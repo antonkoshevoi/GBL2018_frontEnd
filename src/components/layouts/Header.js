@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import logo from '../../../media/images/logo.png';
+import logo from '../../media/images/logo.png';
 import PropTypes from 'prop-types';
 
 class Header extends Component {
@@ -8,7 +8,7 @@ class Header extends Component {
             <header className="m-grid__item    m-header "  data-minimize-offset="200" data-minimize-mobile-offset="200" >
                 <div className="m-container m-container--fluid m-container--full-height">
                     <div className="m-stack m-stack--ver m-stack--desktop">
-                        <div className="m-stack__item m-brand  m-brand--skin-dark ">
+                        <div className="m-stack__item m-brand  ">
                             <div className="m-stack m-stack--ver m-stack--general">
                                 <div className="m-stack__item m-stack__item--middle m-brand__logo">
                                     <a href="index.html" className="m-brand__logo-wrapper">

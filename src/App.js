@@ -5,9 +5,9 @@ import './theme/style.bundle.css';
 // import './theme/vendor/vendors.bundle';
 // import './theme/scripts.bundle';
 
-import Routing from './common/Routing';
+import Routing from './Routing';
 
-import Header from "./components/layouts/Header/Header";
+import Header from "./components/layouts/Header";
 
 class App extends Component {
   render() {

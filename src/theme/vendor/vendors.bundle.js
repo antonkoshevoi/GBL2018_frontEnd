@@ -41,7 +41,7 @@
 
 // Edge <= 12 - 13+, Firefox <=18 - 45+, IE 10 - 11, Safari 5.1 - 9+, iOS 6 - 9.1
 // throw exceptions when non-strict code (e.g., ASP.NET 4.5) accesses strict mode
-// arguments.callee.caller (trac-13335). But as of jQuery 3.0 (2016), strict mode should be common
+// arguments.callee.caller (trac-13335). But as of jQuery 3.0 (2016), strict mode should be data
 // enough that all such attempts are guarded in a try block.
 "use strict";
 
@@ -1497,7 +1497,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 		}
 
 		return i ?
-			// Do a sibling check if the nodes have a common ancestor
+			// Do a sibling check if the nodes have a data ancestor
 			siblingCheck( ap[i], bp[i] ) :
 
 			// Otherwise nodes in our document sort first
@@ -5467,7 +5467,7 @@ jQuery.Event.prototype = {
 	}
 };
 
-// Includes all common event props including KeyEvent and MouseEvent specific props
+// Includes all data event props including KeyEvent and MouseEvent specific props
 jQuery.each( {
 	altKey: true,
 	bubbles: true,
@@ -7943,7 +7943,7 @@ jQuery.fn.extend( {
 
 				ret = elem.value;
 
-				// Handle most common string cases
+				// Handle most data string cases
 				if ( typeof ret === "string" ) {
 					return ret.replace( rreturn, "" );
 				}
@@ -9880,7 +9880,7 @@ jQuery.fn.load = function( url, params, callback ) {
 
 
 
-// Attach a bunch of functions for handling common AJAX events
+// Attach a bunch of functions for handling data AJAX events
 jQuery.each( [
 	"ajaxStart",
 	"ajaxStop",
@@ -10463,12 +10463,12 @@ function getRoot(node) {
 }
 
 /**
- * Finds the offset parent common to the two provided nodes
+ * Finds the offset parent data to the two provided nodes
  * @method
  * @memberof Popper.Utils
  * @argument {Element} element1
  * @argument {Element} element2
- * @returns {Element} common offset parent
+ * @returns {Element} data offset parent
  */
 function findCommonOffsetParent(element1, element2) {
   // This check is needed to avoid errors in case one of the elements isn't defined for any reason
@@ -10481,7 +10481,7 @@ function findCommonOffsetParent(element1, element2) {
   var start = order ? element1 : element2;
   var end = order ? element2 : element1;
 
-  // Get common ancestor container
+  // Get data ancestor container
   var range = document.createRange();
   range.setStart(start, 0);
   range.setEnd(end, 0);
@@ -49313,7 +49313,7 @@ function __guardMethod__(obj, methodName, transform) {
     };
 
     /**
-     * returns common ancestor node between two nodes.
+     * returns data ancestor node between two nodes.
      *
      * @param {Node} nodeA
      * @param {Node} nodeB
@@ -61326,7 +61326,7 @@ $.validator.addMethod( "alphanumeric", function( value, element ) {
 /*
  * Dutch bank account numbers (not 'giro' numbers) have 9 digits
  * and pass the '11 check'.
- * We accept the notation with spaces, as that is common.
+ * We accept the notation with spaces, as that is data.
  * acceptable: 123456789 or 12 34 56 789
  */
 $.validator.addMethod( "bankaccountNL", function( value, element ) {
@@ -63144,7 +63144,7 @@ $.notifyDefaults({
 								o = this.get_next_dom(e.currentTarget);
 								if(o && o.length) { o.children('.jstree-anchor').focus(); }
 								break;
-							case 106: // aria defines * on numpad as open_all - not very common
+							case 106: // aria defines * on numpad as open_all - not very data
 								this.open_all();
 								break;
 							case 36: // home
@@ -73782,7 +73782,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     [ property (object) ]
 	     **
 	     * You can add your own method to elements. This is useful when you want to hack default functionality or
-	     * want to wrap some common transformation or attributes in one method. In difference to canvas methods,
+	     * want to wrap some data transformation or attributes in one method. In difference to canvas methods,
 	     * you can redefine element method at any time. Expending element methods wouldn’t affect set.
 	     > Usage
 	     | Raphael.el.red = function () {
@@ -74616,7 +74616,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * Paper.getElementsByPoint
 	     [ method ]
 	     **
-	     * Returns set of elements that have common point inside
+	     * Returns set of elements that have data point inside
 	     **
 	     > Parameters
 	     **
