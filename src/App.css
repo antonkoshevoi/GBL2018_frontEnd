@@ -223,3 +223,10 @@ nav.navigation.hovered  > .menuItem > a.swapped  {
   background-color: #e3e5ea !important;
 }
 
+.m-menu__item .m-menu__link.active {
+  background: #f2f3f8;
+}
+
+.pointer {
+  cursor: pointer;
+}

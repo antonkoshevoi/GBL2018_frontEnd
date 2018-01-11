@@ -1,9 +1,35 @@
 import React, {Component} from 'react';
 import logo from '../../media/images/logo.png';
-import PropTypes from 'prop-types';
+import trans, {changeLanguage} from '../../languages';
+import {  translate } from 'react-i18next';
+import i18n from '../../languages/i18n';
+import LanguageSwitcher from "../ui/LanguageSwitcher";
+
+// @translate(['key'], { wait: true })
 
 class Header extends Component {
+
+    state = {
+        anchorEl: null,
+    };
+
+    _openLanguageMenu = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    _switchLanguage = (lang_code) => {
+        trans.setLanguage(lang_code);
+        i18n.changeLanguage('de');
+        changeLanguage(lang_code)
+        localStorage.setItem('language', lang_code);
+        this.setState({ anchorEl: null });
+    };
+
+
     render() {
+        const { t } = this.props;
+        console.log(t);
+        console.log(t('key'));
         return (
             <header className="m-grid__item    m-header "  data-minimize-offset="200" data-minimize-mobile-offset="200" >
                 <div className="m-container m-container--fluid m-container--full-height">
@@ -420,13 +446,8 @@ class Header extends Component {
                                                 </div>
                                             </div>
                                         </li>
-                                        <li id="m_quick_sidebar_toggle" className="m-nav__item">
-                                            <a href="#" className="m-nav__link m-dropdown__toggle">
-												<span className="m-nav__link-icon">
-													<i className="flaticon-grid-menu"></i>
-												</span>
-                                            </a>
-                                        </li>
+                                           <LanguageSwitcher/>
+
                                     </ul>
                                 </div>
                             </div>
@@ -438,6 +459,6 @@ class Header extends Component {
     }
 }
 
-Header.propTypes = {};
 
-export default Header;
+
+export default translate("translation")(Header);

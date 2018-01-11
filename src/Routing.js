@@ -20,7 +20,7 @@ class Routing extends Component {
                         <Route exact path='/dashboard' name="Dashboard"  component={Dashboard} />
                         <Route  path='/reports' name="Reports" component={Reports} />
                         <Route  path='/404' name="404" component={NotFoundRoute} />
-                        <Redirect to="/404"/>
+                        <Redirect to="/dashboard"/>
                     </Switch>
                 </Wrapper>
                 </div>

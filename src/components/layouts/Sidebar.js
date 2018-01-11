@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import trans from '../../languages'
+import {  translate } from 'react-i18next';
 
 import Menu from "../../data/Menu";
 
@@ -14,19 +15,21 @@ class Sidebar extends Component {
         }
     }
 
+    componentDidUpdate(){
+        console.log(trans);
+    }
 
     _renderGoogleMenus() {
         const activeMenu = this.state.activeMenu;
         const _self = this;
-
         return Menu.multipleMenu.map(function (menu) {
             return (
                 <div className="menuItem" key={menu.key}>
-                   <Link to={(menu.subMenu !== undefined) ? `#${menu.key}` : `/${menu.link}`}  className={menu.colorName + (activeMenu == menu.key ? ' active fadeInUp  animated' :  activeMenu !== 'dashboard' ? ' swapped' : '') }
+                   <NavLink to={(menu.subMenu !== undefined) ? `#${menu.key}` : `/${menu.link}`}  className={menu.colorName + (activeMenu == menu.key ? ' active fadeInUp  animated' :  activeMenu !== 'dashboard' ? ' swapped' : '') }
                          onClick={(event) => _self._googleMenuToggle(menu.key)}>
                        <span className="icon"><i className={menu.icon}></i></span>
-                       <span className="content">{menu.title}</span>
-                   </Link>
+                       <span className="content">{_self.props.t(menu.key)}</span>
+                   </NavLink>
                     {(menu.subMenu !== undefined) ? _self._renderGoogleSubMenuContent(menu) : ''}
                 </div>
            )
@@ -34,11 +37,12 @@ class Sidebar extends Component {
     }
 
     _renderGoogleSubMenus(subMenus) {
+       const _self = this;
        return subMenus.map(function (menu,i) {
             return (
-                <Link to={`/${menu.link}`} key={i}>
-                    <span className="content">{menu.title}</span>
-                </Link>
+                <NavLink activeClassName={'active'} to={`/${menu.link}`} key={i}>
+                    <span className="content"> {_self.props.t(menu.key)}</span>
+                </NavLink >
             )
         })
     }
@@ -64,13 +68,13 @@ class Sidebar extends Component {
         const _self = this;
         return Menu.singleMenu.map(function (menu,i) {
             return (
-                <li className="m-menu__item" key={i} aria-haspopup="true"  data-menu-submenu-toggle="hover">
-                    <Link  to={`/${menu.link}`} className="m-menu__link" onClick={() => {_self._resetMenu()}}>
+                <li  className="m-menu__item" key={i} aria-haspopup="true"  data-menu-submenu-toggle="hover">
+                    <NavLink  to={`/${menu.link}`} className="m-menu__link" onClick={() => {_self._resetMenu()}}>
                         <i className={`m-menu__link-icon ${menu.icon}`}></i>
                         <span className="m-menu__link-text">
-                            {menu.title}
+                            {_self.props.t(menu.key)}
 						</span>
-                    </Link >
+                    </NavLink >
                 </li>
             )
         })
@@ -94,6 +98,8 @@ class Sidebar extends Component {
     }
 
     render() {
+        const { t } = this.props;
+
         return (
         <div id="m_aside_left" className="m-grid__item	m-aside-left  m-aside-left--skin-light ">
 
@@ -117,4 +123,4 @@ class Sidebar extends Component {
 
 Sidebar.propTypes = {};
 
-export default Sidebar;
+export default translate("sidebar")(Sidebar);
