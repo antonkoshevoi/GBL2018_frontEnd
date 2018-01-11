@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import {Menu, MenuItem} from "material-ui";
+import {Avatar, ListItemIcon, ListItemText, Menu, MenuItem} from "material-ui";
+import InboxIcon from 'material-ui-icons/MoveToInbox';
 
 class LanguageSwitcher extends Component {
     constructor(props) {
@@ -58,9 +59,24 @@ class LanguageSwitcher extends Component {
                     open={Boolean(this.state.anchorEl)}
                     onClose={this.handleClose}
                 >
-                    <MenuItem onClick={() => {this._switchLanguage('en')}}>{t('en')}</MenuItem>
-                    <MenuItem onClick={() => {this._switchLanguage('de')}}>{t('de')}</MenuItem>
-                    <MenuItem onClick={() => {this._switchLanguage('fr')}}>{t('fr')}</MenuItem>
+                    <MenuItem onClick={() => {this._switchLanguage('en')}}>
+                        <Avatar alt="Remy Sharp"
+                                className="small-avatar"
+                                src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1280px-Flag_of_the_United_Kingdom.svg.png" />
+                        <ListItemText  inset primary={t('en')} />
+                        </MenuItem>
+                    <MenuItem onClick={() => {this._switchLanguage('de')}}>
+                        <Avatar alt="Remy Sharp"
+                                className="small-avatar"
+                                src="https://upload.wikimedia.org/wikipedia/commons/9/98/Bandera_del_Ejercito_Colombiano_de_Miranda.svg" />
+                        <ListItemText  inset primary={t('de')} />
+                    </MenuItem>
+                    <MenuItem onClick={() => {this._switchLanguage('fr')}}>
+                        <Avatar alt="Remy Sharp"
+                                className="small-avatar"
+                                src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" />
+                        <ListItemText  inset primary={t('fr')} />
+                    </MenuItem>
                 </Menu>
             </li>
         );

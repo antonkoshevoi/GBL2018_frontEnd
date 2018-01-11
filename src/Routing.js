@@ -8,6 +8,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Sidebar from "./components/layouts/Sidebar";
 import Wrapper from "./components/layouts/Wrapper";
+import Students from "./containers/Students";
 
 class Routing extends Component {
     render() {
@@ -19,6 +20,7 @@ class Routing extends Component {
                     <Switch>
                         <Route exact path='/dashboard' name="Dashboard"  component={Dashboard} />
                         <Route  path='/reports' name="Reports" component={Reports} />
+                        <Route  path='/students' name="Students" component={Students} />
                         <Route  path='/404' name="404" component={NotFoundRoute} />
                         <Redirect to="/dashboard"/>
                     </Switch>

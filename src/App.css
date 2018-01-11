@@ -230,3 +230,8 @@ nav.navigation.hovered  > .menuItem > a.swapped  {
 .pointer {
   cursor: pointer;
 }
+
+.MuiAvatar-root-52.small-avatar {
+  width: 20px;
+  height: 20px;
+}

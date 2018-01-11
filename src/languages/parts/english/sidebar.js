@@ -8,5 +8,9 @@ export default {
         administration:'Administration',
         teachers:'Teachers',
         students:'Students',
+        classrooms:'Classrooms',
+        demoCourses:'Demo Courses',
+        homerooms:'Homerooms',
+        professionalTrainings:'Professional Trainings',
     }
 }

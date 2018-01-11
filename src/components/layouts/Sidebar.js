@@ -16,7 +16,6 @@ class Sidebar extends Component {
     }
 
     componentDidUpdate(){
-        console.log(trans);
     }
 
     _renderGoogleMenus() {
@@ -41,7 +40,7 @@ class Sidebar extends Component {
        return subMenus.map(function (menu,i) {
             return (
                 <NavLink activeClassName={'active'} to={`/${menu.link}`} key={i}>
-                    <span className="content"> {_self.props.t(menu.key)}</span>
+                    <span className="content"> {_self.props.t(menu.key) }</span>
                 </NavLink >
             )
         })

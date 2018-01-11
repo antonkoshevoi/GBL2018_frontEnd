@@ -28,8 +28,6 @@ class Header extends Component {
 
     render() {
         const { t } = this.props;
-        console.log(t);
-        console.log(t('key'));
         return (
             <header className="m-grid__item    m-header "  data-minimize-offset="200" data-minimize-mobile-offset="200" >
                 <div className="m-container m-container--fluid m-container--full-height">

@@ -16,16 +16,19 @@ export default  {
                colorName:'green',
                subMenu:[
                    {
+                       key:'administration',
                        title:'Administration',
                        link:'administration',
                        icon:'flaticon flaticon-user-settings',
                    },
                    {
+                       key:'teachers',
                        title:'Teachers',
                        link:'teachers',
                        icon:'flaticon flaticon-user-ok',
                    },
                    {
+                       key:'students',
                        title:'Students',
                        link:'students',
                        icon:'flaticon	flaticon-technology-1',
