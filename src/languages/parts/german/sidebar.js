@@ -12,5 +12,15 @@ export default {
         demoCourses:'Demo-Kurse',
         homerooms:'Homezimmer',
         professionalTrainings:'Professionelle Trainings',
+        acounts:'Acounts',
+        open_invoices:'Open Invoices',
+        history:'History',
+        sharing:'Sharing',
+        chat:'Chat',
+        inbox:'Inbox',
+        labels:'Labels',
+        sent:'Sent',
+        drafts:'Drafts',
+        compose:'Compose',
     }
 }

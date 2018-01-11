@@ -1,21 +1,29 @@
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
-import trans from '../../languages'
+import '../../styles/sidebar.css';
 import {  translate } from 'react-i18next';
+import PropTypes from 'prop-types';
 
 import Menu from "../../data/Menu";
 
 class Sidebar extends Component {
 
-    constructor() {
-        super();
+    constructor(props,context) {
+        super(props,context);
         this.state = {
             activeMenu:'dashboard',
             hovered:false,
         }
     }
 
+    static contextTypes = {
+        router: PropTypes.object.isRequired
+    }; //
+
     componentDidUpdate(){
+        if (this.context.router.route.location.pathname.indexOf('dashboard') !== -1) {
+            this.state.activeMenu = 'dashboard'
+        }
     }
 
     _renderGoogleMenus() {
@@ -121,5 +129,6 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {};
+
 
 export default translate("sidebar")(Sidebar);

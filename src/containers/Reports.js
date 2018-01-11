@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class Reports extends Component {
     render() {
         return (
-            <div>
+            <div className="fadeInLeft  animated">
                 <h1>REPORTS PAGE</h1>
             </div>
         );

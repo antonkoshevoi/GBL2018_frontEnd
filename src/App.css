@@ -33,205 +33,25 @@
 
 
 /* Custom Stylesheet */
-nav.navigation {
-  background: #f5f5f5;
-  width: 255px;
-  color: #555;
-  position: relative;
-  padding-top: 50px;
-  min-height: 100px;
-  -moz-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
-  -ms-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
-  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-}
 
-nav.navigation > .menuItem > a, nav.navigation .second_level a{
-  display: table;
-  width: 100%;
-  height: 50px;
-  color: #555;
-  text-decoration: none;
-  font-weight: 300;
-  font-size: 18px;
-  font-weight: 300;
-  position: relative;
-  transition: all .5s;
-}
-
-nav.navigation > .menuItem > a > .icon {
-  display: table-cell;
-  vertical-align: middle;
-  width: 51px;
-}
-
-nav.navigation > .menuItem > a > .icon > i {
-  margin: 0 11px;
-  line-height: 100%;
-  font-size: 27px;
-  position: relative;
-  top: 2px;
-}
-
-nav.navigation > .menuItem > a > .content {
-  text-align: left;
-  display: table-cell;
-  vertical-align: middle;
-  padding-left: 10px;
-  background: #f5f5f5;
-}
-
-nav.navigation > .menuItem > a.active {
-  top: 0;
-  position: absolute;
-}
-
-nav.navigation > .menuItem > a.home, nav.navigation > .menuItem > a.home .content {
-  background: #444;
-  color: white;
-}
-
-nav.navigation > .menuItem > a.home.active {
-  background: #444;
-  color: white;
-}
-
-nav.navigation > .menuItem > a.home.active > .content {
-  background: #444;
-}
-
-nav.navigation > .menuItem > a.green .icon{
-  background: #b3c833;
-  color: white;
-}
-
-nav.navigation > .menuItem > a.green:hover > .content, nav.navigation > .menuItem > a.green.active > .content, nav.navigation > .menuItem > a.green.hover > .content {
-  background: #b3c833;
-  color: white;
-}
-
-nav.navigation > .menuItem > a.red .icon{
-  background: #ce5043;
-  color: white;
-}
-
-nav.navigation > .menuItem > a.red:hover > .content, nav.navigation > .menuItem >  a.red.active > .content, nav.navigation > .menuItem > a.red.hover > .content {
-  background: #ce5043;
-  color: white;
-}
-
-nav.navigation > .menuItem > a.orange .icon{
-  background: #fb8521;
-  color: white;
-}
-
-nav.navigation > .menuItem > a.orange:hover > .content, nav.navigation > .menuItem > a.orange.active > .content , nav.navigation > .menuItem > a.orange.hover > .content {
-  background: #fb8521;
-  color: white;
-}
-
-nav.navigation > .menuItem > a.blue .icon{
-  background: #1aa1e1;
-  color: white;
-}
-
-nav.navigation > .menuItem > a.blue:hover > .content, nav.navigation > .menuItem > a.blue.active > .content, nav.navigation > .menuItem > a.blue.hover > .content{
-  background: #1aa1e1;
-  color: white;
-}
-
-nav.navigation > .menuItem > a.purple .icon{
-  background: #5e5ca6;
-  color: white;
-}
-
-nav.navigation > .menuItem > a.purple:hover > .content, nav.navigation > .menuItem > a.purple.active > .content, nav.navigation > .menuItem > a.purple.hover > .content  {
-  background: #5e5ca6;
-  color: white;
-}
-
-nav.navigation > .menuItem > a.grey .icon{
-  background: #658092;
-  color: white;
-}
-
-nav.navigation > .menuItem > a.grey:hover > .content, nav.navigation > .menuItem > a.grey.active > .content, nav.navigation > .menuItem > a.grey.hover > .content {
-  background: #658092;
-  color: white;
-}
-
-nav.navigation .second_level {
-  display: none;
-}
-
-nav.navigation .second_level a {
-  height: auto;
-  line-height: 20px;
-  padding: 8px 0 8px 10px;
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-}
-
-nav.navigation .second_level a:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-nav.navigation .second_level > .back {
-  height: 100%;
-  display: table-cell;
-  padding: 0 8px;
-  background: #FFF;
-  vertical-align: middle;
-  font-size: 13px;
-  width: 5px;
-}
-
-nav.navigation .second_level > .content {
-  padding: 6px 0;
-  text-align: left;
-  width: 100%;
-  display: table-cell;
-  vertical-align: middle;
-  background: #f5f5f5;
-}
-
-nav.navigation > .menuItem > a.swapped {
-  transform:translateX(-100%);
-  position: absolute;
-}
-
-nav.navigation > .menuItem > a + .second_level.activeSubMenu {
-  transition: all .4s;
-  display:table;
-}
-
-nav.navigation.hovered .menuItem >  a + .second_level.activeSubMenu  {
-  display: none;
-}
-
-nav.navigation.hovered  > .menuItem > a.swapped  {
-  transform:translateX(0);
-  z-index: 5;
-  position:relative;
-}
-
-.m-aside-left.m-aside-left--skin-dark {
-  background-color: #e3e5ea !important;
-}
-
-.m-menu__item .m-menu__link.active {
-  background: #f2f3f8;
-}
 
 .pointer {
   cursor: pointer;
 }
 
-.MuiAvatar-root-52.small-avatar {
+li > .small-avatar {
   width: 20px;
   height: 20px;
+}
+
+.mt-btn.mt-btn-success {
+  color: #fff;
+  background-color: #34bfa3;
+  border-color: #34bfa3;
+}
+
+.mt-btn.mt-btn-success:hover {
+  color: #fff;
+  background-color: #2ca189;
+  border-color: #299781;
 }

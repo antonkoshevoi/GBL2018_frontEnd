@@ -143,7 +143,7 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <div>
+            <div className="fadeInLeft  animated">
                 <h2>DASHBOARD PAGE</h2>
 
                 <PortletWidgets data={Widget.dashboard}/>

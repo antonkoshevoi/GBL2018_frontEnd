@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import '../../styles/Widgets.css';
+import '../../styles/widgets.css';
 
 
 class PortletWidgets extends Component {

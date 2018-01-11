@@ -10,7 +10,7 @@ class Students extends Component {
     render() {
 
         return (
-            <div>
+            <div className="fadeInLeft  animated">
                 <StudentsList/>
             </div>
         );

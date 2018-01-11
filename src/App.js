@@ -15,8 +15,6 @@ import Header from "./components/layouts/Header";
 
 class App extends Component {
 
-
-
   render() {
     return (
         <Trans i18nKey="translation">

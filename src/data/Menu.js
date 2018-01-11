@@ -13,7 +13,7 @@ export default  {
                title:'Students & Staff',
                link:'dashboard',
                icon:'la la-university',
-               colorName:'green',
+               colorName:'orange',
                subMenu:[
                    {
                        key:'administration',
@@ -65,6 +65,72 @@ export default  {
                        title:'Professional Trainings',
                        link:'students',
                        icon:'flaticon	flaticon-technology-1',
+                   }
+               ]
+           },
+           {
+               key:'sharing',
+               title:'Sharing',
+               link:'dashboard',
+               icon:'la la-share-alt',
+               colorName:'green',
+               subMenu:[
+                   {
+                       key:'inbox',
+                       title:'Inbox',
+                       link:'inbox',
+                       icon:'flaticon flaticon-user-settings',
+                   },
+                   {
+                       key:'labels',
+                       title:'Labels',
+                       link:'labels',
+                       icon:'flaticon flaticon-user-ok',
+                   },
+                   {
+                       key:'sent',
+                       title:'Sent',
+                       link:'sent',
+                       icon:'flaticon	flaticon-technology-1',
+                   },
+                   {
+                       key:'compose',
+                       title:'Compose',
+                       link:'compose',
+                       icon:'flaticon flaticon-technology-1',
+                   },
+                   {
+                       key:'drafts',
+                       title:'Drafts',
+                       link:'drafts',
+                       icon:'flaticon flaticon-technology-1',
+                   },
+                   {
+                       key:'chat',
+                       title:'Chat',
+                       link:'chat',
+                       icon:'flaticon flaticon-technology-1',
+                   }
+               ]
+           },
+           {
+               key:'acounts',
+               title:'Acounts',
+               link:'accounts',
+               icon:'la la-usd',
+               colorName:'blue',
+               subMenu:[
+                   {
+                       key:'open_invoices',
+                       title:'Open Invoices',
+                       link:'invoices',
+                       icon:'flaticon flaticon-user-settings',
+                   },
+                   {
+                       key:'history',
+                       title:'History',
+                       link:'history',
+                       icon:'flaticon flaticon-user-ok',
                    }
                ]
            }
