@@ -14,7 +14,7 @@ class StudentsList extends Component {
         console.log(getAllStudents());
         return students.map(function (student,i) {
             return (
-                <tr data-row="0" className={`m-datatable__row ${(i % 2 !== 0 ? 'm-datatable__row--even' : '')}`} style={{height: '64px'}}>
+                <tr key={i} data-row="0" className={`m-datatable__row ${(i % 2 !== 0 ? 'm-datatable__row--even' : '')}`} style={{height: '64px'}}>
                     <td data-field="RecordID" className="m-datatable__cell--center m-datatable__cell m-datatable__cell--check"><span
                         style={{width: '100px'}}>{i+1}</span>
                     </td>
@@ -47,8 +47,8 @@ class StudentsList extends Component {
                 <div className="m-portlet__head">
                     <div className="m-portlet__head-caption">
                         <div className="m-portlet__head-title">
-                            <span class="m-portlet__head-icon">
-							    <i class="la la-user" style={{fontSize:'55px'}}></i>
+                            <span className="m-portlet__head-icon">
+							    <i className="la la-user" style={{fontSize:'55px'}}></i>
 						    </span>
                             <h3 className="m-portlet__head-text">
                                 Students

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {Line,Pie, Doughnut} from 'react-chartjs';
-import PropTypes from 'prop-types';
+import {Line, Doughnut} from 'react-chartjs';
 
 import Card from "../components/ui/Card";
 import PortletWidgets from "../components/ui/PortletWidgets";
@@ -51,9 +50,6 @@ class Dashboard extends Component {
                             return tooltipItem.yLabel;
                         }
                     }
-                },
-                tooltips: {
-                    enabled: false
                 },
                 title:{
                     display: false,

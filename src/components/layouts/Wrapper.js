@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import SubHeader from "./SubHeader";
 
 class Wrapper extends Component {
@@ -15,6 +14,5 @@ class Wrapper extends Component {
     }
 }
 
-Wrapper.propTypes = {};
 
 export default Wrapper;

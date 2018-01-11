@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import {Avatar, ListItemIcon, ListItemText, Menu, MenuItem} from "material-ui";
-import InboxIcon from 'material-ui-icons/MoveToInbox';
+import {Avatar, ListItemText, Menu, MenuItem} from "material-ui";
 
 class LanguageSwitcher extends Component {
     constructor(props) {

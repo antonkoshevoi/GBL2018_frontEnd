@@ -27,7 +27,6 @@ class Header extends Component {
 
 
     render() {
-        const { t } = this.props;
         return (
             <header className="m-grid__item    m-header "  data-minimize-offset="200" data-minimize-mobile-offset="200" >
                 <div className="m-container m-container--fluid m-container--full-height">
@@ -35,7 +34,7 @@ class Header extends Component {
                         <div className="m-stack__item m-brand  ">
                             <div className="m-stack m-stack--ver m-stack--general">
                                 <div className="m-stack__item m-stack__item--middle m-brand__logo">
-                                    <a href="index.html" className="m-brand__logo-wrapper">
+                                    <a  className="m-brand__logo-wrapper">
                                         <img alt="GravityBrain" style={{"maxWidth":"100%"}} src={logo}/>
                                     </a>
                                 </div>
@@ -53,7 +52,7 @@ class Header extends Component {
                                         <li className="
 	m-nav__item m-dropdown m-dropdown--large m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width m-dropdown--skin-light	m-list-search m-list-search--skin-light"
                                             data-dropdown-toggle="click" data-dropdown-persistent="true" id="m_quicksearch" data-search-type="dropdown">
-                                            <a href="#" className="m-nav__link m-dropdown__toggle">
+                                            <a  className="m-nav__link m-dropdown__toggle">
 												<span className="m-nav__link-icon">
 													<i className="flaticon-search-1"></i>
 												</span>
@@ -82,7 +81,7 @@ class Header extends Component {
                                             </div>
                                         </li>
                                         <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width" data-dropdown-toggle="click" data-dropdown-persistent="true">
-                                            <a href="#" className="m-nav__link m-dropdown__toggle" id="m_topbar_notification_icon">
+                                            <a  className="m-nav__link m-dropdown__toggle" id="m_topbar_notification_icon">
                                                 <span className="m-nav__link-badge m-badge m-badge--dot m-badge--dot-small m-badge--danger"></span>
                                                 <span className="m-nav__link-icon">
 													<i className="flaticon-music-2"></i>
@@ -169,7 +168,7 @@ class Header extends Component {
                                                                                     <span className="m-list-timeline__badge"></span>
                                                                                     <span className="m-list-timeline__text">
 																						System error -
-																						<a href="#" className="m-link">
+																						<a  className="m-link">
 																							Check
 																						</a>
 																					</span>
@@ -179,7 +178,7 @@ class Header extends Component {
                                                                                 </div>
                                                                                 <div className="m-list-timeline__item m-list-timeline__item--read">
                                                                                     <span className="m-list-timeline__badge"></span>
-                                                                                    <span href="" className="m-list-timeline__text">
+                                                                                    <span  className="m-list-timeline__text">
 																						New order received
 																						<span className="m-badge m-badge--danger m-badge--wide">
 																							urgent
@@ -217,7 +216,7 @@ class Header extends Component {
                                                                             <div className="m-list-timeline__items">
                                                                                 <div className="m-list-timeline__item">
                                                                                     <span className="m-list-timeline__badge m-list-timeline__badge--state1-success"></span>
-                                                                                    <a href="" className="m-list-timeline__text">
+                                                                                    <a  className="m-list-timeline__text">
                                                                                         New order received
                                                                                     </a>
                                                                                     <span className="m-list-timeline__time">
@@ -226,7 +225,7 @@ class Header extends Component {
                                                                                 </div>
                                                                                 <div className="m-list-timeline__item">
                                                                                     <span className="m-list-timeline__badge m-list-timeline__badge--state1-danger"></span>
-                                                                                    <a href="" className="m-list-timeline__text">
+                                                                                    <a  className="m-list-timeline__text">
                                                                                         New invoice received
                                                                                     </a>
                                                                                     <span className="m-list-timeline__time">
@@ -235,7 +234,7 @@ class Header extends Component {
                                                                                 </div>
                                                                                 <div className="m-list-timeline__item">
                                                                                     <span className="m-list-timeline__badge m-list-timeline__badge--state1-success"></span>
-                                                                                    <a href="" className="m-list-timeline__text">
+                                                                                    <a  className="m-list-timeline__text">
                                                                                         Production server up
                                                                                     </a>
                                                                                     <span className="m-list-timeline__time">
@@ -244,7 +243,7 @@ class Header extends Component {
                                                                                 </div>
                                                                                 <div className="m-list-timeline__item">
                                                                                     <span className="m-list-timeline__badge m-list-timeline__badge--state1-info"></span>
-                                                                                    <a href="" className="m-list-timeline__text">
+                                                                                    <a  className="m-list-timeline__text">
                                                                                         New order received
                                                                                     </a>
                                                                                     <span className="m-list-timeline__time">
@@ -253,7 +252,7 @@ class Header extends Component {
                                                                                 </div>
                                                                                 <div className="m-list-timeline__item">
                                                                                     <span className="m-list-timeline__badge m-list-timeline__badge--state1-info"></span>
-                                                                                    <a href="" className="m-list-timeline__text">
+                                                                                    <a  className="m-list-timeline__text">
                                                                                         System shutdown
                                                                                     </a>
                                                                                     <span className="m-list-timeline__time">
@@ -262,7 +261,7 @@ class Header extends Component {
                                                                                 </div>
                                                                                 <div className="m-list-timeline__item">
                                                                                     <span className="m-list-timeline__badge m-list-timeline__badge--state1-info"></span>
-                                                                                    <a href="" className="m-list-timeline__text">
+                                                                                    <a  className="m-list-timeline__text">
                                                                                         Production server down
                                                                                     </a>
                                                                                     <span className="m-list-timeline__time">
@@ -291,7 +290,7 @@ class Header extends Component {
                                             </div>
                                         </li>
                                         <li className="m-nav__item m-topbar__quick-actions m-topbar__quick-actions--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push m-dropdown--mobile-full-width m-dropdown--skin-light"  data-dropdown-toggle="click">
-                                            <a href="#" className="m-nav__link m-dropdown__toggle">
+                                            <a  className="m-nav__link m-dropdown__toggle">
                                                 <span className="m-nav__link-badge m-badge m-badge--dot m-badge--info m--hide"></span>
                                                 <span className="m-nav__link-icon">
 													<i className="flaticon-share"></i>
@@ -313,13 +312,13 @@ class Header extends Component {
                                                             <div className="m-scrollable" data-scrollable="false" data-max-height="380" data-mobile-max-height="200">
                                                                 <div className="m-nav-grid m-nav-grid--skin-light">
                                                                     <div className="m-nav-grid__row">
-                                                                        <a href="#" className="m-nav-grid__item">
+                                                                        <a  className="m-nav-grid__item">
                                                                             <i className="m-nav-grid__icon flaticon-file"></i>
                                                                             <span className="m-nav-grid__text">
 																				Generate Report
 																			</span>
                                                                         </a>
-                                                                        <a href="#" className="m-nav-grid__item">
+                                                                        <a  className="m-nav-grid__item">
                                                                             <i className="m-nav-grid__icon flaticon-time"></i>
                                                                             <span className="m-nav-grid__text">
 																				Add New Event
@@ -327,13 +326,13 @@ class Header extends Component {
                                                                         </a>
                                                                     </div>
                                                                     <div className="m-nav-grid__row">
-                                                                        <a href="#" className="m-nav-grid__item">
+                                                                        <a  className="m-nav-grid__item">
                                                                             <i className="m-nav-grid__icon flaticon-folder"></i>
                                                                             <span className="m-nav-grid__text">
 																				Create New Task
 																			</span>
                                                                         </a>
-                                                                        <a href="#" className="m-nav-grid__item">
+                                                                        <a  className="m-nav-grid__item">
                                                                             <i className="m-nav-grid__icon flaticon-clipboard"></i>
                                                                             <span className="m-nav-grid__text">
 																				Completed Tasks
@@ -348,7 +347,7 @@ class Header extends Component {
                                             </div>
                                         </li>
                                         <li className="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" data-dropdown-toggle="click">
-                                            <a href="#" className="m-nav__link m-dropdown__toggle">
+                                            <a  className="m-nav__link m-dropdown__toggle">
 												<span className="m-topbar__userpic">
 													<img src="assets/app/media/img/users/user4.jpg" className="m--img-rounded m--marginless m--img-centered" alt=""/>
 												</span>
@@ -368,7 +367,7 @@ class Header extends Component {
 																<span className="m-card-user__name m--font-weight-500">
 																	Mark Andre
 																</span>
-                                                                <a href="" className="m-card-user__email m--font-weight-300 m-link">
+                                                                <a  className="m-card-user__email m--font-weight-300 m-link">
                                                                     mark.andre@gmail.com
                                                                 </a>
                                                             </div>
@@ -383,7 +382,7 @@ class Header extends Component {
 																	</span>
                                                                 </li>
                                                                 <li className="m-nav__item">
-                                                                    <a href="header/profile.html" className="m-nav__link">
+                                                                    <a  className="m-nav__link">
                                                                         <i className="m-nav__link-icon flaticon-profile-1"></i>
                                                                         <span className="m-nav__link-title">
 																			<span className="m-nav__link-wrap">
@@ -400,7 +399,7 @@ class Header extends Component {
                                                                     </a>
                                                                 </li>
                                                                 <li className="m-nav__item">
-                                                                    <a href="header/profile.html" className="m-nav__link">
+                                                                    <a className="m-nav__link">
                                                                         <i className="m-nav__link-icon flaticon-share"></i>
                                                                         <span className="m-nav__link-text">
 																			Activity
@@ -408,7 +407,7 @@ class Header extends Component {
                                                                     </a>
                                                                 </li>
                                                                 <li className="m-nav__item">
-                                                                    <a href="header/profile.html" className="m-nav__link">
+                                                                    <a  className="m-nav__link">
                                                                         <i className="m-nav__link-icon flaticon-chat-1"></i>
                                                                         <span className="m-nav__link-text">
 																			Messages
@@ -417,7 +416,7 @@ class Header extends Component {
                                                                 </li>
                                                                 <li className="m-nav__separator m-nav__separator--fit"></li>
                                                                 <li className="m-nav__item">
-                                                                    <a href="header/profile.html" className="m-nav__link">
+                                                                    <a className="m-nav__link">
                                                                         <i className="m-nav__link-icon flaticon-info"></i>
                                                                         <span className="m-nav__link-text">
 																			FAQ
@@ -425,7 +424,7 @@ class Header extends Component {
                                                                     </a>
                                                                 </li>
                                                                 <li className="m-nav__item">
-                                                                    <a href="header/profile.html" className="m-nav__link">
+                                                                    <a  className="m-nav__link">
                                                                         <i className="m-nav__link-icon flaticon-lifebuoy"></i>
                                                                         <span className="m-nav__link-text">
 																			Support
@@ -434,7 +433,7 @@ class Header extends Component {
                                                                 </li>
                                                                 <li className="m-nav__separator m-nav__separator--fit"></li>
                                                                 <li className="m-nav__item">
-                                                                    <a href="snippets/pages/user/login-1.html" className="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+                                                                    <a className="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
                                                                         Logout
                                                                     </a>
                                                                 </li>

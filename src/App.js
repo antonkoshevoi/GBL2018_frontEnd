@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import trans from './languages';
 
 import './App.css';
 import './theme/vendor/vendors.bundle.css';

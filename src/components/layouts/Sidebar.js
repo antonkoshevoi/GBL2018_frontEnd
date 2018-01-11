@@ -21,9 +21,7 @@ class Sidebar extends Component {
     }; //
 
     componentDidUpdate(){
-        if (this.context.router.route.location.pathname.indexOf('dashboard') !== -1) {
-            this.state.activeMenu = 'dashboard'
-        }
+
     }
 
     _renderGoogleMenus() {
@@ -32,7 +30,7 @@ class Sidebar extends Component {
         return Menu.multipleMenu.map(function (menu) {
             return (
                 <div className="menuItem" key={menu.key}>
-                   <NavLink to={(menu.subMenu !== undefined) ? `#${menu.key}` : `/${menu.link}`}  className={menu.colorName + (activeMenu == menu.key ? ' active fadeInUp  animated' :  activeMenu !== 'dashboard' ? ' swapped' : '') }
+                   <NavLink to={(menu.subMenu !== undefined) ? `#${menu.key}` : `/${menu.link}`}  className={menu.colorName + (activeMenu === menu.key ? ' active fadeInUp  animated' :  activeMenu !== 'dashboard' ? ' swapped' : '') }
                          onClick={(event) => _self._googleMenuToggle(menu.key)}>
                        <span className="icon"><i className={menu.icon}></i></span>
                        <span className="content">{_self.props.t(menu.key)}</span>
@@ -59,7 +57,7 @@ class Sidebar extends Component {
         const _self = this;
 
         return (
-            <div className={'second_level '  + (activeMenu == menu.key ? 'activeSubMenu fadeInUp  animated' : '')} id={menu.key}>
+            <div className={'second_level '  + (activeMenu === menu.key ? 'activeSubMenu fadeInUp  animated' : '')} id={menu.key}>
                 <a href="#" className="back" onMouseOver={() => {_self._menuBackHover()}}>
                     <i className="la la-angle-left"></i>
                 </a>
@@ -105,7 +103,10 @@ class Sidebar extends Component {
     }
 
     render() {
-        const { t } = this.props;
+
+        if (this.context.router.route.location.pathname.indexOf('dashboard') !== -1) {
+            this.state.activeMenu = 'dashboard'
+        }
 
         return (
         <div id="m_aside_left" className="m-grid__item	m-aside-left  m-aside-left--skin-light ">

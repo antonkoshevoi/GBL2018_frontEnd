@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 
 class Reports extends Component {
     render() {
@@ -11,6 +10,5 @@ class Reports extends Component {
     }
 }
 
-Reports.propTypes = {};
 
 export default Reports;

@@ -1,4 +1,4 @@
-import {  BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import {  BrowserRouter as Router, Route, Switch, Redirect  } from 'react-router-dom';
 
 import Dashboard from './containers/Dashboard';
 import Reports from './containers/Reports';
@@ -9,6 +9,9 @@ import PropTypes from 'prop-types';
 import Sidebar from "./components/layouts/Sidebar";
 import Wrapper from "./components/layouts/Wrapper";
 import Students from "./containers/Students";
+import { createHashHistory } from 'history'
+
+// create history
 
 class Routing extends Component {
     render() {
