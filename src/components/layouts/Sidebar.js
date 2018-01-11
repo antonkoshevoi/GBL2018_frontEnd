@@ -104,10 +104,7 @@ class Sidebar extends Component {
 
     render() {
 
-        if (this.context.router.route.location.pathname.indexOf('dashboard') !== -1) {
-            this.state.activeMenu = 'dashboard'
-        }
-
+    
         return (
         <div id="m_aside_left" className="m-grid__item	m-aside-left  m-aside-left--skin-light ">
 
