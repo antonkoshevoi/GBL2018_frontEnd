@@ -54,12 +54,12 @@ nav.navigation > .menuItem > a.active {
     position: absolute;
 }
 
-nav.navigation > .menuItem > a.home, nav.navigation > .menuItem > a.home .content {
+ nav.navigation > .menuItem > a.home .icon {
     background: #444;
     color: white;
 }
 
-nav.navigation > .menuItem > a.home.active {
+nav.navigation > .menuItem > a.home.active,  nav.navigation > .menuItem > a.home:hover .content {
     background: #444;
     color: white;
 }

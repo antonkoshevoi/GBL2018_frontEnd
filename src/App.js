@@ -18,7 +18,6 @@ class App extends Component {
     return (
         <Trans i18nKey="translation">
           <div className="m-grid m-grid--hor m-grid--root m-page m--full-height" >
-              <Header/>
               <Routing/>
           </div>
         </Trans>

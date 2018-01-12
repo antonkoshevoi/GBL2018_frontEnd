@@ -55,3 +55,27 @@ li > .small-avatar {
   background-color: #2ca189;
   border-color: #299781;
 }
+
+.loginWrapper {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.m-dropdown.m-dropdown--header-bg-fill .m-dropdown__header {
+  background-image: url(/src/media/images/menu_poster.jpg);
+  background-size: cover;
+}
+
+[class^="MuiTab-label"] {
+  color: #fff;
+}
+
+div[class^="MuiTabIndicator"] {
+  background-color: #fff;
+}

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {NavLink} from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
 import '../../styles/sidebar.css';
 import {  translate } from 'react-i18next';
 import PropTypes from 'prop-types';
@@ -11,7 +11,9 @@ class Sidebar extends Component {
     constructor(props,context) {
         super(props,context);
         this.state = {
-            activeMenu:'dashboard',
+            activeMenu:{
+                key:'dashboard'
+            },
             hovered:false,
         }
     }
@@ -20,18 +22,19 @@ class Sidebar extends Component {
         router: PropTypes.object.isRequired
     }; //
 
-    componentDidUpdate(){
-
+    componentDidMount(){
+        this.setState({activeMenu:{key:this.props.location.pathname.substr(1)}})
     }
 
     _renderGoogleMenus() {
         const activeMenu = this.state.activeMenu;
         const _self = this;
+
         return Menu.multipleMenu.map(function (menu) {
             return (
                 <div className="menuItem" key={menu.key}>
-                   <NavLink to={(menu.subMenu !== undefined) ? `#${menu.key}` : `/${menu.link}`}  className={menu.colorName + (activeMenu === menu.key ? ' active fadeInUp  animated' :  activeMenu !== 'dashboard' ? ' swapped' : '') }
-                         onClick={(event) => _self._googleMenuToggle(menu.key)}>
+                   <NavLink to={(menu.subMenu !== undefined) ? `#${menu.key}` : `/${menu.link}`}  className={menu.colorName + (activeMenu.key === menu.key ? ' active fadeInUp  animated' :  activeMenu.subMenu !== undefined ? ' swapped' : '') }
+                         onClick={(event) => _self._googleMenuToggle(menu)}>
                        <span className="icon"><i className={menu.icon}></i></span>
                        <span className="content">{_self.props.t(menu.key)}</span>
                    </NavLink>
@@ -57,7 +60,7 @@ class Sidebar extends Component {
         const _self = this;
 
         return (
-            <div className={'second_level '  + (activeMenu === menu.key ? 'activeSubMenu fadeInUp  animated' : '')} id={menu.key}>
+            <div className={'second_level '  + (activeMenu.key === menu.key ? 'activeSubMenu fadeInUp  animated' : '')} id={menu.key}>
                 <a href="#" className="back" onMouseOver={() => {_self._menuBackHover()}}>
                     <i className="la la-angle-left"></i>
                 </a>
@@ -99,7 +102,7 @@ class Sidebar extends Component {
     }
 
     _resetMenu() {
-        this.setState({activeMenu:'dashboard'});
+        this.setState({activeMenu:{key:'dashboard'}});
     }
 
     render() {
@@ -129,4 +132,4 @@ class Sidebar extends Component {
 Sidebar.propTypes = {};
 
 
-export default translate("sidebar")(Sidebar);
+export default withRouter(translate("sidebar")(Sidebar));

@@ -9,11 +9,18 @@ export default  {
                colorName:'home',
            },
            {
+               key:'reports',
+               title:'Reports',
+               link:'reports',
+               icon:'la la-bar-chart-o',
+               colorName:'orange',
+           },
+           {
                key:'studentsAndStaff',
                title:'Students & Staff',
                link:'dashboard',
                icon:'la la-university',
-               colorName:'orange',
+               colorName:'purple',
                subMenu:[
                    {
                        key:'administration',
@@ -136,12 +143,6 @@ export default  {
            }
        ],
        singleMenu:[
-           {
-               key:'reports',
-               title:'Reports',
-               link:'reports',
-               icon:'la la-bar-chart-o',
-           },
            {
                key:'sCap',
                title:'S-CAP',

@@ -29,11 +29,16 @@ class LanguageSwitcher extends Component {
         this.setState({ anchorEl: event.currentTarget });
     };
 
+    _closeLanguageMenu = event => {
+        this.setState({ anchorEl: null });
+    };
+
+
     _switchLanguage = (lang_code) => {
         const { i18n } = this.props;
         i18n.changeLanguage(lang_code);
         localStorage.setItem('language', lang_code);
-        this.setState({ anchorEl: null });
+        this._closeLanguageMenu;
     };
 
     render() {
@@ -56,7 +61,7 @@ class LanguageSwitcher extends Component {
                     id="simple-menu"
                     anchorEl={this.state.anchorEl}
                     open={Boolean(this.state.anchorEl)}
-                    onClose={this.handleClose}
+                    onClose={this._closeLanguageMenu}
                 >
                     <MenuItem onClick={() => {this._switchLanguage('en')}}>
                         <Avatar alt="Remy Sharp"

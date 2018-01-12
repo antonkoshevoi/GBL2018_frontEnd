@@ -11,6 +11,7 @@ export default {
         classrooms:'Classrooms',
         demoCourses:'Demo Courses',
         homerooms:'Homerooms',
+        howToMovies :'How To Movies',
         professionalTrainings:'Professional Trainings',
         acounts:'Acounts',
         open_invoices:'Open Invoices',

@@ -16,14 +16,14 @@
     "verification_token": null,
     "owner_id": null,
     "active": 1,
-    "avatar": null,
+    "avatar": "http://admissions.berkeley.edu/sites/default/files/UCB_landingpage_images_600x300_212.jpg",
     "last_login": null,
     "created_at": null,
     "updated_at": null
   },  {
     "id": 4,
-    "username": "Gegham",
-    "first_name": "Kadimyan",
+    "username": "Jenifer",
+    "first_name": "Karkas",
     "last_name": "Kadimyan",
     "email": "Kadimyan@xmail.ru",
     "school": "N141 School",
@@ -36,7 +36,7 @@
     "verification_token": null,
     "owner_id": null,
     "active": 1,
-    "avatar": null,
+    "avatar": "https://www.usnews.com/dims4/USNEWS/90238a1/2147483647/thumbnail/652x435%3E/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2F03%2Fa4%2Fc21e092747eb902379ae57eb9987%2F141030-pfcquizgraduate.jpg",
     "last_login": null,
     "created_at": null,
     "updated_at": null
@@ -56,7 +56,7 @@
     "verification_token": null,
     "owner_id": null,
     "active": 1,
-    "avatar": null,
+    "avatar": "https://image.freepik.com/free-photo/profile-portrait-of-serious-man-looking-out-window_1262-1879.jpg",
     "last_login": null,
     "created_at": null,
     "updated_at": null
@@ -76,7 +76,7 @@
     "verification_token": null,
     "owner_id": null,
     "active": 1,
-    "avatar": null,
+    "avatar": "https://i2.cdn.turner.com/cnnnext/dam/assets/140926165711-john-sutter-profile-image-large-169.jpg",
     "last_login": null,
     "created_at": null,
     "updated_at": null
@@ -96,13 +96,13 @@
     "verification_token": null,
     "owner_id": null,
     "active": 1,
-    "avatar": null,
+    "avatar": "https://michiganross.umich.edu/sites/default/files/images/profiles/koustav-de.jpg",
     "last_login": null,
     "created_at": null,
     "updated_at": null
   },  {
     "id": 4,
-    "username": "Gegham",
+    "username": "Lara",
     "first_name": "Kadimyan",
     "last_name": "Kadimyan",
     "email": "Kadimyan@xmail.ru",
@@ -116,7 +116,7 @@
     "verification_token": null,
     "owner_id": null,
     "active": 1,
-    "avatar": null,
+    "avatar": "https://assets.entrepreneur.com/content/3x2/1300/20150406145944-dos-donts-taking-perfect-linkedin-profile-picture-selfie-mobile-camera-2.jpeg?width=750&crop=16:9",
     "last_login": null,
     "created_at": null,
     "updated_at": null
@@ -136,7 +136,7 @@
     "verification_token": null,
     "owner_id": null,
     "active": 1,
-    "avatar": null,
+    "avatar": "http://www.acfe.com/uploadedImages/ACFE_Website/Content/images/membership-certification/graduate-member.jpg",
     "last_login": null,
     "created_at": null,
     "updated_at": null
@@ -156,7 +156,7 @@
     "verification_token": null,
     "owner_id": null,
     "active": 1,
-    "avatar": null,
+    "avatar": "https://image.freepik.com/free-photo/student-man-with-back-pack-doing-okay-sign_1149-1793.jpg",
     "last_login": null,
     "created_at": null,
     "updated_at": null
@@ -176,7 +176,7 @@
     "verification_token": null,
     "owner_id": null,
     "active": 1,
-    "avatar": null,
+    "avatar": "http://www.covenant.edu/images/body/students/profiles/matt-reiter.jpg",
     "last_login": null,
     "created_at": null,
     "updated_at": null
@@ -196,7 +196,7 @@
     "verification_token": null,
     "owner_id": null,
     "active": 1,
-    "avatar": null,
+    "avatar": "https://www.cheatsheet.com/wp-content/uploads/2016/05/college-student-walking-by-at-park.jpg",
     "last_login": null,
     "created_at": null,
     "updated_at": null
@@ -216,7 +216,7 @@
     "verification_token": null,
     "owner_id": null,
     "active": 1,
-    "avatar": null,
+    "avatar": "https://www.wur.nl/upload_mm/7/c/c/ee050040-ff95-4b6a-8005-d0089348ba13_student_studeren_bieb_bibliotheek_lezen_640x430_350e4bdf_640x430.jpg",
     "last_login": null,
     "created_at": null,
     "updated_at": null
@@ -236,7 +236,7 @@
     "verification_token": null,
     "owner_id": null,
     "active": 1,
-    "avatar": null,
+    "avatar": "https://wustl.edu/wp-content/uploads/2014/09/reading.jpg",
     "last_login": null,
     "created_at": null,
     "updated_at": null

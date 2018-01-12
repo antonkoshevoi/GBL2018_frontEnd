@@ -15839,11 +15839,11 @@ code {
   color: #d9dae3; }
 
 .m-card-user.m-card-user--skin-dark .m-card-user__details .m-card-user__email {
-  color: #8284a1; }
+  color: #bbbee6; }
   .m-card-user.m-card-user--skin-dark .m-card-user__details .m-card-user__email:hover {
-    color: #9093ac; }
+    color: #b9bddd; }
     .m-card-user.m-card-user--skin-dark .m-card-user__details .m-card-user__email:hover:after {
-      border-bottom: 1px solid #9093ac;
+      border-bottom: 1px solid #bbbee6;
       opacity: 0.3 ;
       filter: alpha(opacity=30) ; }
 
@@ -29937,7 +29937,7 @@ body.m-content--skin-light2 {
       .m-topbar .m-topbar__nav.m-nav > .m-nav__item.m-topbar__quick-actions.m-topbar__quick-actions--img.m-dropdown--arrow .m-dropdown__arrow {
         color: #6f47d0; }
       .m-topbar .m-topbar__nav.m-nav > .m-nav__item.m-topbar__user-profile.m-topbar__user-profile--img.m-dropdown--arrow .m-dropdown__arrow {
-        color: #7948e1; }
+        color: #0c7394; }
       .m-topbar .m-topbar__nav.m-nav > .m-nav__item.m-dropdown.m-dropdown--offcanvas.m-dropdown--header-bg-fil.m-dropdown--arrow.m-dropdown--arrow .m-dropdown__arrow {
         color: #fff; }
 
