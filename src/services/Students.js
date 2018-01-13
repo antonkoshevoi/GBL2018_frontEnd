@@ -1,6 +1,6 @@
 
 import studentsJson from '../data/json/students.json';
-import ENV from '../configs/env'
+import { env } from '../configs/env'
 
 
 const header = new Headers({
@@ -8,7 +8,7 @@ const header = new Headers({
     'Content-Type': 'multipart/form-data'
 });
 
-const ENV_URL = ENV.url;
+const ENV_URL = env.url;
 
 
 
@@ -18,7 +18,7 @@ export function getAllStudents(data = {}) {
         headers: {
             'Content-Type': 'application/json',
         }
-    }
+    };
 
     return studentsJson;
 
@@ -39,7 +39,7 @@ export function save(data) {
         method:"POST",
         mode: 'cors',
         header: header
-    }
+    };
 
     return fetch(ENV_URL + 'students/store',sentData)
 }

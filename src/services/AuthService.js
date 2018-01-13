@@ -1,3 +1,4 @@
+import { post } from './ApiClient';
 
 export function login(credentials) {
     console.log(45545);
@@ -22,3 +23,9 @@ export function user() {
         role:'admin',
     }
 }
+//
+// export const login = (username, password) => {
+//     post('/session', {
+//         username, password
+//     })
+// };
