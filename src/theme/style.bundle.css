@@ -29895,12 +29895,12 @@ body.m-content--skin-light2 {
           line-height: 0;
           vertical-align: middle;
           padding: 0;
-          color: #ad5beb; }
+          color: #1aa1e1; }
           .m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i {
             font-size: 1.5rem; }
             .m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i:before {
-              background: -webkit-linear-gradient(180deg, #ad5beb 25%, #c678db 50%, #da6ea9 75%, #e76e92 100%);
-              background: linear-gradient(180deg, #ad5beb 25%, #c678db 50%, #da6ea9 75%, #e76e92 100%);
+              background: linear-gradient(180deg, #00c5dc 25%, #1aa1e1 50%, #589ee4 75%, #589ee4 100%);
+              background: -webkit-linear-gradient(180deg, #00c5dc 25%, #1aa1e1 50%, #589ee4 75%, #589ee4 100%);
               background-clip: text;
               text-fill-color: transparent;
               -webkit-background-clip: text;

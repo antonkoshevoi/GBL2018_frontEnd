@@ -1,10 +1,18 @@
 
 import studentsJson from '../data/json/students.json';
+import ENV from '../configs/env'
 
-let datalink = '../data/json/students.json';
+
+const header = new Headers({
+    'Access-Control-Allow-Origin':'*',
+    'Content-Type': 'multipart/form-data'
+});
+
+const ENV_URL = ENV.url;
+
+
 
 export function getAllStudents(data = {}) {
-
     const options = {
         method: 'GET',
         headers: {
@@ -22,4 +30,16 @@ export function getAllStudents(data = {}) {
     //     .catch((error) => {
     //         console.error(error);
     //     });
+}
+
+
+
+export function save(data) {
+    let sentData = {
+        method:"POST",
+        mode: 'cors',
+        header: header
+    }
+
+    return fetch(ENV_URL + 'students/store',sentData)
 }

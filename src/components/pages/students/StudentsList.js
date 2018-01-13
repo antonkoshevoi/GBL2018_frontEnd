@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {translate} from "react-i18next";
-import {getAllStudents} from '../../services/Students'
+import {getAllStudents} from '../../../services/Students'
 import {Button, Icon} from "material-ui";
 
 class StudentsList extends Component {
@@ -43,37 +43,7 @@ class StudentsList extends Component {
 
     render() {
         return (
-            <div className="m-portlet m-portlet--head-solid-bg m-portlet--brand">
-                <div className="m-portlet__head">
-                    <div className="m-portlet__head-caption">
-                        <div className="m-portlet__head-title">
-                            <span className="m-portlet__head-icon">
-							    <i className="la la-user" style={{fontSize:'55px'}}></i>
-						    </span>
-                            <h3 className="m-portlet__head-text">
-                                Students
-                            </h3>
-                        </div>
-                    </div>
 
-                </div>
-                <div className="m-portlet__body">
-                    <div className="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                        <div className="row align-items-center">
-
-                            <div className="col-xl-12 order-1 order-xl-2 m--align-right">
-                                <Button raised color="accent" className="mt-btn mt-btn-success" style={{marginRight:'7px'}}>
-                                    Add New
-                                    <Icon style={{marginLeft:'5px'}}>add</Icon>
-                                </Button>
-                                <Button raised className="btn-success mt-btn mt-btn-success" >
-                                    Bulk Add Students
-                                    <Icon style={{marginLeft:'5px'}}>person</Icon>
-                                </Button>
-                            </div>
-
-                        </div>
-                    </div>
                     <div className="m_datatable m-datatable m-datatable--default m-datatable--loaded" id="ajax_data" >
                         <table className="m-datatable__table" >
                             <thead className="m-datatable__head">
@@ -94,8 +64,7 @@ class StudentsList extends Component {
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
+
         );
     }
 }

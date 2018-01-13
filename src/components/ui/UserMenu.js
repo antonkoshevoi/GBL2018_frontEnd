@@ -35,7 +35,7 @@ class UserMenu extends Component {
 
     _renderDropDownMenu() {
         return  this.state.menuOpened ?  (
-            <div className="m-dropdown__wrapper animated bounceInDown" onMouseLeave={this._closeMenu} style={{display:'block'}}>
+            <div className="m-dropdown__wrapper animated" onMouseLeave={this._closeMenu} style={{display:'block'}}>
                 <span className="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" ></span>
                 <div className="m-dropdown__inner">
                     <div className="m-dropdown__header m--align-center" style={{backgroundImage:`url(${posterImage})`}}>

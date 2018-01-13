@@ -51,14 +51,14 @@ class TabSection extends Component {
                     <div className="m-portlet__head">
                         <div className="m-portlet__head-tools">
                             <Tabs
-                                className="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x"
+                                className="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x main-tabs"
                                 value={this.state.value}
                                 onChange={this.handleChange}
 
                             >
-                                <Tab value="students" label="Students" />
-                                <Tab value="classRooms" label="Classrooms" />
-                                <Tab value="homeRooms" label="Homerooms" />
+                                <Tab className="tab-header-item" value="students" label="Students" />
+                                <Tab className="tab-header-item" value="classRooms" label="Classrooms" />
+                                <Tab className="tab-header-item" value="homeRooms" label="Homerooms" />
                             </Tabs>
                         </div>
 

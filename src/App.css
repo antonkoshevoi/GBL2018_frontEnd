@@ -72,10 +72,23 @@ li > .small-avatar {
   background-size: cover;
 }
 
-[class^="MuiTab-label"] {
+.main-tabs > div > div > div:last-child {
+  background-color: #fff;
+}
+
+
+.main-tabs .tab-header-item > span > div  {
   color: #fff;
 }
 
-div[class^="MuiTabIndicator"] {
-  background-color: #fff;
+.full-width {
+  width: 100%;
+}
+
+header.dialogAppBar {
+  background-color: #0088CC;
+}
+
+div.form-inputs {
+  margin-bottom: 12px;
 }
