@@ -92,3 +92,46 @@ header.dialogAppBar {
 div.form-inputs {
   margin-bottom: 12px;
 }
+
+a.link-btn {
+  text-decoration: none !important;
+}
+
+.my-timeline.m-timeline-2 .m-timeline-2__items .m-timeline-2__item .m-timeline-2__item-cricle {
+  left: 1.44rem;
+}
+
+.my-timeline.m-timeline-2 .m-timeline-2__items .m-timeline-2__item .m-timeline-2__item-text {
+  padding-left: 4rem;
+}
+
+
+.m-timeline-2.my-timeline {
+  overflow: hidden;
+  position: relative;
+}
+
+.m-timeline-2.my-timeline:before {
+  left: 2.25rem;
+}
+
+.react-csv-input {
+  border: 1px solid #dcdcdcb8;
+  background: rgba(88, 158, 228, 0.02);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.csvTable td {
+  padding: 8px 5px 4px 8px;
+}
+
+.disabled {
+  pointer-events: none !important;
+  cursor: not-allowed;
+  opacity: .7;
+}
+
+.not-allowed {
+  cursor: not-allowed;
+}

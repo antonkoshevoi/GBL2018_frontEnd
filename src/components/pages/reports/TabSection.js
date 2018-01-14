@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Paper, Tabs, Tab, Typography, IconButton,  Icon} from "material-ui";
+import {Paper, Tabs, Tab, Typography, GridList, GridListTile, GridListTileBar, IconButton,  Icon} from "material-ui";
 import {getAllStudents} from "../../../services/Students";
-import { GridList, GridListTile, GridListTileBar } from 'material-ui/GridList';
 
 function TabContainer(props) {
     return (

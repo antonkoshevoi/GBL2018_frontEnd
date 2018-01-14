@@ -37,7 +37,7 @@ export default  {
                    {
                        key:'students',
                        title:'Students',
-                       link:'students',
+                       link:'students/list',
                        icon:'flaticon	flaticon-technology-1',
                    }
                ]
@@ -70,7 +70,7 @@ export default  {
                    {
                        key:'professionalTrainings',
                        title:'Professional Trainings',
-                       link:'students',
+                       link:'trainings',
                        icon:'flaticon	flaticon-technology-1',
                    }
                ]

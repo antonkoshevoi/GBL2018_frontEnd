@@ -3,8 +3,9 @@ import {NavLink, withRouter} from "react-router-dom";
 import '../../styles/sidebar.css';
 import {  translate } from 'react-i18next';
 import PropTypes from 'prop-types';
-
 import Menu from "../../data/Menu";
+import $ from 'jquery';
+
 
 class Sidebar extends Component {
 
@@ -12,7 +13,7 @@ class Sidebar extends Component {
         super(props,context);
         this.state = {
             activeMenu:{
-                key:'dashboard'
+                key:''
             },
             hovered:false,
         }
@@ -33,7 +34,7 @@ class Sidebar extends Component {
         return Menu.multipleMenu.map(function (menu) {
             return (
                 <div className="menuItem" key={menu.key}>
-                   <NavLink to={(menu.subMenu !== undefined) ? `#${menu.key}` : `/${menu.link}`}  className={menu.colorName + (activeMenu.key === menu.key ? ' active fadeInUp  animated' :  activeMenu.subMenu !== undefined ? ' swapped' : '') }
+                   <NavLink to={(menu.subMenu !== undefined) ? `#${menu.key}` : `/${menu.link}`}  className={'googleMenuItem ' + menu.colorName + (activeMenu.key === menu.key ? ' active fadeInUp  animated' :  activeMenu.subMenu !== undefined ? ' swapped' : '') }
                          onClick={(event) => _self._googleMenuToggle(menu)}>
                        <span className="icon"><i className={menu.icon}></i></span>
                        <span className="content">{_self.props.t(menu.key)}</span>
@@ -127,6 +128,12 @@ class Sidebar extends Component {
         </div>
         );
     }
+
+
+    componentDidMount(){
+       // $('.googleMenuItem').next('.second_level ').find('.active').closest('.second_level').addClass('activeSubMenu').prev().addClass('active');
+    }
+
 }
 
 Sidebar.propTypes = {};

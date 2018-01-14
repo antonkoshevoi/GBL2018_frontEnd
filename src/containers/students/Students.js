@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {translate} from "react-i18next";
-import StudentsList from "../components/pages/students/StudentsList";
+import StudentsList from "../../components/pages/students/StudentsList";
 import {Button, Icon} from "material-ui";
-import AddStudentDialog from "../components/pages/students/AddStudentDialog";
+import AddStudentDialog from "../../components/pages/students/AddStudentDialog";
+import {NavLink} from "react-router-dom";
 
 
 
@@ -52,10 +53,13 @@ class Students extends Component {
                                         Add New
                                         <Icon style={{marginLeft:'5px'}}>add</Icon>
                                     </Button>
+                                    <NavLink className="link-btn" to="/students/csv">
                                     <Button raised className="btn-success mt-btn mt-btn-success" >
-                                        Bulk Add Students
+
+                                                 Bulk Add Students
                                         <Icon style={{marginLeft:'5px'}}>person</Icon>
                                     </Button>
+                                    </NavLink>
                                 </div>
 
                             </div>
