@@ -1,14 +1,17 @@
-import { LOGIN, LOGIN_FAIL, LOGIN_SUCCESS } from './actions';
+import {LOGIN, LOGIN_FAIL, LOGIN_SUCCESS, SET_REDIRECT_URL} from './actions';
+import Immutable from 'immutable';
 
-const initialState = {
-  login: {
-    user: null,
+const initialState = Immutable.fromJS({
+  loginRequest: {
     loading: false,
     success: false,
     fail: false,
     errorResponse: null
-  }
-};
+  },
+  initialLoad: false,
+  redirectAfterLogin: null,
+  isLoggedIn: false
+});
 
 export default function reducer (state = initialState, action) {
   switch(action.type) {
@@ -16,25 +19,26 @@ export default function reducer (state = initialState, action) {
      * Login
      */
     case LOGIN:
-      return {
-        ...state,
-        loading: true,
-        success: false,
-        fail: false,
-      };
+      return state
+        .set('loginRequest.loading', true)
+        .remove('loginRequest.success')
+        .remove('loginRequest.fail')
+        .set('isLoggedIn', false);
     case LOGIN_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        success: true
-      };
+      return state
+        .remove('loginRequest.loading', false)
+        .set('loginRequest.success', true)
+        .set('isLoggedIn', true)
+        .set('initialLoad', true);
     case LOGIN_FAIL:
-      console.log('qwe');
-      return {
-        ...state,
-        loading: false,
-        fail: true
-      };
+      return state
+        .remove('loginRequest.loading', false)
+        .set('loginRequest.fail', true)
+        .set('initialLoad', true);
+
+    case SET_REDIRECT_URL:
+      return state
+        .set('redirectAfterLogin', action.payload.uri);
 
     default:
       return state;

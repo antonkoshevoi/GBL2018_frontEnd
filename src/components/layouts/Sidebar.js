@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {NavLink, withRouter} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import {withRouter} from "react-router";
 import '../../styles/sidebar.css';
 import {  translate } from 'react-i18next';
 import PropTypes from 'prop-types';

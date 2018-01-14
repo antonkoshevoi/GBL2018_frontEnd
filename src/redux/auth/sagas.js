@@ -1,27 +1,31 @@
-import { put, takeLatest  } from 'redux-saga/effects';
-import { LOGIN, loginFail } from './actions';
+import { all, select, put, call, takeLatest } from 'redux-saga/effects';
+import { push } from 'react-router-redux'
+import { LOGIN_SUCCESS } from './actions';
+import { selectRedirectAfterLogin } from "./selectors";
+import Cookies from 'universal-cookie';
 
-function* login(action) {
-  yield put(loginFail());
-  // action.promise()
-  //   .then(res => {
-  //     console.log(res);
-  //   })
-  //   .catch(err => {
-  //     yield put(loginFail());
-  //   });
+function* afterLoginSuccess (action) {
 
-  try {
+  const { token, expiresAt, refreshToken } = action.result.data;
 
+  const cookies = new Cookies();
 
-    // yield put({type: "USER_FETCH_SUCCEEDED", user: user});
-  } catch (e) {
-    // yield put({type: "USER_FETCH_FAILED", message: e.message});
-  }
+  const options = {
+    expires: new Date(expiresAt * 1000)
+  };
+
+  cookies.set('token', token, options);
+  cookies.set('tokenExpiresAt', options.expires, options);
+  cookies.set('refreshToken', refreshToken, options);
+
+  let redirectTo = yield select( selectRedirectAfterLogin );
+  redirectTo = redirectTo ? redirectTo : '/';
+
+  yield put(push(redirectTo));
 }
 
-const loginSagas = [
-  takeLatest(LOGIN, login)
-];
+const authSagas = all([
+  takeLatest(LOGIN_SUCCESS, afterLoginSuccess)
+]);
 
-export default loginSagas;
+export default authSagas;
