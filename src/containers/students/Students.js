@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import { Button, Icon } from 'material-ui';
+import {Button, CircularProgress, Icon} from 'material-ui';
 import AddStudentDialog from '../../components/pages/students/AddStudentDialog';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getRecords } from '../../redux/students/actions';
 import { selectGetRecordsRequest, selectRecords } from '../../redux/students/selectors';
-import { HeadRow, Row, Table, Tbody, Td, Th, Thead } from '../../components/ui/table';
+import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
 
 
@@ -39,6 +39,18 @@ class Students extends Component {
 
   _renderRecords () {
     const { records } = this.props;
+
+    if (records.length === 0) {
+      return (
+          <tr>
+            <td>
+              <div className="table-message">
+                <h2>Student Not Found...</h2>
+              </div>
+            </td>
+          </tr>
+      )
+    }
 
     return records.map((record, key) => (
       <Row key={key}>
@@ -131,6 +143,9 @@ class Students extends Component {
               </Thead>
 
               <Tbody>
+                {loading &&
+                         <TablePreloader text="Loading..." color="accent"/>
+                }
                 { this._renderRecords() }
               </Tbody>
             </Table>

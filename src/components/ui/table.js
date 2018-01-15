@@ -1,4 +1,5 @@
 import React from 'react';
+import {CircularProgress} from "material-ui";
 
 export const Table = (props) => {
   return(
@@ -66,3 +67,16 @@ export const Td = ({ first, width, ...props}) => {
     </td>
   );
 };
+
+
+export const TablePreloader = ({color,text, ...props}) => {
+    return (
+            <tr>
+                <td>
+                    <div className="table-message">
+                        <h2>{text} <CircularProgress color={color}/></h2>
+                    </div>
+                </td>
+            </tr>
+    );
+}
