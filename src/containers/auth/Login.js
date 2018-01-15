@@ -38,8 +38,8 @@ class Login extends Component {
   render() {
     const { loginRequest } = this.props;
     const loading = loginRequest.get('loading');
-
-    return (
+    const errors = this.props.auth.get('errors');
+      return (
       <div style={{position:'fixed',}} className="loginWrapper">
         {loading ?
           (<div>LOADING...</div>) : ''
@@ -59,9 +59,11 @@ class Login extends Component {
                 <div className="m-login__form m-form" action="">
                   <div className="form-group m-form__group">
                     <input className="form-control m-input" type="text" placeholder="Username" name="username" autoComplete="off" value={this.state.username} onChange={this.handleUsernameChange}/>
+                      {(errors !== undefined && errors.errors.username) && <div id="username-error" className="form-control-feedback error">{errors.errors.username[0]}</div>}
                   </div>
                   <div className="form-group m-form__group">
                     <input className="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handlePasswordChange}/>
+                      {(errors !== undefined && errors.errors.password) && <div id="password-error" className="form-control-feedback error">{errors.errors.password[0]}</div>}
                   </div>
                   <div className="row m-login__form-sub">
                     <div className="col m--align-left m-login__form-left">
@@ -70,7 +72,7 @@ class Login extends Component {
                           <span></span>
                       </label>
                     </div>
-                    <div className="col m--align-right m-login__form-right">
+                    <div className="col m--align-right m-login__form-right m--hide">
                       <a href="javascript:;" id="m_login_forget_password" className="m-link">Forget Password ?</a>
                     </div>
                   </div>
@@ -116,7 +118,8 @@ Login.propTypes = {};
 
 Login = connect(
   state => ({
-    loginRequest: selectLoginRequest(state)
+    loginRequest: selectLoginRequest(state),
+    auth: state.auth
   }),
   (dispatch) => ({
     login: (username, password) => { dispatch(login(username, password)); },
