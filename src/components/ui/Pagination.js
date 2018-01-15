@@ -33,14 +33,14 @@ const Pagination = ({ page, totalPages, onPageSelect, dockLength }) => {
 
   return (
     <div className="m-btn-group m-btn-group--pill m-btn-group--air btn-group m-btn-group m-btn-group--pill btn-group-sm paggination-group">
-      { !showPrev &&
+      { showPrev &&
         <Button raised
           color='default'
           onClick={() => onPageSelect(1) }
           className='m-btn btn btn-metal m-btn--air'><i className="la la-angle-double-left"></i>
         </Button>
       }
-      { !showPrev &&
+      { showPrev &&
         <Button raised
           color='default'
           onClick={() => onPageSelect(page - 1) }
@@ -48,14 +48,14 @@ const Pagination = ({ page, totalPages, onPageSelect, dockLength }) => {
         </Button>
       }
       { pages }
-      { !showNext &&
+      { showNext &&
         <Button raised
           color='default'
           onClick={() => onPageSelect(page + 1) }
           className='m-btn btn  btn-metal m-btn--air'><i className="la la-angle-right"></i>
         </Button>
       }
-      { !showNext &&
+      { showNext &&
         <Button raised
           color='default'
           onClick={() => onPageSelect(totalPages) }
