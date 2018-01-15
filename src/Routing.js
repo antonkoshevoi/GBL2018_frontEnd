@@ -12,7 +12,7 @@ import Students from "./containers/students/Students";
 import { createHashHistory } from 'history'
 import Login from "./containers/auth/Login";
 import * as AUTH from './services/AuthService';
-import Header from "./components/layouts/Header";
+import Header from "./containers/ui/Header";
 import BulkCsv from "./containers/students/BulkCsv";
 
 // create history

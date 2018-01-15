@@ -1,12 +1,16 @@
-import Cookies from 'universal-cookie';
+import SessionStorage from '../../services/SessionStorage';
+
+export const INITIAL_LOGIN = '[Auth] INITIAL_LOGIN';
+export const INITIAL_LOGIN_SUCCESS = '[Auth] INITIAL_LOGIN_SUCCESS';
+export const INITIAL_LOGIN_FAIL = '[Auth] INITIAL_LOGIN_FAIL';
 
 export const LOGIN = '[Auth] LOGIN';
 export const LOGIN_SUCCESS = '[Auth] LOGIN_SUCCESS';
 export const LOGIN_FAIL = '[Auth] LOGIN_FAIL';
 
-export const INITIAL_LOGIN = '[Auth] INITIAL_LOGIN';
-export const INITIAL_LOGIN_SUCCESS = '[Auth] INITIAL_LOGIN_SUCCESS';
-export const INITIAL_LOGIN_FAIL = '[Auth] INITIAL_LOGIN_FAIL';
+export const LOGOUT = '[Auth] LOGOUT';
+export const LOGOUT_SUCCESS = '[Auth] LOGOUT_SUCCESS';
+export const LOGOUT_FAIL = '[Auth] LOGOUT_FAIL';
 
 export const SET_REDIRECT_URL = '[Auth] SET_REDIRECT_URL';
 
@@ -14,20 +18,15 @@ export const SET_REDIRECT_URL = '[Auth] SET_REDIRECT_URL';
  * Login
  */
 export function login(username, password) {
-    console.log("_____LOGIN");
-    return {
+  return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: (apiClient) => apiClient.post('session', {
       username, password
     })
   }
 }
-
-
 export function refreshLogin() {
-  const cookies = new Cookies();
-    console.log("_____INITIAL_LOGIN");
-  const refreshToken = cookies.get('refreshToken');
+  const refreshToken = SessionStorage.get('refreshToken');
 
   if (refreshToken) {
     return {
@@ -40,6 +39,24 @@ export function refreshLogin() {
 
   return {
     type: INITIAL_LOGIN_FAIL
+  };
+}
+
+/**
+ * Logout
+ */
+export function logout() {
+  const token = SessionStorage.get('token');
+
+  if (token) {
+    return {
+      types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
+      promise: (apiClient) => apiClient.post('session/destroy')
+    };
+  }
+
+  return {
+    type: LOGOUT_SUCCESS
   };
 }
 
