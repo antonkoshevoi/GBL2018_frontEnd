@@ -8,6 +8,7 @@ function* afterInitalLoginSuccess (action) {
   const { token, expiresAt, refreshToken } = action.result.data;
 
   const options = {
+    path: '/',
     expires: new Date(expiresAt * 1000)
   };
 
@@ -21,6 +22,7 @@ function* afterLoginSuccess (action) {
   const { token, expiresAt, refreshToken } = action.result.data;
 
   const options = {
+    path: '/',
     expires: new Date(expiresAt * 1000)
   };
 
