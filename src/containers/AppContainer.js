@@ -15,7 +15,6 @@ class AppContainer extends Component {
     const { auth } = this.props;
     const loading = !auth.get('initialLoad');
 
-    console.log(loading);
     if(loading) {
       return (<Loader type="initial"/>);
     }
