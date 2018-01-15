@@ -54,37 +54,7 @@ class Header extends Component {
               <div id="m_header_topbar" className="m-topbar  m-stack m-stack--ver m-stack--general">
                 <div className="m-stack__item m-topbar__nav-wrapper">
                   <ul className="m-topbar__nav m-nav m-nav--inline">
-                    <li className="
-	m-nav__item m-dropdown m-dropdown--large m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width m-dropdown--skin-light	m-list-search m-list-search--skin-light"
-                      data-dropdown-toggle="click" data-dropdown-persistent="true" id="m_quicksearch" data-search-type="dropdown">
-                      <a  className="m-nav__link m-dropdown__toggle">
-												<span className="m-nav__link-icon">
-													<i className="flaticon-search-1"></i>
-												</span>
-                      </a>
-                      <div className="m-dropdown__wrapper">
-                        <span className="m-dropdown__arrow m-dropdown__arrow--center"></span>
-                        <div className="m-dropdown__inner ">
-                          <div className="m-dropdown__header">
-                            <form  className="m-list-search__form">
-                              <div className="m-list-search__form-wrapper">
-																<span className="m-list-search__form-input-wrapper">
-																	<input id="m_quicksearch_input" autoComplete="off" type="text" name="q" className="m-list-search__form-input" value="" placeholder="Search..."/>
-																</span>
-                                <span className="m-list-search__form-icon-close" id="m_quicksearch_close">
-																	<i className="la la-remove"></i>
-																</span>
-                              </div>
-                            </form>
-                          </div>
-                          <div className="m-dropdown__body">
-                            <div className="m-dropdown__scrollable m-scrollable" data-scrollable="true" data-max-height="300" data-mobile-max-height="200">
-                              <div className="m-dropdown__content"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+
                     <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width" data-dropdown-toggle="click" data-dropdown-persistent="true">
                       <a  className="m-nav__link m-dropdown__toggle" id="m_topbar_notification_icon">
                         <span className="m-nav__link-badge m-badge m-badge--dot m-badge--dot-small m-badge--danger"></span>
@@ -127,63 +97,7 @@ class Header extends Component {
                         </div>
                       </div>
                     </li>
-                    <li className="m-nav__item m-topbar__quick-actions m-topbar__quick-actions--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push m-dropdown--mobile-full-width m-dropdown--skin-light"  data-dropdown-toggle="click">
-                      <a  className="m-nav__link m-dropdown__toggle">
-                        <span className="m-nav__link-badge m-badge m-badge--dot m-badge--info m--hide"></span>
-                        <span className="m-nav__link-icon">
-													<i className="flaticon-share"></i>
-												</span>
-                      </a>
-                      <div className="m-dropdown__wrapper">
-                        <span className="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-                        <div className="m-dropdown__inner">
-                          <div className="m-dropdown__header m--align-center" style={{background: "url(assets/app/media/img/misc/quick_actions_bg.jpg); background-size: cover"}}>
-														<span className="m-dropdown__header-title">
-															Quick Actions
-														</span>
-                            <span className="m-dropdown__header-subtitle">
-															Shortcuts
-														</span>
-                          </div>
-                          <div className="m-dropdown__body m-dropdown__body--paddingless">
-                            <div className="m-dropdown__content">
-                              <div className="m-scrollable" data-scrollable="false" data-max-height="380" data-mobile-max-height="200">
-                                <div className="m-nav-grid m-nav-grid--skin-light">
-                                  <div className="m-nav-grid__row">
-                                    <a  className="m-nav-grid__item">
-                                      <i className="m-nav-grid__icon flaticon-file"></i>
-                                      <span className="m-nav-grid__text">
-																				Generate Report
-																			</span>
-                                    </a>
-                                    <a  className="m-nav-grid__item">
-                                      <i className="m-nav-grid__icon flaticon-time"></i>
-                                      <span className="m-nav-grid__text">
-																				Add New Event
-																			</span>
-                                    </a>
-                                  </div>
-                                  <div className="m-nav-grid__row">
-                                    <a  className="m-nav-grid__item">
-                                      <i className="m-nav-grid__icon flaticon-folder"></i>
-                                      <span className="m-nav-grid__text">
-																				Create New Task
-																			</span>
-                                    </a>
-                                    <a  className="m-nav-grid__item">
-                                      <i className="m-nav-grid__icon flaticon-clipboard"></i>
-                                      <span className="m-nav-grid__text">
-																				Completed Tasks
-																			</span>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+
                     <UserMenu logout={logout}/>
 
                     <LanguageSwitcher/>

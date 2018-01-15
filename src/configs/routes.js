@@ -10,6 +10,7 @@ import Login from '../containers/auth/Login';
 import Reports from '../containers/Reports';
 import Students from '../containers/students/Students';
 import BulkCsv from "../containers/students/BulkCsv";
+import Courses from "../containers/pages/Courses/Courses";
 
 export default () => (
   <AppContainer>
@@ -23,6 +24,7 @@ export default () => (
           <Route path="/students/list"  name="Students" component={Students} />
           <Route path="/students/csv" component={BulkCsv}/>
           <Route path='/reports' component={Reports}/>
+          <Route path='/courses' component={Courses}/>
         </MainLayout>
       </AuthenticatedMiddleware>
     </Switch>

@@ -214,3 +214,12 @@ table th .sort-arrow {
   border-radius: 0 !important;
 }
 
+div.portlet-header-input:before {
+  background-color: #fff;
+}
+
+.portlet-header-input input, .portlet-header-input > div > button {
+  color: #fff;
+}
+
+
