@@ -45,7 +45,7 @@ export const HeadRow = (props) => {
 export const Th = ({ first, width, name, onSort, dir = undefined, ...props}) => {
   return (
     <th className={first ? 'm-datatable__cell--center m-datatable__cell m-datatable__cell--check' : 'm-datatable__cell'}
-      onClick={() => { onSort(name) }}>
+      onClick={onSort && (() => { onSort(name) })}>
       <span style={{width: `${width}`}}>
         {props.children}
       </span>
