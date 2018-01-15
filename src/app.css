@@ -149,3 +149,30 @@ button [role="progressbar"] {
   top: 50%;
   transform: translateY(-50%);
 }
+
+div.myGridTileBar {
+  height: 80px;
+  background-color: rgba(0, 17, 0, 0.58);
+}
+
+div.gridProgressBar {
+  height: 6px;
+  border-radius: 6px;
+}
+
+table th.sort-table-head {
+  position: relative;
+  cursor: pointer;
+}
+
+table th.sort-table-head:hover  a{
+  font-weight: 600;
+}
+
+table th .sort-arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(5, 65, 112, 0.64);
+}

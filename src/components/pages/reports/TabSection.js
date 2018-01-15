@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Paper, Tabs, Tab, Typography, GridList, GridListTile, GridListTileBar, IconButton,  Icon} from 'material-ui';
+import {
+    Paper, Tabs, Tab, Typography, GridList, GridListTile, GridListTileBar, IconButton, Icon,
+    LinearProgress
+} from 'material-ui';
 import {getAllStudents} from "../../../services/Students";
 
 function TabContainer(props) {
@@ -27,15 +30,28 @@ class TabSection extends Component {
             return (
                 <GridListTile key={i}>
                     <img src={student.avatar} alt={student.first_name} />
+
                     <GridListTileBar
-                        title={student.first_name}
-                        subtitle={<span>{student.last_name}</span>}
+                        className="myGridTileBar"
+                        title={student.first_name + " " + student.last_name}
+                        subtitle={
+                            (
+                                <div>
+                                    <span className="text-right d-block">75%</span>
+                                    <LinearProgress mode="determinate" className="gridProgressBar" value={75} />
+                                    <br />
+                                    <span  className="text-right  d-block">35%</span>
+                                    <LinearProgress color="accent" className="gridProgressBar" mode="determinate" value={35} />
+                                </div>
+                            )
+                        }
                         actionIcon={
                             <IconButton  color="contrast">
-                               <Icon>person</Icon>
+                              
                             </IconButton>
                         }
                     />
+
                 </GridListTile>
             )
         })

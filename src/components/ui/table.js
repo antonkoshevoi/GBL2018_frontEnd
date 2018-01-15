@@ -42,18 +42,19 @@ export const HeadRow = (props) => {
   );
 };
 
+
 export const Th = ({ first, width, name, onSort, dir = undefined, ...props}) => {
-  return (
-    <th className={first ? 'm-datatable__cell--center m-datatable__cell m-datatable__cell--check' : 'm-datatable__cell'}
-      onClick={onSort && (() => { onSort(name) })}>
-      <span style={{width: `${width}`}}>
-        {props.children}
-      </span>
-      {dir &&
-        (dir === 'asc' ? <span>up</span> : <span>down</span>)
-      }
-    </th>
-  );
+    return (
+        <th className={ (onSort ? 'sort-table-head ' : '') +  (first ? 'm-datatable__cell--center m-datatable__cell m-datatable__cell--check' : 'm-datatable__cell')}
+            onClick={onSort && (() => { onSort(name) })}>
+            <a style={{width: `${width}`}}>
+                {props.children}
+            </a>
+            {dir &&
+            (dir === 'asc' ? <i className="sort-arrow la la-angle-up"></i> : <i className="sort-arrow la la-angle-down"></i>)
+            }
+        </th>
+    );
 };
 
 export const Td = ({ first, width, ...props}) => {
