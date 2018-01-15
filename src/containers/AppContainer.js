@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { refreshLogin } from '../redux/auth/actions';
 import { selectAuthDomain } from '../redux/auth/selectors';
+import Loader from "../components/layouts/Loader";
 
 class AppContainer extends Component {
 
@@ -16,7 +17,7 @@ class AppContainer extends Component {
 
     console.log(loading);
     if(loading) {
-      return (<div>loaaaaaaaaaaaaaaaaaaaaaaaading.........</div>);
+      return (<Loader type="initial"/>);
     }
 
     return this.props.children;

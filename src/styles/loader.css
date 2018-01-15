@@ -1,4 +1,4 @@
-.loader {
+.loaderWrapper {
     position: fixed;
     width:100vw;
     height: 100vh;
@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .spinner {
@@ -17,9 +18,9 @@
 }
 
 .cube1, .cube2 {
-    background-color: #333;
-    width: 15px;
-    height: 15px;
+    background-color: #09a7e0;
+    width: 25px;
+    height: 25px;
     position: absolute;
     top: 0;
     left: 0;
@@ -57,4 +58,123 @@
                 transform: rotate(-360deg);
                 -webkit-transform: rotate(-360deg);
             }
+}
+
+
+.loader,
+.loader:after {
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+}
+.loader {
+    margin: 60px auto;
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: 1.1em solid rgba(104, 177, 255, 0.2);
+    border-right: 1.1em solid rgba(104, 177, 255, 0.2);
+    border-bottom: 1.1em solid rgba(104, 177, 255, 0.2);
+    border-left: 1.1em solid #68b1ff;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+}
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
+/* Main styles */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:800);
+
+.textLoader .text {
+    fill: none;
+    stroke-width: 6;
+    stroke-linejoin: round;
+    stroke-dasharray: 70 330;
+    stroke-dashoffset: 0;
+    -webkit-animation: stroke 6s infinite linear;
+    animation: stroke 6s infinite linear;
+}
+
+.textLoader .text:nth-child(5n + 1) {
+    stroke: #F2385A;
+    -webkit-animation-delay: -1.2s;
+    animation-delay: -1.2s;
+}
+.textLoader .text:nth-child(5n + 2) {
+    stroke: #F5A503;
+    -webkit-animation-delay: -2.4s;
+    animation-delay: -2.4s;
+}
+
+.textLoader .text:nth-child(5n + 3) {
+    stroke: #E9F1DF;
+    -webkit-animation-delay: -3.6s;
+    animation-delay: -3.6s;
+}
+
+.textLoader .text:nth-child(5n + 4) {
+    stroke: #56D9CD;
+    -webkit-animation-delay: -4.8s;
+    animation-delay: -4.8s;
+}
+
+.textLoader .text:nth-child(5n + 5) {
+    stroke: #3AA1BF;
+    -webkit-animation-delay: -6s;
+    animation-delay: -6s;
+}
+
+@-webkit-keyframes stroke {
+    100% {
+        stroke-dashoffset: -400;
+    }
+}
+
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: -400;
+    }
+}
+
+.textLoader{
+    background-size: .2em 100%;
+    font: 8em/1 Open Sans, Impact;
+    text-transform: uppercase;
+    top: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(0,#15869c,#11272d);
+}
+
+
+.textLoader svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }

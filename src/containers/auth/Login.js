@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import { login } from '../../redux/auth/actions';
 import {selectAuthDomain, selectLoginRequest} from "../../redux/auth/selectors";
 import { createStructuredSelector } from "reselect";
+import Loader from "../../components/layouts/Loader";
+import {Button, CircularProgress} from "material-ui";
 
 class Login extends Component {
 
@@ -38,12 +40,9 @@ class Login extends Component {
   render() {
     const { loginRequest } = this.props;
     const loading = loginRequest.get('loading');
-    const errors = this.props.auth.get('errors');
+    const errors = loginRequest.get('errors');
       return (
       <div style={{position:'fixed',}} className="loginWrapper">
-        {loading ?
-          (<div>LOADING...</div>) : ''
-        }
         <div className="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2 m--full-height" id="m_login" style={{backgroundImage: `url(${background})`}}>
           <div className="m-grid__item m-grid__item--fluid	m-login__wrapper">
             <div className="m-login__container">
@@ -59,11 +58,13 @@ class Login extends Component {
                 <div className="m-login__form m-form" action="">
                   <div className="form-group m-form__group">
                     <input className="form-control m-input" type="text" placeholder="Username" name="username" autoComplete="off" value={this.state.username} onChange={this.handleUsernameChange}/>
-                      {(errors !== undefined && errors.errors.username) && <div id="username-error" className="form-control-feedback error">{errors.errors.username[0]}</div>}
+                      {(errors.errors !== undefined && errors.errors.username) && <div id="username-error" className="form-control-feedback  text-center error">{errors.errors.username[0]}</div>}
+
                   </div>
                   <div className="form-group m-form__group">
                     <input className="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handlePasswordChange}/>
-                      {(errors !== undefined && errors.errors.password) && <div id="password-error" className="form-control-feedback error">{errors.errors.password[0]}</div>}
+                      {(errors.errors !== undefined && errors.errors.password) && <div id="password-error" className="form-control-feedback  text-center error">{errors.errors.password[0]}</div>}
+
                   </div>
                   <div className="row m-login__form-sub">
                     <div className="col m--align-left m-login__form-left">
@@ -77,10 +78,13 @@ class Login extends Component {
                     </div>
                   </div>
                   <div className="m-login__form-action">
-                    <button id="m_login_signin_submit" onClick={() => { this._login() }}
-                        className="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primary">
-                      Sign In
-                    </button>
+                    <Button id="m_login_signin_submit"  raised color="primary" onClick={() => { this._login() }}
+                        className="btn  m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primary">
+                      <span>Sign In</span>
+                        {loading &&
+                        <CircularProgress color="accent"/>
+                        }
+                    </Button>
                   </div>
                 </div>
               </div>
