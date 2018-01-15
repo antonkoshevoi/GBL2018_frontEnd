@@ -14,3 +14,8 @@ export const selectRecords = createSelector(
   selectStudentsDomain,
   (subState) => subState.get('records')
 );
+
+export const selectPagination = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('pagination')
+);

@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import {Button, CircularProgress, Icon} from 'material-ui';
+import { Button, Icon, MenuItem, Select } from 'material-ui';
 import AddStudentDialog from '../../components/pages/students/AddStudentDialog';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getRecords } from '../../redux/students/actions';
-import { selectGetRecordsRequest, selectRecords } from '../../redux/students/selectors';
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from '../../components/ui/table';
+import { selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/students/selectors';
 import { buildSortersQuery } from '../../helpers/utils';
-
-
+import Pagination from '../../components/ui/Pagination';
 
 class Students extends Component {
 
@@ -17,8 +16,9 @@ class Students extends Component {
     super(props);
     this.state = {
       dialogIsOpen: false,
-      sorters: {
-      }
+      sorters: {},
+      page: props.pagination.get('page'),
+      perPage: props.pagination.get('perPage')
     }
   }
 
@@ -37,23 +37,27 @@ class Students extends Component {
     this.setState({ dialogIsOpen: false });
   };
 
+  /**
+   *
+   * @private
+   */
   _renderRecords () {
     const { records } = this.props;
 
     if (records.length === 0) {
       return (
-          <tr>
-            <td>
-              <div className="table-message">
-                <h2>Student Not Found...</h2>
-              </div>
-            </td>
-          </tr>
+        <tr>
+          <td>
+            <div className="table-message">
+              <h2>Student Not Found...</h2>
+            </div>
+          </td>
+        </tr>
       )
     }
 
     return records.map((record, key) => (
-      <Row key={key}>
+      <Row index={key} key={key}>
         <Td first={true} width='100px'>{key + 1}</Td>
         <Td width='132px'>{record.get('username')}</Td>
         <Td width='132px'>{record.get('firstName')}</Td>
@@ -70,6 +74,24 @@ class Students extends Component {
     ));
   }
 
+  /**
+   *
+   * @private
+   */
+  _getRecords () {
+    const { sorters, page, perPage } = this.state;
+
+    this.props.getRecords({
+      orderBy: buildSortersQuery(sorters),
+      page, perPage
+    });
+  }
+
+  /**
+   *
+   * @param name
+   * @private
+   */
   _sort (name) {
     let sorters = {};
 
@@ -79,16 +101,32 @@ class Students extends Component {
       sorters[name] = 'asc';
     }
 
-    this.setState({ sorters });
-    this.props.getRecords({
-      orderBy: buildSortersQuery(sorters)
-    });
+    this.setState({ sorters }, this._getRecords);
+  }
+
+  /**
+   *
+   * @param perPage
+   * @private
+   */
+  _selectPerPage (perPage) {
+    this.setState({ perPage }, this._getRecords)
+  }
+
+  /**
+   *
+   * @param page
+   * @private
+   */
+  _goToPage (page) {
+    this.setState({ page }, this._getRecords)
   }
 
   render() {
-    const { getRecordsRequest } = this.props;
-    const { sorters } = this.state;
+    const { getRecordsRequest, pagination } = this.props;
+    const { sorters, page, perPage } = this.state;
     const loading = getRecordsRequest.get('loading');
+    const totalPages = pagination.get('totalPages');
 
     return (
       <div className='fadeInLeft  animated'>
@@ -112,6 +150,15 @@ class Students extends Component {
               <div className='row align-items-center'>
 
                 <div className='col-xl-12 order-1 order-xl-2 m--align-right'>
+                  <Select
+                    value={perPage}
+                    onChange={(e) => { this._selectPerPage(e.target.value) }}>
+                    <MenuItem value={5}>5</MenuItem>
+                    <MenuItem value={10}>10</MenuItem>
+                    <MenuItem value={25}>25</MenuItem>
+                    <MenuItem value={50}>50</MenuItem>
+                    <MenuItem value={100}>100</MenuItem>
+                  </Select>
                   <Button raised color='accent' onClick={this._openAddDialog} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
                     Add New
                     <Icon style={{marginLeft:'5px'}}>add</Icon>
@@ -144,11 +191,13 @@ class Students extends Component {
 
               <Tbody>
                 {loading &&
-                         <TablePreloader text="Loading..." color="accent"/>
+                  <TablePreloader text="Loading..." color="accent"/>
                 }
                 { this._renderRecords() }
               </Tbody>
             </Table>
+
+            <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
           </div>
         </div>
 
@@ -161,7 +210,8 @@ class Students extends Component {
 Students = connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
-    records: selectRecords(state)
+    pagination: selectPagination(state),
+    records: selectRecords(state),
   }),
   (dispatch) => ({
     getRecords: (params = {}) => { dispatch(getRecords(params)) }

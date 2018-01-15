@@ -170,7 +170,7 @@ table th.sort-table-head {
   cursor: pointer;
 }
 
-table th.sort-table-head:hover  a{
+table th.sort-table-head:hover  span{
   font-weight: 600;
 }
 

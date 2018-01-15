@@ -27,9 +27,9 @@ export const Tbody = (props) => {
   );
 };
 
-export const Row = ({ key, ...props}) => {
+export const Row = ({ index, ...props}) => {
   return (
-    <tr key={key} data-row="0" className={`m-datatable__row ${(key % 2 !== 0 ? 'm-datatable__row--even' : '')}`} style={{height: '64px'}}>
+    <tr data-row="0" className={`m-datatable__row ${(index % 2 !== 0 ? 'm-datatable__row--even' : '')}`} style={{height: '64px'}}>
       {props.children}
     </tr>
   );
@@ -48,9 +48,9 @@ export const Th = ({ first, width, name, onSort, dir = undefined, ...props}) => 
     return (
         <th className={ (onSort ? 'sort-table-head ' : '') +  (first ? 'm-datatable__cell--center m-datatable__cell m-datatable__cell--check' : 'm-datatable__cell')}
             onClick={onSort && (() => { onSort(name) })}>
-            <a style={{width: `${width}`}}>
+            <span style={{width: `${width}`}}>
                 {props.children}
-            </a>
+            </span>
             {dir &&
             (dir === 'asc' ? <i className="sort-arrow la la-angle-up"></i> : <i className="sort-arrow la la-angle-down"></i>)
             }
