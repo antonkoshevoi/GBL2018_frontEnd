@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { Button, Icon, MenuItem, Select } from 'material-ui';
-import AddStudentDialog from '../../components/pages/students/AddStudentDialog';
+import AddStudentDialog from './modals/AddStudentDialog';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getRecords } from '../../redux/students/actions';
+import {create, getRecords} from '../../redux/students/actions';
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from '../../components/ui/table';
 import { selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/students/selectors';
 import { buildSortersQuery } from '../../helpers/utils';
@@ -24,7 +24,6 @@ class Students extends Component {
 
   componentDidMount () {
     const { getRecords } = this.props;
-
     getRecords();
   }
 
@@ -124,7 +123,7 @@ class Students extends Component {
 
   render() {
     const { getRecordsRequest, pagination } = this.props;
-    const { sorters, page, perPage } = this.state;
+    const { dialogIsOpen, sorters, page, perPage } = this.state;
     const loading = getRecordsRequest.get('loading');
     const totalPages = pagination.get('totalPages');
 
@@ -206,7 +205,9 @@ class Students extends Component {
           </div>
         </div>
 
-        <AddStudentDialog dialogIsOpen={this.state.dialogIsOpen} handlerClose = {this._closeAddDialog} />
+        <AddStudentDialog
+          dialogIsOpen={dialogIsOpen}
+          onClose={this._closeAddDialog}/>
       </div>
     );
   }

@@ -1,4 +1,4 @@
-import { GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL } from './actions';
+import {GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, CREATE, CREATE_SUCCESS, CREATE_FAIL} from './actions';
 import Immutable from 'immutable';
 
 const initialState = Immutable.fromJS({
@@ -7,6 +7,13 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errorResponse: null
+  },
+  createRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null,
+    errors: {}
   },
   records: [],
   pagination: {
@@ -39,6 +46,43 @@ export default function reducer (state = initialState, action) {
     case GET_RECORDS_FAIL:
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
+          .set('loading', false)
+          .set('fail', true)
+        );
+    /**
+     * Create
+     */
+    case CREATE:
+      return state
+        .set('createRequest', state.get('createRequest')
+          .set('loading', true)
+          .remove('success')
+          .remove('fail')
+        );
+    case CREATE_SUCCESS:
+      const total = state.get('pagination').get('total') + 1;
+      const perPage = state.get('pagination').get('perPage');
+      let totalPages = state.get('pagination').get('totalPages');
+
+      if (total > totalPages * perPage) {
+        totalPages += 1;
+      }
+
+      return state
+        .set('createRequest', state.get('createRequest')
+          .set('success', true)
+          .remove('loading')
+        ).set('records', state.get('records')
+          .push(action.result.data)
+        ).set('pagination', state.get('pagination')
+          .set('page', totalPages)
+          .set('totalPages', totalPages)
+          .set('total', total)
+        );
+    case CREATE_FAIL:
+      console.log(action);
+      return state
+        .set('createRequest', state.get('createRequest')
           .set('loading', false)
           .set('fail', true)
         );

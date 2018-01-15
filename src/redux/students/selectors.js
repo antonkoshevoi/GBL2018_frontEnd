@@ -19,3 +19,11 @@ export const selectPagination = createSelector(
   selectStudentsDomain,
   (subState) => subState.get('pagination')
 );
+
+/**
+ * Create
+ */
+export const selectCreateRequest = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('createRequest')
+);
