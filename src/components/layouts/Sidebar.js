@@ -5,7 +5,7 @@ import '../../styles/sidebar.css';
 import {  translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Menu from "../../data/Menu";
-
+import $ from "jquery"
 
 class Sidebar extends Component {
 
@@ -24,8 +24,16 @@ class Sidebar extends Component {
     }; //
 
     componentDidMount(){
-        this.setState({activeMenu:{key:this.props.location.pathname.substr(1)}})
+        const activeMenuKey = $('.second_level .active').closest('.menuItem').data('key');
+        if (activeMenuKey !== undefined) {
+            $('.second_level active').closest('.menuItem');
+            this.setState({activeMenu:{key:activeMenuKey,subMenu:true}})
+        } else {
+            this.setState({activeMenu:{key:this.props.location.pathname.substr(1)}});
+        }
+
     }
+
 
     _renderGoogleMenus() {
         const activeMenu = this.state.activeMenu;
@@ -33,7 +41,7 @@ class Sidebar extends Component {
 
         return Menu.multipleMenu.map(function (menu) {
             return (
-                <div className="menuItem" key={menu.key}>
+                <div className="menuItem" key={menu.key} data-key={menu.key}>
                    <NavLink to={(menu.subMenu !== undefined) ? `#${menu.key}` : `/${menu.link}`}  className={'googleMenuItem ' + menu.colorName + (activeMenu.key === menu.key ? ' active fadeInUp  animated' :  activeMenu.subMenu !== undefined ? ' swapped' : '') }
                          onClick={(event) => _self._googleMenuToggle(menu)}>
                        <span className="icon"><i className={menu.icon}></i></span>
@@ -107,6 +115,7 @@ class Sidebar extends Component {
     }
 
     render() {
+
 
     
         return (
