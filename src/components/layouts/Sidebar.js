@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {NavLink, withRouter} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import {withRouter} from "react-router";
 import '../../styles/sidebar.css';
 import {  translate } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Menu from "../../data/Menu";
-import $ from 'jquery';
 
 
 class Sidebar extends Component {
@@ -130,9 +130,6 @@ class Sidebar extends Component {
     }
 
 
-    componentDidMount(){
-       // $('.googleMenuItem').next('.second_level ').find('.active').closest('.second_level').addClass('activeSubMenu').prev().addClass('active');
-    }
 
 }
 
