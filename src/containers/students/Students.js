@@ -151,6 +151,7 @@ class Students extends Component {
 
                 <div className='col-xl-12 order-1 order-xl-2 m--align-right'>
                   <Select
+                    className="pull-left table-select"
                     value={perPage}
                     onChange={(e) => { this._selectPerPage(e.target.value) }}>
                     <MenuItem value={5}>5</MenuItem>
@@ -197,7 +198,11 @@ class Students extends Component {
               </Tbody>
             </Table>
 
-            <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
+            <div className="row">
+              <div className="col-sm-12 text-right">
+                <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
+              </div>
+            </div>
           </div>
         </div>
 

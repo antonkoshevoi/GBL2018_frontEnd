@@ -21,15 +21,15 @@ class Loader extends Component {
                                 </text>
                             </symbol>
 
-                            <use xlinkHref="#s-text" class="text"
+                            <use xlinkHref="#s-text" className="text"
                             ></use>
-                            <use xlinkHref="#s-text" class="text"
+                            <use xlinkHref="#s-text" className="text"
                             ></use>
-                            <use xlinkHref="#s-text" class="text"
+                            <use xlinkHref="#s-text" className="text"
                             ></use>
-                            <use xlinkHref="#s-text" class="text"
+                            <use xlinkHref="#s-text" className="text"
                             ></use>
-                            <use xlinkHref="#s-text" class="text"
+                            <use xlinkHref="#s-text" className="text"
                             ></use>
 
                         </svg>

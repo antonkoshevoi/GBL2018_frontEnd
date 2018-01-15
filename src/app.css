@@ -201,3 +201,16 @@ table th .sort-arrow {
 .table-message [role="progressbar"] {
   margin-left: 29px;
 }
+
+.paggination-group button {
+  min-width:50px;
+}
+
+.paggination-group button:not('btn-metal') {
+  background-color: #2f8eed;
+}
+
+.radius-0 {
+  border-radius: 0 !important;
+}
+

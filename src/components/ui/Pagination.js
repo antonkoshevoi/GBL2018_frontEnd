@@ -23,43 +23,43 @@ const Pagination = ({ page, totalPages, onPageSelect, dockLength }) => {
     pages.push(
       <Button key={i}
         raised
-        color='accent'
+        color='primary'
         onClick={() => onPageSelect(k) }
-        className='mt-btn mt-btn-success'>{i}
+        className={`m-btn btn  btn-info m-btn--air radius-0 ${(page === k ? ' active' : '')}`}>{i}
       </Button>
     );
     i++;
   }
 
   return (
-    <div>
-      { showPrev &&
+    <div className="m-btn-group m-btn-group--pill m-btn-group--air btn-group m-btn-group m-btn-group--pill btn-group-sm paggination-group">
+      { !showPrev &&
         <Button raised
-          color='accent'
+          color='default'
           onClick={() => onPageSelect(1) }
-          className='mt-btn mt-btn-success'>first
+          className='m-btn btn btn-metal m-btn--air'><i className="la la-angle-double-left"></i>
         </Button>
       }
-      { showPrev &&
+      { !showPrev &&
         <Button raised
-          color='accent'
+          color='default'
           onClick={() => onPageSelect(page - 1) }
-          className='mt-btn mt-btn-success'>prev
+          className='m-btn btn  btn-metal m-btn--air'><i className="la la-angle-left"></i>
         </Button>
       }
       { pages }
-      { showNext &&
+      { !showNext &&
         <Button raised
-          color='accent'
+          color='default'
           onClick={() => onPageSelect(page + 1) }
-          className='mt-btn mt-btn-success'>next
+          className='m-btn btn  btn-metal m-btn--air'><i className="la la-angle-right"></i>
         </Button>
       }
-      { showNext &&
+      { !showNext &&
         <Button raised
-          color='accent'
+          color='default'
           onClick={() => onPageSelect(totalPages) }
-          className='mt-btn mt-btn-success'>last
+          className='m-btn btn btn-metal m-btn--air'><i className="la la-angle-double-right"></i>
         </Button>
       }
     </div>
