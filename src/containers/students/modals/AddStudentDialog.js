@@ -41,6 +41,8 @@ class AddStudentDialog extends Component {
     const { isOpen } = this.state;
     const { createRequest } = this.props;
     const loading = createRequest.get('loading');
+    const errorMessage = createRequest.get('errorMessage');
+    const errors = createRequest.get('errors');
 
     return (
       <Dialog
@@ -61,8 +63,9 @@ class AddStudentDialog extends Component {
 
         <DialogContent className="m--margin-top-25">
           <DialogContentText>
+            {errorMessage && <span>{errorMessage}</span>}
           </DialogContentText>
-          <AddForm onSubmit={this._save} loading={loading}/>
+          <AddForm onSubmit={this._save} loading={loading} errors={errors}/>
         </DialogContent>
       </Dialog>
     );

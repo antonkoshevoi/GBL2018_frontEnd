@@ -12,7 +12,8 @@ const initialState = Immutable.fromJS({
     loading: false,
     success: false,
     fail: false,
-    errorResponse: null,
+    errorMessage: null,
+    errorCode: null,
     errors: {}
   },
   records: [],
@@ -58,6 +59,9 @@ export default function reducer (state = initialState, action) {
           .set('loading', true)
           .remove('success')
           .remove('fail')
+          .remove('errors')
+          .remove('errorMessage')
+          .remove('errorCode')
         );
     case CREATE_SUCCESS:
       const total = state.get('pagination').get('total') + 1;
@@ -73,18 +77,22 @@ export default function reducer (state = initialState, action) {
           .set('success', true)
           .remove('loading')
         ).set('records', state.get('records')
-          .push(action.result.data)
+          .push(Immutable.fromJS(action.result.data))
         ).set('pagination', state.get('pagination')
           .set('page', totalPages)
           .set('totalPages', totalPages)
           .set('total', total)
         );
     case CREATE_FAIL:
-      console.log(action);
+      const data = action.error.response.data;
+
       return state
         .set('createRequest', state.get('createRequest')
           .set('loading', false)
           .set('fail', true)
+          .set('errorCode', data.code)
+          .set('errorMessage', data.message)
+          .set('errors', data.code === 400 ? Immutable.fromJS(data.errors) : undefined)
         );
 
     default:

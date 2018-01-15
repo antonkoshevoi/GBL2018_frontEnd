@@ -83,7 +83,7 @@ export default function reducer (state = initialState, action) {
         .set('loginRequest', state.get('loginRequest')
           .set('fail', true)
           .remove('loading')
-          .set('errors',action.error.response.data)
+          .set('errors', action.error.response.data)
         ).set('isLoggedIn', true);
 
     /**

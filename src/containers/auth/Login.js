@@ -59,7 +59,6 @@ class Login extends Component {
                   <div className="form-group m-form__group">
                     <input className="form-control m-input" type="text" placeholder="Username" name="username" autoComplete="off" value={this.state.username} onChange={this.handleUsernameChange}/>
                       {(errors.errors !== undefined && errors.errors.username) && <div id="username-error" className="form-control-feedback  text-center error">{errors.errors.username[0]}</div>}
-
                   </div>
                   <div className="form-group m-form__group">
                     <input className="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handlePasswordChange}/>

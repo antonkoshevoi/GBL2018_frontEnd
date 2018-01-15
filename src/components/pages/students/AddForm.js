@@ -34,6 +34,9 @@ class AddForm extends Component {
   }
 
   render() {
+    const { errors } = this.props;
+
+    console.log(errors);
     return (
       <div className="row">
         <div className="col-sm-8 m-auto">
@@ -43,11 +46,11 @@ class AddForm extends Component {
               name="username"
               margin="dense"
               fullWidth
-              value={this.state.userName}
+              value={this.state.username}
               onChange={(e) => { this._handleInputChange(e) }}/>
-            {false && <FormHelperText id="name-error-text">Error</FormHelperText> }
+            {errors && errors.get('username') && <FormHelperText>{ errors.get('username').get(0) }</FormHelperText>}
           </FormControl>
-          <FormControl   aria-describedby="name-error-text"  className="full-width form-inputs">
+          <FormControl aria-describedby="name-error-text" className="full-width form-inputs">
             <InputLabel htmlFor="name-error">Password</InputLabel>
             <Input fullWidth
               name="password"
@@ -55,9 +58,9 @@ class AddForm extends Component {
               margin="dense"
               value={this.state.password}
               onChange={(e) => { this._handleInputChange(e) }}/>
-            {false && <FormHelperText id="name-error-text">Error</FormHelperText>}
+            {errors && errors.get('password') && <FormHelperText>{ errors.get('password').get(0) }</FormHelperText>}
           </FormControl>
-          <FormControl   aria-describedby="name-error-text"  className="full-width form-inputs">
+          <FormControl aria-describedby="name-error-text" className="full-width form-inputs">
             <InputLabel htmlFor="name-error">Email</InputLabel>
             <Input fullWidth
               name="email"
@@ -65,9 +68,9 @@ class AddForm extends Component {
               margin="dense"
               value={this.state.email}
               onChange={(e) => { this._handleInputChange(e) }}/>
-            {false && <FormHelperText id="name-error-text">Error</FormHelperText>}
+            {errors && errors.get('email') && <FormHelperText>{ errors.get('email').get(0) }</FormHelperText>}
           </FormControl>
-          <FormControl   aria-describedby="name-error-text"  className="full-width form-inputs">
+          <FormControl aria-describedby="name-error-text" className="full-width form-inputs">
             <InputLabel htmlFor="name-error">First Name</InputLabel>
             <Input fullWidth
               name="firstName"
@@ -75,9 +78,9 @@ class AddForm extends Component {
               margin="dense"
               value={this.state.firstName}
               onChange={(e) => { this._handleInputChange(e) }}/>
-            {false && <FormHelperText id="name-error-text">Error</FormHelperText>}
+            {errors && errors.get('firstName') && <FormHelperText>{ errors.get('firstName').get(0) }</FormHelperText>}
           </FormControl>
-          <FormControl   aria-describedby="name-error-text"  className="full-width form-inputs">
+          <FormControl aria-describedby="name-error-text" className="full-width form-inputs">
             <InputLabel htmlFor="name-error">Last Name</InputLabel>
             <Input fullWidth
               name="lastName"
@@ -85,10 +88,8 @@ class AddForm extends Component {
               margin="dense"
               value={this.state.lastName}
               onChange={(e) => { this._handleInputChange(e) }}/>
-            {false && <FormHelperText id="name-error-text">Error</FormHelperText>}
+            {errors && errors.get('lastName') && <FormHelperText>{ errors.get('lastName').get(0) }</FormHelperText>}
           </FormControl>
-
-
           <FormControl className="full-width form-inputs">
             <TextField id="select-currency"
               select name="gender"
@@ -103,10 +104,10 @@ class AddForm extends Component {
                 Female
               </MenuItem>
             </TextField>
-            {false && <FormHelperText id="name-error-text">Error</FormHelperText>}
+            {errors && errors.get('gender') && <FormHelperText>{ errors.get('gender').get(0) }</FormHelperText>}
           </FormControl>
 
-          <FormControl aria-describedby="name-error-text"  className="full-width form-inputs">
+          <FormControl aria-describedby="name-error-text" className="full-width form-inputs">
             <InputLabel htmlFor="name-error">Phone</InputLabel>
             <Input fullWidth
               name="phone"
@@ -114,7 +115,7 @@ class AddForm extends Component {
               margin="dense"
               value={this.state.phone}
               onChange={(e) => { this._handleInputChange(e) }}/>
-            {false && <FormHelperText id="name-error-text">Error</FormHelperText>}
+            {errors && errors.get('phone') && <FormHelperText>{ errors.get('phone').get(0) }</FormHelperText>}
           </FormControl>
 
           <FormControl className="full-width form-inputs">
@@ -124,14 +125,14 @@ class AddForm extends Component {
               value={this.state.school}
               onChange={(e) => { this._handleInputChange(e) }}
               margin="normal">
-              <MenuItem  value="male">
+              <MenuItem value="male">
                 Male
               </MenuItem>
-              <MenuItem  value="female">
+              <MenuItem value="female">
                 Female
               </MenuItem>
             </TextField>
-            {false && <FormHelperText id="name-error-text">Error</FormHelperText>}
+            {errors && errors.get('school') && <FormHelperText>{ errors.get('school').get(0) }</FormHelperText>}
           </FormControl>
 
           <FormControl className="full-width form-inputs">
@@ -148,7 +149,7 @@ class AddForm extends Component {
                 Female
               </MenuItem>
             </TextField>
-            {false && <FormHelperText id="name-error-text">Error</FormHelperText>}
+            {errors && errors.get('homeroom') && <FormHelperText>{ errors.get('homeroom').get(0) }</FormHelperText>}
           </FormControl>
         </div>
         <div className="col-sm-12">
@@ -164,7 +165,8 @@ class AddForm extends Component {
 
 AddForm.propTypes = {
   loading: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  errors: PropTypes.any
 };
 
 export default AddForm;
