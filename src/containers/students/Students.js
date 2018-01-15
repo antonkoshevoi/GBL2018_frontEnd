@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { getRecords } from '../../redux/students/actions';
 import { selectGetRecordsRequest, selectRecords } from '../../redux/students/selectors';
 import { HeadRow, Row, Table, Tbody, Td, Th, Thead } from '../../components/ui/table';
+import { buildSortersQuery } from '../../helpers/utils';
 
 
 
@@ -16,8 +17,7 @@ class Students extends Component {
     super(props);
     this.state = {
       dialogIsOpen: false,
-      sorted: {
-
+      sorters: {
       }
     }
   }
@@ -58,8 +58,24 @@ class Students extends Component {
     ));
   }
 
+  _sort (name) {
+    let sorters = {};
+
+    if(this.state.sorters[name]) {
+      sorters[name] = this.state.sorters[name] === 'asc' ? 'desc' : 'asc';
+    } else {
+      sorters[name] = 'asc';
+    }
+
+    this.setState({ sorters });
+    this.props.getRecords({
+      orderBy: buildSortersQuery(sorters)
+    });
+  }
+
   render() {
     const { getRecordsRequest } = this.props;
+    const { sorters } = this.state;
     const loading = getRecordsRequest.get('loading');
 
     return (
@@ -103,14 +119,14 @@ class Students extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th first={true} width='100px'>#</Th>
-                  <Th width='132px'>Username</Th>
-                  <Th width='132px'>Firstname</Th>
-                  <Th width='132px'>Lastname</Th>
-                  <Th width='132px'>Email</Th>
-                  <Th width='132px'>Role</Th>
-                  <Th width='132px'>School</Th>
-                  <Th width='100px'>Actions</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['id']} name='id' first={true} width='100px'>#</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['username']} name='username' width='132px'>Username</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['firstName']} name='firstName' width='132px'>Firstname</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName' width='132px'>Lastname</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' width='132px'>Email</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['role']} name='role' width='132px'>Role</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>School</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['actions']} name='actions' width='100px'>Actions</Th>
                 </HeadRow>
               </Thead>
 
@@ -133,7 +149,7 @@ Students = connect(
     records: selectRecords(state)
   }),
   (dispatch) => ({
-    getRecords: () => { dispatch(getRecords()) }
+    getRecords: (params = {}) => { dispatch(getRecords(params)) }
   })
 )(Students);
 
