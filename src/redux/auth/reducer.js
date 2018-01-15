@@ -20,20 +20,24 @@ export default function reducer (state = initialState, action) {
      */
     case LOGIN:
       return state
-        .set('loginRequest.loading', true)
-        .remove('loginRequest.success')
-        .remove('loginRequest.fail')
-        .set('isLoggedIn', false);
+        .set('loginRequest', state.get('loginRequest')
+          .set('loading', true)
+          .remove('success')
+          .remove('fail')
+        ).set('isLoggedIn', false);
     case LOGIN_SUCCESS:
       return state
-        .remove('loginRequest.loading', false)
-        .set('loginRequest.success', true)
-        .set('isLoggedIn', true)
+        .set('loginRequest', state.get('loginRequest')
+          .set('success', true)
+          .remove('loading')
+        ).set('isLoggedIn', true)
         .set('initialLoad', true);
     case LOGIN_FAIL:
       return state
-        .remove('loginRequest.loading', false)
-        .set('loginRequest.fail', true)
+        .set('loginRequest', state.get('loginRequest')
+          .set('fail', true)
+          .remove('loading')
+        ).set('isLoggedIn', true)
         .set('initialLoad', true);
 
     case SET_REDIRECT_URL:
