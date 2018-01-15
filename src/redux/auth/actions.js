@@ -22,6 +22,8 @@ export function login(username, password) {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: (apiClient) => apiClient.post('session', {
       username, password
+    }, {}, {
+      'Authorization': null
     })
   }
 }
