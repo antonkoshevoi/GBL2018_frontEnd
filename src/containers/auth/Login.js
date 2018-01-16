@@ -1,17 +1,12 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import background from '../../media/images/bg-3.jpg';
 import logo from '../../media/images/logo.png';
-import * as AUTH from '../../services/AuthService';
-import { withRouter } from "react-router";
-import { translate } from "react-i18next";
+import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { login } from '../../redux/auth/actions';
-import {selectAuthDomain, selectLoginRequest} from "../../redux/auth/selectors";
-import { createStructuredSelector } from "reselect";
-import Loader from "../../components/layouts/Loader";
-import {Button, CircularProgress} from "material-ui";
-import {NavLink} from "react-router-dom";
+import { login, setRedirectUrl } from '../../redux/auth/actions';
+import { selectLoginRequest } from '../../redux/auth/selectors';
+import { Button, CircularProgress } from 'material-ui';
+import { withRouter, NavLink } from 'react-router-dom';
 
 class Login extends Component {
 
@@ -24,25 +19,28 @@ class Login extends Component {
     };
   }
 
-  handleUsernameChange = (event) => { this.setState({username: event.target.value}); };
-  handlePasswordChange = (event) => { this.setState({password: event.target.value}); };
+  _handleUsernameChange = (event) => { this.setState({username: event.target.value}); };
+  _handlePasswordChange = (event) => { this.setState({password: event.target.value}); };
 
   _login() {
-    this.props.login(
-      this.state.username,
-      this.state.password
-    );
-    // AUTH.login();
-    // console.log(this.props);
-    // this.props.history.push('/dashboard')
-    // console.log(AUTH.isLodegIn());
+    const { setRedirectUrl, login } = this.props;
+    const { username, password } = this.state;
+
+    let pathname = '/';
+    try {
+      pathname = this.props.location.state.from.pathname;
+    } catch (e) {}
+
+    setRedirectUrl(pathname);
+    login(username, password);
   }
 
   render() {
     const { loginRequest } = this.props;
     const loading = loginRequest.get('loading');
     const errors = loginRequest.get('errors');
-      return (
+
+    return (
       <div style={{position:'fixed',}} className="loginWrapper">
         <div className="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2 m--full-height" id="m_login" style={{backgroundImage: `url(${background})`}}>
           <div className="m-grid__item m-grid__item--fluid	m-login__wrapper">
@@ -58,11 +56,11 @@ class Login extends Component {
                 </div>
                 <div className="m-login__form m-form" action="">
                   <div className="form-group m-form__group">
-                    <input className="form-control m-input" type="text" placeholder="Username" name="username" autoComplete="off" value={this.state.username} onChange={this.handleUsernameChange}/>
+                    <input className="form-control m-input" type="text" placeholder="Username" name="username" autoComplete="off" value={this.state.username} onChange={this._handleUsernameChange}/>
                       {(errors.errors !== undefined && errors.errors.username) && <div id="username-error" className="form-control-feedback  text-center error">{errors.errors.username[0]}</div>}
                   </div>
                   <div className="form-group m-form__group">
-                    <input className="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handlePasswordChange}/>
+                    <input className="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this._handlePasswordChange}/>
                       {(errors.errors !== undefined && errors.errors.password) && <div id="password-error" className="form-control-feedback  text-center error">{errors.errors.password[0]}</div>}
 
                   </div>
@@ -127,6 +125,7 @@ Login = connect(
   }),
   (dispatch) => ({
     login: (username, password) => { dispatch(login(username, password)); },
+    setRedirectUrl: (uri) => { dispatch(setRedirectUrl(uri)); },
   })
 )(Login);
 

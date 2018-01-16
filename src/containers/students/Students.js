@@ -121,7 +121,11 @@ class Students extends Component {
    * @private
    */
   _selectPerPage (perPage) {
-    this.setState({ perPage }, this._getRecords)
+    const total = this.props.pagination.get('total');
+    const totalPages = Math.ceil(total / perPage);
+    const page = Math.min(this.state.page, totalPages);
+
+    this.setState({ perPage, page }, this._getRecords)
   }
 
   /**
@@ -136,9 +140,10 @@ class Students extends Component {
   _onCreate () {
     const { pagination } = this.props;
     const page = pagination.get('page');
-    this._goToPage(page);
-    //
-    // this.setState({ page }, this._getRecords);
+
+    if(this.state.page != page) {
+      this._goToPage(page);
+    }
   }
 
   render() {

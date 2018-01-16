@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setRedirectUrl } from '../../redux/auth/actions';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
-import { Redirect, Route } from 'react-router';
+import { Redirect, Route, withRouter } from 'react-router-dom';
 
 class AuthenticatedRoute extends Component {
 
   render () {
-    const { component: Component, isLoggedIn, ...rest } = this.props;
+    const { component: Component, isLoggedIn, location, ...rest } = this.props;
 
     return <Route {...rest} render={(props) => (
-      isLoggedIn
-        ? <Component {...props}/>
-        : <Redirect to='/login'/>
-    )} />;
+      isLoggedIn ? (
+        <Component {...props}/>
+      ) : (
+        <Redirect to={{
+          pathname: '/login',
+          state: { from: location }
+        }}/>
+      )
+    )}/>;
   }
 }
 
 AuthenticatedRoute = connect(
   (state, ownProps) => ({
-    isLoggedIn: selectIsLoggedIn(state),
-    currentURL: ownProps.path
+    isLoggedIn: selectIsLoggedIn(state)
   }),
-  (dispatch) => ({
-    setRedirectUrl: (uri) => { dispatch(setRedirectUrl(uri)); },
-  })
+  (dispatch) => ({})
 )(AuthenticatedRoute);
 
-export default AuthenticatedRoute;
+export default withRouter(AuthenticatedRoute);

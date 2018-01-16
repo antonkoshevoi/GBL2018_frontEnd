@@ -88,29 +88,29 @@ export default function reducer (state = initialState, action) {
         totalPages += 1;
       }
 
-      if(page === totalPages) {
-        return state
-          .set('createRequest', state.get('createRequest')
-            .set('success', true)
-            .set('loading', false)
-          ).set('records', state.get('records')
-            .push(Immutable.fromJS(action.result.data))
-          ).set('pagination', state.get('pagination')
-            .set('totalPages', totalPages)
-            .set('total', total)
-          );
-      }
-
-      return state
+      let newState = state
         .set('createRequest', state.get('createRequest')
           .set('success', true)
           .set('loading', false)
         ).set('pagination', state.get('pagination')
-          .set('page', totalPages)
           .set('totalPages', totalPages)
           .set('total', total)
         );
+
+      if(page === totalPages) {
+        return newState
+          .set('records', state.get('records')
+            .push(Immutable.fromJS(action.result.data))
+          );
+      }
+
+      console.log(newState);
+      return newState
+        .set('pagination', state.get('pagination')
+          .set('page', totalPages)
+        );
     case CREATE_FAIL:
+      console.log(action.error);
       const data = action.error.response.data;
 
       return state

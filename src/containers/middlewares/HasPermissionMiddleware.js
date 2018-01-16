@@ -11,14 +11,14 @@ class HasPermissionMiddleware extends Component {
   };
 
   componentDidMount() {
-    const { currentURL, isLoggedIn, setRedirectUrl, redirect } = this.props;
-
-    if (!isLoggedIn) {
-      // set the current url/path for future redirection
-      // then redirect
-      setRedirectUrl(currentURL);
-      redirect();
-    }
+    // const { currentURL, isLoggedIn, setRedirectUrl, redirect } = this.props;
+    //
+    // if (!isLoggedIn) {
+    //   // set the current url/path for future redirection
+    //   // then redirect
+    //   setRedirectUrl(currentURL);
+    //   redirect();
+    // }
   }
 
   render () {
