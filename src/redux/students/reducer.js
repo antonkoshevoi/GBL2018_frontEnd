@@ -1,4 +1,7 @@
-import {GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, CREATE, CREATE_SUCCESS, CREATE_FAIL} from './actions';
+import {
+  GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, CREATE, CREATE_SUCCESS, CREATE_FAIL,
+  RESET_CREATE_REQUEST
+} from './actions';
 import Immutable from 'immutable';
 
 const initialState = Immutable.fromJS({
@@ -94,7 +97,12 @@ export default function reducer (state = initialState, action) {
           .set('errorMessage', data.message)
           .set('errors', data.code === 400 ? Immutable.fromJS(data.errors) : undefined)
         );
-
+    case RESET_CREATE_REQUEST:
+      return state
+        .set('createRequest', initialState.get('createRequest'));
+    /**
+     * default
+     */
     default:
       return state;
   }

@@ -5,6 +5,7 @@ export const GET_RECORDS_FAIL = '[Students] GET_RECORDS_FAIL';
 export const CREATE = '[Students] CREATE';
 export const CREATE_SUCCESS = '[Students] CREATE_SUCCESS';
 export const CREATE_FAIL = '[Students] CREATE_FAIL';
+export const RESET_CREATE_REQUEST = '[Students] RESET_CREATE_ERRORS';
 
 export function getRecords(params = {}) {
   return {
@@ -18,4 +19,10 @@ export function create(data, params = {}) {
     types: [CREATE, CREATE_SUCCESS, CREATE_FAIL],
     promise: (apiClient) => apiClient.post('students', data, params)
   };
+}
+
+export function resetCreateRequest () {
+  return {
+    type: RESET_CREATE_REQUEST
+  }
 }

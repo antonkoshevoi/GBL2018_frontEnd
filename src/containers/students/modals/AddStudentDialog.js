@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
-  AppBar,
+  AppBar, CircularProgress,
   Dialog, DialogContent,
   DialogContentText,
   Icon, IconButton, Slide,
   Toolbar, Typography
-} from "material-ui";
+} from 'material-ui';
 import AddForm from "../../../components/pages/students/AddForm";
 import {selectCreateRequest} from "../../../redux/students/selectors";
 import connect from "react-redux/es/connect/connect";
-import {create} from "../../../redux/students/actions";
+import { create, resetCreateRequest } from '../../../redux/students/actions';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -25,11 +25,12 @@ class AddStudentDialog extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     this.setState({isOpen: nextProps.dialogIsOpen});
   }
 
   _onClose = () => {
+    this.props.resetCreateRequest();
     this.setState({isOpen: false}, this.props.onClose);
   };
 
@@ -52,12 +53,15 @@ class AddStudentDialog extends Component {
         aria-labelledby="form-dialog-title">
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
-            <IconButton color="contrast"  aria-label="Close">
+            <IconButton color="contrast" aria-label="Close">
               <Icon>person</Icon>
             </IconButton>
             <Typography type="title" color="inherit" >
               Create user
             </Typography>
+            {loading &&
+              <CircularProgress color="white"/>
+            }
           </Toolbar>
         </AppBar>
 
@@ -84,7 +88,8 @@ AddStudentDialog = connect(
     createRequest: selectCreateRequest(state)
   }),
   (dispatch) => ({
-    create: (form, params = {}) => { dispatch(create(form, params)) }
+    create: (form, params = {}) => { dispatch(create(form, params)) },
+    resetCreateRequest: () => { dispatch(resetCreateRequest()) },
   })
 )(AddStudentDialog);
 
