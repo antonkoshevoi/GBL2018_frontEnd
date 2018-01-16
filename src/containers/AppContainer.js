@@ -1,34 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { refreshLogin } from '../redux/auth/actions';
-import { selectAuthDomain } from '../redux/auth/selectors';
 import Loader from "../components/layouts/Loader";
+import { selectAppDomain } from '../redux/app/selectors';
+import { load } from '../redux/app/actions';
 
 class AppContainer extends Component {
 
   componentDidMount() {
-    const { refreshLogin } = this.props;
-    refreshLogin();
+    const { load } = this.props;
+    load();
   }
 
   render () {
-    const { auth } = this.props;
-    const loading = !auth.get('initialLoad');
+    console.log(this.props.appState);
+    const { appState } = this.props;
+    const loaded = appState.get('loaded');
 
-    if(loading) {
-      return (<Loader type="initial"/>);
+    if(loaded) {
+      return this.props.children;
     }
 
-    return this.props.children;
+    return (<Loader type="initial"/>);
   }
 }
 
 AppContainer = connect(
   (state, ownProps) => ({
-    auth: selectAuthDomain(state)
+    appState: selectAppDomain(state)
   }),
   (dispatch) => ({
-    refreshLogin: () => { dispatch(refreshLogin()) }
+    load: () => { dispatch(load()) }
   })
 )(AppContainer);
 

@@ -2,7 +2,8 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 
 import AppContainer from "../containers/AppContainer";
-import AuthenticatedMiddleware from "../containers/middlewares/AuthenticatedMiddleware";
+import AuthenticatedRoute from "../containers/middlewares/AuthenticatedRoute";
+import UnauthenticatedRoute from '../containers/middlewares/UnauthenticatedRoute';
 import MainLayout from '../containers/layouts/MainLayout';
 
 import Dashboard from '../containers/Dashboard';
@@ -18,18 +19,16 @@ export default () => (
     <Switch>
       <Route path='/login' name='login' component={Login} />
 
-      <AuthenticatedMiddleware>
-        <MainLayout>
-          <Route exact path="/" render={() => {
-              return <Redirect to="/dashboard" />
-          }} />
-          <Route path='/dashboard' name='Dashboard' component={Dashboard}/>
-          <Route path="/students/list"  name="Students" component={Students} />
-          <Route path="/students/csv" component={BulkCsv}/>
-          <Route path='/reports' component={Reports}/>
-          <Route path='/courses' component={Courses}/>
-        </MainLayout>
-      </AuthenticatedMiddleware>
+      <MainLayout>
+        <Route exact path="/" render={() => {
+          return <Redirect to="/dashboard"/>
+        }} />
+        <Route path='/dashboard' name='Dashboard' component={Dashboard}/>
+        <Route path="/students/list" name="Students" component={Students} />
+        <Route path="/students/csv" component={BulkCsv}/>
+        <Route path='/reports' component={Reports}/>
+        <Route path='/courses' component={Courses}/>
+      </MainLayout>
     </Switch>
   </AppContainer>
 );

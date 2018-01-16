@@ -60,14 +60,14 @@ class AddStudentDialog extends Component {
               Create user
             </Typography>
             {loading &&
-              <CircularProgress color="white"/>
+              <CircularProgress color="primary"/>
             }
           </Toolbar>
         </AppBar>
 
         <DialogContent className="m--margin-top-25">
           <DialogContentText>
-            {errorMessage && <span>{errorMessage}</span>}
+            {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
           <AddForm onSubmit={this._save} loading={loading} errors={errors}/>
         </DialogContent>

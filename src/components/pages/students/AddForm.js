@@ -36,7 +36,6 @@ class AddForm extends Component {
   render() {
     const { errors } = this.props;
 
-    console.log(errors);
     return (
       <div className="row">
         <div className="col-sm-8 m-auto">

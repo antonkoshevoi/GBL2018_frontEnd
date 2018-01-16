@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { setRedirectUrl } from '../../redux/auth/actions';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
 
-class AuthenticatedMiddleware extends Component {
+class HasPermissionMiddleware extends Component {
+  static propTypes = {
+    permission: PropTypes.string.isRequired
+  };
 
   componentDidMount() {
     const { currentURL, isLoggedIn, setRedirectUrl, redirect } = this.props;
@@ -28,7 +32,7 @@ class AuthenticatedMiddleware extends Component {
   }
 }
 
-AuthenticatedMiddleware = connect(
+HasPermissionMiddleware = connect(
   (state, ownProps) => ({
     isLoggedIn: selectIsLoggedIn(state),
     currentURL: ownProps.location.pathname
@@ -37,6 +41,6 @@ AuthenticatedMiddleware = connect(
     setRedirectUrl: (uri) => { dispatch(setRedirectUrl(uri)); },
     redirect: () => { dispatch(push('/login')) }
   })
-)(AuthenticatedMiddleware);
+)(HasPermissionMiddleware);
 
-export default AuthenticatedMiddleware;
+export default HasPermissionMiddleware;

@@ -1,6 +1,6 @@
 import {
   INITIAL_LOGIN, INITIAL_LOGIN_FAIL, INITIAL_LOGIN_SUCCESS, LOGIN, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, LOGOUT_FAIL,
-  LOGOUT_SUCCESS,
+  LOGOUT_SUCCESS, RESTORE_LOGIN,
   SET_REDIRECT_URL
 } from './actions';
 import Immutable from 'immutable';
@@ -20,7 +20,6 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorResponse: null
   },
-  initialLoad: false,
   redirectAfterLogin: null,
   isLoggedIn: false
 });
@@ -36,7 +35,7 @@ const saveSession = ({ token, expiresAt, refreshToken }) => {
   SessionStorage.set('refreshToken', refreshToken, options);
 };
 
-const destorySession = () => {
+const destroySession = () => {
   SessionStorage.remove('token');
   SessionStorage.remove('tokenExpiresAt');
   SessionStorage.remove('refreshToken');
@@ -44,22 +43,9 @@ const destorySession = () => {
 
 export default function reducer (state = initialState, action) {
   switch(action.type) {
-    /**
-     * Initial login
-     */
-    case INITIAL_LOGIN:
-      return state
-        .set('isLoggedIn', false)
-        .set('initialLoad', false);
-    case INITIAL_LOGIN_SUCCESS:
-      saveSession(action.result.data);
 
-      return state
-        .set('isLoggedIn', true)
-        .set('initialLoad', true);
-    case INITIAL_LOGIN_FAIL:
-      return state
-        .set('initialLoad', true);
+    case RESTORE_LOGIN:
+      return state.set('isLoggedIn', true);
 
     /**
      * Login
@@ -97,7 +83,7 @@ export default function reducer (state = initialState, action) {
           .remove('fail')
         );
     case LOGOUT_SUCCESS:
-      destorySession();
+      destroySession();
       return state
         .set('logoutRequest', state.get('logoutRequest')
           .set('success', true)
