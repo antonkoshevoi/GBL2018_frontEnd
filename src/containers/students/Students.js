@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { Button, Icon, MenuItem, Select } from 'material-ui';
-import AddStudentDialog from './modals/AddStudentDialog';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
-import Pagination from '../../components/ui/Pagination';
 import { selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/students/selectors';
-import { getRecords } from '../../redux/students/actions';
+import {getRecords, getSingleRecord} from '../../redux/students/actions';
+import Pagination from '../../components/ui/Pagination';
+import CreateStudentModal from './modals/CreateStudentModal';
 import EditStudentDialog from './modals/EditStudentDialog';
+import EditStudentModal from "./modals/EditStudentModal";
 
 class Students extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      dialogIsOpen: false,
-      editDialogIsOpen: false,
+      createModalIsOpen: false,
+      editModalIsOpen: false,
       sorters: {},
       page: props.pagination.get('page'),
       perPage: props.pagination.get('perPage')
@@ -29,22 +29,18 @@ class Students extends Component {
     getRecords();
   }
 
-
-  _openAddDialog = () => {
-    this.setState({ dialogIsOpen: true });
+  _openCreateDialog = () => {
+    this.setState({ createModalIsOpen: true });
   };
-
-  _closeAddDialog = () => {
-    this.setState({ dialogIsOpen: false });
+  _closeCreateDialog = () => {
+    this.setState({ createModalIsOpen: false });
   };
-
 
   _openEditDialog = () => {
-    this.setState({ editDialogIsOpen: true });
+    this.setState({ editModalIsOpen: true });
   };
-
   _closeEditDialog = () => {
-    this.setState({ editDialogIsOpen: false });
+    this.setState({ editModalIsOpen: false });
   };
 
   /**
@@ -77,12 +73,17 @@ class Students extends Component {
         <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>Student</span></Td>
         <Td width='132px'>{record.get('school')}</Td>
         <Td width='100px'>
-          <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={this._openEditDialog}>
+          <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._editRecord(record.get('id')); }}>
             <i className='la la-edit'></i>
           </button>
         </Td>
       </Row>
     ));
+  }
+
+  _editRecord (id) {
+    this.props.getSingleRecord(id);
+    this._openEditDialog();
   }
 
   /**
@@ -141,14 +142,14 @@ class Students extends Component {
     const { pagination } = this.props;
     const page = pagination.get('page');
 
-    if(this.state.page != page) {
+    if(this.state.page !== page) {
       this._goToPage(page);
     }
   }
 
   render() {
     const { getRecordsRequest, pagination } = this.props;
-    const { dialogIsOpen, editDialogIsOpen, sorters, page, perPage } = this.state;
+    const { createModalIsOpen, editModalIsOpen, sorters, page, perPage } = this.state;
     const loading = getRecordsRequest.get('loading');
     const totalPages = pagination.get('totalPages');
 
@@ -184,13 +185,12 @@ class Students extends Component {
                     <MenuItem value={50}>50</MenuItem>
                     <MenuItem value={100}>100</MenuItem>
                   </Select>
-                  <Button raised color='accent' onClick={this._openAddDialog} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                  <Button raised color='accent' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
                     Add New
                     <Icon style={{marginLeft:'5px'}}>add</Icon>
                   </Button>
                   <NavLink className='link-btn' to='/students/csv'>
-                  <Button raised className='btn-success mt-btn mt-btn-success' >
-
+                  <Button raised className='btn-success mt-btn mt-btn-success'>
                          Bulk Add Students
                     <Icon style={{marginLeft:'5px'}}>person</Icon>
                   </Button>
@@ -230,14 +230,14 @@ class Students extends Component {
           </div>
         </div>
 
-        <AddStudentDialog
-          dialogIsOpen={dialogIsOpen}
-          onClose={this._closeAddDialog}
+        <CreateStudentModal
+          isOpen={createModalIsOpen}
+          onClose={() => { this._closeCreateDialog() }}
           onSuccess={() => { this._onCreate() }}/>
 
-        <EditStudentDialog
-          dialogIsOpen={editDialogIsOpen}
-          onClose={this._closeAddDialog}
+        <EditStudentModal
+          isOpen={editModalIsOpen}
+          onClose={() => { this._closeEditDialog() }}
           onSuccess={() => { this._onCreate() }}/>
       </div>
     );
@@ -251,7 +251,8 @@ Students = connect(
     records: selectRecords(state),
   }),
   (dispatch) => ({
-    getRecords: (params = {}) => { dispatch(getRecords(params)) }
+    getRecords: (params = {}) => { dispatch(getRecords(params)) },
+    getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) }
   })
 )(Students);
 

@@ -1,6 +1,7 @@
 import {
   GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, CREATE, CREATE_SUCCESS, CREATE_FAIL,
-  RESET_CREATE_REQUEST, GET_SCHOOLS, GET_SCHOOLS_SUCCESS, GET_SCHOOLS_FAIL
+  RESET_CREATE_REQUEST, GET_SCHOOLS, GET_SCHOOLS_SUCCESS, GET_SCHOOLS_FAIL, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
+  GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS
 } from './actions';
 import Immutable from 'immutable';
 
@@ -11,7 +12,22 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorResponse: null
   },
+  getSingleRecordRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null,
+    record: {}
+  },
   createRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,
+    errorCode: null,
+    errors: {}
+  },
+  updateRequest: {
     loading: false,
     success: false,
     fail: false,
@@ -54,6 +70,33 @@ export default function reducer (state = initialState, action) {
           .set('loading', false)
           .set('fail', true)
         );
+    /**
+     * Get single record
+     */
+    case GET_SINGLE_RECORD:
+      return state
+        .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)
+          .remove('record')
+        );
+    case GET_SINGLE_RECORD_SUCCESS:
+      return state
+        .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
+          .set('success', true)
+          .set('loading', false)
+          .set('record', Immutable.fromJS(action.result.data))
+        );
+    case GET_SINGLE_RECORD_FAIL:
+      return state
+        .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
+          .set('loading', false)
+          .set('fail', true)
+        );
+    case RESET_GET_SINGLE_RECORD_REQUEST:
+      return state
+        .set('getSingleRecordRequest', initialState.get('getSingleRecordRequest'));
     /**
      * Get schools
      */
@@ -104,15 +147,12 @@ export default function reducer (state = initialState, action) {
           );
       }
 
-      console.log(newState);
       return newState
         .set('pagination', state.get('pagination')
           .set('page', totalPages)
         );
     case CREATE_FAIL:
-      console.log(action.error);
       const data = action.error.response.data;
-
       return state
         .set('createRequest', state.get('createRequest')
           .set('loading', false)
@@ -124,6 +164,44 @@ export default function reducer (state = initialState, action) {
     case RESET_CREATE_REQUEST:
       return state
         .set('createRequest', initialState.get('createRequest'));
+    /**
+     * Update
+     */
+    case UPDATE:
+      return state
+        .set('updateRequest', state.get('updateRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)
+          .remove('errors')
+          .remove('errorMessage')
+          .remove('errorCode')
+        );
+    case UPDATE_SUCCESS:
+      let updatedRecords = state.get('records').map(record => {
+        if(record.get('id') === action.result.data.id) {
+          return Immutable.fromJS(action.result.data);
+        }
+        return record;
+      });
+      return state
+        .set('updateRequest', state.get('updateRequest')
+          .set('loading', false)
+          .set('success', true)
+        ).set('records', updatedRecords);
+    case UPDATE_FAIL:
+      const errorData = action.error.response.data;
+      return state
+        .set('updateRequest', state.get('updateRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('errorCode', errorData.code)
+          .set('errorMessage', errorData.message)
+          .set('errors', errorData.code === 400 ? Immutable.fromJS(errorData.errors) : undefined)
+        );
+    case RESET_UPDATE_REQUEST:
+      return state
+        .set('updateRequest', initialState.get('updateRequest'));
     /**
      * default
      */

@@ -44,8 +44,14 @@ export default class ApiClient
     ).then(response => response.data);
   }
 
-  post = (uri, data, params = {}, headers = {}, configs = {}) => {
+  post (uri, data, params = {}, headers = {}, configs = {}) {
     return axios.post(`${env.API_URI}/${uri}`, data,
+      this.mergeConfigs(params, headers, configs)
+    ).then(response => response.data);
+  }
+
+  put (uri, data, params = {}, headers = {}, configs = {}) {
+    return axios.put(`${env.API_URI}/${uri}`, data,
       this.mergeConfigs(params, headers, configs)
     ).then(response => response.data);
   }
