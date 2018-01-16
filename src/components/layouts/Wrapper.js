@@ -21,7 +21,6 @@ class Wrapper extends Component {
             },1500)
         });
 
-        console.log(this.props);
         return (
             <div className="m-grid__item m-grid__item--fluid m-wrapper">
                 <SubHeader/>

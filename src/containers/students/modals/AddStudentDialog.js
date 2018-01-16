@@ -8,9 +8,9 @@ import {
   Toolbar, Typography
 } from 'material-ui';
 import AddForm from "../../../components/pages/students/AddForm";
-import {selectCreateRequest} from "../../../redux/students/selectors";
+import { selectCreateRequest, selectSchools } from '../../../redux/students/selectors';
 import connect from "react-redux/es/connect/connect";
-import { create, resetCreateRequest } from '../../../redux/students/actions';
+import { create, getSchools, resetCreateRequest } from '../../../redux/students/actions';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -25,8 +25,23 @@ class AddStudentDialog extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.getSchools();
+  }
+
   componentWillReceiveProps(nextProps) {
-    this.setState({isOpen: nextProps.dialogIsOpen});
+    const success = this.props.createRequest.get('success');
+    const nextSuccess = nextProps.createRequest.get('success');
+
+    if(!success && nextSuccess) {
+
+      this._onClose();
+      this.props.onSuccess();
+      // this.props.resetCreateRequest();
+    } else {
+
+      this.setState ({ isOpen: nextProps.dialogIsOpen });
+    }
   }
 
   _onClose = () => {
@@ -40,7 +55,7 @@ class AddStudentDialog extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { createRequest } = this.props;
+    const { createRequest, schools } = this.props;
     const loading = createRequest.get('loading');
     const errorMessage = createRequest.get('errorMessage');
     const errors = createRequest.get('errors');
@@ -69,7 +84,11 @@ class AddStudentDialog extends Component {
           <DialogContentText>
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
-          <AddForm onSubmit={this._save} loading={loading} errors={errors}/>
+          <AddForm
+            onSubmit={this._save}
+            loading={loading}
+            schools={schools}
+            errors={errors}/>
         </DialogContent>
       </Dialog>
     );
@@ -79,17 +98,20 @@ class AddStudentDialog extends Component {
 AddStudentDialog.propTypes = {
   dialogIsOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onSuccess: PropTypes.any.isRequired,
   create: PropTypes.func.isRequired,
-  createRequest: PropTypes.any.isRequired
+  createRequest: PropTypes.any.isRequired,
 };
 
 AddStudentDialog = connect(
   (state) => ({
-    createRequest: selectCreateRequest(state)
+    createRequest: selectCreateRequest(state),
+    schools: selectSchools(state),
   }),
   (dispatch) => ({
     create: (form, params = {}) => { dispatch(create(form, params)) },
     resetCreateRequest: () => { dispatch(resetCreateRequest()) },
+    getSchools: () => { dispatch(getSchools()) },
   })
 )(AddStudentDialog);
 

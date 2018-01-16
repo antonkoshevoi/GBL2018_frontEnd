@@ -122,6 +122,14 @@ class Students extends Component {
     this.setState({ page }, this._getRecords)
   }
 
+  _onCreate () {
+    const { pagination } = this.props;
+    const page = pagination.get('page');
+    this._goToPage(page);
+    //
+    // this.setState({ page }, this._getRecords);
+  }
+
   render() {
     const { getRecordsRequest, pagination } = this.props;
     const { dialogIsOpen, sorters, page, perPage } = this.state;
@@ -208,7 +216,8 @@ class Students extends Component {
 
         <AddStudentDialog
           dialogIsOpen={dialogIsOpen}
-          onClose={this._closeAddDialog}/>
+          onClose={this._closeAddDialog}
+          onSuccess={() => { this._onCreate() }}/>
       </div>
     );
   }

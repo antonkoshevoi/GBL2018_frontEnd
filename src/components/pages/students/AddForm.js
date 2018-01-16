@@ -12,9 +12,9 @@ class AddForm extends Component {
       email: '',
       firstName: '',
       lastName: '',
-      gender: 'male',
+      gender: 1,
       phone: '',
-      school: 1,
+      schoolId: 1,
       homeroom: 1,
     }
   }
@@ -31,6 +31,16 @@ class AddForm extends Component {
     this.setState({
       [name]: value
     });
+  }
+
+  _renderSchools() {
+    const { schools } = this.props;
+
+    return schools.map((school, key) => (
+      <MenuItem key={key} value={ school.get('schId') }>
+        { school.get('schName') }
+      </MenuItem>
+    ));
   }
 
   render() {
@@ -96,10 +106,10 @@ class AddForm extends Component {
               value={this.state.gender}
               onChange={(e) => { this._handleInputChange(e) }}
               margin="normal">
-              <MenuItem value="male">
+              <MenuItem value="1">
                 Male
               </MenuItem>
-              <MenuItem value="female">
+              <MenuItem value="0">
                 Female
               </MenuItem>
             </TextField>
@@ -119,17 +129,12 @@ class AddForm extends Component {
 
           <FormControl className="full-width form-inputs">
             <TextField id="select-currency"
-              select name="school"
+              select name="schoolId"
               label="Select school"
-              value={this.state.school}
+              value={this.state.schoolId}
               onChange={(e) => { this._handleInputChange(e) }}
               margin="normal">
-              <MenuItem value="1">
-                School #1
-              </MenuItem>
-              <MenuItem value="2">
-                School #2
-              </MenuItem>
+              {this._renderSchools()}
             </TextField>
             {errors && errors.get('school') && <FormHelperText error>{ errors.get('school').get(0) }</FormHelperText>}
           </FormControl>
@@ -165,6 +170,7 @@ class AddForm extends Component {
 AddForm.propTypes = {
   loading: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  schools: PropTypes.any,
   errors: PropTypes.any
 };
 
