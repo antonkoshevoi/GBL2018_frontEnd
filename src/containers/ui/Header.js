@@ -4,7 +4,7 @@ import trans, {changeLanguage} from '../../languages/index';
 import {  translate } from 'react-i18next';
 import i18n from '../../languages/i18n';
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
-import UserMenu from "../../components/ui/UserMenu";
+import UserMenu from "./UserMenu";
 import * as AUTH from "../../services/AuthService"
 import { connect } from 'react-redux';
 import { logout } from '../../redux/auth/actions';

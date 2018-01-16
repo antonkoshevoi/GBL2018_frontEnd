@@ -5,6 +5,8 @@ import {translate} from "react-i18next";
 import * as AUTH from '../../services/AuthService';
 import {withRouter} from "react-router-dom";
 import posterImage from "../../media/images/menu_poster.jpg"
+import {connect} from "react-redux";
+import {selectUserData} from "../../redux/user/selectors";
 
 class UserMenu extends Component {
 
@@ -32,7 +34,7 @@ class UserMenu extends Component {
   };
 
   _renderDropDownMenu() {
-    const { logout, t } = this.props;
+    const { logout, userData, t } = this.props;
 
     return  this.state.menuOpened ?  (
       <div className="m-dropdown__wrapper animated" onMouseLeave={this._closeMenu} style={{display:'block'}}>
@@ -44,8 +46,8 @@ class UserMenu extends Component {
                 <img src={AUTH.user().avatar} className="m--img-rounded m--marginless" alt=""/>
               </div>
               <div className="m-card-user__details">
-                <span className="m-card-user__name m--font-weight-500">{AUTH.user().firstName + ' ' +  AUTH.user().lastName}</span>
-                <a href="" className="m-card-user__email m--font-weight-300 m-link">{AUTH.user().email}</a>
+                <span className="m-card-user__name m--font-weight-500">{userData.get('username') + ' ' + userData.firstName + ' ' +  userData.lastName}</span>
+                <a href="" className="m-card-user__email m--font-weight-300 m-link">{userData.email}</a>
               </div>
             </div>
           </div>
@@ -126,6 +128,11 @@ class UserMenu extends Component {
   }
 }
 
-
+UserMenu = connect(
+  (state) => ({
+    userData: selectUserData(state)
+  }),
+  (dispatch) => ({})
+)(UserMenu);
 
 export default withRouter(translate("LanguageSwitcher")(UserMenu));
