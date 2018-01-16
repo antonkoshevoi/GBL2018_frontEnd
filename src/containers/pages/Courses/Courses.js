@@ -4,7 +4,7 @@ import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../.
 import {Button, Icon, IconButton, Input, InputAdornment, MenuItem, Select, Tab, Tabs, Typography} from "material-ui";
 
 import Pagination from "../../../components/ui/Pagination";
-import AddStudentDialog from "../../../components/pages/students/AddStudentDialog";
+import AddStudentDialog from "../../../containers/students/modals/AddStudentDialog";
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
 import {getRecords} from "../../../redux/students/actions";
