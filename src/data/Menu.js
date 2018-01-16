@@ -57,7 +57,7 @@ export default  {
                    },
                    {
                        key:'demoCourses',
-                       title:'Demo Courses',
+                       title:'Demo courses',
                        link:'courses',
                        icon:'flaticon flaticon-user-ok',
                    },

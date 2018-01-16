@@ -11,13 +11,19 @@ import Login from '../containers/auth/Login';
 import Reports from '../containers/Reports';
 import Students from '../containers/students/Students';
 import BulkCsv from "../containers/students/BulkCsv";
-import Courses from "../containers/pages/Courses/Courses";
+import Courses from "../containers/pages/courses/Courses";
 import {Redirect} from "react-router-dom";
+import SignUpIndex from "../containers/auth/SignUpIndex";
+import SignUpParent from "../containers/auth/SignUpParent";
+import SignUpPrincipal from "../containers/auth/SignUpPrincipal";
 
 export default () => (
   <AppContainer>
     <Switch>
       <Route path='/login' name='login' component={Login} />
+      <Route path='/signup/types' name='signup' component={SignUpIndex} />
+      <Route path='/signup/parent' name='signup_parent' component={SignUpParent} />
+      <Route path='/signup/principal' name='signup_principal' component={SignUpPrincipal} />
 
       <MainLayout>
         <Route exact path="/" render={() => {

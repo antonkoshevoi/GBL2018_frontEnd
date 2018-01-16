@@ -4,9 +4,9 @@ import { Button, Icon, MenuItem, Select } from 'material-ui';
 import AddStudentDialog from './modals/AddStudentDialog';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {create, getRecords} from '../../redux/students/actions';
+import {create, getRecords} from '../../redux/pages/students/actions';
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from '../../components/ui/table';
-import { selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/students/selectors';
+import { selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/pages/students/selectors';
 import { buildSortersQuery } from '../../helpers/utils';
 import Pagination from '../../components/ui/Pagination';
 

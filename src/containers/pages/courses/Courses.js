@@ -4,11 +4,11 @@ import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../.
 import {Button, Icon, IconButton, Input, InputAdornment, MenuItem, Select, Tab, Tabs, Typography} from "material-ui";
 
 import Pagination from "../../../components/ui/Pagination";
-import AddStudentDialog from "../../../containers/students/modals/AddStudentDialog";
+import AddCourseDialog from "./modals/AddCourseDialog";
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
-import {getRecords} from "../../../redux/students/actions";
-import {selectGetRecordsRequest, selectPagination, selectRecords} from "../../../redux/students/selectors";
+import {getRecords} from "../../../redux/pages/students/actions";
+import {selectGetRecordsRequest, selectPagination, selectRecords} from "../../../redux/pages/students/selectors";
 import {buildSortersQuery} from "../../../helpers/utils";
 import {Search} from "material-ui-icons";
 
@@ -238,7 +238,7 @@ class Courses extends Component {
 
                 </div>
 
-                <AddStudentDialog dialogIsOpen={this.state.dialogIsOpen} handlerClose = {this._closeAddDialog} />
+                <AddCourseDialog dialogIsOpen={this.state.dialogIsOpen} handlerClose = {this._closeAddDialog} />
             </div>
         );
     }

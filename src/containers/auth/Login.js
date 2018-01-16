@@ -11,6 +11,7 @@ import {selectAuthDomain, selectLoginRequest} from "../../redux/auth/selectors";
 import { createStructuredSelector } from "reselect";
 import Loader from "../../components/layouts/Loader";
 import {Button, CircularProgress} from "material-ui";
+import {NavLink} from "react-router-dom";
 
 class Login extends Component {
 
@@ -107,7 +108,7 @@ class Login extends Component {
                 <span className="m-login__account-msg">
                 Don't have an account yet ?
                 </span>
-                <a href="javascript:;" id="m_login_signup" className="m-link m-link--light m-login__account-link">Sign Up</a>
+                <NavLink to="signup/types" id="m_login_signup" className="m-link m-link--light m-login__account-link">Sign Up</NavLink>
               </div>
             </div>
           </div>

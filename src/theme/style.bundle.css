@@ -1650,8 +1650,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
     box-shadow: 0 0 0 0.2rem rgba(88, 103, 221, 0.25); }
   .btn.disabled, .btn:disabled {
     opacity: .65; }
-  .btn:not([disabled]):not(.disabled):active, .btn:not([disabled]):not(.disabled).active {
-    background-image: none; }
+
 
 a.btn.disabled,
 fieldset[disabled] a.btn {
