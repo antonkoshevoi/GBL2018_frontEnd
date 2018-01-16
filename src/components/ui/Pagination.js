@@ -25,7 +25,7 @@ const Pagination = ({ page, totalPages, onPageSelect, dockLength }) => {
         raised
         color='primary'
         onClick={() => onPageSelect(k) }
-        className={`m-btn btn  btn-info m-btn--air radius-0 ${(page === k ? ' active' : '')}`}>{i}
+        className={`m-btn btn  btn-info  m-btn--air radius-0 ${(page === k ? ' active' : ' ')}`}>{i}
       </Button>
     );
     i++;

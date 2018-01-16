@@ -222,4 +222,7 @@ div.portlet-header-input:before {
   color: #fff;
 }
 
-
+.m-btn.btn.btn-info {
+  background-color: #36a3f7;
+  border-color: #36a3f7;
+}

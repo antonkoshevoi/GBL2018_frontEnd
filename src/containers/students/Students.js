@@ -42,13 +42,14 @@ class Students extends Component {
    */
   _renderRecords () {
     const { records } = this.props;
+    const loading = this.props.getRecordsRequest.get('loading');
 
-    if (records.length === 0) {
+      if (!loading && records.size === 0) {
       return (
         <tr>
           <td>
             <div className="table-message">
-              <h2>Student Not Found...</h2>
+              <h2>Students Not Found...</h2>
             </div>
           </td>
         </tr>
