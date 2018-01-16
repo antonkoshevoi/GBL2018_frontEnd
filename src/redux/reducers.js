@@ -1,6 +1,6 @@
 import appReducer from './app/reducer';
 import authReducer from './auth/reducer';
-import studentsReducer from './pages/students/reducer';
+import studentsReducer from './students/reducer';
 
 export default {
   app: appReducer,

@@ -7,8 +7,8 @@ import Pagination from "../../../components/ui/Pagination";
 import AddCourseDialog from "./modals/AddCourseDialog";
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
-import {getRecords} from "../../../redux/pages/students/actions";
-import {selectGetRecordsRequest, selectPagination, selectRecords} from "../../../redux/pages/students/selectors";
+import {getRecords} from "../../../redux/students/actions";
+import {selectGetRecordsRequest, selectPagination, selectRecords} from "../../../redux/students/selectors";
 import {buildSortersQuery} from "../../../helpers/utils";
 import {Search} from "material-ui-icons";
 

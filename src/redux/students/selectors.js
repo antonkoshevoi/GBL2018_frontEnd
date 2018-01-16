@@ -15,6 +15,11 @@ export const selectRecords = createSelector(
   (subState) => subState.get('records')
 );
 
+export const selectSchools = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('schools')
+);
+
 export const selectPagination = createSelector(
   selectStudentsDomain,
   (subState) => subState.get('pagination')

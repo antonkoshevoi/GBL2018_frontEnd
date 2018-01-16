@@ -4,11 +4,12 @@ import { Button, Icon, MenuItem, Select } from 'material-ui';
 import AddStudentDialog from './modals/AddStudentDialog';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {create, getRecords} from '../../redux/pages/students/actions';
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from '../../components/ui/table';
-import { selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/pages/students/selectors';
 import { buildSortersQuery } from '../../helpers/utils';
 import Pagination from '../../components/ui/Pagination';
+import { selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/students/selectors';
+import { getRecords } from '../../redux/students/actions';
+import EditStudentDialog from './modals/EditStudentDialog';
 
 class Students extends Component {
 
@@ -16,6 +17,7 @@ class Students extends Component {
     super(props);
     this.state = {
       dialogIsOpen: false,
+      editDialogIsOpen: false,
       sorters: {},
       page: props.pagination.get('page'),
       perPage: props.pagination.get('perPage')
@@ -34,6 +36,15 @@ class Students extends Component {
 
   _closeAddDialog = () => {
     this.setState({ dialogIsOpen: false });
+  };
+
+
+  _openEditDialog = () => {
+    this.setState({ editDialogIsOpen: true });
+  };
+
+  _closeEditDialog = () => {
+    this.setState({ editDialogIsOpen: false });
   };
 
   /**
@@ -66,7 +77,7 @@ class Students extends Component {
         <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>Student</span></Td>
         <Td width='132px'>{record.get('school')}</Td>
         <Td width='100px'>
-          <button  className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill'>
+          <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={this._openEditDialog}>
             <i className='la la-edit'></i>
           </button>
         </Td>
@@ -132,7 +143,7 @@ class Students extends Component {
 
   render() {
     const { getRecordsRequest, pagination } = this.props;
-    const { dialogIsOpen, sorters, page, perPage } = this.state;
+    const { dialogIsOpen, editDialogIsOpen, sorters, page, perPage } = this.state;
     const loading = getRecordsRequest.get('loading');
     const totalPages = pagination.get('totalPages');
 
@@ -216,6 +227,11 @@ class Students extends Component {
 
         <AddStudentDialog
           dialogIsOpen={dialogIsOpen}
+          onClose={this._closeAddDialog}
+          onSuccess={() => { this._onCreate() }}/>
+
+        <EditStudentDialog
+          dialogIsOpen={editDialogIsOpen}
           onClose={this._closeAddDialog}
           onSuccess={() => { this._onCreate() }}/>
       </div>

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import background from '../../media/images/bg-3.jpg';
 import logo from '../../media/images/logo.png'
-import 'cropperjs/dist/cropper.css';
+// import 'cropperjs/dist/cropper.css';
 
 import {NavLink} from "react-router-dom";
 import Cropper from "react-cropper";
