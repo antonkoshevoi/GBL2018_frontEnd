@@ -7,16 +7,16 @@ import {
   Icon, IconButton, Slide,
   Toolbar, Typography
 } from 'material-ui';
-import AddForm from "../../../components/pages/students/AddForm";
-import {selectCreateRequest} from "../../../redux/pages/students/selectors";
+import AddForm from "../../../../components/pages/courses/AddForm";
+import {selectCreateRequest} from "../../../../redux/pages/courses/selectors";
 import connect from "react-redux/es/connect/connect";
-import { create, resetCreateRequest } from '../../../redux/pages/students/actions';
+import { create, resetCreateRequest } from '../../../../redux/pages/courses/actions';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-class AddStudentDialog extends Component {
+class AddCourseDialog extends Component {
 
   constructor(props) {
     super(props);
@@ -76,14 +76,14 @@ class AddStudentDialog extends Component {
   }
 }
 
-AddStudentDialog.propTypes = {
+AddCourseDialog.propTypes = {
   dialogIsOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   create: PropTypes.func.isRequired,
   createRequest: PropTypes.any.isRequired
 };
 
-AddStudentDialog = connect(
+AddCourseDialog = connect(
   (state) => ({
     createRequest: selectCreateRequest(state)
   }),
@@ -91,6 +91,6 @@ AddStudentDialog = connect(
     create: (form, params = {}) => { dispatch(create(form, params)) },
     resetCreateRequest: () => { dispatch(resetCreateRequest()) },
   })
-)(AddStudentDialog);
+)(AddCourseDialog);
 
-export default AddStudentDialog;
+export default AddCourseDialog;
