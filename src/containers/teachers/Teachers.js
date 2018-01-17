@@ -3,7 +3,7 @@ import { translate } from 'react-i18next';
 import { Button, Icon, MenuItem, Select } from 'material-ui';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
 import { selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/teachers/selectors';
 import {getRecords, getSingleRecord} from '../../redux/teachers/actions';
@@ -70,11 +70,9 @@ class Teachers extends Component {
         <Td width='132px'>{record.get('lastName')}</Td>
         <Td width='132px'>{record.get('email')}</Td>
         <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>Teacher</span></Td>
-        <Td width='132px'>{record.get('school')}</Td>
+        <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
         <Td width='100px'>
-          <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._editRecord(record.get('id')); }}>
-            <i className='la la-edit'></i>
-          </button>
+          <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
         </Td>
       </Row>
     ));
@@ -202,14 +200,14 @@ class Teachers extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['id']} name='id' first={true} width='100px'>#</Th>
+                  <Th first={true} width='100px'>#</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['username']} name='username' width='132px'>Username</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['firstName']} name='firstName' width='132px'>Firstname</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName' width='132px'>Lastname</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' width='132px'>Email</Th>
                   <Th width='132px'>Role</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>School</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['actions']} name='actions' width='100px'>Actions</Th>
+                  <Th width='100px'>Actions</Th>
                 </HeadRow>
               </Thead>
 

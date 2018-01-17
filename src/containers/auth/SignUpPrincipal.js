@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import background from '../../media/images/bg-3.jpg';
 import logo from '../../media/images/logo.png'
-// import 'cropperjs/dist/cropper.css';
-
-import {NavLink} from "react-router-dom";
+import 'cropperjs/dist/cropper.css';
 import Cropper from "react-cropper";
+import {NavLink} from "react-router-dom";
+
 import {Divider} from "material-ui";
 
 
@@ -164,8 +164,8 @@ class SignUpPrincipal extends Component {
                                                            Crop Image <span className="la la-crop"></span>
                                                        </button>
                                                        }
-                                                       <div class="upload-btn-wrapper ">
-                                                           <button class="btn  m-btn--air btn-outline-info">Upload a file </button>
+                                                       <div className="upload-btn-wrapper ">
+                                                           <button className="btn  m-btn--air btn-outline-info">Upload a file </button>
                                                            <input type="file" name="myfile" onChange={this.onChange}/>
                                                        </div>
 
