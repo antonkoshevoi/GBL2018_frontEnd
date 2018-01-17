@@ -8,6 +8,7 @@ import Dashboard from '../containers/Dashboard';
 import Login from '../containers/auth/Login';
 import Reports from '../containers/Reports';
 import Students from '../containers/students/Students';
+import Teachers from "../containers/teachers/Teachers";
 import BulkCsv from '../containers/students/BulkCsv';
 import Courses from '../containers/pages/courses/Courses';
 import {Route, Switch, Redirect} from 'react-router';
@@ -30,6 +31,7 @@ export default () => (
         <AuthenticatedRoute path='/dashboard' name='Dashboard' component={Dashboard}/>
         <AuthenticatedRoute path='/students/list' name='Students' component={Students} />
         <AuthenticatedRoute path='/students/csv' component={BulkCsv}/>
+        <AuthenticatedRoute path='/teachers/list' name='Teachers' component={Teachers} />
         <AuthenticatedRoute path='/reports' component={Reports}/>
         <AuthenticatedRoute path='/courses' component={Courses}/>
       </MainLayout>

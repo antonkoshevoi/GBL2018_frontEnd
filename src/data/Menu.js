@@ -31,7 +31,7 @@ export default  {
                    {
                        key:'teachers',
                        title:'Teachers',
-                       link:'teachers',
+                       link:'teachers/list',
                        icon:'flaticon flaticon-user-ok',
                    },
                    {

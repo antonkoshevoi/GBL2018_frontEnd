@@ -5,13 +5,13 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
-import { selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/students/selectors';
-import {getRecords, getSingleRecord} from '../../redux/students/actions';
+import { selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/teachers/selectors';
+import {getRecords, getSingleRecord} from '../../redux/teachers/actions';
 import Pagination from '../../components/ui/Pagination';
-import CreateStudentModal from './modals/CreateStudentModal';
-import EditStudentModal from "./modals/EditStudentModal";
+import CreateTeacherModal from './modals/CreateTeacherModal';
+import EditTeacherModal from "./modals/EditTeacherModal";
 
-class Students extends Component {
+class Teachers extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -55,7 +55,7 @@ class Students extends Component {
         <tr>
           <td>
             <div className="table-message">
-              <h2>Students Not Found...</h2>
+              <h2>Teachers Not Found...</h2>
             </div>
           </td>
         </tr>
@@ -69,7 +69,7 @@ class Students extends Component {
         <Td width='132px'>{record.get('firstName')}</Td>
         <Td width='132px'>{record.get('lastName')}</Td>
         <Td width='132px'>{record.get('email')}</Td>
-        <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>Student</span></Td>
+        <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>Teacher</span></Td>
         <Td width='132px'>{record.get('school')}</Td>
         <Td width='100px'>
           <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._editRecord(record.get('id')); }}>
@@ -163,7 +163,7 @@ class Students extends Component {
 							  <i className='la la-user' style={{fontSize:'55px'}}></i>
 						  </span>
                 <h3 className='m-portlet__head-text'>
-                  Students
+                  Teachers
                 </h3>
               </div>
             </div>
@@ -188,9 +188,9 @@ class Students extends Component {
                     Add New
                     <Icon style={{marginLeft:'5px'}}>add</Icon>
                   </Button>
-                  <NavLink className='link-btn' to='/students/csv'>
+                  <NavLink className='link-btn' to='/teachers/csv'>
                   <Button raised className='btn-success mt-btn mt-btn-success'>
-                         Bulk Add Students
+                         Bulk Add Teachers
                     <Icon style={{marginLeft:'5px'}}>person</Icon>
                   </Button>
                   </NavLink>
@@ -229,12 +229,12 @@ class Students extends Component {
           </div>
         </div>
 
-        <CreateStudentModal
+        <CreateTeacherModal
           isOpen={createModalIsOpen}
           onClose={() => { this._closeCreateDialog() }}
           onSuccess={() => { this._onCreate() }}/>
 
-        <EditStudentModal
+        <EditTeacherModal
           isOpen={editModalIsOpen}
           onClose={() => { this._closeEditDialog() }}
           onSuccess={() => { this._onCreate() }}/>
@@ -243,7 +243,7 @@ class Students extends Component {
   }
 }
 
-Students = connect(
+Teachers = connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     pagination: selectPagination(state),
@@ -253,7 +253,7 @@ Students = connect(
     getRecords: (params = {}) => { dispatch(getRecords(params)) },
     getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) }
   })
-)(Students);
+)(Teachers);
 
 
-export default translate('students')(Students);
+export default translate('teachers')(Teachers);
