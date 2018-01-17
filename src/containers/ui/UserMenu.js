@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Avatar, Icon, ListItemIcon, ListItemText, Menu, MenuItem} from "material-ui";
 import {translate} from "react-i18next";
 import * as AUTH from '../../services/AuthService';
-import {withRouter} from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
 import posterImage from "../../media/images/menu_poster.jpg"
 import {connect} from "react-redux";
 import {selectUserData} from "../../redux/user/selectors";
@@ -58,15 +58,14 @@ class UserMenu extends Component {
                   <span className="m-nav__section-text">Section</span>
                 </li>
                 <li className="m-nav__item">
-                  <a href="?page=header/profile&amp;demo=default" className="m-nav__link">
+                  <NavLink to="/profile/edit" className="m-nav__link">
                     <i className="m-nav__link-icon flaticon-profile-1"></i>
                     <span className="m-nav__link-title">
 									<span className="m-nav__link-wrap">
 										<span className="m-nav__link-text">My Profile</span>
-										<span className="m-nav__link-badge"><span className="m-badge m-badge--success">2</span></span>
 									</span>
 								</span>
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="m-nav__item">
                   <a href="?page=header/profile&amp;demo=default" className="m-nav__link">
