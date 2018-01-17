@@ -3,7 +3,7 @@ import { translate } from 'react-i18next';
 import { Button, Icon, MenuItem, Select } from 'material-ui';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
 import { selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/teachers/selectors';
 import {getRecords, getSingleRecord} from '../../redux/teachers/actions';
@@ -72,9 +72,7 @@ class Teachers extends Component {
         <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>Teacher</span></Td>
         <Td width='132px'>{record.get('school')}</Td>
         <Td width='100px'>
-          <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._editRecord(record.get('id')); }}>
-            <i className='la la-edit'></i>
-          </button>
+          <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
         </Td>
       </Row>
     ));

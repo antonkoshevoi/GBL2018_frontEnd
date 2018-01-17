@@ -68,6 +68,14 @@ export const Td = ({ first, width, ...props}) => {
   );
 };
 
+export const EditButton = ({ id, onClick, ...props}) => {
+    return (
+        <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={onClick && (() => { onClick(id) })}>
+            <i className='la la-edit'></i>
+        </button>
+    );
+};
+
 
 export const TablePreloader = ({color,text, ...props}) => {
     return (
