@@ -207,7 +207,7 @@ class Students extends Component {
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' width='132px'>Email</Th>
                   <Th width='132px'>Role</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>School</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['actions']} name='actions' width='100px'>Actions</Th>
+                  <Th width='100px'>Actions</Th>
                 </HeadRow>
               </Thead>
 
