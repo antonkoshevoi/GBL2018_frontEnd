@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, FormHelperText, Input, InputLabel, MenuItem, TextField } from 'material-ui';
+import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from 'material-ui';
 
 class StudentForm extends Component {
   static propTypes = {
@@ -91,65 +91,53 @@ class StudentForm extends Component {
             {errors && errors.get('lastName') && <FormHelperText error>{ errors.get('lastName').get(0) }</FormHelperText>}
           </FormControl>
           <FormControl className='full-width form-inputs'>
-            <TextField
-              id='select-currency'
-              select name='gender'
-              label='Select gender'
-              value={student.gender || ''}
+            <InputLabel htmlFor='name-error'>Select Gender</InputLabel>
+            <Select
+              primarytext=""
+              name='gender'
               onChange={(e) => { this._handleInputChange(e) }}
-              margin='normal'>
-              <MenuItem value={null} primaryText=""/>
-              <MenuItem value='1'>
-                Male
-              </MenuItem>
-              <MenuItem value='0'>
-                Female
-              </MenuItem>
-            </TextField>
+              value={student.gender || ''}>
+              <MenuItem value={null} primarytext=""/>
+              <MenuItem value='1'>Male</MenuItem>
+              <MenuItem value='0'>Female</MenuItem>
+            </Select>
             {errors && errors.get('gender') && <FormHelperText error>{ errors.get('gender').get(0) }</FormHelperText>}
           </FormControl>
           <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>Phone</InputLabel>
             <Input
               fullWidth
-              name='phone'
+              name='phoneNumber'
               type='text'
               margin='dense'
-              value={student.phone || ''}
+              value={student.phoneNumber || ''}
               onChange={(e) => { this._handleInputChange(e) }}/>
-            {errors && errors.get('phone') && <FormHelperText error>{ errors.get('phone').get(0) }</FormHelperText>}
+            {errors && errors.get('phoneNumber') && <FormHelperText error>{ errors.get('phoneNumber').get(0) }</FormHelperText>}
           </FormControl>
 
           <FormControl className='full-width form-inputs'>
-            <TextField
-              id='select-currency'
-              select name='schoolId'
-              label='Select school'
-              value={student.schoolId || ''}
-              onChange={(e) => { this._handleInputChange(e) }}
-              margin='normal'>
-              <MenuItem value={null} primaryText="" />
-              {this._renderSchools()}
-            </TextField>
+            <InputLabel htmlFor='name-error'>School</InputLabel>
+            <Select
+                primarytext=""
+                name='schoolId'
+                onChange={(e) => { this._handleInputChange(e) }}
+                children={this._renderSchools()}
+                value={student.schoolId || ''}>
+            </Select>
             {errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}
           </FormControl>
 
           <FormControl className='full-width form-inputs'>
-            <TextField
-              id='select-currency'
-              select name='homeroom'
-              label='Select homeroom'
-              value={student.homeroom || ''}
-              onChange={(e) => { this._handleInputChange(e) }}
-              margin='normal'>
-              <MenuItem value={null} primaryText="" />
-              <MenuItem value='1'>
-                Homeroom #1
-              </MenuItem>
-              <MenuItem value='2'>
-                Homeroom #2
-              </MenuItem>
-            </TextField>
+            <InputLabel htmlFor='name-error'>Homeroom</InputLabel>
+            <Select
+                primarytext=""
+                name='homeroomId'
+                onChange={(e) => { this._handleInputChange(e) }}
+                value={student.homeroomId || ''}>
+                <MenuItem value={null} primaryText="" />
+                <MenuItem value='1'>Homeroom #1</MenuItem>
+                <MenuItem value='2'>Homeroom #2</MenuItem>
+            </Select>
             {errors && errors.get('homeroom') && <FormHelperText error>{ errors.get('homeroom').get(0) }</FormHelperText>}
           </FormControl>
         </div>

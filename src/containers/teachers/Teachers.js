@@ -70,7 +70,7 @@ class Teachers extends Component {
         <Td width='132px'>{record.get('lastName')}</Td>
         <Td width='132px'>{record.get('email')}</Td>
         <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>Teacher</span></Td>
-        <Td width='132px'>{record.get('school')}</Td>
+        <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
         <Td width='100px'>
           <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
         </Td>
@@ -200,7 +200,7 @@ class Teachers extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['id']} name='id' first={true} width='100px'>#</Th>
+                  <Th first={true} width='100px'>#</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['username']} name='username' width='132px'>Username</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['firstName']} name='firstName' width='132px'>Firstname</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName' width='132px'>Lastname</Th>
