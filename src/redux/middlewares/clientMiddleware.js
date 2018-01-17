@@ -9,7 +9,7 @@ export default function clientMiddleware(apiClient) {
         return action(dispatch, getState);
       }
 
-      const { promise, types, ...rest } = action;
+      const { promise, types, upload, ...rest } = action;
 
       if (!Array.isArray(types) && promise) {
         return Promise.resolve(promise().then(() => {
@@ -23,6 +23,13 @@ export default function clientMiddleware(apiClient) {
 
       // get the request data
       const [REQUEST, SUCCESS, FAILURE] = types;
+
+      if (promise && upload) {
+        const PROGRESS = types[3];
+        apiClient.setConfig('onUploadProgress', (progressEvent) => {
+          next({...rest, type: PROGRESS, progressEvent});
+        })
+      }
 
       // if there is a pending request of the same type
       // use that instead for a queue
@@ -47,6 +54,9 @@ export default function clientMiddleware(apiClient) {
                   // send back an error result
                   return next({...rest, error, type: FAILURE});
                 })
+                .finally(() => {
+                  apiClient.resetConfigs();
+                })
             );
           });
       } else {
@@ -65,7 +75,10 @@ export default function clientMiddleware(apiClient) {
             pending = pending.remove(REQUEST);
             // send back an error result
             return next({...rest, error, type: FAILURE});
-          });
+          })
+          .finally(() => {
+            apiClient.resetConfigs();
+          })
       }
 
       // set this as request type as pending

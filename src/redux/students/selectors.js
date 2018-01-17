@@ -55,3 +55,10 @@ export const selectUpdateRequest = createSelector(
   selectStudentsDomain,
   (subState) => subState.get('updateRequest')
 );
+/**
+ * Bulk Upload
+ */
+export const selectBulkUploadRequest = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('bulkUploadRequest')
+);

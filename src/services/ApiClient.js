@@ -4,15 +4,10 @@ import SessionStorage from './SessionStorage';
 
 export default class ApiClient
 {
-  getDefaultConfigs () {
-    return {};
-  }
+  configs = {};
+  defaultConfigs = {};
 
-  getDefaultParams () {
-    return {};
-  }
-
-  getDefaultHeaders () {
+  constructor () {
     const token = SessionStorage.get('token');
     let headers = {};
 
@@ -20,22 +15,42 @@ export default class ApiClient
       headers['Authorization'] = 'Bearer ' + token;
     }
 
-    return headers;
+    this.defaultConfigs = {
+      headers,
+      params: {}
+    };
+
+    this.resetConfigs();
+  }
+
+  resetConfigs () {
+    this.configs = Object.assign({}, this.defaultConfigs);
+  }
+
+  setConfig (key, value) {
+    this.configs = Object.assign({}, this.configs, {
+      [key]: value
+    });
   }
 
   mergeConfigs (params, headers, configs) {
     return Object.assign(
       {},
-      this.getDefaultConfigs(),
+      this.configs,
       Object.assign(
         {},
         configs,
         {
-          params: Object.assign({}, this.getDefaultParams(), params),
-          headers: Object.assign({}, this.getDefaultHeaders(), headers),
+          params: Object.assign({}, this.configs.params, params),
+          headers: Object.assign({}, this.configs.headers, headers),
         }
       )
     )
+  }
+
+  static cancelToken () {
+    const CancelToken = axios.CancelToken;
+    return CancelToken.source();
   }
 
   get (uri, params = {}, headers = {}, configs = {}) {
@@ -54,5 +69,18 @@ export default class ApiClient
     return axios.put(`${env.API_URI}/${uri}`, data,
       this.mergeConfigs(params, headers, configs)
     ).then(response => response.data);
+  }
+
+  upload (uri, file, data, params = {}, headers = {}, configs = {}) {
+    let formData = new FormData();
+    formData.append('file', file);
+
+    for(const key in data) {
+      if(data.hasOwnProperty(key)) {
+        formData.append (key, data[key]);
+      }
+    }
+
+    return this.post(uri, formData, params, headers, configs);
   }
 }
