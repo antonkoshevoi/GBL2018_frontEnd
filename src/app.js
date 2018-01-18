@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './app.css';
 import './theme/vendor/vendors.bundle.css';
 import './theme/style.bundle.css';
-import { translate, Trans } from 'react-i18next';
+import { translate } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { Router } from "react-router";
 
@@ -23,9 +23,7 @@ class App extends Component {
     return (
       <Router history={history}>
         <Provider store={store}>
-          <Trans i18nKey="translation">
-            <Routes />
-          </Trans>
+          <Routes />
         </Provider>
       </Router>
     );

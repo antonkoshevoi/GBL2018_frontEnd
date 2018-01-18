@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import logo from '../../media/images/logo.png';
-import trans, {changeLanguage} from '../../languages/index';
 import {  translate } from 'react-i18next';
-import i18n from '../../languages/i18n';
+import i18n from '../../configs/i18n';
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 import UserMenu from "./UserMenu";
-import * as AUTH from "../../services/AuthService"
 import { connect } from 'react-redux';
 import { logout } from '../../redux/auth/actions';
 // @translate(['key'], { wait: true })
@@ -21,9 +19,7 @@ class Header extends Component {
   };
 
   _switchLanguage = (lang_code) => {
-    trans.setLanguage(lang_code);
     i18n.changeLanguage('de');
-    changeLanguage(lang_code)
     localStorage.setItem('language', lang_code);
     this.setState({ anchorEl: null });
   };
