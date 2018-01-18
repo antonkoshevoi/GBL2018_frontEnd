@@ -3,7 +3,7 @@ import {CircularProgress} from "material-ui";
 
 export const Table = (props) => {
   return(
-  <div className="m_datatable m-datatable m-datatable--default m-datatable--loaded" id="ajax_data" >
+  <div className="m_datatable m-datatable table-responsive m-datatable--default m-datatable--loaded" id="ajax_data" >
     <table className="m-datatable__table" >
     {props.children}
     </table>

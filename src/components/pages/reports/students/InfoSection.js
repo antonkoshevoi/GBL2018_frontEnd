@@ -34,9 +34,9 @@ class InfoSection extends Component {
                 </div>
                 <div className="col-md-9">
                     <div className="row">
-                        <div className="col-md-6 m--margin-bottom-20">
+                        <div className="col-lg-6 m--margin-bottom-20">
                             <Card title="About" icon="la la-info">
-                                <table className="table m-table m-table--head-separator-primary m-middle-table">
+                                <table className="table table-responsive m-table m-table--head-separator-primary m-middle-table">
                                     <thead>
                                     <tr>
                                         <th></th>
@@ -97,9 +97,9 @@ class InfoSection extends Component {
                                 </table>
                             </Card>
                         </div>
-                        <div className="col-md-6 m--margin-bottom-20">
+                        <div className="col-lg-6 m--margin-bottom-20">
                             <Card title="My Courses" icon="fa fa-sitemap">
-                                <table className="table m-table m-table--head-separator-primary m-middle-table">
+                                <table className="table m-table table-responsive m-table--head-separator-primary m-middle-table">
                                     <thead>
                                     <tr>
                                         <th>Courses</th>
