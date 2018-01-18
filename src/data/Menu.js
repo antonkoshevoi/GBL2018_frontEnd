@@ -64,7 +64,7 @@ export default  {
                    {
                        key:'homerooms',
                        title:'Homerooms',
-                       link:'homerooms',
+                       link:'homerooms/list',
                        icon:'flaticon	flaticon-technology-1',
                    },
                    {

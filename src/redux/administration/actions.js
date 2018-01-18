@@ -62,7 +62,7 @@ export function getSchools(params = {}) {
  */
 export function getRoles(params = {}) {
     return {
-        types: [GET_ROLES, GET_ROLES_SUCCESS, GET_ROLES_SUCCESS],
+        types: [GET_ROLES, GET_ROLES_SUCCESS, GET_ROLES_FAIL],
         promise: (apiClient) => apiClient.get('roles', Object.assign({}, params, {
             perPage: 0
         }))
