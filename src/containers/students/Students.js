@@ -5,7 +5,10 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
-import { selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/students/selectors';
+import {
+  selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination,
+  selectRecords
+} from '../../redux/students/selectors';
 import {getRecords, getSingleRecord} from '../../redux/students/actions';
 import Pagination from '../../components/ui/Pagination';
 import CreateStudentModal from './modals/CreateStudentModal';
@@ -20,6 +23,15 @@ class Students extends Component {
       sorters: {},
       page: props.pagination.get('page'),
       perPage: props.pagination.get('perPage')
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const success = this.props.getSingleRecordRequest.get('success');
+    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
+
+    if(!success && nextSuccess) {
+      this._openEditDialog();
     }
   }
 
@@ -80,7 +92,6 @@ class Students extends Component {
 
   _editRecord (id) {
     this.props.getSingleRecord(id);
-    this._openEditDialog();
   }
 
   /**
@@ -244,6 +255,7 @@ class Students extends Component {
 Students = connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
+    getSingleRecordRequest: selectGetSingleRecordRequest(state),
     pagination: selectPagination(state),
     records: selectRecords(state),
   }),
