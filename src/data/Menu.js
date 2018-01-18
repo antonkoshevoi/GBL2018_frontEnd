@@ -25,7 +25,7 @@ export default  {
                    {
                        key:'administration',
                        title:'Administration',
-                       link:'administration',
+                       link:'administration/list',
                        icon:'flaticon flaticon-user-settings',
                    },
                    {
