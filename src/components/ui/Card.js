@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {Avatar} from "material-ui";
 
 class Card extends Component {
 
@@ -7,12 +8,14 @@ class Card extends Component {
 
     render() {
         return (
-            <div style={{marginBottom:0,height:'100%',display: "flex", flexDirection: "column"}} className={"m-portlet m-portlet--head-solid-bg m-portlet--" + this.props.colorName}>
+            <div style={{marginBottom:0,height:'100%',display: "flex", flexDirection: "column"}} className={"m-portlet  m-portlet--head-solid-bg m-portlet--" + this.props.colorName}>
                 <div className="m-portlet__head">
                     <div className="m-portlet__head-caption">
                         <div className="m-portlet__head-title">
 						<span className="m-portlet__head-icon">
-							<i className={this.props.icon}></i>
+                            {this.props.avatar ?
+                            <Avatar src={this.props.avatar}/> :
+							<i className={this.props.icon}></i> }
 						</span>
                             <h3 className="m-portlet__head-text">
                                 {this.props.title}

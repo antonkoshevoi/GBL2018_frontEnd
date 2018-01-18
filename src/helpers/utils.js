@@ -44,3 +44,17 @@ export const yieldErrorToasts = (types) => {
     }
   });
 };
+
+
+/**
+ *
+ * @param paths, i
+ * @returns 'path
+ */
+export const  generateBreadcrumbLink = (paths,i) => {
+    let path = ""
+    for (let x = 1; x<=i; x++) {
+        path += '/' + paths[x];
+    }
+    return path;
+}
