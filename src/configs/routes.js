@@ -36,7 +36,7 @@ export default () => (
         <Redirect to='/dashboard'/>
       )}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/dashboard' name='Dashboard' component={Dashboard}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/students' name='Students' component={Students} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/students/list' name='Students' component={Students} />
       <AuthenticatedRoute exact layout={MainLayout} path='/students/csv' component={StudentsBulkUpload}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/teachers/list' name='Teachers' component={Teachers} />
       <AuthenticatedRoute exact layout={MainLayout} path='/administration/list' name='Administration' component={Administration} />
