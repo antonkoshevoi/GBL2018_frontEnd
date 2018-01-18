@@ -535,7 +535,7 @@ table.m-middle-table td, table.m-middle-table th {
   vertical-align: middle;
 }
 
-.m-datatable.m-datatable--default.m-datatable--loaded > .m-datatable__table {
+div.m-datatable.m-datatable--default.m-datatable--loaded > .m-datatable__table {
   display: inline-block;
   width: auto;
   min-width: 100%;
