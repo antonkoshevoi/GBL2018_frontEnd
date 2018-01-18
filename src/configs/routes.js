@@ -26,7 +26,7 @@ import TeacherReports from "../containers/pages/reports/Teachers";
 export default () => (
   <AppContainer>
     <Switch>
-      <Route exact layout={MainLayout} path='/login' name='login' component={Login} />
+      <Route exact path='/login' name='login' component={Login} />
       <Route exact path='/signup/types' name='signup' component={SignUpIndex} />
       <Route exact path='/signup/parent' name='signup_parent' component={SignUpParent} />
       <Route exact path='/signup/principal' name='signup_principal' component={SignUpPrincipal} />
@@ -35,18 +35,18 @@ export default () => (
         <Redirect to='/dashboard'/>
       )}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/dashboard' name='Dashboard' component={Dashboard}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/students/list' name='Students' component={Students} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/students' name='Students' component={Students} />
       <AuthenticatedRoute exact layout={MainLayout} path='/students/csv' component={StudentsBulkUpload}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/teachers/list' name='Teachers' component={Teachers} />
       <AuthenticatedRoute exact layout={MainLayout} path='/administration/list' name='Administration' component={Administration} />
 
       <AuthenticatedRoute exact layout={MainLayout} path='/courses' component={Courses}/>
 
-      <AuthenticatedRoute  exact layout={MainLayout} path='/profile/edit' name='Profile' component={Profile} />
-      <AuthenticatedRoute  exact layout={MainLayout} path='/reports/schools' component={SchoolReports}/>
-      <AuthenticatedRoute  exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReports}/>
-      <AuthenticatedRoute  exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
-      <AuthenticatedRoute  exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/profile/edit' name='Profile' component={Profile} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/reports/schools' component={SchoolReports}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReports}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
 
       <Route component={NotFoundPage} />
     </Switch>
