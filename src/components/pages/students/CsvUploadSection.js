@@ -8,13 +8,13 @@ import {
   TableRow, Table,
   MenuItem, Select,
   Tab, Tabs,
-  Typography, LinearProgress, Icon
+  Typography, Icon
 } from 'material-ui';
 import toastr from 'toastr';
 import ConfirmButton from '../../ui/ConfirmButton';
 import {CSVLink} from "react-csv";
-import Widget from '../../../data/Widgets';
 import PortletWidgets from '../../ui/PortletWidgets';
+import LinearProgress from '../../ui/LinearProgress';
 
 function TabContainer(props) {
   return (
@@ -124,14 +124,17 @@ class CsvUploadSection extends Component {
   }
 
   _handleFileChange(e) {
-    this.setState({
-      file: e.target.files[0]
-    }, () => {
-      this.props.onUpload(
-        this.state.file,
-        this.state.schoolId
-      )
-    });
+    if(typeof e.target.files[0] !== 'undefined') {
+
+      this.setState ({
+        file: e.target.files[0]
+      }, () => {
+        this.props.onUpload (
+          this.state.file,
+          this.state.schoolId
+        )
+      });
+    }
   }
 
   render() {
@@ -173,6 +176,7 @@ class CsvUploadSection extends Component {
                   <FormControl>
                     <InputLabel htmlFor="school-helper">Schools</InputLabel>
                     <Select
+                      disabled={loading}
                       style={{minWidth: '120px'}}
                       value={schoolId || ''}
                       onChange={(e) => { this._handleSchoolChange(e) }}
@@ -187,8 +191,8 @@ class CsvUploadSection extends Component {
                 </div>
               </div>
             </div>
-            <div className={`col-sm-6 ${!schoolId ? ' not-allowed' : ''}` }>
-              <div className={`react-csv-input ${!schoolId ? ' disabled' : 'fdsfsf'}`}>
+            <div className={`col-sm-6 ${loading || !schoolId ? ' not-allowed' : ''}` }>
+              <div className={`react-csv-input ${loading || !schoolId ? ' disabled' : 'fdsfsf'}`}>
                 <label>Select CSV file</label>
                 <input className="csv-input" type="file" accept="text/csv" onChange={e => this._handleFileChange(e)} />
               </div>
@@ -198,13 +202,16 @@ class CsvUploadSection extends Component {
             <div className="row" style={{marginTop: '10px'}}>
               <div className="col-sm-12">
                 {!uploading &&
-                  <LinearProgress value={progress}/>
+                  <LinearProgress color='primary'/>
                 }
                 {uploading &&
                   <LinearProgress mode="determinate" value={progress}/>
                 }
                 {cancel && uploading &&
-                  <span onClick={() => { cancel('cancelled by user'); }}>cancel</span>
+                  <ConfirmButton className='m--margin-top-10 btn mt-btn mt-btn-danger' onClick={() => { cancel('canceled by user'); }}>
+                    Cancel
+                    <i className='la la-close m--margin-left-5'></i>
+                  </ConfirmButton>
                 }
               </div>
             </div>

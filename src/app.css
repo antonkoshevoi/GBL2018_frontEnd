@@ -56,6 +56,18 @@ li > .small-avatar {
   border-color: #299781;
 }
 
+.mt-btn.mt-btn-danger {
+  color: #fff;
+  background-color: #f4516c ;
+  border-color: #f4516c ;
+}
+
+.mt-btn.mt-btn-danger:hover {
+  color: #fff;
+  background-color: #d4445c;
+  border-color: #d4445c;
+}
+
 .loginWrapper {
   top: 0;
   left: 0;

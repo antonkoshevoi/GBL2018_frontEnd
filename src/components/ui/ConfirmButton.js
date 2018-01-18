@@ -10,10 +10,10 @@ const ConfirmButton = ({ onClick, ...rest }) => {
   };
 
   return (
-    <Button
+    <button
       {...rest}
       onClick={_onClick}>
-    </Button>
+    </button>
   );
 };
 
