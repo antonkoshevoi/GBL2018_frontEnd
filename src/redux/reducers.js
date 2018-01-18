@@ -3,6 +3,7 @@ import authReducer from './auth/reducer';
 import userReducer from './user/reducer';
 import studentsReducer from './students/reducer';
 import teachersReducer from './teachers/reducer';
+import administrationReducer from './administration/reducer';
 
 export default {
   app: appReducer,
@@ -10,4 +11,5 @@ export default {
   user: userReducer,
   students: studentsReducer,
   teachers: teachersReducer,
+  administration: administrationReducer,
 };
