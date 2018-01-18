@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ChartData from '../../../data/Charts';
+import ChartData from '../../../../data/Charts';
 import {Doughnut, Line} from "react-chartjs";
-import Card from "../../ui/Card";
+import Card from "../../../ui/Card";
+import InfoSection from "./InfoSection";
 
 
 class ChartsSection extends Component {
@@ -28,25 +29,30 @@ class ChartsSection extends Component {
     }
 
     render() {
-        console.log(this.state);
+
         return (
             <div className="row">
-                <div className="col-sm-6 col-md-4">
+                <div className="col-sm-6 col-md-3">
+                    <Card title="School N184" className="profile-card" avatar='http://admissions.berkeley.edu/sites/default/files/UCB_landingpage_images_600x300_212.jpg'>
+                        <InfoSection/>
+                    </Card>
+                </div>
+                <div className="col-sm-6 col-md-3">
                     <Card title="Real Time Chart" icon="flaticon-diagram">
                         <Line data={this.state.data} options={this.state.options} width="500" height="350"/>
                     </Card>
                 </div>
 
-                <div className="col-sm-6 col-md-4">
-                    <Card title="School Average" icon="flaticon-list-2">
+                <div className="col-sm-6 col-md-3">
+                    <Card title="School Average Performance" icon="flaticon-list-2">
                         <Doughnut data={this.state.pieDataPerformance} options={this.state.options} width="350" height="180"/>
                         <div className="m-stack m-stack--ver m-stack--general" style={{height:'80px'}}>
                             {this._renderPieChartLabels(this.state.pieDataPerformance)}
                         </div>
                     </Card>
                 </div>
-                <div className="col-sm-6 col-md-4">
-                    <Card title="School Average" icon="flaticon-list-2">
+                <div className="col-sm-6 col-md-3">
+                    <Card title="School Average Progress" icon="flaticon-list-2">
                         <Doughnut data={this.state.pieDataProgress} options={this.state.options} width="350" height="180"/>
                         <div className="m-stack m-stack--ver m-stack--general" style={{height:'80px'}}>
                             {this._renderPieChartLabels(this.state.pieDataProgress)}

@@ -34,7 +34,6 @@ class Dashboard extends Component {
     render() {
         return (
             <div className="fadeInLeft  animated">
-                <h3>DASHBOARD PAGE</h3>
 
                 <PortletWidgets data={Widget.dashboard}/>
                 <PortletWidgets data={Widget.rosterStats} title="Roster Statistics" icon="flaticon-list-3"/>

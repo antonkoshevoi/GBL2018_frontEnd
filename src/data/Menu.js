@@ -11,7 +11,7 @@ export default  {
            {
                key:'reports',
                title:'Reports',
-               link:'reports',
+               link:'reports/schools',
                icon:'la la-bar-chart-o',
                colorName:'orange',
            },
