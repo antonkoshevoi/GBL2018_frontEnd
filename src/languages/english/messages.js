@@ -9,4 +9,5 @@ export default {
 
   created: 'Record successfully crated',
   updated: 'Record successfully updated',
+  uploaded: 'File succesfully uploaded'
 }
