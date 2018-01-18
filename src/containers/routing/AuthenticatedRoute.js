@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
-import { Redirect, Route, withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
+import Route from './Route';
 
 class AuthenticatedRoute extends Component {
 

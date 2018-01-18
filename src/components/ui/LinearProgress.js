@@ -18,10 +18,10 @@ LinearProgress.propTypes = {
 
 LinearProgress = withStyles({
   primaryColor: {
-    backgroundColor: '#589ee4'
+    backgroundColor: '#c0d7ef'
   },
   primaryColorBar: {
-    backgroundColor: '#c0d7ef'
+    backgroundColor: '#589ee4'
   },
 })(LinearProgress);
 
