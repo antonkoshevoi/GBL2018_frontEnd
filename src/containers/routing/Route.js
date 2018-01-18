@@ -11,7 +11,6 @@ class Route extends Component {
         <Component {...props}/>
       );
 
-      console.log(rendered);
       return Layout ? (
         <Layout>
           {rendered}

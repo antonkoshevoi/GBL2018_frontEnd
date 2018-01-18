@@ -36,9 +36,13 @@ const saveSession = ({ token, expiresAt, refreshToken }) => {
 };
 
 const destroySession = () => {
-  SessionStorage.remove('token');
-  SessionStorage.remove('tokenExpiresAt');
-  SessionStorage.remove('refreshToken');
+  const options = {
+    path: '/'
+  };
+
+  SessionStorage.remove('token', options);
+  SessionStorage.remove('tokenExpiresAt', options);
+  SessionStorage.remove('refreshToken', options);
 };
 
 export default function reducer (state = initialState, action) {

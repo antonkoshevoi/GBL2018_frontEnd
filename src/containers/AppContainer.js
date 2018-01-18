@@ -12,7 +12,6 @@ class AppContainer extends Component {
   }
 
   render () {
-    console.log(this.props.appState);
     const { appState } = this.props;
     const loaded = appState.get('loaded');
 

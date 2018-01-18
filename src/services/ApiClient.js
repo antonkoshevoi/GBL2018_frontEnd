@@ -23,6 +23,19 @@ export default class ApiClient
     this.resetConfigs();
   }
 
+  getRuntimeConfigs() {
+    const token = SessionStorage.get('token');
+    let headers = {};
+
+    if (token) {
+      headers['Authorization'] = 'Bearer ' + token;
+    }
+
+    return Object.assign({}, this.configs, {
+      headers
+    });
+  }
+
   resetConfigs () {
     this.configs = Object.assign({}, this.defaultConfigs);
   }
@@ -34,15 +47,16 @@ export default class ApiClient
   }
 
   mergeConfigs (params, headers, configs) {
+    const runtimeConfigs = this.getRuntimeConfigs();
     return Object.assign(
       {},
-      this.configs,
+      runtimeConfigs,
       Object.assign(
         {},
         configs,
         {
-          params: Object.assign({}, this.configs.params, params),
-          headers: Object.assign({}, this.configs.headers, headers),
+          params: Object.assign({}, runtimeConfigs.params, params),
+          headers: Object.assign({}, runtimeConfigs.headers, headers),
         }
       )
     )
