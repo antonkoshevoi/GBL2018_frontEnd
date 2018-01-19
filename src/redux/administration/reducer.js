@@ -174,7 +174,7 @@ export default function reducer (state = initialState, action) {
           .set('fail', true)
           .set('errorCode', data.code)
           .set('errorMessage', data.message)
-          .set('errors', data.code === 400 ? Immutable.fromJS(data.errors) : undefined)
+          .set('errors', data.code === 422 ? Immutable.fromJS(data.errors) : undefined)
         );
     case RESET_CREATE_REQUEST:
       return state
@@ -212,7 +212,7 @@ export default function reducer (state = initialState, action) {
           .set('fail', true)
           .set('errorCode', errorData.code)
           .set('errorMessage', errorData.message)
-          .set('errors', errorData.code === 400 ? Immutable.fromJS(errorData.errors) : undefined)
+          .set('errors', errorData.code === 422 ? Immutable.fromJS(errorData.errors) : undefined)
         );
     case RESET_UPDATE_REQUEST:
       return state
