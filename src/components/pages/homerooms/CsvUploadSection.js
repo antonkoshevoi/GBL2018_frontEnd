@@ -58,15 +58,9 @@ class CsvUploadSection extends Component {
   };
 
   state = {
-    activeTab: '1',
     schoolId: undefined,
     file: undefined,
     csvData: [],
-    schoolId: null
-  };
-
-  handleChange = (event, value) => {
-    this.setState({ activeTab:value });
   };
 
   _selectSchool(event) {
