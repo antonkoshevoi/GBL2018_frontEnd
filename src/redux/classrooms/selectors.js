@@ -3,41 +3,41 @@ import { createSelector } from 'reselect';
 /**
  * Select domain
  */
-export const selectHomeroomsDomain = (state) => state.homerooms;
+export const selectClassroomsDomain = (state) => state.classrooms;
 
 /**
  * Get Records Request
  */
 export const selectGetRecordsRequest = createSelector(
-    selectHomeroomsDomain,
+    selectClassroomsDomain,
   (subState) => subState.get('getRecordsRequest')
 );
 /**
  * Get Single Request
  */
 export const selectGetSingleRecordRequest = createSelector(
-    selectHomeroomsDomain,
+    selectClassroomsDomain,
   (subState) => subState.get('getSingleRecordRequest')
 );
 /**
  * Records
  */
 export const selectRecords = createSelector(
-    selectHomeroomsDomain,
+    selectClassroomsDomain,
   (subState) => subState.get('records')
 );
 /**
  * Schools
  */
 export const selectSchools = createSelector(
-    selectHomeroomsDomain,
+    selectClassroomsDomain,
   (subState) => subState.get('schools')
 );
 /**
  * Pagiantion
  */
 export const selectPagination = createSelector(
-    selectHomeroomsDomain,
+    selectClassroomsDomain,
   (subState) => subState.get('pagination')
 );
 
@@ -45,34 +45,27 @@ export const selectPagination = createSelector(
  * Create
  */
 export const selectCreateRequest = createSelector(
-    selectHomeroomsDomain,
+    selectClassroomsDomain,
   (subState) => subState.get('createRequest')
 );
 /**
  * Update
  */
 export const selectUpdateRequest = createSelector(
-    selectHomeroomsDomain,
+    selectClassroomsDomain,
   (subState) => subState.get('updateRequest')
 );
 /**
- * Homerooms School Teachers
+ * Classrooms School Teachers
  */
 export const selectGetSchoolTeachersRequest = createSelector(
-    selectHomeroomsDomain,
+    selectClassroomsDomain,
     (subState) => subState.get('getSchoolTeachersRequest')
 );
 /**
- * Homerooms School Students
+ * Classrooms School Students
  */
 export const selectGetSchoolStudentsRequest = createSelector(
-    selectHomeroomsDomain,
+    selectClassroomsDomain,
     (subState) => subState.get('getSchoolStudentsRequest')
-);
-/**
- * Bulk Upload
- */
-export const selectBulkUploadRequest = createSelector(
-    selectHomeroomsDomain,
-    (subState) => subState.get('bulkUploadRequest')
 );

@@ -10,7 +10,11 @@ import Students from '../containers/students/Students';
 import Teachers from "../containers/teachers/Teachers";
 import Administration from "../containers/administration/Administration";
 import Homerooms from "../containers/homerooms/Homerooms";
+<<<<<<< HEAD
 import HomeroomsBulkUpload from '../containers/homerooms/HomeroomsBulkUpload';
+=======
+import Classrooms from "../containers/classrooms/Classrooms";
+>>>>>>> d0b3979ede0f25672f1b1989cc8f2b5cce3eeb50
 import StudentsBulkUpload from '../containers/students/StudentsBulkUpload';
 import Courses from '../containers/pages/courses/Courses';
 import {Switch, Redirect} from 'react-router';
@@ -44,6 +48,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/administration/list' name='Administration' component={Administration} />
       <AuthenticatedRoute exact layout={MainLayout} path='/homerooms/list' name='Homerooms' component={Homerooms} />
       <AuthenticatedRoute exact layout={MainLayout} path='/homerooms/csv' component={HomeroomsBulkUpload} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/classrooms/list' name='Classrooms' component={Classrooms} />
 
       <AuthenticatedRoute exact layout={MainLayout} path='/courses' component={Courses}/>
 
