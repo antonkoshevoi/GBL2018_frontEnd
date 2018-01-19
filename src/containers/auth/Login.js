@@ -62,7 +62,6 @@ class Login extends Component {
                   <div className="form-group m-form__group">
                     <input className="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this._handlePasswordChange}/>
                       {(errors.errors !== undefined && errors.errors.password) && <div id="password-error" className="form-control-feedback  text-center error">{errors.errors.password[0]}</div>}
-
                   </div>
                   <div className="row m-login__form-sub">
                     <div className="col m--align-left m-login__form-left">
@@ -104,9 +103,9 @@ class Login extends Component {
               </div>
               <div className="m-login__account">
                 <span className="m-login__account-msg">
-                Don't have an account yet ?
+                Don't have an account yet?
                 </span>
-                <NavLink to="signup/types" id="m_login_signup" className="m-link m-link--light m-login__account-link">Sign Up</NavLink>
+                <NavLink to="signup/types" id="m_login_signup" className="m--margin-left-5 m-link m-link--light m-login__account-link">Sign Up</NavLink>
               </div>
             </div>
           </div>
