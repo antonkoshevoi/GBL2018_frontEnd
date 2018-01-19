@@ -34,8 +34,8 @@ class CreateHomeroomModal extends Component {
         lastName: '',
         gender: null,
         phone: '',
-        schoolId: 1,
-        homeroom: 1,
+        schoolId: null,
+        homeroom: null,
       }
     };
   }
@@ -55,6 +55,9 @@ class CreateHomeroomModal extends Component {
   }
 
   _onClose () {
+    this.setState({
+      homeroom: {}
+    });
     this.props.resetCreateRequest();
     this.props.onClose();
   };
@@ -67,6 +70,8 @@ class CreateHomeroomModal extends Component {
     this.props.create(
       this.state.homeroom
     );
+
+    this.props.resetCreateRequest();
   };
 
   render() {

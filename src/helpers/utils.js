@@ -58,3 +58,16 @@ export const  generateBreadcrumbLink = (paths,i) => {
     }
     return path;
 }
+
+/**
+ *
+ * @param paths, i
+ * @returns 'path
+ */
+export const  generateLinkId = (paths) => {
+    let path = ""
+    for (let x = 1; x<=paths.length-1; x++) {
+        path += paths[x] +  '_';
+    }
+    return path;
+}

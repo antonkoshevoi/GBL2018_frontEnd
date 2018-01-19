@@ -540,3 +540,74 @@ div.m-datatable.m-datatable--default.m-datatable--loaded > .m-datatable__table {
   width: auto;
   min-width: 100%;
 }
+
+.m-portlet canvas {
+  max-width: 100%;
+}
+
+div.m-card-profile .m-card-profile__pic img {
+  max-width: 205px !important;
+}
+
+.btn-icon {
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.vertical-divider {
+  width: 1px;
+  height: 100%;
+  margin: 0 5px;
+}
+
+.store-filter {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+div.m-portlet.m-portlet--info.m-portlet--head-solid-bg .m-portlet__head {
+  background: #589ee4;
+}
+
+.progress .progress-bar.bg-warning {
+  background: #ed9c28;
+}
+
+.progress .progress-bar.bg-success {
+  background: #47a447;
+}
+
+.progress .progress-bar.bg-danger {
+  background: #D2322D;
+}
+
+div.progress.m-progress--sm .progress-bar {
+  border-radius: 0;
+}
+
+
+.progress {
+  background-color: #BDCCD4;
+  border-radius: 10px;
+}
+
+.m-portlet.transparent, .m-portlet.transparent .m-portlet  {
+  background: transparent !important;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.m-portlet.transparent .m-portlet__body {
+  padding: 0;
+  background: transparent !important;
+}
+
+div.m-widget24 {
+  background: #fff;
+  margin-bottom: 15px;
+}
+
+div.m-portlet {
+  margin-bottom: 0;
+}

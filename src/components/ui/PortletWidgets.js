@@ -11,7 +11,8 @@ class PortletWidgets extends Component {
     }
 
     _renderWidgetItems() {
-        const fieldsCount = 12 / this.props.data.length;
+        const fieldsCount = this.props.fullWidth ? 12 : 12 / this.props.data.length;
+
         let basisPercent = 0;
         if (this._isFloatNumber(fieldsCount)) {
             basisPercent = (100 / this.props.data.length) + '%';
@@ -76,7 +77,8 @@ PortletWidgets.propTypes = {
 };
 
 PortletWidgets.defaultProps = {
-    colorName:'brand'
+    colorName:'brand',
+    fullWidth:false
 };
 
 export default PortletWidgets;

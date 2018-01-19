@@ -1,0 +1,30 @@
+
+#store_ #m_header_nav {
+    box-shadow: none;
+}
+
+#store_ .store-wrapper .m-portlet__head {
+    background: rgba(51, 51, 51, 0.05);
+    height:50px;
+}
+
+
+#store_ .m-portlet__head-caption {
+    padding: 0;
+}
+
+
+#store_ .m-subheader {
+    display: none;
+}
+
+#store_ .m-content {
+    padding: 0;
+}
+
+.store-filter-divider {
+    width: 1px;
+    height: 27px;
+    margin: 0 13px;
+    background: #bbb;
+}

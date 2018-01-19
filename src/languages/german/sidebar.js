@@ -22,4 +22,5 @@ export default {
   sent: 'Sent',
   drafts: 'Drafts',
   compose: 'Compose',
+  store: 'Store',
 }

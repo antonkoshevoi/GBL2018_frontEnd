@@ -58,7 +58,7 @@ class UserMenu extends Component {
                   <span className="m-nav__section-text">Section</span>
                 </li>
                 <li className="m-nav__item">
-                  <NavLink to="/profile/edit" className="m-nav__link">
+                  <NavLink to="/profile" className="m-nav__link">
                     <i className="m-nav__link-icon flaticon-profile-1"></i>
                     <span className="m-nav__link-title">
 									<span className="m-nav__link-wrap">

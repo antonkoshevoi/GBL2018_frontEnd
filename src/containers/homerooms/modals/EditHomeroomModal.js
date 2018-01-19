@@ -81,6 +81,8 @@ class EditHomeroomModal extends Component {
       this.state.id,
       this.state.homeroom
     );
+
+    this.props.resetUpdateRequest();
   };
 
   render() {
@@ -101,7 +103,7 @@ class EditHomeroomModal extends Component {
               )}
             </IconButton>
             <Typography type="title" color="inherit" >
-              Edit user
+              Edit Homeroom
             </Typography>
           </Toolbar>
         </AppBar>
@@ -118,7 +120,7 @@ class EditHomeroomModal extends Component {
           <div className='col-sm-12'>
             <Divider/>
             <Button disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary' onClick={() => { this._onSubmit() }} >
-              Update User
+              Update Homeroom
             </Button>
           </div>
         </DialogContent>

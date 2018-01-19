@@ -5,21 +5,28 @@ export default  {
                key:'dashboard',
                title:'Dashboard',
                link:'dashboard',
-               icon:'flaticon flaticon-line-graph',
+               icon:'fa fa-dashboard',
                colorName:'home',
            },
            {
                key:'reports',
                title:'Reports',
                link:'reports/schools',
-               icon:'la la-bar-chart-o',
+               icon:'fa  fa-line-chart ',
                colorName:'orange',
+           },
+           {
+               key:'store',
+               title:'Store',
+               link:'store',
+               icon:'fa fa-shopping-cart ',
+               colorName:'grey',
            },
            {
                key:'studentsAndStaff',
                title:'Students & Staff',
                link:'dashboard',
-               icon:'la la-university',
+               icon:'fa fa-group',
                colorName:'purple',
                subMenu:[
                    {
@@ -46,7 +53,7 @@ export default  {
                key:'learningAreas',
                title:'Learning Areas',
                link:'dashboard',
-               icon:'la la-book',
+               icon:'fa fa-institution',
                colorName:'red',
                subMenu:[
                    {
@@ -79,7 +86,7 @@ export default  {
                key:'sharing',
                title:'Sharing',
                link:'dashboard',
-               icon:'la la-share-alt',
+               icon:'fa fa-share-alt',
                colorName:'green',
                subMenu:[
                    {
@@ -124,7 +131,7 @@ export default  {
                key:'acounts',
                title:'Acounts',
                link:'accounts',
-               icon:'la la-usd',
+               icon:'fa fa-dollar ',
                colorName:'blue',
                subMenu:[
                    {
@@ -147,13 +154,13 @@ export default  {
                key:'sCap',
                title:'S-CAP',
                link:'scap',
-               icon:'la  la-credit-card',
+               icon:'fa fa-id-card',
            },
            {
                key:'howToMovies',
                title:'How To Movies',
                link:'movies',
-               icon:'la  la-film',
+               icon:'fa fa-film',
            },
        ]
 }

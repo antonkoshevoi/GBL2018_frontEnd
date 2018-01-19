@@ -7,12 +7,12 @@ export default {
         labels: ["0", "1", "2", "3", "4", "5", "6","7"],
         datasets: [{
             label: "My First dataset",
-            fillColor : "#ee2b2e78",
+            fillColor : "rgba(220,220,220,0.0)",
             pointRadius: 0,
-            strokeColor : "rgba(220,220,220,1)",
-            pointColor : "rgba(220,220,220,1)",
-            pointStrokeColor : "#ff1312",
-            pointHighlightFill : "#35b3ff",
+            strokeColor : "#8CC9E8",
+            pointColor : "#8CC9E8",
+            pointStrokeColor : "rgba(220,220,220,0.0)",
+            pointHighlightFill : "#8CC9E8",
             pointHighlightStroke : "rgba(220,220,220,1)",
             data: [
                 _randomScalingFactor(),
@@ -102,12 +102,12 @@ export default {
         },
     },
     pieDataProgress:[
-        {color: "#34bfa3", label: "complete", value: 20},
-        {color: "#ffb822", label: "in progress", value: 25},
-        {color: "#b4beea", label: "not started", value: 55}
+        {color: "#79c942", label: "complete", value: 20},
+        {color: "#ff931e", label: "in progress", value: 25},
+        {color: "#dee6e9", label: "not started", value: 55}
     ],
     pieDataPerformance:[
-        {color: "#34bfa3", label: "correct", value: 80},
-        {color: "#c06", label: "incorrect", value: 20},
+        {color: "#79c942", label: "correct", value: 80},
+        {color: "#fe1d25", label: "incorrect", value: 20},
     ]
 }

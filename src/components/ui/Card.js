@@ -8,8 +8,10 @@ class Card extends Component {
 
     render() {
         return (
-            <div style={{marginBottom:0,height:'100%',display: "flex", flexDirection: "column"}} className={"m-portlet  m-portlet--head-solid-bg m-portlet--" + this.props.colorName}>
-                <div className="m-portlet__head">
+            <div style={{marginBottom:0,height:'100%',display: "flex", flexDirection: "column"}}
+                 className={"m-portlet  m-portlet--head-solid-bg m-portlet--" + this.props.colorName + (this.props.transparent ? ' transparent' : '')}
+            >
+                <div className={`m-portlet__head  ${!this.props.header ? 'm--hide' : ''}`}>
                     <div className="m-portlet__head-caption">
                         <div className="m-portlet__head-title">
 						<span className="m-portlet__head-icon">
@@ -40,7 +42,9 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-    colorName:'brand'
+    colorName:'brand',
+    header:true,
+    transparent:false
 };
 
 export default Card;
