@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ChartData from '../../../../data/Charts';
-import {Doughnut, Line} from "react-chartjs";
+import {Doughnut, Line, Pie} from "react-chartjs";
 import Card from "../../../ui/Card";
 import InfoSection from "./InfoSection";
 
@@ -32,32 +32,52 @@ class ChartsSection extends Component {
 
         return (
             <div className="row">
-                <div className="col-sm-6 col-md-3">
+                <div className="col-sm-12  col-md-6 col-xl-3">
                     <Card title="Classroom N1" className="profile-card" avatar='https://www.responsiveclassroom.org/wp-content/uploads/2016/04/DSC_2388-1024x682.jpg'>
                         <InfoSection/>
                     </Card>
                 </div>
-                <div className="col-sm-6 col-md-3">
+                <div className="col-sm-12  col-md-6 col-xl-3">
                     <Card title="Real Time Chart" icon="flaticon-diagram">
                         <Line data={this.state.data} options={this.state.options} width="500" height="350"/>
                     </Card>
                 </div>
-
-                <div className="col-sm-6 col-md-3">
-                    <Card title="School Average Performance" icon="flaticon-list-2">
-                        <Doughnut data={this.state.pieDataPerformance} options={this.state.options} width="350" height="180"/>
-                        <div className="m-stack m-stack--ver m-stack--general" style={{height:'80px'}}>
-                            {this._renderPieChartLabels(this.state.pieDataPerformance)}
-                        </div>
+                <div className="col-sm-12 col-md-6 col-xl-3">
+                    <Card title="Pass Rate" icon="flaticon-list-2">
+                        <h1  className="d-flex justify-content-center align-items-center" style={{fontSize:'7rem',color:'rgb(0, 128, 0)'}}>28%</h1>
                     </Card>
                 </div>
-                <div className="col-sm-6 col-md-3">
-                    <Card title="School Average Progress" icon="flaticon-list-2">
-                        <Doughnut data={this.state.pieDataProgress} options={this.state.options} width="350" height="180"/>
-                        <div className="m-stack m-stack--ver m-stack--general" style={{height:'80px'}}>
-                            {this._renderPieChartLabels(this.state.pieDataProgress)}
+                <div className="col-sm-12 col-md-6 col-xl-3">
+                    <div className="small-card-content">
+                        <div className="small-card">
+                            <div className="row">
+                                <div className="col-md-5">
+                                    <Pie data={this.state.pieDataProgress} options={this.state.options} width="100" height="100"/>
+                                </div>
+                                <div className="col-md-7">
+                                    <div className="m-stack m--padding-left-10  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
+                                        <h5> School Average</h5>
+                                        <legend>Progress</legend>
+                                        {this._renderPieChartLabels(this.state.pieDataProgress)}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </Card>
+                        <div className="small-card">
+                            <div className="row">
+                                <div className="col-md-5">
+                                    <Pie data={this.state.pieDataPerformance} options={this.state.options} width="100" height="100"/>
+                                </div>
+                                <div className="col-md-7">
+                                    <div className="m-stack m--padding-left-10 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
+                                        <h5> School Average</h5>
+                                        <legend>Performance</legend>
+                                        {this._renderPieChartLabels(this.state.pieDataPerformance)}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

@@ -84,7 +84,7 @@ li > .small-avatar {
   background-size: cover;
 }
 
-.main-tabs > div > div > div:last-child {
+.main-tabs > div > div > div:last-child, .main-tabs div > span  {
   background-color: #fff;
 }
 
@@ -92,6 +92,11 @@ li > .small-avatar {
 .main-tabs .tab-header-item > span > div  {
   color: #fff;
 }
+
+.main-tabs button span {
+  color: #ffffff;
+}
+
 
 .full-width {
   width: 100%;
@@ -610,4 +615,67 @@ div.m-widget24 {
 
 div.m-portlet {
   margin-bottom: 0;
+}
+
+
+.small-card-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.small-card-content .small-card {
+  background-color: #fff;
+  border-left: 6px solid #589ee4;
+  flex: 1;
+  align-items: center;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 3px 0 0 2px;
+  box-shadow: 0 1px 15px 1px rgba(69, 65, 78, 0.08);
+}
+
+.small-card-content .small-card:first-child {
+  margin-top: 0;
+}
+
+.small-card-content .small-card:last-child {
+  margin-bottom: 0;
+}
+
+.small-card .col {
+  line-height: 1;
+}
+
+.small-card .widget-desc {
+  font-size: 0.7rem;
+}
+
+.small-card .m-widget1__title {
+  margin-bottom: 1px;
+}
+
+.fa.widget-icon {
+  font-size: 65px;
+  color: #27aae1;
+}
+
+.m-portlet.m-portlet--head-solid-bg .m-widget1 .m-widget1__item {
+  padding: 0.5rem 0;
+}
+
+.m-widget1__item .progress {
+  width: 100%;
+  height: 7px;
+}
+
+.task-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.flex-1 {
+  flex:1
 }

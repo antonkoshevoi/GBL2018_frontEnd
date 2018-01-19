@@ -6,6 +6,9 @@ import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 import UserMenu from "./UserMenu";
 import { connect } from 'react-redux';
 import { logout } from '../../redux/auth/actions';
+import Messages from "../pushers/Messages";
+import Notifications from "../pushers/Notifications";
+import Tasks from "../pushers/Tasks";
 // @translate(['key'], { wait: true })
 
 class Header extends Component {
@@ -42,57 +45,24 @@ class Header extends Component {
 
               </div>
             </div>
-            <div className="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
+            <div className="m-stack__item m-stack__item--fluid m-header-head d-flex" id="m_header_nav">
               <button className="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-dark " id="m_aside_header_menu_mobile_close_btn">
                 <i className="la la-close"></i>
               </button>
+
+              <div className="d-flex justify-content-center  align-items-center flex-1 hidden-sm">
+                <h4>
+                  Gravity Brain School
+                </h4>
+              </div>
 
               <div id="m_header_topbar" className="m-topbar  m-stack m-stack--ver m-stack--general">
                 <div className="m-stack__item m-topbar__nav-wrapper">
                   <ul className="m-topbar__nav m-nav m-nav--inline">
 
-                    <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width" data-dropdown-toggle="click" data-dropdown-persistent="true">
-                      <a  className="m-nav__link m-dropdown__toggle" id="m_topbar_notification_icon">
-                        <span className="m-nav__link-badge m-badge m-badge--dot m-badge--dot-small m-badge--danger"></span>
-                        <span className="m-nav__link-icon">
-													<i className="flaticon-music-2"></i>
-												</span>
-                      </a>
-                      <div className="m-dropdown__wrapper">
-                        <span className="m-dropdown__arrow m-dropdown__arrow--center"></span>
-                        <div className="m-dropdown__inner">
-                          <div className="m-dropdown__header m--align-center" style={{background: "url(assets/app/media/img/misc/notification_bg.jpg); background-size: cover"}}>
-														<span className="m-dropdown__header-title">
-															9 New
-														</span>
-                            <span className="m-dropdown__header-subtitle">
-															User Notifications
-														</span>
-                          </div>
-                          <div className="m-dropdown__body">
-                            <div className="m-dropdown__content">
-                              <ul className="nav nav-tabs m-tabs m-tabs-line m-tabs-line--brand" role="tablist">
-                                <li className="nav-item m-tabs__item">
-                                  <a className="nav-link m-tabs__link active" data-toggle="tab" href="#topbar_notifications_notifications" role="tab">
-                                    Alerts
-                                  </a>
-                                </li>
-                                <li className="nav-item m-tabs__item">
-                                  <a className="nav-link m-tabs__link" data-toggle="tab" href="#topbar_notifications_events" role="tab">
-                                    Events
-                                  </a>
-                                </li>
-                                <li className="nav-item m-tabs__item">
-                                  <a className="nav-link m-tabs__link" data-toggle="tab" href="#topbar_notifications_logs" role="tab">
-                                    Logs
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+                    <Tasks/>
+                    <Messages/>
+                    <Notifications/>
 
                     <UserMenu logout={logout}/>
 

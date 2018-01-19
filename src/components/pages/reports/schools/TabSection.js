@@ -21,7 +21,7 @@ function TabContainer(props) {
 
 class TabSection extends Component {
     state = {
-        value: "students",
+        value: "classRooms",
     };
 
     handleChange = (event, value) => {
@@ -110,9 +110,9 @@ class TabSection extends Component {
                                         onChange={this.handleChange}
 
                                     >
-                                        <Tab className="tab-header-item" value="students" label="Students" />
                                         <Tab className="tab-header-item" value="classRooms" label="Classrooms" />
                                         <Tab className="tab-header-item" value="homeRooms" label="Homerooms" />
+                                        <Tab className="tab-header-item" value="students" label="Students" />
                                     </Tabs>
                                 </div>
 

@@ -33,9 +33,6 @@ class InfoSection extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">PASS RATE</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__number m--font-brand">28%</span>
-                                </div>
                             </div>
                         </div>
                     </div>
