@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography, Tab, Tabs, Paper } from 'material-ui';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
-import { getSchoolTeachers, getSchoolStudents } from "../../../redux/homerooms/actions";
-import {selectGetSchoolStudentsRequest, selectGetSchoolTeachersRequest} from "../../../redux/homerooms/selectors";
+import { getSchoolTeachers, getSchoolStudents } from "../../../redux/classrooms/actions";
+import {selectGetSchoolStudentsRequest, selectGetSchoolTeachersRequest} from "../../../redux/classrooms/selectors";
 
 function TabContainer(props) {
   return (
@@ -19,10 +19,10 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-class HomeroomForm extends Component {
+class ClassroomForm extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
-    homeroom: PropTypes.object.isRequired,
+    classroom: PropTypes.object.isRequired,
     schools: PropTypes.any,
     errors: PropTypes.any
   };
@@ -42,9 +42,9 @@ class HomeroomForm extends Component {
   };
 
   componentDidMount() {
-    if (this.props.homeroom.id) {
+    if (this.props.classroom.id) {
 
-      const studentIds = this.props.homeroom.students.map((student) => {
+      const studentIds = this.props.classroom.students.map((student) => {
         return student.id.toString();
       });
 
@@ -53,8 +53,8 @@ class HomeroomForm extends Component {
         studentIds: studentIds
       });
 
-      this.props.getSchoolTeachers(this.props.homeroom.schoolId);
-      this.props.getSchoolStudents(this.props.homeroom.schoolId);
+      this.props.getSchoolTeachers(this.props.classroom.schoolId);
+      this.props.getSchoolStudents(this.props.classroom.schoolId);
     }
   }
 
@@ -91,7 +91,7 @@ class HomeroomForm extends Component {
     const { name, type, value, checked } = event.target;
 
     this.props.onChange({
-      ...this.props.homeroom,
+      ...this.props.classroom,
       [name]: value
     });
   }
@@ -107,8 +107,8 @@ class HomeroomForm extends Component {
     }
 
     this.props.onChange({
-        ...this.props.homeroom,
-        homeroomStudents: this.state.studentIds
+        ...this.props.classroom,
+        classroomStudents: this.state.studentIds
     });
   }
 
@@ -164,7 +164,7 @@ class HomeroomForm extends Component {
   }
 
   render() {
-    const { homeroom, errors } = this.props;
+    const { classroom, errors } = this.props;
     const { activeTab } = this.state;
 
     return (
@@ -185,7 +185,7 @@ class HomeroomForm extends Component {
                   name='name'
                   margin='dense'
                   fullWidth
-                  value={homeroom.name || ''}
+                  value={classroom.name || ''}
                   onChange={(e) => { this._handleInputChange(e) }}/>
                 {errors && errors.get('name') && <FormHelperText error>{ errors.get('name').get(0) }</FormHelperText>}
             </FormControl>
@@ -195,7 +195,7 @@ class HomeroomForm extends Component {
                   name='startDate'
                   margin='dense'
                   fullWidth
-                  value={homeroom.startDate || ''}
+                  value={classroom.startDate || ''}
                   onChange={(e) => { this._handleInputChange(e) }}/>
                 {errors && errors.get('startDate') && <FormHelperText error>{ errors.get('startDate').get(0) }</FormHelperText>}
             </FormControl>
@@ -205,7 +205,7 @@ class HomeroomForm extends Component {
                   name='endDate'
                   margin='dense'
                   fullWidth
-                  value={homeroom.endDate || ''}
+                  value={classroom.endDate || ''}
                   onChange={(e) => { this._handleInputChange(e) }}/>
                 {errors && errors.get('endDate') && <FormHelperText error>{ errors.get('endDate').get(0) }</FormHelperText>}
             </FormControl>
@@ -215,7 +215,7 @@ class HomeroomForm extends Component {
                   name='enrollmentStartDate'
                   margin='dense'
                   fullWidth
-                  value={homeroom.enrollmentStartDate || ''}
+                  value={classroom.enrollmentStartDate || ''}
                   onChange={(e) => { this._handleInputChange(e) }}/>
                 {errors && errors.get('enrollmentStartDate') && <FormHelperText error>{ errors.get('enrollmentStartDate').get(0) }</FormHelperText>}
             </FormControl>
@@ -225,7 +225,7 @@ class HomeroomForm extends Component {
                   name='enrollmentEndDate'
                   margin='dense'
                   fullWidth
-                  value={homeroom.enrollmentEndDate || ''}
+                  value={classroom.enrollmentEndDate || ''}
                   onChange={(e) => { this._handleInputChange(e) }}/>
                 {errors && errors.get('enrollmentEndDate') && <FormHelperText error>{ errors.get('enrollmentEndDate').get(0) }</FormHelperText>}
             </FormControl>
@@ -239,7 +239,7 @@ class HomeroomForm extends Component {
                   primarytext=""
                   name='schoolId'
                   onChange={(e) => { this._handleSchoolChange(e) }}
-                  value={homeroom.schoolId || ''}>
+                  value={classroom.schoolId || ''}>
                 <MenuItem value={null} primarytext="Select School"/>
                 {this._renderSchools()}
               </Select>
@@ -251,7 +251,7 @@ class HomeroomForm extends Component {
                   primarytext="Select Teacher"
                   name='teacherId'
                   onChange={(e) => { this._handleInputChange(e) }}
-                  value={homeroom.teacherId || ''}>
+                  value={classroom.teacherId || ''}>
                 <MenuItem value={null} primarytext=""/>
                 {this.state.schoolTeachers.map((teacher, key) => {
                   return this._renderTeacher(teacher, key)
@@ -274,7 +274,7 @@ class HomeroomForm extends Component {
   }
 }
 
-HomeroomForm = connect(
+ClassroomForm = connect(
     (state) => ({
         getSchoolTeacherRequest: selectGetSchoolTeachersRequest(state),
         getSchoolStudentsRequest: selectGetSchoolStudentsRequest(state),
@@ -283,6 +283,6 @@ HomeroomForm = connect(
         getSchoolTeachers: (schoolId) => { dispatch(getSchoolTeachers(schoolId)) },
         getSchoolStudents: (schoolId) => { dispatch(getSchoolStudents(schoolId)) },
     })
-)(HomeroomForm);
+)(ClassroomForm);
 
-export default HomeroomForm;
+export default ClassroomForm;

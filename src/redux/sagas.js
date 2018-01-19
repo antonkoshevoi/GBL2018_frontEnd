@@ -5,6 +5,7 @@ import studentsSagas from './students/sagas';
 import teachersSagas from './teachers/sagas';
 import administrationSagas from './administration/sagas';
 import homeroomsSagas from './homerooms/sagas';
+import classroomsSagas from './classrooms/sagas';
 
 function* rootSaga () {
   yield all([,
@@ -13,7 +14,8 @@ function* rootSaga () {
     studentsSagas,
     teachersSagas,
     administrationSagas,
-    homeroomsSagas
+    homeroomsSagas,
+    classroomsSagas
   ])
 }
 
