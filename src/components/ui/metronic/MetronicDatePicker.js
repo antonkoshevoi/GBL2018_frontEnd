@@ -5,13 +5,11 @@ import DatePicker from '../DatePicker';
 class MetronicDatePicker extends Component {
 
   render () {
-    const { placeholder, format, ...rest } = this.props;
+    const { placeholder, ...rest } = this.props;
 
     return (
       <DatePicker
         {...rest}
-        clearable
-        format={format ? format : 'YYYY-MM-DD'}
         style={{width: '100%'}}
         InputProps={{
           disableUnderline: true,
