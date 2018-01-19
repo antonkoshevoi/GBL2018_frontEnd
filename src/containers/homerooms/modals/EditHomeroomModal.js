@@ -18,7 +18,7 @@ import {
   update
 } from '../../../redux/homerooms/actions';
 import Modal from "../../../components/ui/Modal";
-import HomeroomForm from "../../../components/pages/homerooms/HomeroomForm";
+import HomeroomForm from "../forms/HomeroomForm";
 
 class EditHomeroomModal extends Component {
   static propTypes = {

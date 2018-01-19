@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography, Tab, Tabs, Paper } from 'material-ui';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
-import { getSchoolTeachers, getSchoolStudents } from "../../../redux/homerooms/actions";
-import {selectGetSchoolStudentsRequest, selectGetSchoolTeachersRequest} from "../../../redux/homerooms/selectors";
+import { getSchoolTeachers, getSchoolStudents } from "../../../redux/schools/actions";
+import {selectGetSchoolStudentsRequest, selectGetSchoolTeachersRequest} from "../../../redux/schools/selectors";
 
 function TabContainer(props) {
   return (
@@ -38,7 +38,10 @@ class HomeroomForm extends Component {
   }
 
   handleChangeTab = (event, activeTab) => {
-    this.setState({ activeTab });
+    this.setState({
+      ...this.state,
+      activeTab: activeTab
+    });
   };
 
   componentDidMount() {
@@ -101,14 +104,14 @@ class HomeroomForm extends Component {
     const index = this.state.studentIds.indexOf(value.toString());
 
     if (index < 0) {
-        this.state.studentIds.push(value.toString());
+      this.state.studentIds.push(value.toString());
     } else {
-        this.state.studentIds.splice(index, 1);
+      this.state.studentIds.splice(index, 1);
     }
 
     this.props.onChange({
-        ...this.props.homeroom,
-        homeroomStudents: this.state.studentIds
+      ...this.props.homeroom,
+      homeroomStudents: this.state.studentIds
     });
   }
 
@@ -144,23 +147,29 @@ class HomeroomForm extends Component {
     ));
   }
 
-  _renderTeacher(teacher, key) {
-    return <MenuItem key={teacher.id} value={ teacher.id }>
-      { teacher.firstName } { teacher.lastName }
-    </MenuItem>
+  _renderTeachers() {
+    const { schoolTeachers } = this.state;
+
+    return schoolTeachers.map((teacher, key) => (
+      <MenuItem key={key} value={ teacher.id }>
+        { teacher.firstName } { teacher.lastName }
+      </MenuItem>
+    ));
   }
 
-  _renderStudent(student, key) {
-    return <FormControlLabel key={student.id}
-      control={
-        <Checkbox key={student.id}
-          checked={this.state.studentIds.indexOf(student.id.toString()) > 0}
+  _renderStudents() {
+    const { schoolStudents } = this.state;
+
+    return schoolStudents.map((student, key) => (
+      <FormControlLabel key={key}
+        control={<Checkbox
+          checked={this.state.studentIds.indexOf(student.id.toString()) > -1}
           onChange={ (e) => {this._handleStudentsCheckboxChange(e) }}
           value={student.id.toString()}
-        />
-      }
-      label={student.firstName + ' ' + student.lastName}
-    />
+        />}
+        label={student.firstName + ' ' + student.lastName}
+      />
+    ))
   }
 
   render() {
@@ -253,9 +262,7 @@ class HomeroomForm extends Component {
                   onChange={(e) => { this._handleInputChange(e) }}
                   value={homeroom.teacherId || ''}>
                 <MenuItem value={null} primarytext=""/>
-                {this.state.schoolTeachers.map((teacher, key) => {
-                  return this._renderTeacher(teacher, key)
-                })}
+                {this._renderTeachers()}
               </Select>
                 {errors && errors.get('teacherId') && <FormHelperText error>{ errors.get('teacherId').get(0) }</FormHelperText>}
             </FormControl>
@@ -263,9 +270,7 @@ class HomeroomForm extends Component {
           </TabContainer>}
           {activeTab === 2 && <TabContainer>
             <FormGroup row>
-                {this.state.schoolStudents.map((student, key) => {
-                    return this._renderStudent(student, key)
-                })}
+                {this._renderStudents()}
             </FormGroup>
           </TabContainer>}
           </Paper>
