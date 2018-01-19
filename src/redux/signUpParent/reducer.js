@@ -1,15 +1,14 @@
 import Immutable from "immutable";
-import { STEP_1_FAILED, STEP_1_VALIDATED, VALIDATE_STEP_1 } from './actions';
+import { SIGN_UP, STEP_1_FAILED, STEP_1_VALIDATED, VALIDATE_STEP_1 } from './actions';
 
 const initialState = Immutable.fromJS({
-  form: {},
   validateStep1Request: {
     loading: false,
     success: false,
     fail: false,
     errors: {}
   },
-  validateStep2Request: {
+  signUpRequest: {
     loading: false,
     success: false,
     fail: false,
@@ -26,8 +25,8 @@ export default function reducer (state = initialState, action) {
       return state
         .set('validateStep1Request', state.get('validateStep1Request')
           .set('loading', true)
-          .set('success', true)
-          .set('fail', true)
+          .set('success', false)
+          .set('fail', false)
           .set('errors', Immutable.Map())
         );
     case STEP_1_VALIDATED:
@@ -39,16 +38,26 @@ export default function reducer (state = initialState, action) {
     case STEP_1_FAILED:
       let errors = {};
 
-      console.log(action.error.response);
-      if (typeof action.error.response !== 'undefined' && action.error.response.status === 400) {
-
+      if (typeof action.error.response !== 'undefined' && action.error.response.status === 422) {
+        errors = action.error.response.data.errors;
       }
 
       return state
-        .set('loginRequest', state.get('loginRequest')
+        .set('validateStep1Request', state.get('validateStep1Request')
           .set('fail', true)
           .set('loading', false)
-          .set('errors', action.error.response.data)
+          .set('errors', Immutable.fromJS(errors))
+        );
+    /**
+     * Sign Up
+     */
+    case SIGN_UP:
+      return state
+        .set('signUpRequest', state.get('signUpRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)
+          .set('errors', Immutable.Map())
         );
     default:
       return state;
