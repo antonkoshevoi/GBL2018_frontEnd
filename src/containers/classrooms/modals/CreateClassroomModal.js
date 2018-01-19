@@ -9,12 +9,12 @@ import {
   Divider, Button
 } from 'material-ui';
 import { connect } from 'react-redux';
-import { selectCreateRequest, selectSchools } from '../../../redux/homerooms/selectors';
-import { create, getSchools, resetCreateRequest } from '../../../redux/homerooms/actions';
+import { selectCreateRequest, selectSchools } from '../../../redux/classrooms/selectors';
+import { create, getSchools, resetCreateRequest } from '../../../redux/classrooms/actions';
 import Modal from "../../../components/ui/Modal";
-import HomeroomForm from "../../../components/pages/homerooms/HomeroomForm";
+import ClassroomForm from "../../../components/pages/classrooms/ClassroomForm";
 
-class CreateHomeroomModal extends Component {
+class CreateClassroomModal extends Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
@@ -26,7 +26,16 @@ class CreateHomeroomModal extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      homeroom: {}
+      classroom: {
+        username: '',
+        password: '',
+        email: '',
+        firstName: '',
+        lastName: '',
+        gender: null,
+        phone: '',
+        schoolId: null,
+      }
     };
   }
 
@@ -46,19 +55,19 @@ class CreateHomeroomModal extends Component {
 
   _onClose () {
     this.setState({
-      homeroom: {}
+      classroom: {}
     });
     this.props.resetCreateRequest();
     this.props.onClose();
   };
 
-  _onChange (homeroom) {
-    this.setState({ homeroom });
+  _onChange (classroom) {
+    this.setState({ classroom });
   };
 
   _onSubmit = () => {
     this.props.create(
-      this.state.homeroom
+      this.state.classroom
     );
 
     this.props.resetCreateRequest();
@@ -82,7 +91,7 @@ class CreateHomeroomModal extends Component {
               )}
             </IconButton>
             <Typography type="title" color="inherit" >
-              Create Homeroom
+              Create Classroom
             </Typography>
           </Toolbar>
         </AppBar>
@@ -91,15 +100,15 @@ class CreateHomeroomModal extends Component {
           <DialogContentText>
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
-          <HomeroomForm
-            onChange={(homeroom) => { this._onChange(homeroom) }}
-            homeroom={this.state.homeroom}
+          <ClassroomForm
+            onChange={(classroom) => { this._onChange(classroom) }}
+            classroom={this.state.classroom}
             schools={schools}
             errors={errors}/>
           <div className='col-sm-12'>
             <Divider/>
             <Button disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary' onClick={() => { this._onSubmit() }} >
-              Add New Homeroom
+              Add New Classroom
             </Button>
           </div>
         </DialogContent>
@@ -108,7 +117,7 @@ class CreateHomeroomModal extends Component {
   }
 }
 
-CreateHomeroomModal = connect(
+CreateClassroomModal = connect(
   (state) => ({
     createRequest: selectCreateRequest(state),
     schools: selectSchools(state),
@@ -118,6 +127,6 @@ CreateHomeroomModal = connect(
     resetCreateRequest: () => { dispatch(resetCreateRequest()) },
     getSchools: () => { dispatch(getSchools()) },
   })
-)(CreateHomeroomModal);
+)(CreateClassroomModal);
 
-export default CreateHomeroomModal;
+export default CreateClassroomModal;

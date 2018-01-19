@@ -59,7 +59,7 @@ export default  {
                    {
                        key:'classrooms',
                        title:'Classrooms',
-                       link:'classrooms',
+                       link:'classrooms/list',
                        icon:'flaticon flaticon-user-settings',
                    },
                    {
