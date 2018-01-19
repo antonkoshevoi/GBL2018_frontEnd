@@ -197,7 +197,7 @@ class Homerooms extends Component {
                   </Button>
                   <NavLink className='link-btn' to='/homerooms/csv'>
                     <Button raised className='btn-success mt-btn mt-btn-success'>
-                      Bulk Add Students
+                      Bulk Add homerooms
                       <Icon style={{marginLeft:'5px'}}>person</Icon>
                     </Button>
                   </NavLink>
