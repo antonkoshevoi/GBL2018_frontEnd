@@ -8,6 +8,7 @@ import {getAllStudents} from "../../../../services/Students";
 import classRooms from "../../../../data/json/classrooms.json";
 import {NavLink} from "react-router-dom";
 import {Search} from "material-ui-icons";
+import {OldProgressBar} from '../../../ui/LinearProgress'
 
 function TabContainer(props) {
     return (
@@ -41,10 +42,10 @@ class TabSection extends Component {
                             (
                                 <div>
                                     <span className="text-right d-block">75%</span>
-                                    <LinearProgress mode="determinate" className="gridProgressBar" value={75} />
+                                    <OldProgressBar correctValue="40" type="performance" />
                                     <br />
                                     <span  className="text-right  d-block">35%</span>
-                                    <LinearProgress color="accent" className="gridProgressBar" mode="determinate" value={35} />
+                                    <OldProgressBar complateValue="40" progressValue="10" type="progress" />
                                 </div>
                             )
                         }
@@ -74,10 +75,10 @@ class TabSection extends Component {
                             (
                                 <div>
                                     <span className="text-right d-block">75%</span>
-                                    <LinearProgress mode="determinate" className="gridProgressBar" value={75} />
+                                        <OldProgressBar correctValue="40" type="performance" />
                                     <br />
                                     <span  className="text-right  d-block">35%</span>
-                                    <LinearProgress color="accent" className="gridProgressBar" mode="determinate" value={35} />
+                                    <OldProgressBar complateValue="40" progressValue="10" type="progress" />
                                 </div>
                             )
                         }

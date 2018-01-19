@@ -26,3 +26,18 @@ LinearProgress = withStyles({
 })(LinearProgress);
 
 export default LinearProgress;
+
+
+export const OldProgressBar = ({ ...props }) => {
+    return (
+        (props.type === 'performance') ?
+        <div className="progress m-progress--sm">
+              <div className="progress-bar bg-warning" role="progressbar" style={{width: props.correctValue + '%'}}></div>
+              <div className="progress-bar bg-success" role="progressbar" style={{width: 100 - props.correctValue + '%'}}></div>)
+        </div>  :
+            <div className="progress m-progress--sm">
+              <div className="progress-bar bg-success" role="progressbar" style={{width: props.complateValue + '%'}}></div>
+              <div className="progress-bar bg-danger" role="progressbar" style={{width: props.progressValue + '%'}}></div>)
+            </div>
+    )
+}

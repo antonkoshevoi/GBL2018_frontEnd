@@ -53,8 +53,7 @@ class LanguageSwitcher extends Component {
                     onClick={this._openLanguageMenu}
                 >
                                                 <span className="m-nav__link-icon">
-													<i className="la la-globe m--margin-right-5 d-md-inline"></i>
-                                                    <span>{t('language')}</span>
+													<i className="m--icon-font-size-lg5  la la-globe m--margin-right-5 d-md-inline"></i>
 												</span>
                 </a>
                 <Menu

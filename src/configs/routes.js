@@ -24,6 +24,7 @@ import SchoolReports from "../containers/pages/reports/Schools";
 import ClassRoomReports from "../containers/pages/reports/ClassRooms";
 import StudentReports from "../containers/pages/reports/Students";
 import TeacherReports from "../containers/pages/reports/Teachers";
+import Store from "../containers/pages/store/Store";
 
 export default () => (
   <AppContainer>
@@ -51,6 +52,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store' name='Store' component={Store}/>
 
       <Route component={NotFoundPage} />
     </Switch>
