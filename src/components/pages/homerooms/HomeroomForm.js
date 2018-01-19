@@ -43,6 +43,16 @@ class HomeroomForm extends Component {
 
   componentDidMount() {
     if (this.props.homeroom.id) {
+
+      const studentIds = this.props.homeroom.students.map((student) => {
+        return student.id.toString();
+      });
+
+      this.setState({
+        ...this.state,
+        studentIds: studentIds
+      });
+
       this.props.getSchoolTeachers(this.props.homeroom.schoolId);
       this.props.getSchoolStudents(this.props.homeroom.schoolId);
     }
@@ -81,10 +91,10 @@ class HomeroomForm extends Component {
 
   _handleStudentsCheckboxChange(event) {
     const { value } = event.target;
-    const index = this.state.studentIds.indexOf(value);
+    const index = this.state.studentIds.indexOf(value.toString());
 
     if (index < 0) {
-        this.state.studentIds.push(value);
+        this.state.studentIds.push(value.toString());
     } else {
         this.state.studentIds.splice(index, 1);
     }
@@ -122,11 +132,10 @@ class HomeroomForm extends Component {
   _renderStudent(student, key) {
     return <FormControlLabel key={student.id}
       control={
-        <Checkbox
-          name='homeroomStudents'
-          checked={this.state.studentIds.indexOf(student.id) > 0}
+        <Checkbox key={student.id}
+          checked={this.state.studentIds.indexOf(student.id.toString()) > 0}
           onChange={ (e) => {this._handleStudentsCheckboxChange(e) }}
-          value={"3"}
+          value={student.id.toString()}
         />
       }
       label={student.firstName + ' ' + student.lastName}
