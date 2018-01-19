@@ -1,3 +1,5 @@
+import ApiClient from '../../services/ApiClient';
+
 export const GET_RECORDS = '[Homerooms] GET_RECORDS';
 export const GET_RECORDS_SUCCESS = '[Homerooms] GET_RECORDS_SUCCESS';
 export const GET_RECORDS_FAIL = '[Homerooms] GET_RECORDS_FAIL';
@@ -28,6 +30,12 @@ export const GET_SCHOOL_TEACHERS_FAIL = '[Homerooms] GET_SCHOOL_TEACHERS_FAIL';
 export const GET_SCHOOL_STUDENTS = '[Homerooms] GET_SCHOOL_STUDENTS';
 export const GET_SCHOOL_STUDENTS_SUCCESS = '[Homerooms] GET_SCHOOL_STUDENTS_SUCCESS';
 export const GET_SCHOOL_STUDENTS_FAIL = '[Homerooms] GET_SCHOOL_STUDENTS_FAIL';
+
+export const BULK_UPLOAD = '[Homerooms] BULK_UPLOAD';
+export const BULK_UPLOAD_PROGRESS = '[Homerooms] BULK_UPLOAD_PROGRESS';
+export const BULK_UPLOAD_SUCCESS = '[Homerooms] BULK_UPLOAD_SUCCESS';
+export const BULK_UPLOAD_FAIL = '[Homerooms] BULK_UPLOAD_FAIL';
+export const RESET_BULK_UPLOAD_REQUEST = '[Homerooms] RESET_BULK_UPLOAD_REQUEST';
 
 export function getRecords(params = {}) {
   return {
@@ -107,4 +115,26 @@ export function getSchoolStudents(id) {
         types: [GET_SCHOOL_STUDENTS, GET_SCHOOL_STUDENTS_SUCCESS, GET_SCHOOL_STUDENTS_FAIL],
         promise: (apiClient) => apiClient.get(`schools/students/${id}`)
     };
+}
+
+/**
+ * Bulk upload
+ */
+export function bulkUpload(file, data, params = {}) {
+    const source = ApiClient.cancelToken();
+
+    return {
+        upload: true,
+        types: [BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS],
+        promise: (apiClient) => apiClient.upload(`homerooms/bulk`, file, data, params, {}, {
+            cancelToken: source.token
+        }),
+        cancel: source.cancel
+    };
+}
+
+export function resetBulkUploadRequest () {
+    return {
+        type: RESET_BULK_UPLOAD_REQUEST
+    }
 }

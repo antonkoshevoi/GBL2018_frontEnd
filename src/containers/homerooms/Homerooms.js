@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { Button, Icon, MenuItem, Select } from 'material-ui';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
 import {
@@ -194,6 +195,12 @@ class Homerooms extends Component {
                     Add New
                     <Icon style={{marginLeft:'5px'}}>add</Icon>
                   </Button>
+                  <NavLink className='link-btn' to='/homerooms/csv'>
+                    <Button raised className='btn-success mt-btn mt-btn-success'>
+                      Bulk Add Students
+                      <Icon style={{marginLeft:'5px'}}>person</Icon>
+                    </Button>
+                  </NavLink>
                 </div>
 
               </div>

@@ -76,3 +76,10 @@ export const selectGetSchoolStudentsRequest = createSelector(
     selectHomeroomsDomain,
     (subState) => subState.get('getSchoolStudentsRequest')
 );
+/**
+ * Bulk Upload
+ */
+export const selectBulkUploadRequest = createSelector(
+    selectHomeroomsDomain,
+    (subState) => subState.get('bulkUploadRequest')
+);
