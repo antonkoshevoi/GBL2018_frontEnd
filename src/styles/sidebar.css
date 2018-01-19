@@ -34,7 +34,7 @@ nav.navigation > .menuItem > a > .icon {
 }
 
 nav.navigation > .menuItem > a > .icon > i {
-    margin: 0 11px;
+    margin: 0 10px;
     line-height: 100%;
     font-size: 27px;
     position: relative;
@@ -122,6 +122,7 @@ nav.navigation > .menuItem > a.orange:hover > .content, nav.navigation > .menuIt
 
 nav.navigation > .menuItem > a.blue .icon{
     background: #1aa1e1;
+    text-align: center;
     color: white;
 }
 
