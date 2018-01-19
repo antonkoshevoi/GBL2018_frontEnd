@@ -4,8 +4,9 @@ import { translate } from 'react-i18next';
 import { MenuItem, Select } from 'material-ui';
 import 'cropperjs/dist/cropper.css';
 import Cropper from 'react-cropper';
-import {DatePicker} from 'material-ui-pickers';
-import DateTime from 'react-datetime';
+import DatePicker from '../../../ui/DatePicker';
+import MetronicInput from '../../../ui/metronic/MetronicInput';
+import MetronicDatePicker from '../../../ui/metronic/MetronicDatePicker';
 
 class SecondStepForm extends Component {
 
@@ -76,6 +77,7 @@ class SecondStepForm extends Component {
   _handleDateChange(m) {
     this.setState({
       form: {
+        ...this.state.form,
         dateOfBirth: m
       }
     }, () => {
@@ -85,8 +87,18 @@ class SecondStepForm extends Component {
     });
   }
 
+  _renderDateInput () {
+    return (
+      <input
+        name='dateOfBirth'
+        type='text'
+        className='form-control m-input m-input--air m-input--pill'
+        placeholder='Birthday *'/>
+    );
+  }
+
   render() {
-    const { form } = this.state;
+    const { form, dob } = this.state;
     const { errors } = this.props;
 
     return (
@@ -155,16 +167,10 @@ class SecondStepForm extends Component {
                 <div  className='form-control-feedback'></div>
               </div>
               <div className='form-group m-form__group picker'>
-                <DateTime
-                  dateFormat='YYYY-MM-DD'
-                  timeFormat={false}
-                  name='dateOfBirth'
-                  value={form.dateOfBirth || ''}
-                  onChange={(e, b) => { console.log(b); }}
-                  inputProps={{
-                    placeholder: 'Birthday',
-                    className: 'form-control m-input m-input--air m-input--pill'
-                  }}/>
+                <MetronicDatePicker
+                  placeholder='Birthday'
+                  value={form.dateOfBirth || null}
+                  onChange={(e) => { this._handleDateChange(e) }}/>
                 <div  className='form-control-feedback'></div>
               </div>
               <div className='form-group m-form__group'>
