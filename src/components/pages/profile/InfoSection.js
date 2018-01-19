@@ -4,6 +4,7 @@ import * as AUTH from '../../../services/AuthService'
 class InfoSection extends Component {
 
     state = {
+        changePasswordMode:false,
         oldPassword:'',
         newPassword:'',
         confirmPassword:'',
@@ -14,10 +15,17 @@ class InfoSection extends Component {
         this.setState({ [key]:event.target.value });
     };
 
+    _passwordModeSwitch(changePasswordMode) {
+        this.setState({ changePasswordMode });
+    }
+
 
     render() {
+
+        const {changePasswordMode} = this.state;
+
         return (
-            <div className="m-portlet m-portlet--full-height  ">
+            <div className="m-portlet ">
                 <div className="m-portlet__body">
                     <div className="m-card-profile">
                         <div className="m-card-profile__title m--hide">
@@ -35,30 +43,53 @@ class InfoSection extends Component {
                     </div>
                    
                     <div className="m-portlet__body-separator"></div>
-
+                    <div className="text-center m--margin-top-15">
+                        {!changePasswordMode &&
+                        <button onClick={() => {this._passwordModeSwitch(true)}} className="m-btn btn m-btn--air m-btn--outline-2x btn-outline-success">Change Password</button> }
+                    </div>
+                    {changePasswordMode &&
                     <div className="m-widget1 m-widget1--paddingless">
                         <div className="m-widget1__item">
                             <div className="form-group m-form__group ">
                                 <label className="form-control-label" htmlFor="oldPassword">Change Password</label>
-                                <input type="password" placeholder="Enter Old Password"  onChange={(e) => {this.handleChange(e,'oldPassword')}} value={this.state.oldPassword} className="form-control  m-input--air form-control-danger m-input" id="oldPassword"/>
+                                <input type="password" placeholder="Enter Old Password" onChange={(e) => {
+                                    this.handleChange(e, 'oldPassword')
+                                }} value={this.state.oldPassword}
+                                       className="form-control  m-input--air form-control-danger m-input"
+                                       id="oldPassword"/>
                                 <div className="form-control-feedback"></div>
                             </div>
                             <div className="form-group m-form__group">
-                                <input type="password" placeholder="Enter New Password"   onChange={(e) => {this.handleChange(e,'newPassword')}}  value={this.state.newPassword} className="form-control  m-input--air form-control-danger m-input" id="newPassword"/>
+                                <input type="password" placeholder="Enter New Password" onChange={(e) => {
+                                    this.handleChange(e, 'newPassword')
+                                }} value={this.state.newPassword}
+                                       className="form-control  m-input--air form-control-danger m-input"
+                                       id="newPassword"/>
                                 <div className="form-control-feedback"></div>
                             </div>
                             <div className="form-group m-form__group has-danger">
-                                <input type="password" placeholder="Confirm Password"   onChange={(e) => {this.handleChange(e,'confirmPassword')}}  value={this.state.confirmPassword} className="form-control  m-input--air form-control-danger m-input" id="confirmPassword"/>
+                                <input type="password" placeholder="Confirm Password" onChange={(e) => {
+                                    this.handleChange(e, 'confirmPassword')
+                                }} value={this.state.confirmPassword}
+                                       className="form-control  m-input--air form-control-danger m-input"
+                                       id="confirmPassword"/>
                                 <div className="form-control-feedback"></div>
                             </div>
                         </div>
 
                         <div className="text-center m--margin-top-15">
-                            {this.state.oldPassword !== '' && this.state.newPassword !== '' && this.state.confirmPassword !== '' &&
-                            <button className="m-btn btn m-btn--air m-btn--outline-2x btn-outline-success">Change</button> }
-                        </div>
+                            <button onClick={() => {this._passwordModeSwitch(false)}} className="m-btn btn m-btn--air m-btn--outline-2x m--margin-right-10 btn-outline-danger">
+                                Cancel
+                            </button>
+                        {this.state.oldPassword !== '' && this.state.newPassword !== '' && this.state.confirmPassword !== '' &&
 
+                            <button className="m-btn btn m-btn--air m-btn--outline-2x btn-outline-success">
+                                Change
+                             </button>
+                        }
+                        </div>
                     </div>
+                    }
                 </div>
             </div>
         );

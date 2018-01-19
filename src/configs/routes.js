@@ -44,7 +44,7 @@ export default () => (
 
       <AuthenticatedRoute exact layout={MainLayout} path='/courses' component={Courses}/>
 
-      <AuthenticatedRoute exact layout={MainLayout} path='/profile/edit' name='Profile' component={Profile} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/schools' component={SchoolReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
