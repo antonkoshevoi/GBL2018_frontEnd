@@ -70,6 +70,8 @@ class CreateHomeroomModal extends Component {
     this.props.create(
       this.state.homeroom
     );
+
+    this.props.resetCreateRequest();
   };
 
   render() {
