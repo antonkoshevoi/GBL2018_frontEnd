@@ -540,3 +540,12 @@ div.m-datatable.m-datatable--default.m-datatable--loaded > .m-datatable__table {
   width: auto;
   min-width: 100%;
 }
+
+.m-portlet canvas {
+  max-width: 100%;
+}
+
+div.m-card-profile .m-card-profile__pic img {
+  max-width: 205px !important;
+}
+
