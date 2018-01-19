@@ -74,7 +74,7 @@ class Dashboard extends Component {
                         <Card title="School Average" icon="flaticon-list-2">
                             <div className="row">
                                 <div className="col-md-6">
-                                    <Pie data={this.state.pieDataProgress} options={this.state.options} width="200" height="200"/>
+                                    <Pie data={this.state.pieDataProgress} options={this.state.options} width="150" height="150"/>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="m-stack  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
@@ -85,7 +85,7 @@ class Dashboard extends Component {
 
                             <div className="row">
                                 <div className="col-md-6">
-                                    <Pie data={this.state.pieDataPerformance} options={this.state.options} width="200" height="200"/>
+                                    <Pie data={this.state.pieDataPerformance} options={this.state.options} width="150" height="150"/>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="m-stack d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
