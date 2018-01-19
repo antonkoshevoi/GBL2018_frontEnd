@@ -81,6 +81,8 @@ class EditHomeroomModal extends Component {
       this.state.id,
       this.state.homeroom
     );
+
+    this.props.resetUpdateRequest();
   };
 
   render() {

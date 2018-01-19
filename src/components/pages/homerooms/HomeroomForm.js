@@ -78,6 +78,13 @@ class HomeroomForm extends Component {
         schoolStudents: nextschoolStudents.toJS()
       });
     }
+
+    if (!this.props.errors.size && nextProps.errors.size) {
+      this.setState({
+        ...this.state,
+        activeTab: nextProps.errors.get('schoolId') ? 1 : 0
+      });
+    }
   }
 
   _handleInputChange(event) {
@@ -108,8 +115,16 @@ class HomeroomForm extends Component {
   _handleSchoolChange(event) {
     const { value } = event.target;
 
-    this.props.getSchoolTeachers(value);
-    this.props.getSchoolStudents(value);
+    this.setState({
+      ...this.state,
+      studentIds: []
+    });
+
+    if (value) {
+      this.props.getSchoolTeachers(value);
+      this.props.getSchoolStudents(value);
+    }
+
     this._handleInputChange(event);
   }
 
