@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import { Button, Icon, MenuItem, Select } from 'material-ui';
+import { Button, Icon, MenuItem, Select, Input } from 'material-ui';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
@@ -13,6 +13,7 @@ import {getRecords, getSingleRecord} from '../../redux/students/actions';
 import Pagination from '../../components/ui/Pagination';
 import CreateStudentModal from './modals/CreateStudentModal';
 import EditStudentModal from "./modals/EditStudentModal";
+import SearchInput from "../../components/ui/SearchInput";
 
 class Students extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class Students extends Component {
       createModalIsOpen: false,
       editModalIsOpen: false,
       sorters: {},
+      filters: {},
       page: props.pagination.get('page'),
       perPage: props.pagination.get('perPage')
     }
@@ -99,10 +101,11 @@ class Students extends Component {
    * @private
    */
   _getRecords () {
-    const { sorters, page, perPage } = this.state;
+    const { sorters, filters, page, perPage } = this.state;
 
     this.props.getRecords({
       orderBy: buildSortersQuery(sorters),
+      filter: filters,
       page, perPage
     });
   }
@@ -122,6 +125,23 @@ class Students extends Component {
     }
 
     this.setState({ sorters }, this._getRecords);
+  }
+
+  /**
+   *
+   * @param value
+   * @private
+   */
+  _search(value) {
+    let filters = {
+      composed: value,
+      // username: value,
+      // firstName: value,
+      // lastName: value,
+      // email: value,
+    };
+
+    this.setState({ filters }, this._getRecords);
   }
 
   /**
@@ -176,7 +196,14 @@ class Students extends Component {
                 </h3>
               </div>
             </div>
-
+            <div className="m-portlet__head-tools">
+              <SearchInput
+                className="portlet-header-input"
+                id="search"
+                type='search'
+                placeholder="Search"
+                onChange={(e) => { this._search(e) }}/>
+            </div>
           </div>
           <div className='m-portlet__body'>
             <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
