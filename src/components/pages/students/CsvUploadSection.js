@@ -218,6 +218,7 @@ class CsvUploadSection extends Component {
           )}
         </div>
       </div>
+        <div className="row">
         <div className="col-xs-12">
           {success &&
             <PortletWidgets data={[
@@ -238,6 +239,7 @@ class CsvUploadSection extends Component {
               }
             ]} title="Results" icon="flaticon-list-3"/>
           }
+        </div>
         </div>
       </div>
     );

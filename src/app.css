@@ -792,6 +792,10 @@ div.m-subheader .m-subheader__breadcrumbs.m-nav > .m-nav__item > .m-nav__link > 
   min-width: 15px;
 }
 
+div.m-portlet .m-portlet__head {
+  height: 4.1rem;
+}
+
 @media (max-width: 1599px) {
   .small-card .m-stack {
     font-size: 75%;
