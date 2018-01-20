@@ -19,7 +19,7 @@ class ChartsSection extends Component {
     _renderPieChartLabels(labels) {
         return labels.map(function (item,i) {
             return (
-                <div key={i} className="m-stack__item m--margin-bottom-10 m-stack__item--center m-stack__item--middle">
+                <div key={i} className="m-stack__item m--margin-bottom-5 m-stack__item--center m-stack__item--middle">
                     <span className="m-badge m-badge--success" style={{marginRight:'8px', backgroundColor:item.color}}></span>
                     <span>{item.value+'%  '}</span>
                     <span style={{whiteSpace:'pre'}}>{item.label}</span>
@@ -44,7 +44,7 @@ class ChartsSection extends Component {
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-3">
                     <Card title="Pass Rate" icon="flaticon-list-2">
-                        <h1  className="d-flex justify-content-center align-items-center" style={{fontSize:'7rem',color:'rgb(0, 128, 0)'}}>28%</h1>
+                        <h1  className="d-flex justify-content-center align-items-center absolute-center" style={{fontSize:'7rem',color:'rgb(0, 128, 0)'}}>28%</h1>
                     </Card>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-3">

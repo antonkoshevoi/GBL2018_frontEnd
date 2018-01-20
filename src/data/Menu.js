@@ -13,21 +13,21 @@ export default  {
                title:'Reports',
                link:'reports/schools',
                icon:'fa  fa-line-chart ',
-               colorName:'orange',
+               colorName:'home',
            },
            {
                key:'store',
                title:'Store',
                link:'store',
                icon:'fa fa-shopping-cart ',
-               colorName:'grey',
+               colorName:'home',
            },
            {
                key:'studentsAndStaff',
                title:'Students & Staff',
                link:'dashboard',
                icon:'fa fa-group',
-               colorName:'purple',
+               colorName:'home',
                subMenu:[
                    {
                        key:'administration',
@@ -54,7 +54,7 @@ export default  {
                title:'Learning Areas',
                link:'dashboard',
                icon:'fa fa-institution',
-               colorName:'red',
+               colorName:'home',
                subMenu:[
                    {
                        key:'classrooms',
@@ -87,7 +87,7 @@ export default  {
                title:'Sharing',
                link:'dashboard',
                icon:'fa fa-share-alt',
-               colorName:'green',
+               colorName:'home',
                subMenu:[
                    {
                        key:'inbox',

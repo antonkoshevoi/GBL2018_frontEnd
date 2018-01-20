@@ -55,23 +55,23 @@ nav.navigation > .menuItem > a.active {
 }
 
  nav.navigation > .menuItem > a.home .icon {
-    background: #2073c5;
+    background: #3E6B99;
     color: white;
 }
 
 nav.navigation > .menuItem > a.home.active,  nav.navigation > .menuItem > a.home:hover .content {
-    background: #2073c5;
+    background: #3E6B99;
     color: white;
 }
 
 
 .menuItem > a.home + .second_level.activeSubMenu .content > a.active {
-    color: #2073c5;
+    color: #3E6B99;
     font-weight: 500;
 }
 
 nav.navigation > .menuItem > a.home.active > .content {
-    background: #2073c5;
+    background: #3E6B99;
 }
 
 nav.navigation > .menuItem > a.green .icon{
@@ -121,18 +121,18 @@ nav.navigation > .menuItem > a.orange:hover > .content, nav.navigation > .menuIt
 }
 
 nav.navigation > .menuItem > a.blue .icon{
-    background: #7bb3ea;
+    background: #3E6B99;
     text-align: center;
     color: white;
 }
 
 nav.navigation > .menuItem > a.blue:hover > .content, nav.navigation > .menuItem > a.blue.active > .content, nav.navigation > .menuItem > a.blue.hover > .content{
-    background: #7bb3ea;
+    background: #3E6B99;
     color: white;
 }
 
 .menuItem > a.blue + .second_level.activeSubMenu .content > a.active {
-    color: #7bb3ea;
+    color: #3E6B99;
     font-weight: 500;
 }
 

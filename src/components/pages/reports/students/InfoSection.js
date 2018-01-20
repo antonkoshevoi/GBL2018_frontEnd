@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Card from "../../../ui/Card";
 import {IconButton, LinearProgress} from "material-ui";
 import {Delete, Edit} from "material-ui-icons";
+import {OldProgressBar} from "../../../ui/LinearProgress";
 
 class InfoSection extends Component {
 
@@ -12,8 +13,8 @@ class InfoSection extends Component {
             return (
                 <tr key={i}>
                     <td>{item.name}</td>
-                    <td><LinearProgress mode="determinate" color='accent' value={item.progress} /></td>
-                    <td><LinearProgress mode="determinate" color='primary' value={item.performance} /></td>
+                    <td>  <OldProgressBar complateValue="40" progressValue={item.progress} type="progress" /></td>
+                    <td><OldProgressBar correctValue={item.performance}  type="performance"  /></td>
                 </tr>
             )
         })
