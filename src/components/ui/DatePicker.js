@@ -6,7 +6,7 @@ import blue from 'material-ui/es/colors/blue';
 class DatePicker extends Component {
 
   render () {
-    const { format, ...rest } = this.props;
+    const { InputProps, format, ...rest } = this.props;
 
     const theme = createMuiTheme ({
       palette: {
@@ -19,7 +19,12 @@ class DatePicker extends Component {
         <BaseDatePicker
           {...rest}
           clearable
-          format={format ? format : 'YYYY-MM-DD'}/>
+          format={format ? format : 'YYYY-MM-DD'}
+          InputProps={InputProps ? InputProps : {
+            style: {
+              marginTop: '16px'
+            }
+          }}/>
       </MuiThemeProvider>
     );
   }

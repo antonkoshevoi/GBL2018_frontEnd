@@ -8,6 +8,7 @@ import { getSchoolTeachers, getSchoolStudents } from "../../../redux/schools/act
 import {selectGetSchoolStudentsRequest, selectGetSchoolTeachersRequest} from "../../../redux/schools/selectors";
 import { selectSchools } from '../../../redux/homerooms/selectors';
 import { getSchools } from '../../../redux/homerooms/actions';
+import DatePicker from '../../../components/ui/DatePicker';
 
 function TabContainer(props) {
   return (
@@ -92,6 +93,13 @@ class HomeroomForm extends Component {
         activeTab: nextProps.errors.get('schoolId') ? 1 : 0
       });
     }
+  }
+
+  _handleStartDateChange(m) {
+    this.props.onChange({
+      ...this.props.homeroom,
+      startDate: m
+    });
   }
 
   _handleInputChange(event) {
@@ -204,12 +212,17 @@ class HomeroomForm extends Component {
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
               <InputLabel htmlFor='name-error'>Start Date</InputLabel>
-              <Input
-                  name='startDate'
-                  margin='dense'
-                  fullWidth
-                  value={homeroom.startDate || ''}
-                  onChange={(e) => { this._handleInputChange(e) }}/>
+              <DatePicker
+                name='startDate'
+                value={homeroom.startDate || null}
+                onChange={(m) => { this._handleStartDateChange(m) }}
+              />
+              {/*<Input*/}
+                  {/*name='startDate'*/}
+                  {/*margin='dense'*/}
+                  {/*fullWidth*/}
+                  {/*value={homeroom.startDate || ''}*/}
+                  {/*onChange={(e) => { this._handleInputChange(e) }}/>*/}
                 {errors && errors.get('startDate') && <FormHelperText error>{ errors.get('startDate').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
