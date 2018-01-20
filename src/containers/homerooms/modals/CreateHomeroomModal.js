@@ -6,7 +6,7 @@ import {
   DialogContentText,
   Icon, IconButton,
   Toolbar, Typography,
-  Divider, Button
+  Divider, Button, DialogActions
 } from 'material-ui';
 import { connect } from 'react-redux';
 import { selectCreateRequest } from '../../../redux/homerooms/selectors';
@@ -68,7 +68,7 @@ class CreateHomeroomModal extends Component {
     const errors = createRequest.get('errors');
 
     return (
-      <Modal isOpen={isOpen} onClose={() => this._close()}>
+      <Modal isOpen={isOpen} onClose={() => this._close()} bigger>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
             <IconButton color="contrast" aria-label="Close">
@@ -88,19 +88,25 @@ class CreateHomeroomModal extends Component {
           <DialogContentText>
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
-          <form onSubmit={(e) => { this._onSubmit(e) }}>
+          <form id='create-homeroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
             <HomeroomForm
               onChange={(homeroom) => { this._onChange(homeroom) }}
               homeroom={this.state.homeroom}
               errors={errors}/>
-            <div className='col-sm-12'>
-              <Divider/>
-              <Button type='submit' disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary'>
-                Add New Homeroom
-              </Button>
-            </div>
           </form>
         </DialogContent>
+        <Divider className='full-width'/>
+        <DialogActions>
+          <Button
+            type='submit'
+            form='create-homeroom-form'
+            disabled={loading}
+            raised
+            className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+            color='primary'>
+            Add New Homeroom
+          </Button>
+        </DialogActions>
       </Modal>
     );
   }

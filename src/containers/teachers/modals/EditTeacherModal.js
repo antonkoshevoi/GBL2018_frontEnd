@@ -6,7 +6,7 @@ import {
   DialogContentText,
   Icon, IconButton,
   Toolbar, Typography,
-  Divider, Button
+  Divider, Button, DialogActions
 } from 'material-ui';
 import { connect } from 'react-redux';
 import {
@@ -105,19 +105,25 @@ class EditTeacherModal extends Component {
           <DialogContentText>
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
-          <form onSubmit={(e) => { this._onSubmit(e) }}>
+          <form id='update-teacher-form' onSubmit={(e) => { this._onSubmit(e) }}>
             <TeacherForm
               onChange={(teacher) => { this._onChange(teacher) }}
               teacher={this.state.teacher}
               errors={errors}/>
-            <div className='col-sm-12'>
-              <Divider/>
-              <Button type='submit' disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary'>
-                Update User
-              </Button>
-            </div>
           </form>
         </DialogContent>
+        <Divider className='full-width'/>
+        <DialogActions>
+          <Button
+            type='submit'
+            form='update-teacher-form'
+            disabled={loading}
+            raised
+            className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+            color='primary'>
+            Update Teacher
+          </Button>
+        </DialogActions>
       </Modal>
     );
   }

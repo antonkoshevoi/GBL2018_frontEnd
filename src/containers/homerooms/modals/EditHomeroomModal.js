@@ -6,7 +6,7 @@ import {
   DialogContentText,
   Icon, IconButton,
   Toolbar, Typography,
-  Divider, Button
+  Divider, Button, DialogActions
 } from 'material-ui';
 import { connect } from 'react-redux';
 import {
@@ -109,19 +109,25 @@ class EditHomeroomModal extends Component {
           <DialogContentText>
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
-          <form onSubmit={(e) => { this._onSubmit(e) }}>
+          <form id='update-homeroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
             <HomeroomForm
               onChange={(homeroom) => { this._onChange(homeroom) }}
               homeroom={this.state.homeroom}
               errors={errors}/>
-            <div className='col-sm-12'>
-              <Divider/>
-              <Button type='submit' disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary'>
-                Update Homeroom
-              </Button>
-            </div>
           </form>
         </DialogContent>
+        <Divider className='full-width'/>
+        <DialogActions>
+          <Button
+            type='submit'
+            form='update-homeroom-form'
+            disabled={loading}
+            raised
+            className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+            color='primary'>
+            Update Homeroom
+          </Button>
+        </DialogActions>
       </Modal>
     );
   }

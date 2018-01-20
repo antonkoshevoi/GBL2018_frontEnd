@@ -190,13 +190,12 @@ class HomeroomForm extends Component {
 
     return (
       <div className='row'>
-
-          <Paper>
-            <Tabs value={activeTab} onChange={this.handleChangeTab} centered>
-              <Tab label="Details" />
-              <Tab label="Administration" />
-              <Tab label="Students" />
-            </Tabs>
+        <Paper className='full-width '>
+          <Tabs value={activeTab} onChange={this.handleChangeTab} centered>
+            <Tab label="Details" />
+            <Tab label="Administration" />
+            <Tab label="Students" />
+          </Tabs>
 
           {activeTab === 0 && <TabContainer>
             <div className="col-sm-8 m-auto">

@@ -19,6 +19,7 @@ class DatePicker extends Component {
         <BaseDatePicker
           {...rest}
           clearable
+          autoOk={true}
           format={format ? format : 'YYYY-MM-DD'}
           InputProps={InputProps ? InputProps : {
             style: {

@@ -6,7 +6,7 @@ import {
   DialogContentText,
   Icon, IconButton,
   Toolbar, Typography,
-  Divider, Button
+  Divider, Button, DialogActions
 } from 'material-ui';
 import { connect } from 'react-redux';
 import { selectCreateRequest } from '../../../redux/administration/selectors';
@@ -93,19 +93,24 @@ class CreateAdministrationModal extends Component {
           <DialogContentText>
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
-          <form onSubmit={(e) => { this._onSubmit(e) }}>
+          <form id='create-administrator-form' onSubmit={(e) => { this._onSubmit(e) }}>
             <AdministrationForm
               onChange={(adminUser) => { this._onChange(adminUser) }}
               adminUser={this.state.adminUser}
               errors={errors}/>
-            <div className='col-sm-12'>
-              <Divider/>
-              <Button type='submit' disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary'>
-                Add New User
-              </Button>
-            </div>
           </form>
         </DialogContent>
+        <DialogActions>
+          <Button
+            type='submit'
+            form='create-administrator-form'
+            disabled={loading}
+            raised
+            className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+            color='primary'>
+            Update User
+          </Button>
+        </DialogActions>
       </Modal>
     );
   }
