@@ -324,7 +324,7 @@ export default function reducer (state = initialState, action) {
             newStateOnBulkUploadFail.set('bulkUploadRequest', newStateOnBulkUploadFail.get('bulkUploadRequest')
                 .set('errorCode', bulkUploadRequestErrorData.code)
                 .set('errorMessage', bulkUploadRequestErrorData.message)
-                .set('errors', bulkUploadRequestErrorData.code === 400 ? Immutable.fromJS(bulkUploadRequestErrorData.errors) : undefined)
+                .set('errors', bulkUploadRequestErrorData.code === 422 ? Immutable.fromJS(bulkUploadRequestErrorData.errors) : undefined)
             );
         }
         return newStateOnBulkUploadFail;
