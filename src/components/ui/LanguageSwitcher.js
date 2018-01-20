@@ -64,10 +64,7 @@ class LanguageSwitcher extends Component {
 
             return (
                <MenuItem key={i} onClick={() => {_self._switchLanguage(item.code)}}>
-                   <Avatar alt="Remy Sharp"
-                           className="small-avatar"
-                           src={item.img}/>
-                   <ListItemText  inset primary={t(item.code)} />
+                   <ListItemText   primary={t(item.code)} />
                </MenuItem>
            )
         })

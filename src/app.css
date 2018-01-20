@@ -734,6 +734,10 @@ div.row {
   height: 35px;
 }
 
+.m-dropdown.m-dropdown--align-center .m-dropdown__wrapper {
+  left: -50px !important;
+}
+
 .m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i:not(.la-globe):hover {
   /*background: #7a7a7a;*/
 }
