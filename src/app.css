@@ -626,7 +626,7 @@ div.m-portlet {
 }
 
 .small-card-content .small-card {
-  background-color: #fff;
+  background-color: #fdfdfd;
   border-left: 6px solid #589ee4;
   flex: 1;
   align-items: center;
@@ -662,7 +662,7 @@ div.m-portlet {
 }
 
 .m-portlet.m-portlet--head-solid-bg .m-widget1 .m-widget1__item {
-  padding: 0.5rem 0;
+  padding: 0.3rem 0;
 }
 
 .m-widget1__item .progress {
@@ -680,6 +680,67 @@ div.m-portlet {
   flex:1
 }
 
+.pie-block {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+div.m-portlet .m-portlet__head {
+  padding: 0 1.2rem;
+}
+
+div.m-portlet .m-portlet__body {
+  padding: 1.2rem;
+}
+
+div[class^='col-'] {
+  padding-right: 7px;
+  padding-left: 7px;
+}
+
+.m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i:not(.la-globe) {
+  font-size: 1.4rem;
+  line-height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px #80808036;
+  width: 40px;
+  height: 40px;
+}
+
+.m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i:not(.la-globe):hover {
+  background: #7a7a7a;
+}
+
+.m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i:not(.la-globe):hover:before {
+  color: #fff;
+}
+
+div.m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i:before {
+  background: none;
+  font-weight: normal;
+  color: #7a7a7a;
+  -webkit-background-clip: content-box;
+  -webkit-text-fill-color: inherit;
+}
+
+div.m-content--skin-light2 .m-body {
+  background-color: #ecedf1;
+}
+
+div.m-stack.m-stack--desktop.m-stack--ver > .m-stack__item.m-stack__item--fluid {
+  box-shadow: none;
+}
+
+.m-topbar .m-topbar__nav.m-nav > .m-nav__item:first-child {
+   border-left: 1px solid #8080800f;
+}
+
+.m-topbar .m-topbar__nav.m-nav > .m-nav__item:nth-child(3) {
+  border-right: 1px solid #8080800f;
+}
+
+.m-topbar .m-topbar__nav.m-nav > .m-nav__item:last-child > .m-nav__link .m-nav__link-icon > i  {}
 
 @media (max-width: 1599px) {
   .small-card .m-stack {
@@ -689,6 +750,11 @@ div.m-portlet {
 
   .small-card .m-stack legend {
     font-size: 1rem;
+  }
+
+  .small-card .m-badge {
+    min-height: 10px;
+    min-width: 10px;
   }
 
   .fa.widget-icon {

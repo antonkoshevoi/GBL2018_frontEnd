@@ -33,11 +33,11 @@ export const OldProgressBar = ({ ...props }) => {
         (props.type === 'performance') ?
         <div className="progress m-progress--sm">
               <div  title="Correct" className="progress-bar bg-warning" role="progressbar" style={{width: props.correctValue + '%'}}></div>
-              <div title="In Correct" className="progress-bar bg-success" role="progressbar" style={{width: 100 - props.correctValue + '%'}}></div>)
+              <div title="In Correct" className="progress-bar bg-success" role="progressbar" style={{width: 100 - props.correctValue + '%'}}></div>
         </div>  :
             <div className="progress m-progress--sm">
               <div title="Complete" className="progress-bar bg-success" role="progressbar" style={{width: props.complateValue + '%'}}></div>
-              <div title="In Progress" className="progress-bar bg-danger" role="progressbar" style={{width: props.progressValue + '%'}}></div>)
+              <div title="In Progress" className="progress-bar bg-danger" role="progressbar" style={{width: props.progressValue + '%'}}></div>
             </div>
     )
 }

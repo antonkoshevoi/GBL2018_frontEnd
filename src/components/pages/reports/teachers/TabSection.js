@@ -20,7 +20,7 @@ function TabContainer(props) {
 
 class TabSection extends Component {
     state = {
-        value: "students",
+        value: "schools",
     };
 
     handleChange = (event, value) => {
@@ -109,6 +109,7 @@ class TabSection extends Component {
                                         onChange={this.handleChange}
 
                                     >
+                                        <Tab className="tab-header-item" value="schools" label="Schools" />
                                         <Tab className="tab-header-item" value="students" label="Students" />
                                         <Tab className="tab-header-item" value="classRooms" label="Classrooms" />
                                         <Tab className="tab-header-item" value="homeRooms" label="Homerooms" />
@@ -133,6 +134,11 @@ class TabSection extends Component {
                             </div>
                             </div>
                             <div className="m-portlet__body" style={{height:"100%"}}>
+                                {value === 'schools' && <TabContainer>
+                                    <GridList cellHeight={250} cols={4}>
+                                        { this._renderStudents(getAllStudents().students) }
+                                    </GridList>
+                                </TabContainer>}
                                 {value === 'students' && <TabContainer>
                                     <GridList cellHeight={250} cols={4}>
                                         { this._renderStudents(getAllStudents().students) }
