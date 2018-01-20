@@ -30,7 +30,6 @@ class Messages extends Component {
                 </a>
                 {activeMenu == 'messages' &&
                 <div className="m-dropdown__wrapper" onMouseLeave={() => {this.props.switchMenu(null)}} style={{display: 'block'}}>
-                    <span className="m-dropdown__arrow m-dropdown__arrow--center"></span>
                     <div className="m-dropdown__inner">
                         <div className="m-dropdown__header m--align-center"
                              style={{backgroundImage: `url(${posterImage})`}}>
