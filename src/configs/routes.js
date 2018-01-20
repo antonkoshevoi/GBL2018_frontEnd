@@ -10,11 +10,8 @@ import Students from '../containers/students/Students';
 import Teachers from "../containers/teachers/Teachers";
 import Administration from "../containers/administration/Administration";
 import Homerooms from "../containers/homerooms/Homerooms";
-<<<<<<< HEAD
 import HomeroomsBulkUpload from '../containers/homerooms/HomeroomsBulkUpload';
-=======
 import Classrooms from "../containers/classrooms/Classrooms";
->>>>>>> d0b3979ede0f25672f1b1989cc8f2b5cce3eeb50
 import StudentsBulkUpload from '../containers/students/StudentsBulkUpload';
 import Courses from '../containers/pages/courses/Courses';
 import {Switch, Redirect} from 'react-router';
