@@ -1,6 +1,22 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import {Avatar, ListItemText, Menu, MenuItem} from "material-ui";
+import en_flag from '../../media/images/flags/gb.png';
+import es_flag from '../../media/images/flags/es.png';
+import fr_flag from '../../media/images/flags/fr.png';
+import kr_flag from '../../media/images/flags/kr.png';
+import ch_1_flag from '../../media/images/flags/cn.png';
+import ch_2_flag from '../../media/images/flags/cn.png';
+
+const languages = [
+    {code:'en', img:en_flag},
+    {code:'es', img:es_flag},
+    {code:'fr', img:fr_flag},
+    {code:'kr', img:kr_flag},
+    {code:'ch_1', img:ch_1_flag},
+    {code:'ch_2', img:ch_2_flag},
+   ];
+
 
 class LanguageSwitcher extends Component {
     constructor(props) {
@@ -41,9 +57,24 @@ class LanguageSwitcher extends Component {
         this._closeLanguageMenu;
     };
 
-    render() {
+    _renderLangsMenu(langs) {
         const { t } = this.props;
+        const _self = this;
+        return languages.map(function (item,i) {
 
+            return (
+               <MenuItem key={i} onClick={() => {_self._switchLanguage(item.code)}}>
+                   <Avatar alt="Remy Sharp"
+                           className="small-avatar"
+                           src={item.img}/>
+                   <ListItemText  inset primary={t(item.code)} />
+               </MenuItem>
+           )
+        })
+    }
+
+    render() {
+        const  langs  = this.props.i18n.store.data;
 
         return (
             <li className="m-nav__item">
@@ -52,9 +83,9 @@ class LanguageSwitcher extends Component {
                     aria-haspopup="true"
                     onClick={this._openLanguageMenu}
                 >
-                                                <span className="m-nav__link-icon">
-													<i className="m--icon-font-size-lg5  la la-globe m--margin-right-5 d-md-inline"></i>
-												</span>
+                        <span className="m-nav__link-icon">
+                            <i className="m--icon-font-size-lg5  la la-globe m--margin-right-5 d-md-inline"></i>
+                        </span>
                 </a>
                 <Menu
                     id="simple-menu"
@@ -62,28 +93,12 @@ class LanguageSwitcher extends Component {
                     open={Boolean(this.state.anchorEl)}
                     onClose={this._closeLanguageMenu}
                 >
-                    <MenuItem onClick={() => {this._switchLanguage('en')}}>
-                        <Avatar alt="Remy Sharp"
-                                className="small-avatar"
-                                src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1280px-Flag_of_the_United_Kingdom.svg.png" />
-                        <ListItemText  inset primary={t('en')} />
-                        </MenuItem>
-                    <MenuItem onClick={() => {this._switchLanguage('de')}}>
-                        <Avatar alt="Remy Sharp"
-                                className="small-avatar"
-                                src="https://upload.wikimedia.org/wikipedia/commons/9/98/Bandera_del_Ejercito_Colombiano_de_Miranda.svg" />
-                        <ListItemText  inset primary={t('de')} />
-                    </MenuItem>
-                    <MenuItem onClick={() => {this._switchLanguage('fr')}}>
-                        <Avatar alt="Remy Sharp"
-                                className="small-avatar"
-                                src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" />
-                        <ListItemText  inset primary={t('fr')} />
-                    </MenuItem>
+                    {this._renderLangsMenu(langs)}
+
                 </Menu>
             </li>
         );
     }
 }
 
-export default translate("LanguageSwitcher")(LanguageSwitcher);
+export default translate("languageSwitcher")(LanguageSwitcher);

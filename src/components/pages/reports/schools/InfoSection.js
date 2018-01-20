@@ -7,13 +7,13 @@ class InfoSection extends Component {
     _renderRosterStats(stats) {
         return stats.map(function (item,i) {
             return (
-                <div class="m-widget1__item">
-                    <div class="row m-row--no-padding align-items-center">
-                        <div class="col">
-                            <h3 class="m-widget1__title">{item.title}</h3>
+                <div key={i} className="m-widget1__item">
+                    <div className="row m-row--no-padding align-items-center">
+                        <div className="col">
+                            <h3 className="m-widget1__title">{item.title}</h3>
                         </div>
-                        <div class="col m--align-right">
-                            <span class="m-widget1__number m--font-brand">{item.value}</span>
+                        <div className="col m--align-right">
+                            <span className="m-widget1__number m--font-brand">{item.value}</span>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@ class InfoSection extends Component {
         return (
 
                     <div className="m-widget1 m-widget1--paddingless">
-                        <div class="m-widget1 m-widget1--paddingless">
+                        <div className="m-widget1 m-widget1--paddingless">
                              {this._renderRosterStats(WD.rosterStats)}
                         </div>
                     </div>

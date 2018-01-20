@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { selectCreateRequest, selectSchools } from '../../../redux/homerooms/selectors';
 import { create, getSchools, resetCreateRequest } from '../../../redux/homerooms/actions';
 import Modal from "../../../components/ui/Modal";
-import HomeroomForm from "../../../components/pages/homerooms/HomeroomForm";
+import HomeroomForm from "../forms/HomeroomForm";
 
 class CreateHomeroomModal extends Component {
   static propTypes = {

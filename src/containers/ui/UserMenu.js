@@ -26,7 +26,6 @@ class UserMenu extends Component {
 
   _openMenu = event => {
     this.setState({ menuOpened: !this.state.menuOpened });
-    console.log(this.state.menuOpened);
   };
 
   _closeMenu = event => {

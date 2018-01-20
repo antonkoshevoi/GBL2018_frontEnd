@@ -44,35 +44,40 @@ class ChartsSection extends Component {
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-3">
                     <Card title="Pass Rate" icon="flaticon-list-2">
-                        <h1 align="center" style={{fontSize:'7rem',color:'rgb(0, 128, 0)'}}>28%</h1>
+                        <h1  className="d-flex justify-content-center align-items-center" style={{fontSize:'7rem',color:'rgb(0, 128, 0)'}}>28%</h1>
                     </Card>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-3">
-                    <Card title="School Average Performance" icon="flaticon-list-2">
-
-                        <div className="row">
-                            <div className="col-md-6">
-                                <Pie data={this.state.pieDataPerformance} options={this.state.options} width="300" height="300"/>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="m-stack d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
-                                    <legend>Performance</legend>
-                                    {this._renderPieChartLabels(this.state.pieDataPerformance)}
+                    <div className="small-card-content">
+                        <div className="small-card">
+                            <div className="row">
+                                <div className="col-md-5">
+                                    <Pie data={this.state.pieDataProgress} options={this.state.options} width="100" height="100"/>
+                                </div>
+                                <div className="col-md-7">
+                                    <div className="m-stack m--padding-left-10  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
+                                        <h5> School Average</h5>
+                                        <legend>Progress</legend>
+                                        {this._renderPieChartLabels(this.state.pieDataProgress)}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-md-6">
-                                <Pie data={this.state.pieDataProgress} options={this.state.options} width="300" height="300"/>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="m-stack  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
-                                    <legend>Progress</legend>
-                                    {this._renderPieChartLabels(this.state.pieDataProgress)}
+                        <div className="small-card">
+                            <div className="row">
+                                <div className="col-md-5">
+                                    <Pie data={this.state.pieDataPerformance} options={this.state.options} width="100" height="100"/>
+                                </div>
+                                <div className="col-md-7">
+                                    <div className="m-stack m--padding-left-10 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
+                                        <h5> School Average</h5>
+                                        <legend>Performance</legend>
+                                        {this._renderPieChartLabels(this.state.pieDataPerformance)}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </Card>
+                    </div>
                 </div>
             </div>
         );

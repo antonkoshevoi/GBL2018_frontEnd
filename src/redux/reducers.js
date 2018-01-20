@@ -7,6 +7,7 @@ import teachersReducer from './teachers/reducer';
 import administrationReducer from './administration/reducer';
 import homeroomsReducer from './homerooms/reducer';
 import classroomsReducer from './classrooms/reducer';
+import schoolsReducer from './schools/reducer';
 
 export default {
   app: appReducer,
@@ -18,4 +19,5 @@ export default {
   administration: administrationReducer,
   homerooms: homeroomsReducer,
   classrooms: classroomsReducer,
+  schools: schoolsReducer,
 };
