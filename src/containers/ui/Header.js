@@ -74,7 +74,6 @@ class Header extends Component {
 
                     <UserMenu logout={logout}/>
 
-                    <LanguageSwitcher/>
 
                   </ul>
                 </div>

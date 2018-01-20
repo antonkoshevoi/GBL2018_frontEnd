@@ -36,7 +36,7 @@ class UserMenu extends Component {
     const { logout, userData, t } = this.props;
 
     return  this.state.menuOpened ?  (
-      <div className="m-dropdown__wrapper animated" onMouseLeave={this._closeMenu} style={{display:'block'}}>
+      <div className="m-dropdown__wrapper animated m--padding-right-20" onMouseLeave={this._closeMenu} style={{display:'block'}}>
         <span className="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" ></span>
         <div className="m-dropdown__inner">
           <div className="m-dropdown__header m--align-center" style={{backgroundImage:`url(${posterImage})`}}>
