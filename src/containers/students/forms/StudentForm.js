@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from 'material-ui';
+import { connect } from 'react-redux';
+import { selectSchools } from '../../../redux/students/selectors';
+import { getSchools } from '../../../redux/students/actions';
 
 class StudentForm extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     student: PropTypes.object.isRequired,
-    schools: PropTypes.any,
     errors: PropTypes.any
   };
 
@@ -27,6 +29,11 @@ class StudentForm extends Component {
         { school.get('schName') }
       </MenuItem>
     ));
+  }
+
+  componentDidMount() {
+    const { getSchools } = this.props;
+    getSchools();
   }
 
   render() {
@@ -145,5 +152,14 @@ class StudentForm extends Component {
     );
   }
 }
+
+StudentForm = connect(
+  (state) => ({
+    schools: selectSchools(state),
+  }),
+  (dispatch) => ({
+    getSchools: () => { dispatch(getSchools()) }
+  })
+)(StudentForm);
 
 export default StudentForm;

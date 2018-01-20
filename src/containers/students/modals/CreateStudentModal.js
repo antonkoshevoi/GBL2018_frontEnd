@@ -9,10 +9,10 @@ import {
   Divider, Button
 } from 'material-ui';
 import { connect } from 'react-redux';
-import { selectCreateRequest, selectSchools } from '../../../redux/students/selectors';
-import { create, getSchools, resetCreateRequest } from '../../../redux/students/actions';
+import { selectCreateRequest } from '../../../redux/students/selectors';
+import { create, resetCreateRequest } from '../../../redux/students/actions';
 import Modal from "../../../components/ui/Modal";
-import StudentForm from "../../../components/pages/students/StudentForm";
+import StudentForm from "../forms/StudentForm";
 
 class CreateStudentModal extends Component {
   static propTypes = {
@@ -40,43 +40,40 @@ class CreateStudentModal extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.getSchools();
-  }
-
   componentWillReceiveProps(nextProps) {
     const success = this.props.createRequest.get('success');
     const nextSuccess = nextProps.createRequest.get('success');
 
     if(!success && nextSuccess) {
-      this._onClose();
+      this._close();
       this.props.onSuccess();
     }
   }
-
-  _onClose () {
-    this.props.resetCreateRequest();
-    this.props.onClose();
-  };
 
   _onChange (student) {
     this.setState({ student });
   };
 
-  _onSubmit = () => {
+  _onSubmit (e) {
+    e.preventDefault();
     this.props.create(
       this.state.student
     );
   };
 
+  _close () {
+    this.props.onClose();
+    this.props.resetCreateRequest();
+  }
+
   render() {
-    const { isOpen, createRequest, schools } = this.props;
+    const { isOpen, createRequest } = this.props;
     const loading = createRequest.get('loading');
     const errorMessage = createRequest.get('errorMessage');
     const errors = createRequest.get('errors');
 
     return (
-      <Modal isOpen={isOpen} onClose={() => this._onClose()}>
+      <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
             <IconButton color="contrast" aria-label="Close">
@@ -96,17 +93,18 @@ class CreateStudentModal extends Component {
           <DialogContentText>
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
-          <StudentForm
-            onChange={(student) => { this._onChange(student) }}
-            student={this.state.student}
-            schools={schools}
-            errors={errors}/>
-          <div className='col-sm-12'>
-            <Divider/>
-            <Button disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary' onClick={() => { this._onSubmit() }} >
-              Add New User
-            </Button>
-          </div>
+          <form onSubmit={(e) => { this._onSubmit(e) }}>
+            <StudentForm
+              onChange={(student) => { this._onChange(student) }}
+              student={this.state.student}
+              errors={errors}/>
+            <div className='col-sm-12'>
+              <Divider/>
+              <Button type='submit' disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary'>
+                Add New User
+              </Button>
+            </div>
+          </form>
         </DialogContent>
       </Modal>
     );
@@ -116,12 +114,10 @@ class CreateStudentModal extends Component {
 CreateStudentModal = connect(
   (state) => ({
     createRequest: selectCreateRequest(state),
-    schools: selectSchools(state),
   }),
   (dispatch) => ({
     create: (form, params = {}) => { dispatch(create(form, params)) },
     resetCreateRequest: () => { dispatch(resetCreateRequest()) },
-    getSchools: () => { dispatch(getSchools()) },
   })
 )(CreateStudentModal);
 
