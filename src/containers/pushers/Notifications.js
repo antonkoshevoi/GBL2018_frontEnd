@@ -15,24 +15,20 @@ class Notifications extends Component {
 
     }
 
-    _openMenu = event => {
-        this.setState({ menuOpened: !this.state.menuOpened });
-    };
 
-    _closeMenu = event => {
-        this.setState({ menuOpened: false });
-    };
 
     render() {
+        const {activeMenu} = this.props
+
         return (
             <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width" data-dropdown-toggle="click" data-dropdown-persistent="true">
-                <a  className="m-nav__link m-dropdown__toggle pointer" id="m_topbar_notification_icon" onClick={this._openMenu}>
+                <a  className="m-nav__link m-dropdown__toggle pointer" id="m_topbar_notification_icon" onClick={() => {this.props.switchMenu('notifications')}}>
                     <span className="m-nav__link-icon">
 													<i className="fa fa-bullhorn"></i>
 												</span>
                 </a>
-                {this.state.menuOpened &&
-                <div className="m-dropdown__wrapper" onMouseLeave={this._closeMenu} style={{display: 'block'}}>
+                {activeMenu == 'notifications'  &&
+                <div className="m-dropdown__wrapper" onMouseLeave={() => {this.props.switchMenu(null)}} style={{display: 'block'}}>
                     <span className="m-dropdown__arrow m-dropdown__arrow--center"></span>
                     <div className="m-dropdown__inner">
                         <div className="m-dropdown__header m--align-center"

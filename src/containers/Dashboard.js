@@ -67,7 +67,7 @@ class Dashboard extends Component {
                     </div>
                     <div className="col-sm-12 col-md-6 col-lg-3">
                         <Card title="Real Time Chart" icon="flaticon-diagram" >
-                            <Line data={this.state.data} ref="chartCanvas" options={this.state.options} width="500" height="350" />
+                            <Line data={this.state.data} ref="chartCanvas" options={this.state.options} width="400" height="280" />
                         </Card>
                     </div>
 
@@ -75,11 +75,11 @@ class Dashboard extends Component {
                         <div className="small-card-content">
                             <div className="small-card">
                                 <div className="row">
-                                    <div className="col-xl-5 col-lg-3">
-                                        <Pie data={this.state.pieDataProgress} options={this.state.options} width="100" height="100"/>
+                                    <div className="col-xl-4 col-lg-3 pie-block">
+                                        <Pie data={this.state.pieDataProgress} options={this.state.options} width="70" height="70"/>
                                     </div>
-                                    <div className="col-xl-7 col-lg-9">
-                                        <div className="m-stack m--padding-left-10  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
+                                    <div className="col-xl-8 col-lg-9">
+                                        <div className="m-stack m--padding-left-20  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
                                            <h5> School Average</h5>
                                             <legend>Progress</legend>
                                             {this._renderPieChartLabels(this.state.pieDataProgress)}
@@ -89,11 +89,11 @@ class Dashboard extends Component {
                             </div>
                             <div className="small-card">
                                 <div className="row">
-                                    <div className="col-xl-5 col-lg-3">
-                                        <Pie data={this.state.pieDataPerformance} options={this.state.options} width="100" height="100"/>
+                                    <div className="col-xl-4 col-lg-3 pie-block">
+                                        <Pie data={this.state.pieDataPerformance} options={this.state.options} width="70" height="70"/>
                                     </div>
-                                    <div className="col-xl-7 col-lg-9">
-                                        <div className="m-stack m--padding-left-10 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
+                                    <div className="col-xl-8 col-lg-9">
+                                        <div className="m-stack m--padding-left-20 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
                                             <h5> School Average</h5>
                                             <legend>Performance</legend>
                                             {this._renderPieChartLabels(this.state.pieDataPerformance)}
@@ -109,7 +109,7 @@ class Dashboard extends Component {
 
                             <div className="small-card-content">
                                 <div className="small-card">
-                                    <div className="row m--full-height  align-items-center">
+                                    <div className="row m--full-height  m--padding-right-10 m--padding-left-10 align-items-center">
                                         <div className="col ">
                                             <span className="m-widget1__number m--font-brand">
                                                  <i className="fa fa-film widget-icon"></i>

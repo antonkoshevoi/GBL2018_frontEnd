@@ -16830,9 +16830,9 @@ body.m-portlet--fullscreen {
       .m-portlet.m-portlet--brand.m-portlet--head-solid-bg .m-portlet__head-tools .m-tabs-line .m-tabs__link.active > i {
         color: white; }
   .m-portlet.m-portlet--brand.m-portlet--head-solid-bg .m-portlet__body {
-    background: white; }
+    background: #fdfdfd; }
   .m-portlet.m-portlet--brand.m-portlet--head-solid-bg .m-portlet__foot {
-    background: white;
+    background: ##fdfdfd;
     border-color: #589ee4; }
 
 .m-portlet.m-portlet--border-bottom-brand {

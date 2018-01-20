@@ -13,11 +13,16 @@ import Tasks from "../pushers/Tasks";
 
 class Header extends Component {
 
-  state = {
-    anchorEl: null,
-  };
+    constructor(props) {
+        super(props);
+        this.state = {
+            anchorEl: null,
+            activePusherMenu: null,
+        };
+    }
 
-  _openLanguageMenu = event => {
+
+    _openLanguageMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
@@ -27,6 +32,9 @@ class Header extends Component {
     this.setState({ anchorEl: null });
   };
 
+  _switchPushMenus = (menu) =>{
+      this.setState({activePusherMenu:menu})
+  }
 
   _renderHeader() {
     const { logout } = this.props;
@@ -51,8 +59,8 @@ class Header extends Component {
               </button>
 
               <div className="d-flex justify-content-center  align-items-center flex-1 hidden-sm">
-                <h4>
-                  Gravity Brain School
+                <h4 style={{color:'#777'}}>
+                  GravityBrain School
                 </h4>
               </div>
 
@@ -60,9 +68,9 @@ class Header extends Component {
                 <div className="m-stack__item m-topbar__nav-wrapper">
                   <ul className="m-topbar__nav m-nav m-nav--inline">
 
-                    <Tasks/>
-                    <Messages/>
-                    <Notifications/>
+                    <Tasks activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
+                    <Messages activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
+                    <Notifications activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
 
                     <UserMenu logout={logout}/>
 
