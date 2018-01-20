@@ -20,14 +20,14 @@ export default  {
                title:'Store',
                link:'store',
                icon:'fa fa-shopping-cart ',
-               colorName:'grey',
+               colorName:'green',
            },
            {
                key:'studentsAndStaff',
                title:'Students & Staff',
                link:'dashboard',
                icon:'fa fa-group',
-               colorName:'purple',
+               colorName:'red',
                subMenu:[
                    {
                        key:'administration',
@@ -54,7 +54,7 @@ export default  {
                title:'Learning Areas',
                link:'dashboard',
                icon:'fa fa-institution',
-               colorName:'red',
+               colorName:'grey',
                subMenu:[
                    {
                        key:'classrooms',
@@ -87,7 +87,7 @@ export default  {
                title:'Sharing',
                link:'dashboard',
                icon:'fa fa-share-alt',
-               colorName:'green',
+               colorName:'orange',
                subMenu:[
                    {
                        key:'inbox',

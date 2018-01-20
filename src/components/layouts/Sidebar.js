@@ -119,7 +119,7 @@ class Sidebar extends Component {
 
     
         return (
-        <div id="m_aside_left" className="m-grid__item	m-aside-left  m-aside-left--skin-light ">
+        <div id="m_aside_left" className="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
 
             <div
             id="m_ver_menu"
