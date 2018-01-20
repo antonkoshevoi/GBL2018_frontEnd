@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, FormHelperText, Input, InputLabel, MenuItem, TextField, Select } from 'material-ui';
+import { connect } from 'react-redux';
+import { getSchools } from '../../../redux/teachers/actions';
+import { selectSchools } from '../../../redux/teachers/selectors';
 
 class TeacherForm extends Component {
   static propTypes = {
@@ -9,6 +12,10 @@ class TeacherForm extends Component {
     schools: PropTypes.any,
     errors: PropTypes.any
   };
+
+  componentDidMount() {
+    this.props.getSchools();
+  }
 
   _handleInputChange(event) {
     const { name, type, value, checked } = event.target;
@@ -145,5 +152,14 @@ class TeacherForm extends Component {
     );
   }
 }
+
+TeacherForm = connect(
+  (state) => ({
+    schools: selectSchools(state),
+  }),
+  (dispatch) => ({
+    getSchools: () => { dispatch(getSchools()) }
+  })
+)(TeacherForm);
 
 export default TeacherForm;

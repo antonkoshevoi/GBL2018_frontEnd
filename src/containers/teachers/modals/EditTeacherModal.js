@@ -10,15 +10,13 @@ import {
 } from 'material-ui';
 import { connect } from 'react-redux';
 import {
-  selectGetSingleRecordRequest, selectSchools,
-  selectUpdateRequest
+  selectGetSingleRecordRequest, selectUpdateRequest,
 } from '../../../redux/teachers/selectors';
 import {
-  getSchools, resetGetSingleRecordRequest, resetUpdateRequest,
-  update
+  resetGetSingleRecordRequest, resetUpdateRequest, update
 } from '../../../redux/teachers/actions';
 import Modal from "../../../components/ui/Modal";
-import TeacherForm from "../../../components/pages/teachers/TeacherForm";
+import TeacherForm from "../form/TeacherForm";
 
 class EditTeacherModal extends Component {
   static propTypes = {
@@ -38,10 +36,6 @@ class EditTeacherModal extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.getSchools();
-  }
-
   componentWillReceiveProps(nextProps) {
     const record = this.props.getSingleRecordRequest.get('record');
     const nextRecord = nextProps.getSingleRecordRequest.get('record');
@@ -57,12 +51,12 @@ class EditTeacherModal extends Component {
     const nextSuccess = nextProps.updateRequest.get('success');
 
     if(!success && nextSuccess) {
-      this._onClose();
+      this._close();
       this.props.onSuccess();
     }
   }
 
-  _onClose () {
+  _close () {
     this.setState({
       id: undefined,
       teacher: {}
@@ -76,7 +70,8 @@ class EditTeacherModal extends Component {
     this.setState({ teacher });
   };
 
-  _onSubmit = () => {
+  _onSubmit (e) {
+    e.preventDefault();
     this.props.update(
       this.state.id,
       this.state.teacher
@@ -84,13 +79,13 @@ class EditTeacherModal extends Component {
   };
 
   render() {
-    const { isOpen, updateRequest, getSingleRecordRequest, schools } = this.props;
+    const { isOpen, updateRequest, getSingleRecordRequest } = this.props;
     const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');
     const errorMessage = updateRequest.get('errorMessage');
     const errors = updateRequest.get('errors');
 
     return (
-      <Modal isOpen={isOpen} onClose={() => this._onClose()}>
+      <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
             <IconButton color="contrast" aria-label="Close">
@@ -110,17 +105,18 @@ class EditTeacherModal extends Component {
           <DialogContentText>
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
-          <TeacherForm
-            onChange={(teacher) => { this._onChange(teacher) }}
-            teacher={this.state.teacher}
-            schools={schools}
-            errors={errors}/>
-          <div className='col-sm-12'>
-            <Divider/>
-            <Button disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary' onClick={() => { this._onSubmit() }} >
-              Update User
-            </Button>
-          </div>
+          <form onSubmit={(e) => { this._onSubmit(e) }}>
+            <TeacherForm
+              onChange={(teacher) => { this._onChange(teacher) }}
+              teacher={this.state.teacher}
+              errors={errors}/>
+            <div className='col-sm-12'>
+              <Divider/>
+              <Button type='submit' disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary'>
+                Update User
+              </Button>
+            </div>
+          </form>
         </DialogContent>
       </Modal>
     );
@@ -131,13 +127,11 @@ EditTeacherModal = connect(
   (state) => ({
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
     updateRequest: selectUpdateRequest(state),
-    schools: selectSchools(state),
   }),
   (dispatch) => ({
     update: (id, form, params = {}) => { dispatch(update(id, form, params)) },
     resetUpdateRequest: () => { dispatch(resetUpdateRequest()) },
     resetGetSingleRecordRequest: () => { dispatch(resetGetSingleRecordRequest()) },
-    getSchools: () => { dispatch(getSchools()) },
   })
 )(EditTeacherModal);
 

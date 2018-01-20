@@ -6,6 +6,8 @@ import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
 import { getSchoolTeachers, getSchoolStudents } from "../../../redux/schools/actions";
 import {selectGetSchoolStudentsRequest, selectGetSchoolTeachersRequest} from "../../../redux/schools/selectors";
+import { selectSchools } from '../../../redux/homerooms/selectors';
+import { getSchools } from '../../../redux/homerooms/actions';
 
 function TabContainer(props) {
   return (
@@ -59,6 +61,8 @@ class HomeroomForm extends Component {
       this.props.getSchoolTeachers(this.props.homeroom.schoolId);
       this.props.getSchoolStudents(this.props.homeroom.schoolId);
     }
+
+    this.props.getSchools();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -280,14 +284,16 @@ class HomeroomForm extends Component {
 }
 
 HomeroomForm = connect(
-    (state) => ({
-        getSchoolTeacherRequest: selectGetSchoolTeachersRequest(state),
-        getSchoolStudentsRequest: selectGetSchoolStudentsRequest(state),
-    }),
-    (dispatch) => ({
-        getSchoolTeachers: (schoolId) => { dispatch(getSchoolTeachers(schoolId)) },
-        getSchoolStudents: (schoolId) => { dispatch(getSchoolStudents(schoolId)) },
-    })
+  (state) => ({
+    schools: selectSchools(state),
+    getSchoolTeacherRequest: selectGetSchoolTeachersRequest(state),
+    getSchoolStudentsRequest: selectGetSchoolStudentsRequest(state),
+  }),
+  (dispatch) => ({
+    getSchools: () => { dispatch(getSchools()) },
+    getSchoolTeachers: (schoolId) => { dispatch(getSchoolTeachers(schoolId)) },
+    getSchoolStudents: (schoolId) => { dispatch(getSchoolStudents(schoolId)) },
+  })
 )(HomeroomForm);
 
 export default HomeroomForm;

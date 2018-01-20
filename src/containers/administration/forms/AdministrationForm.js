@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, FormHelperText, Input, InputLabel, MenuItem, TextField, Select } from 'material-ui';
+import { getRoles, getSchools } from '../../../redux/administration/actions';
+import { connect } from 'react-redux';
+import { selectRoles, selectSchools } from '../../../redux/administration/selectors';
 
 class AdministrationForm extends Component {
   static propTypes = {
@@ -10,6 +13,12 @@ class AdministrationForm extends Component {
     roles: PropTypes.any,
     errors: PropTypes.any
   };
+
+
+  componentDidMount() {
+    this.props.getSchools();
+    this.props.getRoles();
+  }
 
   _handleInputChange(event) {
     const { name, type, value, checked } = event.target;
@@ -167,5 +176,16 @@ class AdministrationForm extends Component {
     );
   }
 }
+
+AdministrationForm = connect(
+  (state) => ({
+    schools: selectSchools(state),
+    roles: selectRoles(state),
+  }),
+  (dispatch) => ({
+    getSchools: () => { dispatch(getSchools()) },
+    getRoles: () => { dispatch(getRoles()) },
+  })
+)(AdministrationForm);
 
 export default AdministrationForm;
