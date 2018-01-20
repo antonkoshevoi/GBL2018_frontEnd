@@ -109,7 +109,7 @@ class Dashboard extends Component {
 
                             <div className="small-card-content">
                                 <div className="small-card">
-                                    <div className="row m--full-height  align-items-center">
+                                    <div className="row m--full-height  m--padding-right-10 m--padding-left-10 align-items-center">
                                         <div className="col ">
                                             <span className="m-widget1__number m--font-brand">
                                                  <i className="fa fa-film widget-icon"></i>

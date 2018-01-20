@@ -551,7 +551,7 @@ div.m-datatable.m-datatable--default.m-datatable--loaded > .m-datatable__table {
 }
 
 div.m-card-profile .m-card-profile__pic img {
-  max-width: 205px !important;
+  max-width: 100% !important;
 }
 
 .btn-icon {
@@ -678,4 +678,24 @@ div.m-portlet {
 
 .flex-1 {
   flex:1
+}
+
+
+@media (max-width: 1599px) {
+  .small-card .m-stack {
+    font-size: 75%;
+    padding-left: 0;
+  }
+
+  .small-card .m-stack legend {
+    font-size: 1rem;
+  }
+
+  .fa.widget-icon {
+    font-size: 55px;
+  }
+
+  .m-widget1__number > img {
+    width: 55px;
+  }
 }
