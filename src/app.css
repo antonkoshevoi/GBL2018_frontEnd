@@ -574,15 +574,15 @@ div.m-portlet.m-portlet--info.m-portlet--head-solid-bg .m-portlet__head {
 }
 
 .progress .progress-bar.bg-warning {
-  background-color: #ed9c28;
+  background-color: #ed9c28!important;
 }
 
 .progress .progress-bar.bg-success {
-  background-color: #47a447;
+  background-color: #47a447!important;
 }
 
 .progress .progress-bar.bg-danger {
-  background-color: #D2322D;
+  background-color: #D2322D !important;
 }
 
 div.progress.m-progress--sm .progress-bar {
@@ -591,7 +591,7 @@ div.progress.m-progress--sm .progress-bar {
 
 
 .progress {
-  background-color: #BDCCD4;
+  background-color: #BDCCD4!important;;
   border-radius: 10px;
 }
 
