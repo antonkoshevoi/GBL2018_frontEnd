@@ -41,7 +41,7 @@ class Login extends Component {
     const errors = loginRequest.get('errors');
 
     return (
-      <div style={{position:'fixed',}} className="loginWrapper">
+      <div style={{position:'fixed'}} className="loginWrapper">
         <div className="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2 m--full-height" id="m_login" style={{backgroundImage: `url(${background})`}}>
           <div className="m-grid__item m-grid__item--fluid	m-login__wrapper">
             <div className="m-login__container">
@@ -105,7 +105,7 @@ class Login extends Component {
                 <span className="m-login__account-msg">
                 Don't have an account yet?
                 </span>
-                <NavLink to="signup/types" id="m_login_signup" className="m--margin-left-5 m-link m-link--light m-login__account-link">Sign Up</NavLink>
+                <NavLink to="signUp" id="m_login_signup" className="m--margin-left-5 m-link m-link--light m-login__account-link">Sign Up</NavLink>
               </div>
             </div>
           </div>

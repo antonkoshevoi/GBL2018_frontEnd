@@ -5,13 +5,14 @@ import background from '../../media/images/bg-3.jpg';
 import logo from '../../media/images/logo.png'
 
 import {NavLink} from 'react-router-dom';
-import {Divider, Step,  StepLabel, Stepper, Typography} from 'material-ui';
+import {CircularProgress, Divider, Step, StepLabel, Stepper, Typography} from 'material-ui';
 
 import FirstStepForm from '../../components/pages/auth/signup/FirstStepForm';
 import SecondStepForm from '../../components/pages/auth/signup/SecondStepForm';
 import ThirdStepForm from '../../components/pages/auth/signup/ThirdStepForm';
-import { validateStep1 } from '../../redux/signUpParent/actions';
-import { selectValidateStep1Request } from '../../redux/signUpParent/selectors';
+import {signUp, validateStep1} from '../../redux/signUpParent/actions';
+import {selectSignUpRequest, selectValidateStep1Request} from '../../redux/signUpParent/selectors';
+import MetronicProgressButton from "../../components/ui/metronic/MetronicProgressButton";
 
 class SignUpParent extends Component {
 
@@ -28,11 +29,41 @@ class SignUpParent extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
+    this._goForwardOnStep1Success(nextProps);
+    this._goForwardOnStep2Success(nextProps);
+    this._goBackIfThereWasAnErrorOnStep1(nextProps);
+  }
+
+  _goForwardOnStep1Success (nextProps) {
     const success = this.props.validateStep1Request.get('success');
     const nextSuccess = nextProps.validateStep1Request.get('success');
 
     if(!success && nextSuccess) {
       this._next();
+    }
+  }
+
+  _goForwardOnStep2Success (nextProps) {
+    const success = this.props.signUpRequest.get('success');
+    const nextSuccess = nextProps.signUpRequest.get('success');
+
+    if(!success && nextSuccess) {
+      this._next();
+    }
+  }
+
+  _goBackIfThereWasAnErrorOnStep1 (nextProps) {
+    const fail = this.props.signUpRequest.get('fail');
+    const nextFail = nextProps.signUpRequest.get('fail');
+
+    if(!fail && nextFail) {
+      const errors = nextProps.signUpRequest.get('errors');
+      if (errors.get('step1').size > 0) {
+        this.props.validateStep1(
+          this.state.form.step1
+        );
+        this._back();
+      }
     }
   }
 
@@ -60,6 +91,12 @@ class SignUpParent extends Component {
     );
   };
 
+  _submitStep2() {
+    this.props.signUp(
+      this.state.form
+    );
+  };
+
   _next() {
     const { activeStep } = this.state;
     this.setState({
@@ -76,7 +113,11 @@ class SignUpParent extends Component {
 
   render() {
     const { activeStep, form } = this.state;
+    const step1Loading = this.props.validateStep1Request.get('loading');
     const step1Errors = this.props.validateStep1Request.get('errors');
+
+    const step2Loading = this.props.signUpRequest.get('loading');
+    const step2Errors = this.props.signUpRequest.get('errors').get('step2');
 
     return (
       <form onSubmit={[
@@ -113,7 +154,9 @@ class SignUpParent extends Component {
                     </div>
 
                     <Stepper activeStep={activeStep} alternativeLabel>
+
                       <Step>
+
                         <StepLabel>STEP 1</StepLabel>
                       </Step>
                       <Step>
@@ -123,11 +166,10 @@ class SignUpParent extends Component {
                         <StepLabel>STEP 3</StepLabel>
                       </Step>
                     </Stepper>
-
                     <div>
                       {[
                         <FirstStepForm form={form.step1} errors={step1Errors} onChange={(form) => { this._registerStep1Changes(form) }}/>,
-                        <SecondStepForm form={form.step2} onChange={(form) => { this._registerStep2Changes(form) }}/>,
+                        <SecondStepForm form={form.step2} errors={step2Errors} onChange={(form) => { this._registerStep2Changes(form) }}/>,
                         <ThirdStepForm/>
                       ][activeStep]}
                     </div>
@@ -143,8 +185,8 @@ class SignUpParent extends Component {
                             BACK
                           </button>}
                         {[
-                          <button type='submit' className='m-btn m-btn--air m--margin-5 btn btn-info'>NEXT</button>,
-                          <button type='submit' className='m-btn m-btn--air m--margin-5 btn btn-info'>NEXT</button>,
+                          <MetronicProgressButton type='submit' disabled={step1Loading} loading={step1Loading} className='m-btn m-btn--air m--margin-5 btn btn-info'>NEXT</MetronicProgressButton>,
+                          <MetronicProgressButton type='submit' disabled={step2Loading} loading={step2Loading} className='m-btn m-btn--air m--margin-5 btn btn-info'>NEXT</MetronicProgressButton>,
                           <button type='submit' className='m-btn m-btn--air m--margin-5 btn btn-info'>GO TO DASHBOARD</button>
                         ][activeStep]}
                       </div>
@@ -153,7 +195,6 @@ class SignUpParent extends Component {
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -164,10 +205,12 @@ class SignUpParent extends Component {
 
 SignUpParent = connect(
   (state) => ({
-    validateStep1Request: selectValidateStep1Request(state)
+    validateStep1Request: selectValidateStep1Request(state),
+    signUpRequest: selectSignUpRequest(state),
   }),
   (dispatch) => ({
     validateStep1: (form, params = {}) => { dispatch(validateStep1(form, params)) },
+    signUp: (form, params = {}) => { dispatch(signUp(form, params)) },
   })
 )(SignUpParent);
 

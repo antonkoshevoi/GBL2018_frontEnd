@@ -7,6 +7,7 @@ import Cropper from 'react-cropper';
 import DatePicker from '../../../ui/DatePicker';
 import MetronicInput from '../../../ui/metronic/MetronicInput';
 import MetronicDatePicker from '../../../ui/metronic/MetronicDatePicker';
+import MetronicSelect from "../../../ui/metronic/MetronicSelect";
 
 class SecondStepForm extends Component {
 
@@ -24,6 +25,9 @@ class SecondStepForm extends Component {
     };
   }
 
+  /**
+   *
+   */
   _handleFileChange(e) {
     e.preventDefault();
     let files;
@@ -39,14 +43,17 @@ class SecondStepForm extends Component {
       this.setState({
         form: {
           ...this.state.form,
-          imageSrc: reader.result
+          avatar: reader.result
         }
-      });
+      }, () => { this.props.onChange(this.state.form); });
     };
 
     reader.readAsDataURL(files[0]);
   }
 
+  /**
+   *
+   */
   _handleImageCrop() {
     if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
       return;
@@ -54,11 +61,14 @@ class SecondStepForm extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        cropResult: this.cropper.getCroppedCanvas().toDataURL()
+        avatarCropped: this.cropper.getCroppedCanvas().toDataURL()
       }
-    });
+    }, () => { this.props.onChange(this.state.form); });
   }
 
+  /**
+   *
+   */
   _handleInputChange(event) {
     const { name, type, value, checked } = event.target;
 
@@ -67,38 +77,11 @@ class SecondStepForm extends Component {
         ...this.state.form,
         [name]: value
       }
-    }, () => {
-      this.props.onChange(
-        this.state.form
-      );
-    });
-  }
-
-  _handleDateChange(m) {
-    this.setState({
-      form: {
-        ...this.state.form,
-        dateOfBirth: m
-      }
-    }, () => {
-      this.props.onChange(
-        this.state.form
-      );
-    });
-  }
-
-  _renderDateInput () {
-    return (
-      <input
-        name='dateOfBirth'
-        type='text'
-        className='form-control m-input m-input--air m-input--pill'
-        placeholder='Birthday *'/>
-    );
+    }, () => { this.props.onChange(this.state.form); });
   }
 
   render() {
-    const { form, dob } = this.state;
+    const { form } = this.state;
     const { errors } = this.props;
 
     return (
@@ -118,7 +101,8 @@ class SecondStepForm extends Component {
                     className='form-control m-input m-input--air m-input--pill'
                     placeholder='Username *'/>
                 </div>
-                <div className='form-control-feedback'></div>
+                {errors && errors.get('username') &&
+                  <div className="form-control-feedback text-center error">{errors.get('username').get(0)}</div>}
               </div>
             </div>
             <div className='m-form__section m-form__section--first'>
@@ -132,7 +116,8 @@ class SecondStepForm extends Component {
                     className='form-control m-input m-input--air m-input--pill'
                     placeholder='Password *'/>
                 </div>
-                <div className='form-control-feedback'></div>
+                {errors && errors.get('password') &&
+                  <div className="form-control-feedback text-center error">{errors.get('password').get(0)}</div>}
               </div>
             </div>
           </div>
@@ -152,7 +137,8 @@ class SecondStepForm extends Component {
                     className='form-control m-input m-input--air m-input--pill'
                     placeholder='First Name'/>
                 </div>
-                <div  className='form-control-feedback'></div>
+                {errors && errors.get('firstName') &&
+                  <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
               </div>
               <div className='form-group m-form__group'>
                 <div>
@@ -164,28 +150,30 @@ class SecondStepForm extends Component {
                     className='form-control m-input m-input--air m-input--pill'
                     placeholder='Last Name'/>
                 </div>
-                <div  className='form-control-feedback'></div>
+                {errors && errors.get('lastName') &&
+                  <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
               </div>
               <div className='form-group m-form__group picker'>
                 <MetronicDatePicker
                   placeholder='Birthday'
                   value={form.dateOfBirth || null}
                   onChange={(e) => { this._handleDateChange(e) }}/>
-                <div  className='form-control-feedback'></div>
+                {errors && errors.get('dateOfBirth') &&
+                  <div className="form-control-feedback text-center error">{errors.get('dateOfBirth').get(0)}</div>}
               </div>
               <div className='form-group m-form__group'>
                 <div>
-                  <Select
+                  <MetronicSelect
                     name='gender'
-                    value={form.gender || ''}
-                    onChange={(e) => { this._handleInputChange(e) }}
-                    className='form-control m-input m-input--air m-input--pill main-select'
-                    style={{minWidth:'120px'}}>
+                    placeholder='Gender'
+                    value={form.gender || 'male'}
+                    onChange={(e) => { this._handleInputChange(e) }}>
                     <MenuItem value='male'>Male</MenuItem>
                     <MenuItem value='female'>Female</MenuItem>
-                  </Select>
+                  </MetronicSelect>
                 </div>
-                <div  className='form-control-feedback'></div>
+                {errors && errors.get('gender') &&
+                  <div className="form-control-feedback text-center error">{errors.get('gender').get(0)}</div>}
               </div>
             </address>
           </div>
@@ -194,8 +182,9 @@ class SecondStepForm extends Component {
           <legend className='m--margin-bottom-10'>Profile Pic Upload</legend>
 
           <div className='CropperBlock'>
-            {form.imageSrc &&
+            {form.avatar &&
               <button
+                type="'"
                 className='btn m-btn--air btn-success'
                 onClick={() => { this._handleImageCrop() }}
                 style={{float: 'right'}}>
@@ -208,15 +197,15 @@ class SecondStepForm extends Component {
 
             <Cropper
               ref={cropper => { this.cropper = cropper; }}
-              src={form.imageSrc}
+              src={form.avatar}
               className='signup-cropper'
               style={{height: 250, width: 250}}
               aspectRatio={1 / 1}
               guides={false}/>
 
             <div className='croppedBlock'>
-              {form.cropResult &&
-                <img className='img-thumbnail' style={{ width: '150px' }} src={form.cropResult} alt='cropped image'/>}
+              {form.avatarCropped &&
+                <img className='img-thumbnail' style={{ width: '150px' }} src={form.avatarCropped} alt='cropped image'/>}
             </div>
           </div>
         </div>

@@ -18,6 +18,9 @@ class FirstStepForm extends Component {
     };
   }
 
+  /**
+   *
+   */
   _handleFileChange(e) {
     e.preventDefault();
     let files;
@@ -33,14 +36,17 @@ class FirstStepForm extends Component {
       this.setState({
         form: {
           ...this.state.form,
-          imageSrc: reader.result
+          avatar: reader.result
         }
-      });
+      }, () => { this.props.onChange(this.state.form); });
     };
 
     reader.readAsDataURL(files[0]);
   }
 
+  /**
+   *
+   */
   _handleImageCrop() {
     if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
       return;
@@ -48,11 +54,14 @@ class FirstStepForm extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        cropResult: this.cropper.getCroppedCanvas().toDataURL()
+        avatarCropped: this.cropper.getCroppedCanvas().toDataURL()
       }
-    });
+    }, () => { this.props.onChange(this.state.form); });
   }
 
+  /**
+   *
+   */
   _handleInputChange(event) {
     const { name, type, value, checked } = event.target;
 
@@ -61,11 +70,7 @@ class FirstStepForm extends Component {
         ...this.state.form,
         [name]: value
       }
-    }, () => {
-      this.props.onChange(
-        this.state.form
-      );
-    });
+    }, () => { this.props.onChange(this.state.form); });
   }
 
   render() {
@@ -260,16 +265,16 @@ class FirstStepForm extends Component {
               <div className='form-group m-form__group'>
                 <div>
                   <input
-                    value={form.phone || ''}
-                    name='phone'
+                    value={form.phoneNumber || ''}
+                    name='phoneNumber'
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
                     className='form-control m-input m-input--air m-input--pill'
                     placeholder='Phone'/>
                 </div>
                 <div className='form-control-feedback'>
-                  {errors && errors.get('phone') &&
-                    <div className="form-control-feedback text-center error">{errors.get('phone').get(0)}</div>}
+                  {errors && errors.get('phoneNumber') &&
+                    <div className="form-control-feedback text-center error">{errors.get('phoneNumber').get(0)}</div>}
                 </div>
               </div>
             </address>
@@ -280,12 +285,13 @@ class FirstStepForm extends Component {
 
         <div className='col-sm-12'>
           <div className='row'>
-            <legend className='m--margin-bottom-10'> Profile Pic Upload</legend>
+            <legend className='m--margin-bottom-10'>Profile Pic Upload</legend>
 
             <div className='col-md-6'>
               <div className='CropperBlock'>
-                {form.imageSrc &&
+                {form.avatar &&
                   <button
+                    type='button'
                     className='btn m-btn--air btn-success'
                     onClick={() => { this._handleImageCrop() }}
                     style={{float: 'right'}}>
@@ -298,7 +304,7 @@ class FirstStepForm extends Component {
 
                 <Cropper
                   ref={cropper => { this.cropper = cropper; }}
-                  src={form.imageSrc}
+                  src={form.avatar}
                   className='signup-cropper'
                   style={{height: 250, width: 250}}
                   aspectRatio={1 / 1}
@@ -308,8 +314,8 @@ class FirstStepForm extends Component {
 
             <div className='col-md-6'>
               <div className='croppedBlock'>
-              {form.cropResult &&
-                <img className='img-thumbnail' style={{ width: '150px' }} src={form.cropResult} alt='cropped image'/>}
+              {form.avatarCropped &&
+                <img className='img-thumbnail' style={{ width: '150px' }} src={form.avatarCropped} alt='cropped image'/>}
               </div>
             </div>
           </div>
