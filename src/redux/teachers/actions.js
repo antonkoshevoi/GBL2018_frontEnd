@@ -7,10 +7,6 @@ export const GET_SINGLE_RECORD_SUCCESS = '[Teachers] GET_SINGLE_RECORD_SUCCESS';
 export const GET_SINGLE_RECORD_FAIL = '[Teachers] GET_SINGLE_RECORD_FAIL';
 export const RESET_GET_SINGLE_RECORD_REQUEST = '[Teachers] RESET_GET_SINGLE_RECORD_REQUEST';
 
-export const GET_SCHOOLS = '[Teachers] GET_SCHOOLS';
-export const GET_SCHOOLS_SUCCESS = '[Teachers] GET_SCHOOLS_SUCCESS';
-export const GET_SCHOOLS_FAIL = '[Teachers] GET_SCHOOLS_FAIL';
-
 export const CREATE = '[Teachers] CREATE';
 export const CREATE_SUCCESS = '[Teachers] CREATE_SUCCESS';
 export const CREATE_FAIL = '[Teachers] CREATE_FAIL';
@@ -41,17 +37,6 @@ export function resetGetSingleRecordRequest () {
   return {
     type: RESET_GET_SINGLE_RECORD_REQUEST
   }
-}
-/**
- * Get schools
- */
-export function getSchools(params = {}) {
-  return {
-    types: [GET_SCHOOLS, GET_SCHOOLS_SUCCESS, GET_SCHOOLS_FAIL],
-    promise: (apiClient) => apiClient.get('schools', Object.assign({}, params, {
-      perPage: 0
-    }))
-  };
 }
 /**
  * Create

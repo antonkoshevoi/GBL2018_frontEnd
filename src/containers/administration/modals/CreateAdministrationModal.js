@@ -34,8 +34,8 @@ class CreateAdministrationModal extends Component {
         lastName: '',
         gender: null,
         phone: '',
-        schoolId: 1,
-        homeroom: 1,
+        schoolId: '',
+        homeroomId: '',
       }
     };
   }
@@ -51,6 +51,9 @@ class CreateAdministrationModal extends Component {
   }
 
   _close () {
+    this.setState({
+      adminUser: {}
+    });
     this.props.resetCreateRequest();
     this.props.onClose();
   };

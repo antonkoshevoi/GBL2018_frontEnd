@@ -1,23 +1,48 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, FormHelperText, Input, InputLabel, MenuItem, TextField, Select } from 'material-ui';
-import { getRoles, getSchools } from '../../../redux/administration/actions';
+import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from 'material-ui';
+import { getRoles } from '../../../redux/administration/actions';
 import { connect } from 'react-redux';
-import { selectRoles, selectSchools } from '../../../redux/administration/selectors';
+import { selectRoles } from '../../../redux/administration/selectors';
+import { selectGetSchoolHomeroomsRequest, selectSchools } from "../../../redux/schools/selectors";
+import { getSchoolHomerooms, getSchools } from "../../../redux/schools/actions";
 
 class AdministrationForm extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     adminUser: PropTypes.object.isRequired,
-    schools: PropTypes.any,
     roles: PropTypes.any,
     errors: PropTypes.any
   };
 
+  constructor (props) {
+    super(props);
+    this.state = {
+      schoolHomerooms: [],
+    };
+  }
 
   componentDidMount() {
-    this.props.getSchools();
-    this.props.getRoles();
+    const { getSchools, getRoles, adminUser, getSchoolHomerooms } = this.props;
+
+    getSchools();
+    getRoles();
+
+    if (adminUser.id) {
+      getSchoolHomerooms(adminUser.schoolId);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const schoolHomerooms = this.props.getSchoolHomeroomsRequest.get('records');
+    const nextschoolHomerooms = nextProps.getSchoolHomeroomsRequest.get('records');
+
+    if (!schoolHomerooms && nextschoolHomerooms) {
+      this.setState({
+        ...this.state,
+        schoolHomerooms: nextschoolHomerooms.toJS()
+      });
+    }
   }
 
   _handleInputChange(event) {
@@ -27,6 +52,21 @@ class AdministrationForm extends Component {
       ...this.props.adminUser,
       [name]: value
     });
+  }
+
+  _handleSchoolChange(event) {
+    const { value } = event.target;
+
+    if (value) {
+      this.props.getSchoolHomerooms(value);
+    } else {
+      this.setState({
+        ...this.state,
+        schoolHomerooms: []
+      });
+    }
+
+    this._handleInputChange(event);
   }
 
   _renderRoles() {
@@ -45,6 +85,16 @@ class AdministrationForm extends Component {
     return schools.map((school, key) => (
       <MenuItem key={key} value={ school.get('schId') }>
         { school.get('schName') }
+      </MenuItem>
+    ));
+  }
+
+  _renderSchoolHomerooms() {
+    const { schoolHomerooms } = this.state;
+
+    return schoolHomerooms.map((homeroom, key) => (
+      <MenuItem key={key} value={ homeroom.id }>
+        { homeroom.name }
       </MenuItem>
     ));
   }
@@ -151,9 +201,10 @@ class AdministrationForm extends Component {
             <Select
                 primarytext=""
                 name='schoolId'
-                onChange={(e) => { this._handleInputChange(e) }}
-                children={this._renderSchools()}
+                onChange={(e) => { this._handleSchoolChange(e) }}
                 value={adminUser.schoolId || ''}>
+              <MenuItem value={null} primarytext="Select School"/>
+              {this._renderSchools()}
             </Select>
             {errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}
           </FormControl>
@@ -165,9 +216,8 @@ class AdministrationForm extends Component {
                 name='homeroomId'
                 onChange={(e) => { this._handleInputChange(e) }}
                 value={adminUser.homeroomId || ''}>
-              <MenuItem value={null} primaryText="" />
-              <MenuItem value='1'>Homeroom #1</MenuItem>
-              <MenuItem value='2'>Homeroom #2</MenuItem>
+              <MenuItem value={null} primarytext=""/>
+              {this._renderSchoolHomerooms()}
             </Select>
             {errors && errors.get('homeroom') && <FormHelperText error>{ errors.get('homeroom').get(0) }</FormHelperText>}
           </FormControl>
@@ -181,10 +231,12 @@ AdministrationForm = connect(
   (state) => ({
     schools: selectSchools(state),
     roles: selectRoles(state),
+    getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state),
   }),
   (dispatch) => ({
     getSchools: () => { dispatch(getSchools()) },
     getRoles: () => { dispatch(getRoles()) },
+    getSchoolHomerooms: (schoolId) => { dispatch(getSchoolHomerooms(schoolId)) }
   })
 )(AdministrationForm);
 

@@ -34,8 +34,8 @@ class CreateStudentModal extends Component {
         lastName: '',
         gender: null,
         phone: '',
-        schoolId: 1,
-        homeroom: 1,
+        schoolId: '',
+        homeroomId: '',
       }
     };
   }
@@ -62,6 +62,9 @@ class CreateStudentModal extends Component {
   };
 
   _close () {
+    this.setState({
+      student: {}
+    });
     this.props.onClose();
     this.props.resetCreateRequest();
   }
@@ -109,7 +112,7 @@ class CreateStudentModal extends Component {
             raised
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Add New User
+            Add New Student
           </Button>
         </DialogActions>
       </Modal>

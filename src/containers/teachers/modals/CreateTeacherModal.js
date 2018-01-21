@@ -34,8 +34,8 @@ class CreateTeacherModal extends Component {
         lastName: '',
         gender: null,
         phone: '',
-        schoolId: 1,
-        homeroom: 1,
+        schoolId: '',
+        homeroomId: '',
       }
     };
   }
@@ -50,11 +50,6 @@ class CreateTeacherModal extends Component {
     }
   }
 
-  _close () {
-    this.props.resetCreateRequest();
-    this.props.onClose();
-  };
-
   _onChange (teacher) {
     this.setState({ teacher });
   };
@@ -65,6 +60,14 @@ class CreateTeacherModal extends Component {
       this.state.teacher
     );
   };
+
+  _close () {
+    this.setState({
+      teacher: {}
+    });
+    this.props.onClose();
+    this.props.resetCreateRequest();
+  }
 
   render() {
     const { isOpen, createRequest } = this.props;
@@ -84,22 +87,23 @@ class CreateTeacherModal extends Component {
               )}
             </IconButton>
             <Typography type='title' color='inherit' >
-              Create user
+              Create Teacher
             </Typography>
           </Toolbar>
         </AppBar>
 
         <DialogContent className='m--margin-top-25'>
-          <DialogContentText>
-            {/*{errorMessage && <span>{errorMessage}</span>}*/}
-          </DialogContentText>
           <form id='create-teacher-form' onSubmit={(e) => { this._onSubmit(e) }}>
-            <TeacherForm
-              onChange={(teacher) => { this._onChange(teacher) }}
-              teacher={this.state.teacher}
-              errors={errors}/>
+            <DialogContentText>
+              {/*{errorMessage && <span>{errorMessage}</span>}*/}
+            </DialogContentText>
+              <TeacherForm
+                onChange={(teacher) => { this._onChange(teacher) }}
+                teacher={this.state.teacher}
+                errors={errors}/>
           </form>
         </DialogContent>
+        <Divider className='full-width'/>
         <DialogActions>
           <Button
             type='submit'
@@ -108,7 +112,7 @@ class CreateTeacherModal extends Component {
             raised
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Create Teacher
+            Add New Teacher
           </Button>
         </DialogActions>
       </Modal>

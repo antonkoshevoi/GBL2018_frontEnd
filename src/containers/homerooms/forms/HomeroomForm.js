@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography, Tab, Tabs, Paper } from 'material-ui';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
-import { getSchoolTeachers, getSchoolStudents } from "../../../redux/schools/actions";
-import {selectGetSchoolStudentsRequest, selectGetSchoolTeachersRequest} from "../../../redux/schools/selectors";
-import { selectSchools } from '../../../redux/homerooms/selectors';
-import { getSchools } from '../../../redux/homerooms/actions';
+import {getSchoolTeachers, getSchoolStudents, getSchools} from "../../../redux/schools/actions";
+import {
+    selectGetSchoolStudentsRequest, selectGetSchoolTeachersRequest,
+    selectSchools
+} from "../../../redux/schools/selectors";
 import DatePicker from '../../../components/ui/DatePicker';
 
 function TabContainer(props) {
@@ -48,9 +49,10 @@ class HomeroomForm extends Component {
   };
 
   componentDidMount() {
-    if (this.props.homeroom.id) {
+    const { homeroom } = this.props;
 
-      const studentIds = this.props.homeroom.students.map((student) => {
+    if (homeroom.id) {
+      const studentIds = homeroom.students.map((student) => {
         return student.id.toString();
       });
 
@@ -59,8 +61,9 @@ class HomeroomForm extends Component {
         studentIds: studentIds
       });
 
-      this.props.getSchoolTeachers(this.props.homeroom.schoolId);
-      this.props.getSchoolStudents(this.props.homeroom.schoolId);
+      const { getSchoolTeachers, getSchoolStudents } = this.props;
+      getSchoolTeachers(homeroom.schoolId);
+      getSchoolStudents(homeroom.schoolId);
     }
 
     this.props.getSchools();
@@ -95,10 +98,10 @@ class HomeroomForm extends Component {
     }
   }
 
-  _handleStartDateChange(m) {
-    this.props.onChange({
+  _handleDateChange(m, dateField) {
+      this.props.onChange({
       ...this.props.homeroom,
-      startDate: m
+      [dateField]: m
     });
   }
 
@@ -202,11 +205,11 @@ class HomeroomForm extends Component {
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
               <InputLabel htmlFor='name-error'>Name</InputLabel>
               <Input
-                  name='name'
-                  margin='dense'
-                  fullWidth
-                  value={homeroom.name || ''}
-                  onChange={(e) => { this._handleInputChange(e) }}/>
+                name='name'
+                margin='dense'
+                fullWidth
+                value={homeroom.name || ''}
+                onChange={(e) => { this._handleInputChange(e) }}/>
                 {errors && errors.get('name') && <FormHelperText error>{ errors.get('name').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
@@ -214,45 +217,36 @@ class HomeroomForm extends Component {
               <DatePicker
                 name='startDate'
                 value={homeroom.startDate || null}
-                onChange={(m) => { this._handleStartDateChange(m) }}
+                onChange={(m) => { this._handleDateChange(m, 'startDate') }}
               />
-              {/*<Input*/}
-                  {/*name='startDate'*/}
-                  {/*margin='dense'*/}
-                  {/*fullWidth*/}
-                  {/*value={homeroom.startDate || ''}*/}
-                  {/*onChange={(e) => { this._handleInputChange(e) }}/>*/}
-                {errors && errors.get('startDate') && <FormHelperText error>{ errors.get('startDate').get(0) }</FormHelperText>}
+              {errors && errors.get('startDate') && <FormHelperText error>{ errors.get('startDate').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
               <InputLabel htmlFor='name-error'>End Date</InputLabel>
-              <Input
-                  name='endDate'
-                  margin='dense'
-                  fullWidth
-                  value={homeroom.endDate || ''}
-                  onChange={(e) => { this._handleInputChange(e) }}/>
-                {errors && errors.get('endDate') && <FormHelperText error>{ errors.get('endDate').get(0) }</FormHelperText>}
+              <DatePicker
+                name='endDate'
+                value={homeroom.endDate || null}
+                onChange={(m) => { this._handleDateChange(m, 'endDate') }}
+              />
+              {errors && errors.get('endDate') && <FormHelperText error>{ errors.get('endDate').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
               <InputLabel htmlFor='name-error'>Enrollment Start Date</InputLabel>
-              <Input
-                  name='enrollmentStartDate'
-                  margin='dense'
-                  fullWidth
-                  value={homeroom.enrollmentStartDate || ''}
-                  onChange={(e) => { this._handleInputChange(e) }}/>
-                {errors && errors.get('enrollmentStartDate') && <FormHelperText error>{ errors.get('enrollmentStartDate').get(0) }</FormHelperText>}
+              <DatePicker
+                name='enrollmentStartDate'
+                value={homeroom.enrollmentStartDate || null}
+                onChange={(m) => { this._handleDateChange(m, 'enrollmentStartDate') }}
+              />
+              {errors && errors.get('enrollmentStartDate') && <FormHelperText error>{ errors.get('enrollmentStartDate').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
               <InputLabel htmlFor='name-error'>Enrollment End Date</InputLabel>
-              <Input
-                  name='enrollmentEndDate'
-                  margin='dense'
-                  fullWidth
-                  value={homeroom.enrollmentEndDate || ''}
-                  onChange={(e) => { this._handleInputChange(e) }}/>
-                {errors && errors.get('enrollmentEndDate') && <FormHelperText error>{ errors.get('enrollmentEndDate').get(0) }</FormHelperText>}
+              <DatePicker
+                name='enrollmentEndDate'
+                value={homeroom.enrollmentEndDate || null}
+                onChange={(m) => { this._handleDateChange(m, 'enrollmentEndDate') }}
+              />
+              {errors && errors.get('enrollmentEndDate') && <FormHelperText error>{ errors.get('enrollmentEndDate').get(0) }</FormHelperText>}
             </FormControl>
             </div>
           </TabContainer>}

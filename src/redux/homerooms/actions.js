@@ -7,10 +7,6 @@ export const GET_SINGLE_RECORD_SUCCESS = '[Homerooms] GET_SINGLE_RECORD_SUCCESS'
 export const GET_SINGLE_RECORD_FAIL = '[Homerooms] GET_SINGLE_RECORD_FAIL';
 export const RESET_GET_SINGLE_RECORD_REQUEST = '[Homerooms] RESET_GET_SINGLE_RECORD_REQUEST';
 
-export const GET_SCHOOLS = '[Homerooms] GET_SCHOOLS';
-export const GET_SCHOOLS_SUCCESS = '[Homerooms] GET_SCHOOLS_SUCCESS';
-export const GET_SCHOOLS_FAIL = '[Homerooms] GET_SCHOOLS_FAIL';
-
 export const CREATE = '[Homerooms] CREATE';
 export const CREATE_SUCCESS = '[Homerooms] CREATE_SUCCESS';
 export const CREATE_FAIL = '[Homerooms] CREATE_FAIL';
@@ -20,14 +16,6 @@ export const UPDATE = '[Homerooms] UPDATE';
 export const UPDATE_SUCCESS = '[Homerooms] UPDATE_SUCCESS';
 export const UPDATE_FAIL = '[Homerooms] UPDATE_FAIL';
 export const RESET_UPDATE_REQUEST = '[Homerooms] RESET_UPDATE_REQUEST';
-
-export const GET_SCHOOL_TEACHERS = '[Homerooms] GET_SCHOOL_TEACHERS';
-export const GET_SCHOOL_TEACHERS_SUCCESS = '[Homerooms] GET_SCHOOL_TEACHERS_SUCCESS';
-export const GET_SCHOOL_TEACHERS_FAIL = '[Homerooms] GET_SCHOOL_TEACHERS_FAIL';
-
-export const GET_SCHOOL_STUDENTS = '[Homerooms] GET_SCHOOL_STUDENTS';
-export const GET_SCHOOL_STUDENTS_SUCCESS = '[Homerooms] GET_SCHOOL_STUDENTS_SUCCESS';
-export const GET_SCHOOL_STUDENTS_FAIL = '[Homerooms] GET_SCHOOL_STUDENTS_FAIL';
 
 export function getRecords(params = {}) {
   return {
@@ -49,17 +37,6 @@ export function resetGetSingleRecordRequest () {
   return {
     type: RESET_GET_SINGLE_RECORD_REQUEST
   }
-}
-/**
- * Get schools
- */
-export function getSchools(params = {}) {
-  return {
-    types: [GET_SCHOOLS, GET_SCHOOLS_SUCCESS, GET_SCHOOLS_FAIL],
-    promise: (apiClient) => apiClient.get('schools', Object.assign({}, params, {
-      perPage: 0
-    }))
-  };
 }
 /**
  * Create
@@ -88,27 +65,4 @@ export function resetUpdateRequest () {
   return {
     type: RESET_UPDATE_REQUEST
   }
-}
-
-/**
- * Homerooms School Teachers
- */
-export function getSchoolTeachers(id) {
-    return {
-        types: [GET_SCHOOL_TEACHERS, GET_SCHOOL_TEACHERS_SUCCESS, GET_SCHOOL_TEACHERS_FAIL],
-        promise: (apiClient) => apiClient.get(`schools/teachers/${id}`, {
-            perPage: 0
-        })
-    };
-}
-/**
- * Homerooms School Students
- */
-export function getSchoolStudents(id) {
-    return {
-        types: [GET_SCHOOL_STUDENTS, GET_SCHOOL_STUDENTS_SUCCESS, GET_SCHOOL_STUDENTS_FAIL],
-        promise: (apiClient) => apiClient.get(`schools/students/${id}`, {
-            perPage: 0
-        })
-    };
 }

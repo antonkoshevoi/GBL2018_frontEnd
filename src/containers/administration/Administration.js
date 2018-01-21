@@ -27,27 +27,30 @@ class Administration extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const success = this.props.getSingleRecordRequest.get('success');
-    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
-
-    if(!success && nextSuccess) {
-      this._openEditDialog();
-    }
-  }
-
   componentDidMount () {
     const { getRecords } = this.props;
     getRecords();
   }
 
+  /**
+   * Monitor props like events
+   */
+  componentWillReceiveProps(nextProps) {
+    this._openEditDialogOnSingleRequestSuccess(nextProps);
+  }
+
+  /**
+   * Create Dialog
+   */
   _openCreateDialog = () => {
     this.setState({ createModalIsOpen: true });
   };
   _closeCreateDialog = () => {
     this.setState({ createModalIsOpen: false });
   };
-
+  /**
+   * Edit Dialog
+   */
   _openEditDialog = () => {
     this.setState({ editModalIsOpen: true });
   };
@@ -56,9 +59,17 @@ class Administration extends Component {
   };
 
   /**
-   *
-   * @private
+   * Records
    */
+  _getRecords () {
+    const { sorters, filters, page, perPage } = this.state;
+
+    this.props.getRecords({
+      orderBy: buildSortersQuery(sorters),
+      filter: filters,
+      page, perPage
+    });
+  }
   _renderRecords () {
     const { records } = this.props;
     const loading = this.props.getRecordsRequest.get('loading');
@@ -91,29 +102,35 @@ class Administration extends Component {
     ));
   }
 
+  /**
+   * Change page if necessary after creating a new record
+   */
+  _onCreate () {
+    const { pagination } = this.props;
+    const page = pagination.get('page');
+
+    if(this.state.page !== page) {
+      this._goToPage(page);
+    }
+  }
+
+  /**
+   * Edit
+   */
   _editRecord (id) {
     this.props.getSingleRecord(id);
-    this._openEditDialog();
+  }
+  _openEditDialogOnSingleRequestSuccess(nextProps) {
+    const success = this.props.getSingleRecordRequest.get('success');
+    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
+
+    if(!success && nextSuccess) {
+      this._openEditDialog();
+    }
   }
 
   /**
-   *
-   * @private
-   */
-  _getRecords () {
-    const { sorters, filters, page, perPage } = this.state;
-
-    this.props.getRecords({
-      orderBy: buildSortersQuery(sorters),
-      filter: filters,
-      page, perPage
-    });
-  }
-
-  /**
-   *
-   * @param name
-   * @private
+   * Records
    */
   _sort (name) {
     let sorters = {};
@@ -126,13 +143,7 @@ class Administration extends Component {
 
     this.setState({ sorters }, this._getRecords);
   }
-
-  /**
-   *
-   * @param value
-   * @private
-   */
-  _search(value) {
+  _search (value) {
     let filters = {
       composed: value,
       // username: value,
@@ -141,14 +152,11 @@ class Administration extends Component {
       // email: value,
     };
 
-    this.setState({ filters }, this._getRecords);
+    this.setState({
+      page: 1,
+      filters
+    }, this._getRecords);
   }
-
-  /**
-   *
-   * @param perPage
-   * @private
-   */
   _selectPerPage (perPage) {
     const total = this.props.pagination.get('total');
     const totalPages = Math.ceil(total / perPage);
@@ -156,23 +164,8 @@ class Administration extends Component {
 
     this.setState({ perPage, page }, this._getRecords)
   }
-
-  /**
-   *
-   * @param page
-   * @private
-   */
   _goToPage (page) {
     this.setState({ page }, this._getRecords)
-  }
-
-  _onCreate () {
-    const { pagination } = this.props;
-    const page = pagination.get('page');
-
-    if(this.state.page !== page) {
-      this._goToPage(page);
-    }
   }
 
   render() {
@@ -285,6 +278,5 @@ Administration = connect(
     getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) }
   })
 )(Administration);
-
 
 export default translate('administration')(Administration);
