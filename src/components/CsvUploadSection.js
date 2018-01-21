@@ -52,7 +52,12 @@ class CsvUploadSection extends Component {
   }
 
   _handleSchoolChange(e) {
-    this.setState({schoolId: e.target.value})
+    document.getElementById('file-input').value = '';
+
+    this.setState({
+      schoolId: e.target.value,
+      file: undefined
+    })
   }
 
   _handleFileChange(e) {
@@ -126,7 +131,7 @@ class CsvUploadSection extends Component {
               <div className={`col-sm-6 ${loading || !schoolId ? ' not-allowed' : ''}` }>
                 <div className={`react-csv-input ${loading || !schoolId ? ' disabled' : 'fdsfsf'}`}>
                   <label>Select CSV file</label>
-                  <input className="csv-input" type="file" accept="text/csv" onChange={e => this._handleFileChange(e)} />
+                  <input id='file-input' className="csv-input" type="file" accept="text/csv" onChange={e => this._handleFileChange(e)} />
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import CsvUploadSection from "../../components/CsvUploadSection";
 import Insctruction from "../../components/ui/Insctruction";
 import { connect } from 'react-redux';
-import { bulkUpload } from '../../redux/students/actions';
+import { bulkUpload, resetBulkUploadRequest } from '../../redux/students/actions';
 import { getSchools } from '../../redux/schools/actions';
 import { selectBulkUploadRequest } from '../../redux/students/selectors';
 import { selectSchools } from '../../redux/schools/selectors';
@@ -62,6 +62,10 @@ class StudentsBulkUpload extends Component {
     this.props.getSchools();
   }
 
+  componentWillUnmount () {
+    this.props.resetBulkUploadRequest();
+  }
+
   render() {
     const { schools, upload, bulkUploadRequest } = this.props;
 
@@ -90,10 +94,12 @@ StudentsBulkUpload = connect(
   (dispatch) => ({
     getSchools: () => { dispatch(getSchools()) },
     upload: (file, schoolId) => {
+      dispatch(resetBulkUploadRequest());
       dispatch(bulkUpload(file, {
         schoolId
       }));
-    }
+    },
+    resetBulkUploadRequest: () => { dispatch(resetBulkUploadRequest()) }
   })
 )(StudentsBulkUpload);
 
