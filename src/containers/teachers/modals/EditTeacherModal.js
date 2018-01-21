@@ -6,7 +6,8 @@ import {
   DialogContentText,
   Icon, IconButton,
   Toolbar, Typography,
-  Divider, Button, DialogActions
+  Divider, Button,
+  DialogActions
 } from 'material-ui';
 import { connect } from 'react-redux';
 import {
@@ -43,7 +44,7 @@ class EditTeacherModal extends Component {
     if (!record && nextRecord) {
       this.setState({
         id: nextRecord.get('id'),
-          teacher: nextRecord.toJS()
+        teacher: nextRecord.toJS()
       });
     }
 
@@ -61,9 +62,9 @@ class EditTeacherModal extends Component {
       id: undefined,
       teacher: {}
     });
+    this.props.onClose();
     this.props.resetUpdateRequest();
     this.props.resetGetSingleRecordRequest();
-    this.props.onClose();
   };
 
   _onChange (teacher) {
@@ -96,7 +97,7 @@ class EditTeacherModal extends Component {
               )}
             </IconButton>
             <Typography type="title" color="inherit" >
-              Edit user
+              Edit Teacher
             </Typography>
           </Toolbar>
         </AppBar>

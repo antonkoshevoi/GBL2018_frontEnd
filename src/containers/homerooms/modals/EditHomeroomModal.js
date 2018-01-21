@@ -10,7 +10,7 @@ import {
 } from 'material-ui';
 import { connect } from 'react-redux';
 import {
-  selectGetSingleRecordRequest, selectSchools,
+  selectGetSingleRecordRequest,
   selectUpdateRequest
 } from '../../../redux/homerooms/selectors';
 import {

@@ -27,13 +27,6 @@ export const selectRecords = createSelector(
   (subState) => subState.get('records')
 );
 /**
- * Schools
- */
-export const selectSchools = createSelector(
-    selectAdministrationDomain,
-  (subState) => subState.get('schools')
-);
-/**
  * Roles
  */
 export const selectRoles = createSelector(

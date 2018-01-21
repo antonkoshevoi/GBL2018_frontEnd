@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
 import {
-  CREATE_FAIL, CREATE_SUCCESS, GET_RECORDS_FAIL, GET_SCHOOLS_FAIL,
+  CREATE_FAIL, CREATE_SUCCESS, GET_RECORDS_FAIL,
   GET_SINGLE_RECORD_FAIL, UPDATE_FAIL,
   UPDATE_SUCCESS
 } from './actions';
@@ -15,7 +15,6 @@ const homeroomSagas = all([
   yieldErrorToasts([
     GET_RECORDS_FAIL,
     GET_SINGLE_RECORD_FAIL,
-    GET_SCHOOLS_FAIL,
     CREATE_FAIL,
     UPDATE_FAIL
   ]),

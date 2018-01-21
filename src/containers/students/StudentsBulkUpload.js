@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import CsvUploadSection from "../../components/CsvUploadSection";
 import Insctruction from "../../components/ui/Insctruction";
 import { connect } from 'react-redux';
-import { bulkUpload, getSchools } from '../../redux/students/actions';
-import { selectBulkUploadRequest, selectSchools } from '../../redux/students/selectors';
+import { bulkUpload } from '../../redux/students/actions';
+import { getSchools } from '../../redux/schools/actions';
+import { selectBulkUploadRequest } from '../../redux/students/selectors';
+import { selectSchools } from '../../redux/schools/selectors';
 
 class StudentsBulkUpload extends Component {
 

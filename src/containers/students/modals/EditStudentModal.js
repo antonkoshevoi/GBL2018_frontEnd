@@ -97,7 +97,7 @@ class EditStudentModal extends Component {
               )}
             </IconButton>
             <Typography type="title" color="inherit" >
-              Edit user
+              Edit Student
             </Typography>
           </Toolbar>
         </AppBar>
@@ -122,7 +122,7 @@ class EditStudentModal extends Component {
             raised
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Update User
+            Update Student
           </Button>
         </DialogActions>
       </Modal>

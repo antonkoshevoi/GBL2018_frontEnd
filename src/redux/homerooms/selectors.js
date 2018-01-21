@@ -27,13 +27,6 @@ export const selectRecords = createSelector(
   (subState) => subState.get('records')
 );
 /**
- * Schools
- */
-export const selectSchools = createSelector(
-    selectHomeroomsDomain,
-  (subState) => subState.get('schools')
-);
-/**
  * Pagiantion
  */
 export const selectPagination = createSelector(
@@ -54,18 +47,4 @@ export const selectCreateRequest = createSelector(
 export const selectUpdateRequest = createSelector(
     selectHomeroomsDomain,
   (subState) => subState.get('updateRequest')
-);
-/**
- * Homerooms School Teachers
- */
-export const selectGetSchoolTeachersRequest = createSelector(
-    selectHomeroomsDomain,
-    (subState) => subState.get('getSchoolTeachersRequest')
-);
-/**
- * Homerooms School Students
- */
-export const selectGetSchoolStudentsRequest = createSelector(
-    selectHomeroomsDomain,
-    (subState) => subState.get('getSchoolStudentsRequest')
 );
