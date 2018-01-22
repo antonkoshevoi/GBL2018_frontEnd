@@ -12,7 +12,7 @@ class Sidebar extends Component {
     }
 
     render() {
-        const {title,data,productType} = this.props
+        const {title,data,dataType} = this.props
         return (
             <div>
                 <div className="row">
@@ -20,7 +20,7 @@ class Sidebar extends Component {
                         <h3 className="sidebarTitle">{title}</h3>
                     </div>
                     <div className="col-md-6 text-right m--padding-right-10">
-                        <NavLink to="/store/products" params={{type:productType}} className="btn m-btn btn-sm btn-danger">All</NavLink>
+                        <NavLink to={`/store/products/${dataType}`}  className="btn m-btn btn-sm btn-danger">All</NavLink>
                     </div>
                 </div>
                <div>
