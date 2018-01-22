@@ -11,6 +11,14 @@ import { selectSchools } from '../../redux/schools/selectors';
 class HomeroomsBulkUpload extends Component {
 
   state = {
+    exampleName: 'homerooms.csv',
+    fields: [
+        'name',
+        'startDate',
+        'endDate',
+        'enrollmentStartDate',
+        'enrollmentEndDate'
+    ],
     instruction: [
       {
         title: 'Select the School, to which the homeroom will be assigned, from the list',
@@ -61,6 +69,8 @@ class HomeroomsBulkUpload extends Component {
       <div className="row">
         <div className="col-sm-6">
           <CsvUploadSection
+            exampleName = {this.state.exampleName}
+            fields = {this.state.fields}
             schools={schools}
             onUpload={upload}
             uploadRequest={bulkUploadRequest}

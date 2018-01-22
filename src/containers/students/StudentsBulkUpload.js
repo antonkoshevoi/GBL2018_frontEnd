@@ -10,6 +10,17 @@ import { selectSchools } from '../../redux/schools/selectors';
 class StudentsBulkUpload extends Component {
 
   state = {
+      exampleName: 'students.csv',
+      fields: [
+          'username',
+          'password',
+          'firstname',
+          'lastname',
+          'email',
+          'phone',
+          'homeroom',
+          'student_id'
+      ],
     instruction: [
       {
         title: 'Select the School, to which the users will be assigned, from the list',
@@ -69,6 +80,8 @@ class StudentsBulkUpload extends Component {
       <div className="row">
         <div className="col-sm-6">
           <CsvUploadSection
+            exampleName = {this.state.exampleName}
+            fields = {this.state.fields}
             schools={schools}
             onUpload={upload}
             uploadRequest={bulkUploadRequest}

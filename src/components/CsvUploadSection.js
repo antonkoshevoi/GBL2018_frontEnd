@@ -10,22 +10,23 @@ import { CSVLink } from "react-csv";
 import PortletWidgets from './ui/PortletWidgets';
 import LinearProgress from './ui/LinearProgress';
 
-const requiredCsvFields = [
-  'username',
-  'password',
-  'firstname',
-  'lastname',
-  'email',
-  'phone',
-  'homeroom',
-  'student_id'
-];
-
-const csvTemplate = [
-  [...requiredCsvFields]
-];
+// const requiredCsvFields = [
+//   'username',
+//   'password',
+//   'firstname',
+//   'lastname',
+//   'email',
+//   'phone',
+//   'homeroom',
+//   'student_id'
+// ];
+//
+// const csvTemplate = [
+//   [...requiredCsvFields]
+// ];
 
 class CsvUploadSection extends Component {
+
   static propTypes = {
     schools: PropTypes.any.isRequired,
     onUpload: PropTypes.func.isRequired,
@@ -34,7 +35,7 @@ class CsvUploadSection extends Component {
 
   state = {
     schoolId: undefined,
-    file: undefined
+    file: undefined,
   };
 
   _selectSchool(event) {
@@ -78,6 +79,12 @@ class CsvUploadSection extends Component {
     const uploading = loading && progress < 100;
     const success = uploadRequest.get('success');
     const results = uploadRequest.get('results');
+    const exampleName = this.props.exampleName;
+    const csvTemplate = [
+        [...this.props.fields]
+    ];
+
+    console.log(csvTemplate);
 
     return (
       <div>
@@ -98,7 +105,7 @@ class CsvUploadSection extends Component {
                   <h6>
                     You may download this .csv template to use it as pattern for your csv file. Kindly make sure that you have a valid .csv format before uploading to the system.
                   </h6>
-                  <CSVLink data={csvTemplate} filename="students.csv" className="btn btn-success">Download</CSVLink>
+                  <CSVLink data={csvTemplate} filename={exampleName} className="btn btn-success">Download</CSVLink>
                 </div>
             </div>
             <div className="row" style={{marginLeft: 0}}>
