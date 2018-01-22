@@ -17,6 +17,10 @@ export const UPDATE_SUCCESS = '[Teachers] UPDATE_SUCCESS';
 export const UPDATE_FAIL = '[Teachers] UPDATE_FAIL';
 export const RESET_UPDATE_REQUEST = '[Teachers] RESET_UPDATE_REQUEST';
 
+export const DELETE = '[Teachers] DELETE';
+export const DELETE_SUCCESS = '[Teachers] DELETE_SUCCESS';
+export const DELETE_FAIL = '[Teachers] DELETE_FAIL';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -65,4 +69,13 @@ export function resetUpdateRequest () {
   return {
     type: RESET_UPDATE_REQUEST
   }
+}
+/**
+ * Delete
+ */
+export function deleteRecord(id, params = {}) {
+  return {
+    types: [DELETE, DELETE_SUCCESS, DELETE_FAIL],
+    promise: (apiClient) => apiClient.delete(`teachers/${id}`, params)
+  };
 }

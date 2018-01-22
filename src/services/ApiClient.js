@@ -89,6 +89,12 @@ export default class ApiClient
     ).then(response => response.data);
   }
 
+  delete (uri, params = {}, headers = {}, configs = {}) {
+    return axios.delete(`${env.API_URI}/${uri}`,
+      this.mergeConfigs(params, headers, configs)
+    ).then(response => response.data);
+  }
+
   upload (uri, file, data, params = {}, headers = {}, configs = {}) {
     let formData = new FormData();
     formData.append('file', file);

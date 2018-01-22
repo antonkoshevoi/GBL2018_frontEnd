@@ -17,6 +17,10 @@ export const UPDATE_SUCCESS = '[Homerooms] UPDATE_SUCCESS';
 export const UPDATE_FAIL = '[Homerooms] UPDATE_FAIL';
 export const RESET_UPDATE_REQUEST = '[Homerooms] RESET_UPDATE_REQUEST';
 
+export const DELETE = '[Homerooms] DELETE';
+export const DELETE_SUCCESS = '[Homerooms] DELETE_SUCCESS';
+export const DELETE_FAIL = '[Homerooms] DELETE_FAIL';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -65,4 +69,13 @@ export function resetUpdateRequest () {
   return {
     type: RESET_UPDATE_REQUEST
   }
+}
+/**
+ * Delete
+ */
+export function deleteRecord(id, params = {}) {
+  return {
+    types: [DELETE, DELETE_SUCCESS, DELETE_FAIL],
+    promise: (apiClient) => apiClient.delete(`homeroom/${id}`, params)
+  };
 }

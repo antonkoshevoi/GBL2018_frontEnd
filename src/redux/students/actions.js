@@ -25,6 +25,10 @@ export const BULK_UPLOAD_SUCCESS = '[Students] BULK_UPLOAD_SUCCESS';
 export const BULK_UPLOAD_FAIL = '[Students] BULK_UPLOAD_FAIL';
 export const RESET_BULK_UPLOAD_REQUEST = '[Students] RESET_BULK_UPLOAD_REQUEST';
 
+export const DELETE = '[Students] DELETE';
+export const DELETE_SUCCESS = '[Students] DELETE_SUCCESS';
+export const DELETE_FAIL = '[Students] DELETE_FAIL';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -93,4 +97,13 @@ export function resetBulkUploadRequest () {
   return {
     type: RESET_BULK_UPLOAD_REQUEST
   }
+}
+/**
+ * Delete
+ */
+export function deleteRecord(id, params = {}) {
+  return {
+    types: [DELETE, DELETE_SUCCESS, DELETE_FAIL],
+    promise: (apiClient) => apiClient.delete(`students/${id}`, params)
+  };
 }

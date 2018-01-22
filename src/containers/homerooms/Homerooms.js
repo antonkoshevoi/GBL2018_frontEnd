@@ -5,14 +5,16 @@ import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
 import {
+  selectDeleteRequest,
   selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination,
   selectRecords
 } from '../../redux/homerooms/selectors';
-import {getRecords, getSingleRecord} from '../../redux/homerooms/actions';
+import {deleteRecord, getRecords, getSingleRecord} from '../../redux/homerooms/actions';
 import Pagination from '../../components/ui/Pagination';
 import CreateHomeroomModal from './modals/CreateHomeroomModal';
 import EditHomeroomModal from "./modals/EditHomeroomModal";
 import SearchInput from "../../components/ui/SearchInput";
+import DeleteButton from "../../components/ui/DeleteButton";
 
 class Homerooms extends Component {
   constructor(props) {
@@ -28,12 +30,8 @@ class Homerooms extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const success = this.props.getSingleRecordRequest.get('success');
-    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
-
-    if(!success && nextSuccess) {
-      this._openEditDialog();
-    }
+    this._openEditDialogOnSingleRequestSuccess(nextProps);
+    this._deleteRequestSuccess(nextProps);
   }
 
   componentDidMount () {
@@ -84,6 +82,7 @@ class Homerooms extends Component {
         <Td width='132px'>{record.get('studentsCount')}</Td>
         <Td width='100px'>
           <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
+          <DeleteButton onClick={() => { this._deleteRecord(record.get('id')) }}/>
         </Td>
       </Row>
     ));
@@ -91,6 +90,26 @@ class Homerooms extends Component {
 
   _editRecord (id) {
     this.props.getSingleRecord(id);
+  }
+  _openEditDialogOnSingleRequestSuccess(nextProps) {
+    const success = this.props.getSingleRecordRequest.get('success');
+    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
+
+    if(!success && nextSuccess) {
+      this._openEditDialog();
+    }
+  }
+
+  _deleteRecord (id) {
+    this.props.deleteRecord(id);
+  }
+  _deleteRequestSuccess(nextProps) {
+    const deleteSuccess = this.props.getDeleteRequest.get('success');
+    const nextDeleteSuccess = nextProps.getDeleteRequest.get('success');
+
+    if(!deleteSuccess && nextDeleteSuccess) {
+      this.props.getRecords();
+    }
   }
 
   /**
@@ -137,7 +156,10 @@ class Homerooms extends Component {
       // teacher: value,
     };
 
-    this.setState({ filters }, this._getRecords);
+    this.setState({
+      page: 1,
+      filters
+    }, this._getRecords);
   }
 
   /**
@@ -271,12 +293,14 @@ Homerooms = connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
+    getDeleteRequest: selectDeleteRequest(state),
     pagination: selectPagination(state),
     records: selectRecords(state),
   }),
   (dispatch) => ({
     getRecords: (params = {}) => { dispatch(getRecords(params)) },
-    getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) }
+    getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
+    deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) }
   })
 )(Homerooms);
 

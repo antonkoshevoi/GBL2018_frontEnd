@@ -1,7 +1,8 @@
 import {
   GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, CREATE, CREATE_SUCCESS, CREATE_FAIL,
   RESET_CREATE_REQUEST, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
-  GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS
+  GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS,
+  DELETE, DELETE_SUCCESS, DELETE_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -28,6 +29,14 @@ const initialState = Immutable.fromJS({
     errors: {}
   },
   updateRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,
+    errorCode: null,
+    errors: {}
+  },
+  deleteRequest: {
     loading: false,
     success: false,
     fail: false,
@@ -190,6 +199,35 @@ export default function reducer (state = initialState, action) {
     case RESET_UPDATE_REQUEST:
       return state
         .set('updateRequest', initialState.get('updateRequest'));
+    /**
+     * Delete
+     */
+    case DELETE:
+      return state
+        .set('deleteRequest', state.get('deleteRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)
+          .remove('errors')
+          .remove('errorMessage')
+          .remove('errorCode')
+        );
+    case DELETE_SUCCESS:
+      return state
+        .set('deleteRequest', state.get('deleteRequest')
+          .set('loading', false)
+          .set('success', true)
+        );
+    case DELETE_FAIL:
+      const deleteError = action.error.response.data;
+      return state
+        .set('deleteRequest', state.get('deleteRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('errorCode', deleteError.code)
+          .set('errorMessage', deleteError.message)
+          .set('errors', deleteError.code === 422 ? Immutable.fromJS(deleteError.errors) : undefined)
+        );
     /**
      * default
      */

@@ -48,3 +48,10 @@ export const selectUpdateRequest = createSelector(
     selectHomeroomsDomain,
   (subState) => subState.get('updateRequest')
 );
+/**
+ * Delete
+ */
+export const selectDeleteRequest = createSelector(
+  selectHomeroomsDomain,
+  (subState) => subState.get('deleteRequest')
+);

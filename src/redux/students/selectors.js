@@ -55,3 +55,10 @@ export const selectBulkUploadRequest = createSelector(
   selectStudentsDomain,
   (subState) => subState.get('bulkUploadRequest')
 );
+/**
+ * Delete
+ */
+export const selectDeleteRequest = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('deleteRequest')
+);
