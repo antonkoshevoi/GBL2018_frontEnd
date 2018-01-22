@@ -68,7 +68,7 @@ class CreateHomeroomModal extends Component {
     const errors = createRequest.get('errors');
 
     return (
-      <Modal isOpen={isOpen} onClose={() => this._close()} bigger>
+      <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
             <IconButton color="contrast" aria-label="Close">

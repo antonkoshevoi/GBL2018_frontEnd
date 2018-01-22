@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography, Tab, Tabs, Paper } from 'material-ui';
+import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography, Tab, Tabs, Paper, Grid } from 'material-ui';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
 import {getSchoolTeachers, getSchoolStudents, getSchools} from "../../../redux/schools/actions";
@@ -175,15 +175,28 @@ class HomeroomForm extends Component {
   _renderStudents() {
     const { schoolStudents } = this.state;
 
+    if (!schoolStudents.length) {
+      return <div>
+        <Typography type="display1" gutterBottom>
+          Assign students to homeroom
+        </Typography>
+        <Typography type="title" gutterBottom>
+          Select a school for students list to be available.
+        </Typography>
+      </div>
+    }
+
     return schoolStudents.map((student, key) => (
-      <FormControlLabel key={key}
-        control={<Checkbox
-          checked={this.state.studentIds.indexOf(student.id.toString()) > -1}
-          onChange={ (e) => {this._handleStudentsCheckboxChange(e) }}
-          value={student.id.toString()}
-        />}
-        label={student.firstName + ' ' + student.lastName}
-      />
+      <Grid item xs={4} key={key}>
+        <FormControlLabel
+          control={<Checkbox
+            checked={this.state.studentIds.indexOf(student.id.toString()) > -1}
+            onChange={ (e) => {this._handleStudentsCheckboxChange(e) }}
+            value={student.id.toString()}
+          />}
+          label={student.firstName + ' ' + student.lastName}
+        />
+      </Grid>
     ))
   }
 
@@ -193,7 +206,7 @@ class HomeroomForm extends Component {
 
     return (
       <div className='row'>
-        <Paper className='full-width '>
+        <Paper className='full-width' style={{boxShadow:'0 0 0 0'}}>
           <Tabs value={activeTab} onChange={this.handleChangeTab} centered>
             <Tab label="Details" />
             <Tab label="Administration" />
@@ -213,7 +226,7 @@ class HomeroomForm extends Component {
                 {errors && errors.get('name') && <FormHelperText error>{ errors.get('name').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-              <InputLabel htmlFor='name-error'>Start Date</InputLabel>
+              <InputLabel htmlFor='name-error' shrink={homeroom.startDate}>Start Date</InputLabel>
               <DatePicker
                 name='startDate'
                 value={homeroom.startDate || null}
@@ -222,7 +235,7 @@ class HomeroomForm extends Component {
               {errors && errors.get('startDate') && <FormHelperText error>{ errors.get('startDate').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-              <InputLabel htmlFor='name-error'>End Date</InputLabel>
+              <InputLabel htmlFor='name-error' shrink={homeroom.endDate}>End Date</InputLabel>
               <DatePicker
                 name='endDate'
                 value={homeroom.endDate || null}
@@ -231,7 +244,7 @@ class HomeroomForm extends Component {
               {errors && errors.get('endDate') && <FormHelperText error>{ errors.get('endDate').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-              <InputLabel htmlFor='name-error'>Enrollment Start Date</InputLabel>
+              <InputLabel htmlFor='name-error' shrink={homeroom.enrollmentStartDate}>Enrollment Start Date</InputLabel>
               <DatePicker
                 name='enrollmentStartDate'
                 value={homeroom.enrollmentStartDate || null}
@@ -240,7 +253,7 @@ class HomeroomForm extends Component {
               {errors && errors.get('enrollmentStartDate') && <FormHelperText error>{ errors.get('enrollmentStartDate').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-              <InputLabel htmlFor='name-error'>Enrollment End Date</InputLabel>
+              <InputLabel htmlFor='name-error' shrink={homeroom.enrollmentEndDate}>Enrollment End Date</InputLabel>
               <DatePicker
                 name='enrollmentEndDate'
                 value={homeroom.enrollmentEndDate || null}
@@ -283,7 +296,7 @@ class HomeroomForm extends Component {
                 {this._renderStudents()}
             </FormGroup>
           </TabContainer>}
-          </Paper>
+        </Paper>
       </div>
     );
   }
