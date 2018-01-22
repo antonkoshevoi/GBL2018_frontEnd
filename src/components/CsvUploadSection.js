@@ -84,8 +84,6 @@ class CsvUploadSection extends Component {
         [...this.props.fields]
     ];
 
-    console.log(csvTemplate);
-
     return (
       <div>
         <div className="m-portlet m-portlet--brand  m-portlet--head-solid-bg m-portlet--bordered">
