@@ -55,10 +55,10 @@ class Filter extends Component {
                 <Popper
                     placement="bottom-start"
                     eventsEnabled={categoryIsOpen}
-                    className={classNames({ [classes.popperClose]: !categoryIsOpen })}
+                    className={classNames({ [classes.popperClose]: !categoryIsOpen },'popperDropMenu') }
                 >
-                    <ClickAwayListener onClickAway={this.handleClose}>
-                        <Grow in={categoryIsOpen}  style={{ transformOrigin: '0 0 0' }}>
+                    <ClickAwayListener  onClickAway={this.handleClose}>
+                        <Grow in={categoryIsOpen} style={{ transformOrigin: '0 0 0' }}>
                             <Paper>
                                 <MenuList role="menu">
                                     <MenuItem onClick={this.handleClose}>Any</MenuItem>
@@ -74,6 +74,7 @@ class Filter extends Component {
                 <div className="store-filter-divider"></div>
                 <div className="filter-buttons">
                     <Button>Newest</Button>
+                    <Button>Most Popular</Button>
                 </div>
 
             </div>

@@ -4,6 +4,9 @@ import {translate} from 'react-i18next';
 import '../../../styles/store.css'
 import {Button, ClickAwayListener, Grow, MenuItem, MenuList, Paper, Target} from "material-ui";
 import Filter from "../../../components/pages/store/Filter";
+import products from "../../../data/json/products.json";
+import ProductsSection from "../../../components/pages/store/ProductsSection";
+
 
 class Store extends Component {
 
@@ -11,14 +14,20 @@ class Store extends Component {
 
     render() {
         return (
-            <div >
+            <div className="animated fadeInLeft">
                 <div className="m-portlet store-wrapper">
                     <div className="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
+                        <div className="m-portlet__head-caption">
+                            <div className="m-portlet__head-title">
                                <Filter/>
                             </div>
                         </div>
+                    </div>
+
+                    <div id="store-body">
+                        <ProductsSection type="newest" title="Newest" products={products.slice(0,9)}/>
+                        <ProductsSection type="popular" title="Most Popular" products={products.slice(0,9)}/>
+                        <ProductsSection type="top" title="Top Rating" products={products.slice(0,9)}/>
                     </div>
                 </div>
             </div>
