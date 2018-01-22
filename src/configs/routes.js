@@ -8,6 +8,7 @@ import Dashboard from '../containers/Dashboard';
 import Login from '../containers/auth/Login';
 import Students from '../containers/students/Students';
 import Teachers from "../containers/teachers/Teachers";
+import TeachersBulkUpload from '../containers/teachers/TeachersBulkUpload';
 import Administration from "../containers/administration/Administration";
 import Homerooms from "../containers/homerooms/Homerooms";
 import HomeroomsBulkUpload from '../containers/homerooms/HomeroomsBulkUpload';
@@ -44,6 +45,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/students/list' name='Students' component={Students} />
       <AuthenticatedRoute exact layout={MainLayout} path='/students/csv' component={StudentsBulkUpload}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/teachers/list' name='Teachers' component={Teachers} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/teachers/csv' component={TeachersBulkUpload}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/administration/list' name='Administration' component={Administration} />
       <AuthenticatedRoute exact layout={MainLayout} path='/homerooms/list' name='Homerooms' component={Homerooms} />
       <AuthenticatedRoute exact layout={MainLayout} path='/homerooms/csv' component={HomeroomsBulkUpload} />
