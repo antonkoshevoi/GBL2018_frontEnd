@@ -5,14 +5,16 @@ import background from '../../media/images/bg-3.jpg';
 import logo from '../../media/images/logo.png'
 
 import {NavLink} from 'react-router-dom';
-import {CircularProgress, Divider, Step, StepLabel, Stepper, Typography} from 'material-ui';
+import {Divider, Step, StepLabel, Stepper} from 'material-ui';
 
-import FirstStepForm from '../../components/pages/auth/signup/FirstStepForm';
-import SecondStepForm from '../../components/pages/auth/signup/SecondStepForm';
-import ThirdStepForm from '../../components/pages/auth/signup/ThirdStepForm';
+import FirstStepForm from '../../components/signUpParent/FirstStepForm';
+import SecondStepForm from '../../components/signUpParent/SecondStepForm';
+import ThirdStepForm from '../../components/signUpParent/ThirdStepForm';
 import {signUp, validateStep1} from '../../redux/signUpParent/actions';
 import {selectSignUpRequest, selectValidateStep1Request} from '../../redux/signUpParent/selectors';
 import MetronicProgressButton from "../../components/ui/metronic/MetronicProgressButton";
+import { push } from 'react-router-redux';
+import { load } from '../../redux/app/actions';
 
 class SignUpParent extends Component {
 
@@ -22,8 +24,18 @@ class SignUpParent extends Component {
     this.state = {
       activeStep: 0,
       form: {
-        step1: {},
-        step2: {}
+        step1: {
+          username: 'esh',
+          "password": "123456",
+          "password_confirmation": "123456",
+          "email": "eshi@glux.com",
+          "firstName": "Eshi",
+          "lastName": "Glux"
+        },
+        step2: {
+          "username": "eshuk",
+          "password": "123456"
+        }
       }
     };
   }
@@ -95,6 +107,11 @@ class SignUpParent extends Component {
     this.props.signUp(
       this.state.form
     );
+  };
+
+  _goToDashboard() {
+    this.props.appLoad();
+    this.props.goToDashboard();
   };
 
   _next() {
@@ -170,7 +187,7 @@ class SignUpParent extends Component {
                       {[
                         <FirstStepForm form={form.step1} errors={step1Errors} onChange={(form) => { this._registerStep1Changes(form) }}/>,
                         <SecondStepForm form={form.step2} errors={step2Errors} onChange={(form) => { this._registerStep2Changes(form) }}/>,
-                        <ThirdStepForm/>
+                        <ThirdStepForm form={form}/>
                       ][activeStep]}
                     </div>
                     <Divider className='m--margin-top-25'/>
@@ -211,6 +228,8 @@ SignUpParent = connect(
   (dispatch) => ({
     validateStep1: (form, params = {}) => { dispatch(validateStep1(form, params)) },
     signUp: (form, params = {}) => { dispatch(signUp(form, params)) },
+    goToDashboard: () => { dispatch(push('/dashboard')) },
+    appLoad: () => { dispatch(load()) }
   })
 )(SignUpParent);
 

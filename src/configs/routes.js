@@ -30,9 +30,9 @@ export default () => (
   <AppContainer>
     <Switch>
       <Route exact path='/login' name='login' component={Login} />
-      <Route exact path='/signup/types' name='signup' component={SignUpIndex} />
-      <Route exact path='/signup/parent' name='signup_parent' component={SignUpParent} />
-      <Route exact path='/signup/principal' name='signup_principal' component={SignUpPrincipal} />
+      <Route exact path='/signUp' name='signUp' component={SignUpIndex} />
+      <Route exact path='/signUp/parent' name='signUpParent' component={SignUpParent} />
+      <Route exact path='/signUp/principal' name='signUpPrincipal' component={SignUpPrincipal} />
 
       <Route exact path='/' render={() => (
         <Redirect to='/dashboard'/>
