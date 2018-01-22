@@ -64,10 +64,9 @@ class CsvUploadSection extends Component {
     const uploading = loading && progress < 100;
     const success = uploadRequest.get('success');
     const results = uploadRequest.get('results');
-    const exampleName = this.props.exampleName;
-    const csvTemplate = [
-        [...this.props.fields]
-    ];
+    const csvExampleName = this.props.csvExampleName;
+    const csvTemplateHeaders = this.props.csvTemplateHeaders;
+    const csvTemplateData = this.props.csvTemplateData;
 
     return (
       <div>
@@ -88,7 +87,7 @@ class CsvUploadSection extends Component {
                   <h6>
                     You may download this .csv template to use it as pattern for your csv file. Kindly make sure that you have a valid .csv format before uploading to the system.
                   </h6>
-                  <CSVLink data={csvTemplate} filename={exampleName} className="btn btn-success">Download</CSVLink>
+                  <CSVLink headers={csvTemplateHeaders} data={csvTemplateData} filename={csvExampleName} className="btn btn-success">Download</CSVLink>
                 </div>
             </div>
             <div className="row" style={{marginLeft: 0}}>

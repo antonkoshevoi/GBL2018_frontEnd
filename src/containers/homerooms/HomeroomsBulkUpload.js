@@ -11,13 +11,19 @@ import { selectSchools } from '../../redux/schools/selectors';
 class HomeroomsBulkUpload extends Component {
 
   state = {
-    exampleName: 'homerooms.csv',
-    fields: [
-        'name',
-        'startDate',
-        'endDate',
-        'enrollmentStartDate',
-        'enrollmentEndDate'
+    csvExampleName: 'homerooms.csv',
+    csvTemplateHeaders: [
+        {label: 'name', key: 'name'},
+        {label: 'startDate', key: 'startDate'},
+        {label: 'endDate', key: 'endDate'},
+        {label: 'enrollmentStartDate', key: 'enrollmentStartDate'},
+        {label: 'enrollmentEndDate', key: 'enrollmentEndDate'}
+    ],
+    csvTemplateData : [
+        {name: 'Homeroom 1', startDate: '2018-10-10', endDate: '2018-10-10', enrollmentStartDate: '2018-10-10', enrollmentEndDate: '2018-10-10'},
+        {name: 'Homeroom 2', startDate: '2018-10-10', endDate: '2018-10-10', enrollmentStartDate: '2018-10-10', enrollmentEndDate: '2018-10-10'},
+        {name: 'Homeroom 3', startDate: '2018-10-10', endDate: '2018-10-10', enrollmentStartDate: '2018-10-10', enrollmentEndDate: '2018-10-10'}
+
     ],
     instruction: [
       {
@@ -70,8 +76,9 @@ class HomeroomsBulkUpload extends Component {
       <div className="row">
         <div className="col-sm-6">
           <CsvUploadSection
-            exampleName = {this.state.exampleName}
-            fields = {this.state.fields}
+            csvExampleName = {this.state.csvExampleName}
+            csvTemplateHeaders = {this.state.csvTemplateHeaders}
+            csvTemplateData = {this.state.csvTemplateData}
             schools={schools}
             onUpload={upload}
             uploadRequest={bulkUploadRequest}

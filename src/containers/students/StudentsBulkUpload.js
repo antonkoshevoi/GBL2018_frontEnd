@@ -10,16 +10,21 @@ import { selectSchools } from '../../redux/schools/selectors';
 class StudentsBulkUpload extends Component {
 
   state = {
-      exampleName: 'students.csv',
-      fields: [
-          'username',
-          'password',
-          'firstname',
-          'lastname',
-          'email',
-          'phone',
-          'homeroom',
-          'student_id'
+      csvExampleName: 'students.csv',
+      csvTemplateHeaders: [
+          {label: 'username', key: 'username'},
+          {label: 'password', key: 'password'},
+          {label: 'firstname', key: 'firstname'},
+          {label: 'lastname', key: 'lastname'},
+          {label: 'email', key: 'email'},
+          {label: 'phone', key: 'phone'},
+          {label: 'homeroom', key: 'homeroom'},
+          {label: 'student_id', key: 'student_id'}
+      ],
+      csvTemplateData : [
+          {username: 'Student 1', password: '123456', firstname: 'Student 1', lastname: 'Student 1', email: 'willy1@gmail.com', phone: '(055)36-36-55', homeroom: '1', student_id: '1'},
+          {username: 'Student 2', password: '123456', firstname: 'Student 2', lastname: 'Student 2', email: 'willy2@gmail.com', phone: '(095)36-36-55', homeroom: '2', student_id: '2'},
+          {username: 'Student 3', password: '123456', firstname: 'Student 3', lastname: 'Student 3', email: 'willy3@gmail.com', phone: '(098)36-36-55', homeroom: '3', student_id: '3'}
       ],
     instruction: [
       {
@@ -50,7 +55,7 @@ class StudentsBulkUpload extends Component {
             title: 'phone'
           },
           {
-            title: 'homeroom'
+            title: 'homeroom_id'
           },
           {
             title: 'student_id'
@@ -80,8 +85,9 @@ class StudentsBulkUpload extends Component {
       <div className="row">
         <div className="col-sm-6">
           <CsvUploadSection
-            exampleName = {this.state.exampleName}
-            fields = {this.state.fields}
+            csvExampleName = {this.state.csvExampleName}
+            csvTemplateHeaders = {this.state.csvTemplateHeaders}
+            csvTemplateData = {this.state.csvTemplateData}
             schools={schools}
             onUpload={upload}
             uploadRequest={bulkUploadRequest}
