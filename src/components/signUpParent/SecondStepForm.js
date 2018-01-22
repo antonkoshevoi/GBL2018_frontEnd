@@ -4,10 +4,8 @@ import { translate } from 'react-i18next';
 import { MenuItem, Select } from 'material-ui';
 import 'cropperjs/dist/cropper.css';
 import Cropper from 'react-cropper';
-import DatePicker from '../../../ui/DatePicker';
-import MetronicInput from '../../../ui/metronic/MetronicInput';
-import MetronicDatePicker from '../../../ui/metronic/MetronicDatePicker';
-import MetronicSelect from "../../../ui/metronic/MetronicSelect";
+import MetronicDatePicker from '../ui/metronic/MetronicDatePicker';
+import MetronicSelect from "../ui/metronic/MetronicSelect";
 
 class SecondStepForm extends Component {
 

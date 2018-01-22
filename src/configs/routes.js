@@ -24,15 +24,17 @@ import SchoolReports from "../containers/pages/reports/Schools";
 import ClassRoomReports from "../containers/pages/reports/ClassRooms";
 import StudentReports from "../containers/pages/reports/Students";
 import TeacherReports from "../containers/pages/reports/Teachers";
-// import Store from "../containers/pages/store/Store";
+import Store from "../containers/pages/store/Store";
+import Details from "../containers/pages/store/Details";
+import Products from "../containers/pages/store/Products";
 
 export default () => (
   <AppContainer>
     <Switch>
       <Route exact path='/login' name='login' component={Login} />
-      <Route exact path='/signup/types' name='signup' component={SignUpIndex} />
-      <Route exact path='/signup/parent' name='signup_parent' component={SignUpParent} />
-      <Route exact path='/signup/principal' name='signup_principal' component={SignUpPrincipal} />
+      <Route exact path='/signUp' name='signUp' component={SignUpIndex} />
+      <Route exact path='/signUp/parent' name='signUpParent' component={SignUpParent} />
+      <Route exact path='/signUp/principal' name='signUpPrincipal' component={SignUpPrincipal} />
 
       <Route exact path='/' render={() => (
         <Redirect to='/dashboard'/>
@@ -52,7 +54,9 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
-      {/*<AuthenticatedRoute exact layout={MainLayout} path='/store' name='Store' component={Store}/>*/}
+      <AuthenticatedRoute exact layout={MainLayout} path='/store' name='Store' component={Store}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:type' name='Store' component={Products}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
 
       <Route component={NotFoundPage} />
     </Switch>

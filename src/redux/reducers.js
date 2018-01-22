@@ -2,6 +2,7 @@ import appReducer from './app/reducer';
 import authReducer from './auth/reducer';
 import userReducer from './user/reducer';
 import signUpParentReducer from './signUpParent/reducer';
+import signUpPrincipalReducer from './signUpPrincipal/reducer';
 import studentsReducer from './students/reducer';
 import teachersReducer from './teachers/reducer';
 import administrationReducer from './administration/reducer';
@@ -14,6 +15,7 @@ export default {
   auth: authReducer,
   user: userReducer,
   signUpParent: signUpParentReducer,
+  signUpPrincipal: signUpPrincipalReducer,
   students: studentsReducer,
   teachers: teachersReducer,
   administration: administrationReducer,

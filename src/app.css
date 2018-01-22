@@ -2,6 +2,33 @@
   height: 100%;
 }
 
+button, [role="button"], [type="button"],  .btn {
+  outline: none !important;
+}
+
+.g-red {
+  color:#D2322D !important;
+}
+
+.g-green {
+  color:#7ac943 !important;
+}
+
+
+.g-orange {
+  color:#f79226 !important;
+}
+
+
+.g-blue {
+  color:#589ee4 !important;
+}
+
+
+.g-gray {
+  color:#ccc !important;
+}
+
 .App {
   text-align: center;
 }
@@ -25,6 +52,8 @@
 .App-intro {
   font-size: large;
 }
+
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
@@ -813,6 +842,10 @@ div.m-portlet .m-portlet__head {
 
 .m-subheader .breadcrumbs li i.fa {
   font-size: 1.4rem;
+}
+
+.popperDropMenu {
+  z-index: 55;
 }
 
 
