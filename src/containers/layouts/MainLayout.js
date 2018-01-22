@@ -11,7 +11,7 @@ class MainLayout extends Component {
       const {pathname} = this.props.location;
 
       return (
-      <div className='m-grid m-grid--hor m-grid--root m-page m--full-height' id={generateLinkId(pathname.split('/'))}>
+      <div className={`m-grid m-grid--hor m-grid--root m-page m--full-height ${pathname.split('/')[1]}`} id={generateLinkId(pathname.split('/'))}>
         <div className='m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body'>
           <Header/>
           <Sidebar/>
