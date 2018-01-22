@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import StarRating from "../../ui/StarRating";
-import {Player} from "video-react";
 
 class DetailsSection extends Component {
     render() {
