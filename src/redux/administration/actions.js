@@ -21,6 +21,10 @@ export const UPDATE_SUCCESS = '[Administration] UPDATE_SUCCESS';
 export const UPDATE_FAIL = '[Administration] UPDATE_FAIL';
 export const RESET_UPDATE_REQUEST = '[Administration] RESET_UPDATE_REQUEST';
 
+export const DELETE = '[Administration] DELETE';
+export const DELETE_SUCCESS = '[Administration] DELETE_SUCCESS';
+export const DELETE_FAIL = '[Administration] DELETE_FAIL';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -80,4 +84,13 @@ export function resetUpdateRequest () {
   return {
     type: RESET_UPDATE_REQUEST
   }
+}
+/**
+ * Delete
+ */
+export function deleteRecord(id, params = {}) {
+  return {
+    types: [DELETE, DELETE_SUCCESS, DELETE_FAIL],
+    promise: (apiClient) => apiClient.delete(`administration/${id}`, params)
+  };
 }

@@ -38,7 +38,12 @@ class CsvUploadSection extends Component {
   }
 
   _handleSchoolChange(e) {
-    this.setState({schoolId: e.target.value})
+    document.getElementById('file-input').value = '';
+
+    this.setState({
+      schoolId: e.target.value,
+      file: undefined
+    })
   }
 
   _handleFileChange(e) {
@@ -91,7 +96,7 @@ class CsvUploadSection extends Component {
                 </div>
             </div>
             <div className="row" style={{marginLeft: 0}}>
-              <div className="col-sm-6">
+              <div className="col-md-6">
                 <div className="row">
                   <div className="col-xs-12 ">
                     <FormControl>
@@ -112,10 +117,10 @@ class CsvUploadSection extends Component {
                   </div>
                 </div>
               </div>
-              <div className={`col-sm-6 ${loading || !schoolId ? ' not-allowed' : ''}` }>
+              <div className={`col-md-6 ${loading || !schoolId ? ' not-allowed' : ''}` }>
                 <div className={`react-csv-input ${loading || !schoolId ? ' disabled' : 'fdsfsf'}`}>
                   <label>Select CSV file</label>
-                  <input className="csv-input" type="file" accept="text/csv" onChange={e => this._handleFileChange(e)} />
+                  <input id='file-input' className="csv-input" type="file" accept="text/csv" onChange={e => this._handleFileChange(e)} />
                 </div>
               </div>
             </div>
@@ -138,27 +143,30 @@ class CsvUploadSection extends Component {
             )}
           </div>
         </div>
-        <div className="col-xs-12 m--margin-top-10">
-          {success &&
-            <PortletWidgets data={[
-              {
-                title: 'Total',
-                value: results.get('total'),
-                colorName: 'info',
-              },
-              {
-                title: 'Inserted',
-                value: results.get('inserted'),
-                colorName: 'success',
-              },
-              {
-                title: 'Failed',
-                value: results.get('failed'),
-                colorName: 'danger',
+        <div className="row">
+          <div className="col-md-12 m--margin-top-10">
+              {success &&
+              <PortletWidgets data={[
+                  {
+                      title: 'Total',
+                      value: results.get('total'),
+                      colorName: 'info',
+                  },
+                  {
+                      title: 'Inserted',
+                      value: results.get('inserted'),
+                      colorName: 'success',
+                  },
+                  {
+                      title: 'Failed',
+                      value: results.get('failed'),
+                      colorName: 'danger',
+                  }
+              ]} title="Results" icon="flaticon-list-3"/>
               }
-            ]} title="Results" icon="flaticon-list-3"/>
-          }
+          </div>
         </div>
+
       </div>
     );
   }

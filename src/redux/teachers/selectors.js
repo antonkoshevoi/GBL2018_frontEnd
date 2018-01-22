@@ -48,3 +48,17 @@ export const selectUpdateRequest = createSelector(
     selectTeachersDomain,
   (subState) => subState.get('updateRequest')
 );
+/**
+ * Delete
+ */
+export const selectDeleteRequest = createSelector(
+  selectTeachersDomain,
+  (subState) => subState.get('deleteRequest')
+);
+/**
+ * Bulk Upload
+ */
+export const selectBulkUploadRequest = createSelector(
+    selectTeachersDomain,
+    (subState) => subState.get('bulkUploadRequest')
+);

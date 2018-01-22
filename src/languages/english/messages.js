@@ -10,5 +10,6 @@ export default {
 
   created: 'Record successfully crated',
   updated: 'Record successfully updated',
-  uploaded: 'File succesfully uploaded'
+  uploaded: 'File succesfully uploaded',
+  deleted: 'Record succesfully removed',
 }

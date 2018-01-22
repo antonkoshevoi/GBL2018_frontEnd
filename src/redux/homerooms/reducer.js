@@ -1,9 +1,8 @@
 import {
   GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, CREATE, CREATE_SUCCESS, CREATE_FAIL,
-  RESET_CREATE_REQUEST, GET_SCHOOLS, GET_SCHOOLS_SUCCESS, GET_SCHOOLS_FAIL, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
+  RESET_CREATE_REQUEST, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
   GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS,
-  GET_SCHOOL_TEACHERS, GET_SCHOOL_TEACHERS_SUCCESS, GET_SCHOOL_TEACHERS_FAIL,
-  GET_SCHOOL_STUDENTS, GET_SCHOOL_STUDENTS_SUCCESS, GET_SCHOOL_STUDENTS_FAIL,
+  DELETE, DELETE_SUCCESS, DELETE_FAIL,
   RESET_BULK_UPLOAD_REQUEST, BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS
 
 } from './actions';
@@ -39,19 +38,13 @@ const initialState = Immutable.fromJS({
     errorCode: null,
     errors: {}
   },
-  getSchoolTeachersRequest: {
+  deleteRequest: {
     loading: false,
     success: false,
     fail: false,
-    errorResponse: null,
-    records: {}
-  },
-  getSchoolStudentsRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorResponse: null,
-    records: {}
+    errorMessage: null,
+    errorCode: null,
+    errors: {}
   },
   bulkUploadRequest: {
       loading: false,
@@ -220,56 +213,6 @@ export default function reducer (state = initialState, action) {
     case RESET_UPDATE_REQUEST:
       return state
         .set('updateRequest', initialState.get('updateRequest'));
-
-    /**
-     * Homeroom School Teachers
-     */
-    case GET_SCHOOL_TEACHERS:
-      return state
-        .set('getSchoolTeachersRequest', state.get('getSchoolTeachersRequest')
-          .set('loading', true)
-          .set('success', false)
-          .set('fail', false)
-          .remove('records')
-        );
-    case GET_SCHOOL_TEACHERS_SUCCESS:
-      return state
-        .set('getSchoolTeachersRequest', state.get('getSchoolTeachersRequest')
-          .set('success', true)
-          .set('loading', false)
-          .set('records', Immutable.fromJS(action.result.data))
-        );
-    case GET_SCHOOL_TEACHERS_FAIL:
-      return state
-        .set('getSchoolTeachersRequest', state.get('getSchoolTeachersRequest')
-          .set('loading', false)
-          .set('fail', true)
-        );
-
-    /**
-     * Homeroom School Students
-     */
-    case GET_SCHOOL_STUDENTS:
-      return state
-        .set('getSchoolStudentsRequest', state.get('getSchoolStudentsRequest')
-          .set('loading', true)
-          .set('success', false)
-          .set('fail', false)
-          .remove('records')
-        );
-    case GET_SCHOOL_STUDENTS_SUCCESS:
-      return state
-        .set('getSchoolStudentsRequest', state.get('getSchoolStudentsRequest')
-          .set('success', true)
-          .set('loading', false)
-          .set('records', Immutable.fromJS(action.result.data))
-        );
-    case GET_SCHOOL_STUDENTS_FAIL:
-      return state
-        .set('getSchoolStudentsRequest', state.get('getSchoolStudentsRequest')
-          .set('loading', false)
-          .set('fail', true)
-        );
     /**
      * Bulk upload
      */
@@ -320,6 +263,35 @@ export default function reducer (state = initialState, action) {
     case RESET_BULK_UPLOAD_REQUEST:
         return state
             .set('bulkUploadRequest', initialState.get('bulkUploadRequest'));
+    /**
+     * Delete
+     */
+    case DELETE:
+      return state
+        .set('deleteRequest', state.get('deleteRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)
+          .remove('errors')
+          .remove('errorMessage')
+          .remove('errorCode')
+        );
+    case DELETE_SUCCESS:
+      return state
+        .set('deleteRequest', state.get('deleteRequest')
+          .set('loading', false)
+          .set('success', true)
+        );
+    case DELETE_FAIL:
+      const deleteError = action.error.response.data;
+      return state
+        .set('deleteRequest', state.get('deleteRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('errorCode', deleteError.code)
+          .set('errorMessage', deleteError.message)
+          .set('errors', deleteError.code === 422 ? Immutable.fromJS(deleteError.errors) : undefined)
+        );
     /**
      * default
      */

@@ -314,8 +314,8 @@ class FirstStepForm extends Component {
 
             <div className='col-md-6'>
               <div className='croppedBlock'>
-              {form.avatarCropped &&
-                <img className='img-thumbnail' style={{ width: '150px' }} src={form.avatarCropped} alt='cropped image'/>}
+                {form.avatarCropped &&
+                  <img className='img-thumbnail' style={{ width: '150px' }} src={form.avatarCropped} alt='cropped image'/>}
               </div>
             </div>
           </div>

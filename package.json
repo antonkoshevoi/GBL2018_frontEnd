@@ -37,6 +37,7 @@
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
     "reselect": "^3.0.1",
+    "sweetalert-react": "^0.4.11",
     "toastr": "^2.1.4",
     "universal-cookie": "^2.1.2"
   },

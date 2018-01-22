@@ -5,14 +5,16 @@ import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
 import {
+  selectDeleteRequest,
   selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination,
   selectRecords
 } from '../../redux/administration/selectors';
-import {getRecords, getSingleRecord} from '../../redux/administration/actions';
+import {deleteRecord, getRecords, getSingleRecord} from '../../redux/administration/actions';
 import Pagination from '../../components/ui/Pagination';
 import CreateAdministrationModal from './modals/CreateAdministrationModal';
 import EditAdministrationModal from "./modals/EditAdministrationModal";
 import SearchInput from "../../components/ui/SearchInput";
+import DeleteButton from "../../components/ui/DeleteButton";
 
 class Administration extends Component {
   constructor(props) {
@@ -37,6 +39,7 @@ class Administration extends Component {
    */
   componentWillReceiveProps(nextProps) {
     this._openEditDialogOnSingleRequestSuccess(nextProps);
+    this._deleteRequestSuccess(nextProps);
   }
 
   /**
@@ -97,6 +100,7 @@ class Administration extends Component {
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
         <Td width='100px'>
           <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
+          <DeleteButton onClick={() => { this._deleteRecord(record.get('id')) }}/>
         </Td>
       </Row>
     ));
@@ -126,6 +130,18 @@ class Administration extends Component {
 
     if(!success && nextSuccess) {
       this._openEditDialog();
+    }
+  }
+
+  _deleteRecord (id) {
+    this.props.deleteRecord(id);
+  }
+  _deleteRequestSuccess(nextProps) {
+    const deleteSuccess = this.props.getDeleteRequest.get('success');
+    const nextDeleteSuccess = nextProps.getDeleteRequest.get('success');
+
+    if(!deleteSuccess && nextDeleteSuccess) {
+      this.props.getRecords();
     }
   }
 
@@ -270,12 +286,14 @@ Administration = connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
+    getDeleteRequest: selectDeleteRequest(state),
     pagination: selectPagination(state),
     records: selectRecords(state),
   }),
   (dispatch) => ({
     getRecords: (params = {}) => { dispatch(getRecords(params)) },
-    getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) }
+    getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
+    deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) }
   })
 )(Administration);
 

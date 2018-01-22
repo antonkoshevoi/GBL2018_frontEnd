@@ -1,31 +1,32 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import CsvUploadSection from "../../components/CsvUploadSection";
 import Insctruction from "../../components/ui/Insctruction";
 import { connect } from 'react-redux';
-import { bulkUpload, resetBulkUploadRequest } from '../../redux/students/actions';
+import { bulkUpload, resetBulkUploadRequest } from '../../redux/teachers/actions';
 import { getSchools } from '../../redux/schools/actions';
-import { selectBulkUploadRequest } from '../../redux/students/selectors';
+import { selectBulkUploadRequest } from '../../redux/teachers/selectors';
 import { selectSchools } from '../../redux/schools/selectors';
 
-class StudentsBulkUpload extends Component {
+class TeachersBulkUpload extends Component {
 
   state = {
-      csvExampleName: 'students.csv',
-      csvTemplateHeaders: [
-          {label: 'username', key: 'username'},
-          {label: 'password', key: 'password'},
-          {label: 'firstname', key: 'firstname'},
-          {label: 'lastname', key: 'lastname'},
-          {label: 'email', key: 'email'},
-          {label: 'phone', key: 'phone'},
-          {label: 'homeroom', key: 'homeroom'},
-          {label: 'student_id', key: 'student_id'}
-      ],
-      csvTemplateData : [
-          {username: 'Student 1', password: '123456', firstname: 'Student 1', lastname: 'Student 1', email: 'willy1@gmail.com', phone: '(055)36-36-55', homeroom: '1', student_id: '1'},
-          {username: 'Student 2', password: '123456', firstname: 'Student 2', lastname: 'Student 2', email: 'willy2@gmail.com', phone: '(095)36-36-55', homeroom: '2', student_id: '2'},
-          {username: 'Student 3', password: '123456', firstname: 'Student 3', lastname: 'Student 3', email: 'willy3@gmail.com', phone: '(098)36-36-55', homeroom: '3', student_id: '3'}
-      ],
+    csvExampleName: 'teachers.csv',
+    csvTemplateHeaders: [
+      {label: 'username', key: 'username'},
+      {label: 'password', key: 'password'},
+      {label: 'firstname', key: 'firstname'},
+      {label: 'lastname', key: 'lastname'},
+      {label: 'email', key: 'email'},
+      {label: 'phone', key: 'phone'},
+      {label: 'homeroom', key: 'homeroom'},
+      {label: 'student_id', key: 'student_id'}
+    ],
+    csvTemplateData : [
+      {username: 'Teacher 1', password: '123456', firstname: 'Teacher 1', lastname: 'Teacher 1', email: 'willy1@gmail.com', phone: '(055)36-36-55', homeroom: '1', student_id: '1'},
+      {username: 'Teacher 2', password: '123456', firstname: 'Teacher 2', lastname: 'Teacher 2', email: 'willy2@gmail.com', phone: '(095)36-36-55', homeroom: '2', student_id: '2'},
+      {username: 'Teacher 3', password: '123456', firstname: 'Teacher 3', lastname: 'Teacher 3', email: 'willy3@gmail.com', phone: '(098)36-36-55', homeroom: '3', student_id: '3'}
+    ],
     instruction: [
       {
         title: 'Select the School, to which the users will be assigned, from the list',
@@ -43,23 +44,23 @@ class StudentsBulkUpload extends Component {
             title: 'password'
           },
           {
-            title: 'firstname'
+            title: 'firstName'
           },
           {
-            title: 'lastname'
+            title: 'lastName'
           },
           {
             title: 'email'
           },
           {
-            title: 'phone'
+            title: 'phoneNumber'
           },
           {
             title: 'homeroom_id'
           },
           {
             title: 'student_id'
-          },
+          }
         ]
       },
       {
@@ -70,17 +71,13 @@ class StudentsBulkUpload extends Component {
       },
       {
         title: 'You may leave other columns data blank except for the username and password. If they are empty, place a \'\' in their column position.',
-      },
+      }
     ]
   };
 
   componentDidMount () {
-    this.props.getSchools();
-    this.props.resetBulkUploadRequest();
-  }
-
-  componentWillUnmount () {
-    this.props.resetBulkUploadRequest();
+      this.props.getSchools();
+      this.props.resetBulkUploadRequest()
   }
 
   render() {
@@ -106,7 +103,7 @@ class StudentsBulkUpload extends Component {
   }
 }
 
-StudentsBulkUpload = connect(
+TeachersBulkUpload = connect(
   (state) => ({
     schools: selectSchools(state),
     bulkUploadRequest: selectBulkUploadRequest(state)
@@ -115,13 +112,11 @@ StudentsBulkUpload = connect(
     getSchools: () => { dispatch(getSchools()) },
     resetBulkUploadRequest: () => { dispatch(resetBulkUploadRequest()) },
     upload: (file, schoolId) => {
-      dispatch(resetBulkUploadRequest());
       dispatch(bulkUpload(file, {
         schoolId
       }));
-    },
-    resetBulkUploadRequest: () => { dispatch(resetBulkUploadRequest()) }
+    }
   })
-)(StudentsBulkUpload);
+)(TeachersBulkUpload);
 
-export default StudentsBulkUpload;
+export default TeachersBulkUpload;

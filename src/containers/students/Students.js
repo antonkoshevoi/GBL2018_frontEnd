@@ -6,14 +6,16 @@ import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
 import {
+  selectDeleteRequest,
   selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination,
   selectRecords
 } from '../../redux/students/selectors';
-import {getRecords, getSingleRecord} from '../../redux/students/actions';
+import {deleteRecord, getRecords, getSingleRecord} from '../../redux/students/actions';
 import Pagination from '../../components/ui/Pagination';
 import CreateStudentModal from './modals/CreateStudentModal';
 import EditStudentModal from "./modals/EditStudentModal";
 import SearchInput from "../../components/ui/SearchInput";
+import DeleteButton from "../../components/ui/DeleteButton";
 
 class Students extends Component {
   constructor(props) {
@@ -38,6 +40,7 @@ class Students extends Component {
    */
   componentWillReceiveProps(nextProps) {
     this._openEditDialogOnSingleRequestSuccess(nextProps);
+    this._deleteRequestSuccess(nextProps);
   }
 
   /**
@@ -98,6 +101,7 @@ class Students extends Component {
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
         <Td width='100px'>
           <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
+          <DeleteButton onClick={() => { this._deleteRecord(record.get('id')) }}/>
         </Td>
       </Row>
     ));
@@ -127,6 +131,18 @@ class Students extends Component {
 
     if(!success && nextSuccess) {
       this._openEditDialog();
+    }
+  }
+
+  _deleteRecord (id) {
+    this.props.deleteRecord(id);
+  }
+  _deleteRequestSuccess(nextProps) {
+    const deleteSuccess = this.props.getDeleteRequest.get('success');
+    const nextDeleteSuccess = nextProps.getDeleteRequest.get('success');
+
+    if(!deleteSuccess && nextDeleteSuccess) {
+      this.props.getRecords();
     }
   }
 
@@ -277,12 +293,14 @@ Students = connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
+    getDeleteRequest: selectDeleteRequest(state),
     pagination: selectPagination(state),
     records: selectRecords(state),
   }),
   (dispatch) => ({
     getRecords: (params = {}) => { dispatch(getRecords(params)) },
-    getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) }
+    getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
+    deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) }
   })
 )(Students);
 

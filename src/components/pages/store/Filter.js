@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Button, ClickAwayListener, Grow, Icon, MenuItem, MenuList, Paper, withStyles} from "material-ui";
 import {Manager, Popper, Target} from "react-popper";
 import classNames from 'classnames';
+import {NavLink} from "react-router-dom";
 
 const styles = {
     root: {
@@ -55,10 +56,10 @@ class Filter extends Component {
                 <Popper
                     placement="bottom-start"
                     eventsEnabled={categoryIsOpen}
-                    className={classNames({ [classes.popperClose]: !categoryIsOpen })}
+                    className={classNames({ [classes.popperClose]: !categoryIsOpen },'popperDropMenu') }
                 >
-                    <ClickAwayListener onClickAway={this.handleClose}>
-                        <Grow in={categoryIsOpen}  style={{ transformOrigin: '0 0 0' }}>
+                    <ClickAwayListener  onClickAway={this.handleClose}>
+                        <Grow in={categoryIsOpen} style={{ transformOrigin: '0 0 0' }}>
                             <Paper>
                                 <MenuList role="menu">
                                     <MenuItem onClick={this.handleClose}>Any</MenuItem>
@@ -73,7 +74,9 @@ class Filter extends Component {
             </Manager>
                 <div className="store-filter-divider"></div>
                 <div className="filter-buttons">
-                    <Button>Newest</Button>
+                    <NavLink to="/store"><Button>All</Button></NavLink>
+                    <NavLink to="/store/products/newest"><Button>Newest</Button></NavLink>
+                    <NavLink to="/store/products/newest"><Button>Most Popular</Button></NavLink>
                 </div>
 
             </div>

@@ -1,5 +1,6 @@
-import Immutable from "immutable";
+import Immutable from 'immutable';
 import {SIGN_UP, SIGN_UP_FAIL, SIGN_UP_SUCCESS, STEP_1_FAILED, STEP_1_VALIDATED, VALIDATE_STEP_1} from './actions';
+import { saveSession } from '../../helpers/session';
 
 const initialState = Immutable.fromJS({
   validateStep1Request: {
@@ -63,6 +64,7 @@ export default function reducer (state = initialState, action) {
           .set('errors', initialState.get('signUpRequest').get('errors'))
         );
     case SIGN_UP_SUCCESS:
+      saveSession(action.result.data);
       return state
         .set('signUpRequest', state.get('signUpRequest')
           .set('success', true)

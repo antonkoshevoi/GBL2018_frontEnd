@@ -55,3 +55,10 @@ export const selectUpdateRequest = createSelector(
     selectAdministrationDomain,
   (subState) => subState.get('updateRequest')
 );
+/**
+ * Delete
+ */
+export const selectDeleteRequest = createSelector(
+  selectAdministrationDomain,
+  (subState) => subState.get('deleteRequest')
+);

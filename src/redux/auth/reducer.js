@@ -4,7 +4,7 @@ import {
   SET_REDIRECT_URL
 } from './actions';
 import Immutable from 'immutable';
-import SessionStorage from '../../services/SessionStorage';
+import { destroySession, saveSession } from '../../helpers/session';
 
 const initialState = Immutable.fromJS({
   loginRequest: {
@@ -23,27 +23,6 @@ const initialState = Immutable.fromJS({
   redirectAfterLogin: null,
   isLoggedIn: false
 });
-
-const saveSession = ({ token, expiresAt, refreshToken }) => {
-  const options = {
-    path: '/',
-    expires: new Date(expiresAt * 1000)
-  };
-
-  SessionStorage.set('token', token, options);
-  SessionStorage.set('tokenExpiresAt', options.expires, options);
-  SessionStorage.set('refreshToken', refreshToken, options);
-};
-
-const destroySession = () => {
-  const options = {
-    path: '/'
-  };
-
-  SessionStorage.remove('token', options);
-  SessionStorage.remove('tokenExpiresAt', options);
-  SessionStorage.remove('refreshToken', options);
-};
 
 export default function reducer (state = initialState, action) {
   switch(action.type) {

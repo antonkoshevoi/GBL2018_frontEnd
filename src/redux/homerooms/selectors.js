@@ -48,20 +48,12 @@ export const selectUpdateRequest = createSelector(
     selectHomeroomsDomain,
   (subState) => subState.get('updateRequest')
 );
-
 /**
- * Homerooms School Teachers
+ * Delete
  */
-export const selectGetSchoolTeachersRequest = createSelector(
-    selectHomeroomsDomain,
-    (subState) => subState.get('getSchoolTeachersRequest')
-);
-/**
- * Homerooms School Students
- */
-export const selectGetSchoolStudentsRequest = createSelector(
-    selectHomeroomsDomain,
-    (subState) => subState.get('getSchoolStudentsRequest')
+export const selectDeleteRequest = createSelector(
+  selectHomeroomsDomain,
+  (subState) => subState.get('deleteRequest')
 );
 /**
  * Bulk Upload
