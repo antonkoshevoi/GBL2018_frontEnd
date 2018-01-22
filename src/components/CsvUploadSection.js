@@ -10,21 +10,6 @@ import { CSVLink } from "react-csv";
 import PortletWidgets from './ui/PortletWidgets';
 import LinearProgress from './ui/LinearProgress';
 
-// const requiredCsvFields = [
-//   'username',
-//   'password',
-//   'firstname',
-//   'lastname',
-//   'email',
-//   'phone',
-//   'homeroom',
-//   'student_id'
-// ];
-//
-// const csvTemplate = [
-//   [...requiredCsvFields]
-// ];
-
 class CsvUploadSection extends Component {
 
   static propTypes = {
