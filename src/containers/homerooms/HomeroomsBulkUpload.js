@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CsvUploadSection from "../../components/CsvUploadSection";
 import Insctruction from "../../components/ui/Insctruction";
 import { connect } from 'react-redux';
-import { bulkUpload } from '../../redux/homerooms/actions';
+import { bulkUpload, resetBulkUploadRequest } from '../../redux/homerooms/actions';
 import { getSchools } from '../../redux/schools/actions';
 import { selectBulkUploadRequest } from '../../redux/homerooms/selectors';
 import { selectSchools } from '../../redux/schools/selectors';
@@ -60,6 +60,7 @@ class HomeroomsBulkUpload extends Component {
 
   componentDidMount () {
       this.props.getSchools();
+      this.props.resetBulkUploadRequest()
   }
 
   render() {
@@ -91,6 +92,7 @@ HomeroomsBulkUpload = connect(
   }),
   (dispatch) => ({
     getSchools: () => { dispatch(getSchools()) },
+    resetBulkUploadRequest: () => { dispatch(resetBulkUploadRequest()) },
     upload: (file, schoolId) => {
       dispatch(bulkUpload(file, {
         schoolId
