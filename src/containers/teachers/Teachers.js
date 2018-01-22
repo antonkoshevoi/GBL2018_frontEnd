@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import { Button, Icon, MenuItem, Select } from 'material-ui';
+import { Button, Icon, MenuItem, Select, Input } from 'material-ui';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
@@ -13,6 +13,7 @@ import {getRecords, getSingleRecord} from '../../redux/teachers/actions';
 import Pagination from '../../components/ui/Pagination';
 import CreateTeacherModal from './modals/CreateTeacherModal';
 import EditTeacherModal from "./modals/EditTeacherModal";
+import SearchInput from "../../components/ui/SearchInput";
 
 class Teachers extends Component {
   constructor(props) {
@@ -21,17 +22,9 @@ class Teachers extends Component {
       createModalIsOpen: false,
       editModalIsOpen: false,
       sorters: {},
+      filters: {},
       page: props.pagination.get('page'),
       perPage: props.pagination.get('perPage')
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const success = this.props.getSingleRecordRequest.get('success');
-    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
-
-    if(!success && nextSuccess) {
-      this._openEditDialog();
     }
   }
 
@@ -40,13 +33,25 @@ class Teachers extends Component {
     getRecords();
   }
 
+  /**
+   * Monitor props like events
+   */
+  componentWillReceiveProps(nextProps) {
+    this._openEditDialogOnSingleRequestSuccess(nextProps);
+  }
+
+  /**
+   * Create Dialog
+   */
   _openCreateDialog = () => {
     this.setState({ createModalIsOpen: true });
   };
   _closeCreateDialog = () => {
     this.setState({ createModalIsOpen: false });
   };
-
+  /**
+   * Edit Dialog
+   */
   _openEditDialog = () => {
     this.setState({ editModalIsOpen: true });
   };
@@ -55,9 +60,17 @@ class Teachers extends Component {
   };
 
   /**
-   *
-   * @private
+   * Records
    */
+  _getRecords () {
+    const { sorters, filters, page, perPage } = this.state;
+
+    this.props.getRecords({
+      orderBy: buildSortersQuery(sorters),
+      filter: filters,
+      page, perPage
+    });
+  }
   _renderRecords () {
     const { records } = this.props;
     const loading = this.props.getRecordsRequest.get('loading');
@@ -90,28 +103,35 @@ class Teachers extends Component {
     ));
   }
 
+  /**
+   * Change page if necessary after creating a new record
+   */
+  _onCreate () {
+    const { pagination } = this.props;
+    const page = pagination.get('page');
+
+    if(this.state.page !== page) {
+      this._goToPage(page);
+    }
+  }
+
+  /**
+   * Edit
+   */
   _editRecord (id) {
     this.props.getSingleRecord(id);
-    this._openEditDialog();
+  }
+  _openEditDialogOnSingleRequestSuccess(nextProps) {
+    const success = this.props.getSingleRecordRequest.get('success');
+    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
+
+    if(!success && nextSuccess) {
+      this._openEditDialog();
+    }
   }
 
   /**
-   *
-   * @private
-   */
-  _getRecords () {
-    const { sorters, page, perPage } = this.state;
-
-    this.props.getRecords({
-      orderBy: buildSortersQuery(sorters),
-      page, perPage
-    });
-  }
-
-  /**
-   *
-   * @param name
-   * @private
+   * Records
    */
   _sort (name) {
     let sorters = {};
@@ -124,12 +144,20 @@ class Teachers extends Component {
 
     this.setState({ sorters }, this._getRecords);
   }
+  _search(value) {
+    let filters = {
+      composed: value,
+      // username: value,
+      // firstName: value,
+      // lastName: value,
+      // email: value,
+    };
 
-  /**
-   *
-   * @param perPage
-   * @private
-   */
+    this.setState({
+      page: 1,
+      filters
+    }, this._getRecords);
+  }
   _selectPerPage (perPage) {
     const total = this.props.pagination.get('total');
     const totalPages = Math.ceil(total / perPage);
@@ -137,23 +165,8 @@ class Teachers extends Component {
 
     this.setState({ perPage, page }, this._getRecords)
   }
-
-  /**
-   *
-   * @param page
-   * @private
-   */
   _goToPage (page) {
     this.setState({ page }, this._getRecords)
-  }
-
-  _onCreate () {
-    const { pagination } = this.props;
-    const page = pagination.get('page');
-
-    if(this.state.page !== page) {
-      this._goToPage(page);
-    }
   }
 
   render() {
@@ -177,7 +190,14 @@ class Teachers extends Component {
                 </h3>
               </div>
             </div>
-
+            <div className="m-portlet__head-tools">
+              <SearchInput
+                className="portlet-header-input"
+                id="search"
+                type='search'
+                placeholder="Search"
+                onChange={(e) => { this._search(e) }}/>
+            </div>
           </div>
           <div className='m-portlet__body'>
             <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
@@ -265,6 +285,5 @@ Teachers = connect(
     getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) }
   })
 )(Teachers);
-
 
 export default translate('teachers')(Teachers);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Dialog, Slide } from 'material-ui';
+import { Dialog, Slide, withStyles } from 'material-ui';
 
 function Transition(props) {
   return <Slide direction='up' {...props} />;
@@ -35,9 +35,13 @@ class Modal extends Component {
 
   render() {
     const { isOpen } = this.state;
+    const { classes, bigger } = this.props;
 
     return (
       <Dialog
+        classes={{
+          paper: bigger ? classes.biggerPaper : classes.paper
+        }}
         open={isOpen}
         onClose={() => this._onClose()}
         transition={Transition}
@@ -47,5 +51,25 @@ class Modal extends Component {
     );
   }
 }
+
+Modal = withStyles({
+  paper: {
+    height: '80%'
+  },
+  biggerPaper: {
+    height: '80%',
+    minWidth: '80%',
+    maxWidth: 'none'
+  },
+  // paperWidthXs: {
+  //   width: '80%'
+  // },
+  // paperWidthSm: {
+  //   width: '80%'
+  // },
+  // paperWidthMd: {
+  //   width: '80%'
+  // },
+})(Modal);
 
 export default Modal;

@@ -40,10 +40,10 @@ class SignUpIndex extends Component {
                       <h2 className="text-center m--margin-top-25">Select your account type</h2>
 
                       <div className="signup-btns flex-column d-flex flex m--margin-top-40 ">
-                        <NavLink to="/signup/parent" activeClassName="link-active" className="btn m-btn--pill m--margin-bottom-10 btn-lg m-btn m-btn--gradient-from-primary m-btn--gradient-to-info">
+                        <NavLink to="/signUp/parent" activeClassName="link-active" className="btn m-btn--pill m--margin-bottom-10 btn-lg m-btn m-btn--gradient-from-primary m-btn--gradient-to-info">
                           Parent
                         </NavLink>
-                        <NavLink to="/signup/principal" activeClassName="link-active" className="btn m-btn--pill btn-lg m-btn m-btn--gradient-from-success m-btn--gradient-to-info">
+                        <NavLink to="/signUp/principal" activeClassName="link-active" className="btn m-btn--pill btn-lg m-btn m-btn--gradient-from-success m-btn--gradient-to-info">
                           Principal
                         </NavLink>
                       </div>

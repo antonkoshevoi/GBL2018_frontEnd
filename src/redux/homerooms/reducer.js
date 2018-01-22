@@ -4,7 +4,10 @@ import {
   GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS,
   GET_SCHOOL_TEACHERS, GET_SCHOOL_TEACHERS_SUCCESS, GET_SCHOOL_TEACHERS_FAIL,
   GET_SCHOOL_STUDENTS, GET_SCHOOL_STUDENTS_SUCCESS, GET_SCHOOL_STUDENTS_FAIL,
-  RESET_BULK_UPLOAD_REQUEST, BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS
+  RESET_BULK_UPLOAD_REQUEST, BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS,
+  RESET_CREATE_REQUEST, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
+  GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS
+
 } from './actions';
 import Immutable from 'immutable';
 
@@ -125,18 +128,6 @@ export default function reducer (state = initialState, action) {
     case RESET_GET_SINGLE_RECORD_REQUEST:
       return state
         .set('getSingleRecordRequest', initialState.get('getSingleRecordRequest'));
-    /**
-     * Get schools
-     */
-    case GET_SCHOOLS:
-      return state
-        .set('schools', Immutable.List());
-    case GET_SCHOOLS_SUCCESS:
-      return state
-        .set('schools', Immutable.fromJS(action.result.data));
-    case GET_SCHOOLS_FAIL:
-      return state;
-
     /**
      * Create
      */

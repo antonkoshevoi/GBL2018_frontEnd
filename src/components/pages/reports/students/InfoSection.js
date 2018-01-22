@@ -120,7 +120,7 @@ class InfoSection extends Component {
                         </div>
                         <div className="col-md-12 m--margin-bottom-10">
                             <Card title="Remarks" icon="flaticon-edit">
-
+                                <h1>No Info...</h1>
                             </Card>
                         </div>
                     </div>

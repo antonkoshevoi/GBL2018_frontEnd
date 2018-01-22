@@ -12,3 +12,7 @@ export const selectValidateStep1Request = createSelector(
   selectParentSignUpDomain,
   (subState) => subState.get('validateStep1Request')
 );
+export const selectSignUpRequest = createSelector(
+  selectParentSignUpDomain,
+  (subState) => subState.get('signUpRequest')
+);

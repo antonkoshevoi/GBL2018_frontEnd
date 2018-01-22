@@ -27,13 +27,6 @@ export const selectRecords = createSelector(
   (subState) => subState.get('records')
 );
 /**
- * Schools
- */
-export const selectSchools = createSelector(
-    selectHomeroomsDomain,
-  (subState) => subState.get('schools')
-);
-/**
  * Pagiantion
  */
 export const selectPagination = createSelector(
@@ -55,6 +48,7 @@ export const selectUpdateRequest = createSelector(
     selectHomeroomsDomain,
   (subState) => subState.get('updateRequest')
 );
+
 /**
  * Homerooms School Teachers
  */
@@ -76,3 +70,4 @@ export const selectBulkUploadRequest = createSelector(
     selectHomeroomsDomain,
     (subState) => subState.get('bulkUploadRequest')
 );
+

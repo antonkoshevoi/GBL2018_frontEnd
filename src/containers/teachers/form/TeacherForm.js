@@ -1,14 +1,44 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, FormHelperText, Input, InputLabel, MenuItem, TextField, Select } from 'material-ui';
+import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from 'material-ui';
+import { connect } from 'react-redux';
+import { selectGetSchoolHomeroomsRequest, selectSchools } from '../../../redux/schools/selectors';
+import { getSchoolHomerooms, getSchools } from '../../../redux/schools/actions';
 
 class TeacherForm extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     teacher: PropTypes.object.isRequired,
-    schools: PropTypes.any,
     errors: PropTypes.any
   };
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      schoolHomerooms: [],
+    };
+  }
+
+  componentDidMount() {
+    const { getSchools, teacher, getSchoolHomerooms } = this.props;
+    getSchools();
+
+    if (teacher.id) {
+      getSchoolHomerooms(teacher.schoolId);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const schoolHomerooms = this.props.getSchoolHomeroomsRequest.get('records');
+    const nextschoolHomerooms = nextProps.getSchoolHomeroomsRequest.get('records');
+
+    if (!schoolHomerooms && nextschoolHomerooms) {
+      this.setState({
+        ...this.state,
+        schoolHomerooms: nextschoolHomerooms.toJS()
+      });
+    }
+  }
 
   _handleInputChange(event) {
     const { name, type, value, checked } = event.target;
@@ -19,12 +49,37 @@ class TeacherForm extends Component {
     });
   }
 
+  _handleSchoolChange(event) {
+    const { value } = event.target;
+
+    if (value) {
+      this.props.getSchoolHomerooms(value);
+    } else {
+      this.setState({
+        ...this.state,
+        schoolHomerooms: []
+      });
+    }
+
+    this._handleInputChange(event);
+  }
+
   _renderSchools() {
     const { schools } = this.props;
 
     return schools.map((school, key) => (
       <MenuItem key={key} value={ school.get('schId') }>
         { school.get('schName') }
+      </MenuItem>
+    ));
+  }
+
+  _renderSchoolHomerooms() {
+    const { schoolHomerooms } = this.state;
+
+    return schoolHomerooms.map((homeroom, key) => (
+      <MenuItem key={key} value={ homeroom.id }>
+        { homeroom.name }
       </MenuItem>
     ));
   }
@@ -120,9 +175,10 @@ class TeacherForm extends Component {
             <Select
                 primarytext=""
                 name='schoolId'
-                onChange={(e) => { this._handleInputChange(e) }}
-                children={this._renderSchools()}
+                onChange={(e) => { this._handleSchoolChange(e) }}
                 value={teacher.schoolId || ''}>
+              <MenuItem value={null} primarytext=""/>
+              {this._renderSchools()}
             </Select>
             {errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}
           </FormControl>
@@ -134,9 +190,8 @@ class TeacherForm extends Component {
                 name='homeroomId'
                 onChange={(e) => { this._handleInputChange(e) }}
                 value={teacher.homeroomId || ''}>
-              <MenuItem value={null} primaryText="" />
-              <MenuItem value='1'>Homeroom #1</MenuItem>
-              <MenuItem value='2'>Homeroom #2</MenuItem>
+              <MenuItem value={null} primarytext=""/>
+              {this._renderSchoolHomerooms()}
             </Select>
             {errors && errors.get('homeroom') && <FormHelperText error>{ errors.get('homeroom').get(0) }</FormHelperText>}
           </FormControl>
@@ -145,5 +200,16 @@ class TeacherForm extends Component {
     );
   }
 }
+
+TeacherForm = connect(
+  (state) => ({
+    schools: selectSchools(state),
+    getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state),
+  }),
+  (dispatch) => ({
+    getSchools: () => { dispatch(getSchools()) },
+    getSchoolHomerooms: (schoolId) => { dispatch(getSchoolHomerooms(schoolId)) }
+  })
+)(TeacherForm);
 
 export default TeacherForm;

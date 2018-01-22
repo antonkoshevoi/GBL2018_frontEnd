@@ -9,10 +9,6 @@ export const GET_SINGLE_RECORD_SUCCESS = '[Homerooms] GET_SINGLE_RECORD_SUCCESS'
 export const GET_SINGLE_RECORD_FAIL = '[Homerooms] GET_SINGLE_RECORD_FAIL';
 export const RESET_GET_SINGLE_RECORD_REQUEST = '[Homerooms] RESET_GET_SINGLE_RECORD_REQUEST';
 
-export const GET_SCHOOLS = '[Homerooms] GET_SCHOOLS';
-export const GET_SCHOOLS_SUCCESS = '[Homerooms] GET_SCHOOLS_SUCCESS';
-export const GET_SCHOOLS_FAIL = '[Homerooms] GET_SCHOOLS_FAIL';
-
 export const CREATE = '[Homerooms] CREATE';
 export const CREATE_SUCCESS = '[Homerooms] CREATE_SUCCESS';
 export const CREATE_FAIL = '[Homerooms] CREATE_FAIL';
@@ -59,17 +55,6 @@ export function resetGetSingleRecordRequest () {
   }
 }
 /**
- * Get schools
- */
-export function getSchools(params = {}) {
-  return {
-    types: [GET_SCHOOLS, GET_SCHOOLS_SUCCESS, GET_SCHOOLS_FAIL],
-    promise: (apiClient) => apiClient.get('schools', Object.assign({}, params, {
-      perPage: 0
-    }))
-  };
-}
-/**
  * Create
  */
 export function create(data, params = {}) {
@@ -96,6 +81,7 @@ export function resetUpdateRequest () {
   return {
     type: RESET_UPDATE_REQUEST
   }
+
 }
 
 /**
@@ -141,4 +127,5 @@ export function resetBulkUploadRequest () {
     return {
         type: RESET_BULK_UPLOAD_REQUEST
     }
+
 }

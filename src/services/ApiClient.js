@@ -1,4 +1,5 @@
 import axios from 'axios';
+import qs from 'qs';
 import { env } from '../configs/env'
 import SessionStorage from './SessionStorage';
 
@@ -57,6 +58,9 @@ export default class ApiClient
         {
           params: Object.assign({}, runtimeConfigs.params, params),
           headers: Object.assign({}, runtimeConfigs.headers, headers),
+          paramsSerializer: function(params) {
+            return qs.stringify(params, {arrayFormat: 'brackets'})
+          },
         }
       )
     )

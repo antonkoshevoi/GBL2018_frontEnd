@@ -6,13 +6,13 @@ import {
   DialogContentText,
   Icon, IconButton,
   Toolbar, Typography,
-  Divider, Button
+  Divider, Button, DialogActions
 } from 'material-ui';
 import { connect } from 'react-redux';
-import { selectCreateRequest, selectSchools, selectRoles } from '../../../redux/administration/selectors';
-import { create, getSchools, getRoles, resetCreateRequest } from '../../../redux/administration/actions';
+import { selectCreateRequest } from '../../../redux/administration/selectors';
+import { create, resetCreateRequest } from '../../../redux/administration/actions';
 import Modal from "../../../components/ui/Modal";
-import AdministrationForm from "../../../components/pages/administration/AdministrationForm";
+import AdministrationForm from "../forms/AdministrationForm";
 
 class CreateAdministrationModal extends Component {
   static propTypes = {
@@ -34,15 +34,10 @@ class CreateAdministrationModal extends Component {
         lastName: '',
         gender: null,
         phone: '',
-        schoolId: 1,
-        homeroom: 1,
+        schoolId: '',
+        homeroomId: '',
       }
     };
-  }
-
-  componentDidMount() {
-    this.props.getSchools();
-    this.props.getRoles();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,12 +45,15 @@ class CreateAdministrationModal extends Component {
     const nextSuccess = nextProps.createRequest.get('success');
 
     if(!success && nextSuccess) {
-      this._onClose();
+      this._close();
       this.props.onSuccess();
     }
   }
 
-  _onClose () {
+  _close () {
+    this.setState({
+      adminUser: {}
+    });
     this.props.resetCreateRequest();
     this.props.onClose();
   };
@@ -64,20 +62,21 @@ class CreateAdministrationModal extends Component {
     this.setState({ adminUser });
   };
 
-  _onSubmit = () => {
+  _onSubmit (e) {
+    e.preventDefault();
     this.props.create(
       this.state.adminUser
     );
   };
 
   render() {
-    const { isOpen, createRequest, schools, roles } = this.props;
+    const { isOpen, createRequest } = this.props;
     const loading = createRequest.get('loading');
     const errorMessage = createRequest.get('errorMessage');
     const errors = createRequest.get('errors');
 
     return (
-      <Modal isOpen={isOpen} onClose={() => this._onClose()}>
+      <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
             <IconButton color="contrast" aria-label="Close">
@@ -97,19 +96,24 @@ class CreateAdministrationModal extends Component {
           <DialogContentText>
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
-          <AdministrationForm
-            onChange={(adminUser) => { this._onChange(adminUser) }}
-            adminUser={this.state.adminUser}
-            schools={schools}
-            roles={roles}
-            errors={errors}/>
-          <div className='col-sm-12'>
-            <Divider/>
-            <Button disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary' onClick={() => { this._onSubmit() }} >
-              Add New User
-            </Button>
-          </div>
+          <form id='create-administrator-form' onSubmit={(e) => { this._onSubmit(e) }}>
+            <AdministrationForm
+              onChange={(adminUser) => { this._onChange(adminUser) }}
+              adminUser={this.state.adminUser}
+              errors={errors}/>
+          </form>
         </DialogContent>
+        <DialogActions>
+          <Button
+            type='submit'
+            form='create-administrator-form'
+            disabled={loading}
+            raised
+            className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+            color='primary'>
+            Update User
+          </Button>
+        </DialogActions>
       </Modal>
     );
   }
@@ -118,14 +122,10 @@ class CreateAdministrationModal extends Component {
 CreateAdministrationModal = connect(
   (state) => ({
     createRequest: selectCreateRequest(state),
-    schools: selectSchools(state),
-    roles: selectRoles(state),
   }),
   (dispatch) => ({
     create: (form, params = {}) => { dispatch(create(form, params)) },
     resetCreateRequest: () => { dispatch(resetCreateRequest()) },
-    getSchools: () => { dispatch(getSchools()) },
-    getRoles: () => { dispatch(getRoles()) },
   })
 )(CreateAdministrationModal);
 

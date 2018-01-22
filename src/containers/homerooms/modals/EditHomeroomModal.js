@@ -6,11 +6,11 @@ import {
   DialogContentText,
   Icon, IconButton,
   Toolbar, Typography,
-  Divider, Button
+  Divider, Button, DialogActions
 } from 'material-ui';
 import { connect } from 'react-redux';
 import {
-  selectGetSingleRecordRequest, selectSchools,
+  selectGetSingleRecordRequest,
   selectUpdateRequest
 } from '../../../redux/homerooms/selectors';
 import {
@@ -38,10 +38,6 @@ class EditHomeroomModal extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.getSchools();
-  }
-
   componentWillReceiveProps(nextProps) {
     const record = this.props.getSingleRecordRequest.get('record');
     const nextRecord = nextProps.getSingleRecordRequest.get('record');
@@ -57,12 +53,12 @@ class EditHomeroomModal extends Component {
     const nextSuccess = nextProps.updateRequest.get('success');
 
     if(!success && nextSuccess) {
-      this._onClose();
+      this._close();
       this.props.onSuccess();
     }
   }
 
-  _onClose () {
+  _close () {
     this.setState({
       id: undefined,
       homeroom: {}
@@ -76,7 +72,8 @@ class EditHomeroomModal extends Component {
     this.setState({ homeroom });
   };
 
-  _onSubmit = () => {
+  _onSubmit (e) {
+    e.preventDefault();
     this.props.update(
       this.state.id,
       this.state.homeroom
@@ -86,13 +83,13 @@ class EditHomeroomModal extends Component {
   };
 
   render() {
-    const { isOpen, updateRequest, getSingleRecordRequest, schools } = this.props;
+    const { isOpen, updateRequest, getSingleRecordRequest } = this.props;
     const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');
     const errorMessage = updateRequest.get('errorMessage');
     const errors = updateRequest.get('errors');
 
     return (
-      <Modal isOpen={isOpen} onClose={() => this._onClose()}>
+      <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
             <IconButton color="contrast" aria-label="Close">
@@ -112,18 +109,25 @@ class EditHomeroomModal extends Component {
           <DialogContentText>
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
-          <HomeroomForm
-            onChange={(homeroom) => { this._onChange(homeroom) }}
-            homeroom={this.state.homeroom}
-            schools={schools}
-            errors={errors}/>
-          <div className='col-sm-12'>
-            <Divider/>
-            <Button disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary' onClick={() => { this._onSubmit() }} >
-              Update Homeroom
-            </Button>
-          </div>
+          <form id='update-homeroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
+            <HomeroomForm
+              onChange={(homeroom) => { this._onChange(homeroom) }}
+              homeroom={this.state.homeroom}
+              errors={errors}/>
+          </form>
         </DialogContent>
+        <Divider className='full-width'/>
+        <DialogActions>
+          <Button
+            type='submit'
+            form='update-homeroom-form'
+            disabled={loading}
+            raised
+            className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+            color='primary'>
+            Update Homeroom
+          </Button>
+        </DialogActions>
       </Modal>
     );
   }
@@ -133,13 +137,11 @@ EditHomeroomModal = connect(
   (state) => ({
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
     updateRequest: selectUpdateRequest(state),
-    schools: selectSchools(state),
   }),
   (dispatch) => ({
     update: (id, form, params = {}) => { dispatch(update(id, form, params)) },
     resetUpdateRequest: () => { dispatch(resetUpdateRequest()) },
     resetGetSingleRecordRequest: () => { dispatch(resetGetSingleRecordRequest()) },
-    getSchools: () => { dispatch(getSchools()) },
   })
 )(EditHomeroomModal);
 

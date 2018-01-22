@@ -1,6 +1,6 @@
 import {
   GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, CREATE, CREATE_SUCCESS, CREATE_FAIL,
-  RESET_CREATE_REQUEST, GET_SCHOOLS, GET_SCHOOLS_SUCCESS, GET_SCHOOLS_FAIL, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
+  RESET_CREATE_REQUEST, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
   GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS
 } from './actions';
 import Immutable from 'immutable';
@@ -35,7 +35,6 @@ const initialState = Immutable.fromJS({
     errorCode: null,
     errors: {}
   },
-  schools: [],
   records: [],
   pagination: {
     page: 1,
@@ -97,17 +96,6 @@ export default function reducer (state = initialState, action) {
     case RESET_GET_SINGLE_RECORD_REQUEST:
       return state
         .set('getSingleRecordRequest', initialState.get('getSingleRecordRequest'));
-    /**
-     * Get schools
-     */
-    case GET_SCHOOLS:
-      return state
-        .set('schools', Immutable.List());
-    case GET_SCHOOLS_SUCCESS:
-      return state
-        .set('schools', Immutable.fromJS(action.result.data));
-    case GET_SCHOOLS_FAIL:
-      return state;
     /**
      * Create
      */

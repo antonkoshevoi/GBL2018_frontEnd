@@ -6,19 +6,17 @@ import {
   DialogContentText,
   Icon, IconButton,
   Toolbar, Typography,
-  Divider, Button
+  Divider, Button, DialogActions
 } from 'material-ui';
 import { connect } from 'react-redux';
 import {
-  selectGetSingleRecordRequest, selectSchools,
-  selectUpdateRequest, selectRoles
+  selectGetSingleRecordRequest, selectUpdateRequest
 } from '../../../redux/administration/selectors';
 import {
-  getSchools, getRoles, resetGetSingleRecordRequest, resetUpdateRequest,
-  update
+  update, resetGetSingleRecordRequest, resetUpdateRequest,
 } from '../../../redux/administration/actions';
 import Modal from "../../../components/ui/Modal";
-import AdministrationForm from "../../../components/pages/administration/AdministrationForm";
+import AdministrationForm from "../forms/AdministrationForm";
 
 class EditAdministrationModal extends Component {
   static propTypes = {
@@ -36,11 +34,6 @@ class EditAdministrationModal extends Component {
       id: undefined,
       adminUser: {}
     };
-  }
-
-  componentDidMount() {
-    this.props.getSchools();
-    this.props.getRoles();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -77,7 +70,8 @@ class EditAdministrationModal extends Component {
     this.setState({ adminUser });
   };
 
-  _onSubmit = () => {
+  _onSubmit (e) {
+    e.preventDefault();
     this.props.update(
       this.state.id,
       this.state.adminUser
@@ -85,7 +79,7 @@ class EditAdministrationModal extends Component {
   };
 
   render() {
-    const { isOpen, updateRequest, getSingleRecordRequest, schools, roles } = this.props;
+    const { isOpen, updateRequest, getSingleRecordRequest } = this.props;
     const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');
     const errorMessage = updateRequest.get('errorMessage');
     const errors = updateRequest.get('errors');
@@ -111,19 +105,24 @@ class EditAdministrationModal extends Component {
           <DialogContentText>
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
-          <AdministrationForm
-            onChange={(adminUser) => { this._onChange(adminUser) }}
-            adminUser={this.state.adminUser}
-            schools={schools}
-            roles={roles}
-            errors={errors}/>
-          <div className='col-sm-12'>
-            <Divider/>
-            <Button disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary' onClick={() => { this._onSubmit() }} >
-              Update User
-            </Button>
-          </div>
+          <form id='update-administrator-form' onSubmit={(e) => { this._onSubmit(e) }}>
+            <AdministrationForm
+              onChange={(adminUser) => { this._onChange(adminUser) }}
+              adminUser={this.state.adminUser}
+              errors={errors}/>
+          </form>
         </DialogContent>
+        <DialogActions>
+          <Button
+            type='submit'
+            form='update-administrator-form'
+            disabled={loading}
+            raised
+            className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+            color='primary'>
+            Update User
+          </Button>
+        </DialogActions>
       </Modal>
     );
   }
@@ -133,15 +132,11 @@ EditAdministrationModal = connect(
   (state) => ({
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
     updateRequest: selectUpdateRequest(state),
-    schools: selectSchools(state),
-    roles: selectRoles(state),
   }),
   (dispatch) => ({
     update: (id, form, params = {}) => { dispatch(update(id, form, params)) },
     resetUpdateRequest: () => { dispatch(resetUpdateRequest()) },
     resetGetSingleRecordRequest: () => { dispatch(resetGetSingleRecordRequest()) },
-    getSchools: () => { dispatch(getSchools()) },
-    getRoles: () => { dispatch(getRoles()) },
   })
 )(EditAdministrationModal);
 

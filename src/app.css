@@ -574,15 +574,15 @@ div.m-portlet.m-portlet--info.m-portlet--head-solid-bg .m-portlet__head {
 }
 
 .progress .progress-bar.bg-warning {
-  background: #ed9c28;
+  background-color: #ed9c28!important;
 }
 
 .progress .progress-bar.bg-success {
-  background: #47a447;
+  background-color: #47a447!important;
 }
 
 .progress .progress-bar.bg-danger {
-  background: #D2322D;
+  background-color: #D2322D !important;
 }
 
 div.progress.m-progress--sm .progress-bar {
@@ -591,7 +591,7 @@ div.progress.m-progress--sm .progress-bar {
 
 
 .progress {
-  background-color: #BDCCD4;
+  background-color: #BDCCD4!important;;
   border-radius: 10px;
 }
 
@@ -727,25 +727,29 @@ div.row {
 
 .m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i:not(.la-globe) {
   font-size: 1.4rem;
-  line-height: 40px;
+  line-height: 35px;
   border-radius: 50%;
-  box-shadow: 0 2px 5px #80808036;
-  width: 40px;
-  height: 40px;
+  /*box-shadow: 0 2px 5px #80808036;*/
+  width: 35px;
+  height: 35px;
+}
+
+.m-dropdown.m-dropdown--align-center .m-dropdown__wrapper {
+  left: -50px !important;
 }
 
 .m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i:not(.la-globe):hover {
-  background: #7a7a7a;
+  /*background: #7a7a7a;*/
 }
 
 .m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i:not(.la-globe):hover:before {
-  color: #fff;
+  /*color: #fff;*/
 }
 
 div.m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i:before {
   background: none;
   font-weight: normal;
-  color: #7a7a7a;
+  color: #adadad;
   -webkit-background-clip: content-box;
   -webkit-text-fill-color: inherit;
 }
@@ -792,6 +796,26 @@ div.m-subheader .m-subheader__breadcrumbs.m-nav > .m-nav__item > .m-nav__link > 
   min-width: 15px;
 }
 
+div.m-portlet .m-portlet__head {
+  height: 4.1rem;
+}
+
+.m-subheader .breadcrumbs ul {
+  background: transparent;
+  float: right;
+}
+
+.m-subheader .breadcrumbs li {
+  display: inline-block;
+  padding: 9px;
+  color: #fff;
+}
+
+.m-subheader .breadcrumbs li i.fa {
+  font-size: 1.4rem;
+}
+
+
 @media (max-width: 1599px) {
   .small-card .m-stack {
     font-size: 75%;
@@ -815,3 +839,4 @@ div.m-subheader .m-subheader__breadcrumbs.m-nav > .m-nav__item > .m-nav__link > 
     width: 55px;
   }
 }
+
