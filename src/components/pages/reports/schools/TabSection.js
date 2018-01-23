@@ -50,7 +50,7 @@ class TabSection extends Component {
                             )
                         }
                         actionIcon={
-                            <IconButton  color="contrast">
+                            <IconButton  color="default">
 
                             </IconButton>
                         }
@@ -112,9 +112,9 @@ class TabSection extends Component {
                                             onChange={this.handleChange}
                                             scrollable
 
-                                            scrollButtons={false}
-                                            indicatorColor="#fff"
-                                            textColor="#fff"
+                                            scrollButtons="off"
+                                            indicatorColor="secondary"
+                                            textColor="secondary"
 
                                         >
                                             <Tab className="tab-header-item" value="schools" label="Schools" />

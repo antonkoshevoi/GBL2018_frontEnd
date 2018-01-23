@@ -190,3 +190,40 @@
 #product-details .productTitle {
     font-weight: 400;
 }
+
+
+
+
+/* =====================================
+            SHOPPING CART
+========================================*/
+
+.shoppingCartTable .productInfo {
+    display: table;
+}
+
+.shoppingCartTable .productInfo > div {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 15px;
+}
+
+.shoppingCartTable table th {
+    padding: 15px;
+}
+
+.shoppingCartTable .productInfo .productImg {
+    width: 150px;
+}
+
+.shoppingCartTable .productPrice {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.shoppingCartTable .productQuantity {
+    font-size: 25px;
+    padding: 7px;
+    text-align: center;
+    font-weight: bold;
+}

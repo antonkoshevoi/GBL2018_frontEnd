@@ -34,7 +34,7 @@ class ChartsSection extends Component {
             <div className="row">
                 <div className="col-sm-12 col-md-6 col-lg-3">
                     <Card title="School N184" className="profile-card" avatar='http://admissions.berkeley.edu/sites/default/files/UCB_landingpage_images_600x300_212.jpg'>
-                        <InfoSection/>
+                        <InfoSection data={this.props.data}/>
                     </Card>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-3">

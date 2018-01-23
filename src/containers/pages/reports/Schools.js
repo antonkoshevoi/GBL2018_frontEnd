@@ -16,7 +16,7 @@ class Schools extends Component {
         console.log(AUTH.isLodegIn());
         return (
             <div className="fadeInLeft  animated">
-                    <CardsSection/>
+                    <CardsSection />
                     <TabSection/>
 
             </div>

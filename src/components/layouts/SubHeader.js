@@ -41,7 +41,7 @@ class SubHeader extends Component {
         const _self = this;
             return ( [
                 <MenuItem key="1" onClick={_self._closeHeaderMenu}>
-                    <i className="fa fa-shopping-cart PageHeader-icon"></i>
+                    <NavLink to='/shopping/cart' className="fa fa-shopping-cart PageHeader-icon"></NavLink>
                 </MenuItem>,
                 <MenuItem key="2" onClick={_self._closeHeaderMenu}>
                     <i className="fa fa-line-chart"></i>
@@ -95,9 +95,10 @@ class SubHeader extends Component {
 					<div className="right-wrapper text-right PageHeader-breadcrumbs">
                             <ol className="breadcrumbs m--padding-right-20 d-flex justify-content-between align-items-center header-menu" style={{marginBottom:0}}>
                                 <li>
-                                    <a >
+                                    <NavLink to='/shopping/cart'>
                                         <i className="fa fa-shopping-cart PageHeader-icon"></i>
-                                    </a>
+                                          <span className="g-badge badge-red">2</span>
+                                    </NavLink>
                                 </li>
                                 <li>
                                     <a >

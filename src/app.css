@@ -30,6 +30,10 @@ button, [role="button"], [type="button"],  .btn {
   color:#ccc !important;
 }
 
+.img-responsive {
+  max-width: 100%;
+}
+
 .App {
   text-align: center;
 }
@@ -665,7 +669,7 @@ div.m-portlet {
   margin: 5px 0;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  padding: 3px;
   border-radius: 3px 0 0 2px;
   box-shadow: 0 1px 15px 1px rgba(69, 65, 78, 0.08);
 }
@@ -749,6 +753,10 @@ div[class^='col-'] {
   margin-bottom: 15px;
 }
 
+.small-card [class^='col-'] {
+  margin-bottom: 0;
+}
+
 div.row {
   margin-right: -7px;
   margin-left: -7px;
@@ -826,6 +834,10 @@ div.m-subheader .m-subheader__breadcrumbs.m-nav > .m-nav__item > .m-nav__link > 
   color: #d0d2db;
 }
 
+.breadcrumbs a {
+  color: #fff;
+}
+
 
 .small-card .m-badge {
   min-height: 15px;
@@ -873,4 +885,28 @@ div.m-portlet .m-portlet__head {
 
 .m-sidebar-is-open .m-aside-left {
   left: 0;
+}
+
+.breadcrumbs li a {
+  position: relative;
+}
+
+.breadcrumbs li a .g-badge {
+  position: absolute;
+  top: -9px;
+  right: -11px;
+}
+
+.g-badge {
+  width: 17px;
+  height: 17px;
+  text-align: center;
+  line-height: 17px;
+  border-radius: 25px;
+  text-shadow: 0 2px 5px black;
+}
+
+.g-badge.badge-red {
+  background: red;
+  color: #fff;
 }
