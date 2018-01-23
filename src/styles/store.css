@@ -48,10 +48,15 @@
 }
 
  .cardItem {
-    flex: 0 0 11%;
+    flex: 1 0 11%;
     padding: 5px;
     overflow: hidden;
 }
+
+ .all-products .cardItem {
+     flex: 0 0 11%;
+ }
+
  .cardContent {
     padding: 7px;
 }
@@ -128,6 +133,10 @@
      /*border-bottom: 3px solid #D2322D;*/
  }
 
+.store-wrapper div[class^='col-'] {
+    margin-bottom: 0 !important;
+}
+
  @media (max-width: 1367px) {
      .productSection .cardItem:nth-child(9) {
          display: none;
@@ -180,4 +189,41 @@
 
 #product-details .productTitle {
     font-weight: 400;
+}
+
+
+
+
+/* =====================================
+            SHOPPING CART
+========================================*/
+
+.shoppingCartTable .productInfo {
+    display: table;
+}
+
+.shoppingCartTable .productInfo > div {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 15px;
+}
+
+.shoppingCartTable table th {
+    padding: 15px;
+}
+
+.shoppingCartTable .productInfo .productImg {
+    width: 150px;
+}
+
+.shoppingCartTable .productPrice {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.shoppingCartTable .productQuantity {
+    font-size: 25px;
+    padding: 7px;
+    text-align: center;
+    font-weight: bold;
 }

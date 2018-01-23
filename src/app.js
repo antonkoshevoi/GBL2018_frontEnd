@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
-import './app.css';
 import './theme/vendor/vendors.bundle.css';
 import './theme/style.bundle.css';
+import './app.css';
+import './styles/responsive.css';
+
 import { translate } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { Router } from "react-router";

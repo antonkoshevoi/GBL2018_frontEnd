@@ -34,7 +34,7 @@ class ChartsSection extends Component {
             <div className="row">
                 <div className="col-sm-12 col-md-6 col-lg-3">
                     <Card title="School N184" className="profile-card" avatar='http://admissions.berkeley.edu/sites/default/files/UCB_landingpage_images_600x300_212.jpg'>
-                        <InfoSection/>
+                        <InfoSection data={this.props.data}/>
                     </Card>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-3">
@@ -43,7 +43,7 @@ class ChartsSection extends Component {
                     </Card>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-3">
-                    <Card title="Pass Rate" icon="flaticon-list-2">
+                    <Card title="Pass Rate" icon="flaticon-list-2" className='passRateCard'>
                         <h1  className="d-flex justify-content-center align-items-center absolute-center" style={{fontSize:'7rem',color:'rgb(0, 128, 0)'}}>28%</h1>
                     </Card>
                 </div>

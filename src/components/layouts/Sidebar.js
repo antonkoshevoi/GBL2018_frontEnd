@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import Menu from "../../data/Menu";
 import MenuParent from "../../data/MenuParent";
 import $ from "jquery"
+import {Icon, IconButton} from "material-ui";
 import HasRole from "../../containers/middlewares/HasRole";
 
 class Sidebar extends Component {
@@ -43,7 +44,7 @@ class Sidebar extends Component {
 
         return Menu.multipleMenu.map(function (menu) {
             return (
-                <div className="menuItem" key={menu.key} data-key={menu.key}>
+                <div className="menuItem" key={menu.key} data-key={menu.key}  onClick={(menu.subMenu === undefined) ? _self.props.mobileSidebar : () => {return} }>
                    <NavLink to={(menu.subMenu !== undefined) ? `#${menu.key}` : `/${menu.link}`}  className={'googleMenuItem ' + menu.colorName + (activeMenu.key === menu.key ? ' active fadeInUp  animated' :  activeMenu.subMenu !== undefined ? ' swapped' : '') }
                          onClick={(event) => _self._googleMenuToggle(menu)}>
                        <span className="icon"><i className={menu.icon}></i></span>
@@ -94,7 +95,7 @@ class Sidebar extends Component {
                 <a href="#" className="back" onMouseOver={() => {_self._menuBackHover()}}>
                     <i className="la la-angle-left"></i>
                 </a>
-                <div className="content">
+                <div className="content" onClick={() => {_self.props.mobileSidebar()}}>
                     {_self._renderGoogleSubMenus(menu.subMenu)}
                 </div>
             </div>
@@ -106,7 +107,7 @@ class Sidebar extends Component {
         const _self = this;
         return Menu.singleMenu.map(function (menu,i) {
             return (
-                <li  className="m-menu__item" key={i} aria-haspopup="true"  data-menu-submenu-toggle="hover">
+                <li  className="m-menu__item" key={i} aria-haspopup="true"  data-menu-submenu-toggle="hover" >
                     <NavLink  to={`/${menu.link}`} className="m-menu__link" onClick={() => {_self._resetMenu()}}>
                         <i className={`m-menu__link-icon ${menu.icon}`}></i>
                         <span className="m-menu__link-text">
@@ -141,6 +142,11 @@ class Sidebar extends Component {
     
         return (
         <div id="m_aside_left" className="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
+            <div className="text-right mobile-sidebar-toggle m--hide" >
+                <IconButton color='primary'  onClick={() => {this.props.mobileSidebar()}}>
+                    <Icon>menu</Icon>
+                </IconButton>
+            </div>
 
             <div
             id="m_ver_menu"
@@ -156,7 +162,7 @@ class Sidebar extends Component {
                         {this._renderGoogleMenusParent()}
                     </HasRole>
                 </nav>
-                <ul className="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
+                <ul className="m-menu__nav  m-menu__nav--dropdown-submenu-arrow "  onClick={() => {this.props.mobileSidebar()}}>
                     {this._renderSingleMenus()}
                 </ul>
             </div>
