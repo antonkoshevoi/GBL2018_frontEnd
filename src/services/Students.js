@@ -1,6 +1,6 @@
 
 import studentsJson from '../data/json/students.json';
-import { env } from '../configs/env'
+import { env } from '../configs/.env'
 
 
 const header = new Headers({
