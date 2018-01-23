@@ -1,0 +1,194 @@
+
+@media (max-width: 1600px) {
+    .small-card .m-stack {
+        font-size: 75%;
+        padding-left: 0;
+    }
+
+    .small-card .m-stack legend {
+        font-size: 1rem;
+    }
+
+    .small-card .m-badge {
+        min-height: 10px;
+        min-width: 10px;
+    }
+
+    .fa.widget-icon {
+        font-size: 55px;
+    }
+
+    .m-widget1__number > img {
+        width: 55px;
+    }
+
+    .small-card-content .small-card {
+        padding: 1px;
+    }
+
+    .cardItem .cardContent {
+        padding: 5px;
+    }
+}
+
+
+/**********************************/
+
+@media (max-width: 1367px) {
+
+    .m-portlet.m-portlet--head-solid-bg .m-widget1 .m-widget1__item {
+        padding: 0.3rem 0;
+    }
+
+    .m-widget1 .m-widget1__item .m-widget1__title {
+        font-size: 1rem;
+    }
+
+    .small-card-content .small-card {
+        padding: 0;
+        line-height: 1;
+    }
+
+    .fa.widget-icon {
+        font-size: 25px;
+    }
+
+    .m-widget1__number > img {
+        width: 25px;
+    }
+
+    .small-card .widget-desc {
+        font-size: 0.6rem;
+    }
+
+    .small-card .m-stack {
+        padding-left: 5px !important;
+        font-size: 50%;
+    }
+
+    .small-card .m-stack legend {
+        font-size: .7rem;
+    }
+
+    .small-card .m-stack h5 {
+        font-size: 0.8rem;
+    }
+
+    .small-card .m-stack div[class^='col-'] {
+        padding-right: 4px;
+        padding-left: 4px;
+    }
+
+    .passRateCard h1 {
+        font-size: 4rem !important;
+    }
+
+
+    div.cardContent {
+        padding: 4px;
+    }
+}
+
+/**********************************/
+
+
+@media (max-width: 992px) {
+
+    .m-wrapper {
+        padding-top: 50px;
+    }
+
+    .m-header--fixed-mobile .m-topbar {
+        top: 0 !important;
+    }
+
+    .headerSchoolName {
+        display: none !important;
+    }
+
+    .m-brand__logo-wrapper {
+        width: 150px;
+    }
+
+
+    .mobile-sidebar-toggle {
+        display: block !important;
+    }
+
+    .mobile-sidebar-out-toggle {
+        display: inline-block !important;
+    }
+
+}
+
+
+@media (min-width: 993px) {
+
+
+}
+
+/**********************************/
+
+
+@media (max-width: 1024px) {
+    div.pie-block > canvas {
+        margin: auto;
+    }
+}
+
+/**********************************/
+
+
+@media (max-width: 767px) {
+
+
+
+    .top-header.m-container.m-container--full-height {
+        display: block;
+        height: 35px;
+    }
+
+    .top-header .m-brand__logo-wrapper {
+        width: 150px;
+        display: inline-block;
+    }
+
+    /*.general-header  .m-brand__logo-wrapper{*/
+        /*display: none !important;*/
+    /*}*/
+
+    .general-header {
+        background: #fff;
+    }
+
+    .passRateCard h1 {
+        position: relative;
+        transform: none;
+    }
+
+
+    .m-subheader__title.m-subheader__title--separator {
+        vertical-align: middle;
+        display: inline-block;
+    }
+
+
+    .header-menu {
+        display: none !important;
+    }
+
+    .mobile-header-menu {
+        display: block !important;
+        margin-right: 20px;
+    }
+
+    .mobile-header-menu > a.fa {
+        font-size: 2rem;
+        color: #fff;
+        padding-left: 5px;
+    }
+
+
+}
+
+/**********************************/
