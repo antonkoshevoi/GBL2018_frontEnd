@@ -14,3 +14,20 @@ export const selectUserData = createSelector(
   selectUserDomain,
   (subState) => subState.get('userData')
 );
+
+export const selectUserPermissions = createSelector(
+  selectUserDomain,
+  (subState) => subState.get('permissions')
+);
+
+export const selectUserRoles = createSelector(
+  selectUserDomain,
+  (subState) => subState.get('roles')
+);
+/**
+ * Update
+ */
+export const selectUpdateRequest = createSelector(
+  selectUserDomain,
+  (subState) => subState.get('updateRequest')
+);
