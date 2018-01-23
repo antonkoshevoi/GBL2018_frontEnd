@@ -44,7 +44,7 @@ class ChartsSection extends Component {
                 </div>
 
                 <div className="col-sm-12 col-md-6 col-xl-3">
-                    <Card title="Pass Rate" icon="flaticon-list-2">
+                    <Card title="Pass Rate" className="passRateCard" icon="flaticon-list-2">
                         <h1  className="d-flex justify-content-center align-items-center absolute-center" style={{fontSize:'7rem',color:'rgb(0, 128, 0)'}}>28%</h1>
                     </Card>
                 </div>

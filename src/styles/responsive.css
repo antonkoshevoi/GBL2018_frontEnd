@@ -36,8 +36,12 @@
 
 @media (max-width: 1367px) {
 
+    div.m-portlet .m-portlet__body {
+        padding: 0.7rem;
+    }
+
     .m-portlet.m-portlet--head-solid-bg .m-widget1 .m-widget1__item {
-        padding: 0.3rem 0;
+        padding: 0.2rem 0;
     }
 
     .m-widget1 .m-widget1__item .m-widget1__title {
@@ -119,6 +123,24 @@
         display: inline-block !important;
     }
 
+    .small-card-content .small-card .row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: unset;
+    }
+
+    .small-card .m-stack {
+        font-size: 75%;
+    }
+
+    .small-card .m-stack h5 {
+        font-size: 1.2rem;
+    }
+
+    .small-card .m-stack legend {
+        font-size: 1rem;
+    }
+
 }
 
 
@@ -164,6 +186,8 @@
     .passRateCard h1 {
         position: relative;
         transform: none;
+        top: 0;
+        left: 0;
     }
 
 
