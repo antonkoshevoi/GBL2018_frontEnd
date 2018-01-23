@@ -1,3 +1,4 @@
+
 #root{
   height: 100%;
 }
@@ -279,13 +280,13 @@ div.portlet-header-input:before {
 }
 
 .btn {
-  border: 2px solid gray;
-  color: gray;
-  background-color: white;
-  padding: 8px 20px;
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: bold;
+  /*border: 2px solid gray;*/
+  /*color: gray;*/
+  /*background-color: white;*/
+  /*padding: 8px 20px;*/
+  /*border-radius: 8px;*/
+  /*font-size: 20px;*/
+  /*font-weight: bold;*/
 }
 
 .upload-btn-wrapper input[type=file] {
@@ -602,6 +603,10 @@ div.m-portlet.m-portlet--info.m-portlet--head-solid-bg .m-portlet__head {
   background: #589ee4;
 }
 
+div.m-portlet, div.small-card-content {
+  margin-bottom: 20px;
+}
+
 .progress .progress-bar.bg-warning {
   background-color: #ed9c28!important;
 }
@@ -667,6 +672,7 @@ div.m-portlet {
 
 .small-card-content .small-card .row {
   width: 100%;
+  margin: auto;
 }
 
 .small-card-content .small-card:first-child {
@@ -740,6 +746,7 @@ div.m-portlet .m-portlet__body {
 div[class^='col-'] {
   padding-right: 7px;
   padding-left: 7px;
+  margin-bottom: 15px;
 }
 
 div.row {
@@ -848,28 +855,22 @@ div.m-portlet .m-portlet__head {
   z-index: 55;
 }
 
-
-@media (max-width: 1599px) {
-  .small-card .m-stack {
-    font-size: 75%;
-    padding-left: 0;
-  }
-
-  .small-card .m-stack legend {
-    font-size: 1rem;
-  }
-
-  .small-card .m-badge {
-    min-height: 10px;
-    min-width: 10px;
-  }
-
-  .fa.widget-icon {
-    font-size: 55px;
-  }
-
-  .m-widget1__number > img {
-    width: 55px;
-  }
+#header-menu li {
+  justify-content: center;
 }
 
+#header-menu li .fa {
+  font-size: 1.6rem;
+}
+
+#header-menu li .fa.fa-globe {
+  margin-right:0 !important;
+}
+
+.m-aside-left {
+  transition: all .2s;
+}
+
+.m-sidebar-is-open .m-aside-left {
+  left: 0;
+}

@@ -48,10 +48,15 @@
 }
 
  .cardItem {
-    flex: 0 0 11%;
+    flex: 1 0 11%;
     padding: 5px;
     overflow: hidden;
 }
+
+ .all-products .cardItem {
+     flex: 0 0 11%;
+ }
+
  .cardContent {
     padding: 7px;
 }
@@ -127,6 +132,10 @@
 .store-filter .filter-buttons a.active {
      /*border-bottom: 3px solid #D2322D;*/
  }
+
+.store-wrapper div[class^='col-'] {
+    margin-bottom: 0 !important;
+}
 
  @media (max-width: 1367px) {
      .productSection .cardItem:nth-child(9) {

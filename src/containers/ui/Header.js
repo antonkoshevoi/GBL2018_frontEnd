@@ -9,6 +9,7 @@ import { logout } from '../../redux/auth/actions';
 import Messages from "../pushers/Messages";
 import Notifications from "../pushers/Notifications";
 import Tasks from "../pushers/Tasks";
+import {Icon, IconButton} from "material-ui";
 // @translate(['key'], { wait: true })
 
 class Header extends Component {
@@ -41,7 +42,9 @@ class Header extends Component {
 
     return  (
       <header className="m-grid__item  m-header "  data-minimize-offset="200" data-minimize-mobile-offset="200" >
-        <div className="m-container m-container--fluid m-container--full-height">
+
+
+        <div className="m-container general-header m-container--fluid m-container--full-height">
           <div className="m-stack m-stack--ver m-stack--desktop">
             <div className="m-stack__item m-brand  ">
               <div className="m-stack m-stack--ver m-stack--general">
@@ -58,7 +61,7 @@ class Header extends Component {
                 <i className="la la-close"></i>
               </button>
 
-              <div className="d-flex justify-content-center  align-items-center flex-1 hidden-sm">
+              <div className="d-flex justify-content-center headerSchoolName align-items-center flex-1 hidden-sm">
                 <h4 style={{color:'#777'}}>
                   GravityBrain School
                 </h4>
@@ -66,6 +69,10 @@ class Header extends Component {
 
               <div id="m_header_topbar" className="m-topbar  m-stack m-stack--ver m-stack--general">
                 <div className="m-stack__item m-topbar__nav-wrapper">
+                    <IconButton color='primary' className="m--hide mobile-sidebar-out-toggle"  onClick={() => {this.props.mobileSidebar()}}>
+                        <Icon>menu</Icon>
+                    </IconButton>
+
                   <ul className="m-topbar__nav m-nav m-nav--inline">
 
                     <Tasks activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>

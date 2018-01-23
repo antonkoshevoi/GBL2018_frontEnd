@@ -2,9 +2,18 @@ import React, {Component} from 'react';
 import {NavLink, withRouter} from "react-router-dom";
 import {generateBreadcrumbLink} from "../../helpers/utils";
 import LanguageSwitcher from "../ui/LanguageSwitcher";
+import {Menu, MenuItem} from "material-ui";
 
 class SubHeader extends Component {
 
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            anchorEl: null
+        };
+
+    }
 
 
     _renderBreadcrumbs(paths) {
@@ -28,6 +37,44 @@ class SubHeader extends Component {
     }
 
 
+    _renderHeaderMenu() {
+        const _self = this;
+            return ( [
+                <MenuItem key="1" onClick={_self._closeHeaderMenu}>
+                    <i className="fa fa-shopping-cart PageHeader-icon"></i>
+                </MenuItem>,
+                <MenuItem key="2" onClick={_self._closeHeaderMenu}>
+                    <i className="fa fa-line-chart"></i>
+                </MenuItem>,
+                <MenuItem key="3" onClick={_self._closeHeaderMenu}>
+                    <i className="fa fa-id-card PageHeader-icon"></i>
+                </MenuItem>,
+                <MenuItem key="4" onClick={_self._closeHeaderMenu}>
+                    <i className="fa fa-calendar PageHeader-icon"></i>
+                </MenuItem>,
+                <MenuItem key="5" onClick={_self._closeHeaderMenu}>
+                    <i className="fa fa-envelope-open PageHeader-icon"></i>
+                </MenuItem>,
+                <MenuItem key="6" onClick={_self._closeHeaderMenu}>
+                   <ul className="list-inline"><LanguageSwitcher/></ul>
+                </MenuItem>
+
+               ]
+            )
+    }
+
+
+    _openHeaderMenu = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+
+    _closeHeaderMenu = event => {
+        this.setState({ anchorEl: null });
+        console.log(this.state.anchorEl);
+    };
+
+
 
   render() {
         const { location} = this.props
@@ -46,7 +93,7 @@ class SubHeader extends Component {
                     <div>
   			    <span className="m-subheader__datferange " id="m_dashboard_daterangepicker">
 					<div className="right-wrapper text-right PageHeader-breadcrumbs">
-                            <ol className="breadcrumbs m--padding-right-20 d-flex justify-content-between align-items-center" style={{marginBottom:0}}>
+                            <ol className="breadcrumbs m--padding-right-20 d-flex justify-content-between align-items-center header-menu" style={{marginBottom:0}}>
                                 <li>
                                     <a >
                                         <i className="fa fa-shopping-cart PageHeader-icon"></i>
@@ -74,6 +121,22 @@ class SubHeader extends Component {
                                 </li>
                                 <LanguageSwitcher/>
                             </ol>
+
+                            <div className="mobile-header-menu m--hide">
+                                <a className="fa pointer fa-arrow-down "
+                                   aria-haspopup="true"
+                                   onClick={this._openHeaderMenu}>
+                                    <Menu
+                                        id="header-menu"
+                                        anchorEl={this.state.anchorEl}
+                                        open={Boolean(this.state.anchorEl)}
+                                        onClose={this._closeHeaderMenu}
+                                    >
+                                        {this._renderHeaderMenu()}
+
+                                    </Menu>
+                                </a>
+                            </div>
                         </div>
 				</span>
                     </div>

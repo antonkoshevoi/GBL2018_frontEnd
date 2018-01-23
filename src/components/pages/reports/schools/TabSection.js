@@ -103,36 +103,44 @@ class TabSection extends Component {
                     <div className="m--margin-top-50" >
                         <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
                             <div className="m-portlet__head">
-                                <div className="m-portlet__head-tools">
-                                    <Tabs
-                                        className="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x main-tabs"
-                                        value={this.state.value}
-                                        onChange={this.handleChange}
+                                <div className="row">
 
-                                    >
-                                        <Tab className="tab-header-item" value="schools" label="Schools" />
-                                        <Tab className="tab-header-item" value="classRooms" label="Classrooms" />
-                                        <Tab className="tab-header-item" value="homeRooms" label="Homerooms" />
-                                        <Tab className="tab-header-item" value="students" label="Students" />
-                                    </Tabs>
+                                    <div className="m-portlet__head-tools text-left col-md-8"  >
+                                        <Tabs
+                                            className="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x main-tabs"
+                                            value={this.state.value}
+                                            onChange={this.handleChange}
+                                            scrollable
+
+                                            scrollButtons={false}
+                                            indicatorColor="#fff"
+                                            textColor="#fff"
+
+                                        >
+                                            <Tab className="tab-header-item" value="schools" label="Schools" />
+                                            <Tab className="tab-header-item" value="classRooms" label="Classrooms" />
+                                            <Tab className="tab-header-item" value="homeRooms" label="Homerooms" />
+                                            <Tab className="tab-header-item" value="students" label="Students" />
+                                        </Tabs>
+                                    </div>
+                                    <div className="m-portlet__head-tools col-md-4">
+                                        <Input
+                                            className="portlet-header-input"
+                                            id="search"
+                                            type='search'
+                                            placeholder="Search"
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                    >
+                                                        <Search/>
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                        />
+                                    </div>
                                 </div>
 
-                            <div className="m-portlet__head-tools">
-                                <Input
-                                    className="portlet-header-input"
-                                    id="search"
-                                    type='search'
-                                    placeholder="Search"
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                            >
-                                                <Search/>
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                />
-                            </div>
                             </div>
                             <div className="m-portlet__body" style={{height:"100%"}}>
                                 {value === 'schools' && <TabContainer>
