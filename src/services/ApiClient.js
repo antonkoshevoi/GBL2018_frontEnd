@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import { env } from '../configs/env'
+import { env } from '../configs/.env'
 import SessionStorage from './SessionStorage';
 
 export default class ApiClient
