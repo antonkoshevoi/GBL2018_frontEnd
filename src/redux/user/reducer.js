@@ -1,6 +1,7 @@
 import {
   GET_USER, GET_USER_SUCCESS, GET_USER_FAIL,
-  UPDATE, UPDATE_SUCCESS, UPDATE_FAIL, RESET_UPDATE_REQUEST
+  UPDATE, UPDATE_SUCCESS, UPDATE_FAIL,
+  CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -14,6 +15,14 @@ const initialState = Immutable.fromJS({
     errorResponse: null
   },
   updateRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,
+    errorCode: null,
+    errors: {}
+  },
+  changePasswordRequest: {
     loading: false,
     success: false,
     fail: false,
@@ -87,9 +96,35 @@ export default function reducer (state = initialState, action) {
           .set('errorMessage', errorData.message)
           .set('errors', errorData.code === 422 ? Immutable.fromJS(errorData.errors) : undefined)
         );
-    case RESET_UPDATE_REQUEST:
+    /**
+     * Change Password
+     */
+    case CHANGE_PASSWORD:
       return state
-        .set('updateRequest', initialState.get('updateRequest'));
+        .set('changePasswordRequest', state.get('changePasswordRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)
+          .remove('errors')
+          .remove('errorMessage')
+          .remove('errorCode')
+        );
+    case CHANGE_PASSWORD_SUCCESS:
+      return state
+        .set('changePasswordRequest', state.get('changePasswordRequest')
+          .set('loading', false)
+          .set('success', true)
+        );
+    case CHANGE_PASSWORD_FAIL:
+      const changePasswordError = action.error.response.data;
+      return state
+        .set('changePasswordRequest', state.get('changePasswordRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('errorCode', changePasswordError.code)
+          .set('errorMessage', changePasswordError.message)
+          .set('errors', changePasswordError.code === 422 ? Immutable.fromJS(changePasswordError.errors) : undefined)
+        );
     /**
      * default
      */

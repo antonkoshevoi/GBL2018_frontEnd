@@ -21,7 +21,7 @@ import SignUpParent from '../containers/auth/SignUpParent';
 import SignUpPrincipal from '../containers/auth/SignUpPrincipal';
 import NotFoundPage from '../containers/errors/404';
 import Route from '../containers/routing/Route';
-import Profile from "../containers/pages/profile/Profile";
+import Profile from "../containers/profile/Profile";
 import SchoolReports from "../containers/pages/reports/Schools";
 import ClassRoomReports from "../containers/pages/reports/ClassRooms";
 import StudentReports from "../containers/pages/reports/Students";

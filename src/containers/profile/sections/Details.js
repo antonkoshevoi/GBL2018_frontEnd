@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  Typography, Icon, Button, Tooltip, Select, MenuItem, Input, CircularProgress
-} from 'material-ui';
-import {getSchoolHomerooms, getSchools} from "../../../redux/schools/actions";
-import {selectGetSchoolHomeroomsRequest, selectSchools} from "../../../redux/schools/selectors";
+import { Typography, Icon, Button, Tooltip, Select, MenuItem } from 'material-ui';
+import { getSchoolHomerooms } from "../../../redux/schools/actions";
+import { selectGetSchoolHomeroomsRequest } from "../../../redux/schools/selectors";
 import MetronicDatePicker from "../../../components/ui/metronic/MetronicDatePicker";
 import { update } from "../../../redux/user/actions";
-import {selectUpdateRequest} from "../../../redux/user/selectors";
+import { selectUpdateRequest } from "../../../redux/user/selectors";
 
 function TabContainer(props) {
   return (
@@ -22,6 +20,7 @@ class Details extends Component {
 
   static propTypes = {
     user: PropTypes.object.isRequired,
+    schools: PropTypes.array.isRequired,
   };
 
   constructor(props) {
@@ -39,20 +38,13 @@ class Details extends Component {
       user: this.props.user
     });
 
-    this.props.getSchools();
     this.props.getSchoolHomerooms(this.props.user.schoolId);
   }
 
   componentWillReceiveProps(nextProps) {
+    this._updateUserSuccess(nextProps);
     this._getSchoolHomeroomsRequestSuccess(nextProps);
   }
-
-  _onSubmit (e) {
-    e.preventDefault();
-    this.props.update(
-      this.state.user
-    );
-  };
 
   _getSchoolHomeroomsRequestSuccess(nextProps) {
     const schoolHomerooms = this.props.getSchoolHomeroomsRequest.get('records');
@@ -62,6 +54,18 @@ class Details extends Component {
       this.setState({
         ...this.state,
         schoolHomerooms: nextSchoolHomerooms.toJS()
+      });
+    }
+  }
+
+  _updateUserSuccess(nextProps) {
+    const prev = this.props.getUpdateRequest.get('success');
+    const next = nextProps.getUpdateRequest.get('success');
+
+    if (!prev && next) {
+      this.setState({
+        ...this.state,
+        mode: 'overview'
       });
     }
   }
@@ -109,7 +113,7 @@ class Details extends Component {
     const { schools } = this.props;
 
     return schools.map((school,i)=>{
-      return <MenuItem key={i} value={school.get('schId')}>{school.get('schName')}</MenuItem>
+      return <MenuItem key={i} value={school.schId}>{school.schName}</MenuItem>
     });
   }
 
@@ -120,6 +124,13 @@ class Details extends Component {
       return <MenuItem key={i} value={schoolHomeroom.id}>{schoolHomeroom.name}</MenuItem>
     });
   }
+
+  _onSubmit (e) {
+    e.preventDefault();
+    this.props.update(
+      this.state.user
+    );
+  };
 
   render() {
     const { mode, user } = this.state;
@@ -219,48 +230,52 @@ class Details extends Component {
                   <div className="form-group m-form__group row">
                     <label className="col-form-label col-lg-3" htmlFor="firsName">First Name</label>
                     <div className="col-lg-9">
-                      <input type="text"
-                             name="firstName"
-                             onChange={(e) => { this._handleInputChange(e) }}
-                             value={user.firstName || ''}
-                             className="form-control m-input--air form-control-success m-input"
-                             id="firsName"/>
+                      <input
+                        type="text"
+                        name="firstName"
+                        onChange={(e) => { this._handleInputChange(e) }}
+                        value={user.firstName || ''}
+                        className="form-control m-input--air form-control-success m-input"
+                        id="firsName"/>
                       {errors && errors.get('firstName') && <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
                     </div>
                   </div>
                   <div className="form-group m-form__group row">
                     <label className="col-form-label col-lg-3" htmlFor="lastName">Last Name</label>
                     <div className="col-lg-9">
-                      <input type="text"
-                             name="lastName"
-                             onChange={(e) => { this._handleInputChange(e) }}
-                             value={user.lastName || ''}
-                             className="form-control m-input--air form-control-success m-input"
-                             id="lastName"/>
+                      <input
+                        type="text"
+                        name="lastName"
+                        onChange={(e) => { this._handleInputChange(e) }}
+                        value={user.lastName || ''}
+                        className="form-control m-input--air form-control-success m-input"
+                        id="lastName"/>
                       {errors && errors.get('lastName') && <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
                     </div>
                   </div>
                   <div className="form-group m-form__group row">
                     <label className="col-form-label col-lg-3" htmlFor="email">Email</label>
                     <div className="col-lg-9">
-                      <input type="email"
-                             name="email"
-                             onChange={(e) => { this._handleInputChange(e) }}
-                             value={user.email || ''}
-                             className="form-control m-input--air form-control-success m-input"
-                             id="email"/>
+                      <input
+                        type="email"
+                        name="email"
+                        onChange={(e) => { this._handleInputChange(e) }}
+                        value={user.email || ''}
+                        className="form-control m-input--air form-control-success m-input"
+                        id="email"/>
                       {errors && errors.get('email') && <div className="form-control-feedback text-center error">{errors.get('email').get(0)}</div>}
                     </div>
                   </div>
                   <div className="form-group m-form__group row">
                     <label className="col-form-label col-lg-3" htmlFor="phone">Phone Number</label>
                     <div className="col-lg-9">
-                      <input type="text"
-                             name="phoneNumber"
-                             onChange={(e) => { this._handleInputChange(e) }}
-                             value={user.phoneNumber || ''}
-                             className="form-control m-input--air form-control-success m-input"
-                             id="phone"/>
+                      <input
+                        type="text"
+                        name="phoneNumber"
+                        onChange={(e) => { this._handleInputChange(e) }}
+                        value={user.phoneNumber || ''}
+                        className="form-control m-input--air form-control-success m-input"
+                        id="phone"/>
                       {errors && errors.get('phoneNumber') && <div className="form-control-feedback text-center error">{errors.get('phoneNumber').get(0)}</div>}
                     </div>
                   </div>
@@ -352,12 +367,10 @@ class Details extends Component {
 
 Details = connect(
   (state) => ({
-    schools: selectSchools(state),
     getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state),
     getUpdateRequest: selectUpdateRequest(state),
   }),
   (dispatch) => ({
-    getSchools: () => { dispatch(getSchools()) },
     getSchoolHomerooms: (schoolId) => { dispatch(getSchoolHomerooms(schoolId)) },
     update: (form, params = {}) => { dispatch(update(form, params)) },
   })

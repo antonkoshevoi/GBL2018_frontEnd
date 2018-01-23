@@ -5,35 +5,39 @@ import Info from "./sections/Info";
 import Details from "./sections/Details";
 import Summery from "./sections/Summery";
 import { selectGetUserRequest, selectUserData } from "../../redux/user/selectors";
-import { getUser } from "../../redux/user/actions";
+import { selectSchools } from "../../redux/schools/selectors";
+import { getSchools } from "../../redux/schools/actions";
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {}
+
     }
   }
 
   componentDidMount () {
-    const { getUser } = this.props;
+    const { getSchools } = this.props;
 
-    getUser();
+    getSchools();
   }
 
   render() {
-    const { userRequest, userData } = this.props;
+    const { userData, schoolsData, getUserRequest } = this.props;
+
+    const user = userData.toJS();
+    const schools = schoolsData.toJS();
 
     return (
       <div className="row">
         <div className="col-lg-3">
-          {userRequest.get('success') && <Info user={userData}/>}
+          {getUserRequest.get('success') && <Info user={user}/>}
         </div>
         <div className="col-lg-6">
-          {userRequest.get('success') && <Details user={userData}/>}
+          {getUserRequest.get('success') && <Details user={user} schools={schools}/>}
         </div>
         <div className="col-lg-3">
-          {userRequest.get('success') && <Summery user={userData}/>}
+          {getUserRequest.get('success') && <Summery user={user} schools={schools} homerooms={user.homerooms}/>}
         </div>
       </div>
     );
@@ -43,10 +47,11 @@ class Profile extends Component {
 Profile = connect(
   (state) => ({
     userData: selectUserData(state),
-    userRequest: selectGetUserRequest(state),
+    schoolsData: selectSchools(state),
+    getUserRequest: selectGetUserRequest(state),
   }),
   (dispatch) => ({
-    getUser: () => { dispatch(getUser()) },
+    getSchools: () => { dispatch(getSchools()) },
   })
 )(Profile);
 

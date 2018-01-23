@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
+import {selectChangePasswordRequest, selectUpdateRequest} from "../../../redux/user/selectors";
+import { changePassword } from "../../../redux/user/actions";
 
 class Info extends Component {
 
@@ -14,27 +16,70 @@ class Info extends Component {
     this.state = {
       user: {},
       changePasswordMode: false,
-      passwordFields: {
-        oldPassword: '',
-        newPassword: '',
-        confirmPassword: '',
-      }
+      passwordFields: {}
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.setState({
       ...this.state,
       user: this.props.user
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this._passwordChangedSuccess(nextProps);
+    this._updateUserSuccess(nextProps);
+  }
+
+  _passwordChangedSuccess(nextProps) {
+    const prev = this.props.getChangePasswordRequest.get('success');
+    const next = nextProps.getChangePasswordRequest.get('success');
+
+    if (!prev && next) {
+      this.setState({
+        ...this.state,
+        changePasswordMode: false,
+        passwordFields: {},
+      });
+    }
+  }
+
+  _updateUserSuccess(nextProps) {
+    const prev = this.props.getUpdateRequest.get('success');
+    const next = nextProps.getUpdateRequest.get('success');
+
+    if (!prev && next) {
+      this.setState({
+        ...this.state,
+        user: nextProps.user
+      });
+    }
+  }
+
   _handlePasswordModeSwitch(changePasswordMode) {
     this.setState({ changePasswordMode });
   }
 
+  _handlePasswordFieldChange(value, field) {
+    this.setState({
+      passwordFields: {
+        ...this.state.passwordFields,
+        [field]: value
+      }
+    });
+  }
+
+  _changePassword(e) {
+    e.preventDefault();
+    this.props.changePassword(
+      this.state.passwordFields
+    );
+  }
+
   render() {
     const { user, changePasswordMode, passwordFields } = this.state;
+    const errors = this.props.getChangePasswordRequest.get('errors');
 
     return (
       <div className="m-portlet ">
@@ -45,7 +90,7 @@ class Info extends Component {
             </div>
             <div className="m-card-profile__pic">
               <div className="m-card-profile__pic-wrapper">
-                <img src="https://notednames.com/ImgProfile/lok_Kobe%20Bryant.jpg" alt=""/>
+                <img src={user.avatar} alt=""/>
               </div>
             </div>
             <div className="m-card-profile__details">
@@ -62,53 +107,66 @@ class Info extends Component {
           </div>
           {changePasswordMode &&
             <div className="m-widget1 m-widget1--paddingless">
+              <form id='change-password-form' onSubmit={(e) => { this._changePassword(e) }}>
                 <div className="m-widget1__item">
                   <div className="form-group m-form__group ">
-                    <label className="form-control-label" htmlFor="oldPassword">Change Password</label>
-                    <input type="password"
-                           placeholder="Enter Old Password"
-                           onChange={(e) => {this.handleChange(e, 'oldPassword')}}
-                           value={passwordFields.oldPassword}
-                           className="form-control  m-input--air form-control-danger m-input"
-                           id="oldPassword"/>
-                    <div className="form-control-feedback"></div>
+                    <input
+                      type="password"
+                      placeholder="Enter Old Password"
+                      name="oldPassword"
+                      onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'oldPassword')}}
+                      value={passwordFields.oldPassword || ''}
+                      className="form-control  m-input--air form-control-danger m-input"
+                      id="oldPassword"/>
+                    {errors && errors.get('oldPassword') && <div className="form-control-feedback text-center error">{errors.get('oldPassword').get(0)}</div>}
                   </div>
                   <div className="form-group m-form__group">
-                    <input type="password"
-                           placeholder="Enter New Password"
-                           onChange={(e) => {this.handleChange(e, 'newPassword')}}
-                           value={passwordFields.newPassword}
-                           className="form-control  m-input--air form-control-danger m-input"
-                           id="newPassword"/>
-                    <div className="form-control-feedback"></div>
+                    <input
+                      type="password"
+                      placeholder="Enter New Password"
+                      name="newPassword"
+                      onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword')}}
+                      value={passwordFields.newPassword || ''}
+                      className="form-control  m-input--air form-control-danger m-input"
+                      id="newPassword"/>
+                    {errors && errors.get('newPassword') && <div className="form-control-feedback text-center error">{errors.get('newPassword').get(0)}</div>}
                   </div>
                   <div className="form-group m-form__group has-danger">
-                    <input type="password"
-                           placeholder="Confirm Password"
-                           onChange={(e) => {this.handleChange(e, 'confirmPassword')}}
-                           value={passwordFields.confirmPassword}
-                           className="form-control  m-input--air form-control-danger m-input"
-                           id="confirmPassword"/>
-                    <div className="form-control-feedback"></div>
+                    <input
+                      type="password"
+                      placeholder="Confirm Password"
+                      name="newPassword_confirmation"
+                      onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword_confirmation')}}
+                      value={passwordFields.newPassword_confirmation || ''}
+                      className="form-control  m-input--air form-control-danger m-input"
+                      id="confirmPassword"/>
+                    {errors && errors.get('newPassword_confirmation') && <div className="form-control-feedback text-center error">{errors.get('newPassword_confirmation').get(0)}</div>}
                   </div>
                 </div>
-
                 <div className="text-center m--margin-top-15">
-                    <button onClick={() => {
-                      this._handlePasswordModeSwitch(false)
-                    }} className="m-btn btn m-btn--air m-btn--outline-2x m--margin-right-10 btn-outline-danger">
+                    <button onClick={() => {this._handlePasswordModeSwitch(false)}} className="m-btn btn m-btn--air m-btn--outline-2x m--margin-right-10 btn-outline-danger">
                         Cancel
                     </button>
-                    {passwordFields.oldPassword !== '' && passwordFields.newPassword !== '' && passwordFields.confirmPassword !== '' &&
-                      <button className="m-btn btn m-btn--air m-btn--outline-2x btn-outline-success">
-                          Change
-                      </button>}
+                    <button className="m-btn btn m-btn--air m-btn--outline-2x btn-outline-success">
+                        Change
+                    </button>
                 </div>
+              </form>
             </div>}
           </div>
       </div>
     );
   }
 }
+
+Info = connect(
+  (state) => ({
+    getChangePasswordRequest: selectChangePasswordRequest(state),
+    getUpdateRequest: selectUpdateRequest(state),
+  }),
+  (dispatch) => ({
+    changePassword: (fields, params = {}) => { dispatch(changePassword(fields, params)) },
+  })
+)(Info);
 
 export default Info;

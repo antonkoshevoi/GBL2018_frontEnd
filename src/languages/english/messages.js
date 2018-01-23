@@ -12,4 +12,6 @@ export default {
   updated: 'Record successfully updated',
   uploaded: 'File succesfully uploaded',
   deleted: 'Record succesfully removed',
+  profileUpdated: 'Profile succesfully updated',
+  passwordChanged: 'Password changed succesfully',
 }

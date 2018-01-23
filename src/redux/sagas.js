@@ -8,6 +8,7 @@ import teachersSagas from './teachers/sagas';
 import administrationSagas from './administration/sagas';
 import homeroomsSagas from './homerooms/sagas';
 import classroomsSagas from './classrooms/sagas';
+import userSagas from './user/sagas';
 
 function* rootSaga () {
   yield all([,
@@ -19,7 +20,8 @@ function* rootSaga () {
     teachersSagas,
     administrationSagas,
     homeroomsSagas,
-    classroomsSagas
+    classroomsSagas,
+    userSagas
   ])
 }
 

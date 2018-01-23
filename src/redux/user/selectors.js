@@ -31,3 +31,11 @@ export const selectUpdateRequest = createSelector(
   selectUserDomain,
   (subState) => subState.get('updateRequest')
 );
+
+/**
+ * Change password
+ */
+export const selectChangePasswordRequest = createSelector(
+  selectUserDomain,
+  (subState) => subState.get('changePasswordRequest')
+);

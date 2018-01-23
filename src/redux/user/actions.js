@@ -5,7 +5,10 @@ export const GET_USER_FAIL = '[User] GET_USER_FAIL';
 export const UPDATE = '[User] UPDATE';
 export const UPDATE_SUCCESS = '[User] UPDATE_SUCCESS';
 export const UPDATE_FAIL = '[User] UPDATE_FAIL';
-export const RESET_UPDATE_REQUEST = '[User] RESET_UPDATE_REQUEST';
+
+export const CHANGE_PASSWORD = '[User] CHANGE_PASSWORD';
+export const CHANGE_PASSWORD_SUCCESS = '[User] CHANGE_PASSWORD_SUCCESS';
+export const CHANGE_PASSWORD_FAIL = '[User] CHANGE_PASSWORD_FAIL';
 
 export function getUser(params = {}) {
   return {
@@ -30,8 +33,13 @@ export function update(data, params = {}) {
     promise: (apiClient) => apiClient.put('user', data, params)
   };
 }
-export function resetUpdateRequest () {
+
+/**
+ * Change Password
+ */
+export function changePassword(data, params = {}) {
   return {
-    type: RESET_UPDATE_REQUEST
-  }
+    types: [CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAIL],
+    promise: (apiClient) => apiClient.post('user/password', data, params)
+  };
 }
