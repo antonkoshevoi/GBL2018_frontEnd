@@ -16,16 +16,7 @@ class SignUpPrincipal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: {
-        "username": "esh",
-        "password": "123456",
-        "password_confirmation": "123456",
-        "email": "eshi@glux.com",
-        "firstName": "Eshi",
-        "lastName": "Glux",
-        "schoolCode": "123",
-        "schoolName": "XXX"
-      }
+      form: {}
     };
   }
 

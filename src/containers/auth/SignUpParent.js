@@ -24,18 +24,8 @@ class SignUpParent extends Component {
     this.state = {
       activeStep: 0,
       form: {
-        step1: {
-          username: 'esh',
-          "password": "123456",
-          "password_confirmation": "123456",
-          "email": "eshi@glux.com",
-          "firstName": "Eshi",
-          "lastName": "Glux"
-        },
-        step2: {
-          "username": "eshuk",
-          "password": "123456"
-        }
+        step1: {},
+        step2: {}
       }
     };
   }
