@@ -226,7 +226,7 @@ class HomeroomForm extends Component {
                 {errors && errors.get('name') && <FormHelperText error>{ errors.get('name').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-              <InputLabel htmlFor='name-error' shrink={homeroom.startDate}>Start Date</InputLabel>
+              <InputLabel htmlFor='name-error' shrink={!!homeroom.startDate}>Start Date</InputLabel>
               <DatePicker
                 name='startDate'
                 value={homeroom.startDate || null}
@@ -235,7 +235,7 @@ class HomeroomForm extends Component {
               {errors && errors.get('startDate') && <FormHelperText error>{ errors.get('startDate').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-              <InputLabel htmlFor='name-error' shrink={homeroom.endDate}>End Date</InputLabel>
+              <InputLabel htmlFor='name-error' shrink={!!homeroom.endDate}>End Date</InputLabel>
               <DatePicker
                 name='endDate'
                 value={homeroom.endDate || null}
@@ -244,7 +244,7 @@ class HomeroomForm extends Component {
               {errors && errors.get('endDate') && <FormHelperText error>{ errors.get('endDate').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-              <InputLabel htmlFor='name-error' shrink={homeroom.enrollmentStartDate}>Enrollment Start Date</InputLabel>
+              <InputLabel htmlFor='name-error' shrink={!!homeroom.enrollmentStartDate}>Enrollment Start Date</InputLabel>
               <DatePicker
                 name='enrollmentStartDate'
                 value={homeroom.enrollmentStartDate || null}
@@ -253,7 +253,7 @@ class HomeroomForm extends Component {
               {errors && errors.get('enrollmentStartDate') && <FormHelperText error>{ errors.get('enrollmentStartDate').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-              <InputLabel htmlFor='name-error' shrink={homeroom.enrollmentEndDate}>Enrollment End Date</InputLabel>
+              <InputLabel htmlFor='name-error' shrink={!!homeroom.enrollmentEndDate}>Enrollment End Date</InputLabel>
               <DatePicker
                 name='enrollmentEndDate'
                 value={homeroom.enrollmentEndDate || null}

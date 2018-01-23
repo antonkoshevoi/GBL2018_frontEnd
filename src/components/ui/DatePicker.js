@@ -6,6 +6,16 @@ import moment from "moment/moment";
 
 class DatePicker extends Component {
 
+  _convertReturnValue(m) {
+    const date = moment(m).format('YYYY-MM-DD');
+
+    if (date === 'Invalid date') {
+      return null;
+    }
+
+    return date;
+  }
+
   render () {
     const { InputProps, format, onChange, ...rest } = this.props;
 
@@ -19,10 +29,11 @@ class DatePicker extends Component {
       <MuiThemeProvider theme={theme}>
         <BaseDatePicker
           {...rest}
-          onChange={(m) => onChange(moment(m).format('YYYY-MM-DD'))}
+          onChange={(m) => onChange(this._convertReturnValue(m))}
           clearable
           autoOk={true}
           returnMoment={false}
+          invalidLabel=""
           format={format ? format : 'YYYY-MM-DD'}
           InputProps={InputProps ? InputProps : {
             style: {
