@@ -34,6 +34,10 @@ button, [role="button"], [type="button"],  .btn {
   max-width: 100%;
 }
 
+.m-o-hidden{
+  overflow: hidden !important;
+}
+
 .App {
   text-align: center;
 }
@@ -629,7 +633,7 @@ div.progress.m-progress--sm .progress-bar {
 
 
 .progress {
-  background-color: #BDCCD4!important;;
+  background-color: #D2322D!important;;
   border-radius: 10px;
 }
 

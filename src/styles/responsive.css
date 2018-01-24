@@ -177,6 +177,10 @@
     .small-card .widget-desc {
         font-size: .5rem;
     }
+
+    .empty-stars:before, .full-stars:before {
+        font-size: 6pt;
+    }
 }
 
 /**********************************/
