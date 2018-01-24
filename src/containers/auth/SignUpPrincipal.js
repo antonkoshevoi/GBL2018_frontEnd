@@ -150,7 +150,7 @@ class SignUpPrincipal extends Component {
                                   value={form.firstName}
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="text"
-                                  className="form-control m-input m-input--air m-input--pill"
+                                  className="form-control m-input m-input--air "
                                   placeholder="First Name"/>
                               </div>
                               {errors && errors.get('firstName') &&
@@ -165,7 +165,7 @@ class SignUpPrincipal extends Component {
                                   value={form.lastName}
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="text"
-                                  className="form-control m-input m-input--air m-input--pill"
+                                  className="form-control m-input m-input--air "
                                   placeholder="Last Name "/>
                               </div>
                               {errors && errors.get('lastName') &&
@@ -180,7 +180,7 @@ class SignUpPrincipal extends Component {
                                   value={form.email}
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="text"
-                                  className="form-control m-input m-input--air m-input--pill"
+                                  className="form-control m-input m-input--air "
                                   placeholder="Email "/>
                               </div>
                               {errors && errors.get('email') &&
@@ -195,7 +195,7 @@ class SignUpPrincipal extends Component {
                                   value={form.username}
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="text"
-                                  className="form-control m-input m-input--air m-input--pill"
+                                  className="form-control m-input m-input--air "
                                   placeholder="Username "/>
                               </div>
                               {errors && errors.get('username') &&
@@ -210,7 +210,7 @@ class SignUpPrincipal extends Component {
                                   value={form.password}
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="password"
-                                  className="form-control m-input m-input--air m-input--pill"
+                                  className="form-control m-input m-input--air "
                                   placeholder="Password "/>
                               </div>
                               {errors && errors.get('password') &&
@@ -225,7 +225,7 @@ class SignUpPrincipal extends Component {
                                   value={form.password_confirmation}
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="password"
-                                  className="form-control m-input m-input--air m-input--pill"
+                                  className="form-control m-input m-input--air "
                                   placeholder="Confirm Password "/>
                               </div>
                             </div>
@@ -241,7 +241,7 @@ class SignUpPrincipal extends Component {
                                 value={form.schoolName}
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 type="text"
-                                className="form-control m-input m-input--air m-input--pill"
+                                className="form-control m-input m-input--air "
                                 placeholder="School Name"/>
                             </div>
                             {errors && errors.get('schoolName') &&
@@ -254,7 +254,7 @@ class SignUpPrincipal extends Component {
                                 value={form.schoolCode}
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 type="text"
-                                className="form-control m-input m-input--air m-input--pill"
+                                className="form-control m-input m-input--air "
                                 placeholder="School Code"/>
                             </div>
                             {errors && errors.get('schoolCode') &&

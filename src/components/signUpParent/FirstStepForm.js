@@ -90,7 +90,7 @@ class FirstStepForm extends Component {
                     name='firstName'
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air m-input--pill'
+                    className='form-control m-input m-input--air '
                     placeholder='First Name *'/>
                 </div>
                 <div className='form-control-feedback'>
@@ -107,7 +107,7 @@ class FirstStepForm extends Component {
                     name='lastName'
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air m-input--pill'
+                    className='form-control m-input m-input--air '
                     placeholder='Last Name *'/>
                 </div>
                 <div className='form-control-feedback'>
@@ -124,7 +124,7 @@ class FirstStepForm extends Component {
                     name='email'
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='email'
-                    className='form-control m-input m-input--air m-input--pill'
+                    className='form-control m-input m-input--air '
                     placeholder='Email *'/>
                 </div>
                 <div className='form-control-feedback'>
@@ -141,7 +141,7 @@ class FirstStepForm extends Component {
                     name='username'
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air m-input--pill'
+                    className='form-control m-input m-input--air '
                     placeholder='Username *'/>
                 </div>
                 <div className='form-control-feedback'>
@@ -158,7 +158,7 @@ class FirstStepForm extends Component {
                     name='password'
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='password'
-                    className='form-control m-input m-input--air m-input--pill'
+                    className='form-control m-input m-input--air '
                     placeholder='Password *'/>
                 </div>
                 <div className='form-control-feedback'>
@@ -167,134 +167,119 @@ class FirstStepForm extends Component {
                 </div>
               </div>
             </div>
-            <div className='m-form__section m-form__section--first'>
-              <div className='form-group m-form__group'>
-                <div className=''>
-                  <input
-                    value={form.password_confirmation || ''}
-                    name='password_confirmation'
-                    onChange={(e) => { this._handleInputChange(e) }}
-                    type='password'
-                    className='form-control m-input m-input--air m-input--pill'
-                    placeholder='Confirm Password *'/>
+          </div>
+          <div className='m-separator m-separator--dashed m-separator--lg'></div>
+          <div className='col-sm-12'>
+            <div className='col-xs-12'>
+              <legend className='m--margin-bottom-10'>Optional</legend>
+              <address className='m-form__section m-form__section--first signUpOptional'>
+                <div className='form-group m-form__group'>
+                  <div>
+                    <input
+                        value={form.addressLine1 || ''}
+                        name='addressLine1'
+                        onChange={(e) => { this._handleInputChange(e) }}
+                        type='text'
+                        className='form-control m-input m-input--air '
+                        placeholder='Address Line 1'/>
+                  </div>
+                  <div className='form-control-feedback'>
+                      {errors && errors.get('addressLine1') &&
+                      <div className="form-control-feedback text-center error">{errors.get('addressLine1').get(0)}</div>}
+                  </div>
                 </div>
-              </div>
+                <div className='form-group m-form__group'>
+                  <div>
+                    <input
+                        value={form.addressLine2 || ''}
+                        name='addressLine2'
+                        onChange={(e) => { this._handleInputChange(e) }}
+                        type='text'
+                        className='form-control m-input m-input--air '
+                        placeholder='Address Line 2'/>
+                  </div>
+                  <div className='form-control-feedback'>
+                      {errors && errors.get('addressLine2') &&
+                      <div className="form-control-feedback text-center error">{errors.get('addressLine2').get(0)}</div>}
+                  </div>
+                </div>
+                <div className='form-group m-form__group'>
+                  <div>
+                    <input
+                        value={form.city || ''}
+                        name='city'
+                        onChange={(e) => { this._handleInputChange(e) }}
+                        type='text'
+                        className='form-control m-input m-input--air '
+                        placeholder='City'/>
+                  </div>
+                  <div className='form-control-feedback'>
+                      {errors && errors.get('city') &&
+                      <div className="form-control-feedback text-center error">{errors.get('city').get(0)}</div>}
+                  </div>
+                </div>
+                <div className='form-group m-form__group'>
+                  <div>
+                    <input
+                        value={form.region || ''}
+                        name='region'
+                        onChange={(e) => { this._handleInputChange(e) }}
+                        type='text'
+                        className='form-control m-input m-input--air '
+                        placeholder='Region'/>
+                  </div>
+                  <div className='form-control-feedback'>
+                      {errors && errors.get('region') &&
+                      <div className="form-control-feedback text-center error">{errors.get('region').get(0)}</div>}
+                  </div>
+                </div>
+                <div className='form-group m-form__group'>
+                  <div>
+                    <input
+                        value={form.country || ''}
+                        name='country'
+                        onChange={(e) => { this._handleInputChange(e) }}
+                        type='text'
+                        className='form-control m-input m-input--air '
+                        placeholder='Country'/>
+                  </div>
+                  <div className='form-control-feedback'>
+                      {errors && errors.get('country') &&
+                      <div className="form-control-feedback text-center error">{errors.get('country').get(0)}</div>}
+                  </div>
+                </div>
+                <div className='form-group m-form__group'>
+                  <div>
+                    <input
+                        value={form.phoneNumber || ''}
+                        name='phoneNumber'
+                        onChange={(e) => { this._handleInputChange(e) }}
+                        type='text'
+                        className='form-control m-input m-input--air '
+                        placeholder='Phone'/>
+                  </div>
+                  <div className='form-control-feedback'>
+                      {errors && errors.get('phoneNumber') &&
+                      <div className="form-control-feedback text-center error">{errors.get('phoneNumber').get(0)}</div>}
+                  </div>
+                </div>
+              </address>
             </div>
           </div>
         </div>
 
-        <div className='col-md-6'>
-          <div className='col-xs-12'>
-            <legend className='m--margin-bottom-10'>Optional</legend>
-            <address className='m-form__section m-form__section--first'>
-              <div className='form-group m-form__group'>
-                <div>
-                  <input
-                    value={form.addressLine1 || ''}
-                    name='addressLine1'
-                    onChange={(e) => { this._handleInputChange(e) }}
-                    type='text'
-                    className='form-control m-input m-input--air m-input--pill'
-                    placeholder='Address Line 1'/>
-                </div>
-                <div className='form-control-feedback'>
-                  {errors && errors.get('addressLine1') &&
-                    <div className="form-control-feedback text-center error">{errors.get('addressLine1').get(0)}</div>}
-                </div>
-              </div>
-              <div className='form-group m-form__group'>
-                <div>
-                  <input
-                    value={form.addressLine2 || ''}
-                    name='addressLine2'
-                    onChange={(e) => { this._handleInputChange(e) }}
-                    type='text'
-                    className='form-control m-input m-input--air m-input--pill'
-                    placeholder='Address Line 2'/>
-                </div>
-                <div className='form-control-feedback'>
-                  {errors && errors.get('addressLine2') &&
-                    <div className="form-control-feedback text-center error">{errors.get('addressLine2').get(0)}</div>}
-                </div>
-              </div>
-              <div className='form-group m-form__group'>
-                <div>
-                  <input
-                    value={form.city || ''}
-                    name='city'
-                    onChange={(e) => { this._handleInputChange(e) }}
-                    type='text'
-                    className='form-control m-input m-input--air m-input--pill'
-                    placeholder='City'/>
-                </div>
-                <div className='form-control-feedback'>
-                  {errors && errors.get('city') &&
-                    <div className="form-control-feedback text-center error">{errors.get('city').get(0)}</div>}
-                </div>
-              </div>
-              <div className='form-group m-form__group'>
-                <div>
-                  <input
-                    value={form.region || ''}
-                    name='region'
-                    onChange={(e) => { this._handleInputChange(e) }}
-                    type='text'
-                    className='form-control m-input m-input--air m-input--pill'
-                    placeholder='Region'/>
-                </div>
-                <div className='form-control-feedback'>
-                  {errors && errors.get('region') &&
-                    <div className="form-control-feedback text-center error">{errors.get('region').get(0)}</div>}
-                </div>
-              </div>
-              <div className='form-group m-form__group'>
-                <div>
-                  <input
-                    value={form.country || ''}
-                    name='country'
-                    onChange={(e) => { this._handleInputChange(e) }}
-                    type='text'
-                    className='form-control m-input m-input--air m-input--pill'
-                    placeholder='Country'/>
-                </div>
-                <div className='form-control-feedback'>
-                  {errors && errors.get('country') &&
-                    <div className="form-control-feedback text-center error">{errors.get('country').get(0)}</div>}
-                </div>
-              </div>
-              <div className='form-group m-form__group'>
-                <div>
-                  <input
-                    value={form.phoneNumber || ''}
-                    name='phoneNumber'
-                    onChange={(e) => { this._handleInputChange(e) }}
-                    type='text'
-                    className='form-control m-input m-input--air m-input--pill'
-                    placeholder='Phone'/>
-                </div>
-                <div className='form-control-feedback'>
-                  {errors && errors.get('phoneNumber') &&
-                    <div className="form-control-feedback text-center error">{errors.get('phoneNumber').get(0)}</div>}
-                </div>
-              </div>
-            </address>
-          </div>
-        </div>
-
-        <div className='m-separator m-separator--dashed m-separator--lg'></div>
-
-        <div className='col-sm-12'>
+        <div className='col-sm-6'>
           <div className='row'>
             <legend className='m--margin-bottom-10'>Profile Pic Upload</legend>
 
-            <div className='col-md-6'>
+            <div className='col-sm-12'>
               <div className='CropperBlock'>
-                {form.avatar &&
+                  {form.avatar &&
                   <button
-                    type='button'
-                    className='btn m-btn--air btn-success'
-                    onClick={() => { this._handleImageCrop() }}
-                    style={{float: 'right'}}>
+                      type='button'
+                      className='btn m-btn--air btn-success'
+                      onClick={() => { this._handleImageCrop() }}
+                      style={{float: 'right'}}>
                     Crop Image <span className='la la-crop'></span>
                   </button>}
                 <div className='upload-btn-wrapper '>
@@ -303,23 +288,25 @@ class FirstStepForm extends Component {
                 </div>
 
                 <Cropper
-                  ref={cropper => { this.cropper = cropper; }}
-                  src={form.avatar}
-                  className='signup-cropper'
-                  style={{height: 250, width: 250}}
-                  aspectRatio={1 / 1}
-                  guides={false}/>
+                    ref={cropper => { this.cropper = cropper; }}
+                    src={form.avatar}
+                    className='signup-cropper'
+                    style={{height: 250, width: 250}}
+                    aspectRatio={1 / 1}
+                    guides={false}/>
               </div>
             </div>
 
-            <div className='col-md-6'>
-              <div className='croppedBlock'>
+            <div className='col-sm-12'>
                 {form.avatarCropped &&
-                  <img className='img-thumbnail' style={{ width: '150px' }} src={form.avatarCropped} alt='cropped image'/>}
-              </div>
+              <div className='croppedBlock'>
+                  <img className='img-thumbnail' style={{ width: '150px' }} src={form.avatarCropped} alt='cropped image'/>
+              </div>}
             </div>
           </div>
         </div>
+
+
       </div>
     );
   }

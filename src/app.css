@@ -914,3 +914,9 @@ div.m-portlet .m-portlet__head {
   background: red;
   color: #fff;
 }
+
+address.signUpOptional {
+  padding: 10px;
+  border-radius: 5px;
+  background: #edf2f866;
+}
