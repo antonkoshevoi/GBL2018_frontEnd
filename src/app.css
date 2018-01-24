@@ -753,7 +753,7 @@ div[class^='col-'] {
   margin-bottom: 15px;
 }
 
-.small-card [class^='col-'] {
+.small-card [class^='col-'], .m-portlet__body [class^='col-']{
   margin-bottom: 0;
 }
 

@@ -198,6 +198,10 @@
         left: 0;
     }
 
+    .m-subheader .m-subheader__breadcrumbs.m-nav {
+        display: none;
+    }
+
 
     .m-subheader__title.m-subheader__title--separator {
         vertical-align: middle;
