@@ -13,7 +13,8 @@ export function load()
     return {
       types: [LOAD, LOAD_SUCCESS_AUTHENTICATED, LOAD_FAIL],
       promise: (apiClient) => Promise.all([
-        apiClient.get('user')
+        apiClient.get('user'),
+        apiClient.get('user/threads')
       ])
     }
   }

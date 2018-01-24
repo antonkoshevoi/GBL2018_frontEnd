@@ -9,6 +9,8 @@ import administrationReducer from './administration/reducer';
 import homeroomsReducer from './homerooms/reducer';
 import classroomsReducer from './classrooms/reducer';
 import schoolsReducer from './schools/reducer';
+import notificationsReducer from './notifications/reducer';
+import messagesReducer from './messages/reducer';
 
 export default {
   app: appReducer,
@@ -22,4 +24,6 @@ export default {
   homerooms: homeroomsReducer,
   classrooms: classroomsReducer,
   schools: schoolsReducer,
+  notifications: notificationsReducer,
+  messages: messagesReducer,
 };

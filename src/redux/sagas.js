@@ -8,6 +8,8 @@ import teachersSagas from './teachers/sagas';
 import administrationSagas from './administration/sagas';
 import homeroomsSagas from './homerooms/sagas';
 import classroomsSagas from './classrooms/sagas';
+import notificationsSagas from './notifications/sagas';
+import messagesSagas from './messages/sagas';
 import userSagas from './user/sagas';
 
 function* rootSaga () {
@@ -20,6 +22,9 @@ function* rootSaga () {
     teachersSagas,
     administrationSagas,
     homeroomsSagas,
+    classroomsSagas,
+    notificationsSagas,
+    messagesSagas,
     classroomsSagas,
     userSagas
   ])

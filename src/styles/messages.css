@@ -1,0 +1,51 @@
+.m-messenger__message {
+    width: 100%;
+}
+
+.m-messenger__message--in > .m-messenger__message-pic,
+.m-messenger__message--in > .m-messenger__message-no-pic,
+.m-messenger__message--in > .m-messenger__message-body {
+    float: left;
+}
+
+.m-messenger__message--out > .m-messenger__message-pic,
+.m-messenger__message--out > .m-messenger__message-no-pic,
+.m-messenger__message--out > .m-messenger__message-body {
+    float: right;
+}
+
+.m-messenger__message-body {
+    width: 40%;
+}
+
+.m-messenger__message-no-pic {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 100%;
+    text-transform: uppercase;
+}
+
+.thread {
+    border: 0.1em solid #f4f5f8;
+    padding: 10px;
+}
+
+.thread :hover,
+.thread.active {
+    background: #f4f5f8;
+}

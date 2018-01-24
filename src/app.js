@@ -14,9 +14,11 @@ import configureStore from './redux/store';
 import createHistory from 'history/createBrowserHistory'
 
 import ApiClient from "./services/ApiClient";
+import LiveService from "./services/LiveService";
 
 const history = createHistory();
 const apiClient = new ApiClient();
+const liveService = new LiveService();
 const store = configureStore(history, apiClient);
 
 class App extends Component {

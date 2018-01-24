@@ -31,6 +31,7 @@ const initialState = Immutable.fromJS({
     errors: {}
   },
   userData: {
+    id: undefined,
     username: undefined,
     firstName: undefined,
     lastName: undefined,
