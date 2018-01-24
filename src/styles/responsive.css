@@ -45,7 +45,12 @@
     }
 
     .small-card .m--padding-right-10, .small-card .m--padding-left-10 {
-        padding: 2px;
+        padding: 2px !important;
+        justify-content: space-between;
+    }
+
+    div.m-widget1 .m-widget1__item .m-widget1__number {
+       font-size: 1rem;
     }
 
     .small-card .m-widget1__title {
@@ -160,9 +165,17 @@
 /**********************************/
 
 
-@media (max-width: 1024px) {
+@media (max-width: 1060px) {
     div.pie-block > canvas {
         margin: auto;
+    }
+
+    .small-card .m-widget1__title {
+        font-size: .8rem;
+    }
+
+    .small-card .widget-desc {
+        font-size: .5rem;
     }
 }
 
@@ -171,7 +184,21 @@
 
 @media (max-width: 767px) {
 
+    div.m-widget1 .m-widget1__item .m-widget1__number {
+        font-size: 1.3rem;
+    }
 
+    .small-card .m-widget1__title {
+        font-size: 1rem;
+    }
+
+    #g-widgets .small-card > div > div:first-child {
+        flex-basis: 30%;
+    }
+
+    .small-card .widget-desc {
+        font-size: .7rem;
+    }
 
     .top-header.m-container.m-container--full-height {
         display: block;
