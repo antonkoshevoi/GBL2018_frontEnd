@@ -96,7 +96,7 @@ class SecondStepForm extends Component {
                     value={form.username || ''}
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air m-input--pill'
+                    className='form-control m-input m-input--air '
                     placeholder='Username *'/>
                 </div>
                 {errors && errors.get('username') &&
@@ -111,7 +111,7 @@ class SecondStepForm extends Component {
                     value={form.password || ''}
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='password'
-                    className='form-control m-input m-input--air m-input--pill'
+                    className='form-control m-input m-input--air '
                     placeholder='Password *'/>
                 </div>
                 {errors && errors.get('password') &&
@@ -124,7 +124,7 @@ class SecondStepForm extends Component {
 
           <div className='col-xs-12'>
             <legend className='m--margin-bottom-10'>Optional</legend>
-            <address className='m-form__section m-form__section--first'>
+            <address className='m-form__section m-form__section--first signUpOptional'>
               <div className='form-group m-form__group'>
                 <div>
                   <input
@@ -132,7 +132,7 @@ class SecondStepForm extends Component {
                     value={form.firstName || ''}
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air m-input--pill'
+                    className='form-control m-input m-input--air '
                     placeholder='First Name'/>
                 </div>
                 {errors && errors.get('firstName') &&
@@ -145,7 +145,7 @@ class SecondStepForm extends Component {
                     value={form.lastName || ''}
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air m-input--pill'
+                    className='form-control m-input m-input--air '
                     placeholder='Last Name'/>
                 </div>
                 {errors && errors.get('lastName') &&

@@ -31,13 +31,13 @@ class Profile extends Component {
     return (
       <div className="row">
         <div className="col-lg-3">
-          {getUserRequest.get('success') && <Info user={user}/>}
+          <Info user={user}/>
         </div>
         <div className="col-lg-6">
           {getUserRequest.get('success') && <Details user={user} schools={schools}/>}
         </div>
         <div className="col-lg-3">
-          {getUserRequest.get('success') && <Summery user={user} schools={schools} homerooms={user.homerooms}/>}
+          <Summery user={user} schools={schools}/>
         </div>
       </div>
     );

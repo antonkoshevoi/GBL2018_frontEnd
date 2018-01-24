@@ -5,11 +5,17 @@ import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../../ui/table";
 import "../../../styles/store.css"
 import {Button} from "material-ui";
 import red from "material-ui/es/colors/red";
+import {NavLink} from "react-router-dom";
 
 class ShoppingCartTable extends Component {
 
     state = {
-        data:this.props.data
+        data:this.props.data,
+        total:0
+    }
+
+    componentWillMount(){
+        this.setState({total:this._getTotalSum(this.state.data)})
     }
 
     _removeItem(idx){
@@ -18,7 +24,23 @@ class ShoppingCartTable extends Component {
     }
 
     _changeItemCount(idx,e) {
-        //
+        let data = this.state.data;
+        data[idx].count = e.target.value;
+        this.setState({data})
+        this.setState({total:this.state.total + Number(data[idx].price)})
+    }
+
+    _getTotalSum(products) {
+        let total = 0
+        for(var i=0;i<products.length;i++)
+        {
+            if(isNaN(products[i].price)){
+                continue;
+            }
+            total += (Number(products[i].price) * Number(products[i].count));
+        }
+
+        return total;
     }
 
     _renderRows(rows) {
@@ -59,6 +81,27 @@ class ShoppingCartTable extends Component {
         })
     }
 
+    _renderTotalRow() {
+        return (
+            <Row >
+                <Td first={true} width='20px'></Td>
+                <Td width='350px'>
+                    <h3 className="text-right">{this.state.data.length + ' Items'}</h3>
+                </Td>
+                <Td width='180px'>
+                    <span>Total</span><br/>
+                    <span className="productPrice g-blue">
+                            {parseInt(this.state.total).toFixed(2) + "$"}
+                        </span>
+                </Td>
+                <Td width='175px'>
+                      <NavLink to="/shopping/checkout" className="btn m-btm btn-info">Checkout</NavLink>
+                </Td>
+
+            </Row>
+        )
+    }
+
     render() {
         const {data} = this.state;
         return (
@@ -75,6 +118,7 @@ class ShoppingCartTable extends Component {
                     </Thead>
                     <Tbody>
                         {this._renderRows(data)}
+                        {this._renderTotalRow()}
                     </Tbody>
                 </Table>
             </div>

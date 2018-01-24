@@ -34,6 +34,10 @@ button, [role="button"], [type="button"],  .btn {
   max-width: 100%;
 }
 
+.m-o-hidden{
+  overflow: hidden !important;
+}
+
 .App {
   text-align: center;
 }
@@ -629,7 +633,7 @@ div.progress.m-progress--sm .progress-bar {
 
 
 .progress {
-  background-color: #BDCCD4!important;;
+  background-color: #D2322D!important;;
   border-radius: 10px;
 }
 
@@ -753,7 +757,7 @@ div[class^='col-'] {
   margin-bottom: 15px;
 }
 
-.small-card [class^='col-'] {
+.small-card [class^='col-'], .m-portlet__body [class^='col-']{
   margin-bottom: 0;
 }
 
@@ -909,4 +913,10 @@ div.m-portlet .m-portlet__head {
 .g-badge.badge-red {
   background: red;
   color: #fff;
+}
+
+address.signUpOptional {
+  padding: 10px;
+  border-radius: 5px;
+  background: #edf2f866;
 }

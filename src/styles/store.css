@@ -1,3 +1,5 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 
 #store_ #m_header_nav {
     box-shadow: none;
@@ -226,4 +228,27 @@
     padding: 7px;
     text-align: center;
     font-weight: bold;
+}
+
+/* CHECKOUT */
+
+.cartItems .m-widget4__item {
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+}
+
+.payments-widgets.m-widget24 {
+    margin-bottom: 0;
+}
+
+.payments-widgets .m-widget24__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.payments-widgets .m-widget24__item:hover {
+    background: #ccc;
 }

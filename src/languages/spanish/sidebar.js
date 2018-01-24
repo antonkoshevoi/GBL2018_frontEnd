@@ -14,7 +14,7 @@ export default {
   professionalTrainings: 'Professional Trainings',
   acounts: 'Acounts',
   open_invoices: 'Open Invoices',
-  history: 'History',
+  history: 'History (Transactions)',
   sharing: 'Sharing',
   chat: 'Chat',
   inbox: 'Inbox',
@@ -23,4 +23,5 @@ export default {
   drafts: 'Drafts',
   compose: 'Compose',
   store: 'Store',
+  unassigned_credits: 'Unassigned Credits',
 }

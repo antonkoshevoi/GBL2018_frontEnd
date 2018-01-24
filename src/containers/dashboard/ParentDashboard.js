@@ -7,6 +7,10 @@ import {
 } from 'material-ui';
 import {OldProgressBar} from "../../components/ui/LinearProgress";
 import {NavLink} from "react-router-dom";
+import products from "../../data/json/products.json"
+import DashboardStore from "../../components/pages/store/DashboardStore";
+import HowToMovies from "../../components/pages/dashboard/HowToMovies";
+import UnassignedCourses from "../../components/pages/dashboard/UnassignedCourses";
 
 class ParentDashboard extends Component {
   constructor(props) {
@@ -17,7 +21,7 @@ class ParentDashboard extends Component {
   }
 
   _renderStudents() {
-    return studentsJson.students.map(function (student, i) {
+    return studentsJson.students.slice(0,5).map(function (student, i) {
       return (
         <GridListTile key={i} className="grid-tile">
           <img src={student.avatar} alt={student.first_name}/>
@@ -38,7 +42,7 @@ class ParentDashboard extends Component {
               )
             }
             actionIcon={
-              <IconButton color="contrast">
+              <IconButton>
 
               </IconButton>
             }
@@ -53,29 +57,46 @@ class ParentDashboard extends Component {
     return <div className="fadeInLeft animated">
 
       <div className="row">
-        <div className="col-sm-12 col-md-5 col-lg-5">
+        <div className="col-sm-12 col-md-4 col-lg-4">
           <Card title="My Learners" icon="flaticon-list-3">
-            <GridList cellHeight={250} cols={2}>
+            <GridList cellHeight={250} cols={1}>
               {this._renderStudents()}
             </GridList>
           </Card>
         </div>
-        <div className="col-sm-12 col-md-3 col-lg-3">
-          {/*<Card title="Student App" icon="flaticon-list-3">*/}
+        <div className="col-sm-12 col-md-8 col-lg-8">
+          <div className="row">
+              <div className="col-md-12">
+                  <DashboardStore data={products.slice(0,10)}/>
+              </div>
+              <div className="col-md-12">
+                  <HowToMovies/>
+              </div>
 
-          {/*</Card>*/}
+              <div className="col-md-12">
+                  <UnassignedCourses/>
+              </div>
 
-          {/*<Card title="How To Movies" icon="flaticon-list-3">*/}
+              <div className="col-md-12" style={{marginBottom:0}}>
+                  <div className="m-portlet m-portlet--bordered-semi  cartItems">
+                      <div className="m-portlet__body">
+                          <div className="m-widget25">
+                              <span className="m-widget25__price m--font-brand">Student App</span>
+                              <span className="m-widget25__desc">My Os</span>
+                          </div>
+                          <div className="m-widget4 text-right">
+                              <button className="btn m-btn btn-lg btn-success"> DOWNLOAD APP <i className="fa fa-download"></i> </button>
+                          </div>
+                      </div>
+                  </div>
 
-          {/*</Card>*/}
+
+              </div>
+
+          </div>
         </div>
         <div className="col-sm-12 col-md-4 col-lg-4">
-          {/*<Card title="Shop" icon="flaticon-list-3">*/}
 
-          {/*</Card>*/}
-          {/*<Card title="Unassigned Courses" icon="flaticon-list-3">*/}
-
-          {/*</Card>*/}
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import {selectChangePasswordRequest, selectUpdateRequest} from "../../../redux/user/selectors";
+import { selectChangePasswordRequest } from "../../../redux/user/selectors";
 import { changePassword } from "../../../redux/user/actions";
 
 class Info extends Component {
@@ -14,22 +14,13 @@ class Info extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
       changePasswordMode: false,
       passwordFields: {}
     }
   }
 
-  componentDidMount() {
-    this.setState({
-      ...this.state,
-      user: this.props.user
-    });
-  }
-
   componentWillReceiveProps(nextProps) {
     this._passwordChangedSuccess(nextProps);
-    this._updateUserSuccess(nextProps);
   }
 
   _passwordChangedSuccess(nextProps) {
@@ -41,18 +32,6 @@ class Info extends Component {
         ...this.state,
         changePasswordMode: false,
         passwordFields: {},
-      });
-    }
-  }
-
-  _updateUserSuccess(nextProps) {
-    const prev = this.props.getUpdateRequest.get('success');
-    const next = nextProps.getUpdateRequest.get('success');
-
-    if (!prev && next) {
-      this.setState({
-        ...this.state,
-        user: nextProps.user
       });
     }
   }
@@ -78,7 +57,8 @@ class Info extends Component {
   }
 
   render() {
-    const { user, changePasswordMode, passwordFields } = this.state;
+    const { user } = this.props;
+    const { changePasswordMode, passwordFields } = this.state;
     const errors = this.props.getChangePasswordRequest.get('errors');
 
     return (
@@ -161,8 +141,7 @@ class Info extends Component {
 
 Info = connect(
   (state) => ({
-    getChangePasswordRequest: selectChangePasswordRequest(state),
-    getUpdateRequest: selectUpdateRequest(state),
+    getChangePasswordRequest: selectChangePasswordRequest(state)
   }),
   (dispatch) => ({
     changePassword: (fields, params = {}) => { dispatch(changePassword(fields, params)) },
