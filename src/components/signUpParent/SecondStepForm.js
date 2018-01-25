@@ -89,33 +89,35 @@ class SecondStepForm extends Component {
             <legend className='m--margin-bottom-10'>Required</legend>
 
             <div className='m-form__section m-form__section--first'>
-              <div className='form-group m-form__group'>
-                <div>
+             <div className="form-group m-form__group row">
+				<label className="col-form-label col-lg-3 col-sm-12">Username <small className="g-red">*</small></label>
+				<div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     name='username'
                     value={form.username || ''}
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air m-input--pill'
-                    placeholder='Username *'/>
+                    className='form-control m-input m-input--air '
+                    placeholder=''/>
+                    {errors && errors.get('username') &&
+                    <div className="form-control-feedback text-center error">{errors.get('username').get(0)}</div>}
                 </div>
-                {errors && errors.get('username') &&
-                  <div className="form-control-feedback text-center error">{errors.get('username').get(0)}</div>}
               </div>
             </div>
             <div className='m-form__section m-form__section--first'>
-              <div className='form-group m-form__group'>
-                <div>
+             <div className="form-group m-form__group row">
+				<label className="col-form-label col-lg-3 col-sm-12">Password <small className="g-red">*</small></label>
+				<div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     name='password'
                     value={form.password || ''}
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='password'
-                    className='form-control m-input m-input--air m-input--pill'
-                    placeholder='Password *'/>
+                    className='form-control m-input m-input--air '
+                    placeholder=''/>
+                    {errors && errors.get('password') &&
+                    <div className="form-control-feedback text-center error">{errors.get('password').get(0)}</div>}
                 </div>
-                {errors && errors.get('password') &&
-                  <div className="form-control-feedback text-center error">{errors.get('password').get(0)}</div>}
               </div>
             </div>
           </div>
@@ -124,46 +126,50 @@ class SecondStepForm extends Component {
 
           <div className='col-xs-12'>
             <legend className='m--margin-bottom-10'>Optional</legend>
-            <address className='m-form__section m-form__section--first'>
-              <div className='form-group m-form__group'>
-                <div>
+            <address className='m-form__section m-form__section--first signUpOptional'>
+             <div className="form-group m-form__group row">
+				<label className="col-form-label col-lg-3 col-sm-12">First Name</label>
+				<div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     name='firstName'
                     value={form.firstName || ''}
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air m-input--pill'
-                    placeholder='First Name'/>
+                    className='form-control m-input m-input--air '
+                    placeholder=''/>
+                    {errors && errors.get('firstName') &&
+                    <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
                 </div>
-                {errors && errors.get('firstName') &&
-                  <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
               </div>
-              <div className='form-group m-form__group'>
-                <div>
+             <div className="form-group m-form__group row">
+				<label className="col-form-label col-lg-3 col-sm-12">Last Name</label>
+				<div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     name='lastName'
                     value={form.lastName || ''}
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air m-input--pill'
-                    placeholder='Last Name'/>
+                    className='form-control m-input m-input--air '
+                    placeholder=''/>
+                    {errors && errors.get('lastName') &&
+                    <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
                 </div>
-                {errors && errors.get('lastName') &&
-                  <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
               </div>
-              <div className='form-group m-form__group picker'>
+              <div className='form-group m-form__group row picker'>
+                <label className="col-form-label col-lg-3 col-sm-12">Birthday</label>
                 <MetronicDatePicker
-                  placeholder='Birthday'
+                  className='col-lg-8 col-md-9 col-sm-12'
                   value={form.dateOfBirth || null}
                   onChange={(e) => { this._handleDateChange(e) }}/>
                 {errors && errors.get('dateOfBirth') &&
                   <div className="form-control-feedback text-center error">{errors.get('dateOfBirth').get(0)}</div>}
               </div>
-              <div className='form-group m-form__group'>
-                <div>
+             <div className="form-group m-form__group row">
+				<label className="col-form-label col-lg-3 col-sm-12">Gender</label>
+				<div className="col-lg-8 col-md-9 col-sm-12">
                   <MetronicSelect
                     name='gender'
-                    placeholder='Gender'
+                    placeholder=''
                     value={form.gender || 'male'}
                     onChange={(e) => { this._handleInputChange(e) }}>
                     <MenuItem value='male'>Male</MenuItem>
@@ -176,18 +182,10 @@ class SecondStepForm extends Component {
             </address>
           </div>
         </div>
-        <div className='col-md-6'>
+        <div className='col-md-6 text-center'>
           <legend className='m--margin-bottom-10'>Profile Pic Upload</legend>
 
-          <div className='CropperBlock'>
-            {form.avatar &&
-              <button
-                type="'"
-                className='btn m-btn--air btn-success'
-                onClick={() => { this._handleImageCrop() }}
-                style={{float: 'right'}}>
-                Crop Image <span className='la la-crop'></span>
-              </button>}
+          <div className='CropperBlock text-center'>
             <div className='upload-btn-wrapper '>
               <button className='btn m-btn--air btn-outline-info'>Upload a file</button>
               <input type='file' name='myfile' onChange={(e) => { this._handleFileChange(e) }}/>
@@ -200,6 +198,15 @@ class SecondStepForm extends Component {
               style={{height: 250, width: 250}}
               aspectRatio={1 / 1}
               guides={false}/>
+
+              {form.avatar &&
+              <button
+                  type="'"
+                  className='btn m-btn--air btn-success m--margin-top-15'
+                  onClick={() => { this._handleImageCrop() }}
+              >
+                Crop Image <span className='la la-crop'></span>
+              </button>}
 
             <div className='croppedBlock'>
               {form.avatarCropped &&

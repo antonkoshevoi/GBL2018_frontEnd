@@ -141,8 +141,14 @@ export default  {
                        icon:'flaticon flaticon-user-settings',
                    },
                    {
+                       key:'unassigned_credits',
+                       title:'Unassigned Credits',
+                       link:'unassigned/credits',
+                       icon:'flaticon flaticon-user-settings',
+                   },
+                   {
                        key:'history',
-                       title:'History',
+                       title:'History (Transactions)',
                        link:'history',
                        icon:'flaticon flaticon-user-ok',
                    }

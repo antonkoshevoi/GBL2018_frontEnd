@@ -14,7 +14,6 @@ class MetronicDatePicker extends Component {
         InputProps={{
           disableUnderline: true,
           inputComponent: MetronicInput,
-          placeholder: placeholder,
           type: 'text',
         }}/>
     );

@@ -30,6 +30,7 @@ import Store from "../containers/pages/store/Store";
 import Details from "../containers/pages/store/Details";
 import Products from "../containers/pages/store/Products";
 import ShoppingCart from "../containers/pages/store/ShoppingCart/ShoppingCart";
+import Checkout from "../containers/pages/store/checkout/Checkout";
 
 export default () => (
   <AppContainer>
@@ -64,6 +65,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:type' name='Store' component={Products}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/shopping/cart' name='ShoppingCart' component={ShoppingCart}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/shopping/checkout' name='Checkout' component={Checkout}/>
 
       <Route component={NotFoundPage} />
     </Switch>

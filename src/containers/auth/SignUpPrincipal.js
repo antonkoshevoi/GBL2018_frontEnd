@@ -10,6 +10,7 @@ import {Divider} from "material-ui";
 import { selectSignUpRequest } from '../../redux/signUpPrincipal/selectors';
 import { signUp } from '../../redux/signUpPrincipal/actions';
 import MetronicProgressButton from '../../components/ui/metronic/MetronicProgressButton';
+import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 
 class SignUpPrincipal extends Component {
 
@@ -114,7 +115,7 @@ class SignUpPrincipal extends Component {
       <div className="">
         <div className="m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor  m-login--2 m-login-2--skin-2 m--full-height" id="m_login" style={{backgroundImage: `url(${background})`,minHeight:'100vh'}}>
           <div className="m-grid__item m-grid__item--fluid	m-login__wrapper">
-            <div className="m-login__container">
+            <div className="m-login__container signup-page">
               <div className="m-login__logo  text-center">
                 <a href="#">
                   <img src={logo}/>
@@ -128,10 +129,15 @@ class SignUpPrincipal extends Component {
                   <div className="m-portlet__head">
                     <div className="m-portlet__head-caption">
                       <div className="m-portlet__head-title full-width">
-                        <h3 className="m-portlet__head-text text-center full-width">
+                        <h3 className="m-portlet__head-text ">
                           SETUP YOUR PRINCIPAL PROFILE
                         </h3>
                       </div>
+                    </div>
+                    <div className="m-portlet__head-tools">
+                      <ul className="m-portlet__nav">
+                        <LanguageSwitcher className="m-portlet__nav-item"/>
+                      </ul>
                     </div>
                   </div>
                   <form className="m-portlet__body" onSubmit={(e) => { e.preventDefault(); this._submit(); }}>
@@ -150,7 +156,7 @@ class SignUpPrincipal extends Component {
                                   value={form.firstName}
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="text"
-                                  className="form-control m-input m-input--air m-input--pill"
+                                  className="form-control m-input m-input--air "
                                   placeholder="First Name"/>
                               </div>
                               {errors && errors.get('firstName') &&
@@ -165,7 +171,7 @@ class SignUpPrincipal extends Component {
                                   value={form.lastName}
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="text"
-                                  className="form-control m-input m-input--air m-input--pill"
+                                  className="form-control m-input m-input--air "
                                   placeholder="Last Name "/>
                               </div>
                               {errors && errors.get('lastName') &&
@@ -180,7 +186,7 @@ class SignUpPrincipal extends Component {
                                   value={form.email}
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="text"
-                                  className="form-control m-input m-input--air m-input--pill"
+                                  className="form-control m-input m-input--air "
                                   placeholder="Email "/>
                               </div>
                               {errors && errors.get('email') &&
@@ -195,7 +201,7 @@ class SignUpPrincipal extends Component {
                                   value={form.username}
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="text"
-                                  className="form-control m-input m-input--air m-input--pill"
+                                  className="form-control m-input m-input--air "
                                   placeholder="Username "/>
                               </div>
                               {errors && errors.get('username') &&
@@ -210,7 +216,7 @@ class SignUpPrincipal extends Component {
                                   value={form.password}
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="password"
-                                  className="form-control m-input m-input--air m-input--pill"
+                                  className="form-control m-input m-input--air "
                                   placeholder="Password "/>
                               </div>
                               {errors && errors.get('password') &&
@@ -225,7 +231,7 @@ class SignUpPrincipal extends Component {
                                   value={form.password_confirmation}
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="password"
-                                  className="form-control m-input m-input--air m-input--pill"
+                                  className="form-control m-input m-input--air "
                                   placeholder="Confirm Password "/>
                               </div>
                             </div>
@@ -241,7 +247,7 @@ class SignUpPrincipal extends Component {
                                 value={form.schoolName}
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 type="text"
-                                className="form-control m-input m-input--air m-input--pill"
+                                className="form-control m-input m-input--air "
                                 placeholder="School Name"/>
                             </div>
                             {errors && errors.get('schoolName') &&
@@ -254,7 +260,7 @@ class SignUpPrincipal extends Component {
                                 value={form.schoolCode}
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 type="text"
-                                className="form-control m-input m-input--air m-input--pill"
+                                className="form-control m-input m-input--air "
                                 placeholder="School Code"/>
                             </div>
                             {errors && errors.get('schoolCode') &&

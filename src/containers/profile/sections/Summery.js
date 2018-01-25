@@ -2,44 +2,18 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { randColorName } from "../../../helpers/colors";
 import { translate } from 'react-i18next';
-import { connect } from 'react-redux';
-import { selectUpdateRequest} from "../../../redux/user/selectors";
 
 class Summery extends Component {
 
   static propTypes = {
     user: PropTypes.object.isRequired,
-    schools: PropTypes.array.isRequired,
-    homerooms: PropTypes.array.isRequired,
+    schools: PropTypes.array.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      user: {}
-    }
-  }
 
-  componentDidMount () {
-    this.setState({
-      ...this.state,
-      user: this.props.user
-    });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this._updateUserSuccess(nextProps);
-  }
-
-  _updateUserSuccess(nextProps) {
-    const prev = this.props.getUpdateRequest.get('success');
-    const next = nextProps.getUpdateRequest.get('success');
-
-    if (!prev && next) {
-      this.setState({
-        ...this.state,
-        user: nextProps.user
-      });
     }
   }
 
@@ -65,8 +39,22 @@ class Summery extends Component {
   }
 
   _renderHomerooms() {
-    const { homerooms } = this.props;
+    const { homerooms } = this.props.user;
 
+    if (!homerooms || !homerooms.length) {
+      return <div className="m-timeline-2 my-timeline">
+        <div className="m-timeline-2__items  m--padding-top-5 m--padding-bottom-10">
+          <div className="m-timeline-2__item m--margin-bottom-10">
+            <div className="m-timeline-2__item-cricle">
+              <i className={`fa fa-genderless m--font-${randColorName()}`}></i>
+            </div>
+            <div className="m-timeline-2__item-text  m--padding-top-5">
+              No Homerooms found
+            </div>
+          </div>
+        </div>
+      </div>
+    }
     return (
       homerooms.map((homeroom, key) => {
         return <div className="m-timeline-2 my-timeline" key={key}>
@@ -130,11 +118,5 @@ class Summery extends Component {
     );
   }
 }
-
-Summery = connect(
-  (state) => ({
-    getUpdateRequest: selectUpdateRequest(state),
-  })
-)(Summery);
 
 export default Summery;

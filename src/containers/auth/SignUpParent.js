@@ -15,6 +15,7 @@ import {selectSignUpRequest, selectValidateStep1Request} from '../../redux/signU
 import MetronicProgressButton from "../../components/ui/metronic/MetronicProgressButton";
 import { push } from 'react-router-redux';
 import { load } from '../../redux/app/actions';
+import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 
 class SignUpParent extends Component {
 
@@ -134,43 +135,47 @@ class SignUpParent extends Component {
       ][activeStep]}>
         <div className='m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor  m-login--2 m-login-2--skin-2 m--full-height' id='m_login' style={{backgroundImage: `url(${background})`,minHeight:'100vh'}}>
           <div className='m-grid__item m-grid__item--fluid m-login__wrapper'>
-            <div className='m-login__container'>
+            <div className='m-login__container signup-page'>
               <div className='m-login__logo text-center'>
                 <a href='#'>
                   <img src={logo}/>
                 </a>
               </div>
-              <div className='m-signup col-sm-6 m-auto'>
+              <div className='m-signup col-sm-8 m-auto'>
                 <div className='m-signup__head'>
                   <h3 className='m-login__title'>Sign Up</h3>
                 </div>
                 <div className='m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--info m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height'>
                   <div className='m-portlet__head'>
                     <div className='m-portlet__head-caption'>
-                      <div className='m-portlet__head-title full-width'>
-                        <h3 className='m-portlet__head-text text-center full-width'>
+                      <div className='m-portlet__head-title'>
+                        <h3 className='m-portlet__head-text'>
                           SETUP YOUR PARENT PROFILE
                         </h3>
                       </div>
                     </div>
-
+                    <div className="m-portlet__head-tools">
+                      <ul className="m-portlet__nav">
+                        <LanguageSwitcher className="m-portlet__nav-item"/>
+                      </ul>
+                    </div>
                   </div>
                   <div className='m-portlet__body'>
                     <div className='alert m-alert m-alert--default'>
                       <p className='text-center'> If you already have a account, <NavLink to='/login'><strong>Login</strong></NavLink> to start your session. Otherwise,</p>
                     </div>
 
-                    <Stepper activeStep={activeStep} alternativeLabel>
+                    <Stepper activeStep={activeStep} alternativeLabel className="g-stepper">
 
                       <Step>
 
-                        <StepLabel>STEP 1</StepLabel>
+                        <StepLabel>Parent Profile</StepLabel>
                       </Step>
                       <Step>
-                        <StepLabel>STEP 2</StepLabel>
+                        <StepLabel>Child Profile</StepLabel>
                       </Step>
                       <Step>
-                        <StepLabel>STEP 3</StepLabel>
+                        <StepLabel>Confirmation</StepLabel>
                       </Step>
                     </Stepper>
                     <div>

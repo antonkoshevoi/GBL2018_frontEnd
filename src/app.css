@@ -34,6 +34,10 @@ button, [role="button"], [type="button"],  .btn {
   max-width: 100%;
 }
 
+.m-o-hidden{
+  overflow: hidden !important;
+}
+
 .App {
   text-align: center;
 }
@@ -49,6 +53,25 @@ button, [role="button"], [type="button"],  .btn {
   padding: 20px;
   color: white;
 }
+
+
+.table.m-table-noborder th, .table.m-table-noborder td {
+  border: none;
+}
+
+.margin-0 {
+  margin: 0 !important;
+}
+
+.margin-bottom-0 {
+  margin-bottom: 0 !important;
+}
+
+
+.margin-top-0 {
+  margin-top: 0 !important;
+}
+
 
 .App-title {
   font-size: 1.5em;
@@ -303,9 +326,10 @@ div.portlet-header-input:before {
 }
 
 .croppedBlock {
-  background: #edf2f8ad;
+  background: #edf2f866;
   padding: 1px;
   margin-top: 10px;
+  border-radius: 5px;
 }
 
 .croppedBlock img {
@@ -315,6 +339,14 @@ div.portlet-header-input:before {
 
 .signup-cropper {
   margin: auto;
+}
+
+.signup-page .m-form__section{
+  text-align: right;
+}
+
+.signup-page .m-form__section .m-input{
+  text-align: left;
 }
 
 .m-input.main-select {
@@ -629,7 +661,7 @@ div.progress.m-progress--sm .progress-bar {
 
 
 .progress {
-  background-color: #BDCCD4!important;;
+  background-color: #D2322D!important;;
   border-radius: 10px;
 }
 
@@ -753,7 +785,7 @@ div[class^='col-'] {
   margin-bottom: 15px;
 }
 
-.small-card [class^='col-'] {
+.small-card [class^='col-'], .m-portlet__body [class^='col-']{
   margin-bottom: 0;
 }
 
@@ -908,5 +940,39 @@ div.m-portlet .m-portlet__head {
 
 .g-badge.badge-red {
   background: red;
+  color: #fff;
+}
+
+address.signUpOptional {
+  padding: 10px;
+  border-radius: 5px;
+  background: #edf2f866;
+}
+
+.g-stepper svg {
+  width: 60px;
+  height: 60px;
+}
+
+.g-stepper svg circle {
+  fill: #0000;
+}
+
+.g-stepper svg circle {
+  stroke-width: 1px;
+  stroke: #08c;
+}
+
+.g-stepper svg text {
+  fill: #08c;
+}
+
+.g-stepper > div > div:last-child {
+  top: 30px;
+  left: calc(50% + 30px);
+  right: calc(-50% + 30px);
+}
+
+.m-portlet--info .m-portlet__nav-item .fa {
   color: #fff;
 }
