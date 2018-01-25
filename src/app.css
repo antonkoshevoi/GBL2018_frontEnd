@@ -54,6 +54,25 @@ button, [role="button"], [type="button"],  .btn {
   color: white;
 }
 
+
+.table.m-table-noborder th, .table.m-table-noborder td {
+  border: none;
+}
+
+.margin-0 {
+  margin: 0 !important;
+}
+
+.margin-bottom-0 {
+  margin-bottom: 0 !important;
+}
+
+
+.margin-top-0 {
+  margin-top: 0 !important;
+}
+
+
 .App-title {
   font-size: 1.5em;
 }
@@ -307,9 +326,10 @@ div.portlet-header-input:before {
 }
 
 .croppedBlock {
-  background: #edf2f8ad;
+  background: #edf2f866;
   padding: 1px;
   margin-top: 10px;
+  border-radius: 5px;
 }
 
 .croppedBlock img {
@@ -319,6 +339,14 @@ div.portlet-header-input:before {
 
 .signup-cropper {
   margin: auto;
+}
+
+.signup-page .m-form__section{
+  text-align: right;
+}
+
+.signup-page .m-form__section .m-input{
+  text-align: left;
 }
 
 .m-input.main-select {
@@ -919,4 +947,32 @@ address.signUpOptional {
   padding: 10px;
   border-radius: 5px;
   background: #edf2f866;
+}
+
+.g-stepper svg {
+  width: 60px;
+  height: 60px;
+}
+
+.g-stepper svg circle {
+  fill: #0000;
+}
+
+.g-stepper svg circle {
+  stroke-width: 1px;
+  stroke: #08c;
+}
+
+.g-stepper svg text {
+  fill: #08c;
+}
+
+.g-stepper > div > div:last-child {
+  top: 30px;
+  left: calc(50% + 30px);
+  right: calc(-50% + 30px);
+}
+
+.m-portlet--info .m-portlet__nav-item .fa {
+  color: #fff;
 }

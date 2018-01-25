@@ -9,7 +9,7 @@ class MetronicSelect extends Component {
     return (
       <Select
         {...rest}
-        className='form-control m-input m-input--air m-input--pill main-select'
+        className='form-control m-input m-input--air main-select'
         style={{minWidth:'120px'}}
         disableUnderline={true}>
         {children}
