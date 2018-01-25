@@ -5,7 +5,8 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { login, setRedirectUrl } from '../../redux/auth/actions';
 import { selectLoginRequest } from '../../redux/auth/selectors';
-import { Button, CircularProgress } from 'material-ui';
+import { FormControlLabel } from 'material-ui/Form';
+import { Button, CircularProgress, Checkbox } from 'material-ui';
 import { withRouter, NavLink } from 'react-router-dom';
 
 class Login extends Component {
@@ -15,16 +16,18 @@ class Login extends Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      remember: false
     };
   }
 
   _handleUsernameChange = (event) => { this.setState({username: event.target.value}); };
   _handlePasswordChange = (event) => { this.setState({password: event.target.value}); };
+  _handleRememberChange = (event) => { this.setState({remember: !this.state.remember}); };
 
   _login() {
     const { setRedirectUrl, login } = this.props;
-    const { username, password } = this.state;
+    const { username, password, remember } = this.state;
 
     let pathname = '/';
     try {
@@ -32,7 +35,7 @@ class Login extends Component {
     } catch (e) {}
 
     setRedirectUrl(pathname);
-    login(username, password);
+    login(username, password, remember);
   }
 
   render() {
@@ -65,10 +68,14 @@ class Login extends Component {
                   </div>
                   <div className="row m-login__form-sub">
                     <div className="col m--align-left m-login__form-left">
-                      <label className="m-checkbox  m-checkbox--light">
-                        <input type="checkbox" name="remember"/> Remember me
-                          <span></span>
-                      </label>
+                      <FormControlLabel
+                        control={<Checkbox
+                          checked={this.state.remember}
+                          onChange={this._handleRememberChange}
+                          value={''}
+                        />}
+                        label="Remember me"
+                      />
                     </div>
                     <div className="col m--align-right m-login__form-right m--hide">
                       <a href="javascript:;" id="m_login_forget_password" className="m-link">Forget Password ?</a>
@@ -123,7 +130,7 @@ Login = connect(
     auth: state.auth
   }),
   (dispatch) => ({
-    login: (username, password) => { dispatch(login(username, password)); },
+    login: (username, password, remember) => { dispatch(login(username, password, remember)); },
     setRedirectUrl: (uri) => { dispatch(setRedirectUrl(uri)); },
   })
 )(Login);

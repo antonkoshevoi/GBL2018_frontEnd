@@ -6,8 +6,9 @@ import SessionStorage from '../../services/SessionStorage';
 
 function* onLoad (action) {
   const token = SessionStorage.get('token');
+  const refreshToken = SessionStorage.get('refreshToken');
 
-  if (token) {
+  if (token || refreshToken) {
     yield put(restoreLogin());
   }
 }

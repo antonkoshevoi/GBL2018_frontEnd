@@ -1,6 +1,6 @@
 import { all, select, put, call, takeLatest } from 'redux-saga/effects';
 import { push } from 'react-router-redux'
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from './actions';
+import { LOGIN_SUCCESS, LOGIN_SUCCESS_REMEMBER, LOGOUT_SUCCESS } from './actions';
 import { selectRedirectAfterLogin } from "./selectors";
 import { load } from '../app/actions';
 
@@ -18,6 +18,7 @@ function* afterLogoutSuccess (action) {
 
 const authSagas = all([
   // takeLatest(INITIAL_LOGIN_SUCCESS, afterInitialLoginSuccess),
+  takeLatest(LOGIN_SUCCESS_REMEMBER, afterLoginSuccess),
   takeLatest(LOGIN_SUCCESS, afterLoginSuccess),
   takeLatest(LOGOUT_SUCCESS, afterLogoutSuccess)
 ]);

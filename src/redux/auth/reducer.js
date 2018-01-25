@@ -1,5 +1,5 @@
 import {
-  INITIAL_LOGIN, INITIAL_LOGIN_FAIL, INITIAL_LOGIN_SUCCESS, LOGIN, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, LOGOUT_FAIL,
+  INITIAL_LOGIN, INITIAL_LOGIN_FAIL, INITIAL_LOGIN_SUCCESS, LOGIN, LOGIN_FAIL, LOGIN_SUCCESS, LOGIN_SUCCESS_REMEMBER, LOGOUT, LOGOUT_FAIL,
   LOGOUT_SUCCESS, RESTORE_LOGIN,
   SET_REDIRECT_URL
 } from './actions';
@@ -42,6 +42,13 @@ export default function reducer (state = initialState, action) {
         ).set('isLoggedIn', false);
     case LOGIN_SUCCESS:
       saveSession(action.result.data);
+      return state
+        .set('loginRequest', state.get('loginRequest')
+          .set('success', true)
+          .remove('loading')
+        ).set('isLoggedIn', true);
+    case LOGIN_SUCCESS_REMEMBER:
+      saveSession(action.result.data, true);
       return state
         .set('loginRequest', state.get('loginRequest')
           .set('success', true)
