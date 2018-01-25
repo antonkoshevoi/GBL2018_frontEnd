@@ -5,6 +5,7 @@ import {
     LinearProgress, Input, InputAdornment
 } from 'material-ui';
 import {getAllStudents} from "../../../../services/Students";
+import {getSchoolStudents} from "../../../../redux/schools/actions";
 import classRooms from "../../../../data/json/classrooms.json";
 import {NavLink} from "react-router-dom";
 import {Search} from "material-ui-icons";
@@ -21,7 +22,7 @@ function TabContainer(props) {
 
 class TabSection extends Component {
     state = {
-        value: "schools",
+        value: "classRooms",
     };
 
     handleChange = (event, value) => {
@@ -29,15 +30,18 @@ class TabSection extends Component {
     };
 
 
-    _renderStudents(students) {
-        return students.map(function (student,i) {
+    _renderSchoolStudents() {
+
+        const schoolStudents = this.props.schoolStudents.toJS().records;
+
+        return schoolStudents.map(function (student,i) {
             return (
                 <GridListTile key={i} className="grid-tile">
-                    <img src={student.avatar} alt={student.first_name} />
+                    <img src="https://www.usnews.com/dims4/USNEWS/4d7e4ab/2147483647/thumbnail/640x420/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2Fa1%2Fef%2F1e83f506456aa210658a95891c66%2F180124-trump-editorial.jpg" alt={student.firstName} />
 
                     <GridListTileBar
                         className="myGridTileBar"
-                        title={<NavLink to={`/reports/students/${student.id}`}>{student.first_name + " " + student.last_name}</NavLink>}
+                        title={<NavLink to={`/reports/students/${student.id}`}>{student.firstName + " " + student.lastName}</NavLink>}
                         subtitle={
                             (
                                 <div>
@@ -54,6 +58,41 @@ class TabSection extends Component {
 
                             </IconButton>
                         }
+                    />
+
+                </GridListTile>
+            )
+        })
+    }
+
+    _renderSchoolHomerooms() {
+
+        const schoolHomerooms = this.props.schoolHomerooms.toJS().records;
+
+        return schoolHomerooms.map(function (homeroom,i) {
+            return (
+                <GridListTile key={i} className="grid-tile">
+                    <img src="https://www.usnews.com/dims4/USNEWS/90238a1/2147483647/thumbnail/652x435%3E/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2F03%2Fa4%2Fc21e092747eb902379ae57eb9987%2F141030-pfcquizgraduate.jpg" alt={homeroom.id} />
+
+                    <GridListTileBar
+                        className="myGridTileBar"
+                        title={<NavLink to={`/reports/homerooms/${homeroom.id}`}>{homeroom.name}</NavLink>}
+                        // subtitle={
+                        //     (
+                        //         <div>
+                        //             <span className="text-right d-block">75%</span>
+                        //             <OldProgressBar correctValue="40" type="performance" />
+                        //             <br />
+                        //             <span  className="text-right  d-block">35%</span>
+                        //             <OldProgressBar complateValue="40" progressValue="10" type="progress" />
+                        //         </div>
+                        //     )
+                        // }
+                       actionIcon={
+                          <IconButton  color="default">
+
+                         </IconButton>
+                       }
                     />
 
                 </GridListTile>
@@ -117,7 +156,7 @@ class TabSection extends Component {
                                             textColor="secondary"
 
                                         >
-                                            <Tab className="tab-header-item" value="schools" label="Schools" />
+                                            {/*<Tab className="tab-header-item" value="schools" label="Schools" />*/}
                                             <Tab className="tab-header-item" value="classRooms" label="Classrooms" />
                                             <Tab className="tab-header-item" value="homeRooms" label="Homerooms" />
                                             <Tab className="tab-header-item" value="students" label="Students" />
@@ -143,14 +182,14 @@ class TabSection extends Component {
 
                             </div>
                             <div className="m-portlet__body" style={{height:"100%"}}>
-                                {value === 'schools' && <TabContainer>
-                                    <GridList cellHeight={250} cols={4}>
-                                        { this._renderStudents(getAllStudents().students) }
-                                    </GridList>
-                                </TabContainer>}
+                                {/*{value === 'schools' && <TabContainer>*/}
+                                    {/*<GridList cellHeight={250} cols={4}>*/}
+                                        {/*{ this._renderStudents(getAllStudents().students) }*/}
+                                    {/*</GridList>*/}
+                                {/*</TabContainer>}*/}
                                 {value === 'students' && <TabContainer>
                                     <GridList cellHeight={250} cols={4}>
-                                        { this._renderStudents(getAllStudents().students) }
+                                        { this._renderSchoolStudents() }
                                     </GridList>
                                 </TabContainer>}
                                 {value === 'classRooms' && <TabContainer>
@@ -161,7 +200,7 @@ class TabSection extends Component {
                                 </TabContainer>}
                                 {value === 'homeRooms' && <TabContainer>
                                     <GridList cellHeight={250} cols={3}>
-                                        { this._renderStudents(getAllStudents().students) }
+                                        { this._renderSchoolHomerooms() }
                                     </GridList>
                                 </TabContainer>}
 
@@ -181,6 +220,6 @@ class TabSection extends Component {
     }
 }
 
-TabSection.propTypes = {};
+// TabSection.propTypes = {};
 
 export default TabSection;

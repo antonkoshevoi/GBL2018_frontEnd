@@ -3,6 +3,7 @@ import {
   GET_SCHOOL_TEACHERS, GET_SCHOOL_TEACHERS_SUCCESS, GET_SCHOOL_TEACHERS_FAIL,
   GET_SCHOOL_STUDENTS, GET_SCHOOL_STUDENTS_SUCCESS, GET_SCHOOL_STUDENTS_FAIL,
   GET_SCHOOL_HOMEROOMS, GET_SCHOOL_HOMEROOMS_SUCCESS, GET_SCHOOL_HOMEROOMS_FAIL,
+  GET_USER_SCHOOL, GET_USER_SCHOOL_SUCCESS, GET_USER_SCHOOL_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -29,6 +30,7 @@ const initialState = Immutable.fromJS({
       records: {}
   },
   schools: [],
+  school: []
 });
 
 export default function reducer (state = initialState, action) {
@@ -45,6 +47,17 @@ export default function reducer (state = initialState, action) {
     case GET_SCHOOLS_FAIL:
       return state;
     /**
+     * Get school
+     */
+    case GET_USER_SCHOOL:
+        return state
+            .set('school', Immutable.List());
+    case GET_USER_SCHOOL_SUCCESS:
+        return state
+            .set('school', Immutable.fromJS(action.result.data));
+    case GET_USER_SCHOOL_FAIL:
+        return state;
+    /**
      * School Teachers
      */
     case GET_SCHOOL_TEACHERS:
@@ -53,7 +66,7 @@ export default function reducer (state = initialState, action) {
           .set('loading', true)
           .set('success', false)
           .set('fail', false)
-          .remove('records')
+          .set('records', Immutable.List())
         );
     case GET_SCHOOL_TEACHERS_SUCCESS:
       return state
@@ -78,7 +91,7 @@ export default function reducer (state = initialState, action) {
           .set('loading', true)
           .set('success', false)
           .set('fail', false)
-          .remove('records')
+          .set('records', Immutable.List())
         );
     case GET_SCHOOL_STUDENTS_SUCCESS:
       return state
@@ -103,7 +116,7 @@ export default function reducer (state = initialState, action) {
             .set('loading', true)
             .set('success', false)
             .set('fail', false)
-            .remove('records')
+            .set('records', Immutable.List())
           );
       case GET_SCHOOL_HOMEROOMS_SUCCESS:
         return state
