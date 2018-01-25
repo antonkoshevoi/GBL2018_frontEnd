@@ -33,11 +33,12 @@ class TabSection extends Component {
     _renderSchoolStudents() {
 
         const schoolStudents = this.props.schoolStudents.toJS().records;
+        const avatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
 
         return schoolStudents.map(function (student,i) {
             return (
                 <GridListTile key={i} className="grid-tile">
-                    <img src="https://www.usnews.com/dims4/USNEWS/4d7e4ab/2147483647/thumbnail/640x420/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2Fa1%2Fef%2F1e83f506456aa210658a95891c66%2F180124-trump-editorial.jpg" alt={student.firstName} />
+                    <img src={ (!student.avatar) ? avatar : student.avatar } alt={student.firstName} />
 
                     <GridListTileBar
                         className="myGridTileBar"

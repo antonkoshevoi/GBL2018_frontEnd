@@ -50,12 +50,12 @@ class ChartsSection extends Component {
             },
             {
                 title: 'Teachers',
-                value: 1,
+                value: this.props.teachersCount,
                 colorName: 'info'
             },
             {
                 title: 'Admins',
-                value: 1,
+                value: this.props.adminsCount,
                 colorName: 'info'
             }
 

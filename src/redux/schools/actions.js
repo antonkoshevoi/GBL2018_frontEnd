@@ -30,17 +30,6 @@ export function getSchools(params = {}) {
     };
 }
 /**
- * Get schools
- */
-export function getUserSchool(params = {}) {
-    return {
-        types: [GET_USER_SCHOOL, GET_USER_SCHOOL_SUCCESS, GET_USER_SCHOOL_FAIL],
-        promise: (apiClient) => apiClient.get('school', Object.assign({}, params, {
-            perPage: 0
-        }))
-    };
-}
-/**
  * School Teachers
  */
 export function getSchoolTeachers(id) {
