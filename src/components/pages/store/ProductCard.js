@@ -32,7 +32,7 @@ class ProductCard extends Component {
                             <NavLink to={`/store/details/${product.id}`}>
                                 <StarRating score={product.score}/>
                             </NavLink>
-                            <div className="productPrice">{product.price + ' $'}</div>
+                            <div className="productPrice"><span className="discount"><span>150$</span></span><br/>{product.price + ' $'}</div>
                         </div>
                     </CardContent>
 

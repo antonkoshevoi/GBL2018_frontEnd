@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import {NavLink, withRouter} from "react-router-dom";
 import {generateBreadcrumbLink} from "../../helpers/utils";
-import LanguageSwitcher from "../ui/LanguageSwitcher";
+import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 import {Menu, MenuItem} from "material-ui";
+import {translate} from "react-i18next";
+import {connect} from "react-redux";
+import {selectAddToCartRequest, selectCartRecords} from "../../redux/store/selectors";
 
 class SubHeader extends Component {
 
@@ -77,7 +80,7 @@ class SubHeader extends Component {
 
 
   render() {
-        const { location} = this.props
+        const {location, cartRecords} = this.props
 
         const paths = location.pathname.split('/')
 
@@ -97,7 +100,7 @@ class SubHeader extends Component {
                                 <li>
                                     <NavLink to='/shopping/cart'>
                                         <i className="fa fa-shopping-cart PageHeader-icon"></i>
-                                          <span className="g-badge badge-red">2</span>
+                                          <span className="g-badge badge-red">{cartRecords.size}</span>
                                     </NavLink>
                                 </li>
                                 <li>
@@ -149,4 +152,16 @@ class SubHeader extends Component {
 
 SubHeader.propTypes = {};
 
-export default withRouter(SubHeader);
+SubHeader = connect(
+    (state) => ({
+        addToCartRequest: selectAddToCartRequest(state),
+        cartRecords:selectCartRecords(state)
+    }),
+    (dispatch) => ({
+
+    })
+)(SubHeader);
+
+export default withRouter(translate("translation")(SubHeader));
+
+

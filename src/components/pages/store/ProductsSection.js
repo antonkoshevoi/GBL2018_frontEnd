@@ -15,7 +15,7 @@ class ProductsSection extends Component {
                 return (
                     (!all) ?
                         <ProductCard key={i} type="vertical" data={item}/> :
-                        (<div key={i} className="col-md-4 col-lg-3 col-xl-2">
+                        (<div key={i} className="">
                             <ProductCard  type="vertical" data={item}/>
                         </div>)
 

@@ -15,9 +15,7 @@ class Products extends Component {
                 <div className="m-portlet store-wrapper">
                     <div className="m-portlet__head">
                         <div className="m-portlet__head-caption">
-                            <div className="m-portlet__head-title">
                                 <Filter/>
-                            </div>
                         </div>
                     </div>
 
