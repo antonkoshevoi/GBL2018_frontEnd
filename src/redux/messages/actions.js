@@ -13,6 +13,10 @@ export const SEND_NEW_MESSAGE_FAIL = '[Messages] SEND_NEW_MESSAGE_FAIL';
 
 export const NEW_MESSAGE_RECEIVED = '[Messages] NEW_MESSAGE_RECEIVED';
 
+export const GET_AVAILABLE_USERS = '[Messages] GET_AVAILABLE_USERS';
+export const GET_AVAILABLE_USERS_SUCCESS = '[Messages] GET_AVAILABLE_USERS_SUCCESS';
+export const GET_AVAILABLE_USERS_FAIL = '[Messages] GET_AVAILABLE_USERS_FAIL';
+
 export function subscribe (userId) {
   return {
     type: SUBSCRIBE,
@@ -31,21 +35,19 @@ export function getThreads(params = {}) {
 }
 
 /**
- * set selected thread
+ * send message
  */
-export function selectThread(id) {
+export function sendNewMessage(threadId, messageBody) {
   return {
-    type: SELECT_THREAD,
-    id
+    threadId, messageBody,
+    types: [SEND_NEW_MESSAGE, SEND_NEW_MESSAGE_SUCCESS, SEND_NEW_MESSAGE_FAIL],
+    promise: (apiClient) => apiClient.post(`user/messages/${threadId}`, { message: messageBody })
   };
 }
 
-/**
- * send message
- */
-export function sendNewMessage(threadId, message) {
+export function getAvailableUsers(keyword = '') {
   return {
-    types: [SEND_NEW_MESSAGE, SEND_NEW_MESSAGE_SUCCESS, SEND_NEW_MESSAGE_FAIL],
-    promise: (apiClient) => apiClient.post(`user/messages/${threadId}`, { message })
+    types: [GET_AVAILABLE_USERS, GET_AVAILABLE_USERS_SUCCESS, GET_AVAILABLE_USERS_FAIL],
+    promise: (apiClient) => apiClient.get(`user/messages/availableUsers`, { filter: { username: keyword } })
   };
 }

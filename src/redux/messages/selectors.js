@@ -35,3 +35,15 @@ export const selectGetThreadsRequest = createSelector(
   selectMessagesDomain,
   (subState) => subState.get('getThreadsRequest')
 );
+
+/**
+ * Available users
+ */
+export const selectAvailableUsers = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('availableUsers')
+);
+export const selectGetAvailableUsersRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('getAvailableUsersRequest')
+);

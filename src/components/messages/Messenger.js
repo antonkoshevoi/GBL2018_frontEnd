@@ -16,26 +16,9 @@ class Messenger extends Component {
     newMessage: ''
   };
 
-  componentDidMount () {
-    this._scrollToBottom();
-  }
-
   _scrollToBottom () {
     let element = document.getElementById('messages-container');
     element.scrollTop = element.scrollHeight;
-  }
-
-  /**
-   * Get user info from participants
-   * @param userId
-   * @private
-   */
-  _getUserInfo (userId) {
-    const { thread } = this.props;
-    if (thread.get('private')) {
-      return thread.get('user');
-    }
-    return thread.get('participants').find(user => user.id === userId);
   }
 
   /**
@@ -50,13 +33,12 @@ class Messenger extends Component {
 
       if (message.get('type') === 'in') {
 
-        const userInfo = this._getUserInfo(message.get('userId'));
         return <MessageIn
           key={key}
           body={message.get('body')}
-          username={userInfo.get('username')}
-          color={userInfo.get('color')}
-          avatar={userInfo.get('avatar')}/>
+          username={message.get('user').get('username')}
+          color={message.get('user').get('color')}
+          avatar={message.get('user').get('avatar')}/>
       }
 
       if (message.get('type') === 'out') {
@@ -87,12 +69,15 @@ class Messenger extends Component {
     e.preventDefault();
 
     this.props.onNewMessage(this.state.newMessage);
+    this.setState({
+      newMessage: ''
+    });
   }
 
   render() {
     return (
       <div className="m-messenger m-messenger--message-arrow m-messenger--skin-light">
-        <div id='messages-container' className="m-messenger__messages mCS_7 mCS-autoHide" style={{height: '694px', position: 'relative', overflow: 'auto'}}>
+        <div id='messages-container' className="m-messenger__messages mCS_7 mCS-autoHide" style={{height: '500px', position: 'relative', overflow: 'auto'}}>
           { this._renderMessages() }
         </div>
 

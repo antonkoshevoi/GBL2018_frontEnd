@@ -11,13 +11,6 @@ class Thread extends Component {
   render() {
     const { thread } = this.props;
 
-    const messages = thread.get('messages');
-    let preview = 'No messages yet';
-
-    if (messages.size > 0) {
-      preview = messages.get(0).get('body');
-    }
-
     let avatar;
     let title;
 
@@ -27,35 +20,36 @@ class Thread extends Component {
       const color = thread.get('user').get('color');
 
       if (userAvatar) {
-        avatar = <Avatar src={userAvatar}/>;
+        avatar = (
+          <span className="m-list-search__result-item-pic">
+            <img className="m--img-rounded" src={userAvatar} title=""/>
+          </span>
+        );
       } else {
 
         avatar = (
-          <div className={`m-messenger__message-no-pic m--bg-fill-${color}`}>
+          <span className={`m-messenger__conversation-no-pic m--bg-fill-${color}`}>
             <span>{username[0]}</span>
-          </div>
+          </span>
         );
       }
 
       title = username;
     } else {
-      avatar = <Avatar src='/'/>;
+      avatar = (
+        <span className={`m-messenger__conversation-no-pic m--bg-fill-default`}>
+          <span>G</span>
+        </span>
+      );
       title = 'group';
     }
 
     return (
-      <div className="m-widget1__item thread">
-        <div className="row m-row--no-padding align-items-center">
-          <div className="col-md-2 m--align-left">
-            <span className="m-widget1__number m--font-brand">
-              { avatar }
-            </span>
-          </div>
-          <div className="col">
-            <h3 className="m-widget1__title">{ title }</h3>
-            <span className="m-widget1__desc">{ preview }</span>
-          </div>
-        </div>
+      <div className="m-list-search__result-item">
+        <span className="m-list-search__result-item-pic">
+          {avatar}
+        </span>
+        <span className="m-list-search__result-item-text">{ title }</span>
       </div>
     );
   }

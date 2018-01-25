@@ -18,9 +18,9 @@
     width: 40%;
 }
 
-.m-messenger__message-no-pic {
-    height: 40px;
-    width: 40px;
+.m-messenger__conversation-no-pic {
+    height: 35px;
+    width: 35px;
     display: inline-block;
     text-align: center;
     position: relative;
@@ -38,6 +38,10 @@
     vertical-align: middle;
     border-radius: 100%;
     text-transform: uppercase;
+}
+
+.m-list-search__result-item {
+    cursor: pointer;
 }
 
 .thread {

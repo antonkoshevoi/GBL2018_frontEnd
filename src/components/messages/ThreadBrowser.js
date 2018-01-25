@@ -7,7 +7,6 @@ class ThreadBrowser extends Component {
   static propTypes = {
     threads: PropTypes.instanceOf(Immutable.Map).isRequired,
     onSelectThread: PropTypes.func.isRequired,
-    selectedThread: PropTypes.instanceOf(Immutable.Map)
   };
 
   _renderThreads () {
@@ -28,6 +27,9 @@ class ThreadBrowser extends Component {
 
     return (
       <div className="m-widget1 m-widget1--paddingless">
+        <span className="m-list-search__result-category">
+            Conversations
+        </span>
         { this._renderThreads() }
       </div>
     );

@@ -1,9 +1,13 @@
 import {
   NEW_MESSAGE_RECEIVED, SELECT_THREAD,
-  GET_THREADS, GET_THREADS_FAIL, GET_THREADS_SUCCESS
+  GET_THREADS, GET_THREADS_FAIL, GET_THREADS_SUCCESS, SEND_NEW_MESSAGE, GET_AVAILABLE_USERS,
+  GET_AVAILABLE_USERS_SUCCESS, GET_AVAILABLE_USERS_FAIL
 } from './actions';
 import Immutable from 'immutable';
-import { randColorName } from '../../helpers/colors';
+import {
+  addColorsForParticipants, addIncomingMessageToQuery, addOutgoingMessageToQuery,
+  buildMessagesQueue
+} from '../../helpers/messages';
 
 const initialState = Immutable.fromJS({
   getThreadsRequest: {
@@ -16,8 +20,13 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false
   },
-  selectedThreadId: undefined,
+  getAvailableUsersRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+  },
   threads: {},
+  availableUsers: [],
   recentMessages: {},
 });
 
@@ -34,24 +43,18 @@ export default function reducer (state = initialState, action) {
           .remove('fail')
         ).set('threads', Immutable.Map());
     case GET_THREADS_SUCCESS:
-      const threads = {};
+      let threads = {};
       for (let res of action.result.data) {
-        if (res.private) {
-          res.user.color = randColorName();
-        } else {
-          res.participants = res.participants.map(participant => ({
-            ...participant,
-            color: randColorName()
-          }));
-        }
-        threads[res.id] = res;
+        threads[res.id] = buildMessagesQueue(
+          addColorsForParticipants(res)
+        );
       }
+
       return state
         .set('getThreadsRequest', state.get('getThreadsRequest')
           .set('success', true)
           .remove('loading')
-        ).set('threads', Immutable.fromJS(threads))
-        .set('selectedThreadId', action.result.data[0].id);
+        ).set('threads', Immutable.fromJS(threads));
     case GET_THREADS_FAIL:
       return state
         .set('getThreadsRequest', state.get('getThreadsRequest')
@@ -59,20 +62,50 @@ export default function reducer (state = initialState, action) {
           .set('fail', true)
         );
     /**
-     * Select thread
+     * New Message
      */
-    case SELECT_THREAD:
-      return state.set('selectedThreadId', action.id);
+    case SEND_NEW_MESSAGE:
+      return state
+        .setIn(['threads', `${action.threadId}`], Immutable.fromJS(
+          addOutgoingMessageToQuery(
+            state.getIn(['threads', `${action.threadId}`]).toJS(), action.messageBody
+          )
+        ));
     /**
      * New Message
      */
     case NEW_MESSAGE_RECEIVED:
       const threadId = action.message.threadId;
-      const search = ['threads', `${threadId}`, 'messages'];
 
       return state
-        .setIn(search, state.getIn(search)
-          .unshift(Immutable.fromJS(action.message))
+        .setIn(['threads', `${threadId}`], Immutable.fromJS(
+          addIncomingMessageToQuery(
+            state.getIn(['threads', `${threadId}`]).toJS(), action.message
+          )
+        ));
+    /**
+     *  available users
+     */
+    case GET_AVAILABLE_USERS:
+      return state
+        .set('getAvailableUsersRequest', state.get('getAvailableUsersRequest')
+          .set('loading', true)
+          .remove('success')
+          .remove('fail')
+        ).set('availableUsers', Immutable.List());
+    case GET_AVAILABLE_USERS_SUCCESS:
+      console.log(action);
+      return state
+        .set('getAvailableUsersRequest', state.get('getAvailableUsersRequest')
+          .set('success', true)
+          .remove('loading')
+        ).set('availableUsers', Immutable.fromJS(action.result.data));
+    case GET_AVAILABLE_USERS_FAIL:
+      console.log(action);
+      return state
+        .set('getAvailableUsersRequest', state.get('getAvailableUsersRequest')
+          .set('loading', false)
+          .set('fail', true)
         );
     /**
      * default
