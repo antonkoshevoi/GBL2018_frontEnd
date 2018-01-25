@@ -74,7 +74,7 @@ class LanguageSwitcher extends Component {
         const  langs  = this.props.i18n.store.data;
 
         return (
-            <li className="m-nav__item">
+            <li className={this.props.className ? 'm-portlet__nav-item' : 'm-nav__item'}>
                 <a  className="m-nav__link m-dropdown__toggle pointer"
                     aria-owns={this.state.anchorEl ? 'simple-menu' : null}
                     aria-haspopup="true"

@@ -22,7 +22,14 @@ export default {
   sent: 'Sent',
   drafts: 'Drafts',
   compose: 'Compose',
-  store: 'Store',
   unassigned_credits: 'Unassigned Credits',
+  store: 'Store',
+  courses: 'Courses',
+  books: 'Books',
+  teaching_aids: 'Teaching Aids',
+  stationary: '学习领域',
+  student_rewards: 'Student Rewards',
+  tutoring_services: 'Tutoring Services',
+  bundles: 'Bundles',
 
 }

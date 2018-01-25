@@ -3,7 +3,7 @@ import * as AUTH from '../../../services/AuthService'
 import InfoSection from "../../../components/pages/reports/schools/InfoSection";
 import CardsSection from "../../../components/pages/reports/schools/CardsSection";
 import TabSection from "../../../components/pages/reports/schools/TabSection";
-import SubHeader from "../../../components/layouts/SubHeader";
+import SubHeader from "../../ui/SubHeader";
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
 

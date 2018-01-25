@@ -1,7 +1,8 @@
 import {
-    GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, CREATE, CREATE_SUCCESS, CREATE_FAIL,
-    RESET_CREATE_REQUEST,  GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
-    GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS,
+    GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, GET_CART_RECORDS, GET_CART_RECORDS_SUCCESS, GET_CART_RECORDS_FAIL,
+    ADD_TO_CART,ADD_TO_CART_FAIL,ADD_TO_CART_SUCCESS,
+    GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
+    GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST
 } from './actions';
 import Immutable from 'immutable';
 
@@ -35,15 +36,27 @@ const initialState = Immutable.fromJS({
     errorCode: null,
     errors: {}
   },
-
-  schools: [],
-  records: [],
+  getCartRecordsRequest: {
+      loading: false,
+      success: false,
+      fail: false,
+      errorResponse: null
+  },
+  addToCartRequest: {
+      loading: false,
+      success: false,
+      fail: false,
+      errorResponse: null
+  },
   pagination: {
     page: 1,
     perPage: 10,
     total: 0,
     totalPages: 1
-  }
+  },
+    cartRecords: [],
+    records: [],
+    singleRecord: [],
 });
 
 export default function reducer (state = initialState, action) {
@@ -99,100 +112,76 @@ export default function reducer (state = initialState, action) {
       return state
         .set('getSingleRecordRequest', initialState.get('getSingleRecordRequest'));
 
-    /**
-     * Create
-     */
-    case CREATE:
-      return state
-        .set('createRequest', state.get('createRequest')
-          .set('loading', true)
-          .set('success', false)
-          .set('fail', false)
-          .remove('errors')
-          .remove('errorMessage')
-          .remove('errorCode')
-        );
-    case CREATE_SUCCESS:
-      const total = state.get('pagination').get('total') + 1;
-      const page = state.get('pagination').get('page');
-      const perPage = state.get('pagination').get('perPage');
-      let totalPages = state.get('pagination').get('totalPages');
+      /**
+       * Get cart records
+       */
+      case GET_CART_RECORDS:
+          return state
+              .set('getCartRecordsRequest', state.get('getCartRecordsRequest')
+                  .set('loading', true)
+                  .remove('success')
+                  .remove('fail')
+              ).set('cartRecord', Immutable.List());
+      case GET_CART_RECORDS_SUCCESS:
+          return state
+              .set('getCartRecordsRequest', state.get('getCartRecordsRequest')
+                  .set('success', true)
+                  .remove('loading')
+              ).set('cartRecord', Immutable.fromJS(action.result.data));
+      case GET_CART_RECORDS_FAIL:
+          return state
+              .set('getCartRecordsRequest', state.get('getCartRecordsRequest')
+                  .set('loading', false)
+                  .set('fail', true)
+              );
 
-      if (total > totalPages * perPage) {
-        totalPages += 1;
-      }
+      /**
+       * Get single cart records
+       */
+      case GET_CART_RECORDS:
+          return state
+              .set('getSingleCartRecordsRequest', state.get('getSingleCartRecordsRequest')
+                  .set('loading', true)
+                  .remove('success')
+                  .remove('fail')
+              ).set('cartRecords', Immutable.List());
+      case GET_CART_RECORDS_SUCCESS:
+          return state
+              .set('getSingleCartRecordsRequest', state.get('getSingleCartRecordsRequest')
+                  .set('success', true)
+                  .remove('loading')
+              ).set('cartRecords', Immutable.fromJS(action.result.data))
+              .set('pagination', Immutable.fromJS(action.result.meta.pagination));
+      case GET_CART_RECORDS_FAIL:
+          return state
+              .set('getSingleCartRecordsRequest', state.get('getSingleCartRecordsRequest')
+                  .set('loading', false)
+                  .set('fail', true)
+              );
+      /**
+       * Add cart record
+       */
+      case ADD_TO_CART:
+          return state
+              .set('addToCartRequest', state.get('addToCartRequest')
+                  .set('loading', true)
+                  .remove('success')
+                  .remove('fail')
+              );
+      case ADD_TO_CART_SUCCESS:
+          return state
+              .set('addToCartRequest', state.get('addToCartRequest')
+                  .set('success', true)
+                  .remove('loading')
+              );
+      case ADD_TO_CART_FAIL:
 
-      let newState = state
-        .set('createRequest', state.get('createRequest')
-          .set('success', true)
-          .set('loading', false)
-        ).set('pagination', state.get('pagination')
-          .set('totalPages', totalPages)
-          .set('total', total)
-        );
+          return state
+              .set('addToCartRequest', state.get('addToCartRequest')
+                  .set('loading', false)
+                  .set('fail', true)
+              );
 
-      if(page === totalPages) {
-        return newState
-          .set('records', state.get('records')
-            .push(Immutable.fromJS(action.result.data))
-          );
-      }
-
-      return newState
-        .set('pagination', state.get('pagination')
-          .set('page', totalPages)
-        );
-    case CREATE_FAIL:
-      const data = action.error.response.data;
-      return state
-        .set('createRequest', state.get('createRequest')
-          .set('loading', false)
-          .set('fail', true)
-          .set('errorCode', data.code)
-          .set('errorMessage', data.message)
-          .set('errors', data.code === 422 ? Immutable.fromJS(data.errors) : undefined)
-        );
-    case RESET_CREATE_REQUEST:
-      return state
-        .set('createRequest', initialState.get('createRequest'));
-    /**
-     * Update
-     */
-    case UPDATE:
-      return state
-        .set('updateRequest', state.get('updateRequest')
-          .set('loading', true)
-          .set('success', false)
-          .set('fail', false)
-          .remove('errors')
-          .remove('errorMessage')
-          .remove('errorCode')
-        );
-    case UPDATE_SUCCESS:
-      let updatedRecords = state.get('records').map(record => {
-        if(record.get('id') === action.result.data.id) {
-          return Immutable.fromJS(action.result.data);
-        }
-        return record;
-      });
-      return state
-        .set('updateRequest', state.get('updateRequest')
-          .set('loading', false)
-          .set('success', true)
-        ).set('records', updatedRecords);
-    case UPDATE_FAIL:
-      const errorData = action.error.response.data;
-      return state
-        .set('updateRequest', state.get('updateRequest')
-          .set('loading', false)
-          .set('fail', true)
-          .set('errorCode', errorData.code)
-          .set('errorMessage', errorData.message)
-          .set('errors', errorData.code === 422 ? Immutable.fromJS(errorData.errors) : undefined)
-        );
-    case RESET_UPDATE_REQUEST:
-      return state
-        .set('updateRequest', initialState.get('updateRequest'));
 
     /**
      * default

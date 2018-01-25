@@ -21,6 +21,50 @@ export default  {
                link:'store',
                icon:'fa fa-shopping-cart ',
                colorName:'green',
+               subMenu:[
+                   {
+                       key:'courses',
+                       title:'Courses',
+                       link:'store/category/courses',
+                       icon:'flaticon flaticon-user-settings',
+                   },
+                   {
+                       key:'books',
+                       title:'Books',
+                       link:'store/category/books',
+                       icon:'flaticon flaticon-user-ok',
+                   },
+                   {
+                       key:'teaching_aids',
+                       title:'Teaching Aids',
+                       link:'store/category/teaching_aids',
+                       icon:'flaticon	flaticon-technology-1',
+                   },
+                   {
+                       key:'stationary',
+                       title:'Stationary',
+                       link:'store/category/stationary',
+                       icon:'flaticon	flaticon-technology-1',
+                   },
+                   {
+                       key:'student_rewards',
+                       title:'Student Rewards',
+                       link:'store/category/student_rewards',
+                       icon:'flaticon	flaticon-technology-1',
+                   },
+                   {
+                       key:'tutoring_services',
+                       title:'Tutoring Services ',
+                       link:'store/category/tutoring_services',
+                       icon:'flaticon	flaticon-technology-1',
+                   },
+                   {
+                       key:'bundles',
+                       title:'Bundles',
+                       link:'store/category/bundles',
+                       icon:'flaticon	flaticon-technology-1',
+                   }
+               ]
            },
            {
                key:'studentsAndStaff',

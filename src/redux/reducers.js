@@ -11,6 +11,7 @@ import classroomsReducer from './classrooms/reducer';
 import schoolsReducer from './schools/reducer';
 import notificationsReducer from './notifications/reducer';
 import messagesReducer from './messages/reducer';
+import storeReducer from './store/reducer';
 
 export default {
   app: appReducer,
@@ -26,4 +27,5 @@ export default {
   schools: schoolsReducer,
   notifications: notificationsReducer,
   messages: messagesReducer,
+  store: storeReducer,
 };

@@ -1,6 +1,6 @@
 import SessionStorage from '../services/SessionStorage';
 
-export const saveSession = ({ token, expiresAt, refreshToken }) => {
+export const saveSession = ({ token, expiresAt, refreshToken }, remember) => {
   const options = {
     path: '/',
     expires: new Date(expiresAt * 1000)
@@ -8,7 +8,14 @@ export const saveSession = ({ token, expiresAt, refreshToken }) => {
 
   SessionStorage.set('token', token, options);
   SessionStorage.set('tokenExpiresAt', options.expires, options);
-  SessionStorage.set('refreshToken', refreshToken, options);
+
+  if (remember) {
+    const rememberOptions = {
+      path: '/',
+      expires: new Date(expiresAt * 1000 + (30 * 24 * 3600 * 1000))
+    };
+    SessionStorage.set('refreshToken', refreshToken, rememberOptions);
+  }
 };
 
 export const destroySession = () => {

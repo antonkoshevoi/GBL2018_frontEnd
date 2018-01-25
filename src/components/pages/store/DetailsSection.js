@@ -5,11 +5,11 @@ import StarRating from "../../ui/StarRating";
 class DetailsSection extends Component {
     render() {
 
-        const {image,title,desc,price,score,type,video,total_vote} = this.props.data;
+        const {id,image,title,desc,price,score,type,video,total_vote} = this.props.data;
 
 
         return (
-            <div>
+            <div id="product-details">
                 <div className="headerBlock">
                     <div className="row">
                         <div className="col-md-4">
@@ -39,8 +39,17 @@ class DetailsSection extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="actionsBtn m--padding-right-20 align-self-end">
-                                    <button className="btn m-btn btn-danger ">Buy By {price + ' $'}</button>
+                                <div className="actionsBtn justify-content-between full-width align-items-end d-flex m--padding-right-20 align-self-end">
+                                    <div className="m-widget25 ">
+                                        <span className="m-widget25__price m--font-brand">{parseInt(price).toFixed(2) }</span>
+                                        <span className="m-widget25__desc">$</span>
+                                    </div>
+                                    <button className="btn m-btn btn-danger m-btn--icon" onClick={() => {this.props.buyClick(id)}}>
+                                        <span>
+                                            <i className="fa fa-shopping-basket"></i>
+                                            <span>Add To Cart</span>
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
 

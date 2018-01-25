@@ -8,6 +8,7 @@ export const RESTORE_LOGIN = '[Auth] RESTORE_LOGIN';
 
 export const LOGIN = '[Auth] LOGIN';
 export const LOGIN_SUCCESS = '[Auth] LOGIN_SUCCESS';
+export const LOGIN_SUCCESS_REMEMBER = '[Auth] LOGIN_SUCCESS_REMEMBER';
 export const LOGIN_FAIL = '[Auth] LOGIN_FAIL';
 
 export const LOGOUT = '[Auth] LOGOUT';
@@ -19,9 +20,11 @@ export const SET_REDIRECT_URL = '[Auth] SET_REDIRECT_URL';
 /**
  * Login
  */
-export function login(username, password) {
+export function login(username, password, remember) {
+  const types = remember ? [LOGIN, LOGIN_SUCCESS_REMEMBER, LOGIN_FAIL] : [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL];
+
   return {
-    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+    types: types,
     promise: (apiClient) => apiClient.post('session', {
       username, password
     }, {}, {
