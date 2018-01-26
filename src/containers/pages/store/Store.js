@@ -6,13 +6,29 @@ import {Button, ClickAwayListener, Grow, MenuItem, MenuList, Paper, Target} from
 import Filter from "../../../components/pages/store/Filter";
 import products from "../../../data/json/products.json";
 import ProductsSection from "../../../components/pages/store/ProductsSection";
+import {
+    selectGetRecordsRequest, selectRecords
+} from "../../../redux/store/selectors";
+import {withRouter} from "react-router-dom";
+import {getCartRecords, getRecords, getSingleRecord} from "../../../redux/store/actions";
 
 
 class Store extends Component {
 
+    componentDidMount(){
+        this._getRecords();
+    }
 
+
+    _getRecords() {
+        this.props.getRecords();
+    }
 
     render() {
+
+        const {records, getSingleRecord} = this.props;
+
+        console.log(records);
         return (
             <div className="animated fadeInLeft">
                 <div className="m-portlet store-wrapper">
@@ -25,9 +41,9 @@ class Store extends Component {
                     </div>
 
                     <div id="store-body">
-                        <ProductsSection type="newest" title="Newest" products={products.slice(0,9)}/>
-                        <ProductsSection type="popular" title="Most Popular" products={products.slice(0,9)}/>
-                        <ProductsSection type="top" title="Top Rating" products={products.slice(0,9)}/>
+                        <ProductsSection type="newest" title="Newest" products={records}/>
+                        <ProductsSection type="popular" title="Most Popular" products={records}/>
+                        <ProductsSection type="top" title="Top Rating" products={records}/>
                     </div>
                 </div>
             </div>
@@ -35,11 +51,15 @@ class Store extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {};
-}
+Store = connect(
+    (state) => ({
+        getRecordsRequest: selectGetRecordsRequest(state),
+        records: selectRecords(state),
+    }),
+    (dispatch) => ({
+        getRecords: (params = {type:'recent'}) => { dispatch(getRecords(params)) },
+    })
+)(Store);
 
-export default translate("Store")(connect(
-    mapStateToProps,
-)(Store));
 
+export default withRouter(translate("Store")(Store));
