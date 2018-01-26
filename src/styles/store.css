@@ -35,6 +35,14 @@
     background: #bbb;
 }
 
+.store .store-filter button {
+    font-weight: 300;
+}
+
+.store .store-search button {
+    /*color: #0a8cf0;*/
+}
+
 .store .m-portlet.store-wrapper {
     background: transparent;
     box-shadow: none;
@@ -54,6 +62,13 @@
     padding: 5px;
     overflow: hidden;
 }
+
+ .verticalCardItem.cardItem {
+     min-width: 110px;
+     max-width: 178px;
+     flex-basis: auto;
+     flex-grow: 1;
+ }
 
  .all-products .cardItem {
      flex: 0 0 11%;
@@ -78,9 +93,21 @@
     float: right;
     color: #D2322D;
     font-weight: 500;
+    margin-top: -15px;
+    text-align: right;
 }
 
- .cardItem .cardDesc {
+.cardItem .productPrice .discount {
+   color: #771f1e;
+    text-decoration: line-through;
+    font-size: 0.9rem;
+}
+
+.cardItem .productPrice .discount > span  {
+    color: #525672;
+}
+
+.cardItem .cardDesc {
     overflow: hidden;
     white-space: pre;
     position: relative;
@@ -128,7 +155,7 @@
  }
 
  .store-filter .filter-buttons a {
-     padding: 13px;
+     padding: 4px;
  }
 
 .store-filter .filter-buttons a.active {
@@ -139,40 +166,44 @@
     margin-bottom: 0 !important;
 }
 
- @media (max-width: 1367px) {
-     .productSection .cardItem:nth-child(9) {
-         display: none;
-     }
- }
+ /*@media (max-width: 1367px) {*/
+     /*.productSection .cardItem:nth-child(9) {*/
+         /*display: none;*/
+     /*}*/
+ /*}*/
 
 
-@media (max-width: 1000px) {
-    .productSection .cardItem:nth-child(8) {
-        display: none;
-    }
-}
+/*@media (max-width: 1000px) {*/
+    /*.productSection .cardItem:nth-child(8) {*/
+        /*display: none;*/
+    /*}*/
+/*}*/
 
-@media (max-width: 900px) {
-    .productSection .cardItem:nth-child(7) {
-        display: none;
-    }
-}
+/*@media (max-width: 900px) {*/
+    /*.productSection .cardItem:nth-child(7) {*/
+        /*display: none;*/
+    /*}*/
+/*}*/
 
-@media (max-width: 700px) {
-    .productSection .cardItem:nth-child(6) {
-        display: none;
-    }
-}
+/*@media (max-width: 700px) {*/
+    /*.productSection .cardItem:nth-child(6) {*/
+        /*display: none;*/
+    /*}*/
+/*}*/
 
 @media (max-width: 600px) {
-    .productSection .cardItem:nth-child(5) {
+    .verticalCardItem.cardItem {
+        max-width: 170px;
+    }
+
+    .store-filter .filter-buttons a {
         display: none;
     }
 }
 
-@media (max-width: 500px) {
-    .productSection .cardItem:nth-child(4) {
-        display: none;
+@media (max-width: 562px) {
+    .verticalCardItem.cardItem {
+        max-width: 150px;
     }
 }
 
@@ -193,7 +224,14 @@
     font-weight: 400;
 }
 
+#product-details .m-widget25 {
+    line-height: 1;
+}
 
+#product-details .m-widget25 .m-widget25__price {
+    line-height: 0;
+    font-size: 50px;
+}
 
 
 /* =====================================

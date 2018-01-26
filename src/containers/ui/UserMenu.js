@@ -62,10 +62,10 @@ class UserMenu extends Component {
                   <NavLink to="/profile" className="m-nav__link">
                     <i className="m-nav__link-icon flaticon-profile-1"></i>
                     <span className="m-nav__link-title">
-									<span className="m-nav__link-wrap">
-										<span className="m-nav__link-text">My Profile</span>
-									</span>
-								</span>
+                      <span className="m-nav__link-wrap">
+                        <span className="m-nav__link-text">My Profile</span>
+                      </span>
+                    </span>
                   </NavLink>
                 </li>
                 <li className="m-nav__item">
@@ -75,10 +75,14 @@ class UserMenu extends Component {
                   </a>
                 </li>
                 <li className="m-nav__item">
-                  <a href="?page=header/profile&amp;demo=default" className="m-nav__link">
-                    <i className="m-nav__link-icon flaticon-chat-1"></i>
-                    <span className="m-nav__link-text">Messages</span>
-                  </a>
+                  <NavLink to="/messages" className="m-nav__link">
+                    <i className="m-nav__link-icon flaticon-profile-1"></i>
+                    <span className="m-nav__link-title">
+                      <span className="m-nav__link-wrap">
+                        <span className="m-nav__link-text">Messages</span>
+                      </span>
+                    </span>
+                  </NavLink>
                 </li>
                 <li className="m-nav__separator m-nav__separator--fit">
                 </li>
@@ -122,8 +126,6 @@ class UserMenu extends Component {
         </span>
         </a>
         {this._renderDropDownMenu()}
-
-
       </li>
     );
   }

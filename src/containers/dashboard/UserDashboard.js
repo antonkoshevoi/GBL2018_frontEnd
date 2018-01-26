@@ -4,6 +4,7 @@ import Card from "../../components/ui/Card";
 import Widget from "../../data/Widgets";
 import ChartData from "../../data/Charts";
 import classRoomSvg from '../../media/images/classroom.svg';
+import AppDownloadDrawer from "../../components/ui/AppDownloadDrawer";
 
 class UserDashboard extends Component {
   constructor(props){
@@ -47,6 +48,11 @@ class UserDashboard extends Component {
     return <div className="fadeInLeft  animated">
 
       <div className="row">
+
+        <div className="col-md-12 text-right">
+          <AppDownloadDrawer/>
+        </div>
+
         <div className="col-sm-12 col-md-6 col-lg-3">
           <Card title="Roster Statistics" icon="flaticon-list-3" >
             <div className="m-widget1 m-widget1--paddingless">
@@ -54,6 +60,7 @@ class UserDashboard extends Component {
             </div>
           </Card>
         </div>
+
         <div className="col-sm-12 col-md-6 col-lg-3">
           <Card title="Real Time Chart" icon="flaticon-diagram" >
             <Line data={this.state.data} ref="chartCanvas" options={this.state.options} width="400" height="280" />
@@ -92,7 +99,6 @@ class UserDashboard extends Component {
             </div>
           </div>
         </div>
-
 
         <div className="col-sm-12 col-md-6 col-lg-3">
 
@@ -154,6 +160,7 @@ class UserDashboard extends Component {
 
 
         </div>
+
       </div>
 
     </div>

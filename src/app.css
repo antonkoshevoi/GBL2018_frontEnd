@@ -976,3 +976,37 @@ address.signUpOptional {
 .m-portlet--info .m-portlet__nav-item .fa {
   color: #fff;
 }
+
+.appDownloadDrawer {
+  padding: 40px 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.appDownloadDrawer::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  transform: scale(1.1);
+  width: 100%;
+  filter: blur(3px) brightness(49%);
+  z-index: -1;
+  height: 100%;
+  background: url("https://joanneroyerphd.com/wp-content/uploads/2016/02/phone.jpg") no-repeat center;
+  background-size: cover;
+}
+
+.appDownloadDrawer .actionButtons button{
+  margin: 5px;
+}
+
+.appDownloadDrawer .actionButtons button .fa {
+  font-size: 2rem;
+  vertical-align: middle;
+}
+
+.appDownloadDrawer .drawerTitle  {
+  color: #fff;
+  text-shadow: 0 2px 10px black;
+}

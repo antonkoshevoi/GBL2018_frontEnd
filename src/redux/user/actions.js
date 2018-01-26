@@ -17,7 +17,7 @@ export function getUser(params = {}) {
   };
 }
 
-export function getUserSucess (result) {
+export function getUserSuccess (result) {
   return {
     type: GET_USER_SUCCESS,
     result

@@ -6192,10 +6192,10 @@ a.text-dark:focus, a.text-dark:hover {
   border-color: #589ee4; }
   .btn-brand:hover {
     color: #fff;
-    background-color: #564ec0;
-    border-color: #4d44bd; }
+    background-color: #32587d;
+    border-color: #32587d; }
   .btn-brand:focus, .btn-brand.focus {
-    box-shadow: 0 0 0 0.2rem rgba(113, 106, 202, 0.5); }
+    box-shadow: 0 0 0 0.2rem rgba(87, 145, 202, 0.5); }
   .btn-brand.disabled, .btn-brand:disabled {
     background-color: #589ee4;
     border-color: #589ee4; }

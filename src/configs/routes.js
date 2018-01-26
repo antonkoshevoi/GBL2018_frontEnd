@@ -30,6 +30,7 @@ import Store from "../containers/pages/store/Store";
 import Details from "../containers/pages/store/Details";
 import Products from "../containers/pages/store/Products";
 import ShoppingCart from "../containers/pages/store/ShoppingCart/ShoppingCart";
+import Messages from '../containers/messages/Messages';
 import Checkout from "../containers/pages/store/checkout/Checkout";
 
 export default () => (
@@ -55,17 +56,26 @@ export default () => (
 
       <AuthenticatedRoute exact layout={MainLayout} path='/courses' component={Courses}/>
 
-      <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/schools' component={SchoolReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
 
-      <AuthenticatedRoute exact layout={MainLayout} path='/store' name='Store' component={Store}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/courses' name='Store' component={Store}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/books' name='Store' component={Store}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/teaching_aids' name='Store' component={Store}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/stationary' name='Store' component={Store}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/student_rewards' name='Store' component={Store}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/tutoring_services' name='Store' component={Store}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/bundles' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:type' name='Store' component={Products}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/shopping/cart' name='ShoppingCart' component={ShoppingCart}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/shopping/checkout' name='Checkout' component={Checkout}/>
+
+      {/*User*/}
+      <AuthenticatedRoute exact layout={MainLayout} path='/messages' name='Messages' component={Messages} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />
 
       <Route component={NotFoundPage} />
     </Switch>

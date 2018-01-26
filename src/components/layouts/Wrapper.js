@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import SubHeader from "./SubHeader";
+import SubHeader from "../../containers/ui/SubHeader";
 import {withRouter} from "react-router-dom"
 import Loader from "./Loader";
 

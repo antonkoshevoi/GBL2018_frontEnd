@@ -4,7 +4,9 @@ import createSagaMiddleware from 'redux-saga';
 
 import reducers from './reducers';
 import rootSaga from './sagas';
-import clientMiddleware from "./middlewares/clientMiddleware";
+import clientMiddleware from './middlewares/clientMiddleware';
+import notificationsMiddleware from './notifications/middleware';
+import messagesMiddleware from './messages/middleware';
 
 export default (history, apiClient) => {
   const sagaMiddleware = createSagaMiddleware();
@@ -15,6 +17,8 @@ export default (history, apiClient) => {
     }),
     applyMiddleware(
       clientMiddleware(apiClient),
+      notificationsMiddleware(),
+      messagesMiddleware(),
       routerMiddleware(history),
       sagaMiddleware
     )
