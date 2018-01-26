@@ -14,12 +14,8 @@ import {CircularProgress} from "material-ui";
 class InfoSection extends Component {
 
     componentDidMount () {
-
         const  studentId  = this.props.match.params.id;
-        console.log(studentId);
         this.props.getSchoolReportStudent(studentId);
-
-
     }
 
     _renderCourseTable(courses) {
@@ -45,7 +41,6 @@ class InfoSection extends Component {
 
         const defaultAvatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
 
-        console.log(getStudentForReportRequest.get('loading'));
         return (
             <div className="row">
                 <div className="col-md-3">
@@ -125,20 +120,21 @@ class InfoSection extends Component {
                         </div>
                         <div className="col-lg-6 m--margin-bottom-20">
                             <Card title="My Courses" icon="fa fa-sitemap">
-                                <div className="table-responsive">
-                                <table className="table m-table  m-table--head-separator-primary m-middle-table">
-                                    <thead>
-                                    <tr>
-                                        <th>Courses</th>
-                                        <th>Progress</th>
-                                        <th>Performance</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {this._renderCourseTable(data.courses)}
-                                    </tbody>
-                                </table>
-                                </div>
+                                <h1>No Info...</h1>
+                                {/*<div className="table-responsive">*/}
+                                {/*<table className="table m-table  m-table--head-separator-primary m-middle-table">*/}
+                                    {/*<thead>*/}
+                                    {/*<tr>*/}
+                                        {/*<th>Courses</th>*/}
+                                        {/*<th>Progress</th>*/}
+                                        {/*<th>Performance</th>*/}
+                                    {/*</tr>*/}
+                                    {/*</thead>*/}
+                                    {/*<tbody>*/}
+                                    {/*{this._renderCourseTable(data.courses)}*/}
+                                    {/*</tbody>*/}
+                                {/*</table>*/}
+                                {/*</div>*/}
                             </Card>
                         </div>
                         <div className="col-md-12 m--margin-bottom-10">
@@ -158,19 +154,9 @@ class InfoSection extends Component {
 InfoSection = connect(
     (state) => ({
         getStudentForReportRequest: selectGetStudentForReportRequest(state),
-        // school: selectSchoolRequest(state),
-        // schoolStudents: selectGetUserSchoolStudentsRequest(state),
-        // schoolHomerooms: selectGetUserSchoolHomeroomsRequest(state),
-        // schoolTeachers: selectGetUserSchoolTeachersRequest(state),
-        // schoolAdmins: selectGetUserSchoolAdminsRequestRequest(state)
     }),
     (dispatch) => ({
         getSchoolReportStudent: (id) => { dispatch(getSchoolReportStudent(id)) },
-        // getUserSchoolAdmins: () => { dispatch(getUserSchoolAdmins(1)) },
-        // getUserSchoolTeachers: () => { dispatch(getUserSchoolTeachers(1)) },
-        // getUserSchoolStudents: () => { dispatch(getUserSchoolStudents(1)) },
-        // getUserSchoolHomerooms: () => { dispatch(getUserSchoolHomerooms(1)) },
-        // getUserSchool: () => { dispatch(getUserSchool(1)) }
     })
 )(InfoSection);
 
