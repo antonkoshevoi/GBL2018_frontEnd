@@ -83,15 +83,13 @@ class SubHeader extends Component {
 
     _closeHeaderMenu = event => {
         this.setState({ anchorEl: null });
-        console.log(this.state.anchorEl);
     };
 
 
 
   render() {
-        const {location, cartRecords} = this.props;
+      const {location, cartRecords, addToCartRequest, cartRecordsRequest} = this.props;
 
-      console.log(cartRecords);
 
       const paths = location.pathname.split('/')
 

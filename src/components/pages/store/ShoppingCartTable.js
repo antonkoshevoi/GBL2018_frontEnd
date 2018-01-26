@@ -15,7 +15,7 @@ class ShoppingCartTable extends Component {
     }
 
     componentWillMount(){
-        this.setState({total:this._getTotalSum(this.state.data)})
+        this.setState({total:this._getTotalSum(this.state.data)});
     }
 
     _removeItem(idx){
@@ -25,31 +25,41 @@ class ShoppingCartTable extends Component {
 
     _changeItemCount(idx,e) {
         let data = this.state.data;
-        data.get(idx).get('item').set('count',e.target.value);
+        if (e.target.value < 1) return;
+        data[idx]['count'] = e.target.value;
+
+
         this.setState({data});
-        this.setState({total:this.state.total + Number(data.get(idx).get('item').get('price'))});
+        this.setState({total:this._getTotalSum(data)});
     }
+
+
 
     _getTotalSum(products) {
         let total = 0
-        // for(var i=0;i<products.size;i++)
-        // {
-        //     if(isNaN(products[i].price)){
-        //         continue;
-        //     }
-        //     total += (Number(products[i].price) * Number(products[i].count));
-        // }
-
-        products.map(function (item,i) {
-            total += (Number(item.get('item').get('price')) * Number(item.get('item').get('count')));
-        })
-
+        for(var i=0;i<products.length;i++)
+        {
+            if(isNaN(products[i].storeItem.price)){
+                continue;
+            }
+            total += (Number(products[i].storeItem.price) * Number(products[i].count));
+        }
         return total;
     }
 
-    _renderRows(rows) {
 
+    _getEmptyMessage(){
+        return (
+           <div className="m--padding-20">
+               <h2 className="text-center m--padding-10">Shopping Cart Is Empty</h2>
+           </div>
+        )
+    }
+
+
+    _renderRows(rows) {
         const _self = this;
+
 
         return rows.map(function (item, i) {
 
@@ -59,24 +69,24 @@ class ShoppingCartTable extends Component {
                     <Td width='400px'>
                         <div className="productInfo">
                             <div className="productImg" >
-                                <img src={item.get('item').get('thumbnail')} className="img-responsive" alt=""/>
+                                <img src={item.storeItem.thumbnail} className="img-responsive" alt=""/>
                             </div>
                             <div className="productContent">
-                                <h4>{item.get('item').get('title')}</h4>
-                                <span>{item.get('item').get('description').substr(0,23) + '...'}</span>
+                                <h4>{item.storeItem.title}</h4>
+                                <span>{item.storeItem.description.substr(0,23) + '...'}</span>
                             </div>
                         </div>
                     </Td>
                     <Td width='172px'>
-                        <input type="number" onChange={(e) => {_self._changeItemCount(i,e)}} value={item.get('item').get('count')} className="form-control productQuantity m-input m-input--solid"  style={{height:"50px"}}/>
+                        <input type="number" onChange={(e) => {_self._changeItemCount(i,e)}} value={item.count} className="form-control productQuantity m-input m-input--solid"  style={{height:"50px"}}/>
                     </Td>
                     <Td width='132px'>
                         <span className="productPrice g-blue">
-                            {parseInt(item.get('item').get('price')).toFixed(2) + "$"}
+                            {parseInt(item.storeItem.price).toFixed(2) + "$"}
                         </span>
                     </Td>
                     <Td width="50px">
-                        <button onClick={() => {_self._removeItem(i)}} className="btn btn-danger m-btn m-btn--icon btn-lg m-btn--icon-only m-btn--pill" >
+                        <button onClick={() => {_self.props.onDelete(item.storeItem.id)}} className="btn btn-danger m-btn m-btn--icon btn-lg m-btn--icon-only m-btn--pill" >
                             <i className="fa fa-trash"></i>
                         </button>
                     </Td>
@@ -90,7 +100,7 @@ class ShoppingCartTable extends Component {
             <Row >
                 <Td first={true} width='20px'></Td>
                 <Td width='350px'>
-                    <h3 className="text-right">{this.state.data.size + ' Items'}</h3>
+                    <h3 className="text-right">{this.state.data.length + ' Items'}</h3>
                 </Td>
                 <Td width='180px'>
                     <span>Total</span><br/>
@@ -107,24 +117,28 @@ class ShoppingCartTable extends Component {
     }
 
     render() {
-        const {data} = this.state;
+        const {data} = this.props;
+
         return (
             <div className="shoppingCartTable">
-                <Table>
-                    <Thead>
-                    <HeadRow>
-                        <Th first={true} width='20px'>#</Th>
-                        <Th name='product'  width='400px'>Product</Th>
-                        <Th name='quantity' width='172px'>Quantity</Th>
-                        <Th name='price' width='100px'>Price</Th>
-                        <Th name='actions' width='50px'>Delete</Th>
-                    </HeadRow>
-                    </Thead>
-                    <Tbody>
+                {data.length > 0 ?
+                    <Table>
+                        <Thead>
+                        <HeadRow>
+                            <Th first={true} width='20px'>#</Th>
+                            <Th name='product' width='400px'>Product</Th>
+                            <Th name='quantity' width='172px'>Quantity</Th>
+                            <Th name='price' width='100px'>Price</Th>
+                            <Th name='actions' width='50px'>Delete</Th>
+                        </HeadRow>
+                        </Thead>
+                        <Tbody>
                         {this._renderRows(data)}
                         {this._renderTotalRow()}
-                    </Tbody>
-                </Table>
+                        </Tbody>
+                    </Table> :
+                    this._getEmptyMessage()
+                }
             </div>
         );
     }

@@ -4,10 +4,15 @@ import {translate} from 'react-i18next';
 import ShoppingCartTable from "../../../../components/pages/store/ShoppingCartTable";
 
 import {
-     selectCartRecords, selectGetCartRecordsRequest,
+    deleteFromCartRequest,
+    selectCartRecords, selectGetCartRecordsRequest,
 } from "../../../../redux/store/selectors";
-import {addToCarts, getCartRecords, getRecords, getSingleRecord} from "../../../../redux/store/actions";
+import {
+    addToCarts, deleteCartRecord, getCartRecords, getRecords,
+    getSingleRecord
+} from "../../../../redux/store/actions";
 import {withRouter} from "react-router-dom";
+import Loader from "../../../../components/layouts/Loader";
 
 class ShoppingCart extends Component {
 
@@ -20,15 +25,22 @@ class ShoppingCart extends Component {
         this.props.getRecords();
     }
 
+
+    _deleteRecordFromCart(id) {
+        this.props.deleteCartRecord(id);
+    }
+
     render() {
 
-        const {records, cartRecordsRequest} = this.props;
+        const {records, cartRecordsRequest,deleteFromCartRequest} = this.props;
         const loading = cartRecordsRequest.get('loading');
         const success = cartRecordsRequest.get('success');
+        console.log(records,deleteFromCartRequest);
 
         return (
             <div>
-
+                {loading &&
+                <Loader/>}
               <div className="row">
                   <div className="col-xl-9 m-auto">
                       <div className="m-portlet m-portlet--full-height ">
@@ -44,7 +56,7 @@ class ShoppingCart extends Component {
                           </div>
                           <div className="m-portlet__body">
                               {success &&
-                             <ShoppingCartTable data={records}/> }
+                             <ShoppingCartTable onDelete={(id) => {this._deleteRecordFromCart (id)}} data={records.toJS()}/> }
                           </div>
                       </div>
                   </div>
@@ -58,10 +70,12 @@ class ShoppingCart extends Component {
 ShoppingCart = connect(
     (state) => ({
         cartRecordsRequest: selectGetCartRecordsRequest(state),
+        deleteFromCartRequest: deleteFromCartRequest(state),
         records: selectCartRecords(state),
     }),
     (dispatch) => ({
         getRecords: () => { dispatch(getCartRecords()) },
+        deleteCartRecord: (id) => { dispatch(deleteCartRecord(id)) },
     })
 )(ShoppingCart);
 

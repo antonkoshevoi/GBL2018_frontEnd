@@ -11,40 +11,57 @@ import {
 } from "../../../redux/store/selectors";
 import {withRouter} from "react-router-dom";
 import {getCartRecords, getRecords, getSingleRecord} from "../../../redux/store/actions";
+import Loader from "../../../components/layouts/Loader";
 
 
 class Store extends Component {
+
+
+    state = {
+        isFiltered:false
+    }
 
     componentDidMount(){
         this._getRecords();
     }
 
 
-    _getRecords() {
-        this.props.getRecords();
+    _getRecords(params) {
+        this.props.getRecords(params);
+    }
+
+    _setFilters(params) {
+        console.log(params);
+        this.setState({isFiltered:true});
+        this._getRecords(params)
     }
 
     render() {
 
-        const {records, getSingleRecord} = this.props;
+        const {records, getRecordsRequest} = this.props;
+        const loading = getRecordsRequest.get('loading');
+        const success = getRecordsRequest.get('success');
 
         console.log(records);
         return (
             <div className="animated fadeInLeft">
+                {loading &&
+                <Loader/>}
                 <div className="m-portlet store-wrapper">
                     <div className="m-portlet__head">
                         <div className="m-portlet__head-caption">
 
-                               <Filter/>
+                               <Filter onChange={(fields) => {this._setFilters(fields)}}/>
 
                         </div>
                     </div>
-
+                    {success &&
                     <div id="store-body">
-                        <ProductsSection type="newest" title="Newest" products={records}/>
-                        <ProductsSection type="popular" title="Most Popular" products={records}/>
-                        <ProductsSection type="top" title="Top Rating" products={records}/>
+                        <ProductsSection type="newest" title="Newest" products={records.slice(0, 9)}/>
+                        <ProductsSection type="popular" title="Most Popular" products={records.slice(0, 9)}/>
+                        <ProductsSection type="top" title="Top Rating" products={records.slice(0, 9)}/>
                     </div>
+                    }
                 </div>
             </div>
         );
