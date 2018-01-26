@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { debounce } from '../../helpers/utils';
-import { Input } from 'material-ui';
+import { debounce } from '../../../helpers/utils';
+import MetronicInput from './MetronicInput';
 
-class SearchInput extends Component {
+class MetronicSearchInput extends Component {
 
   static propTypes = {
     onChange: PropTypes.func.isRequired
@@ -25,7 +25,7 @@ class SearchInput extends Component {
     const { onChange, ...rest } = this.props;
 
     return (
-      <Input
+      <MetronicInput
         {...rest}
         value={this.state.value}
         onChange={(e) => { this._onChange(e.target.value) }}/>
@@ -33,4 +33,4 @@ class SearchInput extends Component {
   }
 }
 
-export default SearchInput;
+export default MetronicSearchInput;
