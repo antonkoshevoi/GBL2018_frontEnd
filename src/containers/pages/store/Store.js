@@ -42,7 +42,6 @@ class Store extends Component {
         const loading = getRecordsRequest.get('loading');
         const success = getRecordsRequest.get('success');
 
-        console.log(records);
         return (
             <div className="animated fadeInLeft">
                 {loading &&
