@@ -3,10 +3,29 @@ import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import ShoppingCartTable from "../../../../components/pages/store/ShoppingCartTable";
 
-import products from '../../../../data/json/products.json'
+import {
+     selectCartRecords, selectGetCartRecordsRequest,
+} from "../../../../redux/store/selectors";
+import {addToCarts, getCartRecords, getRecords, getSingleRecord} from "../../../../redux/store/actions";
+import {withRouter} from "react-router-dom";
 
 class ShoppingCart extends Component {
+
+    componentDidMount() {
+        this._getRecords();
+    }
+
+
+    _getRecords() {
+        this.props.getRecords();
+    }
+
     render() {
+
+        const {records, cartRecordsRequest} = this.props;
+        const loading = cartRecordsRequest.get('loading');
+        const success = cartRecordsRequest.get('success');
+
         return (
             <div>
 
@@ -24,7 +43,8 @@ class ShoppingCart extends Component {
 
                           </div>
                           <div className="m-portlet__body">
-                             <ShoppingCartTable data={products}/>
+                              {success &&
+                             <ShoppingCartTable data={records}/> }
                           </div>
                       </div>
                   </div>
@@ -35,11 +55,15 @@ class ShoppingCart extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {};
-}
+ShoppingCart = connect(
+    (state) => ({
+        cartRecordsRequest: selectGetCartRecordsRequest(state),
+        records: selectCartRecords(state),
+    }),
+    (dispatch) => ({
+        getRecords: () => { dispatch(getCartRecords()) },
+    })
+)(ShoppingCart);
 
-export default translate("ShoppingCart")(connect(
-    mapStateToProps,
-)(ShoppingCart));
 
+export default withRouter(translate("ShoppingCart")(ShoppingCart));

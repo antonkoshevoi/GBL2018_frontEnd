@@ -18,23 +18,7 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errorResponse: null,
-    record: {}
-  },
-  createRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorMessage: null,
-    errorCode: null,
-    errors: {}
-  },
-  updateRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorMessage: null,
-    errorCode: null,
-    errors: {}
+    singleRecord: {}
   },
   getCartRecordsRequest: {
       loading: false,
@@ -56,7 +40,7 @@ const initialState = Immutable.fromJS({
   },
     cartRecords: [],
     records: [],
-    singleRecord: [],
+    singleRecord: {},
 });
 
 export default function reducer (state = initialState, action) {
@@ -93,15 +77,15 @@ export default function reducer (state = initialState, action) {
           .set('loading', true)
           .set('success', false)
           .set('fail', false)
-          .remove('record')
+          .remove('singleRecord')
         );
     case GET_SINGLE_RECORD_SUCCESS:
-      return state
+        console.log(4944494944994);
+        return state
         .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
           .set('success', true)
-          .set('loading', false)
-          .set('record', Immutable.fromJS(action.result.data))
-        );
+          .set('loading', false).set('singleRecord', Immutable.fromJS(action.result.data))
+        ).set('singleRecord', Immutable.fromJS(action.result.data));
     case GET_SINGLE_RECORD_FAIL:
       return state
         .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
@@ -123,11 +107,12 @@ export default function reducer (state = initialState, action) {
                   .remove('fail')
               ).set('cartRecord', Immutable.List());
       case GET_CART_RECORDS_SUCCESS:
+          console.log(Immutable.fromJS(action.result.data));
           return state
               .set('getCartRecordsRequest', state.get('getCartRecordsRequest')
                   .set('success', true)
                   .remove('loading')
-              ).set('cartRecord', Immutable.fromJS(action.result.data));
+              ).set('cartRecords', Immutable.fromJS(action.result.data));
       case GET_CART_RECORDS_FAIL:
           return state
               .set('getCartRecordsRequest', state.get('getCartRecordsRequest')

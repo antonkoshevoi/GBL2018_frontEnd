@@ -24,7 +24,7 @@ export const ADD_TO_CART_FAIL = '[Store] ADD_TO_CART_FAIL';
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
-    promise: (apiClient) => apiClient.get('store', params)
+    promise: (apiClient) => apiClient.get('store/items', params)
   };
 }
 
@@ -32,9 +32,9 @@ export function getRecords(params = {}) {
  * Single
  */
 export function getSingleRecord(id, params = {}) {
-  return {
+    return {
     types: [GET_SINGLE_RECORD, GET_SINGLE_RECORD_SUCCESS, GET_SINGLE_RECORD_FAIL],
-    promise: (apiClient) => apiClient.get(`store/product/${id}`, params)
+    promise: (apiClient) => apiClient.get(`store/items/${id}`, params)
   };
 }
 
@@ -47,7 +47,7 @@ export function getSingleRecord(id, params = {}) {
 export function getCartRecords(params = {}) {
     return {
         types: [GET_CART_RECORDS, GET_CART_RECORDS_SUCCESS, GET_CART_RECORDS_FAIL],
-        promise: (apiClient) => apiClient.get('store/cart', params)
+        promise: (apiClient) => apiClient.get('store/shopping-cart', params)
     };
 }
 
@@ -59,7 +59,7 @@ export function getCartRecords(params = {}) {
 export function deleteCartRecord(id,params) {
     return {
         types: [DELETE_CART_RECORD, DELETE_CART_RECORD_SUCCESS, DELETE_CART_RECORD_FAIL],
-        promise: (apiClient) => apiClient.get(`store/cart/${id}`, params)
+        promise: (apiClient) => apiClient.post(`store/cart/${id}`, params)
     };
 }
 
@@ -72,7 +72,7 @@ export function deleteCartRecord(id,params) {
 export function addToCarts(id,params = {}) {
     return {
         types: [ADD_TO_CART, ADD_TO_CART_SUCCESS, ADD_TO_CART_FAIL],
-        promise: (apiClient) => apiClient.get('store/cart/add', params)
+        promise: (apiClient) => apiClient.post(`store/add-to-cart/${id}`, params)
     };
 }
 

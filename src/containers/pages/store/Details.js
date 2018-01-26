@@ -10,18 +10,31 @@ import Filter from "../../../components/pages/store/Filter";
 import Sidebar from "../../../components/pages/store/Sidebar";
 
 
-import {addToCarts, getCartRecords, getSingleRecord} from "../../../redux/store/actions";
+import {addToCarts,  getRecords, getSingleRecord} from "../../../redux/store/actions";
 import {
-    selectAddToCartRequest, selectGetSingleRecord,
-    selectGetSingleRecordRequest
+    selectAddToCartRequest, selectGetRecordsRequest, selectGetSingleRecord,
+    selectGetSingleRecordRequest, selectRecords
 } from "../../../redux/store/selectors";
 
 class Details extends Component {
+
+    componentDidMount() {
+        const recordId = this.props.match.params.id;
+        this._getRecord(recordId);
+        this._getRecords();
+    }
 
     _getProductById(id) {
         return products.filter(item =>  item.id == id)[0]
     }
 
+    _getRecord(id,params) {
+        this.props.getSingleRecord(id)
+    }
+
+    _getRecords() {
+        this.props.getRecords();
+    }
 
     _addToCart(id) {
         this.props.addToCarts(id)
@@ -30,9 +43,9 @@ class Details extends Component {
     render() {
         const productID = this.props.match.params.id;
 
-        const {record, addToCartRequest} = this.props;
-
-        console.log(addToCartRequest.get("fail"));
+        const {record, records, addToCartRequest ,getSingleRecordRequest} = this.props;
+        const loadingSingle = getSingleRecordRequest.get('loading');
+        const successSingle = getSingleRecordRequest.get('success');
 
         return (
             <div className="m-portlet store-wrapper fadeInLeft animated">
@@ -45,12 +58,14 @@ class Details extends Component {
                 <div className="row">
                     <div className="col-lg-8">
                         <div className="m-portlet">
-                            <DetailsSection data={this._getProductById(productID)} buyClick={(id) => {this._addToCart(id)}}/>
+                            {successSingle &&
+                            <DetailsSection data={record} buyClick={(id) => {this._addToCart(id)}}/>}
                             <CommentsSection/>
                         </div>
                     </div>
                     <div className="col-lg-4">
-                        <Sidebar data={products} title="Recent" dataType="recent"/>
+                        {successSingle &&
+                        <Sidebar data={records} title="Recent" dataType="recent"/>}
                     </div>
                 </div>
             </div>
@@ -63,12 +78,14 @@ class Details extends Component {
 
 Details = connect(
     (state) => ({
-        getSingleRecord: selectGetSingleRecordRequest(state),
+        getSingleRecordRequest: selectGetSingleRecordRequest(state),
         addToCartRequest: selectAddToCartRequest(state),
+        getRecordsRequest: selectGetRecordsRequest(state),
+        records: selectRecords(state),
         record: selectGetSingleRecord(state),
     }),
     (dispatch) => ({
-        getRecords: (params = {type:'recent'}) => { dispatch(getCartRecords(params)) },
+        getRecords: (params = {type:'recent'}) => { dispatch(getRecords(params)) },
         getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
         addToCarts: (id, params = {}) => { dispatch(addToCarts(id, params)) },
     })

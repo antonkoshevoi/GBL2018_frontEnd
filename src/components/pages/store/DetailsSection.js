@@ -5,8 +5,10 @@ import StarRating from "../../ui/StarRating";
 class DetailsSection extends Component {
     render() {
 
-        const {id,image,title,desc,price,score,type,video,total_vote} = this.props.data;
-
+        const data = this.props.data;
+        console.log(data.get('price'));
+        const category = 'No Info...';
+        const price = data.get('price');
 
         return (
             <div id="product-details">
@@ -14,7 +16,7 @@ class DetailsSection extends Component {
                     <div className="row">
                         <div className="col-md-4">
                             <div className="productImage">
-                                <img src={image} className="full-width" alt="product"/>
+                                <img src={data.get('thumbnail')} className="full-width" alt="product"/>
                             </div>
                         </div>
                         <div className="col-md-8">
@@ -22,17 +24,17 @@ class DetailsSection extends Component {
                                 <div className="productInfo full-width m--padding-20">
                                     <div className="row">
                                         <div className="col-md-12">
-                                            <h4 className="productTitle">{title}</h4>
+                                            <h4 className="productTitle">{data.get('title')}</h4>
                                         </div>
                                         <div className="col-md-12">
                                             <div className="row">
                                                 <div className="col-md-7">
-                                                    <p className="g-red productType">{type}</p>
+                                                    <p className="g-red productType">{category}</p>
                                                 </div>
                                                 <div className="col-md-5 text-right">
                                                     <div className="align-text-bottom">
-                                                        <StarRating score={score}/>
-                                                        <span className="m--margin-left-5">{total_vote} <i className="fa fa-user"></i></span>
+                                                        <StarRating score={data.get('score')}/>
+                                                        <span className="m--margin-left-5">{data.get('count')} <i className="fa fa-user"></i></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -41,10 +43,10 @@ class DetailsSection extends Component {
                                 </div>
                                 <div className="actionsBtn justify-content-between full-width align-items-end d-flex m--padding-right-20 align-self-end">
                                     <div className="m-widget25 ">
-                                        <span className="m-widget25__price m--font-brand">{parseInt(price).toFixed(2) }</span>
+                                        <span className="m-widget25__price m--font-brand">{price }</span>
                                         <span className="m-widget25__desc">$</span>
                                     </div>
-                                    <button className="btn m-btn btn-danger m-btn--icon" onClick={() => {this.props.buyClick(id)}}>
+                                    <button className="btn m-btn btn-danger m-btn--icon" onClick={() => {this.props.buyClick(data.get('id'))}}>
                                         <span>
                                             <i className="fa fa-shopping-basket"></i>
                                             <span>Add To Cart</span>
@@ -56,13 +58,13 @@ class DetailsSection extends Component {
                         </div>
 
                         <div className="col-md-12 m--margin-top-15">
-                            <iframe className="full-width mainVideo" width={640} height={360} src={video}></iframe>
+                            <iframe className="full-width mainVideo" width={640} height={360} src={data.get('videoLink')}></iframe>
                         </div>
                     </div>
                 </div>
                 <div className='m-separator m-separator--dashed m-separator--'></div>
                 <div className="DescBlock m--padding-20">
-                    <p>{desc}</p>
+                    <p>{data.get('description')}</p>
                 </div>
                 <div className='m-separator m-separator--dashed'></div>
             </div>
