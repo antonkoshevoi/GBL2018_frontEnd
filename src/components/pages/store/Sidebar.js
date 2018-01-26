@@ -12,7 +12,7 @@ class Sidebar extends Component {
     }
 
     render() {
-        const {title,data,dataType} = this.props
+        const {title,data,dataType} = this.props;
         return (
             <div>
                 <div className="row">
@@ -32,7 +32,6 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-    data:PropTypes.array.isRequired,
     title:PropTypes.string,
 };
 
