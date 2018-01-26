@@ -54,8 +54,10 @@ export const buildMessagesQueue = (thread) => {
     prevMessage = message;
   });
 
-  prevMessage.body = accumulatedText.reverse().join('\n\n');
-  messages.push(prevMessage);
+  if (thread.messages.length > 0) {
+    prevMessage.body = accumulatedText.reverse ().join ('\n\n');
+    messages.push(prevMessage);
+  }
 
   thread.messages = messages.map(message => {
     if (message.type === 'in') {
@@ -89,7 +91,7 @@ export const addOutgoingMessageToQuery = (thread, messageBody) => {
 export const addIncomingMessageToQuery = (thread, message) => {
   let lastMessage = thread.messages[0];
 
-  if (lastMessage.type === 'in' && lastMessage.userId === message.userId) {
+  if (lastMessage && lastMessage.type === 'in' && lastMessage.userId === message.userId) {
     lastMessage.body += '\n\n' + message.body;
   } else {
     thread.messages.unshift({

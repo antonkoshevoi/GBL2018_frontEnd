@@ -1,4 +1,4 @@
-import { NEW_MESSAGE_RECEIVED, SUBSCRIBE, SUBSCRIBE_FAIL } from './actions';
+import { NEW_MESSAGE_RECEIVED, NEW_THREAD_CREATED, SUBSCRIBE, SUBSCRIBE_FAIL } from './actions';
 import LiveService from '../../services/LiveService';
 
 export default function messagesMiddleware() {
@@ -17,6 +17,10 @@ export default function messagesMiddleware() {
 
       LiveService.messages(userId, message => {
         dispatch({type: NEW_MESSAGE_RECEIVED, message})
+      });
+
+      LiveService.threads(userId, thread => {
+        dispatch({type: NEW_THREAD_CREATED, thread})
       });
     };
   };

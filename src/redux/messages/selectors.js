@@ -47,3 +47,11 @@ export const selectGetAvailableUsersRequest = createSelector(
   selectMessagesDomain,
   (subState) => subState.get('getAvailableUsersRequest')
 );
+
+/**
+ * new thread
+ */
+export const selectCreateNewThreadRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('createThreadRequest')
+);
