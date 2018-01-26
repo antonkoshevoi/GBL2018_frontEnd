@@ -5,7 +5,8 @@ import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 import {Menu, MenuItem} from "material-ui";
 import {translate} from "react-i18next";
 import {connect} from "react-redux";
-import {selectAddToCartRequest, selectCartRecords} from "../../redux/store/selectors";
+import {selectAddToCartRequest, selectCartRecords, selectGetCartRecordsRequest} from "../../redux/store/selectors";
+import {getCartRecords} from "../../redux/store/actions";
 
 class SubHeader extends Component {
 
@@ -18,6 +19,14 @@ class SubHeader extends Component {
 
     }
 
+    componentDidMount() {
+        this._getCartRecords();
+    }
+
+
+    _getCartRecords() {
+        this.props.getCartRecords();
+    }
 
     _renderBreadcrumbs(paths) {
         return paths.map(function (item,i) {
@@ -80,9 +89,11 @@ class SubHeader extends Component {
 
 
   render() {
-        const {location, cartRecords} = this.props
+        const {location, cartRecords} = this.props;
 
-        const paths = location.pathname.split('/')
+      console.log(cartRecords);
+
+      const paths = location.pathname.split('/')
 
       return (
             <div className="m-subheader">
@@ -155,10 +166,11 @@ SubHeader.propTypes = {};
 SubHeader = connect(
     (state) => ({
         addToCartRequest: selectAddToCartRequest(state),
-        cartRecords:selectCartRecords(state)
+        cartRecordsRequest: selectGetCartRecordsRequest(state),
+        cartRecords: selectCartRecords(state),
     }),
     (dispatch) => ({
-
+        getCartRecords: () => { dispatch(getCartRecords()) },
     })
 )(SubHeader);
 

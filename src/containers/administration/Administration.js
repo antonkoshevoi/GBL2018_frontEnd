@@ -141,7 +141,7 @@ class Administration extends Component {
     const nextDeleteSuccess = nextProps.getDeleteRequest.get('success');
 
     if(!deleteSuccess && nextDeleteSuccess) {
-      this.props.getRecords();
+      this._getRecords();
     }
   }
 

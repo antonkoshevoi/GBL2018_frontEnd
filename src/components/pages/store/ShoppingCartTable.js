@@ -25,20 +25,24 @@ class ShoppingCartTable extends Component {
 
     _changeItemCount(idx,e) {
         let data = this.state.data;
-        data[idx].count = e.target.value;
-        this.setState({data})
-        this.setState({total:this.state.total + Number(data[idx].price)})
+        data.get(idx).get('item').set('count',e.target.value);
+        this.setState({data});
+        this.setState({total:this.state.total + Number(data.get(idx).get('item').get('price'))});
     }
 
     _getTotalSum(products) {
         let total = 0
-        for(var i=0;i<products.length;i++)
-        {
-            if(isNaN(products[i].price)){
-                continue;
-            }
-            total += (Number(products[i].price) * Number(products[i].count));
-        }
+        // for(var i=0;i<products.size;i++)
+        // {
+        //     if(isNaN(products[i].price)){
+        //         continue;
+        //     }
+        //     total += (Number(products[i].price) * Number(products[i].count));
+        // }
+
+        products.map(function (item,i) {
+            total += (Number(item.get('item').get('price')) * Number(item.get('item').get('count')));
+        })
 
         return total;
     }
@@ -55,20 +59,20 @@ class ShoppingCartTable extends Component {
                     <Td width='400px'>
                         <div className="productInfo">
                             <div className="productImg" >
-                                <img src={item.image} className="img-responsive" alt=""/>
+                                <img src={item.get('item').get('thumbnail')} className="img-responsive" alt=""/>
                             </div>
                             <div className="productContent">
-                                <h4>{item.title}</h4>
-                                <span>{item.desc.substr(0,23) + '...'}</span>
+                                <h4>{item.get('item').get('title')}</h4>
+                                <span>{item.get('item').get('description').substr(0,23) + '...'}</span>
                             </div>
                         </div>
                     </Td>
                     <Td width='172px'>
-                        <input type="number" onChange={(e) => {_self._changeItemCount(i,e)}} value={item.count} className="form-control productQuantity m-input m-input--solid"  style={{height:"50px"}}/>
+                        <input type="number" onChange={(e) => {_self._changeItemCount(i,e)}} value={item.get('item').get('count')} className="form-control productQuantity m-input m-input--solid"  style={{height:"50px"}}/>
                     </Td>
                     <Td width='132px'>
                         <span className="productPrice g-blue">
-                            {parseInt(item.price).toFixed(2) + "$"}
+                            {parseInt(item.get('item').get('price')).toFixed(2) + "$"}
                         </span>
                     </Td>
                     <Td width="50px">
@@ -86,7 +90,7 @@ class ShoppingCartTable extends Component {
             <Row >
                 <Td first={true} width='20px'></Td>
                 <Td width='350px'>
-                    <h3 className="text-right">{this.state.data.length + ' Items'}</h3>
+                    <h3 className="text-right">{this.state.data.size + ' Items'}</h3>
                 </Td>
                 <Td width='180px'>
                     <span>Total</span><br/>
@@ -127,7 +131,7 @@ class ShoppingCartTable extends Component {
 }
 
 ShoppingCartTable.propTypes = {
-    data:PropTypes.array.isRequired
+
 };
 
 ShoppingCartTable.defaultProps = {

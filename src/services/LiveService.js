@@ -11,4 +11,9 @@ export default class LiveService {
     const channel = pusher.subscribe(`private-user.messenger.${userId}`);
     channel.bind('message.created', callback);
   }
+
+  static threads (userId, callback) {
+    const channel = pusher.subscribe(`private-user.messenger.${userId}`);
+    channel.bind('thread.created', callback);
+  }
 }

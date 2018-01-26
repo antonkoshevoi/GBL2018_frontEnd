@@ -5,6 +5,7 @@ import '../../styles/messages.css';
 import MessageIn from './MessageIn';
 import MessageOut from './MessageOut';
 import Immutable from "immutable";
+import MessageDivider from './MessageDivider';
 
 class Messenger extends Component {
   static propTypes = {
@@ -28,6 +29,13 @@ class Messenger extends Component {
   _renderMessages () {
     const { thread } = this.props;
     const messages = thread.get('messages');
+    const loading = false;
+
+    if (!loading && messages.size === 0) {
+      return (
+        <MessageDivider>No messages yet</MessageDivider>
+      );
+    }
 
     return messages.reverse().map((message, key) => {
 

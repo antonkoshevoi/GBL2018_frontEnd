@@ -31,7 +31,7 @@ class DeleteButton extends Component {
 
   render() {
     return (
-      <button className='btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => {this._openConfirm()}}>
+      <button className='btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' style={{marginLeft: '5px'}} onClick={() => {this._openConfirm()}}>
         <i className='la la-remove'></i>
         <SweetAlert
           show={this.state.opened}

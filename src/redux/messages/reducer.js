@@ -1,7 +1,8 @@
 import {
   NEW_MESSAGE_RECEIVED, SELECT_THREAD,
   GET_THREADS, GET_THREADS_FAIL, GET_THREADS_SUCCESS, SEND_NEW_MESSAGE, GET_AVAILABLE_USERS,
-  GET_AVAILABLE_USERS_SUCCESS, GET_AVAILABLE_USERS_FAIL
+  GET_AVAILABLE_USERS_SUCCESS, GET_AVAILABLE_USERS_FAIL, CREATE_NEW_THREAD, CREATE_NEW_THREAD_SUCCESS,
+  NEW_THREAD_CREATED
 } from './actions';
 import Immutable from 'immutable';
 import {
@@ -11,6 +12,11 @@ import {
 
 const initialState = Immutable.fromJS({
   getThreadsRequest: {
+    loading: false,
+    success: false,
+    fail: false
+  },
+  createThreadRequest: {
     loading: false,
     success: false,
     fail: false
@@ -62,6 +68,24 @@ export default function reducer (state = initialState, action) {
           .set('fail', true)
         );
     /**
+     * New Thread
+     */
+    case CREATE_NEW_THREAD:
+      return state
+        .set('createThreadRequest', state.get('createThreadRequest')
+          .set('loading', true)
+          .remove('success')
+          .remove('fail')
+        );
+    case CREATE_NEW_THREAD_SUCCESS:
+      return state
+        .set('createThreadRequest', state.get('createThreadRequest')
+          .set('success', true)
+          .remove('loading')
+        ).set('threads', state.get('threads')
+          .set(`${action.result.data.id}`, Immutable.fromJS(action.result.data))
+        );
+    /**
      * New Message
      */
     case SEND_NEW_MESSAGE:
@@ -77,12 +101,23 @@ export default function reducer (state = initialState, action) {
     case NEW_MESSAGE_RECEIVED:
       const threadId = action.message.threadId;
 
+      if (!state.getIn(['threads', `${threadId}`])) {
+        return state;
+      }
+
       return state
         .setIn(['threads', `${threadId}`], Immutable.fromJS(
           addIncomingMessageToQuery(
             state.getIn(['threads', `${threadId}`]).toJS(), action.message
           )
         ));
+    /**
+     * New Thread
+     */
+    case NEW_THREAD_CREATED:
+      return state.set('threads', state.get('threads')
+        .set(`${action.thread.id}`, Immutable.fromJS(action.thread))
+      );
     /**
      *  available users
      */
@@ -94,14 +129,12 @@ export default function reducer (state = initialState, action) {
           .remove('fail')
         ).set('availableUsers', Immutable.List());
     case GET_AVAILABLE_USERS_SUCCESS:
-      console.log(action);
       return state
         .set('getAvailableUsersRequest', state.get('getAvailableUsersRequest')
           .set('success', true)
           .remove('loading')
         ).set('availableUsers', Immutable.fromJS(action.result.data));
     case GET_AVAILABLE_USERS_FAIL:
-      console.log(action);
       return state
         .set('getAvailableUsersRequest', state.get('getAvailableUsersRequest')
           .set('loading', false)

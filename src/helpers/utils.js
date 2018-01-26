@@ -45,6 +45,17 @@ export const yieldErrorToasts = (types) => {
   });
 };
 
+let timer = null;
+export const debounce = (fn, delay) => {
+  return function () {
+    let context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      fn.apply(context, args);
+    }, delay);
+  };
+};
+
 
 /**
  *

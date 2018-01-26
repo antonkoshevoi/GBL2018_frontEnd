@@ -7,10 +7,15 @@ export const GET_THREADS_FAIL = '[Messages] GET_THREADS_FAIL';
 
 export const SELECT_THREAD = '[Messages] SELECT_THREAD';
 
+export const CREATE_NEW_THREAD = '[Messages] CREATE_NEW_THREAD';
+export const CREATE_NEW_THREAD_SUCCESS = '[Messages] CREATE_NEW_THREAD_SUCCESS';
+export const CREATE_NEW_THREAD_FAIL = '[Messages] CREATE_NEW_THREAD_FAIL';
+
 export const SEND_NEW_MESSAGE = '[Messages] SEND_NEW_MESSAGE';
 export const SEND_NEW_MESSAGE_SUCCESS = '[Messages] SEND_NEW_MESSAGE_SUCCESS';
 export const SEND_NEW_MESSAGE_FAIL = '[Messages] SEND_NEW_MESSAGE_FAIL';
 
+export const NEW_THREAD_CREATED = '[Messages] NEW_THREAD_CREATED';
 export const NEW_MESSAGE_RECEIVED = '[Messages] NEW_MESSAGE_RECEIVED';
 
 export const GET_AVAILABLE_USERS = '[Messages] GET_AVAILABLE_USERS';
@@ -31,6 +36,17 @@ export function getThreads(params = {}) {
   return {
     types: [GET_THREADS, GET_THREADS_SUCCESS, GET_THREADS_FAIL],
     promise: (apiClient) => apiClient.get('user/threads', params)
+  };
+}
+
+/**
+ * create thread
+ */
+export function createNewThread(userId, messageBody) {
+  return {
+    userId, messageBody,
+    types: [CREATE_NEW_THREAD, CREATE_NEW_THREAD_SUCCESS, CREATE_NEW_THREAD_FAIL],
+    promise: (apiClient) => apiClient.post(`user/threads/${userId}`, { message: messageBody })
   };
 }
 
