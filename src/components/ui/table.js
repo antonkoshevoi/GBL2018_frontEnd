@@ -88,3 +88,11 @@ export const TablePreloader = ({color,text, ...props}) => {
     </tr>
   );
 };
+
+export const MyPreloader = ({color,text, ...props}) => {
+    return (
+            <div className="table-message">
+                <h2>{text} <CircularProgress color={color}/></h2>
+            </div>
+    );
+};

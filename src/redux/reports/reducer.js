@@ -4,6 +4,7 @@ import {
   GET_USER_SCHOOL_HOMEROOMS, GET_USER_SCHOOL_HOMEROOMS_SUCCESS, GET_USER_SCHOOL_HOMEROOMS_FAIL,
   GET_USER_SCHOOL_TEACHERS, GET_USER_SCHOOL_TEACHERS_SUCCESS, GET_USER_SCHOOL_TEACHERS_FAIL,
   GET_USER_SCHOOL_ADMINS, GET_USER_SCHOOL_ADMINS_SUCCESS, GET_USER_SCHOOL_ADMINS_FAIL,
+  GET_SCHOOL_REPORT_STUDENT, GET_SCHOOL_REPORT_STUDENT_SUCCESS, GET_SCHOOL_REPORT_STUDENT_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -36,7 +37,20 @@ getUserSchoolAdminsRequest: {
     errorResponse: null,
     records: {}
 },
-  school: []
+getStudentForReportRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null,
+    record: {}
+},
+  school: {
+      loading: false,
+      success: false,
+      fail: false,
+      errorResponse: null,
+      records: {}
+  }
 });
 
 export default function reducer (state = initialState, action) {
@@ -46,12 +60,50 @@ export default function reducer (state = initialState, action) {
      */
     case GET_USER_SCHOOL:
         return state
-            .set('school', Immutable.List());
+            .set('school', state.get('school')
+                .set('loading', true)
+                .set('success', false)
+                .set('fail', false)
+                .set('records', Immutable.List())
+            );
     case GET_USER_SCHOOL_SUCCESS:
         return state
-            .set('school', Immutable.fromJS(action.result.data));
+            .set('school', state.get('school')
+                .set('success', true)
+                .set('loading', false)
+                .set('records', Immutable.fromJS(action.result.data))
+            );
     case GET_USER_SCHOOL_FAIL:
-        return state;
+        return state
+            .set('school', state.get('school')
+                .set('loading', false)
+                .set('fail', true)
+            );
+
+  /**
+   * Get School Report Student
+   */
+  case GET_SCHOOL_REPORT_STUDENT:
+      return state
+          .set('getStudentForReportRequest', state.get('getStudentForReportRequest')
+              .set('loading', true)
+              .set('success', false)
+              .set('fail', false)
+              .set('record', Immutable.List())
+          );
+  case GET_SCHOOL_REPORT_STUDENT_SUCCESS:
+      return state
+          .set('getStudentForReportRequest', state.get('getStudentForReportRequest')
+              .set('success', true)
+              .set('loading', false)
+              .set('record', Immutable.fromJS(action.result.data))
+          );
+  case GET_SCHOOL_REPORT_STUDENT_FAIL:
+      return state
+          .set('getStudentForReportRequest', state.get('getStudentForReportRequest')
+              .set('loading', false)
+              .set('fail', true)
+          );
       /**
        * User School Students
        */

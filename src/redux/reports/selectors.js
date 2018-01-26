@@ -8,7 +8,7 @@ export const selectSchoolsDomain = (state) => state.reports;
 /**
  * School
  */
-export const selectSchool = createSelector(
+export const selectSchoolRequest = createSelector(
     selectSchoolsDomain,
     (subState) => subState.get('school')
 );
@@ -39,4 +39,11 @@ export const selectGetUserSchoolTeachersRequest = createSelector(
 export const selectGetUserSchoolAdminsRequestRequest = createSelector(
     selectSchoolsDomain,
     (subState) => subState.get('getUserSchoolAdminsRequest')
+);
+/**
+ * Get Student for report
+ */
+export const selectGetStudentForReportRequest = createSelector(
+    selectSchoolsDomain,
+    (subState) => subState.get('getStudentForReportRequest')
 );

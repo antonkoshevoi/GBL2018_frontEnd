@@ -8,7 +8,7 @@ import {
     getUserSchoolHomerooms, getUserSchoolTeachers, getUserSchoolAdmins
 } from "../../../redux/reports/actions";
 import {
-    selectSchool, selectGetUserSchoolStudentsRequest,
+    selectSchoolRequest, selectGetUserSchoolStudentsRequest,
     selectGetUserSchoolHomeroomsRequest, selectGetUserSchoolTeachersRequest,
     selectGetUserSchoolAdminsRequestRequest
 } from "../../../redux/reports/selectors.js";
@@ -30,6 +30,27 @@ class Schools extends Component {
         this.props.getUserSchoolTeachers();
         this.props.getUserSchoolAdmins()
     }
+
+    // componentDidMount () {
+    //     const { getUserSchool } = this.props;
+    //     getUserSchool();
+    //
+    //     this.props.getUserSchool();
+    //
+    // }
+    //
+    // /**
+    //  * Monitor props like events
+    //  */
+    // componentWillReceiveProps(nextProps) {
+    //     const success = this.props.school.get('success');
+    //     const nextSuccess = nextProps.school.get('success');
+    //     const school = nextProps.school.get('records');
+    //     if(!success && nextSuccess) {
+    //         console.log(school, success, nextSuccess);
+    //     }
+    //
+    // }
 
     render() {
 
@@ -60,7 +81,7 @@ class Schools extends Component {
 
 Schools = connect(
     (state) => ({
-        school: selectSchool(state),
+        school: selectSchoolRequest(state),
         schoolStudents: selectGetUserSchoolStudentsRequest(state),
         schoolHomerooms: selectGetUserSchoolHomeroomsRequest(state),
         schoolTeachers: selectGetUserSchoolTeachersRequest(state),

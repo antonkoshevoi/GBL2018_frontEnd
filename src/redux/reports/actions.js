@@ -18,6 +18,10 @@ export const GET_USER_SCHOOL = '[Schools] GET_USER_SCHOOL';
 export const GET_USER_SCHOOL_SUCCESS = '[Schools] GET_USER_SCHOOL_SUCCESS';
 export const GET_USER_SCHOOL_FAIL = '[Schools] GET_USER_SCHOOL_FAIL';
 
+export const GET_SCHOOL_REPORT_STUDENT = '[Schools] GET_SCHOOL_REPORT_STUDENT';
+export const GET_SCHOOL_REPORT_STUDENT_SUCCESS = '[Schools] GET_SCHOOL_REPORT_STUDENT_SUCCESS';
+export const GET_SCHOOL_REPORT_STUDENT_FAIL = '[Schools] GET_SCHOOL_REPORT_STUDENT_FAIL';
+
 export function getUserSchool(params = {}) {
     return {
         types: [GET_USER_SCHOOL, GET_USER_SCHOOL_SUCCESS, GET_USER_SCHOOL_FAIL],
@@ -68,5 +72,14 @@ export function getUserSchoolAdmins(id) {
         promise: (apiClient) => apiClient.get(`schools/admins/${id}`, {
             perPage: 0
         })
+    };
+}
+/**
+ * School Report Student
+ */
+export function getSchoolReportStudent(id) {
+    return {
+        types: [GET_SCHOOL_REPORT_STUDENT, GET_SCHOOL_REPORT_STUDENT_SUCCESS, GET_SCHOOL_REPORT_STUDENT_FAIL],
+        promise: (apiClient) => apiClient.get(`students/${id}`)
     };
 }
