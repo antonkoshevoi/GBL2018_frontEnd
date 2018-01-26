@@ -95,26 +95,28 @@ class TabSection extends Component {
                                         class="flaticon-analytics"></i></span><h3 class="m-portlet__head-text">Reports</h3></div>
                                 </div>
                                 <div className="m-portlet__head-tools col-sm-8">
-                                    <Tabs
-                                        className="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x main-tabs pull-right"
-                                        value={this.state.value}
-                                        onChange={this.handleChange}
-                                        scrollable
-                                        scrollButtons={false}
-                                    >
-                                        {this._renderTabs(courses)}
-                                        <Tab className="tab-header-item" value='details' label="Detailed Data"/>
 
-                                    </Tabs>
+                                    {/*<Tabs*/}
+                                        {/*className="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x main-tabs pull-right"*/}
+                                        {/*value={this.state.value}*/}
+                                        {/*onChange={this.handleChange}*/}
+                                        {/*scrollable*/}
+                                        {/*scrollButtons={false}*/}
+                                    {/*>*/}
+                                        {/*{this._renderTabs(courses)}*/}
+                                        {/*<Tab className="tab-header-item" value='details' label="Detailed Data"/>*/}
+
+                                    {/*</Tabs>*/}
                                 </div>
 
                             </div>
                             <div className="m-portlet__body" style={{height: "100%"}}>
-                                {this._renderTabContent(courses)}
+                                <h1>No Info...</h1>
+                                {/*{this._renderTabContent(courses)}*/}
 
-                                { value === 'details' && <TabContainer>
-                                    <h1>Detailed Data</h1>
-                                </TabContainer>}
+                                {/*{ value === 'details' && <TabContainer>*/}
+                                    {/*<h1>Detailed Data</h1>*/}
+                                {/*</TabContainer>}*/}
 
                             </div>
                         </div>

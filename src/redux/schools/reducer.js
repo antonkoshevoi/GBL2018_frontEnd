@@ -2,7 +2,7 @@ import {
   GET_SCHOOLS, GET_SCHOOLS_SUCCESS, GET_SCHOOLS_FAIL,
   GET_SCHOOL_TEACHERS, GET_SCHOOL_TEACHERS_SUCCESS, GET_SCHOOL_TEACHERS_FAIL,
   GET_SCHOOL_STUDENTS, GET_SCHOOL_STUDENTS_SUCCESS, GET_SCHOOL_STUDENTS_FAIL,
-  GET_SCHOOL_HOMEROOMS, GET_SCHOOL_HOMEROOMS_SUCCESS, GET_SCHOOL_HOMEROOMS_FAIL,
+  GET_SCHOOL_HOMEROOMS, GET_SCHOOL_HOMEROOMS_SUCCESS, GET_SCHOOL_HOMEROOMS_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -28,7 +28,7 @@ const initialState = Immutable.fromJS({
       errorResponse: null,
       records: {}
   },
-  schools: [],
+  schools: []
 });
 
 export default function reducer (state = initialState, action) {

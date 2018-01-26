@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
-import * as AUTH from '../../../../services/AuthService'
-import WD from  '../../../../data/Widgets';
+import * as AUTH from '../../../../services/AuthService';
+import {CircularProgress} from "material-ui";
 
 class InfoSection extends Component {
 
-    _renderRosterStats(stats) {
+    _renderRosterStats() {
+
+        const stats  = this.props.data;
+        const loading  = this.props.loading;
+
         return stats.map(function (item,i) {
+
             return (
                 <div key={i} className="m-widget1__item">
                     <div className="row m-row--no-padding align-items-center">
@@ -13,7 +18,10 @@ class InfoSection extends Component {
                             <h3 className="m-widget1__title">{item.title}</h3>
                         </div>
                         <div className="col m--align-right">
-                            <span className="m-widget1__number m--font-brand">{item.value}</span>
+                            <span className="m-widget1__number m--font-brand">
+                                { loading && <CircularProgress color="accent"/> }
+                                { !loading && item.value }
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -22,13 +30,16 @@ class InfoSection extends Component {
     }
 
     render() {
+
+        const loading  = this.props.loading;
+
         return (
 
+                <div className="m-widget1 m-widget1--paddingless">
                     <div className="m-widget1 m-widget1--paddingless">
-                        <div className="m-widget1 m-widget1--paddingless">
-                             {this._renderRosterStats(WD.rosterStats)}
-                        </div>
+                        {this._renderRosterStats()}
                     </div>
+                </div>
 
         );
     }

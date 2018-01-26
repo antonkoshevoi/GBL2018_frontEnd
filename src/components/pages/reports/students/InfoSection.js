@@ -1,19 +1,29 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import Card from "../../../ui/Card";
+import {TablePreloader, MyPreloader} from '../../../ui/table';
 import {IconButton, LinearProgress} from "material-ui";
+import { translate } from 'react-i18next';
 import {Delete, Edit} from "material-ui-icons";
 import {OldProgressBar} from "../../../ui/LinearProgress";
+import { withRouter } from 'react-router-dom';
+import { connect } from "react-redux";
+import { getSchoolReportStudent } from '../../../../redux/reports/actions';
+import { selectGetStudentForReportRequest } from '../../../../redux/reports/selectors';
+import {CircularProgress} from "material-ui";
 
 class InfoSection extends Component {
 
+    componentDidMount () {
+        const  studentId  = this.props.match.params.id;
+        this.props.getSchoolReportStudent(studentId);
+    }
 
     _renderCourseTable(courses) {
         return courses.map(function (item,i) {
             return (
                 <tr key={i}>
                     <td>{item.name}</td>
-                    <td>  <OldProgressBar complateValue="40" progressValue={item.progress} type="progress" /></td>
+                    <td><OldProgressBar complateValue="40" progressValue={item.progress} type="progress" /></td>
                     <td><OldProgressBar correctValue={item.performance}  type="performance"  /></td>
                 </tr>
             )
@@ -22,14 +32,22 @@ class InfoSection extends Component {
 
     render() {
 
-        const {data} = this.props;
+        const { getStudentForReportRequest, data } = this.props;
+        const firstName = getStudentForReportRequest.get('record').toJS().firstName;
+        const lastName = getStudentForReportRequest.get('record').toJS().lastName;
+        const birthday = getStudentForReportRequest.get('record').toJS().birthday;
+        const avatar = getStudentForReportRequest.get('record').toJS().avatar;
+        const loading = getStudentForReportRequest.get('loading');
+
+        const defaultAvatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
 
         return (
             <div className="row">
                 <div className="col-md-3">
                     <div className="imgBlock">
+                        { loading && <MyPreloader text="Loading..." color="accent"/> }
                         <div className="avatar m--margin-bottom-20">
-                            <img src="https://akphoto1.ask.fm/052/240/170/-169996968-1tn0fp4-g4ddct7j47t9bsa/original/avatar.jpg" alt="" className=""/>
+                            { !loading && <img src={ (avatar) ? avatar : defaultAvatar } alt="" className=""/> }
                         </div>
                     </div>
                 </div>
@@ -43,57 +61,57 @@ class InfoSection extends Component {
                                     <tr>
                                         <th></th>
                                         <th></th>
-                                        <th className="text-center">Actions</th>
+                                        {/*<th className="text-center">Actions</th>*/}
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <th>First Name</th>
-                                        <td>{data.firstname}</td>
-                                        <td className="text-center">
-                                            <div className="actions">
-                                                <IconButton color='primary'
-                                                >
-                                                    <Edit/>
-                                                </IconButton>
-                                                <IconButton color='accent'
-                                                >
-                                                    <Delete/>
-                                                </IconButton>
-                                            </div>
-                                        </td>
+                                        <td>{ loading && <CircularProgress color="accent"/> } { !loading && firstName }</td>
+                                        {/*<td className="text-center">*/}
+                                            {/*<div className="actions">*/}
+                                                {/*<IconButton color='primary'*/}
+                                                {/*>*/}
+                                                    {/*<Edit/>*/}
+                                                {/*</IconButton>*/}
+                                                {/*<IconButton color='accent'*/}
+                                                {/*>*/}
+                                                    {/*<Delete/>*/}
+                                                {/*</IconButton>*/}
+                                            {/*</div>*/}
+                                        {/*</td>*/}
                                     </tr>
                                     <tr>
                                         <th>Last Name</th>
-                                        <td>{data.lastname}</td>
-                                        <td className="text-center">
-                                            <div className="actions">
-                                                <IconButton color='primary'
-                                                >
-                                                    <Edit/>
-                                                </IconButton>
-                                                <IconButton color='accent'
-                                                >
-                                                    <Delete/>
-                                                </IconButton>
-                                            </div>
-                                        </td>
+                                        <td>{ loading && <CircularProgress color="accent"/> } { !loading && lastName }</td>
+                                        {/*<td className="text-center">*/}
+                                            {/*<div className="actions">*/}
+                                                {/*<IconButton color='primary'*/}
+                                                {/*>*/}
+                                                    {/*<Edit/>*/}
+                                                {/*</IconButton>*/}
+                                                {/*<IconButton color='accent'*/}
+                                                {/*>*/}
+                                                    {/*<Delete/>*/}
+                                                {/*</IconButton>*/}
+                                            {/*</div>*/}
+                                        {/*</td>*/}
                                     </tr>
                                     <tr>
                                         <th>Birthday</th>
-                                        <td>{data.birthday}</td>
-                                        <td className="text-center">
-                                            <div className="actions">
-                                                <IconButton color='primary'
-                                                >
-                                                    <Edit/>
-                                                </IconButton>
-                                                <IconButton color='accent'
-                                                >
-                                                    <Delete/>
-                                                </IconButton>
-                                            </div>
-                                        </td>
+                                        <td>{ (birthday) ? birthday : 'N / A' }</td>
+                                        {/*<td className="text-center">*/}
+                                            {/*<div className="actions">*/}
+                                                {/*<IconButton color='primary'*/}
+                                                {/*>*/}
+                                                    {/*<Edit/>*/}
+                                                {/*</IconButton>*/}
+                                                {/*<IconButton color='accent'*/}
+                                                {/*>*/}
+                                                    {/*<Delete/>*/}
+                                                {/*</IconButton>*/}
+                                            {/*</div>*/}
+                                        {/*</td>*/}
                                     </tr>
                                     </tbody>
                                 </table>
@@ -102,20 +120,21 @@ class InfoSection extends Component {
                         </div>
                         <div className="col-lg-6 m--margin-bottom-20">
                             <Card title="My Courses" icon="fa fa-sitemap">
-                                <div className="table-responsive">
-                                <table className="table m-table  m-table--head-separator-primary m-middle-table">
-                                    <thead>
-                                    <tr>
-                                        <th>Courses</th>
-                                        <th>Progress</th>
-                                        <th>Performance</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {this._renderCourseTable(data.courses)}
-                                    </tbody>
-                                </table>
-                                </div>
+                                <h1>No Info...</h1>
+                                {/*<div className="table-responsive">*/}
+                                {/*<table className="table m-table  m-table--head-separator-primary m-middle-table">*/}
+                                    {/*<thead>*/}
+                                    {/*<tr>*/}
+                                        {/*<th>Courses</th>*/}
+                                        {/*<th>Progress</th>*/}
+                                        {/*<th>Performance</th>*/}
+                                    {/*</tr>*/}
+                                    {/*</thead>*/}
+                                    {/*<tbody>*/}
+                                    {/*{this._renderCourseTable(data.courses)}*/}
+                                    {/*</tbody>*/}
+                                {/*</table>*/}
+                                {/*</div>*/}
                             </Card>
                         </div>
                         <div className="col-md-12 m--margin-bottom-10">
@@ -131,6 +150,14 @@ class InfoSection extends Component {
     }
 }
 
-InfoSection.propTypes = {};
+// InfoSection.propTypes = {};
+InfoSection = connect(
+    (state) => ({
+        getStudentForReportRequest: selectGetStudentForReportRequest(state),
+    }),
+    (dispatch) => ({
+        getSchoolReportStudent: (id) => { dispatch(getSchoolReportStudent(id)) },
+    })
+)(InfoSection);
 
-export default InfoSection;
+export default withRouter(translate('reports')(InfoSection));
