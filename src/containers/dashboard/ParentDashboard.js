@@ -67,7 +67,7 @@ class ParentDashboard extends Component {
         <div className="col-sm-12 col-md-8 col-lg-8">
           <div className="row">
               <div className="col-md-12">
-                  <DashboardStore data={products.slice(0,10)}/>
+                  <DashboardStore/>
               </div>
               <div className="col-md-12">
                   <HowToMovies/>

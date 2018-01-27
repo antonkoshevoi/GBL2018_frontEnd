@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import ProductCard from "./ProductCard";
 import "../../../styles/store.css"
 import Card from "../../ui/Card";
 import Slider from "react-slick";
+import {getRecords} from "../../../redux/store/actions";
+import {selectGetRecordsRequest, selectRecords} from "../../../redux/store/selectors";
+import {connect} from 'react-redux';
 
 class DashboardStore extends Component {
 
@@ -63,12 +65,14 @@ class DashboardStore extends Component {
     }
 }
 
-DashboardStore.propTypes = {
-    data:PropTypes.array.isRequired
-};
-
-DashboardStore.defaultProps = {
-    data:[]
-}
+DashboardStore = connect(
+  (state) => ({
+    getRecordsRequest: selectGetRecordsRequest(state),
+    data: selectRecords(state),
+  }),
+  (dispatch) => ({
+    getRecords: (params = {type:'recent'}) => { dispatch(getRecords(params)) },
+  })
+)(DashboardStore);
 
 export default DashboardStore;
