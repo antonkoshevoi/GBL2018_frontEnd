@@ -35,12 +35,39 @@
     background: #bbb;
 }
 
-.store .store-filter button {
-    font-weight: 300;
+/*.store .filterMenu,.store .filterMenu > button {*/
+    /*height: 50px;*/
+/*}*/
+
+
+.store .store-filter button:hover {
+    box-shadow: inset 0 -3px red;
 }
 
-.store .store-search button {
-    /*color: #0a8cf0;*/
+.store .store-filter .store-search button {
+    box-shadow: none;
+}
+
+.store .store-filter button, .store .filterMenu > button {
+    height: 50px;
+    font-weight: 300;
+    border-radius: 0;
+}
+
+.store-filter.right-block {
+    justify-content: flex-end;
+}
+
+.store-filter.right-block .row {
+    flex: 1;
+}
+
+.store .store-filter button .fa {
+    color: #adadad;
+}
+
+.store .filter-buttons {
+    display: flex;
 }
 
 .store .m-portlet.store-wrapper {
@@ -80,6 +107,10 @@
 
 .sectionTopBar h2 {
     font-weight: 200;
+}
+
+.sectionTopBar h2:first-letter {
+    text-transform: uppercase;
 }
 
 .cardItem .cardTitle {
@@ -155,7 +186,9 @@
  }
 
  .store-filter .filter-buttons a {
-     padding: 4px;
+     padding: 0 4px;
+     height: 50px;
+     display: inline-block;
  }
 
 .store-filter .filter-buttons a.active {
@@ -289,4 +322,15 @@
 
 .payments-widgets .m-widget24__item:hover {
     background: #ccc;
+}
+
+
+@media (max-width: 567px) {
+    .store-filter.right-block {
+        justify-content: flex-start;
+    }
+
+    .store-filter.right-block .col-xs-6 {
+        flex: 1;
+    }
 }

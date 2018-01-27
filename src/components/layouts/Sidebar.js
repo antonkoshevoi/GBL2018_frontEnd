@@ -69,7 +69,7 @@ class Sidebar extends Component {
                 <span className="icon"><i className={menu.icon}></i></span>
                 <span className="content">{_self.props.t(menu.key)}</span>
             </NavLink>
-          {(menu.subMenu !== undefined) ? _self._renderGoogleSubMenuContent(menu) : ''}
+          {(menu.subMenu !== undefined) && _self._renderGoogleSubMenuContent(menu) }
         </div>
       )
     })
@@ -79,9 +79,19 @@ class Sidebar extends Component {
        const _self = this;
        return subMenus.map(function (menu,i) {
             return (
-                <NavLink activeClassName={'active'} to={`/${menu.link}`} key={i}>
-                    <span className="content"> {_self.props.t(menu.key) }</span>
-                </NavLink >
+                <div>
+                    <NavLink activeClassName={'active'} to={`/${menu.link}`} key={i}>
+                        <span className="content"> {_self.props.t(menu.key) }</span>
+                    </NavLink >
+                    {menu.subMenu !== undefined &&
+                        <div className="timelineSubMenu m-list-timeline">
+                            <div className="m-list-timeline__items">
+                              {_self._renderTimelineSubMenu(menu.subMenu)}
+                            </div>
+                        </div>
+                    }
+                  </div>
+
             )
         })
     }
@@ -96,12 +106,34 @@ class Sidebar extends Component {
                     <i className="la la-angle-left"></i>
                 </a>
                 <div className="content" onClick={() => {_self.props.mobileSidebar()}}>
-                    {_self._renderGoogleSubMenus(menu.subMenu)}
+                        {_self._renderGoogleSubMenus(menu.subMenu)}
                 </div>
             </div>
         )
     }
 
+
+    _renderTimelineSubMenu(menu){
+        return menu.map((item,i)=>{
+            return (
+                <div className="m-list-timeline__item">
+                    <NavLink to={`/${item.link}`} className="timelineMenuItem">
+                        <span className="m-list-timeline__badge m-list-timeline__badge--success"></span>
+                        <span className="m-list-timeline__text">
+                        {item.title}
+                    </span>
+                    </NavLink>
+                    {item.subMenu !== undefined &&
+                    <div className="timelineSecondSubMenu  m-list-timeline">
+                        <div className="m-list-timeline__items">
+                            {this._renderTimelineSubMenu(item.subMenu)}
+                        </div>
+                    </div>
+                    }
+                </div>
+            )
+        })
+    }
 
     _renderSingleMenus() {
         const _self = this;

@@ -61,14 +61,11 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
 
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/courses' name='Store' component={Store}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/books' name='Store' component={Store}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/teaching_aids' name='Store' component={Store}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/stationary' name='Store' component={Store}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/student_rewards' name='Store' component={Store}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/tutoring_services' name='Store' component={Store}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/bundles' name='Store' component={Store}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category' name='Store' component={Store}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory' name='Store' component={Store}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:type' name='Store' component={Products}/>
+
       <AuthenticatedRoute exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/shopping/cart' name='ShoppingCart' component={ShoppingCart}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/shopping/checkout' name='Checkout' component={Checkout}/>

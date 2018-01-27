@@ -14,7 +14,10 @@ import Loader from "../../../components/layouts/Loader";
 class Products extends Component {
 
     state = {
-        isFiltered:false
+        isFiltered:false,
+        sort:{
+            orderBy:'created'
+        }
     }
 
     componentDidMount(){
