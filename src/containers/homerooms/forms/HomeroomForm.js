@@ -49,7 +49,7 @@ class HomeroomForm extends Component {
   };
 
   componentDidMount() {
-    const { homeroom } = this.props;
+    const { homeroom, getSchoolTeachers, getSchoolStudents, getSchools } = this.props;
 
     if (homeroom.id) {
       const studentIds = homeroom.students.map((student) => {
@@ -60,16 +60,29 @@ class HomeroomForm extends Component {
         ...this.state,
         studentIds: studentIds
       });
-
-      const { getSchoolTeachers, getSchoolStudents } = this.props;
-      getSchoolTeachers(homeroom.schoolId);
-      getSchoolStudents(homeroom.schoolId);
     }
 
-    this.props.getSchools();
+    getSchools();
+    getSchoolTeachers();
+    getSchoolStudents();
   }
 
   componentWillReceiveProps(nextProps) {
+    this._getErrorsSuccess(nextProps);
+    this._getSchoolTeachersSuccess(nextProps);
+    this._getSchoolStudentsSuccess(nextProps);
+  }
+
+  _getErrorsSuccess(nextProps) {
+    if (!this.props.errors.size && nextProps.errors.size) {
+      this.setState({
+        ...this.state,
+        activeTab: nextProps.errors.get('schoolId') ? 1 : 0
+      });
+    }
+  }
+
+  _getSchoolTeachersSuccess(nextProps) {
     const schoolTeachers = this.props.getSchoolTeacherRequest.get('records');
     const nextschoolTeachers = nextProps.getSchoolTeacherRequest.get('records');
 
@@ -79,7 +92,9 @@ class HomeroomForm extends Component {
         schoolTeachers: nextschoolTeachers.toJS()
       });
     }
+  }
 
+  _getSchoolStudentsSuccess(nextProps) {
     const schoolStudents = this.props.getSchoolStudentsRequest.get('records');
     const nextschoolStudents = nextProps.getSchoolStudentsRequest.get('records');
 
@@ -87,13 +102,6 @@ class HomeroomForm extends Component {
       this.setState({
         ...this.state,
         schoolStudents: nextschoolStudents.toJS()
-      });
-    }
-
-    if (!this.props.errors.size && nextProps.errors.size) {
-      this.setState({
-        ...this.state,
-        activeTab: nextProps.errors.get('schoolId') ? 1 : 0
       });
     }
   }
@@ -128,28 +136,6 @@ class HomeroomForm extends Component {
       ...this.props.homeroom,
       homeroomStudents: this.state.studentIds
     });
-  }
-
-  _handleSchoolChange(event) {
-    const { value } = event.target;
-
-    this.setState({
-      ...this.state,
-      studentIds: []
-    });
-
-    if (value) {
-      this.props.getSchoolTeachers(value);
-      this.props.getSchoolStudents(value);
-    } else {
-      this.setState({
-        ...this.state,
-        schoolTeachers: [],
-        schoolStudents: [],
-      });
-    }
-
-    this._handleInputChange(event);
   }
 
   _renderSchools() {
@@ -265,18 +251,18 @@ class HomeroomForm extends Component {
           </TabContainer>}
           {activeTab === 1 && <TabContainer>
             <div className="col-sm-8 m-auto">
-            <FormControl className='full-width form-inputs'>
-              <InputLabel htmlFor='name-error'>School</InputLabel>
-              <Select
-                  primarytext=""
-                  name='schoolId'
-                  onChange={(e) => { this._handleSchoolChange(e) }}
-                  value={homeroom.schoolId || ''}>
-                <MenuItem value={null} primarytext="Select School"/>
-                {this._renderSchools()}
-              </Select>
-              {errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}
-            </FormControl>
+            {/*<FormControl className='full-width form-inputs'>*/}
+              {/*<InputLabel htmlFor='name-error'>School</InputLabel>*/}
+              {/*<Select*/}
+                  {/*primarytext=""*/}
+                  {/*name='schoolId'*/}
+                  {/*onChange={(e) => { this._handleSchoolChange(e) }}*/}
+                  {/*value={homeroom.schoolId || ''}>*/}
+                {/*<MenuItem value={null} primarytext="Select School"/>*/}
+                {/*{this._renderSchools()}*/}
+              {/*</Select>*/}
+              {/*{errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}*/}
+            {/*</FormControl>*/}
             <FormControl className='full-width form-inputs'>
               <InputLabel htmlFor='name-error'>Teacher</InputLabel>
               <Select
@@ -310,8 +296,8 @@ HomeroomForm = connect(
   }),
   (dispatch) => ({
     getSchools: () => { dispatch(getSchools()) },
-    getSchoolTeachers: (schoolId) => { dispatch(getSchoolTeachers(schoolId)) },
-    getSchoolStudents: (schoolId) => { dispatch(getSchoolStudents(schoolId)) },
+    getSchoolTeachers: () => { dispatch(getSchoolTeachers()) },
+    getSchoolStudents: () => { dispatch(getSchoolStudents()) },
   })
 )(HomeroomForm);
 

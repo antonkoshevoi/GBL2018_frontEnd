@@ -23,17 +23,18 @@ class AdministrationForm extends Component {
   }
 
   componentDidMount() {
-    const { getSchools, getRoles, adminUser, getSchoolHomerooms } = this.props;
+    const { getSchools, getRoles, getSchoolHomerooms } = this.props;
 
     getSchools();
     getRoles();
-
-    if (adminUser.id) {
-      getSchoolHomerooms(adminUser.schoolId);
-    }
+    getSchoolHomerooms();
   }
 
   componentWillReceiveProps(nextProps) {
+    this._getSchoolHomeroomsSuccess(nextProps);
+  }
+
+  _getSchoolHomeroomsSuccess(nextProps) {
     const schoolHomerooms = this.props.getSchoolHomeroomsRequest.get('records');
     const nextschoolHomerooms = nextProps.getSchoolHomeroomsRequest.get('records');
 
@@ -52,21 +53,6 @@ class AdministrationForm extends Component {
       ...this.props.adminUser,
       [name]: value
     });
-  }
-
-  _handleSchoolChange(event) {
-    const { value } = event.target;
-
-    if (value) {
-      this.props.getSchoolHomerooms(value);
-    } else {
-      this.setState({
-        ...this.state,
-        schoolHomerooms: []
-      });
-    }
-
-    this._handleInputChange(event);
   }
 
   _renderRoles() {
@@ -196,18 +182,18 @@ class AdministrationForm extends Component {
               {errors && errors.get('phoneNumber') && <FormHelperText error>{ errors.get('phoneNumber').get(0) }</FormHelperText>}
           </FormControl>
 
-          <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>School</InputLabel>
-            <Select
-                primarytext=""
-                name='schoolId'
-                onChange={(e) => { this._handleSchoolChange(e) }}
-                value={adminUser.schoolId || ''}>
-              <MenuItem value={null} primarytext="Select School"/>
-              {this._renderSchools()}
-            </Select>
-            {errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}
-          </FormControl>
+          {/*<FormControl className='full-width form-inputs'>*/}
+            {/*<InputLabel htmlFor='name-error'>School</InputLabel>*/}
+            {/*<Select*/}
+                {/*primarytext=""*/}
+                {/*name='schoolId'*/}
+                {/*onChange={(e) => { this._handleSchoolChange(e) }}*/}
+                {/*value={adminUser.schoolId || ''}>*/}
+              {/*<MenuItem value={null} primarytext="Select School"/>*/}
+              {/*{this._renderSchools()}*/}
+            {/*</Select>*/}
+            {/*{errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}*/}
+          {/*</FormControl>*/}
 
           <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>Homeroom</InputLabel>
@@ -236,7 +222,7 @@ AdministrationForm = connect(
   (dispatch) => ({
     getSchools: () => { dispatch(getSchools()) },
     getRoles: () => { dispatch(getRoles()) },
-    getSchoolHomerooms: (schoolId) => { dispatch(getSchoolHomerooms(schoolId)) }
+    getSchoolHomerooms: () => { dispatch(getSchoolHomerooms()) }
   })
 )(AdministrationForm);
 

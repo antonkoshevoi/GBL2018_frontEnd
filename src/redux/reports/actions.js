@@ -33,10 +33,10 @@ export function getUserSchool(params = {}) {
 /**
  * User School Students
  */
-export function getUserSchoolStudents(id) {
+export function getUserSchoolStudents() {
     return {
         types: [GET_USER_SCHOOL_STUDENTS, GET_USER_SCHOOL_STUDENTS_SUCCESS, GET_USER_SCHOOL_STUDENTS_FAIL],
-        promise: (apiClient) => apiClient.get(`schools/students/${id}`, {
+        promise: (apiClient) => apiClient.get(`schools/students`, {
             perPage: 0
         })
     };
@@ -44,10 +44,10 @@ export function getUserSchoolStudents(id) {
 /**
  * User School Homerooms
  */
-export function getUserSchoolHomerooms(id) {
+export function getUserSchoolHomerooms() {
     return {
         types: [GET_USER_SCHOOL_HOMEROOMS, GET_USER_SCHOOL_HOMEROOMS_SUCCESS, GET_USER_SCHOOL_HOMEROOMS_FAIL],
-        promise: (apiClient) => apiClient.get(`schools/homerooms/${id}`, {
+        promise: (apiClient) => apiClient.get(`schools/homerooms`, {
             perPage: 0
         })
     };
@@ -55,10 +55,10 @@ export function getUserSchoolHomerooms(id) {
 /**
  * User School Teachers
  */
-export function getUserSchoolTeachers(id) {
+export function getUserSchoolTeachers() {
     return {
         types: [GET_USER_SCHOOL_TEACHERS, GET_USER_SCHOOL_TEACHERS_SUCCESS, GET_USER_SCHOOL_TEACHERS_FAIL],
-        promise: (apiClient) => apiClient.get(`schools/teachers/${id}`, {
+        promise: (apiClient) => apiClient.get(`schools/teachers`, {
             perPage: 0
         })
     };
@@ -66,10 +66,10 @@ export function getUserSchoolTeachers(id) {
 /**
  * User School Admins
  */
-export function getUserSchoolAdmins(id) {
+export function getUserSchoolAdmins() {
     return {
         types: [GET_USER_SCHOOL_ADMINS, GET_USER_SCHOOL_ADMINS_SUCCESS, GET_USER_SCHOOL_ADMINS_FAIL],
-        promise: (apiClient) => apiClient.get(`schools/admins/${id}`, {
+        promise: (apiClient) => apiClient.get(`schools/admins`, {
             perPage: 0
         })
     };

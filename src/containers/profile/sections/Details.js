@@ -38,15 +38,17 @@ class Details extends Component {
       user: this.props.user
     });
 
-    this.props.getSchoolHomerooms(this.props.user.schoolId);
+    const { getSchoolHomerooms } = this.props;
+
+    getSchoolHomerooms();
   }
 
   componentWillReceiveProps(nextProps) {
     this._updateUserSuccess(nextProps);
-    this._getSchoolHomeroomsRequestSuccess(nextProps);
+    this._getSchoolHomeroomsSuccess(nextProps);
   }
 
-  _getSchoolHomeroomsRequestSuccess(nextProps) {
+  _getSchoolHomeroomsSuccess(nextProps) {
     const schoolHomerooms = this.props.getSchoolHomeroomsRequest.get('records');
     const nextSchoolHomerooms = nextProps.getSchoolHomeroomsRequest.get('records');
 
@@ -88,21 +90,6 @@ class Details extends Component {
         [dateField]: m
       }
     });
-  }
-
-  _handleSchoolChange(event) {
-    const { value } = event.target;
-
-    if (value) {
-      this.props.getSchoolHomerooms(value);
-    } else {
-      this.setState({
-        ...this.state,
-        schoolHomerooms: [],
-      });
-    }
-
-    this._handleInputChange(event);
   }
 
   _handleSwitchMode(mode) {
@@ -306,28 +293,28 @@ class Details extends Component {
                   </div>
                 </div>
                 <div className="m-separator m-separator--dashed"></div>
-                <div className="row form-group m-form__group">
-                  <label className="col-form-label col-md-3" htmlFor="gender">School</label>
-                  <div className="col-md-8">
-                    <Select
-                      id="schools"
-                      name="schoolId"
-                      className="form-control m-input  m-input--air  main-select"
-                      style={{minWidth:'120px'}}
-                      value={user.schoolId || ''}
-                      onChange={(e) => { this._handleSchoolChange(e) }}>
-                      <MenuItem value={null} primarytext=""><em>None</em></MenuItem>
-                      {this._renderSchools()}
-                    </Select>
-                    {errors && errors.get('schoolId') && <div className="form-control-feedback text-center error">{errors.get('schoolId').get(0)}</div>}
-                  </div>
+                {/*<div className="row form-group m-form__group">*/}
+                  {/*<label className="col-form-label col-md-3" htmlFor="gender">School</label>*/}
+                  {/*<div className="col-md-8">*/}
+                    {/*<Select*/}
+                      {/*id="schools"*/}
+                      {/*name="schoolId"*/}
+                      {/*className="form-control m-input  m-input--air  main-select"*/}
+                      {/*style={{minWidth:'120px'}}*/}
+                      {/*value={user.schoolId || ''}*/}
+                      {/*onChange={(e) => { this._handleSchoolChange(e) }}>*/}
+                      {/*<MenuItem value={null} primarytext=""><em>None</em></MenuItem>*/}
+                      {/*{this._renderSchools()}*/}
+                    {/*</Select>*/}
+                    {/*{errors && errors.get('schoolId') && <div className="form-control-feedback text-center error">{errors.get('schoolId').get(0)}</div>}*/}
+                  {/*</div>*/}
 
-                  <div className="col-md-1">
-                    <Button fab mini color="primary" aria-label="add">
-                      <Icon>add</Icon>
-                    </Button>
-                  </div>
-                </div>
+                  {/*<div className="col-md-1">*/}
+                    {/*<Button fab mini color="primary" aria-label="add">*/}
+                      {/*<Icon>add</Icon>*/}
+                    {/*</Button>*/}
+                  {/*</div>*/}
+                {/*</div>*/}
                 <div className="m-separator m-separator--dashed"></div>
 
                 <div className="row form-group m-form__group">
@@ -371,7 +358,7 @@ Details = connect(
     getUpdateRequest: selectUpdateRequest(state),
   }),
   (dispatch) => ({
-    getSchoolHomerooms: (schoolId) => { dispatch(getSchoolHomerooms(schoolId)) },
+    getSchoolHomerooms: () => { dispatch(getSchoolHomerooms()) },
     update: (form, params = {}) => { dispatch(update(form, params)) },
   })
 )(Details);
