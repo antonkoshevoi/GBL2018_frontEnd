@@ -1,6 +1,6 @@
 import {
     GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, GET_CART_RECORDS, GET_CART_RECORDS_SUCCESS, GET_CART_RECORDS_FAIL,
-    ADD_TO_CART,ADD_TO_CART_FAIL,ADD_TO_CART_SUCCESS,
+    ADD_TO_CART,ADD_TO_CART_FAIL,ADD_TO_CART_SUCCESS,DELETE_CART_RECORD,DELETE_CART_RECORD_SUCCESS,DELETE_CART_RECORD_FAIL,
     GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
     GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST
 } from './actions';
@@ -27,6 +27,12 @@ const initialState = Immutable.fromJS({
       errorResponse: null
   },
   addToCartRequest: {
+      loading: false,
+      success: false,
+      fail: false,
+      errorResponse: null
+  },
+  deleteFromCartRequest: {
       loading: false,
       success: false,
       fail: false,
@@ -80,7 +86,6 @@ export default function reducer (state = initialState, action) {
           .remove('singleRecord')
         );
     case GET_SINGLE_RECORD_SUCCESS:
-        console.log(4944494944994);
         return state
         .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
           .set('success', true)
@@ -121,29 +126,6 @@ export default function reducer (state = initialState, action) {
               );
 
       /**
-       * Get single cart records
-       */
-      case GET_CART_RECORDS:
-          return state
-              .set('getSingleCartRecordsRequest', state.get('getSingleCartRecordsRequest')
-                  .set('loading', true)
-                  .remove('success')
-                  .remove('fail')
-              ).set('cartRecords', Immutable.List());
-      case GET_CART_RECORDS_SUCCESS:
-          return state
-              .set('getSingleCartRecordsRequest', state.get('getSingleCartRecordsRequest')
-                  .set('success', true)
-                  .remove('loading')
-              ).set('cartRecords', Immutable.fromJS(action.result.data))
-              .set('pagination', Immutable.fromJS(action.result.meta.pagination));
-      case GET_CART_RECORDS_FAIL:
-          return state
-              .set('getSingleCartRecordsRequest', state.get('getSingleCartRecordsRequest')
-                  .set('loading', false)
-                  .set('fail', true)
-              );
-      /**
        * Add cart record
        */
       case ADD_TO_CART:
@@ -158,15 +140,37 @@ export default function reducer (state = initialState, action) {
               .set('addToCartRequest', state.get('addToCartRequest')
                   .set('success', true)
                   .remove('loading')
-              );
+              ).set('cartRecords', Immutable.fromJS(action.result.data));
       case ADD_TO_CART_FAIL:
-
           return state
               .set('addToCartRequest', state.get('addToCartRequest')
                   .set('loading', false)
                   .set('fail', true)
               );
 
+
+      /**
+       * Delete
+       */
+      case DELETE_CART_RECORD:
+          return state
+              .set('deleteFromCartRequest', state.get('deleteFromCartRequest')
+                  .set('loading', true)
+                  .set('success', false)
+                  .set('fail', false)
+              );
+      case DELETE_CART_RECORD_SUCCESS:
+          return state
+              .set('deleteFromCartRequest', state.get('deleteFromCartRequest')
+                  .set('loading', false)
+                  .set('success', true).set('cartRecords', Immutable.fromJS(action.result.data))
+              ).set('cartRecords', Immutable.fromJS(action.result.data));
+      case DELETE_CART_RECORD_FAIL:
+          return state
+              .set('deleteFromCartRequest', state.get('deleteFromCartRequest')
+                  .set('loading', false)
+                  .set('fail', true)
+              );
 
     /**
      * default

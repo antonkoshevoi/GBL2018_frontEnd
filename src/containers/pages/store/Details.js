@@ -15,17 +15,21 @@ import {
     selectAddToCartRequest, selectGetRecordsRequest, selectGetSingleRecord,
     selectGetSingleRecordRequest, selectRecords
 } from "../../../redux/store/selectors";
+import Loader from "../../../components/layouts/Loader";
 
 class Details extends Component {
 
     componentDidMount() {
         const recordId = this.props.match.params.id;
-        this._getRecord(recordId);
-        this._getRecords();
+        this._getPageRecords(recordId);
     }
 
-    _getProductById(id) {
-        return products.filter(item =>  item.id == id)[0]
+    componentWillReceiveProps(nextProps) {
+        const recordId = this.props.match.params.id;
+        const nextRecordId = nextProps.match.params.id;
+        if (recordId !== nextRecordId) {
+            this._getPageRecords(nextRecordId);
+        }
     }
 
     _getRecord(id,params) {
@@ -36,19 +40,24 @@ class Details extends Component {
         this.props.getRecords();
     }
 
+    _getPageRecords(id){
+        this._getRecord(id);
+        this._getRecords();
+    }
+
     _addToCart(id) {
         this.props.addToCarts(id)
     }
 
     render() {
-        const productID = this.props.match.params.id;
-
         const {record, records, addToCartRequest ,getSingleRecordRequest} = this.props;
         const loadingSingle = getSingleRecordRequest.get('loading');
         const successSingle = getSingleRecordRequest.get('success');
 
         return (
             <div className="m-portlet store-wrapper fadeInLeft animated">
+                {loadingSingle &&
+                <Loader/>}
                 <div className="m-portlet__head m--margin-bottom-30">
                     <div className="m-portlet__head-caption">
                             <Filter/>
@@ -57,11 +66,12 @@ class Details extends Component {
                 <div className="container" id="productDetails">
                 <div className="row">
                     <div className="col-lg-8">
+                        {successSingle &&
                         <div className="m-portlet">
-                            {successSingle &&
-                            <DetailsSection data={record} buyClick={(id) => {this._addToCart(id)}}/>}
+                            <DetailsSection data={record} buyClick={(id) => {this._addToCart(id)}}/>
                             <CommentsSection/>
                         </div>
+                        }
                     </div>
                     <div className="col-lg-4">
                         {successSingle &&

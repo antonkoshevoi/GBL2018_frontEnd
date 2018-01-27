@@ -71,7 +71,7 @@ export const selectPagination = createSelector(
 /**
  * Delete
  */
-export const selectDeleteRequest = createSelector(
+export const deleteFromCartRequest = createSelector(
   selectStoreDomain,
-  (subState) => subState.get('deleteRequest')
+  (subState) => subState.get('deleteFromCartRequest')
 );

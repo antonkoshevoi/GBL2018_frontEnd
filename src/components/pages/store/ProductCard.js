@@ -8,9 +8,8 @@ import "../../../styles/store.css"
 class ProductCard extends Component {
 
     _renderCard(type,product) {
-        console.log(product);
         const category = product.get('categories').get(0) ? product.get('categories').get(0).get('title') : 'No Info...';
-        const price = product.get('price');
+        const price = Number(product.get('price'));
 
 
         return (
@@ -37,7 +36,7 @@ class ProductCard extends Component {
                             <NavLink to={`/store/details/${product.get('id')}`}>
                                 <StarRating score={product.get('score')}/>
                             </NavLink>
-                            <div className="productPrice"><span className="discount"><span>{(price/100*product.get('discount') + price)}</span></span><br/>{price + ' $'}</div>
+                            <div className="productPrice"><span className="discount"><span>{(price/100*product.get('discount') + price) + '$'}</span></span><br/>{price + ' $'}</div>
                         </div>
                     </CardContent>
 

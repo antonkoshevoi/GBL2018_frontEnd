@@ -7,15 +7,37 @@ import products from '../../../../data/json/products.json'
 import "../../../../styles/store.css"
 import InfoDetails from "../../../../components/pages/store/checkout/InfoDetails";
 import PaymentMethods from "../../../../components/pages/store/checkout/PaymentMethods";
+import {selectCartRecords, selectGetCartRecordsRequest} from "../../../../redux/store/selectors";
+import {getCartRecords} from "../../../../redux/store/actions";
+import {withRouter} from "react-router-dom";
 
 class Checkout extends Component {
+
+    componentDidMount() {
+        this._getCartRecords();
+    }
+
+
+    _getCartRecords() {
+        this.props.getCartRecords();
+    }
+
+
+
     render() {
+
+        const {cartRecords,cartRecordsRequest} = this.props;
+        const loadingCarts = cartRecordsRequest.get('loading');
+        const successCarts = cartRecordsRequest.get('success');
+
+
         return (
             <div>
-
                 <div className="row">
                     <div className="col-xl-3">
-                        <CartItems data={products}/>
+                        {successCarts &&
+                        <CartItems data={cartRecords.toJS()}/>
+                        }
                     </div>
                     <div className="col-xl-9">
                         <div className="row">
@@ -36,11 +58,16 @@ class Checkout extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {};
-}
 
-export default translate("Checkout")(connect(
-    mapStateToProps,
-)(Checkout));
 
+Checkout = connect(
+    (state) => ({
+        cartRecordsRequest: selectGetCartRecordsRequest(state),
+        cartRecords: selectCartRecords(state),
+    }),
+    (dispatch) => ({
+        getCartRecords: () => { dispatch(getCartRecords()) },
+    })
+)(Checkout);
+
+export default withRouter(translate("Checkout")(Checkout));

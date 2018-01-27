@@ -24,6 +24,12 @@ class Filter extends Component {
         categoryIsOpen: false,
         subjectIsOpen: false,
         sotByIsOpen: false,
+        params:{
+           filter:{
+               name:'',
+               category:''
+           }
+        }
     };
 
 
@@ -39,6 +45,15 @@ class Filter extends Component {
         this.setState({ [menu]: true });
     };
 
+
+    _searchBarChange = (e) => {
+        this.setState({params:{...this.state.params, filter:{...this.state.params.filter, category:e.target.value}}});
+    }
+
+
+    _initFilter = (e) =>  {
+        this.props.onChange(this.state.params);
+    }
 
     render() {
         const { classes } = this.props;
@@ -125,10 +140,11 @@ class Filter extends Component {
                                     className=" store-search"
                                     id="search"
                                     type='search'
+                                    onChange={(e) => this._searchBarChange(e)}
                                     placeholder="Search"
                                     endAdornment={
                                         <InputAdornment position="end">
-                                            <IconButton
+                                            <IconButton onClick={() => {this._initFilter()}}
                                             >
                                                 <Search/>
                                             </IconButton>
