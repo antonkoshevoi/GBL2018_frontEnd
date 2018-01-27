@@ -106,8 +106,8 @@ class Summery extends Component {
           </div>
         </div>
         <div className="m-portlet__body">
-          <h3>Schools</h3>
-          {this._renderSchools()}
+          {/*<h3>Schools</h3>*/}
+          {/*{this._renderSchools()}*/}
           <h3>Homerooms</h3>
           {this._renderHomerooms()}
           <h3>Classrooms</h3>

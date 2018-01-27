@@ -88,11 +88,11 @@ Schools = connect(
         schoolAdmins: selectGetUserSchoolAdminsRequestRequest(state)
     }),
     (dispatch) => ({
-        getUserSchoolAdmins: () => { dispatch(getUserSchoolAdmins(1)) },
-        getUserSchoolTeachers: () => { dispatch(getUserSchoolTeachers(1)) },
-        getUserSchoolStudents: () => { dispatch(getUserSchoolStudents(1)) },
-        getUserSchoolHomerooms: () => { dispatch(getUserSchoolHomerooms(1)) },
-        getUserSchool: () => { dispatch(getUserSchool(1)) }
+        getUserSchoolAdmins: () => { dispatch(getUserSchoolAdmins()) },
+        getUserSchoolTeachers: () => { dispatch(getUserSchoolTeachers()) },
+        getUserSchoolStudents: () => { dispatch(getUserSchoolStudents()) },
+        getUserSchoolHomerooms: () => { dispatch(getUserSchoolHomerooms()) },
+        getUserSchool: () => { dispatch(getUserSchool()) }
     })
 )(Schools);
 
