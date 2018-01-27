@@ -20,15 +20,17 @@ class TeacherForm extends Component {
   }
 
   componentDidMount() {
-    const { getSchools, teacher, getSchoolHomerooms } = this.props;
-    getSchools();
+    const { getSchools, getSchoolHomerooms } = this.props;
 
-    if (teacher.id) {
-      getSchoolHomerooms(teacher.schoolId);
-    }
+    getSchools();
+    getSchoolHomerooms();
   }
 
   componentWillReceiveProps(nextProps) {
+    this._getSchoolHomeroomsSuccess(nextProps);
+  }
+
+  _getSchoolHomeroomsSuccess(nextProps) {
     const schoolHomerooms = this.props.getSchoolHomeroomsRequest.get('records');
     const nextschoolHomerooms = nextProps.getSchoolHomeroomsRequest.get('records');
 
@@ -47,21 +49,6 @@ class TeacherForm extends Component {
       ...this.props.teacher,
       [name]: value
     });
-  }
-
-  _handleSchoolChange(event) {
-    const { value } = event.target;
-
-    if (value) {
-      this.props.getSchoolHomerooms(value);
-    } else {
-      this.setState({
-        ...this.state,
-        schoolHomerooms: []
-      });
-    }
-
-    this._handleInputChange(event);
   }
 
   _renderSchools() {
@@ -170,18 +157,18 @@ class TeacherForm extends Component {
               {errors && errors.get('phoneNumber') && <FormHelperText error>{ errors.get('phoneNumber').get(0) }</FormHelperText>}
           </FormControl>
 
-          <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>School</InputLabel>
-            <Select
-                primarytext=""
-                name='schoolId'
-                onChange={(e) => { this._handleSchoolChange(e) }}
-                value={teacher.schoolId || ''}>
-              <MenuItem value={null} primarytext=""/>
-              {this._renderSchools()}
-            </Select>
-            {errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}
-          </FormControl>
+          {/*<FormControl className='full-width form-inputs'>*/}
+            {/*<InputLabel htmlFor='name-error'>School</InputLabel>*/}
+            {/*<Select*/}
+                {/*primarytext=""*/}
+                {/*name='schoolId'*/}
+                {/*onChange={(e) => { this._handleSchoolChange(e) }}*/}
+                {/*value={teacher.schoolId || ''}>*/}
+              {/*<MenuItem value={null} primarytext=""/>*/}
+              {/*{this._renderSchools()}*/}
+            {/*</Select>*/}
+            {/*{errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}*/}
+          {/*</FormControl>*/}
 
           <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>Homeroom</InputLabel>
@@ -208,7 +195,7 @@ TeacherForm = connect(
   }),
   (dispatch) => ({
     getSchools: () => { dispatch(getSchools()) },
-    getSchoolHomerooms: (schoolId) => { dispatch(getSchoolHomerooms(schoolId)) }
+    getSchoolHomerooms: () => { dispatch(getSchoolHomerooms()) }
   })
 )(TeacherForm);
 
