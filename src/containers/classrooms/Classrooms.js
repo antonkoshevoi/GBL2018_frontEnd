@@ -76,9 +76,10 @@ class Classrooms extends Component {
     return records.map((record, key) => (
       <Row index={key} key={key}>
         <Td first={true} width='100px'>{key + 1}</Td>
-        <Td width='132px'>{record.get('name')}</Td>
+        <Td width='132px'>{record.get('crmName')}</Td>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
-        <Td width='132px'>{record.getIn(['course', 'courseName'])}</Td>
+        {/*<Td width='132px'>{record.getIn(['course', 'crmCourse'])}</Td>*/}
+        <Td width='132px'>{record.get('crmName')}</Td>
         <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
         <Td width='132px'>{record.get('studentsCount')}</Td>
         <Td width='100px'>

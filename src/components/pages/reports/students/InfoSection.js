@@ -84,34 +84,10 @@ class InfoSection extends Component {
                                     <tr>
                                         <th>Last Name</th>
                                         <td>{ loading && <CircularProgress color="accent"/> } { !loading && lastName }</td>
-                                        {/*<td className="text-center">*/}
-                                            {/*<div className="actions">*/}
-                                                {/*<IconButton color='primary'*/}
-                                                {/*>*/}
-                                                    {/*<Edit/>*/}
-                                                {/*</IconButton>*/}
-                                                {/*<IconButton color='accent'*/}
-                                                {/*>*/}
-                                                    {/*<Delete/>*/}
-                                                {/*</IconButton>*/}
-                                            {/*</div>*/}
-                                        {/*</td>*/}
                                     </tr>
                                     <tr>
                                         <th>Birthday</th>
                                         <td>{ (birthday) ? birthday : 'N / A' }</td>
-                                        {/*<td className="text-center">*/}
-                                            {/*<div className="actions">*/}
-                                                {/*<IconButton color='primary'*/}
-                                                {/*>*/}
-                                                    {/*<Edit/>*/}
-                                                {/*</IconButton>*/}
-                                                {/*<IconButton color='accent'*/}
-                                                {/*>*/}
-                                                    {/*<Delete/>*/}
-                                                {/*</IconButton>*/}
-                                            {/*</div>*/}
-                                        {/*</td>*/}
                                     </tr>
                                     </tbody>
                                 </table>
@@ -120,21 +96,21 @@ class InfoSection extends Component {
                         </div>
                         <div className="col-lg-6 m--margin-bottom-20">
                             <Card title="My Courses" icon="fa fa-sitemap">
-                                <h1>No Info...</h1>
-                                {/*<div className="table-responsive">*/}
-                                {/*<table className="table m-table  m-table--head-separator-primary m-middle-table">*/}
-                                    {/*<thead>*/}
-                                    {/*<tr>*/}
-                                        {/*<th>Courses</th>*/}
-                                        {/*<th>Progress</th>*/}
-                                        {/*<th>Performance</th>*/}
-                                    {/*</tr>*/}
-                                    {/*</thead>*/}
-                                    {/*<tbody>*/}
-                                    {/*{this._renderCourseTable(data.courses)}*/}
-                                    {/*</tbody>*/}
-                                {/*</table>*/}
-                                {/*</div>*/}
+                                {/*<h1>No Info...</h1>*/}
+                                <div className="table-responsive">
+                                <table className="table m-table  m-table--head-separator-primary m-middle-table">
+                                    <thead>
+                                    <tr>
+                                        <th>Courses</th>
+                                        <th>Progress</th>
+                                        <th>Performance</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {this._renderCourseTable(data.courses)}
+                                    </tbody>
+                                </table>
+                                </div>
                             </Card>
                         </div>
                         <div className="col-md-12 m--margin-bottom-10">
