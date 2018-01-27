@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import MetronicSearchInput from '../ui/metronic/MetronicSearchInput';
 import { CircularProgress } from 'material-ui';
 import Immutable from "immutable";
+import {Scrollbars} from "react-custom-scrollbars";
 
 class UserBrowser extends Component {
   static propTypes = {
@@ -17,9 +18,10 @@ class UserBrowser extends Component {
   }
 
   _renderUsers () {
-    const { users, loading } = this.props;
+    const { users, loading, thread } = this.props;
+    const activeUserName = (thread !== undefined) ? thread.get('user').get('username') : '';
 
-    if (!loading && users.size === 0) {
+      if (!loading && users.size === 0) {
       return (
         <div>
           <span className="m-list-search__result-item-text">Users not found</span>
@@ -28,13 +30,21 @@ class UserBrowser extends Component {
     }
 
     return users.map((user, key) => {
+
       return (
-        <div key={key} className="m-list-search__result-item" onClick={() => { this._onUserSelect(user.get('id')) }}>
-          <span className="m-list-search__result-item-pic">
-              <img className="m--img-rounded" src={user.get('avatar')} title=""/>
-          </span>
-          <span className="m-list-search__result-item-text">{ user.get('username') }</span>
-        </div>
+          <div className={`m-widget4__item pointer ${activeUserName === user.get('username') && 'active'}`} key={key}
+               onClick={() => { this._onUserSelect(user.get('id')) }}>
+              <div className="m-widget4__img m-widget4__img--pic">
+                  <img src={user.get('avatar')} alt={ user.get('username') }/>
+              </div>
+              <div className="m-widget4__info">
+                    <span className="m-widget4__title">
+                    { user.get('username') }
+                    </span><br/>
+                    <span className="m-widget4__sub">
+                    </span>
+              </div>
+          </div>       
       );
     });
   }
@@ -67,8 +77,10 @@ class UserBrowser extends Component {
             )}
           </span>
         </div>
-        <div style={{ marginTop: '10px' }}>
-          { this._renderUsers() }
+        <div style={{ marginTop: '10px' }} className="m-widget4 message-users-list">
+            <Scrollbars >
+                { this._renderUsers() }
+            </Scrollbars>
         </div>
       </div>
     );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Immutable from "immutable";
 import Thread from './Thread';
+import {Scrollbars} from "react-custom-scrollbars";
 
 class ThreadBrowser extends Component {
   static propTypes = {
@@ -10,13 +11,13 @@ class ThreadBrowser extends Component {
   };
 
   _renderThreads () {
-    const { threads, onSelectThread } = this.props;
+    const { threads, onSelectThread, userData } = this.props;
     let views = [];
 
     threads.forEach((thread, key) => {
       views.push(
-        <div key={key} onClick={() => { onSelectThread(thread.get('id')) }}>
-          <Thread thread={thread}/>
+        <div key={key} onClick={() => { onSelectThread(thread.get('id')) }} >
+          <Thread thread={thread} />
         </div>);
     });
 
@@ -30,7 +31,9 @@ class ThreadBrowser extends Component {
         <span className="m-list-search__result-category">
             Conversations
         </span>
-        { this._renderThreads() }
+        <Scrollbars autoHeight={true}>
+          { this._renderThreads() }
+        </Scrollbars>
       </div>
     );
   }

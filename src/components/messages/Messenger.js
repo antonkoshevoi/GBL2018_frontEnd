@@ -6,6 +6,7 @@ import MessageIn from './MessageIn';
 import MessageOut from './MessageOut';
 import Immutable from "immutable";
 import MessageDivider from './MessageDivider';
+import {Scrollbars} from "react-custom-scrollbars";
 
 class Messenger extends Component {
   static propTypes = {
@@ -27,7 +28,7 @@ class Messenger extends Component {
    * @private
    */
   _renderMessages () {
-    const { thread } = this.props;
+    const { thread, userData } = this.props;
     const messages = thread.get('messages');
     const loading = false;
 
@@ -49,9 +50,10 @@ class Messenger extends Component {
           avatar={message.get('user').get('avatar')}/>
       }
 
-      if (message.get('type') === 'out') {
+        if (message.get('type') === 'out') {
         return <MessageOut
           key={key}
+          avatar={userData.get('avatar')}
           body={message.get('body')}/>
       }
     });
@@ -86,24 +88,27 @@ class Messenger extends Component {
     return (
       <div className="m-messenger m-messenger--message-arrow m-messenger--skin-light">
         <div id='messages-container' className="m-messenger__messages mCS_7 mCS-autoHide" style={{height: '500px', position: 'relative', overflow: 'auto'}}>
-          { this._renderMessages() }
+          <Scrollbars>
+              { this._renderMessages() }
+          </Scrollbars>
         </div>
 
         <div className="m-messenger__seperator"></div>
 
         <form className="m-messenger__form" onSubmit={(e) => { this._handleSubmit(e); }}>
           <div className="m-messenger__form-controls">
-            <input
+            <textarea
               value={this.state.newMessage}
               onChange={(e) => { this._handleInputChange(e) }}
               type="text"
               name=""
+              rows={5}
               placeholder="Type here..."
-              className="m-messenger__form-input"/>
+              className="m-messenger__form-input"></textarea>
           </div>
           <div className="m-messenger__form-tools">
-            <a href="" className="m-messenger__form-attachment">
-              <i className="la la-paperclip"></i>
+            <a className="m-messenger__form-attachment" onClick={(e) => { this._handleSubmit(e); }}>
+              <i className="la la-send"></i>
             </a>
           </div>
         </form>

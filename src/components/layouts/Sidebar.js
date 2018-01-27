@@ -79,7 +79,7 @@ class Sidebar extends Component {
        const _self = this;
        return subMenus.map(function (menu,i) {
             return (
-                <div>
+                <div key={i}>
                     <NavLink activeClassName={'active'} to={`/${menu.link}`} key={i}>
                         <span className="content"> {_self.props.t(menu.key) }</span>
                     </NavLink >
@@ -116,7 +116,7 @@ class Sidebar extends Component {
     _renderTimelineSubMenu(menu){
         return menu.map((item,i)=>{
             return (
-                <div className="m-list-timeline__item">
+                <div className="m-list-timeline__item" key={i}>
                     <NavLink to={`/${item.link}`} className="timelineMenuItem">
                         <span className="m-list-timeline__badge m-list-timeline__badge--success"></span>
                         <span className="m-list-timeline__text">

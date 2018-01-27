@@ -65,7 +65,7 @@ class SubHeader extends Component {
                     <i className="fa fa-calendar PageHeader-icon"></i>
                 </MenuItem>,
                 <MenuItem key="5" onClick={_self._closeHeaderMenu}>
-                    <i className="fa fa-envelope-open PageHeader-icon"></i>
+                    <NavLink to="/messages" className="fa fa-envelope-open PageHeader-icon"></NavLink>
                 </MenuItem>,
                 <MenuItem key="6" onClick={_self._closeHeaderMenu}>
                    <ul className="list-inline"><LanguageSwitcher/></ul>
@@ -128,9 +128,9 @@ class SubHeader extends Component {
                                     </a>
                                 </li>
                                 <li>
-                                    <a >
+                                    <NavLink to="/messages">
                                         <i className="fa fa-envelope-open PageHeader-icon"></i>
-                                    </a>
+                                    </NavLink>
                                 </li>
                                 <LanguageSwitcher/>
                             </ol>

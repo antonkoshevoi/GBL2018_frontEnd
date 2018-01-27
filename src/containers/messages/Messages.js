@@ -13,6 +13,8 @@ import {
 import Messenger from '../../components/messages/Messenger';
 import ThreadBrowser from '../../components/messages/ThreadBrowser';
 import UserBrowser from '../../components/messages/UserBrowser';
+import {selectUserData} from "../../redux/user/selectors";
+import {Scrollbars} from "react-custom-scrollbars";
 
 class Messages extends Component {
 
@@ -126,32 +128,37 @@ class Messages extends Component {
   }
 
   render() {
-    const { users, getUsersRequest } = this.props;
+    const { users, getUsersRequest, userData } = this.props;
     const threads = this._getThreads();
     const selectedThread = this._getSelectedThread();
 
     return (
       <div className="row">
-        <div className="col-lg-12">
-          <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
-            <div className="row m-portlet__body">
-              <div className="col-lg-3">
-                <div className="m-list-search">
-                  <div className="m-list-search__results">
-                    <UserBrowser
-                      users={users}
-                      loading={getUsersRequest.get('loading')}
-                      onSearch={(keyword) => { this._searchUsers(keyword); }}
-                      onUserSelect={(id) => { this._createThread(id); }}/>
-                    <ThreadBrowser
-                      threads={threads}
-                      onSelectThread={(id) => { this._selectThread(id) }}/>
+        <div className="col-lg-12 animated fadeInLeft">
+          <div className="m-portlet messages-portlet  m-portlet--info">
+            <div className="m-portlet__body m-portlet__body--no-padding">
+              <div className="row  m-row--col-separator-xl">
+                <div className="col-lg-3 no-padding">
+                  <div className="m-list-search">
+                    <Scrollbars autoHide>
+                    <div className="m-list-search__results">
+                        <UserBrowser
+                          users={users}
+                          thread={selectedThread}
+                          loading={getUsersRequest.get('loading')}
+                          onSearch={(keyword) => { this._searchUsers(keyword); }}
+                          onUserSelect={(id) => { this._createThread(id); }}/>
+                        <ThreadBrowser
+                          threads={threads}
+                          onSelectThread={(id) => { this._selectThread(id) }}/>
+                    </div>
+                    </Scrollbars>
                   </div>
                 </div>
-              </div>
-              <div className="col-lg-9">
-                {selectedThread &&
-                  <Messenger thread={selectedThread} onNewMessage={(message) => { this._sendNewMessage(message); }}/>}
+                <div className="col-lg-9 no-padding">
+                  {selectedThread &&
+                    <Messenger thread={selectedThread} userData={userData} onNewMessage={(message) => { this._sendNewMessage(message); }}/>}
+                </div>
               </div>
             </div>
           </div>
@@ -167,7 +174,8 @@ Messages = connect(
     getThreadsRequest: selectGetThreadsRequest(state),
     users: selectAvailableUsers(state),
     getUsersRequest: selectGetAvailableUsersRequest(state),
-    createNewThreadRequest: selectCreateNewThreadRequest(state)
+    createNewThreadRequest: selectCreateNewThreadRequest(state),
+    userData: selectUserData(state),
   }),
   (dispatch) => ({
     getThreads: () => { dispatch(getThreads()) },
