@@ -76,7 +76,7 @@ class UserMenu extends Component {
                 </li>
                 <li className="m-nav__item">
                   <NavLink to="/messages" className="m-nav__link">
-                    <i className="m-nav__link-icon flaticon-profile-1"></i>
+                    <i className="m-nav__link-icon flaticon-chat-1"></i>
                     <span className="m-nav__link-title">
                       <span className="m-nav__link-wrap">
                         <span className="m-nav__link-text">Messages</span>

@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
-    Button, ClickAwayListener, Grow, Icon, IconButton, Input, InputAdornment, MenuItem, MenuList, Paper,
+    Button, ClickAwayListener, Grow, Icon, IconButton, Input, InputAdornment, Menu, MenuItem, MenuList, Paper,
     withStyles
 } from "material-ui";
 import {Manager, Popper, Target} from "react-popper";
 import classNames from 'classnames';
 import {NavLink} from "react-router-dom";
 import {Search} from "material-ui-icons";
+import red from "material-ui/es/colors/red";
 
 const styles = {
     root: {
@@ -16,7 +17,17 @@ const styles = {
     popperClose: {
         pointerEvents: 'none',
     },
+    inputLabelFocused: {
+        color: red[500],
+    },
+    inputInkbar: {
+        '&:after': {
+            backgroundColor: red[500],
+        },
+    }
 };
+
+
 
 class Filter extends Component {
 
@@ -24,6 +35,9 @@ class Filter extends Component {
         categoryIsOpen: false,
         subjectIsOpen: false,
         sotByIsOpen: false,
+        categoryMenu:null,
+        subjectMenu:null,
+        sortMenu:null,
         params:{
            filter:{
                name:'',
@@ -34,15 +48,13 @@ class Filter extends Component {
 
 
 
-    handleClose = (menu) => {
-        this.setState({ [menu]: false });
+    handleMenuClick = (event,menu) => {
+        this.setState({ [menu]: event.currentTarget });
     };
 
-
-
-
-    handleClick = (menu) => {
-        this.setState({ [menu]: true });
+    handleMenuClose = (event,menu) => {
+        console.log(event.currentTarget.value);
+        this.setState({ [menu]: null });
     };
 
 
@@ -58,74 +70,53 @@ class Filter extends Component {
     render() {
         const { classes } = this.props;
         const {categoryIsOpen,subjectIsOpen,sortByIsOpen} = this.state;
+        const { categoryMenu, subjectMenu,sortMenu } = this.state;
 
         return (
             <div className="col-md-12 ">
                 <div className="row">
-                    <div className="col-md-8 store-filter">
-                        <Manager>
-                            <Target>
-                                <Button
-                                    className={classes.button}
-                                    aria-owns={categoryIsOpen ? 'menu-list' : null}
-                                    aria-haspopup="true"
-                                    style={{height:'50px'}}
-                                    onClick={() => {this.handleClick("categoryIsOpen")}}
-                                >
-                                    Category > Age
-                                    <span className="btn-icon la la-angle-down"></span>
-                                </Button>
-                            </Target>
-                            <Popper
-                                placement="bottom-start"
-                                eventsEnabled={categoryIsOpen}
-                                className={classNames({ [classes.popperClose]: !categoryIsOpen },'popperDropMenu') }
-                            >
-                                <ClickAwayListener  onClickAway={() => {this.setState({categoryIsOpen:false})}}>
-                                    <Grow in={categoryIsOpen} style={{ transformOrigin: '0 0 0' }}>
-                                        <Paper>
-                                            <MenuList role="menu">
-                                                <MenuItem  onClick={() => {this.handleClose("categoryIsOpen")}}>Any</MenuItem>
-                                                <MenuItem  onClick={() => {this.handleClose("categoryIsOpen")}}>Kindergarten</MenuItem>
-                                                <MenuItem  onClick={() => {this.handleClose("categoryIsOpen")}}>Elementary</MenuItem>
-                                                <MenuItem  onClick={() => {this.handleClose("categoryIsOpen")}}>High School</MenuItem>
-                                            </MenuList>
-                                        </Paper>
-                                    </Grow>
-                                </ClickAwayListener>
-                            </Popper>
-                        </Manager>
+                    <div className="col-md-12 col-lg-8 store-filter left-block">
+
+                    <div className="filterMenu">
+                        <Button
+                            aria-owns={categoryMenu ? 'category-menu' : null}
+                            aria-haspopup="true"
+                            onClick={(e) => {this.handleMenuClick(e,'categoryMenu')}}
+                        >
+                            Category > Age <i className="m--margin-left-10 fa fa-chevron-down"></i>
+                        </Button>
+                        <Menu
+                            id="category-menu"
+                            anchorEl={categoryMenu}
+                            open={Boolean(categoryMenu)}
+                            onClose={(e) => {this.handleMenuClose(e,'categoryMenu')}}
+                        >
+                            <MenuItem onClick={(e) => {this.handleMenuClose(e,'categoryMenu')}}>Any</MenuItem>
+                            <MenuItem onClick={(e) => {this.handleMenuClose(e,'categoryMenu')}}>Kindergarten</MenuItem>
+                            <MenuItem onClick={(e) => {this.handleMenuClose(e,'categoryMenu')}}>Elementary</MenuItem>
+                            <MenuItem onClick={(e) => {this.handleMenuClose(e,'categoryMenu')}}>High School</MenuItem>
+                        </Menu>
+                    </div>
                         <div className="store-filter-divider"></div>
-                        <Manager>
-                            <Target>
-                                <Button
-                                    className={classes.button}
-                                    aria-owns={subjectIsOpen ? 'menu-list' : null}
-                                    aria-haspopup="true"
-                                    style={{height:'50px'}}
-                                    onClick={() => {this.handleClick("subjectIsOpen")}}
-                                >
-                                    Subject
-                                    <span className="btn-icon la la-angle-down"></span>
-                                </Button>
-                            </Target>
-                            <Popper
-                                placement="bottom-start"
-                                eventsEnabled={subjectIsOpen}
-                                className={classNames({ [classes.popperClose]: !subjectIsOpen },'popperDropMenu') }
+                        <div className="filterMenu">
+                            <Button
+                                aria-owns={subjectMenu ? 'subject-menu' : null}
+                                aria-haspopup="true"
+                                onClick={(e) => {this.handleMenuClick(e,'subjectMenu')}}
                             >
-                                <ClickAwayListener  onClickAway={() => {this.setState({subjectIsOpen:false})}}>
-                                    <Grow in={subjectIsOpen} style={{ transformOrigin: '0 0 0' }}>
-                                        <Paper>
-                                            <MenuList role="menu">
-                                                <MenuItem  onClick={() => {this.handleClose("subjectIsOpen")}}>English as a second Language</MenuItem>
-                                                <MenuItem  onClick={() => {this.handleClose("subjectIsOpen")}}>Arithmetic</MenuItem>
-                                            </MenuList>
-                                        </Paper>
-                                    </Grow>
-                                </ClickAwayListener>
-                            </Popper>
-                        </Manager>
+                                Subject <i className="m--margin-left-10 fa fa-chevron-down"></i>
+                            </Button>
+                            <Menu
+                                id="subject-menu"
+                                anchorEl={subjectMenu}
+                                open={Boolean(subjectMenu)}
+                                onClose={(e) => {this.handleMenuClose(e,'subjectMenu')}}
+                            >
+                                <MenuItem onClick={(e) => {this.handleMenuClose(e,'subjectMenu')}}>English as a second Language</MenuItem>
+                                <MenuItem onClick={(e) => {this.handleMenuClose(e,'subjectMenu')}}>Arithmetic</MenuItem>
+                            </Menu>
+                        </div>
+
                         <div className="store-filter-divider"></div>
                         <div className="filter-buttons">
                             <NavLink to="/store/category/courses"><Button>All</Button></NavLink>
@@ -133,15 +124,18 @@ class Filter extends Component {
                             <NavLink to="/store/products/newest"><Button>Most Popular</Button></NavLink>
                         </div>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-lg-4 col-md-12 store-filter right-block">
                         <div className="row">
-                            <div className="col-xs-8 col-md-8 text-right">
+                            <div className="col-xs-6 search-field col-sm-6 col-md-6 col-lg-8 text-right">
                                 <Input
                                     className=" store-search"
                                     id="search"
                                     type='search'
                                     onChange={(e) => this._searchBarChange(e)}
                                     placeholder="Search"
+                                    classes={{
+                                        inkbar: classes.inputInkbar,
+                                    }}
                                     endAdornment={
                                         <InputAdornment position="end">
                                             <IconButton onClick={() => {this._initFilter()}}
@@ -152,39 +146,27 @@ class Filter extends Component {
                                     }
                                 />
                             </div>
-                            <div className="col-xs-4 col-md-4 text-right">
-                                <Manager>
-                                    <Target>
-                                        <Button
-                                            className={classes.button}
-                                            aria-owns={sortByIsOpen ? 'menu-list' : null}
-                                            aria-haspopup="true"
-                                            style={{height:'50px'}}
-                                            onClick={() => {this.handleClick("sortByIsOpen")}}
-                                        >
-                                            Sort By:
-                                            <span className="btn-icon la la-sort-amount-desc"></span>
-                                        </Button>
-                                    </Target>
-                                    <Popper
-                                        placement="bottom-start"
-                                        eventsEnabled={sortByIsOpen}
-                                        className={classNames({ [classes.popperClose]: !sortByIsOpen },'popperDropMenu') }
+                            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-4 text-right">
+                                <div className="filterMenu">
+                                    <Button
+                                        aria-owns={sortMenu ? 'category-menu' : null}
+                                        aria-haspopup="true"
+                                        onClick={(e) => {this.handleMenuClick(e,'sortMenu')}}
                                     >
-                                        <ClickAwayListener  onClickAway={() => {this.setState({sortByIsOpen:false})}}>
-                                            <Grow in={sortByIsOpen} style={{ transformOrigin: '0 0 0' }}>
-                                                <Paper>
-                                                    <MenuList role="menu">
-                                                        <MenuItem  onClick={() => {this.handleClose("sortByIsOpen")}}>Price: lowest to high</MenuItem>
-                                                        <MenuItem  onClick={() => {this.handleClose("sortByIsOpen")}}>Price: high to lowest</MenuItem>
-                                                        <MenuItem  onClick={() => {this.handleClose("sortByIsOpen")}}>Latest added</MenuItem>
-                                                        <MenuItem  onClick={() => {this.handleClose("sortByIsOpen")}}>High rating</MenuItem>
-                                                    </MenuList>
-                                                </Paper>
-                                            </Grow>
-                                        </ClickAwayListener>
-                                    </Popper>
-                                </Manager>
+                                        Sort By: <i className="m--margin-left-10 fa fa-sort-amount-desc"></i>
+                                    </Button>
+                                    <Menu
+                                        id="category-menu"
+                                        anchorEl={sortMenu}
+                                        open={Boolean(sortMenu)}
+                                        onClose={(e) => {this.handleMenuClose(e,'sortMenu')}}
+                                    >
+                                        <MenuItem onClick={(e) => {this.handleMenuClose(e,'sortMenu')}}>Price: lowest to high</MenuItem>
+                                        <MenuItem onClick={(e) => {this.handleMenuClose(e,'sortMenu')}}>Price: high to lowest</MenuItem>
+                                        <MenuItem onClick={(e) => {this.handleMenuClose(e,'sortMenu')}}>Latest added</MenuItem>
+                                        <MenuItem onClick={(e) => {this.handleMenuClose(e,'sortMenu')}}>High rating</MenuItem>
+                                    </Menu>
+                                </div>
                             </div>
                         </div>
                     </div>

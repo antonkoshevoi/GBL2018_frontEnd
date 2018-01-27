@@ -9,11 +9,14 @@ class MessageIn extends Component {
   };
 
   render() {
-    const { body } = this.props;
+    const { body, avatar } = this.props;
 
     return (
       <div className="m-messenger__wrapper">
         <div className="m-messenger__message m-messenger__message--out">
+          <div className="m-messenger__message-pic">
+            <img src={avatar} alt="" className="mCS_img_loaded"/>
+          </div>
           <div className="m-messenger__message-body">
             <div className="m-messenger__message-arrow"></div>
             <div className="m-messenger__message-content">

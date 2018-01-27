@@ -7,6 +7,10 @@ button, [role="button"], [type="button"],  .btn {
   outline: none !important;
 }
 
+textarea {
+  resize: none;
+}
+
 .g-red {
   color:#D2322D !important;
 }
@@ -72,6 +76,9 @@ button, [role="button"], [type="button"],  .btn {
   margin-top: 0 !important;
 }
 
+.no-padding {
+  padding: 0 !important;
+}
 
 .App-title {
   font-size: 1.5em;
@@ -1009,4 +1016,36 @@ address.signUpOptional {
 .appDownloadDrawer .drawerTitle  {
   color: #fff;
   text-shadow: 0 2px 10px black;
+}
+
+.messages-portlet {
+  min-height:;: calc(100vh - 180px);
+  box-shadow: -4px 4px 20px #80808033;
+}
+
+.message-users-list {
+  height: calc((100vh - 180px)/1.9) !important;
+  overflow-y: auto;
+}
+
+ .messages-portlet #messages-container {
+  height: calc((100vh - 180px)/1.7) !important;
+  overflow-y: auto;
+}
+
+
+.messages-portlet .m-list-search {
+  background: #f4f5f8;
+  padding: 15px;
+  height: calc(100vh - 180px);
+}
+
+.messages-portlet .m-messenger {
+  height: calc(100vh - 180px);
+  padding: 15px;
+  background: #fff;
+}
+
+.messages-portlet .m-list-search .m-widget4 .m-widget4__item:hover, .messages-portlet .m-list-search .m-widget4 .m-widget4__item.active {
+  background: linear-gradient(90deg,transparent, #dcdde0);
 }
