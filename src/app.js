@@ -15,6 +15,7 @@ import createHistory from 'history/createBrowserHistory'
 
 import ApiClient from "./services/ApiClient";
 import LiveService from "./services/LiveService";
+import {Scrollbars} from "react-custom-scrollbars";
 
 const history = createHistory();
 const apiClient = new ApiClient();
@@ -25,11 +26,13 @@ class App extends Component {
 
   render() {
     return (
-      <Router history={history}>
-        <Provider store={store}>
-          <Routes />
-        </Provider>
-      </Router>
+        <Scrollbars autoHide>
+          <Router history={history}>
+            <Provider store={store}>
+              <Routes />
+            </Provider>
+          </Router>
+        </Scrollbars>
     );
   }
 }
