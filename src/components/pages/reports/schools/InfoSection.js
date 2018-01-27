@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import * as AUTH from '../../../../services/AuthService';
 import {CircularProgress} from "material-ui";
 
 class InfoSection extends Component {

@@ -23,34 +23,41 @@ class Schools extends Component {
     //     }
     // }
 
+    // componentDidMount () {
+    //     this.props.getUserSchool();
+    //     this.props.getUserSchoolStudents();
+    //     this.props.getUserSchoolHomerooms();
+    //     this.props.getUserSchoolTeachers();
+    //     this.props.getUserSchoolAdmins()
+    // }
+
     componentDidMount () {
+
+        const { getUserSchool } = this.props;
+        getUserSchool();
+
         this.props.getUserSchool();
-        this.props.getUserSchoolStudents();
-        this.props.getUserSchoolHomerooms();
-        this.props.getUserSchoolTeachers();
-        this.props.getUserSchoolAdmins()
+
     }
 
-    // componentDidMount () {
-    //     const { getUserSchool } = this.props;
-    //     getUserSchool();
-    //
-    //     this.props.getUserSchool();
-    //
-    // }
-    //
-    // /**
-    //  * Monitor props like events
-    //  */
-    // componentWillReceiveProps(nextProps) {
-    //     const success = this.props.school.get('success');
-    //     const nextSuccess = nextProps.school.get('success');
-    //     const school = nextProps.school.get('records');
-    //     if(!success && nextSuccess) {
-    //         console.log(school, success, nextSuccess);
-    //     }
-    //
-    // }
+    componentWillReceiveProps(nextProps) {
+
+        const success = this.props.school.get('success');
+        const nextSuccess = nextProps.school.get('success');
+        const school = nextProps.school;
+
+        if(!success && nextSuccess) {
+
+            const schoolId = school.get('records').toJS().schId;
+
+            this.props.getUserSchoolStudents(schoolId);
+            this.props.getUserSchoolHomerooms(schoolId);
+            this.props.getUserSchoolTeachers(schoolId);
+            this.props.getUserSchoolAdmins(schoolId)
+
+        }
+
+    }
 
     render() {
 
@@ -88,11 +95,11 @@ Schools = connect(
         schoolAdmins: selectGetUserSchoolAdminsRequestRequest(state)
     }),
     (dispatch) => ({
-        getUserSchoolAdmins: () => { dispatch(getUserSchoolAdmins(1)) },
-        getUserSchoolTeachers: () => { dispatch(getUserSchoolTeachers(1)) },
-        getUserSchoolStudents: () => { dispatch(getUserSchoolStudents(1)) },
-        getUserSchoolHomerooms: () => { dispatch(getUserSchoolHomerooms(1)) },
-        getUserSchool: () => { dispatch(getUserSchool(1)) }
+        getUserSchool: () => { dispatch(getUserSchool()) },
+        getUserSchoolHomerooms: (schoolId) => { dispatch(getUserSchoolHomerooms(schoolId)) },
+        getUserSchoolStudents: (schoolId) => { dispatch(getUserSchoolStudents(schoolId)) },
+        getUserSchoolTeachers: (schoolId) => { dispatch(getUserSchoolTeachers(schoolId)) },
+        getUserSchoolAdmins: (schoolId) => { dispatch(getUserSchoolAdmins(schoolId)) }
     })
 )(Schools);
 
