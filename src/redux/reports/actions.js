@@ -22,6 +22,10 @@ export const GET_SCHOOL_REPORT_STUDENT = '[Schools] GET_SCHOOL_REPORT_STUDENT';
 export const GET_SCHOOL_REPORT_STUDENT_SUCCESS = '[Schools] GET_SCHOOL_REPORT_STUDENT_SUCCESS';
 export const GET_SCHOOL_REPORT_STUDENT_FAIL = '[Schools] GET_SCHOOL_REPORT_STUDENT_FAIL';
 
+export const GET_USER_SCHOOL_CLASSROOMS = '[Schools] GET_USER_SCHOOL_CLASSROOMS';
+export const GET_USER_SCHOOL_CLASSROOMS_SUCCESS = '[Schools] GET_USER_SCHOOL_CLASSROOMS_SUCCESS';
+export const GET_USER_SCHOOL_CLASSROOMS_FAIL = '[Schools] GET_USER_SCHOOL_CLASSROOMS_FAIL';
+
 export function getUserSchool(params = {}) {
     return {
         types: [GET_USER_SCHOOL, GET_USER_SCHOOL_SUCCESS, GET_USER_SCHOOL_FAIL],
@@ -81,5 +85,16 @@ export function getSchoolReportStudent(id) {
     return {
         types: [GET_SCHOOL_REPORT_STUDENT, GET_SCHOOL_REPORT_STUDENT_SUCCESS, GET_SCHOOL_REPORT_STUDENT_FAIL],
         promise: (apiClient) => apiClient.get(`students/${id}`)
+    };
+}
+/**
+ * User School Classrooms
+ */
+export function getUserSchoolClassrooms() {
+    return {
+        types: [GET_USER_SCHOOL_CLASSROOMS, GET_USER_SCHOOL_CLASSROOMS_SUCCESS, GET_USER_SCHOOL_CLASSROOMS_FAIL],
+        promise: (apiClient) => apiClient.get(`schools/classrooms`, {
+            perPage: 0
+        })
     };
 }

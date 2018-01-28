@@ -4,8 +4,6 @@ import {
     Paper, Tabs, Tab, Typography, GridList, GridListTile, GridListTileBar, IconButton, Icon,
     LinearProgress, Input, InputAdornment
 } from 'material-ui';
-import {getAllStudents} from "../../../../services/Students";
-import {getSchoolStudents} from "../../../../redux/schools/actions";
 import classRooms from "../../../../data/json/classrooms.json";
 import {NavLink} from "react-router-dom";
 import {Search} from "material-ui-icons";
@@ -69,7 +67,7 @@ class TabSection extends Component {
     _renderSchoolHomerooms() {
 
         const schoolHomerooms = this.props.schoolHomerooms.toJS().records;
-
+        console.log(schoolHomerooms);
         return schoolHomerooms.map(function (homeroom,i) {
             return (
                 <GridListTile key={i} className="grid-tile">
@@ -101,38 +99,81 @@ class TabSection extends Component {
         })
     }
 
+    _renderSchoolClassrooms() {
 
-    _renderClassRooms(classrooms) {
-        return classrooms.map(function (classroom,i) {
-            return (
-                <GridListTile key={i} className="grid-tile">
-                    <img src={classroom.avatar} alt={classroom.first_name} />
+        const schoolClassrooms = this.props.schoolClassrooms;
+        const avatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+        // console.log(schoolClassrooms);
 
-                    <GridListTileBar
-                        className="myGridTileBar"
-                        title={<NavLink to={`/reports/classrooms/${classroom.id}`}>{classroom.name}</NavLink>}
-                        subtitle={
-                            (
-                                <div>
-                                    <span className="text-right d-block">75%</span>
-                                        <OldProgressBar correctValue="40" type="performance" />
-                                    <br />
-                                    <span  className="text-right  d-block">35%</span>
-                                    <OldProgressBar complateValue="40" progressValue="10" type="progress" />
-                                </div>
-                            )
-                        }
-                        actionIcon={
-                            <IconButton  color="contrast">
 
-                            </IconButton>
-                        }
-                    />
+        // return schoolClassrooms.map(function (classroom,i) {
+        //     return (
+        //         <GridListTile key={i} className="grid-tile">
+        //             <img src={ (!classroom.avatar) ? avatar : classroom.avatar } alt={classroom.name} />
+        //
+        //             <GridListTileBar
+        //                 className="myGridTileBar"
+        //                 title={<NavLink to={`/reports/classroom/${classroom.id}`}>{classroom.name}</NavLink>}
+        //                 // subtitle={
+        //                 //     (
+        //                 //         <div>
+        //                 //             <span className="text-right d-block">75%</span>
+        //                 //             <OldProgressBar correctValue="40" type="performance" />
+        //                 //             <br />
+        //                 //             <span  className="text-right  d-block">35%</span>
+        //                 //             <OldProgressBar complateValue="40" progressValue="10" type="progress" />
+        //                 //         </div>
+        //                 //     )
+        //                 // }
+        //                 actionIcon={
+        //                     <IconButton  color="default">
+        //
+        //                     </IconButton>
+        //                 }
+        //             />
+        //
+        //         </GridListTile>
+        //     )
+        // })
 
-                </GridListTile>
-            )
-        })
     }
+
+
+    // _renderClassRooms() {
+    //
+    //     const schoolClassrooms = this.props.schoolClassrooms.toJS().records;
+    //     const avatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+    //
+    //     return schoolClassrooms.map(function (classroom,i) {
+    //         return (
+    //             <GridListTile key={i} className="grid-tile">
+    //                 <img src={ (!classroom.avatar) ? avatar : classroom.avatar } alt={classroom.id} />
+    //
+    //                 <GridListTileBar
+    //                     className="myGridTileBar"
+    //                     title={<NavLink to={`/reports/classrooms/${classroom.id}`}>{classroom.name}</NavLink>}
+    //                     subtitle={
+    //                         (
+    //                             <div>
+    //                                 <span className="text-right d-block">75%</span>
+    //                                     <OldProgressBar correctValue="40" type="performance" />
+    //                                 <br />
+    //                                 <span  className="text-right  d-block">35%</span>
+    //                                 <OldProgressBar complateValue="40" progressValue="10" type="progress" />
+    //                             </div>
+    //                         )
+    //                     }
+    //                     actionIcon={
+    //                         <IconButton  color="contrast">
+    //
+    //                         </IconButton>
+    //                     }
+    //                 />
+    //
+    //             </GridListTile>
+    //         )
+    //     })
+    // }
 
 
     render() {
@@ -195,7 +236,7 @@ class TabSection extends Component {
                                 </TabContainer>}
                                 {value === 'classRooms' && <TabContainer>
                                     <GridList cellHeight={250} cols={3}>
-                                        {this._renderClassRooms(classRooms)}
+                                        {this._renderSchoolClassrooms()}
                                     </GridList>
 
                                 </TabContainer>}

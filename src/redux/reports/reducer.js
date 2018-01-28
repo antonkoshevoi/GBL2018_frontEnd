@@ -4,53 +4,61 @@ import {
   GET_USER_SCHOOL_HOMEROOMS, GET_USER_SCHOOL_HOMEROOMS_SUCCESS, GET_USER_SCHOOL_HOMEROOMS_FAIL,
   GET_USER_SCHOOL_TEACHERS, GET_USER_SCHOOL_TEACHERS_SUCCESS, GET_USER_SCHOOL_TEACHERS_FAIL,
   GET_USER_SCHOOL_ADMINS, GET_USER_SCHOOL_ADMINS_SUCCESS, GET_USER_SCHOOL_ADMINS_FAIL,
-  GET_SCHOOL_REPORT_STUDENT, GET_SCHOOL_REPORT_STUDENT_SUCCESS, GET_SCHOOL_REPORT_STUDENT_FAIL
+  GET_SCHOOL_REPORT_STUDENT, GET_SCHOOL_REPORT_STUDENT_SUCCESS, GET_SCHOOL_REPORT_STUDENT_FAIL,
+  GET_USER_SCHOOL_CLASSROOMS, GET_USER_SCHOOL_CLASSROOMS_SUCCESS, GET_USER_SCHOOL_CLASSROOMS_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
 const initialState = Immutable.fromJS({
-  getUserSchoolStudentsRequest: {
+    getUserSchoolStudentsRequest: {
       loading: false,
       success: false,
       fail: false,
       errorResponse: null,
       records: {}
-  },
-  getUserSchoolHomeroomsRequest: {
+    },
+    getUserSchoolHomeroomsRequest: {
       loading: false,
       success: false,
       fail: false,
       errorResponse: null,
       records: {}
-  },
-getUserSchoolTeachersRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorResponse: null,
-    records: {}
-},
-getUserSchoolAdminsRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorResponse: null,
-    records: {}
-},
-getStudentForReportRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorResponse: null,
-    record: {}
-},
-  school: {
+    },
+    getUserSchoolClassroomsRequest: {
+        loading: false,
+        success: false,
+        fail: false,
+        errorResponse: null,
+        records: {}
+    },
+    getUserSchoolTeachersRequest: {
+        loading: false,
+        success: false,
+        fail: false,
+        errorResponse: null,
+        records: {}
+    },
+    getUserSchoolAdminsRequest: {
+        loading: false,
+        success: false,
+        fail: false,
+        errorResponse: null,
+        records: {}
+    },
+    getStudentForReportRequest: {
+        loading: false,
+        success: false,
+        fail: false,
+        errorResponse: null,
+        record: {}
+    },
+    school: {
       loading: false,
       success: false,
       fail: false,
       errorResponse: null,
       records: {}
-  }
+    }
 });
 
 export default function reducer (state = initialState, action) {
@@ -150,6 +158,30 @@ export default function reducer (state = initialState, action) {
       case GET_USER_SCHOOL_HOMEROOMS_FAIL:
           return state
               .set('getUserSchoolHomeroomsRequest', state.get('getUserSchoolHomeroomsRequest')
+                  .set('loading', false)
+                  .set('fail', true)
+              );
+      /**
+       * User School Classrooms
+       */
+      case GET_USER_SCHOOL_CLASSROOMS:
+          return state
+              .set('getUserSchoolClassroomsRequest', state.get('getUserSchoolClassroomsRequest')
+                  .set('loading', true)
+                  .set('success', false)
+                  .set('fail', false)
+                  .set('records', Immutable.List())
+              );
+      case GET_USER_SCHOOL_CLASSROOMS_SUCCESS:
+          return state
+              .set('getUserSchoolClassroomsRequest', state.get('getUserSchoolClassroomsRequest')
+                  .set('success', true)
+                  .set('loading', false)
+                  .set('records', Immutable.fromJS(action.result.data))
+              );
+      case GET_USER_SCHOOL_CLASSROOMS_FAIL:
+          return state
+              .set('getUserSchoolClassroomsRequest', state.get('getUserSchoolClassroomsRequest')
                   .set('loading', false)
                   .set('fail', true)
               );

@@ -40,7 +40,7 @@ class ChartsSection extends Component {
             },
             {
                 title: 'Classrooms',
-                value: 2,
+                value: this.props.classroomsCount,
                 colorName: 'info'
             },
             {

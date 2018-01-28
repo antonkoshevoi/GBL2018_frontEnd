@@ -4,13 +4,13 @@ import TabSection from "../../../components/pages/reports/schools/TabSection";
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
 import {
-    getUserSchool, getUserSchoolStudents,
+    getUserSchool, getUserSchoolStudents, getUserSchoolClassrooms,
     getUserSchoolHomerooms, getUserSchoolTeachers, getUserSchoolAdmins
 } from "../../../redux/reports/actions";
 import {
     selectSchoolRequest, selectGetUserSchoolStudentsRequest,
     selectGetUserSchoolHomeroomsRequest, selectGetUserSchoolTeachersRequest,
-    selectGetUserSchoolAdminsRequestRequest
+    selectGetUserSchoolAdminsRequestRequest, selectGetUserSchoolClassroomsRequest
 } from "../../../redux/reports/selectors.js";
 
 class Schools extends Component {
@@ -53,7 +53,8 @@ class Schools extends Component {
             this.props.getUserSchoolStudents(schoolId);
             this.props.getUserSchoolHomerooms(schoolId);
             this.props.getUserSchoolTeachers(schoolId);
-            this.props.getUserSchoolAdmins(schoolId)
+            this.props.getUserSchoolAdmins(schoolId);
+            this.props.getUserSchoolClassrooms(schoolId);
 
         }
 
@@ -61,7 +62,7 @@ class Schools extends Component {
 
     render() {
 
-        const { school, schoolStudents, schoolHomerooms, schoolTeachers, schoolAdmins } = this.props;
+        const { school, schoolStudents, schoolHomerooms, schoolTeachers, schoolAdmins, schoolClassrooms } = this.props;
         const loading = schoolHomerooms.get('loading');
 
         return (
@@ -73,11 +74,13 @@ class Schools extends Component {
                         homeroomsCount = { schoolHomerooms.get('records').size }
                         teachersCount = { schoolTeachers.get('records').size }
                         adminsCount = { schoolAdmins.get('records').size }
+                        classroomsCount = { schoolClassrooms.get('records').size }
                     />
                     <TabSection
                         school = { school }
                         schoolStudents = { schoolStudents }
                         schoolHomerooms = { schoolHomerooms }
+                        schoolClassrooms = { schoolClassrooms }
                     />
 
             </div>
@@ -92,9 +95,11 @@ Schools = connect(
         schoolStudents: selectGetUserSchoolStudentsRequest(state),
         schoolHomerooms: selectGetUserSchoolHomeroomsRequest(state),
         schoolTeachers: selectGetUserSchoolTeachersRequest(state),
-        schoolAdmins: selectGetUserSchoolAdminsRequestRequest(state)
+        schoolAdmins: selectGetUserSchoolAdminsRequestRequest(state),
+        schoolClassrooms: selectGetUserSchoolClassroomsRequest(state)
     }),
     (dispatch) => ({
+        getUserSchoolClassrooms: () => { dispatch(getUserSchoolClassrooms()) },
         getUserSchoolAdmins: () => { dispatch(getUserSchoolAdmins()) },
         getUserSchoolTeachers: () => { dispatch(getUserSchoolTeachers()) },
         getUserSchoolStudents: () => { dispatch(getUserSchoolStudents()) },
