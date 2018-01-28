@@ -44,9 +44,9 @@ const initialState = Immutable.fromJS({
     total: 0,
     totalPages: 1
   },
-    cartRecords: [],
-    records: [],
-    singleRecord: {},
+  cartRecords: [],
+  records: [],
+  singleRecord: {},
 });
 
 export default function reducer (state = initialState, action) {

@@ -1,82 +1,72 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Card from "../../../ui/Card";
 
 class CartItems extends Component {
+  static propTypes = {
+    data: PropTypes.array.isRequired
+  };
 
+  _getTotalSum () {
+    const { data } = this.props;
 
-
-
-    _getTotalSum(items) {
-        let total = 0
-        for(var i=0;i<items.length;i++)
-        {
-            if(isNaN(items[i].storeItem.price)){
-                continue;
-            }
-            total += (Number(items[i].storeItem.price) * Number(items[i].count));
-        }
-        return total;
+    let total = 0;
+    for(let i = 0; i < data.length; i++) {
+      if (isNaN(data[i].storeItem.price)) {
+        continue;
+      }
+      total += (Number(data[i].storeItem.price) * Number(data[i].count));
     }
+    return total;
+  }
 
-    _renderItems(items) {
-        return items.map(function (item,i) {
-            return (
-                <div class="m-widget4__item">
-                    <div class="m-widget__img m-widget4__img--logo">
-                        <img src={item.storeItem.thumbnail} width={40} alt="cart product"/>
-                    </div>
-                    <div class="m-widget4__info">
-					<span class="m-widget4__title">
-                        {item.storeItem.title}
+  _renderItems () {
+    const { data } = this.props;
+
+    return data.map((item, key) => (
+      <div key={key} className="m-widget4__item">
+        <div className="m-widget__img m-widget4__img--logo">
+          <img src={item.storeItem.thumbnail} width={40} alt="cart product"/>
+        </div>
+        <div className="m-widget4__info">
+					<span className="m-widget4__title">
+            {item.storeItem.title}
 					</span> <br/>
-                    <span class="m-widget4__sub">
-                        {item.count} items
+          <span className="m-widget4__sub">
+            {item.count} items
 					</span>
-                    </div>
-                    <span class="m-widget4__ext">
-					<span class="m-widget4__number m--font-danger">+${item.storeItem.price * item.count}</span>
-				</span>
-                </div>
-            )
-        })
-    }
+        </div>
+        <span className="m-widget4__ext">
+            <span className="m-widget4__number m--font-danger">+${item.storeItem.price * item.count}</span>
+          </span>
+      </div>
+    ));
+  }
 
-    render() {
+  render() {
 
-        const {data} = this.props;
-
-        return (
-            <div className="m-portlet m-portlet--bordered-semi  cartItems">
-                <div class="m-portlet__head m--hide">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                            <h3 class="m-portlet__head-text">
-                                Items
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div className="m-portlet__body">
-                    <div class="m-widget25">
-                        <span class="m-widget25__price m--font-brand">${this._getTotalSum(data)}</span>
-                        <span class="m-widget25__desc">Total</span>
-                    </div>
-                    <div class="m-widget4">
-                        {this._renderItems(data)}
-                    </div>
-                </div>
+    return (
+      <div className="m-portlet m-portlet--bordered-semi  cartItems">
+        <div className="m-portlet__head m--hide">
+          <div className="m-portlet__head-caption">
+            <div className="m-portlet__head-title">
+              <h3 className="m-portlet__head-text">
+                Items
+              </h3>
             </div>
-        );
-    }
-}
-
-CartItems.propTypes = {
-    data:PropTypes.array.isRequired
-};
-
-CartItems.defaultProps = {
-    data: []
+          </div>
+        </div>
+        <div className="m-portlet__body">
+          <div className="m-widget25">
+            <span className="m-widget25__price m--font-brand">${this._getTotalSum()}</span>
+            <span className="m-widget25__desc">Total</span>
+          </div>
+          <div className="m-widget4">
+            {this._renderItems()}
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default CartItems;

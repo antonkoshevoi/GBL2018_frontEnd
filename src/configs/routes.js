@@ -32,6 +32,9 @@ import Products from "../containers/pages/store/Products";
 import ShoppingCart from "../containers/pages/store/ShoppingCart/ShoppingCart";
 import Messages from '../containers/messages/Messages';
 import Checkout from "../containers/pages/store/checkout/Checkout";
+import PayPalReturnContainer from '../containers/pages/store/payments/PayPalReturnContainer';
+import PaymentFailedContainer from '../containers/pages/store/payments/PaymentFailedContainer';
+import PaymentSuccessContainer from '../containers/pages/store/payments/PaymentSuccessContainer';
 
 export default () => (
   <AppContainer>
@@ -73,6 +76,11 @@ export default () => (
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/messages' name='Messages' component={Messages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />
+
+      {/*Payments*/}
+      <Route exact path='/payments/paypal/return' component={PayPalReturnContainer} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/payments/success' component={PaymentSuccessContainer} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/payments/fail' component={PaymentFailedContainer} />
 
       <Route component={NotFoundPage} />
     </Switch>

@@ -13,6 +13,7 @@ import reportsReducer from './reports/reducer';
 import notificationsReducer from './notifications/reducer';
 import messagesReducer from './messages/reducer';
 import storeReducer from './store/reducer';
+import paymentsReducer from './payments/reducer';
 
 export default {
   app: appReducer,
@@ -30,4 +31,5 @@ export default {
   notifications: notificationsReducer,
   messages: messagesReducer,
   store: storeReducer,
+  payments: paymentsReducer,
 };
