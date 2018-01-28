@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { selectCreateRequest, selectSchools } from '../../../redux/classrooms/selectors';
 import { create, getSchools, resetCreateRequest } from '../../../redux/classrooms/actions';
 import Modal from "../../../components/ui/Modal";
-import ClassroomForm from "../../../components/pages/classrooms/ClassroomForm";
+import ClassroomForm from "../forms/ClassroomForm";
 
 class CreateClassroomModal extends Component {
   static propTypes = {
@@ -103,7 +103,7 @@ class CreateClassroomModal extends Component {
           <ClassroomForm
             onChange={(classroom) => { this._onChange(classroom) }}
             classroom={this.state.classroom}
-            schools={schools}
+            // schools={schools}
             errors={errors}/>
           <div className='col-sm-12'>
             <Divider/>

@@ -18,7 +18,7 @@ import {
   update
 } from '../../../redux/classrooms/actions';
 import Modal from "../../../components/ui/Modal";
-import ClassroomForm from "../../../components/pages/classrooms/ClassroomForm";
+import ClassroomForm from "../forms/ClassroomForm";
 
 class EditClassroomModal extends Component {
   static propTypes = {

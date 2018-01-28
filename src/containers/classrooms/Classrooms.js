@@ -34,23 +34,27 @@ class Classrooms extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+      this._openEditDialogOnSingleRequestSuccess(nextProps);
+  }
+
   componentDidMount () {
-    const { getRecords } = this.props;
-    getRecords();
+      const { getRecords } = this.props;
+      getRecords();
   }
 
   _openCreateDialog = () => {
-    this.setState({ createModalIsOpen: true });
+      this.setState({ createModalIsOpen: true });
   };
   _closeCreateDialog = () => {
-    this.setState({ createModalIsOpen: false });
+      this.setState({ createModalIsOpen: false });
   };
 
   _openEditDialog = () => {
-    this.setState({ editModalIsOpen: true });
+      this.setState({ editModalIsOpen: true });
   };
   _closeEditDialog = () => {
-    this.setState({ editModalIsOpen: false });
+      this.setState({ editModalIsOpen: false });
   };
 
   /**
@@ -78,8 +82,8 @@ class Classrooms extends Component {
         <Td first={true} width='100px'>{key + 1}</Td>
         <Td width='132px'>{record.get('crmName')}</Td>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
-        {/*<Td width='132px'>{record.getIn(['course', 'crmCourse'])}</Td>*/}
-        <Td width='132px'>{record.get('crmName')}</Td>
+        <Td width='132px'>{record.get('crmCourse')}</Td>
+        {/*<Td width='132px'>{record.get('crmName')}</Td>*/}
         <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
         <Td width='132px'>{record.get('studentsCount')}</Td>
         <Td width='100px'>
@@ -90,7 +94,15 @@ class Classrooms extends Component {
   }
 
   _editRecord (id) {
-    this.props.getSingleRecord(id);
+      this.props.getSingleRecord(id);
+  }
+  _openEditDialogOnSingleRequestSuccess(nextProps) {
+      const success = this.props.getSingleRecordRequest.get('success');
+      const nextSuccess = nextProps.getSingleRecordRequest.get('success');
+
+      if(!success && nextSuccess) {
+          this._openEditDialog();
+      }
   }
 
   /**
