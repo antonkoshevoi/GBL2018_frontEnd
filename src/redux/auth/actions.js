@@ -5,6 +5,7 @@ export const INITIAL_LOGIN_SUCCESS = '[Auth] INITIAL_LOGIN_SUCCESS';
 export const INITIAL_LOGIN_FAIL = '[Auth] INITIAL_LOGIN_FAIL';
 
 export const RESTORE_LOGIN = '[Auth] RESTORE_LOGIN';
+export const RESTORE_LOGIN_FAIL = '[Auth] RESTORE_LOGIN_FAIL';
 
 export const LOGIN = '[Auth] LOGIN';
 export const LOGIN_SUCCESS = '[Auth] LOGIN_SUCCESS';
@@ -37,6 +38,15 @@ export function restoreLogin () {
     type: RESTORE_LOGIN
   };
 }
+
+export function restoreLoginFail () {
+    const userData = SessionStorage.get('userData');
+    return {
+        type: RESTORE_LOGIN_FAIL,
+        payload:userData
+    };
+}
+
 export function refreshLogin() {
   const refreshToken = SessionStorage.get('refreshToken');
 

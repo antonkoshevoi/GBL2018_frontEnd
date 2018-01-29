@@ -1,7 +1,8 @@
 import {
-  INITIAL_LOGIN, INITIAL_LOGIN_FAIL, INITIAL_LOGIN_SUCCESS, LOGIN, LOGIN_FAIL, LOGIN_SUCCESS, LOGIN_SUCCESS_REMEMBER, LOGOUT, LOGOUT_FAIL,
-  LOGOUT_SUCCESS, RESTORE_LOGIN,
-  SET_REDIRECT_URL
+    INITIAL_LOGIN, INITIAL_LOGIN_FAIL, INITIAL_LOGIN_SUCCESS, LOGIN, LOGIN_FAIL, LOGIN_SUCCESS, LOGIN_SUCCESS_REMEMBER,
+    LOGOUT, LOGOUT_FAIL,
+    LOGOUT_SUCCESS, RESTORE_LOGIN, RESTORE_LOGIN_FAIL,
+    SET_REDIRECT_URL
 } from './actions';
 import Immutable from 'immutable';
 import { destroySession, saveSession } from '../../helpers/session';
@@ -21,14 +22,23 @@ const initialState = Immutable.fromJS({
     errorResponse: null
   },
   redirectAfterLogin: null,
-  isLoggedIn: false
+  isLoggedIn: false,
+  restoreLoginFail: false,
+  restoreLoginUser:{}
 });
 
 export default function reducer (state = initialState, action) {
-  switch(action.type) {
+
+    switch(action.type) {
 
     case RESTORE_LOGIN:
-      return state.set('isLoggedIn', true);
+      return state.set('isLoggedIn', true)
+                  .set('restoreLoginFail', false);
+
+    case RESTORE_LOGIN_FAIL:
+      return state.set('restoreLoginFail', true)
+                  .set('isLoggedIn', false)
+                  .set('restoreLoginUser',Immutable.fromJS(action.payload))
 
     /**
      * Login
@@ -41,21 +51,21 @@ export default function reducer (state = initialState, action) {
           .remove('fail')
         ).set('isLoggedIn', false);
     case LOGIN_SUCCESS:
-      saveSession(action.result.data);
+        saveSession(action.result.data);
       return state
         .set('loginRequest', state.get('loginRequest')
           .set('success', true)
           .remove('loading')
-        ).set('isLoggedIn', true);
+        ).set('isLoggedIn', true).set('isLoggedInWithoutPassword', false);
     case LOGIN_SUCCESS_REMEMBER:
       saveSession(action.result.data, true);
       return state
         .set('loginRequest', state.get('loginRequest')
           .set('success', true)
           .remove('loading')
-        ).set('isLoggedIn', true);
+        ).set('isLoggedIn', true).set('restoreLoginFail', false);
     case LOGIN_FAIL:
-      return state
+        return state
         .set('loginRequest', state.get('loginRequest')
           .set('fail', true)
           .remove('loading')

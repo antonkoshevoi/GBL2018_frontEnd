@@ -154,6 +154,10 @@
         font-size: 1rem;
     }
 
+    div#notFoundPage {
+        margin: -20px;
+    }
+
 }
 
 

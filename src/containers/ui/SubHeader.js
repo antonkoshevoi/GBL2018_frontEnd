@@ -88,13 +88,13 @@ class SubHeader extends Component {
 
 
   render() {
-      const {location, cartRecords, addToCartRequest, cartRecordsRequest} = this.props;
-
-
+      const {location, cartRecords, addToCartRequest, cartRecordsRequest, auth} = this.props;
+      const isLoggedIn = auth.get('isLoggedIn')
       const paths = location.pathname.split('/')
 
       return (
             <div className="m-subheader">
+                {isLoggedIn &&
                 <div className="d-flex align-items-center full-width">
                     <div className="mr-auto">
                         <h3 className="m-subheader__title m-subheader__title--separator">{(parseInt(paths[paths.length-1]).length > 0) ? paths[paths.length-1] : (paths.length > 2) ? paths[paths.length-2] : paths[paths.length-1]}</h3>
@@ -154,6 +154,7 @@ class SubHeader extends Component {
 				</span>
                     </div>
                 </div>
+                }
             </div>
         );
     }
@@ -166,6 +167,7 @@ SubHeader = connect(
         addToCartRequest: selectAddToCartRequest(state),
         cartRecordsRequest: selectGetCartRecordsRequest(state),
         cartRecords: selectCartRecords(state),
+        auth: state.auth
     }),
     (dispatch) => ({
         getCartRecords: () => { dispatch(getCartRecords()) },

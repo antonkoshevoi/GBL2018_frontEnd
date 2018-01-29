@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import {isLoggedInWithoutPassword, selectIsLoggedIn, SelectRestoreLoginFail} from '../../redux/auth/selectors';
 import { Redirect, withRouter } from 'react-router-dom';
 import Route from './Route';
 
 class AuthenticatedRoute extends Component {
 
   render () {
-    const { component: Component, isLoggedIn, location, ...rest } = this.props;
-
-    return <Route {...rest} render={(props) => (
+    const { component: Component, isLoggedIn,restoreLoginFail, location, ...rest } = this.props;
+      console.log(isLoggedIn, restoreLoginFail);
+      return <Route {...rest} render={(props) => (
       isLoggedIn ? (
         <Component {...props}/>
-      ) : (
+      ) : restoreLoginFail ? (
         <Redirect to={{
-          pathname: '/login',
+          pathname: '/restore-login',
           state: { from: location }
         }}/>
+      ) : (
+          <Redirect to={{
+              pathname: '/login',
+              state: { from: location }
+          }}/>
       )
     )}/>;
   }
@@ -24,7 +29,8 @@ class AuthenticatedRoute extends Component {
 
 AuthenticatedRoute = connect(
   (state, ownProps) => ({
-    isLoggedIn: selectIsLoggedIn(state)
+    isLoggedIn: selectIsLoggedIn(state),
+      restoreLoginFail: SelectRestoreLoginFail(state)
   }),
   (dispatch) => ({})
 )(AuthenticatedRoute);

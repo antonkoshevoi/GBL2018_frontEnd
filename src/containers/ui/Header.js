@@ -38,13 +38,13 @@ class Header extends Component {
   }
 
   _renderHeader() {
-    const { logout } = this.props;
-
+    const { logout, auth } = this.props;
+    const isLoggedIn = auth.get('isLoggedIn')
     return  (
+
       <header className="m-grid__item  m-header "  data-minimize-offset="200" data-minimize-mobile-offset="200" >
-
-
-        <div className="m-container general-header m-container--fluid m-container--full-height">
+          {isLoggedIn &&
+          <div className="m-container general-header m-container--fluid m-container--full-height">
           <div className="m-stack m-stack--ver m-stack--desktop">
             <div className="m-stack__item m-brand  ">
               <div className="m-stack m-stack--ver m-stack--general">
@@ -88,6 +88,7 @@ class Header extends Component {
             </div>
           </div>
         </div>
+          }
       </header>
     )
   }
@@ -100,7 +101,9 @@ class Header extends Component {
 }
 
 Header = connect(
-  (state) => ({}),
+  (state) => ({
+      auth: state.auth
+  }),
   (dispatch) => ({
     logout: () => { dispatch(logout()) }
   })

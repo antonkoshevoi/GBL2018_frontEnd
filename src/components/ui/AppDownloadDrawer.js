@@ -21,7 +21,7 @@ class AppDownloadDrawer extends Component {
             <div>
                 <button className="btn m-btn btn-brand m-btn--icon" onClick={this.toggleDrawer(true)}>
                      <span>
-                        <i class="fa fa-download"></i>
+                        <i className="fa fa-download"></i>
                         <span>Download App</span>
                     </span>
                 </button>
@@ -41,13 +41,13 @@ class AppDownloadDrawer extends Component {
                             <div className="actionButtons">
                                 <button className="btn btn-success btn-lg m-btn 	m-btn m-btn--icon">
                                     <span>
-										<i class="fa fa-android"></i>
+										<i className="fa fa-android"></i>
 										<span>Download App</span>
 									</span>
                                 </button>
                                 <button className="btn btn-success btn-lg m-btn 	m-btn m-btn--icon">
                                     <span>
-										<i class="fa fa-apple"></i>
+										<i className="fa fa-apple"></i>
 										<span>Download App</span>
 									</span>
                                 </button>

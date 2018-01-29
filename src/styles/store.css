@@ -321,7 +321,11 @@
 }
 
 .payments-widgets .m-widget24__item:hover {
-    background: #ccc;
+    background: #f4f5f8;
+}
+
+.m-pricing-table-1 .m-pricing-table-1__items .m-pricing-table-1__item .m-pricing-table-1__price {
+    font-size: 1.7rem;
 }
 
 

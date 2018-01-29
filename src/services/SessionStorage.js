@@ -22,4 +22,9 @@ export default class SessionStorage {
     const instance = new SessionStorage();
     return instance.cookies.remove(key, options);
   }
+
+  static getAll() {
+      const instance = new SessionStorage();
+      return instance.cookies.getAll();
+  }
 }

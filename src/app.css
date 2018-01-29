@@ -1049,3 +1049,9 @@ address.signUpOptional {
 .messages-portlet .m-list-search .m-widget4 .m-widget4__item:hover, .messages-portlet .m-list-search .m-widget4 .m-widget4__item.active {
   background: linear-gradient(90deg,transparent, #dcdde0);
 }
+
+div#notFoundPage {
+  margin: -30px;
+  background-position: center top;
+  background-repeat: no-repeat;
+}

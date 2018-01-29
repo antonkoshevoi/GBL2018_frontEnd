@@ -35,11 +35,13 @@ import Checkout from "../containers/pages/store/checkout/Checkout";
 import PayPalReturnContainer from '../containers/pages/store/payments/PayPalReturnContainer';
 import PaymentFailedContainer from '../containers/pages/store/payments/PaymentFailedContainer';
 import PaymentSuccessContainer from '../containers/pages/store/payments/PaymentSuccessContainer';
+import RestoreLogin from "../containers/auth/RestoreLogin";
 
 export default () => (
   <AppContainer>
     <Switch>
       <Route exact path='/login' name='login' component={Login} />
+      <Route exact path='/restore-login' name='restore-login' component={RestoreLogin} />
       <Route exact path='/signUp' name='signUp' component={SignUpIndex} />
       <Route exact path='/signUp/parent' name='signUpParent' component={SignUpParent} />
       <Route exact path='/signUp/principal' name='signUpPrincipal' component={SignUpPrincipal} />
@@ -79,10 +81,10 @@ export default () => (
 
       {/*Payments*/}
       <Route exact path='/payments/paypal/return' component={PayPalReturnContainer} />
-      <AuthenticatedRoute exact layout={MainLayout} path='/payments/success' component={PaymentSuccessContainer} />
-      <AuthenticatedRoute exact layout={MainLayout} path='/payments/fail' component={PaymentFailedContainer} />
+      <Route exact layout={MainLayout} path='/payments/success' component={PaymentSuccessContainer} />
+      <Route exact layout={MainLayout} path='/payments/fail' component={PaymentFailedContainer} />
 
-      <Route component={NotFoundPage} />
+      <Route layout={MainLayout} component={NotFoundPage} />
     </Switch>
   </AppContainer>
 );

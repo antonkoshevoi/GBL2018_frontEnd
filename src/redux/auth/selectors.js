@@ -22,3 +22,8 @@ export const selectIsLoggedIn = createSelector(
   selectAuthDomain,
   (subState) => subState.get('isLoggedIn')
 );
+
+export const SelectRestoreLoginFail = createSelector(
+  selectAuthDomain,
+  (subState) => subState.get('restoreLoginFail')
+);

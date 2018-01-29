@@ -15,7 +15,19 @@ class ShoppingCartTable extends Component {
     }
 
     componentWillMount(){
-        this.setState({total:this._getTotalSum(this.state.data)});
+        const {data} = this.props;
+        this.setState({total:this._getTotalSum(data)});
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.data !== this.props.data) {
+            this._updateData(nextProps.data);
+        }
+    }
+
+    _updateData(data){
+        this.setState({data});
+        this.setState({total:this._getTotalSum(data)});
     }
 
     _removeItem(idx){
@@ -27,10 +39,7 @@ class ShoppingCartTable extends Component {
         let data = this.state.data;
         if (e.target.value < 1) return;
         data[idx]['count'] = e.target.value;
-
-
-        this.setState({data});
-        this.setState({total:this._getTotalSum(data)});
+        this._updateData(data)
     }
 
 
