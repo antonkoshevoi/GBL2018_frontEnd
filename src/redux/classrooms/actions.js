@@ -1,33 +1,37 @@
-export const GET_RECORDS = '[Classroomss] GET_RECORDS';
-export const GET_RECORDS_SUCCESS = '[Classroomss] GET_RECORDS_SUCCESS';
-export const GET_RECORDS_FAIL = '[Classroomss] GET_RECORDS_FAIL';
+import ApiClient from '../../services/ApiClient';
 
-export const GET_SINGLE_RECORD = '[Classroomss] GET_SINGLE_RECORD';
-export const GET_SINGLE_RECORD_SUCCESS = '[Classroomss] GET_SINGLE_RECORD_SUCCESS';
-export const GET_SINGLE_RECORD_FAIL = '[Classroomss] GET_SINGLE_RECORD_FAIL';
-export const RESET_GET_SINGLE_RECORD_REQUEST = '[Classroomss] RESET_GET_SINGLE_RECORD_REQUEST';
+export const GET_RECORDS = '[Classrooms] GET_RECORDS';
+export const GET_RECORDS_SUCCESS = '[Classrooms] GET_RECORDS_SUCCESS';
+export const GET_RECORDS_FAIL = '[Classrooms] GET_RECORDS_FAIL';
 
-export const GET_SCHOOLS = '[Classroomss] GET_SCHOOLS';
-export const GET_SCHOOLS_SUCCESS = '[Classroomss] GET_SCHOOLS_SUCCESS';
-export const GET_SCHOOLS_FAIL = '[Classroomss] GET_SCHOOLS_FAIL';
+export const GET_SINGLE_RECORD = '[Classrooms] GET_SINGLE_RECORD';
+export const GET_SINGLE_RECORD_SUCCESS = '[Classrooms] GET_SINGLE_RECORD_SUCCESS';
+export const GET_SINGLE_RECORD_FAIL = '[Classrooms] GET_SINGLE_RECORD_FAIL';
+export const RESET_GET_SINGLE_RECORD_REQUEST = '[Classrooms] RESET_GET_SINGLE_RECORD_REQUEST';
 
-export const CREATE = '[Classroomss] CREATE';
-export const CREATE_SUCCESS = '[Classroomss] CREATE_SUCCESS';
-export const CREATE_FAIL = '[Classroomss] CREATE_FAIL';
-export const RESET_CREATE_REQUEST = '[Classroomss] RESET_CREATE_ERRORS';
+export const CREATE = '[Classrooms] CREATE';
+export const CREATE_SUCCESS = '[Classrooms] CREATE_SUCCESS';
+export const CREATE_FAIL = '[Classrooms] CREATE_FAIL';
+export const RESET_CREATE_REQUEST = '[Classrooms] RESET_CREATE_ERRORS';
 
-export const UPDATE = '[Classroomss] UPDATE';
-export const UPDATE_SUCCESS = '[Classroomss] UPDATE_SUCCESS';
-export const UPDATE_FAIL = '[Classroomss] UPDATE_FAIL';
-export const RESET_UPDATE_REQUEST = '[Classroomss] RESET_UPDATE_REQUEST';
+export const UPDATE = '[Classrooms] UPDATE';
+export const UPDATE_SUCCESS = '[Classrooms] UPDATE_SUCCESS';
+export const UPDATE_FAIL = '[Classrooms] UPDATE_FAIL';
+export const RESET_UPDATE_REQUEST = '[Classrooms] RESET_UPDATE_REQUEST';
 
-export const GET_SCHOOL_TEACHERS = '[Classroomss] GET_SCHOOL_TEACHERS';
-export const GET_SCHOOL_TEACHERS_SUCCESS = '[Classroomss] GET_SCHOOL_TEACHERS_SUCCESS';
-export const GET_SCHOOL_TEACHERS_FAIL = '[Classroomss] GET_SCHOOL_TEACHERS_FAIL';
+export const DELETE = '[Classrooms] DELETE';
+export const DELETE_SUCCESS = '[Classrooms] DELETE_SUCCESS';
+export const DELETE_FAIL = '[Classrooms] DELETE_FAIL';
 
-export const GET_SCHOOL_STUDENTS = '[Classroomss] GET_SCHOOL_STUDENTS';
-export const GET_SCHOOL_STUDENTS_SUCCESS = '[Classroomss] GET_SCHOOL_STUDENTS_SUCCESS';
-export const GET_SCHOOL_STUDENTS_FAIL = '[Classroomss] GET_SCHOOL_STUDENTS_FAIL';
+export const BULK_UPLOAD = '[Classrooms] BULK_UPLOAD';
+export const BULK_UPLOAD_PROGRESS = '[Classrooms] BULK_UPLOAD_PROGRESS';
+export const BULK_UPLOAD_SUCCESS = '[Classrooms] BULK_UPLOAD_SUCCESS';
+export const BULK_UPLOAD_FAIL = '[Classrooms] BULK_UPLOAD_FAIL';
+export const RESET_BULK_UPLOAD_REQUEST = '[Classrooms] RESET_BULK_UPLOAD_REQUEST';
+
+export const GET_COURSES = '[Classrooms] GET_COURSES';
+export const GET_COURSES_SUCCESS = '[Classrooms] GET_COURSES_SUCCESS';
+export const GET_COURSES_FAIL = '[Classrooms] GET_COURSES_FAIL';
 
 export function getRecords(params = {}) {
   return {
@@ -49,17 +53,6 @@ export function resetGetSingleRecordRequest () {
   return {
     type: RESET_GET_SINGLE_RECORD_REQUEST
   }
-}
-/**
- * Get schools
- */
-export function getSchools(params = {}) {
-  return {
-    types: [GET_SCHOOLS, GET_SCHOOLS_SUCCESS, GET_SCHOOLS_FAIL],
-    promise: (apiClient) => apiClient.get('schools', Object.assign({}, params, {
-      perPage: 0
-    }))
-  };
 }
 /**
  * Create
@@ -91,24 +84,43 @@ export function resetUpdateRequest () {
 }
 
 /**
- * Classrooms School Teachers
+ * Bulk upload
  */
-export function getSchoolTeachers(id) {
+export function bulkUpload(file, data, params = {}) {
+    const source = ApiClient.cancelToken();
+
     return {
-        types: [GET_SCHOOL_TEACHERS, GET_SCHOOL_TEACHERS_SUCCESS, GET_SCHOOL_TEACHERS_FAIL],
-        promise: (apiClient) => apiClient.get(`schools/teachers`, {
-            perPage: 0
-        })
+        upload: true,
+        types: [BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS],
+        promise: (apiClient) => apiClient.upload(`classroom/bulk`, file, data, params, {}, {
+            cancelToken: source.token
+        }),
+        cancel: source.cancel
     };
 }
-/**
- * Classrooms School Students
- */
-export function getSchoolStudents(id) {
+
+export function resetBulkUploadRequest () {
     return {
-        types: [GET_SCHOOL_STUDENTS, GET_SCHOOL_STUDENTS_SUCCESS, GET_SCHOOL_STUDENTS_FAIL],
-        promise: (apiClient) => apiClient.get(`schools/students`, {
-            perPage: 0
-        })
-    };
+        type: RESET_BULK_UPLOAD_REQUEST
+    }
+
+}
+/**
+ * Delete
+ */
+export function deleteRecord(id, params = {}) {
+  return {
+    types: [DELETE, DELETE_SUCCESS, DELETE_FAIL],
+    promise: (apiClient) => apiClient.delete(`classroom/${id}`, params)
+  };
+}
+
+/**
+ * Courses
+ */
+export function getCourses() {
+  return {
+    types: [GET_COURSES, GET_COURSES_SUCCESS, GET_COURSES_FAIL],
+    promise: (apiClient) => apiClient.get(`classrooms/courses`)
+  };
 }

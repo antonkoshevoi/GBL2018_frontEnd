@@ -6,11 +6,11 @@ import {
   DialogContentText,
   Icon, IconButton,
   Toolbar, Typography,
-  Divider, Button
+  Divider, Button, DialogActions
 } from 'material-ui';
 import { connect } from 'react-redux';
-import { selectCreateRequest, selectSchools } from '../../../redux/classrooms/selectors';
-import { create, getSchools, resetCreateRequest } from '../../../redux/classrooms/actions';
+import { selectCreateRequest } from '../../../redux/classrooms/selectors';
+import { create, resetCreateRequest } from '../../../redux/classrooms/actions';
 import Modal from "../../../components/ui/Modal";
 import ClassroomForm from "../forms/ClassroomForm";
 
@@ -26,21 +26,8 @@ class CreateClassroomModal extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      classroom: {
-        username: '',
-        password: '',
-        email: '',
-        firstName: '',
-        lastName: '',
-        gender: null,
-        phone: '',
-        schoolId: null,
-      }
+      classroom: {}
     };
-  }
-
-  componentDidMount() {
-    this.props.getSchools();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -48,12 +35,12 @@ class CreateClassroomModal extends Component {
     const nextSuccess = nextProps.createRequest.get('success');
 
     if(!success && nextSuccess) {
-      this._onClose();
+      this._close();
       this.props.onSuccess();
     }
   }
 
-  _onClose () {
+  _close () {
     this.setState({
       classroom: {}
     });
@@ -65,7 +52,8 @@ class CreateClassroomModal extends Component {
     this.setState({ classroom });
   };
 
-  _onSubmit = () => {
+  _onSubmit (e) {
+    e.preventDefault();
     this.props.create(
       this.state.classroom
     );
@@ -74,13 +62,13 @@ class CreateClassroomModal extends Component {
   };
 
   render() {
-    const { isOpen, createRequest, schools } = this.props;
+    const { isOpen, createRequest } = this.props;
     const loading = createRequest.get('loading');
     const errorMessage = createRequest.get('errorMessage');
     const errors = createRequest.get('errors');
 
     return (
-      <Modal isOpen={isOpen} onClose={() => this._onClose()}>
+      <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
             <IconButton color="contrast" aria-label="Close">
@@ -100,18 +88,25 @@ class CreateClassroomModal extends Component {
           <DialogContentText>
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
-          <ClassroomForm
-            onChange={(classroom) => { this._onChange(classroom) }}
-            classroom={this.state.classroom}
-            // schools={schools}
-            errors={errors}/>
-          <div className='col-sm-12'>
-            <Divider/>
-            <Button disabled={loading} raised className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn' color='primary' onClick={() => { this._onSubmit() }} >
-              Add New Classroom
-            </Button>
-          </div>
+          <form id='create-classroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
+            <ClassroomForm
+              onChange={(classroom) => { this._onChange(classroom) }}
+              classroom={this.state.classroom}
+              errors={errors}/>
+          </form>
         </DialogContent>
+        <Divider className='full-width'/>
+        <DialogActions>
+          <Button
+            type='submit'
+            form='create-classroom-form'
+            disabled={loading}
+            raised
+            className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+            color='primary'>
+            Add New Classroom
+          </Button>
+        </DialogActions>
       </Modal>
     );
   }
@@ -120,12 +115,10 @@ class CreateClassroomModal extends Component {
 CreateClassroomModal = connect(
   (state) => ({
     createRequest: selectCreateRequest(state),
-    schools: selectSchools(state),
   }),
   (dispatch) => ({
     create: (form, params = {}) => { dispatch(create(form, params)) },
     resetCreateRequest: () => { dispatch(resetCreateRequest()) },
-    getSchools: () => { dispatch(getSchools()) },
   })
 )(CreateClassroomModal);
 

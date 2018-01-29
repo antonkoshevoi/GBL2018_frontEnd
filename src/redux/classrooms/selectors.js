@@ -27,13 +27,6 @@ export const selectRecords = createSelector(
   (subState) => subState.get('records')
 );
 /**
- * Schools
- */
-export const selectSchools = createSelector(
-    selectClassroomsDomain,
-  (subState) => subState.get('schools')
-);
-/**
  * Pagiantion
  */
 export const selectPagination = createSelector(
@@ -56,16 +49,24 @@ export const selectUpdateRequest = createSelector(
   (subState) => subState.get('updateRequest')
 );
 /**
- * Classrooms School Teachers
+ * Delete
  */
-export const selectGetSchoolTeachersRequest = createSelector(
-    selectClassroomsDomain,
-    (subState) => subState.get('getSchoolTeachersRequest')
+export const selectDeleteRequest = createSelector(
+  selectClassroomsDomain,
+  (subState) => subState.get('deleteRequest')
 );
 /**
- * Classrooms School Students
+ * Bulk Upload
  */
-export const selectGetSchoolStudentsRequest = createSelector(
+export const selectBulkUploadRequest = createSelector(
     selectClassroomsDomain,
-    (subState) => subState.get('getSchoolStudentsRequest')
+    (subState) => subState.get('bulkUploadRequest')
+);
+
+/**
+ * Courses
+ */
+export const selectCoursesRequest = createSelector(
+  selectClassroomsDomain,
+  (subState) => subState.get('getCoursesRequest')
 );

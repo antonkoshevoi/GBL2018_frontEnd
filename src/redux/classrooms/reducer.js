@@ -1,9 +1,10 @@
 import {
   GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, CREATE, CREATE_SUCCESS, CREATE_FAIL,
-  RESET_CREATE_REQUEST, GET_SCHOOLS, GET_SCHOOLS_SUCCESS, GET_SCHOOLS_FAIL, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
+  RESET_CREATE_REQUEST, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
   GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS,
-  GET_SCHOOL_TEACHERS, GET_SCHOOL_TEACHERS_SUCCESS, GET_SCHOOL_TEACHERS_FAIL,
-  GET_SCHOOL_STUDENTS, GET_SCHOOL_STUDENTS_SUCCESS, GET_SCHOOL_STUDENTS_FAIL,
+  DELETE, DELETE_SUCCESS, DELETE_FAIL,
+  RESET_BULK_UPLOAD_REQUEST, BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS,
+  GET_COURSES, GET_COURSES_FAIL, GET_COURSES_SUCCESS
 } from './actions';
 import Immutable from 'immutable';
 
@@ -37,14 +38,26 @@ const initialState = Immutable.fromJS({
     errorCode: null,
     errors: {}
   },
-  getSchoolTeachersRequest: {
+  deleteRequest: {
     loading: false,
     success: false,
     fail: false,
-    errorResponse: null,
-    records: {}
+    errorMessage: null,
+    errorCode: null,
+    errors: {}
   },
-  getSchoolStudentsRequest: {
+  bulkUploadRequest: {
+      loading: false,
+      progress: 0,
+      success: false,
+      fail: false,
+      errorMessage: null,
+      errorCode: null,
+      errors: {},
+      cancel: undefined,
+      results: {}
+  },
+  getCoursesRequest: {
     loading: false,
     success: false,
     fail: false,
@@ -113,18 +126,6 @@ export default function reducer (state = initialState, action) {
     case RESET_GET_SINGLE_RECORD_REQUEST:
       return state
         .set('getSingleRecordRequest', initialState.get('getSingleRecordRequest'));
-    /**
-     * Get schools
-     */
-    case GET_SCHOOLS:
-      return state
-        .set('schools', Immutable.List());
-    case GET_SCHOOLS_SUCCESS:
-      return state
-        .set('schools', Immutable.fromJS(action.result.data));
-    case GET_SCHOOLS_FAIL:
-      return state;
-
     /**
      * Create
      */
@@ -219,53 +220,107 @@ export default function reducer (state = initialState, action) {
     case RESET_UPDATE_REQUEST:
       return state
         .set('updateRequest', initialState.get('updateRequest'));
-
     /**
-     * Classroom School Teachers
+     * Bulk upload
      */
-    case GET_SCHOOL_TEACHERS:
+    case BULK_UPLOAD:
+        return state
+            .set('bulkUploadRequest', state.get('bulkUploadRequest')
+                .set('loading', true)
+                .set('progress', 0)
+                .set('success', false)
+                .set('fail', false)
+                .remove('errors')
+                .remove('errorMessage')
+                .remove('errorCode')
+                .set('cancel', action.cancel)
+            );
+    case BULK_UPLOAD_PROGRESS:
+        const percent = Math.round((action.progressEvent.loaded * 100) / action.progressEvent.total);
+        return state
+            .set('bulkUploadRequest', state.get('bulkUploadRequest')
+                .set('progress', percent)
+            );
+    case BULK_UPLOAD_SUCCESS:
+        return state
+            .set('bulkUploadRequest', state.get('bulkUploadRequest')
+                .set('loading', false)
+                .set('progress', 100)
+                .set('success', true)
+                .set('results', Immutable.fromJS(action.result.data))
+            );
+    case BULK_UPLOAD_FAIL:
+        //avoid duplicate declaration
+        let newStateOnBulkUploadFail = state
+            .set('bulkUploadRequest', state.get('bulkUploadRequest')
+                .set('loading', false)
+                .set('progress', 0)
+                .set('fail', true)
+            );
+
+        if (typeof action.error.response !== 'undefined') {
+            const bulkUploadRequestErrorData = action.error.response.data;
+            newStateOnBulkUploadFail.set('bulkUploadRequest', newStateOnBulkUploadFail.get('bulkUploadRequest')
+                .set('errorCode', bulkUploadRequestErrorData.code)
+                .set('errorMessage', bulkUploadRequestErrorData.message)
+                .set('errors', bulkUploadRequestErrorData.code === 422 ? Immutable.fromJS(bulkUploadRequestErrorData.errors) : undefined)
+            );
+        }
+        return newStateOnBulkUploadFail;
+    case RESET_BULK_UPLOAD_REQUEST:
+        return state
+            .set('bulkUploadRequest', initialState.get('bulkUploadRequest'));
+    /**
+     * Delete
+     */
+    case DELETE:
       return state
-        .set('getSchoolTeachersRequest', state.get('getSchoolTeachersRequest')
+        .set('deleteRequest', state.get('deleteRequest')
           .set('loading', true)
           .set('success', false)
           .set('fail', false)
-          .remove('records')
+          .remove('errors')
+          .remove('errorMessage')
+          .remove('errorCode')
         );
-    case GET_SCHOOL_TEACHERS_SUCCESS:
+    case DELETE_SUCCESS:
       return state
-        .set('getSchoolTeachersRequest', state.get('getSchoolTeachersRequest')
-          .set('success', true)
+        .set('deleteRequest', state.get('deleteRequest')
           .set('loading', false)
-          .set('records', Immutable.fromJS(action.result.data))
+          .set('success', true)
         );
-    case GET_SCHOOL_TEACHERS_FAIL:
+    case DELETE_FAIL:
+      const deleteError = action.error.response.data;
       return state
-        .set('getSchoolTeachersRequest', state.get('getSchoolTeachersRequest')
+        .set('deleteRequest', state.get('deleteRequest')
           .set('loading', false)
           .set('fail', true)
+          .set('errorCode', deleteError.code)
+          .set('errorMessage', deleteError.message)
+          .set('errors', deleteError.code === 422 ? Immutable.fromJS(deleteError.errors) : undefined)
         );
 
     /**
-     * Classroom School Students
+     * Courses
      */
-    case GET_SCHOOL_STUDENTS:
+    case GET_COURSES:
       return state
-        .set('getSchoolStudentsRequest', state.get('getSchoolStudentsRequest')
+        .set('getCoursesRequest', state.get('getCoursesRequest')
           .set('loading', true)
           .set('success', false)
           .set('fail', false)
           .remove('records')
         );
-    case GET_SCHOOL_STUDENTS_SUCCESS:
+    case GET_COURSES_SUCCESS:
       return state
-        .set('getSchoolStudentsRequest', state.get('getSchoolStudentsRequest')
+        .set('getCoursesRequest', state.get('getCoursesRequest')
           .set('success', true)
           .set('loading', false)
           .set('records', Immutable.fromJS(action.result.data))
         );
-    case GET_SCHOOL_STUDENTS_FAIL:
+    case GET_COURSES_FAIL:
       return state
-        .set('getSchoolStudentsRequest', state.get('getSchoolStudentsRequest')
+        .set('getCoursesRequest', state.get('getCoursesRequest')
           .set('loading', false)
           .set('fail', true)
         );

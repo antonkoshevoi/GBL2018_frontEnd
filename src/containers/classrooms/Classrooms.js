@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import { Button, Icon, MenuItem, Select } from 'material-ui';
+import { Button, Icon, MenuItem, Select, Input } from 'material-ui';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
 import {
+  selectDeleteRequest,
   selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination,
   selectRecords
 } from '../../redux/classrooms/selectors';
-import {getRecords, getSingleRecord} from '../../redux/classrooms/actions';
+import {deleteRecord, getRecords, getSingleRecord} from '../../redux/classrooms/actions';
 import Pagination from '../../components/ui/Pagination';
 import CreateClassroomModal from './modals/CreateClassroomModal';
 import EditClassroomModal from "./modals/EditClassroomModal";
+import SearchInput from "../../components/ui/SearchInput";
+import DeleteButton from "../../components/ui/DeleteButton";
 
 class Classrooms extends Component {
   constructor(props) {
@@ -20,41 +24,34 @@ class Classrooms extends Component {
       createModalIsOpen: false,
       editModalIsOpen: false,
       sorters: {},
+      filters: {},
       page: props.pagination.get('page'),
       perPage: props.pagination.get('perPage')
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const success = this.props.getSingleRecordRequest.get('success');
-    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
-
-    if(!success && nextSuccess) {
-      this._openEditDialog();
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-      this._openEditDialogOnSingleRequestSuccess(nextProps);
+    this._openEditDialogOnSingleRequestSuccess(nextProps);
+    this._deleteRequestSuccess(nextProps);
   }
 
   componentDidMount () {
-      const { getRecords } = this.props;
-      getRecords();
+    const { getRecords } = this.props;
+    getRecords();
   }
 
   _openCreateDialog = () => {
-      this.setState({ createModalIsOpen: true });
+    this.setState({ createModalIsOpen: true });
   };
   _closeCreateDialog = () => {
-      this.setState({ createModalIsOpen: false });
+    this.setState({ createModalIsOpen: false });
   };
 
   _openEditDialog = () => {
-      this.setState({ editModalIsOpen: true });
+    this.setState({ editModalIsOpen: true });
   };
   _closeEditDialog = () => {
-      this.setState({ editModalIsOpen: false });
+    this.setState({ editModalIsOpen: false });
   };
 
   /**
@@ -82,27 +79,39 @@ class Classrooms extends Component {
         <Td first={true} width='100px'>{key + 1}</Td>
         <Td width='132px'>{record.get('crmName')}</Td>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
-        <Td width='132px'>{record.get('crmCourse')}</Td>
-        {/*<Td width='132px'>{record.get('crmName')}</Td>*/}
+        <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
         <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
         <Td width='132px'>{record.get('studentsCount')}</Td>
         <Td width='100px'>
           <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
+          <DeleteButton onClick={() => { this._deleteRecord(record.get('id')) }}/>
         </Td>
       </Row>
     ));
   }
 
   _editRecord (id) {
-      this.props.getSingleRecord(id);
+    this.props.getSingleRecord(id);
   }
   _openEditDialogOnSingleRequestSuccess(nextProps) {
-      const success = this.props.getSingleRecordRequest.get('success');
-      const nextSuccess = nextProps.getSingleRecordRequest.get('success');
+    const success = this.props.getSingleRecordRequest.get('success');
+    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
 
-      if(!success && nextSuccess) {
-          this._openEditDialog();
-      }
+    if(!success && nextSuccess) {
+      this._openEditDialog();
+    }
+  }
+
+  _deleteRecord (id) {
+    this.props.deleteRecord(id);
+  }
+  _deleteRequestSuccess(nextProps) {
+    const deleteSuccess = this.props.getDeleteRequest.get('success');
+    const nextDeleteSuccess = nextProps.getDeleteRequest.get('success');
+
+    if(!deleteSuccess && nextDeleteSuccess) {
+      this._getRecords();
+    }
   }
 
   /**
@@ -110,10 +119,11 @@ class Classrooms extends Component {
    * @private
    */
   _getRecords () {
-    const { sorters, page, perPage } = this.state;
+    const { sorters, filters, page, perPage } = this.state;
 
     this.props.getRecords({
       orderBy: buildSortersQuery(sorters),
+      filter: filters,
       page, perPage
     });
   }
@@ -133,6 +143,25 @@ class Classrooms extends Component {
     }
 
     this.setState({ sorters }, this._getRecords);
+  }
+
+  /**
+   *
+   * @param value
+   * @private
+   */
+  _search(value) {
+    let filters = {
+      composed: value,
+      // name: value,
+      // school: value,
+      // teacher: value,
+    };
+
+    this.setState({
+      page: 1,
+      filters
+    }, this._getRecords);
   }
 
   /**
@@ -187,7 +216,14 @@ class Classrooms extends Component {
                 </h3>
               </div>
             </div>
-
+            <div className="m-portlet__head-tools">
+              <SearchInput
+                className="portlet-header-input"
+                id="search"
+                type='search'
+                placeholder="Search"
+                onChange={(e) => { this._search(e) }}/>
+            </div>
           </div>
           <div className='m-portlet__body'>
             <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
@@ -208,6 +244,12 @@ class Classrooms extends Component {
                     Add New
                     <Icon style={{marginLeft:'5px'}}>add</Icon>
                   </Button>
+                  <NavLink className='link-btn' to='/classrooms/csv'>
+                    <Button raised className='btn-success mt-btn mt-btn-success'>
+                      Bulk Add classrooms
+                      <Icon style={{marginLeft:'5px'}}>person</Icon>
+                    </Button>
+                  </NavLink>
                 </div>
 
               </div>
@@ -217,11 +259,11 @@ class Classrooms extends Component {
               <Thead>
                 <HeadRow>
                   <Th first={true} width='100px'>#</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>Name</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>School</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>Course</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>Teacher</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='132px'>Students Count</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='122px'>Name</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='122px'>School</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='122px'>Course</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='122px'>Teacher</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='122px'>Students Count</Th>
                   <Th width='100px'>Actions</Th>
                 </HeadRow>
               </Thead>
@@ -260,12 +302,14 @@ Classrooms = connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
+    getDeleteRequest: selectDeleteRequest(state),
     pagination: selectPagination(state),
     records: selectRecords(state),
   }),
   (dispatch) => ({
     getRecords: (params = {}) => { dispatch(getRecords(params)) },
-    getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) }
+    getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
+    deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) }
   })
 )(Classrooms);
 

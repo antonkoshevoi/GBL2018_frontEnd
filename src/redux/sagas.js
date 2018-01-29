@@ -26,7 +26,6 @@ function* rootSaga () {
     classroomsSagas,
     notificationsSagas,
     messagesSagas,
-    classroomsSagas,
     userSagas,
     storeSagas
   ])
