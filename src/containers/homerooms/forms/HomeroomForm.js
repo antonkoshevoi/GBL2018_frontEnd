@@ -68,18 +68,8 @@ class HomeroomForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this._getErrorsSuccess(nextProps);
     this._getSchoolTeachersSuccess(nextProps);
     this._getSchoolStudentsSuccess(nextProps);
-  }
-
-  _getErrorsSuccess(nextProps) {
-    if (!this.props.errors.size && nextProps.errors.size) {
-      this.setState({
-        ...this.state,
-        activeTab: nextProps.errors.get('schoolId') ? 1 : 0
-      });
-    }
   }
 
   _getSchoolTeachersSuccess(nextProps) {
