@@ -19,6 +19,10 @@ export const ADD_TO_CART = '[Store] ADD_TO_CART';
 export const ADD_TO_CART_SUCCESS = '[Store] ADD_TO_CART_SUCCESS';
 export const ADD_TO_CART_FAIL = '[Store] ADD_TO_CART_FAIL';
 
+export const GET_UNASSIGNEDS = '[Store] GET_UNASSIGNEDS';
+export const GET_UNASSIGNEDS_SUCCESS = '[Store] GET_UNASSIGNEDS_SUCCESS';
+export const GET_UNASSIGNEDS_FAIL = '[Store] GET_UNASSIGNEDS_FAIL';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -70,5 +74,17 @@ export function addToCarts(id, params = {}) {
   return {
     types: [ADD_TO_CART, ADD_TO_CART_SUCCESS, ADD_TO_CART_FAIL],
     promise: (apiClient) => apiClient.post(`store/add-to-card/${id}`, params)
+  };
+}
+
+/**
+ * Unassigneds
+ * @param params
+ * @returns {{types: [null,null,null], promise: (function(*))}}
+ */
+export function getUnassigneds(params = {}) {
+  return {
+    types: [GET_UNASSIGNEDS, GET_UNASSIGNEDS_SUCCESS, GET_UNASSIGNEDS_FAIL],
+    promise: (apiClient) => apiClient.get('store/unassigned-items', params)
   };
 }

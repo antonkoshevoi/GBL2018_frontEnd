@@ -37,6 +37,7 @@ import PaymentFailedContainer from '../containers/pages/store/payments/PaymentFa
 import PaymentSuccessContainer from '../containers/pages/store/payments/PaymentSuccessContainer';
 import RestoreLogin from "../containers/auth/RestoreLogin";
 import TransactionsContainer from "../containers/pages/store/payments/TransactionsContainer";
+import UnassignedCredits from "../containers/unassigned-credits/UnassignedCredits";
 
 export default () => (
   <AppContainer>
@@ -81,6 +82,9 @@ export default () => (
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/messages' name='Messages' component={Messages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />
+
+      {/*Unassigned Credits*/}
+      <AuthenticatedRoute exact layout={MainLayout} path='/accounts/unassigned_credits' name='Unassigned Credits' component={UnassignedCredits} />
 
       {/*Payments*/}
       <Route exact path='/payments/paypal/return' component={PayPalReturnContainer} />

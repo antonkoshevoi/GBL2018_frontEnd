@@ -28,7 +28,7 @@ class TransactionList extends Component {
                 <tr>
                     <td>
                         <div className="table-message">
-                            <h2>Students Not Found...</h2>
+                            <h2>No transactions...</h2>
                         </div>
                     </td>
                 </tr>
@@ -44,14 +44,13 @@ class TransactionList extends Component {
                             </IconButton>
                         </Td>
                         <Td width='20px'>{i + 1}</Td>
-                        <Td width='240px'>{item.external_id}</Td>
-                        <Td width='102px'><span style={{fontWeight:600}} className="g-blue">{item.total}$</span></Td>
+                        <Td width='102px'><span style={{fontWeight:600}} className="g-blue">{item.get('total')}$</span></Td>
                         <Td width='100px'><span
-                            className='m-badge m-badge--brand m-badge--wide'>{item.type}</span></Td>
-                        <Td width='120px'>{moment(item.created).format("YY MMM hh:mm:ss")}</Td>
-                        <Td width='132px'>{moment(item.authorized).format("YY MMM hh:mm:ss")}</Td>
+                            className='m-badge m-badge--brand m-badge--wide'>{item.get('paymentType')}</span></Td>
+                        <Td width='120px'>{item.get('createdAt')}</Td>
+                        <Td width='132px'>{item.get('authorizedAt')}</Td>
                     </Row>,
-                    ( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) && this._renderTransactionItemsBlock(item.items)
+                    ( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) && this._renderTransactionItemsBlock(item.get('items'))
                 ]
             )
         })
@@ -66,7 +65,6 @@ class TransactionList extends Component {
                         <Table style={{minHeight:'300px'}}>
                             <Thead >
                                 <HeadRow className="m-datatable__row">
-                                    <Th width="100px">ID</Th>
                                     <Th width="80px">Thumbnail</Th>
                                     <Th width="180px">Title</Th>
                                     <Th width="100px">Quantity</Th>
@@ -88,15 +86,14 @@ class TransactionList extends Component {
         return data.map((item,i) => {
             return (
                 <Row key={i} index={i}>
-                    <Td width="100px">{item.id}</Td>
                     <Td width="80px">
                         <div >
-                            <img src={item.thumbnail} width={70} alt={item.title}/>
+                            <img src={item.get('item').get('thumbnail')} width={70} alt={item.get('title')}/>
                         </div>
                     </Td>
-                    <Td  width="180px"><NavLink to={`/store/details/${item.id}`}>{item.title}</NavLink></Td>
-                    <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{item.quantity}</span></Td>
-                    <Td width='150px'><span style={{fontWeight:700,fontSize:'1.7rem'}} className="g-blue">{Number(item.price).toFixed(2)} $</span></Td>
+                    <Td  width="180px"><NavLink to={`/store/details/${item.get('item').get('id')}`}>{item.get('item').get('title')}</NavLink></Td>
+                    <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{item.get('quantity')}</span></Td>
+                    <Td width='150px'><span style={{fontWeight:700,fontSize:'1.7rem'}} className="g-blue">{Number(item.get('item').get('price')).toFixed(2)} $</span></Td>
 
                 </Row>
             )
@@ -116,13 +113,12 @@ class TransactionList extends Component {
                 <Table >
                     <Thead>
                         <HeadRow>
-                            <Th  width='20px'></Th>
+                            <Th width='20px'></Th>
                             <Th first={true} width='20px'>#</Th>
-                            <Th name='trans_id' width='240px'>ID</Th>
-                            <Th name='firstName' width='102px'>Total</Th>
-                            <Th name='lastName' width='100px'>Type</Th>
-                            <Th name='email' width='120px'>Created</Th>
-                            <Th width='132px'>Authorized</Th>
+                            <Th name='total' width='102px'>Total</Th>
+                            <Th name='type' width='100px'>Type</Th>
+                            <Th name='created' width='120px'>Created</Th>
+                            <Th name='authorized' width='132px'>Authorized</Th>
                         </HeadRow>
                     </Thead>
                     <Tbody>

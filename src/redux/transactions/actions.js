@@ -6,7 +6,7 @@ export const GET_RECORDS_FAIL = '[Transactions] GET_RECORDS_FAIL';
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
-    promise: (apiClient) => apiClient.get('transaction/items', params)
+    promise: (apiClient) => apiClient.get('store/transactions', params)
   };
 }
 

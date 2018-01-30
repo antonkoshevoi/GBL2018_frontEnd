@@ -46,7 +46,7 @@ export default function reducer (state = initialState, action) {
         .set('getRecordsRequest', state.get('getRecordsRequest')
           .set('loading', false)
           .set('fail', true)
-        ).set('records', Immutable.List(data));
+        );
 
 
     /**

@@ -75,3 +75,11 @@ export const deleteFromCartRequest = createSelector(
   selectStoreDomain,
   (subState) => subState.get('deleteFromCartRequest')
 );
+
+/**
+ * Unassigneds
+ */
+export const getUnassignedsRequest = createSelector(
+  selectStoreDomain,
+  (subState) => subState.get('getUnassignedsRequest')
+);
