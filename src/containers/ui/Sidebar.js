@@ -28,14 +28,31 @@ class Sidebar extends Component {
     }; //
 
     componentDidMount(){
-        const activeMenuKey = $('.second_level .active').closest('.menuItem').data('key');
-        if (activeMenuKey !== undefined) {
-            $('.second_level active').closest('.menuItem');
-            this.setState({activeMenu:{key:activeMenuKey,subMenu:true}})
-        } else {
-            this.setState({activeMenu:{key:this.props.location.pathname.substr(1)}});
-        }
+        const {location} = this.props;
+        const key = location.pathname.substr(1).split('/')[0];
 
+        setTimeout(()=>{
+            const activeMenuKey = $('.second_level .active').closest('.menuItem').data('key');
+
+            if (activeMenuKey !== undefined) {
+                $('.second_level active').closest('.menuItem');
+                this.setState({activeMenu:{key:activeMenuKey,subMenu:true}})
+            } else {
+                this.setState({activeMenu:this._getActiveMenuByKey(key)});
+            }
+        })
+    }
+
+
+    _getActiveMenuByKey(key) {
+        const activeMenu = Menu.multipleMenu.filter(item => item.key === key )[0];
+        if (activeMenu) {
+            return activeMenu
+        } else {
+            return {
+                key:'dashboard'
+            }
+        }
     }
 
 

@@ -10,10 +10,8 @@ import {destroyTokenSession} from "../../helpers/session";
 function* onLoad (action) {
   const token = SessionStorage.get('token');
   const refreshToken = SessionStorage.get('refreshToken');
-    console.log(SessionStorage.getAll());
 
-
-    if (token || refreshToken) {
+  if (token || refreshToken) {
     yield put(restoreLogin());
   }
 
@@ -22,7 +20,6 @@ function* onLoad (action) {
 function* afterLoadSuccess (action) {
   if(action.result) {
     const userResults = action.result[0];
-      console.log(userResults);
       //subscribe to user's notifications & messages channels
     yield put ( subscribeToNotifications(userResults.data.id) );
     yield put ( subscribeToMessages(userResults.data.id) );

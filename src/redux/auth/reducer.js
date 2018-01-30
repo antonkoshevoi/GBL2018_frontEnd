@@ -28,7 +28,7 @@ const initialState = Immutable.fromJS({
 });
 
 export default function reducer (state = initialState, action) {
-    console.log(action.type);
+
     switch(action.type) {
 
     case RESTORE_LOGIN:

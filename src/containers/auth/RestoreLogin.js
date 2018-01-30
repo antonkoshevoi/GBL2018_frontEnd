@@ -23,7 +23,7 @@ class RestoreLogin extends Component {
   }
 
 
-  componentDidMount(){
+  componentWillMount(){
       const {history, auth} = this.props;
 
       if (auth.get('restoreLoginUser')) {
