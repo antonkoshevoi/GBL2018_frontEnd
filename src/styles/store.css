@@ -134,6 +134,15 @@
     font-size: 0.9rem;
 }
 
+.m-widget25__desc .discount {
+    color: #771f1e;
+    text-decoration: line-through;
+}
+
+.m-widget25__desc .discount  > span {
+    color: #5c7b8b;
+}
+
 .cardItem .productPrice .discount > span  {
     color: #525672;
 }

@@ -1061,9 +1061,13 @@ table .sub-table {
 }
 
 table .sub-table > td {
-  padding: 25px;
+  padding: 30px;
 }
 
 table .sub-table .m-datatable {
   box-shadow: 0 0 15px 1px rgba(113,106,202,.2);
+}
+
+.transactionsList table td, .transactionsList table th {
+  text-align: center;
 }

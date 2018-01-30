@@ -5,6 +5,7 @@ import Card from "../../../ui/Card";
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../../ui/table";
 import {Icon, IconButton} from "material-ui";
 import moment from "moment";
+import {NavLink} from "react-router-dom";
 
 class TransactionList extends Component {
 
@@ -44,7 +45,7 @@ class TransactionList extends Component {
                         </Td>
                         <Td width='20px'>{i + 1}</Td>
                         <Td width='240px'>{item.external_id}</Td>
-                        <Td width='102px'>{item.total}</Td>
+                        <Td width='102px'><span style={{fontWeight:600}} className="g-blue">{item.total}$</span></Td>
                         <Td width='100px'><span
                             className='m-badge m-badge--brand m-badge--wide'>{item.type}</span></Td>
                         <Td width='120px'>{moment(item.created).format("YY MMM hh:mm:ss")}</Td>
@@ -69,6 +70,7 @@ class TransactionList extends Component {
                                     <Th width="80px">Thumbnail</Th>
                                     <Th width="180px">Title</Th>
                                     <Th width="100px">Quantity</Th>
+                                    <Th width="150px">Price</Th>
                                 </HeadRow>
                             </Thead>
                             <Tbody >
@@ -81,6 +83,7 @@ class TransactionList extends Component {
         )
     }
 
+
     _renderTransactionItems(data) {
         return data.map((item,i) => {
             return (
@@ -91,8 +94,9 @@ class TransactionList extends Component {
                             <img src={item.thumbnail} width={70} alt={item.title}/>
                         </div>
                     </Td>
-                    <Td  width="180px">{item.title}</Td>
+                    <Td  width="180px"><NavLink to={`/store/details/${item.id}`}>{item.title}</NavLink></Td>
                     <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{item.quantity}</span></Td>
+                    <Td width='150px'><span style={{fontWeight:700,fontSize:'1.7rem'}} className="g-blue">{Number(item.price).toFixed(2)} $</span></Td>
 
                 </Row>
             )
@@ -104,7 +108,7 @@ class TransactionList extends Component {
         const loading = request.get('loading');
 
         return (
-        <div>
+        <div className="transactionsList">
             <Card title="Transactions" icon="la la-money">
                 {loading &&
                 <TablePreloader text="Loading..." color="accent"/>

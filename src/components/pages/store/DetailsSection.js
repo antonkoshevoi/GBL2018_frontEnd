@@ -6,9 +6,8 @@ class DetailsSection extends Component {
     render() {
 
         const data = this.props.data;
-        console.log(data.get('price'));
         const category = 'No Info...';
-        const price = data.get('price');
+        const price = Number(data.get('price'));
 
         return (
             <div id="product-details">
@@ -43,8 +42,12 @@ class DetailsSection extends Component {
                                 </div>
                                 <div className="actionsBtn justify-content-between full-width align-items-end d-flex m--padding-right-20 align-self-end">
                                     <div className="m-widget25 ">
-                                        <span className="m-widget25__price m--font-brand">{price }</span>
-                                        <span className="m-widget25__desc">$</span>
+                                        <span className="m-widget25__price m--font-brand">${price}</span>
+                                        <span className="m-widget25__desc">
+                                            <span className="discount">
+                                                <span>{(price/100*data.get('discount') + price) + '$'}</span>
+                                            </span>
+                                        </span>
                                     </div>
                                     <button className="btn m-btn btn-danger m-btn--icon" onClick={() => {this.props.buyClick(data.get('id'))}}>
                                         <span>
