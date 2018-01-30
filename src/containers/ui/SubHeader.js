@@ -91,7 +91,6 @@ class SubHeader extends Component {
       const {location, cartRecords, addToCartRequest, cartRecordsRequest, auth} = this.props;
       const isLoggedIn = auth.get('isLoggedIn');
       const paths = location.pathname.split('/');
-      console.log(isLoggedIn);
       return (
           isLoggedIn && (
                 <div className="m-subheader">

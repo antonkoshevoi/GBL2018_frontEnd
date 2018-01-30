@@ -74,7 +74,7 @@ export const buildMessagesQueue = (thread) => {
 export const addOutgoingMessageToQuery = (thread, messageBody) => {
   let lastMessage = thread.messages[0];
 
-  if (lastMessage.type === 'out') {
+  if (lastMessage && lastMessage.type === 'out') {
     lastMessage.body += '\n\n' + messageBody;
   } else {
     thread.messages.unshift({
@@ -86,7 +86,6 @@ export const addOutgoingMessageToQuery = (thread, messageBody) => {
 
   return thread;
 };
-
 
 export const addIncomingMessageToQuery = (thread, message) => {
   let lastMessage = thread.messages[0];

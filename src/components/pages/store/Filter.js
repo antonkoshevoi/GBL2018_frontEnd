@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import {NavLink} from "react-router-dom";
 import {Search} from "material-ui-icons";
 import red from "material-ui/es/colors/red";
+import {buildSortersQuery} from "../../../helpers/utils";
 
 const styles = {
     root: {
@@ -42,8 +43,10 @@ class Filter extends Component {
            filter:{
                name:'',
                category:''
-           }
-        }
+           },
+            orderBy:{}
+        },
+        sorters:{}
     };
 
 
@@ -64,8 +67,30 @@ class Filter extends Component {
 
 
     _initFilter = (e) =>  {
-        this.props.onChange(this.state.params);
+        const {params} = this.state;
+        this.props.onChange(params);
     }
+
+    _selectSorter = (e,name) => {
+
+
+        let sorters = {};
+
+        if(sorters[name]) {
+            sorters[name] = this.state.sorters[name] === 'asc' ? 'desc' : 'asc';
+        } else {
+            sorters[name] = 'desc';
+        }
+
+        this.setState({
+            ...sorters,
+            params:{ ...this.state.params,
+                filter:{...this.state.params.filter},
+                orderBy:buildSortersQuery(sorters) }});
+
+        this._initFilter();
+    }
+
 
     render() {
         const { classes } = this.props;
@@ -161,10 +186,10 @@ class Filter extends Component {
                                         open={Boolean(sortMenu)}
                                         onClose={(e) => {this.handleMenuClose(e,'sortMenu')}}
                                     >
-                                        <MenuItem onClick={(e) => {this.handleMenuClose(e,'sortMenu')}}>Price: lowest to high</MenuItem>
-                                        <MenuItem onClick={(e) => {this.handleMenuClose(e,'sortMenu')}}>Price: high to lowest</MenuItem>
-                                        <MenuItem onClick={(e) => {this.handleMenuClose(e,'sortMenu')}}>Latest added</MenuItem>
-                                        <MenuItem onClick={(e) => {this.handleMenuClose(e,'sortMenu')}}>High rating</MenuItem>
+                                        <MenuItem onClick={(e) => {this._selectSorter(e,'priceLow')}}>Price: lowest to high</MenuItem>
+                                        <MenuItem onClick={(e) => {this._selectSorter(e,'priceHigh')}}>Price: high to lowest</MenuItem>
+                                        <MenuItem onClick={(e) => {this._selectSorter(e,'created')}}>Latest added</MenuItem>
+                                        <MenuItem onClick={(e) => {this._selectSorter(e,'rating')}}>High rating</MenuItem>
                                     </Menu>
                                 </div>
                             </div>

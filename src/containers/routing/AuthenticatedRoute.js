@@ -8,7 +8,7 @@ class AuthenticatedRoute extends Component {
 
   render () {
     const { component: Component, isLoggedIn,restoreLoginFail, location, ...rest } = this.props;
-      console.log(isLoggedIn, restoreLoginFail);
+
       return <Route {...rest} render={(props) => (
       isLoggedIn ? (
         <Component {...props}/>

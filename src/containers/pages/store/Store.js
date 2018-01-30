@@ -36,11 +36,14 @@ class Store extends Component {
         this._getRecords(params)
     }
 
+
+
     render() {
 
         const {records, getRecordsRequest} = this.props;
         const loading = getRecordsRequest.get('loading');
         const success = getRecordsRequest.get('success');
+        const {isFiltered} = this.state;
 
         return (
             <div className="animated fadeInLeft">
@@ -54,11 +57,16 @@ class Store extends Component {
 
                         </div>
                     </div>
-                    {success &&
+                    {(success && !isFiltered) &&
                     <div id="store-body">
                         <ProductsSection type="newest" title="Newest" products={records.slice(0, 9)}/>
                         <ProductsSection type="popular" title="Most Popular" products={records.slice(0, 9)}/>
                         <ProductsSection type="top" title="Top Rating" products={records.slice(0, 9)}/>
+                    </div>
+                    }
+                    {isFiltered &&
+                    <div id="store-body">
+                        <ProductsSection type="newest" title="Search Result" all={true} products={records}/>
                     </div>
                     }
                 </div>
