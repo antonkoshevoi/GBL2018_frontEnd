@@ -21,17 +21,19 @@ class ShoppingCartTable extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.data !== this.props.data) {
-            this._updateData(nextProps.data);
+            // this._updateData(nextProps.data);
         }
     }
 
     _updateData(data){
+        const total = this._getTotalSum(data);
         this.setState({data});
-        this.setState({total:this._getTotalSum(data)});
+        this.setState({total});
+        this.props.onUpdate(data,total)
     }
 
     _removeItem(idx){
-        this.state.data.splice(idx,1)
+        this.state.data.splice(idx,1);
         this.setState({data:this.state.data})
     }
 

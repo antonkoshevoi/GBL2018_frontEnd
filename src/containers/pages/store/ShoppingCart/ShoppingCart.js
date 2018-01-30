@@ -9,7 +9,7 @@ import {
 } from "../../../../redux/store/selectors";
 import {
     addToCarts, deleteCartRecord, getCartRecords, getRecords,
-    getSingleRecord
+    getSingleRecord, updateShoppingCart
 } from "../../../../redux/store/actions";
 import {withRouter} from "react-router-dom";
 import Loader from "../../../../components/layouts/Loader";
@@ -30,12 +30,17 @@ class ShoppingCart extends Component {
         this.props.deleteCartRecord(id);
     }
 
+
+    _updateData(data,total) {
+        this.props.updateData(data,total)
+    }
+
     render() {
 
         const {records, cartRecordsRequest,deleteFromCartRequest} = this.props;
         const loading = cartRecordsRequest.get('loading');
         const success = cartRecordsRequest.get('success');
-        console.log(records,deleteFromCartRequest);
+
 
         return (
             <div>
@@ -56,7 +61,7 @@ class ShoppingCart extends Component {
                           </div>
                           <div className="m-portlet__body">
                               {success &&
-                             <ShoppingCartTable onDelete={(id) => {this._deleteRecordFromCart (id)}} data={records.toJS()}/> }
+                             <ShoppingCartTable onUpdate={(data,total) => {this._updateData(data,total)}} onDelete={(id) => {this._deleteRecordFromCart (id)}} data={records.toJS()}/> }
                           </div>
                       </div>
                   </div>
@@ -76,6 +81,7 @@ ShoppingCart = connect(
     (dispatch) => ({
         getRecords: () => { dispatch(getCartRecords()) },
         deleteCartRecord: (id) => { dispatch(deleteCartRecord(id)) },
+        updateData: (data,total) => { dispatch(updateShoppingCart(data,total)) },
     })
 )(ShoppingCart);
 

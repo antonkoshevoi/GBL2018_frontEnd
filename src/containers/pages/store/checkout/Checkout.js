@@ -5,8 +5,8 @@ import CartItems from '../../../../components/pages/store/checkout/CartItems';
 import '../../../../styles/store.css'
 import InfoDetails from '../../../../components/pages/store/checkout/InfoDetails';
 import PaymentMethods from '../../../../components/pages/store/checkout/PaymentMethods';
-import {selectCartRecords, selectGetCartRecordsRequest} from '../../../../redux/store/selectors';
-import { getCartRecords } from '../../../../redux/store/actions';
+import {selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest} from '../../../../redux/store/selectors';
+import {calculateCartSum, getCartRecords} from '../../../../redux/store/actions';
 import { withRouter } from 'react-router-dom';
 
 import payPalImg from '../../../../media/images/payments/paypal.png'
@@ -18,15 +18,27 @@ import { createPayPalPayment } from '../../../../redux/payments/actions';
 class Checkout extends Component {
 
   componentDidMount() {
-    this._getCartRecords();
+    const { cartRecords } = this.props;
+      if (cartRecords.size === 0) {
+        this._getCartRecords();
+        this._calculateSum(this.props.cartRecords.toJS());
+    }
   }
 
   componentWillReceiveProps (nextProps) {
     this._handlePayPalPaymentCrated(nextProps);
+
+    if (this.props.cartRecords !== nextProps.cartRecords) {
+        this._calculateSum(nextProps.cartRecords.toJS());
+    }
   }
 
   _getCartRecords() {
     this.props.getCartRecords();
+  }
+
+  _calculateSum(data){
+    this.props.calculateSum(data);
   }
 
   _processPayPal () {
@@ -43,16 +55,16 @@ class Checkout extends Component {
 
   render() {
 
-    const { cartRecords, cartRecordsRequest, createPayPalPaymentRequest } = this.props;
+    const { cartRecords, cartRecordsRequest, createPayPalPaymentRequest, cartRecordsSum } = this.props;
     const loadingCarts = cartRecordsRequest.get('loading');
     const successCarts = cartRecordsRequest.get('success');
 
-    return (
+      return (
       <div>
         <div className='row'>
           <div className='col-xl-3'>
             {successCarts &&
-              <CartItems data={cartRecords.toJS()}/>}
+              <CartItems sum={cartRecordsSum} data={cartRecords.toJS()}/>}
           </div>
           <div className='col-xl-9'>
             <div className='row'>
@@ -91,11 +103,13 @@ Checkout = connect(
   (state) => ({
     cartRecordsRequest: selectGetCartRecordsRequest(state),
     cartRecords: selectCartRecords(state),
+    cartRecordsSum: selectCartRecordsSum(state),
     createPayPalPaymentRequest: selectCreatePayPalPaymentRequest(state)
   }),
   (dispatch) => ({
     getCartRecords: () => { dispatch(getCartRecords()) },
-    createPayPalPayment: () => { dispatch(createPayPalPayment()) }
+    createPayPalPayment: () => { dispatch(createPayPalPayment()) },
+    calculateSum: (data) => { dispatch(calculateCartSum(data)) }
   })
 )(Checkout);
 

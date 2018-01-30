@@ -19,6 +19,9 @@ export const ADD_TO_CART = '[Store] ADD_TO_CART';
 export const ADD_TO_CART_SUCCESS = '[Store] ADD_TO_CART_SUCCESS';
 export const ADD_TO_CART_FAIL = '[Store] ADD_TO_CART_FAIL';
 
+export const UPDATE_SHOPPING_CART = '[Store] UPDATE_SHOPPING_CART';
+export const CALCULATE_CART_SUM = '[Store] CALCULATE_CART_SUM';
+
 export const GET_UNASSIGNEDS = '[Store] GET_UNASSIGNEDS';
 export const GET_UNASSIGNEDS_SUCCESS = '[Store] GET_UNASSIGNEDS_SUCCESS';
 export const GET_UNASSIGNEDS_FAIL = '[Store] GET_UNASSIGNEDS_FAIL';
@@ -87,4 +90,34 @@ export function getUnassigneds(params = {}) {
     types: [GET_UNASSIGNEDS, GET_UNASSIGNEDS_SUCCESS, GET_UNASSIGNEDS_FAIL],
     promise: (apiClient) => apiClient.get('store/unassigned-items', params)
   };
+}
+
+
+/**
+ *
+ * @param data
+ * @param total
+ * @returns {{type: string, data: *, total: *}}
+ */
+export function updateShoppingCart(data,total) {
+    return {
+      type:UPDATE_SHOPPING_CART,
+        data,total
+    }
+}
+
+
+export function calculateCartSum(data) {
+
+    let total = 0;
+    for(let i = 0; i < data.length; i++) {
+        if (isNaN(data[i].storeItem.price)) {
+            continue;
+        }
+        total += (Number(data[i].storeItem.price) * Number(data[i].count));
+    }
+    return {
+      type:CALCULATE_CART_SUM,
+        total
+    }
 }

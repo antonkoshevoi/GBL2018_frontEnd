@@ -1,9 +1,24 @@
 import {
-    GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, GET_CART_RECORDS, GET_CART_RECORDS_SUCCESS, GET_CART_RECORDS_FAIL,
-    ADD_TO_CART,ADD_TO_CART_FAIL,ADD_TO_CART_SUCCESS,DELETE_CART_RECORD,DELETE_CART_RECORD_SUCCESS,DELETE_CART_RECORD_FAIL,
-    GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
-    GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST,
-  GET_UNASSIGNEDS, GET_UNASSIGNEDS_SUCCESS, GET_UNASSIGNEDS_FAIL
+    GET_RECORDS,
+    GET_RECORDS_SUCCESS,
+    GET_RECORDS_FAIL,
+    GET_CART_RECORDS,
+    GET_CART_RECORDS_SUCCESS,
+    GET_CART_RECORDS_FAIL,
+    ADD_TO_CART,
+    ADD_TO_CART_FAIL,
+    ADD_TO_CART_SUCCESS,
+    DELETE_CART_RECORD,
+    DELETE_CART_RECORD_SUCCESS,
+    DELETE_CART_RECORD_FAIL,
+    GET_SINGLE_RECORD,
+    GET_SINGLE_RECORD_FAIL,
+    GET_SINGLE_RECORD_SUCCESS,
+    RESET_GET_SINGLE_RECORD_REQUEST,
+    GET_UNASSIGNEDS,
+    GET_UNASSIGNEDS_SUCCESS,
+    GET_UNASSIGNEDS_FAIL,
+    UPDATE_SHOPPING_CART, CALCULATE_CART_SUM
 } from './actions';
 import Immutable from 'immutable';
 
@@ -59,6 +74,7 @@ const initialState = Immutable.fromJS({
     totalPages: 1
   },
   cartRecords: [],
+  totalSum:0,
   records: [],
   singleRecord: {},
 });
@@ -126,7 +142,6 @@ export default function reducer (state = initialState, action) {
                   .remove('fail')
               ).set('cartRecord', Immutable.List());
       case GET_CART_RECORDS_SUCCESS:
-          console.log(Immutable.fromJS(action.result.data));
           return state
               .set('getCartRecordsRequest', state.get('getCartRecordsRequest')
                   .set('success', true)
@@ -162,6 +177,21 @@ export default function reducer (state = initialState, action) {
                   .set('fail', true)
               );
 
+
+      /**
+       * update cart record
+       */
+      case UPDATE_SHOPPING_CART:
+          return state
+              .set('totalSum', Immutable.fromJS(action.total))
+                  .set('cartRecords', Immutable.fromJS(action.data));
+
+      /**
+       * calculate cart sum
+       */
+      case CALCULATE_CART_SUM:
+          return state
+              .set('totalSum', Immutable.fromJS(action.total));
 
       /**
        * Delete

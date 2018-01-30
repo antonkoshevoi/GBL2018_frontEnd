@@ -52,6 +52,14 @@ export const selectCartRecords = createSelector(
 );
 
 /**
+ * Get Cart Records Total
+ */
+export const selectCartRecordsSum = createSelector(
+    selectStoreDomain,
+    (subState) => subState.get('totalSum')
+);
+
+/**
  * Add To Cart Request
  */
 export const selectAddToCartRequest = createSelector(

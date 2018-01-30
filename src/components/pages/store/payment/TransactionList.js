@@ -107,9 +107,7 @@ class TransactionList extends Component {
         return (
         <div className="transactionsList">
             <Card title="Transactions" icon="la la-money">
-                {loading &&
-                <TablePreloader text="Loading..." color="accent"/>
-                }
+
                 <Table >
                     <Thead>
                         <HeadRow>
@@ -123,6 +121,10 @@ class TransactionList extends Component {
                     </Thead>
                     <Tbody>
                     {this._renderTransactions()}
+
+                    {loading &&
+                    <TablePreloader text="Loading..." color="accent"/>
+                    }
                     </Tbody>
                 </Table>
             </Card>

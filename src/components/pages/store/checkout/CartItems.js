@@ -43,7 +43,7 @@ class CartItems extends Component {
   }
 
   render() {
-
+    const {sum} = this.props;
     return (
       <div className="m-portlet m-portlet--bordered-semi  cartItems">
         <div className="m-portlet__head m--hide">
@@ -57,7 +57,7 @@ class CartItems extends Component {
         </div>
         <div className="m-portlet__body">
           <div className="m-widget25">
-            <span className="m-widget25__price m--font-brand">${this._getTotalSum()}</span>
+            <span className="m-widget25__price m--font-brand">${sum}</span>
             <span className="m-widget25__desc">Total</span>
           </div>
           <div className="m-widget4">
