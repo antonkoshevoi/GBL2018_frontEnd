@@ -9,6 +9,7 @@ import MenuParent from "../../data/MenuParent";
 import $ from "jquery"
 import {Icon, IconButton} from "material-ui";
 import HasRole from "../../containers/middlewares/HasRole";
+import {connect} from "react-redux";
 
 class Sidebar extends Component {
 
@@ -170,35 +171,37 @@ class Sidebar extends Component {
 
     render() {
 
-
+        const { auth } = this.props;
+        const isLoggedIn = auth.get('isLoggedIn')
 
         return (
-        <div id="m_aside_left" className="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
-            <div className="text-right mobile-sidebar-toggle m--hide" >
-                <IconButton color='primary'  onClick={() => {this.props.mobileSidebar()}}>
-                    <Icon>menu</Icon>
-                </IconButton>
+        isLoggedIn && (
+            <div id="m_aside_left" className="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
+                <div className="text-right mobile-sidebar-toggle m--hide" >
+                    <IconButton color='primary'  onClick={() => {this.props.mobileSidebar()}}>
+                        <Icon>menu</Icon>
+                    </IconButton>
+                </div>
+                <div
+                id="m_ver_menu"
+                className="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark "
+                data-menu-vertical="true"
+                data-menu-scrollable="false" data-menu-dropdown-timeout="500"
+                onMouseLeave={() => {this._menuHoverOut()}} >
+                    <nav className={'navigation ' + (this.state.hovered ? 'hovered' : '')}>
+                        <HasRole role="Superintendent">
+                            {this._renderGoogleMenus()}
+                        </HasRole>
+                        <HasRole role="Parents">
+                            {this._renderGoogleMenusParent()}
+                        </HasRole>
+                    </nav>
+                    <ul className="m-menu__nav  m-menu__nav--dropdown-submenu-arrow "  onClick={() => {this.props.mobileSidebar()}}>
+                        {this._renderSingleMenus()}
+                    </ul>
+                </div>
             </div>
-
-            <div
-            id="m_ver_menu"
-            className="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark "
-            data-menu-vertical="true"
-            data-menu-scrollable="false" data-menu-dropdown-timeout="500"
-            onMouseLeave={() => {this._menuHoverOut()}} >
-                <nav className={'navigation ' + (this.state.hovered ? 'hovered' : '')}>
-                    <HasRole role="Superintendent">
-                        {this._renderGoogleMenus()}
-                    </HasRole>
-                    <HasRole role="Parents">
-                        {this._renderGoogleMenusParent()}
-                    </HasRole>
-                </nav>
-                <ul className="m-menu__nav  m-menu__nav--dropdown-submenu-arrow "  onClick={() => {this.props.mobileSidebar()}}>
-                    {this._renderSingleMenus()}
-                </ul>
-            </div>
-        </div>
+            )
         );
     }
 
@@ -206,7 +209,14 @@ class Sidebar extends Component {
 
 }
 
-Sidebar.propTypes = {};
+Sidebar = connect(
+    (state) => ({
+        auth: state.auth
+    }),
+    (dispatch) => ({
+    })
+)(Sidebar);
+
 
 
 export default withRouter(translate("sidebar")(Sidebar));

@@ -36,6 +36,7 @@ import PayPalReturnContainer from '../containers/pages/store/payments/PayPalRetu
 import PaymentFailedContainer from '../containers/pages/store/payments/PaymentFailedContainer';
 import PaymentSuccessContainer from '../containers/pages/store/payments/PaymentSuccessContainer';
 import RestoreLogin from "../containers/auth/RestoreLogin";
+import TransactionsContainer from "../containers/pages/store/payments/TransactionsContainer";
 
 export default () => (
   <AppContainer>
@@ -66,12 +67,14 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
 
+      {/*Store*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:type' name='Store' component={Products}/>
-
       <AuthenticatedRoute exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
+
+      {/*Shopping Cart*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/shopping/cart' name='ShoppingCart' component={ShoppingCart}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/shopping/checkout' name='Checkout' component={Checkout}/>
 
@@ -83,6 +86,8 @@ export default () => (
       <Route exact path='/payments/paypal/return' component={PayPalReturnContainer} />
       <Route exact layout={MainLayout} path='/payments/success' component={PaymentSuccessContainer} />
       <Route exact layout={MainLayout} path='/payments/fail' component={PaymentFailedContainer} />
+
+      <Route exact layout={MainLayout} path='/accounts/transactions' component={TransactionsContainer} />
 
       <Route layout={MainLayout} component={NotFoundPage} />
     </Switch>

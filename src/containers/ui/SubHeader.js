@@ -89,78 +89,77 @@ class SubHeader extends Component {
 
   render() {
       const {location, cartRecords, addToCartRequest, cartRecordsRequest, auth} = this.props;
-      const isLoggedIn = auth.get('isLoggedIn')
-      const paths = location.pathname.split('/')
-
+      const isLoggedIn = auth.get('isLoggedIn');
+      const paths = location.pathname.split('/');
+      console.log(isLoggedIn);
       return (
-            <div className="m-subheader">
-                {isLoggedIn &&
-                <div className="d-flex align-items-center full-width">
-                    <div className="mr-auto">
-                        <h3 className="m-subheader__title m-subheader__title--separator">{(parseInt(paths[paths.length-1]).length > 0) ? paths[paths.length-1] : (paths.length > 2) ? paths[paths.length-2] : paths[paths.length-1]}</h3>
-                        <div className="m-subheader__breadcrumbs m-nav m-nav--inline">
-                            {paths.length > 2 && this._renderBreadcrumbs(paths) }
-                        </div>
-                    </div>
-                    <div>
-  			    <span className="m-subheader__datferange " id="m_dashboard_daterangepicker">
-					<div className="right-wrapper text-right PageHeader-breadcrumbs">
-                            <ol className="breadcrumbs m--padding-right-20 d-flex justify-content-between align-items-center header-menu" style={{marginBottom:0}}>
-                                <li>
-                                    <NavLink to='/shopping/cart'>
-                                        <i className="fa fa-shopping-cart PageHeader-icon"></i>
-                                          <span className="g-badge badge-red">{cartRecords.size}</span>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <a >
-                                        <i className="fa fa-line-chart PageHeader-icon"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a >
-                                        <i className="fa fa-id-card PageHeader-icon"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a >
-                                        <i className="fa fa-calendar PageHeader-icon"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <NavLink to="/messages">
-                                        <i className="fa fa-envelope-open PageHeader-icon"></i>
-                                    </NavLink>
-                                </li>
-                                <LanguageSwitcher/>
-                            </ol>
-
-                            <div className="mobile-header-menu m--hide">
-                                <a className="fa pointer fa-arrow-down "
-                                   aria-haspopup="true"
-                                   onClick={this._openHeaderMenu}>
-                                    <Menu
-                                        id="header-menu"
-                                        anchorEl={this.state.anchorEl}
-                                        open={Boolean(this.state.anchorEl)}
-                                        onClose={this._closeHeaderMenu}
-                                    >
-                                        {this._renderHeaderMenu()}
-
-                                    </Menu>
-                                </a>
+          isLoggedIn && (
+                <div className="m-subheader">
+                    <div className="d-flex align-items-center full-width">
+                        <div className="mr-auto">
+                            <h3 className="m-subheader__title m-subheader__title--separator">{(parseInt(paths[paths.length-1]).length > 0) ? paths[paths.length-1] : (paths.length > 2) ? paths[paths.length-2] : paths[paths.length-1]}</h3>
+                            <div className="m-subheader__breadcrumbs m-nav m-nav--inline">
+                                {paths.length > 2 && this._renderBreadcrumbs(paths) }
                             </div>
                         </div>
-				</span>
+                        <div>
+                    <span className="m-subheader__datferange " id="m_dashboard_daterangepicker">
+                        <div className="right-wrapper text-right PageHeader-breadcrumbs">
+                                <ol className="breadcrumbs m--padding-right-20 d-flex justify-content-between align-items-center header-menu" style={{marginBottom:0}}>
+                                    <li>
+                                        <NavLink to='/shopping/cart'>
+                                            <i className="fa fa-shopping-cart PageHeader-icon"></i>
+                                              <span className="g-badge badge-red">{cartRecords.size}</span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <a >
+                                            <i className="fa fa-line-chart PageHeader-icon"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a >
+                                            <i className="fa fa-id-card PageHeader-icon"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a >
+                                            <i className="fa fa-calendar PageHeader-icon"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/messages">
+                                            <i className="fa fa-envelope-open PageHeader-icon"></i>
+                                        </NavLink>
+                                    </li>
+                                    <LanguageSwitcher/>
+                                </ol>
+
+                                <div className="mobile-header-menu m--hide">
+                                    <a className="fa pointer fa-arrow-down "
+                                       aria-haspopup="true"
+                                       onClick={this._openHeaderMenu}>
+                                        <Menu
+                                            id="header-menu"
+                                            anchorEl={this.state.anchorEl}
+                                            open={Boolean(this.state.anchorEl)}
+                                            onClose={this._closeHeaderMenu}
+                                        >
+                                            {this._renderHeaderMenu()}
+
+                                        </Menu>
+                                    </a>
+                                </div>
+                            </div>
+                    </span>
+                        </div>
                     </div>
                 </div>
-                }
-            </div>
+              )
         );
     }
 }
 
-SubHeader.propTypes = {};
 
 SubHeader = connect(
     (state) => ({

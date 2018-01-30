@@ -25,6 +25,15 @@ class PaymentSuccessContainer extends Component {
         };
     }
 
+
+    componentDidMount(){
+        const {history} = this.props;
+
+        if (history.action !== "PUSH") {
+            history.push('/login')
+        }
+    }
+
     _handleUsernameChange = (event) => { this.setState({username: event.target.value}); };
     _handlePasswordChange = (event) => { this.setState({password: event.target.value}); };
     _handleRememberChange = (event) => { this.setState({remember: !this.state.remember}); };
@@ -32,10 +41,9 @@ class PaymentSuccessContainer extends Component {
     _login() {
         const { setRedirectUrl, login } = this.props;
         const { username, password, remember } = this.state;
-
         let pathname = '/';
         try {
-            pathname = this.props.location.state.from.pathname;
+            pathname = this.props.location.pathname;
         } catch (e) {}
 
         setRedirectUrl(pathname);
@@ -45,23 +53,26 @@ class PaymentSuccessContainer extends Component {
 
     render() {
 
-      const {auth, loginRequest} = this.props;
-      const isLoggedIn = auth.get('isLoggedIn')
-      const loading = loginRequest.get('loading');
-      const errors = loginRequest.get('errors');
+    const {auth, loginRequest,history} = this.props;
+    const isLoggedIn = auth.get('isLoggedIn')
+    const loading = loginRequest.get('loading');
+    const errors = loginRequest.get('errors');
 
     return (
         <div className="row">
             <div className="col-md-10 m-auto">
                 <div className="m-portlet m--margin-top-35">
                     <div className="m-portlet__body">
-                        <h3 className="display-4 text-center">
-                            <i className="la la-check-circle align-middle m--margin-right-20" style={{
-                                color: '#7ac943',
-                                fontSize: '100px'
-                            }}/>
-                            Your payment was successful
-                        </h3>
+                        <div className="alert m-alert m-alert--default">
+                            <h3 className="display-4 text-center">
+                                <i className="la la-check-circle align-middle m--margin-right-20" style={{
+                                    color: '#7ac943',
+                                    fontSize: '100px'
+                                }}/>
+                                Your payment was successful
+                            </h3>
+                        </div>
+
                         {!isLoggedIn &&
                         <div className="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2 m--full-height" id="m_login">
                                 <div className="m-grid__item m-grid__item--fluid	m-login__wrapper">

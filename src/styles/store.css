@@ -327,7 +327,10 @@
 .m-pricing-table-1 .m-pricing-table-1__items .m-pricing-table-1__item .m-pricing-table-1__price {
     font-size: 1.7rem;
 }
-
+.m-pricing-table-1 .m-pricing-table-1__items .m-pricing-table-1__item:nth-child(1) .m-pricing-table-1__price {
+    font-size: 1.7rem;
+    margin-top: 20rem;
+}
 
 @media (max-width: 567px) {
     .store-filter.right-block {

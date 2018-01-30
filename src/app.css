@@ -1055,3 +1055,15 @@ div#notFoundPage {
   background-position: center top;
   background-repeat: no-repeat;
 }
+
+table .sub-table {
+  background-color: #f5f4f7;
+}
+
+table .sub-table > td {
+  padding: 25px;
+}
+
+table .sub-table .m-datatable {
+  box-shadow: 0 0 15px 1px rgba(113,106,202,.2);
+}

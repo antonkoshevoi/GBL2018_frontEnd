@@ -28,7 +28,7 @@ const initialState = Immutable.fromJS({
 });
 
 export default function reducer (state = initialState, action) {
-
+    console.log(action.type);
     switch(action.type) {
 
     case RESTORE_LOGIN:
@@ -70,7 +70,7 @@ export default function reducer (state = initialState, action) {
           .set('fail', true)
           .remove('loading')
           .set('errors', action.error.response.data)
-        ).set('isLoggedIn', true);
+        ).set('isLoggedIn', false);
 
     /**
      * Logout

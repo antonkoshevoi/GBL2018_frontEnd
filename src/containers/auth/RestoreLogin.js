@@ -23,6 +23,14 @@ class RestoreLogin extends Component {
   }
 
 
+  componentDidMount(){
+      const {history, auth} = this.props;
+
+      if (auth.get('restoreLoginUser')) {
+          history.push('/login')
+      }
+  }
+
   _handleUsernameChange = (event) => { this.setState({username: event.target.value}); };
   _handlePasswordChange = (event) => { this.setState({password: event.target.value}); };
   _handleRememberChange = (event) => { this.setState({remember: !this.state.remember}); };

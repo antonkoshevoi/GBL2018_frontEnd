@@ -323,19 +323,19 @@ export default  {
                    {
                        key:'open_invoices',
                        title:'Open Invoices',
-                       link:'invoices',
+                       link:'accounts/invoices',
                        icon:'flaticon flaticon-user-settings',
                    },
                    {
                        key:'unassigned_credits',
                        title:'Unassigned Credits',
-                       link:'unassigned/credits',
+                       link:'accounts/unassigned_credits',
                        icon:'flaticon flaticon-user-settings',
                    },
                    {
                        key:'history',
                        title:'History (Transactions)',
-                       link:'history',
+                       link:'accounts/transactions',
                        icon:'flaticon flaticon-user-ok',
                    }
                ]

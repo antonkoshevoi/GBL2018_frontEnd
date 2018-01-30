@@ -12,9 +12,11 @@ import { selectExecutePayPalPaymentRequest } from '../../../../redux/payments/se
 class PayPalReturnContainer extends Component {
 
   componentDidMount() {
-    const { location, executePayPalPayment } = this.props;
-
-    const parsed = queryString.parse(location.search);
+    const { location, history, executePayPalPayment } = this.props;
+      if (!location.search) {
+          history.push('/login')
+      }
+      const parsed = queryString.parse(location.search);
     executePayPalPayment(parsed);
   }
 

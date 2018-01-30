@@ -21,6 +21,14 @@ class Login extends Component {
     };
   }
 
+  componentDidMount() {
+      const { auth, history } = this.props;
+
+      if (auth.get('isLoggedIn')) {
+          history.push('/')
+      }
+  }
+
   _handleUsernameChange = (event) => { this.setState({username: event.target.value}); };
   _handlePasswordChange = (event) => { this.setState({password: event.target.value}); };
   _handleRememberChange = (event) => { this.setState({remember: !this.state.remember}); };

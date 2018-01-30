@@ -26,6 +26,16 @@ class PaymentFailedContainer extends Component {
         };
     }
 
+
+
+    componentDidMount(){
+        const {history} = this.props;
+
+        if (history.action !== "PUSH") {
+            history.push('/login')
+        }
+    }
+
     _handleUsernameChange = (event) => { this.setState({username: event.target.value}); };
     _handlePasswordChange = (event) => { this.setState({password: event.target.value}); };
     _handleRememberChange = (event) => { this.setState({remember: !this.state.remember}); };
@@ -36,7 +46,7 @@ class PaymentFailedContainer extends Component {
 
         let pathname = '/';
         try {
-            pathname = this.props.location.state.from.pathname;
+            pathname = this.props.location.pathname;
         } catch (e) {}
 
         setRedirectUrl(pathname);
@@ -56,14 +66,15 @@ class PaymentFailedContainer extends Component {
               <div className="col-md-10 m-auto">
                   <div className="m-portlet m--margin-top-35">
                       <div className="m-portlet__body">
-                          <h3 className="display-4 text-center">
-                              <i className="la la-times align-middle m--margin-right-20" style={{
-                                  color: 'rgb(210, 50, 45)',
-                                  fontSize: '100px'
-                              }}/>
-                              Unfortunately your payment has failed
-                          </h3>
-
+                          <div className="alert m-alert m-alert--default">
+                              <h3 className="display-4 text-center">
+                                  <i className="la la-times align-middle m--margin-right-20" style={{
+                                      color: 'rgb(210, 50, 45)',
+                                      fontSize: '100px'
+                                  }}/>
+                                  Unfortunately your payment has failed
+                              </h3>
+                          </div>
                           {!isLoggedIn &&
                           <div className="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2 m--full-height" id="m_login">
                               <div className="m-grid__item m-grid__item--fluid	m-login__wrapper">

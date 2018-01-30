@@ -11,12 +11,12 @@ class ServiceList extends Component {
                         <div class="m-pricing-table-1__visual">
                             <div class="m-pricing-table-1__hexagon1"></div>
                             <div class="m-pricing-table-1__hexagon2"></div>
-                            <span class="m-pricing-table-1__icon m--font-brand"><i class="flaticon-piggy-bank"></i></span>
+                            <span class="m-pricing-table-1__icon m--font-brand"><i class="la la-money"></i></span>
                         </div>
                         <span class="m-pricing-table-1__price">Open Invoices</span>
 
                         <div class="m-pricing-table-1__btn">
-                            <NavLink to="/invoices" ><button type="button" class="btn m-btn--pill  btn-brand m-btn--wide m-btn--uppercase m-btn--bolder m-btn--sm">Open</button></NavLink>
+                            <NavLink to="/accounts/invoices" ><button type="button" class="btn m-btn--pill  btn-brand m-btn--wide m-btn--uppercase m-btn--bolder m-btn--sm">Open</button></NavLink>
                         </div>
                     </div>
 
@@ -29,7 +29,7 @@ class ServiceList extends Component {
                         <span class="m-pricing-table-1__price">Unassigned Credits</span>
 
                         <div class="m-pricing-table-1__btn">
-                            <NavLink to="/unassigned/credits" ><button type="button" class="btn m-btn--pill  btn-brand m-btn--wide m-btn--uppercase m-btn--bolder m-btn--sm">Open</button></NavLink>
+                            <NavLink to="/accounts/unassigned_credits" ><button type="button" class="btn m-btn--pill  btn-brand m-btn--wide m-btn--uppercase m-btn--bolder m-btn--sm">Open</button></NavLink>
 
                         </div>
                     </div>
@@ -43,7 +43,7 @@ class ServiceList extends Component {
                         <span class="m-pricing-table-1__price">Transactions</span>
 
                         <div class="m-pricing-table-1__btn">
-                            <NavLink to="/transactions" ><button type="button" class="btn m-btn--pill  btn-brand m-btn--wide m-btn--uppercase m-btn--bolder m-btn--sm">Open</button></NavLink>
+                            <NavLink to="/accounts/transactions" ><button type="button" class="btn m-btn--pill  btn-brand m-btn--wide m-btn--uppercase m-btn--bolder m-btn--sm">Open</button></NavLink>
 
                         </div>
                     </div>
