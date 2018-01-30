@@ -47,8 +47,8 @@ class TransactionList extends Component {
                         <Td width='102px'><span style={{fontWeight:600}} className="g-blue">{item.get('total')}$</span></Td>
                         <Td width='100px'><span
                             className='m-badge m-badge--brand m-badge--wide'>{item.get('paymentType')}</span></Td>
-                        <Td width='120px'>{item.get('createdAt')}</Td>
-                        <Td width='132px'>{item.get('authorizedAt')}</Td>
+                        <Td width='140px'>{item.get('createdAt')}</Td>
+                        <Td width='140px'>{item.get('authorizedAt') } {(!item.get('isAuthorized')) && <i className="fa fa-close g-red"></i>}</Td>
                     </Row>,
                     ( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) && this._renderTransactionItemsBlock(item.get('items'))
                 ]
@@ -117,8 +117,8 @@ class TransactionList extends Component {
                             <Th first={true} width='20px'>#</Th>
                             <Th name='total' width='102px'>Total</Th>
                             <Th name='type' width='100px'>Type</Th>
-                            <Th name='created' width='120px'>Created</Th>
-                            <Th name='authorized' width='132px'>Authorized</Th>
+                            <Th name='created' width='140px'>Created</Th>
+                            <Th name='authorized' width='140px'>Authorized</Th>
                         </HeadRow>
                     </Thead>
                     <Tbody>
