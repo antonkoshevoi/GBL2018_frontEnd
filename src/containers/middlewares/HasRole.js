@@ -5,7 +5,7 @@ import { selectUserRoles } from "../../redux/user/selectors";
 
 class HasRole extends Component {
   static propTypes = {
-    role: PropTypes.string.isRequired
+    roles: PropTypes.array.isRequired
   };
 
   roles = [
@@ -23,8 +23,9 @@ class HasRole extends Component {
     const { userRoles } = this.props;
 
     let hasRole = false;
+
     userRoles.map(role => {
-      if (role.get('name') === this.props.role) {
+      if (this.props.roles.indexOf(role.get('name')) > -1) {
         hasRole = true;
       }
     })

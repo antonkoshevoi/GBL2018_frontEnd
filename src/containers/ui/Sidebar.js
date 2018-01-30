@@ -206,10 +206,18 @@ class Sidebar extends Component {
                 data-menu-scrollable="false" data-menu-dropdown-timeout="500"
                 onMouseLeave={() => {this._menuHoverOut()}} >
                     <nav className={'navigation ' + (this.state.hovered ? 'hovered' : '')}>
-                        <HasRole role="Superintendent">
+                        <HasRole roles={[
+                          'Superintendent',
+                          'Student',
+                          'Teacher',
+                          'Principal',
+                          'Administrator',
+                          'Superadministrator',
+                          'Affiliate',
+                        ]}>
                             {this._renderGoogleMenus()}
                         </HasRole>
-                        <HasRole role="Parents">
+                        <HasRole roles={["Parents"]}>
                             {this._renderGoogleMenusParent()}
                         </HasRole>
                     </nav>

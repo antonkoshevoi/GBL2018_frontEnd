@@ -16,10 +16,18 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-          <HasRole role="Superintendent">
+          <HasRole roles={[
+            'Superintendent',
+            'Student',
+            'Teacher',
+            'Principal',
+            'Administrator',
+            'Superadministrator',
+            'Affiliate',
+          ]}>
               <UserDashboard/>
           </HasRole>
-          <HasRole role="Parents">
+          <HasRole roles={["Parents"]}>
               <ParentDashboard/>
           </HasRole>
       </div>
