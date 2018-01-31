@@ -22,7 +22,6 @@ class ShoppingCart extends Component {
       if (records.size === 0) {
         this._getRecords();
       }
-      console.log(records.toJS());
       this._calculateSum(records.toJS());
     }
 

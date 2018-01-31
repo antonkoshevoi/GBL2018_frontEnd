@@ -69,7 +69,7 @@ class Products extends Component {
 
           <div id="store-body" className="all-products">
             {success &&
-            <ProductsSection title={this.props.match.params.type} all={true} products={records}/> }
+            <ProductsSection  all={true} products={records}/> }
             {(records.size === 0 && success) && this._renderNotFountMessage()}
           </div>
         </div>

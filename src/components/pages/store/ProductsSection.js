@@ -8,51 +8,52 @@ import ProductCard from "./ProductCard";
 class ProductsSection extends Component {
 
 
-    _renderProducts(products) {
-        const {all} = this.props;
+  _renderProducts(products) {
+    const {all} = this.props;
 
-        return products.map(function (item,i) {
-                return (
-                    (!all) ?
-                        <ProductCard key={i} type="vertical" data={item}/> :
-                        (<div key={i} className="">
-                            <ProductCard  type="vertical" data={item}/>
-                        </div>)
+    return products.map(function (item, i) {
+      return (
+        (!all) ?
+          <ProductCard key={i} type="vertical" data={item}/> :
+          (<div key={i} className="">
+            <ProductCard type="vertical" data={item}/>
+          </div>)
 
-                )
-            })
-    }
+      )
+    })
+  }
 
 
-    render() {
-        const {products,title,type,all} = this.props;
+  render() {
+    const {products, title, type, all} = this.props;
 
-        return (
-            <section className="productSection">
-                <div className="row">
-                    <div className="col-md-12">
-                        <div className="row sectionTopBar">
-                            <div className="col-md-6">
-                                <h2>{title}</h2>
-                            </div>
-                            <div className="col-md-6 text-right">
-                                {!all && <NavLink to={`/store/products/${type}`} params={{type:'sad'}} className="btn m-btn btn-sm btn-danger">ALL</NavLink> }
-                            </div>
-                        </div>
-                        <div className="row">
-                            {this._renderProducts(products)}
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
-    }
+    return (
+      <section className="productSection">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="row sectionTopBar">
+              <div className="col-md-6">
+                <h2>{title}</h2>
+              </div>
+              <div className="col-md-6 text-right">
+                {!all && <NavLink to={`/store/products/courses/${type}`} params={{type: 'sad'}}
+                                  className="btn m-btn btn-sm btn-danger">ALL</NavLink> }
+              </div>
+            </div>
+            <div className="row">
+              {this._renderProducts(products)}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 }
 
 ProductsSection.propTypes = {};
 
 ProductsSection.defaultProps = {
-    all:false
+  all: false
 }
 
 export default ProductsSection;
