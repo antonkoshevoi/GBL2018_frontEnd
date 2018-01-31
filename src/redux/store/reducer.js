@@ -183,7 +183,6 @@ export default function reducer (state = initialState, action) {
        */
       case UPDATE_SHOPPING_CART:
           return state
-              .set('totalSum', Immutable.fromJS(action.total))
                   .set('cartRecords', Immutable.fromJS(action.data));
 
       /**

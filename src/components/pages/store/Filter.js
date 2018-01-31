@@ -49,12 +49,49 @@ class Filter extends Component {
   };
 
 
+  componentDidMount(){
+    const {type} = this.props;
+    if (type === 'newest') {
+      this._selectSorterDesc('created');
+    }
+  }
+
+
+  componentWillReceiveProps(nextProps){
+    if (!nextProps.isActive) {
+      this._resetAll();
+    }
+  }
+
+
+  _resetFilters() {
+    this.setState({
+        params:{...this.state.params,
+        filter:{name:'',title:''},
+      }
+    })
+  }
+
+  _resetSorters() {
+    this.setState({
+          params:{...this.state.params,
+          orderBy:{}
+        },
+          sorters:{}
+    })
+  }
+
+  _resetAll(){
+    this._resetFilters();
+    this._resetSorters();
+  }
+
+
   handleMenuClick = (event, menu) => {
     this.setState({[menu]: event.currentTarget});
   };
 
   handleMenuClose = (event, menu) => {
-    console.log(event.currentTarget.value);
     this.setState({[menu]: null});
   };
 
@@ -63,18 +100,15 @@ class Filter extends Component {
     this.setState({params: {...this.state.params, filter: {...this.state.params.filter, title: e.target.value}}});
   }
 
-
-  _initFilter = (e) => {
-    const {params} = this.state;
-    console.log(this);
+  _initFilter = () => {
+    let {params} = this.state;
     this.props.onChange(params);
   }
 
-  _selectSorter = (e, name) => {
+  _selectSorter = (name) => {
     let sorters = {};
 
     if (this.state.sorters[name]) {
-      console.log(sorters[name]);
       sorters[name] = this.state.sorters[name] === 'asc' ? 'desc' : 'asc';
     } else {
       sorters[name] = 'desc';
@@ -88,14 +122,27 @@ class Filter extends Component {
         orderBy: buildSortersQuery(sorters)
       }
     }, this._initFilter);
+  }
 
+  _selectSorterDesc = (name) => {
+    let sorters = {};
+
+    sorters[name] = 'desc';
+
+    this.setState({sorters})
+    this.setState({
+      params: {
+        ...this.state.params,
+        filter: {...this.state.params.filter},
+        orderBy: buildSortersQuery(sorters)
+      }
+    }, this._initFilter);
   }
 
 
   render() {
-    const {classes} = this.props;
-    const {categoryIsOpen, subjectIsOpen, sortByIsOpen} = this.state;
-    const {categoryMenu, subjectMenu, sortMenu} = this.state;
+    const {classes, isActive, type} = this.props;
+    const {categoryMenu, subjectMenu, sortMenu, sorters} = this.state;
 
     return (
       <div className="col-md-12 ">
@@ -164,9 +211,9 @@ class Filter extends Component {
 
             <div className="store-filter-divider"></div>
             <div className="filter-buttons">
-              <NavLink to="/store/category/courses"><Button>All</Button></NavLink>
-              <NavLink to="/store/products/newest"><Button>Newest</Button></NavLink>
-              <NavLink to="/store/products/newest"><Button>Most Popular</Button></NavLink>
+              <NavLink to="/store/category/course" className={(!isActive && type !== 'details') ? ' activeFilter' : ''}><Button>All</Button></NavLink>
+              <NavLink to="/store/products/course/newest" className={(sorters.created == 'desc') ? ' activeFilter' : ''}><Button>Newest</Button></NavLink>
+              <NavLink to="/store/products/course/popular"><Button>Most Popular</Button></NavLink>
             </div>
           </div>
           <div className="col-lg-4 col-md-12 store-filter right-block">
@@ -213,13 +260,13 @@ class Filter extends Component {
                     }}
                   >
                     <MenuItem onClick={(e) => {
-                      this._selectSorter(e, 'price')
+                      this._selectSorter('price')
                     }}>Price</MenuItem>
                     <MenuItem onClick={(e) => {
-                      this._selectSorter(e, 'created')
+                      this._selectSorter('created')
                     }}>Date</MenuItem>
                     <MenuItem onClick={(e) => {
-                      this._selectSorter(e, 'rating')
+                      this._selectSorter('rating')
                     }}>Rating</MenuItem>
                   </Menu>
                 </div>
@@ -235,5 +282,10 @@ class Filter extends Component {
 }
 
 Filter.propTypes = {};
+
+Filter.defaultProps = {
+  type:'',
+  isActive:false
+}
 
 export default withStyles(styles)(Filter);

@@ -13,58 +13,83 @@ import Loader from "../../../components/layouts/Loader";
 
 class Products extends Component {
 
-    state = {
-        isFiltered:false,
-        sort:{
-            orderBy:'created'
-        }
+  state = {
+    isFiltered: true,
+    sort: {
+      orderBy: {}
     }
+  }
 
-    componentDidMount(){
-        this._getRecords();
-    }
+  componentDidMount() {
+    this._getRecords();
+  }
 
 
-    _getRecords(params) {
-        this.props.getRecords(params);
-    }
+  _getRecords(params) {
+    this.props.getRecords(params);
+  }
 
-    render() {
-        const {records, getRecordsRequest} = this.props;
-        const loading = getRecordsRequest.get('loading');
-        const success = getRecordsRequest.get('success');
 
-        return (
-            <div className="animated fadeInLeft">
-                {loading &&
-                <Loader/>}
-                <div className="m-portlet store-wrapper">
-                    <div className="m-portlet__head">
-                        <div className="m-portlet__head-caption">
-                                <Filter/>
-                        </div>
-                    </div>
+  _setFilters(params) {
+    if (params )
+      this.setState({isFiltered:true});
+    this._getRecords(params)
+  }
 
-                    <div id="store-body" className="all-products">
-                        <ProductsSection title={this.props.match.params.type} all={true} products={records}/>
-                    </div>
-                </div>
+
+  _renderNotFountMessage() {
+    return (
+      <div className="notFountMessage">
+        <div className="display-1 text-center">
+          <i className="la g-red	la-times-circle"></i>
+          <h1>Products Not Found</h1>
+        </div>
+      </div>
+    )
+  }
+
+  render() {
+    const {records, getRecordsRequest, match} = this.props;
+    const loading = getRecordsRequest.get('loading');
+    const success = getRecordsRequest.get('success');
+    const {isFiltered} = this.state;
+
+    return (
+      <div className="animated fadeInLeft">
+        {loading &&
+        <Loader/>}
+        <div className="m-portlet store-wrapper">
+          <div className="m-portlet__head">
+            <div className="m-portlet__head-caption">
+              <Filter type={match.params.type} isActive={isFiltered} onChange={(fields) => {
+                this._setFilters(fields)
+              }}/>
             </div>
-        );
-    }
+          </div>
+
+          <div id="store-body" className="all-products">
+            {success &&
+            <ProductsSection title={this.props.match.params.type} all={true} products={records}/> }
+            {(records.size === 0 && success) && this._renderNotFountMessage()}
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 
 Products = connect(
-    (state) => ({
-        getRecordsRequest: selectGetRecordsRequest(state),
-        records: selectRecords(state),
-    }),
-    (dispatch) => ({
-        getRecords: (params = {type:'recent'}) => { dispatch(getRecords(params)) },
-    })
+  (state) => ({
+    getRecordsRequest: selectGetRecordsRequest(state),
+    records: selectRecords(state),
+  }),
+  (dispatch) => ({
+    getRecords: (params = {type: 'recent'}) => {
+      dispatch(getRecords(params))
+    },
+  })
 )(Products);
-
 
 
 export default withRouter(translate("Products")(Products));

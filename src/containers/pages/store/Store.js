@@ -31,16 +31,25 @@ class Store extends Component {
     }
 
     _setFilters(params) {
+        if (params )
         this.setState({isFiltered:true});
         this._getRecords(params)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location.key !== this.props.location.key) {
+            this.setState({isFiltered:false});
+            this._getRecords();
+        }
     }
 
 
     _renderNotFountMessage() {
         return (
           <div className="notFountMessage">
-              <div className="display-1">
-                  <h1>Products Founds</h1>
+              <div className="display-1 text-center">
+                  <i className="la g-red	la-times-circle"></i>
+                  <h1>Products Not Found</h1>
               </div>
           </div>
         )
@@ -61,9 +70,7 @@ class Store extends Component {
                 <div className="m-portlet store-wrapper">
                     <div className="m-portlet__head">
                         <div className="m-portlet__head-caption">
-
-                               <Filter onChange={(fields) => {this._setFilters(fields)}}/>
-
+                               <Filter isActive={isFiltered} onChange={(fields) => {this._setFilters(fields)}}/>
                         </div>
                     </div>
                     {(success && !isFiltered) &&
@@ -75,11 +82,11 @@ class Store extends Component {
                     }
                     {isFiltered &&
                     <div id="store-body">
-                        <ProductsSection type="newest" title="Search Result" all={true} products={records}/>
+                        <ProductsSection type="newest" title="" all={true} products={records}/>
                     </div>
                     }
 
-                  {records.size === 0 && this._renderNotFountMessage()}
+                  {(records.size === 0 && success) && this._renderNotFountMessage()}
                 </div>
             </div>
         );

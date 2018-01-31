@@ -1071,3 +1071,7 @@ table .sub-table .m-datatable {
 .transactionsList table td, .transactionsList table th {
   text-align: center;
 }
+
+div.m-widget25 .m-widget25__price {
+  font-size: 60px;
+}

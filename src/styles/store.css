@@ -204,6 +204,10 @@
      /*border-bottom: 3px solid #D2322D;*/
  }
 
+.store-filter .filter-buttons a.activeFilter {
+    border-bottom: 3px solid #D2322D;
+}
+
 .store-wrapper div[class^='col-'] {
     margin-bottom: 0 !important;
 }
@@ -295,7 +299,7 @@
 }
 
 .shoppingCartTable .productInfo .productImg {
-    width: 150px;
+    width: 100px;
 }
 
 .shoppingCartTable .productPrice {

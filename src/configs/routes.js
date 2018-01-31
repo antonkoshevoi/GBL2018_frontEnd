@@ -73,7 +73,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:type' name='Store' component={Products}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:category/:type' name='Store' component={Products}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
 
       {/*Shopping Cart*/}

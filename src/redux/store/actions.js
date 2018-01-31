@@ -99,16 +99,17 @@ export function getUnassigneds(params = {}) {
  * @param total
  * @returns {{type: string, data: *, total: *}}
  */
-export function updateShoppingCart(data,total) {
-    return {
+export function updateShoppingCart(data) {
+  console.log(data);
+  return {
       type:UPDATE_SHOPPING_CART,
-        data,total
+        data
     }
 }
 
 
-export function calculateCartSum(data) {
-
+export function calculateCartSum(data = []) {
+  console.log(data);
     let total = 0;
     for(let i = 0; i < data.length; i++) {
         if (isNaN(data[i].storeItem.price)) {
@@ -116,7 +117,8 @@ export function calculateCartSum(data) {
         }
         total += (Number(data[i].storeItem.price) * Number(data[i].count));
     }
-    return {
+  console.log(total);
+  return {
       type:CALCULATE_CART_SUM,
         total
     }

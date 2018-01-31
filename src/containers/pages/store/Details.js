@@ -60,7 +60,7 @@ class Details extends Component {
                 <Loader/>}
                 <div className="m-portlet__head m--margin-bottom-30">
                     <div className="m-portlet__head-caption">
-                            <Filter/>
+                           <Filter isActive={false} type="details"/>
                     </div>
                 </div>
                 <div className="container" id="productDetails">

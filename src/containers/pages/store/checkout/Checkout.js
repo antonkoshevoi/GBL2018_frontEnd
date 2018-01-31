@@ -30,7 +30,7 @@ class Checkout extends Component {
     const { cartRecords } = this.props;
       if (cartRecords.size === 0) {
         this._getCartRecords();
-        this._calculateSum(this.props.cartRecords.toJS());
+        this._calculateSum(cartRecords.toJS());
     }
   }
 

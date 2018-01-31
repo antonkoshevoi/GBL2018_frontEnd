@@ -38,7 +38,7 @@ class SubHeader extends Component {
                         <NavLink to={`${item === '' ? '/dashboard' :  generateBreadcrumbLink(paths,i)}`} className="m-nav__link ">
                             {(item === '') ?
                                 <i className="m-nav__link-icon la la-home"></i> :
-                                <span className="m-nav__link-text">{item}</span>
+                                <span className="m-nav__link-text">{item.replace('_', ' ')}</span>
                             }
                         </NavLink>
                     </li>

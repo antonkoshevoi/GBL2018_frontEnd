@@ -29,6 +29,11 @@
     .cardItem .cardContent {
         padding: 5px;
     }
+
+    .shoppingCartPortlet {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
 }
 
 
@@ -110,6 +115,10 @@
 
 
 @media (max-width: 992px) {
+
+    div.loader {
+        margin-left: 0;
+    }
 
     .m-wrapper {
         padding-top: 50px;
