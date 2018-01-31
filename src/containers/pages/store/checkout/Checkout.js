@@ -8,14 +8,23 @@ import PaymentMethods from '../../../../components/pages/store/checkout/PaymentM
 import {selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest} from '../../../../redux/store/selectors';
 import {calculateCartSum, getCartRecords} from '../../../../redux/store/actions';
 import { withRouter } from 'react-router-dom';
+import { push } from 'react-router-redux';
+import {
+  selectCreateCheckPaymentRequest,
+  selectCreatePayPalPaymentRequest
+} from '../../../../redux/payments/selectors';
+import { createCheckPayment, createPayPalPayment } from '../../../../redux/payments/actions';
 
 import payPalImg from '../../../../media/images/payments/paypal.png'
 import creditCardImg from '../../../../media/images/payments/credit_card.png'
 import checkImg from '../../../../media/images/payments/check.png'
-import { selectCreatePayPalPaymentRequest } from '../../../../redux/payments/selectors';
-import { createPayPalPayment } from '../../../../redux/payments/actions';
+
 
 class Checkout extends Component {
+
+  state = {
+    redirecting: false
+  };
 
   componentDidMount() {
     const { cartRecords } = this.props;
@@ -26,7 +35,9 @@ class Checkout extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this._handlePayPalPaymentCrated(nextProps);
+    this._handlePayPalPaymentCreated(nextProps);
+    this._handleCheckPaymentCreated(nextProps);
+    this._handleCheckPaymentFailed(nextProps);
 
     if (this.props.cartRecords !== nextProps.cartRecords) {
         this._calculateSum(nextProps.cartRecords.toJS());
@@ -41,25 +52,61 @@ class Checkout extends Component {
     this.props.calculateSum(data);
   }
 
+  /**
+   * PayPal
+   * @private
+   */
   _processPayPal () {
     this.props.createPayPalPayment();
   }
-  _handlePayPalPaymentCrated(nextProps) {
+  _handlePayPalPaymentCreated(nextProps) {
     const success = this.props.createPayPalPaymentRequest.get('success');
     const nextSuccess = nextProps.createPayPalPaymentRequest.get('success');
 
     if (!success && nextSuccess) {
+      this.setState({ redirecting: true });
       window.location = nextProps.createPayPalPaymentRequest.get('approvalUrl');
+    }
+  }
+
+  /**
+   * Check
+   * @private
+   */
+  _processCheck () {
+    this.props.createCheckPayment();
+  }
+  _handleCheckPaymentCreated(nextProps) {
+    const success = this.props.createCheckPaymentRequest.get('success');
+    const nextSuccess = nextProps.createCheckPaymentRequest.get('success');
+
+    if (!success && nextSuccess) {
+      this.props.goToPendingPage();
+    }
+  }
+  _handleCheckPaymentFailed(nextProps) {
+    const fail = this.props.createCheckPaymentRequest.get('fail');
+    const nextFail = nextProps.createCheckPaymentRequest.get('fail');
+
+    if (!fail && nextFail) {
+      this.props.goToFailPage();
     }
   }
 
   render() {
 
-    const { cartRecords, cartRecordsRequest, createPayPalPaymentRequest, cartRecordsSum } = this.props;
+    const { redirecting } = this.state;
+    const {
+      cartRecords,
+      cartRecordsRequest,
+      createPayPalPaymentRequest,
+      createCheckPaymentRequest,
+      cartRecordsSum
+    } = this.props;
     const loadingCarts = cartRecordsRequest.get('loading');
     const successCarts = cartRecordsRequest.get('success');
 
-      return (
+    return (
       <div>
         <div className='row'>
           <div className='col-xl-3'>
@@ -76,7 +123,7 @@ class Checkout extends Component {
                   {
                     title: 'PayPal',
                     img: payPalImg,
-                    loading: createPayPalPaymentRequest.get('loading'),
+                    loading: createPayPalPaymentRequest.get('loading') || redirecting,
                     onSelect: () => { this._processPayPal(); },
                   },
                   {
@@ -87,6 +134,7 @@ class Checkout extends Component {
                   {
                     title: 'Check',
                     img: checkImg,
+                    loading: createCheckPaymentRequest.get('loading') || redirecting,
                     onSelect: () => { this._processCheck(); },
                   }
                 ]}/>
@@ -104,12 +152,17 @@ Checkout = connect(
     cartRecordsRequest: selectGetCartRecordsRequest(state),
     cartRecords: selectCartRecords(state),
     cartRecordsSum: selectCartRecordsSum(state),
-    createPayPalPaymentRequest: selectCreatePayPalPaymentRequest(state)
+    createPayPalPaymentRequest: selectCreatePayPalPaymentRequest(state),
+    createCheckPaymentRequest: selectCreateCheckPaymentRequest(state)
   }),
   (dispatch) => ({
     getCartRecords: () => { dispatch(getCartRecords()) },
     createPayPalPayment: () => { dispatch(createPayPalPayment()) },
-    calculateSum: (data) => { dispatch(calculateCartSum(data)) }
+    createCheckPayment: () => { dispatch(createCheckPayment()) },
+    calculateSum: (data) => { dispatch(calculateCartSum(data)) },
+    goToSuccessPage: () => { dispatch(push('/payments/success')) },
+    goToPendingPage: () => { dispatch(push('/payments/pending')) },
+    goToFailPage: () => { dispatch(push('/payments/fail')) },
   })
 )(Checkout);
 

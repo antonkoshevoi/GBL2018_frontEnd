@@ -35,6 +35,7 @@ import Checkout from "../containers/pages/store/checkout/Checkout";
 import PayPalReturnContainer from '../containers/pages/store/payments/PayPalReturnContainer';
 import PaymentFailedContainer from '../containers/pages/store/payments/PaymentFailedContainer';
 import PaymentSuccessContainer from '../containers/pages/store/payments/PaymentSuccessContainer';
+import PaymentPendingContainer from '../containers/pages/store/payments/PaymentPendingContainer';
 import RestoreLogin from "../containers/auth/RestoreLogin";
 import TransactionsContainer from "../containers/pages/store/payments/TransactionsContainer";
 import UnassignedCredits from "../containers/unassigned-credits/UnassignedCredits";
@@ -90,6 +91,7 @@ export default () => (
       <Route exact path='/payments/paypal/return' component={PayPalReturnContainer} />
       <Route exact layout={MainLayout} path='/payments/success' component={PaymentSuccessContainer} />
       <Route exact layout={MainLayout} path='/payments/fail' component={PaymentFailedContainer} />
+      <Route exact layout={MainLayout} path='/payments/pending' component={PaymentPendingContainer} />
 
       <Route exact layout={MainLayout} path='/accounts/transactions' component={TransactionsContainer} />
 

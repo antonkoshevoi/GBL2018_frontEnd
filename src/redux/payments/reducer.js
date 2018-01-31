@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import {
+  CREATE_CHECK_PAYMENT, CREATE_CHECK_PAYMENT_FAIL, CREATE_CHECK_PAYMENT_SUCCESS,
   CREATE_PAYPAL_PAYMENT, CREATE_PAYPAL_PAYMENT_FAIL, CREATE_PAYPAL_PAYMENT_SUCCESS,
   EXECUTE_PAYPAL_PAYMENT, EXECUTE_PAYPAL_PAYMENT_FAIL, EXECUTE_PAYPAL_PAYMENT_SUCCESS
 } from './actions';
@@ -12,6 +13,11 @@ const initialState = Immutable.fromJS({
     approvalUrl: undefined
   },
   executePayPalPaymentRequest: {
+    loading: false,
+    success: false,
+    fail: false
+  },
+  createCheckPaymentRequest: {
     loading: false,
     success: false,
     fail: false
@@ -63,6 +69,28 @@ export default function reducer (state = initialState, action) {
     case EXECUTE_PAYPAL_PAYMENT_FAIL:
       return state
         .set('executePayPalPaymentRequest', state.get('executePayPalPaymentRequest')
+          .set('loading', false)
+          .set('fail', true)
+        );
+    /**
+     * Create check payment
+     */
+    case CREATE_CHECK_PAYMENT:
+      return state
+        .set('createCheckPaymentRequest', state.get('createCheckPaymentRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)
+        );
+    case CREATE_CHECK_PAYMENT_SUCCESS:
+      return state
+        .set('createCheckPaymentRequest', state.get('createCheckPaymentRequest')
+          .set('success', true)
+          .set('loading', false)
+        );
+    case CREATE_CHECK_PAYMENT_FAIL:
+      return state
+        .set('createCheckPaymentRequest', state.get('createCheckPaymentRequest')
           .set('loading', false)
           .set('fail', true)
         );
