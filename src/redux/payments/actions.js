@@ -20,7 +20,7 @@ export function createPayPalPayment() {
     types: [CREATE_PAYPAL_PAYMENT, CREATE_PAYPAL_PAYMENT_SUCCESS, CREATE_PAYPAL_PAYMENT_FAIL],
     promise: (apiClient) => apiClient.post(`checkout/paypal/create`, {
       returnUrl: uri('payments/paypal/return'),
-      cancelUrl: uri('payments/paypal/cancel')
+      cancelUrl: uri('payments/canceled')
     })
   }
 }

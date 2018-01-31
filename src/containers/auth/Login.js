@@ -92,7 +92,7 @@ class Login extends Component {
                     </div>
                   </div>
                   <div className="m-login__form-action">
-                    <Button id="m_login_signin_submit" raised color="primary" type='submit'
+                    <Button id="m_login_signin_submit" raised color="primary" type='submit' disabled={loading}
                         className="btn  m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primary">
                       <span>Sign In</span>
                         {loading &&

@@ -23,7 +23,7 @@ import checkImg from '../../../../media/images/payments/check.png'
 class Checkout extends Component {
 
   state = {
-    redirecting: false
+    redirectingToPayPal: false
   };
 
   componentDidMount() {
@@ -64,7 +64,7 @@ class Checkout extends Component {
     const nextSuccess = nextProps.createPayPalPaymentRequest.get('success');
 
     if (!success && nextSuccess) {
-      this.setState({ redirecting: true });
+      this.setState({ redirectingToPayPal: true });
       window.location = nextProps.createPayPalPaymentRequest.get('approvalUrl');
     }
   }
@@ -95,7 +95,7 @@ class Checkout extends Component {
 
   render() {
 
-    const { redirecting } = this.state;
+    const { redirectingToPayPal } = this.state;
     const {
       cartRecords,
       cartRecordsRequest,
@@ -123,7 +123,7 @@ class Checkout extends Component {
                   {
                     title: 'PayPal',
                     img: payPalImg,
-                    loading: createPayPalPaymentRequest.get('loading') || redirecting,
+                    loading: createPayPalPaymentRequest.get('loading') || redirectingToPayPal,
                     onSelect: () => { this._processPayPal(); },
                   },
                   {
@@ -134,7 +134,7 @@ class Checkout extends Component {
                   {
                     title: 'Check',
                     img: checkImg,
-                    loading: createCheckPaymentRequest.get('loading') || redirecting,
+                    loading: createCheckPaymentRequest.get('loading'),
                     onSelect: () => { this._processCheck(); },
                   }
                 ]}/>

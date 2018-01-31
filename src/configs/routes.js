@@ -39,6 +39,7 @@ import PaymentPendingContainer from '../containers/pages/store/payments/PaymentP
 import RestoreLogin from "../containers/auth/RestoreLogin";
 import TransactionsContainer from "../containers/pages/store/payments/TransactionsContainer";
 import UnassignedCredits from "../containers/unassigned-credits/UnassignedCredits";
+import PaymentCanceledContainer from '../containers/pages/store/payments/PaymentCanceledContainer';
 
 export default () => (
   <AppContainer>
@@ -92,6 +93,7 @@ export default () => (
       <Route exact layout={MainLayout} path='/payments/success' component={PaymentSuccessContainer} />
       <Route exact layout={MainLayout} path='/payments/fail' component={PaymentFailedContainer} />
       <Route exact layout={MainLayout} path='/payments/pending' component={PaymentPendingContainer} />
+      <Route exact layout={MainLayout} path='/payments/canceled' component={PaymentCanceledContainer} />
 
       <Route exact layout={MainLayout} path='/accounts/transactions' component={TransactionsContainer} />
 
