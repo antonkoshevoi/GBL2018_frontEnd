@@ -32,12 +32,8 @@ class Schools extends Component {
     // }
 
     componentDidMount () {
-
         const { getUserSchool } = this.props;
         getUserSchool();
-
-        this.props.getUserSchool();
-
     }
 
     componentWillReceiveProps(nextProps) {

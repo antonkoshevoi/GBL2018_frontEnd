@@ -10,6 +10,7 @@ import homeroomsReducer from './homerooms/reducer';
 import classroomsReducer from './classrooms/reducer';
 import schoolsReducer from './schools/reducer';
 import reportsReducer from './reports/reducer';
+import studentReportsReducer from './reports/student-reducer';
 import notificationsReducer from './notifications/reducer';
 import messagesReducer from './messages/reducer';
 import storeReducer from './store/reducer';
@@ -34,4 +35,5 @@ export default {
   store: storeReducer,
   payments: paymentsReducer,
   transactions: transactionsReducer,
+  studentReportsReducer: studentReportsReducer,
 };
