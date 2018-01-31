@@ -33,7 +33,9 @@ class Login extends Component {
   _handlePasswordChange = (event) => { this.setState({password: event.target.value}); };
   _handleRememberChange = (event) => { this.setState({remember: !this.state.remember}); };
 
-  _login() {
+  _login(e) {
+    e.preventDefault();
+
     const { setRedirectUrl, login } = this.props;
     const { username, password, remember } = this.state;
 
@@ -65,7 +67,7 @@ class Login extends Component {
                 <div className="m-login__head">
                   <h3 className="m-login__title">Sign In </h3>
                 </div>
-                <div className="m-login__form m-form" action="">
+                <form className="m-login__form m-form" onSubmit={(e) => { this._login(e) }}>
                   <div className="form-group m-form__group">
                     <input className="form-control m-input" type="text" placeholder="Username" name="username" autoComplete="off" value={this.state.username} onChange={this._handleUsernameChange}/>
                       {(errors.errors !== undefined && errors.errors.username) && <div id="username-error" className="form-control-feedback  text-center error">{errors.errors.username[0]}</div>}
@@ -90,15 +92,14 @@ class Login extends Component {
                     </div>
                   </div>
                   <div className="m-login__form-action">
-                    <Button id="m_login_signin_submit"  raised color="primary" onClick={() => { this._login() }}
+                    <Button id="m_login_signin_submit" raised color="primary" type='submit'
                         className="btn  m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primary">
                       <span>Sign In</span>
                         {loading &&
-                        <CircularProgress color="accent"/>
-                        }
+                          <CircularProgress color="accent"/>}
                     </Button>
                   </div>
-                </div>
+                </form>
               </div>
 
               <div className="m-login__forget-password">
