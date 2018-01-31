@@ -4,6 +4,7 @@ import {
   CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAIL
 } from './actions';
 import Immutable from 'immutable';
+import {saveUserDataSession} from "../../helpers/session";
 
 const initialState = Immutable.fromJS({
   roles: [],
@@ -53,6 +54,7 @@ export default function reducer (state = initialState, action) {
         .set('permissions', Immutable.List())
         .set('roles', Immutable.List());
     case GET_USER_SUCCESS:
+        saveUserDataSession(action.result.data)
       return state
         .set('getUserRequest', state.get('getUserRequest')
           .set('success', true)

@@ -31,11 +31,20 @@ class Store extends Component {
     }
 
     _setFilters(params) {
-        console.log(params);
         this.setState({isFiltered:true});
         this._getRecords(params)
     }
 
+
+    _renderNotFountMessage() {
+        return (
+          <div className="notFountMessage">
+              <div className="display-1">
+                  <h1>Products Founds</h1>
+              </div>
+          </div>
+        )
+    }
 
 
     render() {
@@ -69,6 +78,8 @@ class Store extends Component {
                         <ProductsSection type="newest" title="Search Result" all={true} products={records}/>
                     </div>
                     }
+
+                  {records.size === 0 && this._renderNotFountMessage()}
                 </div>
             </div>
         );

@@ -22,16 +22,19 @@ export const saveSession = ({ token, expiresAt, refreshToken }, remember) => {
 
 
 export const saveUserDataSession = (data) => {
-  const expiresAt = new Date();
-  const userData = SessionStorage.get('userData');
+    const now = new Date();
+    const time = now.getTime();
+    const expireTime = time + 1000*36000;
+    now.setTime(expireTime);
 
-  const rememberOptions = {
+  const userData = SessionStorage.get('userData');
+    const rememberOptions = {
       path: '/',
-      expires: new Date(expiresAt * 1000 + (30 * 24 * 3600 * 1000))
+      expires: new Date(now * 1000 + (30 * 24 * 3600 * 1000))
   };
 
   if (!userData || userData == undefined) {
-      SessionStorage.set('userData', data);
+      SessionStorage.set('userData', data,rememberOptions);
   }
 }
 
