@@ -37,14 +37,23 @@ class TabSection extends Component {
   _renderTabContent(courses) {
     const {value} = this.state;
     const _self = this;
-    return courses.map(function (item, i) {
-      console.log(item.course.crsId, value);
-      return (
-        value == item.course.crsId && <TabContainer key={i}>
-          {_self._renderLessonsTables(item)}
-        </TabContainer>
-      )
-    })
+    console.log(courses);
+    if (value === 'details') {
+      if (!courses.length) {
+        return null;
+      }
+      return <TabContainer>
+        {this._renderDetailedData(courses[0])}
+      </TabContainer>
+    } else {
+      return courses.map(function (item, i) {
+        return (
+          value == item.course.crsId && <TabContainer key={i}>
+            {_self._renderLessonsTables(item)}
+          </TabContainer>
+        )
+      })
+    }
   }
 
   _renderLessonsTables(item) {
@@ -72,8 +81,10 @@ class TabSection extends Component {
                   {attemptCurrent.attempts == 0 ? 'Not started' : (attemptCurrent.passes == attemptCurrent.Required_Passes ? 'Completed' : 'In Progress') }
                 </span>
               </Td>
-              <Td width='120px'>{attemptCurrent.passes / attemptCurrent.Required_Passes}</Td>
-              <Td width='132px'>{attemptCurrent.metadata}</Td>
+              <Td width='120px'>{attemptCurrent.passes} / {attemptCurrent.Required_Passes}</Td>
+              <Td width='132px'>
+                {/*{attemptCurrent.metadata}*/}
+              </Td>
             </Row>
           )
         })}
@@ -82,8 +93,41 @@ class TabSection extends Component {
     )
   }
 
-  _renderDetailedData(courses) {
-
+  _renderDetailedData(item) {
+    return (
+      <Table>
+        <Thead>
+        <HeadRow>
+          <Th first={true} width='20px'>#</Th>
+          <Th width='90px'>Date</Th>
+          <Th width='90px'>Classroom</Th>
+          <Th width='90px'>Course</Th>
+          <Th width='90px'>Unit/Lesson</Th>
+          <Th width='90px'>Score</Th>
+          <Th width='90px'>Percent</Th>
+          <Th width='90px'>Pass/Fail</Th>
+          <Th width='90px'>Passes/Attempts</Th>
+        </HeadRow>
+        </Thead>
+        <Tbody>
+        {item.attempts.map(function (attempt, i) {
+          return (
+            <Row index={i} key={i}>
+              <Td first={true} width='20px'>{i + 1}</Td>
+              <Td width='90px'>{attempt.att_date}</Td>
+              <Td width='90px'>{attempt.classroom_name}</Td>
+              <Td width='90px'>{attempt.course_name}</Td>
+              <Td width='90px'></Td>
+              <Td width='90px'>{attempt.scored_points} / {attempt.lesson_points}</Td>
+              <Td width='90px'>{(attempt.scored_points / attempt.lesson_points) * 100}</Td>
+              <Td width='90px'></Td>
+              <Td width='90px'>{attempt.passes} / {attempt.attempts} </Td>
+            </Row>
+          )
+        })}
+        </Tbody>
+      </Table>
+    )
   }
 
   render() {
