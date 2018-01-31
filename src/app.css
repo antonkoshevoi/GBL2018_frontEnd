@@ -34,6 +34,10 @@ textarea {
   color:#ccc !important;
 }
 
+.g-metal {
+  color: #555 !important;
+}
+
 .img-responsive {
   max-width: 100%;
 }
@@ -1056,6 +1060,10 @@ div#notFoundPage {
   background-repeat: no-repeat;
 }
 
+.store div#notFoundPage {
+  margin: 0;
+}
+
 table .sub-table {
   background-color: #f5f4f7;
 }
@@ -1070,4 +1078,8 @@ table .sub-table .m-datatable {
 
 .transactionsList table td, .transactionsList table th {
   text-align: center;
+}
+
+div.m-widget25 .m-widget25__price {
+  font-size: 60px;
 }

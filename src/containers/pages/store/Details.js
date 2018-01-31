@@ -10,97 +10,114 @@ import Filter from "../../../components/pages/store/Filter";
 import Sidebar from "../../../components/pages/store/Sidebar";
 
 
-import {addToCarts,  getRecords, getSingleRecord} from "../../../redux/store/actions";
+import {addToCarts, getRecords, getSingleRecord} from "../../../redux/store/actions";
 import {
-    selectAddToCartRequest, selectGetRecordsRequest, selectGetSingleRecord,
-    selectGetSingleRecordRequest, selectRecords
+  selectAddToCartRequest, selectGetRecordsRequest, selectGetSingleRecord,
+  selectGetSingleRecordRequest, selectRecords
 } from "../../../redux/store/selectors";
 import Loader from "../../../components/layouts/Loader";
+import {buildSortersQuery} from "../../../helpers/utils";
 
 class Details extends Component {
 
-    componentDidMount() {
-        const recordId = this.props.match.params.id;
-        this._getPageRecords(recordId);
+  state = {
+    sorters: {
+      created: 'desc'
     }
+  }
 
-    componentWillReceiveProps(nextProps) {
-        const recordId = this.props.match.params.id;
-        const nextRecordId = nextProps.match.params.id;
-        if (recordId !== nextRecordId) {
-            this._getPageRecords(nextRecordId);
-        }
+  componentDidMount() {
+    const recordId = this.props.match.params.id;
+    this._getPageRecords(recordId);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const recordId = this.props.match.params.id;
+    const nextRecordId = nextProps.match.params.id;
+    if (recordId !== nextRecordId) {
+      this._getPageRecords(nextRecordId);
     }
+  }
 
-    _getRecord(id,params) {
-        this.props.getSingleRecord(id)
-    }
+  _getRecord(id, params) {
+    this.props.getSingleRecord(id)
+  }
 
-    _getRecords() {
-        this.props.getRecords();
-    }
+  _getRecords() {
+    const {sorters} = this.state;
+    this.props.getRecords({
+      orderBy: buildSortersQuery(sorters)
+    });
+  }
 
-    _getPageRecords(id){
-        this._getRecord(id);
-        this._getRecords();
-    }
+  _getPageRecords(id) {
+    this._getRecord(id);
+    this._getRecords();
+  }
 
-    _addToCart(id) {
-        this.props.addToCarts(id)
-    }
+  _addToCart(id) {
+    this.props.addToCarts(id)
+  }
 
-    render() {
-        const {record, records, addToCartRequest ,getSingleRecordRequest} = this.props;
-        const loadingSingle = getSingleRecordRequest.get('loading');
-        const successSingle = getSingleRecordRequest.get('success');
+  render() {
+    const {record, records, addToCartRequest, getSingleRecordRequest} = this.props;
+    const loadingSingle = getSingleRecordRequest.get('loading');
+    const successSingle = getSingleRecordRequest.get('success');
 
-        return (
-            <div className="m-portlet store-wrapper fadeInLeft animated">
-                {loadingSingle &&
-                <Loader/>}
-                <div className="m-portlet__head m--margin-bottom-30">
-                    <div className="m-portlet__head-caption">
-                            <Filter/>
-                    </div>
-                </div>
-                <div className="container" id="productDetails">
-                <div className="row">
-                    <div className="col-lg-8">
-                        {successSingle &&
-                        <div className="m-portlet">
-                            <DetailsSection data={record} buyClick={(id) => {this._addToCart(id)}}/>
-                            <CommentsSection/>
-                        </div>
-                        }
-                    </div>
-                    <div className="col-lg-4">
-                        {successSingle &&
-                        <Sidebar data={records} title="Recent" dataType="recent"/>}
-                    </div>
-                </div>
+    return (
+      <div className="m-portlet store-wrapper fadeInLeft animated">
+        {loadingSingle &&
+        <Loader/>}
+        <div className="m-portlet__head m--margin-bottom-30">
+          <div className="m-portlet__head-caption">
+            <Filter isActive={false} type="details"/>
+          </div>
+        </div>
+        <div className="container" id="productDetails">
+          <div className="row">
+            <div className="col-lg-8">
+              {successSingle &&
+              <div className="m-portlet">
+                <DetailsSection data={record} addedRequest={addToCartRequest} buyClick={(id) => {
+                  this._addToCart(id)
+                }}/>
+                <CommentsSection/>
+              </div>
+              }
             </div>
-
+            <div className="col-lg-4">
+              {successSingle &&
+              <Sidebar data={records} title="Newest" dataType="newest"/>}
             </div>
+          </div>
+        </div>
 
-        );
-    }
+      </div>
+
+    );
+  }
 }
 
 Details = connect(
-    (state) => ({
-        getSingleRecordRequest: selectGetSingleRecordRequest(state),
-        addToCartRequest: selectAddToCartRequest(state),
-        getRecordsRequest: selectGetRecordsRequest(state),
-        records: selectRecords(state),
-        record: selectGetSingleRecord(state),
-    }),
-    (dispatch) => ({
-        getRecords: (params = {type:'recent'}) => { dispatch(getRecords(params)) },
-        getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
-        addToCarts: (id, params = {}) => { dispatch(addToCarts(id, params)) },
-    })
+  (state) => ({
+    getSingleRecordRequest: selectGetSingleRecordRequest(state),
+    addToCartRequest: selectAddToCartRequest(state),
+    getRecordsRequest: selectGetRecordsRequest(state),
+    records: selectRecords(state),
+    record: selectGetSingleRecord(state),
+  }),
+  (dispatch) => ({
+    getRecords: (params = {type: 'recent'}) => {
+      dispatch(getRecords(params))
+    },
+    getSingleRecord: (id, params = {}) => {
+      dispatch(getSingleRecord(id, params))
+    },
+    addToCarts: (id, params = {}) => {
+      dispatch(addToCarts(id, params))
+    },
+  })
 )(Details);
-
 
 
 export default withRouter(translate("Details")(Details));

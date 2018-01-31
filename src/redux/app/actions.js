@@ -10,7 +10,6 @@ export function load()
 {
   const token = SessionStorage.get('token');
   const refreshToken = SessionStorage.get('refreshToken');
-
   if (token) {
     return {
       types: [LOAD, LOAD_SUCCESS_AUTHENTICATED, LOAD_FAIL],

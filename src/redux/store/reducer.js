@@ -120,7 +120,10 @@ export default function reducer (state = initialState, action) {
         .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
           .set('success', true)
           .set('loading', false).set('singleRecord', Immutable.fromJS(action.result.data))
-        ).set('singleRecord', Immutable.fromJS(action.result.data));
+        ).set('singleRecord', Immutable.fromJS(action.result.data))
+          .set('addToCartRequest', state.get('addToCartRequest')
+            .remove('success')
+          );
     case GET_SINGLE_RECORD_FAIL:
       return state
         .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
@@ -165,6 +168,7 @@ export default function reducer (state = initialState, action) {
                   .remove('fail')
               );
       case ADD_TO_CART_SUCCESS:
+
           return state
               .set('addToCartRequest', state.get('addToCartRequest')
                   .set('success', true)
@@ -183,7 +187,6 @@ export default function reducer (state = initialState, action) {
        */
       case UPDATE_SHOPPING_CART:
           return state
-              .set('totalSum', Immutable.fromJS(action.total))
                   .set('cartRecords', Immutable.fromJS(action.data));
 
       /**

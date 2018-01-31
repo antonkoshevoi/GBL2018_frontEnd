@@ -7,7 +7,7 @@ import Filter from "../../../components/pages/store/Filter";
 import products from "../../../data/json/products.json";
 import ProductsSection from "../../../components/pages/store/ProductsSection";
 import {
-    selectGetRecordsRequest, selectRecords
+  selectGetRecordsRequest, selectRecords
 } from "../../../redux/store/selectors";
 import {withRouter} from "react-router-dom";
 import {getCartRecords, getRecords, getSingleRecord} from "../../../redux/store/actions";
@@ -17,72 +17,94 @@ import Loader from "../../../components/layouts/Loader";
 class Store extends Component {
 
 
-    state = {
-        isFiltered:false
+  state = {
+    isFiltered: false
+  }
+
+  componentDidMount() {
+    this._getRecords();
+  }
+
+
+  _getRecords(params) {
+    this.props.getRecords(params);
+  }
+
+  _setFilters(params) {
+    if (params)
+      this.setState({isFiltered: true});
+    this._getRecords(params)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.key !== this.props.location.key) {
+      this.setState({isFiltered: false});
+      this._getRecords();
     }
-
-    componentDidMount(){
-        this._getRecords();
-    }
+  }
 
 
-    _getRecords(params) {
-        this.props.getRecords(params);
-    }
+  _renderNotFountMessage() {
+    return (
+      <div className="notFountMessage">
+        <div className="display-1 text-center">
+          <i className="la g-red	la-times-circle"></i>
+          <h1>Products Not Found</h1>
+        </div>
+      </div>
+    )
+  }
 
-    _setFilters(params) {
-        console.log(params);
-        this.setState({isFiltered:true});
-        this._getRecords(params)
-    }
 
+  render() {
 
+    const {records, getRecordsRequest} = this.props;
+    const loading = getRecordsRequest.get('loading');
+    const success = getRecordsRequest.get('success');
+    const {isFiltered} = this.state;
 
-    render() {
-
-        const {records, getRecordsRequest} = this.props;
-        const loading = getRecordsRequest.get('loading');
-        const success = getRecordsRequest.get('success');
-        const {isFiltered} = this.state;
-
-        return (
-            <div className="animated fadeInLeft">
-                {loading &&
-                <Loader/>}
-                <div className="m-portlet store-wrapper">
-                    <div className="m-portlet__head">
-                        <div className="m-portlet__head-caption">
-
-                               <Filter onChange={(fields) => {this._setFilters(fields)}}/>
-
-                        </div>
-                    </div>
-                    {(success && !isFiltered) &&
-                    <div id="store-body">
-                        <ProductsSection type="newest" title="Newest" products={records.slice(0, 9)}/>
-                        <ProductsSection type="popular" title="Most Popular" products={records.slice(0, 9)}/>
-                        <ProductsSection type="top" title="Top Rating" products={records.slice(0, 9)}/>
-                    </div>
-                    }
-                    {isFiltered &&
-                    <div id="store-body">
-                        <ProductsSection type="newest" title="Search Result" all={true} products={records}/>
-                    </div>
-                    }
-                </div>
+    return (
+      <div className="animated fadeInLeft">
+        {loading &&
+        <Loader/>}
+        <div className="m-portlet store-wrapper">
+          <div className="m-portlet__head">
+            <div className="m-portlet__head-caption">
+              <Filter isActive={isFiltered} onChange={(fields) => {
+                this._setFilters(fields)
+              }}/>
             </div>
-        );
-    }
+          </div>
+          {(success && !isFiltered) &&
+          <div id="store-body">
+            <ProductsSection type="newest" title="Newest" products={records.slice(0, 9)}/>
+            <ProductsSection type="popular" title="Most Popular" products={records.slice(0, 9)}/>
+            <ProductsSection type="top" title="Top Rating" products={records.slice(0, 9)}/>
+          </div>
+          }
+          {isFiltered &&
+          <div id="store-body">
+            <ProductsSection type="newest" title="" all={true} products={records}/>
+          </div>
+          }
+
+          {(records.size === 0 && success) && this._renderNotFountMessage()}
+        </div>
+      </div>
+    );
+  }
 }
 
 Store = connect(
-    (state) => ({
-        getRecordsRequest: selectGetRecordsRequest(state),
-        records: selectRecords(state),
-    }),
-    (dispatch) => ({
-        getRecords: (params = {type:'recent'}) => { dispatch(getRecords(params)) },
-    })
+  (state) => ({
+    getRecordsRequest: selectGetRecordsRequest(state),
+    records: selectRecords(state),
+  }),
+  (dispatch) => ({
+    getRecords: (params = {type: 'recent'}) => {
+      dispatch(getRecords(params))
+    },
+  })
 )(Store);
 
 

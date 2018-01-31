@@ -204,6 +204,10 @@
      /*border-bottom: 3px solid #D2322D;*/
  }
 
+.store-filter .filter-buttons a.activeFilter {
+    border-bottom: 3px solid #D2322D;
+}
+
 .store-wrapper div[class^='col-'] {
     margin-bottom: 0 !important;
 }
@@ -295,7 +299,7 @@
 }
 
 .shoppingCartTable .productInfo .productImg {
-    width: 150px;
+    width: 100px;
 }
 
 .shoppingCartTable .productPrice {
@@ -348,5 +352,27 @@
 
     .store-filter.right-block .col-xs-6 {
         flex: 1;
+    }
+}
+
+.floating-basket {
+    color: #e02426;
+    opacity: 0;
+    animation-name: floatingToRightTop;
+    animation-duration: 1s;
+    display: flex !important;
+    width: 0;
+    will-change: auto;
+    font-size: 2rem;
+}
+
+@keyframes floatingToRightTop {
+    from {
+        transform: translateX(0) translateY(0) scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px) translateY(-400px) scale(3);
+        opacity: 0;
     }
 }

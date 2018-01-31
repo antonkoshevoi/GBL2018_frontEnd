@@ -35,9 +35,11 @@ import Checkout from "../containers/pages/store/checkout/Checkout";
 import PayPalReturnContainer from '../containers/pages/store/payments/PayPalReturnContainer';
 import PaymentFailedContainer from '../containers/pages/store/payments/PaymentFailedContainer';
 import PaymentSuccessContainer from '../containers/pages/store/payments/PaymentSuccessContainer';
+import PaymentPendingContainer from '../containers/pages/store/payments/PaymentPendingContainer';
 import RestoreLogin from "../containers/auth/RestoreLogin";
 import TransactionsContainer from "../containers/pages/store/payments/TransactionsContainer";
 import UnassignedCredits from "../containers/unassigned-credits/UnassignedCredits";
+import PaymentCanceledContainer from '../containers/pages/store/payments/PaymentCanceledContainer';
 
 export default () => (
   <AppContainer>
@@ -72,7 +74,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:type' name='Store' component={Products}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:category/:type' name='Store' component={Products}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
 
       {/*Shopping Cart*/}
@@ -90,6 +92,8 @@ export default () => (
       <Route exact path='/payments/paypal/return' component={PayPalReturnContainer} />
       <Route exact layout={MainLayout} path='/payments/success' component={PaymentSuccessContainer} />
       <Route exact layout={MainLayout} path='/payments/fail' component={PaymentFailedContainer} />
+      <Route exact layout={MainLayout} path='/payments/pending' component={PaymentPendingContainer} />
+      <Route exact layout={MainLayout} path='/payments/canceled' component={PaymentCanceledContainer} />
 
       <Route exact layout={MainLayout} path='/accounts/transactions' component={TransactionsContainer} />
 

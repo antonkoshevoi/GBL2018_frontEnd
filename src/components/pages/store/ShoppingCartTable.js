@@ -19,11 +19,6 @@ class ShoppingCartTable extends Component {
         this.setState({total:this._getTotalSum(data)});
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.data !== this.props.data) {
-            // this._updateData(nextProps.data);
-        }
-    }
 
     _updateData(data){
         const total = this._getTotalSum(data);
@@ -76,19 +71,19 @@ class ShoppingCartTable extends Component {
 
             return (
                 <Row index={i} key={i}>
-                    <Td first={true} width='20px'>{i + 1}</Td>
-                    <Td width='400px'>
+                    <Td first={true} width='10px'>{i + 1}</Td>
+                    <Td width='260px'>
                         <div className="productInfo">
                             <div className="productImg" >
                                 <img src={item.storeItem.thumbnail} className="img-responsive" alt=""/>
                             </div>
                             <div className="productContent">
-                                <h4>{item.storeItem.title}</h4>
+                                <NavLink to={`/store/details/${item.storeItem.id}`}><h4>{item.storeItem.title}</h4></NavLink>
                                 <span>{item.storeItem.description.substr(0,23) + '...'}</span>
                             </div>
                         </div>
                     </Td>
-                    <Td width='172px'>
+                    <Td width='132px'>
                         <input type="number" onChange={(e) => {_self._changeItemCount(i,e)}} value={item.count} className="form-control productQuantity m-input m-input--solid"  style={{height:"50px"}}/>
                     </Td>
                     <Td width='132px'>
@@ -106,29 +101,35 @@ class ShoppingCartTable extends Component {
         })
     }
 
-    _renderTotalRow() {
+    _renderTotalRow(sum) {
         return (
-            <Row >
-                <Td first={true} width='20px'></Td>
-                <Td width='350px'>
-                    <h3 className="text-right">{this.state.data.length + ' Items'}</h3>
-                </Td>
-                <Td width='180px'>
-                    <span>Total</span><br/>
-                    <span className="productPrice g-blue">
-                            {parseInt(this.state.total).toFixed(2) + "$"}
-                        </span>
-                </Td>
-                <Td width='175px'>
-                      <NavLink to="/shopping/checkout" className="btn m-btm btn-info">Checkout</NavLink>
-                </Td>
+            <div >
+                <div className="m alert  m-alert--default">
+                    <div className="row text-right">
+                        <div className="col-md-3 text-right">
+                            <h3 >{this.state.data.length + ' Items'}</h3>
+                        </div>
+                        <div className="col-md-6 ">
+                            <div className="text-left d-inline-block">
+                                <span>Total</span><br/>
+                                <span className="productPrice g-blue">
+                                {parseInt(sum).toFixed(2) + "$"}
+                                </span>
+                            </div>
+                        </div>
+                        <div className="col-md-3 d-flex justify-content-end align-items-center">
+                            <NavLink to="/shopping/checkout" className="btn m-btm btn-success">Checkout</NavLink>
+                        </div>
+                    </div>
+                </div>
 
-            </Row>
+            </div>
+
         )
     }
 
     render() {
-        const {data} = this.props;
+        const {data,sum} = this.props;
 
         return (
             <div className="shoppingCartTable">
@@ -136,20 +137,20 @@ class ShoppingCartTable extends Component {
                     <Table>
                         <Thead>
                         <HeadRow>
-                            <Th first={true} width='20px'>#</Th>
-                            <Th name='product' width='400px'>Product</Th>
-                            <Th name='quantity' width='172px'>Quantity</Th>
+                            <Th first={true} width='10px'>#</Th>
+                            <Th name='product' width='260px'>Product</Th>
+                            <Th name='quantity' width='132px'>Quantity</Th>
                             <Th name='price' width='100px'>Price</Th>
                             <Th name='actions' width='50px'>Delete</Th>
                         </HeadRow>
                         </Thead>
                         <Tbody>
                         {this._renderRows(data)}
-                        {this._renderTotalRow()}
                         </Tbody>
                     </Table> :
                     this._getEmptyMessage()
                 }
+              {this._renderTotalRow(sum)}
             </div>
         );
     }
