@@ -132,8 +132,11 @@ class ShoppingCartTable extends Component {
         const {data,sum} = this.props;
 
         return (
+          <div>
+            {data.length > 0 ?
+
             <div className="shoppingCartTable">
-                {data.length > 0 ?
+
                     <Table>
                         <Thead>
                         <HeadRow>
@@ -147,11 +150,13 @@ class ShoppingCartTable extends Component {
                         <Tbody>
                         {this._renderRows(data)}
                         </Tbody>
-                    </Table> :
-                    this._getEmptyMessage()
-                }
-              {this._renderTotalRow(sum)}
+                    </Table>
+                {this._renderTotalRow(sum)}
             </div>
+              :
+              this._getEmptyMessage()
+            }
+          </div>
         );
     }
 }

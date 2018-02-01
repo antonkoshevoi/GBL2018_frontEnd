@@ -18,7 +18,7 @@ class InfoSection extends Component {
                         </div>
                         <div className="col m--align-right">
                             <span className="m-widget1__number m--font-brand">
-                                { loading && <CircularProgress color="accent"/> }
+                                { loading && <CircularProgress size={17} color="accent"/> }
                                 { !loading && item.value }
                             </span>
                         </div>
