@@ -82,7 +82,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/shopping/checkout' name='Checkout' component={Checkout}/>
 
       {/*User*/}
-      <AuthenticatedRoute exact layout={MainLayout} path='/messages' name='Messages' component={Messages} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/messages/:threadId?' name='Messages' component={Messages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />
 
       {/*Unassigned Credits*/}

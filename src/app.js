@@ -14,12 +14,10 @@ import configureStore from './redux/store';
 import createHistory from 'history/createBrowserHistory'
 
 import ApiClient from "./services/ApiClient";
-import LiveService from "./services/LiveService";
 import {Scrollbars} from "react-custom-scrollbars";
 
 const history = createHistory();
 const apiClient = new ApiClient();
-const liveService = new LiveService();
 const store = configureStore(history, apiClient);
 
 class App extends Component {
