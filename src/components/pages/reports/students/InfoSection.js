@@ -47,8 +47,9 @@ class InfoSection extends Component {
   }
 
   render() {
-
-    const {getStudentForReportRequest, data} = this.props;
+    const { data } = this.props.data;
+    const coursesLoading = this.props.data.loading;
+    const {getStudentForReportRequest} = this.props;
     const firstName = getStudentForReportRequest.get('record').toJS().firstName;
     const lastName = getStudentForReportRequest.get('record').toJS().lastName;
     const birthday = getStudentForReportRequest.get('record').toJS().birthday;
@@ -123,7 +124,8 @@ class InfoSection extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {this._renderCourseTable(data)}
+                      {coursesLoading && <tr><td colSpan="3" className="text-center"><CircularProgress color="accent"/></td></tr>}
+                      {!coursesLoading && this._renderCourseTable(data)}
                     </tbody>
                   </table>
                 </div>

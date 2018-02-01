@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Tab, Tabs, Typography} from "material-ui";
 import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../../../ui/table";
+import Parser from 'html-react-parser';
 
 function TabContainer(props) {
   return (
@@ -62,11 +63,11 @@ class TabSection extends Component {
         <Thead>
         <HeadRow>
           <Th first={true} width='20px'>#</Th>
-          <Th width='132px'>Unit/lesson</Th>
-          <Th width='172px'>Title / Description</Th>
+          <Th width='100px'>Unit/lesson</Th>
+          <Th width='150px'>Title / Description</Th>
           <Th width='100px'>Status</Th>
-          <Th width='120px'>Passes/Required Passes</Th>
-          <Th width='132px'>Comments</Th>
+          <Th width='50px'>Passes/Required Passes</Th>
+          <Th width='250px'>Comments</Th>
         </HeadRow>
         </Thead>
         <Tbody>
@@ -74,17 +75,15 @@ class TabSection extends Component {
           return (
             <Row index={i} key={i}>
               <Td first={true} width='20px'>{i + 1}</Td>
-              <Td width='132px'>{item.course.crsTitle}</Td>
-              <Td width='172px'></Td>
+              <Td width='100px'>{attemptCurrent.lesson}</Td>
+              <Td width='150px'>{attemptCurrent.description}</Td>
               <Td width='100px'>
                 <span className='m-badge m-badge--brand m-badge--wide'>
                   {attemptCurrent.attempts == 0 ? 'Not started' : (attemptCurrent.passes == attemptCurrent.Required_Passes ? 'Completed' : 'In Progress') }
                 </span>
               </Td>
-              <Td width='120px'>{attemptCurrent.passes} / {attemptCurrent.Required_Passes}</Td>
-              <Td width='132px'>
-                {/*{attemptCurrent.metadata}*/}
-              </Td>
+              <Td width='50px'>{attemptCurrent.passes} / {attemptCurrent.Required_Passes}</Td>
+              <Td width='250px'>{Parser(attemptCurrent.metadata)}</Td>
             </Row>
           )
         })}
@@ -99,14 +98,14 @@ class TabSection extends Component {
         <Thead>
         <HeadRow>
           <Th first={true} width='20px'>#</Th>
-          <Th width='90px'>Date</Th>
-          <Th width='90px'>Classroom</Th>
-          <Th width='90px'>Course</Th>
-          <Th width='90px'>Unit/Lesson</Th>
-          <Th width='90px'>Score</Th>
-          <Th width='90px'>Percent</Th>
-          <Th width='90px'>Pass/Fail</Th>
-          <Th width='90px'>Passes/Attempts</Th>
+          <Th width='150px'>Date</Th>
+          <Th width='150px'>Classroom</Th>
+          <Th width='150px'>Course</Th>
+          <Th width='200px'>Unit/Lesson</Th>
+          <Th width='50px'>Score</Th>
+          <Th width='50px'>Percent</Th>
+          <Th width='50px'>Pass/Fail</Th>
+          <Th width='50px'>Passes/Attempts</Th>
         </HeadRow>
         </Thead>
         <Tbody>
@@ -114,14 +113,18 @@ class TabSection extends Component {
           return (
             <Row index={i} key={i}>
               <Td first={true} width='20px'>{i + 1}</Td>
-              <Td width='90px'>{attempt.att_date}</Td>
-              <Td width='90px'>{attempt.classroom_name}</Td>
-              <Td width='90px'>{attempt.course_name}</Td>
-              <Td width='90px'></Td>
-              <Td width='90px'>{attempt.scored_points} / {attempt.lesson_points}</Td>
-              <Td width='90px'>{(attempt.scored_points / attempt.lesson_points) * 100}</Td>
-              <Td width='90px'></Td>
-              <Td width='90px'>{attempt.passes} / {attempt.attempts} </Td>
+              <Td width='150px'>{attempt.att_date}</Td>
+              <Td width='150px'>{attempt.classroom_name}</Td>
+              <Td width='150px'>{attempt.course_name}</Td>
+              <Td width='200px'>{attempt.lesson}</Td>
+              <Td width='50px'>{attempt.scored_points} / {attempt.lesson_points}</Td>
+              <Td width='50px'>{(attempt.scored_points / attempt.lesson_points) * 100}</Td>
+              <Td width='50px'>
+                <span className='m-badge m-badge--brand m-badge--wide'>
+                  {attempt.pass ? 'pass' : 'fail'}
+                </span>
+              </Td>
+              <Td width='50px'>{attempt.passes} / {attempt.attempts} </Td>
             </Row>
           )
         })}
@@ -133,7 +136,7 @@ class TabSection extends Component {
   render() {
 
     const { value } = this.state;
-    const { data } = this.props;
+    const { data } = this.props.data;
 
     return (
       <div className="row ">

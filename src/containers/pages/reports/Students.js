@@ -16,7 +16,7 @@ class Students extends Component {
   }
 
   render() {
-    const data = this.props.getReportRequest.get('data').toJS();
+    const data = this.props.getReportRequest.toJS();
 
     return (
       <div className="animate fadeInLeftBig">
