@@ -32,6 +32,18 @@ class Messages extends Component {
   componentWillReceiveProps (nextProps) {
     this._handleGetThreadsSuccess(nextProps);
     this._handleCreateThreadSuccess(nextProps);
+    this._handleSetSelectThreadFromRoute(nextProps);
+  }
+
+  _handleSetSelectThreadFromRoute (nextProps) {
+    const threadId = this.props.match.params.threadId;
+    const nextThreadId = nextProps.match.params.threadId;
+
+    if (threadId !== nextThreadId) {
+      this.setState({
+        selectedThreadId: nextThreadId
+      })
+    }
   }
 
   _handleGetThreadsSuccess (nextProps) {
