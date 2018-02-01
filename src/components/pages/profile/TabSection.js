@@ -92,44 +92,44 @@ class TabSection extends Component {
                     <div className="m-portlet__body m--padding-top-5" style={{height:"100%"}}>
                         {mode === 'overviewMode' && <TabContainer>
 
-                            <div class="m-widget1 m-widget1--paddingless">
-                                <div class="m-widget1__item">
-                                    <div class="row m-row--no-padding align-items-center">
-                                        <div class="col">
-                                            <h3 class="m-widget1__title">First Name</h3>
+                            <div className="m-widget1 m-widget1--paddingless">
+                                <div className="m-widget1__item">
+                                    <div className="row m-row--no-padding align-items-center">
+                                        <div className="col">
+                                            <h3 className="m-widget1__title">First Name</h3>
                                         </div>
-                                        <div class="col m--align-right">
-                                            <span class="m-widget1__number m--font-brand">{this.state.firstName}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="m-widget1__item">
-                                    <div class="row m-row--no-padding align-items-center">
-                                        <div class="col">
-                                            <h3 class="m-widget1__title">Last Name</h3>
-                                        </div>
-                                        <div class="col m--align-right">
-                                            <span class="m-widget1__number m--font-brand">{this.state.lastName}</span>
+                                        <div className="col m--align-right">
+                                            <span className="m-widget1__number m--font-brand">{this.state.firstName}</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="m-widget1__item">
-                                    <div class="row m-row--no-padding align-items-center">
-                                        <div class="col">
-                                            <h3 class="m-widget1__title">Email</h3>
+                                <div className="m-widget1__item">
+                                    <div className="row m-row--no-padding align-items-center">
+                                        <div className="col">
+                                            <h3 className="m-widget1__title">Last Name</h3>
                                         </div>
-                                        <div class="col m--align-right">
-                                            <span class="m-widget1__number m--font-brand">{this.state.email}</span>
+                                        <div className="col m--align-right">
+                                            <span className="m-widget1__number m--font-brand">{this.state.lastName}</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="m-widget1__item">
-                                    <div class="row m-row--no-padding align-items-center">
-                                        <div class="col">
-                                            <h3 class="m-widget1__title">Birthday</h3>
+                                <div className="m-widget1__item">
+                                    <div className="row m-row--no-padding align-items-center">
+                                        <div className="col">
+                                            <h3 className="m-widget1__title">Email</h3>
                                         </div>
-                                        <div class="col m--align-right">
-                                            <span class="m-widget1__number m--font-brand">{this.state.birthday.toDateString()}</span>
+                                        <div className="col m--align-right">
+                                            <span className="m-widget1__number m--font-brand">{this.state.email}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="m-widget1__item">
+                                    <div className="row m-row--no-padding align-items-center">
+                                        <div className="col">
+                                            <h3 className="m-widget1__title">Birthday</h3>
+                                        </div>
+                                        <div className="col m--align-right">
+                                            <span className="m-widget1__number m--font-brand">{this.state.birthday.toDateString()}</span>
                                         </div>
                                     </div>
                                 </div>

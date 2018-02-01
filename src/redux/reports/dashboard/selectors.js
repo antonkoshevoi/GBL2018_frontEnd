@@ -20,3 +20,27 @@ export const selectRosterStatisticRequest = createSelector(
   selectChartDataDomain,
   (subState) => subState.get('getRosterStatisticRequest')
 );
+
+/**
+ * Students
+ */
+export const selectStudentsRequest = createSelector(
+  selectChartDataDomain,
+  (subState) => subState.get('getStudentsRequest')
+);
+
+/**
+ * Homerooms
+ */
+export const selectHomeroomsRequest = createSelector(
+  selectChartDataDomain,
+  (subState) => subState.get('getHomeroomsRequest')
+);
+
+/**
+ * Classrooms
+ */
+export const selectClassroomsRequest = createSelector(
+  selectChartDataDomain,
+  (subState) => subState.get('getClassroomsRequest')
+);

@@ -4,6 +4,7 @@ import LineChart from "./widgets/LineChart";
 import PassRate from "./widgets/PassRate";
 import SchoolAverageChart from "./widgets/SchoolAverageChart";
 import RosterStatistic from "./widgets/RosterStatistic";
+import DashboardTabs from "./DashboardTabs";
 
 class Dashboard extends Component {
 
@@ -27,6 +28,11 @@ class Dashboard extends Component {
           </div>
           <div className="col-sm-12 col-md-6 col-lg-3">
             <SchoolAverageChart/>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+            <DashboardTabs/>
           </div>
         </div>
       </div>

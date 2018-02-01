@@ -30,7 +30,7 @@ class TabSection extends Component {
       courses.map(function (item, i) {
         return <Tab key={i} className="tab-header-item" value={item.course.crsId} label={item.course.crsTitle}/>
       }),
-      <Tab className="tab-header-item" value="details" label="Detailed Data"/>
+      <Tab key={-1} className="tab-header-item" value="details" label="Detailed Data"/>
     ];
   }
 
@@ -144,17 +144,15 @@ class TabSection extends Component {
           <div className="m--margin-top-40">
             <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
               <div className="m-portlet__head d-flex justify-content-between align-items-center">
-                <div class="m-portlet__head-caption col-sm-4">
-                  <div class="m-portlet__head-title"><span class="m-portlet__head-icon"><i
-                    class="flaticon-analytics"></i></span><h3 class="m-portlet__head-text">Reports</h3></div>
+                <div className="m-portlet__head-caption col-sm-4">
+                  <div className="m-portlet__head-title"><span className="m-portlet__head-icon"><i
+                    className="flaticon-analytics"></i></span><h3 className="m-portlet__head-text">Reports</h3></div>
                 </div>
                 <div className="m-portlet__head-tools col-sm-8">
                   <Tabs
                     className="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x main-tabs pull-right"
                     value={value}
                     onChange={this.handleChange}
-                    scrollable
-                    scrollButtons={false}
                   >
                   {this._renderTabs(data)}
                   </Tabs>
