@@ -11,12 +11,13 @@ import classroomsReducer from './classrooms/reducer';
 import schoolsReducer from './schools/reducer';
 import reportsReducer from './reports/reducer';
 import studentReportsReducer from './reports/students/reducer';
-import chartsReducer from './reports/charts/reducer';
 import notificationsReducer from './notifications/reducer';
 import messagesReducer from './messages/reducer';
 import storeReducer from './store/reducer';
 import paymentsReducer from './payments/reducer';
 import transactionsReducer from './transactions/reducer';
+
+import reportsDashboardReducer from './reports/dashboard/reducer';
 
 export default {
   app: appReducer,
@@ -37,5 +38,6 @@ export default {
   payments: paymentsReducer,
   transactions: transactionsReducer,
   studentReportsReducer: studentReportsReducer,
-  chartsReducer: chartsReducer,
+
+  reportsDashboardReducer: reportsDashboardReducer,
 };

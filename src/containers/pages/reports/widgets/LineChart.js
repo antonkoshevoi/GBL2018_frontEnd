@@ -15,11 +15,9 @@ class LineChart extends Component {
 
   render() {
     return (
-      <div className="col-sm-12 col-md-6 col-lg-3">
-        <Card title="Real Time Chart" icon="flaticon-diagram">
-          <Line data={this.state.data} options={this.state.options} width="500" height="350"/>
-        </Card>
-      </div>
+      <Card title="Real Time Chart" icon="flaticon-diagram">
+        <Line data={this.state.data} options={this.state.options} width="500" height="350"/>
+      </Card>
     );
   }
 }

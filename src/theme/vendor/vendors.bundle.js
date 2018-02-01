@@ -81480,9 +81480,9 @@ var Chartist = {
   };
 
   /**
-   * Ensures that the data object passed as second argument to the charts is present and correctly initialized.
+   * Ensures that the data object passed as second argument to the dashboard is present and correctly initialized.
    *
-   * @param  {Object} data The data object that is passed as second argument to the charts
+   * @param  {Object} data The data object that is passed as second argument to the dashboard
    * @return {Object} The normalized data object
    */
   Chartist.normalizeData = function(data, reverse, multi) {
@@ -82465,7 +82465,7 @@ var Chartist = {
 
     return function cardinal(pathCoordinates, valueData) {
       // First we try to split the coordinates into segments
-      // This is necessary to treat "holes" in line charts
+      // This is necessary to treat "holes" in line dashboard
       var segments = Chartist.splitIntoSegments(pathCoordinates, valueData, {
         fillHoles: options.fillHoles
       });
@@ -82570,7 +82570,7 @@ var Chartist = {
 
     return function monotoneCubic(pathCoordinates, valueData) {
       // First we try to split the coordinates into segments
-      // This is necessary to treat "holes" in line charts
+      // This is necessary to treat "holes" in line dashboard
       var segments = Chartist.splitIntoSegments(pathCoordinates, valueData, {
         fillHoles: options.fillHoles,
         increasingX: true
@@ -82953,7 +82953,7 @@ var Chartist = {
       this.data = data || {};
       this.data.labels = this.data.labels || [];
       this.data.series = this.data.series || [];
-      // Event for data transformation that allows to manipulate the data before it gets rendered in the charts
+      // Event for data transformation that allows to manipulate the data before it gets rendered in the dashboard
       this.eventEmitter.emit('data', {
         type: 'update',
         data: this.data
@@ -82981,7 +82981,7 @@ var Chartist = {
   }
 
   /**
-   * This method can be called on the API object of each chart and will un-register all event listeners that were added to other components. This currently includes a window.resize listener as well as media query listeners if any responsive options have been provided. Use this function if you need to destroy and recreate Chartist charts dynamically.
+   * This method can be called on the API object of each chart and will un-register all event listeners that were added to other components. This currently includes a window.resize listener as well as media query listeners if any responsive options have been provided. Use this function if you need to destroy and recreate Chartist dashboard dynamically.
    *
    * @memberof Chartist.Base
    */
@@ -83046,7 +83046,7 @@ var Chartist = {
       }.bind(this));
     }
 
-    // Event for data transformation that allows to manipulate the data before it gets rendered in the charts
+    // Event for data transformation that allows to manipulate the data before it gets rendered in the dashboard
     this.eventEmitter.emit('data', {
       type: 'initial',
       data: this.data
@@ -84231,7 +84231,7 @@ var Chartist = {
  *   scaleMinSpace: 20,
  *   // Can be set to true or false. If set to true, the scale will be generated with whole numbers only.
  *   onlyInteger: true,
- *   // The reference value can be used to make sure that this value will always be on the chart. This is especially useful on bipolar charts where the bipolar center always needs to be part of the chart.
+ *   // The reference value can be used to make sure that this value will always be on the chart. This is especially useful on bipolar dashboard where the bipolar center always needs to be part of the chart.
  *   referenceValue: 5
  * };
  * ```
@@ -84325,7 +84325,7 @@ var Chartist = {
 
 }(window, document, Chartist));
 ;/**
- * The step axis for step based charts like bar chart or step based line charts. It uses a fixed amount of ticks that will be equally distributed across the whole axis length. The projection is done using the index of the data value rather than the value itself and therefore it's only useful for distribution purpose.
+ * The step axis for step based dashboard like bar chart or step based line dashboard. It uses a fixed amount of ticks that will be equally distributed across the whole axis length. The projection is done using the index of the data value rather than the value itself and therefore it's only useful for distribution purpose.
  * **Options**
  * The following options are used by this axis in addition to the default axis options outlined in the axis configuration of the chart default settings.
  * ```javascript
@@ -84365,7 +84365,7 @@ var Chartist = {
 
 }(window, document, Chartist));
 ;/**
- * The Chartist line chart can be used to draw Line or Scatter charts. If used in the browser you can access the global `Chartist` namespace where you find the `Line` function as a main entry point.
+ * The Chartist line chart can be used to draw Line or Scatter dashboard. If used in the browser you can access the global `Chartist` namespace where you find the `Line` function as a main entry point.
  *
  * For examples on how to use the line chart please check the examples of the `Chartist.Line` method.
  *
@@ -84376,7 +84376,7 @@ var Chartist = {
   'use strict';
 
   /**
-   * Default options in line charts. Expand the code view to see a detailed list of options with comments.
+   * Default options in line dashboard. Expand the code view to see a detailed list of options with comments.
    *
    * @memberof Chartist.Line
    */
@@ -84441,9 +84441,9 @@ var Chartist = {
     lineSmooth: true,
     // If the line chart should add a background fill to the .ct-grids group.
     showGridBackground: false,
-    // Overriding the natural low of the chart allows you to zoom in or limit the charts lowest displayed value
+    // Overriding the natural low of the chart allows you to zoom in or limit the dashboard lowest displayed value
     low: undefined,
-    // Overriding the natural high of the chart allows you to zoom in or limit the charts highest displayed value
+    // Overriding the natural high of the chart allows you to zoom in or limit the dashboard highest displayed value
     high: undefined,
     // Padding of the chart drawing area to the container element and labels as a number or padding object {top: 5, right: 5, bottom: 5, left: 5}
     chartPadding: {
@@ -84780,7 +84780,7 @@ var Chartist = {
 
 }(window, document, Chartist));
 ;/**
- * The bar chart module of Chartist that can be used to draw unipolar or bipolar bar and grouped bar charts.
+ * The bar chart module of Chartist that can be used to draw unipolar or bipolar bar and grouped bar dashboard.
  *
  * @module Chartist.Bar
  */
@@ -84789,7 +84789,7 @@ var Chartist = {
   'use strict';
 
   /**
-   * Default options in bar charts. Expand the code view to see a detailed list of options with comments.
+   * Default options in bar dashboard. Expand the code view to see a detailed list of options with comments.
    *
    * @memberof Chartist.Bar
    */
@@ -84842,9 +84842,9 @@ var Chartist = {
     width: undefined,
     // Specify a fixed height for the chart as a string (i.e. '100px' or '50%')
     height: undefined,
-    // Overriding the natural high of the chart allows you to zoom in or limit the charts highest displayed value
+    // Overriding the natural high of the chart allows you to zoom in or limit the dashboard highest displayed value
     high: undefined,
-    // Overriding the natural low of the chart allows you to zoom in or limit the charts lowest displayed value
+    // Overriding the natural low of the chart allows you to zoom in or limit the dashboard lowest displayed value
     low: undefined,
     // Unless low/high are explicitly set, bar chart will be centered at zero by default. Set referenceValue to null to auto scale.
     referenceValue: 0,
@@ -85037,7 +85037,7 @@ var Chartist = {
         // length by 2
         periodHalfLength = labelAxis.axisLength / 2;
       } else {
-        // On regular bar charts we should just use the series length
+        // On regular bar dashboard we should just use the series length
         periodHalfLength = labelAxis.axisLength / data.normalized.series[seriesIndex].length / 2;
       }
 
@@ -85072,7 +85072,7 @@ var Chartist = {
           // 0 for projection on the label step axis
           labelAxisValueIndex = 0;
         } else {
-          // On regular bar charts we just use the value index to project on the label step axis
+          // On regular bar dashboard we just use the value index to project on the label step axis
           labelAxisValueIndex = valueIndex;
         }
 
@@ -85223,7 +85223,7 @@ var Chartist = {
 
 }(window, document, Chartist));
 ;/**
- * The pie chart module of Chartist that can be used to draw pie, donut or gauge charts
+ * The pie chart module of Chartist that can be used to draw pie, donut or gauge dashboard
  *
  * @module Chartist.Pie
  */
@@ -85232,7 +85232,7 @@ var Chartist = {
   'use strict';
 
   /**
-   * Default options in line charts. Expand the code view to see a detailed list of options with comments.
+   * Default options in line dashboard. Expand the code view to see a detailed list of options with comments.
    *
    * @memberof Chartist.Pie
    */
@@ -85255,7 +85255,7 @@ var Chartist = {
     },
     // The start angle of the pie chart in degrees where 0 points north. A higher value offsets the start angle clockwise.
     startAngle: 0,
-    // An optional total you can specify. By specifying a total value, the sum of the values in the series must be this total in order to draw a full pie. You can use this parameter to draw only parts of a pie or gauge charts.
+    // An optional total you can specify. By specifying a total value, the sum of the values in the series must be this total in order to draw a full pie. You can use this parameter to draw only parts of a pie or gauge dashboard.
     total: undefined,
     // If specified the donut CSS classes will be used and strokes will be drawn instead of pie slices.
     donut: false,
@@ -92802,7 +92802,7 @@ module.exports = function(Chart) {
 			return 0;
 		},
 
-		// gets the max border or hover width to properly scale pie charts
+		// gets the max border or hover width to properly scale pie dashboard
 		getMaxBorderWidth: function(arcs) {
 			var max = 0;
 			var index = this.index;
@@ -93590,7 +93590,7 @@ defaults._set('scatter', {
 
 module.exports = function(Chart) {
 
-	// Scatter charts use line controllers
+	// Scatter dashboard use line controllers
 	Chart.controllers.scatter = Chart.controllers.line;
 
 };
@@ -94535,7 +94535,7 @@ module.exports = function(Chart) {
 				listeners[type] = listener;
 			});
 
-			// Elements used to detect size change should not be injected for non responsive charts.
+			// Elements used to detect size change should not be injected for non responsive dashboard.
 			// See https://github.com/chartjs/Chart.js/issues/2210
 			if (me.options.responsive) {
 				listener = function() {
@@ -94867,7 +94867,7 @@ module.exports = function(Chart) {
 			var data = dataset.data || (dataset.data = []);
 
 			// In order to correctly handle data addition/deletion animation (an thus simulate
-			// real-time charts), we need to monitor these data modifications and synchronize
+			// real-time dashboard), we need to monitor these data modifications and synchronize
 			// the internal meta data accordingly.
 			if (me._data !== data) {
 				if (me._data) {
@@ -95161,7 +95161,7 @@ module.exports = function(Chart) {
 					// scale config merging is complex. Add our own function here for that
 					target[key] = helpers.scaleMerge(tval, sval);
 				} else if (key === 'scale') {
-					// used in polar area & radar charts since there is only one scale
+					// used in polar area & radar dashboard since there is only one scale
 					target[key] = helpers.merge(tval, [Chart.scaleService.getScaleDefaults(sval.type), sval]);
 				} else {
 					helpers._merger(key, target, source, options);
@@ -96336,7 +96336,7 @@ module.exports = function(Chart) {
 
 			helpers.each(leftBoxes.concat(rightBoxes, topBoxes, bottomBoxes), getMinimumBoxSize);
 
-			// If a horizontal box has padding, we move the left boxes over to avoid ugly charts (see issue #2478)
+			// If a horizontal box has padding, we move the left boxes over to avoid ugly dashboard (see issue #2478)
 			var maxHorizontalLeftPadding = 0;
 			var maxHorizontalRightPadding = 0;
 			var maxVerticalTopPadding = 0;
@@ -98261,7 +98261,7 @@ module.exports = function(Chart) {
 	// @return : new tooltip item
 	function createTooltipItem(element) {
 		var xScale = element._xScale;
-		var yScale = element._yScale || element._scale; // handle radar || polarArea charts
+		var yScale = element._yScale || element._scale; // handle radar || polarArea dashboard
 		var index = element._index;
 		var datasetIndex = element._datasetIndex;
 
@@ -100641,7 +100641,7 @@ function initCanvas(canvas, config) {
 	if (renderHeight === null || renderHeight === '') {
 		if (canvas.style.height === '') {
 			// If no explicit render height and style height, let's apply the aspect ratio,
-			// which one can be specified by the user but also by charts as default option
+			// which one can be specified by the user but also by dashboard as default option
 			// (i.e. options.aspectRatio). If not specified, use canvas aspect ratio of 2.
 			canvas.height = canvas.width / (config.options.aspectRatio || 2);
 		} else {

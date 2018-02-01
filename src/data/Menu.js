@@ -11,7 +11,7 @@ export default  {
            {
                key:'reports',
                title:'Reports',
-               link:'reports/schools',
+               link:'reports',
                icon:'fa  fa-line-chart ',
                colorName:'orange',
            },

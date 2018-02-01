@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Card from "../../../ui/Card";
 import InfoSection from "./InfoSection";
-import SchoolAverageChart from "../../../../containers/pages/reports/Widgets/SchoolAverageChart";
-import PassRate from "../../../../containers/pages/reports/Widgets/PassRate";
-import LineChart from "../../../../containers/pages/reports/Widgets/LineChart";
+import SchoolAverageChart from "../../../../containers/pages/reports/widgets/SchoolAverageChart";
+import PassRate from "../../../../containers/pages/reports/widgets/PassRate";
+import LineChart from "../../../../containers/pages/reports/widgets/LineChart";
 
 class ChartsSection extends Component {
 

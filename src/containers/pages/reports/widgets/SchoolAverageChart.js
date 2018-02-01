@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Pie} from "react-chartjs";
 import {connect} from "react-redux";
-import {getCharts} from "../../../../redux/reports/charts/actions";
-import {selectChartDatatRequest} from "../../../../redux/reports/charts/selectors";
+import {getCharts} from "../../../../redux/reports/dashboard/actions";
+import {selectChartDatatRequest} from "../../../../redux/reports/dashboard/selectors";
 import {CircularProgress} from "material-ui";
 
 class SchoolAverageChart extends Component {
@@ -88,40 +88,38 @@ class SchoolAverageChart extends Component {
     ]
 
     return (
-      <div className="col-sm-12 col-md-6 col-lg-3">
-        <div className="small-card-content">
-          <div className="small-card">
-            {loading && <div className="text-center col-md-12"><CircularProgress color="accent"/></div>}
-            {!loading && <div className="row">
-              <div className="col-md-5 pie-block">
-                <Pie data={progress} options={this.options} width="100" height="100"/>
+      <div className="small-card-content">
+        <div className="small-card">
+          {loading && <div className="text-center col-md-12"><CircularProgress color="accent"/></div>}
+          {!loading && <div className="row">
+            <div className="col-md-5 pie-block">
+              <Pie data={progress} options={this.options} width="100" height="100"/>
+            </div>
+            <div className="col-md-7 pie-block">
+              <div
+                className="m-stack m--padding-left-20  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
+                <h5> School Average</h5>
+                <legend>Progress</legend>
+                {this._renderPieChartLabels(progress)}
               </div>
-              <div className="col-md-7 pie-block">
-                <div
-                  className="m-stack m--padding-left-20  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
-                  <h5> School Average</h5>
-                  <legend>Progress</legend>
-                  {this._renderPieChartLabels(progress)}
-                </div>
+            </div>
+          </div>}
+        </div>
+        <div className="small-card">
+          {loading && <div className="text-center col-md-12"><CircularProgress color="accent"/></div>}
+          {!loading && <div className="row">
+            <div className="col-md-5 pie-block">
+              <Pie data={performance} options={this.options} width="100" height="100"/>
+            </div>
+            <div className="col-md-7  pie-block">
+              <div
+                className="m-stack m--padding-left-20 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
+                <h5> School Average</h5>
+                <legend>Performance</legend>
+                {this._renderPieChartLabels(performance)}
               </div>
-            </div>}
-          </div>
-          <div className="small-card">
-            {loading && <div className="text-center col-md-12"><CircularProgress color="accent"/></div>}
-            {!loading && <div className="row">
-              <div className="col-md-5 pie-block">
-                <Pie data={performance} options={this.options} width="100" height="100"/>
-              </div>
-              <div className="col-md-7  pie-block">
-                <div
-                  className="m-stack m--padding-left-20 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
-                  <h5> School Average</h5>
-                  <legend>Performance</legend>
-                  {this._renderPieChartLabels(performance)}
-                </div>
-              </div>
-            </div>}
-          </div>
+            </div>
+          </div>}
         </div>
       </div>
     );
