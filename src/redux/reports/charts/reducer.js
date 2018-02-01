@@ -1,41 +1,41 @@
 import {
-  GET_REPORT_DATA, GET_REPORT_DATA_SUCCESS, GET_REPORT_DATA_FAIL
-} from './student-actions';
+  GET_CHARTS_DATA, GET_CHARTS_DATA_SUCCESS, GET_CHARTS_DATA_FAIL
+} from './actions';
 import Immutable from 'immutable';
 
 const initialState = Immutable.fromJS({
-  getReportRequest: {
+  getChartDataRequest: {
     loading: false,
     success: false,
     fail: false,
     errorResponse: null,
-    data: []
+    data: {}
   },
 });
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     /**
-     * Get Report data
+     * Get Charts data
      */
-    case GET_REPORT_DATA:
+    case GET_CHARTS_DATA:
       return state
-        .set('getReportRequest', state.get('getReportRequest')
+        .set('getChartDataRequest', state.get('getChartDataRequest')
           .set('loading', true)
           .set('success', false)
           .set('fail', false)
-          .set('data', Immutable.List())
+          .set('data', Immutable.Map())
         );
-    case GET_REPORT_DATA_SUCCESS:
+    case GET_CHARTS_DATA_SUCCESS:
       return state
-        .set('getReportRequest', state.get('getReportRequest')
+        .set('getChartDataRequest', state.get('getChartDataRequest')
           .set('success', true)
           .set('loading', false)
           .set('data', Immutable.fromJS(action.result.data))
         );
-    case GET_REPORT_DATA_FAIL:
+    case GET_CHARTS_DATA_FAIL:
       return state
-        .set('getReportRequest', state.get('getReportRequest')
+        .set('getChartDataRequest', state.get('getChartDataRequest')
           .set('loading', false)
           .set('fail', true)
         );

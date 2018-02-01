@@ -37,7 +37,7 @@ class TabSection extends Component {
   //(temp) TODO need create UI component for Grids
   _setGridCols() {
     if (window.innerWidth <= 768) {
-     this._setTabsOptions();
+      this._setTabsOptions();
       this.setState({cols: 1})
     } else if (window.innerWidth > 767 && window.innerWidth <= 1024) {
       this.setState({cols: 2})
@@ -70,7 +70,7 @@ class TabSection extends Component {
     return schoolStudents.map(function (student, i) {
       return (
         <GridListTile key={i} className="grid-tile">
-          <img src={ (!student.avatar) ? avatar : student.avatar } alt={student.firstName}/>
+          <img src={(!student.avatar) ? avatar : student.avatar} alt={student.firstName}/>
 
           <GridListTileBar
             className="myGridTileBar"
@@ -81,7 +81,7 @@ class TabSection extends Component {
                 <div>
                   <span className="text-right d-block">75%</span>
                   <OldProgressBar correctValue="40" type="performance"/>
-                  <br />
+                  <br/>
                   <span className="text-right  d-block">35%</span>
                   <OldProgressBar complateValue="40" progressValue="10" type="progress"/>
                 </div>
@@ -102,7 +102,7 @@ class TabSection extends Component {
   _renderSchoolHomerooms() {
 
     const schoolHomerooms = this.props.schoolHomerooms.toJS().records;
-    console.log(schoolHomerooms);
+
     return schoolHomerooms.map(function (homeroom, i) {
       return (
         <GridListTile key={i} className="grid-tile">
@@ -138,80 +138,40 @@ class TabSection extends Component {
 
   _renderSchoolClassrooms() {
 
-    const schoolClassrooms = this.props.schoolClassrooms;
-    const avatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
-    // console.log(schoolClassrooms);
+    const schoolClassrooms = this.props.schoolClassrooms.toJS().records;
 
+    return schoolClassrooms.map(function (classroom, i) {
+      return (
+        <GridListTile key={i} className="grid-tile">
+          <img
+            src="https://www.usnews.com/dims4/USNEWS/90238a1/2147483647/thumbnail/652x435%3E/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2F03%2Fa4%2Fc21e092747eb902379ae57eb9987%2F141030-pfcquizgraduate.jpg"
+            alt={classroom.id}/>
 
-    // return schoolClassrooms.map(function (classroom,i) {
-    //     return (
-    //         <GridListTile key={i} className="grid-tile">
-    //             <img src={ (!classroom.avatar) ? avatar : classroom.avatar } alt={classroom.name} />
-    //
-    //             <GridListTileBar
-    //                 className="myGridTileBar"
-    //                 title={<NavLink to={`/reports/classroom/${classroom.id}`}>{classroom.name}</NavLink>}
-    //                 // subtitle={
-    //                 //     (
-    //                 //         <div>
-    //                 //             <span className="text-right d-block">75%</span>
-    //                 //             <OldProgressBar correctValue="40" type="performance" />
-    //                 //             <br />
-    //                 //             <span  className="text-right  d-block">35%</span>
-    //                 //             <OldProgressBar complateValue="40" progressValue="10" type="progress" />
-    //                 //         </div>
-    //                 //     )
-    //                 // }
-    //                 actionIcon={
-    //                     <IconButton  color="default">
-    //
-    //                     </IconButton>
-    //                 }
-    //             />
-    //
-    //         </GridListTile>
-    //     )
-    // })
+          <GridListTileBar
+            className="myGridTileBar"
+            title={<NavLink to={`/reports/classrooms/${classroom.id}`}>{classroom.crmName}</NavLink>}
+            // subtitle={
+            //     (
+            //         <div>
+            //             <span className="text-right d-block">75%</span>
+            //             <OldProgressBar correctValue="40" type="performance" />
+            //             <br />
+            //             <span  className="text-right  d-block">35%</span>
+            //             <OldProgressBar complateValue="40" progressValue="10" type="progress" />
+            //         </div>
+            //     )
+            // }
+            actionIcon={
+              <IconButton color="default">
 
+              </IconButton>
+            }
+          />
+
+        </GridListTile>
+      )
+    })
   }
-
-
-  // _renderClassRooms() {
-  //
-  //     const schoolClassrooms = this.props.schoolClassrooms.toJS().records;
-  //     const avatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
-  //
-  //     return schoolClassrooms.map(function (classroom,i) {
-  //         return (
-  //             <GridListTile key={i} className="grid-tile">
-  //                 <img src={ (!classroom.avatar) ? avatar : classroom.avatar } alt={classroom.id} />
-  //
-  //                 <GridListTileBar
-  //                     className="myGridTileBar"
-  //                     title={<NavLink to={`/reports/classrooms/${classroom.id}`}>{classroom.name}</NavLink>}
-  //                     subtitle={
-  //                         (
-  //                             <div>
-  //                                 <span className="text-right d-block">75%</span>
-  //                                     <OldProgressBar correctValue="40" type="performance" />
-  //                                 <br />
-  //                                 <span  className="text-right  d-block">35%</span>
-  //                                 <OldProgressBar complateValue="40" progressValue="10" type="progress" />
-  //                             </div>
-  //                         )
-  //                     }
-  //                     actionIcon={
-  //                         <IconButton  color="contrast">
-  //
-  //                         </IconButton>
-  //                     }
-  //                 />
-  //
-  //             </GridListTile>
-  //         )
-  //     })
-  // }
-
 
   render() {
     const {value, cols, tabCentered, tabFullWidth, tabScrollButtons} = this.state;
@@ -267,7 +227,7 @@ class TabSection extends Component {
                 {/*</TabContainer>}*/}
                 {value === 'students' && <TabContainer>
                   <GridList cellHeight={250} cols={cols}>
-                    { this._renderSchoolStudents() }
+                    {this._renderSchoolStudents()}
                   </GridList>
                 </TabContainer>}
                 {value === 'classRooms' && <TabContainer>
@@ -278,7 +238,7 @@ class TabSection extends Component {
                 </TabContainer>}
                 {value === 'homeRooms' && <TabContainer>
                   <GridList cellHeight={250} cols={cols}>
-                    { this._renderSchoolHomerooms() }
+                    {this._renderSchoolHomerooms()}
                   </GridList>
                 </TabContainer>}
 
@@ -286,7 +246,7 @@ class TabSection extends Component {
               </div>
             </div>
 
-            <Paper >
+            <Paper>
 
 
             </Paper>

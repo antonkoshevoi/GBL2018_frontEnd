@@ -29,7 +29,7 @@ const initialState = Immutable.fromJS({
         success: false,
         fail: false,
         errorResponse: null,
-        records: {}
+        records: []
     },
     getUserSchoolTeachersRequest: {
         loading: false,

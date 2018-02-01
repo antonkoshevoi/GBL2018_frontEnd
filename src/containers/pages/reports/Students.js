@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import InfoSection from "../../../components/pages/reports/students/InfoSection";
 import TabSection from "../../../components/pages/reports/students/TabSection";
-import {selectStudentReportRequest} from "../../../redux/reports/student-selectors";
-import {getReport} from "../../../redux/reports/student-actions";
+import {selectStudentReportRequest} from "../../../redux/reports/students/selectors";
+import {getReport} from "../../../redux/reports/students/actions";
 
 class Students extends Component {
 

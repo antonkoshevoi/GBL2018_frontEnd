@@ -38,7 +38,7 @@ class TabSection extends Component {
   _renderTabContent(courses) {
     const {value} = this.state;
     const _self = this;
-    console.log(courses);
+
     if (value === 'details') {
       if (!courses.length) {
         return null;
@@ -83,7 +83,7 @@ class TabSection extends Component {
                 </span>
               </Td>
               <Td width='50px'>{attemptCurrent.passes} / {attemptCurrent.Required_Passes}</Td>
-              <Td width='250px'>{Parser(attemptCurrent.metadata)}</Td>
+              <Td width='250px'>{attemptCurrent.metadata && Parser(attemptCurrent.metadata)}</Td>
             </Row>
           )
         })}
