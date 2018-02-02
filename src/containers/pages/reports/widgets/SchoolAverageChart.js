@@ -72,9 +72,8 @@ class SchoolAverageChart extends Component {
   }
 
   render() {
-    const {getChartDataRequest} = this.props;
-    const data = getChartDataRequest.get('data').toJS();
-    const loading = getChartDataRequest.get('loading');
+    const getChartDataRequest = this.props.getChartDataRequest.toJS();
+    const { data, loading, success, fail } = getChartDataRequest;
 
     const progress = [
       {color: "#79c942", label: "complete", value: data.completed},
@@ -90,8 +89,8 @@ class SchoolAverageChart extends Component {
     return (
       <div className="small-card-content">
         <div className="small-card">
-          {loading && <div className="text-center col-md-12"><CircularProgress color="accent"/></div>}
-          {!loading && <div className="row">
+          {loading && !success && <div className="text-center col-md-12"><CircularProgress color="accent"/></div>}
+          {!loading && success && <div className="row">
             <div className="col-md-5 pie-block">
               <Pie data={progress} options={this.options} width="100" height="100"/>
             </div>
@@ -104,10 +103,11 @@ class SchoolAverageChart extends Component {
               </div>
             </div>
           </div>}
+          {fail && <div className="text-center col-md-12"><span style={{color: 'red' }}>Error</span></div>}
         </div>
         <div className="small-card">
-          {loading && <div className="text-center col-md-12"><CircularProgress color="accent"/></div>}
-          {!loading && <div className="row">
+          {loading && !success && <div className="text-center col-md-12"><CircularProgress color="accent"/></div>}
+          {!loading && success && <div className="row">
             <div className="col-md-5 pie-block">
               <Pie data={performance} options={this.options} width="100" height="100"/>
             </div>
@@ -120,6 +120,7 @@ class SchoolAverageChart extends Component {
               </div>
             </div>
           </div>}
+          {fail && <div className="text-center col-md-12"><span style={{color: 'red' }}>Error</span></div>}
         </div>
       </div>
     );
