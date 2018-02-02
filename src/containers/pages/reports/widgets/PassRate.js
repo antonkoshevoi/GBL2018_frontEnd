@@ -21,12 +21,16 @@ class PassRate extends Component {
   render() {
     const {getChartDataRequest} = this.props;
     const data = getChartDataRequest.get('data').toJS();
+    const loading = getChartDataRequest.get('loading');
+    const success = getChartDataRequest.get('success');
+    const fail = getChartDataRequest.get('fail');
 
     return (
       <Card title="Pass Rate" icon="flaticon-list-2" className='passRateCard'>
         <h1  className="d-flex justify-content-center align-items-center absolute-center" style={{fontSize:'7rem',color:'rgb(0, 128, 0)'}}>
-          {getChartDataRequest.get('loading') && <CircularProgress color="accent"/>}
-          {!getChartDataRequest.get('loading') && data.passRate + '%'}
+          {loading && !success && <CircularProgress color="accent"/>}
+          {!loading && success && data.passRate + '%'}
+          {fail && <span style={{color: 'red' }}>Error</span>}
         </h1>
       </Card>
     );

@@ -8,7 +8,7 @@ import "../../../styles/store.css"
 class ProductCard extends Component {
 
   _renderCard(type, product) {
-    const category = product.get('categories').get(0) ? product.get('categories').get(0).get('title') : 'No Info...';
+    const category = product.get('category') ? product.get('category').get('title') : 'No Info...';
     const price = Number(product.get('price'));
 
     return (
