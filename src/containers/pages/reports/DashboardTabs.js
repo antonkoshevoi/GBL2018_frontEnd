@@ -114,7 +114,7 @@ class DashboardTabs extends Component {
       return (
         <GridListTile key={i} className="grid-tile">
           <img
-            src="https://www.usnews.com/dims4/USNEWS/90238a1/2147483647/thumbnail/652x435%3E/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2F03%2Fa4%2Fc21e092747eb902379ae57eb9987%2F141030-pfcquizgraduate.jpg"
+            src="https://is5-ssl.mzstatic.com/image/thumb/Purple1/v4/7d/3c/43/7d3c4388-f8c2-466d-0848-b7ec85c0fd3b/pr_source.jpg/1200x630bb.jpg"
             alt={homeroom.id}/>
           <GridListTileBar
             className="myGridTileBar"
@@ -135,7 +135,7 @@ class DashboardTabs extends Component {
       return (
         <GridListTile key={i} className="grid-tile">
           <img
-            src="https://www.usnews.com/dims4/USNEWS/90238a1/2147483647/thumbnail/652x435%3E/quality/85/?url=http%3A%2F%2Fmedia.beam.usnews.com%2F03%2Fa4%2Fc21e092747eb902379ae57eb9987%2F141030-pfcquizgraduate.jpg"
+            src="http://energydiet.canadiangeographic.ca/application/assets/img/2013/classroom-avatar.png"
             alt={classroom.id}/>
           <GridListTileBar
             className="myGridTileBar"

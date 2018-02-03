@@ -210,6 +210,7 @@ class ClassroomForm extends Component {
               <MenuItem value={null} primarytext=""/>
               {this._renderCourses()}
             </Select>
+            {this.props.getCoursesRequest.get('success') && !this.state.courses.length && <h5 className="text-center" style={{color: 'red'}}>No Unassigned Courses found (You should buy from Store)</h5>}
             {errors && errors.get('crmCourse') && <FormHelperText error>{ errors.get('crmCourse').get(0) }</FormHelperText>}
           </FormControl>
           <FormControl className='full-width form-inputs'>
