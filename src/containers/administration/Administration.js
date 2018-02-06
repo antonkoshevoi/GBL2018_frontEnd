@@ -15,6 +15,7 @@ import CreateAdministrationModal from './modals/CreateAdministrationModal';
 import EditAdministrationModal from "./modals/EditAdministrationModal";
 import SearchInput from "../../components/ui/SearchInput";
 import DeleteButton from "../../components/ui/DeleteButton";
+import HasPermission from "../middlewares/HasPermission";
 
 class Administration extends Component {
   constructor(props) {
@@ -99,8 +100,16 @@ class Administration extends Component {
         <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>{record.getIn(['role', 'name'])}</span></Td>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
         <Td width='100px'>
-          <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
-          <DeleteButton onClick={() => { this._deleteRecord(record.get('id')) }}/>
+          <HasPermission permissions={[
+            '[Users][Administration][Update][SuperAdmin]'
+          ]}>
+            <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
+          </HasPermission>
+          <HasPermission permissions={[
+            '[Users][Administration][Delete][Any]'
+          ]}>
+            <DeleteButton onClick={() => { this._deleteRecord(record.get('id')) }}/>
+          </HasPermission>
         </Td>
       </Row>
     ));
@@ -229,10 +238,14 @@ class Administration extends Component {
                     <MenuItem value={50}>50</MenuItem>
                     <MenuItem value={100}>100</MenuItem>
                   </Select>
-                  <Button raised color='accent' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
-                    Add New
-                    <Icon style={{marginLeft:'5px'}}>add</Icon>
-                  </Button>
+                  <HasPermission permissions={[
+                    '[Users][Administration][Create][SuperAdmin]'
+                  ]}>
+                    <Button raised color='accent' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                      Add New
+                      <Icon style={{marginLeft:'5px'}}>add</Icon>
+                    </Button>
+                  </HasPermission>
                 </div>
 
               </div>

@@ -16,6 +16,7 @@ import CreateStudentModal from './modals/CreateStudentModal';
 import EditStudentModal from "./modals/EditStudentModal";
 import SearchInput from "../../components/ui/SearchInput";
 import DeleteButton from "../../components/ui/DeleteButton";
+import HasPermission from "../middlewares/HasPermission";
 
 class Students extends Component {
   constructor(props) {
@@ -100,8 +101,16 @@ class Students extends Component {
         <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>Student</span></Td>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
         <Td width='100px'>
-          <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
-          <DeleteButton onClick={() => { this._deleteRecord(record.get('id')) }}/>
+          <HasPermission permissions={[
+            '[Users][Students][Update][Any]'
+          ]}>
+            <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
+          </HasPermission>
+          <HasPermission permissions={[
+            '[Users][Students][Delete][Any]'
+          ]}>
+            <DeleteButton onClick={() => { this._deleteRecord(record.get('id')) }}/>
+          </HasPermission>
         </Td>
       </Row>
     ));
@@ -230,16 +239,24 @@ class Students extends Component {
                     <MenuItem value={50}>50</MenuItem>
                     <MenuItem value={100}>100</MenuItem>
                   </Select>
-                  <Button raised color='accent' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
-                    Add New
-                    <Icon style={{marginLeft:'5px'}}>add</Icon>
-                  </Button>
-                  <NavLink className='link-btn' to='/students/csv'>
-                  <Button raised className='btn-success mt-btn mt-btn-success'>
-                         Bulk Add Students
-                    <Icon style={{marginLeft:'5px'}}>person</Icon>
-                  </Button>
-                  </NavLink>
+                  <HasPermission permissions={[
+                    '[Users][Students][Create][Any]'
+                  ]}>
+                    <Button raised color='accent' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                      Add New
+                      <Icon style={{marginLeft:'5px'}}>add</Icon>
+                    </Button>
+                  </HasPermission>
+                  <HasPermission permissions={[
+                    '[Users][Students][Create][Bulk][Any]'
+                  ]}>
+                    <NavLink className='link-btn' to='/students/csv'>
+                    <Button raised className='btn-success mt-btn mt-btn-success'>
+                           Bulk Add Students
+                      <Icon style={{marginLeft:'5px'}}>person</Icon>
+                    </Button>
+                    </NavLink>
+                  </HasPermission>
                 </div>
 
               </div>
