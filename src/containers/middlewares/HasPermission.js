@@ -5,14 +5,13 @@ import {selectUserPermissions} from "../../redux/user/selectors";
 
 class HasPermission extends Component {
   static propTypes = {
-    permissions: PropTypes.string.isRequired
+    permissions: PropTypes.array.isRequired
   };
 
   render () {
     const { permissions, userPermissions } = this.props;
 
-    // let hasPermission = false; //TODO: For now give all permissions
-    let hasPermission = true;
+    let hasPermission = false;
 
     userPermissions.map(userPermission => {
       permissions.map(permission => {
