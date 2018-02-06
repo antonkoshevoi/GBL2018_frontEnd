@@ -44,23 +44,10 @@ class Messages extends Component {
     const newMessages = user.get('unreadMessages');
 
     return (
-      <li className='m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width' data-dropdown-toggle='click' data-dropdown-persistent='true'>
-        <a className='m-nav__link m-dropdown__toggle pointer' id='m_topbar_notification_icon' onClick={() => { switchMenu('messages') }}>
-          <span className='m-nav__link-icon'>
-            <i className='fa fa-envelope'/>
-          </span>
-        </a>
-        {active &&
-          <div className='m-dropdown__wrapper' onMouseLeave={() => { switchMenu(null) }} style={{display: 'block'}}>
-            <div className='m-dropdown__inner'>
-              <div className='m-dropdown__header m--align-center' style={{backgroundImage: `url(${posterImage})`}}>
-                <span className='m-dropdown__header-title'>
-                  {newMessages} New
-                </span>
-                <span className='m-dropdown__header-subtitle'>
-                  { pluralize('Message', newMessages) }
-                </span>
-              </div>
+
+          <div className=''>
+            {newMessages ?
+
               <div className='m-dropdown__body'>
                 <div className='m-dropdown__content'>
                   <div className='tab-content'>
@@ -71,10 +58,10 @@ class Messages extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>}
-      </li>
+              </div> :
+              <h4 className="text-center m--padding-top-20 m--padding-bottom-10">You have no new messages</h4>
+            }
+          </div>
     );
   }
 }

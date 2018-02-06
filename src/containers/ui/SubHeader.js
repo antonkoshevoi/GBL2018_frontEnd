@@ -88,7 +88,7 @@ class SubHeader extends Component {
 
 
   render() {
-      const {location, cartRecords, addToCartRequest, cartRecordsRequest, auth} = this.props;
+      const {location,  auth} = this.props;
       const isLoggedIn = auth.get('isLoggedIn');
       const paths = location.pathname.split('/');
       return (
@@ -108,7 +108,7 @@ class SubHeader extends Component {
                                     <li>
                                         <NavLink to='/shopping/cart'>
                                             <i className="fa fa-shopping-cart PageHeader-icon"></i>
-                                              <span className="g-badge badge-red">{cartRecords.size}</span>
+
                                         </NavLink>
                                     </li>
                                     <li>

@@ -12,7 +12,7 @@ export default {
   homerooms: 'Homerooms',
   howToMovies : 'How To Movies',
   professionalTrainings: 'Professional Trainings',
-  acounts: 'Acounts',
+  accounts: 'Accounts',
   open_invoices: 'Open Invoices',
   history: 'History (Transactions)',
   sharing: 'Sharing',

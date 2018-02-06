@@ -13,7 +13,7 @@ export default  {
                title:'Reports',
                link:'reports',
                icon:'fa  fa-line-chart ',
-               colorName:'orange',
+               colorName:'purple',
            },
            {
                key:'store',
@@ -213,7 +213,7 @@ export default  {
                title:'Students & Staff',
                link:'dashboard',
                icon:'fa fa-group',
-               colorName:'red',
+               colorName:'orange',
                subMenu:[
                    {
                        key:'administration',
@@ -240,7 +240,7 @@ export default  {
                title:'Learning Areas',
                link:'dashboard',
                icon:'fa fa-institution',
-               colorName:'grey',
+               colorName:'red',
                subMenu:[
                    {
                        key:'classrooms',
@@ -273,7 +273,7 @@ export default  {
                title:'Sharing',
                link:'dashboard',
                icon:'fa fa-share-alt',
-               colorName:'orange',
+               colorName:'blue',
                subMenu:[
                    {
                        key:'inbox',
@@ -314,11 +314,11 @@ export default  {
                ]
            },
            {
-               key:'acounts',
-               title:'Acounts',
+               key:'accounts',
+               title:'Accounts',
                link:'accounts',
                icon:'fa fa-dollar ',
-               colorName:'blue',
+               colorName:'grey',
                subMenu:[
                    {
                        key:'open_invoices',

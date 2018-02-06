@@ -23,7 +23,7 @@ class Wrapper extends Component {
 
         return (
             <div className="m-grid__item m-grid__item--fluid m-wrapper">
-                <SubHeader/>
+               
                 <div className="m-content">
                     {/*{this.state.isLoading && <Loader/> }*/}
                     {this.props.children}

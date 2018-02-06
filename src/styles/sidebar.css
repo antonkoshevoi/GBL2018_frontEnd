@@ -1,6 +1,6 @@
 nav.navigation {
     background: #f5f5f5;
-    width: 255px;
+    width: 225px;
     color: #555;
     position: relative;
     z-index:5556;
@@ -13,6 +13,10 @@ nav.navigation {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+}
+
+#m_aside_left {
+    width: 225px;
 }
 
 nav.navigation > .menuItem > a, nav.navigation .second_level a{
@@ -60,114 +64,115 @@ nav.navigation > .menuItem > a.active {
 }
 
  nav.navigation > .menuItem > a.home .icon {
-    background: #589ee4;
+    background: #385774;
     color: white;
 }
 
 nav.navigation > .menuItem > a.home.active,  nav.navigation > .menuItem > a.home:hover .content {
-    background: #589ee4;
+    background: #385774;
     color: white;
 }
 
 
 .menuItem > a.home + .second_level.activeSubMenu .content > a.active {
-    color: #589ee4;
+    color: #385774;
     font-weight: 500;
 }
 
 nav.navigation > .menuItem > a.home.active > .content {
-    background: #589ee4;
+    background: #385774;
 }
 
 nav.navigation > .menuItem > a.green .icon{
-    background: #7ac943;
+    background: #7bc848;
     color: white;
 }
 
 nav.navigation > .menuItem > a.green:hover > .content, nav.navigation > .menuItem > a.green.active > .content, nav.navigation > .menuItem > a.green.hover > .content {
-    background: #7ac943;
+    background: #7bc848;
     color: white;
 }
 
 
 .menuItem > a.green + .second_level.activeSubMenu .content > a.active {
-    color: #7ac943;
+    color: #7bc848;
     font-weight: 500;
 }
 
 nav.navigation > .menuItem > a.red .icon{
-    background: #D2322D;
+    background: #ce342c;
     color: white;
 }
 
 nav.navigation > .menuItem > a.red:hover > .content, nav.navigation > .menuItem >  a.red.active > .content, nav.navigation > .menuItem > a.red.hover > .content {
-    background: #D2322D;
+    background: #ce342c;
     color: white;
 }
 
 .menuItem > a.red + .second_level.activeSubMenu .content > a.active {
-    color: #D2322D;
+    color: #ce342c;
     font-weight: 500;
 }
 
 nav.navigation > .menuItem > a.orange .icon{
-    background: #f79226;
+    background: #f8912a;
     color: white;
 }
 
 nav.navigation > .menuItem > a.orange:hover > .content, nav.navigation > .menuItem > a.orange.active > .content , nav.navigation > .menuItem > a.orange.hover > .content {
-    background: #f79226;
+    background: #f8912a;
     color: white;
 }
 
 .menuItem > a.orange + .second_level.activeSubMenu .content > a.active {
-    color: #f79226;
+    color: #f8912a;
     font-weight: 500;
 }
 
 nav.navigation > .menuItem > a.blue .icon{
-    background: #589ee4;
+    background: #385774;
     text-align: center;
     color: white;
 }
 
 nav.navigation > .menuItem > a.blue:hover > .content, nav.navigation > .menuItem > a.blue.active > .content, nav.navigation > .menuItem > a.blue.hover > .content{
-    background: #589ee4;
+    background: #385774;
     color: white;
 }
 
 .menuItem > a.blue + .second_level.activeSubMenu .content > a.active {
-    color: #589ee4;
+    color: #385774;
     font-weight: 500;
 }
 
 nav.navigation > .menuItem > a.purple .icon{
-    background: #5099e2;
+    background: #4fa1ea;
     color: white;
 }
 
 nav.navigation > .menuItem > a.purple:hover > .content, nav.navigation > .menuItem > a.purple.active > .content, nav.navigation > .menuItem > a.purple.hover > .content  {
-    background: #5099e2;
+    background: #4fa1ea;
     color: white;
 }
 
 .menuItem > a.purple + .second_level.activeSubMenu .content > a.active {
-    color: #5099e2;
+    color: #4fa1ea;
     font-weight: 500;
 }
 
 nav.navigation > .menuItem > a.grey .icon{
-    background: #ccc;
+    background: #558436;
     color: white;
+    text-align: center;
 }
 
 nav.navigation > .menuItem > a.grey:hover > .content, nav.navigation > .menuItem > a.grey.active > .content, nav.navigation > .menuItem > a.grey.hover > .content {
-    background: #ccc;
+    background: #558436;
     color: white;
 }
 
 .menuItem > a.grey + .second_level.activeSubMenu .content > a.active {
-    color: #ccc;
+    color: #558436;
     font-weight: 500;
 }
 
@@ -293,6 +298,8 @@ nav.navigation .second_level .timelineSubMenu .m-list-timeline__item:hover .time
     animation-duration: .3s;
     animation-name: slidein;
 }
+
+
 
 @keyframes slidein {
     from {

@@ -21,26 +21,7 @@ class Notifications extends Component {
         const {activeMenu} = this.props
 
         return (
-            <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width" data-dropdown-toggle="click" data-dropdown-persistent="true">
-                <a  className="m-nav__link m-dropdown__toggle pointer" id="m_topbar_notification_icon" onClick={() => {this.props.switchMenu('notifications')}}>
-                    <span className="m-nav__link-icon">
-													<i className="fa fa-bullhorn"></i>
-												</span>
-                </a>
-                {activeMenu == 'notifications'  &&
-                <div className="m-dropdown__wrapper" onMouseLeave={() => {this.props.switchMenu(null)}} style={{display: 'block'}}>
-
-                    <div className="m-dropdown__inner">
-                        <div className="m-dropdown__header m--align-center"
-                             style={{backgroundImage: `url(${posterImage})`}}>
-														<span className="m-dropdown__header-title">
-															9 New
-														</span>
-                            <span className="m-dropdown__header-subtitle">
-															Notifications
-														</span>
-                        </div>
-                        <div className="m-dropdown__body">
+                <div className="m-dropdown__body">
                             <div className="m-dropdown__content">
 
                                 <div className="tab-content">
@@ -89,10 +70,6 @@ class Notifications extends Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                }
-            </li>
         );
     }
 }
