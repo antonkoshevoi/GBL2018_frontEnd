@@ -50,9 +50,10 @@ class ChartsSection extends Component {
     return (
       <div className="row">
         <div className="col-sm-12 col-md-6 col-lg-3">
-          <Card title={school.get('schName')}
+          <Card title={'Roster'}
                 className="profile-card"
-                avatar='http://admissions.berkeley.edu/sites/default/files/UCB_landingpage_images_600x300_212.jpg'>
+                avatar={school.get('schAvatar') ? school.get('schAvatar') : ''}
+                icon={'fa fa-institution'}>
             <InfoSection
               loading={loading}
               data={data}

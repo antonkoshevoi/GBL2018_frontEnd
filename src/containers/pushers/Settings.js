@@ -4,6 +4,7 @@ import {translate} from 'react-i18next';
 import posterImage from "../../media/images/menu_poster.jpg"
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 import {NavLink, withRouter} from "react-router-dom";
+import AppDownloadDrawer from "../../components/ui/AppDownloadDrawer";
 
 class Settings extends Component {
 
@@ -49,9 +50,7 @@ class Settings extends Component {
                                                 </NavLink>
                                             </div>
                                             <div>
-                                                <NavLink to="/">
-                                                    <i className="fa fa-download"></i>
-                                                </NavLink>
+                                                    <AppDownloadDrawer/>
                                             </div>
                                             <div>
                                                 <LanguageSwitcher/>

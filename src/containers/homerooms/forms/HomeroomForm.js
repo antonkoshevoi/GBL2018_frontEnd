@@ -185,7 +185,7 @@ class HomeroomForm extends Component {
         <Paper className='full-width' style={{boxShadow:'0 0 0 0'}}>
           <Tabs value={activeTab} onChange={this.handleChangeTab} centered>
             <Tab label="Details" />
-            <Tab label="Administration" />
+            <Tab label="Teachers" />
             <Tab label="Students" />
           </Tabs>
 

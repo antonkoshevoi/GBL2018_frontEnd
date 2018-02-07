@@ -1,0 +1,186 @@
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import 'cropperjs/dist/cropper.css';
+import Cropper from "react-cropper";
+
+class ImageCropper extends Component {
+
+  state = {
+    file: '',
+    croppedFile: ''
+  }
+
+  _handleFileChange(e) {
+    e.preventDefault();
+    let files;
+    if (e.dataTransfer) {
+      files = e.dataTransfer.files;
+    } else if (e.target) {
+      files = e.target.files;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.setState({
+        file: reader.result
+      });
+    };
+
+    reader.readAsDataURL(files[0]);
+  }
+
+
+  onChange(e) {
+    e.preventDefault();
+    let files;
+    if (e.dataTransfer) {
+      files = e.dataTransfer.files;
+    } else if (e.target) {
+      files = e.target.files;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.setState({src: reader.result});
+    };
+    reader.readAsDataURL(files[0]);
+  }
+
+  cropImage() {
+    if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
+      return;
+    }
+
+    this.props.onCrop(this.cropper.getCroppedCanvas().toDataURL());
+    this.props.setFile(this.state.file);
+
+    this.setState({
+      croppedFile: this.cropper.getCroppedCanvas().toDataURL(),
+    });
+  }
+
+  _rotateImage(angle = 0) {
+    this.cropper.rotate(++angle)
+  }
+
+
+  _zoomIn() {
+    this.cropper.zoom(0.1)
+  }
+
+  _zoomOut() {
+    this.cropper.zoom(-0.1)
+  }
+
+  _reverseImage(scale) {
+    if (scale === 'vertical') {
+      if (this.cropper.cropper.imageData.scaleY == 1) {
+        this.cropper.scaleY(-1)
+      } else {
+        this.cropper.scaleY(1)
+      }
+
+    } else {
+      if (this.cropper.cropper.imageData.scaleX == 1) {
+        this.cropper.scaleX(-1)
+      } else {
+        this.cropper.scaleX(1)
+      }
+    }
+  }
+
+  render() {
+
+    const {croppedFile, file} = this.state;
+
+    return (
+      <div className="CropperBlock">
+        <div className='upload-btn-wrapper '>
+          <button className='btn m-btn--air btn-outline-info'>Upload a file</button>
+          <input type='file' name='myfile' onChange={(e) => {
+            this._handleFileChange(e)
+          }}/>
+        </div>
+
+
+        <Cropper
+          ref={cropper => {
+            this.cropper = cropper;
+          }}
+          src={file}
+          className='signup-cropper'
+          style={{height: 250, width: 250}}
+          aspectRatio={1 / 1}
+
+          guides={false}/>
+        {file &&
+        <div className="text-center m--margin-10">
+          <a
+            className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+            onMouseDown={() => {
+              this._reverseImage('vertical')
+            }}>
+            <i className="fa 	fa-arrows-v"></i>
+          </a>
+          <a
+            className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+            onMouseDown={() => {
+              this._reverseImage('horizontal')
+            }}>
+            <i className="fa 	fa-arrows-h"></i>
+          </a>
+          <a
+            className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+            onMouseDown={() => {
+              this._zoomIn()
+            }}>
+            <i className="fa fa-search-plus"></i>
+          </a>
+          <a
+            className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+            onMouseDown={() => {
+              this._zoomOut()
+            }}>
+            <i className="fa fa-search-minus"></i>
+          </a>
+          <a
+            className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+            onMouseDown={() => {
+              this._rotateImage(-5)
+            }}>
+            <i className="fa fa-rotate-left"></i>
+          </a>
+          <a
+            className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+            onMouseDown={() => {
+              this._rotateImage(5)
+            }}>
+            <i className="fa fa-rotate-right"></i>
+          </a>
+          <br/>
+          <button
+            type='button'
+            className='btn m-btn m--margin-5 m-btn--pill m-btn--air btn-success'
+            onClick={() => {
+              this._handleImageCrop()
+            }}
+          >
+            Crop <span className='la la-crop'></span>
+          </button>
+        </div>
+        }
+        <div className='croppedBlock'>
+          {croppedFile &&
+          <img className='img-thumbnail' style={{width: '150px'}} src={croppedFile} alt='cropped image'/>}
+        </div>
+      </div>
+    );
+  }
+}
+
+ImageCropper.propTypes = {
+  onCrop: PropTypes.func.isRequired,
+  setFile: PropTypes.func.isRequired
+};
+
+export default ImageCropper;

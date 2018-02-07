@@ -12,7 +12,26 @@ import {
 import {withRouter} from "react-router-dom";
 import {getCartRecords, getRecords, getSingleRecord} from "../../../redux/store/actions";
 import Loader from "../../../components/layouts/Loader";
+import StoreSlider from "../../../components/pages/store/StoreSlider";
 
+
+const sliderData = [
+  {
+    image:'https://www.swinburne.edu.my/wp-content/uploads/2017/06/sa-short-courses.jpg',
+    title:'Save Big With course bundles',
+    desc:''
+  },
+  {
+    image:'https://conceptacademies.co.uk/wp-content/uploads/2014/10/6700226_m.jpg',
+    title:'BZabc:Buy the entire series!',
+    desc:''
+  },
+  {
+    image:'https://az616578.vo.msecnd.net/files/2017/02/26/636237341865706889-619832852_movies.jpg',
+    title:'New Movies to Rent',
+    desc:''
+  }
+]
 
 class Store extends Component {
 
@@ -65,6 +84,7 @@ class Store extends Component {
 
     return (
       <div className="animated fadeInLeft">
+
         {loading &&
         <Loader/>}
         <div className="m-portlet store-wrapper">
@@ -77,9 +97,20 @@ class Store extends Component {
           </div>
           {(success && !isFiltered) &&
           <div id="store-body">
-            <ProductsSection type="newest" title="Newest" products={records.slice(0, 9)}/>
-            <ProductsSection type="popular" title="Most Popular" products={records.slice(0, 9)}/>
-            <ProductsSection type="top" title="Top Rating" products={records.slice(0, 9)}/>
+
+
+            <div className="row">
+              <div className="col-md-12">
+                <StoreSlider data={sliderData}/>
+              </div>
+            </div>
+            <ProductsSection type="Courses" title="Newest" products={records.slice(0, 9)}/>
+            <ProductsSection type="Books" title="Books" products={records.slice(0, 9)}/>
+            <ProductsSection type="Teaching Ads" title="Teaching Ads" products={records.slice(0, 9)}/>
+            <ProductsSection type="Stationary" title="Stationary" products={records.slice(0, 9)}/>
+            <ProductsSection type="Student Reward" title="Student Reward" products={records.slice(0, 9)}/>
+            <ProductsSection type="Tutoring Service" title="Tutoring Service" products={records.slice(0, 9)}/>
+            <ProductsSection type="Bundles" title="Bundles" products={records.slice(0, 9)}/>
           </div>
           }
           {isFiltered &&

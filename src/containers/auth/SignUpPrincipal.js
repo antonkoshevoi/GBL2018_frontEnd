@@ -17,7 +17,8 @@ class SignUpPrincipal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: {}
+      form: {},
+      imageZoom:0,
     };
   }
 
@@ -106,11 +107,41 @@ class SignUpPrincipal extends Component {
     });
   }
 
+  _rotateImage(angle = 0){
+    this.cropper.rotate(++angle)
+  }
+
+  _zoomIn(){
+    this.cropper.zoom(0.1)
+  }
+
+  _zoomOut() {
+    this.cropper.zoom(-0.1)
+  }
+
+  _reverseImage(scale) {
+    if (scale === 'vertical') {
+      if (this.cropper.cropper.imageData.scaleY == 1) {
+        this.cropper.scaleY(-1)
+      } else {
+        this.cropper.scaleY(1)
+      }
+
+    } else {
+      if (this.cropper.cropper.imageData.scaleX == 1) {
+        this.cropper.scaleX(-1)
+      } else {
+        this.cropper.scaleX(1)
+      }
+    }
+  }
+
   render() {
-    const { form } = this.state;
+    const { form, imageZoom } = this.state;
     const loading = this.props.signUpRequest.get('loading');
     const errors = this.props.signUpRequest.get('errors');
 
+    console.log(this.cropper);
     return (
       <div className="">
         <div className="m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor  m-login--2 m-login-2--skin-2 m--full-height" id="m_login" style={{backgroundImage: `url(${background})`,minHeight:'100vh'}}>
@@ -269,27 +300,75 @@ class SignUpPrincipal extends Component {
                         </div>
 
                         <div className="CropperBlock">
-                          {form.schoolLogo &&
-                            <button
-                              type='button'
-                              className='btn m-btn--air btn-success'
-                              onClick={() => { this._handleImageCrop() }}
-                              style={{float: 'right'}}>
-                              Crop Image <span className='la la-crop'></span>
-                            </button>}
                           <div className='upload-btn-wrapper '>
                             <button className='btn m-btn--air btn-outline-info'>Upload a file</button>
                             <input type='file' name='myfile' onChange={(e) => { this._handleFileChange(e) }}/>
                           </div>
 
+
                           <Cropper
                             ref={cropper => { this.cropper = cropper; }}
                             src={form.schoolLogo}
+                            dragMode={'move'}
                             className='signup-cropper'
-                            style={{height: 250, width: 250}}
+                            style={{height: 250, width: '100%'}}
                             aspectRatio={1 / 1}
-                            guides={false}/>
 
+                            guides={false}/>
+                          {form.schoolLogo &&
+                          <div className="text-center m--margin-10">
+                            <a
+                              className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+                              onMouseDown={() => {
+                                this._reverseImage('vertical')
+                              }}>
+                              <i className="fa 	fa-arrows-v"></i>
+                            </a>
+                            <a
+                              className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+                              onMouseDown={() => {
+                                this._reverseImage('horizontal')
+                              }}>
+                              <i className="fa 	fa-arrows-h"></i>
+                            </a>
+                            <a
+                              className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+                              onMouseDown={() => {
+                                this._zoomIn()
+                              }}>
+                              <i className="fa fa-search-plus"></i>
+                            </a>
+                            <a
+                              className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+                              onMouseDown={() => {
+                                this._zoomOut()
+                              }}>
+                              <i className="fa fa-search-minus"></i>
+                            </a>
+                            <a
+                              className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+                              onMouseDown={() => {
+                                this._rotateImage(-5)
+                              }}>
+                              <i className="fa fa-rotate-left"></i>
+                            </a>
+                            <a
+                              className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+                              onMouseDown={() => {
+                                this._rotateImage(5)
+                              }}>
+                              <i className="fa fa-rotate-right"></i>
+                            </a>
+                            <br/>
+                            <button
+                              type='button'
+                              className='btn m-btn m--margin-5 m-btn--pill m-btn--air btn-success'
+                              onClick={() => { this._handleImageCrop() }}
+                             >
+                              Crop <span className='la la-crop'></span>
+                            </button>
+                          </div>
+                          }
                           <div className='croppedBlock'>
                             {form.schoolLogoCropped &&
                               <img className='img-thumbnail' style={{ width: '150px' }} src={form.schoolLogoCropped} alt='cropped image'/>}

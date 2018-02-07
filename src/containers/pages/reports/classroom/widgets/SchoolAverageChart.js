@@ -2,11 +2,14 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Pie} from "react-chartjs";
 import {connect} from "react-redux";
-import {getCharts} from "../../../../redux/reports/dashboard/actions";
-import {selectChartDatatRequest} from "../../../../redux/reports/dashboard/selectors";
+import {getCharts} from "../../../../../redux/reports/classroom/actions";
+import {selectChartDatatRequest} from "../../../../../redux/reports/classroom/selectors";
 import {CircularProgress} from "material-ui";
 
 class SchoolAverageChart extends Component {
+  static propTypes = {
+    classroomId: PropTypes.string.isRequired
+  };
 
   options = {
     responsive: true,
@@ -55,8 +58,9 @@ class SchoolAverageChart extends Component {
   }
 
   componentDidMount() {
-    const {getCharts} = this.props;
-    getCharts();
+    const { getCharts, classroomId } = this.props;
+
+    getCharts(classroomId);
   }
 
   _renderPieChartLabels(labels) {
@@ -132,9 +136,7 @@ SchoolAverageChart = connect(
     getChartDataRequest: selectChartDatatRequest(state)
   }),
   (dispatch) => ({
-    getCharts: (params = {}) => {
-      dispatch(getCharts(params))
-    },
+    getCharts: (id, params = {}) => {dispatch(getCharts(id, params))},
   })
 )(SchoolAverageChart);
 

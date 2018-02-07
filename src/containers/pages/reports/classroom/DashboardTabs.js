@@ -6,11 +6,8 @@ import {
 import { NavLink } from "react-router-dom";
 import { Search } from "material-ui-icons";
 import {connect} from "react-redux";
-import {
-  selectClassroomsRequest, selectHomeroomsRequest,
-  selectStudentsRequest
-} from "../../../redux/reports/dashboard/selectors";
-import {getClassrooms, getHomerooms, getStudents} from "../../../redux/reports/dashboard/actions";
+import {selectStudentsRequest} from "../../../../redux/reports/classroom/selectors";
+import {getStudents} from "../../../../redux/reports/classroom/actions";
 
 function TabContainer(props) {
   return (
@@ -21,10 +18,14 @@ function TabContainer(props) {
 }
 
 class DashboardTabs extends Component {
+  static propTypes = {
+    classroomId: PropTypes.string.isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = {
-      value: "classRooms",
+      value: "students",
       cols: 4,
       tabCentered: false,
       tabFullWidth: false,
@@ -33,11 +34,9 @@ class DashboardTabs extends Component {
   }
 
   componentDidMount() {
-    const { getStudents, getHomerooms, getClassrooms } = this.props;
+    const { getStudents, classroomId } = this.props;
 
-    getStudents();
-    getHomerooms();
-    getClassrooms();
+    getStudents(classroomId);
 
     this._setGridCols();
     window.addEventListener("resize", this._setGridCols.bind(this));
@@ -107,50 +106,8 @@ class DashboardTabs extends Component {
     })
   }
 
-  _renderHomerooms() {
-    const homerooms = this.props.getHomeroomsRequest.get('records').toJS();
-
-    return homerooms.map(function (homeroom, i) {
-      return (
-        <GridListTile key={i} className="grid-tile">
-          <img
-            src="https://is5-ssl.mzstatic.com/image/thumb/Purple1/v4/7d/3c/43/7d3c4388-f8c2-466d-0848-b7ec85c0fd3b/pr_source.jpg/1200x630bb.jpg"
-            alt={homeroom.id}/>
-          <GridListTileBar
-            className="myGridTileBar"
-            title={<NavLink to={`/reports/homerooms/${homeroom.id}`}>{homeroom.name}</NavLink>}
-            actionIcon={
-              <IconButton color="default"></IconButton>
-            }
-          />
-        </GridListTile>
-      )
-    })
-  }
-
-  _renderClassrooms() {
-    const classrooms = this.props.getClassroomsRequest.get('records').toJS();
-
-    return classrooms.map(function (classroom, i) {
-      return (
-        <GridListTile key={i} className="grid-tile">
-          <img
-            src="http://energydiet.canadiangeographic.ca/application/assets/img/2013/classroom-avatar.png"
-            alt={classroom.id}/>
-          <GridListTileBar
-            className="myGridTileBar"
-            title={<NavLink to={`/reports/classrooms/${classroom.id}`}>{classroom.crmName}</NavLink>}
-            actionIcon={
-              <IconButton color="default"></IconButton>
-            }
-          />
-        </GridListTile>
-      )
-    })
-  }
-
   render() {
-    const { value, cols, tabCentered, tabFullWidth, tabScrollButtons } = this.state;
+    const { value, cols, tabCentered, tabFullWidth } = this.state;
 
     return (
       <div className="m--margin-top-50">
@@ -166,8 +123,6 @@ class DashboardTabs extends Component {
                   centered={tabCentered}
                   fullWidth={tabFullWidth}
                 >
-                  <Tab className="tab-header-item" value="classRooms" label="Classrooms"/>
-                  <Tab className="tab-header-item" value="homeRooms" label="Homerooms"/>
                   <Tab className="tab-header-item" value="students" label="Students"/>
                 </Tabs>
               </div>
@@ -194,17 +149,6 @@ class DashboardTabs extends Component {
                 {this._renderStudents()}
               </GridList>
             </TabContainer>}
-            {value === 'classRooms' && <TabContainer>
-              <GridList cellHeight={250} cols={cols}>
-                {this._renderClassrooms()}
-              </GridList>
-
-            </TabContainer>}
-            {value === 'homeRooms' && <TabContainer>
-              <GridList cellHeight={250} cols={cols}>
-                {this._renderHomerooms()}
-              </GridList>
-            </TabContainer>}
           </div>
         </div>
         <Paper></Paper>
@@ -216,13 +160,9 @@ class DashboardTabs extends Component {
 DashboardTabs = connect(
   (state) => ({
     getStudentsRequest: selectStudentsRequest(state),
-    getHomeroomsRequest: selectHomeroomsRequest(state),
-    getClassroomsRequest: selectClassroomsRequest(state),
   }),
   (dispatch) => ({
-    getStudents: (params = {}) => {dispatch(getStudents(params))},
-    getHomerooms: (params = {}) => {dispatch(getHomerooms(params))},
-    getClassrooms: (params = {}) => {dispatch(getClassrooms(params))},
+    getStudents: (id, params = {}) => {dispatch(getStudents(id, params))},
   })
 )(DashboardTabs);
 

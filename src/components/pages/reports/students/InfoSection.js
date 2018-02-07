@@ -25,20 +25,14 @@ class InfoSection extends Component {
           <td>{item.course.crsTitle}</td>
           <td>
             <div className="progress m-progress--sm">
-              <div className="progress-bar bg-success" role="progressbar"
-                   style={{width: item.progress.completedProgress + '%'}}></div>
-              <div className="progress-bar bg-warning" role="progressbar"
-                   style={{width: item.progress.inprogresProgress + '%'}}></div>
-              <div className="progress-bar bg-danger" role="progressbar"
-                   style={{width: item.progress.not_started + '%'}}></div>
+              <div className="progress-bar bg-success" role="progressbar" style={{width: item.progress.completedProgress + '%'}}></div>
+              <div className="progress-bar bg-warning" role="progressbar" style={{width: item.progress.inprogressProgress + '%'}}></div>
             </div>
           </td>
           <td>
             <div className="progress m-progress--sm">
-              <div className="progress-bar bg-success" role="progressbar"
-                   style={{width: item.progress.averageGrade + '%'}}></div>
-              <div className="progress-bar bg-danger" role="progressbar"
-                   style={{width: (100 - item.progress.averageGrade) + '%'}}></div>
+              <div className="progress-bar bg-success" role="progressbar" style={{width: item.averageGrade + '%'}}></div>
+              <div className="progress-bar bg-danger" role="progressbar" style={{width: (100 - item.averageGrade) + '%'}}></div>
             </div>
           </td>
         </tr>
