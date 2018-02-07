@@ -1149,3 +1149,7 @@ div.m-widget25 .m-widget25__price {
 .with-divider {
   border-top: 1px solid rgba(128, 128, 128, 0.45);
 }
+
+.CropperBlock {
+  text-align: center;
+}

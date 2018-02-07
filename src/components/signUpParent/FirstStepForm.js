@@ -59,6 +59,35 @@ class FirstStepForm extends Component {
     }, () => { this.props.onChange(this.state.form); });
   }
 
+  _rotateImage(angle = 0){
+    this.cropper.rotate(++angle)
+  }
+
+  _zoomIn(){
+    this.cropper.zoom(0.1)
+  }
+
+  _zoomOut() {
+    this.cropper.zoom(-0.1)
+  }
+
+  _reverseImage(scale) {
+    if (scale === 'vertical') {
+      if (this.cropper.cropper.imageData.scaleY == 1) {
+        this.cropper.scaleY(-1)
+      } else {
+        this.cropper.scaleY(1)
+      }
+
+    } else {
+      if (this.cropper.cropper.imageData.scaleX == 1) {
+        this.cropper.scaleX(-1)
+      } else {
+        this.cropper.scaleX(1)
+      }
+    }
+  }
+
   /**
    *
    */
@@ -294,21 +323,69 @@ class FirstStepForm extends Component {
                     ref={cropper => { this.cropper = cropper; }}
                     src={form.avatar}
                     className='signup-cropper'
-                    style={{height: 250, width: 250}}
+                    dragMode="move"
+                    style={{height: 250, width: '100%'}}
                     aspectRatio={1 / 1}
                     guides={false}/>
               </div>
             </div>
 
             <div className='col-sm-12'>
-                {form.avatar &&
+              {form.avatar &&
+              <div className="text-center m--margin-10">
+                <a
+                  className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+                  onMouseDown={() => {
+                    this._reverseImage('vertical')
+                  }}>
+                  <i className="fa 	fa-arrows-v"></i>
+                </a>
+                <a
+                  className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+                  onMouseDown={() => {
+                    this._reverseImage('horizontal')
+                  }}>
+                  <i className="fa 	fa-arrows-h"></i>
+                </a>
+                <a
+                  className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+                  onMouseDown={() => {
+                    this._zoomIn()
+                  }}>
+                  <i className="fa fa-search-plus"></i>
+                </a>
+                <a
+                  className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+                  onMouseDown={() => {
+                    this._zoomOut()
+                  }}>
+                  <i className="fa fa-search-minus"></i>
+                </a>
+                <a
+                  className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+                  onMouseDown={() => {
+                    this._rotateImage(-5)
+                  }}>
+                  <i className="fa fa-rotate-left"></i>
+                </a>
+                <a
+                  className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+                  onMouseDown={() => {
+                    this._rotateImage(5)
+                  }}>
+                  <i className="fa fa-rotate-right"></i>
+                </a>
+                <br/>
                 <button
-                    type='button'
-                    className='btn m-btn--air btn-success m--margin-top-15'
-                    onClick={() => { this._handleImageCrop() }}
-                   >
-                  Crop Image <span className='la la-crop'></span>
-                </button>}
+                  type='button'
+                  className='btn m-btn m--margin-5 m-btn--pill m-btn--air btn-success'
+                  onClick={() => { this._handleImageCrop() }}
+                >
+                  Crop <span className='la la-crop'></span>
+                </button>
+              </div>
+              }
+
                 {form.avatarCropped &&
               <div className='croppedBlock'>
                   <img className='img-thumbnail' style={{ width: '150px' }} src={form.avatarCropped} alt='cropped image'/>
