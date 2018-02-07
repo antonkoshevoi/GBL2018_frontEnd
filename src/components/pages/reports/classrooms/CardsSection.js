@@ -33,7 +33,7 @@ class ChartsSection extends Component {
         return (
             <div className="row">
                 <div className="col-sm-12  col-md-6 col-xl-3">
-                    <Card title="Classroom N1" className="profile-card" avatar='https://www.responsiveclassroom.org/wp-content/uploads/2016/04/DSC_2388-1024x682.jpg'>
+                    <Card title="Roster" className="profile-card" avatar='' icon="fa fa-institution">
                         <InfoSection/>
                     </Card>
                 </div>
@@ -52,6 +52,20 @@ class ChartsSection extends Component {
                         <div className="small-card">
                             <div className="row">
                                 <div className="col-md-5  pie-block">
+                                    <Pie data={this.state.pieDataPerformance} options={this.state.options} width="100" height="100"/>
+                                </div>
+                                <div className="col-md-7  pie-block">
+                                    <div className="m-stack m--padding-left-20 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
+                                        <h5> School Average</h5>
+                                        <legend>Performance</legend>
+                                      {this._renderPieChartLabels(this.state.pieDataPerformance)}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="small-card">
+                            <div className="row">
+                                <div className="col-md-5  pie-block">
                                     <Pie data={this.state.pieDataProgress} options={this.state.options} width="100" height="100"/>
                                 </div>
                                 <div className="col-md-7 pie-block">
@@ -63,20 +77,7 @@ class ChartsSection extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="small-card">
-                            <div className="row">
-                                <div className="col-md-5  pie-block">
-                                    <Pie data={this.state.pieDataPerformance} options={this.state.options} width="100" height="100"/>
-                                </div>
-                                <div className="col-md-7  pie-block">
-                                    <div className="m-stack m--padding-left-20 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
-                                        <h5> School Average</h5>
-                                        <legend>Performance</legend>
-                                        {this._renderPieChartLabels(this.state.pieDataPerformance)}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

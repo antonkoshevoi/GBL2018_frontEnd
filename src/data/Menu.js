@@ -9,12 +9,117 @@ export default  {
                colorName:'home',
            },
            {
+           key:'studentsAndStaff',
+           title:'Students & Staff',
+           link:'dashboard',
+           icon:'fa fa-group',
+           colorName:'orange',
+           subMenu:[
+             {
+               key:'administration',
+               title:'Administration',
+               link:'administration/list',
+               icon:'flaticon flaticon-user-settings',
+             },
+             {
+               key:'teachers',
+               title:'Teachers',
+               link:'teachers/list',
+               icon:'flaticon flaticon-user-ok',
+             },
+             {
+               key:'students',
+               title:'Students',
+               link:'students/list',
+               icon:'flaticon	flaticon-technology-1',
+             }
+           ]
+         },
+           {
+           key:'learningAreas',
+           title:'Learning Areas',
+           link:'dashboard',
+           icon:'fa fa-institution',
+           colorName:'red',
+           subMenu:[
+             {
+               key:'classrooms',
+               title:'Classrooms',
+               link:'classrooms/list',
+               icon:'flaticon flaticon-user-settings',
+             },
+             {
+               key:'demoCourses',
+               title:'Demo courses',
+               link:'courses',
+               icon:'flaticon flaticon-user-ok',
+             },
+             {
+               key:'homerooms',
+               title:'Homerooms',
+               link:'homerooms/list',
+               icon:'flaticon	flaticon-technology-1',
+             },
+             {
+               key:'professionalTrainings',
+               title:'Professional Trainings',
+               link:'trainings',
+               icon:'flaticon	flaticon-technology-1',
+             }
+           ]
+         },
+           {
                key:'reports',
                title:'Reports',
                link:'reports',
                icon:'fa  fa-line-chart ',
                colorName:'purple',
            },
+           {
+           key:'sharing',
+           title:'Sharing',
+           link:'dashboard',
+           icon:'fa fa-share-alt',
+           colorName:'blue',
+           subMenu:[
+             {
+               key:'inbox',
+               title:'Inbox',
+               link:'inbox',
+               icon:'flaticon flaticon-user-settings',
+             },
+             {
+               key:'labels',
+               title:'Labels',
+               link:'labels',
+               icon:'flaticon flaticon-user-ok',
+             },
+             {
+               key:'sent',
+               title:'Sent',
+               link:'sent',
+               icon:'flaticon	flaticon-technology-1',
+             },
+             {
+               key:'compose',
+               title:'Compose',
+               link:'compose',
+               icon:'flaticon flaticon-technology-1',
+             },
+             {
+               key:'drafts',
+               title:'Drafts',
+               link:'drafts',
+               icon:'flaticon flaticon-technology-1',
+             },
+             {
+               key:'chat',
+               title:'Chat',
+               link:'chat',
+               icon:'flaticon flaticon-technology-1',
+             }
+           ]
+         },
            {
                key:'store',
                title:'Store',
@@ -205,111 +310,6 @@ export default  {
                                icon:'flaticon flaticon-user-ok',
                            }
                        ]
-                   }
-               ]
-           },
-           {
-               key:'studentsAndStaff',
-               title:'Students & Staff',
-               link:'dashboard',
-               icon:'fa fa-group',
-               colorName:'orange',
-               subMenu:[
-                   {
-                       key:'administration',
-                       title:'Administration',
-                       link:'administration/list',
-                       icon:'flaticon flaticon-user-settings',
-                   },
-                   {
-                       key:'teachers',
-                       title:'Teachers',
-                       link:'teachers/list',
-                       icon:'flaticon flaticon-user-ok',
-                   },
-                   {
-                       key:'students',
-                       title:'Students',
-                       link:'students/list',
-                       icon:'flaticon	flaticon-technology-1',
-                   }
-               ]
-           },
-           {
-               key:'learningAreas',
-               title:'Learning Areas',
-               link:'dashboard',
-               icon:'fa fa-institution',
-               colorName:'red',
-               subMenu:[
-                   {
-                       key:'classrooms',
-                       title:'Classrooms',
-                       link:'classrooms/list',
-                       icon:'flaticon flaticon-user-settings',
-                   },
-                   {
-                       key:'demoCourses',
-                       title:'Demo courses',
-                       link:'courses',
-                       icon:'flaticon flaticon-user-ok',
-                   },
-                   {
-                       key:'homerooms',
-                       title:'Homerooms',
-                       link:'homerooms/list',
-                       icon:'flaticon	flaticon-technology-1',
-                   },
-                   {
-                       key:'professionalTrainings',
-                       title:'Professional Trainings',
-                       link:'trainings',
-                       icon:'flaticon	flaticon-technology-1',
-                   }
-               ]
-           },
-           {
-               key:'sharing',
-               title:'Sharing',
-               link:'dashboard',
-               icon:'fa fa-share-alt',
-               colorName:'blue',
-               subMenu:[
-                   {
-                       key:'inbox',
-                       title:'Inbox',
-                       link:'inbox',
-                       icon:'flaticon flaticon-user-settings',
-                   },
-                   {
-                       key:'labels',
-                       title:'Labels',
-                       link:'labels',
-                       icon:'flaticon flaticon-user-ok',
-                   },
-                   {
-                       key:'sent',
-                       title:'Sent',
-                       link:'sent',
-                       icon:'flaticon	flaticon-technology-1',
-                   },
-                   {
-                       key:'compose',
-                       title:'Compose',
-                       link:'compose',
-                       icon:'flaticon flaticon-technology-1',
-                   },
-                   {
-                       key:'drafts',
-                       title:'Drafts',
-                       link:'drafts',
-                       icon:'flaticon flaticon-technology-1',
-                   },
-                   {
-                       key:'chat',
-                       title:'Chat',
-                       link:'chat',
-                       icon:'flaticon flaticon-technology-1',
                    }
                ]
            },

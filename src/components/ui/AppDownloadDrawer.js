@@ -18,13 +18,8 @@ class AppDownloadDrawer extends Component {
 
     render() {
         return (
-            <div>
-                <button className="btn m-btn btn-brand m-btn--icon" onClick={this.toggleDrawer(true)}>
-                     <span>
+            <div onClick={this.toggleDrawer(true)}>
                         <i className="fa fa-download"></i>
-                        <span>Download App</span>
-                    </span>
-                </button>
                 <Drawer
                     anchor="bottom"
                     open={this.state.isOpen}

@@ -376,3 +376,33 @@
         opacity: 0;
     }
 }
+
+.storeSlider .slick-slide {
+    position: relative;
+}
+
+.storeSlider .slick-slide .sliderItem img {
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.storeSlider .slick-slide .sliderItem .slideTitle {
+    color: #fff;
+    font-weight: 900;
+    text-shadow: 0 2px 15px rgba(128, 128, 128, 0.76);
+}
+
+.sliderItem {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

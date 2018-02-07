@@ -783,7 +783,7 @@ div.pie-block > canvas {
 }
 
 div.m-portlet .m-portlet__head {
-  padding: 0 1.2rem;
+  padding: 0.5rem 1.2rem;
   min-height: 4.1rem;
   height: initial;
 }
@@ -1096,6 +1096,7 @@ div.m-widget25 .m-widget25__price {
 .g-tab-list > li {
   padding: 15px;
   text-align: center;
+  cursor: pointer;
 }
 
 .g-tab-list > li.react-tabs__tab--selected {
@@ -1143,4 +1144,8 @@ div.m-widget25 .m-widget25__price {
 
 .settingsMenuBlock > div .fa:hover {
   color: #385774
+}
+
+.with-divider {
+  border-top: 1px solid rgba(128, 128, 128, 0.45);
 }

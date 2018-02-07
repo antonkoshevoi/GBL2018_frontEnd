@@ -63,7 +63,7 @@ class Sidebar extends Component {
         return Menu.multipleMenu.map(function (menu) {
             return (
                 <div className="menuItem" key={menu.key} data-key={menu.key}  onClick={(menu.subMenu === undefined) ? _self.props.mobileSidebar : () => {return} }>
-                   <NavLink to={(menu.subMenu !== undefined) ? `#${menu.key}` : `/${menu.link}`}  className={'googleMenuItem ' + menu.colorName + (activeMenu.key === menu.key ? ' active fadeInUp  animated' :  activeMenu.subMenu !== undefined ? ' swapped' : '') }
+                   <NavLink to={(menu.subMenu !== undefined) ? `${menu.key == 'store' ? menu.link : '#' + menu.key }` : `/${menu.link}`}  className={'googleMenuItem ' + menu.colorName + (activeMenu.key === menu.key ? ' active fadeInUp  animated' :  activeMenu.subMenu !== undefined ? ' swapped' : '') }
                          onClick={(event) => _self._googleMenuToggle(menu)}>
                        <span className="icon"><i className={menu.icon}></i></span>
                        <span className="content">{_self.props.t(menu.key)}</span>
@@ -101,15 +101,7 @@ class Sidebar extends Component {
                     <NavLink activeClassName={'active'} to={`/${menu.link}`} key={i}>
                         <span className="content"> {_self.props.t(menu.key) }</span>
                     </NavLink >
-                    {menu.subMenu !== undefined &&
-                        <div className="timelineSubMenu m-list-timeline">
-                            <div className="m-list-timeline__items">
-                              {_self._renderTimelineSubMenu(menu.subMenu)}
-                            </div>
-                        </div>
-                    }
-                  </div>
-
+                </div>
             )
         })
     }
