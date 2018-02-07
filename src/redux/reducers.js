@@ -16,8 +16,8 @@ import messagesReducer from './messages/reducer';
 import storeReducer from './store/reducer';
 import paymentsReducer from './payments/reducer';
 import transactionsReducer from './transactions/reducer';
-
 import reportsDashboardReducer from './reports/dashboard/reducer';
+import invitationsReducer from './invitations/reducer';
 
 export default {
   app: appReducer,
@@ -38,6 +38,6 @@ export default {
   payments: paymentsReducer,
   transactions: transactionsReducer,
   studentReportsReducer: studentReportsReducer,
-
   reportsDashboardReducer: reportsDashboardReducer,
+  invitations: invitationsReducer
 };

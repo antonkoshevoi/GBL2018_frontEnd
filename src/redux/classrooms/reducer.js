@@ -4,7 +4,8 @@ import {
   GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS,
   DELETE, DELETE_SUCCESS, DELETE_FAIL,
   RESET_BULK_UPLOAD_REQUEST, BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS,
-  GET_COURSES, GET_COURSES_FAIL, GET_COURSES_SUCCESS
+  GET_COURSES, GET_COURSES_FAIL, GET_COURSES_SUCCESS, GET_DEMO_CLASSROOMS, GET_DEMO_CLASSROOMS_SUCCESS,
+  GET_DEMO_CLASSROOMS_FAIL, GET_DEMO_COURSES, GET_DEMO_COURSES_SUCCESS, GET_DEMO_COURSES_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -80,6 +81,7 @@ export default function reducer (state = initialState, action) {
      * Get records
      */
     case GET_RECORDS:
+    case GET_DEMO_CLASSROOMS:
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
           .set('loading', true)
@@ -87,6 +89,7 @@ export default function reducer (state = initialState, action) {
           .remove('fail')
         ).set('records', Immutable.List());
     case GET_RECORDS_SUCCESS:
+    case GET_DEMO_CLASSROOMS_SUCCESS:
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
           .set('success', true)
@@ -94,6 +97,7 @@ export default function reducer (state = initialState, action) {
         ).set('records', Immutable.fromJS(action.result.data))
         .set('pagination', Immutable.fromJS(action.result.meta.pagination));
     case GET_RECORDS_FAIL:
+    case GET_DEMO_CLASSROOMS_FAIL:
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
           .set('loading', false)
@@ -304,6 +308,7 @@ export default function reducer (state = initialState, action) {
      * Courses
      */
     case GET_COURSES:
+    case GET_DEMO_COURSES:
       return state
         .set('getCoursesRequest', state.get('getCoursesRequest')
           .set('loading', true)
@@ -312,6 +317,7 @@ export default function reducer (state = initialState, action) {
           .remove('records')
         );
     case GET_COURSES_SUCCESS:
+    case GET_DEMO_COURSES_SUCCESS:
       return state
         .set('getCoursesRequest', state.get('getCoursesRequest')
           .set('success', true)
@@ -319,6 +325,7 @@ export default function reducer (state = initialState, action) {
           .set('records', Immutable.fromJS(action.result.data))
         );
     case GET_COURSES_FAIL:
+    case GET_DEMO_COURSES_FAIL:
       return state
         .set('getCoursesRequest', state.get('getCoursesRequest')
           .set('loading', false)

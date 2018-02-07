@@ -33,6 +33,14 @@ export const GET_COURSES = '[Classrooms] GET_COURSES';
 export const GET_COURSES_SUCCESS = '[Classrooms] GET_COURSES_SUCCESS';
 export const GET_COURSES_FAIL = '[Classrooms] GET_COURSES_FAIL';
 
+export const GET_DEMO_COURSES = '[Classrooms] GET_DEMO_COURSES';
+export const GET_DEMO_COURSES_SUCCESS = '[Classrooms] GET_DEMO_COURSES_SUCCESS';
+export const GET_DEMO_COURSES_FAIL = '[Classrooms] GET_DEMO_COURSES_FAIL';
+
+export const GET_DEMO_CLASSROOMS = '[Classrooms] GET_DEMO_CLASSROOMS';
+export const GET_DEMO_CLASSROOMS_SUCCESS = '[Classrooms] GET_DEMO_CLASSROOMS_SUCCESS';
+export const GET_DEMO_CLASSROOMS_FAIL = '[Classrooms] GET_DEMO_CLASSROOMS_FAIL';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -122,5 +130,25 @@ export function getCourses() {
   return {
     types: [GET_COURSES, GET_COURSES_SUCCESS, GET_COURSES_FAIL],
     promise: (apiClient) => apiClient.get(`classrooms/courses`)
+  };
+}
+
+/**
+ * Courses
+ */
+export function getDemoCourses() {
+  return {
+    types: [GET_DEMO_COURSES, GET_DEMO_COURSES_SUCCESS, GET_DEMO_COURSES_FAIL],
+    promise: (apiClient) => apiClient.get(`classrooms/courses/demo`)
+  };
+}
+
+/**
+ * Courses
+ */
+export function getDemoClassrooms(params = {}) {
+  return {
+    types: [GET_DEMO_CLASSROOMS, GET_DEMO_CLASSROOMS_SUCCESS, GET_DEMO_CLASSROOMS_FAIL],
+    promise: (apiClient) => apiClient.get(`classrooms/demo`, params)
   };
 }
