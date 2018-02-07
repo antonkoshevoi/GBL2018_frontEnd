@@ -18,6 +18,7 @@ import paymentsReducer from './payments/reducer';
 import transactionsReducer from './transactions/reducer';
 
 import reportsDashboardReducer from './reports/dashboard/reducer';
+import classroomsReportReducer from './reports/classroom/reducer';
 
 export default {
   app: appReducer,
@@ -40,4 +41,5 @@ export default {
   studentReportsReducer: studentReportsReducer,
 
   reportsDashboardReducer: reportsDashboardReducer,
+  classroomsReport: classroomsReportReducer,
 };

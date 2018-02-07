@@ -22,7 +22,6 @@ import SignUpPrincipal from '../containers/auth/SignUpPrincipal';
 import NotFoundPage from '../containers/errors/404';
 import Route from '../containers/routing/Route';
 import Profile from "../containers/profile/Profile";
-import ClassRoomReports from "../containers/pages/reports/ClassRooms";
 import StudentReports from "../containers/pages/reports/Students";
 import TeacherReports from "../containers/pages/reports/Teachers";
 import Store from "../containers/pages/store/Store";
@@ -41,6 +40,7 @@ import UnassignedCredits from "../containers/unassigned-credits/UnassignedCredit
 import PaymentCanceledContainer from '../containers/pages/store/payments/PaymentCanceledContainer';
 
 import ReportsDashboard from "../containers/pages/reports/Dashboard";
+import ClassRoomReportDashboard from "../containers/pages/reports/classroom/Dashboard";
 
 export default () => (
   <AppContainer>
@@ -67,7 +67,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/courses' component={Courses}/>
 
       <AuthenticatedRoute exact layout={MainLayout} path='/reports' component={ReportsDashboard}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReports}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReportDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
 
