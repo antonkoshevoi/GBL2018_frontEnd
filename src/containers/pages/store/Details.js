@@ -87,7 +87,7 @@ class Details extends Component {
             </div>
             <div className="col-lg-4">
               {successSingle &&
-              <Sidebar data={records} title="Newest" dataType="newest"/>}
+              <Sidebar data={records} title="Similar" dataType="similar"/>}
             </div>
           </div>
         </div>
