@@ -48,7 +48,7 @@ class UserMenu extends Component {
               </div>
               <div className="m-card-user__details">
                 <span className="m-card-user__name m--font-weight-500">{user.firstName + ' ' +  user.lastName}</span>
-                <a href="" className="m-card-user__email m--font-weight-300 m-link" style={{ fontSize: '0.8rem'}}>{user.email}</a>
+                <a href={`mailto:${user.email}`} className="m-card-user__email m--font-weight-300 m-link" style={{ fontSize: '0.8rem'}}>{user.email}</a>
               </div>
             </div>
           </div>
@@ -68,36 +68,8 @@ class UserMenu extends Component {
                     </span>
                   </NavLink>
                 </li>
-                <li className="m-nav__item">
-                  <a href="?page=header/profile&amp;demo=default" className="m-nav__link">
-                    <i className="m-nav__link-icon flaticon-share"></i>
-                    <span className="m-nav__link-text">Activity</span>
-                  </a>
-                </li>
-                <li className="m-nav__item">
-                  <NavLink to="/messages" className="m-nav__link">
-                    <i className="m-nav__link-icon flaticon-chat-1"></i>
-                    <span className="m-nav__link-title">
-                      <span className="m-nav__link-wrap">
-                        <span className="m-nav__link-text">Messages</span>
-                      </span>
-                    </span>
-                  </NavLink>
-                </li>
-                <li className="m-nav__separator m-nav__separator--fit">
-                </li>
-                <li className="m-nav__item">
-                  <a href="?page=header/profile&amp;demo=default" className="m-nav__link">
-                    <i className="m-nav__link-icon flaticon-info"></i>
-                    <span className="m-nav__link-text">FAQ</span>
-                  </a>
-                </li>
-                <li className="m-nav__item">
-                  <a href="?page=header/profile&amp;demo=default" className="m-nav__link">
-                    <i className="m-nav__link-icon flaticon-lifebuoy"></i>
-                    <span className="m-nav__link-text">Support</span>
-                  </a>
-                </li>
+
+
                 <li className="m-nav__separator m-nav__separator--fit">
                 </li>
                 <li className="m-nav__item" onClick={logout}>

@@ -30,7 +30,9 @@ class DetailsSection extends Component {
                       <div className="row">
                         <div className="col-md-7">
                           <p className="g-red productType">{category}</p>
-                          <span className="g-metal">Left in Stock ({data.get('count')})</span>
+                          <p>Product:Digital / Manual Course</p>
+                          <p>Age:Kindergarten</p>
+                          <p>Subject:EFL for Young Children</p>
                         </div>
                         <div className="col-md-5 text-right">
                           <div className="align-text-bottom">
@@ -44,21 +46,14 @@ class DetailsSection extends Component {
                 </div>
                 <div
                   className="actionsBtn justify-content-between full-width align-items-end d-flex m--padding-right-20 align-self-end">
-                  <div className="m-widget25 ">
-                    <span className="m-widget25__price m--font-brand">${price}</span>
-                    <span className="m-widget25__desc">
-                                            <span className="discount">
-                                                <span>{(price / 100 * data.get('discount') + price) + '$'}</span>
-                                            </span>
-                                        </span>
-                  </div>
+
                   <button className="btn m-btn btn-danger m-btn--icon" onClick={() => {
                     this.props.buyClick(data.get('id'))
                   }}>
                                         <span>
                                           {addedRequest.get('success') &&
                                           <i className="fa floating-basket fa-shopping-basket"></i>}
-                                          <i className="fa fa-shopping-basket"></i>
+                                          <span>{price.toFixed(2)}$</span>
                                             <span>Add To Cart</span>
                                         </span>
                   </button>

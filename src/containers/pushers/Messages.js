@@ -6,6 +6,7 @@ import { Avatar } from 'material-ui';
 import { selectUserData } from '../../redux/user/selectors';
 import { push } from 'react-router-redux';
 import * as pluralize from 'pluralize';
+import {NavLink} from "react-router-dom";
 
 class Messages extends Component {
 
@@ -61,6 +62,13 @@ class Messages extends Component {
               </div> :
               <h4 className="text-center m--padding-top-20 m--padding-bottom-10">You have no new messages</h4>
             }
+
+            <div className="text-right m--margin-top-15">
+              <NavLink to="/messages" className="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+                <span className="m-nav__link-text">See All</span>
+              </NavLink>
+            </div>
+
           </div>
     );
   }

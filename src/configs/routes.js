@@ -72,7 +72,8 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
 
       {/*Store*/}
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category' name='Store' component={Store}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store' name='Store' component={Store}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category' name='Store' component={Products}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:category/:type' name='Store' component={Products}/>

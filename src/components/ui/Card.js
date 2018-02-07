@@ -7,29 +7,29 @@ class Card extends Component {
 
 
     render() {
+        const {avatar, className,title,icon, children,header,colorName, transparent} = this.props
         return (
             <div style={{marginBottom:0,height:'100%',display: "flex", flexDirection: "column"}}
-                 className={this.props.className + " m-portlet  m-portlet--head-solid-bg m-portlet--" + this.props.colorName + (this.props.transparent ? ' transparent' : '')}
+                 className={className + " m-portlet  m-portlet--head-solid-bg m-portlet--" + colorName + (transparent ? ' transparent' : '')}
 
             >
-                <div className={`m-portlet__head  ${!this.props.header ? 'm--hide' : ''}`}>
+                <div className={`m-portlet__head  ${!header ? 'm--hide' : ''}`}>
                     <div className="m-portlet__head-caption">
                         <div className="m-portlet__head-title">
 						<span className="m-portlet__head-icon">
-                            {this.props.avatar ?
-                            <Avatar src={this.props.avatar}/> :
-							<i className={this.props.icon}></i> }
+                            {avatar && avatar !== '' ?
+                            <Avatar src={avatar}/> :
+							<i className={icon}></i> }
 						</span>
                             <h3 className="m-portlet__head-text">
-                                {this.props.title}
+                                {title}
                             </h3>
                         </div>
                     </div>
 
                 </div>
                 <div className="m-portlet__body position-relative" style={{height:"100%"}}>
-                    {this.props.children}
-
+                    {children}
                 </div>
             </div>
         );

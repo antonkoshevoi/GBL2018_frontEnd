@@ -25,9 +25,10 @@ class RosterStatistic extends Component {
 
     return (
       <Card
-        title={success ? data.school.schName : ''}
+        title={'Roster'}
         className="profile-card"
-        avatar='http://admissions.berkeley.edu/sites/default/files/UCB_landingpage_images_600x300_212.jpg'>
+        avatar={success && data.school.avatar ? data.school.avatar : ''}
+        icon={'fa fa-institution'}>
         <div className="m-widget1 m-widget1--paddingless">
           <div className="m-widget1 m-widget1--paddingless">
             <div className="m-widget1__item">
@@ -77,7 +78,7 @@ class RosterStatistic extends Component {
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
                       { !success && <CircularProgress size={15} color="accent"/> }
-                      { !loading && data.teachersCount }
+                    { !loading && data.teachersCount }
                   </span>
                 </div>
               </div>
@@ -90,7 +91,7 @@ class RosterStatistic extends Component {
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
                       { !success && <CircularProgress size={15} color="accent"/> }
-                      { !loading && data.adminsCount }
+                    { !loading && data.adminsCount }
                   </span>
                 </div>
               </div>
