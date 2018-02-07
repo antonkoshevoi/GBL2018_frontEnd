@@ -30,13 +30,13 @@ class Dashboard extends Component {
             {classroomId && <RosterStatistic classroomId={classroomId}/>}
           </div>
           <div className="col-sm-12 col-md-6 col-lg-3">
-            {classroomId && <LineChart classroomId={classroomId}/>}
+            {classroomId &&<SchoolAverageChart classroomId={classroomId}/>}
           </div>
           <div className="col-sm-12 col-md-6 col-lg-3">
             {classroomId && <PassRate classroomId={classroomId}/>}
           </div>
           <div className="col-sm-12 col-md-6 col-lg-3">
-            {classroomId &&<SchoolAverageChart classroomId={classroomId}/>}
+            {classroomId && <LineChart classroomId={classroomId}/>}
           </div>
         </div>
         <div className="row">
