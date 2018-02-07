@@ -31,7 +31,7 @@ class RosterStatistic extends Component {
       <Card
         title={success ? data.classroom.crmName : ''}
         className="profile-card"
-        avatar='http://admissions.berkeley.edu/sites/default/files/UCB_landingpage_images_600x300_212.jpg'>
+        avatar='https://2.bp.blogspot.com/-6OIq3QHFf7c/Wa8Zb4r1isI/AAAAAAAACsk/IbNuuBvRajwEr45pMV8IATiVytBXVA1mACLcBGAs/s1600/iOS10-960x960_Classroom-Icon_US-EN.png'>
         <div className="m-widget1 m-widget1--paddingless">
           <div className="m-widget1 m-widget1--paddingless">
             <div className="m-widget1__item">

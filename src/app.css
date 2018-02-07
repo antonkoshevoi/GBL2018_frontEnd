@@ -1153,3 +1153,6 @@ div.m-widget25 .m-widget25__price {
 .CropperBlock {
   text-align: center;
 }
+.progress {
+  background-color: #BDCCD4 !important;
+}

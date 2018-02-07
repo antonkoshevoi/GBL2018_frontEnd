@@ -89,7 +89,7 @@ class DashboardTabs extends Component {
                 <span className="text-right d-block">{student.passRate} %</span>
                 <div className="progress m-progress--sm">
                   <div title="Completed" className="progress-bar bg-success" role="progressbar" style={{width: student.completed + '%'}}></div>
-                  <div title="In Progress" className="progress-bar bg-danger" role="progressbar" style={{width: student.inProgress + '%'}}></div>
+                  <div title="In Progress" className="progress-bar bg-warning" role="progressbar" style={{width: student.inProgress + '%'}}></div>
                 </div>
                 <br/>
                 <div className="progress m-progress--sm">
