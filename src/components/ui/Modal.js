@@ -54,7 +54,8 @@ class Modal extends Component {
 
 Modal = withStyles({
   paper: {
-    height: '80%'
+    overflowY: 'auto',
+    maxHeight: '100vh'
   },
   biggerPaper: {
     height: '80%',
