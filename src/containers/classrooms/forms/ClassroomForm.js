@@ -44,6 +44,8 @@ class ClassroomForm extends Component {
   componentDidMount() {
     const { getSchoolTeachers, getSchoolHomerooms, getCourses, getSchools } = this.props;
 
+    this._setInitialHomerooms();
+
     getCourses();
     getSchools();
     getSchoolTeachers();
@@ -54,6 +56,17 @@ class ClassroomForm extends Component {
     this._getCoursesSuccess(nextProps);
     this._getSchoolTeachersSuccess(nextProps);
     this._getSchoolHomeroomsSuccess(nextProps);
+  }
+
+  _setInitialHomerooms() {
+    let { classroom } = this.props;
+
+    this.props.classroom.homeroomIds = [];
+    if (classroom.homerooms && classroom.homerooms.length) {
+      this.props.classroom.homeroomIds = classroom.homerooms.map((homeroom) => {
+        return homeroom.id;
+      })
+    }
   }
 
   _getSchoolTeachersSuccess(nextProps) {
@@ -226,16 +239,17 @@ class ClassroomForm extends Component {
             {errors && errors.get('teacherId') && <FormHelperText error>{ errors.get('teacherId').get(0) }</FormHelperText>}
           </FormControl>
           <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Homeroom</InputLabel>
+            <InputLabel htmlFor='name-error'>Homerooms (Multiple)</InputLabel>
             <Select
+              multiple={true}
               primarytext="Select Homeroom"
-              name='homeroomId'
+              name='homeroomIds'
               onChange={(e) => { this._handleInputChange(e) }}
-              value={classroom.homeroomId || ''}>
+              value={classroom.homeroomIds || []}>
               <MenuItem value={null} primarytext=""/>
               {this._renderHomerooms()}
             </Select>
-            {errors && errors.get('homeroomId') && <FormHelperText error>{ errors.get('homeroomId').get(0) }</FormHelperText>}
+            {errors && errors.get('homerooms') && <FormHelperText error>{ errors.get('homerooms').get(0) }</FormHelperText>}
           </FormControl>
         </div>
       </div>
