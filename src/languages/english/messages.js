@@ -14,4 +14,9 @@ export default {
   deleted: 'Record succesfully removed',
   profileUpdated: 'Profile succesfully updated',
   passwordChanged: 'Password changed succesfully',
+  classrooms: {
+    assigned: {
+      students: 'Students successfully changed for classroom'
+    }
+  }
 }

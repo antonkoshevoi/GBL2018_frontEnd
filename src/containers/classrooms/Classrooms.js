@@ -6,17 +6,30 @@ import { NavLink } from 'react-router-dom';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
 import {
-  selectDeleteRequest,
+  selectDeleteRequest, selectGetRecordForAssignStudentsRequest,
   selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination,
   selectRecords
 } from '../../redux/classrooms/selectors';
-import {deleteRecord, getRecords, getSingleRecord} from '../../redux/classrooms/actions';
+import {deleteRecord, getRecordForAssignStudents, getRecords, getSingleRecord} from '../../redux/classrooms/actions';
 import Pagination from '../../components/ui/Pagination';
 import CreateClassroomModal from './modals/CreateClassroomModal';
 import EditClassroomModal from "./modals/EditClassroomModal";
 import SearchInput from "../../components/ui/SearchInput";
 import DeleteButton from "../../components/ui/DeleteButton";
 import HasPermission from "../middlewares/HasPermission";
+import AssignStudentsModal from "./modals/AssignStudentsModal";
+
+const AssignButton = ({ id, onClick}) => {
+  return (
+    <button
+      className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill'
+      onClick={onClick && (() => { onClick(id) })}
+      style={{marginLeft: '5px'}}
+    >
+      <i className='la la-user-plus'></i>
+    </button>
+  );
+};
 
 class Classrooms extends Component {
   constructor(props) {
@@ -24,6 +37,7 @@ class Classrooms extends Component {
     this.state = {
       createModalIsOpen: false,
       editModalIsOpen: false,
+      assignStudentsModalIsOpen: false,
       sorters: {},
       filters: {},
       page: props.pagination.get('page'),
@@ -33,6 +47,7 @@ class Classrooms extends Component {
 
   componentWillReceiveProps(nextProps) {
     this._openEditDialogOnSingleRequestSuccess(nextProps);
+    this._openAssignStudentDialogOnSingleRequestSuccess(nextProps);
     this._deleteRequestSuccess(nextProps);
   }
 
@@ -53,6 +68,13 @@ class Classrooms extends Component {
   };
   _closeEditDialog = () => {
     this.setState({ editModalIsOpen: false });
+  };
+
+  _openAssignStudentsDialog  = () => {
+    this.setState({ assignStudentsModalIsOpen: true });
+  };
+  _closeAssignStudentsDialog = () => {
+    this.setState({ assignStudentsModalIsOpen: false });
   };
 
   /**
@@ -83,12 +105,17 @@ class Classrooms extends Component {
         <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
         <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
         <Td width='132px'>{record.get('studentsCount')}</Td>
-        <Td width='100px'>
+        <Td width='150px'>
           <HasPermission permissions={[
             '[ClassRooms][Update][Any]'
           ]}>
             <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
           </HasPermission>
+          {/*<HasPermission permissions={[*/}
+            {/*'[ClassRooms][Assign][Student]'*/}
+          {/*]}>*/}
+            <AssignButton onClick={() => { this._assignStudent(record.get('id')) }}/>
+          {/*</HasPermission>*/}
           <HasPermission permissions={[
             '[ClassRooms][Delete][Any]'
           ]}>
@@ -120,6 +147,18 @@ class Classrooms extends Component {
 
     if(!deleteSuccess && nextDeleteSuccess) {
       this._getRecords();
+    }
+  }
+
+  _assignStudent (id) {
+    this.props.getRecordForAssignStudents(id);
+  }
+  _openAssignStudentDialogOnSingleRequestSuccess(nextProps) {
+    const success = this.props.getRecordForAssignStudentsRequest.get('success');
+    const nextSuccess = nextProps.getRecordForAssignStudentsRequest.get('success');
+
+    if(!success && nextSuccess) {
+      this._openAssignStudentsDialog();
     }
   }
 
@@ -206,7 +245,7 @@ class Classrooms extends Component {
 
   render() {
     const { getRecordsRequest, pagination } = this.props;
-    const { createModalIsOpen, editModalIsOpen, sorters, page, perPage } = this.state;
+    const { createModalIsOpen, editModalIsOpen, assignStudentsModalIsOpen, sorters, page, perPage } = this.state;
     const loading = getRecordsRequest.get('loading');
     const totalPages = pagination.get('totalPages');
 
@@ -276,12 +315,12 @@ class Classrooms extends Component {
               <Thead>
                 <HeadRow>
                   <Th first={true} width='100px'>#</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='122px'>Name</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='122px'>School</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='122px'>Course</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='122px'>Teacher</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='122px'>Students Count</Th>
-                  <Th width='100px'>Actions</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>Name</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>School</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>Course</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>Teacher</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='132px'>Students Count</Th>
+                  <Th width='150px'>Actions</Th>
                 </HeadRow>
               </Thead>
 
@@ -310,6 +349,11 @@ class Classrooms extends Component {
           isOpen={editModalIsOpen}
           onClose={() => { this._closeEditDialog() }}
           onSuccess={() => { this._onCreate() }}/>
+
+        <AssignStudentsModal
+          isOpen={assignStudentsModalIsOpen}
+          onClose={() => { this._closeAssignStudentsDialog() }}
+          onSuccess={() => { this._onCreate() }}/>
       </div>
     );
   }
@@ -319,6 +363,7 @@ Classrooms = connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
+    getRecordForAssignStudentsRequest: selectGetRecordForAssignStudentsRequest(state),
     getDeleteRequest: selectDeleteRequest(state),
     pagination: selectPagination(state),
     records: selectRecords(state),
@@ -326,6 +371,7 @@ Classrooms = connect(
   (dispatch) => ({
     getRecords: (params = {}) => { dispatch(getRecords(params)) },
     getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
+    getRecordForAssignStudents: (id, params = {}) => { dispatch(getRecordForAssignStudents(id, params)) },
     deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) }
   })
 )(Classrooms);

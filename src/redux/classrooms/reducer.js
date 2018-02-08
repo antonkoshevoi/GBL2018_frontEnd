@@ -5,7 +5,9 @@ import {
   DELETE, DELETE_SUCCESS, DELETE_FAIL,
   RESET_BULK_UPLOAD_REQUEST, BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS,
   GET_COURSES, GET_COURSES_FAIL, GET_COURSES_SUCCESS, GET_DEMO_CLASSROOMS, GET_DEMO_CLASSROOMS_SUCCESS,
-  GET_DEMO_CLASSROOMS_FAIL, GET_DEMO_COURSES, GET_DEMO_COURSES_SUCCESS, GET_DEMO_COURSES_FAIL
+  GET_DEMO_CLASSROOMS_FAIL, GET_DEMO_COURSES, GET_DEMO_COURSES_SUCCESS, GET_DEMO_COURSES_FAIL,
+  GET_RECORD_FOR_ASSIGN_STUDENTS, GET_RECORD_FOR_ASSIGN_STUDENTS_SUCCESS, GET_RECORD_FOR_ASSIGN_STUDENTS_FAIL, RESET_GET_RECORD_FOR_ASSIGN_STUDENTS_REQUEST,
+  ASSIGN_STUDENT, ASSIGN_STUDENT_FAIL, ASSIGN_STUDENT_SUCCESS, RESET_ASSIGN_STUDENT_REQUEST
 } from './actions';
 import Immutable from 'immutable';
 
@@ -72,7 +74,22 @@ const initialState = Immutable.fromJS({
     perPage: 10,
     total: 0,
     totalPages: 1
-  }
+  },
+  getRecordForAssignStudentsRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null,
+    record: {}
+  },
+  assignStudentsRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,
+    errorCode: null,
+    errors: {}
+  },
 });
 
 export default function reducer (state = initialState, action) {
@@ -331,6 +348,73 @@ export default function reducer (state = initialState, action) {
           .set('loading', false)
           .set('fail', true)
         );
+    /**
+     * Get record for assign students
+     */
+    case GET_RECORD_FOR_ASSIGN_STUDENTS:
+      return state
+        .set('getRecordForAssignStudentsRequest', state.get('getRecordForAssignStudentsRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)
+          .remove('record')
+        );
+    case GET_RECORD_FOR_ASSIGN_STUDENTS_SUCCESS:
+      return state
+        .set('getRecordForAssignStudentsRequest', state.get('getRecordForAssignStudentsRequest')
+          .set('success', true)
+          .set('loading', false)
+          .set('record', Immutable.fromJS(action.result.data))
+        );
+    case GET_RECORD_FOR_ASSIGN_STUDENTS_FAIL:
+      return state
+        .set('getRecordForAssignStudentsRequest', state.get('getRecordForAssignStudentsRequest')
+          .set('loading', false)
+          .set('fail', true)
+        );
+    case RESET_GET_RECORD_FOR_ASSIGN_STUDENTS_REQUEST:
+      return state
+        .set('getRecordForAssignStudentsRequest', initialState.get('getRecordForAssignStudentsRequest'));
+
+    /**
+     * Assign Students
+     */
+    case ASSIGN_STUDENT:
+      return state
+        .set('assignStudentsRequest', state.get('assignStudentsRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)
+          .remove('errors')
+          .remove('errorMessage')
+          .remove('errorCode')
+        );
+    case ASSIGN_STUDENT_SUCCESS:
+      let assignedRecords = state.get('records').map(record => {
+        if(record.get('id') === action.result.data.id) {
+          return Immutable.fromJS(action.result.data);
+        }
+        return record;
+      });
+      return state
+        .set('assignStudentsRequest', state.get('assignStudentsRequest')
+          .set('loading', false)
+          .set('success', true)
+        ).set('records', assignedRecords);
+      return state
+    case ASSIGN_STUDENT_FAIL:
+      const assignStudentsErrordata = action.error.response.data;
+      return state
+        .set('assignStudentsRequest', state.get('assignStudentsRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('errorCode', assignStudentsErrordata.code)
+          .set('errorMessage', assignStudentsErrordata.message)
+          .set('errors', assignStudentsErrordata.code === 422 ? Immutable.fromJS(assignStudentsErrordata.errors) : undefined)
+        );
+    case RESET_ASSIGN_STUDENT_REQUEST:
+      return state
+        .set('assignStudentsRequest', initialState.get('assignStudentsRequest'));
     /**
      * default
      */

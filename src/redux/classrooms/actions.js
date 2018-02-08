@@ -41,6 +41,16 @@ export const GET_DEMO_CLASSROOMS = '[Classrooms] GET_DEMO_CLASSROOMS';
 export const GET_DEMO_CLASSROOMS_SUCCESS = '[Classrooms] GET_DEMO_CLASSROOMS_SUCCESS';
 export const GET_DEMO_CLASSROOMS_FAIL = '[Classrooms] GET_DEMO_CLASSROOMS_FAIL';
 
+export const GET_RECORD_FOR_ASSIGN_STUDENTS = '[Classrooms] GET_ASSIGN_STUDENTS';
+export const GET_RECORD_FOR_ASSIGN_STUDENTS_SUCCESS = '[Classrooms] GET_ASSIGN_STUDENTS_SUCCESS';
+export const GET_RECORD_FOR_ASSIGN_STUDENTS_FAIL = '[Classrooms] GET_ASSIGN_STUDENTS_FAIL';
+export const RESET_GET_RECORD_FOR_ASSIGN_STUDENTS_REQUEST = '[Classrooms] RESET_GET_ASSIGN_STUDENTS_REQUEST';
+
+export const ASSIGN_STUDENT = '[Classrooms] ASSIGN_STUDENT';
+export const ASSIGN_STUDENT_SUCCESS = '[Classrooms] ASSIGN_STUDENT_SUCCESS';
+export const ASSIGN_STUDENT_FAIL = '[Classrooms] ASSIGN_STUDENT_FAIL';
+export const RESET_ASSIGN_STUDENT_REQUEST = '[Classrooms] RESET_ASSIGN_STUDENT_REQUEST';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -151,4 +161,35 @@ export function getDemoClassrooms(params = {}) {
     types: [GET_DEMO_CLASSROOMS, GET_DEMO_CLASSROOMS_SUCCESS, GET_DEMO_CLASSROOMS_FAIL],
     promise: (apiClient) => apiClient.get(`classrooms/demo`, params)
   };
+}
+
+/**
+ * Get classroom for assign students
+ */
+export function getRecordForAssignStudents(id, params = {}) {
+  return {
+    types: [GET_RECORD_FOR_ASSIGN_STUDENTS, GET_RECORD_FOR_ASSIGN_STUDENTS_SUCCESS, GET_RECORD_FOR_ASSIGN_STUDENTS_FAIL],
+    promise: (apiClient) => apiClient.get(`classroom/${id}`, params)
+  };
+}
+export function resetGetRecordForAssignStudentsRequest () {
+  return {
+    type: RESET_GET_RECORD_FOR_ASSIGN_STUDENTS_REQUEST
+  }
+}
+
+/**
+ * Assign Students
+ */
+export function assignStudents(id, data, params = {}) {
+  return {
+    types: [ASSIGN_STUDENT, ASSIGN_STUDENT_SUCCESS, ASSIGN_STUDENT_FAIL],
+    promise: (apiClient) => apiClient.post(`classrooms/assign/students/${id}`, data, params)
+  };
+}
+
+export function resetAssignStudentsRequest () {
+  return {
+    type: RESET_ASSIGN_STUDENT_REQUEST
+  }
 }
