@@ -191,6 +191,18 @@ class InvitationsTab extends Component {
     return <span className='m-badge m-badge--brand m-badge--wide'>Pending</span>;
   }
 
+  /**
+   * Change page if necessary after creating a new record
+   */
+  _onCreate () {
+    const { pagination } = this.props;
+    const page = pagination.get('page');
+
+    if(this.state.page !== page) {
+      this._goToPage(page);
+    }
+  }
+
   render() {
     const { getRecordsRequest, pagination } = this.props;
     const { createModalIsOpen, sorters, page, perPage } = this.state;
@@ -216,7 +228,7 @@ class InvitationsTab extends Component {
                 </Select>
                 <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
                   Send new invitation
-                  <Icon style={{marginLeft:'5px'}}>add</Icon>
+                  <Icon style={{marginLeft:'5px'}}>send</Icon>
                 </Button>
               </div>
             </div>

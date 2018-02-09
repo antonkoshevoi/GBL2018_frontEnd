@@ -9,8 +9,8 @@ import {
   Divider, Button, DialogActions
 } from 'material-ui';
 import { connect } from 'react-redux';
-import { selectCreateRequest } from '../../../redux/students/selectors';
-import { create, resetCreateRequest } from '../../../redux/students/actions';
+import { selectCreateRequest } from '../../../redux/invitations/selectors';
+import { create, resetCreateRequest } from '../../../redux/invitations/actions';
 import Modal from '../../../components/ui/Modal';
 import InvitationForm from '../forms/InvitationForm';
 
@@ -27,15 +27,10 @@ class SendInvitationModal extends Component {
     super(props);
     this.state = {
       invitation: {
-        username: '',
-        password: '',
+        classroomId: '',
         email: '',
-        firstName: '',
-        lastName: '',
-        gender: null,
-        phone: '',
-        schoolId: '',
-        homeroomId: '',
+        name: '',
+        message: ''
       }
     };
   }
@@ -82,7 +77,7 @@ class SendInvitationModal extends Component {
               {loading ? (
                 <CircularProgress style={{float: 'right'}} color='inherit'/>
               ) : (
-                <Icon>person</Icon>
+                <Icon>send</Icon>
               )}
             </IconButton>
             <Typography type='title' color='inherit'>

@@ -13,6 +13,13 @@ export const selectGetRecordsRequest = createSelector(
   (subState) => subState.get('getRecordsRequest')
 );
 /**
+ * Get Single Request
+ */
+export const selectGetSingleRecordRequest = createSelector(
+  selectInvitationsDomain,
+  (subState) => subState.get('getSingleRecordRequest')
+);
+/**
  * Delete record request
  */
 export const selectDeleteRecordRequest = createSelector(
@@ -32,4 +39,11 @@ export const selectRecords = createSelector(
 export const selectPagination = createSelector(
   selectInvitationsDomain,
   (subState) => subState.get('pagination')
+);
+/**
+ * Create
+ */
+export const selectCreateRequest = createSelector(
+  selectInvitationsDomain,
+  (subState) => subState.get('createRequest')
 );

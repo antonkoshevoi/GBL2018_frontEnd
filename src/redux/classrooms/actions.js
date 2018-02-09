@@ -146,10 +146,10 @@ export function getCourses() {
 /**
  * Courses
  */
-export function getDemoCourses() {
+export function getDemoCourses(params = {}) {
   return {
     types: [GET_DEMO_COURSES, GET_DEMO_COURSES_SUCCESS, GET_DEMO_COURSES_FAIL],
-    promise: (apiClient) => apiClient.get(`classrooms/courses/demo`)
+    promise: (apiClient) => apiClient.get(`classrooms/courses/demo`, params)
   };
 }
 

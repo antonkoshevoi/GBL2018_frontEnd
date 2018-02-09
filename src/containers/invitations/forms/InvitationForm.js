@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from 'material-ui';
 import { connect } from 'react-redux';
-import { selectGetSchoolHomeroomsRequest, selectSchools } from '../../../redux/schools/selectors';
-import { getSchoolHomerooms, getSchools } from '../../../redux/schools/actions';
+import { getDemoClassrooms } from '../../../redux/classrooms/actions';
+import { selectGetRecordsRequest, selectRecords } from '../../../redux/classrooms/selectors';
 
 class InvitationForm extends Component {
   static propTypes = {
@@ -15,57 +15,31 @@ class InvitationForm extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      schoolHomerooms: [],
+      classrooms: [],
     };
   }
 
   componentDidMount() {
-    const { getSchoolHomerooms } = this.props;
+    const { getDemoCourses } = this.props;
 
-    getSchoolHomerooms();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this._getSchoolHomeroomsSuccess(nextProps);
-  }
-
-  _getSchoolHomeroomsSuccess(nextProps) {
-    const schoolHomerooms = this.props.getSchoolHomeroomsRequest.get('records');
-    const nextschoolHomerooms = nextProps.getSchoolHomeroomsRequest.get('records');
-
-    if (!schoolHomerooms && nextschoolHomerooms) {
-      this.setState({
-        ...this.state,
-        schoolHomerooms: nextschoolHomerooms.toJS()
-      });
-    }
+    getDemoCourses();
   }
 
   _handleInputChange(event) {
     const { name, type, value, checked } = event.target;
 
     this.props.onChange({
-      ...this.props.student,
+      ...this.props.invitation,
       [name]: value
     });
   }
 
-  _renderSchools() {
-    const { schools } = this.props;
+  _renderDemoClassrooms() {
+    const { demoClassrooms } = this.props;
 
-    return schools.map((school, key) => (
-      <MenuItem key={key} value={ school.get('schId') }>
-        { school.get('schName') }
-      </MenuItem>
-    ));
-  }
-
-  _renderSchoolHomerooms() {
-    const { schoolHomerooms } = this.state;
-
-    return schoolHomerooms.map((homeroom, key) => (
-      <MenuItem key={key} value={ homeroom.id }>
-        { homeroom.name }
+    return demoClassrooms.map((classroom, key) => (
+      <MenuItem key={key} value={ classroom.get('id') }>
+        { classroom.get('crmName') }
       </MenuItem>
     ));
   }
@@ -84,7 +58,7 @@ class InvitationForm extends Component {
                 onChange={(e) => { this._handleInputChange(e) }}
                 value={invitation.classroomId || ''}>
               <MenuItem value={null} primarytext=""/>
-              {this._renderSchoolHomerooms()}
+              { this._renderDemoClassrooms() }
             </Select>
             {errors && errors.get('classroomId') && <FormHelperText error>{ errors.get('classroomId').get(0) }</FormHelperText>}
           </FormControl>
@@ -94,7 +68,7 @@ class InvitationForm extends Component {
             <Input
               fullWidth
               name='email'
-              type='email'
+              type='text'
               margin='dense'
               value={invitation.email || ''}
               onChange={(e) => { this._handleInputChange(e) }}/>
@@ -133,12 +107,13 @@ class InvitationForm extends Component {
 
 InvitationForm = connect(
   (state) => ({
-    schools: selectSchools(state),
-    getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state),
+    getCoursesRequest: selectGetRecordsRequest(state),
+    demoClassrooms: selectRecords(state),
   }),
   (dispatch) => ({
-    getSchools: () => { dispatch(getSchools()) },
-    getSchoolHomerooms: () => { dispatch(getSchoolHomerooms()) }
+    getDemoCourses: () => { dispatch(getDemoClassrooms({
+      perPage: 0
+    })) },
   })
 )(InvitationForm);
 

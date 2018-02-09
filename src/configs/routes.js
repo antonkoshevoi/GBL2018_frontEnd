@@ -41,6 +41,7 @@ import PaymentCanceledContainer from '../containers/pages/store/payments/Payment
 
 import ReportsDashboard from "../containers/pages/reports/Dashboard";
 import ClassRoomReportDashboard from "../containers/pages/reports/classroom/Dashboard";
+import InvitationDetails from '../containers/invitations/InvitationDetails';
 
 export default () => (
   <AppContainer>
@@ -98,6 +99,8 @@ export default () => (
       <Route exact layout={MainLayout} path='/payments/canceled' component={PaymentCanceledContainer} />
 
       <Route exact layout={MainLayout} path='/accounts/transactions' component={TransactionsContainer} />
+
+      <Route exact path='/invitations/details/:id/:hash' component={InvitationDetails}/>
 
       <Route layout={MainLayout} component={NotFoundPage} />
     </Switch>
