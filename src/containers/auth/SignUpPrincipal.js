@@ -320,7 +320,7 @@ class SignUpPrincipal extends Component {
                                 value={form.schoolCountry}
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 className="form-control m-input m-input--air">
-                                <option selected>Select Country</option>
+                                <option>Select Country</option>
                                 {this._renderCountries()}
                               </select>
                             </div>
