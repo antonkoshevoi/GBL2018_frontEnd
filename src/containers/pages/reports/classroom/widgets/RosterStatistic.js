@@ -41,7 +41,7 @@ class RosterStatistic extends Component {
                 </div>
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
-                      { !success && <CircularProgress size={15} color="accent"/> }
+                      { !success && <CircularProgress size={15} color="primary"/> }
                       { !loading && data.studentsCount }
                   </span>
                 </div>
@@ -54,7 +54,7 @@ class RosterStatistic extends Component {
                 </div>
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
-                      { !success && <CircularProgress size={15} color="accent"/> }
+                      { !success && <CircularProgress size={15} color="primary"/> }
                       { !loading && data.teachersCount }
                   </span>
                 </div>

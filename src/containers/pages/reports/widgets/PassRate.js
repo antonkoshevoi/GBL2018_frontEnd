@@ -28,7 +28,7 @@ class PassRate extends Component {
     return (
       <Card title="Pass Rate" icon="flaticon-list-2" className='passRateCard'>
         <h1  className="d-flex justify-content-center align-items-center absolute-center" style={{fontSize:'7rem',color:'rgb(0, 128, 0)'}}>
-          {loading && !success && <CircularProgress color="accent"/>}
+          {loading && !success && <CircularProgress color="primary"/>}
           {!loading && success && data.passRate + '%'}
           {fail && <span style={{color: 'red' }}>Error</span>}
         </h1>

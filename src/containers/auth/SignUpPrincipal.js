@@ -141,7 +141,6 @@ class SignUpPrincipal extends Component {
     const loading = this.props.signUpRequest.get('loading');
     const errors = this.props.signUpRequest.get('errors');
 
-    console.log(this.cropper);
     return (
       <div className="">
         <div className="m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor  m-login--2 m-login-2--skin-2 m--full-height" id="m_login" style={{backgroundImage: `url(${background})`,minHeight:'100vh'}}>

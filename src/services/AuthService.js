@@ -1,7 +1,6 @@
 import { post } from './ApiClient';
 
 export function login(credentials) {
-    console.log(45545);
     localStorage.setItem('isLogedIn',true);
 }
 
@@ -10,7 +9,6 @@ export function logOut(credentials) {
 }
 
 export function isLodegIn() {
-    console.log("%c IS LOGED IN  :  " + !!localStorage.getItem('isLogedIn'));
     return localStorage.getItem('isLogedIn') == 'true';
 }
 

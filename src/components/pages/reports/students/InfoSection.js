@@ -78,7 +78,7 @@ class InfoSection extends Component {
                     <tbody>
                     <tr>
                       <th>First Name</th>
-                      <td>{loading && <CircularProgress color="accent"/>} {!loading && firstName}</td>
+                      <td>{loading && <CircularProgress color="primary"/>} {!loading && firstName}</td>
                       {/*<td className="text-center">*/}
                       {/*<div className="actions">*/}
                       {/*<IconButton color='primary'*/}
@@ -94,7 +94,7 @@ class InfoSection extends Component {
                     </tr>
                     <tr>
                       <th>Last Name</th>
-                      <td>{loading && <CircularProgress color="accent"/>} {!loading && lastName}</td>
+                      <td>{loading && <CircularProgress color="primary"/>} {!loading && lastName}</td>
                     </tr>
                     <tr>
                       <th>Birthday</th>
@@ -118,7 +118,7 @@ class InfoSection extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                      {coursesLoading && <tr><td colSpan="3" className="text-center"><CircularProgress color="accent"/></td></tr>}
+                      {coursesLoading && <tr><td colSpan="3" className="text-center"><CircularProgress color="primary"/></td></tr>}
                       {!coursesLoading && this._renderCourseTable(data)}
                     </tbody>
                   </table>

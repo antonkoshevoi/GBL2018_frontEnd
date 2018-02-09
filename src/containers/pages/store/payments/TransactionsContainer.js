@@ -21,7 +21,7 @@ class TransactionsContainer extends Component {
     render() {
 
         const {cartRecordsRequest, records } = this.props;
-        console.log(records);
+
         return (
             <div>
                 <TransactionList request={cartRecordsRequest} data={records}/>

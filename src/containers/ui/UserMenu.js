@@ -85,7 +85,7 @@ class UserMenu extends Component {
 
   render() {
     const { t, userData, activeMenu } = this.props;
-    console.log(activeMenu);
+
     let user = userData.toJS();
 
     return (

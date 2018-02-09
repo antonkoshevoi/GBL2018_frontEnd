@@ -25,7 +25,7 @@ class RestoreLogin extends Component {
 
   componentWillMount(){
       const {history, auth} = this.props;
-      console.log(auth);
+
       if (auth.get('restoreLoginUser') == undefined || auth.get('restoreLoginUser').size === 0) {
           history.push('/login')
       }
@@ -39,8 +39,8 @@ class RestoreLogin extends Component {
     const { setRedirectUrl, login, auth } = this.props;
     const { username, password, remember } = this.state;
 
-      console.log(this.state);
-      let pathname = '/';
+    let pathname = '/';
+
     try {
       pathname = this.props.location.state.from.pathname;
     } catch (e) {}
@@ -109,7 +109,7 @@ class RestoreLogin extends Component {
                               className="btn  m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primary">
                         <span>Sign In</span>
                           {loading &&
-                          <CircularProgress color="accent"/>
+                          <CircularProgress color="primary"/>
                           }
                       </Button>
                     </div>

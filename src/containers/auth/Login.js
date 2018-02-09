@@ -96,7 +96,7 @@ class Login extends Component {
                         className="btn  m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primary">
                       <span>Sign In</span>
                         {loading &&
-                          <CircularProgress color="accent"/>}
+                          <CircularProgress color="primary"/>}
                     </Button>
                   </div>
                 </form>

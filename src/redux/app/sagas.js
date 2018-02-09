@@ -33,7 +33,7 @@ function* loadFail () {
     // destroyTokenSession();
 
     const userData = SessionStorage.get('userData');
-    console.log(userData);
+
     // if (userData) {
         yield put(restoreLoginFail());
     // }
