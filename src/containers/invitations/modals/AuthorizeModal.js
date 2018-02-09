@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 import {
   AppBar, Button, DialogActions, DialogContent, DialogContentText, Divider, Toolbar,
   Typography
 } from 'material-ui';
 import Modal from '../../../components/ui/Modal';
+import { connect } from 'react-redux';
 
 class AuthorizeModal extends Component {
   static propTypes = {
@@ -13,7 +15,7 @@ class AuthorizeModal extends Component {
   };
 
   render () {
-    const { isOpen, onClose } = this.props;
+    const { isOpen, onClose, toLogin, toRegistration } = this.props;
 
     return (
       <Modal isOpen={isOpen} onClose={() => onClose()}>
@@ -34,7 +36,8 @@ class AuthorizeModal extends Component {
         <Divider className='full-width'/>
         <DialogActions>
           <Button
-            type='submit'
+            onClick={() => { toLogin() }}
+            type='button'
             form='create-student-form'
             raised
             className='m--margin-top-10 pull-right mt-btn'
@@ -42,7 +45,8 @@ class AuthorizeModal extends Component {
             Login
           </Button>
           <Button
-            type='submit'
+            onClick={() => { toRegistration() }}
+            type='button'
             form='create-student-form'
             raised
             className='m--margin-top-10 pull-right mt-btn'
@@ -54,5 +58,13 @@ class AuthorizeModal extends Component {
     );
   }
 }
+
+AuthorizeModal = connect(
+  (state) => ({}),
+  (dispatch) => ({
+    toLogin: () => { dispatch(push('/login')) },
+    toRegistration: () => { dispatch(push('/signUp/parent')) },
+  })
+)(AuthorizeModal);
 
 export default AuthorizeModal;

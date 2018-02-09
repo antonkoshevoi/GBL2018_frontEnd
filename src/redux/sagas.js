@@ -12,6 +12,7 @@ import notificationsSagas from './notifications/sagas';
 import messagesSagas from './messages/sagas';
 import userSagas from './user/sagas';
 import storeSagas from './store/sagas';
+import invitationsSagas from './store/sagas';
 
 function* rootSaga () {
   yield all([,
@@ -27,7 +28,8 @@ function* rootSaga () {
     notificationsSagas,
     messagesSagas,
     userSagas,
-    storeSagas
+    storeSagas,
+    invitationsSagas
   ])
 }
 

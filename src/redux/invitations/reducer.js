@@ -1,6 +1,7 @@
 import {
   GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, DELETE_RECORD, DELETE_RECORD_SUCCESS, DELETE_RECORD_FAIL,
-  CREATE, CREATE_FAIL, CREATE_SUCCESS, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL, GET_SINGLE_RECORD_SUCCESS
+  CREATE, CREATE_FAIL, CREATE_SUCCESS, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL, GET_SINGLE_RECORD_SUCCESS,
+  DECLINE_SUCCESS, ACCEPT_SUCCESS
 } from './actions';
 import Immutable from 'immutable';
 
@@ -162,6 +163,22 @@ export default function reducer (state = initialState, action) {
           .set('errorCode', data.code)
           .set('errorMessage', data.message)
           .set('errors', data.code === 422 ? Immutable.fromJS(data.errors) : undefined)
+        );
+
+    case ACCEPT_SUCCESS:
+      return state
+        .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
+          .set('record', state.get('getSingleRecordRequest').get('record')
+            .set('isAccepted', true)
+          )
+        );
+
+    case DECLINE_SUCCESS:
+      return state
+        .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
+          .set('record', state.get('getSingleRecordRequest').get('record')
+            .set('isDeclined', true)
+          )
         );
     default:
       return state;

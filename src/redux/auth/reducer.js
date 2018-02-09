@@ -1,8 +1,8 @@
 import {
-    INITIAL_LOGIN, INITIAL_LOGIN_FAIL, INITIAL_LOGIN_SUCCESS, LOGIN, LOGIN_FAIL, LOGIN_SUCCESS, LOGIN_SUCCESS_REMEMBER,
-    LOGOUT, LOGOUT_FAIL,
-    LOGOUT_SUCCESS, RESTORE_LOGIN, RESTORE_LOGIN_FAIL,
-    SET_REDIRECT_URL
+  INITIAL_LOGIN, INITIAL_LOGIN_FAIL, INITIAL_LOGIN_SUCCESS, LOGIN, LOGIN_FAIL, LOGIN_SUCCESS, LOGIN_SUCCESS_REMEMBER,
+  LOGOUT, LOGOUT_FAIL,
+  LOGOUT_SUCCESS, RESTORE_LOGIN, RESTORE_LOGIN_FAIL, SET_CALLBACK,
+  SET_REDIRECT_URL
 } from './actions';
 import Immutable from 'immutable';
 import { destroySession, saveSession } from '../../helpers/session';
@@ -22,6 +22,7 @@ const initialState = Immutable.fromJS({
     errorResponse: null
   },
   redirectAfterLogin: null,
+  callback: undefined,
   isLoggedIn: false,
   restoreLoginFail: false,
   restoreLoginUser:{}
@@ -99,6 +100,10 @@ export default function reducer (state = initialState, action) {
     case SET_REDIRECT_URL:
       return state
         .set('redirectAfterLogin', action.payload.uri);
+
+    case SET_CALLBACK:
+      return state
+        .set('callback', action.payload.callback);
 
     default:
       return state;

@@ -18,6 +18,11 @@ export const selectRedirectAfterLogin = createSelector(
   (subState) => subState.get('redirectAfterLogin')
 );
 
+export const selectCallback = createSelector(
+  selectAuthDomain,
+  (subState) => subState.get('callback')
+);
+
 export const selectIsLoggedIn = createSelector(
   selectAuthDomain,
   (subState) => subState.get('isLoggedIn')

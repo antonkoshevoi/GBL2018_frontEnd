@@ -17,6 +17,14 @@ export const CREATE_SUCCESS = '[Invitations] CREATE_SUCCESS';
 export const CREATE_FAIL = '[Invitations] CREATE_FAIL';
 export const RESET_CREATE_REQUEST = '[Invitations] RESET_CREATE_ERRORS';
 
+export const ACCEPT = '[Invitations] ACCEPT';
+export const ACCEPT_SUCCESS = '[Invitations] ACCEPT_SUCCESS';
+export const ACCEPT_FAIL = '[Invitations] ACCEPT_FAIL';
+
+export const DECLINE = '[Invitations] DECLINE';
+export const DECLINE_SUCCESS = '[Invitations] DECLINE_SUCCESS';
+export const DECLINE_FAIL = '[Invitations] DECLINE_FAIL';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -56,4 +64,24 @@ export function resetCreateRequest () {
   return {
     type: RESET_CREATE_REQUEST
   }
+}
+
+/**
+ * Accept
+ */
+export function acceptInvitation(id, hash, params = {}) {
+  return {
+    types: [ACCEPT, ACCEPT_SUCCESS, ACCEPT_FAIL],
+    promise: (apiClient) => apiClient.put(`invitations/${id}/${hash}/accept`, params)
+  };
+}
+
+/**
+ * Decline
+ */
+export function declineInvitation(id, hash, params = {}) {
+  return {
+    types: [DECLINE, DECLINE_SUCCESS, DECLINE_FAIL],
+    promise: (apiClient) => apiClient.put(`invitations/${id}/${hash}/decline`, params)
+  };
 }

@@ -17,6 +17,7 @@ export const LOGOUT_SUCCESS = '[Auth] LOGOUT_SUCCESS';
 export const LOGOUT_FAIL = '[Auth] LOGOUT_FAIL';
 
 export const SET_REDIRECT_URL = '[Auth] SET_REDIRECT_URL';
+export const SET_CALLBACK = '[Auth] SET_CALLBACK';
 
 /**
  * Login
@@ -90,6 +91,18 @@ export function setRedirectUrl (uri) {
     type: SET_REDIRECT_URL,
     payload: {
       uri
+    }
+  };
+}
+
+/**
+ * where to redirect after login
+ */
+export function setCallback (callback) {
+  return {
+    type: SET_CALLBACK,
+    payload: {
+      callback
     }
   };
 }
