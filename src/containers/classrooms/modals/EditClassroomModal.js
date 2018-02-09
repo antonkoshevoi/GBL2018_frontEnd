@@ -92,7 +92,7 @@ class EditClassroomModal extends Component {
       <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
-            <IconButton color="primary" aria-label="Close">
+            <IconButton color="inherit" aria-label="Close">
               {loading ? (
                 <CircularProgress style={{float: 'right'}} color="inherit"/>
               ) : (
