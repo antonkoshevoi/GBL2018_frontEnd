@@ -19,6 +19,7 @@ import transactionsReducer from './transactions/reducer';
 import reportsDashboardReducer from './reports/dashboard/reducer';
 import invitationsReducer from './invitations/reducer';
 import classroomsReportReducer from './reports/classroom/reducer';
+import countriesReducer from './countries/reducer';
 
 export default {
   app: appReducer,
@@ -42,4 +43,5 @@ export default {
   reportsDashboardReducer: reportsDashboardReducer,
   invitations: invitationsReducer,
   classroomsReport: classroomsReportReducer,
+  countries: countriesReducer,
 };

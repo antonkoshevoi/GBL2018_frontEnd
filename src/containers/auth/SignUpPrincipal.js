@@ -11,6 +11,8 @@ import { selectSignUpRequest } from '../../redux/signUpPrincipal/selectors';
 import { signUp } from '../../redux/signUpPrincipal/actions';
 import MetronicProgressButton from '../../components/ui/metronic/MetronicProgressButton';
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
+import {selectRecords} from "../../redux/countries/selectors";
+import {getCountries} from "../../redux/countries/actions";
 
 class SignUpPrincipal extends Component {
 
@@ -20,6 +22,13 @@ class SignUpPrincipal extends Component {
       form: {},
       imageZoom:0,
     };
+  }
+
+  componentDidMount() {
+
+    const { getCountries } = this.props;
+
+    getCountries();
   }
 
   _submit () {
@@ -134,6 +143,14 @@ class SignUpPrincipal extends Component {
         this.cropper.scaleX(1)
       }
     }
+  }
+
+  _renderCountries() {
+    const countries = this.props.countries.toJS();
+
+    return countries.map((country, key) => (
+      <option value={country.id.toString()} key={key}>{ country.name }</option>
+    ))
   }
 
   render() {
@@ -296,6 +313,20 @@ class SignUpPrincipal extends Component {
                             {errors && errors.get('schoolCode') &&
                               <div className="form-control-feedback text-center error">{errors.get('schoolCode').get(0)}</div>}
                           </div>
+                          <div className="form-group m-form__group">
+                            <div>
+                              <select
+                                name="schoolCountry"
+                                value={form.schoolCountry}
+                                onChange={(e) => { this._handleInputChange(e) }}
+                                className="form-control m-input m-input--air">
+                                <option>Select Country</option>
+                                {this._renderCountries()}
+                              </select>
+                            </div>
+                            {errors && errors.get('schoolCountry') &&
+                            <div className="form-control-feedback text-center error">{errors.get('schoolCountry').get(0)}</div>}
+                          </div>
                         </div>
 
                         <div className="CropperBlock">
@@ -403,9 +434,11 @@ class SignUpPrincipal extends Component {
 SignUpPrincipal = connect(
   (state) => ({
     signUpRequest: selectSignUpRequest(state),
+    countries: selectRecords(state),
   }),
   (dispatch) => ({
     signUp: (form, params = {}) => { dispatch(signUp(form, params)) },
+    getCountries: (params = {}) => { dispatch(getCountries(params)) },
   })
 )(SignUpPrincipal);
 
