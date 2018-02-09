@@ -71,7 +71,7 @@ class CreateHomeroomModal extends Component {
       <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
-            <IconButton color="contrast" aria-label="Close">
+            <IconButton color="primary" aria-label="Close">
               {loading ? (
                 <CircularProgress style={{float: 'right'}} color="inherit"/>
               ) : (
@@ -101,7 +101,7 @@ class CreateHomeroomModal extends Component {
             type='submit'
             form='create-homeroom-form'
             disabled={loading}
-            raised
+            variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
             Add New Homeroom

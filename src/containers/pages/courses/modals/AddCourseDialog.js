@@ -53,7 +53,7 @@ class AddCourseDialog extends Component {
         aria-labelledby="form-dialog-title">
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
-            <IconButton color="contrast" aria-label="Close">
+            <IconButton color="primary" aria-label="Close">
               <Icon>person</Icon>
             </IconButton>
             <Typography type="title" color="inherit" >

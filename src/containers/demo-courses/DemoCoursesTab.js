@@ -243,7 +243,7 @@ class DemoCoursesTab extends Component {
                   <MenuItem value={50}>50</MenuItem>
                   <MenuItem value={100}>100</MenuItem>
                 </Select>
-                <Button raised color='accent' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
                   Add new
                   <Icon style={{marginLeft:'5px'}}>add</Icon>
                 </Button>
@@ -264,7 +264,7 @@ class DemoCoursesTab extends Component {
             </Thead>
 
             <Tbody>
-            {loading && <TablePreloader text='Loading...' color='accent'/>}
+            {loading && <TablePreloader text='Loading...' color='primary'/>}
             { this._renderRecords() }
             </Tbody>
           </Table>

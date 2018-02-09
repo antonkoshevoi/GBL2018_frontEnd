@@ -123,7 +123,7 @@ class TransactionList extends Component {
                     {this._renderTransactions()}
 
                     {loading &&
-                    <TablePreloader text="Loading..." color="accent"/>
+                    <TablePreloader text="Loading..." color="primary"/>
                     }
                     </Tbody>
                 </Table>

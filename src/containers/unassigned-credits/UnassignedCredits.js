@@ -103,7 +103,7 @@ class UnassignedCredits extends Component {
               </Thead>
               <Tbody>
               {loading &&
-              <TablePreloader text="Loading..." color="accent"/>
+              <TablePreloader text="Loading..." color="primary"/>
               }
               { this._renderRecords() }
               </Tbody>

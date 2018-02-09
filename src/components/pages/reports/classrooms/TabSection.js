@@ -86,7 +86,7 @@ class TabSection extends Component {
               )
             }
             actionIcon={
-              <IconButton color="contrast">
+              <IconButton color="primary">
 
               </IconButton>
             }

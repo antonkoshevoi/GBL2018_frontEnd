@@ -56,7 +56,7 @@ class InfoSection extends Component {
       <div className="row">
         <div className="col-md-3">
           <div className="imgBlock">
-            {loading && <MyPreloader text="Loading..." color="accent"/>}
+            {loading && <MyPreloader text="Loading..." color="primary"/>}
             <div className="avatar m--margin-bottom-20">
               {!loading && <img src={(avatar) ? avatar : defaultAvatar} alt="" className=""/>}
             </div>
@@ -85,7 +85,7 @@ class InfoSection extends Component {
                       {/*>*/}
                       {/*<Edit/>*/}
                       {/*</IconButton>*/}
-                      {/*<IconButton color='accent'*/}
+                      {/*<IconButton color='primary'*/}
                       {/*>*/}
                       {/*<Delete/>*/}
                       {/*</IconButton>*/}

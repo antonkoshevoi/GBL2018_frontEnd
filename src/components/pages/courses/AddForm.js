@@ -153,7 +153,7 @@ class AddForm extends Component {
                 </div>
                 <div className="col-sm-12">
                     <Divider/>
-                    <Button raised className="mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn" color="primary" onClick={() => { this._submit() }} >
+                    <Button variant="raised" className="mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn" color="primary" onClick={() => { this._submit() }} >
                         Add New User
                     </Button>
                 </div>

@@ -19,7 +19,7 @@ class StoreTabs extends Component {
     value: "courses",
     tabCentered: false,
     tabFullWidth: false,
-    tabScrollButtons: false
+    tabScrollButtons: 'off'
   };
 
   componentDidMount() {
@@ -32,7 +32,7 @@ class StoreTabs extends Component {
       this.setState({
         tabCentered: true,
         tabFullWidth: true,
-        tabScrollButtons: true
+        tabScrollButtons: 'on'
       });
     }
   }
@@ -51,8 +51,8 @@ class StoreTabs extends Component {
     }
     return data.map(function (item,i) {
       return  (
-        <div className="col-sm-3 col-lg-4 col-xl-3">
-          <ProductCard key={i} data={item}/>
+        <div className="col-sm-3 col-lg-4 col-xl-3" key={i}>
+          <ProductCard data={item}/>
         </div>
       )
     })

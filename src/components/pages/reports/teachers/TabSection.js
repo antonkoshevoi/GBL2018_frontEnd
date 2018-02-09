@@ -44,12 +44,12 @@ class TabSection extends Component {
                                     <LinearProgress mode="determinate" className="gridProgressBar" value={75} />
                                     <br />
                                     <span  className="text-right  d-block">35%</span>
-                                    <LinearProgress color="accent" className="gridProgressBar" mode="determinate" value={35} />
+                                    <LinearProgress color="primary" className="gridProgressBar" mode="determinate" value={35} />
                                 </div>
                             )
                         }
                         actionIcon={
-                            <IconButton  color="contrast">
+                            <IconButton  color="primary">
 
                             </IconButton>
                         }
@@ -77,12 +77,12 @@ class TabSection extends Component {
                                     <LinearProgress mode="determinate" className="gridProgressBar" value={75} />
                                     <br />
                                     <span  className="text-right  d-block">35%</span>
-                                    <LinearProgress color="accent" className="gridProgressBar" mode="determinate" value={35} />
+                                    <LinearProgress color="primary" className="gridProgressBar" mode="determinate" value={35} />
                                 </div>
                             )
                         }
                         actionIcon={
-                            <IconButton  color="contrast">
+                            <IconButton  color="primary">
 
                             </IconButton>
                         }

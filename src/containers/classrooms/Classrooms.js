@@ -291,7 +291,7 @@ class Classrooms extends Component {
                   <HasPermission permissions={[
                     '[ClassRooms][Create][Any]'
                   ]}>
-                    <Button raised color='accent' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                    <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
                       Add New
                       <Icon style={{marginLeft:'5px'}}>add</Icon>
                     </Button>
@@ -300,7 +300,7 @@ class Classrooms extends Component {
                     '[ClassRooms][Create][Bulk][Any]'
                   ]}>
                     <NavLink className='link-btn' to='/classrooms/csv'>
-                      <Button raised className='btn-success mt-btn mt-btn-success'>
+                      <Button variant="raised" className='btn-success mt-btn mt-btn-success'>
                         Bulk Add classrooms
                         <Icon style={{marginLeft:'5px'}}>person</Icon>
                       </Button>
@@ -326,7 +326,7 @@ class Classrooms extends Component {
 
               <Tbody>
                 {loading &&
-                  <TablePreloader text="Loading..." color="accent"/>
+                  <TablePreloader text="Loading..." color="primary"/>
                 }
                 { this._renderRecords() }
               </Tbody>

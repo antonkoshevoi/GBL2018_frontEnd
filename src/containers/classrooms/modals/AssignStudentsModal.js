@@ -130,7 +130,7 @@ class AssignStudentsModal extends Component {
             type='submit'
             form='assign-students-form'
             disabled={loading}
-            raised
+            variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
             Assign Students
