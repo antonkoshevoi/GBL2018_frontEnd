@@ -170,7 +170,7 @@ class HomeroomForm extends Component {
             onChange={ (e) => {this._handleStudentsCheckboxChange(e) }}
             value={student.id.toString()}
           />}
-          label={student.firstName + ' ' + student.lastName}
+          label={(student.firstName ? student.firstName : '-') + ' ' + (student.lastName ? student.lastName : '-')}
         />
       </Grid>
     ))

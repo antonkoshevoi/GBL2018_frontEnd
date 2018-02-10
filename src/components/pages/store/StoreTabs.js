@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Paper, Tab, Tabs, Typography} from "material-ui";
+import {Paper, Tab, Tabs, Typography, Grid} from "material-ui";
 import ProductCard from "./ProductCard";
 import {NavLink} from "react-router-dom";
 
@@ -51,9 +51,9 @@ class StoreTabs extends Component {
     }
     return data.map(function (item,i) {
       return  (
-        <div className="col-sm-3 col-lg-4 col-xl-3" key={i}>
+        <Grid item xs={3} lg={3} sm={3} key={i}>
           <ProductCard data={item}/>
-        </div>
+        </Grid>
       )
     })
   }
@@ -114,8 +114,10 @@ class StoreTabs extends Component {
 
                   {value === 'courses' &&
                   <TabContainer>
-                    {this._renderCards(data)}
-                    {data.size > 0 &&  this._renderSeeAllButton('courses')}
+                    <Grid container spacing={24}>
+                      {this._renderCards(data)}
+                      {data.size > 0 &&  this._renderSeeAllButton('courses')}
+                    </Grid>
                   </TabContainer>
                   }
                   {value === 'teaching_aids' &&
