@@ -86,7 +86,7 @@ class Header extends Component {
                     <li
                       className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width">
 
-                      <NavLink to='/shopping/cart' className='m-nav__link m-dropdown__toggle pointer' id='m_topbar_notification_icon'>
+                      <NavLink to='/accounts/invoices' className='m-nav__link m-dropdown__toggle pointer' id='m_topbar_notification_icon'>
                         <span className='m-nav__link-icon'>
                           <i className="fa fa-shopping-cart PageHeader-icon"></i>
                           <span className="g-badge badge-red">{cartRecords.size}</span>
@@ -96,8 +96,6 @@ class Header extends Component {
                     <Settings activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
 
                     <UserMenu activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus} logout={logout}/>
-
-
                   </ul>
                 </div>
               </div>

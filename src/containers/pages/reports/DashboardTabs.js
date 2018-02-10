@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import { push } from 'react-router-redux';
 import {
   Paper, Tabs, Tab, Typography, GridList, GridListTile, GridListTileBar, IconButton, Input, InputAdornment
 } from 'material-ui';
@@ -72,18 +72,18 @@ class DashboardTabs extends Component {
   };
 
   _renderStudents() {
+    const { goTo } = this.props;
     const students = this.props.getStudentsRequest.get('records').toJS();
     const defaultAvatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
 
     return students.map(function (student, i) {
       return (
-        <GridListTile key={i} className="grid-tile">
+        <GridListTile key={i} className="grid-tile" onClick={() => { goTo(`/reports/students/${student.id}`); }} style={{ cursor: 'pointer' }}>
+
           <img src={(!student.avatar) ? defaultAvatar : student.avatar} alt={student.firstName}/>
           <GridListTileBar
             className="myGridTileBar"
-            title={
-              <NavLink to={`/reports/students/${student.id}`}>{student.firstName + " " + student.lastName}</NavLink>
-            }
+            title={(student.firstName || student.lastName) ? student.firstName + " " + student.lastName : student.username}
             subtitle={(
               <div>
                 <span className="text-right d-block">{student.passRate} %</span>
@@ -223,6 +223,8 @@ DashboardTabs = connect(
     getStudents: (params = {}) => {dispatch(getStudents(params))},
     getHomerooms: (params = {}) => {dispatch(getHomerooms(params))},
     getClassrooms: (params = {}) => {dispatch(getClassrooms(params))},
+
+    goTo: (url) => { dispatch(push(url)) }
   })
 )(DashboardTabs);
 
