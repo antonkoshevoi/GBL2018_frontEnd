@@ -296,16 +296,6 @@ class Classrooms extends Component {
                       <Icon style={{marginLeft:'5px'}}>add</Icon>
                     </Button>
                   </HasPermission>
-                  <HasPermission permissions={[
-                    '[ClassRooms][Create][Bulk][Any]'
-                  ]}>
-                    <NavLink className='link-btn' to='/classrooms/csv'>
-                      <Button variant="raised" className='btn-success mt-btn mt-btn-success'>
-                        Bulk Add classrooms
-                        <Icon style={{marginLeft:'5px'}}>person</Icon>
-                      </Button>
-                    </NavLink>
-                  </HasPermission>
                 </div>
 
               </div>

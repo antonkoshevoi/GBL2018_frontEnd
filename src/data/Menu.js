@@ -123,7 +123,7 @@ export default  {
            {
                key:'store',
                title:'Store',
-               link:'store',
+               link:'/store',
                icon:'fa fa-shopping-cart ',
                colorName:'green',
                subMenu:[
