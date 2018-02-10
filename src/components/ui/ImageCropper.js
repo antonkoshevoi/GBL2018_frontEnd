@@ -47,12 +47,16 @@ class ImageCropper extends Component {
   }
 
   cropImage() {
+    const {saveButton} = this.props;
+
     if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
       return;
     }
 
-    this.props.onCrop(this.cropper.getCroppedCanvas().toDataURL());
-    this.props.setFile(this.state.file);
+    if (!saveButton){
+      this.props.onCrop(this.cropper.getCroppedCanvas().toDataURL());
+      this.props.setFile(this.state.file);
+    }
 
     this.setState({
       croppedFile: this.cropper.getCroppedCanvas().toDataURL(),
@@ -89,9 +93,33 @@ class ImageCropper extends Component {
     }
   }
 
+
+  _handleImageCrop() {
+    const {saveButton} = this.props;
+    if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
+      return;
+    }
+
+    this.setState({
+      croppedFile: this.cropper.getCroppedCanvas().toDataURL()
+    });
+
+    if (!saveButton){
+      this.props.onCrop(this.cropper.getCroppedCanvas().toDataURL());
+      this.props.setFile(this.state.file);
+    }
+  }
+
+  _saveImages(){
+    this.props.onSubmit(this.state.croppedFile,this.state.file)
+    this.props.onCrop(this.state.croppedFile);
+    this.props.setFile(this.state.file);
+  }
+
   render() {
 
     const {croppedFile, file} = this.state;
+    const {saveButton} = this.props;
 
     return (
       <div className="CropperBlock">
@@ -101,7 +129,6 @@ class ImageCropper extends Component {
             this._handleFileChange(e)
           }}/>
         </div>
-
 
         <Cropper
           ref={cropper => {
@@ -171,7 +198,14 @@ class ImageCropper extends Component {
         }
         <div className='croppedBlock'>
           {croppedFile &&
-          <img className='img-thumbnail' style={{width: '150px'}} src={croppedFile} alt='cropped image'/>}
+          <img className='img-thumbnail' style={{width: '150px'}} src={croppedFile} alt='cropped image'/>
+          }
+
+          {(saveButton && croppedFile) && (
+            <div className="textCenter m--margin-20">
+                <button className="btn m-btn btn-info m-btn--air" onClick={()=>{this._saveImages()}}>Save</button>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -180,7 +214,13 @@ class ImageCropper extends Component {
 
 ImageCropper.propTypes = {
   onCrop: PropTypes.func.isRequired,
-  setFile: PropTypes.func.isRequired
+  setFile: PropTypes.func.isRequired,
+  saveButton: PropTypes.bool,
+  onSubmit: PropTypes.func
+};
+
+ImageCropper.defaultProps = {
+  saveButton: false
 };
 
 export default ImageCropper;

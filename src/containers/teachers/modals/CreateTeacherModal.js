@@ -13,6 +13,7 @@ import { selectCreateRequest } from '../../../redux/teachers/selectors';
 import { create, resetCreateRequest } from '../../../redux/teachers/actions';
 import Modal from '../../../components/ui/Modal';
 import TeacherForm from '../form/TeacherForm';
+import ImageCropper from "../../../components/ui/ImageCropper";
 
 class CreateTeacherModal extends Component {
   static propTypes = {
@@ -36,6 +37,8 @@ class CreateTeacherModal extends Component {
         phone: '',
         schoolId: '',
         homeroomId: '',
+        croppedAvatar: '',
+        avatar: '',
       }
     };
   }
@@ -60,6 +63,29 @@ class CreateTeacherModal extends Component {
       this.state.teacher
     );
   };
+
+
+  _setCroppedImage(img){
+    this.setState(
+      {
+        teacher: {
+          ...this.state.teacher,
+          croppedAvatar:img
+        }
+      }
+    );
+  }
+
+  _setImage(img){
+    this.setState(
+      {
+        teacher: {
+          ...this.state.teacher,
+          avatar:img
+        }
+      }
+    );
+  }
 
   _close () {
     this.setState({
@@ -97,10 +123,17 @@ class CreateTeacherModal extends Component {
             <DialogContentText>
               {/*{errorMessage && <span>{errorMessage}</span>}*/}
             </DialogContentText>
-              <TeacherForm
-                onChange={(teacher) => { this._onChange(teacher) }}
-                teacher={this.state.teacher}
-                errors={errors}/>
+             <div className="row">
+               <div className="col-md-6">
+                 <TeacherForm
+                   onChange={(teacher) => { this._onChange(teacher) }}
+                   teacher={this.state.teacher}
+                   errors={errors}/>
+               </div>
+               <div className="col-md-6">
+                 <ImageCropper onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
+               </div>
+             </div>
           </form>
         </DialogContent>
         <Divider className='full-width'/>

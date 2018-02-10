@@ -9,7 +9,7 @@ class Card extends Component {
     render() {
         const {avatar, className,title,icon, children,header,colorName, transparent} = this.props
         return (
-            <div style={{marginBottom:0,height:'100%',display: "flex", flexDirection: "column"}}
+            <div style={{marginBottom:0,height:'100%',display: "flex", flexDirection: "column", ...this.props.style}}
                  className={className + " m-portlet  m-portlet--head-solid-bg m-portlet--" + colorName + (transparent ? ' transparent' : '')}
 
             >

@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectChangePasswordRequest } from "../../../redux/user/selectors";
-import { changePassword } from "../../../redux/user/actions";
+import {selectChangePasswordRequest, selectUpdateRequest} from "../../../redux/user/selectors";
+import {changePassword, update} from "../../../redux/user/actions";
+import { Dialog, Modal} from "material-ui";
+import ImageCropper from "../../../components/ui/ImageCropper";
+import Card from "../../../components/ui/Card";
 
 class Info extends Component {
 
@@ -15,7 +18,10 @@ class Info extends Component {
     super(props);
     this.state = {
       changePasswordMode: false,
-      passwordFields: {}
+      passwordFields: {},
+      uploadModal:false,
+      croppedImage:null,
+      image:null
     }
   }
 
@@ -56,6 +62,35 @@ class Info extends Component {
     );
   }
 
+  _openUploadModal(){
+    this.setState({uploadModal:true})
+  }
+
+  _closeUploadModal(){
+    this.setState({uploadModal:false})
+  }
+
+  _setCroppedImage(img){
+    this.setState({croppedImage:img});
+    this._closeUploadModal();
+  }
+
+  _setImage(img){
+    this.setState({avatarCropped:img});
+    this._closeUploadModal();
+  }
+
+  _onSubmit (croppedImg,img) {
+    const { user } = this.props;
+    this.props.update(
+      {
+        ...user,
+        avatar:img,
+        avatarCropped:croppedImg
+      }
+    );
+  };
+
   render() {
     const { user } = this.props;
     const { changePasswordMode, passwordFields } = this.state;
@@ -72,7 +107,11 @@ class Info extends Component {
               <div className="m-card-profile__pic-wrapper">
                 <img src={user.avatar} alt=""/>
               </div>
+              <div className="text-center m--margin-bottom-20">
+                <button className="m-btn btn btn-info m-btn--pill" onClick={()=>{this._openUploadModal()}}>Upload Avatar</button>
+              </div>
             </div>
+
             <div className="m-card-profile__details">
               <span className="m-card-profile__name">{user.firstName} {user.lastName}</span>
               <a href="" className="m-card-profile__email m-link">{user.username}</a>
@@ -127,13 +166,24 @@ class Info extends Component {
                     <button onClick={() => {this._handlePasswordModeSwitch(false)}} className="m-btn btn m-btn--air m-btn--outline-2x m--margin-right-10 btn-outline-danger">
                         Cancel
                     </button>
-                    <button className="m-btn btn m-btn--air m-btn--outline-2x btn-outline-success">
+                    <button className="m-btn btn m-btn--outline-2x btn-outline-success">
                         Change
                     </button>
                 </div>
               </form>
             </div>}
           </div>
+
+        <Dialog
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={this.state.uploadModal}
+          onClose={() => this._closeUploadModal()}
+        >
+         <Card title="Upload Avatar" icon="fa fa-upload" style={{minWidth:'280px'}}>
+            <ImageCropper saveButton onSubmit={(cropImg,img) => this._onSubmit(cropImg,img)} onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
+         </Card>
+        </Dialog>
       </div>
     );
   }
@@ -141,10 +191,12 @@ class Info extends Component {
 
 Info = connect(
   (state) => ({
-    getChangePasswordRequest: selectChangePasswordRequest(state)
+    getChangePasswordRequest: selectChangePasswordRequest(state),
+    getUpdateRequest: selectUpdateRequest(state),
   }),
   (dispatch) => ({
     changePassword: (fields, params = {}) => { dispatch(changePassword(fields, params)) },
+    update: (form, params = {}) => { dispatch(update(form, params)) },
   })
 )(Info);
 

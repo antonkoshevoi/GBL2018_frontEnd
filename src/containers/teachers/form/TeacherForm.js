@@ -76,7 +76,7 @@ class TeacherForm extends Component {
 
     return (
       <div className='row'>
-        <div className='col-sm-8 m-auto'>
+        <div className='col-sm-12 m-auto'>
           <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>Username</InputLabel>
             <Input

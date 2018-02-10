@@ -13,6 +13,7 @@ import { selectCreateRequest } from '../../../redux/administration/selectors';
 import { create, resetCreateRequest } from '../../../redux/administration/actions';
 import Modal from "../../../components/ui/Modal";
 import AdministrationForm from "../forms/AdministrationForm";
+import ImageCropper from "../../../components/ui/ImageCropper";
 
 class CreateAdministrationModal extends Component {
   static propTypes = {
@@ -36,6 +37,8 @@ class CreateAdministrationModal extends Component {
         phone: '',
         schoolId: '',
         homeroomId: '',
+        croppedAvatar: '',
+        avatar: '',
       }
     };
   }
@@ -69,6 +72,31 @@ class CreateAdministrationModal extends Component {
     );
   };
 
+
+  _setCroppedImage(img){
+
+    this.setState(
+      {
+        adminUser: {
+          ...this.state.adminUser,
+          croppedAvatar:img
+        }
+      }
+    );
+  }
+
+  _setImage(img){
+
+    this.setState(
+      {
+        adminUser: {
+          ...this.state.adminUser,
+          avatar:img
+        }
+      }
+    );
+  }
+
   render() {
     const { isOpen, createRequest } = this.props;
     const loading = createRequest.get('loading');
@@ -97,10 +125,17 @@ class CreateAdministrationModal extends Component {
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
           <form id='create-administrator-form' onSubmit={(e) => { this._onSubmit(e) }}>
-            <AdministrationForm
-              onChange={(adminUser) => { this._onChange(adminUser) }}
-              adminUser={this.state.adminUser}
-              errors={errors}/>
+           <div className="row">
+             <div className="col-md-6">
+               <AdministrationForm
+                 onChange={(adminUser) => { this._onChange(adminUser) }}
+                 adminUser={this.state.adminUser}
+                 errors={errors}/>
+             </div>
+             <div className="col-md-6">
+               <ImageCropper onCrop={(cropImg) => {this._setCroppedImage(cropImg)}} setFile={(img) => {this._setImage(img)}}/>
+             </div>
+           </div>
           </form>
         </DialogContent>
         <DialogActions>

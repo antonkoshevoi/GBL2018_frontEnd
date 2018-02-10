@@ -13,6 +13,7 @@ import { selectCreateRequest } from '../../../redux/students/selectors';
 import { create, resetCreateRequest } from '../../../redux/students/actions';
 import Modal from "../../../components/ui/Modal";
 import StudentForm from "../forms/StudentForm";
+import ImageCropper from "../../../components/ui/ImageCropper";
 
 class CreateStudentModal extends Component {
   static propTypes = {
@@ -36,6 +37,8 @@ class CreateStudentModal extends Component {
         phone: '',
         schoolId: '',
         homeroomId: '',
+        avatar:'',
+        croppedAvatar:''
       }
     };
   }
@@ -69,6 +72,28 @@ class CreateStudentModal extends Component {
     this.props.resetCreateRequest();
   }
 
+  _setCroppedImage(img){
+    this.setState(
+      {
+        student: {
+          ...this.state.student,
+          croppedAvatar:img
+        }
+      }
+    );
+  }
+
+  _setImage(img){
+    this.setState(
+      {
+        student: {
+          ...this.state.student,
+          avatar:img
+        }
+      }
+    );
+  }
+
   render() {
     const { isOpen, createRequest } = this.props;
     const loading = createRequest.get('loading');
@@ -97,10 +122,17 @@ class CreateStudentModal extends Component {
             <DialogContentText>
               {/*{errorMessage && <span>{errorMessage}</span>}*/}
             </DialogContentText>
-              <StudentForm
-                onChange={(student) => { this._onChange(student) }}
-                student={this.state.student}
-                errors={errors}/>
+            <div className="row">
+              <div className="col-md-6">
+                <StudentForm
+                  onChange={(student) => { this._onChange(student) }}
+                  student={this.state.student}
+                  errors={errors}/>
+              </div>
+              <div className="col-md-6">
+                <ImageCropper onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
+              </div>
+            </div>
           </form>
         </DialogContent>
         <Divider className='full-width'/>
