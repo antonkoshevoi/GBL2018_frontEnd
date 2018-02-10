@@ -139,7 +139,7 @@ export function deleteRecord(id, params = {}) {
 export function getCourses() {
   return {
     types: [GET_COURSES, GET_COURSES_SUCCESS, GET_COURSES_FAIL],
-    promise: (apiClient) => apiClient.get(`classrooms/courses`)
+    promise: (apiClient) => apiClient.get(`courses`)
   };
 }
 
@@ -149,7 +149,7 @@ export function getCourses() {
 export function getDemoCourses(params = {}) {
   return {
     types: [GET_DEMO_COURSES, GET_DEMO_COURSES_SUCCESS, GET_DEMO_COURSES_FAIL],
-    promise: (apiClient) => apiClient.get(`classrooms/courses/demo`, params)
+    promise: (apiClient) => apiClient.get(`courses/demo`, params)
   };
 }
 
