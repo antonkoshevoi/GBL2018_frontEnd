@@ -19,9 +19,7 @@ class OpenInvoices extends Component {
   componentDidMount() {
     const { records } = this.props;
 
-    if (records.size === 0) {
-      this._getRecords();
-    }
+    this._getRecords();
 
     this._calculateSum(records.toJS());
   }
