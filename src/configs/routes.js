@@ -27,7 +27,7 @@ import TeacherReports from "../containers/pages/reports/Teachers";
 import Store from "../containers/pages/store/Store";
 import Details from "../containers/pages/store/Details";
 import Products from "../containers/pages/store/Products";
-import ShoppingCart from "../containers/pages/store/ShoppingCart/ShoppingCart";
+import OpenInvoices from "../containers/pages/store/open-invoices/OpenInvoices";
 import Messages from '../containers/messages/Messages';
 import Checkout from "../containers/pages/store/checkout/Checkout";
 import PayPalReturnContainer from '../containers/pages/store/payments/PayPalReturnContainer';
@@ -80,14 +80,14 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:category/:type' name='Store' component={Products}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
 
-      {/*Shopping Cart*/}
-      <AuthenticatedRoute exact layout={MainLayout} path='/shopping/cart' name='ShoppingCart' component={ShoppingCart}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/shopping/checkout' name='Checkout' component={Checkout}/>
 
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/:threadId?' name='Messages' component={Messages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />
 
+      {/*Open Invoices*/}
+      <AuthenticatedRoute exact layout={MainLayout} path='/accounts/invoices' name='OpenInvoices' component={OpenInvoices}/>
       {/*Unassigned Credits*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/accounts/unassigned_credits' name='Unassigned Credits' component={UnassignedCredits} />
 
