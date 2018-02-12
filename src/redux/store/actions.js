@@ -11,6 +11,10 @@ export const GET_CART_RECORDS = '[Store] GET_CART_RECORDS';
 export const GET_CART_RECORDS_SUCCESS = '[Store] GET_CART_RECORDS_SUCCESS';
 export const GET_CART_RECORDS_FAIL = '[Store] GET_CART_RECORDS_FAIL';
 
+export const GET_CART_INVOICE_RECORDS = '[Store] GET_CART_INVOICE_RECORDS';
+export const GET_CART_INVOICE_RECORDS_SUCCESS = '[Store] GET_CART_INVOICE_RECORDS_SUCCESS';
+export const GET_CART_INVOICE_RECORDS_FAIL = '[Store] GET_CART_INVOICE_RECORDS_FAIL';
+
 export const DELETE_CART_RECORD = '[Store] DELETE_CART_RECORD';
 export const DELETE_CART_RECORD_SUCCESS = '[Store] DELETE_CART_RECORD_SUCCESS';
 export const DELETE_CART_RECORD_FAIL = '[Store] DELETE_CART_RECORD_FAIL';
@@ -53,6 +57,18 @@ export function getCartRecords(params = {}) {
   return {
     types: [GET_CART_RECORDS, GET_CART_RECORDS_SUCCESS, GET_CART_RECORDS_FAIL],
     promise: (apiClient) => apiClient.get('store/shopping-card', params)
+  };
+}
+
+/**
+ * Cart records
+ * @param params
+ * @returns {{types: [*,*,*], promise: (function(*))}}
+ */
+export function getCartInvoiceRecords(params = {}) {
+  return {
+    types: [GET_CART_INVOICE_RECORDS, GET_CART_INVOICE_RECORDS_SUCCESS, GET_CART_INVOICE_RECORDS_FAIL],
+    promise: (apiClient) => apiClient.get('store/shopping-card/invoices', params)
   };
 }
 

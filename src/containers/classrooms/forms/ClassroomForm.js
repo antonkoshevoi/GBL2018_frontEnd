@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography } from 'material-ui';
+import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography, Button } from 'material-ui';
 import {getSchoolTeachers, getSchools, getSchoolHomerooms} from "../../../redux/schools/actions";
 import {
   selectGetSchoolHomeroomsRequest,
@@ -9,8 +9,7 @@ import {
   selectSchools
 } from "../../../redux/schools/selectors";
 import DatePicker from '../../../components/ui/DatePicker';
-import {getCourses} from "../../../redux/classrooms/actions";
-import {selectCoursesRequest} from "../../../redux/classrooms/selectors";
+import CourseModal from "../modals/CourseModal";
 
 function TabContainer(props) {
   return (
@@ -37,26 +36,37 @@ class ClassroomForm extends Component {
     this.state = {
       schoolTeachers: [],
       schoolHomerooms: [],
-      courses: [],
+      courseModalIsOpen: false,
     };
   }
 
   componentDidMount() {
-    const { getSchoolTeachers, getSchoolHomerooms, getCourses, getSchools } = this.props;
+    const { getSchoolTeachers, getSchoolHomerooms, getSchools } = this.props;
 
     this._setInitialHomerooms();
 
-    getCourses();
     getSchools();
     getSchoolTeachers();
     getSchoolHomerooms();
   }
 
   componentWillReceiveProps(nextProps) {
-    this._getCoursesSuccess(nextProps);
     this._getSchoolTeachersSuccess(nextProps);
     this._getSchoolHomeroomsSuccess(nextProps);
   }
+
+  _openCourseDialog = () => {
+    this.setState({ courseModalIsOpen: true });
+  };
+  _closeCourseDialog = () => {
+    this.setState({ courseModalIsOpen: false });
+  };
+  _submitCourseDialog = (courseId) => {
+    this.props.onChange({
+      ...this.props.classroom,
+      crmCourse: courseId
+    });
+  };
 
   _setInitialHomerooms() {
     let { classroom } = this.props;
@@ -89,18 +99,6 @@ class ClassroomForm extends Component {
       this.setState({
         ...this.state,
         schoolHomerooms: nextProps.getSchoolHomeroomsRequest.get('records').toJS()
-      });
-    }
-  }
-
-  _getCoursesSuccess(nextProps) {
-    const courses = this.props.getCoursesRequest.get('success');
-    const nextCourses = nextProps.getCoursesRequest.get('success');
-
-    if (!courses && nextCourses) {
-      this.setState({
-        ...this.state,
-        courses: nextProps.getCoursesRequest.get('records').toJS()
       });
     }
   }
@@ -163,6 +161,7 @@ class ClassroomForm extends Component {
 
   render() {
     const { classroom, errors } = this.props;
+    const { courseModalIsOpen } = this.state;
 
     return (
       <div className='row'>
@@ -214,16 +213,15 @@ class ClassroomForm extends Component {
             {errors && errors.get('crmEnrollmentEndDate') && <FormHelperText error>{ errors.get('crmEnrollmentEndDate').get(0) }</FormHelperText>}
           </FormControl>
           <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Course</InputLabel>
-            <Select
-              primarytext="Select Course"
-              name='crmCourse'
-              onChange={(e) => { this._handleInputChange(e) }}
-              value={classroom.crmCourse || ''}>
-              <MenuItem value={null} primarytext=""/>
-              {this._renderCourses()}
-            </Select>
-            {this.props.getCoursesRequest.get('success') && !this.state.courses.length && <h5 className="text-center" style={{color: 'red'}}>No Unassigned Courses found (You should buy from Store)</h5>}
+            <Button
+              onClick={() => { this._openCourseDialog() }}
+              type='button'
+              form='create-classroom-form'
+              variant="raised"
+              className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+              color='primary'>
+              Choose Course
+            </Button>
             {errors && errors.get('crmCourse') && <FormHelperText error>{ errors.get('crmCourse').get(0) }</FormHelperText>}
           </FormControl>
           <FormControl className='full-width form-inputs'>
@@ -252,6 +250,13 @@ class ClassroomForm extends Component {
             {errors && errors.get('homerooms') && <FormHelperText error>{ errors.get('homerooms').get(0) }</FormHelperText>}
           </FormControl>
         </div>
+
+        <CourseModal
+          courseId={classroom.crmCourse}
+          isOpen={courseModalIsOpen}
+          onClose={() => { this._closeCourseDialog() }}
+          onSuccess={(courseId) => { this._submitCourseDialog(courseId) }}/>
+
       </div>
     );
   }
@@ -260,12 +265,10 @@ class ClassroomForm extends Component {
 ClassroomForm = connect(
   (state) => ({
     schools: selectSchools(state),
-    getCoursesRequest: selectCoursesRequest(state),
     getSchoolTeacherRequest: selectGetSchoolTeachersRequest(state),
     getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state),
   }),
   (dispatch) => ({
-    getCourses: () => { dispatch(getCourses()) },
     getSchools: () => { dispatch(getSchools()) },
     getSchoolTeachers: () => { dispatch(getSchoolTeachers()) },
     getSchoolHomerooms: () => { dispatch(getSchoolHomerooms()) },

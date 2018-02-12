@@ -55,7 +55,7 @@ class OpenInvoicesTable extends Component {
   _getEmptyMessage(){
     return (
        <div className="m--padding-20">
-         <h2 className="text-center m--padding-10">Shopping Cart Is Empty</h2>
+         <h2 className="text-center m--padding-10">No Open invoices</h2>
        </div>
     )
   }

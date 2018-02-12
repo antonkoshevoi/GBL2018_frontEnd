@@ -42,6 +42,7 @@ import PaymentCanceledContainer from '../containers/pages/store/payments/Payment
 import ReportsDashboard from "../containers/pages/reports/Dashboard";
 import ClassRoomReportDashboard from "../containers/pages/reports/classroom/Dashboard";
 import InvitationDetails from '../containers/invitations/InvitationDetails';
+import ShoppingCart from "../containers/pages/store/shopping-cart/ShoppingCart";
 
 export default () => (
   <AppContainer>
@@ -79,6 +80,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:category/:type' name='Store' component={Products}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/store/shopping-cart' name='Details' component={ShoppingCart}/>
 
       <AuthenticatedRoute exact layout={MainLayout} path='/shopping/checkout' name='Checkout' component={Checkout}/>
 

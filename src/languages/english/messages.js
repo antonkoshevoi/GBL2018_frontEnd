@@ -18,5 +18,6 @@ export default {
     assigned: {
       students: 'Students successfully changed for classroom'
     }
-  }
+  },
+  courseRequired: 'You should select course'
 }

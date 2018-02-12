@@ -20,6 +20,7 @@ import reportsDashboardReducer from './reports/dashboard/reducer';
 import invitationsReducer from './invitations/reducer';
 import classroomsReportReducer from './reports/classroom/reducer';
 import countriesReducer from './countries/reducer';
+import coursesReducer from './courses/reducer';
 
 export default {
   app: appReducer,
@@ -44,4 +45,5 @@ export default {
   invitations: invitationsReducer,
   classroomsReport: classroomsReportReducer,
   countries: countriesReducer,
+  courses: coursesReducer,
 };

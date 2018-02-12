@@ -44,6 +44,14 @@ export const selectGetCartRecordsRequest = createSelector(
 );
 
 /**
+ * Get Cart Records Request
+ */
+export const selectGetCartInvoiceRecordsRequest = createSelector(
+  selectStoreDomain,
+  (subState) => subState.get('getCartInvoiceRecordsRequest')
+);
+
+/**
  * Get Cart Records
  */
 export const selectCartRecords = createSelector(

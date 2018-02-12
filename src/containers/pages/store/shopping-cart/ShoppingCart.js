@@ -5,16 +5,16 @@ import OpenInvoicesTable from '../../../../components/pages/store/OpenInvoicesTa
 
 import {
   deleteFromCartRequest,
-  selectCartRecords, selectCartRecordsSum, selectGetCartInvoiceRecordsRequest, selectGetCartRecordsRequest,
+  selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest,
 } from '../../../../redux/store/selectors';
 import {
-  calculateCartSum, deleteCartRecord, getCartInvoiceRecords, getCartRecords,
+  calculateCartSum, deleteCartRecord, getCartRecords,
   updateShoppingCart
 } from '../../../../redux/store/actions';
 import {withRouter} from 'react-router-dom';
 import Loader from '../../../../components/layouts/Loader';
 
-class OpenInvoices extends Component {
+class ShoppingCart extends Component {
 
   componentDidMount() {
     const { records } = this.props;
@@ -63,7 +63,7 @@ class OpenInvoices extends Component {
                 <div className='m-portlet__head-caption'>
                   <div className='m-portlet__head-title'>
                     <h3 className='m-portlet__head-text'>
-                      Open invoices
+                      Shopping Cart
                     </h3>
                   </div>
                 </div>
@@ -86,19 +86,19 @@ class OpenInvoices extends Component {
   }
 }
 
-OpenInvoices = connect(
+ShoppingCart = connect(
   (state) => ({
-    cartRecordsRequest: selectGetCartInvoiceRecordsRequest(state),
+    cartRecordsRequest: selectGetCartRecordsRequest(state),
     deleteFromCartRequest: deleteFromCartRequest(state),
     cartRecordsSum: selectCartRecordsSum(state),
     records: selectCartRecords(state),
   }),
   (dispatch) => ({
-    getRecords: () => { dispatch(getCartInvoiceRecords()) },
+    getRecords: () => { dispatch(getCartRecords()) },
     deleteCartRecord: (id) => { dispatch(deleteCartRecord(id)) },
     calculateSum: (data) => { dispatch(calculateCartSum(data)) },
     updateData: (data) => { dispatch(updateShoppingCart(data)) },
   })
-)(OpenInvoices);
+)(ShoppingCart);
 
-export default withRouter(translate('OpenInvoices')(OpenInvoices));
+export default withRouter(translate('OpenInvoices')(ShoppingCart));

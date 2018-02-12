@@ -18,7 +18,10 @@ import {
     GET_UNASSIGNEDS,
     GET_UNASSIGNEDS_SUCCESS,
     GET_UNASSIGNEDS_FAIL,
-    UPDATE_SHOPPING_CART, CALCULATE_CART_SUM
+    UPDATE_SHOPPING_CART, CALCULATE_CART_SUM,
+  GET_CART_INVOICE_RECORDS,
+  GET_CART_INVOICE_RECORDS_FAIL,
+  GET_CART_INVOICE_RECORDS_SUCCESS
 } from './actions';
 import Immutable from 'immutable';
 
@@ -41,6 +44,12 @@ const initialState = Immutable.fromJS({
       success: false,
       fail: false,
       errorResponse: null
+  },
+  getCartInvoiceRecordsRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null
   },
   addToCartRequest: {
       loading: false,
@@ -157,6 +166,28 @@ export default function reducer (state = initialState, action) {
                   .set('fail', true)
               );
 
+    /**
+     * Get cart records
+     */
+    case GET_CART_INVOICE_RECORDS:
+      return state
+        .set('getCartInvoiceRecordsRequest', state.get('getCartInvoiceRecordsRequest')
+          .set('loading', true)
+          .remove('success')
+          .remove('fail')
+        ).set('cartRecord', Immutable.List());
+    case GET_CART_INVOICE_RECORDS_SUCCESS:
+      return state
+        .set('getCartInvoiceRecordsRequest', state.get('getCartInvoiceRecordsRequest')
+          .set('success', true)
+          .remove('loading')
+        ).set('cartRecords', Immutable.fromJS(action.result.data));
+    case GET_CART_INVOICE_RECORDS_FAIL:
+      return state
+        .set('getCartInvoiceRecordsRequest', state.get('getCartInvoiceRecordsRequest')
+          .set('loading', false)
+          .set('fail', true)
+        );
       /**
        * Add cart record
        */
