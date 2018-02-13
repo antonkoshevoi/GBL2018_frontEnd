@@ -68,7 +68,7 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errorResponse: null,
-    records: {},
+    records: [],
     pagination: {
       page: 1,
       perPage: 10,
