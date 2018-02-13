@@ -104,13 +104,13 @@ class Store extends Component {
                 <StoreSlider data={sliderData}/>
               </div>
             </div>
-            <ProductsSection type="Courses" title="Newest" products={records.slice(0, 9)}/>
-            <ProductsSection type="Books" title="Books" products={records.slice(0, 9)}/>
-            <ProductsSection type="Teaching Ads" title="Teaching Ads" products={records.slice(0, 9)}/>
-            <ProductsSection type="Stationary" title="Stationary" products={records.slice(0, 9)}/>
-            <ProductsSection type="Student Reward" title="Student Reward" products={records.slice(0, 9)}/>
-            <ProductsSection type="Tutoring Service" title="Tutoring Service" products={records.slice(0, 9)}/>
-            <ProductsSection type="Bundles" title="Bundles" products={records.slice(0, 9)}/>
+            <ProductsSection categoryId={1} type="Courses" title="Courses" products={records}/>
+            <ProductsSection categoryId={4} type="Books" title="Books" products={records}/>
+            <ProductsSection categoryId={3} type="Teaching Ads" title="Teaching Ads" products={records}/>
+            <ProductsSection categoryId={6} type="Stationary" title="Stationary" products={records}/>
+            <ProductsSection categoryId={5} type="Student Reward" title="Student Reward" products={records}/>
+            <ProductsSection categoryId={7} type="Tutoring Service" title="Tutoring Service" products={records}/>
+            <ProductsSection categoryId={2} type="Bundles" title="Bundles" products={records}/>
           </div>
           }
           {isFiltered &&
@@ -132,7 +132,7 @@ Store = connect(
     records: selectRecords(state),
   }),
   (dispatch) => ({
-    getRecords: (params = {type: 'recent'}) => {
+    getRecords: (params = {perPage: '50'}) => {
       dispatch(getRecords(params))
     },
   })

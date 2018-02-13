@@ -62,25 +62,25 @@ class Filter extends Component {
   _setCategoryFilter(category){
     switch (category){
       case 'courses':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'courses'}}}, this._initFilter);
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '1'}}}, this._initFilter);
         break;
       case 'books':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'books'}}}, this._initFilter);
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '4'}}}, this._initFilter);
         break;
       case 'teaching_aids':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'teaching_aids'}}}, this._initFilter);
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '3'}}}, this._initFilter);
         break;
       case 'stationary':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'stationary'}}}, this._initFilter);
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '6'}}}, this._initFilter);
         break;
       case 'student_rewards':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'student_rewards'}}}, this._initFilter);
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '5'}}}, this._initFilter);
         break;
       case 'tutoring_services':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'tutoring_services'}}}, this._initFilter);
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '7'}}}, this._initFilter);
         break;
       case 'bundles':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'bundles'}}}, this._initFilter);
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '2'}}}, this._initFilter);
         break;
       default:
         return;
@@ -132,18 +132,22 @@ class Filter extends Component {
 
   _searchBarChange = (e) => {
     this.setState({params: {...this.state.params, filter: {...this.state.params.filter, title: e.target.value}}});
-  }
+  };
 
 
-  _selectFilter = (type,value) => {
-    this.setState({params: {...this.state.params, filter: {...this.state.params.filter, [type]: value}}}, this._initFilter);
-  }
+  _selectFilter = (type,value,e) => {
+      const {title} = e.currentTarget;
+      let activeFilter = 'active_' + type;
+      this.setState({[activeFilter]:title})
+      this.setState({params: {...this.state.params, filter: {...this.state.params.filter, [type]: value,}}}, this._initFilter);
+  };
 
 
   _initFilter = () => {
     let {params} = this.state;
     this.props.onChange(params);
-  }
+  };
+
 
   _selectSorter = (name) => {
     let sorters = {};
@@ -162,14 +166,13 @@ class Filter extends Component {
         orderBy: buildSortersQuery(sorters)
       }
     }, this._initFilter);
-  }
+  };
+
 
   _selectSorterDesc = (name) => {
     let sorters = {};
-
     sorters[name] = 'desc';
-
-    this.setState({sorters})
+    this.setState({sorters});
     this.setState({
       params: {
         ...this.state.params,
@@ -177,14 +180,14 @@ class Filter extends Component {
         orderBy: buildSortersQuery(sorters)
       }
     }, this._initFilter);
-  }
+  };
 
 
   render() {
     const {classes, isActive, type} = this.props;
     const {categoryMenu, subjectMenu, sortMenu, sorters} = this.state;
 
-    return (
+      return (
       <div className="col-md-12 ">
         <div className="row">
           <div className="col-md-12 col-lg-8 store-filter left-block">
@@ -197,7 +200,7 @@ class Filter extends Component {
                   this.handleMenuClick(e, 'categoryMenu')
                 }}
               >
-                Target > Age <i className="m--margin-left-10 fa fa-chevron-down"></i>
+                <span> { this.state.active_target ? this.state.active_target : 'Target > Age' }</span> <i className="m--margin-left-10 fa fa-chevron-down"></i>
               </Button>
               <Menu
                 id="category-menu"
@@ -207,35 +210,35 @@ class Filter extends Component {
                   this.handleMenuClose(e, 'categoryMenu')
                 }}
               >
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target','')
-                }}>All</MenuItem>
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',1)
+                {this.state.active_target &&  <MenuItem onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target','',e)
+                }}>All</MenuItem>}
+                <MenuItem title="Elementary Grade 1" onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',1,e)
                 }}>Elementary Grade 1</MenuItem>
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',2)
+                <MenuItem title="Kindy Starter" onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',2,e)
                 }}>Kindy Starter</MenuItem>
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',3)
+                <MenuItem title="Kindy Advanced" onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',3,e)
                 }}>Kindy Advanced</MenuItem>
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',4)
+                <MenuItem title="Elementary 1-3" onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',4,e)
                 }}>Elementary 1-3</MenuItem>
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',5)
+                <MenuItem title="Kindy Starter" onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',5,e)
                 }}>Elementary 4-6</MenuItem>
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',6)
+                <MenuItem title="Elementary 4-6" onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',6,e)
                 }}>Junior High School</MenuItem>
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',7)
+                <MenuItem title="Junior High School" onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',7,e)
                 }}>High School</MenuItem>
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',8)
+                <MenuItem title="High School" onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',8,e)
                 }}>Adult</MenuItem>
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',9)
+                <MenuItem title="Senior" onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',9,e)
                 }}>Senior</MenuItem>
               </Menu>
             </div>
@@ -248,7 +251,7 @@ class Filter extends Component {
                   this.handleMenuClick(e, 'subjectMenu')
                 }}
               >
-                Subject <i className="m--margin-left-10 fa fa-chevron-down"></i>
+                  <span> { this.state.active_subject ? this.state.active_subject : 'Subject' }</span>  <i className="m--margin-left-10 fa fa-chevron-down"></i>
               </Button>
               <Menu
                 id="subject-menu"
@@ -258,20 +261,24 @@ class Filter extends Component {
                   this.handleMenuClose(e, 'subjectMenu')
                 }}
               >
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',1)
+                  {this.state.active_subject &&
+                  <MenuItem title="English for Kids" onClick={(e) => {
+                      this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject','',e)
+                  }}>All</MenuItem>}
+                <MenuItem title="English for Kids" onClick={(e) => {
+                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',1,e)
                 }}>English for Kids</MenuItem>
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',2)
+                <MenuItem title="Language" onClick={(e) => {
+                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',2,e)
                 }}>Language</MenuItem>
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',3)
+                <MenuItem title="Safety" onClick={(e) => {
+                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',3,e)
                 }}>Safety</MenuItem>
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',4)
+                <MenuItem title="Fine Arts" onClick={(e) => {
+                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',4,e)
                 }}>Fine Arts</MenuItem>
-                <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',5)
+                <MenuItem title="Flex" onClick={(e) => {
+                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',5,e)
                 }}>Flex</MenuItem>
               </Menu>
             </div>

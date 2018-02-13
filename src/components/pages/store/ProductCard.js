@@ -36,8 +36,10 @@ class ProductCard extends Component {
               <NavLink to={`/store/details/${product.get('id')}`}>
                 <StarRating score={product.get('score')}/>
               </NavLink>
-              <div className="productPrice"><span
-                className="discount"><span>${price.toFixed(2)}</span></span><br/>${discountPrice.toFixed(2)}
+              <div className="productPrice">
+                  {product.get('discount') != 0 && <span className="discount"><span>${price.toFixed(2)}</span></span> }
+                  <br/>
+                  ${discountPrice.toFixed(2)}
               </div>
             </div>
           </CardContent>
