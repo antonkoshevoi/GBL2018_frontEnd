@@ -315,7 +315,7 @@ class FirstStepForm extends Component {
             <div className='col-sm-12'>
               <div className='CropperBlock'>
                 <div className='upload-btn-wrapper '>
-                  <button className='btn m-btn--air btn-outline-info'>Upload a file</button>
+                  <span className='btn pointer m-btn--air btn-outline-info'>Upload a file</span>
                   <input type='file' name='myfile' onChange={(e) => { this._handleFileChange(e) }}/>
                 </div>
 
@@ -376,13 +376,13 @@ class FirstStepForm extends Component {
                   <i className="fa fa-rotate-right"></i>
                 </a>
                 <br/>
-                <button
-                  type='button'
-                  className='btn m-btn m--margin-5 m-btn--pill m-btn--air btn-success'
+                <span
+
+                  className='btn pointer m-btn m--margin-5 m-btn--pill m-btn--air btn-success'
                   onClick={() => { this._handleImageCrop() }}
                 >
                   Crop <span className='la la-crop'></span>
-                </button>
+                </span>
               </div>
               }
 
