@@ -13,6 +13,13 @@ export const selectGetRecordsRequest = createSelector(
   (subState) => subState.get('getRecordsRequest')
 );
 /**
+ * Get Parent Records Request
+ */
+export const selectGetParentRecordsRequest = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('getParentRecordsRequest')
+);
+/**
  * Get Single Request
  */
 export const selectGetSingleRecordRequest = createSelector(

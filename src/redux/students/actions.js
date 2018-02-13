@@ -29,10 +29,21 @@ export const DELETE = '[Students] DELETE';
 export const DELETE_SUCCESS = '[Students] DELETE_SUCCESS';
 export const DELETE_FAIL = '[Students] DELETE_FAIL';
 
+export const GET_PARENT_RECORDS = '[Students] GET_PARENT_RECORDS';
+export const GET_PARENT_RECORDS_SUCCESS = '[Students] GET_PARENT_RECORDS_SUCCESS';
+export const GET_PARENT_RECORDS_FAIL = '[Students] GET_PARENT_RECORDS_FAIL';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
     promise: (apiClient) => apiClient.get('students', params)
+  };
+}
+
+export function getParentRecords(params = {}) {
+  return {
+    types: [GET_PARENT_RECORDS, GET_PARENT_RECORDS_SUCCESS, GET_PARENT_RECORDS_FAIL],
+    promise: (apiClient) => apiClient.get('students/parent/records', params)
   };
 }
 
