@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import StarRating from "../../ui/StarRating";
+import {Icon} from "material-ui";
 
 class DetailsSection extends Component {
 
@@ -50,8 +51,8 @@ class DetailsSection extends Component {
                         </div>
                         <div className="col-md-5 text-right">
                           <div className="align-text-bottom">
-                            <StarRating score={data.get('score')}/>
-                            <span className="m--margin-left-5">{data.get('count')} <i className="fa fa-user"></i></span>
+                            <StarRating score={data.get('score') || 4}/>
+                            <span className="m--margin-left-5">{data.get('count') || 54} <Icon fontSize={4} style={{fontSize:17, color:'#737373', transform: 'translateY(3px)'}}>person</Icon></span>
                           </div>
                         </div>
                       </div>
@@ -67,8 +68,8 @@ class DetailsSection extends Component {
                                         <span>
                                           {addedRequest.get('success') &&
                                           <i className="fa floating-basket fa-shopping-basket"></i>}
-                                          <span className="discount"><span>${discountPrice.toFixed(2)}  </span></span>
-                                          <span>${price.toFixed(2)}</span>
+                                          <span className="discount"><span>${price.toFixed(2)}  </span></span>
+                                          <span>${discountPrice.toFixed(2)}</span>
                                             <span>BUY</span>
                                         </span>
                   </button>
