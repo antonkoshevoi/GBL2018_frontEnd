@@ -21,7 +21,7 @@ class Products extends Component {
   }
 
   componentDidMount() {
-    this._getRecords();
+    // this._getRecords();
   }
 
 

@@ -82,3 +82,9 @@ export const  generateLinkId = (paths) => {
     }
     return path;
 }
+
+
+export const getUrlLastName = (url) => {
+  const paths = url.split('/');
+  return paths[paths.length-1];
+}

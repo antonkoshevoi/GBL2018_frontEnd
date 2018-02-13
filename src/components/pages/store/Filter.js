@@ -6,10 +6,10 @@ import {
 } from "material-ui";
 import {Manager, Popper, Target} from "react-popper";
 import classNames from 'classnames';
-import {NavLink} from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
 import {Search} from "material-ui-icons";
 import red from "material-ui/es/colors/red";
-import {buildSortersQuery} from "../../../helpers/utils";
+import {buildSortersQuery, getUrlLastName} from "../../../helpers/utils";
 
 const styles = {
   root: {
@@ -41,7 +41,8 @@ class Filter extends Component {
     params: {
       filter: {
         name: '',
-        title: ''
+        title: '',
+        category:''
       },
       orderBy: {}
     },
@@ -50,9 +51,39 @@ class Filter extends Component {
 
 
   componentDidMount(){
-    const {type} = this.props;
+    const {type, match} = this.props;
     if (type === 'newest') {
       this._selectSorterDesc('created');
+    }
+    this._setCategoryFilter(match.params.category)
+  }
+
+
+  _setCategoryFilter(category){
+    switch (category){
+      case 'courses':
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'courses'}}}, this._initFilter);
+        break;
+      case 'books':
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'books'}}}, this._initFilter);
+        break;
+      case 'teaching_aids':
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'teaching_aids'}}}, this._initFilter);
+        break;
+      case 'stationary':
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'stationary'}}}, this._initFilter);
+        break;
+      case 'student_rewards':
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'student_rewards'}}}, this._initFilter);
+        break;
+      case 'tutoring_services':
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'tutoring_services'}}}, this._initFilter);
+        break;
+      case 'bundles':
+        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: 'bundles'}}}, this._initFilter);
+        break;
+      default:
+        return;
     }
   }
 
@@ -60,6 +91,9 @@ class Filter extends Component {
   componentWillReceiveProps(nextProps){
     if (!nextProps.isActive) {
       this._resetAll();
+    }
+    if (nextProps.location.key !== this.props.location.key) {
+      this._setCategoryFilter(nextProps.match.params.category);
     }
   }
 
@@ -99,6 +133,12 @@ class Filter extends Component {
   _searchBarChange = (e) => {
     this.setState({params: {...this.state.params, filter: {...this.state.params.filter, title: e.target.value}}});
   }
+
+
+  _selectFilter = (type,value) => {
+    this.setState({params: {...this.state.params, filter: {...this.state.params.filter, [type]: value}}}, this._initFilter);
+  }
+
 
   _initFilter = () => {
     let {params} = this.state;
@@ -157,7 +197,7 @@ class Filter extends Component {
                   this.handleMenuClick(e, 'categoryMenu')
                 }}
               >
-                Age to Target > Age <i className="m--margin-left-10 fa fa-chevron-down"></i>
+                Target > Age <i className="m--margin-left-10 fa fa-chevron-down"></i>
               </Button>
               <Menu
                 id="category-menu"
@@ -168,17 +208,35 @@ class Filter extends Component {
                 }}
               >
                 <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu')
-                }}>Any</MenuItem>
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target','')
+                }}>All</MenuItem>
                 <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu')
-                }}>Kindergarten</MenuItem>
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',1)
+                }}>Elementary Grade 1</MenuItem>
                 <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu')
-                }}>Elementary</MenuItem>
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',2)
+                }}>Kindy Starter</MenuItem>
                 <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu')
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',3)
+                }}>Kindy Advanced</MenuItem>
+                <MenuItem onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',4)
+                }}>Elementary 1-3</MenuItem>
+                <MenuItem onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',5)
+                }}>Elementary 4-6</MenuItem>
+                <MenuItem onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',6)
+                }}>Junior High School</MenuItem>
+                <MenuItem onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',7)
                 }}>High School</MenuItem>
+                <MenuItem onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',8)
+                }}>Adult</MenuItem>
+                <MenuItem onClick={(e) => {
+                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',9)
+                }}>Senior</MenuItem>
               </Menu>
             </div>
             <div className="store-filter-divider"></div>
@@ -201,11 +259,20 @@ class Filter extends Component {
                 }}
               >
                 <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'subjectMenu')
-                }}>English as a second Language</MenuItem>
+                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',1)
+                }}>English for Kids</MenuItem>
                 <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'subjectMenu')
-                }}>Arithmetic</MenuItem>
+                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',2)
+                }}>Language</MenuItem>
+                <MenuItem onClick={(e) => {
+                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',3)
+                }}>Safety</MenuItem>
+                <MenuItem onClick={(e) => {
+                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',4)
+                }}>Fine Arts</MenuItem>
+                <MenuItem onClick={(e) => {
+                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',5)
+                }}>Flex</MenuItem>
               </Menu>
             </div>
 
@@ -213,7 +280,6 @@ class Filter extends Component {
             <div className="filter-buttons">
               <NavLink to="/store" className={(!isActive && type !== 'details') ? ' activeFilter' : ''}><Button>All</Button></NavLink>
               <NavLink to="/store/products/course/newest" className={(sorters.created == 'desc') ? ' activeFilter' : ''}><Button>Newest</Button></NavLink>
-              <NavLink to="/store/products/course/popular"><Button>Most Popular</Button></NavLink>
             </div>
           </div>
           <div className="col-lg-4 col-md-12 store-filter right-block">
@@ -288,4 +354,4 @@ Filter.defaultProps = {
   isActive:false
 }
 
-export default withStyles(styles)(Filter);
+export default withRouter(withStyles(styles)(Filter));
