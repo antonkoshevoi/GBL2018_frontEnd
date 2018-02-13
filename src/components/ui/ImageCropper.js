@@ -124,7 +124,7 @@ class ImageCropper extends Component {
     return (
       <div className="CropperBlock">
         <div className='upload-btn-wrapper '>
-          <button className='btn m-btn--air btn-outline-info'>Upload a file</button>
+          <a className='btn m-btn--air btn-outline-info'>Upload a file</a>
           <input type='file' name='myfile' onChange={(e) => {
             this._handleFileChange(e)
           }}/>
@@ -185,7 +185,7 @@ class ImageCropper extends Component {
             <i className="fa fa-rotate-right"></i>
           </a>
           <br/>
-          <button
+          <a
             type='button'
             className='btn m-btn m--margin-5 m-btn--pill m-btn--air btn-success'
             onClick={() => {
@@ -193,7 +193,7 @@ class ImageCropper extends Component {
             }}
           >
             Crop <span className='la la-crop'></span>
-          </button>
+          </a>
         </div>
         }
         <div className='croppedBlock'>
@@ -203,7 +203,7 @@ class ImageCropper extends Component {
 
           {(saveButton && croppedFile) && (
             <div className="textCenter m--margin-20">
-                <button className="btn m-btn btn-info m-btn--air" onClick={()=>{this._saveImages()}}>Save</button>
+                <a className="btn m-btn btn-info m-btn--air" onClick={()=>{this._saveImages()}}>Save</a>
             </div>
           )}
         </div>
