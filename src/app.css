@@ -136,6 +136,10 @@ li > .small-avatar {
   border-color: #d4445c;
 }
 
+.no-border {
+  border-radius: 0 !important;
+}
+
 .loginWrapper {
   top: 0;
   left: 0;
@@ -856,7 +860,7 @@ div.m-stack.m-stack--desktop.m-stack--ver > .m-stack__item.m-stack__item--fluid 
 }
 
 .m-topbar .m-topbar__nav.m-nav > .m-nav__item:first-child {
-   border-left: 1px solid #8080800f;
+   /*border-left: 1px solid #8080800f;*/
 }
 
 .m-topbar .m-topbar__nav.m-nav > .m-nav__item:nth-child(3) {

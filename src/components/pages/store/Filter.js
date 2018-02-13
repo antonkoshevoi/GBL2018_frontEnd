@@ -157,7 +157,7 @@ class Filter extends Component {
                   this.handleMenuClick(e, 'categoryMenu')
                 }}
               >
-                Category > Age <i className="m--margin-left-10 fa fa-chevron-down"></i>
+                Age to Target > Age <i className="m--margin-left-10 fa fa-chevron-down"></i>
               </Button>
               <Menu
                 id="category-menu"
@@ -211,7 +211,7 @@ class Filter extends Component {
 
             <div className="store-filter-divider"></div>
             <div className="filter-buttons">
-              <NavLink to="/store/category/course" className={(!isActive && type !== 'details') ? ' activeFilter' : ''}><Button>All</Button></NavLink>
+              <NavLink to="/store" className={(!isActive && type !== 'details') ? ' activeFilter' : ''}><Button>All</Button></NavLink>
               <NavLink to="/store/products/course/newest" className={(sorters.created == 'desc') ? ' activeFilter' : ''}><Button>Newest</Button></NavLink>
               <NavLink to="/store/products/course/popular"><Button>Most Popular</Button></NavLink>
             </div>

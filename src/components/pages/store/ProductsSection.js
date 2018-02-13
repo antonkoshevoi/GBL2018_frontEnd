@@ -30,14 +30,14 @@ class ProductsSection extends Component {
     return (
       <section className="productSection">
         <div className="row">
-          <div className="col-md-12">
+          <div className="">
             <div className="row sectionTopBar">
               <div className="col-md-6">
                 <h2>{title}</h2>
               </div>
               <div className="col-md-6 text-right">
                 {!all && <NavLink to={`/store/products/courses/${type}`} params={{type: 'sad'}}
-                                  className="btn m-btn btn-sm btn-danger">ALL</NavLink> }
+                                  className="btn m-btn no-border btn-sm btn-danger">More</NavLink> }
               </div>
             </div>
             <div className="row">

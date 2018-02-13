@@ -10,6 +10,7 @@ class ProductCard extends Component {
   _renderCard(type, product) {
     const category = product.get('category') ? product.get('category').get('title') : 'No Info...';
     const price = Number(product.get('price'));
+    const discountPrice = Number(price - (price * product.get('discount') / 100));
 
     return (
       <div className={`cardItem ${type === 'vertical' ? ' verticalCardItem' : ' horizontalCardItem'}`}>
@@ -36,7 +37,7 @@ class ProductCard extends Component {
                 <StarRating score={product.get('score')}/>
               </NavLink>
               <div className="productPrice"><span
-                className="discount"><span>{(price / 100 * product.get('discount') + price) + '$'}</span></span><br/>{price + ' $'}
+                className="discount"><span>${price.toFixed(2)}</span></span><br/>${discountPrice.toFixed(2)}
               </div>
             </div>
           </CardContent>

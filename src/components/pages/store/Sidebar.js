@@ -20,7 +20,7 @@ class Sidebar extends Component {
             <h3 className="sidebarTitle">{title}</h3>
           </div>
           <div className="col-md-6 text-right m--padding-right-10">
-            <NavLink to={`/store/products/courses/${dataType}`} className="btn m-btn btn-sm btn-danger">All</NavLink>
+            <NavLink to={`/store/products/courses/${dataType}`} className="btn no-border m-btn btn-sm btn-danger">More</NavLink>
           </div>
         </div>
         <div>
