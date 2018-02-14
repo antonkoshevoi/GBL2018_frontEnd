@@ -190,7 +190,7 @@ class SchoolDetails extends Component {
                 <div className="m-separator m-separator--dashed"></div>
                 <div className="m-form">
                   <div className="form-group m-form__group row">
-                    <label className="col-form-label col-lg-3" htmlFor="shippingAddress">Shipping Addess</label>
+                    <label className="col-form-label col-lg-3" htmlFor="shippingAddress">Shipping Address</label>
                     <div className="col-lg-6">
                       <input
                         type="text"
