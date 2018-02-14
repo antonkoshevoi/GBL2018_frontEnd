@@ -16,7 +16,12 @@ class UserDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...ChartData
+      ...ChartData,
+      params: {
+        filter: {
+          category: '1'
+        }
+      }
     }
   }
 
@@ -26,8 +31,73 @@ class UserDashboard extends Component {
   }
 
 
-  _getRecords(params) {
+  _getRecords() {
+    const {params} = this.state;
     this.props.getRecords(params);
+  }
+
+  _setCategoryFilter(category) {
+
+    switch (category) {
+      case 'courses':
+        this.setState({
+          params: {
+            ...this.state.params,
+            filter: {...this.state.params.filter, category: '1'}
+          }
+        }, this._getRecords);
+        break;
+      case 'books':
+        this.setState({
+          params: {
+            ...this.state.params,
+            filter: {...this.state.params.filter, category: '4'}
+          }
+        }, this._getRecords);
+        break;
+      case 'teaching_aids':
+        this.setState({
+          params: {
+            ...this.state.params,
+            filter: {...this.state.params.filter, category: '3'}
+          }
+        }, this._getRecords);
+        break;
+      case 'stationary':
+        this.setState({
+          params: {
+            ...this.state.params,
+            filter: {...this.state.params.filter, category: '6'}
+          }
+        }, this._getRecords);
+        break;
+      case 'student_rewards':
+        this.setState({
+          params: {
+            ...this.state.params,
+            filter: {...this.state.params.filter, category: '5'}
+          }
+        }, this._getRecords);
+        break;
+      case 'tutoring_services':
+        this.setState({
+          params: {
+            ...this.state.params,
+            filter: {...this.state.params.filter, category: '7'}
+          }
+        }, this._getRecords);
+        break;
+      case 'bundles':
+        this.setState({
+          params: {
+            ...this.state.params,
+            filter: {...this.state.params.filter, category: '2'}
+          }
+        }, this._getRecords);
+        break;
+      default:
+        return;
+    }
   }
 
   _renderPieChartLabels(labels) {
@@ -63,7 +133,8 @@ class UserDashboard extends Component {
   render() {
 
     const {records, getRecordsRequest} = this.props;
-
+    const productsLoading = getRecordsRequest.get('loading');
+    const productsSuccess = getRecordsRequest.get('success');
     return (
       <div className="fadeInLeft  animated">
         <div className="row">
@@ -137,7 +208,9 @@ class UserDashboard extends Component {
         </div>
         <div className="row">
           <div className="col-md-12">
-            <StoreTabs data={records}/>
+            <StoreTabs isLoading={productsLoading} isSuccess={productsSuccess} getProducts={(category) => {
+              this._setCategoryFilter(category)
+            }} data={records}/>
           </div>
         </div>
       </div>

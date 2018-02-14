@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Paper, Tab, Tabs, Typography, Grid} from "material-ui";
 import ProductCard from "./ProductCard";
 import {NavLink} from "react-router-dom";
-
+import { CircularProgress } from 'material-ui/Progress';
 
 function TabContainer(props) {
   return (
@@ -28,7 +28,7 @@ class StoreTabs extends Component {
 
 
   _setTabsOptions() {
-    if (window.innerWidth <= 767) {
+    if (window.innerWidth <= 1400) {
       this.setState({
         tabCentered: true,
         tabFullWidth: true,
@@ -51,9 +51,9 @@ class StoreTabs extends Component {
     }
     return data.map(function (item,i) {
       return  (
-        <Grid item xs={3} lg={3} sm={3} key={i}>
+        <div key={i}>
           <ProductCard data={item}/>
-        </Grid>
+        </div>
       )
     })
   }
@@ -70,13 +70,14 @@ class StoreTabs extends Component {
 
   handleChange = (event, value) => {
     this.setState({value});
+    this.props.getProducts(value);
   };
 
 
   render() {
 
     const {value,  tabCentered, tabFullWidth, tabScrollButtons} = this.state;
-    const {data} = this.props;
+    const {data, isLoading, isSuccess} = this.props;
 
     return (
       <div className="row ">
@@ -92,8 +93,8 @@ class StoreTabs extends Component {
                       onChange={this.handleChange}
                       scrollable={true}
                       centered={tabCentered}
-                      fullWidth={tabFullWidth}
-                      scrollButtons={tabScrollButtons}
+                      fullWidth={true}
+                      scrollButtons={'on'}
 
 
                     >
@@ -111,8 +112,15 @@ class StoreTabs extends Component {
               </div>
               <div className="m-portlet__body" style={{height: "100%"}}>
 
+                {isLoading &&
+                  <TabContainer>
+                    <div className="full-width text-center m--margin-35">
+                      <CircularProgress  size={70} />
+                    </div>
+                  </TabContainer>
+                }
 
-                  {value === 'courses' &&
+                  {(isSuccess && value === 'courses') &&
                   <TabContainer>
                     <Grid container spacing={24}>
                       {this._renderCards(data)}
@@ -120,33 +128,33 @@ class StoreTabs extends Component {
                     </Grid>
                   </TabContainer>
                   }
-                  {value === 'teaching_aids' &&
+                  {(isSuccess && value === 'teaching_aids') &&
                   <TabContainer>
-                    {this._renderEmptyDataMsg()}
+                    {this._renderCards(data)}
                     {data.size > 0 &&  this._renderSeeAllButton('teaching_aids')}
                   </TabContainer>
                   }
-                  {value === 'books' &&
+                  {(isSuccess && value === 'books') &&
                   <TabContainer>
-                    {this._renderEmptyDataMsg()}
+                    {this._renderCards(data)}
                     {data.size > 0 &&  this._renderSeeAllButton('books')}
                   </TabContainer>
                   }
-                  {value === 'student_rewards' &&
+                  {(isSuccess && value === 'student_rewards') &&
                   <TabContainer>
-                    {this._renderEmptyDataMsg()}
+                    {this._renderCards(data)}
                     {data.size > 0 &&  this._renderSeeAllButton('student_rewards')}
                   </TabContainer>
                   }
-                  {value === 'stationary' &&
+                  {(isSuccess && value === 'stationary') &&
                   <TabContainer>
-                    {this._renderEmptyDataMsg()}
+                    {this._renderCards(data)}
                     {data.size > 0 &&  this._renderSeeAllButton('stationary')}
                   </TabContainer>
                   }
-                {value === 'bundles' &&
+                {(isSuccess && value === 'bundles') &&
                 <TabContainer>
-                  {this._renderEmptyDataMsg()}
+                  {this._renderCards(data)}
                   {data.size > 0 &&  this._renderSeeAllButton('bundles')}
                 </TabContainer>
                 }
