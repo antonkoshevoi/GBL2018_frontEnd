@@ -44,15 +44,15 @@ class Sidebar extends Component {
   }
 
 
-  componentWillReceiveProps(nextProps) {
-    const {location} = nextProps;
-
-    if (location.pathname !== '/dashboard'){
-      const key = location.pathname.substr(1).split('/')[0];
-      this.setState({activeMenu:{key:key, subMenu: true}})
-    }
-
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   const {location} = nextProps;
+  //
+  //   if (location.pathname !== '/dashboard'){
+  //     const key = location.pathname.substr(1).split('/')[0];
+  //     this.setState({activeMenu:{key:key, subMenu: true}})
+  //   }
+  //
+  // }
 
 
   _getActiveMenuByKey(key) {
