@@ -10,7 +10,16 @@ class ImageCropper extends Component {
     croppedFile: ''
   }
 
-  _handleFileChange(e) {
+
+    componentDidMount() {
+        const {image} = this.props;
+        if (image) {
+            this.setState({file:image});
+        }
+    }
+
+
+    _handleFileChange(e) {
     e.preventDefault();
     let files;
     if (e.dataTransfer) {
@@ -116,20 +125,39 @@ class ImageCropper extends Component {
     this.props.setFile(this.state.file);
   }
 
+  _triggerFileInput(){
+      this.fileInput.click();
+  }
+
   render() {
 
     const {croppedFile, file} = this.state;
-    const {saveButton} = this.props;
+    const {saveButton, circularButton} = this.props;
 
     return (
       <div className="CropperBlock">
-        <div className='upload-btn-wrapper '>
-          <span className='btn pointer m-btn--air btn-outline-info'>Upload a file</span>
-          <input type='file' name='myfile' onChange={(e) => {
-            this._handleFileChange(e)
-          }}/>
-        </div>
-
+          {!circularButton &&
+            <div className='upload-btn-wrapper '>
+              <span className='btn pointer m-btn--air btn-outline-info'>Upload a file</span>
+              <input type='file' ref={fileInput => this.fileInput = fileInput}  name='myfile' onChange={(e) => {
+                this._handleFileChange(e)
+              }}/>
+            </div>
+          }
+          {circularButton &&
+          <div className={'upload-btn-wrapper ' + (croppedFile && 'withImage')} >
+              <span className="uploadImgBtn circular pointer" onClick={() => this._triggerFileInput()}>
+                   {croppedFile &&
+                   <img className='croppedThumbnail' src={croppedFile} alt='cropped image'/>
+                   }
+                  <i className="uploadBtnText fa fa-upload"></i>
+                  <span className="uploadBtnText">Upload Photo</span>
+              </span>
+              <input type='file' className="m--hide" ref={fileInput => this.fileInput = fileInput}  name='myfile' onChange={(e) => {
+                  this._handleFileChange(e)
+              }}/>
+          </div>
+          }
         <Cropper
           ref={cropper => {
             this.cropper = cropper;
@@ -197,7 +225,7 @@ class ImageCropper extends Component {
         </div>
         }
         <div className='croppedBlock'>
-          {croppedFile &&
+          {(croppedFile  && !circularButton) &&
           <img className='img-thumbnail' style={{width: '150px'}} src={croppedFile} alt='cropped image'/>
           }
 

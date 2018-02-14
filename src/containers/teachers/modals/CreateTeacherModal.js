@@ -102,7 +102,7 @@ class CreateTeacherModal extends Component {
     const errors = createRequest.get('errors');
 
     return (
-      <Modal isOpen={isOpen} onClose={() => this._close()}>
+      <Modal isOpen={isOpen} bigger onClose={() => this._close()}>
         <AppBar position='static' color='primary' className='dialogAppBar'>
           <Toolbar>
             <IconButton color="inherit" aria-label='Close'>
@@ -125,13 +125,13 @@ class CreateTeacherModal extends Component {
             </DialogContentText>
              <div className="row">
                <div className="col-md-6">
-                 <TeacherForm
-                   onChange={(teacher) => { this._onChange(teacher) }}
-                   teacher={this.state.teacher}
-                   errors={errors}/>
+                    <ImageCropper circularButton onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
                </div>
                <div className="col-md-6">
-                 <ImageCropper onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
+                   <TeacherForm
+                       onChange={(teacher) => { this._onChange(teacher) }}
+                       teacher={this.state.teacher}
+                       errors={errors}/>
                </div>
              </div>
           </form>

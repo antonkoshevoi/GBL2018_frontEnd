@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { selectRoles } from '../../../redux/administration/selectors';
 import { selectGetSchoolHomeroomsRequest, selectSchools } from "../../../redux/schools/selectors";
 import { getSchoolHomerooms, getSchools } from "../../../redux/schools/actions";
+import MetronicSelect from "../../../components/ui/metronic/MetronicSelect";
 
 class AdministrationForm extends Component {
   static propTypes = {
@@ -90,124 +91,117 @@ class AdministrationForm extends Component {
 
     return (
       <div className='row'>
-        <div className='col-sm-8 m-auto'>
-          <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Group</InputLabel>
-            <Select
-              primarytext=""
-              name='roleId'
-              onChange={(e) => { this._handleInputChange(e) }}
-              children={this._renderRoles()}
-              value={adminUser.roleId || ''}>
-            </Select>
-            {errors && errors.get('roleId') && <FormHelperText error>{ errors.get('roleId').get(0) }</FormHelperText>}
-          </FormControl>
-          <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Username</InputLabel>
-            <Input
-              autoFocus
-              name='username'
-              margin='dense'
-              fullWidth
-              value={adminUser.username || ''}
-              onChange={(e) => { this._handleInputChange(e) }}/>
-            {errors && errors.get('username') && <FormHelperText error>{ errors.get('username').get(0) }</FormHelperText>}
-          </FormControl>
-          <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Password</InputLabel>
-            <Input
-              fullWidth
-              name='password'
-              type='password'
-              margin='dense'
-              value={adminUser.password || ''}
-              onChange={(e) => { this._handleInputChange(e) }}/>
-            {errors && errors.get('password') && <FormHelperText error>{ errors.get('password').get(0) }</FormHelperText>}
-          </FormControl>
-          <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Email</InputLabel>
-            <Input
-              fullWidth
-              name='email'
-              type='email'
-              margin='dense'
-              value={adminUser.email || ''}
-              onChange={(e) => { this._handleInputChange(e) }}/>
-            {errors && errors.get('email') && <FormHelperText error>{ errors.get('email').get(0) }</FormHelperText>}
-          </FormControl>
-          <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>First Name</InputLabel>
-            <Input
-              fullWidth
-              name='firstName'
-              type='text'
-              margin='dense'
-              value={adminUser.firstName || ''}
-              onChange={(e) => { this._handleInputChange(e) }}/>
-            {errors && errors.get('firstName') && <FormHelperText error>{ errors.get('firstName').get(0) }</FormHelperText>}
-          </FormControl>
-          <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Last Name</InputLabel>
-            <Input
-              fullWidth
-              name='lastName'
-              type='text'
-              margin='dense'
-              value={adminUser.lastName || ''}
-              onChange={(e) => { this._handleInputChange(e) }}/>
-            {errors && errors.get('lastName') && <FormHelperText error>{ errors.get('lastName').get(0) }</FormHelperText>}
-          </FormControl>
-          <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Select Gender</InputLabel>
-            <Select
-                primarytext=""
-                name='gender'
-                onChange={(e) => { this._handleInputChange(e) }}
-                value={adminUser.gender || ''}>
-              <MenuItem value={null} primarytext=""/>
-              <MenuItem value='1'>Male</MenuItem>
-              <MenuItem value='0'>Female</MenuItem>
-            </Select>
-            {errors && errors.get('gender') && <FormHelperText error>{ errors.get('gender').get(0) }</FormHelperText>}
-          </FormControl>
-          <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Phone</InputLabel>
-            <Input
-                fullWidth
-                name='phoneNumber'
-                type='text'
-                margin='dense'
-                value={adminUser.phoneNumber || ''}
-                onChange={(e) => { this._handleInputChange(e) }}/>
-              {errors && errors.get('phoneNumber') && <FormHelperText error>{ errors.get('phoneNumber').get(0) }</FormHelperText>}
-          </FormControl>
+          <div className='col-sm-12 m-auto'>
 
-          {/*<FormControl className='full-width form-inputs'>*/}
-            {/*<InputLabel htmlFor='name-error'>School</InputLabel>*/}
-            {/*<Select*/}
-                {/*primarytext=""*/}
-                {/*name='schoolId'*/}
-                {/*onChange={(e) => { this._handleSchoolChange(e) }}*/}
-                {/*value={adminUser.schoolId || ''}>*/}
-              {/*<MenuItem value={null} primarytext="Select School"/>*/}
+              <div className="m-form">
+                  <div className="form-group m-form__group row">
+                      <label className="col-form-label col-lg-3" htmlFor="gender">Group</label>
+                      <div className="col-lg-9">
+                          <MetronicSelect
+                              primarytext=""
+                              name='roleId'
+                              id="roleId"
+                              onChange={(e) => { this._handleInputChange(e) }}
+                              value={adminUser.roleId || ''}>
+                              {this._renderRoles()}
+                          </MetronicSelect>
+                          {errors && errors.get('roleId') && <div className="form-control-feedback error">{ errors.get('roleId').get(0) }</div>}
+                      </div>
+                  </div>
+                  <div className="form-group m-form__group row">
+                      <label className="col-form-label col-lg-3" htmlFor="username">Username</label>
+                      <div className="col-lg-9">
+                          <input type="text" onChange={(e) => { this._handleInputChange(e) }} value={adminUser.username || ''} className="form-control m-input--air form-control-success m-input" name="username" id="username"/>
+                          {errors && errors.get('username') && <div className="form-control-feedback error">{ errors.get('username').get(0) }</div>}
+                      </div>
+                  </div>
+                  <div className="form-group m-form__group row">
+                      <label className="col-form-label col-lg-3" htmlFor="password">Password</label>
+                      <div className="col-lg-9">
+                          <input type="password" onChange={(e) => { this._handleInputChange(e) }} value={adminUser.password || ''} className="form-control m-input--air form-control-success m-input" name="password" id="password"/>
+                          {errors && errors.get('password') && <div className="form-control-feedback error">{ errors.get('password').get(0) }</div>}
+                      </div>
+                  </div>
+                  <div className="form-group m-form__group row">
+                      <label className="col-form-label col-lg-3" htmlFor="email">Email</label>
+                      <div className="col-lg-9">
+                          <input type="email" onChange={(e) => { this._handleInputChange(e) }} value={adminUser.email || ''} className="form-control m-input--air form-control-success m-input" name="email" id="email"/>
+                          {errors && errors.get('email') && <div className="form-control-feedback error">{ errors.get('email').get(0) }</div>}
+                      </div>
+                  </div>
+                  <div className="form-group m-form__group row">
+                      <label className="col-form-label col-lg-3" htmlFor="firsName">First Name</label>
+                      <div className="col-lg-9">
+                          <input type="text" onChange={(e) => { this._handleInputChange(e) }} value={adminUser.firstName || ''} className="form-control m-input--air form-control-success m-input" name="firstName" id="firstName"/>
+                          {errors && errors.get('firstName') && <div className="form-control-feedback error">{ errors.get('firstName').get(0) }</div>}
+                      </div>
+                  </div>
+                  <div className="form-group m-form__group row">
+                      <label className="col-form-label col-lg-3" htmlFor="lastName">Last Name</label>
+                      <div className="col-lg-9">
+                          <input type="text" onChange={(e) => { this._handleInputChange(e) }} value={adminUser.lastName || ''} className="form-control m-input--air form-control-success m-input" name="lastName" id="lastName"/>
+                          {errors && errors.get('lastName') && <div className="form-control-feedback error">{ errors.get('lastName').get(0) }</div>}
+                      </div>
+                  </div>
+
+                  <div className="form-group m-form__group row">
+                      <label className="col-form-label col-lg-3" htmlFor="gender">Select Gender</label>
+                      <div className="col-lg-9">
+                          <MetronicSelect
+                              primarytext=""
+                              name='gender'
+                              id="gender"
+                              onChange={(e) => { this._handleInputChange(e) }}
+                              value={adminUser.gender || ''}>
+                              <MenuItem value={null} primarytext=""/>
+                              <MenuItem value='1'>Male</MenuItem>
+                              <MenuItem value='0'>Female</MenuItem>
+                          </MetronicSelect>
+                          {errors && errors.get('gender') && <div className="form-control-feedback error">{ errors.get('gender').get(0) }</div>}
+                      </div>
+                  </div>
+                  <div className="form-group m-form__group row">
+                      <label className="col-form-label col-lg-3" htmlFor="firsName">Phone Number</label>
+                      <div className="col-lg-9">
+                          <input type="text" onChange={(e) => { this._handleInputChange(e) }} value={adminUser.phoneNumber || ''} className="form-control m-input--air form-control-success m-input" name="phoneNumber" id="phoneNumber"/>
+                          {errors && errors.get('phoneNumber') && <div className="form-control-feedback error">{ errors.get('phoneNumber').get(0) }</div>}
+                      </div>
+                  </div>
+                  <div className="form-group m-form__group row">
+                      <label className="col-form-label col-lg-3" htmlFor="homeroomId">Homeroom</label>
+                      <div className="col-lg-9">
+                          <MetronicSelect
+                              primarytext=""
+                              name='homeroomId'
+                              id="homeroomId"
+                              onChange={(e) => { this._handleInputChange(e) }}
+                              value={adminUser.homeroomId || ''}>
+                              <MenuItem value={null} primarytext=""/>
+                              {this._renderSchoolHomerooms()}
+                          </MetronicSelect>
+                          {errors && errors.get('homeroom') && <div className="form-control-feedback error">{ errors.get('homeroom').get(0) }</div>}
+                      </div>
+                  </div>
+              </div>
+
+
+
+
+              {/*<FormControl className='full-width form-inputs'>*/}
+              {/*<InputLabel htmlFor='name-error'>School</InputLabel>*/}
+              {/*<Select*/}
+              {/*primarytext=""*/}
+              {/*name='schoolId'*/}
+              {/*onChange={(e) => { this._handleSchoolChange(e) }}*/}
+              {/*value={adminUser.schoolId || ''}>*/}
+              {/*<MenuItem value={null} primarytext=""/>*/}
               {/*{this._renderSchools()}*/}
-            {/*</Select>*/}
-            {/*{errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}*/}
-          {/*</FormControl>*/}
+              {/*</Select>*/}
+              {/*{errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}*/}
+              {/*</FormControl>*/}
 
-          <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Homeroom</InputLabel>
-            <Select
-                primarytext=""
-                name='homeroomId'
-                onChange={(e) => { this._handleInputChange(e) }}
-                value={adminUser.homeroomId || ''}>
-              <MenuItem value={null} primarytext=""/>
-              {this._renderSchoolHomerooms()}
-            </Select>
-            {errors && errors.get('homeroom') && <FormHelperText error>{ errors.get('homeroom').get(0) }</FormHelperText>}
-          </FormControl>
-        </div>
+          </div>
+
       </div>
     );
   }

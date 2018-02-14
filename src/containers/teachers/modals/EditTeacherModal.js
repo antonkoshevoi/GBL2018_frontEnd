@@ -18,6 +18,7 @@ import {
 } from '../../../redux/teachers/actions';
 import Modal from "../../../components/ui/Modal";
 import TeacherForm from "../form/TeacherForm";
+import ImageCropper from "../../../components/ui/ImageCropper";
 
 class EditTeacherModal extends Component {
   static propTypes = {
@@ -79,6 +80,28 @@ class EditTeacherModal extends Component {
     );
   };
 
+    _setCroppedImage(img) {
+        this.setState(
+            {
+                student: {
+                    ...this.state.student,
+                    croppedAvatar: img
+                }
+            }
+        );
+    }
+
+    _setImage(img) {
+        this.setState(
+            {
+                student: {
+                    ...this.state.student,
+                    avatar: img
+                }
+            }
+        );
+    }
+
   render() {
     const { isOpen, updateRequest, getSingleRecordRequest } = this.props;
     const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');
@@ -86,7 +109,7 @@ class EditTeacherModal extends Component {
     const errors = updateRequest.get('errors');
 
     return (
-      <Modal isOpen={isOpen} onClose={() => this._close()}>
+      <Modal isOpen={isOpen} bigger onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
             <IconButton color="inherit" aria-label="Close">
@@ -107,10 +130,21 @@ class EditTeacherModal extends Component {
             {/*{errorMessage && <span>{errorMessage}</span>}*/}
           </DialogContentText>
           <form id='update-teacher-form' onSubmit={(e) => { this._onSubmit(e) }}>
-            <TeacherForm
-              onChange={(teacher) => { this._onChange(teacher) }}
-              teacher={this.state.teacher}
-              errors={errors}/>
+              <div className="row">
+                  <div className="col-md-6">
+                      <ImageCropper
+                          circularButton
+                          image={this.state.teacher.avatar}
+                          onCrop={(cropImg) => this._setCroppedImage(cropImg)}
+                          setFile={(img) => this._setImage(img)}/>
+                  </div>
+                  <div className="col-md-6">
+                      <TeacherForm
+                          onChange={(teacher) => { this._onChange(teacher) }}
+                          teacher={this.state.teacher}
+                          errors={errors}/>
+                  </div>
+              </div>
           </form>
         </DialogContent>
         <Divider className='full-width'/>

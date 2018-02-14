@@ -35,7 +35,7 @@ class Modal extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { classes, bigger } = this.props;
+    const { classes, bigger, maxWidth } = this.props;
 
     return (
       <Dialog
@@ -43,6 +43,8 @@ class Modal extends Component {
           paper: bigger ? classes.biggerPaper : classes.paper
         }}
         open={isOpen}
+        maxWidth={maxWidth}
+        className={'MainModal'}
         onClose={() => this._onClose()}
         transition={Transition}
         aria-labelledby='form-dialog-title'>
@@ -52,14 +54,17 @@ class Modal extends Component {
   }
 }
 
+Modal.defaultProps = {
+  maxWidth:'md'
+};
+
 Modal = withStyles({
   paper: {
     height: '80%'
   },
   biggerPaper: {
-    height: '80%',
-    minWidth: '80%',
-    maxWidth: 'none'
+    MaxHeight: '95%',
+    minWidth: '70%',
   },
   // paperWidthXs: {
   //   width: '80%'

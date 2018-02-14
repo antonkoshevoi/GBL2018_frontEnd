@@ -104,7 +104,7 @@ class CreateAdministrationModal extends Component {
     const errors = createRequest.get('errors');
 
     return (
-      <Modal isOpen={isOpen} onClose={() => this._close()}>
+      <Modal bigger isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
             <IconButton color="inherit" aria-label="Close">
@@ -127,13 +127,13 @@ class CreateAdministrationModal extends Component {
           <form id='create-administrator-form' onSubmit={(e) => { this._onSubmit(e) }}>
            <div className="row">
              <div className="col-md-6">
-               <AdministrationForm
-                 onChange={(adminUser) => { this._onChange(adminUser) }}
-                 adminUser={this.state.adminUser}
-                 errors={errors}/>
+                 <ImageCropper circularButton onCrop={(cropImg) => {this._setCroppedImage(cropImg)}} setFile={(img) => {this._setImage(img)}}/>
              </div>
              <div className="col-md-6">
-               <ImageCropper onCrop={(cropImg) => {this._setCroppedImage(cropImg)}} setFile={(img) => {this._setImage(img)}}/>
+                 <AdministrationForm
+                     onChange={(adminUser) => { this._onChange(adminUser) }}
+                     adminUser={this.state.adminUser}
+                     errors={errors}/>
              </div>
            </div>
           </form>

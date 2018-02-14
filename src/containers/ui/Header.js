@@ -63,10 +63,8 @@ class Header extends Component {
             <div className="m-stack__item m-brand  ">
               <div className="m-stack m-stack--ver m-stack--general">
                 <div className="m-stack__item m-stack__item--middle m-brand__logo">
-                  <NavLink to="/dashboard" className="m-nav__link">
-                    <a className="m-brand__logo-wrapper">
+                  <NavLink to="/dashboard" className="m-brand__logo-wrapper">
                       <img alt="GravityBrain" style={{"maxWidth": "100%"}} src={logo}/>
-                    </a>
                   </NavLink>
                 </div>
 
