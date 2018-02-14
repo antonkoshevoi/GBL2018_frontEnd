@@ -7,7 +7,6 @@ class DetailsSection extends Component {
 
   _renderCategories(categories){
     return categories.map((item,i)=>{
-      console.log(item);
       return (
         <span>
           {item.title}
@@ -18,13 +17,11 @@ class DetailsSection extends Component {
   }
 
   render() {
-
     const {data, addedRequest} = this.props;
     const category = 'No Info...';
     const price = Number(data.get('price'));
     const discountPrice = Number(price - (price * data.get('discount') / 100));
-    // const addCartSuccess = addToCartRequest.get('success');
-    console.log(data.get('category'));
+
     return (
       <div id="product-details">
         <div className="headerBlock">
@@ -45,14 +42,14 @@ class DetailsSection extends Component {
                       <div className="row">
                         <div className="col-md-7">
                           <p className="g-red productType  m--hide">{category}</p>
-                          <p>Product: {data.get('category').get('title')}</p>
-                          <p>Age: {data.get('age') ? data.get('age') : 'No Info...'}</p>
-                          <p>Subject: {data.get('subject') ? data.get('subject') : 'No Info...'}</p>
+                          <p className="m--margin-bottom-5">Product: {data.get('category').get('title')}</p>
+                          <p className="m--margin-bottom-5">Age: {data.get('target').get('title') ? data.get('target').get('title') : 'No Info...'}</p>
+                          <p className="m--margin-bottom-5">Subject: {data.get('subject').get('title') ? data.get('subject').get('title') : 'No Info...'}</p>
                         </div>
                         <div className="col-md-5 text-right">
                           <div className="align-text-bottom">
                             <StarRating score={data.get('score') || 4}/>
-                            <span className="m--margin-left-5">{data.get('count') || 54} <Icon fontSize={4} style={{fontSize:17, color:'#737373', transform: 'translateY(3px)'}}>person</Icon></span>
+                            <span className="m--margin-left-5">{data.get('count') || 54} <Icon fontSize={true} style={{fontSize:17, color:'#737373', transform: 'translateY(3px)'}}>person</Icon></span>
                           </div>
                         </div>
                       </div>

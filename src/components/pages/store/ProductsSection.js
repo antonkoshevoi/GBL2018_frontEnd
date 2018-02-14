@@ -23,7 +23,7 @@ class ProductsSection extends Component {
                 <ProductCard key={i} type="vertical" data={item}/> :
                 (
                     <div key={i}>
-                        <ProductCard  type="vertical" data={item}/> :
+                        <ProductCard  type="vertical" data={item}/>
                     </div>
                 )
             )

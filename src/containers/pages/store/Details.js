@@ -60,9 +60,16 @@ class Details extends Component {
   }
 
   render() {
-    const {record, records, addToCartRequest, getSingleRecordRequest} = this.props;
+    const {record, records, addToCartRequest, getSingleRecordRequest, getRecordsRequest} = this.props;
     const loadingSingle = getSingleRecordRequest.get('loading');
     const successSingle = getSingleRecordRequest.get('success');
+    const loadingRecords = getRecordsRequest.get('loading');
+    const successRecords = getRecordsRequest.get('success');
+
+    const similarRecords =
+      (successRecords && successSingle) ?
+      records.filter((item) => {
+      return (item.get('category').get('id') == record.get('category').get('id')) && (item.get('id') !== record.get('id'))}).slice(0, 5) : [];
 
     return (
       <div className="m-portlet store-wrapper fadeInLeft animated">
@@ -78,7 +85,7 @@ class Details extends Component {
             <div className="col-lg-8">
               {successSingle &&
               <div className="m-portlet">
-                <DetailsSection data={record} addedRequest={addToCartRequest} buyClick={(id) => {
+                <DetailsSection data={record}  addedRequest={addToCartRequest} buyClick={(id) => {
                   this._addToCart(id)
                 }}/>
                 <CommentsSection/>
@@ -87,7 +94,7 @@ class Details extends Component {
             </div>
             <div className="col-lg-4">
               {successSingle &&
-              <Sidebar data={records} title="Similar" dataType="similar"/>}
+              <Sidebar data={similarRecords} title="Similar" dataType="similar"/>}
             </div>
           </div>
         </div>
