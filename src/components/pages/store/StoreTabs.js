@@ -51,7 +51,7 @@ class StoreTabs extends Component {
     }
     return data.map(function (item,i) {
       return  (
-        <div key={i}>
+        <div key={i} className="d-inline-block">
           <ProductCard data={item}/>
         </div>
       )
