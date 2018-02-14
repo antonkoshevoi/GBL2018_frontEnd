@@ -92,7 +92,8 @@ class Filter extends Component {
     if (!nextProps.isActive) {
       this._resetAll();
     }
-    if (nextProps.location.key !== this.props.location.key) {
+
+    if (nextProps.location.hash == '' && nextProps.location.key !== this.props.location.key) {
       this._setCategoryFilter(nextProps.match.params.category);
     }
   }
@@ -200,7 +201,7 @@ class Filter extends Component {
                   this.handleMenuClick(e, 'categoryMenu')
                 }}
               >
-                <span> { this.state.active_target ? this.state.active_target : 'Target > Age' }</span> <i className="m--margin-left-10 fa fa-chevron-down"></i>
+                <span> { this.state.active_target ? this.state.active_target : 'Target  Age' }</span> <i className="m--margin-left-10 fa fa-chevron-down"></i>
               </Button>
               <Menu
                 id="category-menu"
