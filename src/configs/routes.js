@@ -22,6 +22,7 @@ import SignUpPrincipal from '../containers/auth/SignUpPrincipal';
 import NotFoundPage from '../containers/errors/404';
 import Route from '../containers/routing/Route';
 import Profile from "../containers/profile/Profile";
+import SchoolProfile from "../containers/profile/SchoolProfile";
 import StudentReports from "../containers/pages/reports/Students";
 import TeacherReports from "../containers/pages/reports/Teachers";
 import Store from "../containers/pages/store/Store";
@@ -87,6 +88,7 @@ export default () => (
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/:threadId?' name='Messages' component={Messages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/school-profile' name='School Profile' component={SchoolProfile} />
 
       {/*Open Invoices*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/accounts/invoices' name='OpenInvoices' component={OpenInvoices}/>

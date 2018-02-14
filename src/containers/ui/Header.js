@@ -16,6 +16,9 @@ import {getCartRecords} from "../../redux/store/actions";
 import {selectAddToCartRequest, selectCartRecords, selectGetCartRecordsRequest} from "../../redux/store/selectors";
 import Settings from "../pushers/Settings";
 import TabMenu from "../pushers/TabMenu";
+import {selectUserData} from "../../redux/user/selectors";
+import {getSchool} from "../../redux/schools/actions";
+import {selectSchool} from "../../redux/schools/selectors";
 // @translate(['key'], { wait: true })
 
 class Header extends Component {
@@ -44,7 +47,8 @@ class Header extends Component {
   }
 
   _renderHeader() {
-    const {logout, cartRecords, addToCartRequest, cartRecordsRequest,} = this.props;
+    const {logout, cartRecords, addToCartRequest, cartRecordsRequest, userData} = this.props;
+    const school = this.props.schoolRequest.get('record').toJS();
 
     return (
       <header className="m-grid__item  m-header " data-minimize-offset="200" data-minimize-mobile-offset="200">
@@ -53,9 +57,11 @@ class Header extends Component {
             <div className="m-stack__item m-brand  ">
               <div className="m-stack m-stack--ver m-stack--general">
                 <div className="m-stack__item m-stack__item--middle m-brand__logo">
-                  <a className="m-brand__logo-wrapper">
-                    <img alt="GravityBrain" style={{"maxWidth": "100%"}} src={logo}/>
-                  </a>
+                  <NavLink to="/dashboard" className="m-nav__link">
+                    <a className="m-brand__logo-wrapper">
+                      <img alt="GravityBrain" style={{"maxWidth": "100%"}} src={logo}/>
+                    </a>
+                  </NavLink>
                 </div>
 
               </div>
@@ -68,7 +74,7 @@ class Header extends Component {
 
               <div className="d-flex justify-content-center headerSchoolName align-items-center flex-1 hidden-sm">
                 <h4 style={{color: '#777'}}>
-                  GravityBrain School
+                  {school.schName}
                 </h4>
               </div>
 
@@ -121,6 +127,8 @@ Header = connect(
     addToCartRequest: selectAddToCartRequest(state),
     cartRecordsRequest: selectGetCartRecordsRequest(state),
     cartRecords: selectCartRecords(state),
+    userData: selectUserData(state),
+    schoolRequest: selectSchool(state),
   }),
   (dispatch) => ({
     logout: () => {
@@ -129,6 +137,7 @@ Header = connect(
     getCartRecords: () => {
       dispatch(getCartRecords())
     },
+    getSchool: () => { dispatch(getSchool()) },
   })
 )(Header);
 

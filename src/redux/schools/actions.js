@@ -2,6 +2,10 @@ export const GET_SCHOOLS = '[Schools] GET_SCHOOLS';
 export const GET_SCHOOLS_SUCCESS = '[Schools] GET_SCHOOLS_SUCCESS';
 export const GET_SCHOOLS_FAIL = '[Schools] GET_SCHOOLS_FAIL';
 
+export const GET_SCHOOL = '[Schools] GET_SCHOOL';
+export const GET_SCHOOL_SUCCESS = '[Schools] GET_SCHOOL_SUCCESS';
+export const GET_SCHOOL_FAIL = '[Schools] GET_SCHOOL_FAIL';
+
 export const GET_SCHOOL_TEACHERS = '[Schools] GET_SCHOOL_TEACHERS';
 export const GET_SCHOOL_TEACHERS_SUCCESS = '[Schools] GET_SCHOOL_TEACHERS_SUCCESS';
 export const GET_SCHOOL_TEACHERS_FAIL = '[Schools] GET_SCHOOL_TEACHERS_FAIL';
@@ -14,6 +18,9 @@ export const GET_SCHOOL_HOMEROOMS = '[Schools] GET_SCHOOL_HOMEROOMS';
 export const GET_SCHOOL_HOMEROOMS_SUCCESS = '[Schools] GET_SCHOOL_HOMEROOMS_SUCCESS';
 export const GET_SCHOOL_HOMEROOMS_FAIL = '[Schools] GET_SCHOOL_HOMEROOMS_FAIL';
 
+export const UPDATE = '[Schools] UPDATE';
+export const UPDATE_SUCCESS = '[Schools] UPDATE_SUCCESS';
+export const UPDATE_FAIL = '[Schools] UPDATE_FAIL';
 /**
  * Get schools
  */
@@ -24,6 +31,25 @@ export function getSchools(params = {}) {
             perPage: 0
         }))
     };
+}
+/**
+ * Get school
+ */
+export function getSchool(params = {}) {
+  return {
+    types: [GET_SCHOOL, GET_SCHOOL_SUCCESS, GET_SCHOOL_FAIL],
+    promise: (apiClient) => apiClient.get('school', Object.assign({}, params))
+  };
+}
+
+/**
+ * Update
+ */
+export function update(data, params = {}) {
+  return {
+    types: [UPDATE, UPDATE_SUCCESS, UPDATE_FAIL],
+    promise: (apiClient) => apiClient.put('school', data, params)
+  };
 }
 /**
  * School Teachers

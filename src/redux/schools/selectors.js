@@ -13,6 +13,21 @@ export const selectSchools = createSelector(
     (subState) => subState.get('schools')
 );
 /**
+ * School
+ */
+export const selectSchool = createSelector(
+  selectSchoolsDomain,
+  (subState) => subState.get('getSchoolRequest')
+);
+
+/**
+ * Update
+ */
+export const selectUpdateRequest = createSelector(
+  selectSchoolsDomain,
+  (subState) => subState.get('updateRequest')
+);
+/**
  * School Teachers
  */
 export const selectGetSchoolTeachersRequest = createSelector(

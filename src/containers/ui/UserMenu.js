@@ -68,6 +68,16 @@ class UserMenu extends Component {
                     </span>
                   </NavLink>
                 </li>
+                <li className="m-nav__item">
+                  <NavLink to="/school-profile" className="m-nav__link">
+                    <i className="m-nav__link-icon flaticon-profile-1"></i>
+                    <span className="m-nav__link-title">
+                      <span className="m-nav__link-wrap">
+                        <span className="m-nav__link-text">School Profile</span>
+                      </span>
+                    </span>
+                  </NavLink>
+                </li>
 
 
                 <li className="m-nav__separator m-nav__separator--fit">
