@@ -31,6 +31,12 @@ class Header extends Component {
     };
   }
 
+  componentDidMount() {
+    const { getSchool } = this.props;
+
+    getSchool();
+  }
+
 
   _openLanguageMenu = event => {
     this.setState({anchorEl: event.currentTarget});
