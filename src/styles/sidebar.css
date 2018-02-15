@@ -17,6 +17,7 @@ nav.navigation {
 
 #m_aside_left {
     width: 225px;
+    box-shadow: 0 2px 10px #8080804a;
 }
 
 nav.navigation > .menuItem > a, nav.navigation .second_level a{
