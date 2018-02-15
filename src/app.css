@@ -1220,8 +1220,14 @@ div.m-widget25 .m-widget25__price {
 }
 
 .uploadImgBtn:hover {
+  background: rgba(172, 227, 240, 0.58);
+}
+
+.withImage .uploadImgBtn:hover {
   background: rgba(115, 156, 174, 0.7);
 }
+
+
 
 .uploadImgBtn > i {
   font-size: 5rem;
