@@ -134,7 +134,7 @@ class Details extends Component {
                 <span className="m-portlet__head-icon">
                   {(mode === 'overview') ?
                     <i className="flaticon-info"></i> :
-                    <Tooltip title="Back" placement="top">
+                    <Tooltip title="Back" placement="bottom">
                       <a onClick={() => {
                         this._handleSwitchMode('overview')
                       }} className="pointer la la-arrow-left"></a>
@@ -150,7 +150,7 @@ class Details extends Component {
               <ul className="m-portlet__nav">
                 <li className="m-portlet__nav-item">
                   {mode === 'overview' &&
-                  <Tooltip id="tooltip-icon" title="Edit" placement="top">
+                  <Tooltip id="tooltip-icon" title="Edit" placement="bottom">
                     <a onClick={() => {
                       this._handleSwitchMode('edit')
                     }}

@@ -76,8 +76,8 @@ class CreateStudentModal extends Component {
     this.setState(
       {
         student: {
-          ...this.state.student,
-          croppedAvatar:img
+        ...this.state.student,
+            croppedAvatar:img
         }
       }
     );
@@ -99,7 +99,7 @@ class CreateStudentModal extends Component {
     const loading = createRequest.get('loading');
     const errorMessage = createRequest.get('errorMessage');
     const errors = createRequest.get('errors');
-
+console.log(this.state)
     return (
       <Modal isOpen={isOpen} bigger onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">

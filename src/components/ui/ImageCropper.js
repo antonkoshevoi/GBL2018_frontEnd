@@ -11,15 +11,15 @@ class ImageCropper extends Component {
   }
 
 
-    componentDidMount() {
-        const {image} = this.props;
-        if (image) {
-            this.setState({file:image});
-        }
-    }
+  componentDidMount() {
+    // const {image} = this.props;
+    // if (image) {
+    //   this.setState({file: image});
+    // }
+  }
 
 
-    _handleFileChange(e) {
+  _handleFileChange(e) {
     e.preventDefault();
     let files;
     if (e.dataTransfer) {
@@ -30,13 +30,15 @@ class ImageCropper extends Component {
 
     const reader = new FileReader();
 
-    reader.onload = () => {
-      this.setState({
-        file: reader.result
-      });
-    };
+    if (files.length) {
+      reader.onload = () => {
+        this.setState({
+          file: reader.result
+        });
+      };
+      reader.readAsDataURL(files[0]);
+    }
 
-    reader.readAsDataURL(files[0]);
   }
 
 
@@ -49,10 +51,12 @@ class ImageCropper extends Component {
       files = e.target.files;
     }
     const reader = new FileReader();
-    reader.onload = () => {
-      this.setState({src: reader.result});
-    };
-    reader.readAsDataURL(files[0]);
+    if (files.length) {
+      reader.onload = () => {
+        this.setState({src: reader.result});
+      };
+      reader.readAsDataURL(files[0]);
+    }
   }
 
   cropImage() {
@@ -62,7 +66,7 @@ class ImageCropper extends Component {
       return;
     }
 
-    if (!saveButton){
+    if (!saveButton) {
       this.props.onCrop(this.cropper.getCroppedCanvas().toDataURL());
       this.props.setFile(this.state.file);
     }
@@ -113,58 +117,65 @@ class ImageCropper extends Component {
       croppedFile: this.cropper.getCroppedCanvas().toDataURL()
     });
 
-    if (!saveButton){
-      this.props.onCrop(this.cropper.getCroppedCanvas().toDataURL());
+    if (!saveButton) {
       this.props.setFile(this.state.file);
+      setTimeout(() => {
+        this.props.onCrop(this.cropper.getCroppedCanvas().toDataURL());
+      }, 200)
     }
   }
 
-  _saveImages(){
-    this.props.onSubmit(this.state.croppedFile,this.state.file)
-    this.props.onCrop(this.state.croppedFile);
-    this.props.setFile(this.state.file);
+
+  _saveImages() {
+    const {croppedFile, file} = this.state;
+    this.props.onSubmit(croppedFile, file)
+    this.props.setFile(file);
+    setTimeout(() => {
+      this.props.onCrop(croppedFile);
+    }, 200)
   }
 
-  _triggerFileInput(){
-      this.fileInput.click();
+  _triggerFileInput() {
+    this.fileInput.click();
   }
 
   render() {
 
     const {croppedFile, file} = this.state;
-    const {saveButton, circularButton} = this.props;
+    const {saveButton, circularButton, image} = this.props;
 
     return (
       <div className="CropperBlock">
-          {!circularButton &&
-            <div className='upload-btn-wrapper '>
-              <span className='btn pointer m-btn--air btn-outline-info'>Upload a file</span>
-              <input type='file' ref={fileInput => this.fileInput = fileInput}  name='myfile' onChange={(e) => {
-                this._handleFileChange(e)
-              }}/>
-            </div>
-          }
-          {circularButton &&
-          <div className={'upload-btn-wrapper ' + (croppedFile && 'withImage')} >
+        {!circularButton &&
+        <div className='upload-btn-wrapper '>
+          <span className='btn pointer m-btn--air btn-outline-info'>Upload a file</span>
+          <input type='file' ref={fileInput => this.fileInput = fileInput} name='myfile' onChange={(e) => {
+            this._handleFileChange(e)
+          }}/>
+        </div>
+        }
+        {circularButton &&
+        <div className={'upload-btn-wrapper ' + ((croppedFile || image) && 'withImage')}>
               <span className="uploadImgBtn circular pointer" onClick={() => this._triggerFileInput()}>
-                   {croppedFile &&
-                   <img className='croppedThumbnail' src={croppedFile} alt='cropped image'/>
+                   {(croppedFile || image) &&
+                   <img className='croppedThumbnail' src={(croppedFile || image)} alt='cropped image'/>
                    }
-                  <i className="uploadBtnText fa fa-upload"></i>
+                <i className="uploadBtnText fa fa-upload"></i>
                   <span className="uploadBtnText">Upload Photo</span>
               </span>
-              <input type='file' className="m--hide" ref={fileInput => this.fileInput = fileInput}  name='myfile' onChange={(e) => {
-                  this._handleFileChange(e)
-              }}/>
-          </div>
-          }
+          <input type='file' className="m--hide" ref={fileInput => this.fileInput = fileInput} name='myfile'
+                 onChange={(e) => {
+                   this._handleFileChange(e)
+                 }}/>
+        </div>
+        }
         <Cropper
           ref={cropper => {
             this.cropper = cropper;
           }}
           src={file}
           className='signup-cropper'
-          style={{height: 250, width: 250}}
+          style={{height: 170, width: 250}}
           aspectRatio={1 / 1}
 
           guides={false}/>
@@ -225,13 +236,18 @@ class ImageCropper extends Component {
         </div>
         }
         <div className='croppedBlock'>
-          {(croppedFile  && !circularButton) &&
+          {(croppedFile && !circularButton) &&
           <img className='img-thumbnail' style={{width: '150px'}} src={croppedFile} alt='cropped image'/>
           }
 
           {(saveButton && croppedFile) && (
             <div className="textCenter m--margin-20">
-                <a className="btn m-btn btn-info m-btn--air" onClick={()=>{this._saveImages()}}>Save</a>
+              <button
+                className="btn btn-outline-metal m-btn btn-sm m-btn--custom btn-white m-btn--outline-2x m-btn--uppercase cropSaveBtn"
+                onClick={() => {
+                  this._saveImages()
+                }}>Save
+              </button>
             </div>
           )}
         </div>

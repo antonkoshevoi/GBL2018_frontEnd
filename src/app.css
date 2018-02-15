@@ -46,6 +46,16 @@ textarea {
   overflow: hidden !important;
 }
 
+.btn-outline-metal.btn-white {
+  color: #fff;
+  border-color: #fff;
+}
+
+.btn-outline-metal.btn-white:hover{
+  background-color: #0a8cf0;
+}
+
+
 .App {
   text-align: center;
 }
@@ -320,6 +330,7 @@ div.portlet-header-input:before {
   overflow: hidden;
   display: inline-block;
   padding: 15px;
+  z-index: 5;
 }
 
 .btn {
@@ -339,6 +350,12 @@ div.portlet-header-input:before {
   top: 0;
   opacity: 0;
   height: 100%;
+}
+
+[role="dialog"] .cropSaveBtn {
+  position: absolute;
+  top: -65px;
+  right: -6px;
 }
 
 .croppedBlock {
@@ -1156,6 +1173,7 @@ div.m-widget25 .m-widget25__price {
 
 .CropperBlock {
   text-align: center;
+  position: relative;
 }
 .progress {
   background-color: #BDCCD4 !important;
@@ -1171,7 +1189,9 @@ div.m-widget25 .m-widget25__price {
 
 .upload-btn-wrapper.withImage .uploadImgBtn:hover .uploadBtnText {
   display: block;
+  font-weight: 600;
   color: #444;
+  text-shadow: 0 0 3px white;
 }
 
 .upload-btn-wrapper.withImage .croppedThumbnail {
@@ -1200,7 +1220,7 @@ div.m-widget25 .m-widget25__price {
 }
 
 .uploadImgBtn:hover {
-  background: rgba(160, 188, 197, 0.7);
+  background: rgba(115, 156, 174, 0.7);
 }
 
 .uploadImgBtn > i {

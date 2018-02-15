@@ -122,7 +122,7 @@ class Info extends Component {
           <div className="text-center m--margin-top-15">
             {!changePasswordMode && <button onClick={() => {
               this._handlePasswordModeSwitch(true)
-            }} className="m-btn btn m-btn--air m-btn--outline-2x btn-outline-success">Change Password</button>}
+            }} className="m-btn btn m-btn--outline-2x btn-outline-success">Change Password</button>}
           </div>
           {changePasswordMode &&
             <div className="m-widget1 m-widget1--paddingless">
@@ -181,7 +181,7 @@ class Info extends Component {
           onClose={() => this._closeUploadModal()}
         >
          <Card title="Upload Avatar" icon="fa fa-upload" style={{minWidth:'280px'}}>
-            <ImageCropper saveButton onSubmit={(cropImg,img) => this._onSubmit(cropImg,img)} onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
+            <ImageCropper saveButton circularButton onSubmit={(cropImg,img) => this._onSubmit(cropImg,img)} onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
          </Card>
         </Dialog>
       </div>
