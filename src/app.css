@@ -3,6 +3,19 @@
   height: 100%;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  position: fixed;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(128, 128, 128, 0.22);
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ededed;
+}
+
 button, [role="button"], [type="button"],  .btn {
   outline: none !important;
 }
@@ -182,6 +195,10 @@ li > .small-avatar {
 
 .full-width {
   width: 100%;
+}
+
+header{
+  transition: .2s;
 }
 
 header.dialogAppBar {

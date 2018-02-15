@@ -28,15 +28,24 @@ class Header extends Component {
     this.state = {
       anchorEl: null,
       activePusherMenu: null,
+      headerPosition: 0,
+      headerHeight:window.innerWidth <= 992 ? 60 : 70
     };
   }
 
   componentDidMount() {
     const { getSchool } = this.props;
-
     getSchool();
+    window.addEventListener('scroll',this.setHeaderPosition.bind(this));
   }
 
+  setHeaderPosition(){
+    const { headerHeight } = this.state
+    window.scrollY <= headerHeight?
+      this.setState({headerPosition:window.scrollY})
+      :
+      this.setState({headerPosition:headerHeight})
+  }
 
   _openLanguageMenu = event => {
     this.setState({anchorEl: event.currentTarget});
@@ -55,9 +64,9 @@ class Header extends Component {
   _renderHeader() {
     const {logout, cartRecords, addToCartRequest, cartRecordsRequest, userData} = this.props;
     const school = this.props.schoolRequest.get('record').toJS();
-
+    const {headerPosition} = this.state;
     return (
-      <header className="m-grid__item  m-header " data-minimize-offset="200" data-minimize-mobile-offset="200">
+      <header className="m-grid__item  m-header " style={{top:-headerPosition}} ref="header" data-minimize-offset="200" data-minimize-mobile-offset="200">
         <div className="m-container general-header m-container--fluid m-container--full-height">
           <div className="m-stack m-stack--ver m-stack--desktop">
             <div className="m-stack__item m-brand  ">

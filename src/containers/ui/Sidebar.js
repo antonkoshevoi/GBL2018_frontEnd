@@ -20,6 +20,8 @@ class Sidebar extends Component {
         key: ''
       },
       hovered: false,
+      headerPosition: 0,
+      headerHeight:window.innerWidth <= 992 ? 60 : 70
     }
   }
 
@@ -30,7 +32,7 @@ class Sidebar extends Component {
   componentDidMount() {
     const {location} = this.props;
     const key = location.pathname.substr(1).split('/')[0];
-
+    window.addEventListener('scroll',this.setHeaderPosition.bind(this));
     setTimeout(() => {
       const activeMenuKey = $('.second_level .active').closest('.menuItem').data('key');
 
@@ -43,6 +45,13 @@ class Sidebar extends Component {
     })
   }
 
+  setHeaderPosition(){
+    const { headerHeight } = this.state
+    window.scrollY <= headerHeight?
+      this.setState({headerPosition:window.scrollY})
+      :
+      this.setState({headerPosition:headerHeight})
+  }
 
   // componentWillReceiveProps(nextProps) {
   //   const {location} = nextProps;
@@ -212,10 +221,11 @@ class Sidebar extends Component {
 
     const {auth} = this.props;
     const isLoggedIn = auth.get('isLoggedIn')
+    const {headerPosition} = this.state;
 
     return (
       isLoggedIn && (
-        <div id="m_aside_left" className="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
+        <div id="m_aside_left" style={{marginTop:-headerPosition}} className="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
           <div className="text-right mobile-sidebar-toggle m--hide">
             <IconButton color='primary' onClick={() => {
               this.props.mobileSidebar()

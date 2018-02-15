@@ -8,9 +8,9 @@ import {
   Toolbar, Typography,
   Divider, Button, DialogActions
 } from 'material-ui';
-import { connect } from 'react-redux';
-import { selectCreateRequest } from '../../../redux/students/selectors';
-import { create, resetCreateRequest } from '../../../redux/students/actions';
+import {connect} from 'react-redux';
+import {selectCreateRequest} from '../../../redux/students/selectors';
+import {create, resetCreateRequest} from '../../../redux/students/actions';
 import Modal from "../../../components/ui/Modal";
 import StudentForm from "../forms/StudentForm";
 import ImageCropper from "../../../components/ui/ImageCropper";
@@ -24,7 +24,7 @@ class CreateStudentModal extends Component {
     createRequest: PropTypes.any.isRequired,
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       student: {
@@ -37,8 +37,8 @@ class CreateStudentModal extends Component {
         phone: '',
         schoolId: '',
         homeroomId: '',
-        avatar:'',
-        croppedAvatar:''
+        avatar: '',
+        croppedAvatar: ''
       }
     };
   }
@@ -47,24 +47,24 @@ class CreateStudentModal extends Component {
     const success = this.props.createRequest.get('success');
     const nextSuccess = nextProps.createRequest.get('success');
 
-    if(!success && nextSuccess) {
+    if (!success && nextSuccess) {
       this._close();
       this.props.onSuccess();
     }
   }
 
-  _onChange (student) {
-    this.setState({ student });
+  _onChange(student) {
+    this.setState({student});
   };
 
-  _onSubmit (e) {
+  _onSubmit(e) {
     e.preventDefault();
     this.props.create(
       this.state.student
     );
   };
 
-  _close () {
+  _close() {
     this.setState({
       student: {}
     });
@@ -72,34 +72,33 @@ class CreateStudentModal extends Component {
     this.props.resetCreateRequest();
   }
 
-  _setCroppedImage(img){
+  _setCroppedImage(img) {
     this.setState(
       {
         student: {
-        ...this.state.student,
-            croppedAvatar:img
+          ...this.state.student,
+          croppedAvatar: img
         }
       }
     );
   }
 
-  _setImage(img){
+  _setImage(img) {
     this.setState(
       {
         student: {
           ...this.state.student,
-          avatar:img
+          avatar: img
         }
       }
     );
   }
 
   render() {
-    const { isOpen, createRequest } = this.props;
+    const {isOpen, createRequest} = this.props;
     const loading = createRequest.get('loading');
     const errorMessage = createRequest.get('errorMessage');
     const errors = createRequest.get('errors');
-console.log(this.state)
     return (
       <Modal isOpen={isOpen} bigger onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
@@ -111,28 +110,33 @@ console.log(this.state)
                 <Icon>person</Icon>
               )}
             </IconButton>
-            <Typography type="title" color="inherit" >
+            <Typography type="title" color="inherit">
               Create user
             </Typography>
           </Toolbar>
         </AppBar>
 
         <DialogContent className="m--margin-top-15">
-          <form id='create-student-form' onSubmit={(e) => { this._onSubmit(e) }}>
+          <form id='create-student-form' onSubmit={(e) => {
+            this._onSubmit(e)
+          }}>
             <DialogContentText>
               {/*{errorMessage && <span>{errorMessage}</span>}*/}
             </DialogContentText>
-                  <div className="row">
-                      <div className="col-md-6">
-                          <ImageCropper circularButton onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
-                      </div>
-                      <div className="col-md-6">
-                          <StudentForm
-                              onChange={(student) => { this._onChange(student) }}
-                              student={this.state.student}
-                              errors={errors}/>
-                      </div>
-                  </div>
+            <div className="row">
+              <div className="col-md-6">
+                <ImageCropper circularButton onCrop={(cropImg) => this._setCroppedImage(cropImg)}
+                              setFile={(img) => this._setImage(img)}/>
+              </div>
+              <div className="col-md-6">
+                <StudentForm
+                  onChange={(student) => {
+                    this._onChange(student)
+                  }}
+                  student={this.state.student}
+                  errors={errors}/>
+              </div>
+            </div>
           </form>
         </DialogContent>
         <Divider className='full-width'/>
@@ -157,8 +161,12 @@ CreateStudentModal = connect(
     createRequest: selectCreateRequest(state),
   }),
   (dispatch) => ({
-    create: (form, params = {}) => { dispatch(create(form, params)) },
-    resetCreateRequest: () => { dispatch(resetCreateRequest()) },
+    create: (form, params = {}) => {
+      dispatch(create(form, params))
+    },
+    resetCreateRequest: () => {
+      dispatch(resetCreateRequest())
+    },
   })
 )(CreateStudentModal);
 
