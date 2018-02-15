@@ -987,13 +987,14 @@ address.signUpOptional {
   height: 60px;
 }
 
-.g-stepper svg circle {
-  fill: #0000;
-}
 
 .g-stepper svg circle {
   stroke-width: 1px;
   stroke: #08c;
+  fill: #0000;
+  cx: 12;
+  cy: 12;
+  r: 9;
 }
 
 .g-stepper svg text {
@@ -1253,3 +1254,27 @@ div.m-widget25 .m-widget25__price {
   margin-bottom: 5px;
 }
 
+
+/* Sidebar Fixed */
+
+#m_aside_left {
+  position: fixed;
+}
+
+.m-wrapper {
+  margin-left: 225px;
+  transition: margin .3s;
+  will-change: auto;
+}
+
+
+
+ @media (max-width: 992px){
+   .m-sidebar-is-open .m-wrapper {
+     margin-left: 225px;
+   }
+
+   .m-wrapper {
+     margin-left: 0;
+   }
+ }
