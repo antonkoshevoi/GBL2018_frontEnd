@@ -78,6 +78,15 @@ class SecondStepForm extends Component {
     }, () => { this.props.onChange(this.state.form); });
   }
 
+  _handleDateChange(m, dateField) {
+    this.setState({
+      form: {
+        ...this.state.form,
+        [dateField]: m
+      }
+    }, () => { this.props.onChange(this.state.form); });
+  }
+
   render() {
     const { form } = this.state;
     const { errors } = this.props;
@@ -159,10 +168,10 @@ class SecondStepForm extends Component {
                 <label className="col-form-label col-lg-3 col-sm-12">Birthday</label>
                 <MetronicDatePicker
                   className='col-lg-8 col-md-9 col-sm-12'
-                  value={form.dateOfBirth || null}
-                  onChange={(e) => { this._handleDateChange(e) }}/>
-                {errors && errors.get('dateOfBirth') &&
-                  <div className="form-control-feedback text-center error">{errors.get('dateOfBirth').get(0)}</div>}
+                  value={form.birthday || null}
+                  onChange={(date) => { this._handleDateChange(date, 'birthday') }}/>
+                {errors && errors.get('birthday') &&
+                  <div className="form-control-feedback text-center error">{errors.get('birthday').get(0)}</div>}
               </div>
              <div className="form-group m-form__group row">
 				<label className="col-form-label col-lg-3 col-sm-12">Gender</label>
