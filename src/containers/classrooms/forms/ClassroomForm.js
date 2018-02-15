@@ -10,6 +10,8 @@ import {
 } from "../../../redux/schools/selectors";
 import DatePicker from '../../../components/ui/DatePicker';
 import CourseModal from "../modals/CourseModal";
+import SweetAlert from 'sweetalert-react';
+import 'sweetalert/dist/sweetalert.css';
 
 function TabContainer(props) {
   return (
@@ -34,6 +36,7 @@ class ClassroomForm extends Component {
   constructor (props) {
     super(props);
     this.state = {
+      unassignedsAlert: false,
       schoolTeachers: [],
       schoolHomerooms: [],
       courseModalIsOpen: false,
@@ -53,6 +56,7 @@ class ClassroomForm extends Component {
   componentWillReceiveProps(nextProps) {
     this._getSchoolTeachersSuccess(nextProps);
     this._getSchoolHomeroomsSuccess(nextProps);
+    this._handleUnassignedsError(nextProps);
   }
 
   _openCourseDialog = () => {
@@ -67,6 +71,22 @@ class ClassroomForm extends Component {
       crmCourse: courseId
     });
   };
+
+  _closeUnassignedsAlert = () => {
+    this.setState({ unassignedsAlert: false });
+  }
+
+  _handleUnassignedsError(nextProps) {
+    const prevErrors = this.props.errors;
+    const nextErrors = nextProps.errors;
+
+    if (prevErrors && !prevErrors.get('unassignedsCount') && nextErrors && nextErrors.get('unassignedsCount')) {
+      this.setState({
+        ...this.state,
+        unassignedsAlert: true
+      });
+    }
+  }
 
   _setInitialHomerooms() {
     let { classroom } = this.props;
@@ -161,10 +181,17 @@ class ClassroomForm extends Component {
 
   render() {
     const { classroom, errors } = this.props;
-    const { courseModalIsOpen } = this.state;
+    const { courseModalIsOpen, unassignedsAlert } = this.state;
 
     return (
       <div className='row'>
+
+        <SweetAlert
+          show={unassignedsAlert}
+          title={unassignedsAlert ? errors.get('unassignedsCount').get(0) : ''}
+          onConfirm={() => {this._closeUnassignedsAlert()}}
+        />
+
         <div className="col-sm-8 m-auto">
           <FormControl aria-describedby='crmName-error-text' className='full-width form-inputs'>
             <InputLabel htmlFor='crmName-error'>Name</InputLabel>
