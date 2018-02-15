@@ -88,7 +88,7 @@ class SchoolInfo extends Component {
           onClose={() => this._closeUploadModal()}
         >
          <Card title="Upload Logo" icon="fa fa-upload" style={{minWidth:'280px'}}>
-            <ImageCropper saveButton onSubmit={(cropImg,img) => this._onSubmit(cropImg,img)} onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
+            <ImageCropper saveButton circularButton onSubmit={(cropImg,img) => this._onSubmit(cropImg,img)} onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
          </Card>
         </Dialog>
       </div>
