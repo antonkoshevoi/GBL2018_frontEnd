@@ -19,6 +19,7 @@ import transactionsReducer from './transactions/reducer';
 import reportsDashboardReducer from './reports/dashboard/reducer';
 import invitationsReducer from './invitations/reducer';
 import classroomsReportReducer from './reports/classroom/reducer';
+import homeroomsReportReducer from './reports/homerooms/reducer';
 import countriesReducer from './countries/reducer';
 import coursesReducer from './courses/reducer';
 
@@ -44,6 +45,7 @@ export default {
   reportsDashboardReducer: reportsDashboardReducer,
   invitations: invitationsReducer,
   classroomsReport: classroomsReportReducer,
+  homeroomReport: homeroomsReportReducer,
   countries: countriesReducer,
   courses: coursesReducer,
 };

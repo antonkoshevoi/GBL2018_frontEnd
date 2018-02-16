@@ -19,6 +19,7 @@ import {
 } from '../../../redux/homerooms/actions';
 import Modal from "../../../components/ui/Modal";
 import HomeroomForm from "../forms/HomeroomForm";
+import ImageCropper from "../../../components/ui/ImageCropper";
 
 class EditHomeroomModal extends Component {
   static propTypes = {
@@ -82,6 +83,28 @@ class EditHomeroomModal extends Component {
     this.props.resetUpdateRequest();
   };
 
+  _setCroppedImage(img) {
+    this.setState(
+      {
+        homeroom: {
+          ...this.state.homeroom,
+          avatarCropped: img
+        }
+      }
+    );
+  }
+
+  _setImage(img) {
+    this.setState(
+      {
+        homeroom: {
+          ...this.state.homeroom,
+          avatar: img
+        }
+      }
+    );
+  }
+
   render() {
     const { isOpen, updateRequest, getSingleRecordRequest } = this.props;
     const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');
@@ -106,14 +129,26 @@ class EditHomeroomModal extends Component {
         </AppBar>
 
         <DialogContent className="m--margin-top-25">
-          <DialogContentText>
-            {/*{errorMessage && <span>{errorMessage}</span>}*/}
-          </DialogContentText>
           <form id='update-homeroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
-            <HomeroomForm
-              onChange={(homeroom) => { this._onChange(homeroom) }}
-              homeroom={this.state.homeroom}
-              errors={errors}/>
+            <DialogContentText>
+              {/*{errorMessage && <span>{errorMessage}</span>}*/}
+            </DialogContentText>
+            <div className="row">
+              <div className="col-md-8">
+                <HomeroomForm
+                  onChange={(homeroom) => { this._onChange(homeroom) }}
+                  homeroom={this.state.homeroom}
+                  errors={errors}/>
+              </div>
+              <div className="col-md-4">
+                <ImageCropper
+                  image={this.state.homeroom.avatar}
+                  circularButton
+                  onCrop={(cropImg) => this._setCroppedImage(cropImg)}
+                  setFile={(img) => this._setImage(img)}
+                />
+              </div>
+            </div>
           </form>
         </DialogContent>
         <Divider className='full-width'/>

@@ -71,10 +71,22 @@ class DashboardTabs extends Component {
     this.setState({value});
   };
 
+  _renderEmptyDataMsg(message){
+    return (
+      <div className="display-1">
+        <h1 className="text-center">{message}</h1>
+      </div>
+    )
+  }
+
   _renderStudents() {
     const { goTo } = this.props;
     const students = this.props.getStudentsRequest.get('records').toJS();
     const defaultAvatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+
+    if (this.props.getStudentsRequest.get('success') && !students.length) {
+      return this._renderEmptyDataMsg('No Students...');
+    }
 
     return students.map(function (student, i) {
       return (
@@ -108,17 +120,35 @@ class DashboardTabs extends Component {
   }
 
   _renderHomerooms() {
+    const { goTo } = this.props;
     const homerooms = this.props.getHomeroomsRequest.get('records').toJS();
+
+    if (this.props.getHomeroomsRequest.get('success') && !homerooms.length) {
+      return this._renderEmptyDataMsg('No Homerooms...');
+    }
 
     return homerooms.map(function (homeroom, i) {
       return (
-        <GridListTile key={i} className="grid-tile">
-          <img
-            src="https://is5-ssl.mzstatic.com/image/thumb/Purple1/v4/7d/3c/43/7d3c4388-f8c2-466d-0848-b7ec85c0fd3b/pr_source.jpg/1200x630bb.jpg"
-            alt={homeroom.id}/>
+        <GridListTile key={i} className="grid-tile" onClick={() => { goTo(`/reports/homerooms/${homeroom.id}`); }} style={{ cursor: 'pointer' }}>
+
+          <img src={homeroom.avatar} alt={homeroom.name}/>
           <GridListTileBar
             className="myGridTileBar"
-            title={<NavLink to={`/reports/homerooms/${homeroom.id}`}>{homeroom.name}</NavLink>}
+            title={homeroom.name}
+            subtitle={(
+              <div>
+                <span className="text-right d-block">{homeroom.passRate} %</span>
+                <div className="progress m-progress--sm">
+                  <div title="Completed" className="progress-bar bg-success" role="progressbar" style={{width: homeroom.completed + '%'}}></div>
+                  <div title="In Progress" className="progress-bar bg-warning" role="progressbar" style={{width: homeroom.inProgress + '%'}}></div>
+                </div>
+                <br/>
+                <div className="progress m-progress--sm">
+                  <div title="Average Grade" className="progress-bar bg-success" role="progressbar" style={{width: homeroom.averageGrade + '%'}}></div>
+                  <div title="Average Grade" className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(homeroom.averageGrade)) + '%'}}></div>
+                </div>
+              </div>
+            )}
             actionIcon={
               <IconButton color="default"></IconButton>
             }
@@ -129,17 +159,35 @@ class DashboardTabs extends Component {
   }
 
   _renderClassrooms() {
+    const { goTo } = this.props;
     const classrooms = this.props.getClassroomsRequest.get('records').toJS();
+
+    if (this.props.getClassroomsRequest.get('success') && !classrooms.length) {
+      return this._renderEmptyDataMsg('No Classrooms...');
+    }
 
     return classrooms.map(function (classroom, i) {
       return (
-        <GridListTile key={i} className="grid-tile">
-          <img
-            src="http://energydiet.canadiangeographic.ca/application/assets/img/2013/classroom-avatar.png"
-            alt={classroom.id}/>
+        <GridListTile key={i} className="grid-tile" onClick={() => { goTo(`/reports/classrooms/${classroom.id}`); }} style={{ cursor: 'pointer' }}>
+
+          <img src={classroom.avatar} alt={classroom.crmName}/>
           <GridListTileBar
             className="myGridTileBar"
-            title={<NavLink to={`/reports/classrooms/${classroom.id}`}>{classroom.crmName}</NavLink>}
+            title={classroom.crmName}
+            subtitle={(
+              <div>
+                <span className="text-right d-block">{classroom.passRate} %</span>
+                <div className="progress m-progress--sm">
+                  <div title="Completed" className="progress-bar bg-success" role="progressbar" style={{width: classroom.completed + '%'}}></div>
+                  <div title="In Progress" className="progress-bar bg-warning" role="progressbar" style={{width: classroom.inProgress + '%'}}></div>
+                </div>
+                <br/>
+                <div className="progress m-progress--sm">
+                  <div title="Average Grade" className="progress-bar bg-success" role="progressbar" style={{width: classroom.averageGrade + '%'}}></div>
+                  <div title="Average Grade" className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(classroom.averageGrade)) + '%'}}></div>
+                </div>
+              </div>
+            )}
             actionIcon={
               <IconButton color="default"></IconButton>
             }

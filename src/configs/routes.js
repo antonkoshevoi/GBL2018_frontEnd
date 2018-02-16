@@ -42,6 +42,7 @@ import PaymentCanceledContainer from '../containers/pages/store/payments/Payment
 
 import ReportsDashboard from "../containers/pages/reports/Dashboard";
 import ClassRoomReportDashboard from "../containers/pages/reports/classroom/Dashboard";
+import HomeRoomReportDashboard from "../containers/pages/reports/homeroom/Dashboard";
 import InvitationDetails from '../containers/invitations/InvitationDetails';
 import ShoppingCart from "../containers/pages/store/shopping-cart/ShoppingCart";
 
@@ -71,6 +72,7 @@ export default () => (
 
       <AuthenticatedRoute exact layout={MainLayout} path='/reports' component={ReportsDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReportDashboard}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/reports/homerooms/:id' name='Homeroom' component={HomeRoomReportDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
 

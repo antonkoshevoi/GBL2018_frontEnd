@@ -6,8 +6,8 @@ import {
 import { NavLink } from "react-router-dom";
 import { Search } from "material-ui-icons";
 import {connect} from "react-redux";
-import {selectStudentsRequest} from "../../../../redux/reports/classroom/selectors";
-import {getStudents} from "../../../../redux/reports/classroom/actions";
+import {selectStudentsRequest} from "../../../../redux/reports/homerooms/selectors";
+import {getStudents} from "../../../../redux/reports/homerooms/actions";
 
 function TabContainer(props) {
   return (
@@ -19,7 +19,7 @@ function TabContainer(props) {
 
 class DashboardTabs extends Component {
   static propTypes = {
-    classroomId: PropTypes.string.isRequired
+    homeroomId: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -34,9 +34,9 @@ class DashboardTabs extends Component {
   }
 
   componentDidMount() {
-    const { getStudents, classroomId } = this.props;
+    const { getStudents, homeroomId } = this.props;
 
-    getStudents(classroomId);
+    getStudents(homeroomId);
 
     this._setGridCols();
     window.addEventListener("resize", this._setGridCols.bind(this));

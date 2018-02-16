@@ -13,6 +13,7 @@ import { selectCreateRequest } from '../../../redux/classrooms/selectors';
 import { create, resetCreateRequest } from '../../../redux/classrooms/actions';
 import Modal from "../../../components/ui/Modal";
 import ClassroomForm from "../forms/ClassroomForm";
+import ImageCropper from "../../../components/ui/ImageCropper";
 
 class CreateClassroomModal extends Component {
   static propTypes = {
@@ -61,6 +62,28 @@ class CreateClassroomModal extends Component {
     this.props.resetCreateRequest();
   };
 
+  _setCroppedImage(img) {
+    this.setState(
+      {
+        classroom: {
+          ...this.state.classroom,
+          avatarCropped: img
+        }
+      }
+    );
+  }
+
+  _setImage(img) {
+    this.setState(
+      {
+        classroom: {
+          ...this.state.classroom,
+          avatar: img
+        }
+      }
+    );
+  }
+
   render() {
     const { isOpen, createRequest } = this.props;
     const loading = createRequest.get('loading');
@@ -85,14 +108,25 @@ class CreateClassroomModal extends Component {
         </AppBar>
 
         <DialogContent className="m--margin-top-25">
-          <DialogContentText>
-            {/*{errorMessage && <span>{errorMessage}</span>}*/}
-          </DialogContentText>
           <form id='create-classroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
-            <ClassroomForm
-              onChange={(classroom) => { this._onChange(classroom) }}
-              classroom={this.state.classroom}
-              errors={errors}/>
+            <DialogContentText>
+              {/*{errorMessage && <span>{errorMessage}</span>}*/}
+            </DialogContentText>
+            <div className="row">
+              <div className="col-md-8">
+                <ClassroomForm
+                  onChange={(classroom) => { this._onChange(classroom) }}
+                  classroom={this.state.classroom}
+                  errors={errors}/>
+              </div>
+              <div className="col-md-4">
+                <ImageCropper
+                  circularButton
+                  onCrop={(cropImg) => this._setCroppedImage(cropImg)}
+                  setFile={(img) => this._setImage(img)}
+                />
+              </div>
+            </div>
           </form>
         </DialogContent>
         <Divider className='full-width'/>

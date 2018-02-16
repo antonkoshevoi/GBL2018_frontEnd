@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import Card from "../../../../../components/ui/Card";
 import { CircularProgress } from 'material-ui';
-import {selectRosterStatisticRequest} from "../../../../../redux/reports/classroom/selectors";
-import {getRosterStatistic} from "../../../../../redux/reports/classroom/actions";
+import {selectRosterStatisticRequest} from "../../../../../redux/reports/homerooms/selectors";
+import {getRosterStatistic} from "../../../../../redux/reports/homerooms/actions";
 
 class RosterStatistic extends Component {
   static propTypes = {
-    classroomId: PropTypes.string.isRequired
+    homeroomId: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -17,9 +17,9 @@ class RosterStatistic extends Component {
   }
 
   componentDidMount() {
-    const { getRosterStatistic, classroomId } = this.props;
+    const { getRosterStatistic, homeroomId } = this.props;
 
-    getRosterStatistic(classroomId);
+    getRosterStatistic(homeroomId);
   }
 
   render() {
@@ -29,9 +29,9 @@ class RosterStatistic extends Component {
 
     return (
       <Card
-        title={success ? data.classroom.crmName : ''}
+        title={success ? data.homeroom.name : ''}
         className="profile-card"
-        avatar={success ? data.classroom.avatar : ''}>
+        avatar={success ? data.homeroom.avatar : ''}>
         <div className="m-widget1 m-widget1--paddingless">
           <div className="m-widget1 m-widget1--paddingless">
             <div className="m-widget1__item">
