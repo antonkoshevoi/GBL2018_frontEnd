@@ -33,16 +33,7 @@ class Sidebar extends Component {
     const {location} = this.props;
     const key = location.pathname.substr(1).split('/')[0];
     window.addEventListener('scroll',this.setHeaderPosition.bind(this));
-    setTimeout(() => {
-      const activeMenuKey = $('.second_level .active').closest('.menuItem').data('key');
-
-      if (activeMenuKey !== undefined) {
-        $('.second_level active').closest('.menuItem');
-        this.setState({activeMenu: {key: activeMenuKey, subMenu: true}})
-      } else {
-        this.setState({activeMenu: this._getActiveMenuByKey(key)});
-      }
-    })
+    this._generateMenusPosition(key);
   }
 
   setHeaderPosition(){
@@ -53,15 +44,11 @@ class Sidebar extends Component {
       this.setState({headerPosition:headerHeight})
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   const {location} = nextProps;
-  //
-  //   if (location.pathname !== '/dashboard'){
-  //     const key = location.pathname.substr(1).split('/')[0];
-  //     this.setState({activeMenu:{key:key, subMenu: true}})
-  //   }
-  //
-  // }
+  componentWillReceiveProps(nextProps) {
+    const {location} = nextProps;
+    const key = location.pathname.substr(1).split('/')[0];
+    this._generateMenusPosition(key);
+  }
 
 
   _getActiveMenuByKey(key) {
@@ -73,6 +60,19 @@ class Sidebar extends Component {
         key: 'dashboard'
       }
     }
+  }
+
+
+  _generateMenusPosition(key){
+    setTimeout(() => {
+      const activeMenuKey = $('.second_level .active').closest('.menuItem').data('key');
+      if (activeMenuKey !== undefined) {
+        $('.second_level .active').closest('.menuItem');
+        this.setState({activeMenu: {key: activeMenuKey, subMenu: true}})
+      } else {
+        this.setState({activeMenu: this._getActiveMenuByKey(key)});
+      }
+    })
   }
 
 
