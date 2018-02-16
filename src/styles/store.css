@@ -381,6 +381,10 @@ button .discount > span {
     margin-top: 20rem;
 }
 
+.shoppingCartPortlet {
+    margin-top: 10px !important;
+}
+
 @media (max-width: 567px) {
     .store-filter.right-block {
         justify-content: flex-start;

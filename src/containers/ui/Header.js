@@ -108,7 +108,7 @@ class Header extends Component {
                       <NavLink to='/store/shopping-cart' className='m-nav__link m-dropdown__toggle pointer' id='m_topbar_notification_icon'>
                         <span className='m-nav__link-icon'>
                           <i className="fa fa-shopping-cart PageHeader-icon"></i>
-                          <span className="g-badge badge-red">{cartRecords.size}</span>
+                          {cartRecords.size > 0 && <span className="g-badge badge-red">{cartRecords.size}</span> }
                         </span>
                       </NavLink>
                     </li>
