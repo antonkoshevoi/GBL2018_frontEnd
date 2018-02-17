@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { selectGetSchoolHomeroomsRequest, selectSchools } from '../../../redux/schools/selectors';
 import { getSchoolHomerooms, getSchools } from '../../../redux/schools/actions';
 import MetronicSelect from "../../../components/ui/metronic/MetronicSelect";
+import HasRole from "../../middlewares/HasRole";
+import HasPermission from "../../middlewares/HasPermission";
 
 class StudentForm extends Component {
   static propTypes = {
@@ -137,21 +139,25 @@ class StudentForm extends Component {
                         {errors && errors.get('phoneNumber') && <div className="form-control-feedback error">{ errors.get('phoneNumber').get(0) }</div>}
                     </div>
                 </div>
-                <div className="form-group m-form__group row">
-                    <label className="col-form-label col-lg-3" htmlFor="homeroomId">Homeroom</label>
-                    <div className="col-lg-9">
-                        <MetronicSelect
-                            primarytext=""
-                            name='homeroomId'
-                            id="homeroomId"
-                            onChange={(e) => { this._handleInputChange(e) }}
-                            value={student.homeroomId || ''}>
-                            <MenuItem value={null} primarytext=""/>
-                            {this._renderSchoolHomerooms()}
-                        </MetronicSelect>
-                        {errors && errors.get('homeroom') && <div className="form-control-feedback error">{ errors.get('homeroom').get(0) }</div>}
-                    </div>
-                </div>
+                <HasPermission permissions={[
+                  '[Users][Students][Create][Any]'
+                ]}>
+                  <div className="form-group m-form__group row">
+                      <label className="col-form-label col-lg-3" htmlFor="homeroomId">Homeroom</label>
+                      <div className="col-lg-9">
+                          <MetronicSelect
+                              primarytext=""
+                              name='homeroomId'
+                              id="homeroomId"
+                              onChange={(e) => { this._handleInputChange(e) }}
+                              value={student.homeroomId || ''}>
+                              <MenuItem value={null} primarytext=""/>
+                              {this._renderSchoolHomerooms()}
+                          </MetronicSelect>
+                          {errors && errors.get('homeroom') && <div className="form-control-feedback error">{ errors.get('homeroom').get(0) }</div>}
+                      </div>
+                  </div>
+                </HasPermission>
             </div>
 
 

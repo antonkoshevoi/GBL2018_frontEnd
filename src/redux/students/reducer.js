@@ -3,8 +3,7 @@ import {
   RESET_CREATE_REQUEST, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
   GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS,
   RESET_BULK_UPLOAD_REQUEST, BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS,
-  DELETE, DELETE_SUCCESS, DELETE_FAIL,
-  GET_PARENT_RECORDS, GET_PARENT_RECORDS_FAIL, GET_PARENT_RECORDS_SUCCESS
+  DELETE, DELETE_SUCCESS, DELETE_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -14,19 +13,6 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errorResponse: null
-  },
-  getParentRecordsRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorResponse: null,
-    records: [],
-    pagination: {
-      page: 1,
-      perPage: 10,
-      total: 0,
-      totalPages: 1
-    }
   },
   getSingleRecordRequest: {
     loading: false,
@@ -105,31 +91,6 @@ export default function reducer (state = initialState, action) {
           .set('fail', true)
         );
 
-    /**
-     * Get parent records
-     */
-    case GET_PARENT_RECORDS:
-      return state
-        .set('getParentRecordsRequest', state.get('getParentRecordsRequest')
-          .set('loading', true)
-          .remove('success')
-          .remove('fail')
-          .set('records', Immutable.List())
-        );
-    case GET_PARENT_RECORDS_SUCCESS:
-      return state
-        .set('getParentRecordsRequest', state.get('getParentRecordsRequest')
-          .set('success', true)
-          .remove('loading')
-          .set('records', Immutable.fromJS(action.result.data))
-          .set('pagination', Immutable.fromJS(action.result.meta.pagination))
-        );
-    case GET_PARENT_RECORDS_FAIL:
-      return state
-        .set('getParentRecordsRequest', state.get('getParentRecordsRequest')
-          .set('loading', false)
-          .set('fail', true)
-        );
     /**
      * Get single record
      */

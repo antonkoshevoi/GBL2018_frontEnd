@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Card from "../../components/ui/Card";
 import {
+  CircularProgress,
   GridList, GridListTile, GridListTileBar, IconButton, Tooltip
 } from 'material-ui';
 import {OldProgressBar} from "../../components/ui/LinearProgress";
@@ -9,14 +10,18 @@ import DashboardStore from "../../components/pages/store/DashboardStore";
 import HowToMovies from "../../components/pages/dashboard/HowToMovies";
 import UnassignedCourses from "../../components/pages/dashboard/UnassignedCourses";
 import {connect} from "react-redux";
-import {selectGetParentRecordsRequest} from "../../redux/students/selectors";
-import {getParentRecords} from "../../redux/students/actions";
+import {selectRecords, selectGetRecordsRequest} from "../../redux/students/selectors";
+import {getRecords} from "../../redux/students/actions";
 import {Row, Table, TablePreloader, Tbody, Td} from "../../components/ui/table";
+import CreateStudentModal from "../students/modals/CreateStudentModal";
+import { push } from 'react-router-redux';
 
 class ParentDashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      createModalIsOpen: false
+    }
   }
 
   componentDidMount() {
@@ -25,8 +30,18 @@ class ParentDashboard extends Component {
     getParentStudents();
   }
 
+  /**
+   * Create Dialog
+   */
+  _openCreateDialog = () => {
+    this.setState({ createModalIsOpen: true });
+  };
+  _closeCreateDialog = () => {
+    this.setState({ createModalIsOpen: false });
+  };
+
   _renderStudentsList() {
-    const students = this.props.getParentStudentsRequest.get('records');
+    const students = this.props.parentStudents;
     const loading = this.props.getParentStudentsRequest.get('loading');
 
     if (!loading && students.size === 0) {
@@ -51,9 +66,10 @@ class ParentDashboard extends Component {
   }
 
   _renderStudents() {
-    const students = this.props.getParentStudentsRequest.get('records');
+    const { goTo } = this.props;
+    const students = this.props.parentStudents.toJS();
 
-    if (!students.size) {
+    if (!students.length) {
       return <div className="display-1">
         <h1 className="text-center">No Students found</h1>
       </div>
@@ -61,28 +77,28 @@ class ParentDashboard extends Component {
 
     return students.map(function (student, i) {
       return (
-        <GridListTile key={i} className="grid-tile">
-          <img src={student.get('avatar')} alt={student.get('firstName')}/>
+        <GridListTile key={i} className="grid-tile" onClick={() => { goTo(`/reports/students/${student.id}`); }} style={{ cursor: 'pointer' }}>
 
+          <img src={student.avatar} alt={student.firstName}/>
           <GridListTileBar
             className="myGridTileBar"
-            title={<NavLink
-              to={`/reports/students/${student.get('id')}`}>{student.get('firstName') + " " + student.get('lastName')}</NavLink>}
-            subtitle={
-              (
-                <div>
-                  <span className="text-right d-block">75%</span>
-                  <OldProgressBar correctValue="40" type="performance"/>
-                  <br/>
-                  <span className="text-right  d-block">35%</span>
-                  <OldProgressBar complateValue="40" progressValue="10" type="progress"/>
+            title={(student.firstName || student.lastName) ? student.firstName + " " + student.lastName : student.username}
+            subtitle={(
+              <div>
+                <span className="text-right d-block">{student.passRate} %</span>
+                <div className="progress m-progress--sm">
+                  <div title="Completed" className="progress-bar bg-success" role="progressbar" style={{width: student.completed + '%'}}></div>
+                  <div title="In Progress" className="progress-bar bg-warning" role="progressbar" style={{width: student.inProgress + '%'}}></div>
                 </div>
-              )
-            }
+                <br/>
+                <div className="progress m-progress--sm">
+                  <div title="Average Grade" className="progress-bar bg-success" role="progressbar" style={{width: student.averageGrade + '%'}}></div>
+                  <div title="Average Grade" className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(student.averageGrade)) + '%'}}></div>
+                </div>
+              </div>
+            )}
             actionIcon={
-              <IconButton>
-
-              </IconButton>
+              <IconButton color="default"></IconButton>
             }
           />
         </GridListTile>
@@ -91,6 +107,7 @@ class ParentDashboard extends Component {
   }
 
   render() {
+    const students = this.props.parentStudents;
     const loading = this.props.getParentStudentsRequest.get('loading');
 
     return <div className="fadeInLeft animated">
@@ -101,7 +118,8 @@ class ParentDashboard extends Component {
               <div className="m-portlet__head-caption">
                 <div className="m-portlet__head-title">
                   <span className="m-portlet__head-icon">
-                    <i className="flaticon-list-3"></i> :
+                    {loading && <CircularProgress color="inherit"/>}
+                    {!loading && <span>{students.size}</span>}
                   </span>
                   <h3 className="m-portlet__head-text">
                     My Learners
@@ -113,7 +131,7 @@ class ParentDashboard extends Component {
                   <li className="m-portlet__nav-item">
                     <Tooltip id="tooltip-icon" title="Add" placement="top">
                       <a onClick={() => {
-                        // this._handleSwitchMode('edit')
+                        this._openCreateDialog()
                       }} className=" pointer m-portlet__nav-link m-portlet__nav-link--icon">
                         <i className="la la-plus"></i>
                       </a>
@@ -123,17 +141,17 @@ class ParentDashboard extends Component {
               </div>
             </div>
             <div className="m-portlet__body m--padding-top-5" style={{height: "100%"}}>
-              <Table>
-                <Tbody>
-                {loading &&
-                <TablePreloader text="Loading..." color="primary"/>
-                }
-                { this._renderStudentsList() }
-                </Tbody>
-              </Table>
-              {/*<GridList cellHeight={250} cols={1}>*/}
-                {/*{this._renderStudents()}*/}
-              {/*</GridList>*/}
+              {/*<Table>*/}
+                {/*<Tbody>*/}
+                {/*{loading &&*/}
+                {/*<TablePreloader text="Loading..." color="primary"/>*/}
+                {/*}*/}
+                {/*{ this._renderStudents() }*/}
+                {/*</Tbody>*/}
+              {/*</Table>*/}
+              {!loading && <GridList cellHeight={250} cols={1}>
+                {this._renderStudents()}
+              </GridList>}
             </div>
           </div>
         </div>
@@ -167,16 +185,24 @@ class ParentDashboard extends Component {
         <div className="col-sm-12 col-md-4 col-lg-4">
         </div>
       </div>
+
+      <CreateStudentModal
+        isOpen={this.state.createModalIsOpen}
+        onClose={() => { this._closeCreateDialog() }}
+        onSuccess={() => {  }}/>
+
     </div>
   }
 }
 
 ParentDashboard = connect(
   (state) => ({
-    getParentStudentsRequest: selectGetParentRecordsRequest(state)
+    parentStudents: selectRecords(state),
+    getParentStudentsRequest: selectGetRecordsRequest(state),
   }),
   (dispatch) => ({
-    getParentStudents: (params = {}) => {dispatch(getParentRecords(params))},
+    getParentStudents: (params = {}) => {dispatch(getRecords(params))},
+    goTo: (url) => { dispatch(push(url)) }
   })
 )(ParentDashboard);
 
