@@ -6,6 +6,18 @@ import {connect} from "react-redux";
 import {getUnassignedsRequest} from "../../../redux/store/selectors";
 import {getUnassigneds} from "../../../redux/store/actions";
 
+const AssignButton = ({ id, onClick}) => {
+  return (
+    <button
+      className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill'
+      onClick={onClick && (() => { onClick(id) })}
+      style={{marginLeft: '5px'}}
+    >
+      <i className='la la-user-plus'></i>
+    </button>
+  );
+};
+
 class UnassignedCourses extends Component {
 
   componentDidMount() {
@@ -32,15 +44,17 @@ class UnassignedCourses extends Component {
     return unassigneds.map(function (unassigned, i) {
       return (
         <Row index={i} key={i}>
-          <Td first={true} width='100px'>{i + 1}</Td>
-          <Td width="80px">
+          <Td first={true} width='80px'>{i + 1}</Td>
+          <Td width="70px">
             <div >
               <img src={unassigned.get('item').get('thumbnail')} width={70}/>
             </div>
           </Td>
-          <Td width='132px'>{unassigned.get('item').get('title')}</Td>
-          <Td width='132px'>{unassigned.get('item').getIn(['resource', 'type'])}</Td>
-          <Td width='132px'>{unassigned.get('quantity')}</Td>
+          <Td width='150px'>{unassigned.get('item').get('title')}</Td>
+          <Td width='50px'>{unassigned.get('quantity')}</Td>
+          <Td width='50px'>
+            <AssignButton onClick={() => {  }}/>
+          </Td>
         </Row>
       )
     })
@@ -52,9 +66,11 @@ class UnassignedCourses extends Component {
         <Table>
           <Thead>
           <HeadRow>
-            <Th first={true} width='100px'>Order #</Th>
-            <Th name='username' width='190px'>Course Name</Th>
-            <Th name='firstName' width='100px'>Status</Th>
+            <Th first={true} width='80px'>Order #</Th>
+            <Th name='image' width='70px'>Image</Th>
+            <Th name='name' width='150px'>Course Name</Th>
+            <Th name='count' width='50px'>Count</Th>
+            <Th name='assign' width='50px'>Assign</Th>
           </HeadRow>
           </Thead>
           <Tbody>
