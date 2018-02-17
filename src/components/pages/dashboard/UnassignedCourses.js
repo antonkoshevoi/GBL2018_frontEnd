@@ -8,6 +8,12 @@ import {getUnassigneds} from "../../../redux/store/actions";
 
 class UnassignedCourses extends Component {
 
+  componentDidMount() {
+    const { getUnassigneds } = this.props;
+
+    getUnassigneds();
+  }
+
   _renderUnassigneds() {
     const unassigneds = this.props.getUnassignedsRequest.get('records');
 
@@ -16,7 +22,7 @@ class UnassignedCourses extends Component {
         <tr>
           <td>
             <div className="table-message">
-              <h2>Not Unassigned credits</h2>
+              <h2>No Unassigned credits...</h2>
             </div>
           </td>
         </tr>

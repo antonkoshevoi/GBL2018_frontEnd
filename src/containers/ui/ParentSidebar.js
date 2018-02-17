@@ -4,12 +4,12 @@ import {withRouter} from "react-router";
 import '../../styles/sidebar.css';
 import {translate} from 'react-i18next';
 import PropTypes from 'prop-types';
-import Menu from "../../data/Menu";
+import MenuParent from "../../data/MenuParent";
 import $ from "jquery"
 import {Icon, IconButton} from "material-ui";
 import {connect} from "react-redux";
 
-class Sidebar extends Component {
+class ParentSidebar extends Component {
 
   constructor(props, context) {
     super(props, context);
@@ -50,7 +50,7 @@ class Sidebar extends Component {
 
 
   _getActiveMenuByKey(key) {
-    const activeMenu = Menu.multipleMenu.filter(item => item.key === key)[0];
+    const activeMenu = MenuParent.multipleMenu.filter(item => item.key === key)[0];
     if (activeMenu) {
       return activeMenu
     } else {
@@ -78,7 +78,7 @@ class Sidebar extends Component {
     const activeMenu = this.state.activeMenu;
     const _self = this;
 
-    return Menu.multipleMenu.map(function (menu) {
+    return MenuParent.multipleMenu.map(function (menu) {
       return (
         <div className="menuItem" key={menu.key} data-key={menu.key}
              onClick={(menu.subMenu === undefined) ? _self.props.mobileSidebar : () => {
@@ -89,7 +89,7 @@ class Sidebar extends Component {
             className={'googleMenuItem ' + menu.colorName + (activeMenu.key === menu.key ? ' active fadeInUp  animated' : activeMenu.subMenu !== undefined ? ' swapped' : '') }
             onClick={(event) => {_self._googleMenuToggle(menu), _self._goToFirstPage(menu)}}>
             <span className="icon"><i className={menu.icon}></i></span>
-            <span className="content">{_self.props.t(menu.key)}</span>
+            <span className="content">{_self.props.t(menu.title)}</span>
           </NavLink>
           {(menu.subMenu !== undefined) ? _self._renderGoogleSubMenuContent(menu) : ''}
         </div>
@@ -99,7 +99,7 @@ class Sidebar extends Component {
 
   _goToFirstPage(menu){
     if (menu.key !== 'store' && menu.subMenu) {
-      const subLink = Menu.multipleMenu.filter(menuItem => menuItem.key ===  menu.key)[0].subMenu[0].link;
+      const subLink = MenuParent.multipleMenu.filter(menuItem => menuItem.key ===  menu.key)[0].subMenu[0].link;
       this.props.history.push('/'+subLink);
     }
   }
@@ -163,7 +163,7 @@ class Sidebar extends Component {
 
   _renderSingleMenus() {
     const _self = this;
-    return Menu.singleMenu.map(function (menu, i) {
+    return MenuParent.singleMenu.map(function (menu, i) {
       return (
         <li className="m-menu__item" key={i} aria-haspopup="true" data-menu-submenu-toggle="hover">
           <NavLink to={`/${menu.link}`} className="m-menu__link" onClick={() => {
@@ -237,12 +237,12 @@ class Sidebar extends Component {
 
 }
 
-Sidebar = connect(
+ParentSidebar = connect(
   (state) => ({
     auth: state.auth
   }),
   (dispatch) => ({})
-)(Sidebar);
+)(ParentSidebar);
 
 
-export default withRouter(translate("sidebar")(Sidebar));
+export default withRouter(translate("sidebar")(ParentSidebar));
