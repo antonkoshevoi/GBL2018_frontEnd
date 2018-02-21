@@ -7,24 +7,27 @@ import rootSaga from './sagas';
 import clientMiddleware from './middlewares/clientMiddleware';
 import notificationsMiddleware from './notifications/middleware';
 import messagesMiddleware from './messages/middleware';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 export default (history, apiClient) => {
-  const sagaMiddleware = createSagaMiddleware();
-  const store = createStore(
-    combineReducers({
-      ...reducers,
-      routing: routerReducer
-    }),
-    applyMiddleware(
-      clientMiddleware(apiClient),
-      notificationsMiddleware(),
-      messagesMiddleware(),
-      routerMiddleware(history),
-      sagaMiddleware
-    )
-  );
+    const sagaMiddleware = createSagaMiddleware();
+    const store = createStore(
+        combineReducers({
+            ...reducers,
+            routing: routerReducer
+        }),
+        composeWithDevTools(
+            applyMiddleware(
+                clientMiddleware(apiClient),
+                notificationsMiddleware(),
+                messagesMiddleware(),
+                routerMiddleware(history),
+                sagaMiddleware
+            )
+        )
+    );
 
-  sagaMiddleware.run(rootSaga);
+    sagaMiddleware.run(rootSaga);
 
-  return store;
+    return store;
 };
