@@ -1271,6 +1271,12 @@ div.m-widget25 .m-widget25__price {
   margin-bottom: 5px;
 }
 
+.csv-upload-errors{
+  max-height: 600px;
+  overflow: scroll;
+  width: 100%;
+  overflow-x: hidden;
+}
 
 /* Sidebar Fixed */
 

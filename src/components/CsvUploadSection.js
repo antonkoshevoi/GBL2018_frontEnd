@@ -60,6 +60,26 @@ class CsvUploadSection extends Component {
     }
   }
 
+  _renderErrorItems(errorsList){
+      if (errorsList){
+         return errorsList.toJS().map( (item,index) => {
+             return <li key={index}>
+                Error in line {item.line}
+                 {Object.keys(item.error)
+                     .map( (typeError, typeIndex) => <span key={typeIndex}> {item.error[typeError]
+                         .map((message,i) => <span key={i}><br/>{message}</span>) }</span> )}
+                    </li>
+         });
+      }
+  }
+
+  _hasErrors(results){
+      if (!results.get('errors')) return false;
+
+      let errorsArr = results.get('errors').toJS();
+      return Array.isArray(errorsArr) && errorsArr.length ? !!errorsArr.length: false;
+  }
+
   render() {
     const { uploadRequest } = this.props;
     const { schoolId } = this.state;
@@ -69,10 +89,10 @@ class CsvUploadSection extends Component {
     const uploading = loading && progress < 100;
     const success = uploadRequest.get('success');
     const results = uploadRequest.get('results');
+    const errors = this._hasErrors(results);
     const csvExampleName = this.props.csvExampleName;
     const csvTemplateHeaders = this.props.csvTemplateHeaders;
     const csvTemplateData = this.props.csvTemplateData;
-
     return (
       <div>
         <div className="m-portlet m-portlet--brand  m-portlet--head-solid-bg m-portlet--bordered">
@@ -166,6 +186,35 @@ class CsvUploadSection extends Component {
               }
           </div>
         </div>
+          {errors &&
+          <div className="row">
+              <div className="col-md-12">
+                  <div className="m-portlet m-portlet--brand  m-portlet--head-solid-bg m-portlet--bordered">
+                      <div className={"m-portlet m-portlet--head-solid-bg m-portlet--brand"}>
+                          <div className={`m-portlet__head`}>
+                              <div className="m-portlet__head-caption">
+                                  <div className="m-portlet__head-title"><span className="m-portlet__head-icon">
+                    <i className="material-icons">error</i>
+                  </span>
+                                      <h3 className="m-portlet__head-text">
+                                          Error list
+                                      </h3>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div className="m-portlet__body  m-portlet__body--no-padding">
+                          <div className="row m-row--no-padding m-row--col-separator-xl">
+                              <ul className="csv-upload-errors">
+                                  {this._renderErrorItems(results.get('errors'))}
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+          }
 
       </div>
     );
