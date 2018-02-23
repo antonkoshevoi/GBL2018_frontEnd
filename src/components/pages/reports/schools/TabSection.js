@@ -65,7 +65,7 @@ class TabSection extends Component {
   _renderSchoolStudents() {
 
     const schoolStudents = this.props.schoolStudents.toJS().records;
-    const avatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+    const avatar = '//s3.amazonaws.com/37assets/svn/765-default-avatar.png';
 
     return schoolStudents.map(function (student, i) {
       return (

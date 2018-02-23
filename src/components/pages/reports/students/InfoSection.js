@@ -50,7 +50,7 @@ class InfoSection extends Component {
     const avatar = getStudentForReportRequest.get('record').toJS().avatar;
     const loading = getStudentForReportRequest.get('loading');
 
-    const defaultAvatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+    const defaultAvatar = '//s3.amazonaws.com/37assets/svn/765-default-avatar.png';
 
     return (
       <div className="row">

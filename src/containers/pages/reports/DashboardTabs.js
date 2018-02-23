@@ -82,7 +82,7 @@ class DashboardTabs extends Component {
   _renderStudents() {
     const { goTo } = this.props;
     const students = this.props.getStudentsRequest.get('records').toJS();
-    const defaultAvatar = 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+    const defaultAvatar = '//s3.amazonaws.com/37assets/svn/765-default-avatar.png';
 
     if (this.props.getStudentsRequest.get('success') && !students.length) {
       return this._renderEmptyDataMsg('No Students...');
