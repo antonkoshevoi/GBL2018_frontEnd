@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import Modal from "../../../components/ui/Modal";
 import {selectGetStoreRecordsRequest, selectGetUnassignedRecordsRequest} from "../../../redux/courses/selectors";
 import {getStoreRecords, getUnassignedRecords} from "../../../redux/courses/actions";
-import {Row, Table, TablePreloader, Tbody, Td} from "../../../components/ui/table";
+import {Row, Table, TablePreloader, Tbody, Td, Thead, HeadRow, Th} from "../../../components/ui/table";
 import toastr from 'toastr';
 import i18n from '../../../configs/i18n';
 
@@ -144,21 +144,24 @@ class CourseModal extends Component {
       return storeCourses.map((course,i) => {
         return (
           <Row key={i} index={i}>
-            <Td width="30px">
+            <Td width='30px' first={true}>
               <FormControlLabel
                 value="male"
                 name="courseId"
                 control={<Radio />}
-                label="Test"
-                checked={course.get('crsId') == courseId}
-                onChange={() => {this._onChange(course.get('crsId'))}}/>
+                // label="Test"
+                checked={course.get('id') == courseId}
+                onChange={() => {this._onChange(course.get('id'))}}/>
             </Td>
-            <Td width="70px">
+            <Td width='70px'>
               <div>
-                <img src={course.get('image')} width={70} alt={course.get('crsTitle')}/>
+                <img src={course.get('thumbnail')} width={70} alt={course.get('title')}/>
               </div>
             </Td>
-            <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('crsTitle')}</span></Td>
+            <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('title')}</span></Td>
+            <Td width='400px'><span style={{fontWeight:600}} className="g-blue">{course.get('description')}</span></Td>
+            <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('price')}</span></Td>
+            <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('credit')}</span></Td>
           </Row>
         )
       });
@@ -191,11 +194,31 @@ class CourseModal extends Component {
         <DialogContent className="m--margin-top-25">
           <DialogContentText></DialogContentText>
           <Paper className='full-width' style={{boxShadow:'0 0 0 0'}}>
-            <Tabs value={activeTab} onChange={this._handleChangeTab} centered>
+              <Table>
+                <Thead>
+                  <HeadRow>
+                    <Th width="30px" first={true}></Th>
+                    <Th width="70px">image</Th>
+                    <Th width="100px">Course title</Th>
+                    <Th width="400px">Course Description</Th>
+                    <Th width="100px">Price Each</Th>
+                    <Th width="100px">Unassigned Credits</Th>
+                  </HeadRow>
+                </Thead>
+                <Tbody >
+                  {storeRecordsLoading &&
+                  <TablePreloader text="Loading..." color="primary"/>
+                  }
+                  {!storeRecordsLoading && this._renderStoreItems()}
+                </Tbody>
+              </Table>
+            {/* <Tabs value={activeTab} onChange={this._handleChangeTab} centered>
               <Tab label="Unassigned Credits" />
               <Tab label="Store Items" />
-            </Tabs>
-            {activeTab === 0 && <TabContainer>
+              <Tab label="New TAb" />
+            </Tabs> */}
+
+            {/* {activeTab === 0 && <TabContainer>
               <Table>
                 <Tbody >
                   {unassignedRecordsLoading &&
@@ -214,7 +237,7 @@ class CourseModal extends Component {
                   {!storeRecordsLoading && this._renderStoreItems()}
                 </Tbody>
               </Table>
-            </TabContainer>}
+            </TabContainer>} */}
           </Paper>
         </DialogContent>
         <Divider className='full-width'/>

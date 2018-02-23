@@ -16,7 +16,7 @@ export function getUnassignedRecords(params = {}) {
 export function getStoreRecords(params = {}) {
   return {
     types: [GET_STORE_RECORDS, GET_STORE_RECORDS_SUCCESS, GET_STORE_RECORDS_FAIL],
-    promise: (apiClient) => apiClient.get('courses/store', params)
+    promise: (apiClient) => apiClient.get('store/all', params)
   };
 }
 
