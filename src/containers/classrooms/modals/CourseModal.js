@@ -11,6 +11,7 @@ import {
 } from 'material-ui';
 import { connect } from 'react-redux';
 import Modal from "../../../components/ui/Modal";
+import Filter from "../../../components/pages/store/Filter";
 import {selectGetStoreRecordsRequest, selectGetUnassignedRecordsRequest} from "../../../redux/courses/selectors";
 import {getStoreRecords, getUnassignedRecords} from "../../../redux/courses/actions";
 import {Row, Table, TablePreloader, Tbody, Td, Thead, HeadRow, Th} from "../../../components/ui/table";
@@ -42,6 +43,18 @@ class CourseModal extends Component {
 
   componentWillReceiveProps(nextProps) {
     this._handleModalOpened(nextProps);
+  }
+
+
+  _getRecords(params) {
+      this.props.getStoreRecords(params);
+  }
+
+
+  _setFilters(params) {
+      if (params )
+          this.setState({isFiltered:true});
+      this._getRecords(params)
   }
 
   _handleModalOpened(nextProps) {
@@ -173,6 +186,7 @@ class CourseModal extends Component {
     const { activeTab } = this.state;
     const storeRecordsLoading = this.props.storeRecordsRequest.get('loading');
     const unassignedRecordsLoading = this.props.unassignedRecordsRequest.get('loading');
+    const {isFiltered} = this.state;
 
     return (
       <Modal isOpen={isOpen} onClose={() => this._close()}>
@@ -193,6 +207,10 @@ class CourseModal extends Component {
 
         <DialogContent className="m--margin-top-25">
           <DialogContentText></DialogContentText>
+          <Filter
+          onChange = {(params) => this._setFilters(params) }
+          isActive={isFiltered}
+          ></Filter>
           <Paper className='full-width' style={{boxShadow:'0 0 0 0'}}>
               <Table>
                 <Thead>
@@ -264,7 +282,7 @@ CourseModal = connect(
     unassignedRecordsRequest: selectGetUnassignedRecordsRequest(state),
   }),
   (dispatch) => ({
-    getStoreRecords: () => { dispatch(getStoreRecords()) },
+    getStoreRecords: (params) => { dispatch(getStoreRecords(params)) },
     getUnassignedRecords: () => { dispatch(getUnassignedRecords()) },
   })
 )(CourseModal);

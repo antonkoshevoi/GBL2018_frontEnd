@@ -132,6 +132,7 @@ class Filter extends Component {
 
 
   _searchBarChange = (e) => {
+    console.log("e.target.value",e.target.value);
     this.setState({params: {...this.state.params, filter: {...this.state.params.filter, title: e.target.value}}});
   };
 
@@ -139,6 +140,7 @@ class Filter extends Component {
   _selectFilter = (type,value,e) => {
       const {title} = e.currentTarget;
       let activeFilter = 'active_' + type;
+      console.log(activeFilter);
       this.setState({[activeFilter]:title})
       this.setState({params: {...this.state.params, filter: {...this.state.params.filter, [type]: value,}}}, this._initFilter);
   };
