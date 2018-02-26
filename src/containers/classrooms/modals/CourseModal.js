@@ -150,8 +150,8 @@ class CourseModal extends Component {
                 name="courseId"
                 control={<Radio />}
                 // label="Test"
-                checked={course.get('id') == courseId}
-                onChange={() => {this._onChange(course.get('id'))}}/>
+                checked={course.get('courseId') == courseId}
+                onChange={() => {this._onChange(course.get('courseId'))}}/>
             </Td>
             <Td width='70px'>
               <div>
