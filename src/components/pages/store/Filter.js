@@ -132,7 +132,6 @@ class Filter extends Component {
 
 
   _searchBarChange = (e) => {
-    console.log("e.target.value",e.target.value);
     this.setState({params: {...this.state.params, filter: {...this.state.params.filter, title: e.target.value}}});
   };
 
@@ -187,114 +186,125 @@ class Filter extends Component {
 
 
   render() {
-    const {classes, isActive, type} = this.props;
+    const {classes, isActive, type, isShow} = this.props;
     const {categoryMenu, subjectMenu, sortMenu, sorters} = this.state;
 
       return (
       <div className="col-md-12 ">
         <div className="row">
           <div className="col-md-12 col-lg-8 store-filter left-block">
-
-            <div className="filterMenu">
-              <Button
-                aria-owns={categoryMenu ? 'category-menu' : null}
-                aria-haspopup="true"
-                onClick={(e) => {
-                  this.handleMenuClick(e, 'categoryMenu')
-                }}
-              >
-                <span> { this.state.active_target ? this.state.active_target : 'Target  Age' }</span> <i className="m--margin-left-10 fa fa-chevron-down"></i>
-              </Button>
-              <Menu
-                id="category-menu"
-                anchorEl={categoryMenu}
-                open={Boolean(categoryMenu)}
-                onClose={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu')
-                }}
-              >
-                {this.state.active_target &&  <MenuItem onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target','',e)
-                }}>All</MenuItem>}
-                <MenuItem title="Elementary Grade 1" onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',1,e)
-                }}>Elementary Grade 1</MenuItem>
-                <MenuItem title="Kindy Starter" onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',2,e)
-                }}>Kindy Starter</MenuItem>
-                <MenuItem title="Kindy Advanced" onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',3,e)
-                }}>Kindy Advanced</MenuItem>
-                <MenuItem title="Elementary 1-3" onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',4,e)
-                }}>Elementary 1-3</MenuItem>
-                <MenuItem title="Kindy Starter" onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',5,e)
-                }}>Elementary 4-6</MenuItem>
-                <MenuItem title="Elementary 4-6" onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',6,e)
-                }}>Junior High School</MenuItem>
-                <MenuItem title="Junior High School" onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',7,e)
-                }}>High School</MenuItem>
-                <MenuItem title="High School" onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',8,e)
-                }}>Adult</MenuItem>
-                <MenuItem title="Senior" onClick={(e) => {
-                  this.handleMenuClose(e, 'categoryMenu'),this._selectFilter('target',9,e)
-                }}>Senior</MenuItem>
-              </Menu>
-            </div>
+              {isShow.target &&
+              <div className="filterMenu">
+                <Button
+                    aria-owns={categoryMenu ? 'category-menu' : null}
+                    aria-haspopup="true"
+                    onClick={(e) => {
+                        this.handleMenuClick(e, 'categoryMenu')
+                    }}
+                >
+                  <span> {this.state.active_target ? this.state.active_target : 'Target  Age'}</span> <i
+                    className="m--margin-left-10 fa fa-chevron-down"></i>
+                </Button>
+                <Menu
+                    id="category-menu"
+                    anchorEl={categoryMenu}
+                    open={Boolean(categoryMenu)}
+                    onClose={(e) => {
+                        this.handleMenuClose(e, 'categoryMenu')
+                    }}
+                >
+                    {this.state.active_target && <MenuItem onClick={(e) => {
+                        this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', '', e)
+                    }}>All</MenuItem>}
+                  <MenuItem title="Elementary Grade 1" onClick={(e) => {
+                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 1, e)
+                  }}>Elementary Grade 1</MenuItem>
+                  <MenuItem title="Kindy Starter" onClick={(e) => {
+                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 2, e)
+                  }}>Kindy Starter</MenuItem>
+                  <MenuItem title="Kindy Advanced" onClick={(e) => {
+                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 3, e)
+                  }}>Kindy Advanced</MenuItem>
+                  <MenuItem title="Elementary 1-3" onClick={(e) => {
+                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 4, e)
+                  }}>Elementary 1-3</MenuItem>
+                  <MenuItem title="Kindy Starter" onClick={(e) => {
+                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 5, e)
+                  }}>Elementary 4-6</MenuItem>
+                  <MenuItem title="Elementary 4-6" onClick={(e) => {
+                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 6, e)
+                  }}>Junior High School</MenuItem>
+                  <MenuItem title="Junior High School" onClick={(e) => {
+                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 7, e)
+                  }}>High School</MenuItem>
+                  <MenuItem title="High School" onClick={(e) => {
+                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 8, e)
+                  }}>Adult</MenuItem>
+                  <MenuItem title="Senior" onClick={(e) => {
+                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 9, e)
+                  }}>Senior</MenuItem>
+                </Menu>
+              </div>
+              }
             <div className="store-filter-divider"></div>
-            <div className="filterMenu">
-              <Button
-                aria-owns={subjectMenu ? 'subject-menu' : null}
-                aria-haspopup="true"
-                onClick={(e) => {
-                  this.handleMenuClick(e, 'subjectMenu')
-                }}
-              >
-                  <span> { this.state.active_subject ? this.state.active_subject : 'Subject' }</span>  <i className="m--margin-left-10 fa fa-chevron-down"></i>
-              </Button>
-              <Menu
-                id="subject-menu"
-                anchorEl={subjectMenu}
-                open={Boolean(subjectMenu)}
-                onClose={(e) => {
-                  this.handleMenuClose(e, 'subjectMenu')
-                }}
-              >
-                  {this.state.active_subject &&
+              {isShow.subject &&
+              <div className="filterMenu">
+                <Button
+                    aria-owns={subjectMenu ? 'subject-menu' : null}
+                    aria-haspopup="true"
+                    onClick={(e) => {
+                        this.handleMenuClick(e, 'subjectMenu')
+                    }}
+                >
+                  <span> {this.state.active_subject ? this.state.active_subject : 'Subject'}</span> <i
+                    className="m--margin-left-10 fa fa-chevron-down"></i>
+                </Button>
+                <Menu
+                    id="subject-menu"
+                    anchorEl={subjectMenu}
+                    open={Boolean(subjectMenu)}
+                    onClose={(e) => {
+                        this.handleMenuClose(e, 'subjectMenu')
+                    }}
+                >
+                    {this.state.active_subject &&
+                    <MenuItem title="English for Kids" onClick={(e) => {
+                        this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', '', e)
+                    }}>All</MenuItem>}
                   <MenuItem title="English for Kids" onClick={(e) => {
-                      this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject','',e)
-                  }}>All</MenuItem>}
-                <MenuItem title="English for Kids" onClick={(e) => {
-                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',1,e)
-                }}>English for Kids</MenuItem>
-                <MenuItem title="Language" onClick={(e) => {
-                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',2,e)
-                }}>Language</MenuItem>
-                <MenuItem title="Safety" onClick={(e) => {
-                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',3,e)
-                }}>Safety</MenuItem>
-                <MenuItem title="Fine Arts" onClick={(e) => {
-                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',4,e)
-                }}>Fine Arts</MenuItem>
-                <MenuItem title="Flex" onClick={(e) => {
-                  this.handleMenuClose(e, 'subjectMenu'),this._selectFilter('subject',5,e)
-                }}>Flex</MenuItem>
-              </Menu>
-            </div>
+                      this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 1, e)
+                  }}>English for Kids</MenuItem>
+                  <MenuItem title="Language" onClick={(e) => {
+                      this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 2, e)
+                  }}>Language</MenuItem>
+                  <MenuItem title="Safety" onClick={(e) => {
+                      this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 3, e)
+                  }}>Safety</MenuItem>
+                  <MenuItem title="Fine Arts" onClick={(e) => {
+                      this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 4, e)
+                  }}>Fine Arts</MenuItem>
+                  <MenuItem title="Flex" onClick={(e) => {
+                      this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 5, e)
+                  }}>Flex</MenuItem>
+                </Menu>
+              </div>
+              }
 
             <div className="store-filter-divider"></div>
             <div className="filter-buttons">
-              <NavLink to="/store" className={(!isActive && type !== 'details') ? ' activeFilter' : ''}><Button>All</Button></NavLink>
-              <NavLink to="/store/products/course/newest" className={(sorters.created == 'desc') ? ' activeFilter' : ''}><Button>Newest</Button></NavLink>
+                { isShow.all &&
+                 <NavLink to="/store" className={(!isActive && type !== 'details') ? ' activeFilter' : ''}><Button>All</Button></NavLink>
+                }
+                {isShow.newest &&
+                <NavLink to="/store/products/course/newest"
+                         className={(sorters.created == 'desc') ? ' activeFilter' : ''}><Button>Newest</Button></NavLink>
+                }
             </div>
           </div>
           <div className="col-lg-4 col-md-12 store-filter right-block">
             <div className="row">
-              <div className="col-xs-6 search-field col-sm-6 col-md-6 col-lg-8 text-right">
+                { isShow.search &&
+                <div className="col-xs-6 search-field col-sm-6 col-md-6 col-lg-8 text-right">
                 <Input
                   className=" store-search"
                   id="search"
@@ -316,6 +326,8 @@ class Filter extends Component {
                   }
                 />
               </div>
+              }
+             { isShow.sort &&
               <div className="col-xs-6 col-sm-6 col-md-6 col-lg-4 text-right">
                 <div className="filterMenu">
                   <Button
@@ -347,6 +359,7 @@ class Filter extends Component {
                   </Menu>
                 </div>
               </div>
+                }
             </div>
           </div>
         </div>
@@ -361,7 +374,15 @@ Filter.propTypes = {};
 
 Filter.defaultProps = {
   type:'',
-  isActive:false
+  isActive:false,
+  isShow:{
+    sort: true,
+    all: true,
+    subject: true,
+    target: true,
+    search: true,
+    newest: true,
+  },
 }
 
 export default withRouter(withStyles(styles)(Filter));

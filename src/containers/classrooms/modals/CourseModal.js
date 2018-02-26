@@ -37,8 +37,17 @@ class CourseModal extends Component {
     super(props);
     this.state = {
       courseId: null,
-      activeTab: 0
+      activeTab: 0,
+      filterShow : {
+          sort: false,
+          all: false,
+          subject: true,
+          target: true,
+          search: true,
+          newest: false,
+      },
     };
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -183,10 +192,9 @@ class CourseModal extends Component {
 
   render() {
     const { isOpen } = this.props;
-    const { activeTab } = this.state;
+    const { activeTab, filterShow,isFiltered } = this.state;
     const storeRecordsLoading = this.props.storeRecordsRequest.get('loading');
     const unassignedRecordsLoading = this.props.unassignedRecordsRequest.get('loading');
-    const {isFiltered} = this.state;
 
     return (
       <Modal isOpen={isOpen} onClose={() => this._close()}>
@@ -210,6 +218,7 @@ class CourseModal extends Component {
           <Filter
           onChange = {(params) => this._setFilters(params) }
           isActive={isFiltered}
+          isShow={filterShow}
           ></Filter>
           <Paper className='full-width' style={{boxShadow:'0 0 0 0'}}>
               <Table>
