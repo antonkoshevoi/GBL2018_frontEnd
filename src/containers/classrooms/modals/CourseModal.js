@@ -183,7 +183,7 @@ class CourseModal extends Component {
             <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('title')}</span></Td>
             <Td width='400px'><span style={{fontWeight:600}} className="g-blue">{course.get('description')}</span></Td>
             <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('price')}</span></Td>
-            <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('credit')}</span></Td>
+            <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('credit') ? course.get('credit') : ''}</span></Td>
           </Row>
         )
       });
