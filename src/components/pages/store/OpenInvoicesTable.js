@@ -93,11 +93,11 @@ class OpenInvoicesTable extends Component {
           </Td>
           <Td width="100px">
             <span className="productLabel">
-               {item.classroom.crm_name}
+               {item.classroom ? item.classroom.crm_name : ''}
             </span>
           </Td>
           <Td width="100px">
-            {_self._renderTableHomerooms(item.classroom.homerooms)}
+            {item.classroom && _self._renderTableHomerooms(item.classroom.homerooms)}
           </Td>
           <Td width='132px'>
             {!item.isInvoice &&
