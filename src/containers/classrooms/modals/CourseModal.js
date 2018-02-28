@@ -9,7 +9,7 @@ import {
   Divider, Button, DialogActions,
   Paper, Tab, Tabs, FormControlLabel, Radio
 } from 'material-ui';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Modal from "../../../components/ui/Modal";
 import Filter from "../../../components/pages/store/Filter";
 import {selectGetStoreRecordsRequest, selectGetUnassignedRecordsRequest} from "../../../redux/courses/selectors";
@@ -33,18 +33,18 @@ class CourseModal extends Component {
     onSuccess: PropTypes.any.isRequired,
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       courseId: null,
       activeTab: 0,
-      filterShow : {
-          sort: false,
-          all: false,
-          subject: true,
-          target: true,
-          search: true,
-          newest: false,
+      filterShow: {
+        sort: false,
+        all: false,
+        subject: true,
+        target: true,
+        search: true,
+        newest: false,
       },
     };
 
@@ -56,14 +56,14 @@ class CourseModal extends Component {
 
 
   _getRecords(params) {
-      this.props.getStoreRecords(params);
+    this.props.getStoreRecords(params);
   }
 
 
   _setFilters(params) {
-      if (params )
-          this.setState({isFiltered:true});
-      this._getRecords(params)
+    if (params)
+      this.setState({isFiltered: true});
+    this._getRecords(params)
   }
 
   _handleModalOpened(nextProps) {
@@ -71,20 +71,20 @@ class CourseModal extends Component {
     const next = nextProps.isOpen;
 
     if (!prev && next) {
-      const { getStoreRecords, getUnassignedRecords, courseId } = this.props;
+      const {getStoreRecords, getUnassignedRecords, courseId} = this.props;
 
       getStoreRecords();
       getUnassignedRecords();
 
-      this.setState({ courseId })
+      this.setState({courseId})
     }
   }
 
   _handleChangeTab = (event, activeTab) => {
-    this.setState({ activeTab });
+    this.setState({activeTab});
   };
 
-  _close () {
+  _close() {
     this.setState({
       courseId: this.props.courseId,
       activeTab: 0
@@ -92,64 +92,67 @@ class CourseModal extends Component {
     this.props.onClose();
   };
 
-  _onChange (courseId) {
-    this.setState({ courseId });
+  _onChange(course) {
+    this.setState({course})
+    const courseId = course.get('courseId');
+    this.setState({courseId})
+
   };
 
-  _onSubmit () {
-    const { courseId } = this.state;
+  _onSubmit() {
+    const {course,courseId} = this.state;
 
     if (!courseId) {
       toastr.error(
         i18n.t(`messages:courseRequired`)
       );
     } else {
-      this.props.onSuccess(courseId);
+      this.props.onSuccess(course);
       this._close();
     }
   };
 
-  _renderUnassignedItems() {
-    const { courseId } = this.state;
-    const unassignedCourses = this.props.unassignedRecordsRequest.get('records');
-
-    if (!unassignedCourses.size) {
-      return (
-        <tr>
-          <td>
-            <div className="table-message">
-              <h2>No Unassigned Credits</h2>
-            </div>
-          </td>
-        </tr>
-      )
-    } else {
-      return unassignedCourses.map((course,i) => {
-        return (
-          <Row key={i} index={i}>
-            <Td width="30px">
-              <FormControlLabel
-                value="male"
-                name="courseId"
-                control={<Radio />}
-                label="Test"
-                checked={course.get('crsId') == courseId}
-                onChange={() => {this._onChange(course.get('crsId'))}}/>
-            </Td>
-            <Td width="70px">
-              <div >
-                <img src={course.get('image')} width={70} alt={course.get('crsTitle')}/>
-              </div>
-            </Td>
-            <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('crsTitle')}</span></Td>
-          </Row>
-        )
-      });
-    }
-  }
+  // _renderUnassignedItems() {
+  //   const { courseId } = this.state;
+  //   const unassignedCourses = this.props.unassignedRecordsRequest.get('records');
+  //
+  //   if (!unassignedCourses.size) {
+  //     return (
+  //       <tr>
+  //         <td>
+  //           <div className="table-message">
+  //             <h2>No Unassigned Credits</h2>
+  //           </div>
+  //         </td>
+  //       </tr>
+  //     )
+  //   } else {
+  //     return unassignedCourses.map((course,i) => {
+  //       return (
+  //         <Row key={i} index={i}>
+  //           <Td width="30px">
+  //             <FormControlLabel
+  //               value="male"
+  //               name="courseId"
+  //               control={<Radio />}
+  //               label="Test"
+  //               checked={course.get('crsId') == courseId}
+  //               onChange={() => {this._onChange(course.get('crsId'))}}/>
+  //           </Td>
+  //           <Td width="70px">
+  //             <div >
+  //               <img src={course.get('image')} width={70} alt={course.get('crsTitle')}/>
+  //             </div>
+  //           </Td>
+  //           <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('crsTitle')}</span></Td>
+  //         </Row>
+  //       )
+  //     });
+  //   }
+  // }
 
   _renderStoreItems() {
-    const { courseId } = this.state;
+    const {courseId} = this.state;
     const storeCourses = this.props.storeRecordsRequest.get('records');
 
     if (!storeCourses.size) {
@@ -163,27 +166,30 @@ class CourseModal extends Component {
         </tr>
       )
     } else {
-      return storeCourses.map((course,i) => {
+      return storeCourses.map((course, i) => {
         return (
           <Row key={i} index={i}>
             <Td width='30px' first={true}>
               <FormControlLabel
                 value="male"
                 name="courseId"
-                control={<Radio />}
+                control={<Radio/>}
                 // label="Test"
                 checked={course.get('courseId') == courseId}
-                onChange={() => {this._onChange(course.get('courseId'))}}/>
+                onChange={() => {
+                  this._onChange(course)
+                }}/>
             </Td>
             <Td width='70px'>
               <div>
                 <img src={course.get('thumbnail')} width={70} alt={course.get('title')}/>
               </div>
             </Td>
-            <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('title')}</span></Td>
-            <Td width='400px'><span style={{fontWeight:600}} className="g-blue">{course.get('description')}</span></Td>
-            <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('price')}</span></Td>
-            <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('credit') ? course.get('credit') : ''}</span></Td>
+            <Td width='100px'><span style={{fontWeight: 600}} className="g-blue">{course.get('title')}</span></Td>
+            <Td width='400px'><span style={{fontWeight: 600}} className="g-blue">{course.get('description')}</span></Td>
+            <Td width='100px'><span style={{fontWeight: 600}} className="g-blue">{course.get('price')}</span></Td>
+            <Td width='100px'><span style={{fontWeight: 600}}
+                                    className="g-blue">{course.get('credit') ? course.get('credit') : ''}</span></Td>
           </Row>
         )
       });
@@ -191,8 +197,8 @@ class CourseModal extends Component {
   }
 
   render() {
-    const { isOpen } = this.props;
-    const { activeTab, filterShow,isFiltered } = this.state;
+    const {isOpen} = this.props;
+    const {activeTab, filterShow, isFiltered} = this.state;
     const storeRecordsLoading = this.props.storeRecordsRequest.get('loading');
     const unassignedRecordsLoading = this.props.unassignedRecordsRequest.get('loading');
 
@@ -207,7 +213,7 @@ class CourseModal extends Component {
                 <Icon>person</Icon>
               )}
             </IconButton>
-            <Typography type="title" color="inherit" >
+            <Typography type="title" color="inherit">
               Choose Course
             </Typography>
           </Toolbar>
@@ -216,29 +222,29 @@ class CourseModal extends Component {
         <DialogContent className="m--margin-top-25">
           <DialogContentText></DialogContentText>
           <Filter
-          onChange = {(params) => this._setFilters(params) }
-          isActive={isFiltered}
-          isShow={filterShow}
+            onChange={(params) => this._setFilters(params)}
+            isActive={isFiltered}
+            isShow={filterShow}
           ></Filter>
-          <Paper className='full-width' style={{boxShadow:'0 0 0 0'}}>
-              <Table>
-                <Thead>
-                  <HeadRow>
-                    <Th width="30px" first={true}></Th>
-                    <Th width="70px">image</Th>
-                    <Th width="100px">Course title</Th>
-                    <Th width="400px">Course Description</Th>
-                    <Th width="100px">Price Each</Th>
-                    <Th width="100px">Unassigned Credits</Th>
-                  </HeadRow>
-                </Thead>
-                <Tbody >
-                  {storeRecordsLoading &&
-                  <TablePreloader text="Loading..." color="primary"/>
-                  }
-                  {!storeRecordsLoading && this._renderStoreItems()}
-                </Tbody>
-              </Table>
+          <Paper className='full-width' style={{boxShadow: '0 0 0 0'}}>
+            <Table>
+              <Thead>
+              <HeadRow>
+                <Th width="30px" first={true}></Th>
+                <Th width="70px">image</Th>
+                <Th width="100px">Course title</Th>
+                <Th width="400px">Course Description</Th>
+                <Th width="100px">Price Each</Th>
+                <Th width="100px">Unassigned Credits</Th>
+              </HeadRow>
+              </Thead>
+              <Tbody>
+              {storeRecordsLoading &&
+              <TablePreloader text="Loading..." color="primary"/>
+              }
+              {!storeRecordsLoading && this._renderStoreItems()}
+              </Tbody>
+            </Table>
             {/* <Tabs value={activeTab} onChange={this._handleChangeTab} centered>
               <Tab label="Unassigned Credits" />
               <Tab label="Store Items" />
@@ -270,7 +276,9 @@ class CourseModal extends Component {
         <Divider className='full-width'/>
         <DialogActions>
           <Button
-            onClick={() => {this._onSubmit()}}
+            onClick={() => {
+              this._onSubmit()
+            }}
             type='button'
             form='choose-course-form'
             disabled={storeRecordsLoading && unassignedRecordsLoading}
@@ -291,8 +299,12 @@ CourseModal = connect(
     unassignedRecordsRequest: selectGetUnassignedRecordsRequest(state),
   }),
   (dispatch) => ({
-    getStoreRecords: (params) => { dispatch(getStoreRecords(params)) },
-    getUnassignedRecords: () => { dispatch(getUnassignedRecords()) },
+    getStoreRecords: (params) => {
+      dispatch(getStoreRecords(params))
+    },
+    getUnassignedRecords: () => {
+      dispatch(getUnassignedRecords())
+    },
   })
 )(CourseModal);
 

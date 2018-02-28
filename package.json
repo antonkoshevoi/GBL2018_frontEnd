@@ -55,8 +55,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy":
-      "npm i && npm run build && scp -i ../dev-server.pem -r ./build/* ubuntu@ec2-54-169-167-29.ap-southeast-1.compute.amazonaws.com:/var/www/dev.gravitybrain.com/build/"
+    "deploy": "npm i && npm run build && scp -i ../dev-server.pem -r ./build/* ubuntu@ec2-54-169-167-29.ap-southeast-1.compute.amazonaws.com:/var/www/dev.gravitybrain.com/build/"
   },
   "eslintConfig": {
     "extends": "react-app"

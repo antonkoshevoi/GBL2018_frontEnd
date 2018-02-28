@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography, Button } from 'material-ui';
+import {connect} from 'react-redux';
+import {FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography, Button} from 'material-ui';
 import {getSchoolTeachers, getSchools, getSchoolHomerooms} from "../../../redux/schools/actions";
 import {
   selectGetSchoolHomeroomsRequest,
@@ -15,7 +15,7 @@ import 'sweetalert/dist/sweetalert.css';
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{padding: 8 * 3}}>
       {props.children}
     </Typography>
   );
@@ -33,7 +33,7 @@ class ClassroomForm extends Component {
     errors: PropTypes.any
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       unassignedsAlert: false,
@@ -44,7 +44,7 @@ class ClassroomForm extends Component {
   }
 
   componentDidMount() {
-    const { getSchoolTeachers, getSchoolHomerooms, getSchools } = this.props;
+    const {getSchoolTeachers, getSchoolHomerooms, getSchools} = this.props;
 
     this._setInitialHomerooms();
 
@@ -60,20 +60,21 @@ class ClassroomForm extends Component {
   }
 
   _openCourseDialog = () => {
-    this.setState({ courseModalIsOpen: true });
+    this.setState({courseModalIsOpen: true});
   };
   _closeCourseDialog = () => {
-    this.setState({ courseModalIsOpen: false });
+    this.setState({courseModalIsOpen: false});
   };
-  _submitCourseDialog = (courseId) => {
+  _submitCourseDialog = (course) => {
+    this.setState({course});
     this.props.onChange({
       ...this.props.classroom,
-      crmCourse: courseId
+      crmCourse: course.get('courseId')
     });
   };
 
   _closeUnassignedsAlert = () => {
-    this.setState({ unassignedsAlert: false });
+    this.setState({unassignedsAlert: false});
   }
 
   _handleUnassignedsError(nextProps) {
@@ -89,7 +90,7 @@ class ClassroomForm extends Component {
   }
 
   _setInitialHomerooms() {
-    let { classroom } = this.props;
+    let {classroom} = this.props;
 
     this.props.classroom.homeroomIds = [];
     if (classroom.homerooms && classroom.homerooms.length) {
@@ -124,15 +125,29 @@ class ClassroomForm extends Component {
   }
 
   _handleDateChange(m, dateField) {
-      this.props.onChange({
+    this.props.onChange({
       ...this.props.classroom,
       [dateField]: m
     });
   }
 
-  _handleInputChange(event) {
-    const { name, value } = event.target;
+  _countStudentByHomerooms(selectedHomerooms) {
+    const {schoolHomerooms} = this.state;
 
+    if (schoolHomerooms && Array.isArray(selectedHomerooms)){
+      const studentCount = schoolHomerooms
+        .filter(room => selectedHomerooms.includes(room.id))
+        .map(room => room.studentsCount)
+        .reduce(((count, studentCount) => count + studentCount),0);
+
+      this.setState({studentCount});
+    }
+
+  }
+
+  _handleInputChange(event) {
+    const {name, value} = event.target;
+    this._countStudentByHomerooms(value);
     this.props.onChange({
       ...this.props.classroom,
       [name]: value
@@ -140,48 +155,48 @@ class ClassroomForm extends Component {
   }
 
   _renderSchools() {
-    const { schools } = this.props;
+    const {schools} = this.props;
 
     return schools.map((school, key) => (
-      <MenuItem key={key} value={ school.get('schId') }>
-        { school.get('schName') }
+      <MenuItem key={key} value={school.get('schId')}>
+        {school.get('schName')}
       </MenuItem>
     ));
   }
 
   _renderCourses() {
-    const { courses } = this.state;
+    const {courses} = this.state;
 
     return courses.map((course, key) => (
-      <MenuItem key={key} value={ course.crsId }>
-        { course.crsTitle }
+      <MenuItem key={key} value={course.crsId}>
+        {course.crsTitle}
       </MenuItem>
     ));
   }
 
   _renderTeachers() {
-    const { schoolTeachers } = this.state;
+    const {schoolTeachers} = this.state;
 
     return schoolTeachers.map((teacher, key) => (
-      <MenuItem key={key} value={ teacher.id }>
-        { teacher.firstName } { teacher.lastName }
+      <MenuItem key={key} value={teacher.id}>
+        {teacher.firstName} {teacher.lastName}
       </MenuItem>
     ));
   }
 
   _renderHomerooms() {
-    const { schoolHomerooms } = this.state;
+    const {schoolHomerooms} = this.state;
 
     return schoolHomerooms.map((homeroom, key) => (
-      <MenuItem key={key} value={ homeroom.id }>
-        { homeroom.name }
+      <MenuItem key={key} value={homeroom.id}>
+        {homeroom.name}
       </MenuItem>
     ));
   }
 
   render() {
-    const { classroom, errors } = this.props;
-    const { courseModalIsOpen, unassignedsAlert } = this.state;
+    const {classroom, errors} = this.props;
+    const {courseModalIsOpen, unassignedsAlert, course,studentCount} = this.state;
 
     return (
       <div className='row'>
@@ -189,7 +204,9 @@ class ClassroomForm extends Component {
         <SweetAlert
           show={unassignedsAlert}
           title={unassignedsAlert ? errors.get('unassignedsCount').get(0) : ''}
-          onConfirm={() => {this._closeUnassignedsAlert()}}
+          onConfirm={() => {
+            this._closeUnassignedsAlert()
+          }}
         />
 
         <div className="col-sm-8 m-auto">
@@ -200,48 +217,66 @@ class ClassroomForm extends Component {
               margin='dense'
               fullWidth
               value={classroom.crmName || ''}
-              onChange={(e) => { this._handleInputChange(e) }}/>
-              {errors && errors.get('crmName') && <FormHelperText error>{ errors.get('crmName').get(0) }</FormHelperText>}
+              onChange={(e) => {
+                this._handleInputChange(e)
+              }}/>
+            {errors && errors.get('crmName') && <FormHelperText error>{errors.get('crmName').get(0)}</FormHelperText>}
           </FormControl>
           <FormControl aria-describedby='crmStartDate-error-text' className='full-width form-inputs'>
             <InputLabel htmlFor='crmStartDate-error' shrink={!!classroom.crmStartDate}>Start Date</InputLabel>
             <DatePicker
               name='crmStartDate'
               value={classroom.crmStartDate || null}
-              onChange={(m) => { this._handleDateChange(m, 'crmStartDate') }}
+              onChange={(m) => {
+                this._handleDateChange(m, 'crmStartDate')
+              }}
             />
-            {errors && errors.get('crmStartDate') && <FormHelperText error>{ errors.get('crmStartDate').get(0) }</FormHelperText>}
+            {errors && errors.get('crmStartDate') &&
+            <FormHelperText error>{errors.get('crmStartDate').get(0)}</FormHelperText>}
           </FormControl>
           <FormControl aria-describedby='crmEndDate-error-text' className='full-width form-inputs'>
             <InputLabel htmlFor='crmEndDate-error' shrink={!!classroom.crmEndDate}>End Date</InputLabel>
             <DatePicker
               name='crmEndDate'
               value={classroom.crmEndDate || null}
-              onChange={(m) => { this._handleDateChange(m, 'crmEndDate') }}
+              onChange={(m) => {
+                this._handleDateChange(m, 'crmEndDate')
+              }}
             />
-            {errors && errors.get('crmEndDate') && <FormHelperText error>{ errors.get('crmEndDate').get(0) }</FormHelperText>}
+            {errors && errors.get('crmEndDate') &&
+            <FormHelperText error>{errors.get('crmEndDate').get(0)}</FormHelperText>}
           </FormControl>
           <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='crmEnrollmentStartDate-error' shrink={!!classroom.crmEnrollmentStartDate}>Enrollment Start Date</InputLabel>
+            <InputLabel htmlFor='crmEnrollmentStartDate-error' shrink={!!classroom.crmEnrollmentStartDate}>Enrollment
+              Start Date</InputLabel>
             <DatePicker
               name='crmEnrollmentStartDate'
               value={classroom.crmEnrollmentStartDate || null}
-              onChange={(m) => { this._handleDateChange(m, 'crmEnrollmentStartDate') }}
+              onChange={(m) => {
+                this._handleDateChange(m, 'crmEnrollmentStartDate')
+              }}
             />
-            {errors && errors.get('crmEnrollmentStartDate') && <FormHelperText error>{ errors.get('crmEnrollmentStartDate').get(0) }</FormHelperText>}
+            {errors && errors.get('crmEnrollmentStartDate') &&
+            <FormHelperText error>{errors.get('crmEnrollmentStartDate').get(0)}</FormHelperText>}
           </FormControl>
           <FormControl aria-describedby='crmEnrollmentEndDate-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='crmEnrollmentEndDate-error' shrink={!!classroom.crmEnrollmentEndDate}>Enrollment End Date</InputLabel>
+            <InputLabel htmlFor='crmEnrollmentEndDate-error' shrink={!!classroom.crmEnrollmentEndDate}>Enrollment End
+              Date</InputLabel>
             <DatePicker
               name='crmEnrollmentEndDate'
               value={classroom.crmEnrollmentEndDate || null}
-              onChange={(m) => { this._handleDateChange(m, 'crmEnrollmentEndDate') }}
+              onChange={(m) => {
+                this._handleDateChange(m, 'crmEnrollmentEndDate')
+              }}
             />
-            {errors && errors.get('crmEnrollmentEndDate') && <FormHelperText error>{ errors.get('crmEnrollmentEndDate').get(0) }</FormHelperText>}
+            {errors && errors.get('crmEnrollmentEndDate') &&
+            <FormHelperText error>{errors.get('crmEnrollmentEndDate').get(0)}</FormHelperText>}
           </FormControl>
           <FormControl className='full-width form-inputs'>
             <Button
-              onClick={() => { this._openCourseDialog() }}
+              onClick={() => {
+                this._openCourseDialog()
+              }}
               type='button'
               form='create-classroom-form'
               variant="raised"
@@ -249,19 +284,36 @@ class ClassroomForm extends Component {
               color='primary'>
               Choose Course
             </Button>
-            {errors && errors.get('crmCourse') && <FormHelperText error>{ errors.get('crmCourse').get(0) }</FormHelperText>}
+            {errors && errors.get('crmCourse') &&
+            <FormHelperText error>{errors.get('crmCourse').get(0)}</FormHelperText>}
           </FormControl>
+          {course &&
+          <div className="row">
+            <div className="col-4">
+              <img src={course.get('thumbnail')} width={70} alt={course.get('title')}/>
+            </div>
+            <div className="col-4 d-flex justify-content-center flex-column">
+              {course.get('title')}
+            </div>
+            <div className="col-4 d-flex justify-content-center flex-column">
+              student Count: {studentCount ? studentCount : 0}
+            </div>
+          </div>
+          }
           <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>Teacher</InputLabel>
             <Select
               primarytext="Select Teacher"
               name='teacherId'
-              onChange={(e) => { this._handleInputChange(e) }}
+              onChange={(e) => {
+                this._handleInputChange(e)
+              }}
               value={classroom.teacherId || ''}>
               <MenuItem value={null} primarytext=""/>
               {this._renderTeachers()}
             </Select>
-            {errors && errors.get('teacherId') && <FormHelperText error>{ errors.get('teacherId').get(0) }</FormHelperText>}
+            {errors && errors.get('teacherId') &&
+            <FormHelperText error>{errors.get('teacherId').get(0)}</FormHelperText>}
           </FormControl>
           <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>Homerooms (Multiple)</InputLabel>
@@ -269,20 +321,26 @@ class ClassroomForm extends Component {
               multiple={true}
               primarytext="Select Homeroom"
               name='homeroomIds'
-              onChange={(e) => { this._handleInputChange(e) }}
+              onChange={(e) => {
+                this._handleInputChange(e)
+              }}
               value={classroom.homeroomIds || []}>
               <MenuItem value={null} primarytext=""/>
               {this._renderHomerooms()}
             </Select>
-            {errors && errors.get('homerooms') && <FormHelperText error>{ errors.get('homerooms').get(0) }</FormHelperText>}
+            {errors && errors.get('homerooms') &&
+            <FormHelperText error>{errors.get('homerooms').get(0)}</FormHelperText>}
           </FormControl>
         </div>
-
         <CourseModal
           courseId={classroom.crmCourse}
           isOpen={courseModalIsOpen}
-          onClose={() => { this._closeCourseDialog() }}
-          onSuccess={(courseId) => { this._submitCourseDialog(courseId) }}/>
+          onClose={() => {
+            this._closeCourseDialog()
+          }}
+          onSuccess={(course) => {
+            this._submitCourseDialog(course)
+          }}/>
 
       </div>
     );
@@ -296,9 +354,15 @@ ClassroomForm = connect(
     getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state),
   }),
   (dispatch) => ({
-    getSchools: () => { dispatch(getSchools()) },
-    getSchoolTeachers: () => { dispatch(getSchoolTeachers()) },
-    getSchoolHomerooms: () => { dispatch(getSchoolHomerooms()) },
+    getSchools: () => {
+      dispatch(getSchools())
+    },
+    getSchoolTeachers: () => {
+      dispatch(getSchoolTeachers())
+    },
+    getSchoolHomerooms: () => {
+      dispatch(getSchoolHomerooms())
+    },
   })
 )(ClassroomForm);
 
