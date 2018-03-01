@@ -83,7 +83,7 @@ class OpenInvoicesTable extends Component {
                 <span>{item.storeItem.description.substr(0, 23) + '...'}</span>
                <div className="d-block">
                  <a href="#"  onClick={() => {
-                   _self.props.onDelete (item.storeItem.id)
+                   _self.props.onDelete (item.id)
                  }} className="productLink g-blue">
                    Delete
                  </a>
