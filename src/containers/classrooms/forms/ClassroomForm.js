@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography, Button} from 'material-ui';
+import {FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography, Button, Checkbox} from 'material-ui';
 import {getSchoolTeachers, getSchools, getSchoolHomerooms} from "../../../redux/schools/actions";
+import { ListItemText } from 'material-ui/List';
 import {
   selectGetSchoolHomeroomsRequest,
   selectGetSchoolTeachersRequest,
@@ -152,6 +153,7 @@ class ClassroomForm extends Component {
       ...this.props.classroom,
       [name]: value
     });
+    this.setState({name: value})
   }
 
   _renderSchools() {
@@ -170,6 +172,7 @@ class ClassroomForm extends Component {
     return courses.map((course, key) => (
       <MenuItem key={key} value={course.crsId}>
         {course.crsTitle}
+
       </MenuItem>
     ));
   }
@@ -184,11 +187,12 @@ class ClassroomForm extends Component {
     ));
   }
 
-  _renderHomerooms() {
+  _renderHomerooms(homeroomIds) {
     const {schoolHomerooms} = this.state;
 
     return schoolHomerooms.map((homeroom, key) => (
-      <MenuItem key={key} value={homeroom.id}>
+      <MenuItem key={homeroom.id} value={homeroom.id}>
+        <Checkbox checked={homeroomIds ? homeroomIds.includes(homeroom.id) : false}/>
         {homeroom.name}
       </MenuItem>
     ));
@@ -319,14 +323,15 @@ class ClassroomForm extends Component {
             <InputLabel htmlFor='name-error'>Homerooms (Multiple)</InputLabel>
             <Select
               multiple={true}
+              renderValue = {(e) => this._getSelectedRooms(e)}
               primarytext="Select Homeroom"
               name='homeroomIds'
               onChange={(e) => {
                 this._handleInputChange(e)
               }}
-              value={classroom.homeroomIds || []}>
-              <MenuItem value={null} primarytext=""/>
-              {this._renderHomerooms()}
+              value={ classroom.homeroomIds || []}>
+              {this._renderHomerooms(classroom.homeroomIds)}
+
             </Select>
             {errors && errors.get('homerooms') &&
             <FormHelperText error>{errors.get('homerooms').get(0)}</FormHelperText>}
@@ -345,6 +350,22 @@ class ClassroomForm extends Component {
       </div>
     );
   }
+
+  _getSelectedRooms(e){
+    const {classroom} = this.props;
+    const {schoolHomerooms} = this.state;
+
+    let selectedRooms = [];
+
+    if (classroom.homeroomIds){
+      selectedRooms = schoolHomerooms
+        .filter(item =>  classroom.homeroomIds.includes(item.id))
+        .map(item => item.name);
+    }
+    return selectedRooms.join(',');
+  }
+
+
 }
 
 ClassroomForm = connect(
