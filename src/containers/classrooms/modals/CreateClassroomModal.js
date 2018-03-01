@@ -58,8 +58,6 @@ class CreateClassroomModal extends Component {
     this.props.create(
       this.state.classroom
     );
-
-    this.props.resetCreateRequest();
   };
 
   _setCroppedImage(img) {
