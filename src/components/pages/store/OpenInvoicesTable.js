@@ -3,6 +3,7 @@ import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../../ui/table";
 
 import "../../../styles/store.css"
 import {NavLink} from "react-router-dom";
+import DeleteButton from "../../ui/DeleteButton";
 
 class OpenInvoicesTable extends Component {
 
@@ -82,11 +83,13 @@ class OpenInvoicesTable extends Component {
                 <NavLink to={`/store/details/${item.storeItem.id}`}><h4>{item.storeItem.title}</h4></NavLink>
                 <span>{item.storeItem.description.substr(0, 23) + '...'}</span>
                <div className="d-block">
-                 <a href="#"  onClick={() => {
-                   _self.props.onDelete (item.id)
-                 }} className="productLink g-blue">
-                   Delete
-                 </a>
+                 <DeleteButton
+                   onClick={() => {   _self.props.onDelete (item.id) }}
+                   title={`Are you sure you want to delete ${item.storeItem.title} ${item.classroom ? `for ${item.classroom.crm_name}?` : `?`} `}
+                   icon={false}
+                   btnName={"Delete"}
+                   classNameBtn="productLink g-blue"
+                 />
                </div>
               </div>
             </div>

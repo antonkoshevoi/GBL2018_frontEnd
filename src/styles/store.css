@@ -358,6 +358,8 @@ button .discount > span {
 .shoppingCartTable .productLink {
     font-size: 1rem;
     font-weight: 600;
+    margin: 0!important;
+    cursor: pointer;
 }
 
 /* CHECKOUT */
