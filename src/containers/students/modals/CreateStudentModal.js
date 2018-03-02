@@ -14,6 +14,7 @@ import {create, resetCreateRequest} from '../../../redux/students/actions';
 import Modal from "../../../components/ui/Modal";
 import StudentForm from "../forms/StudentForm";
 import ImageCropper from "../../../components/ui/ImageCropper";
+import {selectUserData} from "../../../redux/user/selectors";
 
 class CreateStudentModal extends Component {
   static propTypes = {
@@ -26,6 +27,7 @@ class CreateStudentModal extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       student: {
         username: '',
@@ -46,7 +48,15 @@ class CreateStudentModal extends Component {
   componentWillReceiveProps(nextProps) {
     const success = this.props.createRequest.get('success');
     const nextSuccess = nextProps.createRequest.get('success');
-
+    const {userData} = this.props;
+    this.setState(
+      {
+        student: {
+          ...this.state.student,
+          schoolId: userData.get('schoolId')
+        }
+      }
+    );
     if (!success && nextSuccess) {
       this._close();
       this.props.onSuccess();
@@ -159,6 +169,7 @@ class CreateStudentModal extends Component {
 CreateStudentModal = connect(
   (state) => ({
     createRequest: selectCreateRequest(state),
+    userData: selectUserData(state)
   }),
   (dispatch) => ({
     create: (form, params = {}) => {
