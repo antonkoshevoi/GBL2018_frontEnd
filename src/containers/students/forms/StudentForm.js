@@ -67,7 +67,7 @@ class StudentForm extends Component {
     const { schoolHomerooms } = this.state;
 
     return schoolHomerooms.map((homeroom, key) => (
-      <MenuItem key={key} value={ homeroom.name }>
+      <MenuItem key={key} value={ homeroom.id }>
         { homeroom.name }
       </MenuItem>
     ));

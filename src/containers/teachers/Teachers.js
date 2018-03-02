@@ -17,6 +17,8 @@ import EditTeacherModal from "./modals/EditTeacherModal";
 import SearchInput from "../../components/ui/SearchInput";
 import DeleteButton from "../../components/ui/DeleteButton";
 import HasPermission from "../middlewares/HasPermission";
+import {selectSchool} from "../../redux/schools/selectors";
+import {getSchool} from "../../redux/schools/actions";
 
 class Teachers extends Component {
   constructor(props) {
@@ -195,7 +197,7 @@ class Teachers extends Component {
   }
 
   render() {
-    const { getRecordsRequest, pagination } = this.props;
+    const { getRecordsRequest, pagination ,schoolRequest} = this.props;
     const { createModalIsOpen, editModalIsOpen, sorters, page, perPage } = this.state;
     const loading = getRecordsRequest.get('loading');
     const totalPages = pagination.get('totalPages');
@@ -294,11 +296,13 @@ class Teachers extends Component {
 
         <CreateTeacherModal
           isOpen={createModalIsOpen}
+          school={schoolRequest.get('record')}
           onClose={() => { this._closeCreateDialog() }}
           onSuccess={() => { this._onCreate() }}/>
 
         <EditTeacherModal
           isOpen={editModalIsOpen}
+          school={schoolRequest.get('record')}
           onClose={() => { this._closeEditDialog() }}
           onSuccess={() => { this._onCreate() }}/>
       </div>
@@ -313,11 +317,14 @@ Teachers = connect(
     getDeleteRequest: selectDeleteRequest(state),
     pagination: selectPagination(state),
     records: selectRecords(state),
+    schoolRequest: selectSchool(state),
   }),
   (dispatch) => ({
+    getSchool: () => { dispatch(getSchool()) },
     getRecords: (params = {}) => { dispatch(getRecords(params)) },
     getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
     deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) }
+
   })
 )(Teachers);
 

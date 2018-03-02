@@ -96,10 +96,11 @@ class CreateTeacherModal extends Component {
   }
 
   render() {
-    const { isOpen, createRequest } = this.props;
+    const { isOpen, createRequest , school } = this.props;
     const loading = createRequest.get('loading');
     const errorMessage = createRequest.get('errorMessage');
     const errors = createRequest.get('errors');
+
 
     return (
       <Modal isOpen={isOpen} bigger onClose={() => this._close()}>

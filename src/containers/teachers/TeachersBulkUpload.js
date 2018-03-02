@@ -4,9 +4,9 @@ import CsvUploadSection from "../../components/CsvUploadSection";
 import Insctruction from "../../components/ui/Insctruction";
 import { connect } from 'react-redux';
 import { bulkUpload, resetBulkUploadRequest } from '../../redux/teachers/actions';
-import { getSchools } from '../../redux/schools/actions';
+import {getSchool, getSchools} from '../../redux/schools/actions';
 import { selectBulkUploadRequest } from '../../redux/teachers/selectors';
-import { selectSchools } from '../../redux/schools/selectors';
+import {selectSchool, selectSchools} from '../../redux/schools/selectors';
 
 class TeachersBulkUpload extends Component {
 
@@ -81,7 +81,7 @@ class TeachersBulkUpload extends Component {
   }
 
   render() {
-    const { schools, upload, bulkUploadRequest } = this.props;
+    const { schools,schoolRequest, upload, bulkUploadRequest } = this.props;
 
     return (
       <div className="row">
@@ -91,6 +91,7 @@ class TeachersBulkUpload extends Component {
             csvTemplateHeaders = {this.state.csvTemplateHeaders}
             csvTemplateData = {this.state.csvTemplateData}
             schools={schools}
+            schoolRequest={schoolRequest}
             onUpload={upload}
             uploadRequest={bulkUploadRequest}
           />
@@ -106,10 +107,12 @@ class TeachersBulkUpload extends Component {
 TeachersBulkUpload = connect(
   (state) => ({
     schools: selectSchools(state),
+    schoolRequest: selectSchool(state),
     bulkUploadRequest: selectBulkUploadRequest(state)
   }),
   (dispatch) => ({
     getSchools: () => { dispatch(getSchools()) },
+    getSchool: () => { dispatch(getSchool()) },
     resetBulkUploadRequest: () => { dispatch(resetBulkUploadRequest()) },
     upload: (file, schoolId) => {
       dispatch(bulkUpload(file, {
