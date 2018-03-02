@@ -43,13 +43,16 @@ class CsvUploadSection extends Component {
     }
 
     _handleFileChange(e) {
-        if (typeof e.target.files[0] !== 'undefined') {
+      const { schoolRequest } = this.props;
+      const schoolId = schoolRequest.get('record').toJS().schId;
+
+      if (typeof e.target.files[0] !== 'undefined') {
             this.setState(
                 {
                     file: e.target.files[0]
                 },
                 () => {
-                    this.props.onUpload(this.state.file, this.state.schoolId);
+                    this.props.onUpload(this.state.file, schoolId);
                 }
             );
         }
@@ -63,8 +66,8 @@ class CsvUploadSection extends Component {
     }
 
     render() {
-        const { uploadRequest } = this.props;
-        const { schoolId } = this.state;
+        const { uploadRequest,schoolRequest } = this.props;
+        const schoolId = schoolRequest.get('record').toJS().schId;
         const loading = uploadRequest.get('loading');
         const progress = uploadRequest.get('progress');
         const cancel = uploadRequest.get('cancel');
@@ -75,6 +78,7 @@ class CsvUploadSection extends Component {
         const csvExampleName = this.props.csvExampleName;
         const csvTemplateHeaders = this.props.csvTemplateHeaders;
         const csvTemplateData = this.props.csvTemplateData;
+
         return (
             <div>
                 <div className="m-portlet m-portlet--brand  m-portlet--head-solid-bg m-portlet--bordered">
@@ -106,30 +110,30 @@ class CsvUploadSection extends Component {
                             </div>
                         </div>
                         <div className="row" style={{ marginLeft: 0 }}>
-                            <div className="col-md-6">
-                                <div className="row">
-                                    <div className="col-xs-12 ">
-                                        <FormControl>
-                                            <InputLabel htmlFor="school-helper">Schools</InputLabel>
-                                            <Select
-                                                disabled={loading}
-                                                style={{ minWidth: '120px' }}
-                                                value={schoolId || ''}
-                                                onChange={e => {
-                                                    this._handleSchoolChange(e);
-                                                }}
-                                                input={<Input name="school" id="school-helper" />}
-                                            >
-                                                <MenuItem value="">
-                                                    <em>None</em>
-                                                </MenuItem>
-                                                {this._renderSchools()}
-                                            </Select>
-                                            <FormHelperText />
-                                        </FormControl>
-                                    </div>
-                                </div>
-                            </div>
+                            {/*<div className="col-md-6">*/}
+                                {/*<div className="row">*/}
+                                    {/*<div className="col-xs-12 ">*/}
+                                        {/*<FormControl>*/}
+                                            {/*<InputLabel htmlFor="school-helper">Schools</InputLabel>*/}
+                                            {/*<Select*/}
+                                                {/*disabled={loading}*/}
+                                                {/*style={{ minWidth: '120px' }}*/}
+                                                {/*value={schoolId || ''}*/}
+                                                {/*onChange={e => {*/}
+                                                    {/*this._handleSchoolChange(e);*/}
+                                                {/*}}*/}
+                                                {/*input={<Input name="school" id="school-helper" />}*/}
+                                            {/*>*/}
+                                                {/*<MenuItem value="">*/}
+                                                    {/*<em>None</em>*/}
+                                                {/*</MenuItem>*/}
+                                                {/*{this._renderSchools()}*/}
+                                            {/*</Select>*/}
+                                            {/*<FormHelperText />*/}
+                                        {/*</FormControl>*/}
+                                    {/*</div>*/}
+                                {/*</div>*/}
+                            {/*</div>*/}
                             <div className={`col-md-6 ${loading || !schoolId ? ' not-allowed' : ''}`}>
                                 <div className={`react-csv-input ${loading || !schoolId ? ' disabled' : 'fdsfsf'}`}>
                                     <label>Select CSV file</label>
