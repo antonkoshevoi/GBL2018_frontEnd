@@ -85,6 +85,9 @@ textarea {
   color: white;
 }
 
+.gravity-logo {
+  padding: 0 50px 0 0;
+}
 
 .table.m-table-noborder th, .table.m-table-noborder td {
   border: none;
@@ -682,6 +685,7 @@ div.m-card-profile .m-card-profile__pic img {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  height: 40px;
 }
 
 div.m-portlet.m-portlet--info.m-portlet--head-solid-bg .m-portlet__head {
@@ -821,8 +825,8 @@ div.pie-block > canvas {
 }
 
 div.m-portlet .m-portlet__head {
-  padding: 0.5rem 1.2rem;
-  min-height: 4.1rem;
+  padding: 0 1.2rem;
+  /*min-height: 4.1rem;*/
   height: initial;
 }
 

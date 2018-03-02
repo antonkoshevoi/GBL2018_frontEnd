@@ -69,7 +69,7 @@ class Header extends Component {
       <header className="m-grid__item  m-header " style={{top:-headerPosition}} ref="header" data-minimize-offset="200" data-minimize-mobile-offset="200">
         <div className="m-container general-header m-container--fluid m-container--full-height">
           <div className="m-stack m-stack--ver m-stack--desktop">
-            <div className="m-stack__item m-brand  ">
+            <div className="m-stack__item m-brand gravity-logo ">
               <div className="m-stack m-stack--ver m-stack--general">
                 <div className="m-stack__item m-stack__item--middle m-brand__logo">
                   <NavLink to="/dashboard" className="m-brand__logo-wrapper">

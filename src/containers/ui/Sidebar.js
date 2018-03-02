@@ -223,11 +223,11 @@ class Sidebar extends Component {
             <nav className={'navigation ' + (this.state.hovered ? 'hovered' : '')}>
                 {this._renderGoogleMenus()}
             </nav>
-            <ul className="m-menu__nav  m-menu__nav--dropdown-submenu-arrow " onClick={() => {
-              this.props.mobileSidebar()
-            }}>
-              {this._renderSingleMenus()}
-            </ul>
+            {/*<ul className="m-menu__nav  m-menu__nav--dropdown-submenu-arrow " onClick={() => {*/}
+              {/*this.props.mobileSidebar()*/}
+            {/*}}>*/}
+              {/*{this._renderSingleMenus()}*/}
+            {/*</ul>*/}
           </div>
         </div>
       )
