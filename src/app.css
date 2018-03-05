@@ -826,7 +826,7 @@ div.pie-block > canvas {
 
 div.m-portlet .m-portlet__head {
   padding: 0 1.2rem;
-  /*min-height: 4.1rem;*/
+  min-height: 4.1rem;
   height: initial;
 }
 
