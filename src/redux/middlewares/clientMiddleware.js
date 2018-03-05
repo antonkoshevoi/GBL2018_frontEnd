@@ -46,17 +46,19 @@ export default function clientMiddleware(apiClient) {
                   // clear this promise from the queue
                   pending = pending.remove(REQUEST);
                   // send back a success result
+                  apiClient.resetConfigs();
+
                   return next({...rest, result, type: SUCCESS});
                 })
                 .catch(error => {
                   // clear this promise from the queue
                   pending = pending.remove(REQUEST);
                   // send back an error result
+
                   return next({...rest, error, type: FAILURE});
                 })
-                .finally(() => {
-                  apiClient.resetConfigs();
-                })
+                // .finally(() => {
+                // })
             );
           });
       } else {
@@ -68,6 +70,8 @@ export default function clientMiddleware(apiClient) {
             // clear this promise from the queue
             pending = pending.remove(REQUEST);
             // send back a success result
+            apiClient.resetConfigs();
+
             return next({...rest, result, type: SUCCESS});
           })
           .catch(error => {
@@ -75,10 +79,10 @@ export default function clientMiddleware(apiClient) {
             pending = pending.remove(REQUEST);
             // send back an error result
             return next({...rest, error, type: FAILURE});
-          })
-          .finally(() => {
-            apiClient.resetConfigs();
-          })
+          });
+          // .finally(() => {
+          //   apiClient.resetConfigs();
+          // })
       }
 
       // set this as request type as pending
