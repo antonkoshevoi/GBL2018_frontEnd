@@ -34,8 +34,9 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    const { getSchool } = this.props;
+    const { getSchool, getCartRecords } = this.props;
     getSchool();
+    getCartRecords();
     window.addEventListener('scroll',this.setHeaderPosition.bind(this));
   }
 
