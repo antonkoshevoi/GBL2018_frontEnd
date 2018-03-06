@@ -30,7 +30,9 @@ export const getErrorMessage = (response) => {
 export const yieldSuccessToasts = (messages) => {
   return takeLatest(Object.keys(messages), function* (action) {
     toastr.success(
-      messages[action.type]
+      messages[action.type],
+      '',
+      {timeOut: 3000}
     );
   });
 };
