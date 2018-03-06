@@ -9,11 +9,14 @@ import {logout} from '../../redux/auth/actions';
 import Messages from "../pushers/Messages";
 import Notifications from "../pushers/Notifications";
 import Tasks from "../pushers/Tasks";
-import {NavLink, withRouter} from "react-router-dom";
+import {NavLink, withRouter,Redirect} from "react-router-dom";
 
 import {Icon, IconButton} from "material-ui";
 import {getCartRecords} from "../../redux/store/actions";
-import {selectAddToCartRequest, selectCartRecords, selectGetCartRecordsRequest} from "../../redux/store/selectors";
+import {
+  selectAddToCartRequest, selectCardRedirect, selectCartRecords,
+  selectGetCartRecordsRequest
+} from "../../redux/store/selectors";
 import Settings from "../pushers/Settings";
 import TabMenu from "../pushers/TabMenu";
 import {selectUserData} from "../../redux/user/selectors";
@@ -63,11 +66,15 @@ class Header extends Component {
   }
 
   _renderHeader() {
-    const {logout, cartRecords, addToCartRequest, cartRecordsRequest, userData} = this.props;
+    const {logout, cartRecords,cartAddRedirect, addToCartRequest, cartRecordsRequest, userData} = this.props;
+    const {pathname} =window.location;
+
     const school = this.props.schoolRequest.get('record').toJS();
     const {headerPosition} = this.state;
+    console.log();
     return (
       <header className="m-grid__item  m-header " style={{top:-headerPosition}} ref="header" data-minimize-offset="200" data-minimize-mobile-offset="200">
+        {cartAddRedirect && pathname!=='/store/shopping-cart' && <Redirect to='/store/shopping-cart'/>}
         <div className="m-container general-header m-container--fluid m-container--full-height">
           <div className="m-stack m-stack--ver m-stack--desktop">
             <div className="m-stack__item m-brand gravity-logo ">
@@ -141,6 +148,7 @@ Header = connect(
     addToCartRequest: selectAddToCartRequest(state),
     cartRecordsRequest: selectGetCartRecordsRequest(state),
     cartRecords: selectCartRecords(state),
+    cartAddRedirect: selectCardRedirect(state),
     userData: selectUserData(state),
     schoolRequest: selectSchool(state),
   }),

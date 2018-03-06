@@ -58,6 +58,13 @@ export const selectCartRecords = createSelector(
     selectStoreDomain,
     (subState) => subState.get('cartRecords')
 );
+/**
+ * Get Cart Redirect
+ */
+export const selectCardRedirect = createSelector(
+    selectStoreDomain,
+    (subState) => subState.get('addToCartRedirect')
+);
 
 /**
  * Get Cart Records Total
