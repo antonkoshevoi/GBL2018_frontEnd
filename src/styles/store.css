@@ -341,8 +341,17 @@ button .discount > span {
 .shoppingCartTable .productPrice {
     font-size: 1.6rem;
     font-weight: bold;
-    color: #7b7e8a;
+    color: #000000;
 }
+
+.shoppingCartTable .productTax {
+    font-size: 1.6rem;
+    font-weight: bold;
+    height: 100%;
+    margin-left: 35px;
+}
+
+
 
 .shoppingCartTable .productQuantity {
     font-size: 1.2rem;

@@ -120,12 +120,12 @@ class OpenInvoicesTable extends Component {
 
           </Td>
           <Td width='100px'>
-            <span className="productPrice productLabel g-blue">
+            <span className="productPrice productLabel">
               {'$' + parseInt(item.storeItem.price).toFixed(2)}
             </span>
           </Td>
           <Td width='100px'>
-            <span className="productPrice productLabel g-blue">
+            <span className="productPrice productLabel">
               {'$' + parseInt(item.storeItem.price * item.count).toFixed(2)}
             </span>
           </Td>
@@ -145,8 +145,33 @@ class OpenInvoicesTable extends Component {
             <div className="col-md-9">
               <div className="text-left d-inline-block">
                 <span>Total</span><br/>
-                <span className="productPrice g-blue">
+                <span className="productPrice">
                 {'$' + parseInt(sum).toFixed(2)}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    )
+  }
+  _renderTaxRow(tax = 0) {
+    return (
+      <div>
+        <div className="m alert ">
+          <div className="row text-right">
+            <div className="col-md-3">
+              <div className="row text-left d-flex justify-content-center flex-column productTax">
+                <h4>Shopping & Tax</h4>
+              </div>
+            </div>
+            <div className="col-md-9">
+              <div className="text-left d-inline-block">
+                <span>Total</span><br/>
+                <span className="productPrice">
+                {'$' + parseInt(tax).toFixed(2)}
                 </span>
               </div>
             </div>
@@ -182,6 +207,7 @@ class OpenInvoicesTable extends Component {
               {this._renderRows(data)}
               </Tbody>
             </Table>
+            {this._renderTaxRow(0)}
             {this._renderTotalRow(sum,data.length)}
             <div className="row d-flex justify-content-end ">
               <div className="col-md-4 d-flex justify-content-end align-items-center">
