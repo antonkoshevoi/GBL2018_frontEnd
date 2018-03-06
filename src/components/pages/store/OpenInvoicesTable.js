@@ -137,7 +137,7 @@ class OpenInvoicesTable extends Component {
   _renderTotalRow(sum,count) {
     return (
       <div>
-        <div className="m alert  m-alert--default">
+        <div className="m alert  ">
           <div className="row text-right">
             <div className="col-md-3 text-right">
               <h3>{count + ' Items'}</h3>
@@ -160,7 +160,7 @@ class OpenInvoicesTable extends Component {
   _renderTaxRow(tax = 0) {
     return (
       <div>
-        <div className="m alert ">
+        <div className="m alert m-alert--default">
           <div className="row text-right">
             <div className="col-md-3">
               <div className="row text-left d-flex justify-content-center flex-column productTax">
