@@ -47,13 +47,13 @@ class DashboardTabs extends Component {
   _setGridCols() {
     if (window.innerWidth <= 768) {
       this._setTabsOptions();
-      this.setState({cols: 1})
-    } else if (window.innerWidth > 767 && window.innerWidth <= 1024) {
       this.setState({cols: 2})
-    } else if (window.innerWidth > 1024 && window.innerWidth <= 1367) {
-      this.setState({cols: 3})
-    } else if (window.innerWidth > 1367) {
+    } else if (window.innerWidth > 767 && window.innerWidth <= 1024) {
       this.setState({cols: 4})
+    } else if (window.innerWidth > 1024 && window.innerWidth <= 1367) {
+      this.setState({cols: 6})
+    } else if (window.innerWidth > 1367) {
+      this.setState({cols: 7})
     }
   }
 
@@ -176,16 +176,17 @@ class DashboardTabs extends Component {
             title={classroom.crmName}
             subtitle={(
               <div>
-                <span className="text-right d-block">{classroom.passRate} %</span>
-                <div className="progress m-progress--sm">
-                  <div title="Completed" className="progress-bar bg-success" role="progressbar" style={{width: classroom.completed + '%'}}></div>
-                  <div title="In Progress" className="progress-bar bg-warning" role="progressbar" style={{width: classroom.inProgress + '%'}}></div>
-                </div>
-                <br/>
+                {/*<span className="text-right d-block">{classroom.passRate} %</span>*/}
                 <div className="progress m-progress--sm">
                   <div title="Average Grade" className="progress-bar bg-success" role="progressbar" style={{width: classroom.averageGrade + '%'}}></div>
                   <div title="Average Grade" className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(classroom.averageGrade)) + '%'}}></div>
                 </div>
+                <br/>
+                <div className="progress m-progress--sm">
+                  <div title="Completed" className="progress-bar bg-success" role="progressbar" style={{width: classroom.completed + '%'}}></div>
+                  <div title="In Progress" className="progress-bar bg-warning" role="progressbar" style={{width: classroom.inProgress + '%'}}></div>
+                </div>
+
               </div>
             )}
             actionIcon={
@@ -202,8 +203,8 @@ class DashboardTabs extends Component {
 
     return (
       <div className="m--margin-top-50">
-        <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
-          <div className="m-portlet__head d-inline-block">
+        <div className="m-portlet  m-portlet--info">
+          <div className="m-portlet__head d-inline-block border-b-blue">
             <div className="row">
               <div className="m-portlet__head-tools text-left col-sm-8">
                 <Tabs
@@ -238,18 +239,18 @@ class DashboardTabs extends Component {
           </div>
           <div className="m-portlet__body" style={{height: "100%"}}>
             {value === 'students' && <TabContainer>
-              <GridList cellHeight={250} cols={cols}>
+              <GridList cellHeight={200} cols={cols}>
                 {this._renderStudents()}
               </GridList>
             </TabContainer>}
             {value === 'classRooms' && <TabContainer>
-              <GridList cellHeight={250} cols={cols}>
+              <GridList cellHeight={200} cols={cols}>
                 {this._renderClassrooms()}
               </GridList>
 
             </TabContainer>}
             {value === 'homeRooms' && <TabContainer>
-              <GridList cellHeight={250} cols={cols}>
+              <GridList cellHeight={200} cols={cols}>
                 {this._renderHomerooms()}
               </GridList>
             </TabContainer>}

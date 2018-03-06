@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { push } from 'react-router-redux';
+
 import {
   Paper, Tabs, Tab, Typography, GridList, GridListTile, GridListTileBar, IconButton, Input, InputAdornment
 } from 'material-ui';
@@ -81,6 +83,7 @@ class DashboardTabs extends Component {
   _renderStudents() {
     const students = this.props.getStudentsRequest.get('records').toJS();
     const defaultAvatar = '//s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+    const { goTo } = this.props;
 
     if (this.props.getStudentsRequest.get('records') && !students.length) {
       return this._renderEmptyDataMsg();
@@ -88,7 +91,7 @@ class DashboardTabs extends Component {
 
     return students.map(function (student, i) {
       return (
-        <GridListTile key={i} className="grid-tile">
+        <GridListTile key={i} className="grid-tile" onClick={() => { goTo(`/reports/students/${student.id}`); }}>
           <img src={(!student.avatar) ? defaultAvatar : student.avatar} alt={student.firstName}/>
           <GridListTileBar
             className="myGridTileBar"
@@ -173,9 +176,17 @@ DashboardTabs = connect(
   (state) => ({
     getStudentsRequest: selectStudentsRequest(state),
   }),
-  (dispatch) => ({
-    getStudents: (id, params = {}) => {dispatch(getStudents(id, params))},
-  })
+  (dispatch) => {
+    return ({
+      getStudents: (id, params = {}) => {
+        dispatch(getStudents(id, params))
+      },
+      goTo: (url) => {
+        dispatch(push(url))
+      }
+
+    });
+  }
 )(DashboardTabs);
 
 export default DashboardTabs;

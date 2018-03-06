@@ -37,7 +37,7 @@ export const Row = ({ index, ...props}) => {
 
 export const HeadRow = (props) => {
   return (
-  <tr className="m-datatable__row" style={{height: '56px;'}}>
+  <tr className="m-datatable__row" style={{height: '56px'}}>
     {props.children}
   </tr>
   );
