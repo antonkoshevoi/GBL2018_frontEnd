@@ -62,7 +62,7 @@ class OpenInvoicesTable extends Component {
   }
 
   _renderTableHomerooms(homerooms) {
-    return homerooms.map((homeroom,i) => <span key={i} className="d-block productLabel">{homeroom.name}</span>)
+    return homerooms.map((homeroom,i) => <span key={i} className="d-block productLabel font-weight-normal">{homeroom.name}</span>)
   }
 
   _renderRows(rows) {
@@ -74,14 +74,14 @@ class OpenInvoicesTable extends Component {
       return (
         <Row index={i} key={i}>
           <Td first={true} width='10px'>{i + 1}</Td>
-          <Td width='260px'>
+          <Td width='100%'>
             <div className="productInfo">
               <div className="productImg">
                 <img src={item.storeItem.thumbnail} className="img-responsive" alt=""/>
               </div>
               <div className="productContent">
-                <NavLink to={`/store/details/${item.storeItem.id}`}><h4>{item.storeItem.title}</h4></NavLink>
-                <span>{item.storeItem.description.substr(0, 23) + '...'}</span>
+                <NavLink to={`/store/details/${item.storeItem.id}`}><h5>{item.storeItem.title}</h5></NavLink>
+                <span>{item.storeItem.description.substr(0, 50) + '...'}</span>
                <div className="d-block">
                  <DeleteButton
                    onClick={() => {   _self.props.onDelete (item.id) }}
@@ -95,7 +95,7 @@ class OpenInvoicesTable extends Component {
             </div>
           </Td>
           <Td width="100px">
-            <span className="productLabel">
+            <span className="productLabel font-weight-normal">
                {item.classroom ? item.classroom.crm_name : ''}
             </span>
           </Td>
@@ -114,7 +114,7 @@ class OpenInvoicesTable extends Component {
               style={{height: "50px"}}/>
             }
             {item.isInvoice &&
-            <span className="productLabel">{item.count}</span>
+            <span className="productLabel text-center">{item.count}</span>
             }
 
 
@@ -170,10 +170,10 @@ class OpenInvoicesTable extends Component {
               <Thead>
               <HeadRow>
                 <Th first={true} width='10px'>#</Th>
-                <Th name='product' width='260px'>Product</Th>
+                <Th name='product' width='40%'>Product</Th>
                 <Th name='quantity' width='100px'>Classroom</Th>
                 <Th name='quantity' width='100px'>Homeroom</Th>
-                <Th name='quantity' width='132px'>Quantity</Th>
+                <Th name='quantity' width='132px' classNames="text-center">Quantity</Th>
                 <Th name='price' width='100px'>Price</Th>
                 <Th name='actions' width='100px'>Total</Th>
               </HeadRow>

@@ -37,16 +37,16 @@ export const Row = ({ index, ...props}) => {
 
 export const HeadRow = (props) => {
   return (
-  <tr className="m-datatable__row" style={{height: '56px'}}>
+  <tr className="m-datatable__row" style={{height: '56px;'}}>
     {props.children}
   </tr>
   );
 };
 
 
-export const Th = ({ first, width, name, onSort, dir = undefined, ...props}) => {
+export const Th = ({ first, width,classNames, name, onSort, dir = undefined, ...props}) => {
   return (
-    <th width={width} className={ (onSort ? 'sort-table-head ' : '') +  (first ? 'm-datatable__cell--center m-datatable__cell m-datatable__cell--check' : 'm-datatable__cell')}
+    <th width={width} className={(onSort ? 'sort-table-head ' : '') +  (first ? 'm-datatable__cell--center m-datatable__cell m-datatable__cell--check' : 'm-datatable__cell') + ` ${classNames} `}
       onClick={onSort && (() => { onSort(name) })}>
       <span style={{width: `${width}`}}>
         {props.children}

@@ -53,8 +53,8 @@ class Courses extends Component {
     const { activeTab } = this.state;
 
     return (
-      <div className='fadeInLeft  animated'>
-        <div className='m-portlet m-portlet--head-solid-bg m-portlet--brand'>
+      <div className='fadeInLeft  animated learning-areas'>
+        <div className='m-portlet m-portlet--head-solid-bg'>
           <div className='m-portlet__head'>
             <div className="m-portlet__head-tools">
               <Tabs

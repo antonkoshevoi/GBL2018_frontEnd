@@ -202,8 +202,8 @@ class Administration extends Component {
     return (
       <div className='fadeInLeft  animated'>
 
-        <div className='m-portlet m-portlet--head-solid-bg m-portlet--brand'>
-          <div className='m-portlet__head'>
+        <div className='m-portlet m-portlet--head-solid-bg'>
+          <div className='m-portlet__head border-b-orange'>
             <div className='m-portlet__head-caption'>
               <div className='m-portlet__head-title'>
               <span className='m-portlet__head-icon'>

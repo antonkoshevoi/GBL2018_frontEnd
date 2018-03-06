@@ -210,9 +210,9 @@ class Homerooms extends Component {
     const totalPages = pagination.get('totalPages');
 
     return (
-      <div className='fadeInLeft  animated'>
+      <div className='fadeInLeft  animated learning-areas'>
 
-        <div className='m-portlet m-portlet--head-solid-bg m-portlet--brand'>
+        <div className='m-portlet m-portlet--head-solid-bg'>
           <div className='m-portlet__head'>
             <div className='m-portlet__head-caption'>
               <div className='m-portlet__head-title'>
