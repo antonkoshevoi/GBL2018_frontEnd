@@ -126,7 +126,7 @@ class DashboardTabs extends Component {
 
     return (
       <div className="m--margin-top-50">
-        <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
+        <div className="m-portlet m-portlet--info border-b-blue">
           <div className="m-portlet__head d-inline-block">
             <div className="row">
               <div className="m-portlet__head-tools text-left col-sm-8">
