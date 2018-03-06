@@ -347,7 +347,7 @@ button .discount > span {
 .shoppingCartTable .productQuantity {
     font-size: 1.2rem;
     padding: 7px;
-    text-align: center;
+    text-align: right;
     font-weight: bold;
     width: 50px;
     margin: 0 auto;
@@ -365,6 +365,25 @@ button .discount > span {
     margin: 0!important;
     cursor: pointer;
 }
+
+.shoppingCartTable div.m-datatable .m-datatable__head .m-datatable__row > .m-datatable__cell {
+    background: #7bc848!important;
+
+}
+.shoppingCartTable div.m-datatable .m-datatable__row  {
+    border-bottom: #f2f3f8 solid 2px;
+ }
+.shoppingCartTable div.m-datatable .m-datatable__row .m-datatable__row--even {
+     background: #FFFFFF !important;
+ }
+.shoppingCartTable div.m-datatable .m-datatable__row:last-child  {
+    border-bottom: none!important;
+ }
+.shoppingCartTable div.m-datatable .m-datatable__head .m-datatable__row > .m-datatable__cell > span {
+     color: white!important;
+ }
+
+
 
 /* CHECKOUT */
 

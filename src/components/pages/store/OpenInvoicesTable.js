@@ -62,7 +62,7 @@ class OpenInvoicesTable extends Component {
   }
 
   _renderTableHomerooms(homerooms) {
-    return homerooms.map((homeroom,i) => <span key={i} className="d-block productLabel font-weight-normal">{homeroom.name}</span>)
+    return homerooms.map((homeroom,i) => <span key={i} className="d-block productLabel font-weight-normal text-center">{homeroom.name}</span>)
   }
 
   _renderRows(rows) {
@@ -74,7 +74,7 @@ class OpenInvoicesTable extends Component {
       return (
         <Row index={i} key={i}>
           <Td first={true} width='10px'>{i + 1}</Td>
-          <Td width='100%'>
+          <Td width='400px'>
             <div className="productInfo">
               <div className="productImg">
                 <img src={item.storeItem.thumbnail} className="img-responsive" alt=""/>
@@ -95,11 +95,11 @@ class OpenInvoicesTable extends Component {
             </div>
           </Td>
           <Td width="100px">
-            <span className="productLabel font-weight-normal">
+            <span className="productLabel font-weight-normal text-center">
                {item.classroom ? item.classroom.crm_name : ''}
             </span>
           </Td>
-          <Td width="100px">
+          <Td width="100px" classNames="text-center">
             {item.classroom && _self._renderTableHomerooms(item.classroom.homerooms)}
           </Td>
           <Td width='132px'>
@@ -146,7 +146,7 @@ class OpenInvoicesTable extends Component {
               <div className="text-left d-inline-block">
                 <span>Total</span><br/>
                 <span className="productPrice g-blue">
-                {parseInt(sum).toFixed(2) + "$"}
+                {'$' + parseInt(sum).toFixed(2)}
                 </span>
               </div>
             </div>
@@ -170,9 +170,9 @@ class OpenInvoicesTable extends Component {
               <Thead>
               <HeadRow>
                 <Th first={true} width='10px'>#</Th>
-                <Th name='product' width='40%'>Product</Th>
-                <Th name='quantity' width='100px'>Classroom</Th>
-                <Th name='quantity' width='100px'>Homeroom</Th>
+                <Th name='product' width='400px'>Product</Th>
+                <Th name='quantity' width='100px' classNames="text-center">Classroom</Th>
+                <Th name='quantity' width='100px' classNames="text-center">Homeroom</Th>
                 <Th name='quantity' width='132px' classNames="text-center">Quantity</Th>
                 <Th name='price' width='100px'>Price</Th>
                 <Th name='actions' width='100px'>Total</Th>

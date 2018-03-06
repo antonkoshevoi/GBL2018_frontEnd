@@ -703,12 +703,7 @@ div.m-datatable.m-datatable--default.m-datatable--loaded > .m-datatable__table {
     min-width: 100%;
 }
 
-.shoppingCartTable div.m-datatable .m-datatable__head .m-datatable__row > .m-datatable__cell {
-    background: #7bc848!important;
 
-}.shoppingCartTable div.m-datatable .m-datatable__head .m-datatable__row > .m-datatable__cell > span {
-    color: white!important;
-}
 
 div.m-card-profile .m-card-profile__pic img {
     max-width: 100% !important;
