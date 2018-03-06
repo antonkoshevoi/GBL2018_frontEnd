@@ -198,14 +198,13 @@ export default function reducer (state = initialState, action) {
                   .set('loading', true)
                   .remove('success')
                   .remove('fail')
-              ).set('addToCartRedirect', false);
+              );
       case ADD_TO_CART_SUCCESS:
           return state
               .set('addToCartRequest', state.get('addToCartRequest')
                   .set('success', true)
                   .remove('loading')
-              ).set('cartRecords', Immutable.fromJS(action.result.data))
-               .set('addToCartRedirect', true);
+              ).set('cartRecords', Immutable.fromJS(action.result.data));
       case ADD_TO_CART_FAIL:
           return state
               .set('addToCartRequest', state.get('addToCartRequest')
