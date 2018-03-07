@@ -703,8 +703,6 @@ div.m-datatable.m-datatable--default.m-datatable--loaded > .m-datatable__table {
     min-width: 100%;
 }
 
-
-
 div.m-card-profile .m-card-profile__pic img {
     max-width: 100% !important;
 }
@@ -775,13 +773,14 @@ div.m-widget24 {
 div.m-portlet {
     margin-bottom: 0;
 }
-.quick-card-item{
-    margin: 15px 0!important;
+
+.quick-card-item {
+    margin: 15px 0 !important;
 }
 
-.single-card img{
+.single-card img {
     height: 120px;
-    width: 120px!important;
+    width: 120px !important;
     padding: 6px;
 
 }
@@ -1345,33 +1344,54 @@ div.m-widget25 .m-widget25__price {
     }
 }
 
-.quick-link{
+.quick-link {
 
 }
 
-.quick-link .quick-link-title{
+.quick-link .quick-link-title {
     display: block;
     color: #575962;
 }
-.quick-link .quick-link-title span{
+
+.quick-link .quick-link-title span {
     font-size: 20px;
     font-weight: 600;
 
 }
-.quick-link .quick-link-title h5{
-   font-size: 14px;
+
+.quick-link .quick-link-title h5 {
+    font-size: 14px;
     margin: 0;
 }
 
-
-
-.quick-link-download{
-    color: #00bc5e!important;
-}
-.quick-link-film{
-    color: #f2af16!important;
+.quick-link-download {
+    color: #00bc5e !important;
 }
 
-.zoom-preview{
+.quick-link-film {
+    color: #f2af16 !important;
+}
+
+.zoom-preview {
     zoom: 0.4;
+}
+
+.store-container {
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
+.store-featured {
+    max-width: 600px;
+    white-space: pre-wrap;
+    zoom: 0.6;
+    display: inline-block;
+}
+
+.store-featured-title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-left: 5px;
+    color: #aeaeb0;
+
 }

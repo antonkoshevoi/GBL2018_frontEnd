@@ -83,7 +83,7 @@ class OpenInvoicesTable extends Component {
               <div className="productContent">
                 <NavLink to={`/store/details/${item.storeItem.id}`}><h5>{item.storeItem.title}</h5></NavLink>
                 <span>{item.storeItem.description.substr(0, 50) + '...'}</span>
-               <div className="d-block" style={{ 'margin-top':'15px'}}>
+               <div className="d-block" style={{ 'marginTop':'15px'}}>
                  <DeleteButton
                    onClick={() => {   _self.props.onDelete (item.id) }}
                    title={`Are you sure you want to delete ${item.storeItem.title} ${item.classroom ? `for ${item.classroom.crm_name}?` : `?`} `}

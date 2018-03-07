@@ -13,6 +13,7 @@ import StoreTabs from "../../components/pages/store/StoreTabs";
 import LinksWidgets from "../pages/reports/widgets/LinksWidgets";
 import Account from "../pages/reports/widgets/account";
 import QuickLink from "../pages/reports/widgets/QuickLink";
+import FeaturedItems from "../pages/reports/widgets/FeaturedItems";
 
 class UserDashboard extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ class UserDashboard extends Component {
       params: {
         filter: {
           category: '1'
-        }
+        },
+        courses: null,
       }
     }
   }
@@ -176,9 +178,10 @@ class UserDashboard extends Component {
         </div>
         <div className="row">
           <div className="col-md-8">
-            <StoreTabs isLoading={productsLoading} isSuccess={productsSuccess} getProducts={(category) => {
-              this._setCategoryFilter(category)
-            }} data={records}/>
+            <FeaturedItems data={records}/>
+            {/*<StoreTabs isLoading={productsLoading} isSuccess={productsSuccess} getProducts={(category) => {*/}
+              {/*this._setCategoryFilter(category)*/}
+            {/*}} data={records}/>*/}
           </div>
           <div className="col-md-4">
             <Account/>
