@@ -86,6 +86,7 @@ class ShoppingCart extends Component {
                  />
                 }
               </div>
+              {preview &&
               <div className="row d-flex justify-content-end ">
                 <div className="col-md-4 d-flex justify-content-end align-items-center">
                   <div className="form-group-inline btn-group">
@@ -94,6 +95,7 @@ class ShoppingCart extends Component {
                   </div>
                 </div>
               </div>
+              }
             </div>
           </div>
         </div>
