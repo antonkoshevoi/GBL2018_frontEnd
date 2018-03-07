@@ -339,8 +339,8 @@ button .discount > span {
 }
 
 .shoppingCartTable .productPrice {
-    font-size: 1.6rem;
-    font-weight: bold;
+    font-size: 2.2rem;
+    font-weight: 600;
     color: #000000;
 }
 
@@ -351,6 +351,14 @@ button .discount > span {
     margin-left: 35px;
 }
 
+.shoppingCartTable .productTaxPrice {
+    font-size: 1.2rem;
+    font-weight: bold;
+    height: 100%;
+    margin-left: 35px;
+    color: #9a9c9e;
+}
+
 
 
 .shoppingCartTable .productQuantity {
@@ -358,8 +366,11 @@ button .discount > span {
     padding: 7px;
     text-align: right;
     font-weight: bold;
-    width: 50px;
+    width: 65px;
+    height: 33px!important;
     margin: 0 auto;
+    background: #d4edc4;
+    border: #0080003d 1px solid;
 }
 
 .shoppingCartTable .productLabel {
@@ -371,7 +382,7 @@ button .discount > span {
 .shoppingCartTable .productLink {
     font-size: 1rem;
     font-weight: 600;
-    margin: 0!important;
+    margin: 0 15px 0 0!important;
     cursor: pointer;
 }
 
@@ -391,6 +402,15 @@ button .discount > span {
 .shoppingCartTable div.m-datatable .m-datatable__head .m-datatable__row > .m-datatable__cell > span {
      color: white!important;
  }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    opacity: 1;
+    width: 2px;
+    display: block;
+    background: transparent;
+}
+
 
 
 

@@ -139,10 +139,10 @@ class OpenInvoicesTable extends Component {
       <div>
         <div className="m alert  ">
           <div className="row text-right">
-            <div className="col-md-3 text-right">
+            <div className="col-md-2 text-center">
               <h3>{count + ' Items'}</h3>
             </div>
-            <div className="col-md-9">
+            <div className="col-md-10">
               <div className="text-left d-inline-block">
                 <span>Total</span><br/>
                 <span className="productPrice">
@@ -162,15 +162,14 @@ class OpenInvoicesTable extends Component {
       <div>
         <div className="m alert m-alert--default">
           <div className="row text-right">
-            <div className="col-md-3">
+            <div className="col-md-4">
               <div className="row text-left d-flex justify-content-center flex-column productTax">
-                <h4>Shopping & Tax</h4>
+                <h4>Shipping & Tax</h4>
               </div>
             </div>
-            <div className="col-md-9">
-              <div className="text-left d-inline-block">
-                <span>Total</span><br/>
-                <span className="productPrice">
+            <div className="col-md-8">
+              <div className="text-left d-inline-block  ">
+                <span className="productTaxPrice">
                 {'$' + parseInt(tax).toFixed(2)}
                 </span>
               </div>
