@@ -775,6 +775,16 @@ div.m-widget24 {
 div.m-portlet {
     margin-bottom: 0;
 }
+.quick-card-item{
+    margin: 15px 0!important;
+}
+
+.single-card img{
+    height: 120px;
+    width: 120px!important;
+    padding: 6px;
+
+}
 
 .small-card-content {
     height: 100%;
@@ -785,7 +795,7 @@ div.m-portlet {
 
 .small-card-content .small-card {
     background-color: #fdfdfd;
-    border-left: 6px solid #589ee4;
+    /*border-left: 6px solid #589ee4;*/
     flex: 1;
     align-items: center;
     margin: 5px 0;
@@ -1333,4 +1343,35 @@ div.m-widget25 .m-widget25__price {
     .m-wrapper {
         margin-left: 0;
     }
+}
+
+.quick-link{
+
+}
+
+.quick-link .quick-link-title{
+    display: block;
+    color: #575962;
+}
+.quick-link .quick-link-title span{
+    font-size: 20px;
+    font-weight: 600;
+
+}
+.quick-link .quick-link-title h5{
+   font-size: 14px;
+    margin: 0;
+}
+
+
+
+.quick-link-download{
+    color: #00bc5e!important;
+}
+.quick-link-film{
+    color: #f2af16!important;
+}
+
+.zoom-preview{
+    zoom: 0.4;
 }

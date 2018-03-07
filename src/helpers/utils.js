@@ -1,6 +1,8 @@
 import i18n from '../configs/i18n';
-import { takeLatest } from 'redux-saga/effects';
+import { takeLatest , put} from 'redux-saga/effects';
 import toastr from 'toastr';
+import { push } from 'react-router-redux';
+
 
 export const buildSortersQuery = (sorters) => {
 
@@ -39,10 +41,15 @@ export const yieldSuccessToasts = (messages) => {
 
 export const yieldErrorToasts = (types) => {
   return takeLatest([...types], function* (action) {
+    console.log(action.error.response);
     if(typeof action.error !== 'undefined') {
       toastr.error(
         getErrorMessage(action.error.response)
       );
+      if (action.error.response.status === 401) {
+
+      }
+
     }
   });
 };
@@ -90,3 +97,4 @@ export const getUrlLastName = (url) => {
   const paths = url.split('/');
   return paths[paths.length-1];
 }
+

@@ -8,7 +8,8 @@ import DeleteButton from "../../ui/DeleteButton";
 class OpenInvoicesTable extends Component {
 
   defaultProps = {
-    data: []
+    data: [],
+    preview: false,
   };
 
   state = {
@@ -65,7 +66,7 @@ class OpenInvoicesTable extends Component {
     return homerooms.map((homeroom,i) => <span key={i} className="d-block productLabel font-weight-normal text-center">{homeroom.name}</span>)
   }
 
-  _renderRows(rows) {
+  _renderRows(rows, preview) {
     const _self = this;
 
 
@@ -82,7 +83,7 @@ class OpenInvoicesTable extends Component {
               <div className="productContent">
                 <NavLink to={`/store/details/${item.storeItem.id}`}><h5>{item.storeItem.title}</h5></NavLink>
                 <span>{item.storeItem.description.substr(0, 50) + '...'}</span>
-               <div className="d-block">
+               <div className="d-block" style={{ 'margin-top':'15px'}}>
                  <DeleteButton
                    onClick={() => {   _self.props.onDelete (item.id) }}
                    title={`Are you sure you want to delete ${item.storeItem.title} ${item.classroom ? `for ${item.classroom.crm_name}?` : `?`} `}
@@ -94,14 +95,19 @@ class OpenInvoicesTable extends Component {
               </div>
             </div>
           </Td>
+          {!preview &&
           <Td width="100px">
             <span className="productLabel font-weight-normal text-center">
-               {item.classroom ? item.classroom.crm_name : ''}
+               { item.classroom ? item.classroom.crm_name : ''}
             </span>
           </Td>
+          }
+          {!preview &&
           <Td width="100px" classNames="text-center">
             {item.classroom && _self._renderTableHomerooms(item.classroom.homerooms)}
           </Td>
+          }
+
           <Td width='132px'>
             {!item.isInvoice &&
             <input
@@ -183,8 +189,8 @@ class OpenInvoicesTable extends Component {
   }
 
   render() {
-    const {data, sum} = this.props;
-
+    const {data, sum,preview} = this.props;
+    console.log('previewpreview',preview);
     return (
       <div>
         {data.length > 0 ?
@@ -195,19 +201,20 @@ class OpenInvoicesTable extends Component {
               <HeadRow>
                 <Th first={true} width='10px'>#</Th>
                 <Th name='product' width='400px'>Product</Th>
-                <Th name='quantity' width='100px' classNames="text-center">Classroom</Th>
-                <Th name='quantity' width='100px' classNames="text-center">Homeroom</Th>
+                {!preview && <Th name='quantity' width='100px' classNames="text-center">Classroom</Th>}
+                {!preview && <Th name='quantity' width='100px' classNames="text-center">Homeroom</Th>}
                 <Th name='quantity' width='132px' classNames="text-center">Quantity</Th>
                 <Th name='price' width='100px'>Price</Th>
                 <Th name='actions' width='100px'>Total</Th>
               </HeadRow>
               </Thead>
               <Tbody>
-              {this._renderRows(data)}
+              {this._renderRows(data,preview)}
               </Tbody>
             </Table>
             {this._renderTaxRow(0)}
             {this._renderTotalRow(sum,data.length)}
+            {!preview &&
             <div className="row d-flex justify-content-end ">
               <div className="col-md-4 d-flex justify-content-end align-items-center">
                 <div className="form-group-inline btn-group">
@@ -216,6 +223,8 @@ class OpenInvoicesTable extends Component {
                 </div>
               </div>
             </div>
+            }
+
           </div>
           :
           this._getEmptyMessage()

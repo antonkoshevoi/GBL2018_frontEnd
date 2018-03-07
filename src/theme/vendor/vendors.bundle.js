@@ -3200,9 +3200,9 @@ jQuery.each( {
         }
 
         // Support: IE 9 - 11 only, iOS 7 only, Android Browser <=4.3 only
-        // Treat the template element as a regular one in browsers that
+        // Treat the QuickLink element as a regular one in browsers that
         // don't support it.
-        if ( nodeName( elem, "template" ) ) {
+        if ( nodeName( elem, "QuickLink" ) ) {
             elem = elem.content || elem;
         }
 
@@ -17377,7 +17377,7 @@ $.fn.timepicker.defaults = $.extend(true, {}, $.fn.timepicker.defaults, {
 * @license: Licensed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
 * @website: http://www.daterangepicker.com/
 */
-// Follow the UMD template https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js
+// Follow the UMD QuickLink https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Make globaly available as well
@@ -17465,7 +17465,7 @@ $.fn.timepicker.defaults = $.extend(true, {}, $.fn.timepicker.defaults, {
         //data-api options will be overwritten with custom javascript options
         options = $.extend(this.element.data(), options);
 
-        //html template for the picker UI
+        //html QuickLink for the picker UI
         if (typeof options.template !== 'string' && !(options.template instanceof $))
             options.template = '<div class="daterangepicker dropdown-menu">' +
                 '<div class="calendar left">' +
@@ -32269,10 +32269,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	function template(templateSpec, env) {
 	  /* istanbul ignore next */
 	  if (!env) {
-	    throw new _exception2['default']('No environment passed to template');
+	    throw new _exception2['default']('No environment passed to QuickLink');
 	  }
 	  if (!templateSpec || !templateSpec.main) {
-	    throw new _exception2['default']('Unknown template object: ' + typeof templateSpec);
+	    throw new _exception2['default']('Unknown QuickLink object: ' + typeof templateSpec);
 	  }
 
 	  templateSpec.main.decorator = templateSpec.main_d;
@@ -34949,7 +34949,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // When using true SourceNodes, this will update all references to the given alias
 	    // as the source nodes are reused in situ. For the non-source node compilation mode,
 	    // aliases will not be used, but this case is already being run on the client and
-	    // we aren't concern about minimizing the template size.
+	    // we aren't concern about minimizing the QuickLink size.
 	    var aliasCount = 0;
 	    for (var alias in this.aliases) {
 	      // eslint-disable-line guard-for-in
@@ -43071,7 +43071,7 @@ function closure ( target, options, originalOptions ){
         },
 
         /**
-         * Appends slider template to a DOM
+         * Appends slider QuickLink to a DOM
          */
         append: function () {
             var container_html = '<span class="irs js-irs-' + this.plugin_count + ' ' + this.options.extra_classes + '"></span>';
@@ -45696,13 +45696,13 @@ var Dropzone = function (_Emitter) {
 
 
         /**
-         * A string that contains the template used for each dropped
+         * A string that contains the QuickLink used for each dropped
          * file. Change it to fulfill your needs but make sure to properly
          * provide all elements.
          *
          * If you want to use an actual HTML element instead of providing a String
          * as a config option, you could create a div with the id `tpl`,
-         * put the template inside it and provide the element like this:
+         * put the QuickLink inside it and provide the element like this:
          *
          *     document
          *       .querySelector('#tpl')

@@ -353,7 +353,7 @@ button .discount > span {
 
 .shoppingCartTable .productTaxPrice {
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: 600;
     height: 100%;
     margin-left: 35px;
     color: #9a9c9e;
@@ -382,7 +382,7 @@ button .discount > span {
 .shoppingCartTable .productLink {
     font-size: 1rem;
     font-weight: 600;
-    margin: 0 15px 0 0!important;
+    margin: 0!important;
     cursor: pointer;
 }
 

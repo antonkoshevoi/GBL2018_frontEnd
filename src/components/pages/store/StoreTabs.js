@@ -83,10 +83,10 @@ class StoreTabs extends Component {
       <div className="row ">
         <div className="col-md-12">
           <div className="m--margin-top-50">
-            <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
+            <div className="m-portlet  m-portlet--info">
               <div className="m-portlet__head d-inline-block">
                 <div className="row">
-                  <div className="m-portlet__head-tools text-left col-sm-8">
+                  <div className="m-portlet__head-tools text-left col-sm-8 border-b-blue">
                     <Tabs
                       className="main-tabs"
                       value={this.state.value}
