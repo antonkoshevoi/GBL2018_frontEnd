@@ -1,4 +1,4 @@
-import { all } from 'redux-saga/effects';
+import {all, takeLatest, put} from 'redux-saga/effects';
 import {
   CREATE_FAIL, CREATE_SUCCESS, GET_RECORDS_FAIL,
   GET_SINGLE_RECORD_FAIL, UPDATE_FAIL,
@@ -6,8 +6,13 @@ import {
   BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL,
   ASSIGN_STUDENT_SUCCESS, ASSIGN_STUDENT_FAIL
 } from './actions';
-import { yieldErrorToasts, yieldSuccessToasts } from '../../helpers/utils';
+import {yieldErrorToasts, yieldSuccessToasts} from '../../helpers/utils';
 import i18n from '../../configs/i18n';
+import {getCartRecords} from "../store/actions";
+
+function* yieldSuccessClassAdd() {
+  yield put(getCartRecords());
+}
 
 const classroomsSagas = all([
   yieldSuccessToasts({
@@ -26,6 +31,8 @@ const classroomsSagas = all([
     ASSIGN_STUDENT_FAIL,
     BULK_UPLOAD_FAIL
   ]),
+  takeLatest(CREATE_SUCCESS, yieldSuccessClassAdd)
+
 ]);
 
 export default classroomsSagas;

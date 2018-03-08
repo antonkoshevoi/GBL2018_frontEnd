@@ -190,7 +190,6 @@ class OpenInvoicesTable extends Component {
 
   render() {
     const {data, sum,preview} = this.props;
-    console.log('previewpreview',preview);
     return (
       <div>
         {data.length > 0 ?

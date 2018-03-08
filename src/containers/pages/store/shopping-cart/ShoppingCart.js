@@ -58,7 +58,6 @@ class ShoppingCart extends Component {
     const { records, cartRecordsRequest, cartRecordsSum ,preview} = this.props;
     const loading = cartRecordsRequest.get('loading');
     const success = cartRecordsRequest.get('success');
-    console.log(preview);
     return (
       <div>
         {loading && <Loader/>}
