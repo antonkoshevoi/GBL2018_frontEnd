@@ -168,7 +168,6 @@ class SignUpParent extends Component {
                     <Stepper activeStep={activeStep} alternativeLabel className="g-stepper">
 
                       <Step>
-
                         <StepLabel>Parent Profile</StepLabel>
                       </Step>
                       <Step>

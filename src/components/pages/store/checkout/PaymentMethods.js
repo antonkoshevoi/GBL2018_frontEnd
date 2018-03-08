@@ -41,9 +41,6 @@ class PaymentMethods extends Component {
 
   render() {
     return (
-      <Card title='Payment Methods' icon='fa	fa-credit-card'>
-        <div className='row'>
-          <div className='col-md-12'>
             <div className='m-portlet'>
               <div className='m-portlet__body  m-portlet__body--no-padding'>
                 <div className='row m-row--no-padding m-row--col-separator-xl'>
@@ -51,9 +48,6 @@ class PaymentMethods extends Component {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </Card>
     );
   }
 }

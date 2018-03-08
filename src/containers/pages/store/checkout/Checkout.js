@@ -7,40 +7,50 @@ import InfoDetails from '../../../../components/pages/store/checkout/InfoDetails
 import PaymentMethods from '../../../../components/pages/store/checkout/PaymentMethods';
 import {selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest} from '../../../../redux/store/selectors';
 import {calculateCartSum, getCartRecords} from '../../../../redux/store/actions';
-import { withRouter } from 'react-router-dom';
-import { push } from 'react-router-redux';
+import {withRouter} from 'react-router-dom';
+import {push} from 'react-router-redux';
 import {
   selectCreateCheckPaymentRequest,
   selectCreatePayPalPaymentRequest
 } from '../../../../redux/payments/selectors';
-import { createCheckPayment, createPayPalPayment } from '../../../../redux/payments/actions';
+import {createCheckPayment, createPayPalPayment} from '../../../../redux/payments/actions';
+import {Divider, Step, StepLabel, Stepper} from 'material-ui';
+import Button from 'material-ui/Button';
+import { withStyles } from 'material-ui/styles';
+import { CircularProgress } from 'material-ui';
+
 
 import payPalImg from '../../../../media/images/payments/paypal.png'
 import creditCardImg from '../../../../media/images/payments/credit_card.png'
 import checkImg from '../../../../media/images/payments/check.png'
+import Card from "../../../../components/ui/Card";
+import ShippingAndBilling from "./ShippingAndBilling";
 
 
 class Checkout extends Component {
 
   state = {
-    redirectingToPayPal: false
+    redirectingToPayPal: false,
+    stepIndex: 0,
+    finished:0,
+
   };
 
   componentDidMount() {
-    const { cartRecords } = this.props;
-      if (cartRecords.size === 0) {
-        this._getCartRecords();
-        this._calculateSum(cartRecords.toJS());
+    const {cartRecords} = this.props;
+    if (cartRecords.size === 0) {
+      this._getCartRecords();
+      this._calculateSum(cartRecords.toJS());
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     this._handlePayPalPaymentCreated(nextProps);
     this._handleCheckPaymentCreated(nextProps);
     this._handleCheckPaymentFailed(nextProps);
 
     if (this.props.cartRecords !== nextProps.cartRecords) {
-        this._calculateSum(nextProps.cartRecords.toJS());
+      this._calculateSum(nextProps.cartRecords.toJS());
     }
   }
 
@@ -48,23 +58,39 @@ class Checkout extends Component {
     this.props.getCartRecords();
   }
 
-  _calculateSum(data){
+  _calculateSum(data) {
     this.props.calculateSum(data);
   }
+
+  handleNext = () => {
+    const {stepIndex} = this.state;
+    this.setState({
+      stepIndex: stepIndex + 1,
+      finished: stepIndex >= 2,
+    });
+  };
+
+  handleBack = () => {
+    const {stepIndex} = this.state;
+    if (stepIndex > 0) {
+      this.setState({stepIndex: stepIndex - 1});
+    }
+  };
 
   /**
    * PayPal
    * @private
    */
-  _processPayPal () {
+  _processPayPal() {
     this.props.createPayPalPayment();
   }
+
   _handlePayPalPaymentCreated(nextProps) {
     const success = this.props.createPayPalPaymentRequest.get('success');
     const nextSuccess = nextProps.createPayPalPaymentRequest.get('success');
 
     if (!success && nextSuccess) {
-      this.setState({ redirectingToPayPal: true });
+      this.setState({redirectingToPayPal: true});
       window.location = nextProps.createPayPalPaymentRequest.get('approvalUrl');
     }
   }
@@ -73,9 +99,10 @@ class Checkout extends Component {
    * Check
    * @private
    */
-  _processCheck () {
+  _processCheck() {
     this.props.createCheckPayment();
   }
+
   _handleCheckPaymentCreated(nextProps) {
     const success = this.props.createCheckPaymentRequest.get('success');
     const nextSuccess = nextProps.createCheckPaymentRequest.get('success');
@@ -84,6 +111,7 @@ class Checkout extends Component {
       this.props.goToPendingPage();
     }
   }
+
   _handleCheckPaymentFailed(nextProps) {
     const fail = this.props.createCheckPaymentRequest.get('fail');
     const nextFail = nextProps.createCheckPaymentRequest.get('fail');
@@ -95,7 +123,7 @@ class Checkout extends Component {
 
   render() {
 
-    const { redirectingToPayPal } = this.state;
+    const {redirectingToPayPal, stepIndex} = this.state;
     const {
       cartRecords,
       cartRecordsRequest,
@@ -105,42 +133,90 @@ class Checkout extends Component {
     } = this.props;
     const loadingCarts = cartRecordsRequest.get('loading');
     const successCarts = cartRecordsRequest.get('success');
-
+    console.log(loadingCarts);
     return (
       <div>
-        <div className='row'>
-          <div className='col-xl-3'>
-            {successCarts &&
-              <CartItems sum={cartRecordsSum} data={cartRecords.toJS()}/>}
-          </div>
-          <div className='col-xl-9'>
-            <div className='row'>
-              <div className='col-sm-12'>
-                <InfoDetails/>
+        <div className='row d-flex justify-content-center'>
+              <div className="col-10">
+                <Card header={false}>
+                  <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
+
+                    <Step>
+                      <StepLabel>Payments Options</StepLabel>
+                    </Step>
+                    <Step>
+                      <StepLabel>Shipping and Biling</StepLabel>
+                    </Step>
+                    <Step>
+                      <StepLabel>Confirmation</StepLabel>
+                    </Step>
+                  </Stepper>
+                  {[
+                    (() => { return (
+                      //(temp) TODO need extract to component
+                      <div className='col-12'>
+                        {successCarts &&
+                        <CartItems sum={cartRecordsSum} data={cartRecords.toJS()}/>}
+                        {loadingCarts && !successCarts &&
+                        <div className="row d-flex justify-content-center">
+                          <CircularProgress color="primary" size={80}/>
+                        </div>}
+                        <br/>
+                        <PaymentMethods methods={[
+                          {
+                            title: 'PayPal',
+                            img: payPalImg,
+                            loading: createPayPalPaymentRequest.get('loading') || redirectingToPayPal,
+                            onSelect: () => {
+                              this._processPayPal();
+                            },
+                          },
+                          {
+                            title: 'Credit Card',
+                            img: creditCardImg,
+                            onSelect: () => {
+                              this._processCC();
+                            },
+                          },
+                          {
+                            title: 'Check',
+                            img: checkImg,
+                            loading: createCheckPaymentRequest.get('loading'),
+                            onSelect: () => {
+                              this._processCheck();
+                            },
+                          }
+
+                        ]}
+
+                        />
+                      </div>
+
+                    ) })(),
+
+                    <ShippingAndBilling/>
+
+                  ][stepIndex]}
+                 <div className="form-group">
+                   <Button
+                     disabled={stepIndex === 0}
+                     onClick={this.handleBack}
+                   >
+                     Back
+                   </Button>
+                   <Button
+                     variant="raised"
+                     color="primary"
+                     onClick={this.handleNext}
+                   >
+                     {stepIndex === 2 ? 'Finish' : 'Next'}
+                   </Button>
+                 </div>
+                </Card>
+
               </div>
-              <div className='col-sm-12'>
-                <PaymentMethods methods={[
-                  {
-                    title: 'PayPal',
-                    img: payPalImg,
-                    loading: createPayPalPaymentRequest.get('loading') || redirectingToPayPal,
-                    onSelect: () => { this._processPayPal(); },
-                  },
-                  {
-                    title: 'Credit Card',
-                    img: creditCardImg,
-                    onSelect: () => { this._processCC(); },
-                  },
-                  {
-                    title: 'Check',
-                    img: checkImg,
-                    loading: createCheckPaymentRequest.get('loading'),
-                    onSelect: () => { this._processCheck(); },
-                  }
-                ]}/>
-              </div>
-            </div>
-          </div>
+
+
         </div>
       </div>
     );
@@ -156,13 +232,27 @@ Checkout = connect(
     createCheckPaymentRequest: selectCreateCheckPaymentRequest(state)
   }),
   (dispatch) => ({
-    getCartRecords: () => { dispatch(getCartRecords()) },
-    createPayPalPayment: () => { dispatch(createPayPalPayment()) },
-    createCheckPayment: () => { dispatch(createCheckPayment()) },
-    calculateSum: (data) => { dispatch(calculateCartSum(data)) },
-    goToSuccessPage: () => { dispatch(push('/payments/success')) },
-    goToPendingPage: () => { dispatch(push('/payments/pending')) },
-    goToFailPage: () => { dispatch(push('/payments/fail')) },
+    getCartRecords: () => {
+      dispatch(getCartRecords())
+    },
+    createPayPalPayment: () => {
+      dispatch(createPayPalPayment())
+    },
+    createCheckPayment: () => {
+      dispatch(createCheckPayment())
+    },
+    calculateSum: (data) => {
+      dispatch(calculateCartSum(data))
+    },
+    goToSuccessPage: () => {
+      dispatch(push('/payments/success'))
+    },
+    goToPendingPage: () => {
+      dispatch(push('/payments/pending'))
+    },
+    goToFailPage: () => {
+      dispatch(push('/payments/fail'))
+    },
   })
 )(Checkout);
 
