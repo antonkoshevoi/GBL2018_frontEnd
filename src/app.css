@@ -880,10 +880,24 @@ div.m-portlet .m-portlet__body {
     padding: 1.2rem;
 }
 
+div.m-portlet__head-icon
+
 div[class^='col-'] {
     padding-right: 7px;
     padding-left: 7px;
     margin-bottom: 15px;
+}
+
+.circle-background:before{
+    background: #4fa1ea;
+    padding: 6px;
+    border-radius: 60px;
+    color: white;
+}
+.square-background:before{
+    background: #4fa1ea;
+    padding: 6px;
+    color: white;
 }
 
 .small-card [class^='col-'], .m-portlet__body [class^='col-'] {
