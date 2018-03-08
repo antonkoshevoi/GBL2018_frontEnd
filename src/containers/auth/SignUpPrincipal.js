@@ -21,6 +21,7 @@ class SignUpPrincipal extends Component {
     this.state = {
       form: {},
       imageZoom:0,
+      zoom:0.5
     };
   }
 
@@ -126,6 +127,11 @@ class SignUpPrincipal extends Component {
 
   _zoomOut() {
     this.cropper.zoom(-0.1)
+  }
+
+  _zoom(e){
+    this.setState({'zoom':e.target.value});
+    this.cropper.zoomTo(e.target.value)
   }
 
   _reverseImage(scale) {
@@ -340,55 +346,18 @@ class SignUpPrincipal extends Component {
                             ref={cropper => { this.cropper = cropper; }}
                             src={form.schoolLogo}
                             dragMode={'move'}
+                            background={false}
+                            cropBoxMovable={false}
+                            cropBoxResizable={true}
+                            minCropBoxWidth={250}
                             className='signup-cropper'
-                            style={{height: 250, width: '100%'}}
+                            style={{height: 250, width: 250}}
                             aspectRatio={1 / 1}
-
                             guides={false}/>
                           {form.schoolLogo &&
                           <div className="text-center m--margin-10">
-                            <a
-                              className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
-                              onMouseDown={() => {
-                                this._reverseImage('vertical')
-                              }}>
-                              <i className="fa 	fa-arrows-v"></i>
-                            </a>
-                            <a
-                              className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
-                              onMouseDown={() => {
-                                this._reverseImage('horizontal')
-                              }}>
-                              <i className="fa 	fa-arrows-h"></i>
-                            </a>
-                            <a
-                              className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
-                              onMouseDown={() => {
-                                this._zoomIn()
-                              }}>
-                              <i className="fa fa-search-plus"></i>
-                            </a>
-                            <a
-                              className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
-                              onMouseDown={() => {
-                                this._zoomOut()
-                              }}>
-                              <i className="fa fa-search-minus"></i>
-                            </a>
-                            <a
-                              className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
-                              onMouseDown={() => {
-                                this._rotateImage(-5)
-                              }}>
-                              <i className="fa fa-rotate-left"></i>
-                            </a>
-                            <a
-                              className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
-                              onMouseDown={() => {
-                                this._rotateImage(5)
-                              }}>
-                              <i className="fa fa-rotate-right"></i>
-                            </a>
+
+                            <input type="range" min="0.1" max="1" step="0.05"  value={this.state.zoom}  onChange={ (value)=>this._zoom(value)}></input>
                             <br/>
                             <span
                               className='btn pointer m-btn m--margin-5 m-btn--pill m-btn--air btn-success'
