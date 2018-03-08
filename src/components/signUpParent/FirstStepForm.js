@@ -14,7 +14,8 @@ class FirstStepForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: props.form
+      form: props.form,
+      zoom:0.5
     };
   }
 
@@ -66,9 +67,15 @@ class FirstStepForm extends Component {
   _zoomIn(){
     this.cropper.zoom(0.1)
   }
+  
 
   _zoomOut() {
     this.cropper.zoom(-0.1)
+  }
+
+  _zoom(e){
+    this.setState({'zoom':e.target.value});
+    this.cropper.zoomTo(e.target.value)
   }
 
   _reverseImage(scale) {
@@ -108,12 +115,12 @@ class FirstStepForm extends Component {
 
     return (
       <div className='row m--margin-top-40'>
-        <div className='col-md-6'>
+        <div className='col-md-7'>
           <div className='col-xs-12'>
             <legend className='m--margin-bottom-10'>Required</legend>
             <div className='m-form__section m-form__section--first'>
              <div className="form-group m-form__group row">
-				<label className="col-form-label col-lg-3 col-sm-12">First Name <small className="g-red">*</small></label>
+				<label className="col-form-label col-lg-3 col-sm-12">First Name </label>
 				<div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     value={form.firstName || ''}
@@ -131,7 +138,7 @@ class FirstStepForm extends Component {
             </div>
             <div className='m-form__section m-form__section--first'>
               <div className="form-group m-form__group row">
-				<label className="col-form-label col-lg-3 col-sm-12">Last Name <small className="g-red">*</small></label>
+				<label className="col-form-label col-lg-3 col-sm-12">Last Name </label>
 				<div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     value={form.lastName || ''}
@@ -149,7 +156,7 @@ class FirstStepForm extends Component {
             </div>
             <div className='m-form__section m-form__section--first'>
              <div className="form-group m-form__group row">
-				<label className="col-form-label col-lg-3 col-sm-12">Email <small className="g-red">*</small></label>
+				<label className="col-form-label col-lg-3 col-sm-12">Email </label>
 				<div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     value={form.email || ''}
@@ -167,7 +174,7 @@ class FirstStepForm extends Component {
             </div>
             <div className='m-form__section m-form__section--first'>
             <div className="form-group m-form__group row">
-				<label className="col-form-label col-lg-3 col-sm-12">Username <small className="g-red">*</small></label>
+				<label className="col-form-label col-lg-3 col-sm-12">Username </label>
 				<div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     value={form.username || ''}
@@ -185,7 +192,7 @@ class FirstStepForm extends Component {
             </div>
             <div className='m-form__section m-form__section--first'>
             <div className="form-group m-form__group row">
-				<label className="col-form-label col-lg-3 col-sm-12">Password <small className="g-red">*</small></label>
+				<label className="col-form-label col-lg-3 col-sm-12">Password </label>
 				<div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     value={form.password || ''}
@@ -205,7 +212,7 @@ class FirstStepForm extends Component {
           <div className='m-separator m-separator--dashed m-separator--lg'></div>
           <div className='col-sm-12'>
             <div className='col-xs-12'>
-              <legend className='m--margin-bottom-10'>Optional</legend>
+              <legend className='m--margin-bottom-10'>Billing / Shipping Information (optional)</legend>
               <address className='m-form__section m-form__section--first signUpOptional'>
                <div className="form-group m-form__group row">
 				<label className="col-form-label col-lg-3 col-sm-12">Address Line 1</label>
@@ -256,7 +263,7 @@ class FirstStepForm extends Component {
                   </div>
                 </div>
                 <div className="form-group m-form__group row">
-                  <label className="col-form-label col-lg-3 col-sm-12">Region</label>
+                  <label className="col-form-label col-lg-3 col-sm-12">State or Province</label>
                   <div className="col-lg-8 col-md-9 col-sm-12">
                     <input
                         value={form.region || ''}
@@ -268,6 +275,22 @@ class FirstStepForm extends Component {
                     <div className='form-control-feedback'>
                         {errors && errors.get('region') &&
                         <div className="form-control-feedback text-center error">{errors.get('region').get(0)}</div>}
+                    </div>
+                  </div>
+                </div>
+                <div className="form-group m-form__group row">
+                  <label className="col-form-label col-lg-3 col-sm-12">Postal or Zip Code</label>
+                  <div className="col-lg-8 col-md-9 col-sm-12">
+                    <input
+                      value={form.zip || ''}
+                      name='country'
+                      onChange={(e) => { this._handleInputChange(e) }}
+                      type='text'
+                      className='form-control m-input m-input--air '
+                      placeholder=''/>
+                    <div className='form-control-feedback'>
+                      {errors && errors.get('zip') &&
+                      <div className="form-control-feedback text-center error">{errors.get('zip').get(0)}</div>}
                     </div>
                   </div>
                 </div>
@@ -288,7 +311,7 @@ class FirstStepForm extends Component {
                   </div>
                 </div>
               <div className="form-group m-form__group row">
-				<label className="col-form-label col-lg-3 col-sm-12">Phone</label>
+				<label className="col-form-label col-lg-3 col-sm-12">Telephone</label>
 				<div className="col-lg-8 col-md-9 col-sm-12">
                     <input
                         value={form.phoneNumber || ''}
@@ -308,7 +331,7 @@ class FirstStepForm extends Component {
           </div>
         </div>
 
-        <div className='col-sm-6'>
+        <div className='col-sm-5'>
           <div className='row text-center'>
             <legend className='m--margin-bottom-10'>Profile Pic Upload</legend>
 
@@ -321,10 +344,14 @@ class FirstStepForm extends Component {
 
                 <Cropper
                     ref={cropper => { this.cropper = cropper; }}
+                    dragMode={'move'}
                     src={form.avatar}
+                    background={false}
+                    cropBoxMovable={false}
+                    cropBoxResizable={true}
+                    minCropBoxWidth={250}
                     className='signup-cropper'
-                    dragMode="move"
-                    style={{height: 250, width: '100%'}}
+                    style={{height: 250, width: 250}}
                     aspectRatio={1 / 1}
                     guides={false}/>
               </div>
@@ -332,49 +359,9 @@ class FirstStepForm extends Component {
 
             <div className='col-sm-12'>
               {form.avatar &&
+
               <div className="text-center m--margin-10">
-                <a
-                  className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
-                  onMouseDown={() => {
-                    this._reverseImage('vertical')
-                  }}>
-                  <i className="fa 	fa-arrows-v"></i>
-                </a>
-                <a
-                  className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
-                  onMouseDown={() => {
-                    this._reverseImage('horizontal')
-                  }}>
-                  <i className="fa 	fa-arrows-h"></i>
-                </a>
-                <a
-                  className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
-                  onMouseDown={() => {
-                    this._zoomIn()
-                  }}>
-                  <i className="fa fa-search-plus"></i>
-                </a>
-                <a
-                  className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
-                  onMouseDown={() => {
-                    this._zoomOut()
-                  }}>
-                  <i className="fa fa-search-minus"></i>
-                </a>
-                <a
-                  className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
-                  onMouseDown={() => {
-                    this._rotateImage(-5)
-                  }}>
-                  <i className="fa fa-rotate-left"></i>
-                </a>
-                <a
-                  className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
-                  onMouseDown={() => {
-                    this._rotateImage(5)
-                  }}>
-                  <i className="fa fa-rotate-right"></i>
-                </a>
+                <input type="range" min="0.1" max="1" step="0.05"  value={this.state.zoom}  onChange={ (value)=>this._zoom(value)}></input>
                 <br/>
                 <span
 

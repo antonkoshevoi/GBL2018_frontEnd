@@ -12,7 +12,6 @@ import ProductCard from "../../../../components/pages/store/ProductCard";
 export default class FeaturedItems extends Component {
 
     _renderStore(data){
-      console.log(data);
       return data.map( (item,i) => {
         return  (
           <div key={i} className="d-inline-block">

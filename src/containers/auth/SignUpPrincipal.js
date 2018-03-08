@@ -203,7 +203,7 @@ class SignUpPrincipal extends Component {
                                   value={form.firstName}
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="text"
-                                  className="form-control m-input m-input--air "
+                                  className="form-control m-input m-input--air"
                                   placeholder="First Name"/>
                               </div>
                               {errors && errors.get('firstName') &&
