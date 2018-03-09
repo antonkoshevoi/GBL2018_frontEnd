@@ -185,7 +185,24 @@ class Checkout extends Component {
                             onSelect: () => {
                               this._processCheck();
                             },
-                          }
+                          },
+                          {
+                            title: 'WireTransfer(TT)',
+                            img: checkImg,
+                            loading: createCheckPaymentRequest.get('loading'),
+                            onSelect: () => {
+                              this._processCheck();
+                            },
+                          },
+                          {
+                            title: 'COG',
+                            img: checkImg,
+                            loading: createCheckPaymentRequest.get('loading'),
+                            onSelect: () => {
+                              this._processCheck();
+                            },
+                          },
+
 
                         ]}
 

@@ -1,21 +1,34 @@
 import React, {Component} from 'react';
 import '../../../../styles/widgets.css';
+import PropTypes from 'prop-types';
+
 
 
 export default class Address extends Component {
 
-  state = {
-    form: {},
-    errors: null
+  static propTypes = {
+    form: PropTypes.object.isRequired,
+    // errors: PropTypes.object.isRequired,
+    onChange: PropTypes.func.isRequired
   };
 
-  _handleInputChange(e) {
+  state = {
+    form: {},
+  };
 
+  _handleInputChange(event) {
+    const { name, type, value, checked } = event.target;
+    this.setState({
+      form: {
+        ...this.state.form,
+        [name]: value
+      }
+    },() => { this.props.onChange(this.state.form); });
   }
 
   render() {
-    const {form, errors} = this.state;
-    const {title} = this.props;
+    const {form} = this.state;
+    const {title,errors} = this.props;
     return (
       <div className='col-sm-12'>
         <div className='col-xs-12'>
@@ -98,7 +111,7 @@ export default class Address extends Component {
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
                   value={form.zip || ''}
-                  name='country'
+                  name='zip'
                   onChange={(e) => {
                     this._handleInputChange(e)
                   }}

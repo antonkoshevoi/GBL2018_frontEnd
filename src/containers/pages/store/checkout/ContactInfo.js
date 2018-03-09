@@ -9,8 +9,14 @@ export default class ContactInfo extends Component {
     errors: null
   };
 
-  _handleInputChange(e) {
-
+  _handleInputChange(event) {
+    const { name, type, value, checked } = event.target;
+    this.setState({
+      form: {
+        ...this.state.form,
+        [name]: value
+      }
+    });
   }
 
   render() {
@@ -73,43 +79,29 @@ export default class ContactInfo extends Component {
             </div>
           </div>
         </div>
+
         <div className='m-form__section m-form__section--first'>
           <div className="form-group m-form__group row">
-            <label className="col-form-label col-lg-3 col-sm-12">Username </label>
+            <label className="col-form-label col-lg-3 col-sm-12">Last Name </label>
             <div className="col-lg-8 col-md-9 col-sm-12">
               <input
-                value={form.username || ''}
-                name='username'
+                value={form.telephone || ''}
+                name='telephone'
                 onChange={(e) => { this._handleInputChange(e) }}
                 type='text'
                 className='form-control m-input m-input--air '
-              />
-              <div className='form-control-feedback'>
-                {errors && errors.get('username') &&
-                <div className="form-control-feedback  text-center error">{errors.get('username').get(0)}</div>}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className='m-form__section m-form__section--first'>
-          <div className="form-group m-form__group row">
-            <label className="col-form-label col-lg-3 col-sm-12">Password </label>
-            <div className="col-lg-8 col-md-9 col-sm-12">
-              <input
-                value={form.password || ''}
-                name='password'
-                onChange={(e) => { this._handleInputChange(e) }}
-                type='password'
-                className='form-control m-input m-input--air '
                 placeholder=''/>
               <div className='form-control-feedback'>
-                {errors && errors.get('password') &&
-                <div className="form-control-feedback text-center error">{errors.get('password').get(0)}</div>}
+                {errors && errors.get('telephone') &&
+                <div className="form-control-feedback text-center error">{errors.get('telephone').get(0)}</div>}
               </div>
             </div>
           </div>
         </div>
+
+
       </div>
+
     );
   }
 }
