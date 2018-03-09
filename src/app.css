@@ -437,9 +437,12 @@ div.portlet-header-input:before {
     color: #555555;
     background-color: #ffffff;
     border: 1px solid #cccccc;
-
-
 }
+
+.m-form__section .m-input:disabled{
+    background-color: #e9ecef!important;
+}
+
 .m-input.main-select {
     padding-bottom: 0;
     padding-top: 0;

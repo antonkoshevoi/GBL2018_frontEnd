@@ -1,38 +1,56 @@
 import React, {Component} from 'react';
 import '../../../../styles/widgets.css';
+import PropTypes from 'prop-types';
 
 
 export default class ContactInfo extends Component {
+
+  static propTypes = {
+    form: PropTypes.object.isRequired,
+    // errors: PropTypes.object.isRequired,
+    onChange: PropTypes.func.isRequired,
+    disabled: PropTypes.bool
+  };
 
   state = {
     form: {},
     errors: null
   };
 
-  _handleInputChange(event) {
-    const { name, type, value, checked } = event.target;
+  componentDidMount() {
+    const {form} = this.props;
+    this.setState({
+      form: {
+        ...form
+      }
+    })
+  }
+
+  _handleInputChange = event => {
+    const {name, type, value, checked} = event.target;
     this.setState({
       form: {
         ...this.state.form,
         [name]: value
       }
-    });
+    }, () => this.props.onChange(this.state.form));
   }
 
   render() {
-    const {form, errors} = this.state;
-    const {title} = this.props;
+    const {errors} = this.state;
+    const {title,form,disabled} = this.props;
     return (
       <div className='col-xs-12'>
         <legend className='m--margin-bottom-10'>{title}</legend>
         <div className='m-form__section m-form__section--first'>
           <div className="form-group m-form__group row">
             <label className="col-form-label col-lg-3 col-sm-12">First Name </label>
-            <div className="col-lg-8 col-md-9 col-sm-12">
+            <div className="col-lg-9 col-md-9 col-sm-12">
               <input
+                disabled={disabled}
                 value={form.firstName || ''}
                 name='firstName'
-                onChange={(e) => { this._handleInputChange(e) }}
+                onChange={this._handleInputChange}
                 type='text'
                 className='form-control m-input m-input--air '
                 placeholder=''/>
@@ -46,11 +64,12 @@ export default class ContactInfo extends Component {
         <div className='m-form__section m-form__section--first'>
           <div className="form-group m-form__group row">
             <label className="col-form-label col-lg-3 col-sm-12">Last Name </label>
-            <div className="col-lg-8 col-md-9 col-sm-12">
+            <div className="col-lg-9 col-md-9 col-sm-12">
               <input
+                disabled={disabled}
                 value={form.lastName || ''}
                 name='lastName'
-                onChange={(e) => { this._handleInputChange(e) }}
+                onChange={this._handleInputChange}
                 type='text'
                 className='form-control m-input m-input--air '
                 placeholder=''/>
@@ -64,11 +83,12 @@ export default class ContactInfo extends Component {
         <div className='m-form__section m-form__section--first'>
           <div className="form-group m-form__group row">
             <label className="col-form-label col-lg-3 col-sm-12">Email </label>
-            <div className="col-lg-8 col-md-9 col-sm-12">
+            <div className="col-lg-9 col-md-9 col-sm-12">
               <input
+                disabled={disabled}
                 value={form.email || ''}
                 name='email'
-                onChange={(e) => { this._handleInputChange(e) }}
+                onChange={this._handleInputChange}
                 type='email'
                 className='form-control m-input m-input--air '
                 placeholder=''/>
@@ -82,12 +102,13 @@ export default class ContactInfo extends Component {
 
         <div className='m-form__section m-form__section--first'>
           <div className="form-group m-form__group row">
-            <label className="col-form-label col-lg-3 col-sm-12">Last Name </label>
-            <div className="col-lg-8 col-md-9 col-sm-12">
+            <label className="col-form-label col-lg-3 col-sm-12">Telephone</label>
+            <div className="col-lg-9 col-md-9 col-sm-12">
               <input
+                disabled={disabled}
                 value={form.telephone || ''}
                 name='telephone'
-                onChange={(e) => { this._handleInputChange(e) }}
+                onChange={this._handleInputChange}
                 type='text'
                 className='form-control m-input m-input--air '
                 placeholder=''/>

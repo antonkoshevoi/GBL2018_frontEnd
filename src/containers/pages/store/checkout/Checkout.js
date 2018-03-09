@@ -133,7 +133,6 @@ class Checkout extends Component {
     } = this.props;
     const loadingCarts = cartRecordsRequest.get('loading');
     const successCarts = cartRecordsRequest.get('success');
-    console.log(loadingCarts);
     return (
       <div>
         <div className='row d-flex justify-content-center'>
