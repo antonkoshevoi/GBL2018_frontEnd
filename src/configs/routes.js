@@ -45,6 +45,7 @@ import ClassRoomReportDashboard from "../containers/pages/reports/classroom/Dash
 import HomeRoomReportDashboard from "../containers/pages/reports/homeroom/Dashboard";
 import InvitationDetails from '../containers/invitations/InvitationDetails';
 import ShoppingCart from "../containers/pages/store/shopping-cart/ShoppingCart";
+import OnlyHeadLayout from "../containers/layouts/OnlyHeadLayout";
 
 export default () => (
   <AppContainer>
@@ -85,7 +86,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/shopping-cart' name='Details' component={ShoppingCart}/>
 
-      <AuthenticatedRoute exact layout={MainLayout} path='/shopping/checkout' name='Checkout' component={Checkout}/>
+      <AuthenticatedRoute exact layout={OnlyHeadLayout} path='/shopping/checkout' name='Checkout' component={Checkout}/>
 
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/:threadId?' name='Messages' component={Messages} />

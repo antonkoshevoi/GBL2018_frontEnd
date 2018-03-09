@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import Typography from 'material-ui/Typography';
 
 class CartItems extends Component {
   static propTypes = {
@@ -57,12 +58,13 @@ class CartItems extends Component {
         </div>
         <div className="m-portlet__body">
           <div className="m-widget25">
-            <span className="m-widget25__price m--font-brand">${sum}</span>
-            <span className="m-widget25__desc">Total</span>
+            <Typography variant="title" gutterBottom>
+            </Typography>
+            <span className="invoice-title">Yor invoice #{Math.floor(Math.random() * 1000000) + 1  } Total ${sum}</span>
           </div>
-          <div className="m-widget4">
-            {this._renderItems()}
-          </div>
+          {/*<div className="m-widget4">*/}
+            {/*{this._renderItems()}*/}
+          {/*</div>*/}
         </div>
       </div>
     );

@@ -1437,3 +1437,9 @@ div.m-widget25 .m-widget25__price {
     color: #aeaeb0;
 
 }
+
+.invoice-title{
+    font-size: 32px;
+    display: block;
+    text-align: center;
+}
