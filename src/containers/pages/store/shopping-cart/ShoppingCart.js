@@ -10,11 +10,12 @@ import {
   selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest,
 } from '../../../../redux/store/selectors';
 import {
-  calculateCartSum, deleteCartRecord, getCartRecords,
+  calculateCartSum, deleteCartRecord, getCartRecords, setItemQuantity,
   updateShoppingCart
 } from '../../../../redux/store/actions';
 import {withRouter,NavLink} from 'react-router-dom';
 import Loader from '../../../../components/layouts/Loader';
+import {debounce} from "../../../../helpers/utils";
 
 class ShoppingCart extends Component {
 
@@ -79,6 +80,7 @@ class ShoppingCart extends Component {
                  <OpenInvoicesTable
                    preview = {preview}
                    sum={cartRecordsSum}
+                   setQuantity={(data) => this.props.setQuantity(data)}
                    onUpdate={(data,total) => {this._updateData(data,total)}}
                    onDelete={(id) => {this._deleteRecordFromCart (id)}}
                    data={records.toJS()}
@@ -123,6 +125,7 @@ ShoppingCart = connect(
     deleteCartRecord: (id) => { dispatch(deleteCartRecord(id)) },
     calculateSum: (data) => { dispatch(calculateCartSum(data)) },
     updateData: (data) => { dispatch(updateShoppingCart(data)) },
+    setQuantity: (data) => { dispatch(setItemQuantity(data))  },
   })
 )(ShoppingCart);
 

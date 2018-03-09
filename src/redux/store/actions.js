@@ -30,6 +30,10 @@ export const GET_UNASSIGNEDS = '[Store] GET_UNASSIGNEDS';
 export const GET_UNASSIGNEDS_SUCCESS = '[Store] GET_UNASSIGNEDS_SUCCESS';
 export const GET_UNASSIGNEDS_FAIL = '[Store] GET_UNASSIGNEDS_FAIL';
 
+export const UPDATE_ITEM_QUANTITY = '[Store] UPDATE_ITEM_QUANTITY';
+export const UPDATE_ITEM_QUANTITY_SUCCESS = '[Store] UPDATE_ITEM_QUANTITY_SUCCESS';
+export const UPDATE_ITEM_QUANTITY_FAIL = '[Store] UPDATE_ITEM_QUANTITY_FAIL';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -77,7 +81,7 @@ export function getCartInvoiceRecords(params = {}) {
  * @param params
  * @returns {{types: [*,*,*], promise: (function(*))}}CREATE
  */
-export function deleteCartRecord(id,params) {
+export function deleteCartRecord(id, params) {
   return {
     types: [DELETE_CART_RECORD, DELETE_CART_RECORD_SUCCESS, DELETE_CART_RECORD_FAIL],
     promise: (apiClient) => apiClient.post(`store/remove-from-card/${id}`, params)
@@ -116,26 +120,32 @@ export function getUnassigneds(params = {}) {
  * @returns {{type: string, data: *, total: *}}
  */
 export function updateShoppingCart(data) {
-
   return {
-      type:UPDATE_SHOPPING_CART,
-        data
-    }
+    type: UPDATE_SHOPPING_CART,
+    data
+  }
+}
+
+export function setItemQuantity(data) {
+  return {
+    types: [UPDATE_ITEM_QUANTITY, UPDATE_ITEM_QUANTITY_SUCCESS, UPDATE_ITEM_QUANTITY_FAIL],
+    promise: (apiClient) => apiClient.post(`store/items/${data.id}`,data)
+  };
 }
 
 
 export function calculateCartSum(data = []) {
 
-    let total = 0;
-    for(let i = 0; i < data.length; i++) {
-        if (isNaN(data[i].storeItem.price)) {
-            continue;
-        }
-        total += (Number(data[i].storeItem.price) * Number(data[i].count));
+  let total = 0;
+  for (let i = 0; i < data.length; i++) {
+    if (isNaN(data[i].storeItem.price)) {
+      continue;
     }
+    total += (Number(data[i].storeItem.price) * Number(data[i].count));
+  }
 
   return {
-      type:CALCULATE_CART_SUM,
-        total
-    }
+    type: CALCULATE_CART_SUM,
+    total
+  }
 }

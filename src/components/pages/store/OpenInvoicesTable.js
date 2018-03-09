@@ -4,6 +4,7 @@ import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../../ui/table";
 import "../../../styles/store.css"
 import {NavLink} from "react-router-dom";
 import DeleteButton from "../../ui/DeleteButton";
+import {debounce} from "../../../helpers/utils";
 
 class OpenInvoicesTable extends Component {
 
@@ -38,7 +39,9 @@ class OpenInvoicesTable extends Component {
     let data = this.state.data;
     if (e.target.value < 1) return;
     data[idx]['count'] = e.target.value;
-    this._updateData(data)
+    this._updateData(data);
+    debounce(()=>this.props.setQuantity(data[idx]),1000)();
+
   }
 
   _getTotalSum(products) {
