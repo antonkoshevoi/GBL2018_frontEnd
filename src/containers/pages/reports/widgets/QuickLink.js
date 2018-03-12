@@ -22,7 +22,7 @@ export default class QuickLink extends Component {
           </div>
         </div>
 
-        <Card  header = {false} className="quick-card-item">
+        <Card  header={false} className="quick-card-item">
           <div className="single-card quick-link">
             <div className="row">
               <div className="col-6">

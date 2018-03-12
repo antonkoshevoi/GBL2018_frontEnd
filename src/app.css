@@ -932,6 +932,11 @@ div.row {
     margin-left: -7px;
 }
 
+div.row-15{
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
 .absolute-center {
     position: absolute;
     top: 50%;
@@ -1396,13 +1401,13 @@ div.m-widget25 .m-widget25__price {
 }
 
 .quick-link .quick-link-title span {
-    font-size: 20px;
+    font-size: 1.5vw;
     font-weight: 600;
 
 }
 
 .quick-link .quick-link-title h5 {
-    font-size: 14px;
+    font-size: 1vw;
     margin: 0;
 }
 

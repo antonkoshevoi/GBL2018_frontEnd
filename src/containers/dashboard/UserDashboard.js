@@ -142,8 +142,8 @@ class UserDashboard extends Component {
     return (
       <div className="fadeInLeft  animated">
         <div className="row">
-          <div className="col-9">
-            <div className="col-sm-12">
+          <div className="col-sm-12 col-md-8 col-lg-8 col-xl-9">
+            <div className="">
               <div className='m-portlet m-portlet--head-solid-bg'>
                 <div className='m-portlet__head border-b-blue'>
                   <div className='m-portlet__head-caption'>
@@ -156,34 +156,35 @@ class UserDashboard extends Component {
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-sm-12 col-md-6 col-lg-4">
+            <div className="row row-15">
+              <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <RosterStatistic/>
               </div>
-              <div className="col-sm-12 col-md-6 col-lg-4">
+              <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <LineChart/>
               </div>
-              <div className="col-sm-12 col-md-6 col-lg-4">
+              <div className="col-sm-12 col-md-12 col-lg-12 col-xl-4">
                 <SchoolAverageChart/>
               </div>
             </div>
           </div>
-          <div className="col-3">
-              <QuickLink/>
+          <div className="col-sm-12 col-md-4 col-lg-4 col-xl-3">
+            <QuickLink/>
           </div>
+
 
 
 
 
         </div>
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-md-6 col-lg-8">
             <FeaturedItems data={records}/>
             {/*<StoreTabs isLoading={productsLoading} isSuccess={productsSuccess} getProducts={(category) => {*/}
               {/*this._setCategoryFilter(category)*/}
             {/*}} data={records}/>*/}
           </div>
-          <div className="col-md-4">
+          <div className="col-md-6 col-lg-4">
             <Account/>
           </div>
         </div>
