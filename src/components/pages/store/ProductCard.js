@@ -39,7 +39,9 @@ class ProductCard extends Component {
               <div className="productPrice">
                   {product.get('discount') != 0 && <span className="discount"><span>${price.toFixed(2)}</span></span> }
                   <br/>
-                  ${discountPrice.toFixed(2)}
+                  <div className="price">
+                    ${discountPrice.toFixed(2)}
+                  </div>
               </div>
             </div>
           </CardContent>

@@ -1431,8 +1431,17 @@ div.m-widget25 .m-widget25__price {
 .store-featured {
     max-width: 600px;
     white-space: pre-wrap;
-    zoom: 0.6;
     display: inline-block;
+}
+.store-featured .verticalCardItem.cardItem{
+    max-width: 145px;
+}
+
+.store-featured .empty-stars:before {
+    letter-spacing: -1px;
+}
+.store-featured .full-stars:before {
+    letter-spacing: 0;
 }
 
 .store-featured-title {

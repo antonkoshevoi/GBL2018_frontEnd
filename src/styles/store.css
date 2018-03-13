@@ -135,6 +135,10 @@
     position: relative;
     font-size: 0.9rem;
 }
+.cardItem .productPrice .price {
+    color: #771f1e;
+    position: relative;
+}
 
 .m-widget25__desc .discount {
     position: relative;
