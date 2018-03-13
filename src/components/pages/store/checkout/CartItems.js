@@ -7,11 +7,11 @@ class CartItems extends Component {
     data: PropTypes.array.isRequired
   };
 
-  _getTotalSum () {
-    const { data } = this.props;
+  _getTotalSum() {
+    const {data} = this.props;
 
     let total = 0;
-    for(let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       if (isNaN(data[i].storeItem.price)) {
         continue;
       }
@@ -20,8 +20,8 @@ class CartItems extends Component {
     return total;
   }
 
-  _renderItems () {
-    const { data } = this.props;
+  _renderItems() {
+    const {data} = this.props;
 
     return data.map((item, key) => (
       <div key={key} className="m-widget4__item">
@@ -44,7 +44,9 @@ class CartItems extends Component {
   }
 
   render() {
-    const {sum} = this.props;
+    const {sum, data} = this.props;
+    const {invoiceNo} = data.shift();
+
     return (
       <div className="m-portlet m-portlet--bordered-semi  cartItems">
         <div className="m-portlet__head m--hide">
@@ -60,10 +62,10 @@ class CartItems extends Component {
           <div className="m-widget25">
             <Typography variant="title" gutterBottom>
             </Typography>
-            <span className="invoice-title">Yor invoice #{Math.floor(Math.random() * 1000000) + 1  } Total ${sum}</span>
+            <span className="invoice-title">Yor invoice #{invoiceNo} Total ${sum}</span>
           </div>
           {/*<div className="m-widget4">*/}
-            {/*{this._renderItems()}*/}
+          {/*{this._renderItems()}*/}
           {/*</div>*/}
         </div>
       </div>

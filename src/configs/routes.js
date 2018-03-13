@@ -86,7 +86,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/shopping-cart' name='Details' component={ShoppingCart}/>
 
-      <AuthenticatedRoute exact layout={OnlyHeadLayout} path='/shopping/checkout' name='Checkout' component={Checkout}/>
+      <AuthenticatedRoute exact layout={OnlyHeadLayout} path='/shopping/checkout/:step?' name='Checkout' component={Checkout}/>
 
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/:threadId?' name='Messages' component={Messages} />

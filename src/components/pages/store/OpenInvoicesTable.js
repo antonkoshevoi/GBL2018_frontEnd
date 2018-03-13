@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../../ui/table";
-
+import PropTypes from 'prop-types';
 import "../../../styles/store.css"
 import {NavLink} from "react-router-dom";
 import DeleteButton from "../../ui/DeleteButton";
@@ -8,10 +8,15 @@ import {debounce} from "../../../helpers/utils";
 
 class OpenInvoicesTable extends Component {
 
-  defaultProps = {
+  static propTypes = {
+    preview: PropTypes.bool,
+  };
+
+  static defaultProps = {
     data: [],
     preview: false,
   };
+
 
   state = {
     data: this.props.data,

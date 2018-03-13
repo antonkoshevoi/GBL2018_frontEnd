@@ -16,8 +16,8 @@ import {
 import {createCheckPayment, createPayPalPayment} from '../../../../redux/payments/actions';
 import {Divider, Step, StepLabel, Stepper} from 'material-ui';
 import Button from 'material-ui/Button';
-import { withStyles } from 'material-ui/styles';
-import { CircularProgress } from 'material-ui';
+import {withStyles} from 'material-ui/styles';
+import {CircularProgress} from 'material-ui';
 
 
 import payPalImg from '../../../../media/images/payments/paypal.png'
@@ -25,6 +25,7 @@ import creditCardImg from '../../../../media/images/payments/credit_card.png'
 import checkImg from '../../../../media/images/payments/check.png'
 import Card from "../../../../components/ui/Card";
 import ShippingAndBilling from "./ShippingAndBilling";
+import PaymentSuccessContainer from "../payments/PaymentSuccessContainer";
 
 
 class Checkout extends Component {
@@ -32,7 +33,7 @@ class Checkout extends Component {
   state = {
     redirectingToPayPal: false,
     stepIndex: 0,
-    finished:0,
+    finished: 0,
 
   };
 
@@ -41,6 +42,10 @@ class Checkout extends Component {
     if (cartRecords.size === 0) {
       this._getCartRecords();
       this._calculateSum(cartRecords.toJS());
+    }
+    const {step} = this.props.match.params;
+    if (step) {
+      this.setState({stepIndex: +step});
     }
   }
 
@@ -136,101 +141,104 @@ class Checkout extends Component {
     return (
       <div>
         <div className='row d-flex justify-content-center'>
-              <div className="col-10">
-                <Card header={false}>
-                  <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
+          <div className="col-10">
+            <Card header={false}>
+              <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
 
-                    <Step>
-                      <StepLabel>Payments Options</StepLabel>
-                    </Step>
-                    <Step>
-                      <StepLabel>Shipping and Biling</StepLabel>
-                    </Step>
-                    <Step>
-                      <StepLabel>Confirmation</StepLabel>
-                    </Step>
-                  </Stepper>
-                  {[
-                    (() => { return (
-                      //(temp) TODO need extract to component
-                      <div className='col-12'>
-                        {successCarts &&
-                        <CartItems sum={cartRecordsSum} data={cartRecords.toJS()}/>}
-                        {loadingCarts && !successCarts &&
-                        <div className="row d-flex justify-content-center">
-                          <CircularProgress color="primary" size={80}/>
-                        </div>}
-                        <br/>
-                        <PaymentMethods methods={[
-                          {
-                            title: 'PayPal',
-                            img: payPalImg,
-                            loading: createPayPalPaymentRequest.get('loading') || redirectingToPayPal,
-                            onSelect: () => {
-                              this._processPayPal();
-                            },
+                <Step>
+                  <StepLabel>Payments Options</StepLabel>
+                </Step>
+                <Step>
+                  <StepLabel>Shipping and Biling</StepLabel>
+                </Step>
+                <Step>
+                  <StepLabel>Confirmation</StepLabel>
+                </Step>
+              </Stepper>
+              {[
+                (() => {
+                  return (
+                    //(temp) TODO need extract to component
+                    <div className='col-12'>
+                      {successCarts &&
+                      <CartItems sum={cartRecordsSum} data={cartRecords.toJS()}/>}
+                      {loadingCarts && !successCarts &&
+                      <div className="row d-flex justify-content-center">
+                        <CircularProgress color="primary" size={80}/>
+                      </div>}
+                      <br/>
+                      <PaymentMethods methods={[
+                        {
+                          title: 'PayPal',
+                          img: payPalImg,
+                          loading: createPayPalPaymentRequest.get('loading') || redirectingToPayPal,
+                          onSelect: () => {
+                            this._processPayPal();
                           },
-                          {
-                            title: 'Credit Card',
-                            img: creditCardImg,
-                            onSelect: () => {
-                              this._processCC();
-                            },
+                        },
+                        {
+                          title: 'Credit Card',
+                          img: creditCardImg,
+                          onSelect: () => {
+                            this._processCC();
                           },
-                          {
-                            title: 'Check',
-                            img: checkImg,
-                            loading: createCheckPaymentRequest.get('loading'),
-                            onSelect: () => {
-                              this._processCheck();
-                            },
+                        },
+                        {
+                          title: 'Check',
+                          img: checkImg,
+                          loading: createCheckPaymentRequest.get('loading'),
+                          onSelect: () => {
+                            this._processCheck();
                           },
-                          {
-                            title: 'WireTransfer(TT)',
-                            img: checkImg,
-                            loading: createCheckPaymentRequest.get('loading'),
-                            onSelect: () => {
-                              this._processCheck();
-                            },
+                        },
+                        {
+                          title: 'WireTransfer(TT)',
+                          img: checkImg,
+                          loading: createCheckPaymentRequest.get('loading'),
+                          onSelect: () => {
+                            this._processCheck();
                           },
-                          {
-                            title: 'COG',
-                            img: checkImg,
-                            loading: createCheckPaymentRequest.get('loading'),
-                            onSelect: () => {
-                              this._processCheck();
-                            },
+                        },
+                        {
+                          title: 'COG',
+                          img: checkImg,
+                          loading: createCheckPaymentRequest.get('loading'),
+                          onSelect: () => {
+                            this._processCheck();
                           },
+                        },
 
 
-                        ]}
+                      ]}
 
-                        />
-                      </div>
+                      />
+                    </div>
 
-                    ) })(),
+                  )
+                })(),
 
-                    <ShippingAndBilling/>
+                <ShippingAndBilling/>,
+                <PaymentSuccessContainer/>
 
-                  ][stepIndex]}
-                 <div className="form-group">
-                   <Button
-                     disabled={stepIndex === 0}
-                     onClick={this.handleBack}
-                   >
-                     Back
-                   </Button>
-                   <Button
-                     variant="raised"
-                     color="primary"
-                     onClick={this.handleNext}
-                   >
-                     {stepIndex === 2 ? 'Finish' : 'Next'}
-                   </Button>
-                 </div>
-                </Card>
-
+              ][stepIndex]}
+              <div className="form-group">
+                <Button
+                  disabled={stepIndex === 0}
+                  onClick={this.handleBack}
+                >
+                  Back
+                </Button>
+                <Button
+                  variant="raised"
+                  color="primary"
+                  onClick={this.handleNext}
+                >
+                  {stepIndex === 2 ? 'Finish' : 'Next'}
+                </Button>
               </div>
+            </Card>
+
+          </div>
 
 
         </div>
@@ -261,7 +269,7 @@ Checkout = connect(
       dispatch(calculateCartSum(data))
     },
     goToSuccessPage: () => {
-      dispatch(push('/payments/success'))
+      dispatch(push('/shopping/checkout/2'))
     },
     goToPendingPage: () => {
       dispatch(push('/payments/pending'))
