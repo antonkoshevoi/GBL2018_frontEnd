@@ -16,6 +16,15 @@ export default class Address extends Component {
     form: {},
   };
 
+  componentDidMount() {
+    const {form} = this.props;
+    this.setState({
+      form: {
+        ...form
+      }
+    })
+  }
+
   _handleInputChange(event) {
     const { name, type, value, checked } = event.target;
     this.setState({
@@ -28,7 +37,8 @@ export default class Address extends Component {
 
   render() {
     const {form} = this.state;
-    const {title,errors} = this.props;
+    const {title,errors,name} = this.props;
+
     return (
       <div className='col-sm-12'>
         <div className='col-xs-12'>
@@ -38,6 +48,7 @@ export default class Address extends Component {
               <label className="col-form-label col-lg-3 col-sm-12">Address Line 1</label>
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
+                  required
                   value={form.addressLine1 || ''}
                   name='addressLine1'
                   onChange={(e) => {
@@ -47,8 +58,8 @@ export default class Address extends Component {
                   className='form-control m-input m-input--air '
                 />
                 <div className='form-control-feedback'>
-                  {errors && errors.get('addressLine1') &&
-                  <div className="form-control-feedback text-center error">{errors.get('addressLine1').get(0)}</div>}
+                  {errors && errors.get(`${name}.addressLine1`) &&
+                  <div className="form-control-feedback text-center error">{errors.get(`${name}.addressLine1`).get(0)}</div>}
                 </div>
               </div>
             </div>
@@ -65,8 +76,8 @@ export default class Address extends Component {
                   className='form-control m-input m-input--air '
                   placeholder=''/>
                 <div className='form-control-feedback'>
-                  {errors && errors.get('addressLine2') &&
-                  <div className="form-control-feedback text-center error">{errors.get('addressLine2').get(0)}</div>}
+                  {errors && errors.get(`${name}.addressLine2`) &&
+                  <div className="form-control-feedback text-center error">{errors.get(`${name}.addressLine2`).get(0)}</div>}
                 </div>
               </div>
             </div>
@@ -74,6 +85,7 @@ export default class Address extends Component {
               <label className="col-form-label col-lg-3 col-sm-12">City</label>
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
+                  required
                   value={form.city || ''}
                   name='city'
                   onChange={(e) => {
@@ -83,8 +95,8 @@ export default class Address extends Component {
                   className='form-control m-input m-input--air '
                   placeholder=''/>
                 <div className='form-control-feedback'>
-                  {errors && errors.get('city') &&
-                  <div className="form-control-feedback text-center error">{errors.get('city').get(0)}</div>}
+                  {errors && errors.get(`${name}.city`) &&
+                  <div className="form-control-feedback text-center error">{errors.get(`${name}.city`).get(0)}</div>}
                 </div>
               </div>
             </div>
@@ -92,6 +104,7 @@ export default class Address extends Component {
               <label className="col-form-label col-lg-3 col-sm-12">State or Province</label>
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
+                  required
                   value={form.region || ''}
                   name='region'
                   onChange={(e) => {
@@ -101,8 +114,8 @@ export default class Address extends Component {
                   className='form-control m-input m-input--air '
                   placeholder=''/>
                 <div className='form-control-feedback'>
-                  {errors && errors.get('region') &&
-                  <div className="form-control-feedback text-center error">{errors.get('region').get(0)}</div>}
+                  {errors && errors.get(`${name}.region`) &&
+                  <div className="form-control-feedback text-center error">{errors.get(`${name}.region`).get(0)}</div>}
                 </div>
               </div>
             </div>
@@ -110,6 +123,7 @@ export default class Address extends Component {
               <label className="col-form-label col-lg-3 col-sm-12">Postal or Zip Code</label>
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
+                  required
                   value={form.zip || ''}
                   name='zip'
                   onChange={(e) => {
@@ -119,8 +133,8 @@ export default class Address extends Component {
                   className='form-control m-input m-input--air '
                   placeholder=''/>
                 <div className='form-control-feedback'>
-                  {errors && errors.get('zip') &&
-                  <div className="form-control-feedback text-center error">{errors.get('zip').get(0)}</div>}
+                  {errors && errors.get(`${name}.zip`) &&
+                  <div className="form-control-feedback text-center error">{errors.get(`${name}.zip`).get(0)}</div>}
                 </div>
               </div>
             </div>
@@ -128,6 +142,7 @@ export default class Address extends Component {
               <label className="col-form-label col-lg-3 col-sm-12">Country</label>
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
+                  required
                   value={form.country || ''}
                   name='country'
                   onChange={(e) => {
@@ -137,29 +152,12 @@ export default class Address extends Component {
                   className='form-control m-input m-input--air '
                   placeholder=''/>
                 <div className='form-control-feedback'>
-                  {errors && errors.get('country') &&
-                  <div className="form-control-feedback text-center error">{errors.get('country').get(0)}</div>}
+                  {errors && errors.get(`${name}.country`) &&
+                  <div className="form-control-feedback text-center error">{errors.get(`${name}.country`).get(0)}</div>}
                 </div>
               </div>
             </div>
-            <div className="form-group m-form__group row">
-              <label className="col-form-label col-lg-3 col-sm-12">Telephone</label>
-              <div className="col-lg-8 col-md-9 col-sm-12">
-                <input
-                  value={form.phoneNumber || ''}
-                  name='phoneNumber'
-                  onChange={(e) => {
-                    this._handleInputChange(e)
-                  }}
-                  type='text'
-                  className='form-control m-input m-input--air '
-                  placeholder=''/>
-                <div className='form-control-feedback'>
-                  {errors && errors.get('phoneNumber') &&
-                  <div className="form-control-feedback text-center error">{errors.get('phoneNumber').get(0)}</div>}
-                </div>
-              </div>
-            </div>
+
           </address>
         </div>
       </div>

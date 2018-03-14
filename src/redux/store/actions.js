@@ -34,6 +34,12 @@ export const UPDATE_ITEM_QUANTITY = '[Store] UPDATE_ITEM_QUANTITY';
 export const UPDATE_ITEM_QUANTITY_SUCCESS = '[Store] UPDATE_ITEM_QUANTITY_SUCCESS';
 export const UPDATE_ITEM_QUANTITY_FAIL = '[Store] UPDATE_ITEM_QUANTITY_FAIL';
 
+export const SET_SHIPPING_BILLING_INFO = '[Store] SET_SHIPPING_BILLING_INFO';
+export const SET_SHIPPING_BILLING_INFO_SUCCESS = '[Store] SET_SHIPPING_BILLING_INFO_SUCCESS';
+export const SET_SHIPPING_BILLING_INFO_FAIL = '[Store] SET_SHIPPING_BILLING_INFO_FAIL';
+
+export const RESET_SET_SHIPPING_BILLING_INFO = '[Store] RESET_SET_SHIPPING_BILLING_INFO';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -148,4 +154,19 @@ export function calculateCartSum(data = []) {
     type: CALCULATE_CART_SUM,
     total
   }
+
+}
+
+export function setShippingAndBilling(data) {
+  return {
+    types: [SET_SHIPPING_BILLING_INFO, SET_SHIPPING_BILLING_INFO_SUCCESS, SET_SHIPPING_BILLING_INFO_FAIL],
+    promise: (apiClient) => apiClient.post('checkout/address', data)
+  };
+}
+
+export function resetSetShippingAndBilling() {
+  return {
+    type: RESET_SET_SHIPPING_BILLING_INFO,
+  };
+
 }

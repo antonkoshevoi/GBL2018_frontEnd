@@ -106,3 +106,10 @@ export const getUnassignedsRequest = createSelector(
   selectStoreDomain,
   (subState) => subState.get('getUnassignedsRequest')
 );
+/**
+ * Shipping and billing
+ */
+export const setShippingAndBillingRequest = createSelector(
+  selectStoreDomain,
+  (subState) => subState.get('setShippingAndBilling')
+);

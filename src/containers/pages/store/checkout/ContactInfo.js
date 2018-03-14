@@ -37,8 +37,7 @@ export default class ContactInfo extends Component {
   }
 
   render() {
-    const {errors} = this.state;
-    const {title,form,disabled} = this.props;
+    const {title,form,disabled,errors,name} = this.props;
     return (
       <div className='col-xs-12'>
         <legend className='m--margin-bottom-10'>{title}</legend>
@@ -47,6 +46,7 @@ export default class ContactInfo extends Component {
             <label className="col-form-label col-lg-3 col-sm-12">First Name </label>
             <div className="col-lg-9 col-md-9 col-sm-12">
               <input
+                required
                 disabled={disabled}
                 value={form.firstName || ''}
                 name='firstName'
@@ -55,8 +55,8 @@ export default class ContactInfo extends Component {
                 className='form-control m-input m-input--air '
                 placeholder=''/>
               <div className='form-control-feedback'>
-                {errors && errors.get('firstName') &&
-                <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
+                {errors && errors.get(`${name}.firstName`) &&
+                <div className="form-control-feedback text-center error">{errors.get(`${name}.firstName`).get(0)}</div>}
               </div>
             </div>
           </div>
@@ -66,6 +66,7 @@ export default class ContactInfo extends Component {
             <label className="col-form-label col-lg-3 col-sm-12">Last Name </label>
             <div className="col-lg-9 col-md-9 col-sm-12">
               <input
+                required
                 disabled={disabled}
                 value={form.lastName || ''}
                 name='lastName'
@@ -74,8 +75,8 @@ export default class ContactInfo extends Component {
                 className='form-control m-input m-input--air '
                 placeholder=''/>
               <div className='form-control-feedback'>
-                {errors && errors.get('lastName') &&
-                <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
+                {errors && errors.get(`${name}.lastName`) &&
+                <div className="form-control-feedback text-center error">{errors.get(`${name}.lastName`).get(0)}</div>}
               </div>
             </div>
           </div>
@@ -85,6 +86,7 @@ export default class ContactInfo extends Component {
             <label className="col-form-label col-lg-3 col-sm-12">Email </label>
             <div className="col-lg-9 col-md-9 col-sm-12">
               <input
+                required
                 disabled={disabled}
                 value={form.email || ''}
                 name='email'
@@ -93,8 +95,8 @@ export default class ContactInfo extends Component {
                 className='form-control m-input m-input--air '
                 placeholder=''/>
               <div className='form-control-feedback'>
-                {errors && errors.get('email') &&
-                <div className="form-control-feedback text-center error">{errors.get('email').get(0)}</div>}
+                {errors && errors.get(`${name}.email`) &&
+                <div className="form-control-feedback text-center error">{errors.get(`${name}.email`).get(0)}</div>}
               </div>
             </div>
           </div>
@@ -105,6 +107,7 @@ export default class ContactInfo extends Component {
             <label className="col-form-label col-lg-3 col-sm-12">Telephone</label>
             <div className="col-lg-9 col-md-9 col-sm-12">
               <input
+                required
                 disabled={disabled}
                 value={form.telephone || ''}
                 name='telephone'
@@ -113,8 +116,8 @@ export default class ContactInfo extends Component {
                 className='form-control m-input m-input--air '
                 placeholder=''/>
               <div className='form-control-feedback'>
-                {errors && errors.get('telephone') &&
-                <div className="form-control-feedback text-center error">{errors.get('telephone').get(0)}</div>}
+                {errors && errors.get(`${name}.telephone`) &&
+                <div className="form-control-feedback text-center error">{errors.get(`${name}.telephone`).get(0)}</div>}
               </div>
             </div>
           </div>

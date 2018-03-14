@@ -91,7 +91,7 @@ class ShoppingCart extends Component {
               <div className="row d-flex justify-content-end ">
                 <div className="col-md-4 d-flex justify-content-end align-items-center">
                   <div className="form-group-inline btn-group">
-                    <NavLink to="/store/shopping-cart" className="btn m-btm btn-primary">View Card</NavLink>
+                    <NavLink to="/store/shopping-cart" className="btn m-btm btn-primary">View Cart</NavLink>
                     <NavLink to="/shopping/checkout" className="btn m-btm btn-success">Checkout</NavLink>
                   </div>
                 </div>
