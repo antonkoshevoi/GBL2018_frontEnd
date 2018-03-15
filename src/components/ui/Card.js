@@ -6,7 +6,20 @@ class Card extends Component {
 
 
   render() {
-    const {avatar, className, title, icon, children, header, colorName, colorBorder, transparent, iconBackground} = this.props
+    const {
+      avatar,
+      className,
+      title,
+      icon,
+      children,
+      header,
+      colorName,
+      colorBorder,
+      transparent,
+      iconBackground,
+      boxShadow,
+      bodyStyle,
+    } = this.props;
     return (
       <div style={{marginBottom: 0, height: '100%', display: "flex", flexDirection: "column", ...this.props.style}}
            className={className + " m-portlet  m-portlet--head-solid-bg m-portlet--" + colorName + (transparent ? ' transparent' : '')}
@@ -18,7 +31,7 @@ class Card extends Component {
 						<span className="m-portlet__head-icon">
                             {avatar && avatar !== '' ?
                               <Avatar src={avatar}/> :
-                              <i className={ `${icon} ${iconBackground}` }></i>}
+                              <i className={`${icon} ${iconBackground}`}></i>}
 						</span>
               <h3 className="m-portlet__head-text">
                 {title}
@@ -27,7 +40,7 @@ class Card extends Component {
           </div>
 
         </div>
-        <div className="m-portlet__body position-relative" style={{height: "100%"}}>
+        <div className="m-portlet__body position-relative" style={{height: "100%", ...bodyStyle}}>
           {children}
         </div>
       </div>

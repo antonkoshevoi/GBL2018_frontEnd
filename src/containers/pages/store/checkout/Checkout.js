@@ -34,6 +34,7 @@ class Checkout extends Component {
     redirectingToPayPal: false,
     stepIndex: 0,
     finished: 0,
+    payMethod: null,
 
   };
 
@@ -80,13 +81,24 @@ class Checkout extends Component {
 
   }
 
-  _stepBilling(){
-    this._processPayPal();
+  _stepBilling = () => {
+    const {payMethod} = this.state;
+    console.log(payMethod);
+    switch (payMethod) {
+      case 'Check':
+        this._processCheckCreate();
+        break;
+
+      case 'PayPal':
+        this._processPayPal();
+        break;
+    }
+
     this.setState({
       ...this.state,
       shippingBillingSaved: true,
     })
-  }
+  };
 
   handleNext = () => {
 
@@ -100,7 +112,9 @@ class Checkout extends Component {
   handleBack = () => {
     const {stepIndex} = this.state;
     if (stepIndex > 0) {
-      this.setState({stepIndex: stepIndex - 1});
+      this.setState({
+        stepIndex: stepIndex - 1
+      });
     }
 
 
@@ -111,16 +125,15 @@ class Checkout extends Component {
    * @private
    */
   _processPayPal() {
-    console.log('_processPayPal');
     this.props.createPayPalPayment();
   }
 
-  _startProcessPayPal() {
+  _startProcessPayPal = () => {
 
     this.setState({payMethod: 'PayPal'});
 
     this._stepBilling();
-  }
+  };
 
   _handlePayPalPaymentCreated(nextProps) {
     const success = this.props.createPayPalPaymentRequest.get('success');
@@ -132,11 +145,19 @@ class Checkout extends Component {
     }
   }
 
+
+  _processCheck = () => {
+    this.setState({payMethod: 'Check'});
+
+    this.handleNext();
+
+  };
+
   /**
    * Check
    * @private
    */
-  _processCheck() {
+  _processCheckCreate() {
     this.props.createCheckPayment();
   }
 
@@ -205,39 +226,33 @@ class Checkout extends Component {
                             title: 'PayPal',
                             img: payPalImg,
                             loading: createPayPalPaymentRequest.get('loading') || redirectingToPayPal,
-                            onSelect: () => {
-                              this._startProcessPayPal();
-                            },
+                            onSelect: this._startProcessPayPal,
                           },
                           {
                             title: 'Credit Card',
                             img: creditCardImg,
-                            onSelect: () => {
-                              this._processCC();
-                            },
+                            onSelect: this._startProcessPayPal,
                           },
                           {
                             title: 'Check',
                             img: checkImg,
                             loading: createCheckPaymentRequest.get('loading'),
-                            onSelect: () => {
-                              this._processCheck();
-                            },
+                            onSelect: this._processCheck,
                           },
                           {
                             title: 'WireTransfer(TT)',
                             img: checkImg,
-                            loading: createCheckPaymentRequest.get('loading'),
+                            // loading: createCheckPaymentRequest.get('loading'),
                             onSelect: () => {
-                              this._processCheck();
+                              this.handleNext();
                             },
                           },
                           {
                             title: 'COG',
                             img: checkImg,
-                            loading: createCheckPaymentRequest.get('loading'),
+                            // loading: createCheckPaymentRequest.get('loading'),
                             onSelect: () => {
-                              this._processCheck();
+                              this.handleNext();
                             },
                           },
 
@@ -252,7 +267,7 @@ class Checkout extends Component {
                   )
                 })(),
 
-                <ShippingAndBilling onDataSaved={() => this._stepBilling()}/>,
+                <ShippingAndBilling onDataSaved={this._stepBilling}/>,
                 <PaymentSuccessContainer/>
 
               ][stepIndex]}
@@ -265,11 +280,11 @@ class Checkout extends Component {
                   Back
                 </Button>
                 {/*<Button*/}
-                  {/*variant="raised"*/}
-                  {/*color="primary"*/}
-                  {/*onClick={this.handleNext}*/}
+                {/*variant="raised"*/}
+                {/*color="primary"*/}
+                {/*onClick={this.handleNext}*/}
                 {/*>*/}
-                  {/*{stepIndex === 2 ? 'Finish' : 'Next'}*/}
+                {/*{stepIndex === 2 ? 'Finish' : 'Next'}*/}
                 {/*</Button>*/}
               </div>
               }

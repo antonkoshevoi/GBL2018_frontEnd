@@ -14,6 +14,7 @@ import LinksWidgets from "../pages/reports/widgets/LinksWidgets";
 import Account from "../pages/reports/widgets/account";
 import QuickLink from "../pages/reports/widgets/QuickLink";
 import FeaturedItems from "../pages/reports/widgets/FeaturedItems";
+import Card from "../../components/ui/Card";
 
 class UserDashboard extends Component {
   constructor(props) {
@@ -142,38 +143,28 @@ class UserDashboard extends Component {
     return (
       <div className="fadeInLeft  animated">
         <div className="row">
-          <div className="col-sm-12 col-md-8 col-lg-8 col-xl-9">
-            <div className="">
-              <div className='m-portlet m-portlet--head-solid-bg'>
-                <div className='m-portlet__head border-b-blue'>
-                  <div className='m-portlet__head-caption'>
-                    <div className='m-portlet__head-title'>
-                      <h3 className='m-portlet__head-text'>
-                        Reports Snapshot
-                      </h3>
-                    </div>
-                  </div>
+          <div className="col-sm-12 col-md-12 col-lg-12 col-xl-9" style={{marginTop:'15px'}}>
+            <Card title="Reports Snapshot" boxShadow={false} style={{boxShadow:"none"}} bodyStyle={{padding:'0', background:'#f2f3f8'}}>
+              <div className="row row-15">
+                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                  <RosterStatistic/>
+                </div>
+                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                  <LineChart/>
+                </div>
+                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                  <SchoolAverageChart/>
+                </div>
+                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--visible-tablet-and-mobile m--visible-desktop-lg">
+                  <QuickLink/>
                 </div>
               </div>
-            </div>
-            <div className="row row-15">
-              <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                <RosterStatistic/>
-              </div>
-              <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                <LineChart/>
-              </div>
-              <div className="col-sm-12 col-md-12 col-lg-12 col-xl-4">
-                <SchoolAverageChart/>
-              </div>
-            </div>
+            </Card>
+
           </div>
-          <div className="col-sm-12 col-md-4 col-lg-4 col-xl-3">
+          <div className="col-sm-12 col-xl-3 m--hidden-tablet-and-mobile m--hidden-desktop-lg">
             <QuickLink/>
           </div>
-
-
-
 
 
         </div>

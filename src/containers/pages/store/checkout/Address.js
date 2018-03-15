@@ -36,8 +36,7 @@ export default class Address extends Component {
   }
 
   render() {
-    const {form} = this.state;
-    const {title,errors,name,disabled} = this.props;
+    const {title,errors,name,disabled,form} = this.props;
 
     return (
       <div className='col-sm-12'>

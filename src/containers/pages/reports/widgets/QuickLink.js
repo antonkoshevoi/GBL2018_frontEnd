@@ -10,7 +10,8 @@ export default class QuickLink extends Component {
   render() {
     return (
       <div>
-        <div className='m-portlet m-portlet--head-solid-bg'>
+
+        <div className='m-portlet m-portlet--head-solid-bg quick-card-title'>
           <div className='m-portlet__head border-b-orange'>
             <div className='m-portlet__head-caption'>
               <div className='m-portlet__head-title'>
@@ -21,17 +22,17 @@ export default class QuickLink extends Component {
             </div>
           </div>
         </div>
-
-        <Card  header={false} className="quick-card-item">
-          <div className="single-card quick-link">
+        <div className="small-card-content">
+          <div className="small-card">
             <div className="row">
               <div className="col-6">
                 <div className="">
-                    <span className="m-widget1__number m--font-brand">
+                    <span className="quick-card-item m--font-brand">
                         <img src={bz} alt=""/>
                     </span>
                 </div>
               </div>
+
               <div className="col-6">
                 <div className="row">
                   <div className="m--align-right quick-link-title">
@@ -39,48 +40,52 @@ export default class QuickLink extends Component {
                     <span className="">Download</span>
                   </div>
                 </div>
+
                 <div className="row d-flex justify-content-end">
                     <span className="m-widget1__number m--font-brand">
                       <i className="fa fa-download  widget-icon quick-link-download"></i>
-                 </span>
+                    </span>
                 </div>
 
+              </div>
+            </div>
+
+          </div>
+          <div className="small-card">
+
+            <div className="row">
+              <div className="col-6">
+                <div className="">
+                    <span className="quick-card-item m--font-brand">
+                        <img src={teacher} alt=""/>
+                    </span>
+                </div>
+              </div>
+
+              <div className="col-6">
+                <div className="row">
+                  <div className="m--align-right quick-link-title">
+                    <h5 className="text-left">How-To</h5>
+                    <span className="">Movies</span>
+                  </div>
+                </div>
+
+                <div className="row d-flex justify-content-end">
+                    <span className="m-widget1__number m--font-brand">
+                      <i className="fa fa-film  widget-icon quick-link-film"></i>
+                    </span>
+                </div>
               </div>
 
             </div>
 
           </div>
-        </Card>
+        </div>
 
-        <Card  header = {false}>
-          <div className="single-card quick-link">
-                <div className="row">
-                    <div className="col-6">
-                      <div className="">
-                    <span className="m-widget1__number m--font-brand">
-                        <img src={teacher} alt=""/>
-                    </span>
-                      </div>
-                    </div>
-                    <div className="col-6">
-                      <div className="row">
-                        <div className="m--align-right quick-link-title">
-                          <h5 className="text-left">How-To</h5>
-                          <span className="">Movies</span>
-                        </div>
-                      </div>
-                      <div className="row d-flex justify-content-end">
-                    <span className="m-widget1__number m--font-brand">
-                      <i className="fa fa-film  widget-icon quick-link-film"></i>
-                 </span>
-                      </div>
 
-                    </div>
 
-                </div>
 
-          </div>
-        </Card>
+
 
       </div>
 
