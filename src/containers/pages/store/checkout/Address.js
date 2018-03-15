@@ -37,7 +37,7 @@ export default class Address extends Component {
 
   render() {
     const {form} = this.state;
-    const {title,errors,name} = this.props;
+    const {title,errors,name,disabled} = this.props;
 
     return (
       <div className='col-sm-12'>
@@ -48,6 +48,7 @@ export default class Address extends Component {
               <label className="col-form-label col-lg-3 col-sm-12">Address Line 1</label>
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
+                  disabled={disabled}
                   required
                   value={form.addressLine1 || ''}
                   name='addressLine1'
@@ -67,6 +68,7 @@ export default class Address extends Component {
               <label className="col-form-label col-lg-3 col-sm-12">Address Line 2</label>
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
+                  disabled={disabled}
                   value={form.addressLine2 || ''}
                   name='addressLine2'
                   onChange={(e) => {
@@ -85,6 +87,7 @@ export default class Address extends Component {
               <label className="col-form-label col-lg-3 col-sm-12">City</label>
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
+                  disabled={disabled}
                   required
                   value={form.city || ''}
                   name='city'
@@ -104,6 +107,7 @@ export default class Address extends Component {
               <label className="col-form-label col-lg-3 col-sm-12">State or Province</label>
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
+                  disabled={disabled}
                   required
                   value={form.region || ''}
                   name='region'
@@ -123,6 +127,7 @@ export default class Address extends Component {
               <label className="col-form-label col-lg-3 col-sm-12">Postal or Zip Code</label>
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
+                  disabled={disabled}
                   required
                   value={form.zip || ''}
                   name='zip'
@@ -142,6 +147,7 @@ export default class Address extends Component {
               <label className="col-form-label col-lg-3 col-sm-12">Country</label>
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
+                  disabled={disabled}
                   required
                   value={form.country || ''}
                   name='country'

@@ -43,8 +43,16 @@ class ShippingAndBilling extends Component {
       }
     });
 
-    if (sameShipping && name === 'billingContact') {
-      this._setSameShipping(form)
+    if (sameShipping ) {
+      switch (name){
+        case 'billingContact':
+          this._setSameShipping('shippingContact',form);
+          break;
+
+        case 'billingAddress':
+          this._setSameShipping('shippingAddress',form);
+          break;
+      }
     }
   }
 
@@ -56,13 +64,16 @@ class ShippingAndBilling extends Component {
       sameShipping: checked,
     });
 
-    this._setSameShipping(this.state.billingContact)
+    this._setSameShipping('shippingContact',this.state.billingContact);
+    this._setSameShipping('shippingAddress',this.state.billingAddress);
 
   };
 
-  _setSameShipping = (form) => {
+  _setSameShipping = (name,form) => {
+    console.log('name',name);
+    console.log('form',form);
     this.setState({
-      shippingContact: form
+      [name]: form
     });
   };
 
@@ -79,7 +90,7 @@ class ShippingAndBilling extends Component {
               color: '#7ac943',
               fontSize: '100px'
             }}/>
-            Your shipping and billing info is saved. <br/> Create PayPal request ...
+            Your shipping and billing info is saved. <br/> Creating PayPal request ...
           </h3>
         </div>
         <div className="row d-flex justify-content-center">
@@ -162,6 +173,7 @@ class ShippingAndBilling extends Component {
                   name={'shippingAddress'}
                   errors={errors}
                   form={shippingAddress}
+                  disabled={sameShipping}
                 />
               </div>
             </div>

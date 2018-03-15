@@ -119,7 +119,7 @@ class Checkout extends Component {
 
     this.setState({payMethod: 'PayPal'});
 
-    this.handleNext();
+    this._stepBilling();
   }
 
   _handlePayPalPaymentCreated(nextProps) {

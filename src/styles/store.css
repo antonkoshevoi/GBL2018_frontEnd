@@ -138,6 +138,7 @@
 .cardItem .productPrice .price {
     color: #771f1e;
     position: relative;
+    font-size: 0.9rem;
 }
 
 .m-widget25__desc .discount {
