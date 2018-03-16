@@ -22,7 +22,8 @@ import {
   GET_CART_INVOICE_RECORDS,
   GET_CART_INVOICE_RECORDS_FAIL,
   GET_CART_INVOICE_RECORDS_SUCCESS, SET_SHIPPING_BILLING_INFO, SET_SHIPPING_BILLING_INFO_SUCCESS,
-  SET_SHIPPING_BILLING_INFO_FAIL, RESET_SET_SHIPPING_BILLING_INFO,
+  SET_SHIPPING_BILLING_INFO_FAIL, RESET_SET_SHIPPING_BILLING_INFO, GET_RECORDS_PARENT, GET_RECORDS_PARENT_FAIL,
+  GET_RECORDS_PARENT_SUCCESS,
 } from './actions';
 import Immutable from 'immutable';
 
@@ -32,6 +33,13 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errorResponse: null
+  },
+  getRecordsParentRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null,
+    records: []
   },
   getSingleRecordRequest: {
     loading: false,
@@ -125,6 +133,32 @@ export default function reducer(state = initialState, action) {
     case GET_RECORDS_FAIL:
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
+          .set('loading', false)
+          .set('fail', true)
+        );
+
+      /**
+     * Get parent store records
+     */
+    case GET_RECORDS_PARENT:
+      return state
+        .set('getRecordsParentRequest', state.get('getRecordsParentRequest')
+          .set('loading', true)
+          .remove('success')
+          .remove('fail')
+        ).set('records', Immutable.List());
+    case GET_RECORDS_PARENT_SUCCESS:
+      return state
+        .set('getRecordsParentRequest', state.get('getRecordsParentRequest')
+          .set('success', true)
+          .remove('loading')
+          .set('records', Immutable.fromJS(action.result.data))
+          .set('pagination', Immutable.fromJS(action.result.meta.pagination))
+        )
+
+    case GET_RECORDS_PARENT_FAIL:
+      return state
+        .set('getRecordsParentRequest', state.get('getRecordsParentRequest')
           .set('loading', false)
           .set('fail', true)
         );

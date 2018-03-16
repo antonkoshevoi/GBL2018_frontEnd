@@ -9,6 +9,8 @@ export default {
   students: 'Students',
   classrooms: 'Classrooms',
   demoCourses: 'Demo Courses',
+  classInvitations: 'Class Invitations',
+  autoClass: 'Auto Class',
   homerooms: 'Homerooms',
   howToMovies : 'How To Movies',
   professionalTrainings: 'Professional Trainings',

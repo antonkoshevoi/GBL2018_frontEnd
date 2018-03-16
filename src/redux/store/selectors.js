@@ -8,10 +8,19 @@ export const selectStoreDomain = (state) => state.store;
 /**
  * Get Records Request
  */
-export const selectGetRecordsRequest = createSelector(
+  export const selectGetRecordsRequest = createSelector(
   selectStoreDomain,
   (subState) => subState.get('getRecordsRequest')
 );
+
+/**
+ * Get Parent Records Request
+ */
+export const selectGetParentRecordsRequest = createSelector(
+  selectStoreDomain,
+  (subState) => subState.get('getRecordsParentRequest')
+);
+
 /**
  * Get Single Request
  */

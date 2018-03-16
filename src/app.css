@@ -817,6 +817,7 @@ div.m-portlet {
     .quick-card-item img{
         width: 100%;
         padding: 19% 10% 11% 5%;
+        max-width: 119px;
     }
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Switch, Redirect} from 'react-router';
 
 import AppContainer from '../containers/AppContainer';
 import AuthenticatedRoute from '../containers/routing/AuthenticatedRoute';
@@ -15,7 +16,6 @@ import HomeroomsBulkUpload from '../containers/homerooms/HomeroomsBulkUpload';
 import Classrooms from "../containers/classrooms/Classrooms";
 import StudentsBulkUpload from '../containers/students/StudentsBulkUpload';
 import Courses from '../containers/pages/courses/Courses';
-import {Switch, Redirect} from 'react-router';
 import SignUpIndex from '../containers/auth/SignUpIndex';
 import SignUpParent from '../containers/auth/SignUpParent';
 import SignUpPrincipal from '../containers/auth/SignUpPrincipal';
@@ -46,6 +46,7 @@ import HomeRoomReportDashboard from "../containers/pages/reports/homeroom/Dashbo
 import InvitationDetails from '../containers/invitations/InvitationDetails';
 import ShoppingCart from "../containers/pages/store/shopping-cart/ShoppingCart";
 import OnlyHeadLayout from "../containers/layouts/OnlyHeadLayout";
+import AutoCreate from "../containers/classrooms/AutoCreate";
 
 export default () => (
   <AppContainer>
@@ -68,8 +69,10 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/homerooms/list' name='Homerooms' component={Homerooms} />
       <AuthenticatedRoute exact layout={MainLayout} path='/homerooms/csv' component={HomeroomsBulkUpload} />
       <AuthenticatedRoute exact layout={MainLayout} path='/classrooms/list' name='Classrooms' component={Classrooms} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/classrooms/auto' name='AutoCreation'  component={AutoCreate}/>
 
       <AuthenticatedRoute exact layout={MainLayout} path='/courses' component={Courses}/>
+
 
       <AuthenticatedRoute exact layout={MainLayout} path='/reports' component={ReportsDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReportDashboard}/>

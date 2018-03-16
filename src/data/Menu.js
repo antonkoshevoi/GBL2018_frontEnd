@@ -49,9 +49,15 @@ export default  {
                icon:'flaticon flaticon-user-settings',
              },
              {
-               key:'demoCourses',
+               key:'classInvitations',
                title:'Demo courses',
                link:'courses',
+               icon:'flaticon flaticon-user-ok',
+             },
+             {
+               key:'autoClass',
+               title:'Auto Class',
+               link:'classrooms/auto',
                icon:'flaticon flaticon-user-ok',
              },
              {

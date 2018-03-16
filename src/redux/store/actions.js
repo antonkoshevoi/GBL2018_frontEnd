@@ -2,6 +2,10 @@ export const GET_RECORDS = '[Store] GET_RECORDS';
 export const GET_RECORDS_SUCCESS = '[Store] GET_RECORDS_SUCCESS';
 export const GET_RECORDS_FAIL = '[Store] GET_RECORDS_FAIL';
 
+export const GET_RECORDS_PARENT = '[Store] GET_RECORDS_PARENT';
+export const GET_RECORDS_PARENT_SUCCESS = '[Store] GET_RECORDS_PARENT_SUCCESS';
+export const GET_RECORDS_PARENT_FAIL = '[Store] GET_RECORDS_PARENT_FAIL';
+
 export const GET_SINGLE_RECORD = '[Store] GET_SINGLE_RECORD';
 export const GET_SINGLE_RECORD_SUCCESS = '[Store] GET_SINGLE_RECORD_SUCCESS';
 export const GET_SINGLE_RECORD_FAIL = '[Store] GET_SINGLE_RECORD_FAIL';
@@ -44,6 +48,13 @@ export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
     promise: (apiClient) => apiClient.get('store/items', params)
+  };
+}
+
+export function getParentRecords(params = {}) {
+  return {
+    types: [GET_RECORDS_PARENT, GET_RECORDS_PARENT_SUCCESS, GET_RECORDS_PARENT_FAIL],
+    promise: (apiClient) => apiClient.get('store/parent/items', params)
   };
 }
 

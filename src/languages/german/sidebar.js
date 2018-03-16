@@ -9,6 +9,8 @@ export default {
   students: 'Studenten',
   classrooms: 'Klassenzimmer',
   demoCourses: 'Demo-Kurse',
+  classInvitations: 'Class Invitations',
+  autoClass: 'Auto Class',
   homerooms: 'Homezimmer',
   howToMovies : 'Ya To Moveh',
   professionalTrainings: 'Professionelle Trainings',
