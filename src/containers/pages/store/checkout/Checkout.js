@@ -81,9 +81,9 @@ class Checkout extends Component {
 
   }
 
-  _stepBilling = () => {
-    const {payMethod} = this.state;
-    console.log(payMethod);
+  _stepBilling = (method) => {
+    const payMethod = method ? method : this.state.payMethod;
+
     switch (payMethod) {
       case 'Check':
         this._processCheckCreate();
@@ -131,8 +131,10 @@ class Checkout extends Component {
   _startProcessPayPal = () => {
 
     this.setState({payMethod: 'PayPal'});
+    this.setState({payMethod: '123'});
+    console.log('PayPal');
 
-    this._stepBilling();
+    this._stepBilling('PayPal');
   };
 
   _handlePayPalPaymentCreated(nextProps) {
