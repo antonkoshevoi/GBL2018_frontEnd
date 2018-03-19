@@ -1450,9 +1450,10 @@ div.m-widget25 .m-widget25__price {
 }
 
 .store-featured {
-    max-width: 600px;
+    max-width: 460px;
     white-space: pre-wrap;
     display: inline-block;
+    zoom: 0.8;
 }
 .store-featured .verticalCardItem.cardItem{
     max-width: 150px;
