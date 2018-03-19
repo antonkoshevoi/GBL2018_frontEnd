@@ -23,6 +23,7 @@ import ImageCropper from "../../../components/ui/ImageCropper";
 
 class EditClassroomModal extends Component {
   static propTypes = {
+    isPublic: PropTypes.bool,
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     onSuccess: PropTypes.any.isRequired,
@@ -106,7 +107,7 @@ class EditClassroomModal extends Component {
   }
 
   render() {
-    const { isOpen, updateRequest, getSingleRecordRequest } = this.props;
+    const { isOpen, updateRequest, getSingleRecordRequest,isPublic } = this.props;
     const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');
     const errorMessage = updateRequest.get('errorMessage');
     const errors = updateRequest.get('errors');
@@ -136,6 +137,7 @@ class EditClassroomModal extends Component {
             <div className="row">
               <div className="col-md-8">
                 <ClassroomForm
+                  isPublic={isPublic}
                   onChange={(classroom) => { this._onChange(classroom) }}
                   classroom={this.state.classroom}
                   errors={errors}/>

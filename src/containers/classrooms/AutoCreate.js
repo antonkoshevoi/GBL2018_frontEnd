@@ -8,14 +8,53 @@ import {selectGetParentRecordsRequest} from "../../redux/store/selectors";
 import {getParentRecords} from "../../redux/store/actions";
 import {MenuItem, Select} from "material-ui";
 import Card from "../../components/ui/Card";
-import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../components/ui/table";
+import {EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../components/ui/table";
+import {
+  selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination,
+  selectRecords
+} from "../../redux/classrooms/selectors";
+import {getRecordsPublic, getSingleRecord} from "../../redux/classrooms/actions";
+import HasPermission from "../middlewares/HasPermission";
+import EditClassroomModal from "./modals/EditClassroomModal";
 
 
 class AutoCreate extends Component {
 
+  state = {
+    editModalIsOpen : false,
+  };
+
   componentDidMount() {
-    this.props.getParentStore();
+    this.props.getPublicClassrooms();
   }
+
+  componentWillReceiveProps(nextProps) {
+    this._openEditDialogOnSingleRequestSuccess(nextProps);
+  }
+
+  _openEditDialogOnSingleRequestSuccess(nextProps) {
+    const success = this.props.getSingleRecordRequest.get('success');
+    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
+
+    if(!success && nextSuccess) {
+      this._openEditDialog();
+    }
+  }
+
+  _goToPage (page) {
+    this.setState({ page }, this._getRecords)
+  }
+
+  _onCreate () {
+    const { pagination } = this.props;
+    const page = pagination.get('page');
+
+    if(this.state.page !== page) {
+      this._goToPage(page);
+    }
+  }
+
+
 
   /**
    * @param perPage
@@ -27,6 +66,16 @@ class AutoCreate extends Component {
     // const page = Math.min(this.state.page, totalPages);
     //
     // this.setState({ perPage, page }, this._getRecords)
+  };
+  _editRecord (id) {
+    this.props.getSingleRecord(id);
+  }
+
+  _openEditDialog = () => {
+    this.setState({ editModalIsOpen: true });
+  };
+  _closeEditDialog = () => {
+    this.setState({ editModalIsOpen: false });
   };
 
 
@@ -47,8 +96,9 @@ class AutoCreate extends Component {
   }
 
   _renderRecords(){
-    const records = this.props.getParentStoreRequest.get('records');
-    const loading = this.props.getParentStoreRequest.get('loading');
+    const records = this.props.classroomRecords;
+    console.log(records);
+    const loading = this.props.getParentPublicClassroom.get('loading');
 
     if (!loading && records.size === 0) {
       return (
@@ -65,13 +115,17 @@ class AutoCreate extends Component {
     return records.map((record, key) => (
       <Row index={key} key={key}>
         <Td first={true} width='100px'>{key + 1}</Td>
-        <Td width='132px'>{record.get('title')}</Td>
-        <Td width='132px'>{record.getIn(['courses', 'publisher','name'])}</Td>
         <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
-        <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
-        <Td width='132px'>{record.get('studentsCount')}</Td>
+        <Td width='132px'>{record.getIn(['course', 'publisher','name'])}</Td>
+        <Td width='132px'>{'weekly'}</Td>
+        <Td width='132px'>{record.get('crmEnrollmentEndDate')}</Td>
+        <Td width='132px'>{record.get('maxStudent')}</Td>
         <Td width='150px'>
-
+          <HasPermission permissions={[
+            '[ClassRooms][Update][Any]'
+          ]}>
+            <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
+          </HasPermission>
         </Td>
       </Row>
 
@@ -80,10 +134,9 @@ class AutoCreate extends Component {
   }
 
   render() {
-    const {getParentStoreRequest} = this.props;
-    const storeItems = getParentStoreRequest.get('records');
-    const loading = getParentStoreRequest.get('loading');
-    console.log('storeItems',storeItems);
+    const {getParentPublicClassroom, classroomRecords} = this.props;
+    const loading = getParentPublicClassroom.get('loading');
+    const {editModalIsOpen} = this.state;
     return (
       <Card title="Auto Class">
         <div className='col-xl-12 order-1 order-xl-2 m--align-right'>
@@ -111,7 +164,13 @@ class AutoCreate extends Component {
             </Tbody>
           </Table>
         </div>
+        <EditClassroomModal
+          isPublic={true}
+          isOpen={editModalIsOpen}
+          onClose={() => { this._closeEditDialog() }}
+          onSuccess={() => { this._onCreate() }}/>
       </Card>
+
     );
   }
 }
@@ -119,12 +178,16 @@ class AutoCreate extends Component {
 
 AutoCreate = connect(
   (state) => ({
-    getParentStoreRequest: selectGetParentRecordsRequest(state)
+    getParentPublicClassroom: selectGetRecordsRequest(state),
+    classroomRecords: selectRecords(state),
+    getSingleRecordRequest: selectGetSingleRecordRequest(state),
+    pagination: selectPagination(state),
+
   }),
   (dispatch) => ({
-    getParentStore: () => {
-      dispatch(getParentRecords())
-    }
+    getPublicClassrooms: () => {dispatch(getRecordsPublic())},
+    getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
+
   }),
 )(AutoCreate);
 

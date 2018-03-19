@@ -4,6 +4,10 @@ export const GET_RECORDS = '[Classrooms] GET_RECORDS';
 export const GET_RECORDS_SUCCESS = '[Classrooms] GET_RECORDS_SUCCESS';
 export const GET_RECORDS_FAIL = '[Classrooms] GET_RECORDS_FAIL';
 
+export const GET_RECORDS_PUBLIC = '[Classrooms] GET_RECORDS_PUBLIC';
+export const GET_RECORDS_PUBLIC_SUCCESS = '[Classrooms] GET_RECORDS_PUBLIC_SUCCESS';
+export const GET_RECORDS_PUBLIC_FAIL = '[Classrooms] GET_RECORDS_PUBLIC_FAIL';
+
 export const GET_SINGLE_RECORD = '[Classrooms] GET_SINGLE_RECORD';
 export const GET_SINGLE_RECORD_SUCCESS = '[Classrooms] GET_SINGLE_RECORD_SUCCESS';
 export const GET_SINGLE_RECORD_FAIL = '[Classrooms] GET_SINGLE_RECORD_FAIL';
@@ -55,6 +59,13 @@ export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
     promise: (apiClient) => apiClient.get('classroom', params)
+  };
+}
+
+export function getRecordsPublic(params = {}) {
+  return {
+    types: [GET_RECORDS_PUBLIC, GET_RECORDS_PUBLIC_SUCCESS, GET_RECORDS_PUBLIC_FAIL],
+    promise: (apiClient) => apiClient.get('classrooms/auto', params)
   };
 }
 

@@ -31,7 +31,8 @@ class ClassroomForm extends Component {
     onChange: PropTypes.func.isRequired,
     classroom: PropTypes.object.isRequired,
     schools: PropTypes.any,
-    errors: PropTypes.any
+    errors: PropTypes.any,
+    isPublic: PropTypes.bool,
   };
 
   constructor(props) {
@@ -199,9 +200,8 @@ class ClassroomForm extends Component {
   }
 
   render() {
-    const {classroom, errors} = this.props;
+    const {classroom, errors, isPublic} = this.props;
     const {courseModalIsOpen, unassignedsAlert, course,studentCount} = this.state;
-
     return (
       <div className='row'>
 
@@ -276,6 +276,7 @@ class ClassroomForm extends Component {
             {errors && errors.get('crmEnrollmentEndDate') &&
             <FormHelperText error>{errors.get('crmEnrollmentEndDate').get(0)}</FormHelperText>}
           </FormControl>
+          {!isPublic &&
           <FormControl className='full-width form-inputs'>
             <Button
               onClick={() => {
@@ -291,6 +292,7 @@ class ClassroomForm extends Component {
             {errors && errors.get('crmCourse') &&
             <FormHelperText error>{errors.get('crmCourse').get(0)}</FormHelperText>}
           </FormControl>
+          }
           {course &&
           <div className="row">
             <div className="col-4">
@@ -303,6 +305,34 @@ class ClassroomForm extends Component {
               student Count: {studentCount ? studentCount : 0}
             </div>
           </div>
+          }
+          {isPublic && classroom && classroom.course &&
+          <div className="row">
+            <div className="col-4">
+              <img src={classroom.course.image} width={70} alt={classroom.course.title}/>
+            </div>
+            <div className="col-4 d-flex justify-content-center flex-column">
+              {classroom.course.title}
+            </div>
+            <div className="col-4 d-flex justify-content-center flex-column">
+              student Count: {studentCount ? studentCount : 0}
+            </div>
+          </div>
+          }
+          {isPublic &&
+          <FormControl aria-describedby='maxStudent-error-text' className='full-width form-inputs'>
+            <InputLabel htmlFor='maxStudent-error'>Max Students</InputLabel>
+            <Input
+              type="number"
+              name='maxStudent'
+              margin='dense'
+              fullWidth
+              value={classroom.maxStudent || ''}
+              onChange={(e) => {
+                this._handleInputChange(e)
+              }}/>
+            {errors && errors.get('maxStudent') && <FormHelperText error>{errors.get('maxStudent').get(0)}</FormHelperText>}
+          </FormControl>
           }
           <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>Teacher</InputLabel>

@@ -6,8 +6,10 @@ import {
   RESET_BULK_UPLOAD_REQUEST, BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS,
   GET_COURSES, GET_COURSES_FAIL, GET_COURSES_SUCCESS, GET_DEMO_CLASSROOMS, GET_DEMO_CLASSROOMS_SUCCESS,
   GET_DEMO_CLASSROOMS_FAIL, GET_DEMO_COURSES, GET_DEMO_COURSES_SUCCESS, GET_DEMO_COURSES_FAIL,
-  GET_RECORD_FOR_ASSIGN_STUDENTS, GET_RECORD_FOR_ASSIGN_STUDENTS_SUCCESS, GET_RECORD_FOR_ASSIGN_STUDENTS_FAIL, RESET_GET_RECORD_FOR_ASSIGN_STUDENTS_REQUEST,
-  ASSIGN_STUDENT, ASSIGN_STUDENT_FAIL, ASSIGN_STUDENT_SUCCESS, RESET_ASSIGN_STUDENT_REQUEST
+  GET_RECORD_FOR_ASSIGN_STUDENTS, GET_RECORD_FOR_ASSIGN_STUDENTS_SUCCESS, GET_RECORD_FOR_ASSIGN_STUDENTS_FAIL,
+  RESET_GET_RECORD_FOR_ASSIGN_STUDENTS_REQUEST,
+  ASSIGN_STUDENT, ASSIGN_STUDENT_FAIL, ASSIGN_STUDENT_SUCCESS, RESET_ASSIGN_STUDENT_REQUEST, GET_RECORDS_PUBLIC,
+  GET_RECORDS_PUBLIC_SUCCESS, GET_RECORDS_PUBLIC_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -98,6 +100,7 @@ export default function reducer (state = initialState, action) {
      * Get records
      */
     case GET_RECORDS:
+    case GET_RECORDS_PUBLIC:
     case GET_DEMO_CLASSROOMS:
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
@@ -106,6 +109,7 @@ export default function reducer (state = initialState, action) {
           .remove('fail')
         ).set('records', Immutable.List());
     case GET_RECORDS_SUCCESS:
+    case GET_RECORDS_PUBLIC_SUCCESS:
     case GET_DEMO_CLASSROOMS_SUCCESS:
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
@@ -114,6 +118,7 @@ export default function reducer (state = initialState, action) {
         ).set('records', Immutable.fromJS(action.result.data))
         .set('pagination', Immutable.fromJS(action.result.meta.pagination));
     case GET_RECORDS_FAIL:
+    case GET_RECORDS_PUBLIC_FAIL:
     case GET_DEMO_CLASSROOMS_FAIL:
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
