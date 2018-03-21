@@ -9,7 +9,9 @@ import {
   GET_RECORD_FOR_ASSIGN_STUDENTS, GET_RECORD_FOR_ASSIGN_STUDENTS_SUCCESS, GET_RECORD_FOR_ASSIGN_STUDENTS_FAIL,
   RESET_GET_RECORD_FOR_ASSIGN_STUDENTS_REQUEST,
   ASSIGN_STUDENT, ASSIGN_STUDENT_FAIL, ASSIGN_STUDENT_SUCCESS, RESET_ASSIGN_STUDENT_REQUEST, GET_RECORDS_PUBLIC,
-  GET_RECORDS_PUBLIC_SUCCESS, GET_RECORDS_PUBLIC_FAIL
+  GET_RECORDS_PUBLIC_SUCCESS, GET_RECORDS_PUBLIC_FAIL, GET_SINGLE_AUTOCLASS_RECORD, GET_SINGLE_AUTOCLASS_RECORD_SUCCESS,
+  GET_SINGLE_AUTOCLASS_RECORD_FAIL, RESET_GET_SINGLE_AUTOCLASS_RECORD_REQUEST, UPDATE_AUTOCLASS,
+  UPDATE_AUTOCLASS_SUCCESS, UPDATE_AUTOCLASS_FAIL, RESET_UPDATE_AUTOCLASS_REQUEST
 } from './actions';
 import Immutable from 'immutable';
 
@@ -52,15 +54,15 @@ const initialState = Immutable.fromJS({
     errors: {}
   },
   bulkUploadRequest: {
-      loading: false,
-      progress: 0,
-      success: false,
-      fail: false,
-      errorMessage: null,
-      errorCode: null,
-      errors: {},
-      cancel: undefined,
-      results: {}
+    loading: false,
+    progress: 0,
+    success: false,
+    fail: false,
+    errorMessage: null,
+    errorCode: null,
+    errors: {},
+    cancel: undefined,
+    results: {}
   },
   getCoursesRequest: {
     loading: false,
@@ -94,8 +96,8 @@ const initialState = Immutable.fromJS({
   },
 });
 
-export default function reducer (state = initialState, action) {
-  switch(action.type) {
+export default function reducer(state = initialState, action) {
+  switch (action.type) {
     /**
      * Get records
      */
@@ -129,6 +131,7 @@ export default function reducer (state = initialState, action) {
      * Get single record
      */
     case GET_SINGLE_RECORD:
+    case GET_SINGLE_AUTOCLASS_RECORD:
       return state
         .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
           .set('loading', true)
@@ -137,6 +140,7 @@ export default function reducer (state = initialState, action) {
           .remove('record')
         );
     case GET_SINGLE_RECORD_SUCCESS:
+    case GET_SINGLE_AUTOCLASS_RECORD_SUCCESS:
       return state
         .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
           .set('success', true)
@@ -144,12 +148,14 @@ export default function reducer (state = initialState, action) {
           .set('record', Immutable.fromJS(action.result.data))
         );
     case GET_SINGLE_RECORD_FAIL:
+    case GET_SINGLE_AUTOCLASS_RECORD_FAIL:
       return state
         .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
           .set('loading', false)
           .set('fail', true)
         );
     case RESET_GET_SINGLE_RECORD_REQUEST:
+    case RESET_GET_SINGLE_AUTOCLASS_RECORD_REQUEST:
       return state
         .set('getSingleRecordRequest', initialState.get('getSingleRecordRequest'));
     /**
@@ -184,7 +190,7 @@ export default function reducer (state = initialState, action) {
           .set('total', total)
         );
 
-      if(page === totalPages) {
+      if (page === totalPages) {
         return newState
           .set('records', state.get('records')
             .push(Immutable.fromJS(action.result.data))
@@ -212,6 +218,7 @@ export default function reducer (state = initialState, action) {
      * Update
      */
     case UPDATE:
+    case UPDATE_AUTOCLASS:
       return state
         .set('updateRequest', state.get('updateRequest')
           .set('loading', true)
@@ -222,8 +229,9 @@ export default function reducer (state = initialState, action) {
           .remove('errorCode')
         );
     case UPDATE_SUCCESS:
+    case UPDATE_AUTOCLASS_SUCCESS:
       let updatedRecords = state.get('records').map(record => {
-        if(record.get('id') === action.result.data.id) {
+        if (record.get('id') === action.result.data.id) {
           return Immutable.fromJS(action.result.data);
         }
         return record;
@@ -234,6 +242,7 @@ export default function reducer (state = initialState, action) {
           .set('success', true)
         ).set('records', updatedRecords);
     case UPDATE_FAIL:
+    case UPDATE_AUTOCLASS_FAIL:
       const errorData = action.error.response.data;
       return state
         .set('updateRequest', state.get('updateRequest')
@@ -244,58 +253,59 @@ export default function reducer (state = initialState, action) {
           .set('errors', errorData.code === 422 ? Immutable.fromJS(errorData.errors) : undefined)
         );
     case RESET_UPDATE_REQUEST:
+    case RESET_UPDATE_AUTOCLASS_REQUEST:
       return state
         .set('updateRequest', initialState.get('updateRequest'));
     /**
      * Bulk upload
      */
     case BULK_UPLOAD:
-        return state
-            .set('bulkUploadRequest', state.get('bulkUploadRequest')
-                .set('loading', true)
-                .set('progress', 0)
-                .set('success', false)
-                .set('fail', false)
-                .remove('errors')
-                .remove('errorMessage')
-                .remove('errorCode')
-                .set('cancel', action.cancel)
-            );
+      return state
+        .set('bulkUploadRequest', state.get('bulkUploadRequest')
+          .set('loading', true)
+          .set('progress', 0)
+          .set('success', false)
+          .set('fail', false)
+          .remove('errors')
+          .remove('errorMessage')
+          .remove('errorCode')
+          .set('cancel', action.cancel)
+        );
     case BULK_UPLOAD_PROGRESS:
-        const percent = Math.round((action.progressEvent.loaded * 100) / action.progressEvent.total);
-        return state
-            .set('bulkUploadRequest', state.get('bulkUploadRequest')
-                .set('progress', percent)
-            );
+      const percent = Math.round((action.progressEvent.loaded * 100) / action.progressEvent.total);
+      return state
+        .set('bulkUploadRequest', state.get('bulkUploadRequest')
+          .set('progress', percent)
+        );
     case BULK_UPLOAD_SUCCESS:
-        return state
-            .set('bulkUploadRequest', state.get('bulkUploadRequest')
-                .set('loading', false)
-                .set('progress', 100)
-                .set('success', true)
-                .set('results', Immutable.fromJS(action.result.data))
-            );
+      return state
+        .set('bulkUploadRequest', state.get('bulkUploadRequest')
+          .set('loading', false)
+          .set('progress', 100)
+          .set('success', true)
+          .set('results', Immutable.fromJS(action.result.data))
+        );
     case BULK_UPLOAD_FAIL:
-        //avoid duplicate declaration
-        let newStateOnBulkUploadFail = state
-            .set('bulkUploadRequest', state.get('bulkUploadRequest')
-                .set('loading', false)
-                .set('progress', 0)
-                .set('fail', true)
-            );
+      //avoid duplicate declaration
+      let newStateOnBulkUploadFail = state
+        .set('bulkUploadRequest', state.get('bulkUploadRequest')
+          .set('loading', false)
+          .set('progress', 0)
+          .set('fail', true)
+        );
 
-        if (typeof action.error.response !== 'undefined') {
-            const bulkUploadRequestErrorData = action.error.response.data;
-            newStateOnBulkUploadFail.set('bulkUploadRequest', newStateOnBulkUploadFail.get('bulkUploadRequest')
-                .set('errorCode', bulkUploadRequestErrorData.code)
-                .set('errorMessage', bulkUploadRequestErrorData.message)
-                .set('errors', bulkUploadRequestErrorData.code === 422 ? Immutable.fromJS(bulkUploadRequestErrorData.errors) : undefined)
-            );
-        }
-        return newStateOnBulkUploadFail;
+      if (typeof action.error.response !== 'undefined') {
+        const bulkUploadRequestErrorData = action.error.response.data;
+        newStateOnBulkUploadFail.set('bulkUploadRequest', newStateOnBulkUploadFail.get('bulkUploadRequest')
+          .set('errorCode', bulkUploadRequestErrorData.code)
+          .set('errorMessage', bulkUploadRequestErrorData.message)
+          .set('errors', bulkUploadRequestErrorData.code === 422 ? Immutable.fromJS(bulkUploadRequestErrorData.errors) : undefined)
+        );
+      }
+      return newStateOnBulkUploadFail;
     case RESET_BULK_UPLOAD_REQUEST:
-        return state
-            .set('bulkUploadRequest', initialState.get('bulkUploadRequest'));
+      return state
+        .set('bulkUploadRequest', initialState.get('bulkUploadRequest'));
     /**
      * Delete
      */
@@ -396,7 +406,7 @@ export default function reducer (state = initialState, action) {
         );
     case ASSIGN_STUDENT_SUCCESS:
       let assignedRecords = state.get('records').map(record => {
-        if(record.get('id') === action.result.data.id) {
+        if (record.get('id') === action.result.data.id) {
           return Immutable.fromJS(action.result.data);
         }
         return record;

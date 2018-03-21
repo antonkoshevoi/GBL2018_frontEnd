@@ -131,7 +131,6 @@ class Checkout extends Component {
   _startProcessPayPal = () => {
 
     this.setState({payMethod: 'PayPal'});
-    this.setState({payMethod: '123'});
     console.log('PayPal');
 
     this._stepBilling('PayPal');

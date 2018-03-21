@@ -13,10 +13,20 @@ export const GET_SINGLE_RECORD_SUCCESS = '[Classrooms] GET_SINGLE_RECORD_SUCCESS
 export const GET_SINGLE_RECORD_FAIL = '[Classrooms] GET_SINGLE_RECORD_FAIL';
 export const RESET_GET_SINGLE_RECORD_REQUEST = '[Classrooms] RESET_GET_SINGLE_RECORD_REQUEST';
 
+export const GET_SINGLE_AUTOCLASS_RECORD = '[Classrooms] GET_SINGLE_AUTOCLASS_RECORD';
+export const GET_SINGLE_AUTOCLASS_RECORD_SUCCESS = '[Classrooms] GET_SINGLE_AUTOCLASS_RECORD_SUCCESS';
+export const GET_SINGLE_AUTOCLASS_RECORD_FAIL = '[Classrooms] GET_SINGLE_AUTOCLASS_RECORD_FAIL';
+export const RESET_GET_SINGLE_AUTOCLASS_RECORD_REQUEST = '[Classrooms] RESET_GET_SINGLE_RECORD_REQUEST';
+
 export const CREATE = '[Classrooms] CREATE';
 export const CREATE_SUCCESS = '[Classrooms] CREATE_SUCCESS';
 export const CREATE_FAIL = '[Classrooms] CREATE_FAIL';
 export const RESET_CREATE_REQUEST = '[Classrooms] RESET_CREATE_ERRORS';
+
+export const UPDATE_AUTOCLASS = '[Classrooms] UPDATE_AUTOCLASS';
+export const UPDATE_AUTOCLASS_SUCCESS = '[Classrooms] UPDATE_AUTOCLASS_SUCCESS';
+export const UPDATE_AUTOCLASS_FAIL = '[Classrooms] UPDATE_AUTOCLASS_FAIL';
+export const RESET_UPDATE_AUTOCLASS_REQUEST = '[Classrooms] RESET_UPDATE_AUTOCLASS_ERRORS';
 
 export const UPDATE = '[Classrooms] UPDATE';
 export const UPDATE_SUCCESS = '[Classrooms] UPDATE_SUCCESS';
@@ -78,6 +88,7 @@ export function getSingleRecord(id, params = {}) {
     promise: (apiClient) => apiClient.get(`classroom/${id}`, params)
   };
 }
+
 export function resetGetSingleRecordRequest () {
   return {
     type: RESET_GET_SINGLE_RECORD_REQUEST
@@ -106,9 +117,37 @@ export function update(id, data, params = {}) {
     promise: (apiClient) => apiClient.put(`classroom/${id}`, data, params)
   };
 }
+
 export function resetUpdateRequest () {
   return {
     type: RESET_UPDATE_REQUEST
+  }
+}
+
+
+/**
+ * Single
+ */
+export function getSingleAutoClassRecord(id, params = {}) {
+  return {
+    types: [GET_SINGLE_AUTOCLASS_RECORD, GET_SINGLE_AUTOCLASS_RECORD_SUCCESS, GET_SINGLE_AUTOCLASS_RECORD_FAIL],
+    promise: (apiClient) => apiClient.get(`classroom/auto/${id}`, params)
+  };
+}
+
+/**
+ * Update auto classroom
+ */
+export function updateAutoClass(id, data, params = {}) {
+  return {
+    types: [UPDATE_AUTOCLASS, UPDATE_AUTOCLASS_SUCCESS, UPDATE_AUTOCLASS_FAIL],
+    promise: (apiClient) => apiClient.post(`classroom/auto/${id}`, data, params)
+  };
+}
+
+export function resetUpdateAutoClass() {
+  return {
+    type: RESET_UPDATE_AUTOCLASS_REQUEST
   }
 }
 

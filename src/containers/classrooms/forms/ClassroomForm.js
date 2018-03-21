@@ -1,9 +1,19 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography, Button, Checkbox} from 'material-ui';
+import {
+  FormControl,
+  FormHelperText,
+  Input,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+  Button,
+  Checkbox
+} from 'material-ui';
 import {getSchoolTeachers, getSchools, getSchoolHomerooms} from "../../../redux/schools/actions";
-import { ListItemText } from 'material-ui/List';
+import {ListItemText} from 'material-ui/List';
 import {
   selectGetSchoolHomeroomsRequest,
   selectGetSchoolTeachersRequest,
@@ -136,11 +146,11 @@ class ClassroomForm extends Component {
   _countStudentByHomerooms(selectedHomerooms) {
     const {schoolHomerooms} = this.state;
 
-    if (schoolHomerooms && Array.isArray(selectedHomerooms)){
+    if (schoolHomerooms && Array.isArray(selectedHomerooms)) {
       const studentCount = schoolHomerooms
         .filter(room => selectedHomerooms.includes(room.id))
         .map(room => room.studentsCount)
-        .reduce(((count, studentCount) => count + studentCount),0);
+        .reduce(((count, studentCount) => count + studentCount), 0);
 
       this.setState({studentCount});
     }
@@ -201,7 +211,7 @@ class ClassroomForm extends Component {
 
   render() {
     const {classroom, errors, isPublic} = this.props;
-    const {courseModalIsOpen, unassignedsAlert, course,studentCount} = this.state;
+    const {courseModalIsOpen, unassignedsAlert, course, studentCount} = this.state;
     return (
       <div className='row'>
 
@@ -319,21 +329,7 @@ class ClassroomForm extends Component {
             </div>
           </div>
           }
-          {isPublic &&
-          <FormControl aria-describedby='maxStudent-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='maxStudent-error'>Max Students</InputLabel>
-            <Input
-              type="number"
-              name='maxStudent'
-              margin='dense'
-              fullWidth
-              value={classroom.maxStudent || ''}
-              onChange={(e) => {
-                this._handleInputChange(e)
-              }}/>
-            {errors && errors.get('maxStudent') && <FormHelperText error>{errors.get('maxStudent').get(0)}</FormHelperText>}
-          </FormControl>
-          }
+          {!isPublic &&
           <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>Teacher</InputLabel>
             <Select
@@ -349,23 +345,26 @@ class ClassroomForm extends Component {
             {errors && errors.get('teacherId') &&
             <FormHelperText error>{errors.get('teacherId').get(0)}</FormHelperText>}
           </FormControl>
+          }
+          {!isPublic &&
           <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>Homerooms (Multiple)</InputLabel>
             <Select
               multiple={true}
-              renderValue = {(e) => this._getSelectedRooms(e)}
+              renderValue={(e) => this._getSelectedRooms(e)}
               primarytext="Select Homeroom"
               name='homeroomIds'
               onChange={(e) => {
                 this._handleInputChange(e)
               }}
-              value={ classroom.homeroomIds || []}>
+              value={classroom.homeroomIds || []}>
               {this._renderHomerooms(classroom.homeroomIds)}
 
             </Select>
             {errors && errors.get('homerooms') &&
             <FormHelperText error>{errors.get('homerooms').get(0)}</FormHelperText>}
           </FormControl>
+          }
         </div>
         <CourseModal
           courseId={classroom.crmCourse}
@@ -381,15 +380,15 @@ class ClassroomForm extends Component {
     );
   }
 
-  _getSelectedRooms(e){
+  _getSelectedRooms(e) {
     const {classroom} = this.props;
     const {schoolHomerooms} = this.state;
 
     let selectedRooms = [];
 
-    if (classroom.homeroomIds){
+    if (classroom.homeroomIds) {
       selectedRooms = schoolHomerooms
-        .filter(item =>  classroom.homeroomIds.includes(item.id))
+        .filter(item => classroom.homeroomIds.includes(item.id))
         .map(item => item.name);
     }
     return selectedRooms.join(',');

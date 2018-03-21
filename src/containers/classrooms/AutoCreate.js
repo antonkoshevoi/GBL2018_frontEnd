@@ -13,9 +13,14 @@ import {
   selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination,
   selectRecords
 } from "../../redux/classrooms/selectors";
-import {getRecordsPublic, getSingleRecord} from "../../redux/classrooms/actions";
+import {
+  getRecordsPublic, getSingleAutoClassRecord, getSingleRecord,
+  resetUpdateAutoClass
+} from "../../redux/classrooms/actions";
 import HasPermission from "../middlewares/HasPermission";
 import EditClassroomModal from "./modals/EditClassroomModal";
+import EditAutoClassroomModal from "./modals/EditAutoClassroomModal";
+import {getSchoolTeachers} from "../../redux/schools/actions";
 
 
 class AutoCreate extends Component {
@@ -25,6 +30,7 @@ class AutoCreate extends Component {
   };
 
   componentDidMount() {
+    this.props.resetUpdateAutoClass();
     this.props.getPublicClassrooms();
   }
 
@@ -46,6 +52,7 @@ class AutoCreate extends Component {
   }
 
   _onCreate () {
+    this.props.getPublicClassrooms();
     const { pagination } = this.props;
     const page = pagination.get('page');
 
@@ -69,6 +76,7 @@ class AutoCreate extends Component {
   };
   _editRecord (id) {
     this.props.getSingleRecord(id);
+    this.props.getSchoolTeachers();
   }
 
   _openEditDialog = () => {
@@ -97,7 +105,6 @@ class AutoCreate extends Component {
 
   _renderRecords(){
     const records = this.props.classroomRecords;
-    console.log(records);
     const loading = this.props.getParentPublicClassroom.get('loading');
 
     if (!loading && records.size === 0) {
@@ -105,7 +112,7 @@ class AutoCreate extends Component {
         <tr>
           <td>
             <div className="table-message">
-              <h2>Classrooms Not Found...</h2>
+              <h2>Auto Classrooms Not Found...</h2>
             </div>
           </td>
         </tr>
@@ -115,16 +122,16 @@ class AutoCreate extends Component {
     return records.map((record, key) => (
       <Row index={key} key={key}>
         <Td first={true} width='100px'>{key + 1}</Td>
-        <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
-        <Td width='132px'>{record.getIn(['course', 'publisher','name'])}</Td>
-        <Td width='132px'>{'weekly'}</Td>
-        <Td width='132px'>{record.get('crmEnrollmentEndDate')}</Td>
-        <Td width='132px'>{record.get('maxStudent')}</Td>
+        <Td width='132px'>{record.getIn(['courses', 'crsTitle'])}</Td>
+        <Td width='132px'>{record.getIn(['courses', 'publisher','name'])}</Td>
+        <Td width='132px'>{record.getIn(['courses', 'autoCreateTask', 'frequency', 'name'])}</Td>
+        <Td width='132px'></Td>
+        <Td width='132px'>{record.getIn(['courses', 'autoCreateTask', 'maxStudent'])}</Td>
         <Td width='150px'>
           <HasPermission permissions={[
             '[ClassRooms][Update][Any]'
           ]}>
-            <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
+            <EditButton onClick={(id) => { this._editRecord(id) }} id={record.getIn(['courses','crsId'])}/>
           </HasPermission>
         </Td>
       </Row>
@@ -150,7 +157,7 @@ class AutoCreate extends Component {
               <Th name='name' width='132px'>Course name </Th>
               <Th name='publisher' width='132px'>Publisher</Th>
               <Th name='frequency' width='132px'>Frequency</Th>
-              <Th name='rollover' width='132px'>Roll over day time</Th>
+              <Th name='rollover' width='132px'>Rollover day time</Th>
               <Th name='max' width='132px'>Max students</Th>
               <Th name='action' width='150px'>Create now</Th>
             </HeadRow>
@@ -164,7 +171,7 @@ class AutoCreate extends Component {
             </Tbody>
           </Table>
         </div>
-        <EditClassroomModal
+        <EditAutoClassroomModal
           isPublic={true}
           isOpen={editModalIsOpen}
           onClose={() => { this._closeEditDialog() }}
@@ -186,7 +193,9 @@ AutoCreate = connect(
   }),
   (dispatch) => ({
     getPublicClassrooms: () => {dispatch(getRecordsPublic())},
-    getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
+    getSingleRecord: (id, params = {}) => { dispatch(getSingleAutoClassRecord(id, params)) },
+    getSchoolTeachers: () => {dispatch(getSchoolTeachers())},
+    resetUpdateAutoClass: () => {dispatch(resetUpdateAutoClass())}
 
   }),
 )(AutoCreate);
