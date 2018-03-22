@@ -146,6 +146,56 @@ class EditAutoClassroomModal extends Component {
     ));
   }
 
+  _renderRollOverDay(){
+    const {taskConfig} = this.state;
+    const days = Array.from(Array(28).keys());
+    return (
+        <div>
+        {taskConfig.autoCreateTask.frequencyId == 1 &&
+
+        <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
+          <FormControl>
+            <InputLabel htmlFor="age-simple">Rollover day</InputLabel>
+            <Select
+              name="rollOver"
+              value={taskConfig.autoCreateTask.rollOver || ''}
+              onChange={this._handleInputChange}
+            >
+              <MenuItem value={'Monday'}>Monday</MenuItem>
+              <MenuItem value={'Tuesday'}>Tuesday</MenuItem>
+              <MenuItem value={'Wednesday'}>Wednesday</MenuItem>
+              <MenuItem value={'Thursday'}>Thursday</MenuItem>
+              <MenuItem value={'Friday'}>Friday</MenuItem>
+              <MenuItem value={'Saturday'}>Saturday</MenuItem>
+              <MenuItem value={'Sunday'}>Sunday</MenuItem>
+            </Select>
+          </FormControl>
+        </FormControl>
+
+        }
+
+          {taskConfig.autoCreateTask.frequencyId == 2 &&
+          <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
+            <FormControl>
+              <InputLabel htmlFor="age-simple">Rollover day number</InputLabel>
+              <Select
+                name="rollOver"
+                value={+taskConfig.autoCreateTask.rollOver || ''}
+                onChange={this._handleInputChange}
+              >
+                { days.map( (index,value) => (<MenuItem key={index+1} value={index+1}>{index+1}</MenuItem>)) }
+
+              </Select>
+            </FormControl>
+          </FormControl>
+          }
+
+        </div>
+
+  )
+
+  }
+
 
   render() {
     const schoolTeachersSuccess = this.props.getSchoolTeacherRequest.get('success');
@@ -155,8 +205,6 @@ class EditAutoClassroomModal extends Component {
     const errors = updateRequest.get('errors');
     const {taskConfig} = this.state;
 
-    console.log(taskConfig);
-    console.log('errors', errors);
     return (
       <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
@@ -198,6 +246,7 @@ class EditAutoClassroomModal extends Component {
                   {errors && errors.get('autoCreateTask.frequencyId') &&
                   <FormHelperText error>{errors.get('autoCreateTask.frequencyId').get(0)}</FormHelperText>}
                 </FormControl>
+                {this._renderRollOverDay()}
                 <FormControl aria-describedby='maxStudent-error-text' className='full-width form-inputs'>
                   <InputLabel htmlFor='maxStudent-error'>Max Students</InputLabel>
                   <Input
@@ -221,16 +270,6 @@ class EditAutoClassroomModal extends Component {
                     onChange={this._handleInputChange}/>
                   {errors && errors.get('autoCreateTask.courseDuration') &&
                   <FormHelperText error>{errors.get('autoCreateTask.courseDuration').get(0)}</FormHelperText>}
-                </FormControl>
-                <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
-                  <DatePicker
-                    name='rollOver'
-                    placeholder="Rollover day time"
-                    value={taskConfig.autoCreateTask.rollOver || null}
-                    onChange={ (e) => this._handleDateChange(e,'rollOver')}
-                  />
-                  {errors && errors.get('autoCreateTask.rollOver') &&
-                  <FormHelperText error>{errors.get('autoCreateTask.rollOver').get(0)}</FormHelperText>}
                 </FormControl>
                 <FormControl className='full-width form-inputs'>
                   <InputLabel htmlFor='name-error'>Teacher</InputLabel>
