@@ -22,6 +22,7 @@ import ClassroomForm from "../forms/ClassroomForm";
 import ImageCropper from "../../../components/ui/ImageCropper";
 import {selectGetSchoolTeachersRequest} from "../../../redux/schools/selectors";
 import {getSchoolTeachers} from "../../../redux/schools/actions";
+import DatePicker from "../../../components/ui/DatePicker";
 
 class EditAutoClassroomModal extends Component {
   static propTypes = {
@@ -43,6 +44,7 @@ class EditAutoClassroomModal extends Component {
           frequencyId: 1,
           courseDuration: 150,
           maxStudent: 100,
+          rollOver: null,
         }
       }
     };
@@ -88,6 +90,7 @@ class EditAutoClassroomModal extends Component {
           frequencyId: 1,
           courseDuration: 150,
           maxStudent: 100,
+          rollOver: null,
         }
       }
     });
@@ -112,6 +115,18 @@ class EditAutoClassroomModal extends Component {
       }
     });
   };
+
+  _handleDateChange = (date,dateField) => {
+    this.setState({
+      taskConfig: {
+        ...this.state.taskConfig,
+        autoCreateTask: {
+          ...this.state.taskConfig.autoCreateTask,
+          [dateField]: date,
+        }
+      }
+    });
+  }
 
   _onSubmit(e) {
     e.preventDefault();
@@ -206,6 +221,16 @@ class EditAutoClassroomModal extends Component {
                     onChange={this._handleInputChange}/>
                   {errors && errors.get('autoCreateTask.courseDuration') &&
                   <FormHelperText error>{errors.get('autoCreateTask.courseDuration').get(0)}</FormHelperText>}
+                </FormControl>
+                <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
+                  <DatePicker
+                    name='rollOver'
+                    placeholder="Rollover day time"
+                    value={taskConfig.autoCreateTask.rollOver || null}
+                    onChange={ (e) => this._handleDateChange(e,'rollOver')}
+                  />
+                  {errors && errors.get('autoCreateTask.rollOver') &&
+                  <FormHelperText error>{errors.get('autoCreateTask.rollOver').get(0)}</FormHelperText>}
                 </FormControl>
                 <FormControl className='full-width form-inputs'>
                   <InputLabel htmlFor='name-error'>Teacher</InputLabel>

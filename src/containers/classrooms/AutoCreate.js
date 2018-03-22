@@ -125,7 +125,7 @@ class AutoCreate extends Component {
         <Td width='132px'>{record.getIn(['courses', 'crsTitle'])}</Td>
         <Td width='132px'>{record.getIn(['courses', 'publisher','name'])}</Td>
         <Td width='132px'>{record.getIn(['courses', 'autoCreateTask', 'frequency', 'name'])}</Td>
-        <Td width='132px'></Td>
+        <Td width='132px'>{record.getIn(['courses', 'autoCreateTask', 'rollOver'])}</Td>
         <Td width='132px'>{record.getIn(['courses', 'autoCreateTask', 'maxStudent'])}</Td>
         <Td width='150px'>
           <HasPermission permissions={[
