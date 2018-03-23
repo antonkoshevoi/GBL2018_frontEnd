@@ -18,7 +18,6 @@ import {
   resetUpdateAutoClass
 } from "../../redux/classrooms/actions";
 import HasPermission from "../middlewares/HasPermission";
-import EditClassroomModal from "./modals/EditClassroomModal";
 import EditAutoClassroomModal from "./modals/EditAutoClassroomModal";
 import {getSchoolTeachers} from "../../redux/schools/actions";
 

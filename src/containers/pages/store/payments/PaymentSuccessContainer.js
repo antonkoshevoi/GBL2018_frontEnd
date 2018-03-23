@@ -73,61 +73,6 @@ class PaymentSuccessContainer extends Component {
                             </h3>
                         </div>
 
-                        {!isLoggedIn &&
-                        <div className="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2 m--full-height" id="m_login">
-                                <div className="m-grid__item m-grid__item--fluid	m-login__wrapper">
-                                    <div className="m-login__container">
-                                    <div className="paymentLoginBlock">
-                                        <p className="text-center">For see your transaction please log in</p>
-
-                                        <div className="m-login__signin">
-                                            <div className="m-login__head">
-                                                <h3 className="m-login__title">Sign In </h3>
-                                            </div>
-                                            <div className="m-login__form m-form" action="">
-                                                <div className="form-group m-form__group">
-                                                    <input className="form-control m-input" type="text" placeholder="Username" name="username" autoComplete="off" value={this.state.username} onChange={this._handleUsernameChange}/>
-                                                    {(errors.errors !== undefined && errors.errors.username) && <div id="username-error" className="form-control-feedback  text-center error">{errors.errors.username[0]}</div>}
-                                                </div>
-                                                <div className="form-group m-form__group">
-                                                    <input className="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this._handlePasswordChange}/>
-                                                    {(errors.errors !== undefined && errors.errors.password) && <div id="password-error" className="form-control-feedback  text-center error">{errors.errors.password[0]}</div>}
-                                                </div>
-                                                <div className="row m-login__form-sub">
-                                                    <div className="col m--align-left m-login__form-left">
-                                                        <FormControlLabel
-                                                            control={<Checkbox
-                                                                checked={this.state.remember}
-                                                                onChange={this._handleRememberChange}
-                                                                value={''}
-                                                            />}
-                                                            label="Remember me"
-                                                        />
-                                                    </div>
-                                                    <div className="col m--align-right m-login__form-right m--hide">
-                                                        <a href="javascript:;" id="m_login_forget_password" className="m-link">Forget Password ?</a>
-                                                    </div>
-                                                </div>
-                                                <div className="m-login__form-action">
-                                                    <Button id="m_login_signin_submit"  variant="raised" color="primary" onClick={() => { this._login() }}
-                                                            className="btn  m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primary">
-                                                        <span>Sign In</span>
-                                                        {loading &&
-                                                        <CircularProgress color="primary"/>
-                                                        }
-                                                    </Button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-
-                        {isLoggedIn &&
-                            <ServiceList/>
-                        }
 
                     </div>
                 </div>

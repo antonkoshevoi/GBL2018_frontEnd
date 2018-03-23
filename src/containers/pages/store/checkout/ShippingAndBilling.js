@@ -22,6 +22,8 @@ import {
 import {selectGetCartRecordsRequest, setShippingAndBillingRequest} from "../../../../redux/store/selectors";
 import {resetSetShippingAndBilling, setShippingAndBilling} from "../../../../redux/store/actions";
 import Loader from "../../../../components/layouts/Loader";
+import {getCountries} from "../../../../redux/countries/actions";
+import {selectRecords} from "../../../../redux/countries/selectors";
 
 
 class ShippingAndBilling extends Component {
@@ -33,6 +35,10 @@ class ShippingAndBilling extends Component {
     shippingAddress: {},
     sameShipping: false,
   };
+
+  componentDidMount(){
+    this.props.countries();
+  }
 
   _handleForm(form, name) {
     const {sameShipping} = this.state;
@@ -198,11 +204,13 @@ class ShippingAndBilling extends Component {
 ShippingAndBilling = connect(
   (state) => ({
     shippingAndBillingRequest: setShippingAndBillingRequest(state),
+    countriesRequest:  selectRecords(state)
 
   }),
   (dispatch) => ({
     setShippingAndBillingData: (data) => dispatch(setShippingAndBilling(data)),
-    resetShippingAndBillingRequest: () => dispatch(resetSetShippingAndBilling())
+    resetShippingAndBillingRequest: () => dispatch(resetSetShippingAndBilling()),
+    countries: () => dispatch(getCountries())
   }),
 )(ShippingAndBilling);
 

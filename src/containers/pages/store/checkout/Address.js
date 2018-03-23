@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import '../../../../styles/widgets.css';
 import PropTypes from 'prop-types';
+import {selectRecords} from "../../../../redux/countries/selectors";
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import {FormControl, InputLabel, MenuItem, Select} from "material-ui";
 
 
 
-export default class Address extends Component {
+
+
+class Address extends Component {
 
   static propTypes = {
     form: PropTypes.object.isRequired,
@@ -36,8 +42,8 @@ export default class Address extends Component {
   }
 
   render() {
-    const {title,errors,name,disabled,form} = this.props;
-
+    const {title,errors,name,disabled,form, countries} = this.props;
+    const countriesList = countries.toJS();
     return (
       <div className='col-sm-12'>
         <div className='col-xs-12'>
@@ -145,22 +151,26 @@ export default class Address extends Component {
             <div className="form-group m-form__group row">
               <label className="col-form-label col-lg-3 col-sm-12">Country</label>
               <div className="col-lg-8 col-md-9 col-sm-12">
-                <input
-                  disabled={disabled}
-                  required
-                  value={form.country || ''}
-                  name='country'
-                  onChange={(e) => {
-                    this._handleInputChange(e)
-                  }}
-                  type='text'
-                  className='form-control m-input m-input--air '
-                  placeholder=''/>
-                <div className='form-control-feedback'>
-                  {errors && errors.get(`${name}.country`) &&
-                  <div className="form-control-feedback text-center error">{errors.get(`${name}.country`).get(0)}</div>}
-                </div>
+                <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
+                  <FormControl>
+                    <Select
+                      disabled={disabled}
+                      name="country"
+                      value={form.country || ''}
+                      onChange={(e) => this._handleInputChange(e)}
+                    >
+                      {countriesList.map((item,index) => <MenuItem key={index} value={item.id}>{item.name}</MenuItem>)}
+                    </Select>
+
+                  </FormControl>
+                  <div className='form-control-feedback'>
+                    {errors && errors.get(`${name}.country`) &&
+                    <div className="form-control-feedback text-center error">{errors.get(`${name}.country`).get(0)}</div>}
+                  </div>
+                </FormControl>
               </div>
+
+
             </div>
 
           </address>
@@ -169,3 +179,15 @@ export default class Address extends Component {
     );
   }
 }
+
+Address = connect(
+  (state) => ({
+    countries:  selectRecords(state)
+
+  }),
+  (dispatch) => ({
+  }),
+)(Address);
+
+export default withRouter(Address);
+
