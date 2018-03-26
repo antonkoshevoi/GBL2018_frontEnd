@@ -2,7 +2,9 @@ import Immutable from 'immutable';
 import {
   CREATE_CHECK_PAYMENT, CREATE_CHECK_PAYMENT_FAIL, CREATE_CHECK_PAYMENT_SUCCESS,
   CREATE_PAYPAL_PAYMENT, CREATE_PAYPAL_PAYMENT_FAIL, CREATE_PAYPAL_PAYMENT_SUCCESS,
-  EXECUTE_PAYPAL_PAYMENT, EXECUTE_PAYPAL_PAYMENT_FAIL, EXECUTE_PAYPAL_PAYMENT_SUCCESS
+  EXECUTE_PAYPAL_PAYMENT, EXECUTE_PAYPAL_PAYMENT_FAIL, EXECUTE_PAYPAL_PAYMENT_SUCCESS, GET_INVOICE, GET_INVOICE_FAIL,
+  GET_INVOICE_SUCCESS,
+  SET_PAY_TYPE
 } from './actions';
 
 const initialState = Immutable.fromJS({
@@ -22,10 +24,18 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false
   },
+  payMethod: null,
+  invoiceRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    data: undefined
+  },
+
 });
 
-export default function reducer (state = initialState, action) {
-  switch(action.type) {
+export default function reducer(state = initialState, action) {
+  switch (action.type) {
     /**
      * Create paypal payment
      */
@@ -91,6 +101,34 @@ export default function reducer (state = initialState, action) {
     case CREATE_CHECK_PAYMENT_FAIL:
       return state
         .set('createCheckPaymentRequest', state.get('createCheckPaymentRequest')
+          .set('loading', false)
+          .set('fail', true)
+        );
+
+    case SET_PAY_TYPE:
+      return state
+        .set('payMethod', action.data);
+
+    /**
+     * Create check payment
+     */
+    case GET_INVOICE:
+      return state
+        .set('invoiceRequest', state.get('invoiceRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)
+        );
+    case GET_INVOICE_SUCCESS:
+      return state
+        .set('invoiceRequest', state.get('invoiceRequest')
+          .set('success', true)
+          .set('loading', false)
+          .set('data', Immutable.fromJS(action.result.data))
+        );
+    case GET_INVOICE_FAIL:
+      return state
+        .set('invoiceRequest', state.get('invoiceRequest')
           .set('loading', false)
           .set('fail', true)
         );

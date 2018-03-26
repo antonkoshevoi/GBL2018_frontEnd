@@ -1116,18 +1116,6 @@ address.signUpOptional {
     height: 60px;
 }
 
-.g-stepper svg circle {
-    stroke-width: 1px;
-    stroke: #08c;
-    fill: #0000;
-    cx: 12;
-    cy: 12;
-    r: 9;
-}
-
-.g-stepper svg text {
-    fill: #08c;
-}
 
 .g-stepper > div > div:last-child {
     top: 30px;

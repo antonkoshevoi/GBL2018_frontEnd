@@ -24,6 +24,7 @@ import {resetSetShippingAndBilling, setShippingAndBilling} from "../../../../red
 import Loader from "../../../../components/layouts/Loader";
 import {getCountries} from "../../../../redux/countries/actions";
 import {selectRecords} from "../../../../redux/countries/selectors";
+import {selectPaymentMethod} from "../../../../redux/payments/selectors";
 
 
 class ShippingAndBilling extends Component {
@@ -36,7 +37,7 @@ class ShippingAndBilling extends Component {
     sameShipping: false,
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.countries();
   }
 
@@ -49,14 +50,14 @@ class ShippingAndBilling extends Component {
       }
     });
 
-    if (sameShipping ) {
-      switch (name){
+    if (sameShipping) {
+      switch (name) {
         case 'billingContact':
-          this._setSameShipping('shippingContact',form);
+          this._setSameShipping('shippingContact', form);
           break;
 
         case 'billingAddress':
-          this._setSameShipping('shippingAddress',form);
+          this._setSameShipping('shippingAddress', form);
           break;
       }
     }
@@ -70,14 +71,12 @@ class ShippingAndBilling extends Component {
       sameShipping: checked,
     });
 
-    this._setSameShipping('shippingContact',this.state.billingContact);
-    this._setSameShipping('shippingAddress',this.state.billingAddress);
+    this._setSameShipping('shippingContact', this.state.billingContact);
+    this._setSameShipping('shippingAddress', this.state.billingAddress);
 
   };
 
-  _setSameShipping = (name,form) => {
-    console.log('name',name);
-    console.log('form',form);
+  _setSameShipping = (name, form) => {
     this.setState({
       [name]: form
     });
@@ -86,6 +85,11 @@ class ShippingAndBilling extends Component {
   _submitShippingAndBilling = () => {
     this.props.setShippingAndBillingData(this.state);
   };
+
+  _renderType() {
+    const payMethod = this.props.payMethod;
+    return (<div>{payMethod}</div>)
+  }
 
   _renderSuccess() {
     return (
@@ -96,7 +100,7 @@ class ShippingAndBilling extends Component {
               color: '#7ac943',
               fontSize: '100px'
             }}/>
-            Your shipping and billing info is saved. <br/> Creating PayPal request ...
+            Your shipping and billing info is saved. <br/> Creating {this._renderType()} request ...
           </h3>
         </div>
         <div className="row d-flex justify-content-center">
@@ -114,10 +118,10 @@ class ShippingAndBilling extends Component {
     const success = shippingAndBillingRequest.get('success');
     const errors = shippingAndBillingRequest.get('errors');
 
-    if (success){
+    if (success) {
       this.setState({
         ...this.state,
-        successRequest:success
+        successRequest: success
       });
       this.props.resetShippingAndBillingRequest();
       this.props.onDataSaved();
@@ -204,7 +208,8 @@ class ShippingAndBilling extends Component {
 ShippingAndBilling = connect(
   (state) => ({
     shippingAndBillingRequest: setShippingAndBillingRequest(state),
-    countriesRequest:  selectRecords(state)
+    countriesRequest: selectRecords(state),
+    payMethod: selectPaymentMethod(state)
 
   }),
   (dispatch) => ({

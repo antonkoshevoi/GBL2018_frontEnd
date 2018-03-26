@@ -24,3 +24,20 @@ export const selectCreateCheckPaymentRequest = createSelector(
   selectStoreDomain,
   (subState) => subState.get('createCheckPaymentRequest')
 );
+
+
+/**
+ * Pay method
+ */
+export const selectPaymentMethod = createSelector(
+  selectStoreDomain,
+  (subState) => subState.get('payMethod')
+);
+
+/**
+ * Invoice
+ */
+export const invoiceRequest = createSelector(
+  selectStoreDomain,
+  (subState) => subState.get('invoiceRequest')
+);

@@ -11,9 +11,9 @@ import {withRouter} from 'react-router-dom';
 import {push} from 'react-router-redux';
 import {
   selectCreateCheckPaymentRequest,
-  selectCreatePayPalPaymentRequest
+  selectCreatePayPalPaymentRequest, selectPaymentMethod
 } from '../../../../redux/payments/selectors';
-import {createCheckPayment, createPayPalPayment} from '../../../../redux/payments/actions';
+import {createCheckPayment, createPayPalPayment, setPayType} from '../../../../redux/payments/actions';
 import {Divider, Step, StepLabel, Stepper} from 'material-ui';
 import Button from 'material-ui/Button';
 import {withStyles} from 'material-ui/styles';
@@ -27,6 +27,10 @@ import Card from "../../../../components/ui/Card";
 import ShippingAndBilling from "./ShippingAndBilling";
 import PaymentSuccessContainer from "../payments/PaymentSuccessContainer";
 
+const styles = () => ({
+    iconContainer:{
+    }
+});
 
 class Checkout extends Component {
 
@@ -38,12 +42,9 @@ class Checkout extends Component {
 
   };
 
-  componentDidMount() {
-    const {cartRecords} = this.props;
-    if (cartRecords.size === 0) {
-      this._getCartRecords();
-      this._calculateSum(cartRecords.toJS());
-    }
+
+
+  componentWillMount() {
     const {step} = this.props.match.params;
     if (step) {
       this.setState({stepIndex: +step});
@@ -55,34 +56,11 @@ class Checkout extends Component {
     this._handleCheckPaymentCreated(nextProps);
     this._handleCheckPaymentFailed(nextProps);
 
-    if (this.props.cartRecords !== nextProps.cartRecords) {
-      this._calculateSum(nextProps.cartRecords.toJS());
-    }
-  }
-
-  _getCartRecords() {
-    this.props.getCartRecords();
-  }
-
-  _calculateSum(data) {
-    this.props.calculateSum(data);
-  }
-
-  _stepShippingAndBilling() {
-    // const {payMethod} = this.state;
-    // switch (payMethod) {
-    //   case 'PayPal':
-    //     console.log('paypal');
-    //     break;
-    // }
-  }
-
-  _handleShippingAndBilling(data) {
 
   }
 
-  _stepBilling = (method) => {
-    const payMethod = method ? method : this.state.payMethod;
+  _stepBilling = () => {
+    const payMethod = this.props.payMethod;
 
     switch (payMethod) {
       case 'Check':
@@ -94,10 +72,6 @@ class Checkout extends Component {
         break;
     }
 
-    this.setState({
-      ...this.state,
-      shippingBillingSaved: true,
-    })
   };
 
   handleNext = () => {
@@ -130,9 +104,10 @@ class Checkout extends Component {
 
   _startProcessPayPal = () => {
 
-    this.setState({payMethod: 'PayPal'});
+    this.props.setPayMethod('PayPal');
 
-    this._stepBilling('PayPal');
+
+    this._stepBilling();
   };
 
   _handlePayPalPaymentCreated(nextProps) {
@@ -147,10 +122,8 @@ class Checkout extends Component {
 
 
   _processCheck = () => {
-    this.setState({payMethod: 'Check'});
-
+    this.props.setPayMethod('Check');
     this.handleNext();
-
   };
 
   /**
@@ -166,7 +139,8 @@ class Checkout extends Component {
     const nextSuccess = nextProps.createCheckPaymentRequest.get('success');
 
     if (!success && nextSuccess) {
-      this.props.goToPendingPage();
+      console.log('_handleCheckPaymentCreated');
+      this.handleNext();
     }
   }
 
@@ -191,6 +165,8 @@ class Checkout extends Component {
     } = this.props;
     const loadingCarts = cartRecordsRequest.get('loading');
     const successCarts = cartRecordsRequest.get('success');
+    const { classes } = this.props;
+
     return (
       <div>
         <div className='row d-flex justify-content-center'>
@@ -202,7 +178,7 @@ class Checkout extends Component {
                   <StepLabel>Payments Options</StepLabel>
                 </Step>
                 <Step>
-                  <StepLabel>Shipping and Biling</StepLabel>
+                  <StepLabel classes={{...classes}}>Shipping and Billing</StepLabel>
                 </Step>
                 <Step>
                   <StepLabel>Confirmation</StepLabel>
@@ -214,12 +190,6 @@ class Checkout extends Component {
                     //(temp) TODO need extract to component
                     <div className="row d-flex justify-content-center">
                       <div className='col-10'>
-                        {successCarts &&
-                        <CartItems sum={cartRecordsSum} data={cartRecords.toJS()}/>}
-                        {loadingCarts && !successCarts &&
-                        <div className="row d-flex justify-content-center">
-                          <CircularProgress color="primary" size={80}/>
-                        </div>}
                         <br/>
                         <PaymentMethods methods={[
                           {
@@ -305,7 +275,8 @@ Checkout = connect(
     cartRecords: selectCartRecords(state),
     cartRecordsSum: selectCartRecordsSum(state),
     createPayPalPaymentRequest: selectCreatePayPalPaymentRequest(state),
-    createCheckPaymentRequest: selectCreateCheckPaymentRequest(state)
+    createCheckPaymentRequest: selectCreateCheckPaymentRequest(state),
+    payMethod: selectPaymentMethod(state)
   }),
   (dispatch) => ({
     getCartRecords: () => {
@@ -323,13 +294,13 @@ Checkout = connect(
     goToSuccessPage: () => {
       dispatch(push('/shopping/checkout/2'))
     },
-    goToPendingPage: () => {
-      dispatch(push('/payments/pending'))
-    },
     goToFailPage: () => {
       dispatch(push('/payments/fail'))
     },
+    setPayMethod: (data) => {
+      dispatch(setPayType(data))
+    }
   })
-)(Checkout);
+)(withStyles(styles)(Checkout));
 
 export default withRouter(translate('Checkout')(Checkout));

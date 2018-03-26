@@ -7,45 +7,30 @@ class CartItems extends Component {
     data: PropTypes.array.isRequired
   };
 
-  _getTotalSum() {
-    const {data} = this.props;
-
-    let total = 0;
-    for (let i = 0; i < data.length; i++) {
-      if (isNaN(data[i].storeItem.price)) {
-        continue;
-      }
-      total += (Number(data[i].storeItem.price) * Number(data[i].count));
-    }
-    return total;
-  }
-
   _renderItems() {
     const {data} = this.props;
-
-    return data.map((item, key) => (
+    const items = data.get('items');
+    console.log('items.toJS()',items.toJS());
+    return items.map((item, key) => (
       <div key={key} className="m-widget4__item">
-        <div className="m-widget__img m-widget4__img--logo">
-          <img src={item.storeItem.thumbnail} width={40} alt="cart product"/>
-        </div>
+
         <div className="m-widget4__info">
 					<span className="m-widget4__title">
-            {item.storeItem.title}
+            {item.get('title')}
 					</span> <br/>
           <span className="m-widget4__sub">
-            {item.count} items
+            {item.get('quantity')} items
 					</span>
         </div>
         <span className="m-widget4__ext">
-            <span className="m-widget4__number m--font-danger">+${item.storeItem.price * item.count}</span>
+            <span className="m-widget4__number m--font-danger">${item.get('total_price')}</span>
           </span>
       </div>
     ));
   }
 
   render() {
-    const {sum, data} = this.props;
-    const {invoiceNo} = data.shift();
+    const {data} = this.props;
 
     return (
       <div className="m-portlet m-portlet--bordered-semi  cartItems">
@@ -62,11 +47,11 @@ class CartItems extends Component {
           <div className="m-widget25">
             <Typography variant="title" gutterBottom>
             </Typography>
-            <span className="invoice-title">Yor invoice #{invoiceNo} Total ${sum}</span>
+            <span className="invoice-title">Yor invoice #{data.get('invoice_no')} Total ${data.get('total')}</span>
           </div>
-          {/*<div className="m-widget4">*/}
-          {/*{this._renderItems()}*/}
-          {/*</div>*/}
+          <div className="m-widget4 col-md-7 m-auto">
+          {this._renderItems()}
+          </div>
         </div>
       </div>
     );
