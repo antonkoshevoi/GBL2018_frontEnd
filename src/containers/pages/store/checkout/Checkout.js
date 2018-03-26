@@ -166,6 +166,9 @@ class Checkout extends Component {
     const loadingCarts = cartRecordsRequest.get('loading');
     const successCarts = cartRecordsRequest.get('success');
     const { classes } = this.props;
+    console.log(cartRecords.toJS());
+    const item = cartRecords.toJS().shift();
+    console.log(item);
 
     return (
       <div>
@@ -190,6 +193,18 @@ class Checkout extends Component {
                     //(temp) TODO need extract to component
                     <div className="row d-flex justify-content-center">
                       <div className='col-10'>
+                        {successCarts &&
+                        <div className="m-portlet__body">
+                          <div className="m-widget25">
+                            <span className="invoice-title">Yor invoice {item.invoiceNo} Total ${cartRecordsSum}</span>
+                          </div>
+                        </div>
+                        }
+
+                        {loadingCarts && !successCarts &&
+                        <div className="row d-flex justify-content-center">
+                          <CircularProgress color="primary" size={80}/>
+                        </div>}
                         <br/>
                         <PaymentMethods methods={[
                           {
