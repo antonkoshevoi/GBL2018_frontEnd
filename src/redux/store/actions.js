@@ -42,7 +42,13 @@ export const SET_SHIPPING_BILLING_INFO = '[Store] SET_SHIPPING_BILLING_INFO';
 export const SET_SHIPPING_BILLING_INFO_SUCCESS = '[Store] SET_SHIPPING_BILLING_INFO_SUCCESS';
 export const SET_SHIPPING_BILLING_INFO_FAIL = '[Store] SET_SHIPPING_BILLING_INFO_FAIL';
 
+export const GET_SHIPPING_BILLING_INFO = '[Store] GET_SHIPPING_BILLING_INFO';
+export const GET_SHIPPING_BILLING_INFO_SUCCESS = '[Store] GET_SHIPPING_BILLING_INFO_SUCCESS';
+export const GET_SHIPPING_BILLING_INFO_FAIL = '[Store] GET_SHIPPING_BILLING_INFO_FAIL';
+
 export const RESET_SET_SHIPPING_BILLING_INFO = '[Store] RESET_SET_SHIPPING_BILLING_INFO';
+
+export const SAVE_CHECKOUT_INFO = '[Store] SAVE_CHECKOUT_INFO';
 
 export function getRecords(params = {}) {
   return {
@@ -146,20 +152,20 @@ export function updateShoppingCart(data) {
 export function setItemQuantity(data) {
   return {
     types: [UPDATE_ITEM_QUANTITY, UPDATE_ITEM_QUANTITY_SUCCESS, UPDATE_ITEM_QUANTITY_FAIL],
-    promise: (apiClient) => apiClient.post(`store/items/${data.id}`,data)
+    promise: (apiClient) => apiClient.post(`store/items/${data.id}`, data)
   };
 }
 
 
-export function calculateCartSum(data = []) {
+export function calculateCartSum(items = []) {
 
-  let total = 0;
-  for (let i = 0; i < data.length; i++) {
-    if (isNaN(data[i].storeItem.price)) {
-      continue;
-    }
-    total += (Number(data[i].storeItem.price) * Number(data[i].count));
-  }
+  const total = items.reduce((total, item) => {
+    if (item.storeItem && !isNaN(item.storeItem.discountPrice)) {
+         return total + parseFloat(item.storeItem.discountPrice).toFixed(2) * parseInt(item.count);
+
+      }
+    return total;
+  },0);
 
   return {
     type: CALCULATE_CART_SUM,
@@ -171,7 +177,22 @@ export function calculateCartSum(data = []) {
 export function setShippingAndBilling(data) {
   return {
     types: [SET_SHIPPING_BILLING_INFO, SET_SHIPPING_BILLING_INFO_SUCCESS, SET_SHIPPING_BILLING_INFO_FAIL],
-    promise: (apiClient) => apiClient.post('checkout/address', data)
+    promise: (apiClient) => apiClient.post('checkout/address', data),
+    payload: data,
+  };
+}
+
+export function setToStoreContact(data) {
+  return {
+    type: SAVE_CHECKOUT_INFO,
+    data
+  };
+}
+
+export function getShippingAndBilling(data) {
+  return {
+    types: [GET_SHIPPING_BILLING_INFO, GET_SHIPPING_BILLING_INFO_SUCCESS, GET_SHIPPING_BILLING_INFO_FAIL],
+    promise: (apiClient) => apiClient.get('checkout/address', data)
   };
 }
 

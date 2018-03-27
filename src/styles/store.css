@@ -128,6 +128,7 @@
     font-weight: 500;
     margin-top: -15px;
     text-align: right;
+    position: relative;
 }
 
 .cardItem .productPrice .discount {
@@ -383,6 +384,13 @@ button .discount > span {
     color: #7b7e8a!important;
     font-weight: 600;
     display: block;
+    position: relative;
+}
+
+.shoppingCartTable .productLabel .discount::after{
+    top:24%;
+    overflow: hidden;
+    width: 50%;
 }
 .shoppingCartTable .productLink {
     font-size: 1rem;

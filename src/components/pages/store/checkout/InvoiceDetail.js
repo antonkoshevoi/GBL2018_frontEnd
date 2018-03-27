@@ -4,21 +4,19 @@ import Typography from 'material-ui/Typography';
 
 class InvoiceDetail extends Component {
   static propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.object.isRequired
   };
 
   _renderAddress(prefix) {
     const {data} = this.props;
     const address = ['address_1', 'address_2', 'country', 'region', 'city', 'zip'];
-    return address.map(item =>
+    return address.map((item, index) =>
       (
-        <Typography variant="subheading" gutterBottom>
+        <Typography key={index} variant="subheading" gutterBottom>
           {data.get(`${prefix}_${item}`)}
         </Typography>
       )
     );
-
-
   }
 
   render() {

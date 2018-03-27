@@ -20,9 +20,6 @@ import {debounce} from "../../../../helpers/utils";
 class ShoppingCart extends Component {
 
 
-
-
-
   componentDidMount() {
     const { records } = this.props;
 
@@ -106,7 +103,7 @@ class ShoppingCart extends Component {
 }
 
 ShoppingCart.propTypes = {
-  preview: PropTypes.boolean
+  preview: PropTypes.bool
 };
 
 ShoppingCart.defaultProps = {

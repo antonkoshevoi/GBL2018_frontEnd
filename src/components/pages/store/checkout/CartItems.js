@@ -4,13 +4,12 @@ import Typography from 'material-ui/Typography';
 
 class CartItems extends Component {
   static propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.object.isRequired
   };
 
   _renderItems() {
     const {data} = this.props;
     const items = data.get('items');
-    console.log('items.toJS()',items.toJS());
     return items.map((item, key) => (
       <div key={key} className="m-widget4__item">
 
@@ -30,24 +29,13 @@ class CartItems extends Component {
   }
 
   render() {
-    const {data} = this.props;
-
     return (
       <div className="m-portlet m-portlet--bordered-semi  cartItems">
-        <div className="m-portlet__head m--hide">
-          <div className="m-portlet__head-caption">
-            <div className="m-portlet__head-title">
-              <h3 className="m-portlet__head-text">
-                Items
-              </h3>
-            </div>
-          </div>
-        </div>
         <div className="m-portlet__body">
           <div className="m-widget25">
             <Typography variant="title" gutterBottom>
             </Typography>
-            <span className="invoice-title">Yor invoice #{data.get('invoice_no')} Total ${data.get('total')}</span>
+            <span className="invoice-title">Order details</span>
           </div>
           <div className="m-widget4 col-md-7 m-auto">
           {this._renderItems()}

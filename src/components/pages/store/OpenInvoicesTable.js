@@ -134,13 +134,24 @@ class OpenInvoicesTable extends Component {
 
           </Td>
           <Td width='100px'>
+            {/*<span className="productPrice productLabel">*/}
+              {/*{'$' + parseInt(item.storeItem.price).toFixed(2)}*/}
+            {/*</span>*/}
             <span className="productPrice productLabel">
-              {'$' + parseInt(item.storeItem.price).toFixed(2)}
+              {item.storeItem.discount != 0 &&
+             <span>${parseFloat(item.storeItem.price).toFixed(2)}
+              <span className="discount"></span>
+             </span>
+              }
+              <br/>
+              <div className="price productLabel">
+                ${parseFloat(item.storeItem.discountPrice).toFixed(2)}
+              </div>
             </span>
           </Td>
           <Td width='100px'>
             <span className="productPrice productLabel">
-              {'$' + parseInt(item.storeItem.price * item.count).toFixed(2)}
+              {'$' + parseFloat(item.storeItem.discountPrice * item.count).toFixed(2)}
             </span>
           </Td>
         </Row>
@@ -160,7 +171,7 @@ class OpenInvoicesTable extends Component {
               <div className="text-left d-inline-block">
                 <span>Total</span><br/>
                 <span className="productPrice">
-                {'$' + parseInt(sum).toFixed(2)}
+                {'$' + parseFloat(sum).toFixed(2)}
                 </span>
               </div>
             </div>
@@ -184,7 +195,7 @@ class OpenInvoicesTable extends Component {
             <div className="col-md-8">
               <div className="text-left d-inline-block  ">
                 <span className="productTaxPrice">
-                {'$' + parseInt(tax).toFixed(2)}
+                {'$' + parseFloat(tax).toFixed(2)}
                 </span>
               </div>
             </div>

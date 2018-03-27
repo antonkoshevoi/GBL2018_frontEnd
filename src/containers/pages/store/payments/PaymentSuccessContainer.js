@@ -8,7 +8,7 @@ import * as queryString from 'query-string';
 import {executePayPalPayment, getInvoice} from '../../../../redux/payments/actions';
 import Loader from '../../../../components/layouts/Loader';
 import {invoiceRequest, selectExecutePayPalPaymentRequest} from '../../../../redux/payments/selectors';
-import {Button, Checkbox, CircularProgress, FormControlLabel} from "material-ui";
+import {Button, Checkbox, CircularProgress, FormControlLabel, Typography} from "material-ui";
 import {selectLoginRequest} from "../../../../redux/auth/selectors";
 import {login, setRedirectUrl} from "../../../../redux/auth/actions";
 import ServiceList from "../../../../components/pages/store/payment/ServiceList";
@@ -65,36 +65,69 @@ class PaymentSuccessContainer extends Component {
 
     const {auth, loginRequest, history, invoiceRequest} = this.props;
     const invoice = invoiceRequest.get('data');
-    console.log(invoice);
-    const isLoggedIn = auth.get('isLoggedIn')
+    const isLoggedIn = auth.get('isLoggedIn');
     const loading = loginRequest.get('loading');
     const errors = loginRequest.get('errors');
-
+    const distributor = invoice ? invoice.get('distributor') : null;
     return (
       <div className="row">
         <div className="col-md-10 m-auto">
-          <div className="m-portlet m--margin-top-35">
-            <div className="m-portlet__body">
-              <div className="alert m-alert m-alert--default">
-                <h3 className="display-4 text-center">
-                  <i className="la la-check-circle align-middle m--margin-right-20" style={{
-                    color: '#7ac943',
-                    fontSize: '100px'
-                  }}/>
-                  Your payment was successful
-                </h3>
+          {/*<div className="m-portlet m--margin-top-35">*/}
+            {/*<div className="m-portlet__body">*/}
+              {/*<div className="alert m-alert m-alert--default">*/}
+                {/*<h3 className="display-4 text-center">*/}
+                  {/*<i className="la la-check-circle align-middle m--margin-right-20" style={{*/}
+                    {/*color: '#7ac943',*/}
+                    {/*fontSize: '100px'*/}
+                  {/*}}/>*/}
+                  {/*Your payment was successful*/}
+                {/*</h3>*/}
+              {/*</div>*/}
+            {/*</div>*/}
+          {/*</div>*/}
+          {invoice &&
+          <div className="m-widget25">
+            <span className="invoice-title">Yor invoice #{invoice.get('invoice_no')} Total ${invoice.get('total')}</span>
+          </div>
+          }
+        </div>
+        {distributor &&
+        <div className="col-md-10 m-auto">
+            <div className="row">
+              <div className="col-4">
+                Mail Cheque to:
+                <br/>
+                <span className="d-block">{distributor.get('company')}</span>
+                <span className="d-block">{distributor.get('address_1')}</span>
+                <span className="d-block">{distributor.get('city')}, {distributor.get('region')}, {distributor.get('country')}</span>
+
+              </div>
+              <div className="col-4">
+                Wire Transfer to:
+                <br/>
+                {distributor.get('bank_details')}
+              </div>
+              <div className="col-4">
+                Interact payment
+                <span className="d-block">Email to {distributor.get('email')}</span>
+                <span className="d-block">
+
+                </span>
+
               </div>
             </div>
-          </div>
         </div>
+        }
+        {invoice &&
         <div className="col-md-10 m-auto">
-          {invoice &&
-          <InvoiceDetail data={invoice}/>}
+          <InvoiceDetail data={invoice}/>
         </div>
+        }
+        {invoice &&
         <div className="col-md-10 m-auto">
-          {invoice &&
-          <CartItems data={invoice}/>}
+          <CartItems data={invoice}/>
         </div>
+        }
       </div>
     );
   }

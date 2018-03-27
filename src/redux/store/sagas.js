@@ -6,7 +6,7 @@ import {
   GET_SINGLE_RECORD_FAIL,
   ADD_TO_CART_FAIL,
   ADD_TO_CART_SUCCESS,
-  GET_CART_RECORDS_FAIL,
+  GET_CART_RECORDS_FAIL, SET_SHIPPING_BILLING_INFO, setToStoreContact,
 
 
 } from './actions';
@@ -30,6 +30,11 @@ function* yieldSuccessCardAdd (action) {
   yield put(push('/store/shopping-cart'));
 }
 
+function* yieldsContactInfo ({payload}) {
+
+  yield put(setToStoreContact(payload))
+}
+
 const storeSagas = all([
   yieldSuccessToasts({
     [ADD_TO_CART_SUCCESS]: i18n.t('store:cartAdded'),
@@ -40,7 +45,8 @@ const storeSagas = all([
     ADD_TO_CART_FAIL,
     GET_CART_RECORDS_FAIL
   ]),
-  takeLatest(ADD_TO_CART_SUCCESS, yieldSuccessCardAdd)
+  takeLatest(ADD_TO_CART_SUCCESS, yieldSuccessCardAdd),
+  takeLatest(SET_SHIPPING_BILLING_INFO, yieldsContactInfo)
 ]);
 
 export default storeSagas;

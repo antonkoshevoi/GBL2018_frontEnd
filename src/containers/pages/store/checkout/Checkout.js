@@ -139,7 +139,6 @@ class Checkout extends Component {
     const nextSuccess = nextProps.createCheckPaymentRequest.get('success');
 
     if (!success && nextSuccess) {
-      console.log('_handleCheckPaymentCreated');
       this.handleNext();
     }
   }
@@ -166,10 +165,7 @@ class Checkout extends Component {
     const loadingCarts = cartRecordsRequest.get('loading');
     const successCarts = cartRecordsRequest.get('success');
     const { classes } = this.props;
-    console.log(cartRecords.toJS());
     const item = cartRecords.toJS().shift();
-    console.log(item);
-
     return (
       <div>
         <div className='row d-flex justify-content-center'>

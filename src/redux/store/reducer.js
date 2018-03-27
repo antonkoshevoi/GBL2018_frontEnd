@@ -23,7 +23,8 @@ import {
   GET_CART_INVOICE_RECORDS_FAIL,
   GET_CART_INVOICE_RECORDS_SUCCESS, SET_SHIPPING_BILLING_INFO, SET_SHIPPING_BILLING_INFO_SUCCESS,
   SET_SHIPPING_BILLING_INFO_FAIL, RESET_SET_SHIPPING_BILLING_INFO, GET_RECORDS_PARENT, GET_RECORDS_PARENT_FAIL,
-  GET_RECORDS_PARENT_SUCCESS,
+  GET_RECORDS_PARENT_SUCCESS, GET_SHIPPING_BILLING_INFO, GET_SHIPPING_BILLING_INFO_FAIL,
+  GET_SHIPPING_BILLING_INFO_SUCCESS, SAVE_CHECKOUT_INFO,
 } from './actions';
 import Immutable from 'immutable';
 
@@ -92,6 +93,7 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorResponse: null,
     errors: [],
+    records: [],
     pagination: {
       page: 1,
       perPage: 10,
@@ -324,9 +326,10 @@ export default function reducer(state = initialState, action) {
           .set('fail', true)
         );
     /*
-    * Set shipping and billing address
+    * Set/Get shipping and billing address
     * */
     case SET_SHIPPING_BILLING_INFO:
+    case GET_SHIPPING_BILLING_INFO:
       return state
         .set('setShippingAndBilling', state.get('setShippingAndBilling')
           .set('loading', true)
@@ -340,10 +343,18 @@ export default function reducer(state = initialState, action) {
           .set('success', true)
           .set('fail', false)
           .set('errors',null)
-          // .set('data', Immutable.fromJS(action.result.data))
+          .set('records', Immutable.fromJS(action.result.data))
+        );
+    case GET_SHIPPING_BILLING_INFO_SUCCESS:
+      return state
+        .set('setShippingAndBilling', state.get('setShippingAndBilling')
+          .set('loading', false)
+          .set('errors',null)
+          .set('records', Immutable.fromJS(action.result.data))
         );
 
     case SET_SHIPPING_BILLING_INFO_FAIL:
+    case GET_SHIPPING_BILLING_INFO_FAIL:
       const data = action.error.response.data;
       return state
         .set('setShippingAndBilling', state.get('setShippingAndBilling')
@@ -352,6 +363,10 @@ export default function reducer(state = initialState, action) {
           .set('fail', true)
           .set('errors',Immutable.fromJS(data.errors))
         );
+    case SAVE_CHECKOUT_INFO:
+      return state
+        .set('setShippingAndBilling', state.get('setShippingAndBilling')
+          .set('records',Immutable.fromJS(action.data)));
 
     case RESET_SET_SHIPPING_BILLING_INFO:
       return state
