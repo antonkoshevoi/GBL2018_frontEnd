@@ -55,6 +55,12 @@ export default  {
                icon:'flaticon flaticon-user-ok',
              },
              {
+               key:'autoClass',
+               title:'Auto Class',
+               link:'classrooms/auto',
+               icon:'flaticon flaticon-user-ok',
+             },
+             {
                key:'homerooms',
                title:'Homerooms',
                link:'homerooms/list',

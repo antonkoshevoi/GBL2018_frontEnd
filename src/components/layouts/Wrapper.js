@@ -11,7 +11,7 @@ class Wrapper extends Component {
 
 
     render() {
-        const { history } = this.props
+        const { history } = this.props;
 
         history.listen((location, action) => {
             const _self = this;

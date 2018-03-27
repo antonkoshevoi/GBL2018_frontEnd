@@ -6,6 +6,7 @@ import Wrapper from '../../components/layouts/Wrapper';
 import {withRouter} from "react-router-dom";
 import {generateLinkId} from "../../helpers/utils";
 import HasRole from "../middlewares/HasRole";
+import SuperAdminSidebar from "../ui/SuperAdminSidebar";
 
 class MainLayout extends Component {
 
@@ -34,10 +35,14 @@ class MainLayout extends Component {
             'Teacher',
             'Principal',
             'Administrator',
-            'Superadministrator',
             'Affiliate',
           ]}>
             <Sidebar mobileSidebar={() => {this.openMobileSidebar()}}/>
+          </HasRole>
+          <HasRole roles={[
+            'Superadministrator',
+          ]}>
+            <SuperAdminSidebar mobileSidebar={() => {this.openMobileSidebar()}}/>
           </HasRole>
           <HasRole roles={[
             "Parents"
