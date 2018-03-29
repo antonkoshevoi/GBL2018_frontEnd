@@ -139,7 +139,7 @@ export default function reducer(state = initialState, action) {
           .set('fail', true)
         );
 
-      /**
+    /**
      * Get parent store records
      */
     case GET_RECORDS_PARENT:
@@ -150,13 +150,13 @@ export default function reducer(state = initialState, action) {
           .remove('fail')
         ).set('records', Immutable.List());
     case GET_RECORDS_PARENT_SUCCESS:
+      console.log(action.result);
       return state
         .set('getRecordsParentRequest', state.get('getRecordsParentRequest')
           .set('success', true)
           .remove('loading')
-          .set('records', Immutable.fromJS(action.result.data))
-          .set('pagination', Immutable.fromJS(action.result.meta.pagination))
-        )
+        ).set('records', Immutable.fromJS(action.result.data))
+        .set('pagination', Immutable.fromJS(action.result.meta.pagination))
 
     case GET_RECORDS_PARENT_FAIL:
       return state
@@ -335,21 +335,21 @@ export default function reducer(state = initialState, action) {
           .set('loading', true)
           .set('success', false)
           .set('fail', false)
-          .set('errors',null));
+          .set('errors', null));
     case SET_SHIPPING_BILLING_INFO_SUCCESS:
       return state
         .set('setShippingAndBilling', state.get('setShippingAndBilling')
           .set('loading', false)
           .set('success', true)
           .set('fail', false)
-          .set('errors',null)
+          .set('errors', null)
           .set('records', Immutable.fromJS(action.result.data))
         );
     case GET_SHIPPING_BILLING_INFO_SUCCESS:
       return state
         .set('setShippingAndBilling', state.get('setShippingAndBilling')
           .set('loading', false)
-          .set('errors',null)
+          .set('errors', null)
           .set('records', Immutable.fromJS(action.result.data))
         );
 
@@ -361,12 +361,12 @@ export default function reducer(state = initialState, action) {
           .set('loading', false)
           .set('success', false)
           .set('fail', true)
-          .set('errors',Immutable.fromJS(data.errors))
+          .set('errors', Immutable.fromJS(data.errors))
         );
     case SAVE_CHECKOUT_INFO:
       return state
         .set('setShippingAndBilling', state.get('setShippingAndBilling')
-          .set('records',Immutable.fromJS(action.data)));
+          .set('records', Immutable.fromJS(action.data)));
 
     case RESET_SET_SHIPPING_BILLING_INFO:
       return state
@@ -374,7 +374,7 @@ export default function reducer(state = initialState, action) {
           .set('loading', false)
           .set('success', false)
           .set('fail', false)
-          .set('errors',null));
+          .set('errors', null));
 
     /**
      * default

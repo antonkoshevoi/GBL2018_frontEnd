@@ -8,8 +8,9 @@ import Card from "../../../../components/ui/Card";
 export default class QuickLink extends Component {
 
   render() {
+    const {style} = this.props;
     return (
-      <div>
+      <div style={style ? style : {height:'80%'}} >
 
         <div className='m-portlet m-portlet--head-solid-bg quick-card-title'>
           <div className='m-portlet__head border-b-orange'>

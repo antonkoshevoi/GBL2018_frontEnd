@@ -44,7 +44,6 @@ class UnassignedCourses extends Component {
     return unassigneds.map(function (unassigned, i) {
       return (
         <Row index={i} key={i}>
-          <Td first={true} width='80px'>{i + 1}</Td>
           <Td width="70px">
             <div >
               <img src={unassigned.get('item').get('thumbnail')} width={70}/>
@@ -62,11 +61,10 @@ class UnassignedCourses extends Component {
 
   render() {
     return (
-      <Card title="Unassigned Courses" icon="fa fa-list-alt">
+      <Card title="Unassigned Courses" icon="fa fa-list-alt" style={{marginTop:15, height:'unset'}}>
         <Table>
           <Thead>
           <HeadRow>
-            <Th first={true} width='80px'>Order #</Th>
             <Th name='image' width='70px'>Image</Th>
             <Th name='name' width='150px'>Course Name</Th>
             <Th name='count' width='50px'>Count</Th>

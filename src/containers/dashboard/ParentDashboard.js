@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Card from "../../components/ui/Card";
 import {
+  Avatar,
   CircularProgress,
   GridList, GridListTile, GridListTileBar, IconButton, Tooltip
 } from 'material-ui';
@@ -12,9 +13,85 @@ import UnassignedCourses from "../../components/pages/dashboard/UnassignedCourse
 import {connect} from "react-redux";
 import {selectRecords, selectGetRecordsRequest} from "../../redux/students/selectors";
 import {getRecords} from "../../redux/students/actions";
+import {getParentRecords, getRecords as storeRecords} from "../../redux/store/actions";
 import {Row, Table, TablePreloader, Tbody, Td} from "../../components/ui/table";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
-import { push } from 'react-router-redux';
+import {push} from 'react-router-redux';
+import {Link} from 'react-router-dom'
+import {ModeEdit, GridOn} from "material-ui-icons";
+import {withStyles} from 'material-ui/styles';
+import classNames from 'classnames';
+import FeaturedItems from "../pages/reports/widgets/FeaturedItems";
+import {selectRecords as storeItems}  from "../../redux/store/selectors";
+import QuickLink from "../pages/reports/widgets/QuickLink";
+import Account from "../pages/reports/widgets/account";
+
+
+const styles = {
+  row: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  avatar: {
+    margin: 10,
+  },
+  bigAvatar: {
+    width: 80,
+    height: 80,
+    margin: 10,
+    border: 'solid 3px white'
+  },
+  name: {
+    color: 'white',
+    display: 'block',
+    marginTop: 35,
+    marginBottom:5
+  },
+  profileBlock: {
+    position:'relative',
+    background: '#9600ff',
+    borderRadius: 5,
+    margin: '3px 0',
+    display: 'flex',
+  },
+  btnGroup: {
+    display: 'flex',
+    position: 'absolute',
+    right: 10,
+    top: 10,
+
+
+  },
+  btnProfile: {
+    color: 'white',
+    background: '#2e40d4',
+    padding: 5,
+    width: '100%',
+    display: 'flex'
+  },
+  icon: {
+    height: 14,
+    width: 14,
+    margin: '3px 0'
+  },
+  radiusLeft: {
+    borderRadius: '5px 0 0 5px',
+
+  },
+  radiusRight: {
+    borderRadius: '0 5px 5px 0',
+  },
+  username: {
+    color: 'white',
+  },
+  progress: {
+    display: 'flex',
+    margin: '8px 5px',
+    background: 'white',
+    padding: 5,
+    borderRadius: 7,
+  }
+};
 
 class ParentDashboard extends Component {
   constructor(props) {
@@ -25,8 +102,8 @@ class ParentDashboard extends Component {
   }
 
   componentDidMount() {
-    const { getParentStudents } = this.props;
-
+    const {getParentStudents} = this.props;
+    this.props.getRecords();
     getParentStudents();
   }
 
@@ -34,16 +111,15 @@ class ParentDashboard extends Component {
    * Create Dialog
    */
   _openCreateDialog = () => {
-    this.setState({ createModalIsOpen: true });
+    this.setState({createModalIsOpen: true});
   };
   _closeCreateDialog = () => {
-    this.setState({ createModalIsOpen: false });
+    this.setState({createModalIsOpen: false});
   };
 
   _renderStudentsList() {
     const students = this.props.parentStudents;
     const loading = this.props.getParentStudentsRequest.get('loading');
-
     if (!loading && students.size === 0) {
       return (
         <tr>
@@ -66,8 +142,9 @@ class ParentDashboard extends Component {
   }
 
   _renderStudents() {
-    const { goTo } = this.props;
+    const {goTo} = this.props;
     const students = this.props.parentStudents.toJS();
+    const {classes} = this.props;
 
     if (!students.length) {
       return <div className="display-1">
@@ -77,31 +154,46 @@ class ParentDashboard extends Component {
 
     return students.map(function (student, i) {
       return (
-        <GridListTile key={i} className="grid-tile" onClick={() => { goTo(`/reports/students/${student.id}`); }} style={{ cursor: 'pointer' }}>
+        <div key={i} className={classes.profileBlock} onClick={() => {
+          goTo(`/reports/students/${student.id}`);
+        }} style={{cursor: 'pointer'}}>
+          <div className={classes.btnGroup}>
+            <div className="form-group-inline btn-group">
+              <NavLink to="/profile" className={classNames(classes.btnProfile, classes.radiusLeft)}>
+                <GridOn className={classes.icon}/>
+                Report
+              </NavLink>
+              <NavLink to="/profile" className={classNames(classes.btnProfile, classes.radiusRight)}>
+                <ModeEdit className={classes.icon}/>
+                Profile
+              </NavLink>
+            </div>
+          </div>
 
-          <img src={student.avatar} alt={student.firstName}/>
-          <GridListTileBar
-            className="myGridTileBar"
-            title={(student.firstName || student.lastName) ? student.firstName + " " + student.lastName : student.username}
-            subtitle={(
-              <div>
-                <span className="text-right d-block">{student.passRate} %</span>
-                <div className="progress m-progress--sm">
-                  <div title="Completed" className="progress-bar bg-success" role="progressbar" style={{width: student.completed + '%'}}></div>
-                  <div title="In Progress" className="progress-bar bg-warning" role="progressbar" style={{width: student.inProgress + '%'}}></div>
+          <div className="d-flex align-items-center">
+            <Avatar alt={student.firstName} src={student.avatar} className={classes.bigAvatar}/>
+            <div className="info">
+              <h5
+                className={classes.name}>{(student.firstName || student.lastName) ? student.firstName + " " + student.lastName : student.username}</h5>
+              <span className={classes.username}>{student.username}</span>
+              <div className={classes.progress}>
+                <div className="progress m-progress--sm" style={{minWidth: 80, marginRight:5}}>
+                  <div title="Completed" className="progress-bar bg-success" role="progressbar"
+                       style={{width: student.completed + '%'}}></div>
+                  <div title="In Progress" className="progress-bar bg-warning" role="progressbar"
+                       style={{width: student.inProgress + '%'}}></div>
                 </div>
-                <br/>
-                <div className="progress m-progress--sm">
-                  <div title="Average Grade" className="progress-bar bg-success" role="progressbar" style={{width: student.averageGrade + '%'}}></div>
-                  <div title="Average Grade" className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(student.averageGrade)) + '%'}}></div>
+                <div className="progress m-progress--sm" style={{minWidth: 110, marginLeft: 5}}>
+                  <div title="Average Grade" className="progress-bar bg-success" role="progressbar"
+                       style={{width: student.averageGrade + '%'}}></div>
+                  <div title="Average Grade" className="progress-bar bg-danger" role="progressbar"
+                       style={{width: (100 - parseInt(student.averageGrade)) + '%'}}></div>
                 </div>
               </div>
-            )}
-            actionIcon={
-              <IconButton color="default"></IconButton>
-            }
-          />
-        </GridListTile>
+            </div>
+
+          </div>
+        </div>
       )
     })
   }
@@ -109,11 +201,12 @@ class ParentDashboard extends Component {
   render() {
     const students = this.props.parentStudents;
     const loading = this.props.getParentStudentsRequest.get('loading');
+    const {records} = this.props;
 
     return <div className="fadeInLeft animated">
       <div className="row">
-        <div className="col-sm-12 col-md-4 col-lg-4">
-          <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
+        <div className="col-sm-12 col-md-6 col-lg-5 col-xl-4">
+          <div className="m-portlet m-portlet--head-solid-bg m-portlet--info" style={{marginTop:15}}>
             <div className="m-portlet__head">
               <div className="m-portlet__head-caption">
                 <div className="m-portlet__head-title">
@@ -141,55 +234,51 @@ class ParentDashboard extends Component {
               </div>
             </div>
             <div className="m-portlet__body m--padding-top-5" style={{height: "100%"}}>
-              {/*<Table>*/}
-                {/*<Tbody>*/}
-                {/*{loading &&*/}
-                {/*<TablePreloader text="Loading..." color="primary"/>*/}
-                {/*}*/}
-                {/*{ this._renderStudents() }*/}
-                {/*</Tbody>*/}
-              {/*</Table>*/}
-              {!loading && <GridList cellHeight={250} cols={1}>
-                {this._renderStudents()}
-              </GridList>}
-            </div>
-          </div>
-        </div>
-        <div className="col-sm-12 col-md-8 col-lg-8">
-          <div className="row">
-            <div className="col-md-12">
-              <DashboardStore/>
-            </div>
-            <div className="col-md-12">
-              <HowToMovies/>
-            </div>
-            <div className="col-md-12">
-              <UnassignedCourses/>
-            </div>
-            <div className="col-md-12" style={{marginBottom: 0}}>
-              <div className="m-portlet m-portlet--bordered-semi  cartItems">
-                <div className="m-portlet__body">
-                  <div className="m-widget25">
-                    <span className="m-widget25__price m--font-brand">Student App</span>
-                    <span className="m-widget25__desc">My Os</span>
-                  </div>
-                  <div className="m-widget4 text-right">
-                    <button className="btn m-btn btn-lg btn-success"> DOWNLOAD APP <i className="fa fa-download"></i>
-                    </button>
-                  </div>
-                </div>
+              <div style={{maxHeight:320,overflowY:'scroll',overflowX:'hidden'}}>
+                {!loading && <GridList cellHeight={130} cols={1} >
+                  {this._renderStudents()}
+                </GridList>}
               </div>
             </div>
           </div>
         </div>
-        <div className="col-sm-12 col-md-4 col-lg-4">
+        <div className="col-sm-12 col-md-6 col-lg-7 col-xl-5">
+            <UnassignedCourses/>
+        </div>
+        <div className="col-md-6 col-lg-6 col-xl-3">
+          <QuickLink style={{marginTop:15, height:'80%'}}/>
+        </div>
+        <div className="col-md-6 col-lg-6 m--visible-tablet-and-mobile m--visible-desktop-lg" style={{marginTop:15}}>
+          <Account/>
         </div>
       </div>
 
+      <div className="row">
+        <div className="col-md-12 col-lg-12 col-xl-8 margin-top-15">
+          <FeaturedItems data={records}/>
+        </div>
+
+        <div className="col-md-4 col-xl-4 m--hidden-tablet-and-mobile m--hidden-desktop-lg" style={{marginTop:15}}>
+          <Account/>
+        </div>
+      </div>
+     <div className="row">
+       <div className="col-sm-12 col-md-8 col-lg-8">
+         <div className="row">
+           <div className="col-md-12">
+           </div>
+         </div>
+       </div>
+     </div>
+
+
       <CreateStudentModal
         isOpen={this.state.createModalIsOpen}
-        onClose={() => { this._closeCreateDialog() }}
-        onSuccess={() => {  }}/>
+        onClose={() => {
+          this._closeCreateDialog()
+        }}
+        onSuccess={() => {
+        }}/>
 
     </div>
   }
@@ -199,11 +288,20 @@ ParentDashboard = connect(
   (state) => ({
     parentStudents: selectRecords(state),
     getParentStudentsRequest: selectGetRecordsRequest(state),
+    records: storeItems(state),
+
   }),
   (dispatch) => ({
-    getParentStudents: (params = {}) => {dispatch(getRecords(params))},
-    goTo: (url) => { dispatch(push(url)) }
+    getParentStudents: (params = {}) => {
+      dispatch(getRecords(params))
+    },
+    goTo: (url) => {
+      dispatch(push(url))
+    },
+    getRecords: (params = {type: 'recent'}) => {
+      dispatch(getParentRecords(params))
+    },
   })
 )(ParentDashboard);
 
-export default ParentDashboard;
+export default withStyles(styles)(ParentDashboard);
