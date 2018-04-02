@@ -28,8 +28,7 @@ import ShippingAndBilling from "./ShippingAndBilling";
 import PaymentSuccessContainer from "../payments/PaymentSuccessContainer";
 
 const styles = () => ({
-    iconContainer:{
-    }
+  iconContainer: {}
 });
 
 class Checkout extends Component {
@@ -41,7 +40,6 @@ class Checkout extends Component {
     payMethod: null,
 
   };
-
 
 
   componentWillMount() {
@@ -164,7 +162,7 @@ class Checkout extends Component {
     } = this.props;
     const loadingCarts = cartRecordsRequest.get('loading');
     const successCarts = cartRecordsRequest.get('success');
-    const { classes } = this.props;
+    const {classes} = this.props;
     const item = cartRecords.toJS().shift();
     return (
       <div>
@@ -192,7 +190,9 @@ class Checkout extends Component {
                         {successCarts &&
                         <div className="m-portlet__body">
                           <div className="m-widget25">
-                            <span className="invoice-title">Yor invoice {item.invoiceNo} Total ${cartRecordsSum}</span>
+                            {item &&
+                              <span className="invoice-title">Yor invoice {item.invoiceNo} Total ${cartRecordsSum}</span>
+                            }
                           </div>
                         </div>
                         }

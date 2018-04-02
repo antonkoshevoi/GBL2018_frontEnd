@@ -162,9 +162,7 @@ class ShippingAndBilling extends Component {
                   />
                 </div>
               </div>
-              <div className="col-6">
-                <div className="row">
-                </div>
+              <div className="col-md-6 col-sm-12">
                 <ContactInfo
                   title='Billing contact information'
                   onChange={(form) => this._handleForm(form, 'billingContact')}
@@ -173,7 +171,7 @@ class ShippingAndBilling extends Component {
                   form={billingContact}
                 />
               </div>
-              <div className="col-6">
+              <div className="col-md-6 col-sm-12">
                 <ContactInfo
                   title='Shipping contact information'
                   onChange={(form) => this._handleForm(form, 'shippingContact')}
@@ -183,7 +181,7 @@ class ShippingAndBilling extends Component {
                   disabled={sameShipping}
                 />
               </div>
-              <div className="col-6">
+              <div className="col-md-6 col-sm-12">
                 <Address
                   title='Billing Address'
                   onChange={(form) => this._handleForm(form, 'billingAddress')}
@@ -191,7 +189,7 @@ class ShippingAndBilling extends Component {
                   errors={errors}
                   form={billingAddress}/>
               </div>
-              <div className="col-6">
+              <div className="col-md-6 col-sm-12">
                 <Address
                   title='Shipping Address'
                   onChange={(form) => this._handleForm(form, 'shippingAddress')}
