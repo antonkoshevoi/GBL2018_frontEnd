@@ -57,8 +57,8 @@ class Checkout extends Component {
 
   }
 
-  _stepBilling = () => {
-    const payMethod = this.props.payMethod;
+  _stepBilling = (method = null) => {
+    const payMethod = method ? method : this.props.payMethod;
 
     switch (payMethod) {
       case 'Check':
@@ -105,7 +105,7 @@ class Checkout extends Component {
     this.props.setPayMethod('PayPal');
 
 
-    this._stepBilling();
+    this._stepBilling('PayPal');
   };
 
   _handlePayPalPaymentCreated(nextProps) {
