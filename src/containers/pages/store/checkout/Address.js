@@ -54,7 +54,6 @@ class Address extends Component {
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
                   disabled={disabled}
-                  required
                   value={form.addressLine1 || ''}
                   name='addressLine1'
                   onChange={(e) => {
@@ -93,7 +92,6 @@ class Address extends Component {
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
                   disabled={disabled}
-                  required
                   value={form.city || ''}
                   name='city'
                   onChange={(e) => {
@@ -113,7 +111,6 @@ class Address extends Component {
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
                   disabled={disabled}
-                  required
                   value={form.region || ''}
                   name='region'
                   onChange={(e) => {
@@ -133,7 +130,6 @@ class Address extends Component {
               <div className="col-lg-8 col-md-9 col-sm-12">
                 <input
                   disabled={disabled}
-                  required
                   value={form.zip || ''}
                   name='zip'
                   onChange={(e) => {
