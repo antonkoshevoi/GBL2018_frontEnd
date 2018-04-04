@@ -70,13 +70,13 @@ class OpenInvoices extends Component {
 
               </div>
               <div className='m-portlet__body'>
-                {success &&
-                 <OpenInvoicesTable
-                   sum={cartRecordsSum}
-                   onUpdate={(data,total) => {this._updateData(data,total)}}
-                   onDelete={(id) => {this._deleteRecordFromCart (id)}}
-                   data={records.toJS()}/>
-                }
+                {/*{success &&*/}
+                 {/*<OpenInvoicesTable*/}
+                   {/*sum={cartRecordsSum}*/}
+                   {/*onUpdate={(data,total) => {this._updateData(data,total)}}*/}
+                   {/*onDelete={(id) => {this._deleteRecordFromCart (id)}}*/}
+                   {/*data={records.toJS()}/>*/}
+                {/*}*/}
               </div>
             </div>
           </div>

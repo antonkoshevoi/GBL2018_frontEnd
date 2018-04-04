@@ -161,11 +161,7 @@ class ParentDashboard extends Component {
             <div className="form-group-inline btn-group">
               <NavLink to="/profile" className={classNames(classes.btnProfile, classes.radiusLeft)}>
                 <GridOn className={classes.icon}/>
-                Report
-              </NavLink>
-              <NavLink to="/profile" className={classNames(classes.btnProfile, classes.radiusRight)}>
-                <ModeEdit className={classes.icon}/>
-                Profile
+                Report/Profile
               </NavLink>
             </div>
           </div>
