@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Card from "../../../ui/Card";
 import {TablePreloader, MyPreloader} from '../../../ui/table';
-import {IconButton, LinearProgress} from "material-ui";
+import {Avatar, IconButton, LinearProgress} from "material-ui";
 import {translate} from 'react-i18next';
 import {Delete, Edit} from "material-ui-icons";
 import {OldProgressBar} from "../../../ui/LinearProgress";
@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import {getSchoolReportStudent} from '../../../../redux/reports/actions';
 import {selectGetStudentForReportRequest} from '../../../../redux/reports/selectors';
 import {CircularProgress} from "material-ui";
+import {NavLink} from 'react-router-dom'
 
 class InfoSection extends Component {
 
@@ -25,14 +26,18 @@ class InfoSection extends Component {
           <td>{item.course.crsTitle}</td>
           <td>
             <div className="progress m-progress--sm">
-              <div className="progress-bar bg-success" role="progressbar" style={{width: item.progress.completedProgress + '%'}}></div>
-              <div className="progress-bar bg-warning" role="progressbar" style={{width: item.progress.inprogressProgress + '%'}}></div>
+              <div className="progress-bar bg-success" role="progressbar"
+                   style={{width: item.progress.completedProgress + '%'}}></div>
+              <div className="progress-bar bg-warning" role="progressbar"
+                   style={{width: item.progress.inprogressProgress + '%'}}></div>
             </div>
           </td>
           <td>
             <div className="progress m-progress--sm">
-              <div className="progress-bar bg-success" role="progressbar" style={{width: item.averageGrade + '%'}}></div>
-              <div className="progress-bar bg-danger" role="progressbar" style={{width: (100 - item.averageGrade) + '%'}}></div>
+              <div className="progress-bar bg-success" role="progressbar"
+                   style={{width: item.averageGrade + '%'}}></div>
+              <div className="progress-bar bg-danger" role="progressbar"
+                   style={{width: (100 - item.averageGrade) + '%'}}></div>
             </div>
           </td>
         </tr>
@@ -41,7 +46,8 @@ class InfoSection extends Component {
   }
 
   render() {
-    const { data } = this.props.data;
+    const {data} = this.props.data;
+    const {id} = this.props.match.params;
     const coursesLoading = this.props.data.loading;
     const {getStudentForReportRequest} = this.props;
     const firstName = getStudentForReportRequest.get('record').toJS().firstName;
@@ -66,31 +72,34 @@ class InfoSection extends Component {
           <div className="row">
             <div className="col-lg-6 m--margin-bottom-20">
               <Card title="About" icon="la la-info">
+                <td className="text-center">
+                  <div style={{position:'absolute',right:0, top:-50}}>
+                    <NavLink to={`/reports/students/${id}/edit`}>
+                      <IconButton color='primary'>
+                        <Edit/>
+                      </IconButton>
+                    </NavLink>
+
+                    <IconButton color='primary'>
+                      <Delete/>
+                    </IconButton>
+                  </div>
+                </td>
                 <div className="table-responsive">
                   <table className="table m-table m-table--head-separator-primary m-middle-table">
                     <thead>
                     <tr>
-                      <th></th>
-                      <th></th>
-                      {/*<th className="text-center">Actions</th>*/}
+
+                      {/*<IconButton color='primary'>*/}
+                      {/*<Delete/>*/}
+                      {/*</IconButton>*/}
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                       <th>First Name</th>
                       <td>{loading && <CircularProgress color="primary"/>} {!loading && firstName}</td>
-                      {/*<td className="text-center">*/}
-                      {/*<div className="actions">*/}
-                      {/*<IconButton color='primary'*/}
-                      {/*>*/}
-                      {/*<Edit/>*/}
-                      {/*</IconButton>*/}
-                      {/*<IconButton color='primary'*/}
-                      {/*>*/}
-                      {/*<Delete/>*/}
-                      {/*</IconButton>*/}
-                      {/*</div>*/}
-                      {/*</td>*/}
+
                     </tr>
                     <tr>
                       <th>Last Name</th>
@@ -118,8 +127,10 @@ class InfoSection extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                      {coursesLoading && <tr><td colSpan="3" className="text-center"><CircularProgress color="primary"/></td></tr>}
-                      {!coursesLoading && this._renderCourseTable(data)}
+                    {coursesLoading && <tr>
+                      <td colSpan="3" className="text-center"><CircularProgress color="primary"/></td>
+                    </tr>}
+                    {!coursesLoading && this._renderCourseTable(data)}
                     </tbody>
                   </table>
                 </div>
@@ -138,7 +149,6 @@ class InfoSection extends Component {
   }
 }
 
-// InfoSection.propTypes = {};
 InfoSection = connect(
   (state) => ({
     getStudentForReportRequest: selectGetStudentForReportRequest(state),

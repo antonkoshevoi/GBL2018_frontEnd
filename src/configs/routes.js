@@ -47,6 +47,7 @@ import InvitationDetails from '../containers/invitations/InvitationDetails';
 import ShoppingCart from "../containers/pages/store/shopping-cart/ShoppingCart";
 import OnlyHeadLayout from "../containers/layouts/OnlyHeadLayout";
 import AutoCreate from "../containers/classrooms/AutoCreate";
+import ProfileEdit from "../containers/pages/profile/ProfileEdit";
 
 export default () => (
   <AppContainer>
@@ -78,6 +79,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReportDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/homerooms/:id' name='Homeroom' component={HomeRoomReportDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id/edit' name='Student' component={ProfileEdit}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
 
       {/*Store*/}

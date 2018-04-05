@@ -198,7 +198,12 @@ export default function reducer (state = initialState, action) {
         .set('updateRequest', state.get('updateRequest')
           .set('loading', false)
           .set('success', true)
-        ).set('records', updatedRecords);
+        ).set('records', updatedRecords)
+        .set('getSingleRecordRequest', state.get('getSingleRecordRequest')
+          .set('success', true)
+          .set('loading', false)
+          .set('record', Immutable.fromJS(action.result.data))
+        );
     case UPDATE_FAIL:
       const errorData = action.error.response.data;
       return state
