@@ -7,7 +7,8 @@ import MetronicDatePicker from "../../../components/ui/metronic/MetronicDatePick
 import {NavLink} from "react-router-dom";
 import {getSingleRecord, update} from "../../../redux/students/actions";
 import {selectGetSingleRecordRequest, selectUpdateRequest} from "../../../redux/students/selectors";
-
+import 'cropperjs/dist/cropper.css';
+import Cropper from 'react-cropper';
 
 const styles = theme => ({
   root: {
@@ -32,7 +33,9 @@ class ProfileEdit extends Component {
 
   state = {
     form: {},
-    errors: null
+    errors: null,
+    newAvatar: false,
+    zoom: 0.5,
   };
 
   componentDidMount() {
@@ -73,15 +76,75 @@ class ProfileEdit extends Component {
     }))
   };
 
+  _handleImageCrop = () => {
+    if (!this.cropper) return;
+
+    if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
+      return;
+    }
+    this.setState({
+      form: {
+        ...this.state.form,
+        avatarCropped: this.cropper.getCroppedCanvas().toDataURL()
+      }
+    });
+  };
+
+  _handleFileChange(e) {
+    e.preventDefault();
+    let files;
+    if (e.dataTransfer) {
+      files = e.dataTransfer.files;
+    } else if (e.target) {
+      files = e.target.files;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.setState((prevState) => ({
+        form: {
+          ...prevState.form,
+          avatar: reader.result,
+          croppedAvatar: true,
+        },
+        newAvatar: true,
+        oldAvatar: prevState.form.avatar,
+
+      }));
+    };
+
+    reader.readAsDataURL(files[0]);
+  }
+
+  zoom = (e) => {
+    this.setState({'zoom': e.target.value});
+    this.cropper.zoomTo(e.target.value)
+  };
+
+  cancel = () => {
+    this.setState((prevState) => {
+      const {croppedAvatar, avatarCropped, ...rest} = prevState.form;
+      return {
+        newAvatar: false,
+        form: {
+          ...rest,
+          avatar: prevState.oldAvatar
+        }
+      }
+    })
+  };
+
   updateProfile = () => {
     this.props.updateStudent(this.state.id, this.state.form);
+    this.cancel();
   };
 
   render() {
     const {classes, student, updateRequest} = this.props;
     const loading = student.get('loading') || updateRequest.get('loading') || false;
     const errors = updateRequest.get('errors');
-    const {form} = this.state;
+    const {form, newAvatar} = this.state;
 
     const defaultAvatar = '//s3.amazonaws.com/37assets/svn/765-default-avatar.png';
 
@@ -95,19 +158,59 @@ class ProfileEdit extends Component {
 
               <Grid container spacing={24}>
                 <Grid item xs={12}>
-                  <Typography variant="display3" gutterBottom>
-                    Edit profile
-                  </Typography>
+                  <legend className='m--margin-bottom-10'> Edit profile</legend>
                 </Grid>
                 {loading ? (<CircularProgress style={{margin: '10px auto', minHeight: 200}} color="inherit"/>)
                   :
                   <Grid container item spacing={0}>
                     <Grid item xs={12} md={4}>
+                      <legend className='m--margin-bottom-10'>Profile Pic Upload</legend>
                       <Avatar
                         alt="Adelle Charles"
-                        src={form.avatar ? form.avatar : defaultAvatar}
+                        src={form.avatarCropped ? form.avatarCropped : form.avatar}
                         className={classes.avatar}
                       />
+                      <div className='col-md-12 text-center'>
+                        <div className='CropperBlock text-center'>
+                          <div className='upload-btn-wrapper '>
+                            <button className='btn m-btn--air btn-outline-info'>Upload avatar</button>
+                            <input type='file' name='myfile' onChange={(e) => {
+                              this._handleFileChange(e)
+                            }}/>
+                          </div>
+                          {newAvatar &&
+                          <div>
+                            <Cropper
+                              ref={cropper => {
+                                this.cropper = cropper;
+                              }}
+                              src={form.avatar}
+                              className='signup-cropper'
+                              style={{height: 250, width: 250}}
+                              aspectRatio={1 / 1}
+                              guides={false}/>
+                            <input style={{margin: '10px 0 5px 0'}} type="range" min="0.1" max="2" step="0.05"
+                                   value={this.state.zoom}
+                                   onChange={(value) => this.zoom(value)}></input>
+                          </div>
+                          }
+
+                          {form.avatar && newAvatar &&
+                          <div>
+                            <button className='btn m-btn--air btn-success m--margin-top-15'
+                                    onClick={this._handleImageCrop}>
+                              Crop Image
+                            </button>
+                            <button onClick={this.cancel}
+                                    className='btn m-btn--air btn-primary m--margin-top-15 m--margin-left-10'>
+                              Cancel
+                            </button>
+                          </div>
+
+                          }
+
+                        </div>
+                      </div>
                     </Grid>
                     <Grid item xs={12} md={8}>
                       {/*First name*/}
