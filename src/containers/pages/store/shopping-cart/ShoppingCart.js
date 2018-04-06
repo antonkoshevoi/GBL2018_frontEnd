@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import OpenInvoicesTable from '../../../../components/pages/store/OpenInvoicesTable';
 
 import {
-  deleteFromCartRequest,
+  deleteFromCartRequest, selectAddToCartRequest,
   selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest,
 } from '../../../../redux/store/selectors';
 import {
@@ -53,8 +53,15 @@ class ShoppingCart extends Component {
   }
 
   render() {
-    const { records, cartRecordsRequest, cartRecordsSum ,preview} = this.props;
-    const loading = cartRecordsRequest.get('loading');
+    const {
+      records,
+      cartRecordsRequest,
+      cartRecordsSum ,
+      cartRequest,
+      preview,
+      deleteRequest
+    } = this.props;
+    const loading = cartRecordsRequest.get('loading') || cartRequest.get('loading') || deleteRequest.get('loading');
     const success = cartRecordsRequest.get('success');
     return (
       <div>
@@ -116,6 +123,8 @@ ShoppingCart = connect(
     deleteFromCartRequest: deleteFromCartRequest(state),
     cartRecordsSum: selectCartRecordsSum(state),
     records: selectCartRecords(state),
+    cartRequest: selectAddToCartRequest(state),
+    deleteRequest: deleteFromCartRequest(state),
   }),
   (dispatch) => ({
     getRecords: () => { dispatch(getCartRecords()) },

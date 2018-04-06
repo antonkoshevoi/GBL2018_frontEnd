@@ -10,7 +10,7 @@ import {
 
 
 } from './actions';
-import { getErrorMessage, yieldErrorToasts, yieldSuccessToasts } from '../../helpers/utils';
+import {getErrorMessage, yieldErrorToasts, yieldSuccessToasts} from '../../helpers/utils';
 import i18n from '../../configs/i18n';
 import toastr from 'toastr';
 
@@ -35,6 +35,7 @@ function* yieldsContactInfo ({payload}) {
   yield put(setToStoreContact(payload))
 }
 
+
 const storeSagas = all([
   yieldSuccessToasts({
     [ADD_TO_CART_SUCCESS]: i18n.t('store:cartAdded'),
@@ -45,7 +46,7 @@ const storeSagas = all([
     ADD_TO_CART_FAIL,
     GET_CART_RECORDS_FAIL
   ]),
-  takeLatest(ADD_TO_CART_SUCCESS, yieldSuccessCardAdd),
+  // takeLatest(ADD_TO_CART_SUCCESS, yieldSuccessCardAdd),
   takeLatest(SET_SHIPPING_BILLING_INFO, yieldsContactInfo)
 ]);
 
