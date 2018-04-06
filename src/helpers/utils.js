@@ -1,7 +1,7 @@
 import i18n from '../configs/i18n';
-import {takeLatest, put} from 'redux-saga/effects';
+import { takeLatest , put} from 'redux-saga/effects';
 import toastr from 'toastr';
-import {push} from 'react-router-redux';
+import { push } from 'react-router-redux';
 
 
 export const buildSortersQuery = (sorters) => {
@@ -21,12 +21,12 @@ export const buildSortersQuery = (sorters) => {
  * @returns {*}
  */
 export const getErrorMessage = (response) => {
-  if (typeof response !== 'undefined') {
+  if(typeof response !== 'undefined') {
     const code = response.status;
-    return i18n.t(`messages:errors:${code}`);
+    return i18n.t (`messages:errors:${code}`);
   }
 
-  return i18n.t(`messages:errors:unknown`);
+  return i18n.t (`messages:errors:unknown`);
 };
 
 export const yieldSuccessToasts = (messages) => {
@@ -45,7 +45,7 @@ export const yieldSuccessToasts = (messages) => {
 export const yieldErrorToasts = (types) => {
   return takeLatest([...types], function* (action) {
     console.log(action.error.response);
-    if (typeof action.error !== 'undefined') {
+    if(typeof action.error !== 'undefined') {
       toastr.error(
         getErrorMessage(action.error.response)
       );
@@ -74,12 +74,12 @@ export const debounce = (fn, delay) => {
  * @param paths, i
  * @returns 'path
  */
-export const generateBreadcrumbLink = (paths, i) => {
-  let path = ""
-  for (let x = 1; x <= i; x++) {
-    path += '/' + paths[x];
-  }
-  return path;
+export const  generateBreadcrumbLink = (paths,i) => {
+    let path = ""
+    for (let x = 1; x<=i; x++) {
+        path += '/' + paths[x];
+    }
+    return path;
 }
 
 /**
@@ -87,17 +87,17 @@ export const generateBreadcrumbLink = (paths, i) => {
  * @param paths, i
  * @returns 'path
  */
-export const generateLinkId = (paths) => {
-  let path = ""
-  for (let x = 1; x <= paths.length - 1; x++) {
-    path += paths[x] + '_';
-  }
-  return path;
+export const  generateLinkId = (paths) => {
+    let path = ""
+    for (let x = 1; x<=paths.length-1; x++) {
+        path += paths[x] +  '_';
+    }
+    return path;
 }
 
 
 export const getUrlLastName = (url) => {
   const paths = url.split('/');
-  return paths[paths.length - 1];
+  return paths[paths.length-1];
 }
 

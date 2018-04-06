@@ -46,7 +46,7 @@ const storeSagas = all([
     ADD_TO_CART_FAIL,
     GET_CART_RECORDS_FAIL
   ]),
-  // takeLatest(ADD_TO_CART_SUCCESS, yieldSuccessCardAdd),
+  takeLatest(ADD_TO_CART_SUCCESS, yieldSuccessCardAdd),
   takeLatest(SET_SHIPPING_BILLING_INFO, yieldsContactInfo)
 ]);
 
