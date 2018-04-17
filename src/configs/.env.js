@@ -1,5 +1,5 @@
 const API_DEV_URI = "http://api.gravitybrain.homestead/1.0";
-const API_PROD_URI = "https://dev.api.gravitybrain.com/1.0";
+const API_PROD_URI = "https://api.gravitybrain.com/1.0";
 
 export const env = {
   DEBUG: process.env.NODE_ENV !== 'production',
