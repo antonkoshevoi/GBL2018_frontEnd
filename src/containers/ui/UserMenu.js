@@ -7,6 +7,7 @@ import {NavLink, withRouter} from "react-router-dom";
 import posterImage from "../../media/images/menu_poster.jpg"
 import {connect} from "react-redux";
 import {selectUserData} from "../../redux/user/selectors";
+import {selectUserRoles} from "../../redux/user/selectors";
 
 class UserMenu extends Component {
 
@@ -33,9 +34,10 @@ class UserMenu extends Component {
   };
 
   _renderDropDownMenu() {
-    const { logout, userData, t } = this.props;
+    const { logout, userData, t, roles } = this.props;
 
     let user = userData.toJS();
+    let prettyRoles = roles.toJS();
 
       return (
         <div className="m-dropdown__wrapper animated m--padding-right-20" onMouseLeave={() => {this.props.switchMenu(null)}} style={{display:'block'}}>
@@ -68,17 +70,18 @@ class UserMenu extends Component {
                     </span>
                   </NavLink>
                 </li>
-                <li className="m-nav__item">
-                  <NavLink to="/school-profile" className="m-nav__link">
-                    <i className="m-nav__link-icon flaticon-profile-1"></i>
-                    <span className="m-nav__link-title">
-                      <span className="m-nav__link-wrap">
-                        <span className="m-nav__link-text">School Profile</span>
-                      </span>
-                    </span>
-                  </NavLink>
-                </li>
-
+                  {prettyRoles && prettyRoles[0] && prettyRoles[0].name !== 'Parents' &&
+                    <li className="m-nav__item">
+                      <NavLink to="/school-profile" className="m-nav__link">
+                        <i className="m-nav__link-icon flaticon-profile-1"></i>
+                        <span className="m-nav__link-title">
+                          <span className="m-nav__link-wrap">
+                            <span className="m-nav__link-text">School Profile</span>
+                          </span>
+                        </span>
+                      </NavLink>
+                    </li>
+                  }
 
                 <li className="m-nav__separator m-nav__separator--fit">
                 </li>
@@ -117,7 +120,8 @@ class UserMenu extends Component {
 
 UserMenu = connect(
   (state) => ({
-    userData: selectUserData(state)
+    userData: selectUserData(state),
+    roles: selectUserRoles(state)
   }),
   (dispatch) => ({})
 )(UserMenu);
