@@ -204,14 +204,7 @@ class ParentSidebar extends Component {
 
     return (
       isLoggedIn && (
-        <div id="m_aside_left" style={{marginTop:-headerPosition}} className="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
-          <div className="text-right mobile-sidebar-toggle m--hide">
-            <IconButton color='primary' onClick={() => {
-              this.props.mobileSidebar()
-            }}>
-              <Icon>menu</Icon>
-            </IconButton>
-          </div>
+        <div id="m_aside_left" style={{marginTop:-headerPosition + 53}} className="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
           <div
             id="m_ver_menu"
             className="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark "
