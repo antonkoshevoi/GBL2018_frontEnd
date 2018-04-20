@@ -17,9 +17,13 @@ class ParentSidebar extends Component {
       activeMenu: {
         key: ''
       },
+      activeMenuClass: {
+        key: ''
+      },
       hovered: false,
       headerPosition: 0,
-      headerHeight:window.innerWidth <= 992 ? 60 : 70
+      headerHeight:window.innerWidth <= 992 ? 60 : 70,
+      mobileMenu: $(window).width() <= 992 ? 53 : 0
     }
   }
 
@@ -31,7 +35,12 @@ class ParentSidebar extends Component {
     const {location} = this.props;
     const key = location.pathname.substr(1).split('/')[0];
     window.addEventListener('scroll',this.setHeaderPosition.bind(this));
+    window.addEventListener('resize', this.updateDimensions.bind(this));
     this._generateMenusPosition(key);
+  }
+
+  updateDimensions() {
+    this.setState({mobileMenu: $(window).width() <= 992 ? 53 : 0});
   }
 
   setHeaderPosition(){
@@ -66,9 +75,9 @@ class ParentSidebar extends Component {
       const activeMenuKey = $('.second_level .active').closest('.menuItem').data('key');
       if (activeMenuKey !== undefined) {
         $('.second_level .active').closest('.menuItem');
-        this.setState({activeMenu: {key: activeMenuKey, subMenu: true}})
+        this.setState({activeMenu: {key: activeMenuKey, subMenu: true}, activeMenuClass: {key: activeMenuKey}})
       } else {
-        this.setState({activeMenu: this._getActiveMenuByKey(key)});
+        this.setState({activeMenu: this._getActiveMenuByKey(key), activeMenuClass: this._getActiveMenuByKey(key)});
       }
     })
   }
@@ -181,30 +190,30 @@ class ParentSidebar extends Component {
 
   _googleMenuToggle(menu) {
     this._menuHoverOut();
-    this.setState({activeMenu: menu})
+    this.setState({activeMenu: menu, activeMenuClass: menu})
   }
 
   _menuBackHover() {
-    this.setState({hovered: true})
+    this.setState({hovered: true, activeMenuClass : {key: 'dashboard'}})
   }
 
   _menuHoverOut() {
-    this.setState({hovered: false});
+    this.setState({hovered: false,  activeMenuClass: this.state.activeMenu});
   }
 
   _resetMenu() {
-    this.setState({activeMenu: {key: 'dashboard'}});
+    this.setState({activeMenu: {key: 'dashboard'}, activeMenuClass: {key: 'dashboard'}});
   }
 
   render() {
 
     const {auth} = this.props;
-    const isLoggedIn = auth.get('isLoggedIn')
-    const {headerPosition} = this.state;
+    const isLoggedIn = auth.get('isLoggedIn');
+    const {headerPosition, activeMenuClass, mobileMenu} = this.state;
 
     return (
       isLoggedIn && (
-        <div id="m_aside_left" style={{marginTop:-headerPosition + 53}} className="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
+        <div id="m_aside_left" style={{marginTop:-headerPosition + mobileMenu}} className={`m-grid__item	m-aside-left  m-aside-left--skin-dark parent-menu-active-${activeMenuClass.key} `}>
           <div
             id="m_ver_menu"
             className="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark "

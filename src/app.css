@@ -1410,6 +1410,18 @@ div.m-widget25 .m-widget25__price {
         margin-top: 227px;
     }
 
+    .m-sidebar-is-open .parent-menu-active-dashboard ~ .m-wrapper {
+        margin-top: 430px;
+    }
+
+    .m-sidebar-is-open .parent-menu-active-store ~ .m-wrapper {
+        margin-top: 505px;
+    }
+
+    .m-sidebar-is-open .parent-menu-active-calendar ~ .m-wrapper {
+        margin-top: 430px;
+    }
+
     #m_aside_left {
         max-height: 0;
         transition: max-height 0.5s ease-out;
@@ -1445,6 +1457,18 @@ div.m-widget25 .m-widget25__price {
 
     .m-sidebar-is-open #m_aside_left.menu-active-studentsAndStaff {
         max-height: 169px;
+    }
+
+    .m-sidebar-is-open #m_aside_left.parent-menu-active-dashboard {
+        max-height: 375px;
+    }
+
+    .m-sidebar-is-open #m_aside_left.parent-menu-active-store {
+        max-height: 450px;
+    }
+
+    .m-sidebar-is-open #m_aside_left.parent-menu-active-calendar {
+        max-height: 375px;
     }
 
     .m-wrapper {
