@@ -1378,6 +1378,16 @@ div.m-widget25 .m-widget25__price {
     overflow-x: hidden;
 }
 
+#m_aside_left {
+    position: fixed;
+}
+
+.m-wrapper {
+    margin-left: 225px;
+    transition: margin .3s;
+    will-change: auto;
+}
+
 @media (max-width: 992px) {
 
     .m-wrapper {
