@@ -53,7 +53,7 @@ class OpenInvoicesTable extends Component {
     let total = 0;
 
     for (let i = 0; i < products.length; i++) {
-      if (isNaN(products[i].storeItem.price)) {
+      if (!products[i] || (!products[i].storeItem && products[i].storeItem !== 0) || isNaN(products[i].storeItem.price)) {
         continue;
       }
       total += (Number(products[i].storeItem.price) * Number(products[i].count));
@@ -80,7 +80,7 @@ class OpenInvoicesTable extends Component {
 
     return rows.map(function (item, i) {
 
-      return (
+      return (item && item.storeItem &&
         <Row index={i} key={i}>
           <Td first={true} width='10px'>{i + 1}</Td>
           <Td width='400px'>
