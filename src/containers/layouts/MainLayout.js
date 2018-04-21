@@ -14,9 +14,22 @@ class MainLayout extends Component {
         sidebarIsOpen:false
     }
 
-    openMobileSidebar = event => {
-        this.setState({sidebarIsOpen:!this.state.sidebarIsOpen})
+  openMobileSidebar = event => {
+    if (window.innerWidth > 992) {
+      this.setState({sidebarIsOpen: !this.state.sidebarIsOpen});
+    } else {
+      const sidebarIsOpen = this.state.sidebarIsOpen;
+      if (window.scrollY > 50) {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        if (!sidebarIsOpen) {
+          this.setState({sidebarIsOpen: !this.state.sidebarIsOpen});
+        }
+      } else {
+        this.setState({sidebarIsOpen: !this.state.sidebarIsOpen});
+      }
     }
+  }
 
 
 

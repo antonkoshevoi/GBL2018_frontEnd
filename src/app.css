@@ -1397,55 +1397,19 @@ div.m-widget25 .m-widget25__price {
 
     .m-wrapper {
         transition: margin 0.5s ease-in;
-    }
-
-    .m-sidebar-is-open .m-wrapper {
-        padding-top: 0;
-        margin-top: 400px;
-        /*transition: margin 0.5s ease-in;*/
-    }
-
-    .m-sidebar-is-open .menu-active-learningAreas ~ .m-wrapper {
-        margin-top: 263px;
-    }
-
-    .m-sidebar-is-open .menu-active-sharing ~ .m-wrapper {
-        margin-top: 335px;
-    }
-
-    .m-sidebar-is-open .menu-active-store ~ .m-wrapper {
-        margin-top: 371px;
-    }
-
-    .m-sidebar-is-open .menu-active-accounts ~ .m-wrapper {
-        margin-top: 227px;
-    }
-
-    .m-sidebar-is-open .menu-active-studentsAndStaff ~ .m-wrapper {
-        margin-top: 227px;
-    }
-
-    .m-sidebar-is-open .parent-menu-active-dashboard ~ .m-wrapper {
-        margin-top: 430px;
-    }
-
-    .m-sidebar-is-open .parent-menu-active-store ~ .m-wrapper {
-        margin-top: 505px;
-    }
-
-    .m-sidebar-is-open .parent-menu-active-calendar ~ .m-wrapper {
-        margin-top: 430px;
+        padding-top: 0 !important;
     }
 
     #m_aside_left {
         max-height: 0;
         transition: max-height 0.5s ease-out;
-        top: 60px;
+        /*top: 60px;*/
         width: 100% !important;
         min-width: 100%;
-        position: fixed;
+        position: relative;
         left: 0;
         overflow-y: hidden;
+        z-index: 1;
     }
 
     .m-sidebar-is-open #m_aside_left {
