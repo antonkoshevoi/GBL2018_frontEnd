@@ -1390,6 +1390,11 @@ div.m-widget25 .m-widget25__price {
 
 @media (max-width: 992px) {
 
+    .menu-back-arrow {
+        /*TODO delete this and fix bug with arrow on mobile*/
+        display: none !important;
+    }
+
     .m-wrapper {
         transition: margin 0.5s ease-in;
     }

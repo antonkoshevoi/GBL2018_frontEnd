@@ -133,7 +133,7 @@ class ParentSidebar extends Component {
     return (
       <div className={'second_level ' + (activeMenu.key === menu.key ? 'activeSubMenu fadeInUp  animated' : '')}
            id={menu.key}>
-        <a href="#" className="back" onMouseOver={() => {
+        <a href="#" className="menu-back-arrow back" onMouseOver={() => {
           _self._menuBackHover()
         }}>
           <i className="la la-angle-left"></i>
