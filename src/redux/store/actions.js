@@ -178,7 +178,7 @@ export function setShippingAndBilling(data) {
   return {
     types: [SET_SHIPPING_BILLING_INFO, SET_SHIPPING_BILLING_INFO_SUCCESS, SET_SHIPPING_BILLING_INFO_FAIL],
     promise: (apiClient) => apiClient.post('checkout/address', data),
-    payload: data,
+    payload: data
   };
 }
 

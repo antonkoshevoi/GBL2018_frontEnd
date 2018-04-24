@@ -124,6 +124,10 @@ class Checkout extends Component {
     this.handleNext();
   };
 
+  _processCreditCard = () => {
+    this.props.setPayMethod('CreditCard');
+    this.handleNext();
+  };
   /**
    * Check
    * @private
@@ -212,7 +216,7 @@ class Checkout extends Component {
                           {
                             title: 'Credit Card',
                             img: creditCardImg,
-                            onSelect: this._startProcessPayPal,
+                            onSelect: this._processCreditCard,
                           },
                           {
                             title: 'Check',
