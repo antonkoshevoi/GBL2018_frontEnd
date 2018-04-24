@@ -61,7 +61,7 @@ class UnassignedCourses extends Component {
 
   render() {
     return (
-      <Card title="Unassigned Courses" icon="fa fa-list-alt" style={{marginTop:15, height:'unset'}}>
+      <Card title="Unassigned Courses" icon="fa fa-list-alt" isMainCard={true} isStore={true} style={{marginTop:15, height:'unset'}}>
         <Table>
           <Thead>
           <HeadRow>

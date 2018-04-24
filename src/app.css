@@ -1525,6 +1525,10 @@ div.m-widget25 .m-widget25__price {
         border-color: #467822 !important;
     }
 
+    .dashboard-store {
+        margin-top: 0 !important;
+    }
+
     .dashboard-store, .dashboard-shopping-cart-transparent-bg {
         background-color: transparent;
         box-shadow: none;
