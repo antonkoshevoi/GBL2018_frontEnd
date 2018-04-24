@@ -114,7 +114,7 @@
 /**********************************/
 
 
-@media (max-width: 992px) {
+@media (max-width: 1240px) {
 
     div.loader {
         margin-left: 0;
@@ -170,7 +170,7 @@
 }
 
 
-@media (min-width: 993px) {
+@media (min-width: 1241px) {
 
 
 }

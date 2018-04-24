@@ -32,7 +32,7 @@ class Header extends Component {
       anchorEl: null,
       activePusherMenu: null,
       headerPosition: 0,
-      headerHeight:window.innerWidth <= 992 ? 60 : 70
+      headerHeight:window.innerWidth <= 1240 ? 60 : 70
     };
   }
 

@@ -22,8 +22,8 @@ class Sidebar extends Component {
       },
       hovered: false,
       headerPosition: 0,
-      headerHeight:window.innerWidth <= 992 ? 60 : 70,
-      mobileMenu: $(window).width() <= 992 ? 53 : 0
+      headerHeight:window.innerWidth <= 1240 ? 60 : 70,
+      mobileMenu: $(window).width() <= 1240 ? 53 : 0
     }
   }
 
@@ -40,7 +40,7 @@ class Sidebar extends Component {
   }
 
   updateDimensions() {
-    this.setState({mobileMenu: $(window).width() <= 992 ? 53 : 0});
+    this.setState({mobileMenu: $(window).width() <= 1240 ? 53 : 0});
   }
 
   setHeaderPosition(){

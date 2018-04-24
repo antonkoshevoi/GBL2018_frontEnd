@@ -809,7 +809,7 @@ div.m-portlet {
     padding: 12% 10% 9% 5%;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1240px) {
     .quick-card-title{
         margin-top: 15px;
     }
@@ -1406,7 +1406,7 @@ div.m-widget25 .m-widget25__price {
     }
 }
 
-@media (min-width: 992px) and (max-width: 1367px) {
+@media (min-width: 1240px) and (max-width: 1367px) {
     .quick-link-image img {
         width: 100%;
         height: auto;
@@ -1429,14 +1429,14 @@ div.m-widget25 .m-widget25__price {
     }
 }
 
-@media (min-width: 992px) and (max-width: 1036px){
+@media (min-width: 1240px) and (max-width: 1036px){
     .smaller-padding {
         padding-left: 10px;
         padding-right: 10px;
     }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1240px) {
     .margin-bottom-zero {
         margin-bottom: 0 !important;
     }
@@ -1546,7 +1546,7 @@ div.m-widget25 .m-widget25__price {
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1240px) {
 
     .menu-back-arrow {
         /*TODO delete this and fix bug with arrow on mobile*/
@@ -1689,7 +1689,7 @@ div.m-widget25 .m-widget25__price {
     margin-bottom: 15px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1240px) {
     .m--visible-desktop-lg {
         display: block !important; }
     .m--visible-desktop-lg-inline-block {
@@ -1703,7 +1703,7 @@ div.m-widget25 .m-widget25__price {
     .m--hidden-desktop-lg {
         display: none !important; } }
 
-@media (min-width: 1200px) {
+@media (min-width: 1240px) {
     .m--visible-desktop-xl {
         display: block !important; }
     .m--visible-desktop-xl-inline-block {
