@@ -24,7 +24,7 @@ export default class FeaturedItems extends Component {
     render() {
         const {data} = this.props;
         return (
-              <Card title="Store" colorBorder="green" >
+              <Card title="Store" isMainCard={true} isStore={true} colorBorder="green" >
                   <div className="store-container">
                       <div className="store-featured">
                           <div className="store-featured-title">

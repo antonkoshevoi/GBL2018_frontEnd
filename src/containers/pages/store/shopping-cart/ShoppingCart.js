@@ -68,8 +68,8 @@ class ShoppingCart extends Component {
         {loading && <Loader/>}
         <div className='row'>
           <div className={`shoppingCartPortlet m-auto col-xl-${preview ? '12': '9'}`} >
-            <div className='m-portlet m-portlet--full-height '>
-              <div className='m-portlet__head'>
+            <div className='m-portlet m-portlet--full-height dashboard-shopping-cart-transparent-bg'>
+              <div className='m-portlet__head account-header-border'>
                 <div className='m-portlet__head-caption'>
                   <div className='m-portlet__head-title'>
                     <h3 className='m-portlet__head-text'>
@@ -79,7 +79,7 @@ class ShoppingCart extends Component {
                 </div>
 
               </div>
-              <div className={`m-portlet__body ${preview ? 'zoom-preview': ''}`}>
+              <div className={`m-portlet__body dashboard-shopping-cart-body ${preview ? 'zoom-preview': ''}`}>
                 {success &&
                  <OpenInvoicesTable
                    preview = {preview}
@@ -92,11 +92,11 @@ class ShoppingCart extends Component {
                 }
               </div>
               {preview &&
-              <div className="row d-flex justify-content-end ">
+              <div className="row d-flex justify-content-end dashboard-shopping-cart-buttons">
                 <div className="col-md-4 d-flex justify-content-end align-items-center">
                   <div className="form-group-inline btn-group">
-                    <NavLink to="/store/shopping-cart" className="btn m-btm btn-primary">View Cart</NavLink>
-                    <NavLink to="/shopping/checkout" className="btn m-btm btn-success">Checkout</NavLink>
+                    <NavLink to="/store/shopping-cart" className="btn m-btm btn-primary smaller-padding">View Cart</NavLink>
+                    <NavLink to="/shopping/checkout" className="btn m-btm btn-success smaller-padding">Checkout</NavLink>
                   </div>
                 </div>
               </div>

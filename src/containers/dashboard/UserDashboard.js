@@ -142,17 +142,17 @@ class UserDashboard extends Component {
     const productsSuccess = getRecordsRequest.get('success');
     return (
       <div className="fadeInLeft  animated">
-        <div className="row">
-          <div className="col-sm-12 col-md-12 col-lg-12 col-xl-9" style={{marginTop:'15px'}}>
-            <Card title="Reports Snapshot" boxShadow={false} style={{boxShadow:"none"}} bodyStyle={{padding:'0', background:'#f2f3f8'}}>
+        <div className="row dashboard-main-top">
+          <div className="col-sm-12 col-md-12 col-lg-12 col-xl-9 dashboard-reports-snapshot" style={{marginTop:'15px'}}>
+            <Card title="Reports Snapshot" isMainCard={true} boxShadow={false} style={{boxShadow:"none"}} bodyStyle={{padding:'0', background:'#f2f3f8'}}>
               <div className="row row-15">
-                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">
                   <RosterStatistic/>
                 </div>
-                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">
                   <LineChart/>
                 </div>
-                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">
                   <SchoolAverageChart/>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--visible-tablet-and-mobile m--visible-desktop-lg">
@@ -162,13 +162,13 @@ class UserDashboard extends Component {
             </Card>
 
           </div>
-          <div className="col-sm-12 col-xl-3 m--hidden-tablet-and-mobile m--hidden-desktop-lg">
+          <div className="col-sm-12 col-xl-3 m--hidden-tablet-and-mobile m--hidden-desktop-lg dashboard-quick-links">
             <QuickLink/>
           </div>
 
 
         </div>
-        <div className="row">
+        <div className="row dashboard-main-bottom">
           <div className="col-md-6 col-lg-8">
             <FeaturedItems data={records}/>
             {/*<StoreTabs isLoading={productsLoading} isSuccess={productsSuccess} getProducts={(category) => {*/}

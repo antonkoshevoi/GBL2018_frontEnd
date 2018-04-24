@@ -12,8 +12,8 @@ export default class QuickLink extends Component {
     return (
       <div style={style ? style : {height:'80%'}} >
 
-        <div className='m-portlet m-portlet--head-solid-bg quick-card-title'>
-          <div className='m-portlet__head border-b-orange'>
+        <div className='m-portlet m-portlet--head-solid-bg quick-card-title quick-links-header quick-links-header-transparent'>
+          <div className='m-portlet__head border-b-orange quick-links-header-border'>
             <div className='m-portlet__head-caption'>
               <div className='m-portlet__head-title'>
                 <h3 className='m-portlet__head-text'>
@@ -24,21 +24,19 @@ export default class QuickLink extends Component {
           </div>
         </div>
         <div className="small-card-content">
-          <div className="small-card">
+          <div className="small-card quick-link-card">
             <div className="row">
-              <div className="col-6">
-                <div className="">
-                    <span className="quick-card-item m--font-brand">
+              <div className="col-6 quick-link-image">
+                <div>
                         <img src={bz} alt=""/>
-                    </span>
                 </div>
               </div>
 
-              <div className="col-6">
+              <div className="col-6 quick-link-text">
                 <div className="row">
                   <div className="m--align-right quick-link-title">
                     <h5 className="text-left">Student App</h5>
-                    <span className="">Download</span>
+                    <h3 className="text-left">Download</h3>
                   </div>
                 </div>
 
@@ -52,22 +50,18 @@ export default class QuickLink extends Component {
             </div>
 
           </div>
-          <div className="small-card">
+          <div className="small-card quick-link-card">
 
             <div className="row">
-              <div className="col-6">
-                <div className="">
-                    <span className="quick-card-item m--font-brand">
-                        <img src={teacher} alt=""/>
-                    </span>
-                </div>
+              <div className="col-6 quick-link-image">
+                <img src={teacher} alt=""/>
               </div>
 
-              <div className="col-6">
+              <div className="col-6 quick-link-text">
                 <div className="row">
                   <div className="m--align-right quick-link-title">
                     <h5 className="text-left">How-To</h5>
-                    <span className="">Movies</span>
+                    <h3 className="text-left">Movies</h3>
                   </div>
                 </div>
 
