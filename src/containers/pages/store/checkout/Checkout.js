@@ -66,7 +66,7 @@ class Checkout extends Component {
         break;
 
       case 'PayPal':
-        this._processPayPal();
+        this.props.createPayPalPayment();
         break;
     }
 
@@ -88,24 +88,11 @@ class Checkout extends Component {
         stepIndex: stepIndex - 1
       });
     }
-
-
   };
 
-  /**
-   * PayPal
-   * @private
-   */
-  _processPayPal() {
-    this.props.createPayPalPayment();
-  }
-
-  _startProcessPayPal = () => {
-
+  _processPayPal = () => {
     this.props.setPayMethod('PayPal');
-
-
-    this._stepBilling('PayPal');
+    this.handleNext();
   };
 
   _handlePayPalPaymentCreated(nextProps) {
@@ -209,9 +196,8 @@ class Checkout extends Component {
                         <PaymentMethods methods={[
                           {
                             title: 'PayPal',
-                            img: payPalImg,
-                            loading: createPayPalPaymentRequest.get('loading') || redirectingToPayPal,
-                            onSelect: this._startProcessPayPal,
+                            img: payPalImg,                            
+                            onSelect: this._processPayPal,
                           },
                           {
                             title: 'Credit Card',
