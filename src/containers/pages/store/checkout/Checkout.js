@@ -51,20 +51,16 @@ class Checkout extends Component {
     this._handleCheckPaymentCreated(nextProps);
     this._handleCheckPaymentFailed(nextProps);
   }
-/*
-  _save = (method = null) => {
-        alert('_handleCreditCard'); 
-  }; 
-  */
-  _handleCreditCard = () => {
-      alert('_handleCreditCard');  
+
+  _handleCreditCard = () => {      
+      this.handleNext();
   }   
   
   _stepBilling = (method = null) => {
     const payMethod = method ? method : this.props.payMethod;
     
     this.setState({showCreditCard: false});
-    alert('_stepBilling');
+    
     switch (payMethod) {
       case 'Check':
         this._processCheckCreate();
@@ -84,11 +80,10 @@ class Checkout extends Component {
   };
 
   handleNext = () => {
-
     const {stepIndex} = this.state;
     this.setState({
       stepIndex: stepIndex + 1,
-      finished: stepIndex >= 2,
+      finished: stepIndex >= 2
     });
   };
 
@@ -254,7 +249,7 @@ class Checkout extends Component {
                        
                         {showCreditCard &&
                         <div className='col-8'>
-                            <CreditCard  onSubmit={this._handleCreditCard} errors='' />
+                            <CreditCard onDataSaved={this._handleCreditCard} paymentAmount={cartRecordsSum} />
                         </div>
                         }                     
                     </div>

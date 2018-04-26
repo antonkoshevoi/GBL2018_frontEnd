@@ -18,6 +18,14 @@ export const selectExecutePayPalPaymentRequest = createSelector(
 );
 
 /**
+ * CC
+ */
+export const selectCreateCreditCardPaymentRequest = createSelector(
+  selectStoreDomain,
+  (subState) => subState.get('createCreditCardPaymentRequest')
+);
+
+/**
  * Check
  */
 export const selectCreateCheckPaymentRequest = createSelector(

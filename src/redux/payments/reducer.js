@@ -2,8 +2,10 @@ import Immutable from 'immutable';
 import {
   CREATE_CHECK_PAYMENT, CREATE_CHECK_PAYMENT_FAIL, CREATE_CHECK_PAYMENT_SUCCESS,
   CREATE_PAYPAL_PAYMENT, CREATE_PAYPAL_PAYMENT_FAIL, CREATE_PAYPAL_PAYMENT_SUCCESS,
+  CREATE_CC_PAYMENT, CREATE_CC_PAYMENT_SUCCESS, CREATE_CC_PAYMENT_FAIL, RESET_CC_PAYMENT,
   EXECUTE_PAYPAL_PAYMENT, EXECUTE_PAYPAL_PAYMENT_FAIL, EXECUTE_PAYPAL_PAYMENT_SUCCESS, GET_INVOICE, GET_INVOICE_FAIL,
   GET_INVOICE_SUCCESS,
+  
   SET_PAY_TYPE
 } from './actions';
 
@@ -24,18 +26,53 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false
   },
+  createCreditCardPaymentRequest: {
+    loading: false,
+    success: false,
+    fail: false
+  },  
   payMethod: null,
   invoiceRequest: {
     loading: false,
     success: false,
     fail: false,
     data: undefined
-  },
-
+  }
 });
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+      
+    /*
+    * Set/Get shipping and billing address
+    * */
+    case CREATE_CC_PAYMENT:    
+      return state
+        .set('createCreditCardPaymentRequest', state.get('createCreditCardPaymentRequest')
+          .set('loading', true)
+          .set('success', false)          
+          .set('errors', null));
+    case CREATE_CC_PAYMENT_SUCCESS:
+      return state
+        .set('createCreditCardPaymentRequest', state.get('createCreditCardPaymentRequest')
+          .set('loading', false)
+          .set('success', true)          
+          .set('errors', null)
+        );
+    case CREATE_CC_PAYMENT_FAIL:    
+      const data = action.error.response.data;
+      const errors = Immutable.fromJS(data.errors);
+      
+      return state
+        .set('createCreditCardPaymentRequest', state.get('createCreditCardPaymentRequest')
+          .set('loading', false)
+          .set('success', false)          
+          .set('errors', (errors.size ? errors : Immutable.fromJS(data)))
+        );
+    case RESET_CC_PAYMENT:
+      return state
+        .set('createCreditCardPaymentRequest', initialState.get('createCreditCardPaymentRequest'));
+                
     /**
      * Create paypal payment
      */
