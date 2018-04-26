@@ -1429,6 +1429,83 @@ div.m-widget25 .m-widget25__price {
     }
 }
 
+.unit-table td span, .unit-table th span {
+    text-align: center;
+}
+
+.unit-table > tbody > tr {
+    border-top: 2px solid #000000;
+}
+
+.unit-table > tbody > tr:last-child {
+    border-bottom: 2px solid #000000;
+}
+
+.unit-table > tbody > tr > tr {
+    border-top: 1px solid #000000;
+}
+
+.unit-table > tbody > tr > tr:nth-child(2) {
+    border-top: none;
+}
+
+.unit-table > tbody > tr > tr > tr {
+    border-top: 1px solid #000000;
+}
+
+.unit-table > tbody > tr > tr > tr:nth-child(3) {
+    border-top: none;
+}
+
+.unit-table td {
+    border-right: 1px solid #000000;
+}
+
+.unit-table > tbody > tr > td:first-child {
+    border-left: 1px solid #000000;
+}
+
+.attempt-pass {
+    background-color: green;
+}
+
+.attempt-pass div, .attempt-fail div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.attempt-fail {
+    background-color: red;
+}
+
+td.rotate {
+    white-space: nowrap;
+    position: relative;
+    width: 50px;
+    background-color: #337ab7;
+}
+
+td.rotate div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+td.rotate div span {
+    font-size: 26px;
+    color: #ffffff;
+    transform: rotate(270deg);
+}
+
 @media (min-width: 1240px) and (max-width: 1036px){
     .smaller-padding {
         padding-left: 10px;

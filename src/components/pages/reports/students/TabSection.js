@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Tab, Tabs, Typography} from "material-ui";
-import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../../../ui/table";
+import {Tab, Tabs, Typography} from 'material-ui';
+import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../ui/table';
 import Parser from 'html-react-parser';
+import ApiClient from "../../../../services/ApiClient";
+import {LessonsTable} from '../students/LessonsTable';
+import {getStudentClassReport} from '../../../../redux/reports/students/actions';
 
 function TabContainer(props) {
   return (
@@ -48,48 +51,13 @@ class TabSection extends Component {
       </TabContainer>
     } else {
       return courses.map(function (item, i) {
-        return (
-          value == item.course.crsId && <TabContainer key={i}>
-            {_self._renderLessonsTables(item)}
-          </TabContainer>
-        )
+        if (value == item.course.crsId) {
+          return (<LessonsTable studentId={item.studentId} classroomId={item.classroomId} key={i}></LessonsTable>)
+        } else {
+          return (false)
+        }
       })
     }
-  }
-
-  _renderLessonsTables(item) {
-    return (
-      <Table>
-        <Thead>
-        <HeadRow>
-          <Th first={true} width='20px'>#</Th>
-          <Th width='100px'>Unit/lesson</Th>
-          <Th width='150px'>Title / Description</Th>
-          <Th width='100px'>Status</Th>
-          <Th width='50px'>Passes/Required Passes</Th>
-          <Th width='250px'>Comments</Th>
-        </HeadRow>
-        </Thead>
-        <Tbody>
-        {item.attemptsCurrent.map(function (attemptCurrent, i) {
-          return (
-            <Row index={i} key={i}>
-              <Td first={true} width='20px'>{i + 1}</Td>
-              <Td width='100px'>{attemptCurrent.lesson}</Td>
-              <Td width='150px'>{attemptCurrent.description}</Td>
-              <Td width='100px'>
-                <span className='m-badge m-badge--brand m-badge--wide'>
-                  {attemptCurrent.attempts == 0 ? 'Not started' : (attemptCurrent.passes == attemptCurrent.Required_Passes ? 'Completed' : 'In Progress') }
-                </span>
-              </Td>
-              <Td width='50px'>{attemptCurrent.passes} / {attemptCurrent.Required_Passes}</Td>
-              <Td width='250px'>{attemptCurrent.metadata && Parser(attemptCurrent.metadata)}</Td>
-            </Row>
-          )
-        })}
-        </Tbody>
-      </Table>
-    )
   }
 
   _renderDetailedData(item) {
@@ -135,8 +103,8 @@ class TabSection extends Component {
 
   render() {
 
-    const { value } = this.state;
-    const { data } = this.props.data;
+    const {value} = this.state;
+    const {data} = this.props.data;
 
     return (
       <div className="row ">
@@ -154,11 +122,11 @@ class TabSection extends Component {
                     value={value}
                     onChange={this.handleChange}
                   >
-                  {this._renderTabs(data)}
+                    {this._renderTabs(data)}
                   </Tabs>
                 </div>
               </div>
-              <div className="m-portlet__body" style={{height: "100%"}}>
+              <div className="m-portlet__body" style={{height: '100%'}}>
                 {this._renderTabContent(data)}
               </div>
             </div>
