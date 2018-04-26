@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
-import CartItems from '../../../../components/pages/store/checkout/CartItems';
 import '../../../../styles/store.css'
-import InfoDetails from '../../../../components/pages/store/checkout/InfoDetails';
 import PaymentMethods from '../../../../components/pages/store/checkout/PaymentMethods';
 import {selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest} from '../../../../redux/store/selectors';
 import {calculateCartSum, getCartRecords} from '../../../../redux/store/actions';
@@ -25,6 +23,7 @@ import creditCardImg from '../../../../media/images/payments/credit_card.png'
 import checkImg from '../../../../media/images/payments/check.png'
 import Card from "../../../../components/ui/Card";
 import ShippingAndBilling from "./ShippingAndBilling";
+import CreditCard from "./CreditCard";
 import PaymentSuccessContainer from "../payments/PaymentSuccessContainer";
 
 const styles = () => ({
@@ -33,14 +32,12 @@ const styles = () => ({
 
 class Checkout extends Component {
 
-  state = {
-    redirectingToPayPal: false,
+  state = {   
     stepIndex: 0,
     finished: 0,
     payMethod: null,
-
+    showCreditCard: false
   };
-
 
   componentWillMount() {
     const {step} = this.props.match.params;
@@ -53,31 +50,40 @@ class Checkout extends Component {
     this._handlePayPalPaymentCreated(nextProps);
     this._handleCheckPaymentCreated(nextProps);
     this._handleCheckPaymentFailed(nextProps);
-
-
   }
 
+  _handleCreditCard = () => {      
+      this.handleNext();
+  }   
+  
   _stepBilling = (method = null) => {
     const payMethod = method ? method : this.props.payMethod;
-
+    
+    this.setState({showCreditCard: false});
+    
     switch (payMethod) {
       case 'Check':
         this._processCheckCreate();
         break;
 
       case 'PayPal':
-        this._processPayPal();
+        this.props.createPayPalPayment();
         break;
+        
+      case 'CreditCard':
+        this.setState({
+          stepIndex: 1,
+          showCreditCard: true
+        });
+        break;        
     }
-
   };
 
   handleNext = () => {
-
     const {stepIndex} = this.state;
     this.setState({
       stepIndex: stepIndex + 1,
-      finished: stepIndex >= 2,
+      finished: stepIndex >= 2
     });
   };
 
@@ -85,39 +91,25 @@ class Checkout extends Component {
     const {stepIndex} = this.state;
     if (stepIndex > 0) {
       this.setState({
-        stepIndex: stepIndex - 1
+        stepIndex: stepIndex - 1,
+        showCreditCard: false        
       });
     }
-
-
   };
 
-  /**
-   * PayPal
-   * @private
-   */
-  _processPayPal() {
-    this.props.createPayPalPayment();
-  }
-
-  _startProcessPayPal = () => {
-
+  _processPayPal = () => {
     this.props.setPayMethod('PayPal');
-
-
-    this._stepBilling('PayPal');
+    this.handleNext();
   };
 
   _handlePayPalPaymentCreated(nextProps) {
     const success = this.props.createPayPalPaymentRequest.get('success');
     const nextSuccess = nextProps.createPayPalPaymentRequest.get('success');
 
-    if (!success && nextSuccess) {
-      this.setState({redirectingToPayPal: true});
+    if (!success && nextSuccess) {      
       window.location = nextProps.createPayPalPaymentRequest.get('approvalUrl');
     }
   }
-
 
   _processCheck = () => {
     this.props.setPayMethod('Check');
@@ -152,11 +144,13 @@ class Checkout extends Component {
     if (!fail && nextFail) {
       this.props.goToFailPage();
     }
-  }
+  }  
 
   render() {
-
-    const {redirectingToPayPal, stepIndex} = this.state;
+    const {
+        stepIndex,
+        showCreditCard
+    } = this.state;
     const {
       cartRecords,
       cartRecordsRequest,
@@ -174,7 +168,6 @@ class Checkout extends Component {
           <div className="col-12">
             <Card header={false}>
               <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
-
                 <Step>
                   <StepLabel>Payments Options</StepLabel>
                 </Step>
@@ -209,9 +202,8 @@ class Checkout extends Component {
                         <PaymentMethods methods={[
                           {
                             title: 'PayPal',
-                            img: payPalImg,
-                            loading: createPayPalPaymentRequest.get('loading') || redirectingToPayPal,
-                            onSelect: this._startProcessPayPal,
+                            img: payPalImg,                            
+                            onSelect: this._processPayPal,
                           },
                           {
                             title: 'Credit Card',
@@ -226,36 +218,48 @@ class Checkout extends Component {
                           },
                           {
                             title: 'WireTransfer(TT)',
-                            img: checkImg,
-                            // loading: createCheckPaymentRequest.get('loading'),
+                            img: checkImg,                            
                             onSelect: () => {
                               this.handleNext();
                             },
                           },
                           {
                             title: 'COG',
-                            img: checkImg,
-                            // loading: createCheckPaymentRequest.get('loading'),
+                            img: checkImg,                            
                             onSelect: () => {
                               this.handleNext();
                             },
-                          },
-
-
+                          }
                         ]}
 
                         />
                       </div>
                     </div>
-
-
                   )
                 })(),
-
-                <ShippingAndBilling onDataSaved={this._stepBilling}/>,
+                
+                (() => {
+                  return (    
+                    <div className="row d-flex justify-content-center">
+                        {!showCreditCard &&
+                        <div className='col-10'>
+                           <ShippingAndBilling onDataSaved={this._stepBilling}/>
+                        </div>
+                        }
+                       
+                        {showCreditCard &&
+                        <div className='col-8'>
+                            <CreditCard onDataSaved={this._handleCreditCard} paymentAmount={cartRecordsSum} />
+                        </div>
+                        }                     
+                    </div>
+                  )
+                })(),
+                                                
                 <PaymentSuccessContainer/>
 
               ][stepIndex]}
+              
               {stepIndex !== 0 && stepIndex !== 2 &&
               <div className="form-group">
                 <Button
@@ -264,19 +268,10 @@ class Checkout extends Component {
                 >
                   Back
                 </Button>
-                {/*<Button*/}
-                {/*variant="raised"*/}
-                {/*color="primary"*/}
-                {/*onClick={this.handleNext}*/}
-                {/*>*/}
-                {/*{stepIndex === 2 ? 'Finish' : 'Next'}*/}
-                {/*</Button>*/}
               </div>
               }
             </Card>
-
           </div>
-
 
         </div>
       </div>
