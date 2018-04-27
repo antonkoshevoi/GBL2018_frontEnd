@@ -43,12 +43,12 @@ class CreditCard extends Component {
         }
         return (
             <div className="row">
-                <div className="col-sm-8 m-auto">
+                <div className="col-sm-12 col-md-10 col-lg-8 m-auto">
                     {loading && <Loader/>}
                     <legend className='m--margin-bottom-10'>Credit Card</legend>
                     <div className='m-form__section m-form__section--first'>
                       <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3 col-sm-12">Credit Card Number </label>
+                        <label className="col-form-label col-md-3 col-lg-3 col-sm-12">Credit Card Number </label>
                         <div className="col-lg-9 col-md-9 col-sm-12">
                           <input
                             required                    
@@ -66,7 +66,7 @@ class CreditCard extends Component {
                     </div>
                     <div className='m-form__section m-form__section--first'>
                       <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3 col-sm-12">Holder Name</label>
+                        <label className="col-form-label col-md-3 col-lg-3 col-sm-12">Holder Name</label>
                         <div className="col-lg-9 col-md-9 col-sm-12">
                           <input
                             required                    
@@ -82,7 +82,7 @@ class CreditCard extends Component {
                       </div>
                     </div>
                     <div className="form-group m-form__group row">
-                      <label className="col-form-label col-lg-3 col-sm-12">Card Type</label> 
+                      <label className="col-form-label col-lg-3 col-md-3 col-sm-12">Card Type</label> 
                       <div className="col-lg-5 col-md-9 col-sm-12">
                         <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
                           <FormControl>
@@ -103,8 +103,8 @@ class CreditCard extends Component {
                       </div>                      
                     </div>                    
                     <div className="form-group m-form__group row">
-                      <label className="col-form-label col-lg-3 col-sm-12">Exp. Date (YYYY/MM)</label>
-                      <div className="col-lg-5 col-md-9 col-sm-12">
+                      <label className="col-form-label col-lg-3 col-md-3 col-sm-12">Exp. Date (YYYY/MM)</label>
+                      <div className="col-lg-5 col-md-5 col-sm-12">
                         <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
                           <FormControl>
                             <Select                      
@@ -118,7 +118,7 @@ class CreditCard extends Component {
                           {errors && errors.get('cardExpYear') && <FormHelperText error>{ errors.get('cardExpYear').get(0) }</FormHelperText>}
                         </FormControl>
                       </div>
-                      <div className="col-lg-3 col-md-9 col-sm-12">
+                      <div className="col-lg-3 col-md-3 col-sm-12">
                         <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
                           <FormControl>
                             <Select                      
@@ -146,8 +146,8 @@ class CreditCard extends Component {
                     </div>
                     <div className='m-form__section m-form__section--first'>
                       <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3 col-sm-12">CVV Code </label>
-                        <div className="col-lg-5 col-md-9 col-sm-12">
+                        <label className="col-form-label col-lg-3 col-md-3 col-sm-12">CVV Code </label>
+                        <div className="col-lg-5 col-md-6 col-sm-12">
                           <input
                             required                    
                             value={this.state.cardCvv2 || ''}
