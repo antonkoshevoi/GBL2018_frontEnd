@@ -1656,6 +1656,30 @@ td.rotate div span {
         padding-bottom: 20px;
         background-color: #ffffff;
     }
+
+    .reports-flex-row > div:first-child {
+        padding-left: 1px;
+    }
+
+    .reports-flex-row > div:last-child {
+        padding-right: 1px;
+    }
+
+}
+
+.row-reports-main-top-block {
+    flex-direction: column;
+}
+
+.reports-flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.reports-flex-row > div {
+    max-height: 329px;
 }
 
 @media (max-width: 1240px) {
