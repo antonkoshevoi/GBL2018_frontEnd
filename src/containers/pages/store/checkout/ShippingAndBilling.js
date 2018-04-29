@@ -33,11 +33,9 @@ import {selectPaymentMethod} from "../../../../redux/payments/selectors";
 class ShippingAndBilling extends Component {
 
   state = {
-    billingContact: {},
-    shippingContact: {},
     billingAddress: {},
     shippingAddress: {},
-    sameShipping: false,
+    sameShipping: false
   };
 
   componentWillMount() {
@@ -66,15 +64,7 @@ class ShippingAndBilling extends Component {
     });
 
     if (sameShipping) {
-      switch (name) {
-        case 'billingContact':
-          this._setSameShipping('shippingContact', form);
-          break;
-
-        case 'billingAddress':
-          this._setSameShipping('shippingAddress', form);
-          break;
-      }
+        this._setSameShipping('shippingAddress', form);
     }
   }
 
@@ -83,12 +73,10 @@ class ShippingAndBilling extends Component {
     const {checked} = event.target;
     this.setState({
       ...this.state,
-      sameShipping: checked,
+      sameShipping: checked
     });
-
-    this._setSameShipping('shippingContact', this.state.billingContact);
+    
     this._setSameShipping('shippingAddress', this.state.billingAddress);
-
   };
 
   _setSameShipping = (name, form) => {
@@ -127,7 +115,7 @@ class ShippingAndBilling extends Component {
 
 
   render() {
-    const {billingAddress, shippingAddress, billingContact, shippingContact, sameShipping, successRequest} = this.state;
+    const {billingAddress, shippingAddress, sameShipping, successRequest} = this.state;
     const {shippingAndBillingRequest} = this.props;
     const loading = shippingAndBillingRequest.get('loading');
     const success = shippingAndBillingRequest.get('success');
@@ -165,18 +153,18 @@ class ShippingAndBilling extends Component {
               <div className="col-md-6 col-sm-12">
                 <ContactInfo
                   title='Billing contact information'
-                  onChange={(form) => this._handleForm(form, 'billingContact')}
-                  name={'billingContact'}
+                  onChange={(form) => this._handleForm(form, 'billingAddress')}
+                  name={'billingAddress'}
                   errors={errors}
-                  form={billingContact}
+                  form={billingAddress}
                 />
               </div>
               <div className="col-md-6 col-sm-12">
                 <ContactInfo
                   title='Shipping contact information'
-                  onChange={(form) => this._handleForm(form, 'shippingContact')}
-                  name={'shippingContact'}
-                  form={shippingContact}
+                  onChange={(form) => this._handleForm(form, 'shippingAddress')}
+                  name={'shippingAddress'}
+                  form={shippingAddress}
                   errors={errors}
                   disabled={sameShipping}
                 />

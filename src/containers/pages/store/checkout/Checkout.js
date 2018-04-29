@@ -50,8 +50,13 @@ class Checkout extends Component {
     this._handlePayPalPaymentCreated(nextProps);
     this._handleCheckPaymentCreated(nextProps);
     this._handleCheckPaymentFailed(nextProps);
+    this._calculateSum(nextProps.cartRecords.toJS());
   }
 
+  _calculateSum(data){
+      this.props.calculateSum(data);
+  }
+  
   _handleCreditCard = () => {      
       this.handleNext();
   }   
@@ -241,17 +246,12 @@ class Checkout extends Component {
                 (() => {
                   return (    
                     <div className="row d-flex justify-content-center">
-                        {!showCreditCard &&
-                        <div className='col-10'>
-                           <ShippingAndBilling onDataSaved={this._stepBilling}/>
+                        <div className='col-10'>                        
+                        {showCreditCard ? 
+                            <CreditCard onDataSaved={this._handleCreditCard} paymentAmount={cartRecordsSum} /> : 
+                            <ShippingAndBilling onDataSaved={this._stepBilling}/>
+                        }                             
                         </div>
-                        }
-                       
-                        {showCreditCard &&
-                        <div className='col-8'>
-                            <CreditCard onDataSaved={this._handleCreditCard} paymentAmount={cartRecordsSum} />
-                        </div>
-                        }                     
                     </div>
                   )
                 })(),
@@ -272,7 +272,6 @@ class Checkout extends Component {
               }
             </Card>
           </div>
-
         </div>
       </div>
     );
@@ -283,33 +282,19 @@ Checkout = connect(
   (state) => ({
     cartRecordsRequest: selectGetCartRecordsRequest(state),
     cartRecords: selectCartRecords(state),
-    cartRecordsSum: selectCartRecordsSum(state),
     createPayPalPaymentRequest: selectCreatePayPalPaymentRequest(state),
     createCheckPaymentRequest: selectCreateCheckPaymentRequest(state),
+    cartRecordsSum: selectCartRecordsSum(state),
     payMethod: selectPaymentMethod(state)
   }),
   (dispatch) => ({
-    getCartRecords: () => {
-      dispatch(getCartRecords())
-    },
-    createPayPalPayment: () => {
-      dispatch(createPayPalPayment())
-    },
-    createCheckPayment: () => {
-      dispatch(createCheckPayment())
-    },
-    calculateSum: (data) => {
-      dispatch(calculateCartSum(data))
-    },
-    goToSuccessPage: () => {
-      dispatch(push('/shopping/checkout/2'))
-    },
-    goToFailPage: () => {
-      dispatch(push('/payments/fail'))
-    },
-    setPayMethod: (data) => {
-      dispatch(setPayType(data))
-    }
+    getCartRecords:     () => {dispatch(getCartRecords())},
+    calculateSum:       (data) => {dispatch(calculateCartSum(data))},
+    createPayPalPayment:() => {dispatch(createPayPalPayment())},
+    createCheckPayment: () => {dispatch(createCheckPayment())},
+    goToSuccessPage:    () => {dispatch(push('/shopping/checkout/2'))},
+    goToFailPage:       () => {dispatch(push('/payments/fail'))},
+    setPayMethod:       (data) => {dispatch(setPayType(data))}
   })
 )(withStyles(styles)(Checkout));
 

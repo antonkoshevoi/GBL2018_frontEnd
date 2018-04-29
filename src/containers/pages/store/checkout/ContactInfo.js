@@ -122,8 +122,6 @@ export default class ContactInfo extends Component {
             </div>
           </div>
         </div>
-
-
       </div>
 
     );
