@@ -150,7 +150,7 @@ export class LessonsTable extends Component {
         </td>}
         <td className="m-datatable__cell comment-cell"
             key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptComment'}>
-          <span>{attemptFinished && 'COMMENT'}</span>
+          <span>{attemptFinished && Parser(attempt.comment)}</span>
         </td>
       </tr>
     )
