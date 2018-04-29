@@ -4,6 +4,7 @@ import {Tab, Tabs, Typography} from 'material-ui';
 import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../ui/table';
 import Parser from 'html-react-parser';
 import ApiClient from '../../../../services/ApiClient';
+import formTableData from '../../../../services/course-template-manager';
 const apiClient = new ApiClient();
 
 function TabContainer(props) {
@@ -27,10 +28,21 @@ export class LessonsTable extends Component {
 
   componentDidMount() {
     const {studentId, classroomId} = this.props;
-
+    let tableData;
     apiClient.get(`students/report-details/${studentId}/${classroomId}`).then(data => {
-      console.log('apiData', data);
-      this.setState({data: data});
+      let courseTemplate = localStorage.getItem(data.data.course_template);
+      if (!courseTemplate) {
+        apiClient.getJson(data.data.course_template).then((json) => {
+          courseTemplate = json;
+          localStorage.setItem(data.data.course_template, JSON.stringify(courseTemplate));
+          tableData = formTableData(data.data, courseTemplate);
+          this.setState({data: tableData});
+        });
+      } else {
+        courseTemplate = JSON.parse(courseTemplate);
+        tableData = formTableData(data.data, courseTemplate);
+        this.setState({data: tableData});
+      }
     });
   }
 
@@ -46,37 +58,46 @@ export class LessonsTable extends Component {
       <Table className="unit-table">
         <Thead>
         <HeadRow>
-          <Th width='40px'>Unit</Th>
-          <Th width='190px'>Lesson Title</Th>
-          <Th width='200px'>Lesson Description</Th>
-          <Th width='150px'>Lesson attempt</Th>
-          <Th width='100px'>Status</Th>
-          <Th width='150px'>Attempt date</Th>
-          <Th width='100px'>Score</Th>
-          <Th width='100px'>Percent</Th>
-          <Th width='100px'>Pass/Fail</Th>
-          <Th width='250px'>Comments</Th>
+          <Th width='44px'>Unit</Th>
+          <Th width='193px'>Lesson Title</Th>
+          <Th width='193px'>Lesson Description</Th>
+          <Th width='93px'>Lesson attempt</Th>
+          <Th width='93px'>Status</Th>
+          <Th width='93px'>Attempt date</Th>
+          <Th width='93px'>Score</Th>
+          <Th width='93px'>Percent</Th>
+          <Th width='93px'>Pass/Fail</Th>
+          <Th classNames='comment-cell'>Comments</Th>
         </HeadRow>
         </Thead>
         <Tbody>
-        {data.data.map((unit) => {
-          let unitRowSpan = this.countNumberOfUnitAttempts + '';
+        {data.map((unit, unitIndex) => {
+          let unitRowSpan = this.countNumberOfUnitAttempts(unit) + '';
+          if (unitRowSpan === '0') {
+            return (false);
+          }
           return (
             <tr className="m-datatable__row" style={{height: '64px'}} key={unit.unit_id + '-unitRow'}>
               <td className="m-datatable__cell rotate" width='50px' rowSpan={unitRowSpan}
                   key={unit.unit_id + '-unitName'}>
-                <div><span>{unit.unit_name}</span></div>
+                <div><span><b>Unit {unitIndex + 1}</b> {unit.unit_name}</span></div>
               </td>
-              {unit.lessons.map((lesson, i) => {
+              {unit.lessons.map((lesson, lessonIndex) => {
                 const lessonRowSpan = this.countNumberOfLessonAttempts(lesson) + '';
+                if (lessonRowSpan === '0') {
+                  return (false);
+                }
                 return (
                   <tr className="m-datatable__row" style={{height: '64px'}} key={lesson.lesson_id + '-lessonRow'}>
-                    <td className="m-datatable__cell" width='200px' rowSpan={lessonRowSpan}
-                        key={lesson.lesson_id + '-lessonName'}><span
-                      style={{width: '200px'}}>{lesson.lesson_name}</span></td>
-                    <td className="m-datatable__cell" width='200px' rowSpan={lessonRowSpan}
+                    <td className="m-datatable__cell" width='193px' rowSpan={lessonRowSpan}
+                        key={lesson.lesson_id + '-lessonName'}>
+                      <div className="unit-lesson-index"><span
+                        class="m-badge m-badge--brand m-badge--wide">Unit {unitIndex + 1}, Lesson {lessonIndex + 1}</span>
+                      </div>
+                      <span style={{width: '193px'}}>{lesson.lesson_name}</span></td>
+                    <td className="m-datatable__cell" width='193px' rowSpan={lessonRowSpan}
                         key={lesson.lesson_id + '-lessonDesc'}><span
-                      style={{width: '200px'}}>{lesson.lesson_description}</span></td>
+                      style={{width: '193px'}}>{lesson.lesson_description}</span></td>
                     {lesson.attempts.map((attempt) => {
                       return (this.renderAttemptRow(lesson, attempt))
                     })}
@@ -91,38 +112,45 @@ export class LessonsTable extends Component {
   }
 
   renderAttemptRow = (lesson, attempt) => {
+    const attemptFinished = !!attempt.att_date;
     return (<tr className="m-datatable__row" style={{height: '64px'}}
                 key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptRow'}>
-        <td className="m-datatable__cell" width='150px' key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptNo'}>
-          <span style={{width: '150px'}}>{attempt.attempt_no}</span></td>
-        <td className="m-datatable__cell" width='100px'
+        <td className="m-datatable__cell" width='93px' key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptNo'}>
+          <span style={{width: '93px'}}>{attempt.attempt_no}</span></td>
+        <td className="m-datatable__cell" width='93px'
             key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptStatus'}><span
-          style={{width: '100px'}}>{attempt.scored_points >= attempt.pass_weight ? 'Completed' : 'In progress'}</span>
+          style={{width: '93px'}}>{attemptFinished && (attempt.scored_points >= lesson.pass_weight ? 'Completed' : 'In progress')} </span>
         </td>
-        <td className="m-datatable__cell" width='150px'
+        <td className="m-datatable__cell" width='93px'
             key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptDate'}><span
-          style={{width: '150px'}}>{(new Date(attempt.att_date)).toLocaleDateString('en-US', {
+          style={{width: '93px'}}>{attemptFinished && (new Date(attempt.att_date)).toLocaleDateString('en-US', {
           day: 'numeric',
           month: 'numeric',
           year: 'numeric'
         })}</span></td>
-        <td className="m-datatable__cell" width='100px'
+        <td className="m-datatable__cell" width='93px'
             key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptScored'}><span
-          style={{width: '100px'}}>{attempt.scored_points} / {attempt.lesson_points}</span></td>
-        <td className="m-datatable__cell" width='100px'
-            key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptScoredToLesson'}><span
-          style={{width: '100px'}}>{(attempt.scored_points * 100 / attempt.lesson_points).toFixed(2)}%</span>
+          style={{width: '93px'}}>{attemptFinished && (attempt.scored_points + '/' + lesson.lesson_points)}</span>
         </td>
-        {attempt.scored_points >= attempt.pass_weight ? <td className="m-datatable__cell attempt-pass" width='100px'
-                                                            key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptPass'}>
-          <div>PASS</div>
-        </td> : <td className="m-datatable__cell attempt-fail" width='100px'
-                    key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptFail'}>
-          <div>FAIL</div>
+        <td className="m-datatable__cell" width='93px'
+            key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptScoredToLesson'}><span
+          style={{width: '93px'}}>{attemptFinished && (attempt.scored_points * 100 / lesson.lesson_points).toFixed(2) + '%'}</span>
+        </td>
+        {attemptFinished && (attempt.scored_points >= attempt.pass_weight ?
+          <td className="m-datatable__cell attempt-pass" width='93px'
+              key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptPass'}>
+            <div style={{width: '94px'}}>PASS</div>
+          </td> : <td className="m-datatable__cell attempt-fail" width='100px'
+                      key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptFail'}>
+            <div style={{width: '94px'}}>FAIL</div>
+          </td>)}
+        {!attemptFinished && <td className="m-datatable__cell" width='100px'
+                                 key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptPass'}>
+          <div style={{width: '94px'}}></div>
         </td>}
-        <td className="m-datatable__cell" width='250px'
-            key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptComment'}><span
-          style={{width: '250px'}}>COMMENT</span>
+        <td className="m-datatable__cell comment-cell"
+            key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptComment'}>
+          <span>{attemptFinished && 'COMMENT'}</span>
         </td>
       </tr>
     )
@@ -131,12 +159,12 @@ export class LessonsTable extends Component {
   countNumberOfUnitAttempts(unit) {
     let numberOfAttempts = 0;
     if (!unit.lessons) {
-      return '';
+      return 0;
     }
     unit.lessons.forEach((lesson) => {
       numberOfAttempts += this.countNumberOfLessonAttempts(lesson);
     });
-    return numberOfAttempts || 1;
+    return numberOfAttempts;
   }
 
   countNumberOfLessonAttempts(lesson) {
@@ -144,11 +172,9 @@ export class LessonsTable extends Component {
     if (!lesson.attempts) {
       return 0;
     }
-    lesson.attempts.forEach((attempt) => {
-      numberOfAttempts++;
-    });
+    numberOfAttempts += lesson.attempts.length;
 
-    return numberOfAttempts || 1;
+    return numberOfAttempts;
   }
 
 }
