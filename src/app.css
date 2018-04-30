@@ -1548,6 +1548,10 @@ td.rotate div span {
     width: 99% !important;
 }
 
+.text-align-left span {
+    text-align: left!important;
+}
+
 @media (min-width: 1240px) {
     .margin-bottom-zero {
         margin-bottom: 0 !important;
