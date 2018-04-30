@@ -87,7 +87,12 @@ class PaymentSuccessContainer extends Component {
           {/*</div>*/}
           {invoice &&
           <div className="m-widget25">
-            <span className="invoice-title">Yor invoice #{invoice.get('invoice_no')} Total ${invoice.get('total')}</span>
+              <span className="invoice-title">
+                  Yor invoice #{invoice.get('invoice_no')} Total ${invoice.get('total')}.
+              </span>                
+              <p class="text-center">
+                  <a className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">Download PDF</a>
+              </p>
           </div>
           }
         </div>

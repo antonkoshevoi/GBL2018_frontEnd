@@ -40,13 +40,12 @@ export function resetCreditCardPayment () {
 /**
  * PayPal
  */
-export function createPayPalPayment() {
+export function createPayPalPayment(data) {
+  data.returnUrl = uri('payments/paypal/return');
+  data.cancelUrl = uri('payments/canceled');
   return {
     types: [CREATE_PAYPAL_PAYMENT, CREATE_PAYPAL_PAYMENT_SUCCESS, CREATE_PAYPAL_PAYMENT_FAIL],
-    promise: (apiClient) => apiClient.post(`checkout/paypal/create`, {
-      returnUrl: uri('payments/paypal/return'),
-      cancelUrl: uri('payments/canceled')
-    })
+    promise: (apiClient) => apiClient.post(`checkout/paypal/create`, data)
   }
 }
 
@@ -60,10 +59,10 @@ export function executePayPalPayment(data) {
 /**
  * Check
  */
-export function createCheckPayment() {
+export function createCheckPayment(data) {
   return {
     types: [CREATE_CHECK_PAYMENT, CREATE_CHECK_PAYMENT_SUCCESS, CREATE_CHECK_PAYMENT_FAIL],
-    promise: (apiClient) => apiClient.post(`checkout/check/create`, {})
+    promise: (apiClient) => apiClient.post(`checkout/check/create`, data)
   }
 }
 
