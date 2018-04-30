@@ -136,7 +136,7 @@ export class LessonsTable extends Component {
             key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptScoredToLesson'}><span
           style={{width: '93px'}}>{attemptFinished && (attempt.scored_points * 100 / lesson.lesson_points).toFixed(2) + '%'}</span>
         </td>
-        {attemptFinished && (attempt.scored_points >= attempt.pass_weight ?
+        {attemptFinished && (+attempt.scored_points >= +lesson.pass_weight ?
           <td className="m-datatable__cell attempt-pass" width='93px'
               key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptPass'}>
             <div style={{width: '94px'}}>PASS</div>
