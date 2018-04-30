@@ -118,7 +118,7 @@ class TabSection extends Component {
                 </div>
                 <div className="m-portlet__head-tools col-sm-8">
                   <Tabs
-                    className="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x main-tabs pull-right"
+                    className="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x main-tabs pull-right report-tabs-white"
                     value={value}
                     onChange={this.handleChange}
                   >

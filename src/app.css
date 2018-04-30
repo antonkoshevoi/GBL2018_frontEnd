@@ -224,6 +224,10 @@ li > .small-avatar {
     color: #555;
 }
 
+.main-tabs.report-tabs-white button span {
+    color: #ffffff;
+}
+
 .full-width {
     width: 100%;
 }
