@@ -95,7 +95,7 @@ export class LessonsTable extends Component {
                         class="m-badge m-badge--brand m-badge--wide">Unit {unitIndex + 1}, Lesson {lessonIndex + 1}</span>
                       </div>
                       <span style={{width: '193px'}}>{lesson.lesson_name}</span></td>
-                    <td className="m-datatable__cell" width='193px' rowSpan={lessonRowSpan}
+                    <td className="m-datatable__cell text-align-left" width='193px' rowSpan={lessonRowSpan}
                         key={lesson.lesson_id + '-lessonDesc'}><span
                       style={{width: '193px'}}>{lesson.lesson_description}</span></td>
                     {lesson.attempts.map((attempt) => {
@@ -148,7 +148,7 @@ export class LessonsTable extends Component {
                                  key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptPass'}>
           <div style={{width: '94px'}}></div>
         </td>}
-        <td className="m-datatable__cell comment-cell"
+        <td className="m-datatable__cell comment-cell text-align-left"
             key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptComment'}>
           <span>{attemptFinished && Parser(attempt.comment)}</span>
         </td>
