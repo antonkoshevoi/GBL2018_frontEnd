@@ -343,6 +343,8 @@ export default function reducer(state = initialState, action) {
           .set('success', true)
           .set('fail', false)
           .set('errors', null)
+          .set('billingAddressId', action.result.data.billingAddressId)
+          .set('shippingAddressId', action.result.data.shippingAddressId)
           .set('records', Immutable.fromJS(action.result.data))
         );
     case GET_SHIPPING_BILLING_INFO_SUCCESS:
@@ -374,7 +376,9 @@ export default function reducer(state = initialState, action) {
           .set('loading', false)
           .set('success', false)
           .set('fail', false)
-          .set('errors', null));
+          .set('errors', null)
+          .remove('billingAddressId')
+          .remove('shippingAddressId'));
 
     /**
      * default

@@ -36,7 +36,9 @@ class Checkout extends Component {
     stepIndex: 0,
     finished: 0,
     payMethod: null,
-    showCreditCard: false
+    showCreditCard: false,
+    billingAddressId: null,
+    shippingAddressId: null
   };
 
   componentWillMount() {
@@ -61,25 +63,32 @@ class Checkout extends Component {
       this.handleNext();
   }   
   
-  _stepBilling = (method = null) => {
-    const payMethod = method ? method : this.props.payMethod;
+  _stepBilling = (params = {}) => {            
+    const payMethod = this.props.payMethod;    
     
     this.setState({showCreditCard: false});
     
+    this.setState({
+      ...this.state,
+      showCreditCard: false,
+      billingAddressId: params.billingAddressId,
+      shippingAddressId: params.shippingAddressId
+    });    
+        
     switch (payMethod) {
       case 'Check':
-        this._processCheckCreate();
+        this.props.createCheckPayment(params);
         break;
 
       case 'PayPal':
-        this.props.createPayPalPayment();
+        this.props.createPayPalPayment(params);
         break;
         
       case 'CreditCard':
         this.setState({
           stepIndex: 1,
           showCreditCard: true
-        });
+        });            
         break;        
     }
   };
@@ -125,13 +134,6 @@ class Checkout extends Component {
     this.props.setPayMethod('CreditCard');
     this.handleNext();
   };
-  /**
-   * Check
-   * @private
-   */
-  _processCheckCreate() {
-    this.props.createCheckPayment();
-  }
 
   _handleCheckPaymentCreated(nextProps) {
     const success = this.props.createCheckPaymentRequest.get('success');
@@ -154,7 +156,9 @@ class Checkout extends Component {
   render() {
     const {
         stepIndex,
-        showCreditCard
+        showCreditCard,
+        shippingAddressId,
+        billingAddressId
     } = this.state;
     const {
       cartRecords,
@@ -248,7 +252,7 @@ class Checkout extends Component {
                     <div className="row d-flex justify-content-center">
                         <div className='col-10'>                        
                         {showCreditCard ? 
-                            <CreditCard onDataSaved={this._handleCreditCard} paymentAmount={cartRecordsSum} /> : 
+                            <CreditCard onDataSaved={this._handleCreditCard} paymentAmount={cartRecordsSum} shippingAddressId={shippingAddressId} billingAddressId={billingAddressId}/> : 
                             <ShippingAndBilling onDataSaved={this._stepBilling}/>
                         }                             
                         </div>
@@ -290,8 +294,8 @@ Checkout = connect(
   (dispatch) => ({
     getCartRecords:     () => {dispatch(getCartRecords())},
     calculateSum:       (data) => {dispatch(calculateCartSum(data))},
-    createPayPalPayment:() => {dispatch(createPayPalPayment())},
-    createCheckPayment: () => {dispatch(createCheckPayment())},
+    createPayPalPayment:(data) => {dispatch(createPayPalPayment(data))},
+    createCheckPayment: (data) => {dispatch(createCheckPayment(data))},
     goToSuccessPage:    () => {dispatch(push('/shopping/checkout/2'))},
     goToFailPage:       () => {dispatch(push('/payments/fail'))},
     setPayMethod:       (data) => {dispatch(setPayType(data))}

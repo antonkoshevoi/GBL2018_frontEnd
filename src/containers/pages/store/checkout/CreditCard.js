@@ -14,7 +14,9 @@ class CreditCard extends Component {
         super(props);
                 
         this.state = {
-            paymentAmount: props.paymentAmount
+            paymentAmount: props.paymentAmount,
+            billingAddressId: props.billingAddressId,
+            shippingAddressId: props.shippingAddressId
         }
     }  
 

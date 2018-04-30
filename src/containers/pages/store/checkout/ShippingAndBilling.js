@@ -125,9 +125,12 @@ class ShippingAndBilling extends Component {
       this.setState({
         ...this.state,
         successRequest: success
-      });
+      });      
       this.props.resetShippingAndBillingRequest();
-      this.props.onDataSaved();
+      this.props.onDataSaved({
+          billingAddressId: shippingAndBillingRequest.get('billingAddressId'),
+          shippingAddressId: shippingAndBillingRequest.get('shippingAddressId')
+      });
     }
 
     return (
