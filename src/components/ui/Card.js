@@ -20,7 +20,8 @@ class Card extends Component {
       boxShadow,
       bodyStyle,
       isMainCard,
-      isStore
+      isStore,
+      isChart
     } = this.props;
     return (
       <div style={{marginBottom: 0, height: '100%', display: "flex", flexDirection: "column", ...this.props.style}}
@@ -46,7 +47,7 @@ class Card extends Component {
           </div>
 
         </div>
-        <div className={(isStore ? 'dashboard-store-body ' : '') + "m-portlet__body position-relative"} style={{height: "100%", ...bodyStyle}}>
+        <div className={(isStore ? 'dashboard-store-body ' : '') + (isChart ? 'no-padding-top ': '') + "m-portlet__body position-relative"} style={{height: "100%", ...bodyStyle}}>
           {children}
         </div>
       </div>

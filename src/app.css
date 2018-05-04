@@ -1556,6 +1556,58 @@ td.rotate div span {
     text-align: left!important;
 }
 
+.date-group-selector {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1px;
+    border-bottom: 1px solid rgb(110, 110, 110);
+}
+
+.date-group-selector .date-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-width: 24%;
+    flex-basis: 24%;
+    position: relative;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.date-group-selector .date-group:after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: black;
+    transition: width 0.5s;
+}
+
+.date-group-selector .date-group:hover:after {
+    width: 100%;
+}
+
+.date-group-selector .date-group.date-selector-active:after {
+    width: 100%;
+}
+
+.no-padding-top {
+    padding-top: 0 !important;
+}
+
+.date-selector {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 12px;
+}
+
 @media (min-width: 1240px) {
     .margin-bottom-zero {
         margin-bottom: 0 !important;
@@ -1687,7 +1739,7 @@ td.rotate div span {
 }
 
 .reports-flex-row > div {
-    max-height: 329px;
+    max-height: 390px;
 }
 
 @media (max-width: 1240px) {

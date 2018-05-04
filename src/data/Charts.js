@@ -1,8 +1,35 @@
 
 const _randomScalingFactor = function(){ return Math.round(Math.random()*40)};
 
+export function formChartData(labels, data, selector) {
+  labels = labels.map((label) => {
+      if (selector === 0) {
+          label = label.slice(label.length - 5, label.length - 3);
+      } else if (selector === 1 || selector === 2) {
+        label = label.slice(label.length - 5);
+      }
 
-export default {
+      return label;
+  });
+  return {
+    labels: labels,
+    datasets: [{
+      label: 'Online chart',
+      fillColor: 'rgba(220,220,220,0.0)',
+      pointRadius: 1,
+      strokeColor: '#8CC9E8',
+      pointColor: '#8CC9E8',
+      pointStrokeColor: 'rgba(220,220,220,0.0)',
+      pointHighlightFill: '#8CC9E8',
+      pointHighlightStroke: 'rgba(220,220,220,1)',
+      data: data,
+      yAxisID: 'y-axis-1'
+    }]
+  }
+
+}
+
+export const ChartData = {
     data:{
         labels: ["0", "1", "2", "3", "4", "5", "6","7"],
         datasets: [{

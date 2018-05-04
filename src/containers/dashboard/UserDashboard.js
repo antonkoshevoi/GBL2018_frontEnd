@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ChartData from "../../data/Charts";
+import {ChartData} from "../../data/Charts";
 import AppDownloadDrawer from "../../components/ui/AppDownloadDrawer";
 import SchoolAverageChart from "../pages/reports/widgets/SchoolAverageChart";
 import RosterStatistic from "../pages/reports/widgets/RosterStatistic";
