@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import '../../../../styles/widgets.css';
 import {connect} from 'react-redux';
 import Address from "./Address";
-import ContactInfo from "./ContactInfo";
 import {FormControlLabel} from 'material-ui/Form';
 import {withRouter} from 'react-router-dom';
 import {translate} from 'react-i18next';
@@ -20,10 +19,7 @@ import {
 } from 'material-ui';
 
 import {selectGetCartRecordsRequest, setShippingAndBillingRequest} from "../../../../redux/store/selectors";
-import {
-  getShippingAndBilling, resetSetShippingAndBilling,
-  setShippingAndBilling
-} from "../../../../redux/store/actions";
+import {getShippingAndBilling, resetSetShippingAndBilling, setShippingAndBilling} from "../../../../redux/store/actions";
 import Loader from "../../../../components/layouts/Loader";
 import {getCountries} from "../../../../redux/countries/actions";
 import {selectRecords} from "../../../../redux/countries/selectors";
@@ -110,9 +106,7 @@ class ShippingAndBilling extends Component {
           <CircularProgress color="primary" size={80}/>
         </div>
       </div>)
-
   }
-
 
   render() {
     const {billingAddress, shippingAddress, sameShipping, successRequest} = this.state;
@@ -141,7 +135,7 @@ class ShippingAndBilling extends Component {
           <form action="">
             <div className="row">
               <div className="col-12">
-                <div className="col-6 d-flex justify-content-end">
+                <div className="d-flex justify-content-center">
                   <FormControlLabel
                     control={
                       <Checkbox
@@ -154,35 +148,16 @@ class ShippingAndBilling extends Component {
                 </div>
               </div>
               <div className="col-md-6 col-sm-12">
-                <ContactInfo
-                  title='Billing contact information'
+                <Address
+                  title='Billing'
                   onChange={(form) => this._handleForm(form, 'billingAddress')}
                   name={'billingAddress'}
                   errors={errors}
-                  form={billingAddress}
-                />
+                  form={billingAddress}/>                
               </div>
-              <div className="col-md-6 col-sm-12">
-                <ContactInfo
-                  title='Shipping contact information'
-                  onChange={(form) => this._handleForm(form, 'shippingAddress')}
-                  name={'shippingAddress'}
-                  form={shippingAddress}
-                  errors={errors}
-                  disabled={sameShipping}
-                />
-              </div>
-              <div className="col-md-6 col-sm-12">
+              <div className="col-md-6 col-sm-12"> 
                 <Address
-                  title='Billing Address'
-                  onChange={(form) => this._handleForm(form, 'billingAddress')}
-                  name={'billingAddress'}
-                  errors={errors}
-                  form={billingAddress}/>
-              </div>
-              <div className="col-md-6 col-sm-12">
-                <Address
-                  title='Shipping Address'
+                  title='Shipping'
                   onChange={(form) => this._handleForm(form, 'shippingAddress')}
                   name={'shippingAddress'}
                   errors={errors}
@@ -202,7 +177,6 @@ class ShippingAndBilling extends Component {
               </Button>
             </div>
           </form>
-
         }
       </div>
     );
