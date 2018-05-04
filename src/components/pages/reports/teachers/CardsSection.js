@@ -85,7 +85,7 @@ class ChartsSection extends Component {
                       </div>
                     </div>
                     {this.generateDateSelector()}
-                    {this.state.data && this.state.data.datasets && <Line data={this.state.data} options={this.state.options} width="500" height="350"/>}
+                    {this.state.data && this.state.data.datasets && <Line data={this.state.data} options={this.state.options} redraw width="500" height="350"/>}
                   </Card>
                 </div>
 
