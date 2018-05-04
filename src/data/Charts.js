@@ -55,14 +55,31 @@ export const ChartData = {
             yAxisID: "y-axis-1",
         }]
     },
-    options:{
-        responsive: true,
-        hoverMode: 'index',
-        stacked: true,
-        display: false,
-        legend: {
-            display: false
-        },
+  options: {
+    responsive: true,
+    hoverMode: 'index',
+    stacked: true,
+    display: false,
+    legend: {
+      display: false
+    },
+    pointHitDetectionRadius : 1,
+    tooltipTemplate: function (data) {
+      if (data.label && data.label.length === 2) {
+        let numberLabel = +data.label;
+        let timeType ='';
+        if (numberLabel < 12) {
+          timeType = 'AM';
+        } else {
+          timeType = 'PM';
+          numberLabel = numberLabel - 12;
+        }
+        return data.value + ' ' + numberLabel + ':00' + timeType;
+      } else {
+        return data.value + ' ' + data.label;
+      }
+
+    },
         tooltips: {
             callbacks: {
                 label: function(tooltipItem) {
