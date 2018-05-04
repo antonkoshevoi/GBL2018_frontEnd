@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import { Button, Icon, MenuItem, Select, Typography } from 'material-ui';
-
+import { uri } from '../../helpers/uri';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { getRecords, deleteRecord } from '../../redux/invitations/actions';
@@ -175,6 +175,9 @@ class InvitationsTab extends Component {
         <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
         <Td width='132px'>{record.getIn(['course', 'publisher', 'name'])}</Td>
         <Td width='100px'>
+          <a title="View Invitation" href={uri('invitations/details/' + record.get('id') + '/' + record.get('securityHash'))} className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill" target="_blank">
+             <i className='la la-search'></i>
+          </a>
           <DeleteButton onClick={() => { this._deleteRecord(record.get('id')) }}/>
         </Td>
       </Row>
