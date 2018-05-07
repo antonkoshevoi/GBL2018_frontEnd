@@ -12,17 +12,19 @@ import {
   Button,
   Checkbox
 } from 'material-ui';
-import {getSchoolTeachers, getSchools, getSchoolHomerooms} from "../../../redux/schools/actions";
+import {getSchoolTeachers, getSchools, getSchoolHomerooms} from '../../../redux/schools/actions';
 import {ListItemText} from 'material-ui/List';
 import {
   selectGetSchoolHomeroomsRequest,
   selectGetSchoolTeachersRequest,
   selectSchools
-} from "../../../redux/schools/selectors";
+} from '../../../redux/schools/selectors';
 import DatePicker from '../../../components/ui/DatePicker';
-import CourseModal from "../modals/CourseModal";
+import CourseModal from '../modals/CourseModal';
 import SweetAlert from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
+import MomentUtils from 'material-ui-pickers/utils/moment-utils';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 
 function TabContainer(props) {
   return (
@@ -33,7 +35,7 @@ function TabContainer(props) {
 }
 
 TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 class ClassroomForm extends Component {
@@ -42,7 +44,7 @@ class ClassroomForm extends Component {
     classroom: PropTypes.object.isRequired,
     schools: PropTypes.any,
     errors: PropTypes.any,
-    isPublic: PropTypes.bool,
+    isPublic: PropTypes.bool
   };
 
   constructor(props) {
@@ -51,7 +53,7 @@ class ClassroomForm extends Component {
       unassignedsAlert: false,
       schoolTeachers: [],
       schoolHomerooms: [],
-      courseModalIsOpen: false,
+      courseModalIsOpen: false
     };
   }
 
@@ -238,51 +240,59 @@ class ClassroomForm extends Component {
           </FormControl>
           <FormControl aria-describedby='crmStartDate-error-text' className='full-width form-inputs'>
             <InputLabel htmlFor='crmStartDate-error' shrink={!!classroom.crmStartDate}>Start Date</InputLabel>
-            <DatePicker
-              name='crmStartDate'
-              value={classroom.crmStartDate || null}
-              onChange={(m) => {
-                this._handleDateChange(m, 'crmStartDate')
-              }}
-            />
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                name='crmStartDate'
+                value={classroom.crmStartDate || null}
+                onChange={(m) => {
+                  this._handleDateChange(m, 'crmStartDate')
+                }}
+              />
+            </MuiPickersUtilsProvider>
             {errors && errors.get('crmStartDate') &&
             <FormHelperText error>{errors.get('crmStartDate').get(0)}</FormHelperText>}
           </FormControl>
           <FormControl aria-describedby='crmEndDate-error-text' className='full-width form-inputs'>
             <InputLabel htmlFor='crmEndDate-error' shrink={!!classroom.crmEndDate}>End Date</InputLabel>
-            <DatePicker
-              name='crmEndDate'
-              value={classroom.crmEndDate || null}
-              onChange={(m) => {
-                this._handleDateChange(m, 'crmEndDate')
-              }}
-            />
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                name='crmEndDate'
+                value={classroom.crmEndDate || null}
+                onChange={(m) => {
+                  this._handleDateChange(m, 'crmEndDate')
+                }}
+              />
+            </MuiPickersUtilsProvider>
             {errors && errors.get('crmEndDate') &&
             <FormHelperText error>{errors.get('crmEndDate').get(0)}</FormHelperText>}
           </FormControl>
           <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
             <InputLabel htmlFor='crmEnrollmentStartDate-error' shrink={!!classroom.crmEnrollmentStartDate}>Enrollment
               Start Date</InputLabel>
-            <DatePicker
-              name='crmEnrollmentStartDate'
-              value={classroom.crmEnrollmentStartDate || null}
-              onChange={(m) => {
-                this._handleDateChange(m, 'crmEnrollmentStartDate')
-              }}
-            />
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                name='crmEnrollmentStartDate'
+                value={classroom.crmEnrollmentStartDate || null}
+                onChange={(m) => {
+                  this._handleDateChange(m, 'crmEnrollmentStartDate')
+                }}
+              />
+            </MuiPickersUtilsProvider>
             {errors && errors.get('crmEnrollmentStartDate') &&
             <FormHelperText error>{errors.get('crmEnrollmentStartDate').get(0)}</FormHelperText>}
           </FormControl>
           <FormControl aria-describedby='crmEnrollmentEndDate-error-text' className='full-width form-inputs'>
             <InputLabel htmlFor='crmEnrollmentEndDate-error' shrink={!!classroom.crmEnrollmentEndDate}>Enrollment End
               Date</InputLabel>
-            <DatePicker
-              name='crmEnrollmentEndDate'
-              value={classroom.crmEnrollmentEndDate || null}
-              onChange={(m) => {
-                this._handleDateChange(m, 'crmEnrollmentEndDate')
-              }}
-            />
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                name='crmEnrollmentEndDate'
+                value={classroom.crmEnrollmentEndDate || null}
+                onChange={(m) => {
+                  this._handleDateChange(m, 'crmEnrollmentEndDate')
+                }}
+              />
+            </MuiPickersUtilsProvider>
             {errors && errors.get('crmEnrollmentEndDate') &&
             <FormHelperText error>{errors.get('crmEnrollmentEndDate').get(0)}</FormHelperText>}
           </FormControl>
@@ -401,7 +411,7 @@ ClassroomForm = connect(
   (state) => ({
     schools: selectSchools(state),
     getSchoolTeacherRequest: selectGetSchoolTeachersRequest(state),
-    getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state),
+    getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state)
   }),
   (dispatch) => ({
     getSchools: () => {
@@ -412,7 +422,7 @@ ClassroomForm = connect(
     },
     getSchoolHomerooms: () => {
       dispatch(getSchoolHomerooms())
-    },
+    }
   })
 )(ClassroomForm);
 
