@@ -86,3 +86,11 @@ export const selectGetAssignStudentsRequest = createSelector(
   selectClassroomsDomain,
   (subState) => subState.get('assignStudentsRequest')
 );
+
+/**
+ * Get assign demo student request
+ */
+export const selectGetAssignDemoStudentRequest = createSelector(
+  selectClassroomsDomain,
+  (subState) => subState.get('assignDemoStudentRequest')
+);

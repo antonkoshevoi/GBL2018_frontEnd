@@ -16,7 +16,8 @@ export default {
   passwordChanged: 'Password changed succesfully',
   classrooms: {
     assigned: {
-      students: 'Students successfully changed for classroom'
+      students: 'Students successfully changed for classroom',
+      demoStudent: 'Student successfully enrolled to demo classroom'
     }
   },
   courseRequired: 'You should select course'

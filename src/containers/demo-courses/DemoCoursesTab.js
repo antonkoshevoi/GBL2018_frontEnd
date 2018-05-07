@@ -15,6 +15,7 @@ import DeleteButton from '../../components/ui/DeleteButton';
 import { getDemoClassrooms, deleteRecord, getSingleRecord } from '../../redux/classrooms/actions';
 import CreateDemoClassroomModal from './modals/CreateDemoClassroomModal';
 import EditDemoClassroomModal from './modals/EditDemoClassroomModal';
+import AssignStudentModal from './modals/AssignStudentModal';
 
 function TabContainer(props) {
   return (
@@ -38,6 +39,7 @@ class DemoCoursesTab extends Component {
     this.state = {
       createModalIsOpen: false,
       editModalIsOpen: false,
+      assignModalIsOpen: false,
       sorters: {},
       filters: {},
       page: props.pagination.get('page'),
@@ -79,6 +81,18 @@ class DemoCoursesTab extends Component {
       editModalIsOpen: false
     });
   }
+  
+  _openAssignDialog () {
+    this.setState({
+      assignModalIsOpen: true
+    });
+  }
+
+  _closeAssignDialog () {
+    this.setState({
+      assignModalIsOpen: false
+    });
+  }  
 
   /**
    *
@@ -222,7 +236,7 @@ class DemoCoursesTab extends Component {
 
   render() {
     const { getRecordsRequest, pagination } = this.props;
-    const { createModalIsOpen, editModalIsOpen, sorters, page, perPage } = this.state;
+    const { createModalIsOpen, editModalIsOpen, assignModalIsOpen, sorters, page, perPage } = this.state;
     const loading = getRecordsRequest.get('loading');
     const totalPages = pagination.get('totalPages');
 
@@ -243,6 +257,10 @@ class DemoCoursesTab extends Component {
                   <MenuItem value={50}>50</MenuItem>
                   <MenuItem value={100}>100</MenuItem>
                 </Select>
+                <Button variant="raised" color='primary' onClick={() => { this._openAssignDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                  Assign Student
+                  <Icon style={{marginLeft:'5px'}}>persone</Icon>
+                </Button>                 
                 <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
                   Add new
                   <Icon style={{marginLeft:'5px'}}>add</Icon>
@@ -285,6 +303,11 @@ class DemoCoursesTab extends Component {
           isOpen={editModalIsOpen}
           onClose={() => { this._closeEditDialog() }}
           onSuccess={() => { this._onCreate() }}/>
+                      
+        <AssignStudentModal
+          isOpen={assignModalIsOpen}
+          onClose={() => { this._closeAssignDialog() }}
+          onSuccess={() => { this._onCreate() }}/>                           
       </TabContainer>
     );
   }

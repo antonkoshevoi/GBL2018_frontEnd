@@ -65,6 +65,11 @@ export const ASSIGN_STUDENT_SUCCESS = '[Classrooms] ASSIGN_STUDENT_SUCCESS';
 export const ASSIGN_STUDENT_FAIL = '[Classrooms] ASSIGN_STUDENT_FAIL';
 export const RESET_ASSIGN_STUDENT_REQUEST = '[Classrooms] RESET_ASSIGN_STUDENT_REQUEST';
 
+export const ASSIGN_DEMO_STUDENT = '[Classrooms] ASSIGN_DEMO_STUDENT';
+export const ASSIGN_DEMO_STUDENT_SUCCESS = '[Classrooms] ASSIGN_DEMO_STUDENT_SUCCESS';
+export const ASSIGN_DEMO_STUDENT_FAIL = '[Classrooms] ASSIGN_DEMO_STUDENT_FAIL';
+export const RESET_ASSIGN_DEMO_STUDENT_REQUEST = '[Classrooms] RESET_ASSIGN_DEMO_STUDENT_REQUEST';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -241,5 +246,18 @@ export function assignStudents(id, data, params = {}) {
 export function resetAssignStudentsRequest () {
   return {
     type: RESET_ASSIGN_STUDENT_REQUEST
+  }
+}
+
+export function assignDemoStudent(data, params = {}) {
+  return {
+    types: [ASSIGN_DEMO_STUDENT, ASSIGN_DEMO_STUDENT_SUCCESS, ASSIGN_DEMO_STUDENT_FAIL],
+    promise: (apiClient) => apiClient.post(`classrooms/assign/student`, data, params)
+  };
+}
+
+export function resetAssignDemoStudentRequest () {
+  return {
+    type: RESET_ASSIGN_DEMO_STUDENT_REQUEST
   }
 }
