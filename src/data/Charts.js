@@ -37,7 +37,7 @@ export function formChartOptions(maxStudents, selector) {
         label: function (tooltipItem, data) {
           const label = data.labels[tooltipItem.index];
           const value = tooltipItem.yLabel;
-          if ((label && label.length === 2) || (typeof label === 'number')) {
+          if ((selector === 0) && ((label && label.length === 2) || (typeof label === 'number'))) {
             let numberLabel = +label;
             let timeType = '';
             if (numberLabel < 12) {
@@ -47,8 +47,10 @@ export function formChartOptions(maxStudents, selector) {
               numberLabel = numberLabel - 12;
             }
             return value + ' ' + numberLabel + ':00' + timeType;
-          } else {
+          } else if (selector === 1 || selector === 2) {
             return value + ' ' + label;
+          } else if (selector === 3) {
+            return value + ' ' + moment('' + label, 'MM').format('MMMM');
           }
         },
         title: function () {
@@ -126,6 +128,10 @@ export function formChartOptions(maxStudents, selector) {
           return value.slice(-5);
         default:
           return;
+      }
+    } else if (selector === 3) {
+      if (+value % 2 === 0) {
+        return value;
       }
     }
   }
