@@ -1,12 +1,22 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {ChartData, formChartData} from '../../../../../data/Charts';
-import Card from "../../../../../components/ui/Card";
-import { Line } from "react-chartjs";
+import Card from '../../../../../components/ui/Card';
+import {Line} from 'react-chartjs';
 import ApiClient from '../../../../../services/ApiClient';
+import {DatePicker} from 'material-ui-pickers';
+import {createMuiTheme, MuiThemeProvider} from 'material-ui';
+import blue from 'material-ui/es/colors/blue';
+import MomentUtils from 'material-ui-pickers/utils/moment-utils';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
+import moment from 'moment';
+import IconButton from 'material-ui/IconButton';
+import Icon from 'material-ui/Icon';
+import Button from 'material-ui/Button';
 
 class LineChart extends Component {
   apiClient = new ApiClient();
+  picker;
 
   static propTypes = {
     classroomId: PropTypes.string.isRequired
@@ -18,7 +28,7 @@ class LineChart extends Component {
       data: {},
       options: ChartData.options,
       selectorActive: 0,
-      chosenDate: new Date(),
+      chosenDate: moment().format('YYYY-MM-DD'),
       disabled: false
     }
   }
@@ -29,8 +39,8 @@ class LineChart extends Component {
     const date = this.state.chosenDate;
     this.getChartData(selector, date).then(
       (data) => {
-        const labels = Object.keys(data.data);
-        const values = Object.values(data.data);
+        const labels = Object.keys(data.data.history);
+        const values = Object.values(data.data.history);
         this.setState({disabled: false, data: formChartData(labels, values, selector)});
       },
       (error) => {
@@ -66,7 +76,8 @@ class LineChart extends Component {
           </div>
         </div>
         {this.generateDateSelector()}
-        {this.state.data && this.state.data.datasets && <Line data={this.state.data} options={this.state.options} redraw width="500" height="350"/>}
+        {this.state.data && this.state.data.datasets &&
+        <Line data={this.state.data} options={this.state.options} redraw width="500" height="350"/>}
       </Card>
     );
   }
@@ -76,11 +87,26 @@ class LineChart extends Component {
       return;
     }
     this.setState({disabled: true});
-    this.getChartData(newSelector, this.state.chosenDate).then(
+    let currDate;
+    if (newSelector === 0) {
+      currDate = moment().format('YYYY-MM-DD');
+    } else if (newSelector === 1) {
+      currDate = moment().add('weeks', -1).add('days', 1).format('YYYY-MM-DD');
+    } else if (newSelector === 2) {
+      currDate = moment().add('months', -1).add('days', 1).format('YYYY-MM-DD');
+    } else if (newSelector === 3) {
+      currDate = moment().add('years', -1).add('days', 1).format('YYYY-MM-DD');
+    }
+    this.getChartData(newSelector, currDate).then(
       (data) => {
-        const labels = Object.keys(data.data);
-        const values = Object.values(data.data);
-        this.setState({selectorActive: newSelector, disabled: false, data: formChartData(labels, values, newSelector)});
+        const labels = Object.keys(data.data.history);
+        const values = Object.values(data.data.history);
+        this.setState({
+          selectorActive: newSelector,
+          chosenDate: currDate,
+          disabled: false,
+          data: formChartData(labels, values, newSelector)
+        });
       },
       (error) => {
         console.log(error);
@@ -89,13 +115,12 @@ class LineChart extends Component {
   };
 
   getChartData = (selector, date) => {
-    const dateFrom = date.toJSON().slice(0, 10);
     const period = this.getStringPeriodFromNumber(selector);
     const params = {
       'period': period,
-      'date-from': dateFrom
+      'date-from': date
     };
-    return this.apiClient.get('history/classroom/' + this.props.classroomId, params)
+    return this.apiClient.get('history/classroom/' + this.props.classroomId, params);
   };
 
   getStringPeriodFromNumber(selector) {
@@ -111,50 +136,122 @@ class LineChart extends Component {
     }
   }
 
-  generateDateSelector() {
-    const currInputDate = this.state.chosenDate.toJSON().slice(0, 10);
+  generateDateSelector = () => {
+    const currInputDate = this.state.chosenDate;
+    let maxInputDate = moment().format('YYYY-MM-DD');
+    const theme = createMuiTheme({
+      palette: {
+        primary: blue
+      }
+    });
     if (this.state.selectorActive === 0) {
       return (
         <div className="date-selector">
-          <span>Choose date</span>
-          <input type="date" disabled={this.state.disabled} onChange={this.changeStartDate} value={currInputDate}/>
+          <div className="calendar-management-block">
+            <div className="arrow" onClick={this.toggleDateLeft}>
+              <IconButton>
+                <Icon className="material-icons">
+                  keyboard_arrow_left
+                </Icon>
+              </IconButton>
+            </div>
+            <div className="calendar-toggle" onClick={this.openDatePicker}>
+              <Button color="primary">
+                { moment(currInputDate).format('MMMM Do')}
+              </Button>
+            </div>
+            <div className="arrow" onClick={this.toggleDateRight}>
+              <IconButton>
+                <Icon className="material-icons">
+                  keyboard_arrow_right
+                </Icon>
+              </IconButton>
+            </div>
+          </div>
+          <div style={{'display': 'none'}}>
+            <MuiThemeProvider theme={theme}>
+              <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
+                <DatePicker
+                  label="Choose date"
+                  value={currInputDate}
+                  maxDate={maxInputDate}
+                  onChange={this.changeStartDate}
+                  animateYearScrolling={false}
+                  disabled={this.state.disabled}
+                  pickerRef={(node) => {
+                    this.picker = node;
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            </MuiThemeProvider>
+          </div>
         </div>
       )
     } else {
       let endDate;
-      const oneDay = 86400000;
-      const sevenDays = oneDay * 7;
-      const month = oneDay * 30;
-      const year = month * 12 + oneDay * 6; // 'oneDay * 6' because we count month as 30 days instead of 30/31
       if (this.state.selectorActive === 1) {
-        endDate = new Date(this.state.chosenDate.getTime() + sevenDays);
+        endDate = moment(this.state.chosenDate).add('weeks', 1).add('days', -1).format('MMMM Do');
+        maxInputDate = moment().add('weeks', -1).add('days', 1);
       } else if (this.state.selectorActive === 2) {
-        endDate = new Date(this.state.chosenDate.getTime() + month);
+        endDate = moment(this.state.chosenDate).add('months', 1).add('days', -1).format('MMMM Do');
+        maxInputDate = moment().add('months', -1).add('days', 1);
       } else if (this.state.selectorActive === 3) {
-        endDate = new Date(this.state.chosenDate.getTime() + year);
-      }
-      const currDate = new Date();
-      if (endDate > currDate) {
-        endDate = currDate;
+        endDate = moment(this.state.chosenDate).add('years', 1).add('days', -1).format('MMMM Do');
+        maxInputDate = moment().add('years', -1).add('days', 1);
       }
 
       return (
         <div className="date-selector">
-          <span>Start date</span>
-          <input type="date" disabled={this.state.disabled} onChange={this.changeStartDate} value={currInputDate}/>
-          <span>End date: {endDate.toJSON().slice(0, 10)}</span>
+          <div className="calendar-management-block">
+            <div className="arrow" onClick={this.toggleDateLeft}>
+              <IconButton>
+                <Icon className="material-icons">
+                  keyboard_arrow_left
+                </Icon>
+              </IconButton>
+            </div>
+            <div className="calendar-toggle" onClick={this.openDatePicker}>
+              <Button color="primary">
+                { moment(currInputDate).format('MMMM Do')} ~ {endDate}
+              </Button>
+            </div>
+            <div className="arrow" onClick={this.toggleDateRight}>
+              <IconButton>
+                <Icon className="material-icons">
+                  keyboard_arrow_right
+                </Icon>
+              </IconButton>
+            </div>
+          </div>
+          <div style={{'display': 'none'}}>
+            <MuiThemeProvider theme={theme}>
+              <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
+                <DatePicker
+                  label="Choose start date"
+                  pickerRef={(node) => {
+                    this.picker = node;
+                  }}
+                  value={this.state.chosenDate}
+                  maxDate={maxInputDate}
+                  onChange={this.changeStartDate}
+                  animateYearScrolling={false}
+                  disabled={this.state.disabled}
+                />
+              </MuiPickersUtilsProvider>
+            </MuiThemeProvider>
+          </div>
         </div>
       )
     }
-  }
+  };
 
-  changeStartDate = (event) => {
-    this.setState({chosenDate: new Date(event.target.value), disabled: true});
-    const newDate = new Date(event.target.value);
+  changeStartDate = (date) => {
+    const newDate = date.format('YYYY-MM-DD');
+    this.setState({disabled: true});
     this.getChartData(this.state.selectorActive, newDate).then(
       (data) => {
-        const labels = Object.keys(data.data);
-        const values = Object.values(data.data);
+        const labels = Object.keys(data.data.history);
+        const values = Object.values(data.data.history);
         this.setState({
           chosenDate: newDate,
           disabled: false,
@@ -163,9 +260,31 @@ class LineChart extends Component {
       },
       (error) => {
         console.log(error);
-        this.setState({disabled: false, chosenDate: this.state.chosenDate});
+        this.setState({
+          disabled: false
+        });
       })
-  }
+  };
+
+  openDatePicker = () => {
+    this.picker.wrapper.open();
+  };
+
+  toggleDateLeft = () => {
+    if (this.state.disabled) {
+      return;
+    }
+    const date = moment(this.state.chosenDate).add('days', -1);
+    this.changeStartDate(date);
+  };
+
+  toggleDateRight = () => {
+    if (this.state.disabled) {
+      return;
+    }
+    const date = moment(this.state.chosenDate).add('days', 1);
+    this.changeStartDate(date);
+  };
 }
 
 export default LineChart;
