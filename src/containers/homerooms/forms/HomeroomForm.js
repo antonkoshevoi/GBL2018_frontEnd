@@ -207,11 +207,11 @@ class HomeroomForm extends Component {
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
               <InputLabel htmlFor='name-error' shrink={!!homeroom.startDate}>Start Date</InputLabel>
               <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
-              <DatePicker
-                name='startDate'
-                value={homeroom.startDate || null}
-                onChange={(m) => { this._handleDateChange(m, 'startDate') }}
-              />
+                <DatePicker
+                  name='startDate'
+                  value={homeroom.startDate || null}
+                  onChange={(m) => { this._handleDateChange(m, 'startDate') }}
+                />
               </MuiPickersUtilsProvider>
               {errors && errors.get('startDate') && <FormHelperText error>{ errors.get('startDate').get(0) }</FormHelperText>}
             </FormControl>

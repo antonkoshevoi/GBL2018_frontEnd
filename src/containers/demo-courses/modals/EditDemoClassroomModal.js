@@ -78,9 +78,7 @@ class EditDemoClassroomModal extends Component {
     this.props.update(
       this.state.id,
       this.state.classroom
-    );
-
-    this.props.resetUpdateRequest();
+    );   
   };
 
   _setCroppedImage(img) {

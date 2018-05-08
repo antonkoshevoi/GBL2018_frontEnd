@@ -9,9 +9,8 @@ import {
   Divider, Button, DialogActions
 } from 'material-ui';
 import { connect } from 'react-redux';
-import { selectGetAssignDemoStudentRequest } from "../../../redux/classrooms/selectors";
+import { selectAssignDemoStudentRequest } from "../../../redux/classrooms/selectors";
 import { assignDemoStudent, resetAssignDemoStudentRequest } from "../../../redux/classrooms/actions";
-
 import Modal from '../../../components/ui/Modal';
 import AssignStudentForm from '../forms/AssignStudentForm';
 
@@ -21,6 +20,7 @@ class AssignStudentModal extends Component {
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     onSuccess: PropTypes.any.isRequired,    
+    assignDemoStudent: PropTypes.func.isRequired,
     assignDemoStudentRequest: PropTypes.any.isRequired
   };
   
@@ -39,8 +39,8 @@ class AssignStudentModal extends Component {
     const nextSuccess = nextProps.assignDemoStudentRequest.get('success');
 
     if (!success && nextSuccess) {
-      this._close();
-      this.props.onSuccess();    
+      this._close();     
+      this.props.onSuccess();
     }
   };
 
@@ -61,8 +61,7 @@ class AssignStudentModal extends Component {
 
   _onSubmit (e) {            
     e.preventDefault();    
-    this.props.assignDemoStudent(this.state.form);
-    this.props.resetAssignDemoStudentRequest();        
+    this.props.assignDemoStudent(this.state.form);    
   };
 
   render() {
@@ -105,7 +104,7 @@ class AssignStudentModal extends Component {
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Assing
+            Assign
           </Button>
         </DialogActions>
       </Modal>
@@ -115,12 +114,12 @@ class AssignStudentModal extends Component {
 
 AssignStudentModal = connect(
   (state) => ({
-    assignDemoStudentRequest: selectGetAssignDemoStudentRequest(state)
+    assignDemoStudentRequest: selectAssignDemoStudentRequest(state)
   }),
   (dispatch) => ({
     assignDemoStudent: (form, params = {}) => { dispatch(assignDemoStudent(form, params)) },
     resetAssignDemoStudentRequest: () => { dispatch(resetAssignDemoStudentRequest()) },
   })
 )(AssignStudentModal);
-
+  
 export default AssignStudentModal;

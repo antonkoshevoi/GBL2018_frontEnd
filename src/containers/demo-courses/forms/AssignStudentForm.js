@@ -12,14 +12,14 @@ class AssignStudentForm extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     form: PropTypes.object.isRequired,
-    errors: PropTypes.any
+    errors: PropTypes.any    
   };
   
   constructor (props) {
     super(props);
     this.state = {
         schoolStudents: [],
-        classrooms: []
+        demoClassrooms: []
     };
   }
   
