@@ -62,7 +62,7 @@ class AssignStudentModal extends Component {
   _onSubmit (e) {            
     e.preventDefault();    
     this.props.assignDemoStudent(this.state.form);
-    this.props.resetAssignDemoStudentRequest();      
+    this.props.resetAssignDemoStudentRequest();        
   };
 
   render() {

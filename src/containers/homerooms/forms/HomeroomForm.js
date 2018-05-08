@@ -10,6 +10,9 @@ import {
     selectSchools
 } from "../../../redux/schools/selectors";
 import DatePicker from '../../../components/ui/DatePicker';
+import MomentUtils from 'material-ui-pickers/utils/moment-utils';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
+import moment from 'moment';
 
 function TabContainer(props) {
   return (
@@ -203,38 +206,46 @@ class HomeroomForm extends Component {
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
               <InputLabel htmlFor='name-error' shrink={!!homeroom.startDate}>Start Date</InputLabel>
+              <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
               <DatePicker
                 name='startDate'
                 value={homeroom.startDate || null}
                 onChange={(m) => { this._handleDateChange(m, 'startDate') }}
               />
+              </MuiPickersUtilsProvider>
               {errors && errors.get('startDate') && <FormHelperText error>{ errors.get('startDate').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
               <InputLabel htmlFor='name-error' shrink={!!homeroom.endDate}>End Date</InputLabel>
-              <DatePicker
-                name='endDate'
-                value={homeroom.endDate || null}
-                onChange={(m) => { this._handleDateChange(m, 'endDate') }}
-              />
+              <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
+                <DatePicker
+                  name='endDate'
+                  value={homeroom.endDate || null}
+                  onChange={(m) => { this._handleDateChange(m, 'endDate') }}
+                />
+              </MuiPickersUtilsProvider>
               {errors && errors.get('endDate') && <FormHelperText error>{ errors.get('endDate').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
               <InputLabel htmlFor='name-error' shrink={!!homeroom.enrollmentStartDate}>Enrollment Start Date</InputLabel>
-              <DatePicker
-                name='enrollmentStartDate'
-                value={homeroom.enrollmentStartDate || null}
-                onChange={(m) => { this._handleDateChange(m, 'enrollmentStartDate') }}
-              />
+              <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
+                <DatePicker
+                  name='enrollmentStartDate'
+                  value={homeroom.enrollmentStartDate || null}
+                  onChange={(m) => { this._handleDateChange(m, 'enrollmentStartDate') }}
+                />
+              </MuiPickersUtilsProvider>
               {errors && errors.get('enrollmentStartDate') && <FormHelperText error>{ errors.get('enrollmentStartDate').get(0) }</FormHelperText>}
             </FormControl>
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
               <InputLabel htmlFor='name-error' shrink={!!homeroom.enrollmentEndDate}>Enrollment End Date</InputLabel>
-              <DatePicker
-                name='enrollmentEndDate'
-                value={homeroom.enrollmentEndDate || null}
-                onChange={(m) => { this._handleDateChange(m, 'enrollmentEndDate') }}
-              />
+              <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
+                <DatePicker
+                  name='enrollmentEndDate'
+                  value={homeroom.enrollmentEndDate || null}
+                  onChange={(m) => { this._handleDateChange(m, 'enrollmentEndDate') }}
+                />
+              </MuiPickersUtilsProvider>
               {errors && errors.get('enrollmentEndDate') && <FormHelperText error>{ errors.get('enrollmentEndDate').get(0) }</FormHelperText>}
             </FormControl>
             </div>
