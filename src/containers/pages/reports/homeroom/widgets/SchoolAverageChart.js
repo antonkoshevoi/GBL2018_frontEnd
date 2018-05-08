@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Pie} from "react-chartjs";
+import {Pie} from "react-chartjs-2";
 import {connect} from "react-redux";
 import {getCharts} from "../../../../../redux/reports/homerooms/actions";
 import {selectChartDatatRequest} from "../../../../../redux/reports/homerooms/selectors";

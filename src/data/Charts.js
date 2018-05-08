@@ -1,33 +1,196 @@
+import moment from 'moment';
+
 const _randomScalingFactor = function () {
   return Math.round(Math.random() * 40)
 };
 
-export function formChartData(labels, data, selector) {
-  labels = labels.map((label) => {
-    if (selector === 0) {
-      label = label.slice(label.length - 5, label.length - 3);
-    } else if (selector === 1 || selector === 2) {
-      label = label.slice(label.length - 5);
-    }
-
-    return label;
-  });
+export function formChartData(history, selector, startDate) {
+  const data = generateChartTemplate(selector, startDate);
+  generateChartDataFromTemplate(data, history, selector);
   return {
-    labels: labels,
+    labels: data.labels,
     datasets: [{
-      label: 'Online chart',
-      fillColor: 'rgba(220,220,220,0.0)',
-      pointRadius: 1,
-      strokeColor: '#8CC9E8',
-      pointColor: '#8CC9E8',
-      pointStrokeColor: 'rgba(220,220,220,0.0)',
-      pointHighlightFill: '#8CC9E8',
-      pointHighlightStroke: 'rgba(220,220,220,1)',
-      data: data,
-      yAxisID: 'y-axis-1'
+      borderColor: '#8CC9E8',
+      backgroundColor: 'transparent',
+      pointBackgroundColor: '#8CC9E8',
+      pointBorderColor: '#8CC9E8',
+      borderWidth: 2,
+      data: data.values
     }]
   }
 
+}
+
+export function formChartOptions(maxStudents, selector) {
+  return {
+    responsive: true,
+    legend: {
+      display: false
+    },
+    tooltips: {
+      displayColors: false,
+      backgroundColor: '#ffffff',
+      bodyFontColor: '#000000',
+      mode: 'nearest',
+      intersect: false,
+      callbacks: {
+        label: function (tooltipItem, data) {
+          const label = data.labels[tooltipItem.index];
+          const value = tooltipItem.yLabel;
+          if ((label && label.length === 2) || (typeof label === 'number')) {
+            let numberLabel = +label;
+            let timeType = '';
+            if (numberLabel < 12) {
+              timeType = 'AM';
+            } else {
+              timeType = 'PM';
+              numberLabel = numberLabel - 12;
+            }
+            return value + ' ' + numberLabel + ':00' + timeType;
+          } else {
+            return value + ' ' + label;
+          }
+        },
+        title: function () {
+
+        }
+      }
+    },
+    title: {
+      display: false
+    },
+
+    scales: {
+      yAxes: [{
+        display: true,
+        ticks: {
+          suggestedMin: 0,
+          suggestedMax: maxStudents,
+          beginAtZero: true,
+          callback: function (value) {
+            if (value % 1 === 0) {
+              return value;
+            }
+          }
+        }
+      }],
+      xAxes: [{
+        display: true,
+        ticks: {
+          autoSkip: false,
+          callback: function (value) {
+            return renderXAxis(selector, value);
+          }
+        }
+      }]
+    }
+  };
+
+  function renderXAxis(selector, value) {
+    if (selector === 0) {
+      switch (value) {
+        case 0 :
+          return value;
+        case 3 :
+          return value;
+        case 6 :
+          return value;
+        case 9 :
+          return value;
+        case 12 :
+          return value;
+        case 15 :
+          return value;
+        case 18 :
+          return value;
+        case 21 :
+          return value;
+        default:
+          return;
+      }
+    } else if (selector === 1) {
+      return value.slice(-5);
+    } else if (selector === 2) {
+      const daysInMonth = moment(value).daysInMonth();
+      const day = moment(value).date();
+      switch (day) {
+        case 1 :
+          return value.slice(-5);
+        case 7 :
+          return value.slice(-5);
+        case 14 :
+          return value.slice(-5);
+        case 21 :
+          return value.slice(-5);
+        case daysInMonth :
+          return value.slice(-5);
+        default:
+          return;
+      }
+    }
+  }
+}
+
+export function generateChartDataFromTemplate(template, history, selector) {
+  Object.keys(history).forEach((key) => {
+    if (selector === 0) {
+      const newKey = +key.slice(-5, -3);
+      const index = template.labels.indexOf(newKey);
+      template.values[index] = history[key];
+    } else if (selector === 1 || selector === 2) {
+      const newKey = key.slice(-10);
+      console.log(newKey);
+      const index = template.labels.indexOf(newKey);
+      template.values[index] = history[key];
+    }
+    if (selector === 3) {
+      const newKey = +key.slice(-2);
+      const index = template.labels.indexOf(newKey);
+      template.values[index] = history[key];
+    }
+  });
+
+}
+
+export function generateChartTemplate(selector, startDate) {
+  if (selector === 0) {
+    return {
+      labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+      values: fillZeroValues(24)
+    };
+  } else if (selector === 1) {
+    return {
+      labels: fillDates(startDate, 7, 'YYYY-MM-DD'),
+      values: fillZeroValues(7)
+    };
+  } else if (selector === 2) {
+    const daysInMonth = moment(startDate).daysInMonth();
+    return {
+      labels: fillDates(startDate, daysInMonth, 'YYYY-MM-DD'),
+      values: fillZeroValues(daysInMonth)
+    };
+  } else if (selector === 3) {
+    return {
+      labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      values: fillZeroValues(12)
+    };
+  }
+
+  function fillDates(startDate, number, format) {
+    const arr = [];
+    for (let i = 0; i < number; i++) {
+      arr.push(moment(startDate).add('days', i).format(format));
+    }
+    return arr;
+  }
+
+  function fillZeroValues(number) {
+    const arr = [];
+    for (let i = 0; i < number; i++) {
+      arr.push(0);
+    }
+    return arr;
+  }
 }
 
 export const ChartData = {
@@ -58,67 +221,82 @@ export const ChartData = {
   },
   options: {
     responsive: true,
-    hoverMode: 'index',
-    stacked: true,
-    display: false,
     legend: {
       display: false
     },
-    pointHitDetectionRadius: 1,
-    tooltipTemplate: function (data) {
-      if (data.label && data.label.length === 2) {
-        let numberLabel = +data.label;
-        let timeType = '';
-        if (numberLabel < 12) {
-          timeType = 'AM';
-        } else {
-          timeType = 'PM';
-          numberLabel = numberLabel - 12;
-        }
-        return data.value + ' ' + numberLabel + ':00' + timeType;
-      } else {
-        return data.value + ' ' + data.label;
-      }
-
-    },
     tooltips: {
+      displayColors: false,
+      backgroundColor: '#ffffff',
+      bodyFontColor: '#000000',
       callbacks: {
         label: function (tooltipItem) {
-          return tooltipItem.yLabel;
+          const label = tooltipItem.xLabel;
+          const value = tooltipItem.yLabel;
+          if (label && label.length === 2) {
+            let numberLabel = +label;
+            let timeType = '';
+            if (numberLabel < 12) {
+              timeType = 'AM';
+            } else {
+              timeType = 'PM';
+              numberLabel = numberLabel - 12;
+            }
+            return value + ' ' + numberLabel + ':00' + timeType;
+          } else {
+            return value + ' ' + label;
+          }
+        },
+        title: function () {
+
         }
       }
     },
     title: {
-      display: false,
-      text: 'Chart.js Line Chart - Multi Axis'
+      display: false
     },
+
     scales: {
       yAxes: [{
-        type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-        display: false,
-        position: 'left',
-        id: 'y-axis-1',
-        gridLines: {
-          display: false
-        }
-      }, {
-        type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-        display: false,
-        position: 'right',
-        id: 'y-axis-2',
-        // grid line settings
-        gridLines: {
-          display: false // only want the grid lines for one axis to show up
-        }
-      }],
-      xAxes: [{
-        type: 'time',
+        display: true,
         ticks: {
-          autoSkip: true,
-          maxTicksLimit: 8
+          suggestedMin: 0,
+          suggestedMax: 10,
+          beginAtZero: true,
+          callback: function (value) {
+            if (value % 1 === 0) {
+              return value;
+            }
+          }
         }
       }]
     }
+    // scales: {
+    //   yAxes: [{
+    //     type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+    //     display: false,
+    //     position: 'left',
+    //     id: 'y-axis-1',
+    //     gridLines: {
+    //       display: false
+    //     }
+    //   }, {
+    //     type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+    //     display: false,
+    //     position: 'right',
+    //     id: 'y-axis-2',
+    //     // grid line settings
+    //     gridLines: {
+    //       display: false // only want the grid lines for one axis to show up
+    //     }
+    //   }],
+    //   xAxes: [{
+    //     type: 'time',
+    //     ticks: {
+    //       autoSkip: true,
+    //       maxTicksLimit: 8
+    //     }
+    //   }]
+    // }
   },
   pieConfig: {
     //String - The colour of each segment stroke

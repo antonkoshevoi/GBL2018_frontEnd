@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {ChartData, formChartData} from '../../../../../data/Charts';
 import Card from "../../../../../components/ui/Card";
-import { Line } from "react-chartjs";
+import { Line } from "react-chartjs-2";
 import ApiClient from '../../../../../services/ApiClient';
 
 

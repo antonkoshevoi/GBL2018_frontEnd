@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {ChartData, formChartData} from '../../../../data/Charts';
 import Card from '../../../../components/ui/Card';
-import {Line} from 'react-chartjs';
+import {Line} from 'react-chartjs-2';
 import ApiClient from '../../../../services/ApiClient';
 
 class LineChart extends Component {
@@ -25,9 +25,7 @@ class LineChart extends Component {
     const date = this.state.chosenDate;
     this.getChartData(selector, date).then(
       (data) => {
-        const labels = Object.keys(data.data);
-        const values = Object.values(data.data);
-        this.setState({disabled: false, data: formChartData(labels, values, selector)});
+        this.setState({disabled: false, data: formChartData(data.data.history, selector, date)});
       },
       (error) => {
         console.log(error);

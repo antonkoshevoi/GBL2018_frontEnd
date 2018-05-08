@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {ChartData, formChartData} from '../../../../data/Charts';
-import {Doughnut, Line, Pie} from 'react-chartjs';
+import {Doughnut, Line, Pie} from 'react-chartjs-2';
 import Card from '../../../ui/Card';
 import InfoSection from './InfoSection';
 import ApiClient from '../../../../services/ApiClient';

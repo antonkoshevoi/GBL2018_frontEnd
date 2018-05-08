@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {ChartData, formChartData} from '../../../../../data/Charts';
+import {formChartData, formChartOptions} from '../../../../../data/Charts';
 import Card from '../../../../../components/ui/Card';
-import {Line} from 'react-chartjs';
+import {Line} from 'react-chartjs-2';
 import ApiClient from '../../../../../services/ApiClient';
 import {DatePicker} from 'material-ui-pickers';
 import {createMuiTheme, MuiThemeProvider} from 'material-ui';
@@ -26,7 +26,7 @@ class LineChart extends Component {
     super(props);
     this.state = {
       data: {},
-      options: ChartData.options,
+      options: {},
       selectorActive: 0,
       chosenDate: moment().format('YYYY-MM-DD'),
       disabled: false
@@ -39,9 +39,11 @@ class LineChart extends Component {
     const date = this.state.chosenDate;
     this.getChartData(selector, date).then(
       (data) => {
-        const labels = Object.keys(data.data.history);
-        const values = Object.values(data.data.history);
-        this.setState({disabled: false, data: formChartData(labels, values, selector)});
+        this.setState({
+          disabled: false,
+          data: formChartData(data.data.history, selector, date),
+          options: formChartOptions(data.maxCount, selector)
+        });
       },
       (error) => {
         console.log(error);
@@ -77,7 +79,7 @@ class LineChart extends Component {
         </div>
         {this.generateDateSelector()}
         {this.state.data && this.state.data.datasets &&
-        <Line data={this.state.data} options={this.state.options} redraw width="500" height="350"/>}
+        <Line data={this.state.data} options={this.state.options} redraw={true} width="500" height="350"/>}
       </Card>
     );
   }
@@ -91,21 +93,20 @@ class LineChart extends Component {
     if (newSelector === 0) {
       currDate = moment().format('YYYY-MM-DD');
     } else if (newSelector === 1) {
-      currDate = moment().add('weeks', -1).add('days', 1).format('YYYY-MM-DD');
+      currDate = moment().startOf('week').format('YYYY-MM-DD');
     } else if (newSelector === 2) {
-      currDate = moment().add('months', -1).add('days', 1).format('YYYY-MM-DD');
+      currDate = moment().startOf('month').format('YYYY-MM-DD');
     } else if (newSelector === 3) {
-      currDate = moment().add('years', -1).add('days', 1).format('YYYY-MM-DD');
+      currDate = moment().startOf('year').format('YYYY-MM-DD');
     }
     this.getChartData(newSelector, currDate).then(
       (data) => {
-        const labels = Object.keys(data.data.history);
-        const values = Object.values(data.data.history);
         this.setState({
           selectorActive: newSelector,
           chosenDate: currDate,
           disabled: false,
-          data: formChartData(labels, values, newSelector)
+          data: formChartData(data.data.history, newSelector, currDate),
+          options: formChartOptions(data.maxCount, newSelector)
         });
       },
       (error) => {
@@ -118,7 +119,7 @@ class LineChart extends Component {
     const period = this.getStringPeriodFromNumber(selector);
     const params = {
       'period': period,
-      'date-from': date
+      'date-from': moment(date).utc().format('YYYY-MM-DD')
     };
     return this.apiClient.get('history/classroom/' + this.props.classroomId, params);
   };
@@ -246,16 +247,25 @@ class LineChart extends Component {
   };
 
   changeStartDate = (date) => {
-    const newDate = date.format('YYYY-MM-DD');
+    let newDate;
+    const selector = this.state.selectorActive;
+    if (selector === 0) {
+      newDate = date.format('YYYY-MM-DD');
+    } else if (selector === 1) {
+      newDate = date.startOf('week').format('YYYY-MM-DD');
+    } else if (selector === 2) {
+      newDate = date.startOf('month').format('YYYY-MM-DD');
+    } else if (selector === 3) {
+      newDate = date.startOf('year').format('YYYY-MM-DD');
+    }
     this.setState({disabled: true});
-    this.getChartData(this.state.selectorActive, newDate).then(
+    this.getChartData(selector, newDate).then(
       (data) => {
-        const labels = Object.keys(data.data.history);
-        const values = Object.values(data.data.history);
         this.setState({
           chosenDate: newDate,
           disabled: false,
-          data: formChartData(labels, values, this.state.selectorActive)
+          data: formChartData(data.data.history, this.state.selectorActive, newDate),
+          options: formChartOptions(data.maxCount, this.state.selectorActive)
         });
       },
       (error) => {
@@ -274,7 +284,17 @@ class LineChart extends Component {
     if (this.state.disabled) {
       return;
     }
-    const date = moment(this.state.chosenDate).add('days', -1);
+    let date;
+    const selector = this.state.selectorActive;
+    if (selector === 0) {
+      date = moment(this.state.chosenDate).add('days', -1);
+    } else if (selector === 1) {
+      date = moment(this.state.chosenDate).add('weeks', -1);
+    } else if (selector === 2) {
+      date = moment(this.state.chosenDate).add('months', -1);
+    } else if (selector === 3) {
+      date = moment(this.state.chosenDate).add('years', -1);
+    }
     this.changeStartDate(date);
   };
 
@@ -282,7 +302,17 @@ class LineChart extends Component {
     if (this.state.disabled) {
       return;
     }
-    const date = moment(this.state.chosenDate).add('days', 1);
+    let date;
+    const selector = this.state.selectorActive;
+    if (selector === 0) {
+      date = moment(this.state.chosenDate).add('days', 1);
+    } else if (selector === 1) {
+      date = moment(this.state.chosenDate).add('weeks', 1).startOf('week');
+    } else if (selector === 2) {
+      date = moment(this.state.chosenDate).add('months', 1).startOf('month');
+    } else if (selector === 3) {
+      date = moment(this.state.chosenDate).add('years', 1).startOf('years');
+    }
     this.changeStartDate(date);
   };
 }
