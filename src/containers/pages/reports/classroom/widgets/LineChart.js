@@ -182,6 +182,7 @@ class LineChart extends Component {
                   pickerRef={(node) => {
                     this.picker = node;
                   }}
+                  okLabel="Select day"
                 />
               </MuiPickersUtilsProvider>
             </MuiThemeProvider>
@@ -190,15 +191,19 @@ class LineChart extends Component {
       )
     } else {
       let endDate;
+      let okLabel;
       if (this.state.selectorActive === 1) {
         endDate = moment(this.state.chosenDate).add('weeks', 1).add('days', -1).format('MMMM Do');
         maxInputDate = moment().startOf('week');
+        okLabel = "Select week";
       } else if (this.state.selectorActive === 2) {
         endDate = moment(this.state.chosenDate).add('months', 1).add('days', -1).format('MMMM Do');
         maxInputDate = moment().startOf('month');
+        okLabel = "Select month";
       } else if (this.state.selectorActive === 3) {
         endDate = moment(this.state.chosenDate).add('years', 1).add('days', -1).format('MMMM Do');
         maxInputDate = moment().startOf('year');
+        okLabel = "Select year";
       }
 
       return (
@@ -237,6 +242,7 @@ class LineChart extends Component {
                   onChange={this.changeStartDate}
                   animateYearScrolling={false}
                   disabled={this.state.disabled}
+                  okLabel={okLabel}
                 />
               </MuiPickersUtilsProvider>
             </MuiThemeProvider>
