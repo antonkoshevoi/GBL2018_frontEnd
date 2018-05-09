@@ -192,13 +192,13 @@ class LineChart extends Component {
       let endDate;
       if (this.state.selectorActive === 1) {
         endDate = moment(this.state.chosenDate).add('weeks', 1).add('days', -1).format('MMMM Do');
-        maxInputDate = moment().add('weeks', -1).add('days', 1);
+        maxInputDate = moment().startOf('week');
       } else if (this.state.selectorActive === 2) {
         endDate = moment(this.state.chosenDate).add('months', 1).add('days', -1).format('MMMM Do');
-        maxInputDate = moment().add('months', -1).add('days', 1);
+        maxInputDate = moment().startOf('month');
       } else if (this.state.selectorActive === 3) {
         endDate = moment(this.state.chosenDate).add('years', 1).add('days', -1).format('MMMM Do');
-        maxInputDate = moment().add('years', -1).add('days', 1);
+        maxInputDate = moment().startOf('year');
       }
 
       return (
