@@ -1646,6 +1646,17 @@ td.rotate div span {
     color: #606060 !important;
 }
 
+.online-users-chart-header {
+    display: flex!important;
+    flex-direction: row!important;
+    justify-content: space-between!important;
+    align-items: center!important;
+}
+
+.online-users-chart-header h3 {
+    margin-bottom: 0;
+}
+
 @media (min-width: 1240px) {
     .margin-bottom-zero {
         margin-bottom: 0 !important;

@@ -54,7 +54,7 @@ class LineChart extends Component {
   render() {
     return (
       <Card title="Students Online" isChart={true} icon="flaticon-diagram" iconBackground="square-background"
-      >
+            resetDate={this.handleResetDate} isResetChartButton={true}>
         <div className="date-group-selector">
           <div className={`date-group` + (this.state.selectorActive === 0 ? ' date-selector-active' : '')}
                onClick={() => {
@@ -315,6 +315,29 @@ class LineChart extends Component {
     }
     this.changeStartDate(date);
   };
+
+  handleResetDate = () => {
+    if (this.state.disabled === true) {
+      return;
+    }
+    this.setState({disabled: true});
+    const newSelector = 0;
+    const currDate = moment().format('YYYY-MM-DD');
+    this.getChartData(newSelector, currDate).then(
+      (data) => {
+        this.setState({
+          selectorActive: newSelector,
+          chosenDate: currDate,
+          disabled: false,
+          data: formChartData(data.data.history, newSelector, currDate),
+          options: formChartOptions(data.maxCount, newSelector)
+        });
+      },
+      (error) => {
+        console.log(error);
+        this.setState({disabled: false});
+      });
+  }
 }
 
 export default LineChart;
