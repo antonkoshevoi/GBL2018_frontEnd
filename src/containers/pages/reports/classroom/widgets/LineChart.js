@@ -72,7 +72,7 @@ class LineChart extends Component {
         </div>
         {this.generateDateSelector()}
         {this.state.data && this.state.data.datasets &&
-        <Line data={this.state.data} options={this.state.options} width="500" height="350"/>}
+        <Line data={this.state.data} options={this.state.options} width={500} height={350}/>}
       </Card>
     );
   }
