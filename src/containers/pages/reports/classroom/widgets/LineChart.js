@@ -32,26 +32,16 @@ class LineChart extends Component {
       selectorActive: 0,
       chosenDate: moment().format('YYYY-MM-DD'),
       disabled: false,
-      maxInputDate: moment().format('YYYY-MM-DD')
+      maxInputDate: moment().format('YYYY-MM-DD'),
+      originalStateTimerId: ''
     }
   }
 
   componentDidMount() {
-    this.setState({disabled: true});
     const selector = this.state.selectorActive;
     const date = this.state.chosenDate;
-    this.getChartData(selector, date).then(
-      (data) => {
-        this.setState({
-          disabled: false,
-          data: formChartData(data.data.history, selector, date),
-          options: formChartOptions(data.maxCount, selector)
-        });
-      },
-      (error) => {
-        console.log(error);
-        this.setState({disabled: false});
-      });
+    this.returnChartToOriginalState(selector, date);
+    this.getChartData(selector, date);
   }
 
   render() {
@@ -87,11 +77,38 @@ class LineChart extends Component {
     );
   }
 
+  componentWillUnmount() {
+    if (this.state.originalStateTimerId) {
+      clearTimeout(this.state.originalStateTimerId);
+    }
+  }
+
+  returnChartToOriginalState(currSelector, currDate) {
+    if (!currDate) {
+      currDate = moment();
+    }
+    if (this.state.originalStateTimerId) {
+      clearTimeout(this.state.originalStateTimerId);
+      this.setState({originalStateTimerId: ''});
+    }
+    if (!(currSelector === 0 && moment(currDate).isSame(moment(), 'day'))) {
+      const newTimerId = setTimeout(() => {
+        this.getChartData(0, moment().format('YYYY-MM-DD'));
+        if (this.state.originalStateTimerId) {
+          this.setState({originalStateTimerId: ''});
+        }
+      }, 60000);
+      this.setState({originalStateTimerId: newTimerId});
+    }
+  }
+
   changeDateGroup = (newSelector) => {
+    if (newSelector !== 0) {
+      this.returnChartToOriginalState(newSelector);
+    }
     if (this.state.disabled === true) {
       return;
     }
-    this.setState({disabled: true});
     let currDate;
     if (newSelector === 0) {
       currDate = moment().format('YYYY-MM-DD');
@@ -102,20 +119,7 @@ class LineChart extends Component {
     } else if (newSelector === 3) {
       currDate = moment().startOf('year').format('YYYY-MM-DD');
     }
-    this.getChartData(newSelector, currDate).then(
-      (data) => {
-        this.setState({
-          selectorActive: newSelector,
-          chosenDate: currDate,
-          disabled: false,
-          data: formChartData(data.data.history, newSelector, currDate),
-          options: formChartOptions(data.maxCount, newSelector)
-        });
-      },
-      (error) => {
-        console.log(error);
-        this.setState({disabled: false});
-      });
+    this.getChartData(newSelector, currDate);
   };
 
   getChartData = (selector, date) => {
@@ -125,7 +129,21 @@ class LineChart extends Component {
       'date-from': date,
       'offset': this.clientTimeOffset
     };
-    return this.apiClient.get('history/classroom/' + this.props.classroomId, params);
+    this.setState({disabled: true});
+    return this.apiClient.get('history/classroom/' + this.props.classroomId, params).then(
+      (data) => {
+        this.setState({
+          selectorActive: selector,
+          chosenDate: date,
+          disabled: false,
+          data: formChartData(data.data.history, selector, date),
+          options: formChartOptions(data.maxCount, selector)
+        });
+      },
+      (error) => {
+        console.log(error);
+        this.setState({disabled: false});
+      });
   };
 
   getStringPeriodFromNumber(selector) {
@@ -262,6 +280,7 @@ class LineChart extends Component {
   changeStartDate = (date) => {
     let newDate;
     const selector = this.state.selectorActive;
+    this.returnChartToOriginalState(selector, date);
     if (selector === 0) {
       newDate = date.format('YYYY-MM-DD');
     } else if (selector === 1) {
@@ -271,22 +290,7 @@ class LineChart extends Component {
     } else if (selector === 3) {
       newDate = date.startOf('year').format('YYYY-MM-DD');
     }
-    this.setState({disabled: true});
-    this.getChartData(selector, newDate).then(
-      (data) => {
-        this.setState({
-          chosenDate: newDate,
-          disabled: false,
-          data: formChartData(data.data.history, this.state.selectorActive, newDate),
-          options: formChartOptions(data.maxCount, this.state.selectorActive)
-        });
-      },
-      (error) => {
-        console.log(error);
-        this.setState({
-          disabled: false
-        });
-      })
+    this.getChartData(selector, newDate);
   };
 
   openDatePicker = () => {
@@ -333,23 +337,9 @@ class LineChart extends Component {
     if (this.state.disabled === true) {
       return;
     }
-    this.setState({disabled: true});
     const newSelector = 0;
     const currDate = moment().format('YYYY-MM-DD');
-    this.getChartData(newSelector, currDate).then(
-      (data) => {
-        this.setState({
-          selectorActive: newSelector,
-          chosenDate: currDate,
-          disabled: false,
-          data: formChartData(data.data.history, newSelector, currDate),
-          options: formChartOptions(data.maxCount, newSelector)
-        });
-      },
-      (error) => {
-        console.log(error);
-        this.setState({disabled: false});
-      });
+    this.getChartData(newSelector, currDate);
   };
 
   renderWrappedDay = (date, selectedDate, dayInCurrentMonth) => {
