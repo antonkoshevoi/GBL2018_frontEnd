@@ -3,6 +3,8 @@ import { createMuiTheme, MuiThemeProvider } from 'material-ui';
 import { DatePicker as BaseDatePicker } from 'material-ui-pickers';
 import blue from 'material-ui/es/colors/blue';
 import moment from "moment/moment";
+import MomentUtils from 'material-ui-pickers/utils/moment-utils';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 
 class DatePicker extends Component {
 
@@ -27,19 +29,19 @@ class DatePicker extends Component {
 
     return (
       <MuiThemeProvider theme={theme}>
-        <BaseDatePicker
-          {...rest}
-          onChange={(m) => onChange(this._convertReturnValue(m))}
-          clearable
-          autoOk={true}
-          returnMoment={false}
-          invalidLabel=""
-          format={format ? format : 'YYYY-MM-DD'}
-          InputProps={InputProps ? InputProps : {
-            style: {
-              marginTop: '16px'
-            }
-          }}/>
+          <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
+            <BaseDatePicker
+              {...rest}
+              onChange={(m) => onChange(this._convertReturnValue(m))}
+              clearable
+              autoOk={true}
+              returnMoment={false}
+              invalidLabel=""
+              format={format ? format : 'YYYY-MM-DD'}
+              InputProps={InputProps ? InputProps : {
+                style: {}
+              }}/>
+          </MuiPickersUtilsProvider>
       </MuiThemeProvider>
     );
   }

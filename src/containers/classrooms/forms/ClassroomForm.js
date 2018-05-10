@@ -13,7 +13,6 @@ import {
   Checkbox
 } from 'material-ui';
 import {getSchoolTeachers, getSchools, getSchoolHomerooms} from '../../../redux/schools/actions';
-import {ListItemText} from 'material-ui/List';
 import {
   selectGetSchoolHomeroomsRequest,
   selectGetSchoolTeachersRequest,
@@ -23,8 +22,6 @@ import DatePicker from '../../../components/ui/DatePicker';
 import CourseModal from '../modals/CourseModal';
 import SweetAlert from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
-import MomentUtils from 'material-ui-pickers/utils/moment-utils';
-import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 
 function TabContainer(props) {
   return (
@@ -238,23 +235,20 @@ class ClassroomForm extends Component {
               }}/>
             {errors && errors.get('crmName') && <FormHelperText error>{errors.get('crmName').get(0)}</FormHelperText>}
           </FormControl>
-          <FormControl aria-describedby='crmStartDate-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='crmStartDate-error' shrink={!!classroom.crmStartDate}>Start Date</InputLabel>
-            <MuiPickersUtilsProvider utils={MomentUtils}>
+          <div aria-describedby='crmStartDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
+            <InputLabel htmlFor='crmStartDate-error' shrink={!!classroom.crmStartDate}>Start Date</InputLabel>            
               <DatePicker
                 name='crmStartDate'
                 value={classroom.crmStartDate || null}
                 onChange={(m) => {
                   this._handleDateChange(m, 'crmStartDate')
                 }}
-              />
-            </MuiPickersUtilsProvider>
+              />            
             {errors && errors.get('crmStartDate') &&
             <FormHelperText error>{errors.get('crmStartDate').get(0)}</FormHelperText>}
-          </FormControl>
-          <FormControl aria-describedby='crmEndDate-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='crmEndDate-error' shrink={!!classroom.crmEndDate}>End Date</InputLabel>
-            <MuiPickersUtilsProvider utils={MomentUtils}>
+          </div>
+          <div aria-describedby='crmEndDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
+            <InputLabel htmlFor='crmEndDate-error' shrink={!!classroom.crmEndDate}>End Date</InputLabel>            
               <DatePicker
                 name='crmEndDate'
                 value={classroom.crmEndDate || null}
@@ -262,40 +256,33 @@ class ClassroomForm extends Component {
                   this._handleDateChange(m, 'crmEndDate')
                 }}
               />
-            </MuiPickersUtilsProvider>
             {errors && errors.get('crmEndDate') &&
             <FormHelperText error>{errors.get('crmEndDate').get(0)}</FormHelperText>}
-          </FormControl>
-          <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='crmEnrollmentStartDate-error' shrink={!!classroom.crmEnrollmentStartDate}>Enrollment
-              Start Date</InputLabel>
-            <MuiPickersUtilsProvider utils={MomentUtils}>
+          </div>
+          <div aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
+            <InputLabel htmlFor='crmEnrollmentStartDate-error' shrink={!!classroom.crmEnrollmentStartDate}>Enrollment Start Date</InputLabel>            
               <DatePicker
                 name='crmEnrollmentStartDate'
                 value={classroom.crmEnrollmentStartDate || null}
                 onChange={(m) => {
                   this._handleDateChange(m, 'crmEnrollmentStartDate')
                 }}
-              />
-            </MuiPickersUtilsProvider>
+              />            
             {errors && errors.get('crmEnrollmentStartDate') &&
             <FormHelperText error>{errors.get('crmEnrollmentStartDate').get(0)}</FormHelperText>}
-          </FormControl>
-          <FormControl aria-describedby='crmEnrollmentEndDate-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='crmEnrollmentEndDate-error' shrink={!!classroom.crmEnrollmentEndDate}>Enrollment End
-              Date</InputLabel>
-            <MuiPickersUtilsProvider utils={MomentUtils}>
+          </div>
+          <div aria-describedby='crmEnrollmentEndDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
+            <InputLabel htmlFor='crmEnrollmentEndDate-error' shrink={!!classroom.crmEnrollmentEndDate}>Enrollment End Date</InputLabel>            
               <DatePicker
                 name='crmEnrollmentEndDate'
                 value={classroom.crmEnrollmentEndDate || null}
                 onChange={(m) => {
                   this._handleDateChange(m, 'crmEnrollmentEndDate')
                 }}
-              />
-            </MuiPickersUtilsProvider>
+              />            
             {errors && errors.get('crmEnrollmentEndDate') &&
             <FormHelperText error>{errors.get('crmEnrollmentEndDate').get(0)}</FormHelperText>}
-          </FormControl>
+          </div>
           {!isPublic &&
           <FormControl className='full-width form-inputs'>
             <Button
