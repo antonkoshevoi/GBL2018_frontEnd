@@ -10,9 +10,10 @@ import blue from 'material-ui/es/colors/blue';
 import MomentUtils from 'material-ui-pickers/utils/moment-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 import moment from 'moment';
-import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import Button from 'material-ui/Button';
+import classNames from 'classnames';
+import {IconButton, withStyles} from 'material-ui';
 
 class LineChart extends Component {
   apiClient = new ApiClient();
@@ -29,7 +30,8 @@ class LineChart extends Component {
       options: {},
       selectorActive: 0,
       chosenDate: moment().format('YYYY-MM-DD'),
-      disabled: false
+      disabled: false,
+      maxInputDate: moment().format('YYYY-MM-DD')
     }
   }
 
@@ -139,13 +141,15 @@ class LineChart extends Component {
 
   generateDateSelector = () => {
     const currInputDate = this.state.chosenDate;
-    let maxInputDate = moment().format('YYYY-MM-DD');
     const theme = createMuiTheme({
       palette: {
         primary: blue
       }
     });
+    let maxInputDate;
     if (this.state.selectorActive === 0) {
+      maxInputDate = moment().format('YYYY-MM-DD');
+      this.state.maxInputDate = maxInputDate; // it has to be done like this, not with this.setState()!
       return (
         <div className="date-selector">
           <div className="calendar-management-block">
@@ -194,18 +198,18 @@ class LineChart extends Component {
       let okLabel;
       if (this.state.selectorActive === 1) {
         endDate = moment(this.state.chosenDate).add('weeks', 1).add('days', -1).format('MMMM Do');
-        maxInputDate = moment().startOf('week');
-        okLabel = "Select week";
+        maxInputDate = moment().endOf('week').format('YYYY-MM-DD');
+        okLabel = 'Select week';
       } else if (this.state.selectorActive === 2) {
         endDate = moment(this.state.chosenDate).add('months', 1).add('days', -1).format('MMMM Do');
-        maxInputDate = moment().startOf('month');
-        okLabel = "Select month";
+        maxInputDate = moment().endOf('month').format('YYYY-MM-DD');
+        okLabel = 'Select month';
       } else if (this.state.selectorActive === 3) {
         endDate = moment(this.state.chosenDate).add('years', 1).add('days', -1).format('MMMM Do');
-        maxInputDate = moment().startOf('year');
-        okLabel = "Select year";
+        maxInputDate = moment().endOf('year').format('YYYY-MM-DD');
+        okLabel = 'Select year';
       }
-
+      this.state.maxInputDate = maxInputDate;
       return (
         <div className="date-selector">
           <div className="calendar-management-block">
@@ -242,6 +246,7 @@ class LineChart extends Component {
                   onChange={this.changeStartDate}
                   animateYearScrolling={false}
                   disabled={this.state.disabled}
+                  renderDay={this.renderWrappedDay}
                   okLabel={okLabel}
                 />
               </MuiPickersUtilsProvider>
@@ -343,7 +348,91 @@ class LineChart extends Component {
         console.log(error);
         this.setState({disabled: false});
       });
+  };
+
+  renderWrappedDay = (date, selectedDate, dayInCurrentMonth) => {
+    const selector = this.state.selectorActive;
+    const {classes} = this.props;
+    let period;
+    if (selector === 1) {
+      period = 'week';
+    } else if (selector === 2) {
+      period = 'month';
+    } else if (selector === 3) {
+      period = 'year';
+    }
+    const start = moment(selectedDate).startOf(period);
+    const end = moment(selectedDate).endOf(period);
+    const dayIsBetween = date.isBetween(moment(start).add('day', -1), end);
+    const isFirstDay = start.isSame(date, 'day');
+    const isLastDay = end.isSame(date, 'day');
+    const isDisabled = moment(this.state.maxInputDate).isBefore(date, 'day');
+
+    const wrapperClassName = classNames({
+      [classes.highlight]: dayIsBetween,
+      [classes.firstHighlight]: isFirstDay,
+      [classes.endHighlight]: isLastDay
+    });
+
+    const dayClassName = classNames(classes.day, {
+      [classes.nonCurrentMonthDay]: !dayInCurrentMonth,
+      [classes.highlightNonCurrentMonthDay]: !dayInCurrentMonth && dayIsBetween,
+      [classes.disabled]: isDisabled
+    });
+
+    return (
+      <div className={wrapperClassName}>
+        <IconButton className={dayClassName}>
+          <span> { date.format('D')} </span>
+        </IconButton>
+      </div>
+    );
   }
 }
 
-export default LineChart;
+const styles = theme => ({
+  dayWrapper: {
+    position: 'relative'
+  },
+  day: {
+    width: 36,
+    height: 36,
+    fontSize: theme.typography.caption.fontSize,
+    margin: '0 2px',
+    color: 'inherit'
+  },
+  customDayHighlight: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: '2px',
+    right: '2px',
+    border: `1px solid ${theme.palette.secondary.main}`,
+    borderRadius: '50%'
+  },
+  nonCurrentMonthDay: {
+    color: theme.palette.text.disabled
+  },
+  highlightNonCurrentMonthDay: {
+    color: '#676767'
+  },
+  highlight: {
+    background: '#2196f3',
+    color: theme.palette.common.white
+  },
+  firstHighlight: {
+    extend: 'highlight',
+    borderTopLeftRadius: '50%',
+    borderBottomLeftRadius: '50%'
+  },
+  endHighlight: {
+    extend: 'highlight',
+    borderTopRightRadius: '50%',
+    borderBottomRightRadius: '50%'
+  },
+  disabled: {
+    color: 'rgba(0, 0, 0, 0.38)'
+  }
+});
+
+export default withStyles(styles)(LineChart);
