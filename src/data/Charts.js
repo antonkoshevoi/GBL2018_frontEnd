@@ -88,15 +88,15 @@ export function formChartOptions(maxStudents, selector) {
         display: true,
         ticks: {
           autoSkip: false,
-          callback: function (value) {
-            return renderXAxis(selector, value);
+          callback: function (value, index) {
+            return renderXAxis(selector, value, index);
           }
         }
       }]
     }
   };
 
-  function renderXAxis(selector, value) {
+  function renderXAxis(selector, value, index) {
     if (selector === 0) {
       switch (value) {
         case 0 :
@@ -119,6 +119,9 @@ export function formChartOptions(maxStudents, selector) {
           return;
       }
     } else if (selector === 1) {
+      if (index === 7) {
+        return;
+      }
       return value.slice(-5);
     } else if (selector === 2) {
       const daysInMonth = moment(value).daysInMonth();
@@ -163,7 +166,7 @@ export function generateColors(selector, startDate) {
   } else if (selector === 1) {
     const isSameWeek = currDate.isSame(startDate, 'week');
     const currDay = currDate.day();
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 8; i++) {
       if (i < currDay || !isSameWeek) {
         colors.push('#8CC9E8');
       } else if (i === currDay) {
@@ -212,7 +215,6 @@ export function generateChartDataFromTemplate(template, history, selector) {
       template.values[index] = history[key];
     } else if (selector === 1 || selector === 2) {
       const newKey = key.slice(-10);
-      console.log(newKey);
       const index = template.labels.indexOf(newKey);
       template.values[index] = history[key];
     }
@@ -233,8 +235,8 @@ export function generateChartTemplate(selector, startDate) {
     };
   } else if (selector === 1) {
     return {
-      labels: fillDates(startDate, 7, 'YYYY-MM-DD'),
-      values: fillZeroValues(7)
+      labels: fillDates(startDate, 8, 'YYYY-MM-DD'),
+      values: fillZeroValues(8)
     };
   } else if (selector === 2) {
     const daysInMonth = moment(startDate).daysInMonth();
