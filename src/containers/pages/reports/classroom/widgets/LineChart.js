@@ -17,6 +17,7 @@ import {IconButton, withStyles} from 'material-ui';
 
 class LineChart extends Component {
   apiClient = new ApiClient();
+  clientTimeOffset = moment().utcOffset();
   picker;
 
   static propTypes = {
@@ -121,7 +122,8 @@ class LineChart extends Component {
     const period = this.getStringPeriodFromNumber(selector);
     const params = {
       'period': period,
-      'date-from': moment(date).utc().format('YYYY-MM-DD')
+      'date-from': date,
+      'offset': this.clientTimeOffset
     };
     return this.apiClient.get('history/classroom/' + this.props.classroomId, params);
   };
