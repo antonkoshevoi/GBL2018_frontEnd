@@ -8,6 +8,12 @@ export function formChartData(history, selector, startDate) {
   const data = generateChartTemplate(selector, startDate);
   generateChartDataFromTemplate(data, history, selector);
   const colors = generateColors(selector, startDate);
+  data.values = data.values.map((value, index) => {
+    if (colors[index] !== 'transparent') {
+      return value;
+    }
+    return;
+  });
   return {
     labels: data.labels,
     datasets: [{
