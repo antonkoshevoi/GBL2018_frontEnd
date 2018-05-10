@@ -155,9 +155,9 @@ export function generateColors(selector, startDate) {
     const isSameDay = currDate.isSame(startDate, 'day');
     const currHours = +currDate.format('HH');
     for (let i = 0; i < 24; i++) {
-      if (i + 1 < currHours || !isSameDay) {
+      if (i < currHours || !isSameDay) {
         colors.push('#8CC9E8');
-      } else if (i + 1 === currHours) {
+      } else if (i === currHours) {
         colors.push('rgb(121, 201, 66)');
       } else {
         colors.push('transparent');
@@ -236,7 +236,7 @@ export function generateChartTemplate(selector, startDate) {
   } else if (selector === 1) {
     return {
       labels: fillDates(startDate, 8, 'YYYY-MM-DD'),
-      values: fillZeroValues(8)
+      values: fillZeroValues(7)
     };
   } else if (selector === 2) {
     const daysInMonth = moment(startDate).daysInMonth();
