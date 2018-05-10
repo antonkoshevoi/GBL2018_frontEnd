@@ -7,13 +7,15 @@ const _randomScalingFactor = function () {
 export function formChartData(history, selector, startDate) {
   const data = generateChartTemplate(selector, startDate);
   generateChartDataFromTemplate(data, history, selector);
+  const colors = generateColors(selector, startDate);
   return {
     labels: data.labels,
     datasets: [{
       borderColor: '#8CC9E8',
       backgroundColor: 'transparent',
-      pointBackgroundColor: '#8CC9E8',
-      pointBorderColor: '#8CC9E8',
+      pointBackgroundColor: colors,
+      pointBorderColor: colors,
+      pointRadius: 2,
       borderWidth: 2,
       data: data.values
     }]
@@ -135,6 +137,65 @@ export function formChartOptions(maxStudents, selector) {
       }
     }
   }
+}
+
+export function generateColors(selector, startDate) {
+  const currDate = moment();
+  const colors = [];
+  if (selector === 0) {
+    const isSameDay = currDate.isSame(startDate, 'day');
+    const currHours = +currDate.format('HH');
+    for (let i = 0; i < 24; i++) {
+      if (i + 1 < currHours || !isSameDay) {
+        colors.push('#8CC9E8');
+      } else if (i + 1 === currHours) {
+        colors.push('rgb(121, 201, 66)');
+      } else {
+        colors.push('transparent');
+      }
+    }
+  } else if (selector === 1) {
+    const isSameWeek = currDate.isSame(startDate, 'week');
+    const currDay = currDate.day();
+    for (let i = 0; i < 7; i++) {
+      if (i < currDay || !isSameWeek) {
+        colors.push('#8CC9E8');
+      } else if (i === currDay) {
+        colors.push('rgb(121, 201, 66)');
+      } else {
+        colors.push('transparent');
+      }
+    }
+  } else if (selector === 2) {
+    const isSameMonth = currDate.isSame(startDate, 'month');
+    const currDay = currDate.date();
+    const daysInMonth = moment(startDate).daysInMonth();
+
+    for (let i = 0; i < daysInMonth; i++) {
+      if (i < currDay || !isSameMonth) {
+        colors.push('#8CC9E8');
+      } else if (i === currDay) {
+        colors.push('rgb(121, 201, 66)');
+      } else {
+        colors.push('transparent');
+      }
+    }
+  } else if (selector === 3) {
+    const isSameYear = currDate.isSame(startDate, 'year');
+    const currMonth = currDate.month();
+
+    for (let i = 0; i < 12; i++) {
+      if (i < currMonth || !isSameYear) {
+        colors.push('#8CC9E8');
+      } else if (i === currMonth) {
+        colors.push('rgb(121, 201, 66)');
+      } else {
+        colors.push('transparent');
+      }
+    }
+  }
+  return colors;
+
 }
 
 export function generateChartDataFromTemplate(template, history, selector) {
