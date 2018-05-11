@@ -125,14 +125,15 @@ class LineChart extends Component {
     };
     this.setState({disabled: true});
     // TODO send request to homeroom instead of school
-    return this.apiClient.get('history/school', params).then(
-      (data) => {
+    Promise.all([this.apiClient.get('history/school', params),
+      this.apiClient.get('schools/online-students')]).then(
+      (response) => {
         this.setState({
           selectorActive: selector,
           chosenDate: date,
           disabled: false,
-          data: formChartData(data.data.history, selector, date),
-          options: formChartOptions(data.data.maxCount, selector)
+          data: formChartData(response[0].data.history, selector, date, response[1].data.online),
+          options: formChartOptions(response[0].data.maxCount, selector)
         });
       },
       (error) => {

@@ -4,9 +4,9 @@ const _randomScalingFactor = function () {
   return Math.round(Math.random() * 40)
 };
 
-export function formChartData(history, selector, startDate) {
+export function formChartData(history, selector, startDate, currOnline) {
   const data = generateChartTemplate(selector, startDate);
-  generateChartDataFromTemplate(data, history, selector);
+  generateChartDataFromTemplate(data, history, selector, startDate, currOnline);
   const colors = generateColors(selector, startDate);
   data.values = data.values.map((value, index) => {
     if (colors[index] !== 'transparent') {
@@ -59,6 +59,8 @@ export function formChartOptions(maxStudents, selector) {
             return value + ' ' + label;
           } else if (selector === 3) {
             return value + ' ' + moment('' + label, 'MM').format('MMMM');
+          } else if (label.length === 8 && (label.indexOf('am') !== -1 || label.indexOf('pm') !== -1)) {
+            return value + ' ' + label;
           }
         },
         title: function () {
@@ -88,33 +90,42 @@ export function formChartOptions(maxStudents, selector) {
         display: true,
         ticks: {
           autoSkip: false,
-          callback: function (value, index) {
-            return renderXAxis(selector, value, index);
+          callback: function (value, index, xAxesArray) {
+            return renderXAxis(selector, value, index, xAxesArray);
           }
         }
       }]
     }
   };
 
-  function renderXAxis(selector, value, index) {
+  function renderXAxis(selector, value, index, xAxesArray) {
     if (selector === 0) {
+      let isSameDay = false;
+      const cases = [0, 3, 6, 9, 12, 15, 18, 21];
+      for (const datum of xAxesArray) {
+        if (typeof datum === 'string') {
+          isSameDay = true;
+          break;
+        }
+      }
+
       switch (value) {
-        case 0 :
-          return value;
-        case 3 :
-          return value;
-        case 6 :
-          return value;
-        case 9 :
-          return value;
-        case 12 :
-          return value;
-        case 15 :
-          return value;
-        case 18 :
-          return value;
-        case 21 :
-          return value;
+        case cases[0] :
+          return 0;
+        case cases[1] :
+          return 3;
+        case cases[2] :
+          return 6;
+        case cases[3] :
+          return 9;
+        case cases[4] :
+          return 12;
+        case cases[5] :
+          return 15;
+        case cases[6] :
+          return 18;
+        case cases[7] :
+          return 21;
         default:
           return;
       }
@@ -153,8 +164,12 @@ export function generateColors(selector, startDate) {
   const colors = [];
   if (selector === 0) {
     const isSameDay = currDate.isSame(startDate, 'day');
-    const currHours = +currDate.format('HH');
-    for (let i = 0; i < 24; i++) {
+    const currHours = +currDate.format('HH') + 1;
+    let to = 24;
+    if (isSameDay) {
+      to++;
+    }
+    for (let i = 0; i < to; i++) {
       if (i < currHours || !isSameDay) {
         colors.push('#8CC9E8');
       } else if (i === currHours) {
@@ -207,7 +222,7 @@ export function generateColors(selector, startDate) {
 
 }
 
-export function generateChartDataFromTemplate(template, history, selector) {
+export function generateChartDataFromTemplate(template, history, selector, startDate, currOnline) {
   Object.keys(history).forEach((key) => {
     if (selector === 0) {
       const newKey = +key.slice(-5, -3);
@@ -224,14 +239,26 @@ export function generateChartDataFromTemplate(template, history, selector) {
       template.values[index] = history[key];
     }
   });
+  const currDate = moment();
+  if (currDate.isSame(startDate, 'day')) {
+    const currHour = +currDate.format('HH') + 1;
+    template.values.splice(currHour, 0, currOnline);
+  }
 
 }
 
 export function generateChartTemplate(selector, startDate) {
   if (selector === 0) {
+    const labels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+    const values = fillZeroValues(24);
+    const currDate = moment();
+    if (currDate.isSame(startDate, 'day')) {
+      const currHours = +currDate.format('HH') + 1;
+      labels.splice(currHours, 0, currDate.format('hh:mm a'));
+    }
     return {
-      labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
-      values: fillZeroValues(24)
+      labels: labels,
+      values: values
     };
   } else if (selector === 1) {
     return {
@@ -430,5 +457,5 @@ export const ChartData = {
       backgroundColor: ['#79c942', '#fe1d25']
     }],
     labels: ['correct', 'incorrect']
-  },
+  }
 }

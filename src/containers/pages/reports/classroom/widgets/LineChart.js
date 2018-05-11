@@ -124,14 +124,16 @@ class LineChart extends Component {
       'offset': this.clientTimeOffset
     };
     this.setState({disabled: true});
-    return this.apiClient.get('history/classroom/' + this.props.classroomId, params).then(
-      (data) => {
+
+    Promise.all([this.apiClient.get('history/classroom/' + this.props.classroomId, params),
+      this.apiClient.get('classrooms/online-students/' + this.props.classroomId)]).then(
+      (response) => {
         this.setState({
           selectorActive: selector,
           chosenDate: date,
           disabled: false,
-          data: formChartData(data.data.history, selector, date),
-          options: formChartOptions(data.data.maxCount, selector)
+          data: formChartData(response[0].data.history, selector, date, response[1].data.online),
+          options: formChartOptions(response[0].data.maxCount, selector)
         });
       },
       (error) => {
