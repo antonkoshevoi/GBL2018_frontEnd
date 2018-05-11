@@ -181,9 +181,9 @@ export function generateColors(selector, startDate) {
     const daysInMonth = moment(startDate).daysInMonth();
 
     for (let i = 0; i < daysInMonth; i++) {
-      if (i < currDay || !isSameMonth) {
+      if (i + 1 < currDay || !isSameMonth) {
         colors.push('#8CC9E8');
-      } else if (i === currDay) {
+      } else if (i + 1 === currDay) {
         colors.push('rgb(121, 201, 66)');
       } else {
         colors.push('transparent');
