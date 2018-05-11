@@ -1626,6 +1626,7 @@ td.rotate div span {
 
 .calendar-management-block .arrow button span {
     height: 20px;
+    line-height: 21px;
 }
 
 .calendar-management-block .arrow button {
