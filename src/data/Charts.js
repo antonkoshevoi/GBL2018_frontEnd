@@ -182,10 +182,8 @@ export function generateColors(selector, startDate) {
     const isSameWeek = currDate.isSame(startDate, 'week');
     const currDay = currDate.day();
     for (let i = 0; i < 8; i++) {
-      if (i < currDay || !isSameWeek) {
+      if (i <= currDay || !isSameWeek) {
         colors.push('#8CC9E8');
-      } else if (i === currDay) {
-        colors.push('rgb(121, 201, 66)');
       } else {
         colors.push('transparent');
       }
@@ -196,10 +194,8 @@ export function generateColors(selector, startDate) {
     const daysInMonth = moment(startDate).daysInMonth();
 
     for (let i = 0; i < daysInMonth; i++) {
-      if (i + 1 < currDay || !isSameMonth) {
+      if (i + 1 <= currDay || !isSameMonth) {
         colors.push('#8CC9E8');
-      } else if (i + 1 === currDay) {
-        colors.push('rgb(121, 201, 66)');
       } else {
         colors.push('transparent');
       }
@@ -209,10 +205,8 @@ export function generateColors(selector, startDate) {
     const currMonth = currDate.month();
 
     for (let i = 0; i < 12; i++) {
-      if (i < currMonth || !isSameYear) {
+      if (i <= currMonth || !isSameYear) {
         colors.push('#8CC9E8');
-      } else if (i === currMonth) {
-        colors.push('rgb(121, 201, 66)');
       } else {
         colors.push('transparent');
       }
