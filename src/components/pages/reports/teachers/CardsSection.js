@@ -195,7 +195,7 @@ class ChartsSection extends Component {
           chosenDate: date,
           disabled: false,
           data: formChartData(data.data.history, selector, date),
-          options: formChartOptions(data.maxCount, selector)
+          options: formChartOptions(data.data.maxCount, selector)
         });
       },
       (error) => {
