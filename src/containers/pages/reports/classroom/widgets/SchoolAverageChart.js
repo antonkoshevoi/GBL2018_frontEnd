@@ -83,12 +83,28 @@ class SchoolAverageChart extends Component {
       {color: "#79c942", label: "complete", value: data.completed},
       {color: "#ff931e", label: "in progress", value: data.inProgress},
       {color: "#dee6e9", label: "not started", value: data.notStarted}
-    ]
+    ];
+
+    const progressChartData = {
+      datasets: [{
+        data: [+data.completed, +data.inProgress, +data.notStarted],
+        backgroundColor: ['#79c942', '#ff931e', '#dee6e9']
+      }],
+      labels: ['complete', 'in progress', 'not started']
+    };
 
     const performance = [
       {color: "#79c942", label: "correct", value: data.averageGrade},
       {color: "#fe1d25", label: "incorrect", value: 100 - parseInt(data.averageGrade)},
-    ]
+    ];
+
+    const performanceChartData = {
+      datasets: [{
+        data: [+data.averageGrade, 100 - parseInt(data.averageGrade)],
+        backgroundColor: ['#79c942', '#fe1d25']
+      }],
+      labels: ['correct', 'incorrect']
+    };
 
     return (
       <div className="small-card-content">
@@ -96,7 +112,7 @@ class SchoolAverageChart extends Component {
           {loading && !success && <div className="text-center col-md-12"><CircularProgress color="primary"/></div>}
           {!loading && success && <div className="row">
             <div className="col-md-5 pie-block">
-              <Pie data={performance} options={this.options} width={100} height={100}/>
+              <Pie data={performanceChartData} options={this.options} width={100} height={100}/>
             </div>
             <div className="col-md-7  pie-block">
               <div
@@ -113,7 +129,7 @@ class SchoolAverageChart extends Component {
           {loading && !success && <div className="text-center col-md-12"><CircularProgress color="primary"/></div>}
           {!loading && success && <div className="row">
             <div className="col-md-5 pie-block">
-              <Pie data={progress} options={this.options} width={100} height={100}/>
+              <Pie data={progressChartData} options={this.options} width={100} height={100}/>
             </div>
             <div className="col-md-7 pie-block">
               <div

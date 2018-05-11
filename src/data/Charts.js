@@ -414,5 +414,21 @@ export const ChartData = {
   pieDataPerformance: [
     {color: '#79c942', label: 'correct', value: 80},
     {color: '#fe1d25', label: 'incorrect', value: 20}
-  ]
+  ],
+
+  pieChartDataProgress: {
+    datasets: [{
+      data: [20, 25, 55],
+      backgroundColor: ['#79c942', '#ff931e', '#dee6e9']
+    }],
+    labels: ['complete', 'in progress', 'not started']
+  },
+
+  pieChartDataPerformance: {
+    datasets: [{
+      data: [80, 20, 55],
+      backgroundColor: ['#79c942', '#fe1d25']
+    }],
+    labels: ['correct', 'incorrect']
+  },
 }

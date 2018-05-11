@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {formChartOptions, formChartData} from '../../../../data/Charts';
+import {formChartOptions, formChartData, ChartData} from '../../../../data/Charts';
 import {Doughnut, Line, Pie} from "react-chartjs-2";
 import Card from "../../../ui/Card";
 import InfoSection from "./InfoSection";
@@ -30,7 +30,8 @@ class ChartsSection extends Component {
           chosenDate: moment().format('YYYY-MM-DD'),
           disabled: false,
           maxInputDate: moment().format('YYYY-MM-DD'),
-          originalStateTimerId: ''
+          originalStateTimerId: '',
+          ...ChartData
         }
     }
 
@@ -104,7 +105,7 @@ class ChartsSection extends Component {
                         <div className="small-card">
                             <div className="row">
                                 <div className="col-md-5">
-                                    <Pie data={this.state.pieDataProgress} options={this.state.options} width={100} height={100}/>
+                                    <Pie data={this.state.pieChartDataProgress} options={this.state.options} width={100} height={100}/>
                                 </div>
                                 <div className="col-md-7">
                                     <div className="m-stack m--padding-left-10  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
@@ -118,7 +119,7 @@ class ChartsSection extends Component {
                         <div className="small-card">
                             <div className="row">
                                 <div className="col-md-5">
-                                    <Pie data={this.state.pieDataPerformance} options={this.state.options} width={100} height={100}/>
+                                    <Pie data={this.state.pieChartDataPerformance} options={this.state.options} width={100} height={100}/>
                                 </div>
                                 <div className="col-md-7">
                                     <div className="m-stack m--padding-left-10 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">

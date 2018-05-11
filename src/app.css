@@ -1657,6 +1657,11 @@ td.rotate div span {
     margin-bottom: 0;
 }
 
+.pie-block canvas {
+    position: relative!important;
+    margin: 0 auto;
+}
+
 @media (min-width: 1240px) {
     .margin-bottom-zero {
         margin-bottom: 0 !important;
