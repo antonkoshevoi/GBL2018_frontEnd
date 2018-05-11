@@ -96,7 +96,7 @@ class SchoolAverageChart extends Component {
           {loading && !success && <div className="text-center col-md-12"><CircularProgress color="primary"/></div>}
           {!loading && success && <div className="row">
             <div className="col-md-5 pie-block">
-              <Pie data={performance} options={this.options} width="100" height="100"/>
+              <Pie data={performance} options={this.options} width={100} height={100}/>
             </div>
             <div className="col-md-7  pie-block">
               <div
@@ -113,7 +113,7 @@ class SchoolAverageChart extends Component {
           {loading && !success && <div className="text-center col-md-12"><CircularProgress color="primary"/></div>}
           {!loading && success && <div className="row">
             <div className="col-md-5 pie-block">
-              <Pie data={progress} options={this.options} width="100" height="100"/>
+              <Pie data={progress} options={this.options} width={100} height={100}/>
             </div>
             <div className="col-md-7 pie-block">
               <div

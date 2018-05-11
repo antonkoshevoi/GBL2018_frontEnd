@@ -104,7 +104,7 @@ class ChartsSection extends Component {
                         <div className="small-card">
                             <div className="row">
                                 <div className="col-md-5">
-                                    <Pie data={this.state.pieDataProgress} options={this.state.options} width="100" height="100"/>
+                                    <Pie data={this.state.pieDataProgress} options={this.state.options} width={100} height={100}/>
                                 </div>
                                 <div className="col-md-7">
                                     <div className="m-stack m--padding-left-10  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
@@ -118,7 +118,7 @@ class ChartsSection extends Component {
                         <div className="small-card">
                             <div className="row">
                                 <div className="col-md-5">
-                                    <Pie data={this.state.pieDataPerformance} options={this.state.options} width="100" height="100"/>
+                                    <Pie data={this.state.pieDataPerformance} options={this.state.options} width={100} height={100}/>
                                 </div>
                                 <div className="col-md-7">
                                     <div className="m-stack m--padding-left-10 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
