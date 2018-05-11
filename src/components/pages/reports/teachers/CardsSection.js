@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {formChartOptions, formChartData, ChartData} from '../../../../data/Charts';
-import {Doughnut, Line, Pie} from "react-chartjs-2";
-import Card from "../../../ui/Card";
-import InfoSection from "./InfoSection";
+import {Doughnut, Line, Pie} from 'react-chartjs-2';
+import Card from '../../../ui/Card';
+import InfoSection from './InfoSection';
 import ApiClient from '../../../../services/ApiClient';
 import {DatePicker} from 'material-ui-pickers';
 import {createMuiTheme, MuiThemeProvider} from 'material-ui';
@@ -21,120 +21,124 @@ class ChartsSection extends Component {
   clientTimeOffset = moment().utcOffset();
   picker;
 
-    constructor(props){
-        super(props);
-        this.state = {
-          data: {},
-          options: {},
-          selectorActive: 0,
-          chosenDate: moment().format('YYYY-MM-DD'),
-          disabled: false,
-          maxInputDate: moment().format('YYYY-MM-DD'),
-          originalStateTimerId: '',
-          ...ChartData
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: {},
+      options: {},
+      selectorActive: 0,
+      chosenDate: moment().format('YYYY-MM-DD'),
+      disabled: false,
+      maxInputDate: moment().format('YYYY-MM-DD'),
+      originalStateTimerId: '',
+      ...ChartData
     }
+  }
 
   componentDidMount() {
     const selector = this.state.selectorActive;
     const date = this.state.chosenDate;
-    this.returnChartToOriginalState(selector, date);
+    this.returnChartToOriginalState();
     this.getChartData(selector, date);
   }
 
 
-    _renderPieChartLabels(labels) {
-        return labels.map(function (item,i) {
-            return (
-                <div key={i} className="m-stack__item m--margin-bottom-5 m-stack__item--center m-stack__item--middle">
-                    <span className="m-badge m-badge--success" style={{marginRight:'8px', backgroundColor:item.color}}></span>
-                    <span>{item.value+'%  '}</span>
-                    <span style={{whiteSpace:'pre'}}>{item.label}</span>
-                </div>
-            )
-        })
-    }
+  _renderPieChartLabels(labels) {
+    return labels.map(function (item, i) {
+      return (
+        <div key={i} className="m-stack__item m--margin-bottom-5 m-stack__item--center m-stack__item--middle">
+          <span className="m-badge m-badge--success" style={{marginRight: '8px', backgroundColor: item.color}}></span>
+          <span>{item.value + '%  '}</span>
+          <span style={{whiteSpace: 'pre'}}>{item.label}</span>
+        </div>
+      )
+    })
+  }
 
-    render() {
+  render() {
 
-        return (
-            <div className="row">
-                <div className="col-sm-12 col-md-6 col-xl-3">
-                    <Card title="Teacher Mrs B." className="profile-card" avatar='http://admissions.berkeley.edu/sites/default/files/UCB_landingpage_images_600x300_212.jpg'>
-                        <InfoSection/>
-                    </Card>
-                </div>
-                <div className="col-sm-12 col-md-6 col-xl-3">
-                  <Card title="Students Online" isChart={true} icon="flaticon-diagram" iconBackground="square-background"
-                        resetDate={this.handleResetDate} isResetChartButton={true}>
-                    <div className="date-group-selector">
-                      <div className={`date-group` + (this.state.selectorActive === 0 ? ' date-selector-active' : '')}
-                           onClick={() => {
-                             this.changeDateGroup(0)
-                           }}>1 day
-                      </div>
-                      <div className={`date-group` + (this.state.selectorActive === 1 ? ' date-selector-active' : '')}
-                           onClick={() => {
-                             this.changeDateGroup(1)
-                           }}>7 days
-                      </div>
-                      <div className={`date-group` + (this.state.selectorActive === 2 ? ' date-selector-active' : '')}
-                           onClick={() => {
-                             this.changeDateGroup(2)
-                           }}>1 month
-                      </div>
-                      <div className={`date-group` + (this.state.selectorActive === 3 ? ' date-selector-active' : '')}
-                           onClick={() => {
-                             this.changeDateGroup(3)
-                           }}>1 year
-                      </div>
-                    </div>
-                    {this.generateDateSelector()}
-                    {this.state.data && this.state.data.datasets &&
-                    <Line data={this.state.data} options={this.state.options} width={500} height={350}/>}
-                  </Card>
-                </div>
-
-                <div className="col-sm-12 col-md-6 col-xl-3">
-                    <Card title="Pass Rate" className="passRateCard" icon="flaticon-list-2">
-                        <h1  className="d-flex justify-content-center align-items-center absolute-center" style={{fontSize:'7rem',color:'rgb(0, 128, 0)'}}>28%</h1>
-                    </Card>
-                </div>
-                <div className="col-sm-12 col-md-6 col-xl-3">
-                    <div className="small-card-content">
-                        <div className="small-card">
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <Pie data={this.state.pieChartDataProgress} options={this.state.options} width={100} height={100}/>
-                                </div>
-                                <div className="col-md-7">
-                                    <div className="m-stack m--padding-left-10  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
-                                        <h5> School Average</h5>
-                                        <legend>Progress</legend>
-                                        {this._renderPieChartLabels(this.state.pieDataProgress)}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="small-card">
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <Pie data={this.state.pieChartDataPerformance} options={this.state.options} width={100} height={100}/>
-                                </div>
-                                <div className="col-md-7">
-                                    <div className="m-stack m--padding-left-10 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
-                                        <h5> School Average</h5>
-                                        <legend>Performance</legend>
-                                        {this._renderPieChartLabels(this.state.pieDataPerformance)}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    return (
+      <div className="row">
+        <div className="col-sm-12 col-md-6 col-xl-3">
+          <Card title="Teacher Mrs B." className="profile-card"
+                avatar='http://admissions.berkeley.edu/sites/default/files/UCB_landingpage_images_600x300_212.jpg'>
+            <InfoSection/>
+          </Card>
+        </div>
+        <div className="col-sm-12 col-md-6 col-xl-3">
+          <Card title="Students Online" isChart={true} icon="flaticon-diagram" iconBackground="square-background"
+                resetDate={this.handleResetDate} isResetChartButton={true}>
+            <div className="date-group-selector">
+              <div className={`date-group` + (this.state.selectorActive === 0 ? ' date-selector-active' : '')}
+                   onClick={() => {
+                     this.changeDateGroup(0)
+                   }}>1 day
+              </div>
+              <div className={`date-group` + (this.state.selectorActive === 1 ? ' date-selector-active' : '')}
+                   onClick={() => {
+                     this.changeDateGroup(1)
+                   }}>7 days
+              </div>
+              <div className={`date-group` + (this.state.selectorActive === 2 ? ' date-selector-active' : '')}
+                   onClick={() => {
+                     this.changeDateGroup(2)
+                   }}>1 month
+              </div>
+              <div className={`date-group` + (this.state.selectorActive === 3 ? ' date-selector-active' : '')}
+                   onClick={() => {
+                     this.changeDateGroup(3)
+                   }}>1 year
+              </div>
             </div>
-        );
-    }
+            {this.generateDateSelector()}
+            {this.state.data && this.state.data.datasets &&
+            <Line data={this.state.data} options={this.state.options} width={500} height={350}/>}
+          </Card>
+        </div>
+
+        <div className="col-sm-12 col-md-6 col-xl-3">
+          <Card title="Pass Rate" className="passRateCard" icon="flaticon-list-2">
+            <h1 className="d-flex justify-content-center align-items-center absolute-center"
+                style={{fontSize: '7rem', color: 'rgb(0, 128, 0)'}}>28%</h1>
+          </Card>
+        </div>
+        <div className="col-sm-12 col-md-6 col-xl-3">
+          <div className="small-card-content">
+            <div className="small-card">
+              <div className="row">
+                <div className="col-md-5">
+                  <Pie data={this.state.pieChartDataProgress} options={this.state.options} width={100} height={100}/>
+                </div>
+                <div className="col-md-7">
+                  <div
+                    className="m-stack m--padding-left-10  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
+                    <h5> School Average</h5>
+                    <legend>Progress</legend>
+                    {this._renderPieChartLabels(this.state.pieDataProgress)}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="small-card">
+              <div className="row">
+                <div className="col-md-5">
+                  <Pie data={this.state.pieChartDataPerformance} options={this.state.options} width={100} height={100}/>
+                </div>
+                <div className="col-md-7">
+                  <div
+                    className="m-stack m--padding-left-10 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
+                    <h5> School Average</h5>
+                    <legend>Performance</legend>
+                    {this._renderPieChartLabels(this.state.pieDataPerformance)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   componentWillUnmount() {
     if (this.state.originalStateTimerId) {
@@ -142,29 +146,23 @@ class ChartsSection extends Component {
     }
   }
 
-  returnChartToOriginalState(currSelector, currDate) {
-    if (!currDate) {
-      currDate = moment();
-    }
+  returnChartToOriginalState() {
     if (this.state.originalStateTimerId) {
       clearTimeout(this.state.originalStateTimerId);
       this.setState({originalStateTimerId: ''});
     }
-    if (!(currSelector === 0 && moment(currDate).isSame(moment(), 'day'))) {
-      const newTimerId = setTimeout(() => {
-        this.getChartData(0, moment().format('YYYY-MM-DD'));
-        if (this.state.originalStateTimerId) {
-          this.setState({originalStateTimerId: ''});
-        }
-      }, 60000);
-      this.setState({originalStateTimerId: newTimerId});
-    }
+    const newTimerId = setTimeout(() => {
+      this.getChartData(0, moment().format('YYYY-MM-DD'));
+      if (this.state.originalStateTimerId) {
+        this.setState({originalStateTimerId: ''});
+      }
+      this.returnChartToOriginalState();
+    }, 60000);
+    this.setState({originalStateTimerId: newTimerId});
   }
 
   changeDateGroup = (newSelector) => {
-    if (newSelector !== 0) {
-      this.returnChartToOriginalState(newSelector);
-    }
+    this.returnChartToOriginalState();
     if (this.state.disabled === true) {
       return;
     }
@@ -339,7 +337,7 @@ class ChartsSection extends Component {
   changeStartDate = (date) => {
     let newDate;
     const selector = this.state.selectorActive;
-    this.returnChartToOriginalState(selector, date);
+    this.returnChartToOriginalState();
     if (selector === 0) {
       newDate = date.format('YYYY-MM-DD');
     } else if (selector === 1) {

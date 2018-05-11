@@ -38,7 +38,7 @@ class ChartsSection extends Component {
   componentDidMount() {
     const selector = this.state.selectorActive;
     const date = this.state.chosenDate;
-    this.returnChartToOriginalState(selector, date);
+    this.returnChartToOriginalState();
     this.getChartData(selector, date);
   }
 
@@ -65,7 +65,8 @@ class ChartsSection extends Component {
           </Card>
         </div>
         <div className="col-sm-12  col-md-6 col-xl-3">
-          <Card title="Students Online" icon="flaticon-diagram" isChart={true} resetDate={this.handleResetDate} isResetChartButton={true}>
+          <Card title="Students Online" icon="flaticon-diagram" isChart={true} resetDate={this.handleResetDate}
+                isResetChartButton={true}>
             <div className="date-group-selector">
               <div className={`date-group` + (this.state.selectorActive === 0 ? ' date-selector-active' : '')}
                    onClick={() => {
@@ -144,29 +145,23 @@ class ChartsSection extends Component {
     }
   }
 
-  returnChartToOriginalState(currSelector, currDate) {
-    if (!currDate) {
-      currDate = moment();
-    }
+  returnChartToOriginalState() {
     if (this.state.originalStateTimerId) {
       clearTimeout(this.state.originalStateTimerId);
       this.setState({originalStateTimerId: ''});
     }
-    if (!(currSelector === 0 && moment(currDate).isSame(moment(), 'day'))) {
-      const newTimerId = setTimeout(() => {
-        this.getChartData(0, moment().format('YYYY-MM-DD'));
-        if (this.state.originalStateTimerId) {
-          this.setState({originalStateTimerId: ''});
-        }
-      }, 60000);
-      this.setState({originalStateTimerId: newTimerId});
-    }
+    const newTimerId = setTimeout(() => {
+      this.getChartData(0, moment().format('YYYY-MM-DD'));
+      if (this.state.originalStateTimerId) {
+        this.setState({originalStateTimerId: ''});
+      }
+      this.returnChartToOriginalState();
+    }, 60000);
+    this.setState({originalStateTimerId: newTimerId});
   }
 
   changeDateGroup = (newSelector) => {
-    if (newSelector !== 0) {
-      this.returnChartToOriginalState(newSelector);
-    }
+    this.returnChartToOriginalState();
     if (this.state.disabled === true) {
       return;
     }
@@ -341,7 +336,7 @@ class ChartsSection extends Component {
   changeStartDate = (date) => {
     let newDate;
     const selector = this.state.selectorActive;
-    this.returnChartToOriginalState(selector, date);
+    this.returnChartToOriginalState();
     if (selector === 0) {
       newDate = date.format('YYYY-MM-DD');
     } else if (selector === 1) {

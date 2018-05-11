@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {formChartOptions, formChartData} from '../../../../../data/Charts';
-import Card from "../../../../../components/ui/Card";
-import { Line } from "react-chartjs-2";
+import Card from '../../../../../components/ui/Card';
+import {Line} from 'react-chartjs-2';
 import ApiClient from '../../../../../services/ApiClient';
 import {DatePicker} from 'material-ui-pickers';
 import {createMuiTheme, MuiThemeProvider} from 'material-ui';
@@ -40,7 +40,7 @@ class LineChart extends Component {
   componentDidMount() {
     const selector = this.state.selectorActive;
     const date = this.state.chosenDate;
-    this.returnChartToOriginalState(selector, date);
+    this.returnChartToOriginalState();
     this.getChartData(selector, date);
   }
 
@@ -83,29 +83,23 @@ class LineChart extends Component {
     }
   }
 
-  returnChartToOriginalState(currSelector, currDate) {
-    if (!currDate) {
-      currDate = moment();
-    }
+  returnChartToOriginalState() {
     if (this.state.originalStateTimerId) {
       clearTimeout(this.state.originalStateTimerId);
       this.setState({originalStateTimerId: ''});
     }
-    if (!(currSelector === 0 && moment(currDate).isSame(moment(), 'day'))) {
-      const newTimerId = setTimeout(() => {
-        this.getChartData(0, moment().format('YYYY-MM-DD'));
-        if (this.state.originalStateTimerId) {
-          this.setState({originalStateTimerId: ''});
-        }
-      }, 60000);
-      this.setState({originalStateTimerId: newTimerId});
-    }
+    const newTimerId = setTimeout(() => {
+      this.getChartData(0, moment().format('YYYY-MM-DD'));
+      if (this.state.originalStateTimerId) {
+        this.setState({originalStateTimerId: ''});
+      }
+      this.returnChartToOriginalState();
+    }, 60000);
+    this.setState({originalStateTimerId: newTimerId});
   }
 
   changeDateGroup = (newSelector) => {
-    if (newSelector !== 0) {
-      this.returnChartToOriginalState(newSelector);
-    }
+    this.returnChartToOriginalState();
     if (this.state.disabled === true) {
       return;
     }
@@ -281,7 +275,7 @@ class LineChart extends Component {
   changeStartDate = (date) => {
     let newDate;
     const selector = this.state.selectorActive;
-    this.returnChartToOriginalState(selector, date);
+    this.returnChartToOriginalState();
     if (selector === 0) {
       newDate = date.format('YYYY-MM-DD');
     } else if (selector === 1) {
