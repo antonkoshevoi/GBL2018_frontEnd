@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { Button, Icon, MenuItem, Select, Input } from 'material-ui';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { NavLink } from 'react-router-dom';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
@@ -82,7 +83,7 @@ class Classrooms extends Component {
    * @private
    */
   _renderRecords () {
-    const { records } = this.props;
+    const { records, goTo } = this.props;
     const loading = this.props.getRecordsRequest.get('loading');
 
       if (!loading && records.size === 0) {
@@ -111,11 +112,16 @@ class Classrooms extends Component {
           ]}>
             <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
           </HasPermission>
-          {/*<HasPermission permissions={[*/}
-            {/*'[ClassRooms][Assign][Student]'*/}
-          {/*]}>*/}
+          <HasPermission permissions={[
+            '[ClassRooms][Update][Schedule]'
+          ]}>
+            <EditButton onClick={() => { goTo(`/classrooms/schedule/${record.get('id')}`); }} id={record.get('id')}/>
+          </HasPermission>          
+          <HasPermission permissions={[
+            '[ClassRooms][Assign][Student]'
+          ]}>
             <AssignButton onClick={() => { this._assignStudent(record.get('id')) }}/>
-          {/*</HasPermission>*/}
+          </HasPermission>
           <HasPermission permissions={[
             '[ClassRooms][Delete][Any]'
           ]}>
@@ -362,7 +368,8 @@ Classrooms = connect(
     getRecords: (params = {}) => { dispatch(getRecords(params)) },
     getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
     getRecordForAssignStudents: (id, params = {}) => { dispatch(getRecordForAssignStudents(id, params)) },
-    deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) }
+    deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) },
+    goTo: (url) => {dispatch(push(url))}
   })
 )(Classrooms);
 

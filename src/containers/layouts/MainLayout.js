@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../ui/Header';
 import Sidebar from '../ui/Sidebar';
 import ParentSidebar from '../ui/ParentSidebar';
+import TeacherSidebar from '../ui/TeacherSidebar';
 import Wrapper from '../../components/layouts/Wrapper';
 import {withRouter} from "react-router-dom";
 import {generateLinkId} from "../../helpers/utils";
@@ -45,7 +46,6 @@ class MainLayout extends Component {
           <HasRole roles={[
             'Superintendent',
             'Student',
-            'Teacher',
             'Principal',
             'Administrator',
             'Affiliate',
@@ -56,6 +56,11 @@ class MainLayout extends Component {
             'Superadministrator',
           ]}>
             <SuperAdminSidebar mobileSidebar={() => {this.openMobileSidebar()}}/>
+          </HasRole>
+          <HasRole roles={[
+            'Teacher'
+          ]}>
+            <TeacherSidebar mobileSidebar={() => {this.openMobileSidebar()}}/>
           </HasRole>
           <HasRole roles={[
             "Parents"
