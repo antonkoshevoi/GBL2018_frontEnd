@@ -230,67 +230,6 @@ class FirstStepForm extends Component {
             </div>
           </div>
         </div>
-
-        <div className='col-sm-5'>
-          <div className='row text-center'>
-            <legend className='m--margin-bottom-10'>Profile Pic Upload</legend>
-            <div className='col-sm-12'>
-              <div className='CropperBlock'>
-                <div className='upload-btn-wrapper '>
-                  <span className='btn pointer m-btn--air btn-outline-info'>Upload a file</span>
-                  <input type='file' name='myfile' onChange={(e) => { this._handleFileChange(e) }}/>
-                </div>
-
-                <Cropper
-                    ref={cropper => { this.cropper = cropper; }}
-                    dragMode={'move'}
-                    src={form.avatar}
-                    background={false}
-                    cropBoxMovable={false}
-                    cropBoxResizable={true}
-                    minCropBoxWidth={250}
-                    className='signup-cropper'
-                    style={{height: 250, width: 250}}
-                    aspectRatio={1 / 1}
-                    guides={false}/>
-              </div>
-            </div>
-
-            <div className='col-sm-12'>
-              {form.avatar &&
-
-              <div className="text-center m--margin-10">
-                <input type="range" min="0.1" max="1" step="0.05"  value={this.state.zoom}  onChange={ (value)=>this._zoom(value)}></input>
-                <br/>
-                <span
-
-                  className='btn pointer m-btn m--margin-5 m-btn--pill m-btn--air btn-success'
-                  onClick={() => { this._handleImageCrop() }}
-                >
-                  Crop <span className='la la-crop'></span>
-                </span>
-              </div>
-              }
-
-                {form.avatarCropped &&
-              <div className='croppedBlock'>
-                  <img className='img-thumbnail' style={{ width: '150px' }} src={form.avatarCropped} alt='cropped image'/>
-              </div>}
-            </div>
-          </div>
-
-        </div>
-        <div className="container">
-          <Address
-            title='Billing / Shipping Information (optional)'
-            onChange={(form) => this._handleForm(form)}
-            name={'info'}
-            errors={errors}
-            form={form}/>
-        </div>
-
-
-
       </div>
     );
   }

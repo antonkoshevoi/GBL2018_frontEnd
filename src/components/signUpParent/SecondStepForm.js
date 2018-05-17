@@ -98,6 +98,34 @@ class SecondStepForm extends Component {
             <legend className='m--margin-bottom-10'>Required</legend>
 
             <div className='m-form__section m-form__section--first'>
+              <div className="form-group m-form__group row">
+                <label className="col-form-label col-lg-3 col-sm-12">First Name</label>
+                <div className="col-lg-8 col-md-9 col-sm-12">
+                  <input
+                    name='firstName'
+                    value={form.firstName || ''}
+                    onChange={(e) => { this._handleInputChange(e) }}
+                    type='text'
+                    className='form-control m-input m-input--air '
+                    placeholder=''/>
+                  {errors && errors.get('firstName') &&
+                  <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
+                </div>
+              </div>
+              <div className="form-group m-form__group row">
+                <label className="col-form-label col-lg-3 col-sm-12">Last Name</label>
+                <div className="col-lg-8 col-md-9 col-sm-12">
+                  <input
+                    name='lastName'
+                    value={form.lastName || ''}
+                    onChange={(e) => { this._handleInputChange(e) }}
+                    type='text'
+                    className='form-control m-input m-input--air '
+                    placeholder=''/>
+                  {errors && errors.get('lastName') &&
+                  <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
+                </div>
+              </div>
              <div className="form-group m-form__group row">
 				<label className="col-form-label col-lg-3 col-sm-12">Username <small className="g-red">*</small></label>
 				<div className="col-lg-8 col-md-9 col-sm-12">
@@ -131,65 +159,6 @@ class SecondStepForm extends Component {
             </div>
           </div>
 
-          <div className='m-separator m-separator--dashed m-separator--lg'></div>
-
-          <div className='col-xs-12'>
-            <legend className='m--margin-bottom-10'>Optional</legend>
-            <address className='m-form__section m-form__section--first signUpOptional'>
-             <div className="form-group m-form__group row">
-				<label className="col-form-label col-lg-3 col-sm-12">First Name</label>
-				<div className="col-lg-8 col-md-9 col-sm-12">
-                  <input
-                    name='firstName'
-                    value={form.firstName || ''}
-                    onChange={(e) => { this._handleInputChange(e) }}
-                    type='text'
-                    className='form-control m-input m-input--air '
-                    placeholder=''/>
-                    {errors && errors.get('firstName') &&
-                    <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
-                </div>
-              </div>
-             <div className="form-group m-form__group row">
-				<label className="col-form-label col-lg-3 col-sm-12">Last Name</label>
-				<div className="col-lg-8 col-md-9 col-sm-12">
-                  <input
-                    name='lastName'
-                    value={form.lastName || ''}
-                    onChange={(e) => { this._handleInputChange(e) }}
-                    type='text'
-                    className='form-control m-input m-input--air '
-                    placeholder=''/>
-                    {errors && errors.get('lastName') &&
-                    <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
-                </div>
-              </div>
-              <div className='form-group m-form__group row picker'>
-                <label className="col-form-label col-lg-3 col-sm-12">Birthday</label>
-                <MetronicDatePicker
-                  className='col-lg-8 col-md-9 col-sm-12'
-                  value={form.birthday || null}
-                  onChange={(date) => { this._handleDateChange(date, 'birthday') }}/>
-                {errors && errors.get('birthday') &&
-                  <div className="form-control-feedback text-center error">{errors.get('birthday').get(0)}</div>}
-              </div>
-             <div className="form-group m-form__group row">
-				<label className="col-form-label col-lg-3 col-sm-12">Gender</label>
-				<div className="col-lg-8 col-md-9 col-sm-12">
-                  <MetronicSelect
-                    name='gender'
-                    placeholder=''
-                    value={form.gender || 'male'}
-                    onChange={(e) => { this._handleInputChange(e) }}>
-                    <MenuItem value='male'>Male</MenuItem>
-                    <MenuItem value='female'>Female</MenuItem>
-                  </MetronicSelect>
-                </div>
-                {errors && errors.get('gender') &&
-                  <div className="form-control-feedback text-center error">{errors.get('gender').get(0)}</div>}
-              </div>
-            </address>
-          </div>
         </div>
         <div className='col-md-6 text-center'>
           <legend className='m--margin-bottom-10'>Profile Pic Upload</legend>
