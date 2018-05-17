@@ -3,8 +3,8 @@ import {NavLink} from "react-router-dom";
 import {withRouter} from "react-router";
 import '../../styles/sidebar.css';
 import {translate} from 'react-i18next';
-import PropTypes from 'prop-types';
-import Menu from "../../data/Menu";
+//import PropTypes from 'prop-types';
+//import Menu from "../../data/Menu";
 import $ from "jquery"
 import {Icon, IconButton} from "material-ui";
 import {connect} from "react-redux";
@@ -13,6 +13,7 @@ class Sidebar extends Component {
 
   constructor(props, context) {
     super(props, context);
+    this.menu = props.structure;
     this.state = {
       activeMenu: {
         key: ''
@@ -26,10 +27,6 @@ class Sidebar extends Component {
       mobileMenu: $(window).width() <= 1240 ? 53 : 0
     }
   }
-
-  static contextTypes = {
-    router: PropTypes.object.isRequired
-  }; //
 
   componentDidMount() {
     const {location} = this.props;
@@ -59,7 +56,7 @@ class Sidebar extends Component {
 
 
   _getActiveMenuByKey(key) {
-    const activeMenu = Menu.multipleMenu.filter(item => item.key === key)[0];
+    const activeMenu = this.menu.multipleMenu.filter(item => item.key === key)[0];
     if (activeMenu) {
       return activeMenu
     } else {
@@ -87,7 +84,7 @@ class Sidebar extends Component {
     const activeMenu = this.state.activeMenu;
     const _self = this;
 
-    return Menu.multipleMenu.map(function (menu) {
+    return this.menu.multipleMenu.map(function (menu) {
       return (
         <div className="menuItem" key={menu.key} data-key={menu.key}
              onClick={(menu.subMenu === undefined) ? _self.props.mobileSidebar : () => {
@@ -98,7 +95,7 @@ class Sidebar extends Component {
             className={'googleMenuItem ' + menu.colorName + (activeMenu.key === menu.key ? ' active fadeInUp  animated' : activeMenu.subMenu !== undefined ? ' swapped' : '') }
             onClick={(event) => {_self._googleMenuToggle(menu), _self._goToFirstPage(menu)}}>
             <span className="icon"><i className={menu.icon}></i></span>
-            <span className="content">{_self.props.t(menu.key)}</span>
+            <span className="content">{_self.props.t(menu.title)}</span>
           </NavLink>
           {(menu.subMenu !== undefined) ? _self._renderGoogleSubMenuContent(menu) : ''}
         </div>
@@ -108,7 +105,7 @@ class Sidebar extends Component {
 
   _goToFirstPage(menu){
     if (menu.key !== 'store' && menu.subMenu) {
-      const subLink = Menu.multipleMenu.filter(menuItem => menuItem.key ===  menu.key)[0].subMenu[0].link;
+      const subLink = this.menu.multipleMenu.filter(menuItem => menuItem.key ===  menu.key)[0].subMenu[0].link;
       this.props.history.push('/'+subLink);
     }
   }
@@ -147,7 +144,6 @@ class Sidebar extends Component {
     )
   }
 
-
   _renderTimelineSubMenu(menu) {
     return menu.map((item, i) => {
       return (
@@ -170,22 +166,31 @@ class Sidebar extends Component {
     })
   }
 
-  _renderSingleMenus() {
+  _renderSingleMenuItems() {
     const _self = this;
-    return Menu.singleMenu.map(function (menu, i) {
+    return this.menu.singleMenu.map(function (menu, i) {
       return (
         <li className="m-menu__item" key={i} aria-haspopup="true" data-menu-submenu-toggle="hover">
-          <NavLink to={`/${menu.link}`} className="m-menu__link" onClick={() => {
-            _self._resetMenu()
-          }}>
+          <NavLink to={`/${menu.link}`} className="m-menu__link" onClick={() => {_self._resetMenu()}}>
             <i className={`m-menu__link-icon ${menu.icon}`}></i>
-            <span className="m-menu__link-text">
-                            {_self.props.t(menu.key)}
-						</span>
+            <span className="m-menu__link-text">{_self.props.t(menu.key)}</span>
           </NavLink >
         </li>
       )
     })
+  }
+  
+  _renderSingleMenus() {
+      const _self = this;
+      if (this.menu.singleMenu) {
+          return (
+            <ul className="m-menu__nav  m-menu__nav--dropdown-submenu-arrow " onClick={() => {
+              _self.props.mobileSidebar()
+            }}>
+              {_self._renderSingleMenuItems()}
+            </ul>              
+          );
+      }         
   }
 
   _googleMenuToggle(menu) {
@@ -225,18 +230,12 @@ class Sidebar extends Component {
             <nav className={'navigation ' + (this.state.hovered ? 'hovered' : '')}>
                 {this._renderGoogleMenus()}
             </nav>
-            {/*<ul className="m-menu__nav  m-menu__nav--dropdown-submenu-arrow " onClick={() => {*/}
-              {/*this.props.mobileSidebar()*/}
-            {/*}}>*/}
-              {/*{this._renderSingleMenus()}*/}
-            {/*</ul>*/}
+            {this._renderSingleMenus()}
           </div>
         </div>
       )
     );
   }
-
-
 }
 
 Sidebar = connect(

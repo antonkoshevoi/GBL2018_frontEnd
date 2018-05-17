@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import HasRole from "./middlewares/HasRole";
 import UserDashboard from "./dashboard/UserDashboard";
 import ParentDashboard from "./dashboard/ParentDashboard";
-import TeacherDashboard from "./dashboard/TeacherDashboard";
 
 class Dashboard extends Component {
 
@@ -18,19 +17,16 @@ class Dashboard extends Component {
     return (
       <div>
           <HasRole roles={[
-            'Superintendent',
-            'Student',
+            'Superintendent',            
             'Principal',
             'Administrator',
-            'Superadministrator'
+            'Superadministrator',
+            'Teacher'
           ]}>
               <UserDashboard/>
           </HasRole>
           <HasRole roles={["Parents"]}>
               <ParentDashboard/>
-          </HasRole>
-          <HasRole roles={["Teacher"]}>
-              <TeacherDashboard/>
           </HasRole>
       </div>
     );
