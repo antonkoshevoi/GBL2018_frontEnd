@@ -41,7 +41,13 @@ class Address extends Component {
     const countriesList = countries.toJS();
     return (
          <div>
-            <div className='col-xs-12'>
+            <div className='col-xs-12'>  
+                <input
+                  value={form.id || ''}
+                  name='id'
+                  onChange={(e) => {this._handleInputChange(e)}}
+                  type='hidden'
+                  />
               <legend className='m--margin-bottom-10'>{title} contact information</legend>
               <div className='m-form__section m-form__section--first'>
                 <div className="form-group m-form__group row">

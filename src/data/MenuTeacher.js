@@ -9,31 +9,11 @@ export default  {
             colorName: 'home',
         },
         {
-            key: 'studentsAndStaff',
-            title: 'Students & Staff',
-            link: 'dashboard',
+            key: 'students',
+            title: 'Students',
+            link: 'students/list',
             icon: 'fa fa-group',
-            colorName: 'orange',
-            subMenu: [
-                {
-                    key: 'administration',
-                    title: 'Administration',
-                    link: 'administration/list',
-                    icon: 'flaticon flaticon-user-settings',
-                },
-                {
-                    key: 'teachers',
-                    title: 'Teachers',
-                    link: 'teachers/list',
-                    icon: 'flaticon flaticon-user-ok',
-                },
-                {
-                    key: 'students',
-                    title: 'Students',
-                    link: 'students/list',
-                    icon: 'flaticon	flaticon-technology-1',
-                }
-            ]
+            colorName: 'orange'
         },
         {
             key: 'learningAreas',
@@ -49,21 +29,9 @@ export default  {
                     icon: 'flaticon flaticon-user-settings',
                 },
                 {
-                    key: 'classInvitations',
-                    title: 'Demo courses',
-                    link: 'courses',
-                    icon: 'flaticon flaticon-user-ok',
-                },
-                {
                     key: 'homerooms',
                     title: 'Homerooms',
                     link: 'homerooms/list',
-                    icon: 'flaticon	flaticon-technology-1',
-                },
-                {
-                    key: 'professionalTrainings',
-                    title: 'Professional Trainings',
-                    link: 'trainings',
                     icon: 'flaticon	flaticon-technology-1',
                 }
             ]
@@ -340,19 +308,5 @@ export default  {
                 }
             ]
         }
-    ],
-    singleMenu: [
-        {
-            key: 'sCap',
-            title: 'S-CAP',
-            link: 'scap',
-            icon: 'fa fa-id-card',
-        },
-        {
-            key: 'howToMovies',
-            title: 'How To Movies',
-            link: 'movies',
-            icon: 'fa fa-film',
-        },
     ]
 }

@@ -17,13 +17,11 @@ class Dashboard extends Component {
     return (
       <div>
           <HasRole roles={[
-            'Superintendent',
-            'Student',
-            'Teacher',
+            'Superintendent',            
             'Principal',
             'Administrator',
             'Superadministrator',
-            'Affiliate',
+            'Teacher'
           ]}>
               <UserDashboard/>
           </HasRole>

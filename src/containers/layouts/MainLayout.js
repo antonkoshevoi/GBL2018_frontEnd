@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Header from '../ui/Header';
 import Sidebar from '../ui/Sidebar';
-import ParentSidebar from '../ui/ParentSidebar';
 import Wrapper from '../../components/layouts/Wrapper';
 import {withRouter} from "react-router-dom";
 import {generateLinkId} from "../../helpers/utils";
 import HasRole from "../middlewares/HasRole";
-import SuperAdminSidebar from "../ui/SuperAdminSidebar";
+
+import MenuSchool from "../../data/Menu";
+import MenuParent from "../../data/MenuParent";
+import SuperAdminMenu from "../../data/SuperAdminMenu";
+import MenuTeacher from "../../data/MenuTeacher";
 
 class MainLayout extends Component {
 
@@ -31,12 +34,9 @@ class MainLayout extends Component {
     }
   }
 
-
-
   render () {
       const {pathname} = this.props.location;
       const {sidebarIsOpen} = this.state;
-
 
       return (
       <div className={`m-grid m-grid--hor m-grid--root m-page m--full-height ${pathname.split('/')[1]}`} id={generateLinkId(pathname.split('/'))}>
@@ -45,22 +45,26 @@ class MainLayout extends Component {
           <HasRole roles={[
             'Superintendent',
             'Student',
-            'Teacher',
             'Principal',
             'Administrator',
-            'Affiliate',
+            'Affiliate'
           ]}>
-            <Sidebar mobileSidebar={() => {this.openMobileSidebar()}}/>
+            <Sidebar mobileSidebar={() => {this.openMobileSidebar()}} structure={MenuSchool}/>
           </HasRole>
           <HasRole roles={[
             'Superadministrator',
           ]}>
-            <SuperAdminSidebar mobileSidebar={() => {this.openMobileSidebar()}}/>
+            <Sidebar mobileSidebar={() => {this.openMobileSidebar()}} structure={SuperAdminMenu}/>
+          </HasRole>
+          <HasRole roles={[
+            'Teacher'
+          ]}>
+            <Sidebar mobileSidebar={() => {this.openMobileSidebar()}} structure={MenuTeacher}/>
           </HasRole>
           <HasRole roles={[
             "Parents"
           ]}>
-            <ParentSidebar mobileSidebar={() => {this.openMobileSidebar()}}/>
+            <Sidebar mobileSidebar={() => {this.openMobileSidebar()}} structure={MenuParent}/>
           </HasRole>
           <Wrapper>
             {this.props.children}

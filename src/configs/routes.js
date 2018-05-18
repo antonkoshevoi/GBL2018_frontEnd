@@ -14,6 +14,7 @@ import Administration from "../containers/administration/Administration";
 import Homerooms from "../containers/homerooms/Homerooms";
 import HomeroomsBulkUpload from '../containers/homerooms/HomeroomsBulkUpload';
 import Classrooms from "../containers/classrooms/Classrooms";
+import ClassroomSchedule from "../containers/classrooms/ClassroomSchedule";
 import StudentsBulkUpload from '../containers/students/StudentsBulkUpload';
 import Courses from '../containers/pages/courses/Courses';
 import SignUpIndex from '../containers/auth/SignUpIndex';
@@ -70,10 +71,10 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/homerooms/list' name='Homerooms' component={Homerooms} />
       <AuthenticatedRoute exact layout={MainLayout} path='/homerooms/csv' component={HomeroomsBulkUpload} />
       <AuthenticatedRoute exact layout={MainLayout} path='/classrooms/list' name='Classrooms' component={Classrooms} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/classrooms/schedule/:id' name='ClassroomSchedule' component={ClassroomSchedule} />
       <AuthenticatedRoute exact layout={MainLayout} path='/classrooms/auto' name='AutoCreation'  component={AutoCreate}/>
-
+      
       <AuthenticatedRoute exact layout={MainLayout} path='/courses' component={Courses}/>
-
 
       <AuthenticatedRoute exact layout={MainLayout} path='/reports' component={ReportsDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReportDashboard}/>

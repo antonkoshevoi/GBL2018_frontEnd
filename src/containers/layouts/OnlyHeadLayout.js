@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import Header from '../ui/Header';
-import Sidebar from '../ui/Sidebar';
-import ParentSidebar from '../ui/ParentSidebar';
 import Wrapper from '../../components/layouts/Wrapper';
 import {withRouter} from "react-router-dom";
 import {generateLinkId} from "../../helpers/utils";
-import HasRole from "../middlewares/HasRole";
 
 class MainLayout extends Component {
 
