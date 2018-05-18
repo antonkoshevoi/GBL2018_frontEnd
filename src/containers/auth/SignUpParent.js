@@ -16,6 +16,8 @@ import MetronicProgressButton from "../../components/ui/metronic/MetronicProgres
 import { push } from 'react-router-redux';
 import { load } from '../../redux/app/actions';
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
+import './Signup.css'
+
 
 class SignUpParent extends Component {
 

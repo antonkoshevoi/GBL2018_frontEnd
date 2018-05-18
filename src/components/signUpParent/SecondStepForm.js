@@ -93,42 +93,13 @@ class SecondStepForm extends Component {
 
     return (
       <div className='row m--margin-top-40'>
-        <div className='col-md-6'>
+        <div className='col-md-7'>
           <div className='col-xs-12'>
-            <legend className='m--margin-bottom-10'>Required</legend>
 
             <div className='m-form__section m-form__section--first'>
-              <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">First Name</label>
-                <div className="col-lg-8 col-md-9 col-sm-12">
-                  <input
-                    name='firstName'
-                    value={form.firstName || ''}
-                    onChange={(e) => { this._handleInputChange(e) }}
-                    type='text'
-                    className='form-control m-input m-input--air '
-                    placeholder=''/>
-                  {errors && errors.get('firstName') &&
-                  <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
-                </div>
-              </div>
-              <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">Last Name</label>
-                <div className="col-lg-8 col-md-9 col-sm-12">
-                  <input
-                    name='lastName'
-                    value={form.lastName || ''}
-                    onChange={(e) => { this._handleInputChange(e) }}
-                    type='text'
-                    className='form-control m-input m-input--air '
-                    placeholder=''/>
-                  {errors && errors.get('lastName') &&
-                  <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
-                </div>
-              </div>
              <div className="form-group m-form__group row">
-				<label className="col-form-label col-lg-3 col-sm-12">Username <small className="g-red">*</small></label>
-				<div className="col-lg-8 col-md-9 col-sm-12">
+                <label className="col-form-label col-lg-3 col-sm-12">Username</label>
+                <div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     name='username'
                     value={form.username || ''}
@@ -143,8 +114,8 @@ class SecondStepForm extends Component {
             </div>
             <div className='m-form__section m-form__section--first'>
              <div className="form-group m-form__group row">
-				<label className="col-form-label col-lg-3 col-sm-12">Password <small className="g-red">*</small></label>
-				<div className="col-lg-8 col-md-9 col-sm-12">
+                <label className="col-form-label col-lg-3 col-sm-12">Password</label>
+                <div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     name='password'
                     value={form.password || ''}
@@ -157,10 +128,42 @@ class SecondStepForm extends Component {
                 </div>
               </div>
             </div>
+            <label className='m--margin-bottom-10 text-center'>Optional</label>
+            <div className='m-form__section m-form__section--first form-optional'>
+
+            <div className="form-group m-form__group row">
+              <label className="col-form-label col-lg-3 col-sm-12">First Name</label>
+              <div className="col-lg-8 col-md-9 col-sm-12">
+                <input
+                  name='firstName'
+                  value={form.firstName || ''}
+                  onChange={(e) => { this._handleInputChange(e) }}
+                  type='text'
+                  className='form-control m-input m-input--air '
+                  placeholder=''/>
+                {errors && errors.get('firstName') &&
+                <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
+              </div>
+            </div>
+            <div className="form-group m-form__group row">
+              <label className="col-form-label col-lg-3 col-sm-12">Last Name</label>
+              <div className="col-lg-8 col-md-9 col-sm-12">
+                <input
+                  name='lastName'
+                  value={form.lastName || ''}
+                  onChange={(e) => { this._handleInputChange(e) }}
+                  type='text'
+                  className='form-control m-input m-input--air '
+                  placeholder=''/>
+                {errors && errors.get('lastName') &&
+                <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
+              </div>
+            </div>
+          </div>
           </div>
 
         </div>
-        <div className='col-md-6 text-center'>
+        <div className='col-md-5 text-center'>
           <legend className='m--margin-bottom-10'>Profile Pic Upload</legend>
 
           <div className='CropperBlock text-center'>
