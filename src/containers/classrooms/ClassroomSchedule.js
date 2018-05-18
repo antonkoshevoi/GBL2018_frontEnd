@@ -7,42 +7,27 @@ import { NavLink } from 'react-router-dom';
 import { selectGetScheduleRequest } from '../../redux/classrooms/selectors';
 import { getSchedule } from '../../redux/classrooms/actions';
 import HasPermission from "../middlewares/HasPermission";
+import AttemptDateForm from "./forms/AttemptDateForm";
 
 class ClassroomSchedule extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            schedule: {}
-        };
+        this.state = {};
     }
 
     componentDidMount() {
-        const {id} = this.props.match.params;        
+        const {id} = this.props.match.params;
         const { getSchedule } = this.props;
         
         getSchedule(id);
     }
 
-    componentWillReceiveProps(nextProps) {
-        const record = this.props.getScheduleRequest.get('results');
-        const nextRecord = nextProps.getScheduleRequest.get('results');
-
-        if (!record && nextRecord) {
-            this.setState({                
-                schedule: nextRecord.toJS()
-            });
-        }
-    }
     
-    _editLesson(id) {
-        alert(id);
-    }
-    
-    _renderUnits() {
+    _renderUnits(units) {
         
         const _self = this;
         
-        return this.state.schedule.schedule.map(function (unit, unitIndex) {
+        return units.map(function (unit, unitIndex) {
             
             let unitRowSpan = unit.lessons.length;
             
@@ -57,8 +42,9 @@ class ClassroomSchedule extends Component {
         });
     }
     
-    _renderLessons(unitIndex, lessons) {
-        const _self = this;
+    _renderLessons(unitIndex, lessons) {        
+        
+        const {id} = this.props.match.params;
     
         return lessons.map(function (lesson, lessonIndex) {
             return (
@@ -69,10 +55,7 @@ class ClassroomSchedule extends Component {
                     </Td>
                     <Td width='450px'><p className="text-center">{lesson.lessonDescription}</p></Td>
                     <Td width='300px'>
-                        <p className="text-center">
-                            <p className="attemp-date">{lesson.attDate || 'Not set..'}</p>
-                            <EditButton onClick={(id) => { _self._editLesson(id) }} id={lesson.lessonId} />
-                        </p>
+                        <AttemptDateForm lesson={lesson} classroomId={id} />
                     </Td>
                     <Td>-</Td>                    
                 </Row>
@@ -90,6 +73,9 @@ class ClassroomSchedule extends Component {
         }
                
         if (getScheduleRequest.get('success')) {
+                                         
+            const schedule = getScheduleRequest.get('results').toJS();
+            
             return (
                 <div className='fadeInLeft  animated learning-areas'>
                     <div className='m-portlet m-portlet--head-solid-bg'>
@@ -98,7 +84,7 @@ class ClassroomSchedule extends Component {
                                 <div className='m-portlet__head-title'>
                                     <span className='m-portlet__head-icon'><i className='la la-user' style={{fontSize: '55px'}}></i></span>
                                     <h3 className='m-portlet__head-text'>
-                                        {this.state.schedule.crmName} - ClassRoom Schedule 
+                                        {schedule.crmName} - ClassRoom Schedule 
                                     </h3>
                                 </div>
                             </div>
@@ -115,7 +101,7 @@ class ClassroomSchedule extends Component {
                                     </HeadRow>
                                 </Thead>
                                 <Tbody>
-                                    {this._renderUnits()}
+                                    {this._renderUnits(schedule.units)}
                                 </Tbody>
                             </Table>            
                         </div>
