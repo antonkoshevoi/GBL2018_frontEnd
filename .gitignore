@@ -5,7 +5,8 @@
 
 # testing
 /coverage
-
+jatazoulja.pub
+jatazoulja
 # production
 /build
 /src/configs/.env.js
