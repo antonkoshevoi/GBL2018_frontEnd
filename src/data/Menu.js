@@ -340,19 +340,5 @@ export default  {
                 }
             ]
         }
-    ],
-    singleMenu: [
-        {
-            key: 'sCap',
-            title: 'S-CAP',
-            link: 'scap',
-            icon: 'fa fa-id-card',
-        },
-        {
-            key: 'howToMovies',
-            title: 'How To Movies',
-            link: 'movies',
-            icon: 'fa fa-film',
-        },
     ]
 }

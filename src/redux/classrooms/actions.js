@@ -70,6 +70,10 @@ export const ASSIGN_DEMO_STUDENT_SUCCESS = '[Classrooms] ASSIGN_DEMO_STUDENT_SUC
 export const ASSIGN_DEMO_STUDENT_FAIL = '[Classrooms] ASSIGN_DEMO_STUDENT_FAIL';
 export const RESET_ASSIGN_DEMO_STUDENT_REQUEST = '[Classrooms] RESET_ASSIGN_DEMO_STUDENT_REQUEST';
 
+export const GET_CLASSROOM_SCHEDULE  = '[Classrooms] GET_CLASSROOM_SCHEDULE';
+export const GET_CLASSROOM_SCHEDULE_SUCCESS = '[Classrooms] GET_CLASSROOM_SCHEDULE_SUCCESS';
+export const GET_CLASSROOM_SCHEDULE_FAIL = '[Classrooms] GET_CLASSROOM_SCHEDULE_FAIL';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -99,6 +103,7 @@ export function resetGetSingleRecordRequest () {
     type: RESET_GET_SINGLE_RECORD_REQUEST
   }
 }
+
 /**
  * Create
  */
@@ -260,4 +265,11 @@ export function resetAssignDemoStudentRequest () {
   return {
     type: RESET_ASSIGN_DEMO_STUDENT_REQUEST
   }
+}
+
+export function getSchedule(id, params = {}) {
+  return {
+    types: [GET_CLASSROOM_SCHEDULE, GET_CLASSROOM_SCHEDULE_SUCCESS, GET_CLASSROOM_SCHEDULE_FAIL],
+    promise: (apiClient) => apiClient.get(`classroom/schedule/${id}`, params)
+  };
 }
