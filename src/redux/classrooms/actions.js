@@ -289,9 +289,9 @@ export function scheduleLesson(params = {}) {
   };
 }
 
-export function updateSchedule(params = {}) {
+export function updateSchedule(id, params = {}) {
   return {
     types: [UPDATE_CLASSROOM_SCHEDULE, UPDATE_CLASSROOM_SCHEDULE_SUCCESS, UPDATE_CLASSROOM_SCHEDULE_FAIL],
-    promise: (apiClient) => apiClient.post(`classroom/schedule`, params)
+    promise: (apiClient) => apiClient.post(`classroom/schedule/${id}`, params)
   };
 }

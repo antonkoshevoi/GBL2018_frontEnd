@@ -80,7 +80,7 @@ export const EditButton = ({ id, onClick, ...props}) => {
 export const TablePreloader = ({color,text, ...props}) => {
   return (
     <tr>
-      <td>
+      <td style={{minWidth: '300px'}}>
         <div className="table-message">
           <h2>{text} <CircularProgress color={color}/></h2>
         </div>
