@@ -14,7 +14,8 @@ import {
   GET_SINGLE_AUTOCLASS_RECORD_FAIL, RESET_GET_SINGLE_AUTOCLASS_RECORD_REQUEST, UPDATE_AUTOCLASS,
   UPDATE_AUTOCLASS_SUCCESS, UPDATE_AUTOCLASS_FAIL, RESET_UPDATE_AUTOCLASS_REQUEST,
   GET_CLASSROOM_SCHEDULE, GET_CLASSROOM_SCHEDULE_SUCCESS, GET_CLASSROOM_SCHEDULE_FAIL,
-  CLASSROOM_SCHEDULE_LESSON, CLASSROOM_SCHEDULE_LESSON_SUCCESS, CLASSROOM_SCHEDULE_LESSON_FAIL
+  CLASSROOM_SCHEDULE_LESSON, CLASSROOM_SCHEDULE_LESSON_SUCCESS, CLASSROOM_SCHEDULE_LESSON_FAIL,
+  UPDATE_CLASSROOM_SCHEDULE, UPDATE_CLASSROOM_SCHEDULE_SUCCESS, UPDATE_CLASSROOM_SCHEDULE_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -115,7 +116,13 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errors: {}
-  }    
+  },
+  updateScheduleRequest: {   
+    loading: false,
+    success: false,
+    fail: false,
+    errors: {}
+  }     
 });
 
 export default function reducer(state = initialState, action) {
@@ -535,6 +542,29 @@ export default function reducer(state = initialState, action) {
           .set('success', false)
           .set('errors', Immutable.fromJS(action.error.response.data.errors))
         );
+
+    case UPDATE_CLASSROOM_SCHEDULE:
+      return state
+        .set('updateScheduleRequest', state.get('updateScheduleRequest')        
+        .set('loading', true)
+        .set('success', false)
+        .set('fail', false)
+        .remove('errors'));
+    case UPDATE_CLASSROOM_SCHEDULE_SUCCESS:
+      return state
+        .set('updateScheduleRequest', state.get('updateScheduleRequest')
+          .set('loading', false)
+          .set('fail', false)
+          .set('success', true)          
+        );
+    case UPDATE_CLASSROOM_SCHEDULE_FAIL:
+      return state
+        .set('updateScheduleRequest', state.get('updateScheduleRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('success', false)
+          .set('errors', Immutable.fromJS(action.error.response.data.errors))
+        );                        
     /**
      * default
      */

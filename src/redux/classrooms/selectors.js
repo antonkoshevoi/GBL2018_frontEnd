@@ -104,3 +104,8 @@ export const selectScheduleLessonRequest = createSelector(
   selectClassroomsDomain,
   (subState) => subState.get('scheduleLessonRequest')
 );
+
+export const selectUpdateScheduleRequest = createSelector(
+  selectClassroomsDomain,
+  (subState) => subState.get('udateScheduleRequest')
+);

@@ -78,6 +78,10 @@ export const CLASSROOM_SCHEDULE_LESSON  = '[Classrooms] CLASSROOM_SCHEDULE_LESSO
 export const CLASSROOM_SCHEDULE_LESSON_SUCCESS = '[Classrooms] CLASSROOM_SCHEDULE_LESSON_SUCCESS';
 export const CLASSROOM_SCHEDULE_LESSON_FAIL = '[Classrooms] CLASSROOM_SCHEDULE_LESSON_FAIL';
 
+export const UPDATE_CLASSROOM_SCHEDULE  = '[Classrooms] UPDATE_CLASSROOM_SCHEDULE';
+export const UPDATE_CLASSROOM_SCHEDULE_SUCCESS = '[Classrooms] UPDATE_CLASSROOM_SCHEDULE_SUCCESS';
+export const UPDATE_CLASSROOM_SCHEDULE_FAIL = '[Classrooms] UPDATE_CLASSROOM_SCHEDULE_FAIL';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -282,5 +286,12 @@ export function scheduleLesson(params = {}) {
   return {
     types: [CLASSROOM_SCHEDULE_LESSON, CLASSROOM_SCHEDULE_LESSON_SUCCESS, CLASSROOM_SCHEDULE_LESSON_FAIL],
     promise: (apiClient) => apiClient.post(`classroom/schedule-lesson`, params)
+  };
+}
+
+export function updateSchedule(params = {}) {
+  return {
+    types: [UPDATE_CLASSROOM_SCHEDULE, UPDATE_CLASSROOM_SCHEDULE_SUCCESS, UPDATE_CLASSROOM_SCHEDULE_FAIL],
+    promise: (apiClient) => apiClient.post(`classroom/schedule`, params)
   };
 }
