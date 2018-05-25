@@ -76,7 +76,7 @@ class FirstStepForm extends Component {
   _zoomIn(){
     this.cropper.zoom(0.1)
   }
-  
+
 
   _zoomOut() {
     this.cropper.zoom(-0.1)
@@ -107,10 +107,10 @@ class FirstStepForm extends Component {
   _handleForm(fields) {
     this.setState({
       ...this.state,
-        form:{
-          ...this.state.form,
-          ...fields
-        }
+      form:{
+        ...this.state.form,
+        ...fields
+      }
     });
 
   }
@@ -137,8 +137,10 @@ class FirstStepForm extends Component {
       <div className='row m--margin-top-40'>
         <div className='col-md-7'>
           <div className='col-xs-12'>
+            <legend className='m--margin-bottom-10'>Required</legend>
+
             <div className='m-form__section m-form__section--first'>
-             <div className="form-group m-form__group row">
+              <div className="form-group m-form__group row">
                 <label className="col-form-label col-lg-3 col-sm-12">Email </label>
                 <div className="col-lg-8 col-md-9 col-sm-12">
                   <input
@@ -149,17 +151,16 @@ class FirstStepForm extends Component {
                     className='form-control m-input m-input--air '
                     placeholder=''/>
                   <div className='form-control-feedback'>
-                      {errors && errors.get('email') &&
-                      <div className="form-control-feedback text-center error">{errors.get('email').get(0)}</div>}
+                    {errors && errors.get('email') &&
+                    <div className="form-control-feedback text-center error">{errors.get('email').get(0)}</div>}
                   </div>
                 </div>
               </div>
             </div>
-
             <div className='m-form__section m-form__section--first'>
-            <div className="form-group m-form__group row">
-				<label className="col-form-label col-lg-3 col-sm-12">Password </label>
-				<div className="col-lg-8 col-md-9 col-sm-12">
+              <div className="form-group m-form__group row">
+                <label className="col-form-label col-lg-3 col-sm-12">Password </label>
+                <div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     value={form.password || ''}
                     name='password'
@@ -168,14 +169,14 @@ class FirstStepForm extends Component {
                     className='form-control m-input m-input--air '
                     placeholder=''/>
                   <div className='form-control-feedback'>
-                      {errors && errors.get('password') &&
-                      <div className="form-control-feedback text-center error">{errors.get('password').get(0)}</div>}
+                    {errors && errors.get('password') &&
+                    <div className="form-control-feedback text-center error">{errors.get('password').get(0)}</div>}
                   </div>
                 </div>
               </div>
             </div>
-            <label className='m--margin-bottom-10 text-center'>Optional</label>
-            <div className='m-form__section m-form__section--first form-optional'>
+            <legend className='m--margin-bottom-10'>Optional</legend>
+
             <div className='m-form__section m-form__section--first'>
               <div className="form-group m-form__group row">
                 <label className="col-form-label col-lg-3 col-sm-12">First Name </label>
@@ -212,7 +213,6 @@ class FirstStepForm extends Component {
                 </div>
               </div>
             </div>
-            </div>
 
           </div>
         </div>
@@ -228,17 +228,17 @@ class FirstStepForm extends Component {
                 </div>
 
                 <Cropper
-                    ref={cropper => { this.cropper = cropper; }}
-                    dragMode={'move'}
-                    src={form.avatar}
-                    background={false}
-                    cropBoxMovable={false}
-                    cropBoxResizable={true}
-                    minCropBoxWidth={250}
-                    className='signup-cropper'
-                    style={{height: 250, width: 250}}
-                    aspectRatio={1 / 1}
-                    guides={false}/>
+                  ref={cropper => { this.cropper = cropper; }}
+                  dragMode={'move'}
+                  src={form.avatar}
+                  background={false}
+                  cropBoxMovable={false}
+                  cropBoxResizable={true}
+                  minCropBoxWidth={250}
+                  className='signup-cropper'
+                  style={{height: 250, width: 250}}
+                  aspectRatio={1 / 1}
+                  guides={false}/>
               </div>
             </div>
 
