@@ -89,11 +89,8 @@ export class LessonsTable extends Component {
                 }
                 return (
                   <tr className="m-datatable__row" style={{height: '64px'}} key={lesson.lesson_id + '-lessonRow'}>
-                    <td className="m-datatable__cell" width='193px' rowSpan={lessonRowSpan}
-                        key={lesson.lesson_id + '-lessonName'}>
-                      <div className="unit-lesson-index"><span
-                        class="m-badge m-badge--brand m-badge--wide">Unit {unitIndex + 1}, Lesson {lessonIndex + 1}</span>
-                      </div>
+                    <td className="m-datatable__cell text-center" width='193px' rowSpan={lessonRowSpan} key={lesson.lesson_id + '-lessonName'}>
+                      <p><span class="m-badge m-badge--brand m-badge--wide">Unit {unitIndex + 1}, Lesson {lessonIndex + 1}</span></p>
                       <span style={{width: '193px'}}>{lesson.lesson_name}</span></td>
                     <td className="m-datatable__cell text-align-left" width='193px' rowSpan={lessonRowSpan}
                         key={lesson.lesson_id + '-lessonDesc'}><span

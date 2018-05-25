@@ -1432,21 +1432,23 @@ div.m-widget25 .m-widget25__price {
         margin-top: 10px;
     }
 }
-
+.unit-table {
+    border-collapse: collapse;
+}
 .unit-table td span, .unit-table th span {
     text-align: center;
 }
 
 .unit-table > tbody > tr {
-    border-top: 2px solid rgb(110, 110, 110);
+    border-top: 2px solid #f4f5f8;
 }
 
 .unit-table > tbody > tr:last-child {
-    border-bottom: 2px solid rgb(110, 110, 110);
+    border-bottom: 2px solid #f4f5f8;
 }
 
 .unit-table > tbody > tr > tr {
-    border-top: 1px solid rgb(110, 110, 110);
+    border-top: 1px solid #f4f5f8;
 }
 
 .unit-table > tbody > tr > tr:nth-child(2) {
@@ -1454,7 +1456,7 @@ div.m-widget25 .m-widget25__price {
 }
 
 .unit-table > tbody > tr > tr > tr {
-    border-top: 1px solid rgb(110, 110, 110);
+    border-top: 1px #f4f5f8;
 }
 
 .unit-table > tbody > tr > tr > tr:nth-child(3) {
@@ -1463,14 +1465,12 @@ div.m-widget25 .m-widget25__price {
 
 .unit-table td {
     position: relative;
-    border-right: 1px solid rgb(110, 110, 110);
-    padding-left: 3px!important;
-    padding-right: 3px!important;
+    border-right: 1px solid #f4f5f8;
     white-space: pre-wrap;
 }
 
 .unit-table > tbody > tr > td:first-child {
-    border-left: 1px solid rgb(110, 110, 110);
+    border-left: 1px solid #f4f5f8;
 }
 
 .attempt-pass {
@@ -1522,28 +1522,10 @@ td.rotate div span {
     }
 }
 
-.unit-table .unit-lesson-index {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 30px;
-}
-
-.unit-table .m-badge.m-badge--brand.m-badge--wide {
-    font-size: 18px;
+.unit-table .m-badge.m-badge--brand.m-badge--wide {    
     color: white !important;
     font-weight: bold;
     height: 25px;
-}
-
-.unit-table th {
-    padding-left: 3px!important;
-    padding-right: 3px!important;
 }
 
 .unit-table .comment-cell {

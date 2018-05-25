@@ -18,7 +18,8 @@ export default {
     assigned: {
       students: 'Students successfully changed for classroom',
       demoStudent: 'Student successfully enrolled to demo classroom'
-    }
+    },
+    scheduleUpdated: 'Classroom schedule has been updated'
   },
   courseRequired: 'You should select course'
 }

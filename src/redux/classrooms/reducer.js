@@ -12,7 +12,10 @@ import {
   ASSIGN_DEMO_STUDENT, ASSIGN_DEMO_STUDENT_FAIL, ASSIGN_DEMO_STUDENT_SUCCESS, RESET_ASSIGN_DEMO_STUDENT_REQUEST,
   GET_RECORDS_PUBLIC, GET_RECORDS_PUBLIC_SUCCESS, GET_RECORDS_PUBLIC_FAIL, GET_SINGLE_AUTOCLASS_RECORD, GET_SINGLE_AUTOCLASS_RECORD_SUCCESS,
   GET_SINGLE_AUTOCLASS_RECORD_FAIL, RESET_GET_SINGLE_AUTOCLASS_RECORD_REQUEST, UPDATE_AUTOCLASS,
-  UPDATE_AUTOCLASS_SUCCESS, UPDATE_AUTOCLASS_FAIL, RESET_UPDATE_AUTOCLASS_REQUEST
+  UPDATE_AUTOCLASS_SUCCESS, UPDATE_AUTOCLASS_FAIL, RESET_UPDATE_AUTOCLASS_REQUEST,
+  GET_CLASSROOM_SCHEDULE, GET_CLASSROOM_SCHEDULE_SUCCESS, GET_CLASSROOM_SCHEDULE_FAIL,
+  CLASSROOM_SCHEDULE_LESSON, CLASSROOM_SCHEDULE_LESSON_SUCCESS, CLASSROOM_SCHEDULE_LESSON_FAIL,
+  UPDATE_CLASSROOM_SCHEDULE, UPDATE_CLASSROOM_SCHEDULE_SUCCESS, UPDATE_CLASSROOM_SCHEDULE_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -100,7 +103,26 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errors: {}
-  }  
+  },
+  getScheduleRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errors: {},
+    results: {}
+  },
+  scheduleLessonRequest: {   
+    loading: false,
+    success: false,
+    fail: false,
+    errors: {}
+  },
+  updateScheduleRequest: {   
+    loading: false,
+    success: false,
+    fail: false,
+    errors: {}
+  }     
 });
 
 export default function reducer(state = initialState, action) {
@@ -466,6 +488,83 @@ export default function reducer(state = initialState, action) {
     case RESET_ASSIGN_DEMO_STUDENT_REQUEST:
       return state
         .set('assignDemoStudentRequest', initialState.get('assignDemoStudentRequest'));
+
+    /**
+     * Classroom Schedule
+     */
+    case GET_CLASSROOM_SCHEDULE:
+      return state
+        .set('getScheduleRequest', state.get('getScheduleRequest')
+        .set('loading', true)
+        .set('success', false)
+        .set('fail', false)
+        .remove('errors')
+        .remove('results'));
+    case GET_CLASSROOM_SCHEDULE_SUCCESS:
+      return state
+        .set('getScheduleRequest', state.get('getScheduleRequest')
+          .set('loading', false)
+          .set('fail', false)
+          .set('success', true)
+          .set('results', Immutable.fromJS(action.result.data))
+        );      
+    case GET_CLASSROOM_SCHEDULE_FAIL:        
+      return state
+        .set('getScheduleRequest', state.get('getScheduleRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('success', false)
+          .set('errors', Immutable.fromJS(action.error.response.data.errors))
+        );
+
+    /**
+     * Classroom Schedule Lesson
+     */
+    case CLASSROOM_SCHEDULE_LESSON:
+      return state
+        .set('scheduleLessonRequest', state.get('scheduleLessonRequest')        
+        .set('loading', true)
+        .set('success', false)
+        .set('fail', false)
+        .remove('errors'));
+    case CLASSROOM_SCHEDULE_LESSON_SUCCESS:
+      return state
+        .set('scheduleLessonRequest', state.get('scheduleLessonRequest')
+          .set('loading', false)
+          .set('fail', false)
+          .set('success', true)          
+        );      
+    case CLASSROOM_SCHEDULE_LESSON_FAIL:        
+      return state
+        .set('scheduleLessonRequest', state.get('scheduleLessonRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('success', false)
+          .set('errors', Immutable.fromJS(action.error.response.data.errors))
+        );
+
+    case UPDATE_CLASSROOM_SCHEDULE:
+      return state
+        .set('updateScheduleRequest', state.get('updateScheduleRequest')        
+        .set('loading', true)
+        .set('success', false)
+        .set('fail', false)
+        .remove('errors'));
+    case UPDATE_CLASSROOM_SCHEDULE_SUCCESS:
+      return state
+        .set('updateScheduleRequest', state.get('updateScheduleRequest')
+          .set('loading', false)
+          .set('fail', false)
+          .set('success', true)          
+        );
+    case UPDATE_CLASSROOM_SCHEDULE_FAIL:
+      return state
+        .set('updateScheduleRequest', state.get('updateScheduleRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('success', false)
+          .set('errors', Immutable.fromJS(action.error.response.data.errors))
+        );                        
     /**
      * default
      */

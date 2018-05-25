@@ -70,6 +70,18 @@ export const ASSIGN_DEMO_STUDENT_SUCCESS = '[Classrooms] ASSIGN_DEMO_STUDENT_SUC
 export const ASSIGN_DEMO_STUDENT_FAIL = '[Classrooms] ASSIGN_DEMO_STUDENT_FAIL';
 export const RESET_ASSIGN_DEMO_STUDENT_REQUEST = '[Classrooms] RESET_ASSIGN_DEMO_STUDENT_REQUEST';
 
+export const GET_CLASSROOM_SCHEDULE  = '[Classrooms] GET_CLASSROOM_SCHEDULE';
+export const GET_CLASSROOM_SCHEDULE_SUCCESS = '[Classrooms] GET_CLASSROOM_SCHEDULE_SUCCESS';
+export const GET_CLASSROOM_SCHEDULE_FAIL = '[Classrooms] GET_CLASSROOM_SCHEDULE_FAIL';
+
+export const CLASSROOM_SCHEDULE_LESSON  = '[Classrooms] CLASSROOM_SCHEDULE_LESSON';
+export const CLASSROOM_SCHEDULE_LESSON_SUCCESS = '[Classrooms] CLASSROOM_SCHEDULE_LESSON_SUCCESS';
+export const CLASSROOM_SCHEDULE_LESSON_FAIL = '[Classrooms] CLASSROOM_SCHEDULE_LESSON_FAIL';
+
+export const UPDATE_CLASSROOM_SCHEDULE  = '[Classrooms] UPDATE_CLASSROOM_SCHEDULE';
+export const UPDATE_CLASSROOM_SCHEDULE_SUCCESS = '[Classrooms] UPDATE_CLASSROOM_SCHEDULE_SUCCESS';
+export const UPDATE_CLASSROOM_SCHEDULE_FAIL = '[Classrooms] UPDATE_CLASSROOM_SCHEDULE_FAIL';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -99,6 +111,7 @@ export function resetGetSingleRecordRequest () {
     type: RESET_GET_SINGLE_RECORD_REQUEST
   }
 }
+
 /**
  * Create
  */
@@ -260,4 +273,25 @@ export function resetAssignDemoStudentRequest () {
   return {
     type: RESET_ASSIGN_DEMO_STUDENT_REQUEST
   }
+}
+
+export function getSchedule(id, params = {}) {
+  return {
+    types: [GET_CLASSROOM_SCHEDULE, GET_CLASSROOM_SCHEDULE_SUCCESS, GET_CLASSROOM_SCHEDULE_FAIL],
+    promise: (apiClient) => apiClient.get(`classroom/schedule/${id}`, params)
+  };
+}
+
+export function scheduleLesson(params = {}) {
+  return {
+    types: [CLASSROOM_SCHEDULE_LESSON, CLASSROOM_SCHEDULE_LESSON_SUCCESS, CLASSROOM_SCHEDULE_LESSON_FAIL],
+    promise: (apiClient) => apiClient.post(`classroom/schedule-lesson`, params)
+  };
+}
+
+export function updateSchedule(id, params = {}) {
+  return {
+    types: [UPDATE_CLASSROOM_SCHEDULE, UPDATE_CLASSROOM_SCHEDULE_SUCCESS, UPDATE_CLASSROOM_SCHEDULE_FAIL],
+    promise: (apiClient) => apiClient.post(`classroom/schedule/${id}`, params)
+  };
 }

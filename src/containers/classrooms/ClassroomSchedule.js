@@ -1,79 +1,237 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import { Button, Icon, MenuItem, Select, Input, CircularProgress } from 'material-ui';
+import { Button, Icon, Select, MenuItem, Input, CircularProgress, FormControl, FormHelperText, InputLabel, Radio, FormControlLabel } from 'material-ui';
+import DatePicker from '../../components/ui/DatePicker';
+import { HeadRow, Row, Table, Tbody, Td, Th, Thead, TablePreloader } from '../../components/ui/table';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { selectGetSingleRecordRequest } from '../../redux/classrooms/selectors';
-import { getSingleRecord } from '../../redux/classrooms/actions';
-import HasPermission from "../middlewares/HasPermission";
+import { selectGetScheduleRequest, selectUpdateScheduleRequest } from '../../redux/classrooms/selectors';
+import { getSchedule , updateSchedule} from '../../redux/classrooms/actions';
+import AttemptDateForm from "./forms/AttemptDateForm";
 
 class ClassroomSchedule extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            classroom: {}
+            scheduleType: 'unit',
+            days: 0,
+            weeks: 0,
+            startDate: null
         };
     }
 
     componentDidMount() {
-        const {id} = this.props.match.params;        
-        const { getSingleRecord } = this.props;
+        const {id} = this.props.match.params;
+        const { getSchedule } = this.props;
         
-        getSingleRecord(id);
+        getSchedule(id);
     }
-
+    
+    
     componentWillReceiveProps(nextProps) {
-        const record = this.props.getSingleRecordRequest.get('record');
-        const nextRecord = nextProps.getSingleRecordRequest.get('record');
-
-        if (!record && nextRecord) {
-            this.setState({                
-                classroom: nextRecord.toJS()
+        const success       = this.props.updateScheduleRequest.get('success');
+        const nextSuccess   = nextProps.updateScheduleRequest.get('success');
+        const {id}          = this.props.match.params;
+        const {getSchedule} = this.props;
+        
+        if (!success && nextSuccess) {
+            this.setState({            
+                scheduleType: 'unit',
+                days: 0,
+                weeks: 0,
+                startDate: null          
             });
+            
+             getSchedule(id);
         }
     }
+  
+    _handleInputChange(event) {
+        const { name, type, value, checked } = event.target;
+                
+        this.setState({            
+            ...this.state,        
+            [name]: value            
+        });
+    }
+
+    _handleDateChange(value, dateField) {
+        this.setState({
+            ...this.state,
+            [dateField]: value
+        });
+    }    
+    
+    _saveSchedule() {
+        const {id} = this.props.match.params;
+        const {updateSchedule} = this.props;
+    
+        updateSchedule(id, this.state);
+    }
+    
+    _renderUnits(units) {
+        
+        const _self = this;
+        
+        return units.map(function (unit, unitIndex) {
+            
+            let unitRowSpan = unit.lessons.length;
+            
+            return (
+                <tr className="m-datatable__row m-datatable__row--even__none" key={unit.unitId + '-unitRow'}>                
+                    <td className="m-datatable__cell rotate" width='50px' rowSpan={unitRowSpan} key={unit.unitId + '-unitName'}>
+                        <div><span><b>Unit {unitIndex + 1}</b> {unit.unitName}</span></div>
+                    </td>
+                    {_self._renderLessons(unitIndex, unit.lessons)}
+                </tr>
+            );
+        });
+    }
+    
+    _renderLessons(unitIndex, lessons) {        
+        
+        const {id} = this.props.match.params;
+    
+        return lessons.map(function (lesson, lessonIndex) {
+            return (
+                <Row key={lesson.lessonId + '-lessonRow'}>
+                    <Td width='350px'>
+                        <p className="text-center"><span class="m-badge m-badge--brand m-badge--wide">Unit {unitIndex + 1}, Lesson {lessonIndex + 1}</span> </p>                        
+                        <p className="text-center"><span>{lesson.lessonName}</span></p>
+                    </Td>
+                    <Td width='450px'><p className="text-center">{lesson.lessonDescription}</p></Td>
+                    <Td width='300px'>
+                        <AttemptDateForm lesson={lesson} classroomId={id} />
+                    </Td>
+                    <Td>-</Td>                    
+                </Row>
+            );
+        });
+    }      
 
     render() {
-        const {getSingleRecordRequest} = this.props;
-        const loading = getSingleRecordRequest.get('loading')
+        const {getScheduleRequest, updateScheduleRequest} = this.props;
         
-        return loading ? (
-            <h2 className='text-center'><CircularProgress color='accent'/></h2>
-          ) : (
-                <div className='fadeInLeft  animated learning-areas'>
-                    <div className='m-portlet m-portlet--head-solid-bg'>
-                        <div className='m-portlet__head'>
-                            <div className='m-portlet__head-caption'>
-                                <div className='m-portlet__head-title'>
-                                    <span className='m-portlet__head-icon'><i className='la la-user' style={{fontSize: '55px'}}></i></span>
-                                    <h3 className='m-portlet__head-text'>
-                                        {this.state.classroom.crmName} - ClassRoom Schedule 
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='m-portlet__body'>
-                            <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
-                                <div className='row align-items-center'>
-                
-                                </div>
+        const loaded    = getScheduleRequest.get('success');
+        const schedule  = loaded ? getScheduleRequest.get('results').toJS() : {};
+        const errors    = updateScheduleRequest.get('errors');
+        const disabled  = updateScheduleRequest.get('loading');
+        
+        return (
+            <div className='fadeInLeft  animated learning-areas'>
+                <div className='m-portlet m-portlet--head-solid-bg'>
+                    <div className='m-portlet__head'>
+                        <div className='m-portlet__head-caption'>
+                            <div className='m-portlet__head-title'>
+                                <span className='m-portlet__head-icon'><i className='la la-user' style={{fontSize: '55px'}}></i></span>
+                                <h3 className='m-portlet__head-text'>
+                                {loaded ? (schedule.crmName + '- ClassRoom Schedule') : '...' }
+                                </h3>
                             </div>
                         </div>
                     </div>
+                    <div className='m-portlet__body'>
+                        <div className='m-form m-form--label-align-left m--margin-top-20 m--margin-bottom-30'>
+                            <div className="row">                                       
+                                <label className="col-lg-1 col-md-3 col-sm-4 m--margin-top-20">Schedule By:</label>
+                                <div className="col-lg-4 col-md-5 col-sm-6">
+                                    <div>
+                                        <FormControlLabel 
+                                            label="Unit"
+                                            control={<Radio name="scheduleType" checked={this.state.scheduleType == 'unit'} onChange={(e) => {this._handleInputChange(e)}} value="unit" />}          
+                                        />                           
+                                        <FormControlLabel 
+                                            label="Lesson"
+                                            control={<Radio name="scheduleType" checked={this.state.scheduleType == 'lesson'} onChange={(e) => {this._handleInputChange(e)}} value="lesson" />}          
+                                        />
+                                    </div>
+                                    {errors && errors.get('scheduleType') &&  <FormHelperText error>{errors.get('scheduleType').get(0)}</FormHelperText>}                                    
+                                </div>
+                            </div>
+                            <div className="row">
+                                <label className="col-lg-1 col-md-3 col-sm-4">Frequency:</label>
+                                <div className="col-lg-4 col-md-5 col-sm-6">
+                                    <div>
+                                    <Select
+                                    name="days"                                                
+                                    value={this.state.days || 0}
+                                    onChange={(e) => { this._handleInputChange(e) }} >
+                                    <MenuItem value="0"></MenuItem>
+                                    <MenuItem value="1">1</MenuItem>
+                                    <MenuItem value="2">2</MenuItem>
+                                    <MenuItem value="3">3</MenuItem>
+                                    <MenuItem value="4">4</MenuItem>
+                                    <MenuItem value="5">5</MenuItem>
+                                    <MenuItem value="6">6</MenuItem>
+                                    <MenuItem value="7">7</MenuItem>
+                                  </Select>
+                                  <label className="col-lg-2 col-md-3 col-sm-4" htmlFor="days">Days</label>                     
+                                    <Select
+                                    name="weeks"                                                
+                                    value={this.state.weeks || 0}
+                                    onChange={(e) => { this._handleInputChange(e) }} >
+                                    <MenuItem value="0"></MenuItem>
+                                    <MenuItem value="1">1</MenuItem>
+                                    <MenuItem value="2">2</MenuItem>
+                                    <MenuItem value="3">3</MenuItem>
+                                    <MenuItem value="4">4</MenuItem>
+                                  </Select>
+                                  <label className="col-lg-3" htmlFor="weeks">Weeks</label>
+                                  </div>                                  
+                                  {errors && errors.get('days') && <FormHelperText error>{errors.get('days').get(0)}</FormHelperText>}
+                                  {errors && errors.get('weeks') && <FormHelperText error>{errors.get('weeks').get(0)}</FormHelperText>}
+                                </div>                                            
+                            </div>
+                            <div className="row">
+                                <label className="col-lg-1 col-md-3 col-sm-4" htmlFor="startDate">Start Date:</label>
+                                <div className="col-lg-4 col-md-5 col-sm-6">
+                                    <div>
+                                        <DatePicker
+                                            name='startDate'
+                                            value={this.state.startDate || null}
+                                            onChange={(e) => { this._handleDateChange(e, 'startDate') }}
+                                        />
+                                        <Button disabled={disabled} variant="raised" color='primary' onClick={() => { this._saveSchedule() }} className='mt-btn mt-btn-success m--margin-left-15'>Execute</Button>
+                                    </div>
+                                    {errors && errors.get('startDate') && <FormHelperText error>{errors.get('startDate').get(0)}</FormHelperText>}                                    
+                                </div>                       
+                            </div>                              
+                        </div>   
+                    </div>
+                    <div className='m-portlet__body'>
+                        <Table className="unit-table">
+                            <Thead>
+                                <HeadRow>
+                                    <Th width='50px'>Unit</Th>
+                                    <Th width='350px'>Lesson Title</Th>
+                                    <Th width='450px'>Lesson Description</Th>
+                                    <Th width='300px'>Lesson attempt</Th>    
+                                    <Th>Instructions</Th>
+                                </HeadRow>
+                            </Thead>
+                            <Tbody>                           
+                            {loaded ? this._renderUnits(schedule.units) : <TablePreloader text="Loading..." color="primary"/>}
+                            </Tbody>
+                        </Table>            
+                    </div>                                        
                 </div>
-            );
+            </div>
+        );
+    }    
+}
+
+ClassroomSchedule = connect(
+    (state) => ({
+        getScheduleRequest: selectGetScheduleRequest(state),
+        updateScheduleRequest: selectUpdateScheduleRequest(state)
+    }),
+    (dispatch) => ({
+        getSchedule: (id, params = {}) => {
+            dispatch(getSchedule(id, params))
+        },
+        updateSchedule: (id, params = {}) => {
+            dispatch(updateSchedule(id, params))
         }
-    }
+    })
+)(ClassroomSchedule);
 
-    ClassroomSchedule = connect(
-            (state) => ({
-            getSingleRecordRequest: selectGetSingleRecordRequest(state),
-        }),
-            (dispatch) => ({
-            getSingleRecord: (id, params = {}) => {
-                dispatch(getSingleRecord(id, params))
-            }
-        })
-    )(ClassroomSchedule);
-
-    export default ClassroomSchedule;
+export default ClassroomSchedule;
