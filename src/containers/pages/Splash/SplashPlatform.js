@@ -22,9 +22,6 @@ const flippers = [
 
 const FlipperCards = props => {
   const {t} = props;
-  console.debug(t(`${props.title}.title`))
-  console.debug(t('studentAndParents'))
-  console.debug(`${props.title}`)
   return (
     <div className="col-md-4 text-center" key={props.index} style={style.flipper}>
       <img src={flippers[props.index].icon} alt="" className="flipperIcon"/>
@@ -32,7 +29,7 @@ const FlipperCards = props => {
         <span>{t(`${props.title}.title`)}</span>
       </div>
       <div className="flipper-cards">
-
+        <hr />
         {props.content.map((items, index) =>
           <div>
             <h5>{t(`${props.title}.${items.title}`)}</h5>
@@ -42,7 +39,9 @@ const FlipperCards = props => {
               )}
             </ul>
           </div>
+
         )}
+        <hr />
       </div>
 
     </div>

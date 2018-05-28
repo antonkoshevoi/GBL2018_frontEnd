@@ -95,6 +95,12 @@
     text-transform: uppercase;
     margin: 0px;
 }
+.splash-platform hr {
+    margin: 15px 15%;
+    background: #FFF;
+    height: 2px;
+    border: 0;
+}
 .flipperIcon {
     width: 80px;
 }
@@ -116,7 +122,7 @@
     padding: 20px;
     color: #fff;
     border-radius: 5px;
-    min-height: 252px;
+    min-height: 282px;
 }
 @media (min-width: 768px) and (max-width: 1239.98px) {
     .splash  .container {
