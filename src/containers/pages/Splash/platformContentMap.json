@@ -1,0 +1,62 @@
+[
+  {
+    "title": "studentAndParents",
+    "content": [
+      {
+        "title":"kids",
+        "contents": [
+          "kidsOpt1",
+          "kidsOpt2",
+          "kidsOpt3"
+        ]
+      },
+      {
+        "title":"parent",
+        "contents": [
+          "parentOpt1",
+          "parentOpt2"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "schoolAndTeacher",
+    "content": [
+      {
+        "title":"principals",
+        "contents": [
+          "principalsOpt1",
+          "principalsOpt2",
+          "principalsOpt3"
+        ]
+      },
+      {
+        "title":"teacher",
+        "contents": [
+          "teacherOpt1",
+          "teacherOpt2"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "publishers",
+    "content": [
+      {
+        "title":"publishers",
+        "contents": [
+          "publishersOpt1",
+          "publishersOpt2",
+          "publishersOpt3"
+        ]
+      },
+      {
+        "title":"authors",
+        "contents": [
+          "authorsOpt1",
+          "authorsOpt2"
+        ]
+      }
+    ]
+  }
+]

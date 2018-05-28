@@ -1,18 +1,18 @@
 export default {
-  headerJubtronTitle: 'Educational Tools and Products',
+  headerJubtronTitle: 'Outils et produits éducatifs',
   headerListItems: {
     1: 'personalized, data-driven, interactive learning',
-    2: 'vastly improved outcomes',
-    3: 'real-time, detailed insights',
-    4: 'reduced grading and administration for teachers and staff',
-    5: 'publish, globalize, monetize',
+    2: 'des résultats considérablement améliorés',
+    3: 'des aperçus détaillés en temps réel',
+    4: 'réduction du classement et de l\'administration pour les enseignants et le personnel',
+    5: 'publier, globaliser, monétiser',
   },
-  about: 'About',
-  store: 'Store',
-  privacy: 'Privacy Policy',
-  terms: 'Terms and Services',
-  learningPlatform: 'Learning Platform',
-  learnMore: 'Learn more',
+  learnMore: 'Apprendre encore plus',
+  about: 'Sur',
+  store: 'le magasin',
+  privacy: 'Politique de confidentialité',
+  terms: 'Termes et services',
+  learningPlatform: 'Plateforme d\'apprentissage',
   schoolAndTeacher: {
     title: 'SCHOOLS & TEACHERS',
     principals: 'Principals & Admins',
@@ -45,4 +45,5 @@ export default {
     parentOpt1: 'real-time, detailed insights',
     parentOpt2: 'easy-to-use admin tools',
   }
+
 }
