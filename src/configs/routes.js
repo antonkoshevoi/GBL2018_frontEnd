@@ -55,6 +55,7 @@ export default () => (
   <AppContainer>
     <Switch>
       <Route exact path='/splash' name='splash' component={SplashContainer} />
+      <Route exact path='/test.html' name='splash' component={SplashContainer} />
       <Route exact path='/login' name='login' component={Login} />
       <Route exact path='/restore-login' name='restore-login' component={RestoreLogin} />
       <Route exact path='/signUp' name='signUp' component={SignUpIndex} />

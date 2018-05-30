@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@kennethormandy/react-flipcard": "^0.4.2",
     "axios": "^0.17.1",
     "chart.js": "^2.7.2",
     "classnames": "^2.2.5",
@@ -40,6 +41,7 @@
     "react-router-redux": "^4.0.8",
     "react-scripts": "1.0.17",
     "react-slick": "^0.16.0",
+    "react-sticky-header": "^0.1.9",
     "react-tabs": "^2.2.1",
     "react-text-mask": "^5.1.0",
     "redux": "^3.7.2",

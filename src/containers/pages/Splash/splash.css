@@ -69,10 +69,16 @@
     margin-top: 30px;
     margin-bottom: 30px;
 }
-
+.ReactStickyHeader_root {
+    height: 116px;
+}
+.ReactStickyHeader_foreground {
+    display: none;
+}
 .splash-jumbotron {
     padding: 10px;
     background-color: var(--splash-light-blue);
+    margin-top: 116px;
 }
 .splash-jumbotron .header-side {
     align-self: center;

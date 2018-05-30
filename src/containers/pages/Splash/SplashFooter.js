@@ -8,7 +8,7 @@ class SplashFooter extends Component {
       <div className="splash-footer">
         <div className="container clearfix">
           <div className="" style={{flex:1}}>
-            <NavLink to={`/privacy-policy`} className="btn no-border m-btn btn-sm ">{t('privacy')}</NavLink>
+            <a href={process.env.PUBLIC_URL + `/privacy-policy.html`} className="btn no-border m-btn btn-sm ">{t('privacy')}</a>
           </div>
 
           <div className="links text-right m--hidden-mobile">
