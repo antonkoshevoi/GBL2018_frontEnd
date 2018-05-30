@@ -50,12 +50,13 @@ import OnlyHeadLayout from "../containers/layouts/OnlyHeadLayout";
 import AutoCreate from "../containers/classrooms/AutoCreate";
 import ProfileEdit from "../containers/pages/profile/ProfileEdit";
 import SplashContainer from "../containers/pages/Splash";
+import PrivacyPolicy from "../containers/pages/Static/PrivacyPolicy";
 
 export default () => (
   <AppContainer>
     <Switch>
       <Route exact path='/splash' name='splash' component={SplashContainer} />
-      <Route exact path='/test.html' name='splash' component={SplashContainer} />
+      <Route exact path='/privacy-policy.html' name='login' component={PrivacyPolicy} />
       <Route exact path='/login' name='login' component={Login} />
       <Route exact path='/restore-login' name='restore-login' component={RestoreLogin} />
       <Route exact path='/signUp' name='signUp' component={SignUpIndex} />
@@ -63,7 +64,7 @@ export default () => (
       <Route exact path='/signUp/principal' name='signUpPrincipal' component={SignUpPrincipal} />
 
       <Route exact path='/' render={() => (
-        <Redirect to='/dashboard'/>
+        <Redirect to='/splash'/>
       )}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/dashboard' name='Dashboard' component={Dashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/students/list' name='Students' component={Students} />
