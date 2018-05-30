@@ -4,6 +4,11 @@
     --splash-light-blue: #5ba6f1;
     --splash-dark-text: #1b3f5e;
 }
+.splash-container {
+    margin-top: 116px;
+    background-color: #fff;
+    padding-top: 20px;
+}
 .splash {
     background: #fff;
 }
@@ -72,7 +77,7 @@
 .ReactStickyHeader_root {
     height: 116px;
 }
-.ReactStickyHeader_foreground {
+.ReactStickyHeader_foreground, .ReactStickyHeader_background-bg {
     display: none;
 }
 .splash-jumbotron {

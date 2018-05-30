@@ -5,7 +5,7 @@ import logo from '../../../media/images/logo.png';
 
 
 
-class SplashHeeader extends Component {
+class SplashHeader extends Component {
   render() {
     console.debug(this.props)
     return (
@@ -25,4 +25,4 @@ class SplashHeeader extends Component {
   }
 }
 
-export default SplashHeeader
+export default SplashHeader

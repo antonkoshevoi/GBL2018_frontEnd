@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {translate} from 'react-i18next';
-import SplashHeeader from './SplashHeeader'
+import SplashHeader from './SplashHeader'
 import SplashNavigation from './SplashNavigation'
 import SplashJumbotron from './SplashJumbotron'
 import SplashStore from './SplashStore'
@@ -18,7 +18,7 @@ const SplashContainer = props => {
       // This is the sticky part of the header.
       header={
         <section>
-          <SplashHeeader {...props} />
+          <SplashHeader {...props} />
           <SplashNavigation {...props} />
         </section>
       }
