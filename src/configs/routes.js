@@ -76,6 +76,7 @@ export default () => (
       <Route exact path='/signUp' name='signUp' component={SignUpIndex} />
       <Route exact path='/signUp/parent' name='signUpParent' component={SignUpParent} />
       <Route exact path='/signUp/principal' name='signUpPrincipal' component={SignUpPrincipal} />
+      <Route exact layout={MainLayout} path='/store' name='Store' component={Store}/>
 
       <Route exact path='/' render={() => (
         <Redirect to='/splash'/>
@@ -102,7 +103,6 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
 
       {/*Store*/}
-      <AuthenticatedRoute exact layout={MainLayout} path='/store' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category' name='Store' component={Products}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory' name='Store' component={Store}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
