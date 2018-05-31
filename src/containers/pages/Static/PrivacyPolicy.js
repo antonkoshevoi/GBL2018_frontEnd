@@ -11,7 +11,7 @@ import StickyHeader from 'react-sticky-header';
 
 
 const PrivacyPolicy = (props) => {
-  return (
+  return (<div className="splash">
     <StickyHeader
       // This is the sticky part of the header.
       header={
@@ -89,7 +89,7 @@ const PrivacyPolicy = (props) => {
         <SplashFooter {...props} />
       </section>
     </StickyHeader>
-  )
+  </div>)
 };
 
 export default withRouter(translate('splashScreen')(PrivacyPolicy));

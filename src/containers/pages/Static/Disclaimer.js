@@ -11,7 +11,7 @@ import StickyHeader from 'react-sticky-header';
 
 const minHeight = window.document.documentElement.clientHeight - 225;
 const Disclaimer = (props) => {
-  return (
+  return (<div className="splash">
     <StickyHeader
       // This is the sticky part of the header.
       header={
@@ -67,7 +67,7 @@ const Disclaimer = (props) => {
         <SplashFooter {...props} />
       </section>
     </StickyHeader>
-  )
+  </div>)
 };
 
 export default withRouter(translate('splashScreen')(Disclaimer));

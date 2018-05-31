@@ -12,7 +12,7 @@ class SplashHeader extends Component {
       <div className="splash-header">
         <div className="container clearfix">
           <div className="logo">
-            <img src={logo} alt="GravityBrain" />
+            <NavLink to={`/`} className="btn no-border m-btn btn-sm "><img src={logo} alt="GravityBrain" /></NavLink>
           </div>
 
           <div className="links text-right  m--hidden-mobile">
