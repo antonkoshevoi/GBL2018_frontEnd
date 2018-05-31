@@ -51,12 +51,26 @@ import AutoCreate from "../containers/classrooms/AutoCreate";
 import ProfileEdit from "../containers/pages/profile/ProfileEdit";
 import SplashContainer from "../containers/pages/Splash";
 import PrivacyPolicy from "../containers/pages/Static/PrivacyPolicy";
+import About from "../containers/pages/Static/About";
+import Disclaimer from "../containers/pages/Static/Disclaimer";
+import ParentStudent from "../containers/pages/Static/ParentStudent";
+import Publisher from "../containers/pages/Static/Publisher";
+import SchoolTeacher from "../containers/pages/Static/SchoolTeacher";
+import TermsService from "../containers/pages/Static/TermsService";
 
 export default () => (
   <AppContainer>
     <Switch>
+      <Route exact path='/about' name='splash' component={About} />
+      <Route exact path='/disclaimer' name='splash' component={Disclaimer} />
+      <Route exact path='/parents' name='splash' component={ParentStudent} />
+      <Route exact path='/publishers' name='splash' component={Publisher} />
+      <Route exact path='/schools' name='splash' component={SchoolTeacher} />
+      <Route exact path='/terms' name='splash' component={TermsService} />
       <Route exact path='/splash' name='splash' component={SplashContainer} />
       <Route exact path='/privacy-policy.html' name='login' component={PrivacyPolicy} />
+
+
       <Route exact path='/login' name='login' component={Login} />
       <Route exact path='/restore-login' name='restore-login' component={RestoreLogin} />
       <Route exact path='/signUp' name='signUp' component={SignUpIndex} />

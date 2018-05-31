@@ -12,7 +12,7 @@ class SplashFooter extends Component {
           </div>
 
           <div className="links text-right m--hidden-mobile">
-            <NavLink to={`/terms-service`} className="btn no-border m-btn btn-sm ">{t('terms')}</NavLink>
+            <NavLink to={`/terms`} className="btn no-border m-btn btn-sm ">{t('terms')}</NavLink>
           </div>
         </div>
       </div>
