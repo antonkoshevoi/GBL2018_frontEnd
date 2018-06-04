@@ -25,7 +25,7 @@ class Login extends Component {
       const { auth, history } = this.props;
 
       if (auth.get('isLoggedIn')) {
-          history.push('/')
+          history.push('/dashboard')
       }
   }
 
@@ -39,7 +39,7 @@ class Login extends Component {
     const { setRedirectUrl, login } = this.props;
     const { username, password, remember } = this.state;
 
-    let pathname = '/';
+    let pathname = '/dashboard';
     try {
       pathname = this.props.location.state.from.pathname;
     } catch (e) {}
