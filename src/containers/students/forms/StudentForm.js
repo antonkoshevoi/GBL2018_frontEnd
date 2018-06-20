@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { MenuItem } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { selectGetSchoolHomeroomsRequest, selectSchools } from '../../../redux/schools/selectors';
 import { getSchoolHomerooms, getSchools } from '../../../redux/schools/actions';
 import MetronicSelect from "../../../components/ui/metronic/MetronicSelect";
-import HasRole from "../../middlewares/HasRole";
 import HasPermission from "../../middlewares/HasPermission";
 
 class StudentForm extends Component {
@@ -159,23 +158,6 @@ class StudentForm extends Component {
                   </div>
                 </HasPermission>
             </div>
-
-
-
-
-          {/*<FormControl className='full-width form-inputs'>*/}
-            {/*<InputLabel htmlFor='name-error'>School</InputLabel>*/}
-            {/*<Select*/}
-                {/*primarytext=""*/}
-                {/*name='schoolId'*/}
-                {/*onChange={(e) => { this._handleSchoolChange(e) }}*/}
-                {/*value={student.schoolId || ''}>*/}
-              {/*<MenuItem value={null} primarytext=""/>*/}
-              {/*{this._renderSchools()}*/}
-            {/*</Select>*/}
-            {/*{errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}*/}
-          {/*</FormControl>*/}
-
         </div>
       </div>
     );

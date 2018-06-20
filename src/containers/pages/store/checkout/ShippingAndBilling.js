@@ -4,27 +4,13 @@ import {connect} from 'react-redux';
 import Address from "./Address";
 import {withRouter} from 'react-router-dom';
 import {translate} from 'react-i18next';
-import {
-  FormControl,
-  FormHelperText,
-  FormControlLabel,
-  Input,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography,
-  Button,
-  Checkbox,
-  CircularProgress
-} from '@material-ui/core';
-
-import {selectGetCartRecordsRequest, setShippingAndBillingRequest} from "../../../../redux/store/selectors";
+import {FormControlLabel, Button, Checkbox, CircularProgress} from '@material-ui/core';
+import {setShippingAndBillingRequest} from "../../../../redux/store/selectors";
 import {getShippingAndBilling, resetSetShippingAndBilling, setShippingAndBilling} from "../../../../redux/store/actions";
 import Loader from "../../../../components/layouts/Loader";
 import {getCountries} from "../../../../redux/countries/actions";
 import {selectRecords} from "../../../../redux/countries/selectors";
 import {selectPaymentMethod} from "../../../../redux/payments/selectors";
-
 
 class ShippingAndBilling extends Component {
 
@@ -63,7 +49,6 @@ class ShippingAndBilling extends Component {
         this._setSameShipping('shippingAddress', form);
     }
   }
-
 
   _handleSameShipping = event => {
     const {checked} = event.target;

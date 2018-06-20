@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from '../../helpers/utils';
-import { Input } from '@material-ui/core';
+import { Icon, Input, InputAdornment } from '@material-ui/core';
+import {Search} from "@material-ui/icons";
 
 class SearchInput extends Component {
 
@@ -28,7 +29,14 @@ class SearchInput extends Component {
       <Input
         {...rest}
         value={this.state.value}
-        onChange={(e) => { this._onChange(e.target.value) }}/>
+        onChange={(e) => { this._onChange(e.target.value) }}
+        endAdornment={
+        <InputAdornment position="end">
+          <Icon>
+            <Search/>
+          </Icon>
+        </InputAdornment>
+      }/>
     );
   }
 }

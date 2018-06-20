@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { EditButton } from '../../../components/ui/table';
 import DatePicker from '../../../components/ui/DatePicker';
 import { selectScheduleLessonRequest } from '../../../redux/classrooms/selectors';
 import { scheduleLesson } from '../../../redux/classrooms/actions';
-import { CircularProgress} from '@material-ui/core';
 
 class AttemptDateForm extends Component {
     
