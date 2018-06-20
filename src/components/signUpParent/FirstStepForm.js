@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import 'cropperjs/dist/cropper.css';
 import Cropper from 'react-cropper';
-import Address from "../../containers/pages/store/checkout/Address";
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
-import {getCountries} from "../../redux/countries/actions";
-import {selectRecords} from "../../redux/countries/selectors";
 
 class FirstStepForm extends Component {
   static propTypes = {
@@ -24,9 +19,7 @@ class FirstStepForm extends Component {
     };
   }
 
-  componentDidMount(){
-    this.props.countries();
-  }
+  componentDidMount(){}
 
   /**
    *
@@ -77,7 +70,6 @@ class FirstStepForm extends Component {
     this.cropper.zoom(0.1)
   }
 
-
   _zoomOut() {
     this.cropper.zoom(-0.1)
   }
@@ -112,14 +104,10 @@ class FirstStepForm extends Component {
         ...fields
       }
     });
-
   }
 
-  /**
-   *
-   */
   _handleInputChange(event) {
-    const { name, type, value, checked } = event.target;
+    const { name, value } = event.target;
 
     this.setState({
       form: {
@@ -260,27 +248,12 @@ class FirstStepForm extends Component {
 
             </div>
           </div>
-
         </div>
         <div className="container">
-
         </div>
-
-
-
       </div>
     );
   }
 }
-
-FirstStepForm = connect(
-  (state) => ({
-    countriesRequest: selectRecords(state),
-
-  }),
-  (dispatch) => ({
-    countries: () => dispatch(getCountries())
-  }),
-)(FirstStepForm);
 
 export default translate('FirstStepForm')(FirstStepForm);

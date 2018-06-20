@@ -18,7 +18,6 @@ import { load } from '../../redux/app/actions';
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 import './Signup.css'
 
-
 class SignUpParent extends Component {
 
   constructor(props) {
@@ -35,40 +34,30 @@ class SignUpParent extends Component {
 
   componentWillReceiveProps (nextProps) {
     this._goForwardOnStep1Success(nextProps);
-    this._goForwardOnStep2Success(nextProps);
-    this._goBackIfThereWasAnErrorOnStep1(nextProps);
+    this._goForwardOnStep2Success(nextProps);    
   }
 
   _goForwardOnStep1Success (nextProps) {
     const success = this.props.validateStep1Request.get('success');
     const nextSuccess = nextProps.validateStep1Request.get('success');
+    const { activeStep } = this.state;
 
     if(!success && nextSuccess) {
-      this._next();
+        this.setState({
+          activeStep: (activeStep + 1)
+        });
     }
   }
 
   _goForwardOnStep2Success (nextProps) {
     const success = this.props.signUpRequest.get('success');
     const nextSuccess = nextProps.signUpRequest.get('success');
+    const { activeStep } = this.state;
 
     if(!success && nextSuccess) {
-      this._next();
-    }
-  }
-
-  _goBackIfThereWasAnErrorOnStep1 (nextProps) {
-    const fail = this.props.signUpRequest.get('fail');
-    const nextFail = nextProps.signUpRequest.get('fail');
-
-    if(!fail && nextFail) {
-      const errors = nextProps.signUpRequest.get('errors');
-      if (errors.get('step1').size > 0) {
-        this.props.validateStep1(
-          this.state.form.step1
-        );
-        this._back();
-      }
+        this.setState({
+          activeStep: (activeStep + 1)
+        });
     }
   }
 
@@ -109,15 +98,22 @@ class SignUpParent extends Component {
 
   _next() {
     const { activeStep } = this.state;
-    this.setState({
-      activeStep: activeStep + 1,
-    });
+      
+    if (activeStep === 0) {
+        this._submitStep1();
+    }
+    if (activeStep === 1) {
+        this._submitStep2();
+    }
+    if (activeStep === 2) {
+        this._goToDashboard();
+    }    
   };
 
   _back() {
-    const { activeStep } = this.state;
+    const { activeStep } = this.state;    
     this.setState({
-      activeStep: activeStep - 1,
+      activeStep: (activeStep - 1)
     });
   };
 
@@ -128,13 +124,9 @@ class SignUpParent extends Component {
 
     const step2Loading = this.props.signUpRequest.get('loading');
     const step2Errors = this.props.signUpRequest.get('errors').get('step2');
-
+        
     return (
-      <form onSubmit={[
-        (e) => { e.preventDefault(); this._submitStep1(); },
-        (e) => { e.preventDefault(); this._submitStep2(); },
-        (e) => { e.preventDefault(); this._goToDashboard(); }
-      ][activeStep]}>
+      <form  onSubmit={(e) => { e.preventDefault(); this._next(); }}>
         <div className='m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor  m-login--2 m-login-2--skin-2 m--full-height' id='m_login' style={{backgroundImage: `url(${background})`,minHeight:'100vh'}}>
           <div className='m-grid__item m-grid__item--fluid m-login__wrapper'>
             <div className='m-login__container signup-page'>
@@ -168,7 +160,6 @@ class SignUpParent extends Component {
                     </div>
 
                     <Stepper activeStep={activeStep} alternativeLabel className="g-stepper">
-
                       <Step>
                         <StepLabel>Parent Profile</StepLabel>
                       </Step>
@@ -192,6 +183,7 @@ class SignUpParent extends Component {
                       <div className='col-sm-12 text-right m--padding-top-20 text-center'>
                         {activeStep !== 2 &&
                           <button
+                            type='button'
                             disabled={activeStep === 0}
                             onClick={() => { this._back(); }}
                             className='m-btn m-btn--air m--margin-5 btn btn-default'>
@@ -204,7 +196,6 @@ class SignUpParent extends Component {
                         ][activeStep]}
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>

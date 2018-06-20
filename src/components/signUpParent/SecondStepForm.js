@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
-import { MenuItem, Select } from '@material-ui/core';
 import 'cropperjs/dist/cropper.css';
 import Cropper from 'react-cropper';
-import MetronicDatePicker from '../ui/metronic/MetronicDatePicker';
-import MetronicSelect from "../ui/metronic/MetronicSelect";
 
 class SecondStepForm extends Component {
 
@@ -188,7 +185,7 @@ class SecondStepForm extends Component {
 
             <div className='croppedBlock'>
               {form.avatarCropped &&
-              <img className='img-thumbnail' style={{ width: '150px' }} src={form.avatarCropped} alt='cropped image'/>}
+              <img className='img-thumbnail' style={{ width: '150px' }} src={form.avatarCropped} alt='My Student' />}
             </div>
           </div>
         </div>
