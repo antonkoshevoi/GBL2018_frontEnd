@@ -94,8 +94,7 @@ class AssignStudentsModal extends Component {
 
   render() {
     const { isOpen, assignStudentsRequest, getRecordForAssignStudentsRequest } = this.props;
-    const loading = assignStudentsRequest.get('loading') || getRecordForAssignStudentsRequest.get('loading');
-    const errorMessage = assignStudentsRequest.get('errorMessage');
+    const loading = assignStudentsRequest.get('loading') || getRecordForAssignStudentsRequest.get('loading');    
     const errors = assignStudentsRequest.get('errors');
 
     return (

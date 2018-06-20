@@ -2,11 +2,10 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,
-  DialogContentText,
+  DialogContent, 
   Icon, IconButton,
   Toolbar, Typography,
-  Divider, Button, DialogActions, FormControl, InputLabel, Input, FormHelperText, Menu, Select, MenuItem
+  Divider, Button, DialogActions, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem
 } from '@material-ui/core';
 import {connect} from 'react-redux';
 import {
@@ -14,14 +13,11 @@ import {
   selectUpdateRequest
 } from '../../../redux/classrooms/selectors';
 import {
-  getSchools, resetGetSingleRecordRequest, resetUpdateRequest,
-  update, updateAutoClass
+  resetGetSingleRecordRequest, resetUpdateRequest,
+  updateAutoClass
 } from '../../../redux/classrooms/actions';
 import Modal from "../../../components/ui/Modal";
-import ClassroomForm from "../forms/ClassroomForm";
-import ImageCropper from "../../../components/ui/ImageCropper";
 import {selectGetSchoolTeachersRequest} from "../../../redux/schools/selectors";
-import {getSchoolTeachers} from "../../../redux/schools/actions";
 
 class EditAutoClassroomModal extends Component {
   static propTypes = {
@@ -199,8 +195,7 @@ class EditAutoClassroomModal extends Component {
   render() {
     const schoolTeachersSuccess = this.props.getSchoolTeacherRequest.get('success');
     const {isOpen, updateRequest, getSingleRecordRequest} = this.props;
-    const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');
-    const errorMessage = updateRequest.get('errorMessage');
+    const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');    
     const errors = updateRequest.get('errors');
     const {taskConfig} = this.state;
 
@@ -224,10 +219,7 @@ class EditAutoClassroomModal extends Component {
         <DialogContent className="m--margin-top-25">
           <form id='update-classroom-form' onSubmit={(e) => {
             this._onSubmit(e)
-          }}>
-            <DialogContentText>
-              {/*{errorMessage && <span>{errorMessage}</span>}*/}
-            </DialogContentText>
+          }}>            
             <div className="row">
               <div className="col-md-12">
                 <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>

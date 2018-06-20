@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
-    AppBar, CircularProgress,
-    DialogContent,
-    DialogContentText,
+    AppBar, CircularProgress,    
     Icon, IconButton,
     Toolbar, Typography,
-    Divider, Button, DialogActions
+    Button, DialogActions, DialogContent
 } from '@material-ui/core';
 import {connect} from 'react-redux';
 import {
@@ -125,9 +123,6 @@ class EditAdministrationModal extends Component {
                 </AppBar>
 
                 <DialogContent className="m--margin-top-25">
-                    <DialogContentText>
-                        {/*{errorMessage && <span>{errorMessage}</span>}*/}
-                    </DialogContentText>
                     <form id='update-administrator-form' onSubmit={(e) => {
                         this._onSubmit(e)
                     }}>

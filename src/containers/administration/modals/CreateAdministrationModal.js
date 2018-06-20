@@ -2,11 +2,10 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,
-  DialogContentText,
+  DialogContent,  
   Icon, IconButton,
   Toolbar, Typography,
-  Divider, Button, DialogActions
+  Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { selectCreateRequest } from '../../../redux/administration/selectors';
@@ -99,8 +98,7 @@ class CreateAdministrationModal extends Component {
 
   render() {
     const { isOpen, createRequest } = this.props;
-    const loading = createRequest.get('loading');
-    const errorMessage = createRequest.get('errorMessage');
+    const loading = createRequest.get('loading');    
     const errors = createRequest.get('errors');
 
     return (
@@ -121,9 +119,6 @@ class CreateAdministrationModal extends Component {
         </AppBar>
 
         <DialogContent className="m--margin-top-25">
-          <DialogContentText>
-            {/*{errorMessage && <span>{errorMessage}</span>}*/}
-          </DialogContentText>
           <form id='create-administrator-form' onSubmit={(e) => { this._onSubmit(e) }}>
            <div className="row">
              <div className="col-md-6">

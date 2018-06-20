@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { getDemoClassrooms } from '../../../redux/classrooms/actions';
-import { selectGetRecordsRequest, selectRecords } from '../../../redux/classrooms/selectors';
+import { selectRecords } from '../../../redux/classrooms/selectors';
 import { getSchoolStudents } from "../../../redux/schools/actions";
 import { selectGetSchoolStudentsRequest } from "../../../redux/schools/selectors";
 
@@ -45,7 +45,7 @@ class AssignStudentForm extends Component {
   }  
   
   _handleInputChange(event) {
-    const { name, type, value, checked } = event.target;
+    const { name, value } = event.target;
 
     this.props.onChange({
       ...this.props.form,

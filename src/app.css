@@ -355,10 +355,6 @@ table th .sort-arrow {
     border-radius: 0 !important;
 }
 
-div.portlet-header-input:before {
-    background-color: #555;
-}
-
 .portlet-header-input input, .portlet-header-input > div > button {
     color: #555;
 }
@@ -920,8 +916,7 @@ div.pie-block > canvas {
 
 div.m-portlet .m-portlet__head {
     padding: 0 1.2rem;
-    min-height: 50px;
-    height: initial;
+    min-height: 50px;    
 }
 
 div.m-portlet .m-portlet__body {

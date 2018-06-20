@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,
-  DialogContentText,
+  DialogContent,  
   Icon, IconButton,
   Toolbar, Typography,
   Divider, Button, DialogActions
@@ -96,9 +95,8 @@ class CreateTeacherModal extends Component {
   }
 
   render() {
-    const { isOpen, createRequest , school } = this.props;
-    const loading = createRequest.get('loading');
-    const errorMessage = createRequest.get('errorMessage');
+    const { isOpen, createRequest } = this.props;
+    const loading = createRequest.get('loading');    
     const errors = createRequest.get('errors');
 
 
@@ -121,9 +119,6 @@ class CreateTeacherModal extends Component {
 
         <DialogContent className='m--margin-top-25'>
           <form id='create-teacher-form' onSubmit={(e) => { this._onSubmit(e) }}>
-            <DialogContentText>
-              {/*{errorMessage && <span>{errorMessage}</span>}*/}
-            </DialogContentText>
              <div className="row">
                <div className="col-md-6">
                     <ImageCropper circularButton onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>

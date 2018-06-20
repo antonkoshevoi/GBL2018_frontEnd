@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,
-  DialogContentText,
+  DialogContent,  
   Icon, IconButton,
   Toolbar, Typography,
   Divider, Button, DialogActions
@@ -86,8 +85,7 @@ class CreateHomeroomModal extends Component {
 
   render() {
     const { isOpen, createRequest } = this.props;
-    const loading = createRequest.get('loading');
-    const errorMessage = createRequest.get('errorMessage');
+    const loading = createRequest.get('loading');    
     const errors = createRequest.get('errors');
 
     return (
@@ -109,9 +107,6 @@ class CreateHomeroomModal extends Component {
 
         <DialogContent className="m--margin-top-25">
           <form id='create-homeroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
-            <DialogContentText>
-              {/*{errorMessage && <span>{errorMessage}</span>}*/}
-            </DialogContentText>
             <div className="row">
               <div className="col-md-8">
                 <HomeroomForm
