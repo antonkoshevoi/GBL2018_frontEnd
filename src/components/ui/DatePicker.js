@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import { createMuiTheme, MuiThemeProvider } from 'material-ui';
+import React, {Fragment, PureComponent  } from 'react';
 import { DatePicker as BaseDatePicker } from 'material-ui-pickers';
-import blue from 'material-ui/es/colors/blue';
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
+import blue from '@material-ui/core/es/colors/blue';
 import moment from "moment/moment";
-import MomentUtils from 'material-ui-pickers/utils/moment-utils';
-import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 
-class DatePicker extends Component {
+class DatePicker extends PureComponent {
 
   _convertReturnValue(m) {
     const date = moment(m).format('YYYY-MM-DD');
@@ -20,16 +18,13 @@ class DatePicker extends Component {
 
   render () {
     const { InputProps, format, onChange, ...rest } = this.props;
-
-    const theme = createMuiTheme ({
-      palette: {
-        primary: blue
-      }
+    const theme = createMuiTheme({
+        palette: {
+            primary: blue
+        }
     });
-
-    return (
-      <MuiThemeProvider theme={theme}>
-          <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
+    return (     
+        <MuiThemeProvider theme={theme}>
             <BaseDatePicker
               {...rest}
               onChange={(m) => onChange(this._convertReturnValue(m))}
@@ -41,8 +36,7 @@ class DatePicker extends Component {
               InputProps={InputProps ? InputProps : {
                 style: {}
               }}/>
-          </MuiPickersUtilsProvider>
-      </MuiThemeProvider>
+        </MuiThemeProvider>
     );
   }
 }

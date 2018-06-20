@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import { Button, Icon, MenuItem, Select, Input } from 'material-ui';
+import { Button, Icon, MenuItem, Select, Input } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { NavLink } from 'react-router-dom';

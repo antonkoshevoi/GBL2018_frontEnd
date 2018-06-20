@@ -8,7 +8,7 @@ import {
   Toolbar, Typography,
   Divider, Button,
   DialogActions
-} from 'material-ui';
+} from '@material-ui/core';
 import { connect } from 'react-redux';
 import {
   selectGetSingleRecordRequest, selectUpdateRequest,

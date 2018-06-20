@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {NavLink, withRouter} from "react-router-dom";
 import {generateBreadcrumbLink} from "../../helpers/utils";
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
-import {Menu, MenuItem} from "material-ui";
+import {Menu, MenuItem} from '@material-ui/core';
 import {translate} from "react-i18next";
 import {connect} from "react-redux";
 import {selectAddToCartRequest, selectCartRecords, selectGetCartRecordsRequest} from "../../redux/store/selectors";

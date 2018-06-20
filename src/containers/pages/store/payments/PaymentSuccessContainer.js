@@ -8,7 +8,7 @@ import * as queryString from 'query-string';
 import {executePayPalPayment, getInvoice} from '../../../../redux/payments/actions';
 import Loader from '../../../../components/layouts/Loader';
 import {invoiceRequest, selectExecutePayPalPaymentRequest} from '../../../../redux/payments/selectors';
-import {Button, Checkbox, CircularProgress, FormControlLabel, Typography} from "material-ui";
+import {Button, Checkbox, CircularProgress, FormControlLabel, Typography} from '@material-ui/core';
 import {selectLoginRequest} from "../../../../redux/auth/selectors";
 import {login, setRedirectUrl} from "../../../../redux/auth/actions";
 import ServiceList from "../../../../components/pages/store/payment/ServiceList";

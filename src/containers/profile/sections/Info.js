@@ -4,7 +4,7 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import {selectChangePasswordRequest, selectUpdateRequest} from "../../../redux/user/selectors";
 import {changePassword, update} from "../../../redux/user/actions";
-import { Dialog, Modal} from "material-ui";
+import { Dialog, Modal} from '@material-ui/core';
 import ImageCropper from "../../../components/ui/ImageCropper";
 import Card from "../../../components/ui/Card";
 

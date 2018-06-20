@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Button, Drawer} from "material-ui";
+import {Button, Drawer} from '@material-ui/core';
 
 class AppDownloadDrawer extends Component {
 

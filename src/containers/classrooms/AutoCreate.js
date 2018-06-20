@@ -6,7 +6,7 @@ import {withRouter} from "react-router";
 import {translate} from 'react-i18next';
 import {selectGetParentRecordsRequest} from "../../redux/store/selectors";
 import {getParentRecords} from "../../redux/store/actions";
-import {MenuItem, Select} from "material-ui";
+import {MenuItem, Select} from '@material-ui/core';
 import Card from "../../components/ui/Card";
 import {EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../components/ui/table";
 import {

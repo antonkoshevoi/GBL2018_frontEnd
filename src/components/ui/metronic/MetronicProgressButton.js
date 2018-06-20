@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CircularProgress } from 'material-ui';
+import { CircularProgress } from '@material-ui/core';
 
 class MetronicProgressButton extends Component {
 

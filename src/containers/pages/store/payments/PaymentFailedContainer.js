@@ -11,7 +11,7 @@ import { selectExecutePayPalPaymentRequest } from '../../../../redux/payments/se
 import ServiceList from "../../../../components/pages/store/payment/ServiceList";
 import {selectLoginRequest} from "../../../../redux/auth/selectors";
 import {login, setRedirectUrl} from "../../../../redux/auth/actions";
-import {Button, Checkbox, CircularProgress, FormControlLabel} from "material-ui";
+import {Button, Checkbox, CircularProgress, FormControlLabel} from '@material-ui/core';
 
 class PaymentFailedContainer extends Component {
 

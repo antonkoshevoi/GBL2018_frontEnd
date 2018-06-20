@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography, Tab, Tabs, Paper, Grid } from 'material-ui';
-import { FormGroup, FormControlLabel } from 'material-ui/Form';
-import Checkbox from 'material-ui/Checkbox';
+import { FormControl, FormControlLabel, FormGroup, Checkbox, FormHelperText, Input, InputLabel, MenuItem, Select, Typography, Tab, Tabs, Paper, Grid } from '@material-ui/core';
 import {getSchoolTeachers, getSchoolStudents, getSchools} from "../../../redux/schools/actions";
 import {
     selectGetSchoolStudentsRequest, selectGetSchoolTeachersRequest,

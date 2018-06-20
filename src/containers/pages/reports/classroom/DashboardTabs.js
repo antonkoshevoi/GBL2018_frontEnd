@@ -4,9 +4,9 @@ import { push } from 'react-router-redux';
 
 import {
   Paper, Tabs, Tab, Typography, GridList, GridListTile, GridListTileBar, IconButton, Input, InputAdornment
-} from 'material-ui';
+} from '@material-ui/core';
 import { NavLink } from "react-router-dom";
-import { Search } from "material-ui-icons";
+import { Search } from "@material-ui/icons";
 import {connect} from "react-redux";
 import {selectStudentsRequest} from "../../../../redux/reports/classroom/selectors";
 import {getStudents} from "../../../../redux/reports/classroom/actions";

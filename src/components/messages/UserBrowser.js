@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MetronicSearchInput from '../ui/metronic/MetronicSearchInput';
-import { CircularProgress } from 'material-ui';
+import { CircularProgress } from '@material-ui/core';
 import Immutable from "immutable";
 import {Scrollbars} from "react-custom-scrollbars";
 

@@ -11,7 +11,7 @@ import {
   Typography,
   Button,
   Checkbox
-} from 'material-ui';
+} from '@material-ui/core';
 import {getSchoolTeachers, getSchools, getSchoolHomerooms} from '../../../redux/schools/actions';
 import {
   selectGetSchoolHomeroomsRequest,

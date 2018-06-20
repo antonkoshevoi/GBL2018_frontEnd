@@ -6,7 +6,7 @@ import {
   DialogContentText,
   Icon, IconButton, Slide,
   Toolbar, Typography
-} from 'material-ui';
+} from '@material-ui/core';
 import AddForm from "../../../../components/pages/courses/AddForm";
 import {selectCreateRequest} from "../../../../redux/pages/courses/selectors";
 import connect from "react-redux/es/connect/connect";

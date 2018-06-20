@@ -5,7 +5,7 @@ import { EditButton } from '../../../components/ui/table';
 import DatePicker from '../../../components/ui/DatePicker';
 import { selectScheduleLessonRequest } from '../../../redux/classrooms/selectors';
 import { scheduleLesson } from '../../../redux/classrooms/actions';
-import { CircularProgress} from 'material-ui';
+import { CircularProgress} from '@material-ui/core';
 
 class AttemptDateForm extends Component {
     
@@ -29,7 +29,7 @@ class AttemptDateForm extends Component {
     }    
 
     _showDatePicker = function () {
-        this.state.picker.wrapper.open();
+        this.state.picker.open();
     }
 
     _changeAttDate = function (date) {
@@ -59,7 +59,7 @@ class AttemptDateForm extends Component {
                 <div style={{'display': 'none'}}>   
                     <DatePicker
                       name={'lesson-att-date-' + lesson.lessonId}                      
-                      pickerRef={(node) => {this.state.picker = node;}}                      
+                      ref={(node) => {this.state.picker = node;}}                      
                       value={this.state.attDate || ''}                      
                       onChange={(date) => {this._changeAttDate(date)}}                      
                       disabled={scheduleLessonRequest.get('loading')}

@@ -5,8 +5,7 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { login, setRedirectUrl } from '../../redux/auth/actions';
 import { selectLoginRequest } from '../../redux/auth/selectors';
-import { FormControlLabel } from 'material-ui/Form';
-import { Button, CircularProgress, Checkbox } from 'material-ui';
+import { FormControlLabel, Button, CircularProgress, Checkbox } from '@material-ui/core';
 import { withRouter, NavLink } from 'react-router-dom';
 
 class Login extends Component {

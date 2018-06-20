@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Select} from "material-ui";
+import {Select} from '@material-ui/core';
 
 class MetronicSelect extends Component {
 

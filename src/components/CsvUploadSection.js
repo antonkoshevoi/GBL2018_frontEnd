@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from 'material-ui';
+import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from '@material-ui/core';
 import ConfirmButton from './ui/ConfirmButton';
 import { CSVLink } from 'react-csv';
 import PortletWidgets from './ui/PortletWidgets';

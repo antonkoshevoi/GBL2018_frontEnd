@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {getCharts} from "../../../../redux/reports/dashboard/actions";
 import {selectChartDatatRequest} from "../../../../redux/reports/dashboard/selectors";
 import Card from "../../../../components/ui/Card";
-import {CircularProgress} from "material-ui";
+import {CircularProgress} from '@material-ui/core';
 
 class PassRate extends Component {
 

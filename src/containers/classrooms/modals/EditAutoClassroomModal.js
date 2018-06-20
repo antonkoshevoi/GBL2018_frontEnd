@@ -7,7 +7,7 @@ import {
   Icon, IconButton,
   Toolbar, Typography,
   Divider, Button, DialogActions, FormControl, InputLabel, Input, FormHelperText, Menu, Select, MenuItem
-} from 'material-ui';
+} from '@material-ui/core';
 import {connect} from 'react-redux';
 import {
   selectGetSingleRecordRequest,
@@ -22,7 +22,6 @@ import ClassroomForm from "../forms/ClassroomForm";
 import ImageCropper from "../../../components/ui/ImageCropper";
 import {selectGetSchoolTeachersRequest} from "../../../redux/schools/selectors";
 import {getSchoolTeachers} from "../../../redux/schools/actions";
-import DatePicker from "../../../components/ui/DatePicker";
 
 class EditAutoClassroomModal extends Component {
   static propTypes = {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
-import { Button, Icon, MenuItem, Select, Typography } from 'material-ui';
+import { Button, Icon, MenuItem, Select, Typography } from '@material-ui/core';
 import { uri } from '../../helpers/uri';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';

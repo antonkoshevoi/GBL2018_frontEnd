@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Button, Divider, FormControl, FormHelperText, Input, InputLabel, MenuItem, TextField} from "material-ui";
+import {Button, Divider, FormControl, FormHelperText, Input, InputLabel, MenuItem, TextField} from '@material-ui/core';
 
 class AddForm extends Component {
 

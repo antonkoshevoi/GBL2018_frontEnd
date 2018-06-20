@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import Card from "../../../ui/Card";
 import {TablePreloader, MyPreloader} from '../../../ui/table';
-import {Avatar, IconButton, LinearProgress} from "material-ui";
+import {Avatar, IconButton, LinearProgress} from '@material-ui/core';
 import {translate} from 'react-i18next';
-import {Delete, Edit} from "material-ui-icons";
+import {Delete, Edit} from "@material-ui/icons";
 import {OldProgressBar} from "../../../ui/LinearProgress";
 import {withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
 import {getSchoolReportStudent} from '../../../../redux/reports/actions';
 import {selectGetStudentForReportRequest} from '../../../../redux/reports/selectors';
-import {CircularProgress} from "material-ui";
+import {CircularProgress} from '@material-ui/core';
 import {NavLink} from 'react-router-dom'
 
 class InfoSection extends Component {

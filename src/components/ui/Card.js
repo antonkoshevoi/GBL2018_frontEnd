@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Avatar} from 'material-ui';
-import Button from 'material-ui/Button';
+import {Avatar, Button} from '@material-ui/core';
 
 class Card extends Component {
 

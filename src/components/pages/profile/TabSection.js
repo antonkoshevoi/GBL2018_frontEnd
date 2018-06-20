@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
     Paper, Tabs, Tab, Typography, GridList, GridListTile, GridListTileBar, IconButton, Icon,
     LinearProgress, Select, MenuItem, Button, Tooltip
-} from 'material-ui';
+} from '@material-ui/core';
 import DateTime from "react-datetime";
 
 function TabContainer(props) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from '../../helpers/utils';
-import { Input } from 'material-ui';
+import { Input } from '@material-ui/core';
 
 class SearchInput extends Component {
 

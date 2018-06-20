@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Tab, Tabs, Typography} from "material-ui";
+import {Tab, Tabs, Typography} from '@material-ui/core';
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
 import {getRecords} from "../../../redux/students/actions";

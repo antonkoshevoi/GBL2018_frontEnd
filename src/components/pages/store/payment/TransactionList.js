@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {translate} from "react-i18next";
 import Card from "../../../ui/Card";
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../../ui/table";
-import {Icon, IconButton} from "material-ui";
+import {Icon, IconButton} from '@material-ui/core';
 import moment from "moment";
 import {NavLink} from "react-router-dom";
 

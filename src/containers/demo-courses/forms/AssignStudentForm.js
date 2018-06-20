@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from 'material-ui';
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { getDemoClassrooms } from '../../../redux/classrooms/actions';
 import { selectGetRecordsRequest, selectRecords } from '../../../redux/classrooms/selectors';

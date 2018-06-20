@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { selectUpdateRequest} from "../../../redux/schools/selectors";
 import { update } from "../../../redux/schools/actions";
-import { Dialog } from "material-ui";
+import { Dialog } from '@material-ui/core';
 import ImageCropper from "../../../components/ui/ImageCropper";
 import Card from "../../../components/ui/Card";
 

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import {
   Button, ClickAwayListener, Grow, Icon, IconButton, Input, InputAdornment, Menu, MenuItem, MenuList, Paper,
   withStyles
-} from "material-ui";
+} from '@material-ui/core';
 import {Manager, Popper, Target} from "react-popper";
 import classNames from 'classnames';
 import {NavLink, withRouter} from "react-router-dom";
-import {Search} from "material-ui-icons";
-import red from "material-ui/es/colors/red";
+import {Search} from "@material-ui/icons";
+import red from "@material-ui/core/es/colors/red";
 import {buildSortersQuery, getUrlLastName} from "../../../helpers/utils";
 
 const styles = {

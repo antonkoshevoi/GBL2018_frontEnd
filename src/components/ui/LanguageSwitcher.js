@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import {Avatar, ListItemText, Menu, MenuItem} from "material-ui";
+import {Avatar, ListItemText, Menu, MenuItem} from '@material-ui/core';
 import en_flag from '../../media/images/flags/gb.png';
 import es_flag from '../../media/images/flags/es.png';
 import fr_flag from '../../media/images/flags/fr.png';

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
 import { selectGetSingleRecordRequest } from '../../redux/invitations/selectors';
 import { acceptInvitation, declineInvitation, getSingleRecord } from '../../redux/invitations/actions';
-import { Button, CircularProgress, Grid } from 'material-ui';
+import { Button, CircularProgress, Grid } from '@material-ui/core';
 import AuthorizeModal from './modals/AuthorizeModal';
 import { setCallback } from '../../redux/auth/actions';
 

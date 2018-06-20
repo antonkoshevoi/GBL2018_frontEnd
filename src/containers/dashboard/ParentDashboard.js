@@ -4,7 +4,7 @@ import {
   Avatar,
   CircularProgress,
   GridList, GridListTile, GridListTileBar, IconButton, Tooltip
-} from 'material-ui';
+} from '@material-ui/core';
 import {OldProgressBar} from "../../components/ui/LinearProgress";
 import {NavLink} from "react-router-dom";
 import DashboardStore from "../../components/pages/store/DashboardStore";
@@ -18,8 +18,8 @@ import {Row, Table, TablePreloader, Tbody, Td} from "../../components/ui/table";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
 import {push} from 'react-router-redux';
 import {Link} from 'react-router-dom'
-import {ModeEdit, GridOn} from "material-ui-icons";
-import {withStyles} from 'material-ui/styles';
+import {ModeEdit, GridOn} from "@material-ui/icons";
+import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
 import FeaturedItems from "../pages/reports/widgets/FeaturedItems";
 import {selectRecords as storeItems}  from "../../redux/store/selectors";

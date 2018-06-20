@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {translate} from 'react-i18next';
-import {Button, Divider, FormControl, FormHelperText, Input, InputLabel, MenuItem, TextField, Select} from "material-ui";
+import {Button, Divider, FormControl, FormHelperText, Input, InputLabel, MenuItem, TextField, Select} from '@material-ui/core';
 import {selectCreateCreditCardPaymentRequest} from '../../../../redux/payments/selectors';
 import {createCreditCardPayment, resetCreditCardPayment} from '../../../../redux/payments/actions';
 import Loader from "../../../../components/layouts/Loader";

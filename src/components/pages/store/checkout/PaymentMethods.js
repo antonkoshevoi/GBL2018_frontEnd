@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../../ui/Card';
-import { CircularProgress } from 'material-ui';
+import { CircularProgress } from '@material-ui/core';
 
 class PaymentMethods extends Component {
   static propTypes = {

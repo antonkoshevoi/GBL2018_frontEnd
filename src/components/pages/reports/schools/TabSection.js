@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import {
   Paper, Tabs, Tab, Typography, GridList, GridListTile, GridListTileBar, IconButton, Icon,
   LinearProgress, Input, InputAdornment
-} from 'material-ui';
+} from '@material-ui/core';
 import classRooms from "../../../../data/json/classrooms.json";
 import {NavLink} from "react-router-dom";
-import {Search} from "material-ui-icons";
+import {Search} from "@material-ui/icons";
 import {OldProgressBar} from '../../../ui/LinearProgress'
 
 function TabContainer(props) {

@@ -5,7 +5,7 @@ import Card from "../../../../components/ui/Card";
 import {
   Paper, Tabs, Tab, Typography, GridList, GridListTile, GridListTileBar, IconButton, Icon,
   LinearProgress, Input, InputAdornment
-} from 'material-ui';
+} from '@material-ui/core';
 import ProductCard from "../../../../components/pages/store/ProductCard";
 
 

@@ -5,7 +5,7 @@ import background from '../../media/images/bg-3.jpg';
 import logo from '../../media/images/logo.png'
 
 import {NavLink} from 'react-router-dom';
-import {Divider, Step, StepLabel, Stepper} from 'material-ui';
+import {Divider, Step, StepLabel, Stepper} from '@material-ui/core';
 
 import FirstStepForm from '../../components/signUpParent/FirstStepForm';
 import SecondStepForm from '../../components/signUpParent/SecondStepForm';

@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Paper, Tab, Tabs, Typography, Grid} from "material-ui";
+import {Paper, Tab, Tabs, Typography, Grid, CircularProgress } from '@material-ui/core';
 import ProductCard from "./ProductCard";
 import {NavLink} from "react-router-dom";
-import { CircularProgress } from 'material-ui/Progress';
 
 function TabContainer(props) {
   return (

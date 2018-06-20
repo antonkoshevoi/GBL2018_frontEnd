@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {selectRecords} from "../../../../redux/countries/selectors";
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {FormControl, InputLabel, MenuItem, Select} from "material-ui";
+import {FormControl, MenuItem, Select} from '@material-ui/core';
 
 class Address extends Component {
 
@@ -14,7 +14,7 @@ class Address extends Component {
   };
 
   state = {
-    form: {},
+    form: {}
   };
 
   componentDidMount() {

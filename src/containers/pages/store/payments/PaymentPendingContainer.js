@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import '../../../../styles/store.css'
 import { withRouter } from 'react-router-dom';
-import {Button, Checkbox, CircularProgress, FormControlLabel} from "material-ui";
+import {Button, Checkbox, CircularProgress, FormControlLabel} from '@material-ui/core';
 import {selectLoginRequest} from "../../../../redux/auth/selectors";
 import {login, setRedirectUrl} from "../../../../redux/auth/actions";
 import ServiceList from "../../../../components/pages/store/payment/ServiceList";

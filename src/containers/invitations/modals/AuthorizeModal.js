@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {
   AppBar, Button, DialogActions, DialogContent, DialogContentText, Divider, Toolbar,
   Typography
-} from 'material-ui';
+} from '@material-ui/core';
 import Modal from '../../../components/ui/Modal';
 import { connect } from 'react-redux';
 

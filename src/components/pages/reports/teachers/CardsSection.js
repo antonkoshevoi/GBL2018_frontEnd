@@ -6,15 +6,15 @@ import Card from '../../../ui/Card';
 import InfoSection from './InfoSection';
 import ApiClient from '../../../../services/ApiClient';
 import {DatePicker} from 'material-ui-pickers';
-import {createMuiTheme, MuiThemeProvider} from 'material-ui';
-import blue from 'material-ui/es/colors/blue';
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
+import blue from '@material-ui/core/es/colors/blue';
 import MomentUtils from 'material-ui-pickers/utils/moment-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 import moment from 'moment';
-import Icon from 'material-ui/Icon';
-import Button from 'material-ui/Button';
+import Icon from '@material-ui/core/Icon';
+import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
-import {IconButton, withStyles} from 'material-ui';
+import {IconButton, withStyles} from '@material-ui/core';
 
 class ChartsSection extends Component {
   apiClient = new ApiClient();

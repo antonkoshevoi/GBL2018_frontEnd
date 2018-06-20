@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import '../../../../styles/widgets.css';
 import {connect} from 'react-redux';
 import Address from "./Address";
-import {FormControlLabel} from 'material-ui/Form';
 import {withRouter} from 'react-router-dom';
 import {translate} from 'react-i18next';
 import {
   FormControl,
   FormHelperText,
+  FormControlLabel,
   Input,
   InputLabel,
   MenuItem,
@@ -16,7 +16,7 @@ import {
   Button,
   Checkbox,
   CircularProgress
-} from 'material-ui';
+} from '@material-ui/core';
 
 import {selectGetCartRecordsRequest, setShippingAndBillingRequest} from "../../../../redux/store/selectors";
 import {getShippingAndBilling, resetSetShippingAndBilling, setShippingAndBilling} from "../../../../redux/store/actions";

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Avatar, Button, CircularProgress, Grid, Typography} from "material-ui";
-import {withStyles} from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
+import {Avatar, Button, CircularProgress, Grid, Typography} from '@material-ui/core';
+import {withStyles} from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import MetronicDatePicker from "../../../components/ui/metronic/MetronicDatePicker";
 import {NavLink} from "react-router-dom";
 import {getSingleRecord, update} from "../../../redux/students/actions";

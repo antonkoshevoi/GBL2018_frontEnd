@@ -4,7 +4,7 @@ import {Pie} from "react-chartjs-2";
 import {connect} from "react-redux";
 import {getCharts} from "../../../../../redux/reports/homerooms/actions";
 import {selectChartDatatRequest} from "../../../../../redux/reports/homerooms/selectors";
-import {CircularProgress} from "material-ui";
+import {CircularProgress} from '@material-ui/core';
 
 class SchoolAverageChart extends Component {
   static propTypes = {

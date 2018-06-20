@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LinearProgress as BaseLinearProgress, withStyles } from 'material-ui';
+import { LinearProgress as BaseLinearProgress, withStyles } from '@material-ui/core';
 
 function LinearProgress({ classes, ...rest }) {
   return (

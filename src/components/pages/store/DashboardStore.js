@@ -6,7 +6,7 @@ import Slider from "react-slick";
 import {getRecords} from "../../../redux/store/actions";
 import {selectGetRecordsRequest, selectRecords} from "../../../redux/store/selectors";
 import {connect} from 'react-redux';
-import {Grid} from "material-ui";
+import {Grid} from '@material-ui/core';
 
 class DashboardStore extends Component {
 

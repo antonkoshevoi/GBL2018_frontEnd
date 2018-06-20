@@ -12,10 +12,10 @@ import {
   selectCreatePayPalPaymentRequest, selectPaymentMethod
 } from '../../../../redux/payments/selectors';
 import {createCheckPayment, createPayPalPayment, setPayType} from '../../../../redux/payments/actions';
-import {Divider, Step, StepLabel, Stepper} from 'material-ui';
-import Button from 'material-ui/Button';
-import {withStyles} from 'material-ui/styles';
-import {CircularProgress} from 'material-ui';
+import {Divider, Step, StepLabel, Stepper} from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import {withStyles} from '@material-ui/core/styles';
+import {CircularProgress} from '@material-ui/core';
 
 
 import payPalImg from '../../../../media/images/payments/paypal.png'

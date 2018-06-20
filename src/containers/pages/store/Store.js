@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import '../../../styles/store.css'
-import {Button, ClickAwayListener, Grow, MenuItem, MenuList, Paper, Target} from "material-ui";
+import {Button, ClickAwayListener, Grow, MenuItem, MenuList, Paper, Target} from '@material-ui/core';
 import Filter from "../../../components/pages/store/Filter";
 import products from "../../../data/json/products.json";
 import ProductsSection from "../../../components/pages/store/ProductsSection";

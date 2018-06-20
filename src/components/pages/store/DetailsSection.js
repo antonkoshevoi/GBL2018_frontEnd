@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import StarRating from "../../ui/StarRating";
-import {Icon} from "material-ui";
+import {Icon} from '@material-ui/core';
 
 class DetailsSection extends Component {
 

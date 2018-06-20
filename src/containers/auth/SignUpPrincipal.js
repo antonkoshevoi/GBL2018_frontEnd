@@ -6,7 +6,7 @@ import logo from '../../media/images/logo.png'
 import 'cropperjs/dist/cropper.css';
 import Cropper from "react-cropper";
 import {NavLink} from "react-router-dom";
-import {Divider} from "material-ui";
+import {Divider} from '@material-ui/core';
 import { selectSignUpRequest } from '../../redux/signUpPrincipal/selectors';
 import { signUp } from '../../redux/signUpPrincipal/actions';
 import MetronicProgressButton from '../../components/ui/metronic/MetronicProgressButton';

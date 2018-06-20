@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import posterImage from '../../media/images/menu_poster.jpg'
-import { Avatar } from 'material-ui';
+import { Avatar } from '@material-ui/core';
 import { selectUserData } from '../../redux/user/selectors';
 import { push } from 'react-router-redux';
 import * as pluralize from 'pluralize';

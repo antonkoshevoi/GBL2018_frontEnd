@@ -5,15 +5,10 @@ import Card from '../../../../components/ui/Card';
 import {Line} from 'react-chartjs-2';
 import ApiClient from '../../../../services/ApiClient';
 import {DatePicker} from 'material-ui-pickers';
-import {createMuiTheme, MuiThemeProvider} from 'material-ui';
-import blue from 'material-ui/es/colors/blue';
-import MomentUtils from 'material-ui-pickers/utils/moment-utils';
-import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 import moment from 'moment';
-import Icon from 'material-ui/Icon';
-import Button from 'material-ui/Button';
 import classNames from 'classnames';
-import {IconButton, withStyles} from 'material-ui';
+import {Icon, Button, IconButton, withStyles, createMuiTheme, MuiThemeProvider} from '@material-ui/core';
+import blue from '@material-ui/core/es/colors/blue';
 
 class LineChart extends Component {
   apiClient = new ApiClient();
@@ -30,7 +25,7 @@ class LineChart extends Component {
       disabled: false,
       maxInputDate: moment().format('YYYY-MM-DD'),
       originalStateTimerId: ''
-    }
+    }    
   }
 
   componentDidMount() {
@@ -185,8 +180,7 @@ class LineChart extends Component {
             </div>
           </div>
           <div style={{'display': 'none'}}>
-            <MuiThemeProvider theme={theme}>
-              <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
+            <MuiThemeProvider theme={theme}>              
                 <DatePicker
                   label="Choose date"
                   value={currInputDate}
@@ -194,12 +188,11 @@ class LineChart extends Component {
                   onChange={this.changeStartDate}
                   animateYearScrolling={false}
                   disabled={this.state.disabled}
-                  pickerRef={(node) => {
+                  ref={(node) => {
                     this.picker = node;
                   }}
                   okLabel="Select day"
-                />
-              </MuiPickersUtilsProvider>
+                />             
             </MuiThemeProvider>
           </div>
         </div>
@@ -245,11 +238,10 @@ class LineChart extends Component {
             </div>
           </div>
           <div style={{'display': 'none'}}>
-            <MuiThemeProvider theme={theme}>
-              <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
+            <MuiThemeProvider theme={theme}>              
                 <DatePicker
                   label="Choose start date"
-                  pickerRef={(node) => {
+                  ref={(node) => {
                     this.picker = node;
                   }}
                   value={this.state.chosenDate}
@@ -259,8 +251,7 @@ class LineChart extends Component {
                   disabled={this.state.disabled}
                   renderDay={this.renderWrappedDay}
                   okLabel={okLabel}
-                />
-              </MuiPickersUtilsProvider>
+                />              
             </MuiThemeProvider>
           </div>
         </div>
@@ -285,7 +276,7 @@ class LineChart extends Component {
   }
 
   openDatePicker = () => {
-    this.picker.wrapper.open();
+    this.picker.open();
   };
 
   toggleDateLeft = () => {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Typography, Icon, Button, Tooltip, Select, MenuItem } from 'material-ui';
+import { Typography, Icon, Button, Tooltip, Select, MenuItem } from '@material-ui/core';
 import { getSchoolHomerooms } from "../../../redux/schools/actions";
 import { selectGetSchoolHomeroomsRequest } from "../../../redux/schools/selectors";
 import MetronicDatePicker from "../../../components/ui/metronic/MetronicDatePicker";

@@ -11,7 +11,7 @@ import Notifications from "../pushers/Notifications";
 import Tasks from "../pushers/Tasks";
 import {NavLink, withRouter,Redirect} from "react-router-dom";
 
-import {Icon, IconButton} from "material-ui";
+import {Icon, IconButton} from '@material-ui/core';
 import {getCartRecords} from "../../redux/store/actions";
 import {
   selectAddToCartRequest, selectCardRedirect, selectCartRecords,

@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import { push } from 'react-router-redux';
 import {
   Paper, Tabs, Tab, Typography, GridList, GridListTile, GridListTileBar, IconButton, Input, InputAdornment
-} from 'material-ui';
+} from '@material-ui/core';
 import { NavLink } from "react-router-dom";
-import { Search } from "material-ui-icons";
+import { Search } from "@material-ui/icons";
 import {connect} from "react-redux";
 import {
   selectClassroomsRequest, selectHomeroomsRequest,

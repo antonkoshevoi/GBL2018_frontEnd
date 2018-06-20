@@ -7,7 +7,7 @@ import {
   Icon, IconButton,
   Toolbar, Typography,
   Divider, Button, DialogActions
-} from 'material-ui';
+} from '@material-ui/core';
 import { connect } from 'react-redux';
 import { selectCreateRequest } from '../../../redux/teachers/selectors';
 import { create, resetCreateRequest } from '../../../redux/teachers/actions';

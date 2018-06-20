@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Avatar, Icon, ListItemIcon, ListItemText, Menu, MenuItem} from "material-ui";
+import {Avatar, Icon, ListItemIcon, ListItemText, Menu, MenuItem} from '@material-ui/core';
 import {translate} from "react-i18next";
 import * as AUTH from '../../services/AuthService';
 import {NavLink, withRouter} from "react-router-dom";

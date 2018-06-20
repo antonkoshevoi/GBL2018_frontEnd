@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Tab, Tabs, Typography} from 'material-ui';
+import {Tab, Tabs, Typography} from '@material-ui/core';
 import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../ui/table';
 import Parser from 'html-react-parser';
 import ApiClient from '../../../../services/ApiClient';

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Card from "../../ui/Card";
-import {GridList, GridListTile, GridListTileBar, Icon, IconButton} from "material-ui";
+import {GridList, GridListTile, GridListTileBar, Icon, IconButton} from '@material-ui/core';
 
 class HowToMovies extends Component {
 

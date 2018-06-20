@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Dialog, Slide, withStyles } from 'material-ui';
+import { Dialog, Slide, withStyles } from '@material-ui/core';
 
 function Transition(props) {
   return <Slide direction='up' {...props} />;

@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {getCharts} from "../../../../../redux/reports/classroom/actions";
 import {selectChartDatatRequest} from "../../../../../redux/reports/classroom/selectors";
 import Card from "../../../../../components/ui/Card";
-import {CircularProgress} from "material-ui";
+import {CircularProgress} from '@material-ui/core';
 
 class PassRate extends Component {
   static propTypes = {

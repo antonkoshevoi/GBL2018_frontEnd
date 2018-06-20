@@ -8,7 +8,7 @@ import {
   Toolbar, Typography,
   Divider, Button, DialogActions,
   Paper, Tab, Tabs, FormControlLabel, Radio
-} from 'material-ui';
+} from '@material-ui/core';
 import {connect} from 'react-redux';
 import Modal from "../../../components/ui/Modal";
 import Filter from "../../../components/pages/store/Filter";

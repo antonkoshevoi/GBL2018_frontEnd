@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import Card from "../../../../components/ui/Card";
-import { CircularProgress } from 'material-ui';
+import { CircularProgress } from '@material-ui/core';
 import {selectRosterStatisticRequest} from "../../../../redux/reports/dashboard/selectors";
 import {getRosterStatistic} from "../../../../redux/reports/dashboard/actions";
 

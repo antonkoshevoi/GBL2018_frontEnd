@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import { Button, Icon, MenuItem, Select, Input } from 'material-ui';
+import { Button, Icon, MenuItem, Select, Input } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
