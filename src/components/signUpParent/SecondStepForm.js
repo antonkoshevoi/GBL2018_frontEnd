@@ -14,15 +14,11 @@ class SecondStepForm extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      dateOfBirthObj: undefined,
+    this.state = {      
       form: props.form
     };
   }
 
-  /**
-   *
-   */
   _handleFileChange(e) {
     e.preventDefault();
     let files;
@@ -35,23 +31,21 @@ class SecondStepForm extends Component {
     const reader = new FileReader();
 
     reader.onload = () => {
-      this.setState({
+      this.setState({          
         form: {
-          ...this.state.form,
-          avatar: reader.result
+          ...this.state.form,          
+          tmpAvatar: reader.result       
         }
-      }, () => { this.props.onChange(this.state.form); });
+      }, () => { this.props.onChange(this.state.form); });      
     };
 
     reader.readAsDataURL(files[0]);
   }
 
-  /**
-   *
-   */
   _handleImageCrop() {
+    
     if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
-      return;
+        return;
     }
     this.setState({
       form: {
@@ -61,9 +55,6 @@ class SecondStepForm extends Component {
     }, () => { this.props.onChange(this.state.form); });
   }
 
-  /**
-   *
-   */
   _handleInputChange(event) {
     const { name, type, value, checked } = event.target;
 
@@ -71,15 +62,6 @@ class SecondStepForm extends Component {
       form: {
         ...this.state.form,
         [name]: value
-      }
-    }, () => { this.props.onChange(this.state.form); });
-  }
-
-  _handleDateChange(m, dateField) {
-    this.setState({
-      form: {
-        ...this.state.form,
-        [dateField]: m
       }
     }, () => { this.props.onChange(this.state.form); });
   }
@@ -168,15 +150,23 @@ class SecondStepForm extends Component {
 
             <Cropper
               ref={cropper => { this.cropper = cropper; }}
-              src={form.avatar}
+              ready={() => { if (!form.avatarCropped) this._handleImageCrop(); }}
+              dragMode={'move'}
+              src={form.tmpAvatar}
+              background={false}
+              autoCrop={true}
+              cropBoxMovable={false}
+              cropBoxResizable={true}
+              minCropBoxWidth={250}
               className='signup-cropper'
               style={{height: 250, width: 250}}
               aspectRatio={1 / 1}
+              viewMode="3"
               guides={false}/>
 
-            {form.avatar &&
+            {form.avatarCropped &&
             <button
-              type="'"
+              type="button"
               className='btn m-btn--air btn-success m--margin-top-15'
               onClick={() => { this._handleImageCrop() }}
             >
@@ -184,8 +174,7 @@ class SecondStepForm extends Component {
             </button>}
 
             <div className='croppedBlock'>
-              {form.avatarCropped &&
-              <img className='img-thumbnail' style={{ width: '150px' }} src={form.avatarCropped} alt='My Student' />}
+              {form.avatarCropped && <img className='img-thumbnail' style={{ width: '150px' }} src={form.avatarCropped} alt='My Student' />}
             </div>
           </div>
         </div>

@@ -12,18 +12,13 @@ class FirstStepForm extends Component {
   };
 
   constructor(props) {
-    super(props);
-    this.state = {
-      form: props.form,
+    super(props);    
+    this.state = {      
+      form: props.form,      
       zoom:0.5
-    };
-  }
+    };    
+  }  
 
-  componentDidMount(){}
-
-  /**
-   *
-   */
   _handleFileChange(e) {
     e.preventDefault();
     let files;
@@ -36,34 +31,27 @@ class FirstStepForm extends Component {
     const reader = new FileReader();
 
     reader.onload = () => {
-      this.setState({
+      this.setState({            
         form: {
-          ...this.state.form,
-          avatar: reader.result
+          ...this.state.form,        
+          tmpAvatar: reader.result          
         }
-      }, () => { this.props.onChange(this.state.form); });
+      }, () => { this.props.onChange(this.state.form); });           
     };
 
     reader.readAsDataURL(files[0]);
   }
 
-  /**
-   *
-   */
-  _handleImageCrop() {
+  _handleImageCrop() {      
     if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
       return;
-    }
+    }    
     this.setState({
       form: {
         ...this.state.form,
         avatarCropped: this.cropper.getCroppedCanvas().toDataURL()
       }
     }, () => { this.props.onChange(this.state.form); });
-  }
-
-  _rotateImage(angle = 0){
-    this.cropper.rotate(++angle)
   }
 
   _zoomIn(){
@@ -74,42 +62,15 @@ class FirstStepForm extends Component {
     this.cropper.zoom(-0.1)
   }
 
-  _zoom(e){
+  _zoom(e) {          
     this.setState({'zoom':e.target.value});
     this.cropper.zoomTo(e.target.value)
-  }
-
-  _reverseImage(scale) {
-    if (scale === 'vertical') {
-      if (this.cropper.cropper.imageData.scaleY == 1) {
-        this.cropper.scaleY(-1)
-      } else {
-        this.cropper.scaleY(1)
-      }
-
-    } else {
-      if (this.cropper.cropper.imageData.scaleX == 1) {
-        this.cropper.scaleX(-1)
-      } else {
-        this.cropper.scaleX(1)
-      }
-    }
-  }
-
-  _handleForm(fields) {
-    this.setState({
-      ...this.state,
-      form:{
-        ...this.state.form,
-        ...fields
-      }
-    });
   }
 
   _handleInputChange(event) {
     const { name, value } = event.target;
 
-    this.setState({
+    this.setState({      
       form: {
         ...this.state.form,
         [name]: value
@@ -217,35 +178,38 @@ class FirstStepForm extends Component {
 
                 <Cropper
                   ref={cropper => { this.cropper = cropper; }}
+                  ready={() => { if (!form.avatarCropped) this._handleImageCrop(); }}
                   dragMode={'move'}
-                  src={form.avatar}
+                  src={form.tmpAvatar}
                   background={false}
+                  autoCrop={true}
                   cropBoxMovable={false}
                   cropBoxResizable={true}
                   minCropBoxWidth={250}
                   className='signup-cropper'
                   style={{height: 250, width: 250}}
                   aspectRatio={1 / 1}
+                  viewMode="3"
                   guides={false}/>
               </div>
             </div>
 
             <div className='col-sm-12'>
-              {form.avatar &&
-
-              <div className="text-center m--margin-10">
-                <input type="range" min="0.1" max="1" step="0.05"  value={this.state.zoom}  onChange={ (value)=>this._zoom(value)}></input>
-                <br/>
-                <span
-
-                  className='btn pointer m-btn m--margin-5 m-btn--pill m-btn--air btn-success'
-                  onClick={() => { this._handleImageCrop() }}
-                >
-                  Crop <span className='la la-crop'></span>
-                </span>
-              </div>
-              }
-
+                {form.avatarCropped &&
+                  <div className="text-center m--margin-10">
+                      <input type="range" min="0.1" max="1" step="0.05"  value={this.state.zoom}  onChange={ (value) => this._zoom(value)}></input>
+                      <br/>                    
+                      <button
+                          type="button"
+                          className='btn m-btn--air btn-success m--margin-top-15'
+                          onClick={() => { this._handleImageCrop() }}
+                          >
+                          Crop Image <span className='la la-crop'></span>
+                      </button>
+                      <div className='croppedBlock'>              
+                          <img className='img-thumbnail' style={{width: '150px' }} src={form.avatarCropped} alt='My Student' />
+                      </div>
+                  </div>}
             </div>
           </div>
         </div>
