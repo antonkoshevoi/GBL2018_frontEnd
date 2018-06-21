@@ -38,7 +38,7 @@ function* yieldsContactInfo ({payload}) {
 
 const storeSagas = all([
   yieldSuccessToasts({
-    [ADD_TO_CART_SUCCESS]: i18n.t('store:cartAdded'),
+    [ADD_TO_CART_SUCCESS]: i18n.t('messages:store:cartAdded'),
   }),
   yieldErrorToasts([
     GET_RECORDS_FAIL,

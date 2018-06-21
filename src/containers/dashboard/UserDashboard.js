@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {ChartData} from "../../data/Charts";
-import AppDownloadDrawer from "../../components/ui/AppDownloadDrawer";
 import SchoolAverageChart from "../pages/reports/widgets/SchoolAverageChart";
 import RosterStatistic from "../pages/reports/widgets/RosterStatistic";
 import LineChart from "../pages/reports/widgets/LineChart";
@@ -8,9 +7,7 @@ import {connect} from "react-redux";
 import {translate} from "react-i18next";
 import {withRouter} from "react-router-dom";
 import {getRecords} from "../../redux/store/actions";
-import {selectGetRecordsRequest, selectRecords} from "../../redux/store/selectors";
-import StoreTabs from "../../components/pages/store/StoreTabs";
-import LinksWidgets from "../pages/reports/widgets/LinksWidgets";
+import {selectRecords} from "../../redux/store/selectors";
 import Account from "../pages/reports/widgets/account";
 import QuickLink from "../pages/reports/widgets/QuickLink";
 import FeaturedItems from "../pages/reports/widgets/FeaturedItems";
@@ -137,9 +134,7 @@ class UserDashboard extends Component {
 
   render() {
 
-    const {records, getRecordsRequest} = this.props;
-    const productsLoading = getRecordsRequest.get('loading');
-    const productsSuccess = getRecordsRequest.get('success');
+    const {records} = this.props;
     return (
       <div className="fadeInLeft  animated">
         <div className="row dashboard-main-top">
@@ -165,15 +160,10 @@ class UserDashboard extends Component {
           <div className="col-sm-12 col-xl-3 m--hidden-tablet-and-mobile m--hidden-desktop-lg dashboard-quick-links">
             <QuickLink/>
           </div>
-
-
         </div>
         <div className="row dashboard-main-bottom">
           <div className="col-md-6 col-lg-8">
             <FeaturedItems data={records}/>
-            {/*<StoreTabs isLoading={productsLoading} isSuccess={productsSuccess} getProducts={(category) => {*/}
-              {/*this._setCategoryFilter(category)*/}
-            {/*}} data={records}/>*/}
           </div>
           <div className="col-md-6 col-lg-4">
             <Account/>
@@ -186,9 +176,8 @@ class UserDashboard extends Component {
 
 
 UserDashboard = connect(
-  (state) => ({
-    getRecordsRequest: selectGetRecordsRequest(state),
-    records: selectRecords(state),
+  (state) => ({    
+    records: selectRecords(state)
   }),
   (dispatch) => ({
     getRecords: (params = {type: 'recent'}) => {

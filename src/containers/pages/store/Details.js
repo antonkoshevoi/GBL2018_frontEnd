@@ -5,7 +5,6 @@ import DetailsSection from "../../../components/pages/store/DetailsSection";
 import CommentsSection from "../../../components/pages/store/CommentsSection";
 import {withRouter} from "react-router-dom";
 import "../../../styles/store.css"
-import products from "../../../data/json/products.json";
 import Filter from "../../../components/pages/store/Filter";
 import Sidebar from "../../../components/pages/store/Sidebar";
 
@@ -62,8 +61,7 @@ class Details extends Component {
   render() {
     const {record, records, addToCartRequest, getSingleRecordRequest, getRecordsRequest} = this.props;
     const loadingSingle = getSingleRecordRequest.get('loading');
-    const successSingle = getSingleRecordRequest.get('success');
-    const loadingRecords = getRecordsRequest.get('loading');
+    const successSingle = getSingleRecordRequest.get('success');    
     const successRecords = getRecordsRequest.get('success');
 
     const similarRecords =

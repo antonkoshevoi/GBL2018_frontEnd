@@ -19,8 +19,7 @@ class SignUpPrincipal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: {},
-      imageZoom:0,
+      form: {},     
       zoom:0.5
     };
   }
@@ -160,7 +159,7 @@ class SignUpPrincipal extends Component {
   }
 
   render() {
-    const { form, imageZoom } = this.state;
+    const { form } = this.state;
     const loading = this.props.signUpRequest.get('loading');
     const errors = this.props.signUpRequest.get('errors');
 

@@ -14,6 +14,9 @@ export default {
   deleted: 'Record succesfully removed',
   profileUpdated: 'Profile succesfully updated',
   passwordChanged: 'Password changed succesfully',
+  store: {
+      cartAdded: 'Product Added to Cart'
+  },
   classrooms: {
     assigned: {
       students: 'Students successfully changed for classroom',
