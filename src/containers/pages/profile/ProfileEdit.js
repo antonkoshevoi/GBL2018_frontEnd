@@ -206,7 +206,6 @@ class ProfileEdit extends Component {
                               Cancel
                             </button>
                           </div>
-
                           }
 
                         </div>
@@ -327,7 +326,7 @@ class ProfileEdit extends Component {
                     </Button>
                   </NavLink>
 
-                  <Button variant="raised" color="primary" className={classes.button} onClick={this.updateProfile}>
+                  <Button class="m--margin-left-10" variant="raised" color="primary" className={classes.button} onClick={this.updateProfile}>
                     Save
                   </Button>
                 </Grid>

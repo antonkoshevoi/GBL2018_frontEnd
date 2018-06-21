@@ -39,3 +39,8 @@ export const selectChangePasswordRequest = createSelector(
   selectUserDomain,
   (subState) => subState.get('changePasswordRequest')
 );
+
+export const selectChangeImageRequest = createSelector(
+  selectUserDomain,
+  (subState) => subState.get('changeImageRequest')
+);

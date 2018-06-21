@@ -1,7 +1,8 @@
 import {
   GET_USER, GET_USER_SUCCESS, GET_USER_FAIL,
   UPDATE, UPDATE_SUCCESS, UPDATE_FAIL,
-  CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAIL
+  CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAIL,
+  CHANGE_IMAGE, CHANGE_IMAGE_SUCCESS, CHANGE_IMAGE_FAIL
 } from './actions';
 import Immutable from 'immutable';
 import {saveUserDataSession} from "../../helpers/session";
@@ -31,6 +32,14 @@ const initialState = Immutable.fromJS({
     errorCode: null,
     errors: {}
   },
+  changeImageRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,
+    errorCode: null,
+    errors: {}
+  },  
   userData: {
     id: undefined,
     username: undefined,
@@ -127,6 +136,35 @@ export default function reducer (state = initialState, action) {
           .set('errorCode', changePasswordError.code)
           .set('errorMessage', changePasswordError.message)
           .set('errors', changePasswordError.code === 422 ? Immutable.fromJS(changePasswordError.errors) : undefined)
+        );
+    /**
+     * Change Image
+     */
+    case CHANGE_IMAGE:
+      return state
+        .set('changeImageRequest', state.get('changeImageRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)
+          .remove('errors')
+          .remove('errorMessage')
+          .remove('errorCode')
+        );
+    case CHANGE_IMAGE_SUCCESS:
+      return state
+        .set('changeImageRequest', state.get('changeImageRequest')
+          .set('loading', false)
+          .set('success', true)
+        );
+    case CHANGE_IMAGE_FAIL:
+      const changeImageError = action.error.response.data;
+      return state
+        .set('changeImageRequest', state.get('changeImageRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('errorCode', changeImageError.code)
+          .set('errorMessage', changeImageError.message)
+          .set('errors', changeImageError.code === 422 ? Immutable.fromJS(changeImageError.errors) : undefined)
         );
     /**
      * default

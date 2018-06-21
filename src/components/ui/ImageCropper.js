@@ -177,7 +177,7 @@ class ImageCropper extends Component {
           className='signup-cropper'
           style={{height: 170, width: 250}}
           aspectRatio={1 / 1}
-
+          ready={() => { this._handleImageCrop(); }}
           guides={false}/>
         {file &&
         <div className="text-center m--margin-10">
@@ -225,7 +225,6 @@ class ImageCropper extends Component {
           </a>
           <br/>
           <span
-
             className='btn pointer m-btn m--margin-5 m-btn--pill m-btn--air btn-success'
             onClick={() => {
               this._handleImageCrop()
@@ -233,23 +232,17 @@ class ImageCropper extends Component {
           >
             Crop <span className='la la-crop'></span>
           </span>
+          {(saveButton && croppedFile) && (
+          <span className='btn pointer m-btn m--margin-5 m-btn--pill m-btn--air btn-primary' onClick={() => { this._saveImages() }} >
+            Save <span className='la la-save'></span>
+          </span>              
+          )}          
         </div>
         }
         <div className='croppedBlock'>
           {(croppedFile && !circularButton) &&
           <img className='img-thumbnail' style={{width: '150px'}} src={croppedFile} alt='cropped image'/>
           }
-
-          {(saveButton && croppedFile) && (
-            <div className="textCenter m--margin-20">
-              <button
-                className="btn btn-outline-metal m-btn btn-sm m-btn--custom btn-white m-btn--outline-2x m-btn--uppercase cropSaveBtn"
-                onClick={() => {
-                  this._saveImages()
-                }}>Save
-              </button>
-            </div>
-          )}
         </div>
       </div>
     );

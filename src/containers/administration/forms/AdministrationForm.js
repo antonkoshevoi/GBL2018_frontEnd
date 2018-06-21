@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { MenuItem } from '@material-ui/core';
 import { getRoles } from '../../../redux/administration/actions';
 import { connect } from 'react-redux';
 import { selectRoles } from '../../../redux/administration/selectors';
@@ -48,7 +48,7 @@ class AdministrationForm extends Component {
   }
 
   _handleInputChange(event) {
-    const { name, type, value, checked } = event.target;
+    const { name, value } = event.target;
 
       this.props.onChange({
       ...this.props.adminUser,
@@ -183,25 +183,7 @@ class AdministrationForm extends Component {
                       </div>
                   </div>
               </div>
-
-
-
-
-              {/*<FormControl className='full-width form-inputs'>*/}
-              {/*<InputLabel htmlFor='name-error'>School</InputLabel>*/}
-              {/*<Select*/}
-              {/*primarytext=""*/}
-              {/*name='schoolId'*/}
-              {/*onChange={(e) => { this._handleSchoolChange(e) }}*/}
-              {/*value={adminUser.schoolId || ''}>*/}
-              {/*<MenuItem value={null} primarytext=""/>*/}
-              {/*{this._renderSchools()}*/}
-              {/*</Select>*/}
-              {/*{errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}*/}
-              {/*</FormControl>*/}
-
           </div>
-
       </div>
     );
   }

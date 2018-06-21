@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import {selectChangePasswordRequest, selectUpdateRequest} from "../../../redux/user/selectors";
-import {changePassword, update} from "../../../redux/user/actions";
-import { Dialog, Modal} from '@material-ui/core';
+import {selectChangePasswordRequest, selectChangeImageRequest} from "../../../redux/user/selectors";
+import {changePassword, changeImage} from "../../../redux/user/actions";
+import { Dialog, Modal, CircularProgress} from '@material-ui/core';
 import ImageCropper from "../../../components/ui/ImageCropper";
 import Card from "../../../components/ui/Card";
 
@@ -27,6 +27,7 @@ class Info extends Component {
 
   componentWillReceiveProps(nextProps) {
     this._passwordChangedSuccess(nextProps);
+    this._imageChangedSuccess(nextProps);
   }
 
   _passwordChangedSuccess(nextProps) {
@@ -41,7 +42,16 @@ class Info extends Component {
       });
     }
   }
+  
+  _imageChangedSuccess(nextProps) {
+    const prev = this.props.getChangeImageRequest.get('success');
+    const next = nextProps.getChangeImageRequest.get('success');
 
+    if (!prev && next) {        
+        this.props.user.avatar = this.state.croppedImage;
+    }
+  }
+  
   _handlePasswordModeSwitch(changePasswordMode) {
     this.setState({ changePasswordMode });
   }
@@ -61,6 +71,13 @@ class Info extends Component {
       this.state.passwordFields
     );
   }
+  
+  _changeImage(img) {    
+    this._setImage(img);
+    this.props.changeImage({
+      avatarCropped: img
+    });
+  }  
 
   _openUploadModal(){
     this.setState({uploadModal:true})
@@ -80,21 +97,11 @@ class Info extends Component {
     this._closeUploadModal();
   }
 
-  _onSubmit (croppedImg,img) {
-    const { user } = this.props;
-    this.props.update(
-      {
-        ...user,
-        avatar:img,
-        avatarCropped:croppedImg
-      }
-    );
-  };
-
   render() {
     const { user } = this.props;
     const { changePasswordMode, passwordFields } = this.state;
     const errors = this.props.getChangePasswordRequest.get('errors');
+    const loading = this.props.getChangeImageRequest.get('loading');
 
     return (
       <div className="m-portlet ">
@@ -108,7 +115,7 @@ class Info extends Component {
                 <img src={user.avatar} alt=""/>
               </div>
               <div className="text-center m--margin-bottom-20">
-                <button className="m-btn btn btn-info m-btn--pill" onClick={()=>{this._openUploadModal()}}>Upload Avatar</button>
+                {loading ? (<CircularProgress color="primary"/>) : (<button disabled={loading} className="m-btn btn btn-info m-btn--pill m--margin-10" onClick={()=>{this._openUploadModal()}}>Upload Avatar </button>)}
               </div>
             </div>
 
@@ -180,8 +187,8 @@ class Info extends Component {
           open={this.state.uploadModal}
           onClose={() => this._closeUploadModal()}
         >
-         <Card title="Upload Avatar" icon="fa fa-upload" style={{minWidth:'280px'}}>
-            <ImageCropper saveButton circularButton onSubmit={(cropImg,img) => this._onSubmit(cropImg,img)} onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
+         <Card title="Upload Avatar 123" icon="fa fa-upload" style={{minWidth:'280px'}}>
+            <ImageCropper saveButton={true} circularButton onSubmit={(cropImg) => this._changeImage(cropImg)} onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
          </Card>
         </Dialog>
       </div>
@@ -192,11 +199,11 @@ class Info extends Component {
 Info = connect(
   (state) => ({
     getChangePasswordRequest: selectChangePasswordRequest(state),
-    getUpdateRequest: selectUpdateRequest(state),
+    getChangeImageRequest: selectChangeImageRequest(state)    
   }),
   (dispatch) => ({
     changePassword: (fields, params = {}) => { dispatch(changePassword(fields, params)) },
-    update: (form, params = {}) => { dispatch(update(form, params)) },
+    changeImage: (fields, params = {}) => { dispatch(changeImage(fields, params)) }    
   })
 )(Info);
 
