@@ -15,7 +15,8 @@ import {
   UPDATE_AUTOCLASS_SUCCESS, UPDATE_AUTOCLASS_FAIL, RESET_UPDATE_AUTOCLASS_REQUEST,
   GET_CLASSROOM_SCHEDULE, GET_CLASSROOM_SCHEDULE_SUCCESS, GET_CLASSROOM_SCHEDULE_FAIL,
   CLASSROOM_SCHEDULE_LESSON, CLASSROOM_SCHEDULE_LESSON_SUCCESS, CLASSROOM_SCHEDULE_LESSON_FAIL,
-  UPDATE_CLASSROOM_SCHEDULE, UPDATE_CLASSROOM_SCHEDULE_SUCCESS, UPDATE_CLASSROOM_SCHEDULE_FAIL
+  UPDATE_CLASSROOM_SCHEDULE, UPDATE_CLASSROOM_SCHEDULE_SUCCESS, UPDATE_CLASSROOM_SCHEDULE_FAIL,
+  ASSIGN_COURSE_CREDIT, ASSIGN_COURSE_CREDIT_SUCCESS, ASSIGN_COURSE_CREDIT_FAIL, RESET_ASSIGN_COURSE_CREDIT_REQUEST
 } from './actions';
 import Immutable from 'immutable';
 
@@ -104,6 +105,12 @@ const initialState = Immutable.fromJS({
     fail: false,
     errors: {}
   },
+  assignCourseCreditRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errors: {}
+  },  
   getScheduleRequest: {
     loading: false,
     success: false,
@@ -488,6 +495,35 @@ export default function reducer(state = initialState, action) {
     case RESET_ASSIGN_DEMO_STUDENT_REQUEST:
       return state
         .set('assignDemoStudentRequest', initialState.get('assignDemoStudentRequest'));
+
+    /**
+     * Assign Course Credit
+     */
+    case ASSIGN_COURSE_CREDIT:
+      return state
+        .set('assignCourseCreditRequest', state.get('assignCourseCreditRequest')
+        .set('loading', true)
+        .set('success', false)
+        .set('fail', false)
+        .remove('errors'));
+    case ASSIGN_COURSE_CREDIT_SUCCESS:
+      return state
+        .set('assignCourseCreditRequest', state.get('assignCourseCreditRequest')
+          .set('loading', false)
+          .set('fail', false)
+          .set('success', true)
+        );      
+    case ASSIGN_COURSE_CREDIT_FAIL:        
+      return state
+        .set('assignCourseCreditRequest', state.get('assignCourseCreditRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('success', false)
+          .set('errors', Immutable.fromJS(action.error.response.data.errors))
+        );
+    case RESET_ASSIGN_COURSE_CREDIT_REQUEST:
+      return state
+        .set('assignCourseCreditRequest', initialState.get('assignCourseCreditRequest'));
 
     /**
      * Classroom Schedule

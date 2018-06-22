@@ -95,6 +95,11 @@ export const selectAssignDemoStudentRequest = createSelector(
   (subState) => subState.get('assignDemoStudentRequest')
 );
 
+export const selectAssignCourseCreditRequest = createSelector(
+  selectClassroomsDomain,
+  (subState) => subState.get('assignCourseCreditRequest')
+);
+
 export const selectGetScheduleRequest = createSelector(
   selectClassroomsDomain,
   (subState) => subState.get('getScheduleRequest')

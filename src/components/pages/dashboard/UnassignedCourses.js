@@ -47,6 +47,12 @@ class UnassignedCourses extends Component {
       }, assignModalIsOpen: true });
   }
 
+  _handleAssigned() {      
+      const { getUnassigneds } = this.props;
+ 
+      getUnassigneds();
+  }
+  
   _renderUnassigneds() {
     const unassigneds = this.props.getUnassignedsRequest.get('records');
 
@@ -97,7 +103,7 @@ class UnassignedCourses extends Component {
             {this._renderUnassigneds()}
           </Tbody>
         </Table>
-        <AssignStudentModal isOpen={ assignModalIsOpen } onClose={() => {this._closeAssignDialog()}} course={ selectedCourse } />
+        <AssignStudentModal isOpen={ assignModalIsOpen } onClose={() => {this._closeAssignDialog()}} onSuccess={() => {this._handleAssigned()}}  course={ selectedCourse } />
       </Card>
     );
   }

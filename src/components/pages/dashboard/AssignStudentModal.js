@@ -11,12 +11,15 @@ import { connect } from 'react-redux';
 import Modal from '../../ui/Modal';
 import {selectRecords} from "../../../redux/students/selectors";
 import {getRecords} from "../../../redux/students/actions";
+import { selectAssignCourseCreditRequest } from "../../../redux/classrooms/selectors";
+import { assignCourseCreditRequest, resetAssignCourseCreditRequest } from "../../../redux/classrooms/actions";
 
 class AssignStudentModal extends Component {
 
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,    
+    onSuccess: PropTypes.func.isRequired,    
     course: PropTypes.object.isRequired
   };
   
@@ -34,19 +37,30 @@ class AssignStudentModal extends Component {
   }
   
   componentWillReceiveProps(nextProps) {    
-    //this._handleStudentsSuccess(nextProps);      
+    const success = this.props.assignCourseCreditRequest.get('success');
+    const nextSuccess = nextProps.assignCourseCreditRequest.get('success');
+
+    if (!success && nextSuccess) {
+      this._close();     
+      this.props.onSuccess();
+    } 
   };
   
   _close () {     
-    this.props.onClose();    
+    this.setState({studentId: null});  
+    this.props.onClose();
+    this.props.resetAssignCourseCreditRequest();
   };
 
-  _onChange (form) {  
-      this.setState({ form });
-  };
-
-  _onSubmit (e) {            
+  _handleSubmit (e) {            
     e.preventDefault();
+       
+    const { course } = this.props;
+    
+    this.props.assignCourseCredit({
+        creditId: course.id,
+        studentId: this.state.studentId
+    });    
   };
   
   _renderStudents() {
@@ -62,13 +76,13 @@ class AssignStudentModal extends Component {
   _handleInputChange(event) {
     const {name, value} = event.target;    
 
-    this.setState({name: value});
+    this.setState({[name]: value});
   }
   
   render() {
-    const { isOpen, course } = this.props;
-    const loading = false;        
-    const errors  = false;        
+    const { isOpen, course, assignCourseCreditRequest } = this.props;
+    const loading = assignCourseCreditRequest.get('loading');
+    const errors  = assignCourseCreditRequest.get('errors');
         
     return (
       <Modal isOpen={isOpen} onClose={() => this._close()}>
@@ -101,9 +115,10 @@ class AssignStudentModal extends Component {
                 </div>
                 <div className='col-sm-6 col-lg-6 m-auto'>    
                     <FormControl className='full-width form-inputs'>
-                      <InputLabel htmlFor='name-error'>Select Student</InputLabel>
+                      <InputLabel htmlFor='studentId' shrink={!!this.state.studentId}>Select Student</InputLabel>
                       <Select
                         primarytext="Select Student"
+                        id='studentId'
                         name='studentId'
                         value={this.state.studentId}
                         onChange={(e) => {
@@ -125,7 +140,8 @@ class AssignStudentModal extends Component {
         <Divider className='full-width'/>
         <DialogActions>
           <Button
-            type='submit'
+            type='button'
+            onClick={(e) => { this._handleSubmit(e) }}
             form='create-student-form'
             disabled={loading}
             variant="raised"
@@ -141,11 +157,14 @@ class AssignStudentModal extends Component {
     
 AssignStudentModal = connect(
   (state) => ({
-    students: selectRecords(state)
+    students: selectRecords(state),
+    assignCourseCreditRequest: selectAssignCourseCreditRequest(state)
   }),
   (dispatch) => ({
-    getStudents: (params = {}) => { dispatch(getRecords(params)) }
+    getStudents: (params = {}) => { dispatch(getRecords(params)) },
+    assignCourseCredit: (form, params = {}) => { dispatch(assignCourseCreditRequest(form, params)) },
+    resetAssignCourseCreditRequest: () => { dispatch(resetAssignCourseCreditRequest()) }
   })
 )(AssignStudentModal);
-
+  
 export default AssignStudentModal;
