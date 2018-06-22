@@ -5,6 +5,7 @@ import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../../ui/table";
 import {connect} from "react-redux";
 import {getUnassignedsRequest} from "../../../redux/store/selectors";
 import {getUnassigneds} from "../../../redux/store/actions";
+import AssignStudentModal from "./AssignStudentModal"
 
 const AssignButton = ({ id, onClick}) => {
   return (
@@ -20,10 +21,30 @@ const AssignButton = ({ id, onClick}) => {
 
 class UnassignedCourses extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedCourse: null,
+      assignModalIsOpen: false
+    }
+  }
+  
   componentDidMount() {
     const { getUnassigneds } = this.props;
 
     getUnassigneds();
+  }
+  
+  _closeAssignDialog() {      
+      this.setState({ assignModalIsOpen: false, selectedCourse: null });
+  }
+  
+  _openAssignDialog(course) {
+      this.setState({ selectedCourse: {
+          id: course.get('id'),
+          title: course.get('item').get('title'),
+          image: course.get('item').get('thumbnail')
+      }, assignModalIsOpen: true });
   }
 
   _renderUnassigneds() {
@@ -41,8 +62,7 @@ class UnassignedCourses extends Component {
       )
     }
 
-    return unassigneds.map(function (unassigned, i) {
-      return (
+    return unassigneds.map((unassigned, i) => (      
         <Row index={i} key={i}>
           <Td width="70px">
             <div >
@@ -52,14 +72,16 @@ class UnassignedCourses extends Component {
           <Td width='150px'>{unassigned.get('item').get('title')}</Td>
           <Td width='50px'>{unassigned.get('quantity')}</Td>
           <Td width='50px'>
-            <AssignButton onClick={() => {  }}/>
+            <AssignButton onClick={() => { this._openAssignDialog(unassigned) }} id={unassigned.get('id')}/>
           </Td>
-        </Row>
-      )
-    })
+        </Row>      
+     ));
   }
 
   render() {
+      
+    const {selectedCourse, assignModalIsOpen} = this.state;
+    
     return (
       <Card title="Unassigned Courses" icon="fa fa-list-alt" isMainCard={true} isStore={true} style={{marginTop:15, height:'unset'}}>
         <Table>
@@ -75,6 +97,7 @@ class UnassignedCourses extends Component {
             {this._renderUnassigneds()}
           </Tbody>
         </Table>
+        <AssignStudentModal isOpen={ assignModalIsOpen } onClose={() => {this._closeAssignDialog()}} course={ selectedCourse } />
       </Card>
     );
   }
