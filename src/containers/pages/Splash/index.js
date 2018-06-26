@@ -17,7 +17,7 @@ const SplashContainer = props => {
     <StickyHeader
       // This is the sticky part of the header.
       header={
-        <section>
+        <section className="section-header">
           <SplashHeader {...props} />
           <SplashNavigation {...props} />
         </section>

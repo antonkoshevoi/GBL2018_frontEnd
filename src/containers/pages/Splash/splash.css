@@ -15,6 +15,19 @@
 .splash .logo {
     flex: 1;
 }
+
+.splash .section-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 116px;
+}
+
+.splash .splash-header {
+    display: flex;
+    flex: 1 1;
+}
+
 .splash .splash-header  .links {
     flex: 1;
 }
