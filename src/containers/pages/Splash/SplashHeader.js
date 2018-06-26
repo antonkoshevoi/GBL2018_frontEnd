@@ -17,7 +17,7 @@ class SplashHeader extends Component {
 
           <div className="links text-right">
             <NavLink to={`/login`} className="btn no-border m-btn btn-sm ">Login</NavLink>
-            <NavLink to={`/signup`} className="btn no-border m-btn btn-sm signup">Sign up</NavLink>
+            <NavLink to={`/signup`} className="btn btn-bordered m-btn btn-sm signup">Sign up</NavLink>
           </div>
         </div>
       </div>

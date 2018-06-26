@@ -27,8 +27,7 @@
     display: flex;
     flex: 1 1;
 }
-
-.splash .splash-header  .links {
+.splash .splash-header .links {
     flex: 1;
 }
 
@@ -37,6 +36,10 @@
     color: #FFF;
     font-size: 1.2em;
     margin-left: 10px;
+}
+.splash-header .btn.btn-bordered:hover {
+    background: #ffffff;
+    color: #3d6b99;
 }
 .splash-footer .btn {
     background: transparent;
@@ -97,6 +100,9 @@
     padding: 10px;
     background-color: var(--splash-light-blue);
     margin-top: 116px;
+
+    background: #3d6b99;
+    background-image: url(../../../media/images/bg-line.png), -webkit-linear-gradient(93deg, #5ba6f1 0%, #5ba6f1 75%, #3d6b99);
 }
 .splash-jumbotron .header-side {
     align-self: center;
