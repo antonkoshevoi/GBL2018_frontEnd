@@ -24,11 +24,18 @@
 }
 
 .splash .splash-header {
+    background-color: var(--splash-header-bg);
     display: flex;
     flex: 1 1;
 }
 .splash .splash-header .links {
     flex: 1;
+}
+
+.splash-header a:hover {
+    outline: 0;
+    color: #ffffff;
+    text-shadow: 0 0 1px white;
 }
 
 .splash-header .btn {
@@ -39,7 +46,16 @@
 }
 .splash-header .btn.btn-bordered:hover {
     background: #ffffff;
-    color: #3d6b99;
+    color: var(--splash-header-bg);
+}
+.splash-header .btn.signup {
+    border: 1px solid;
+    border-top-right-radius: 10px !important
+}
+
+.splash-footer {
+    background-color: #fff;
+    padding: 20px;
 }
 .splash-footer .btn {
     background: transparent;
@@ -47,22 +63,13 @@
     font-size: 1.2em;
     margin-left: 10px;
 }
-.splash-header .btn.signup {
-    border: 1px solid;
-    border-top-right-radius: 10px !important
-}
+
 .splash-header .container,
 .splash-footer .container {
     display: flex;
     align-items: center;
 }
-.splash-header {
-    background-color: var(--splash-header-bg);
-}
-.splash-footer {
-    background-color: #fff;
-    padding: 20px;
-}
+
 
 
 .splash-navigation {
@@ -81,6 +88,12 @@
     text-transform: uppercase;
     font-size: 1em;
 }
+.splash-navigation a:hover {
+    outline: 0;
+    color: #ffffff;
+    text-shadow: 0 0 1px white;
+}
+
 .splash-navigation-tools {
     position: absolute;
     right: 0;
@@ -101,8 +114,7 @@
     background-color: var(--splash-light-blue);
     margin-top: 116px;
 
-    background: #3d6b99;
-    background-image: url(../../../media/images/bg-line.png), -webkit-linear-gradient(93deg, #5ba6f1 0%, #5ba6f1 75%, #3d6b99);
+    background-image: url(../../../media/images/bg-line.png), -webkit-linear-gradient(93deg, var(--splash-light-blue) 0%, var(--splash-light-blue) 75%, var(--splash-header-bg));
 }
 .splash-jumbotron .header-side {
     align-self: center;
