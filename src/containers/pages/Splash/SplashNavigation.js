@@ -13,7 +13,7 @@ class SplashNavigation extends Component {
           <NavLink to={`/store`} className="btn no-border m-btn btn-sm ">{t('store')}</NavLink>
           <NavLink to={`/parents`} className="btn no-border m-btn btn-sm ">{t('studentAndParents.title')}</NavLink>
           <NavLink to={`/schools`} className="btn no-border m-btn btn-sm ">{t('schoolAndTeacher.title')}</NavLink>
-          <NavLink to={`/publishers`} className="btn no-border m-btn btn-sm ">{t('publishers.title')}</NavLink>
+          <NavLink to={`//pubtool.gravitybrain.com/`} className="btn no-border m-btn btn-sm ">{t('publishers.title')}</NavLink>
           <div className="splash-navigation-tools">
             <LanguageSwitcher/>
           </div>
