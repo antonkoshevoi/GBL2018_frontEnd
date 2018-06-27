@@ -7,7 +7,6 @@ import parentChild from '../../../media/images/svg/circle-parent-child.svg';
 import flipperMap from  './platformContentMap.json'
 const style = {
   flipper: {
-    background: `url(${squareFlipper}) center 40px no-repeat`,
     backgroundSize: '90%',
     minHeight:300,
     position:'relative',
@@ -24,26 +23,34 @@ const FlipperCards = props => {
   const {t} = props;
   return (
     <div className="col-md-4 text-center" key={props.index} style={style.flipper}>
-      <img src={flippers[props.index].icon} alt="" className="flipperIcon"/>
-      <div className="flipper-title">
-        <span>{t(`${props.title}.title`)}</span>
-      </div>
-      <div className="flipper-cards">
-        <hr />
-        {props.content.map((items, index) =>
-          <div>
-            <h5>{t(`${props.title}.${items.title}`)}</h5>
-            <ul>
-              {items.contents.map( cItems =>
-                <li>{t(`${props.title}.${cItems}`)}</li>
-              )}
-            </ul>
+      <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+        <div class="flipper">
+          <div class="front">
+            <img src={flippers[props.index].icon} alt="" className="flipperIcon"/>
+            <div className="flipper-title">
+              <span>{t(`${props.title}.title`)}</span>
+            </div>
           </div>
 
-        )}
-        <hr />
-      </div>
+          <div class="back">
+            <div className="flipper-cards">
+              <hr />
+              {props.content.map((items, index) =>
+                <div>
+                  <h5>{t(`${props.title}.${items.title}`)}</h5>
+                  <ul>
+                    {items.contents.map( cItems =>
+                      <li>{t(`${props.title}.${cItems}`)}</li>
+                    )}
+                  </ul>
+                </div>
 
+              )}
+              <hr />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
