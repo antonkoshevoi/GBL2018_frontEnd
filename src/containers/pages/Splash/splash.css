@@ -17,6 +17,10 @@
     display: flex;
     justify-content: flex-start;
 }
+.logo .img-logo {
+  width: 270px;
+  height: auto;
+}
 
 .splash .section-header {
     display: flex;
