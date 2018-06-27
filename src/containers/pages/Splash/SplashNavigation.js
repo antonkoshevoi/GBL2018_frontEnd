@@ -32,7 +32,7 @@ class SplashNavigation extends Component {
           </div>
         </div>
         <div className="splash-navigation nav-narrow">
-          <div class="nav-narrow-collapse-container">
+          <div className="nav-narrow-collapse-container">
             <i className="fa fa-bars fa-2x" onClick={this.burgerToggle}></i>
             <div className="links text-right">
               <NavLink to={`/login`} className="btn no-border m-btn btn-sm ">Login</NavLink>
