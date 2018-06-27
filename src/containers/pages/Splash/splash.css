@@ -14,16 +14,36 @@
 }
 .splash .logo {
     flex: 1;
+    display: flex;
+    justify-content: flex-start;
 }
-.splash .splash-header  .links {
+
+.splash .section-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 116px;
+}
+
+.splash .splash-header {
+    background-color: var(--splash-header-bg);
+    display: flex;
+    flex: 1 1;
+    min-height: 64px;
+}
+.splash .splash-header .links {
     flex: 1;
 }
 
-.splash-header .btn {
-    background: transparent;
-    color: #FFF;
-    font-size: 1.2em;
-    margin-left: 10px;
+.splash-header a:hover {
+    outline: 0;
+    color: #ffffff;
+    text-shadow: 0 0 1px white;
+}
+
+.splash-footer {
+    background-color: #fff;
+    padding: 20px;
 }
 .splash-footer .btn {
     background: transparent;
@@ -31,23 +51,69 @@
     font-size: 1.2em;
     margin-left: 10px;
 }
-.splash-header .btn.signup {
-    border: 1px solid;
-    border-top-right-radius: 10px !important
-}
+
 .splash-header .container,
 .splash-footer .container {
     display: flex;
     align-items: center;
 }
-.splash-header {
-    background-color: var(--splash-header-bg);
+
+.links .btn {
+    background: transparent;
+    color: #FFF;
+    font-size: 1.2em;
+    margin-left: 10px;
+    font-weight: bold;
 }
-.splash-footer {
-    background-color: #fff;
-    padding: 20px;
+.links .btn.btn-bordered:hover {
+    background: #ffffff;
+    color: var(--splash-header-bg);
+}
+.links .btn.signup {
+    border: 1px solid;
+    border-top-right-radius: 10px !important
 }
 
+.section-header nav {
+    overflow: hidden;
+}
+nav .nav-wide {
+    display: none;
+}
+nav .nav-narrow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    background-color: var(--splash-header-bg);
+}
+
+.nav-narrow i{
+    float: left;
+    cursor: pointer;
+    color: #fff;
+    font-size: 2.5em;
+    margin-left: 15px;
+}
+
+.nav-narrow .narrow-links {
+    display: none;
+    margin: 15px;
+    padding: 0px;
+}
+
+.nav-narrow .narrow-links a {
+    text-decoration: none;
+    display: block;
+    float: left;
+    clear: left;
+    padding: 0.5em 0;
+}
+.nav-narrow .nav-narrow-collapse-container {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 60px;
+}
 
 .splash-navigation {
     background-color: var(--splash-navbar-bg);
@@ -55,21 +121,33 @@
     position: relative;
     text-transform: uppercase;
     font-size: 1em;
+    min-height: 35px;
 }
 .splash-navigation .container{
     position: relative;
 }
 .splash-navigation .btn {
-    background-color: var(--splash-navbar-bg);
     color: #fff;
     text-transform: uppercase;
     font-size: 1em;
 }
+.splash-navigation a:hover {
+    outline: 0;
+    color: #ffffff;
+    text-shadow: 0 0 1px white;
+}
+
 .splash-navigation-tools {
     position: absolute;
-    right: 0;
-    top: 2px;
+    right: 15px;
+    top: 4px;
 }
+
+.nav-narrow .splash-navigation-tools {
+    right: 20px;
+    top: 12px;
+}
+
 .header-break {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -84,6 +162,8 @@
     padding: 10px;
     background-color: var(--splash-light-blue);
     margin-top: 116px;
+
+    background-image: url(../../../media/images/bg-line.png), -webkit-linear-gradient(93deg, var(--splash-light-blue) 0%, var(--splash-light-blue) 75%, var(--splash-header-bg));
 }
 .splash-jumbotron .header-side {
     align-self: center;
@@ -141,5 +221,23 @@
     }
     .flipper-title {
         top:5%;
+    }
+}
+
+@media (min-width: 768px) {
+    nav .nav-wide {
+        display: block;
+    }
+    nav .nav-narrow {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .splash-header .links {
+        display: none;
+    }
+    .splash-header .logo {
+        justify-content: center;
     }
 }
