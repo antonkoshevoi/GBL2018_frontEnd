@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
 import Card from "../../components/ui/Card";
-import {
-  Avatar,
-  CircularProgress,
-  GridList, GridListTile, GridListTileBar, IconButton, Tooltip
-} from '@material-ui/core';
+import {Avatar, CircularProgress, IconButton, Tooltip} from '@material-ui/core';
 import {OldProgressBar} from "../../components/ui/LinearProgress";
 import {NavLink} from "react-router-dom";
 import DashboardStore from "../../components/pages/store/DashboardStore";
@@ -58,9 +54,7 @@ const styles = {
     display: 'flex',
     position: 'absolute',
     right: 10,
-    top: 10,
-
-
+    top: 10
   },
   btnProfile: {
     color: 'white',
@@ -76,7 +70,6 @@ const styles = {
   },
   radiusLeft: {
     borderRadius: '5px 0 0 5px',
-
   },
   radiusRight: {
     borderRadius: '0 5px 5px 0',
@@ -230,10 +223,8 @@ class ParentDashboard extends Component {
               </div>
             </div>
             <div className="m-portlet__body m--padding-top-5" style={{height: "100%"}}>
-              <div style={{maxHeight:320,overflowY:'scroll',overflowX:'hidden'}}>
-                {!loading && <GridList cellHeight={130} cols={1} >
-                  {this._renderStudents()}
-                </GridList>}
+              <div style={{maxHeight:320,overflowY:'auto',overflowX:'hidden'}}>
+                {!loading && this._renderStudents()}
               </div>
             </div>
           </div>

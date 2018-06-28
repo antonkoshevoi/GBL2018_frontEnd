@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
-import splashImage1 from '../../../media/images/splash-image1.png';
+
+const splashBannerImgUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/splash-image1.3239d7be.png';
 
 class SplashJumbotron extends Component {
   render() {
@@ -21,7 +22,7 @@ class SplashJumbotron extends Component {
               <NavLink to="/something">{t('learnMore') } >> </NavLink>
             </div>
             <div className="col-md-6 m--hidden-mobile">
-              <img src={splashImage1} alt="Splash Image1" className="splash-image" />
+              <img src={splashBannerImgUrl} alt="Splash Image1" className="splash-image" />
 
             </div>
           </div>

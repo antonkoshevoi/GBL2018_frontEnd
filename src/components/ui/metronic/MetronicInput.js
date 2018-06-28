@@ -6,7 +6,7 @@ class MetronicInput extends Component {
     const { className, ...rest } = this.props;
 
     return (
-      <input {...rest} className={`form-control m-input m-input--air ${className}`}/>
+      <input {...rest} className={`form-control m-input m-input--air`}/>
     );
   }
 }
