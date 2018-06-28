@@ -42,28 +42,53 @@ class FlipperCards extends Component {
         <div className={`flip-container ${this.state.flipped ? 'hover' : ''}`} onTouchStart={this.handleTouchOnFlip}>
           <div className="flipper">
             <div className="front">
-              <img src={flippers[this.props.index].icon} alt="" className="flipperIcon"/>
-              <div className="flipper-title">
-                <span>{t(`${this.props.title}.title`)}</span>
+              <div class="info-box">
+                <span class="circle-icon icon-gurantee icon-align">
+                  <img src={flippers[this.props.index].icon} alt="" className="flipperIcon"/>
+                </span>
+                <div class="info-line"></div>
+                <h3 class="heading-content">{t(`${this.props.title}.title`)}</h3>
+                <p class="content-about">{t(`${this.props.title}.title`)}</p>
+                <div class="info-line"></div>
               </div>
             </div>
 
             <div className="back">
-              <div className="flipper-cards">
-                <hr />
-                {this.props.content.map((items, index) =>
-                  <div>
-                    <h5>{t(`${this.props.title}.${items.title}`)}</h5>
-                    <ul>
-                      {items.contents.map( cItems =>
-                        <li>{t(`${this.props.title}.${cItems}`)}</li>
-                      )}
-                    </ul>
-                  </div>
+              <div class="info-box info-content">
+                <div class="info-line"></div>
+                <p class="content-about">
+                  {this.props.content.map((items, index) =>
+                    <div>
+                      <h5>{t(`${this.props.title}.${items.title}`)}</h5>
+                      <ul>
+                        {items.contents.map( cItems =>
+                          <li>{t(`${this.props.title}.${cItems}`)}</li>
+                        )}
+                      </ul>
+                    </div>
 
-                )}
-                <hr />
+                  )}
+                </p>
+                <div class="info-line"></div>
               </div>
+
+            {
+              // <div className="flipper-cards">
+              //   <hr />
+              //   {this.props.content.map((items, index) =>
+              //     <div>
+              //       <h5>{t(`${this.props.title}.${items.title}`)}</h5>
+              //       <ul>
+              //         {items.contents.map( cItems =>
+              //           <li>{t(`${this.props.title}.${cItems}`)}</li>
+              //         )}
+              //       </ul>
+              //     </div>
+
+              //   )}
+              //   <hr />
+              // </div>
+            }
             </div>
           </div>
         </div>
@@ -86,7 +111,7 @@ class SplashPlatform extends Component {
           <img src={spacerUrl} alt="---=== ===---" width="200"/>
         </header>
         <div className="container">
-          <div className="row">
+          <div className="row  about-info">
             {flipperMap.map((item, index)=>
               <FlipperCards
                 t={t}
@@ -96,7 +121,6 @@ class SplashPlatform extends Component {
                 content={item.content}
               />
             )}
-
           </div>
         </div>
       </div>
