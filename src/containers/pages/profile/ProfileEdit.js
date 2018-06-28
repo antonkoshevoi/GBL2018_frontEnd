@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Avatar, Button, CircularProgress, Grid, Typography} from '@material-ui/core';
+import {Avatar, CircularProgress, Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import MetronicDatePicker from "../../../components/ui/metronic/MetronicDatePicker";
@@ -293,7 +293,6 @@ class ProfileEdit extends Component {
                         </div>
                       </div>
 
-
                       {/*password name*/}
                       <div className="form-group m-form__group row">
                         <label className="col-form-label col-lg-3 col-sm-12">Password</label>
@@ -321,23 +320,15 @@ class ProfileEdit extends Component {
 
                 <Grid item xs={12}>
                   <NavLink to={`/reports/students/${this.state.id}/`}>
-                    <Button variant="raised" color="default" className={classes.button}>
-                      Back
-                    </Button>
+                            <button className='btn m-btn--air btn-primary m--margin-right-10'>Back</button>
                   </NavLink>
-
-                  <Button class="m--margin-left-10" variant="raised" color="primary" className={classes.button} onClick={this.updateProfile}>
-                    Save
-                  </Button>
+                  <button className='btn m-btn--air btn-success' onClick={this.updateProfile}> Save </button>
                 </Grid>
-
               </Grid>
             </Paper>
-
           </div>
         </div>
       </div>
-
     )
       ;
   }
