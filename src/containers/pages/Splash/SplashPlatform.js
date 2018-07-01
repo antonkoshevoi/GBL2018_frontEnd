@@ -9,9 +9,9 @@ const circleSchoolUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/circle-school.135
 const style = {
   flipper: {
     backgroundSize: '90%',
-    minHeight:300,
+    minHeight:335,
     position:'relative',
-    marginTop: 15,
+    marginTop: 41,
   }
 }
 const flippers = [

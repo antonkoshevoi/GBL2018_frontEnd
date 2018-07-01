@@ -203,6 +203,8 @@ nav .nav-narrow {
 }
 
 .splash-platform {
+    display: flex;
+    flex-direction: column;
     margin-top: 60px;
 }
 
@@ -240,17 +242,10 @@ nav .nav-narrow {
 .about-info .flip-container {
     -webkit-perspective: 1000px;
     perspective: 1000px;
-    height: 242px;
-
     -webkit-perspective: 1000;
     -moz-perspective: 1000;
     -o-perspective: 1000;
     perspective: 1000;
-}
-@media (min-width: 768px) {
-    .about-info .flip-container {
-        height: 180px;
-    }
 }
 
 .flip-container:hover .flipper,
@@ -286,7 +281,6 @@ nav .nav-narrow {
 }
 
 .front {
-    background: url(/static/media/images/svg/square-flipper.svg) center 40px / 90% no-repeat;
     z-index: 2;
 }
 
@@ -299,23 +293,28 @@ nav .nav-narrow {
 
 /* About box */
 .about-info {
-    margin-top: 85px;
+    margin-top: 0;
 }
-@media (min-width: 768px) {
-    .about-info {
-        margin-top: 120px;
+
+@media (max-width: 768px) {
+    .about-info > div {
+        margin-bottom: 30px;
+    }
+    .about-info > div:last-child {
+        margin-bottom: 0;
     }
 }
 
 .about-info .info-box {
     position: relative;
-    min-height: 180px;
-    border: 2px solid #5ba6f1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 335px;
+    border: 2px solid var(--splash-light-blue);
     border-radius: 4px;
     padding: 15px 30px;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 80px;
+    margin: 0;
     text-align: center;
     transition: all 0.5s ease;
 }
@@ -328,13 +327,15 @@ nav .nav-narrow {
 }
 
 .about-info .info-box .circle-icon {
+    position: absolute;
+    top: -41px;
+    left: calc(50% - 41px);
     width: 82px;
     height: 82px;
     border-radius: 60%;
-    margin: -60px auto 0;
     margin-bottom: 0;
     text-align: center;
-    background-color: #5ba6f1;
+    background-color: var(--splash-light-blue);
     display: block;
     font-size: 45px;
     color: #ffffff;
@@ -363,26 +364,37 @@ nav .nav-narrow {
 }
 
 .about-info .info-box .content-about {
-    font-size: 14px;
+    font-size: 13px;
     display: none;
     color: #ffffff;
     text-align: left;
+    margin: 0;
 }
 
 .about-info .info-box .info-line {
-    border-top: 2px solid #5ba6f1;
+    border-top: 2px solid var(--splash-light-blue);
     width: 55%;
     margin: 22px auto;
 }
 
 .about-info .info-box.info-content {
-    background-color: #5ba6f1;
+    justify-content: space-between;
+    background-color: var(--splash-light-blue);
     background-image: url(../../../media/images/bg-line.png);
     border-color: transparent;
 }
 
 .about-info .info-box.info-content .content-about {
     display: block;
+}
+
+@media (min-width: 768px) and (max-width: 936px) {
+    .about-info .info-box.info-content {
+        padding: 15px;
+    }
+    .about-info .info-box.info-content .content-about {
+        font-size: 11px;
+    }
 }
 
 .about-info .info-box.info-content .info-line {
