@@ -226,6 +226,22 @@ nav .nav-narrow {
 
 .splash-footer {
     margin-top: 60px;
+    background-color: #262525;
+}
+
+.splash-footer .footer-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.splash-footer a:hover {
+    outline: 0;
+    color: #ffffff;
+    text-shadow: 0 0 1px white;
+}
+
+.splash-footer .links .btn {
+    font-weight: normal;
 }
 
 /* Flipping animation */

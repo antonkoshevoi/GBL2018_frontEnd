@@ -6,14 +6,9 @@ class SplashFooter extends Component {
     const {t} = this.props;
     return (
       <div className="splash-footer">
-        <div className="container clearfix">
-          <div className="" style={{flex:1}}>
-            <NavLink to={`/privacy-policy.html`} className="btn no-border m-btn btn-sm ">{t('privacy')}</NavLink>
-          </div>
-
-          <div className="links text-right m--hidden-mobile">
-            <NavLink to={`/terms`} className="btn no-border m-btn btn-sm ">{t('terms')}</NavLink>
-          </div>
+        <div className="container footer-container links">
+          <NavLink to={`/privacy-policy.html`} className="btn no-border m-btn btn-sm ">{t('privacy')}</NavLink>
+          <NavLink to={`/terms`} className="btn no-border m-btn btn-sm ">{t('terms')}</NavLink>
         </div>
       </div>
     )
