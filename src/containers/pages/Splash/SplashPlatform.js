@@ -31,7 +31,9 @@ class FlipperCards extends Component {
     this.state = { flipped : false };
   }
 
-  handleTouchOnFlip() {
+  handleTouchOnFlip(e) {
+    e.preventDefault();
+
     this.setState({ flipped : !this.state.flipped })
   }
 
