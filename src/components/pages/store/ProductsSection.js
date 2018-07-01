@@ -22,7 +22,7 @@ class ProductsSection extends Component {
                 (!all) ?
                 <ProductCard key={i} type="vertical" data={item}/> :
                 (
-                    <div key={i}>
+                    <div key={i} className="col-6 col-sm-4 col-md-3 col-lg-2">
                         <ProductCard  type="vertical" data={item}/>
                     </div>
                 )
@@ -48,7 +48,7 @@ class ProductsSection extends Component {
         return (
             <section className="productSection">
                 <div className={'row ' + (products.size === 0 && 'm--hide')}>
-                    <div style={{minWidth:products.size === 0 ? '50%' : 0}}>
+                    <div className="container" style={{minWidth:products.size === 0 ? '50%' : 0}}>
                         <div className="row sectionTopBar">
                             <div className="col-md-6">
                                 <h3>{title}</h3>
