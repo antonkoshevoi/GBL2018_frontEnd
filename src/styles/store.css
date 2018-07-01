@@ -93,8 +93,6 @@
 }
 
 .verticalCardItem.cardItem {
-    min-width: 110px;
-    max-width: 178px;
     flex-basis: auto;
     flex-grow: 1;
 }
@@ -284,18 +282,8 @@ button .discount > span {
 /*}*/
 
 @media (max-width: 600px) {
-    .verticalCardItem.cardItem {
-        max-width: 170px;
-    }
-
     .store-filter .filter-buttons a {
         display: none;
-    }
-}
-
-@media (max-width: 562px) {
-    .verticalCardItem.cardItem {
-        max-width: 140px;
     }
 }
 
