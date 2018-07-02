@@ -19,21 +19,15 @@ class SignUpIndex extends Component {
                   </a>
                 </div>
                 <div className="m-login__signin">
-                  <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--info m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height ">
-                    <div className="m-portlet__head">
-                      <div className="m-portlet__head-caption">
-                        <div className="m-portlet__head-title full-width">
-                          <h3 className="m-portlet__head-text text-center full-width">
-                            Sign Up To GravityBrain
-                          </h3>
-                        </div>
-                      </div>
-
-                    </div>
+                  <div className="m-login__head"> 
+                    <h3 className="m-login__title">Sign Up</h3> 
+                  </div> 
+                  <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--info m-portlet--bordered-semi m--margin-top-20 m-portlet--full-height ">
+                    
                     <div className="m-portlet__body">
-                      <h2 className="text-center m--margin-top-25">Select your account type</h2>
+                      <h4 className="text-center m--margin-top-25">Select your account type</h4>
 
-                      <div className="signup-btns flex-column d-flex flex m--margin-top-40 ">
+                      <div className="signup-btns flex-column d-flex flex m--margin-top-15 m--margin-bottom-15">
                         <NavLink to="/signUp/parent" activeClassName="link-active" className="btn m-btn--pill m--margin-bottom-10 btn-lg m-btn m-btn--gradient-from-primary m-btn--gradient-to-info">
                           Parent
                         </NavLink>
@@ -42,8 +36,8 @@ class SignUpIndex extends Component {
                         </NavLink>
                       </div>
 
-                      <div className="alert m-alert m-alert--default">
-                        <p className="text-center"> If you already have a account, <NavLink to="/login"><strong>Login</strong></NavLink> to start your session.</p>
+                      <div className="alert m-alert m-alert--default margin-bottom-0">
+                        <p className="text-center margin-bottom-0"> If you already have a account, <NavLink to="/login"><strong>Login</strong></NavLink> to start your session.</p>
                       </div>
                     </div>
                   </div>
