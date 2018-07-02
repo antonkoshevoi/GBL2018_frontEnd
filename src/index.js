@@ -16,3 +16,9 @@ ReactDOM.render(
     ),
     document.getElementById('root'));
 registerServiceWorker();
+
+//Check the hover capability
+const canHover = !(matchMedia('(hover: none)').matches);
+if(canHover) {
+  document.body.classList.add('can-hover');
+}
