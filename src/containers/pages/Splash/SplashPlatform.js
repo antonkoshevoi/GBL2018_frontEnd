@@ -6,6 +6,12 @@ const circleBookUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/circle-books.a4c524
 const circleParentChildUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/circle-parent-child.ab68fd20.svg';
 const circleSchoolUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/circle-school.1359579c.svg';
 
+const flippers = [
+  {icon: circleParentChildUrl },
+  {icon: circleSchoolUrl },
+  {icon: circleBookUrl },
+];
+
 const style = {
   flipper: {
     backgroundSize: '90%',
@@ -14,11 +20,7 @@ const style = {
     marginTop: 41,
   }
 }
-const flippers = [
-  {icon: circleParentChildUrl },
-  {icon: circleSchoolUrl },
-  {icon: circleBookUrl },
-];
+
 
 
 class FlipperCards extends Component {
