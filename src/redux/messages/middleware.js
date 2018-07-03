@@ -16,10 +16,12 @@ export default function messagesMiddleware() {
       }
 
       LiveService.messages(userId, message => {
+        console.log("Messages middleware triggered: ", message);
         dispatch({type: NEW_MESSAGE_RECEIVED, message})
       });
 
       LiveService.threads(userId, thread => {
+        console.log("Messages middleware triggered: ", thread);
         dispatch({type: NEW_THREAD_CREATED, thread})
       });
     };

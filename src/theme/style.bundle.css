@@ -434,6 +434,9 @@ h6, .h6 {
   font-weight: 300;
   line-height: 1.2; }
 
+.display-10 {
+  font-size: 1.25rem;
+}
 hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -28823,7 +28826,7 @@ select.m-select2 {
   .m-login.m-login--2.m-login-2--skin-1 .m-login__container .m-login__form .form-control {
     background: rgba(67, 34, 167, 0.8); } }
 
-.m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__head .m-login__title {
+.m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__head .m-login__title, .m-signup__head .m-login__title {
   color: #9e97aa; }
 
 .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__head .m-login__desc {

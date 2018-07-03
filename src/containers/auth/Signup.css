@@ -1,8 +1,33 @@
-.form-optional {
-    background:#e4e6ca;
-    padding:20px 0 1px;
-    margin: 0px 36px;
-}
 label.m--margin-bottom-10 {
     display:block;
+}
+.g-stepper + div {
+    margin-top: 40px;
+}
+.form-control-feedback.error {
+    margin-top: 3px;
+}
+@media (max-width: 1240px) {
+    .col-form-label {
+        text-align: left;
+    }
+    .form-group > div {
+        margin-bottom: 5px !important;
+    }
+    .col-form-label {        
+        margin-bottom: 0 !important;
+    }
+    .form-group {
+        margin-bottom: 0 !important;
+    }    
+}
+
+@media (max-width: 992px) {
+
+    .g-stepper + div {
+        margin-top: 10px !important;
+    }
+    .download-button {
+        text-align: center;
+    }
 }
