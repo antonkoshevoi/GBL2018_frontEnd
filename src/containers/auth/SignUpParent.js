@@ -135,7 +135,7 @@ class SignUpParent extends Component {
                   <img src={logo}/>
                 </a>
               </div>
-              <div className='m-signup col-sm-8 m-auto'>
+              <div className='m-signup col-lg-8 col-md-10 col-sm-12 m-auto'>
                 <div className='m-signup__head'>
                   <h3 className='m-login__title'>Sign Up</h3>
                 </div>

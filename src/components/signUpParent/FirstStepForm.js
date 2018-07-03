@@ -83,15 +83,13 @@ class FirstStepForm extends Component {
     const { errors } = this.props;
 
     return (
-      <div className='row m--margin-top-40'>
-        <div className='col-md-7'>
-          <div className='col-xs-12'>
+      <div className='row'>
+        <div className='col-lg-7 col-md-6 col-sm-12'>          
             <legend className='m--margin-bottom-10'>Required</legend>
-
             <div className='m-form__section m-form__section--first'>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">Email </label>
-                <div className="col-lg-8 col-md-9 col-sm-12">
+                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">Email </label>
+                <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
                     value={form.email || ''}
                     name='email'
@@ -105,11 +103,9 @@ class FirstStepForm extends Component {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className='m-form__section m-form__section--first'>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">Password </label>
-                <div className="col-lg-8 col-md-9 col-sm-12">
+                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">Password </label>
+                <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
                     value={form.password || ''}
                     name='password'
@@ -128,8 +124,8 @@ class FirstStepForm extends Component {
 
             <div className='m-form__section m-form__section--first'>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">First Name </label>
-                <div className="col-lg-8 col-md-9 col-sm-12">
+                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">First Name </label>
+                <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
                     value={form.firstName || ''}
                     name='firstName'
@@ -143,11 +139,9 @@ class FirstStepForm extends Component {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className='m-form__section m-form__section--first'>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">Last Name </label>
-                <div className="col-lg-8 col-md-9 col-sm-12">
+                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">Last Name </label>
+                <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
                     value={form.lastName || ''}
                     name='lastName'
@@ -161,12 +155,10 @@ class FirstStepForm extends Component {
                   </div>
                 </div>
               </div>
-            </div>
-
-          </div>
+            </div>         
         </div>
 
-        <div className='col-sm-5'>
+        <div className='col-lg-5 col-md-6 col-sm-12'>
           <div className='row text-center'>
             <legend className='m--margin-bottom-10'>Profile Pic Upload</legend>
             <div className='col-sm-12'>

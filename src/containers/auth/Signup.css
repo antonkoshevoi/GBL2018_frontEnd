@@ -6,3 +6,28 @@
 label.m--margin-bottom-10 {
     display:block;
 }
+.g-stepper + div {
+    margin-top: 40px;
+}
+@media (max-width: 1240px) {
+    .col-form-label {
+        text-align: left;
+    }   
+}
+
+@media (max-width: 970px) {
+    .col-form-label {        
+        margin-bottom: 0 !important;
+    }
+    
+    .form-group {
+        margin-bottom: 0 !important;
+    }
+    
+    .g-stepper + div {
+        margin-top: 10px !important;
+    }    
+    .download-button {
+        text-align: center;
+    }
+}
