@@ -57,7 +57,7 @@ SplashStore = connect(
     records: selectRecords(state),
   }),
   (dispatch) => ({
-    getRecords: (params = {perPage: '50'}) => {
+    getRecords: (params = {perPage: '50', filter: {category: 1}}) => {
       dispatch(getRecords(params))
     },
   })
