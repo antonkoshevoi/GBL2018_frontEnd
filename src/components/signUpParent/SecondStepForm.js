@@ -76,7 +76,7 @@ class SecondStepForm extends Component {
             <legend className='m--margin-bottom-10'>Required</legend>
             <div className='m-form__section m-form__section--first'>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">Username <small className="g-red">*</small></label>
+                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">Username</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
                     name='username'
@@ -90,7 +90,7 @@ class SecondStepForm extends Component {
                 </div>
               </div>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">Password <small className="g-red">*</small></label>
+                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">Password</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
                     name='password'
@@ -105,7 +105,7 @@ class SecondStepForm extends Component {
               </div>
             </div>
             
-            <legend className='m--margin-bottom-10'>Optional</legend>
+            <legend className='m--margin-bottom-10 m--margin-top-10'>Optional</legend>
 
             <div className='m-form__section m-form__section--first'>
               <div className="form-group m-form__group row">

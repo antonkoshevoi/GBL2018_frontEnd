@@ -120,7 +120,7 @@ class FirstStepForm extends Component {
                 </div>
               </div>
             </div>
-            <legend className='m--margin-bottom-10'>Optional</legend>
+            <legend className='m--margin-bottom-10 m--margin-top-10'>Optional</legend>
 
             <div className='m-form__section m-form__section--first'>
               <div className="form-group m-form__group row">
