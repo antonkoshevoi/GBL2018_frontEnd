@@ -22,9 +22,8 @@ class ThirdStepForm extends Component {
                 </div>
                 }
                 <div className={`col-lg-12 col-md-12 ${form.step1.avatarCropped ? 'col-sm-6' : 'col-sm-12'}`}>
-                    <p>{form.step1.email}</p>
-                    <p>{form.step1.firstName}</p>
-                    <p>{form.step1.lastName}</p>
+                    <p className="display-10">{form.step1.firstName} {form.step1.lastName}</p>                    
+                    <p className="display-10">{form.step1.email}</p>
                 </div>            
             </div>
         </div>                     
@@ -37,9 +36,8 @@ class ThirdStepForm extends Component {
                 </div>
                 }
                 <div className={`col-lg-12 col-md-12 ${form.step2.avatarCropped ? 'col-sm-6' : 'col-sm-12'}`}>
-                    <p>{form.step2.username}</p>
-                    <p>{form.step2.firstName}</p>
-                    <p>{form.step2.lastName}</p>
+                    <p className="display-10">{form.step2.firstName} {form.step2.lastName}</p>
+                    <p className="display-10">{form.step2.username}</p>                    
                 </div>            
             </div>
         </div>

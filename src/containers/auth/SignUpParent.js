@@ -137,28 +137,10 @@ class SignUpParent extends Component {
               </div>
               <div className='m-signup col-lg-8 col-md-10 col-sm-12 m-auto'>
                 <div className='m-signup__head'>
-                  <h3 className='m-login__title'>Sign Up</h3>
+                  <h3 className='m-login__title text-center m--margin-top-30'>Sign Up</h3>
                 </div>
                 <div className='m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--info m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height'>
-                  <div className='m-portlet__head'>
-                    <div className='m-portlet__head-caption'>
-                      <div className='m-portlet__head-title'>
-                        <h3 className='m-portlet__head-text'>
-                          SETUP YOUR PARENT PROFILE
-                        </h3>
-                      </div>
-                    </div>
-                    <div className="m-portlet__head-tools">
-                      <ul className="m-portlet__nav">
-                        <LanguageSwitcher className="m-portlet__nav-item"/>
-                      </ul>
-                    </div>
-                  </div>
                   <div className='m-portlet__body'>
-                    <div className='alert m-alert m-alert--default'>
-                      <p className='text-center'> If you already have a account, <NavLink to='/login'><strong>Login</strong></NavLink> to start your session. Otherwise,</p>
-                    </div>
-
                     <Stepper activeStep={activeStep} alternativeLabel className="g-stepper">
                       <Step>
                         <StepLabel>Parent Profile</StepLabel>
@@ -196,6 +178,9 @@ class SignUpParent extends Component {
                         ][activeStep]}
                       </div>
                     </div>
+                    <div className='alert m-alert m-alert--default'>
+                      <p className='text-center'> If you already have a account, <NavLink to='/login'><strong>Login</strong></NavLink> to start your session.</p>
+                    </div>                    
                   </div>
                 </div>
               </div>
