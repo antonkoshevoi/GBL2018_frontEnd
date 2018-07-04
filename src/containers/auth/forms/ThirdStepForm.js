@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {translate} from 'react-i18next';
+import {Divider} from '@material-ui/core';
 
 class ThirdStepForm extends Component {
   static propTypes = {
@@ -29,8 +30,9 @@ class ThirdStepForm extends Component {
                     </p>
                 </div>            
             </div>
-        </div>                     
+        </div>                             
         <div className="col-lg-6 col-md-6 col-sm-12">
+            <Divider className='m--margin-bottom-30 m--hidden-tablet m--hidden-desktop'/>
             <p className="text-center text-uppercase"><strong>{t('studentProfile')}</strong></p>
             <div className='row'>
                 {form.step2.avatarCropped && 
