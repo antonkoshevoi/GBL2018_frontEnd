@@ -68,15 +68,15 @@ class SecondStepForm extends Component {
 
   render() {
     const { form } = this.state;
-    const { errors } = this.props;
+    const { errors, t } = this.props;
 
     return (
       <div className='row'>
         <div className='col-lg-7 col-md-6 col-sm-12'>
-            <legend className='m--margin-bottom-10'>Required</legend>
+            <legend className='m--margin-bottom-10'>{t('required')}</legend>
             <div className='m-form__section m-form__section--first'>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">Username</label>
+                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('username')}</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
                     name='username'
@@ -90,7 +90,7 @@ class SecondStepForm extends Component {
                 </div>
               </div>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">Password</label>
+                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('password')}</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
                     name='password'
@@ -105,11 +105,11 @@ class SecondStepForm extends Component {
               </div>
             </div>
             
-            <legend className='m--margin-bottom-10 m--margin-top-10'>Optional</legend>
+            <legend className='m--margin-bottom-10 m--margin-top-10'>{t('optional')}</legend>
 
             <div className='m-form__section m-form__section--first'>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">First Name</label>
+                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('firstName')}</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
                     name='firstName'
@@ -123,7 +123,7 @@ class SecondStepForm extends Component {
                 </div>
               </div>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">Last Name</label>
+                <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('lastName')}</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
                     name='lastName'
@@ -139,11 +139,11 @@ class SecondStepForm extends Component {
            </div>
         </div>
         <div className='col-lg-5 col-md-6 col-sm-12 text-center'>
-          <legend className='m--margin-bottom-10'>Profile Pic Upload</legend>
+          <legend className='m--margin-bottom-10'>{t('profilePicUpload')}</legend>
 
           <div className='CropperBlock text-center'>
             <div className='upload-btn-wrapper '>
-              <button className='btn m-btn--air btn-outline-info'>Upload a file</button>
+              <button className='btn m-btn--air btn-outline-info'>{t('uploadFile')}</button>
               <input type='file' name='myfile' onChange={(e) => { this._handleFileChange(e) }}/>
             </div>
 
@@ -169,7 +169,7 @@ class SecondStepForm extends Component {
               className='btn m-btn--air btn-success m--margin-top-15'
               onClick={() => { this._handleImageCrop() }}
             >
-              Crop Image <span className='la la-crop'></span>
+              {t('cropImage')} <span className='la la-crop'></span>
             </button>}
 
             <div className='croppedBlock'>
@@ -182,4 +182,4 @@ class SecondStepForm extends Component {
   }
 }
 
-export default translate('SecondStepForm')(SecondStepForm);
+export default translate('translations')(SecondStepForm);
