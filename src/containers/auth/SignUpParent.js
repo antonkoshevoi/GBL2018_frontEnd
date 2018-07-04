@@ -185,7 +185,7 @@ class SignUpParent extends Component {
                         }
                         {activeStep == 2 &&
                           <div>
-                            <p className="display-10"><strong>{t('SignUpCompletedMessage')}</strong></p>            
+                            <p className="display-10"><strong>{t('signUpCompletedMessage')}</strong></p>            
                             <button type='submit' className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>{t('goToDashboard')}</button>
                           </div>
                         }
