@@ -22,7 +22,6 @@ import TabMenu from "../pushers/TabMenu";
 import {selectUserData} from "../../redux/user/selectors";
 import {getSchool} from "../../redux/schools/actions";
 import {selectSchool} from "../../redux/schools/selectors";
-// @translate(['key'], { wait: true })
 
 class Header extends Component {
 
@@ -37,8 +36,9 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    const { getSchool, getCartRecords, isLoggedIn} = this.props;
-    if (isLoggedIn) {
+    const { getSchool, getCartRecords, auth} = this.props;
+    
+    if (auth.get('isLoggedIn')) {
         getSchool();
         getCartRecords();
     }
@@ -68,7 +68,7 @@ class Header extends Component {
   }
 
   _renderHeader() {
-    const {logout, cartRecords,cartAddRedirect, addToCartRequest, cartRecordsRequest, userData, isLoggedIn} = this.props;
+    const {logout, cartRecords,cartAddRedirect, addToCartRequest, cartRecordsRequest, userData, auth} = this.props;
     const school = this.props.schoolRequest.get('record').toJS();
     const {headerPosition} = this.state;
     console.log();
@@ -85,7 +85,7 @@ class Header extends Component {
                 </div>
               </div>
             </div>
-            {isLoggedIn &&
+            {auth.get('isLoggedIn') &&
             <div className="m-stack__item m-stack__item--fluid m-header-head d-flex" id="m_header_nav">
               <button className="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-dark "
                       id="m_aside_header_menu_mobile_close_btn">
