@@ -37,10 +37,12 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    const { getSchool, getCartRecords } = this.props;
-    getSchool();
-    getCartRecords();
-    window.addEventListener('scroll',this.setHeaderPosition.bind(this));
+    const { getSchool, getCartRecords, isLoggedIn} = this.props;
+    if (isLoggedIn) {
+        getSchool();
+        getCartRecords();
+    }
+    window.addEventListener('scroll',this.setHeaderPosition.bind(this));    
   }
 
   setHeaderPosition(){
@@ -66,7 +68,7 @@ class Header extends Component {
   }
 
   _renderHeader() {
-    const {logout, cartRecords,cartAddRedirect, addToCartRequest, cartRecordsRequest, userData} = this.props;
+    const {logout, cartRecords,cartAddRedirect, addToCartRequest, cartRecordsRequest, userData, isLoggedIn} = this.props;
     const school = this.props.schoolRequest.get('record').toJS();
     const {headerPosition} = this.state;
     console.log();
@@ -81,9 +83,9 @@ class Header extends Component {
                       <img alt="GravityBrain" style={{"maxWidth": "100%"}} src={logo}/>
                   </NavLink>
                 </div>
-
               </div>
             </div>
+            {isLoggedIn &&
             <div className="m-stack__item m-stack__item--fluid m-header-head d-flex" id="m_header_nav">
               <button className="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-dark "
                       id="m_aside_header_menu_mobile_close_btn">
@@ -123,7 +125,7 @@ class Header extends Component {
                   </ul>
                 </div>
               </div>
-            </div>
+            </div>}
           </div>
         </div>
       </header>
@@ -131,11 +133,7 @@ class Header extends Component {
   }
 
   render() {
-    const {auth} = this.props;
-    const isLoggedIn = auth.get('isLoggedIn')
-    return (
-      isLoggedIn && this._renderHeader()
-    );
+      return this._renderHeader();  
   }
 }
 
