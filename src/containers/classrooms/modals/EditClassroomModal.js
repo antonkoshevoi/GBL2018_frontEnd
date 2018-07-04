@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,
-  DialogContentText,
+  DialogContent,  
   Icon, IconButton,
   Toolbar, Typography,
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import {
   selectGetSingleRecordRequest,
   selectUpdateRequest
@@ -107,7 +107,7 @@ class EditClassroomModal extends Component {
   }
 
   render() {
-    const { isOpen, updateRequest, getSingleRecordRequest,isPublic } = this.props;
+    const { isOpen, updateRequest, getSingleRecordRequest,isPublic, t } = this.props;
     const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');
     const errorMessage = updateRequest.get('errorMessage');
     const errors = updateRequest.get('errors');
@@ -124,16 +124,13 @@ class EditClassroomModal extends Component {
               )}
             </IconButton>
             <Typography type="title" color="inherit" >
-              Edit Classroom
+              {t('editClassroom')}
             </Typography>
           </Toolbar>
         </AppBar>
 
         <DialogContent className="m--margin-top-25">
           <form id='update-classroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
-            <DialogContentText>
-              {/*{errorMessage && <span>{errorMessage}</span>}*/}
-            </DialogContentText>
             <div className="row">
               <div className="col-md-8">
                 <ClassroomForm
@@ -162,7 +159,7 @@ class EditClassroomModal extends Component {
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Update Classroom
+            {t('updateClassroom')}
           </Button>
         </DialogActions>
       </Modal>
@@ -182,4 +179,4 @@ EditClassroomModal = connect(
   })
 )(EditClassroomModal);
 
-export default EditClassroomModal;
+export default translate('translations')(EditClassroomModal);

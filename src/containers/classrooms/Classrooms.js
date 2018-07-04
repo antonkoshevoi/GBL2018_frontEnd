@@ -82,7 +82,7 @@ class Classrooms extends Component {
    * @private
    */
   _renderRecords () {
-    const { records, goTo } = this.props;
+    const { records, goTo, t } = this.props;
     const loading = this.props.getRecordsRequest.get('loading');
 
       if (!loading && records.size === 0) {
@@ -90,7 +90,7 @@ class Classrooms extends Component {
         <tr>
           <td>
             <div className="table-message">
-              <h2>Classrooms Not Found...</h2>
+              <h2>{t('classroomsNotFound')}</h2>
             </div>
           </td>
         </tr>
@@ -249,7 +249,7 @@ class Classrooms extends Component {
   }
 
   render() {
-    const { getRecordsRequest, pagination } = this.props;
+    const { getRecordsRequest, pagination, t } = this.props;
     const { createModalIsOpen, editModalIsOpen, assignStudentsModalIsOpen, sorters, page, perPage } = this.state;
     const loading = getRecordsRequest.get('loading');
     const totalPages = pagination.get('totalPages');
@@ -262,10 +262,10 @@ class Classrooms extends Component {
             <div className='m-portlet__head-caption'>
               <div className='m-portlet__head-title'>
               <span className='m-portlet__head-icon'>
-							  <i className='la la-user' style={{fontSize:'55px'}}></i>
-						  </span>
-                <h3 className='m-portlet__head-text'>
-                  Classrooms
+                <i className='la la-user' style={{fontSize:'55px'}}></i>
+              </span>
+                <h3 className='m-portlet__head-text'>                  
+                  {t('classrooms')}
                 </h3>
               </div>
             </div>
@@ -297,7 +297,7 @@ class Classrooms extends Component {
                     '[ClassRooms][Create][Any]'
                   ]}>
                     <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
-                      Add New
+                      {t('addNew')}
                       <Icon style={{marginLeft:'5px'}}>add</Icon>
                     </Button>
                   </HasPermission>
@@ -310,12 +310,12 @@ class Classrooms extends Component {
               <Thead>
                 <HeadRow>
                   <Th first={true} width='100px'>#</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>Name</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>School</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>Course</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>Teacher</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='132px'>Students Count</Th>
-                  <Th width='150px'>Actions</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>{t('course')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>{t('teacher')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='132px'>{t('studentsCount')}</Th>
+                  <Th width='150px'>{t('actions')}</Th>
                 </HeadRow>
               </Thead>
 
@@ -373,4 +373,4 @@ Classrooms = connect(
 )(Classrooms);
 
 
-export default translate('classrooms')(Classrooms);
+export default translate('translations')(Classrooms);

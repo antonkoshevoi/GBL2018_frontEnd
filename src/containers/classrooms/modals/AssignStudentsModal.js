@@ -9,6 +9,7 @@ import {
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import Modal from "../../../components/ui/Modal";
 import {
   selectGetAssignStudentsRequest,
@@ -93,7 +94,7 @@ class AssignStudentsModal extends Component {
   };
 
   render() {
-    const { isOpen, assignStudentsRequest, getRecordForAssignStudentsRequest } = this.props;
+    const { isOpen, assignStudentsRequest, getRecordForAssignStudentsRequest, t } = this.props;
     const loading = assignStudentsRequest.get('loading') || getRecordForAssignStudentsRequest.get('loading');    
     const errors = assignStudentsRequest.get('errors');
 
@@ -109,7 +110,7 @@ class AssignStudentsModal extends Component {
               )}
             </IconButton>
             <Typography type="title" color="inherit" >
-              Assign Students
+              {t('assignStudents')}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -132,7 +133,7 @@ class AssignStudentsModal extends Component {
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Assign Students
+            {t('assignStudents')}
           </Button>
         </DialogActions>
       </Modal>
@@ -151,4 +152,4 @@ AssignStudentsModal = connect(
   })
 )(AssignStudentsModal);
 
-export default AssignStudentsModal;
+export default translate('translations')(AssignStudentsModal);

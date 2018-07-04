@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import { translate } from 'react-i18next';
 import {
   FormControl,
   FormHelperText,
@@ -153,7 +154,6 @@ class ClassroomForm extends Component {
 
       this.setState({studentCount});
     }
-
   }
 
   _handleInputChange(event) {
@@ -209,7 +209,7 @@ class ClassroomForm extends Component {
   }
 
   render() {
-    const {classroom, errors, isPublic} = this.props;
+    const {classroom, errors, isPublic, t} = this.props;
     const {courseModalIsOpen, unassignedsAlert, course, studentCount} = this.state;
     return (
       <div className='row'>
@@ -224,7 +224,7 @@ class ClassroomForm extends Component {
 
         <div className="col-sm-8 m-auto">
           <FormControl aria-describedby='crmName-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='crmName-error'>Name</InputLabel>
+            <InputLabel htmlFor='crmName-error'>{t('name')}</InputLabel>
             <Input
               name='crmName'
               margin='dense'
@@ -236,7 +236,7 @@ class ClassroomForm extends Component {
             {errors && errors.get('crmName') && <FormHelperText error>{errors.get('crmName').get(0)}</FormHelperText>}
           </FormControl>
           <div aria-describedby='crmStartDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmStartDate-error' shrink={!!classroom.crmStartDate}>Start Date</InputLabel>            
+            <InputLabel htmlFor='crmStartDate-error' shrink={!!classroom.crmStartDate}>{t('startDate')}</InputLabel>            
               <DatePicker
                 name='crmStartDate'
                 value={classroom.crmStartDate || null}
@@ -248,7 +248,7 @@ class ClassroomForm extends Component {
             <FormHelperText error>{errors.get('crmStartDate').get(0)}</FormHelperText>}
           </div>
           <div aria-describedby='crmEndDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEndDate-error' shrink={!!classroom.crmEndDate}>End Date</InputLabel>            
+            <InputLabel htmlFor='crmEndDate-error' shrink={!!classroom.crmEndDate}>{t('endDate')}</InputLabel>            
               <DatePicker
                 name='crmEndDate'
                 value={classroom.crmEndDate || null}
@@ -260,7 +260,7 @@ class ClassroomForm extends Component {
             <FormHelperText error>{errors.get('crmEndDate').get(0)}</FormHelperText>}
           </div>
           <div aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEnrollmentStartDate-error' shrink={!!classroom.crmEnrollmentStartDate}>Enrollment Start Date</InputLabel>            
+            <InputLabel htmlFor='crmEnrollmentStartDate-error' shrink={!!classroom.crmEnrollmentStartDate}>{t('enrollmentStartDate')}</InputLabel>            
               <DatePicker
                 name='crmEnrollmentStartDate'
                 value={classroom.crmEnrollmentStartDate || null}
@@ -272,7 +272,7 @@ class ClassroomForm extends Component {
             <FormHelperText error>{errors.get('crmEnrollmentStartDate').get(0)}</FormHelperText>}
           </div>
           <div aria-describedby='crmEnrollmentEndDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEnrollmentEndDate-error' shrink={!!classroom.crmEnrollmentEndDate}>Enrollment End Date</InputLabel>            
+            <InputLabel htmlFor='crmEnrollmentEndDate-error' shrink={!!classroom.crmEnrollmentEndDate}>{t('enrollmentEndDate')}</InputLabel>            
               <DatePicker
                 name='crmEnrollmentEndDate'
                 value={classroom.crmEnrollmentEndDate || null}
@@ -294,7 +294,7 @@ class ClassroomForm extends Component {
               variant="raised"
               className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
               color='primary'>
-              Choose Course
+              {t('chooseCourse')}
             </Button>
             {errors && errors.get('crmCourse') &&
             <FormHelperText error>{errors.get('crmCourse').get(0)}</FormHelperText>}
@@ -309,7 +309,7 @@ class ClassroomForm extends Component {
               {course.get('title')}
             </div>
             <div className="col-4 d-flex justify-content-center flex-column">
-              student Count: {studentCount ? studentCount : 0}
+              {t('studentCount')}: {studentCount ? studentCount : 0}
             </div>
           </div>
           }
@@ -322,15 +322,15 @@ class ClassroomForm extends Component {
               {classroom.course.title}
             </div>
             <div className="col-4 d-flex justify-content-center flex-column">
-              student Count: {studentCount ? studentCount : 0}
+              {t('studentCount')}: {studentCount ? studentCount : 0}
             </div>
           </div>
           }
           {!isPublic &&
           <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Teacher</InputLabel>
+            <InputLabel htmlFor='name-error'>{t('teacher')}</InputLabel>
             <Select
-              primarytext="Select Teacher"
+              primarytext={t('selectTeacher')}
               name='teacherId'
               onChange={(e) => {
                 this._handleInputChange(e)
@@ -345,11 +345,11 @@ class ClassroomForm extends Component {
           }
           {!isPublic &&
           <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Homerooms (Multiple)</InputLabel>
+            <InputLabel htmlFor='name-error'>{t('homeroomsMultiple')}</InputLabel>
             <Select
               multiple={true}
               renderValue={(e) => this._getSelectedRooms(e)}
-              primarytext="Select Homeroom"
+              primarytext={t('selectHomeroom')}
               name='homeroomIds'
               onChange={(e) => {
                 this._handleInputChange(e)
@@ -390,8 +390,6 @@ class ClassroomForm extends Component {
     }
     return selectedRooms.join(',');
   }
-
-
 }
 
 ClassroomForm = connect(
@@ -413,4 +411,4 @@ ClassroomForm = connect(
   })
 )(ClassroomForm);
 
-export default ClassroomForm;
+export default translate('translations')(ClassroomForm);
