@@ -7,9 +7,9 @@ import logo from '../../media/images/logo.png'
 import {NavLink} from 'react-router-dom';
 import {Divider, Step, StepLabel, Stepper} from '@material-ui/core';
 
-import FirstStepForm from '../../components/signUpParent/FirstStepForm';
-import SecondStepForm from '../../components/signUpParent/SecondStepForm';
-import ThirdStepForm from '../../components/signUpParent/ThirdStepForm';
+import FirstStepForm from './forms/FirstStepForm';
+import SecondStepForm from './forms/SecondStepForm';
+import ThirdStepForm from './forms/ThirdStepForm';
 import {signUp, validateStep1} from '../../redux/signUpParent/actions';
 import {selectSignUpRequest, selectValidateStep1Request} from '../../redux/signUpParent/selectors';
 import MetronicProgressButton from "../../components/ui/metronic/MetronicProgressButton";
@@ -159,28 +159,39 @@ class SignUpParent extends Component {
                         <ThirdStepForm form={form}/>
                       ][activeStep]}
                     </div>
-                    <Divider className='m--margin-top-25'/>
-
+                    {activeStep < 2 &&
+                        <Divider className='m--margin-top-25'/>
+                    }
                     <div className='row'>
                       <div className='col-sm-12 text-right m--padding-top-20 text-center'>
-                        {activeStep !== 2 &&
-                          <button
-                            type='button'
-                            disabled={activeStep === 0}
-                            onClick={() => { this._back(); }}
-                            className='m-btn m-btn--air m--margin-5 btn btn-default'>
-                            BACK
-                          </button>}
-                        {[
-                          <MetronicProgressButton type='submit' disabled={step1Loading} loading={step1Loading} className='m-btn m-btn--air m--margin-5 btn btn-info'>NEXT</MetronicProgressButton>,
-                          <MetronicProgressButton type='submit' disabled={step2Loading} loading={step2Loading} className='m-btn m-btn--air m--margin-5 btn btn-info'>NEXT</MetronicProgressButton>,
-                          <button type='submit' className='m-btn m-btn--air m--margin-5 btn btn-info'>GO TO DASHBOARD</button>
-                        ][activeStep]}
+                        {activeStep == 0 &&
+                           <MetronicProgressButton type='submit' disabled={step1Loading} loading={step1Loading} className='m-btn m-btn--air m--margin-5 btn btn-info'>NEXT</MetronicProgressButton>
+                        }
+                        {activeStep == 1 &&
+                          <div>
+                            <button
+                              type='button'
+                              disabled={activeStep === 0}
+                              onClick={() => { this._back(); }}
+                              className='m-btn m-btn--air m--margin-5 btn btn-default'>
+                              BACK
+                            </button>
+                            <MetronicProgressButton type='submit' disabled={step2Loading} loading={step2Loading} className='m-btn m-btn--air m--margin-5 btn btn-info'>NEXT</MetronicProgressButton>
+                          </div>
+                        }
+                        {activeStep == 2 &&
+                          <div>
+                            <p className="display-10"><strong>All set, now choose courses!</strong></p>            
+                            <button type='submit' className='m-btn m-btn--air m--margin-5 btn btn-info'>GO TO DASHBOARD</button>
+                          </div>
+                        }
                       </div>
                     </div>
+                    {activeStep < 2 &&
                     <div className='alert m-alert m-alert--default'>
                       <p className='text-center'> If you already have a account, <NavLink to='/login'><strong>Login</strong></NavLink> to start your session.</p>
-                    </div>                    
+                    </div>   
+                    }
                   </div>
                 </div>
               </div>

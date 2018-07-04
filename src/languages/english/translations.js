@@ -22,6 +22,5 @@ export default {
     chooseCourse: 'Choose Course',
     studentCount: 'student Count',
     homeroomsMultiple: 'Homerooms (Multiple)',
-    selectHomeroom: 'Select Homeroom',
-    selectTeacher: 'Select Teacher'
+    selectHomeroom: 'Select Homeroom'
 }
