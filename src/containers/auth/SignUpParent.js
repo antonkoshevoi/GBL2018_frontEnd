@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {translate, Interpolate} from 'react-i18next';
 import background from '../../media/images/bg-3.jpg';
 import logo from '../../media/images/logo.png'
 
 import {NavLink} from 'react-router-dom';
 import {Divider, Step, StepLabel, Stepper} from '@material-ui/core';
 
-import FirstStepForm from '../../components/signUpParent/FirstStepForm';
-import SecondStepForm from '../../components/signUpParent/SecondStepForm';
-import ThirdStepForm from '../../components/signUpParent/ThirdStepForm';
+import FirstStepForm from './forms/FirstStepForm';
+import SecondStepForm from './forms/SecondStepForm';
+import ThirdStepForm from './forms/ThirdStepForm';
 import {signUp, validateStep1} from '../../redux/signUpParent/actions';
 import {selectSignUpRequest, selectValidateStep1Request} from '../../redux/signUpParent/selectors';
 import MetronicProgressButton from "../../components/ui/metronic/MetronicProgressButton";
@@ -119,11 +119,15 @@ class SignUpParent extends Component {
 
   render() {
     const { activeStep, form } = this.state;
+    const { t } = this.props;
+    
     const step1Loading = this.props.validateStep1Request.get('loading');
     const step1Errors = this.props.validateStep1Request.get('errors');
 
     const step2Loading = this.props.signUpRequest.get('loading');
     const step2Errors = this.props.signUpRequest.get('errors').get('step2');
+    
+    const loginBtn =  <NavLink to='/login'><strong>Login</strong></NavLink>;
         
     return (
       <form  onSubmit={(e) => { e.preventDefault(); this._next(); }}>
@@ -137,19 +141,19 @@ class SignUpParent extends Component {
               </div>
               <div className='m-signup col-lg-8 col-md-10 col-sm-12 m-auto'>
                 <div className='m-signup__head'>
-                  <h3 className='m-login__title text-center m--margin-top-30'>Sign Up</h3>
+                  <h3 className='m-login__title text-center m--margin-top-30'>{t('Sign Up')}</h3>
                 </div>
                 <div className='m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--info m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height'>
                   <div className='m-portlet__body'>
                     <Stepper activeStep={activeStep} alternativeLabel className="g-stepper">
                       <Step>
-                        <StepLabel>Parent Profile</StepLabel>
+                        <StepLabel>{t('Parent Profile')}</StepLabel>
                       </Step>
                       <Step>
-                        <StepLabel>Child Profile</StepLabel>
+                        <StepLabel>{t('Child Profil')}e</StepLabel>
                       </Step>
                       <Step>
-                        <StepLabel>Confirmation</StepLabel>
+                        <StepLabel>{t('Confirmation')}</StepLabel>
                       </Step>
                     </Stepper>
                     <div>
@@ -159,28 +163,41 @@ class SignUpParent extends Component {
                         <ThirdStepForm form={form}/>
                       ][activeStep]}
                     </div>
-                    <Divider className='m--margin-top-25'/>
-
+                    {activeStep < 2 &&
+                        <Divider className='m--margin-top-25'/>
+                    }
                     <div className='row'>
                       <div className='col-sm-12 text-right m--padding-top-20 text-center'>
-                        {activeStep !== 2 &&
-                          <button
-                            type='button'
-                            disabled={activeStep === 0}
-                            onClick={() => { this._back(); }}
-                            className='m-btn m-btn--air m--margin-5 btn btn-default'>
-                            BACK
-                          </button>}
-                        {[
-                          <MetronicProgressButton type='submit' disabled={step1Loading} loading={step1Loading} className='m-btn m-btn--air m--margin-5 btn btn-info'>NEXT</MetronicProgressButton>,
-                          <MetronicProgressButton type='submit' disabled={step2Loading} loading={step2Loading} className='m-btn m-btn--air m--margin-5 btn btn-info'>NEXT</MetronicProgressButton>,
-                          <button type='submit' className='m-btn m-btn--air m--margin-5 btn btn-info'>GO TO DASHBOARD</button>
-                        ][activeStep]}
+                        {activeStep == 0 &&
+                           <MetronicProgressButton type='submit' disabled={step1Loading} loading={step1Loading} className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>{t('next')}</MetronicProgressButton>
+                        }
+                        {activeStep == 1 &&
+                          <div>
+                            <button
+                              type='button'
+                              disabled={activeStep === 0}
+                              onClick={() => { this._back(); }}
+                              className='m-btn m-btn--air m--margin-5 btn btn-default text-uppercase'>
+                              {t('back')}
+                            </button>
+                            <MetronicProgressButton type='submit' disabled={step2Loading} loading={step2Loading} className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>{t('next')}</MetronicProgressButton>
+                          </div>
+                        }
+                        {activeStep == 2 &&
+                          <div>
+                            <p className="display-10"><strong>{t('SignUpCompletedMessage')}</strong></p>            
+                            <button type='submit' className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>{t('goToDashboard')}</button>
+                          </div>
+                        }
                       </div>
                     </div>
+                    {activeStep < 2 &&
                     <div className='alert m-alert m-alert--default'>
-                      <p className='text-center'> If you already have a account, <NavLink to='/login'><strong>Login</strong></NavLink> to start your session.</p>
-                    </div>                    
+                      <p className='text-center'>
+                        <Interpolate i18nKey="alreadyHaveAccountMessage" loginLink={loginBtn} />
+                      </p>                              
+                    </div>   
+                    }
                   </div>
                 </div>
               </div>
@@ -205,4 +222,4 @@ SignUpParent = connect(
   })
 )(SignUpParent);
 
-export default translate('SignUpParent')(SignUpParent);
+export default translate('translations')(SignUpParent);

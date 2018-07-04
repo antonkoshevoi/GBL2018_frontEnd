@@ -47,7 +47,6 @@ class CourseModal extends Component {
         newest: false,
       },
     };
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -173,8 +172,7 @@ class CourseModal extends Component {
               <FormControlLabel
                 value="male"
                 name="courseId"
-                control={<Radio/>}
-                // label="Test"
+                control={<Radio/>}                
                 checked={course.get('courseId') == courseId}
                 onChange={() => {
                   this._onChange(course)
@@ -185,11 +183,10 @@ class CourseModal extends Component {
                 <img src={course.get('thumbnail')} width={70} alt={course.get('title')}/>
               </div>
             </Td>
-            <Td width='100px'><span style={{fontWeight: 600}} className="g-blue">{course.get('title')}</span></Td>
-            <Td width='400px'><span style={{fontWeight: 600}} className="g-blue">{course.get('description')}</span></Td>
-            <Td width='100px'><span style={{fontWeight: 600}} className="g-blue">{course.get('price')}</span></Td>
-            <Td width='100px'><span style={{fontWeight: 600}}
-                                    className="g-blue">{course.get('credit') ? course.get('credit') : ''}</span></Td>
+            <Td width='100px'><span style={{fontWeight: 600}}>{course.get('title')}</span></Td>
+            <Td width='300px'>{course.get('description')}</Td>
+            <Td width='100px'><span style={{fontWeight: 600}}>{course.get('price')}</span></Td>
+            <Td width='100px'><span style={{fontWeight: 600}}>{course.get('credit') ? course.get('credit') : '-'}</span></Td>
           </Row>
         )
       });
@@ -233,7 +230,7 @@ class CourseModal extends Component {
                 <Th width="30px" first={true}></Th>
                 <Th width="70px">image</Th>
                 <Th width="100px">Course title</Th>
-                <Th width="400px">Course Description</Th>
+                <Th width="300px">Course Description</Th>
                 <Th width="100px">Price Each</Th>
                 <Th width="100px">Unassigned Credits</Th>
               </HeadRow>
