@@ -24,5 +24,6 @@ export default {
     },
     scheduleUpdated: 'Classroom schedule has been updated'
   },
-  courseRequired: 'You should select course'
+  courseRequired: 'You should select course',
+  loginOrCreateAccount: 'Please login or create new account to buy any products...'
 }

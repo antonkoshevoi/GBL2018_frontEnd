@@ -62,7 +62,7 @@ class Header extends Component {
     const {logout, cartRecords, auth} = this.props;
     const school = this.props.schoolRequest.get('record').toJS();
     const {headerPosition} = this.state;
-    console.log();
+    
     return (
       <header className="m-grid__item  m-header " style={{top:-headerPosition}} ref="header" data-minimize-offset="200" data-minimize-mobile-offset="200">
         <div className="m-container general-header m-container--fluid m-container--full-height">

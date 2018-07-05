@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
+import { push } from 'react-router-redux';
 import DetailsSection from "../../../components/pages/store/DetailsSection";
 import CommentsSection from "../../../components/pages/store/CommentsSection";
 import {withRouter} from "react-router-dom";
 import "../../../styles/store.css"
 import Filter from "../../../components/pages/store/Filter";
 import Sidebar from "../../../components/pages/store/Sidebar";
-
-
 import {addToCarts, getRecords, getSingleRecord} from "../../../redux/store/actions";
 import {
   selectAddToCartRequest, selectGetRecordsRequest, selectGetSingleRecord,
@@ -16,6 +15,7 @@ import {
 } from "../../../redux/store/selectors";
 import Loader from "../../../components/layouts/Loader";
 import {buildSortersQuery} from "../../../helpers/utils";
+import toastr from 'toastr';
 
 class Details extends Component {
 
@@ -55,7 +55,14 @@ class Details extends Component {
   }
 
   _addToCart(id) {
-    this.props.addToCarts(id)
+    const {t, auth} = this.props;
+
+    if (auth.get('isLoggedIn')) {
+        this.props.addToCarts(id);
+    } else {
+        toastr.success(t(`messages:loginOrCreateAccount`));
+        this.props.goTo('/login');
+    }       
   }
 
   render() {
@@ -83,7 +90,7 @@ class Details extends Component {
             <div className="col-lg-8">
               {successSingle &&
               <div className="m-portlet">
-                <DetailsSection data={record}  addedRequest={addToCartRequest} buyClick={(id) => {
+                <DetailsSection data={record} addedRequest={addToCartRequest} buyClick={(id) => {
                   this._addToCart(id)
                 }}/>
                 <CommentsSection/>
@@ -110,6 +117,7 @@ Details = connect(
     getRecordsRequest: selectGetRecordsRequest(state),
     records: selectRecords(state),
     record: selectGetSingleRecord(state),
+    auth: state.auth
   }),
   (dispatch) => ({
     getRecords: (params = {type: 'recent'}) => {
@@ -121,6 +129,7 @@ Details = connect(
     addToCarts: (id, params = {}) => {
       dispatch(addToCarts(id, params))
     },
+    goTo: (url) => {dispatch(push(url))}
   })
 )(Details);
 
