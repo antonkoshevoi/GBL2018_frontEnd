@@ -7,16 +7,16 @@ import {
   Icon, IconButton,
   Toolbar, Typography,
   Divider, Button, DialogActions,
-  Paper, Tab, Tabs, FormControlLabel, Radio
+  Paper, Tab, FormControlLabel, Radio
 } from '@material-ui/core';
 import {connect} from 'react-redux';
+import {translate} from 'react-i18next';
 import Modal from "../../../components/ui/Modal";
 import Filter from "../../../components/pages/store/Filter";
 import {selectGetStoreRecordsRequest, selectGetUnassignedRecordsRequest} from "../../../redux/courses/selectors";
 import {getStoreRecords, getUnassignedRecords} from "../../../redux/courses/actions";
 import {Row, Table, TablePreloader, Tbody, Td, Thead, HeadRow, Th} from "../../../components/ui/table";
 import toastr from 'toastr';
-import i18n from '../../../configs/i18n';
 
 function TabContainer(props) {
   return (
@@ -52,7 +52,6 @@ class CourseModal extends Component {
   componentWillReceiveProps(nextProps) {
     this._handleModalOpened(nextProps);
   }
-
 
   _getRecords(params) {
     this.props.getStoreRecords(params);
@@ -100,58 +99,18 @@ class CourseModal extends Component {
 
   _onSubmit() {
     const {course,courseId} = this.state;
-
+    const {t} = this.props;
     if (!courseId) {
-      toastr.error(
-        i18n.t(`messages:courseRequired`)
-      );
+      toastr.error(t(`messages:courseRequired`));
     } else {
       this.props.onSuccess(course);
       this._close();
     }
   };
 
-  // _renderUnassignedItems() {
-  //   const { courseId } = this.state;
-  //   const unassignedCourses = this.props.unassignedRecordsRequest.get('records');
-  //
-  //   if (!unassignedCourses.size) {
-  //     return (
-  //       <tr>
-  //         <td>
-  //           <div className="table-message">
-  //             <h2>No Unassigned Credits</h2>
-  //           </div>
-  //         </td>
-  //       </tr>
-  //     )
-  //   } else {
-  //     return unassignedCourses.map((course,i) => {
-  //       return (
-  //         <Row key={i} index={i}>
-  //           <Td width="30px">
-  //             <FormControlLabel
-  //               value="male"
-  //               name="courseId"
-  //               control={<Radio />}
-  //               label="Test"
-  //               checked={course.get('crsId') == courseId}
-  //               onChange={() => {this._onChange(course.get('crsId'))}}/>
-  //           </Td>
-  //           <Td width="70px">
-  //             <div >
-  //               <img src={course.get('image')} width={70} alt={course.get('crsTitle')}/>
-  //             </div>
-  //           </Td>
-  //           <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{course.get('crsTitle')}</span></Td>
-  //         </Row>
-  //       )
-  //     });
-  //   }
-  // }
-
   _renderStoreItems() {
     const {courseId} = this.state;
+    const {t} = this.props;
     const storeCourses = this.props.storeRecordsRequest.get('records');
 
     if (!storeCourses.size) {
@@ -159,7 +118,7 @@ class CourseModal extends Component {
         <tr>
           <td>
             <div className="table-message">
-              <h2>No Store Items</h2>
+              <h2>{t('noStoreItems')}</h2>
             </div>
           </td>
         </tr>
@@ -194,7 +153,7 @@ class CourseModal extends Component {
   }
 
   render() {
-    const {isOpen} = this.props;
+    const {isOpen, t} = this.props;
     const {activeTab, filterShow, isFiltered} = this.state;
     const storeRecordsLoading = this.props.storeRecordsRequest.get('loading');
     const unassignedRecordsLoading = this.props.unassignedRecordsRequest.get('loading');
@@ -211,7 +170,7 @@ class CourseModal extends Component {
               )}
             </IconButton>
             <Typography type="title" color="inherit">
-              Choose Course
+              {t('chooseCourse')}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -228,11 +187,11 @@ class CourseModal extends Component {
               <Thead>
               <HeadRow>
                 <Th width="30px" first={true}></Th>
-                <Th width="70px">image</Th>
-                <Th width="100px">Course title</Th>
-                <Th width="300px">Course Description</Th>
-                <Th width="100px">Price Each</Th>
-                <Th width="100px">Unassigned Credits</Th>
+                <Th width="70px">{t('image')}</Th>
+                <Th width="100px">{t('courseTitle')}</Th>
+                <Th width="300px">{t('courseDescription')}</Th>
+                <Th width="100px">{t('priceEach')}</Th>
+                <Th width="100px">{t('Unassigned Credits')}</Th>
               </HeadRow>
               </Thead>
               <Tbody>
@@ -242,32 +201,6 @@ class CourseModal extends Component {
               {!storeRecordsLoading && this._renderStoreItems()}
               </Tbody>
             </Table>
-            {/* <Tabs value={activeTab} onChange={this._handleChangeTab} centered>
-              <Tab label="Unassigned Credits" />
-              <Tab label="Store Items" />
-              <Tab label="New TAb" />
-            </Tabs> */}
-
-            {/* {activeTab === 0 && <TabContainer>
-              <Table>
-                <Tbody >
-                  {unassignedRecordsLoading &&
-                  <TablePreloader text="Loading..." color="primary"/>
-                  }
-                  {!unassignedRecordsLoading && this._renderUnassignedItems()}
-                </Tbody>
-              </Table>
-            </TabContainer>}
-            {activeTab === 1 && <TabContainer>
-              <Table>
-                <Tbody >
-                  {storeRecordsLoading &&
-                  <TablePreloader text="Loading..." color="primary"/>
-                  }
-                  {!storeRecordsLoading && this._renderStoreItems()}
-                </Tbody>
-              </Table>
-            </TabContainer>} */}
           </Paper>
         </DialogContent>
         <Divider className='full-width'/>
@@ -282,7 +215,7 @@ class CourseModal extends Component {
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Choose Course
+            {t('chooseCourse')}
           </Button>
         </DialogActions>
       </Modal>
@@ -305,4 +238,4 @@ CourseModal = connect(
   })
 )(CourseModal);
 
-export default CourseModal;
+export default translate('translations')(CourseModal);

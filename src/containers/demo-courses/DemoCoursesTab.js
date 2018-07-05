@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import { Button, Icon, MenuItem, Select, Typography } from '@material-ui/core';
-
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import {
@@ -179,7 +178,7 @@ class DemoCoursesTab extends Component {
    * @private
    */
   _renderRecords () {
-    const { records } = this.props;
+    const { records, t } = this.props;
     const loading = this.props.getRecordsRequest.get('loading');
 
     if (!loading && records.size === 0) {
@@ -187,7 +186,7 @@ class DemoCoursesTab extends Component {
         <tr>
           <td>
             <div className="table-message">
-              <h2>Classrooms Not Found...</h2>
+              <h2>{t('classroomsNotFound')}</h2>
             </div>
           </td>
         </tr>
@@ -235,7 +234,7 @@ class DemoCoursesTab extends Component {
   }
 
   render() {
-    const { getRecordsRequest, pagination } = this.props;
+    const { getRecordsRequest, pagination, t } = this.props;
     const { createModalIsOpen, editModalIsOpen, assignModalIsOpen, sorters, page, perPage } = this.state;
     const loading = getRecordsRequest.get('loading');
     const totalPages = pagination.get('totalPages');
@@ -258,11 +257,11 @@ class DemoCoursesTab extends Component {
                   <MenuItem value={100}>100</MenuItem>
                 </Select>
                 <Button variant="raised" color='primary' onClick={() => { this._openAssignDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
-                  Assign Student
+                  {t('assignStudent')}
                   <Icon style={{marginLeft:'5px'}}>persone</Icon>
                 </Button>                 
                 <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
-                  Add new
+                  {t('addNew')}
                   <Icon style={{marginLeft:'5px'}}>add</Icon>
                 </Button>
               </div>
@@ -272,11 +271,11 @@ class DemoCoursesTab extends Component {
             <Thead>
               <HeadRow>
                 <Th first={true} width='100px'>#</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='122px'>Name</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='122px'>School</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='122px'>Course</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='122px'>Teacher</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='122px'>Students Count</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='122px'>{t('name')}</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='122px'>{t('school')}</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='122px'>{t('course')}</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='122px'>{t('teacher')}</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='122px'>{t('studentsCount')}</Th>
                 <Th width='100px'>Actions</Th>
               </HeadRow>
             </Thead>
@@ -328,4 +327,4 @@ DemoCoursesTab = connect(
   })
 )(DemoCoursesTab);
 
-export default translate('demoCourses')(DemoCoursesTab);
+export default translate('translations')(DemoCoursesTab);

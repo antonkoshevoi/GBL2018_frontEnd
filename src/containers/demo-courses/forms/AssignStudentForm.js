@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import { getDemoClassrooms } from '../../../redux/classrooms/actions';
 import { selectRecords } from '../../../redux/classrooms/selectors';
 import { getSchoolStudents } from "../../../redux/schools/actions";
@@ -75,13 +76,13 @@ class AssignStudentForm extends Component {
 
   render() {
     
-    const { form, errors } = this.props;    
+    const { form, errors, t } = this.props;    
     
     return (
       <div className='row'>
         <div className='col-sm-8 col-lg-12 m-auto'>
           <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Demo Classroom</InputLabel>
+            <InputLabel htmlFor='name-error'>{t('demoClassroom')}</InputLabel>
             <Select
                 primarytext=""
                 name='classroomId'
@@ -94,7 +95,7 @@ class AssignStudentForm extends Component {
             {errors && errors.get('classroomId') && <FormHelperText error>{ errors.get('classroomId').get(0) }</FormHelperText>}            
           </FormControl>
           <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Student</InputLabel>
+            <InputLabel htmlFor='name-error'>{t('student')}</InputLabel>
             <Select
                 primarytext=""
                 name='studentId'
@@ -125,4 +126,4 @@ AssignStudentForm = connect(
   })
 )(AssignStudentForm);
 
-export default AssignStudentForm;
+export default translate('translations')(AssignStudentForm);

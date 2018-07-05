@@ -8,6 +8,7 @@ import {
   Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import { selectCreateRequest } from '../../../redux/administration/selectors';
 import { create, resetCreateRequest } from '../../../redux/administration/actions';
 import Modal from "../../../components/ui/Modal";
@@ -97,7 +98,7 @@ class CreateAdministrationModal extends Component {
   }
 
   render() {
-    const { isOpen, createRequest } = this.props;
+    const { isOpen, createRequest, t } = this.props;
     const loading = createRequest.get('loading');    
     const errors = createRequest.get('errors');
 
@@ -113,7 +114,7 @@ class CreateAdministrationModal extends Component {
               )}
             </IconButton>
             <Typography type="title" color="inherit" >
-              Create user
+              {t('createUser')}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -141,7 +142,7 @@ class CreateAdministrationModal extends Component {
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Update User
+            {t('updateUser')}
           </Button>
         </DialogActions>
       </Modal>
@@ -155,8 +156,8 @@ CreateAdministrationModal = connect(
   }),
   (dispatch) => ({
     create: (form, params = {}) => { dispatch(create(form, params)) },
-    resetCreateRequest: () => { dispatch(resetCreateRequest()) },
+    resetCreateRequest: () => { dispatch(resetCreateRequest()) }
   })
 )(CreateAdministrationModal);
 
-export default CreateAdministrationModal;
+export default translate('translations')(CreateAdministrationModal);

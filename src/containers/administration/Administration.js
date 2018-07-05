@@ -75,7 +75,7 @@ class Administration extends Component {
     });
   }
   _renderRecords () {
-    const { records } = this.props;
+    const { records, t } = this.props;
     const loading = this.props.getRecordsRequest.get('loading');
 
       if (!loading && records.size === 0) {
@@ -83,7 +83,7 @@ class Administration extends Component {
         <tr>
           <td>
             <div className="table-message">
-              <h2>Users Not Found...</h2>
+              <h2>{t('usersNotFound')}</h2>
             </div>
           </td>
         </tr>
@@ -170,11 +170,7 @@ class Administration extends Component {
   }
   _search (value) {
     let filters = {
-      composed: value,
-      // username: value,
-      // firstName: value,
-      // lastName: value,
-      // email: value,
+      composed: value
     };
 
     this.setState({
@@ -194,7 +190,7 @@ class Administration extends Component {
   }
 
   render() {
-    const { getRecordsRequest, pagination } = this.props;
+    const { getRecordsRequest, pagination, t } = this.props;
     const { createModalIsOpen, editModalIsOpen, sorters, page, perPage } = this.state;
     const loading = getRecordsRequest.get('loading');
     const totalPages = pagination.get('totalPages');
@@ -206,12 +202,8 @@ class Administration extends Component {
           <div className='m-portlet__head border-b-orange'>
             <div className='m-portlet__head-caption'>
               <div className='m-portlet__head-title'>
-              <span className='m-portlet__head-icon'>
-							  <i className='la la-user' style={{fontSize:'55px'}}></i>
-						  </span>
-                <h3 className='m-portlet__head-text'>
-                  Users
-                </h3>
+              <span className='m-portlet__head-icon'><i className='la la-user' style={{fontSize:'55px'}}></i></span>
+                <h3 className='m-portlet__head-text'>{t('users')}</h3>
               </div>
             </div>
             <div className="m-portlet__head-tools">
@@ -242,12 +234,11 @@ class Administration extends Component {
                     '[Users][Administration][Create][SuperAdmin]'
                   ]}>
                     <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
-                      Add New
+                      {t('addNew')}
                       <Icon style={{marginLeft:'5px'}}>add</Icon>
                     </Button>
                   </HasPermission>
                 </div>
-
               </div>
             </div>
 
@@ -255,13 +246,13 @@ class Administration extends Component {
               <Thead>
                 <HeadRow>
                   <Th first={true} width='100px'>#</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['username']} name='username' width='132px'>Username</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['firstName']} name='firstName' width='132px'>Firstname</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName' width='132px'>Lastname</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' width='132px'>Email</Th>
-                  <Th width='132px'>Role</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>School</Th>
-                  <Th width='100px'>Actions</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['username']} name='username' width='132px'>{t('username')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['firstName']} name='firstName' width='132px'>{t('firstName')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName' width='132px'>{t('lastName')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' width='132px'>{t('email')}</Th>
+                  <Th width='132px'>{t('role')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                  <Th width='100px'>{t('actions')}</Th>
                 </HeadRow>
               </Thead>
 
@@ -310,4 +301,4 @@ Administration = connect(
   })
 )(Administration);
 
-export default translate('administration')(Administration);
+export default translate('translations')(Administration);
