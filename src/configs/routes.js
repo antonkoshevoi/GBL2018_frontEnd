@@ -48,7 +48,7 @@ import InvitationDetails from '../containers/invitations/InvitationDetails';
 import ShoppingCart from "../containers/pages/store/shopping-cart/ShoppingCart";
 import OnlyHeadLayout from "../containers/layouts/OnlyHeadLayout";
 import AutoCreate from "../containers/classrooms/AutoCreate";
-import ProfileEdit from "../containers/pages/profile/ProfileEdit";
+import ProfileEdit from "../containers/profile/ProfileEdit";
 import SplashContainer from "../containers/pages/Splash";
 import PrivacyPolicy from "../containers/pages/Static/PrivacyPolicy";
 import About from "../containers/pages/Static/About";

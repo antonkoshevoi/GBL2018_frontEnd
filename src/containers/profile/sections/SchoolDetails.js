@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import {Typography, Tooltip, CircularProgress} from '@material-ui/core';
 import {update} from "../../../redux/schools/actions";
 import {selectUpdateRequest} from "../../../redux/schools/selectors";
@@ -74,7 +75,7 @@ class SchoolDetails extends Component {
 
   render() {
     const { mode, school } = this.state;
-    const { getUpdateRequest } = this.props;
+    const { getUpdateRequest, t } = this.props;
     const errors = getUpdateRequest.get('errors');
     const loading = getUpdateRequest.get('loading');
 
@@ -121,7 +122,7 @@ class SchoolDetails extends Component {
                 <div className="m-widget1__item">
                   <div className="row m-row--no-padding align-items-center">
                     <div className="col">
-                      <h3 className="m-widget1__title">Name</h3>
+                      <h3 className="m-widget1__title">{t('name')}</h3>
                     </div>
                     <div className="col m--align-right">
                       <span className="m-widget1__number m--font-brand">{school.schName}</span>
@@ -133,7 +134,7 @@ class SchoolDetails extends Component {
                 <div className="m-widget1__item">
                   <div className="row m-row--no-padding align-items-center">
                     <div className="col">
-                      <h3 className="m-widget1__title">Billing</h3>
+                      <h3 className="m-widget1__title">{t('billing')}</h3>
                     </div>
                     <div className="col m--align-right">
                       <span className="m-widget1__number m--font-brand">{school.billing}</span>
@@ -145,7 +146,7 @@ class SchoolDetails extends Component {
                 <div className="m-widget1__item">
                   <div className="row m-row--no-padding align-items-center">
                     <div className="col">
-                      <h3 className="m-widget1__title">Shipping Address</h3>
+                      <h3 className="m-widget1__title">{t('shippingAddress')}</h3>
                     </div>
                     <div className="col m--align-right">
                       <span className="m-widget1__number m--font-brand">{school.shippingAddress}</span>
@@ -158,7 +159,7 @@ class SchoolDetails extends Component {
               <form id='update-school-form' onSubmit={(e) => { this._onSubmit(e) }}>
                 <div className="m-form">
                   <div className="form-group m-form__group row">
-                    <label className="col-form-label col-lg-3" htmlFor="schName">Name</label>
+                    <label className="col-form-label col-lg-3" htmlFor="schName">{t('name')}</label>
                     <div className="col-lg-6">
                       <input
                         type="text"
@@ -174,7 +175,7 @@ class SchoolDetails extends Component {
                 <div className="m-separator m-separator--dashed"></div>
                 <div className="m-form">
                   <div className="form-group m-form__group row">
-                    <label className="col-form-label col-lg-3" htmlFor="billing">Billing</label>
+                    <label className="col-form-label col-lg-3" htmlFor="billing">{t('billing')}</label>
                     <div className="col-lg-6">
                       <input
                         type="text"
@@ -190,7 +191,7 @@ class SchoolDetails extends Component {
                 <div className="m-separator m-separator--dashed"></div>
                 <div className="m-form">
                   <div className="form-group m-form__group row">
-                    <label className="col-form-label col-lg-3" htmlFor="shippingAddress">Shipping Address</label>
+                    <label className="col-form-label col-lg-3" htmlFor="shippingAddress">{t('shippingAddress')}</label>
                     <div className="col-lg-6">
                       <input
                         type="text"
@@ -205,7 +206,7 @@ class SchoolDetails extends Component {
                 </div>
                 <div className="m-separator m-separator--dashed"></div>
                 <div className="text-right">
-                  <button className="btn-outline-success m-btn--outline-2x m-btn btn">Submit</button>
+                  <button className="btn-outline-success m-btn--outline-2x m-btn btn">{t('saveChanges')}</button>
                 </div>
               </form>
             </TabContainer>}
@@ -225,4 +226,4 @@ SchoolDetails = connect(
   })
 )(SchoolDetails);
 
-export default SchoolDetails;
+export default translate('translations')(SchoolDetails);

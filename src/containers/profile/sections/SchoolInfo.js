@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import { selectUpdateRequest} from "../../../redux/schools/selectors";
 import { update } from "../../../redux/schools/actions";
 import { Dialog } from '@material-ui/core';
@@ -20,10 +21,6 @@ class SchoolInfo extends Component {
       croppedImage:null,
       image:null
     }
-  }
-
-  componentWillReceiveProps(nextProps) {
-
   }
 
   _openUploadModal(){
@@ -57,21 +54,21 @@ class SchoolInfo extends Component {
   };
 
   render() {
-    const { school } = this.props;
+    const { school, t } = this.props;
 
     return (
       <div className="m-portlet ">
         <div className="m-portlet__body">
           <div className="m-card-profile">
             <div className="m-card-profile__title m--hide">
-              School Logo
+              {t('schoolLogo')}
             </div>
             <div className="m-card-profile__pic">
               <div className="m-card-profile__pic-wrapper">
                 <img src={school.logo} alt=""/>
               </div>
               <div className="text-center m--margin-bottom-20">
-                <button className="m-btn btn btn-info m-btn--pill" onClick={()=>{this._openUploadModal()}}>Upload Logo</button>
+                <button className="m-btn btn btn-info m-btn--pill" onClick={()=>{this._openUploadModal()}}>{t('uploadLogo')}</button>
               </div>
             </div>
 
@@ -87,7 +84,7 @@ class SchoolInfo extends Component {
           open={this.state.uploadModal}
           onClose={() => this._closeUploadModal()}
         >
-         <Card title="Upload Logo" icon="fa fa-upload" style={{minWidth:'280px'}}>
+         <Card title={t('uploadLogo')} icon="fa fa-upload" style={{minWidth:'280px'}}>
             <ImageCropper saveButton circularButton onSubmit={(cropImg,img) => this._onSubmit(cropImg,img)} onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
          </Card>
         </Dialog>
@@ -105,4 +102,4 @@ SchoolInfo = connect(
   })
 )(SchoolInfo);
 
-export default SchoolInfo;
+export default translate('translations')(SchoolInfo);

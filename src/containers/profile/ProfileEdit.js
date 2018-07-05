@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { translate } from 'react-i18next';
 import {Avatar, CircularProgress, Grid, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import MetronicDatePicker from "../../../components/ui/metronic/MetronicDatePicker";
+import MetronicDatePicker from "../../components/ui/metronic/MetronicDatePicker";
 import {NavLink} from "react-router-dom";
-import {getSingleRecord, update} from "../../../redux/students/actions";
-import {selectGetSingleRecordRequest, selectUpdateRequest} from "../../../redux/students/selectors";
+import {getSingleRecord, update} from "../../redux/students/actions";
+import {selectGetSingleRecordRequest, selectUpdateRequest} from "../../redux/students/selectors";
 import 'cropperjs/dist/cropper.css';
 import Cropper from 'react-cropper';
 
@@ -25,9 +26,8 @@ const styles = theme => ({
     height: 120,
     width: 120,
     display: 'flex'
-  },
+  }
 });
-
 
 class ProfileEdit extends Component {
 
@@ -141,7 +141,7 @@ class ProfileEdit extends Component {
   };
 
   render() {
-    const {classes, student, updateRequest} = this.props;
+    const {classes, student, updateRequest, t } = this.props;
     const loading = student.get('loading') || updateRequest.get('loading') || false;
     const errors = updateRequest.get('errors');
     const {form, newAvatar} = this.state;
@@ -151,29 +151,26 @@ class ProfileEdit extends Component {
     return (
       <div className="d-flex justify-content-center">
         <div className="animate fadeInLeftBig col-xl-10 col-lg-12">
-
           <div className={classes.root}>
-
             <Paper className={classes.paper}>
-
               <Grid container spacing={24}>
                 <Grid item xs={12}>
-                  <legend className='m--margin-bottom-10'> Edit profile</legend>
+                  <legend className='m--margin-bottom-10'>{t('editProfile')}</legend>
                 </Grid>
                 {loading ? (<CircularProgress style={{margin: '10px auto', minHeight: 200}} color="inherit"/>)
                   :
                   <Grid container item spacing={0}>
                     <Grid item xs={12} md={4}>
-                      <legend className='m--margin-bottom-10'>Profile Pic Upload</legend>
+                      <legend className='m--margin-bottom-10'>{t('profilePicUpload')}</legend>
                       <Avatar
-                        alt="Adelle Charles"
+                        alt="Student"
                         src={form.avatarCropped ? form.avatarCropped : form.avatar}
                         className={classes.avatar}
                       />
                       <div className='col-md-12 text-center'>
                         <div className='CropperBlock text-center'>
                           <div className='upload-btn-wrapper '>
-                            <button className='btn m-btn--air btn-outline-info'>Upload avatar</button>
+                            <button className='btn m-btn--air btn-outline-info'>{t('uploadAvatar')}</button>
                             <input type='file' name='myfile' onChange={(e) => {
                               this._handleFileChange(e)
                             }}/>
@@ -197,13 +194,11 @@ class ProfileEdit extends Component {
 
                           {form.avatar && newAvatar &&
                           <div>
-                            <button className='btn m-btn--air btn-success m--margin-top-15'
-                                    onClick={this._handleImageCrop}>
-                              Crop Image
+                            <button className='btn m-btn--air btn-success m--margin-top-15' onClick={this._handleImageCrop}>
+                              {t('cropImage')}
                             </button>
-                            <button onClick={this.cancel}
-                                    className='btn m-btn--air btn-primary m--margin-top-15 m--margin-left-10'>
-                              Cancel
+                            <button onClick={this.cancel} className='btn m-btn--air btn-primary m--margin-top-15 m--margin-left-10'>
+                              {t('cancel')}
                             </button>
                           </div>
                           }
@@ -211,10 +206,9 @@ class ProfileEdit extends Component {
                         </div>
                       </div>
                     </Grid>
-                    <Grid item xs={12} md={8}>
-                      {/*First name*/}
+                    <Grid item xs={12} md={8}>                      
                       <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3 col-sm-12">First name</label>
+                        <label className="col-form-label col-lg-3 col-sm-12">{t('firstName')}</label>
                         <div className="col-lg-8 col-md-12 col-sm-12">
                           <input
                             value={form.firstName || ''}
@@ -233,10 +227,8 @@ class ProfileEdit extends Component {
                         </div>
                       </div>
 
-
-                      {/*Last name*/}
                       <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3 col-sm-12">Last name</label>
+                        <label className="col-form-label col-lg-3 col-sm-12">{t('lastName')}</label>
                         <div className="col-lg-8 col-md-12 col-sm-12">
                           <input
                             value={form.lastName || ''}
@@ -255,9 +247,8 @@ class ProfileEdit extends Component {
                         </div>
                       </div>
 
-                      {/*Birthday*/}
                       <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3 col-sm-12" htmlFor="phone">Birthday</label>
+                        <label className="col-form-label col-lg-3 col-sm-12" htmlFor="phone">{t('birthday')}</label>
                         <div className="col-lg-8 col-md-12 col-sm-12">
                           <MetronicDatePicker
                             className="form-control m-input m-input--air "
@@ -270,11 +261,9 @@ class ProfileEdit extends Component {
                             className="form-control-feedback text-center error">{errors.get('birthday').get(0)}</div>}
                         </div>
                       </div>
-
-
-                      {/*user name*/}
+                      
                       <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3 col-sm-12">User name</label>
+                        <label className="col-form-label col-lg-3 col-sm-12">{t('username')}</label>
                         <div className="col-lg-8 col-md-12 col-sm-12">
                           <input
                             value={form.username || ''}
@@ -292,10 +281,9 @@ class ProfileEdit extends Component {
                           </div>
                         </div>
                       </div>
-
-                      {/*password name*/}
+                      
                       <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3 col-sm-12">Password</label>
+                        <label className="col-form-label col-lg-3 col-sm-12">{t('password')}</label>
                         <div className="col-lg-8 col-md-12 col-sm-12">
                           <input
                             value={form.password || ''}
@@ -313,24 +301,22 @@ class ProfileEdit extends Component {
                           </div>
                         </div>
                       </div>
-
                     </Grid>
                   </Grid>
                 }
 
                 <Grid item xs={12}>
                   <NavLink to={`/reports/students/${this.state.id}/`}>
-                            <button className='btn m-btn--air btn-primary m--margin-right-10'>Back</button>
+                            <button className='btn m-btn--air btn-primary m--margin-right-10'>{t('back')}</button>
                   </NavLink>
-                  <button className='btn m-btn--air btn-success' onClick={this.updateProfile}> Save </button>
+                  <button className='btn m-btn--air btn-success' onClick={this.updateProfile}>{t('save')}</button>
                 </Grid>
               </Grid>
             </Paper>
           </div>
         </div>
       </div>
-    )
-      ;
+    );
   }
 }
 
@@ -349,5 +335,6 @@ ProfileEdit = connect(
   })
 )(ProfileEdit);
 
-export default withStyles(styles)(ProfileEdit);
+ProfileEdit = withStyles(styles)(ProfileEdit);
 
+export default translate('translations')(ProfileEdit);

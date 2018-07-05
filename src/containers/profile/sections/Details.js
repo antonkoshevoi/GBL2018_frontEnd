@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Typography, Icon, Button, Tooltip, Select, MenuItem } from '@material-ui/core';
+import { translate } from 'react-i18next';
+import { Typography, Icon, Tooltip, Select, MenuItem } from '@material-ui/core';
 import { getSchoolHomerooms } from "../../../redux/schools/actions";
 import { selectGetSchoolHomeroomsRequest } from "../../../redux/schools/selectors";
 import MetronicDatePicker from "../../../components/ui/metronic/MetronicDatePicker";
@@ -121,7 +122,7 @@ class Details extends Component {
 
   render() {
     const { mode, user } = this.state;
-    const { getUpdateRequest } = this.props;
+    const { getUpdateRequest, t } = this.props;
     const errors = getUpdateRequest.get('errors');
     const loading = getUpdateRequest.get('loading');
 
@@ -169,7 +170,7 @@ class Details extends Component {
                 <div className="m-widget1__item">
                   <div className="row m-row--no-padding align-items-center">
                     <div className="col">
-                      <h3 className="m-widget1__title">First Name</h3>
+                      <h3 className="m-widget1__title">{t('firstName')}</h3>
                     </div>
                     <div className="col m--align-right">
                       <span className="m-widget1__number m--font-brand">{user.firstName}</span>
@@ -179,7 +180,7 @@ class Details extends Component {
                 <div className="m-widget1__item">
                   <div className="row m-row--no-padding align-items-center">
                     <div className="col">
-                      <h3 className="m-widget1__title">Last Name</h3>
+                      <h3 className="m-widget1__title">{t('lastName')}</h3>
                     </div>
                     <div className="col m--align-right">
                       <span className="m-widget1__number m--font-brand">{user.lastName}</span>
@@ -189,7 +190,7 @@ class Details extends Component {
                 <div className="m-widget1__item">
                   <div className="row m-row--no-padding align-items-center">
                     <div className="col">
-                      <h3 className="m-widget1__title">Email</h3>
+                      <h3 className="m-widget1__title">{t('email')}</h3>
                     </div>
                     <div className="col m--align-right">
                       <span className="m-widget1__number m--font-brand">{user.email}</span>
@@ -199,7 +200,7 @@ class Details extends Component {
                 <div className="m-widget1__item">
                   <div className="row m-row--no-padding align-items-center">
                     <div className="col">
-                      <h3 className="m-widget1__title">Birthday</h3>
+                      <h3 className="m-widget1__title">{t('birthday')}</h3>
                     </div>
                     <div className="col m--align-right">
                       <span className="m-widget1__number m--font-brand">{user.birthday}</span>
@@ -211,11 +212,11 @@ class Details extends Component {
             {mode == 'edit' && <TabContainer>
               <form id='update-user-form' onSubmit={(e) => { this._onSubmit(e) }}>
                 <div className="alert m-alert m-alert--default">
-                  <p>Submitting the following information is optional. Your profile is never shared.</p>
+                  <p>{t('updateUserProfileNote')}</p>
                 </div>
                 <div className="m-form">
                   <div className="form-group m-form__group row">
-                    <label className="col-form-label col-lg-3" htmlFor="firsName">First Name</label>
+                    <label className="col-form-label col-lg-3" htmlFor="firsName">{t('firstName')}</label>
                     <div className="col-lg-9">
                       <input
                         type="text"
@@ -228,7 +229,7 @@ class Details extends Component {
                     </div>
                   </div>
                   <div className="form-group m-form__group row">
-                    <label className="col-form-label col-lg-3" htmlFor="lastName">Last Name</label>
+                    <label className="col-form-label col-lg-3" htmlFor="lastName">{t('lastName')}</label>
                     <div className="col-lg-9">
                       <input
                         type="text"
@@ -241,7 +242,7 @@ class Details extends Component {
                     </div>
                   </div>
                   <div className="form-group m-form__group row">
-                    <label className="col-form-label col-lg-3" htmlFor="email">Email</label>
+                    <label className="col-form-label col-lg-3" htmlFor="email">{t('email')}</label>
                     <div className="col-lg-9">
                       <input
                         type="email"
@@ -254,7 +255,7 @@ class Details extends Component {
                     </div>
                   </div>
                   <div className="form-group m-form__group row">
-                    <label className="col-form-label col-lg-3" htmlFor="phone">Phone Number</label>
+                    <label className="col-form-label col-lg-3" htmlFor="phone">{t('phoneNumber')}</label>
                     <div className="col-lg-9">
                       <input
                         type="text"
@@ -267,7 +268,7 @@ class Details extends Component {
                     </div>
                   </div>
                   <div className="form-group m-form__group row">
-                    <label className="col-form-label col-lg-3" htmlFor="gender">Gender</label>
+                    <label className="col-form-label col-lg-3" htmlFor="gender">{t('gender')}</label>
                     <div className="col-lg-9">
                       <Select
                         id="gender"
@@ -276,14 +277,14 @@ class Details extends Component {
                         style={{minWidth:'120px'}}
                         value={user.gender || 'female'}
                         onChange={(e) => { this._handleInputChange(e) }}>
-                        <MenuItem value="male">Male</MenuItem>
-                        <MenuItem value="female">Famele</MenuItem>
+                        <MenuItem value="male">{t('male')}</MenuItem>
+                        <MenuItem value="female">{t('female')}</MenuItem>
                       </Select>
                       {errors && errors.get('gender') && <div className="form-control-feedback text-center error">{errors.get('gender').get(0)}</div>}
                     </div>
                   </div>
                   <div className="form-group m-form__group row">
-                    <label className="col-form-label col-lg-3" htmlFor="phone">Birthday</label>
+                    <label className="col-form-label col-lg-3" htmlFor="phone">{t('birthday')}</label>
                     <div className="col-lg-9">
                       <MetronicDatePicker
                         value={user.birthday || null}
@@ -293,33 +294,9 @@ class Details extends Component {
                   </div>
                 </div>
                 <div className="m-separator m-separator--dashed"></div>
-                {/*<div className="row form-group m-form__group">*/}
-                  {/*<label className="col-form-label col-md-3" htmlFor="gender">School</label>*/}
-                  {/*<div className="col-md-8">*/}
-                    {/*<Select*/}
-                      {/*id="schools"*/}
-                      {/*name="schoolId"*/}
-                      {/*className="form-control m-input  m-input--air  main-select"*/}
-                      {/*style={{minWidth:'120px'}}*/}
-                      {/*value={user.schoolId || ''}*/}
-                      {/*onChange={(e) => { this._handleSchoolChange(e) }}>*/}
-                      {/*<MenuItem value={null} primarytext=""><em>None</em></MenuItem>*/}
-                      {/*{this._renderSchools()}*/}
-                    {/*</Select>*/}
-                    {/*{errors && errors.get('schoolId') && <div className="form-control-feedback text-center error">{errors.get('schoolId').get(0)}</div>}*/}
-                  {/*</div>*/}
-
-                  {/*<div className="col-md-1">*/}
-                    {/*<Button fab mini color="primary" aria-label="add">*/}
-                      {/*<Icon>add</Icon>*/}
-                    {/*</Button>*/}
-                  {/*</div>*/}
-                {/*</div>*/}
-                <div className="m-separator m-separator--dashed"></div>
-
                 <div className="row form-group m-form__group">
-                  <label className="col-form-label col-md-3" htmlFor="gender">Homerooms</label>
-                  <div className="col-md-8">
+                  <label className="col-form-label col-md-3" htmlFor="gender">{t('homerooms')}</label>
+                  <div className="col-md-9">
                     <Select
                       id="homerooms"
                       name="homeroomId"
@@ -327,21 +304,15 @@ class Details extends Component {
                       style={{minWidth:'120px'}}
                       value={user.homeroomId || ''}
                       onChange={(e) => { this._handleInputChange(e) }}>
-                      <MenuItem value={null} primarytext=""><em>None</em></MenuItem>
+                      <MenuItem value={null} primarytext=""><em>{t('none')}</em></MenuItem>
                       {this._renderHmerooms()}
                     </Select>
                     {errors && errors.get('homeroomId') && <div className="form-control-feedback text-center error">{errors.get('homeroomId').get(0)}</div>}
                   </div>
-
-                  <div className="col-md-1">
-                    <Button fab mini color="primary" aria-label="add">
-                      <Icon>add</Icon>
-                    </Button>
-                  </div>
                 </div>
                 <div className="m-separator m-separator--dashed"></div>
                 <div className="text-right">
-                  <button className="btn-outline-success m-btn--outline-2x m-btn btn">Submit</button>
+                  <button className="btn-outline-success m-btn--outline-2x m-btn btn">{t('saveChanges')}</button>
                 </div>
               </form>
             </TabContainer>}
@@ -363,4 +334,4 @@ Details = connect(
   })
 )(Details);
 
-export default Details;
+export default translate('translations')(Details);

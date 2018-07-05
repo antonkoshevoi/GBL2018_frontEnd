@@ -118,4 +118,4 @@ InvitationForm = connect(
   })
 )(InvitationForm);
 
-export default InvitationForm;
+export default translate('translations')(InvitationForm);
