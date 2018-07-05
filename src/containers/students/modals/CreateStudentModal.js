@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,
-  DialogContentText,
+  DialogContent,  
   Icon, IconButton,
   Toolbar, Typography,
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import {connect} from 'react-redux';
+import {translate} from 'react-i18next';
 import {selectCreateRequest} from '../../../redux/students/selectors';
 import {create, resetCreateRequest} from '../../../redux/students/actions';
 import Modal from "../../../components/ui/Modal";
@@ -105,7 +105,7 @@ class CreateStudentModal extends Component {
   }
 
   render() {
-    const {isOpen, createRequest} = this.props;
+    const {isOpen, createRequest, t} = this.props;
     const loading = createRequest.get('loading');
     const errorMessage = createRequest.get('errorMessage');
     const errors = createRequest.get('errors');
@@ -121,7 +121,7 @@ class CreateStudentModal extends Component {
               )}
             </IconButton>
             <Typography type="title" color="inherit">
-              Create user
+              {t('createStudent')}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -130,13 +130,9 @@ class CreateStudentModal extends Component {
           <form id='create-student-form' onSubmit={(e) => {
             this._onSubmit(e)
           }}>
-            <DialogContentText>
-              {/*{errorMessage && <span>{errorMessage}</span>}*/}
-            </DialogContentText>
             <div className="row">
               <div className="col-md-6">
-                <ImageCropper circularButton onCrop={(cropImg) => this._setCroppedImage(cropImg)}
-                              setFile={(img) => this._setImage(img)}/>
+                <ImageCropper circularButton onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
               </div>
               <div className="col-md-6">
                 <StudentForm
@@ -158,7 +154,7 @@ class CreateStudentModal extends Component {
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Add New Student
+            {t('addNewStudent')}
           </Button>
         </DialogActions>
       </Modal>
@@ -181,4 +177,4 @@ CreateStudentModal = connect(
   })
 )(CreateStudentModal);
 
-export default CreateStudentModal;
+export default translate('translations')(CreateStudentModal);

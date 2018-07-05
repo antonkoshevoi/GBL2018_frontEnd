@@ -2,20 +2,16 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
     AppBar, CircularProgress,
-    DialogContent,
-    DialogContentText,
+    DialogContent,    
     Icon, IconButton,
     Toolbar, Typography,
     Divider, Button,
     DialogActions
 } from '@material-ui/core';
 import {connect} from 'react-redux';
-import {
-    selectGetSingleRecordRequest, selectUpdateRequest,
-} from '../../../redux/students/selectors';
-import {
-    update, resetGetSingleRecordRequest, resetUpdateRequest,
-} from '../../../redux/students/actions';
+import { translate } from 'react-i18next';
+import {selectGetSingleRecordRequest, selectUpdateRequest} from '../../../redux/students/selectors';
+import {update, resetGetSingleRecordRequest, resetUpdateRequest} from '../../../redux/students/actions';
 import Modal from "../../../components/ui/Modal";
 import StudentForm from "../forms/StudentForm";
 import ImageCropper from "../../../components/ui/ImageCropper";
@@ -104,9 +100,8 @@ class EditStudentModal extends Component {
     }
 
     render() {
-        const {isOpen, updateRequest, getSingleRecordRequest} = this.props;
-        const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');
-        const errorMessage = updateRequest.get('errorMessage');
+        const {isOpen, updateRequest, getSingleRecordRequest, t} = this.props;
+        const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');       
         const errors = updateRequest.get('errors');
 
         return (
@@ -121,15 +116,12 @@ class EditStudentModal extends Component {
                             )}
                         </IconButton>
                         <Typography type="title" color="inherit">
-                            Edit Student
+                            {t('editStudent')}
                         </Typography>
                     </Toolbar>
                 </AppBar>
 
                 <DialogContent className="m--margin-top-25">
-                    <DialogContentText>
-                        {/*{errorMessage && <span>{errorMessage}</span>}*/}
-                    </DialogContentText>
                     <form id='update-student-form' onSubmit={(e) => {
                         this._onSubmit(e)
                     }}>
@@ -161,7 +153,7 @@ class EditStudentModal extends Component {
                         variant="raised"
                         className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
                         color='primary'>
-                        Update Student
+                        {t('updateStudent')}
                     </Button>
                 </DialogActions>
             </Modal>
@@ -187,4 +179,4 @@ EditStudentModal = connect(
     })
 )(EditStudentModal);
 
-export default EditStudentModal;
+export default translate('translations')(EditStudentModal);

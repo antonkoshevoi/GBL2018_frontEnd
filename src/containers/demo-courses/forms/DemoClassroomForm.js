@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography } from '@material-ui/core';
 import { getSchoolTeachers } from '../../../redux/schools/actions';
-import {
-  selectGetSchoolTeachersRequest,
-  selectSchools
-} from '../../../redux/schools/selectors';
+import { selectGetSchoolTeachersRequest, selectSchools } from '../../../redux/schools/selectors';
 import DatePicker from '../../../components/ui/DatePicker';
 import { getDemoCourses } from '../../../redux/classrooms/actions';
 import {selectCoursesRequest} from '../../../redux/classrooms/selectors';
@@ -122,13 +120,13 @@ class DemoClassroomForm extends Component {
   }
 
   render() {
-    const { classroom, errors } = this.props;
+    const { classroom, errors, t } = this.props;
 
     return (
       <div className='row'>
         <div className='col-sm-8 m-auto'>
           <FormControl aria-describedby='crmName-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='crmName-error'>Name</InputLabel>
+            <InputLabel htmlFor='crmName-error'>{t('name')}</InputLabel>
             <Input
               name='crmName'
               margin='dense'
@@ -138,7 +136,7 @@ class DemoClassroomForm extends Component {
               {errors && errors.get('crmName') && <FormHelperText error>{ errors.get('crmName').get(0) }</FormHelperText>}
           </FormControl>
           <div aria-describedby='crmStartDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmStartDate-error' shrink={!!classroom.crmStartDate}>Start Date</InputLabel>            
+            <InputLabel htmlFor='crmStartDate-error' shrink={!!classroom.crmStartDate}>{t('startDate')}</InputLabel>            
             <DatePicker
               name='crmStartDate'
               value={classroom.crmStartDate || null}
@@ -147,7 +145,7 @@ class DemoClassroomForm extends Component {
             {errors && errors.get('crmStartDate') && <FormHelperText error>{ errors.get('crmStartDate').get(0) }</FormHelperText>}
           </div>
           <div aria-describedby='crmEndDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEndDate-error' shrink={!!classroom.crmEndDate}>End Date</InputLabel>            
+            <InputLabel htmlFor='crmEndDate-error' shrink={!!classroom.crmEndDate}>{t('endDate')}</InputLabel>            
             <DatePicker
               name='crmEndDate'
               value={classroom.crmEndDate || null}
@@ -156,7 +154,7 @@ class DemoClassroomForm extends Component {
             {errors && errors.get('crmEndDate') && <FormHelperText error>{ errors.get('crmEndDate').get(0) }</FormHelperText>}
           </div>
           <div aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEnrollmentStartDate-error' shrink={!!classroom.crmEnrollmentStartDate}>Enrollment Start Date</InputLabel>            
+            <InputLabel htmlFor='crmEnrollmentStartDate-error' shrink={!!classroom.crmEnrollmentStartDate}>{t('enrollmentStartDate')}</InputLabel>            
             <DatePicker
               name='crmEnrollmentStartDate'
               value={classroom.crmEnrollmentStartDate || null}
@@ -165,7 +163,7 @@ class DemoClassroomForm extends Component {
             {errors && errors.get('crmEnrollmentStartDate') && <FormHelperText error>{ errors.get('crmEnrollmentStartDate').get(0) }</FormHelperText>}
           </div>
           <div aria-describedby='crmEnrollmentEndDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEnrollmentEndDate-error' shrink={!!classroom.crmEnrollmentEndDate}>Enrollment End Date</InputLabel>            
+            <InputLabel htmlFor='crmEnrollmentEndDate-error' shrink={!!classroom.crmEnrollmentEndDate}>{t('enrollmentEndDate')}</InputLabel>            
             <DatePicker
               name='crmEnrollmentEndDate'
               value={classroom.crmEnrollmentEndDate || null}
@@ -174,9 +172,9 @@ class DemoClassroomForm extends Component {
             {errors && errors.get('crmEnrollmentEndDate') && <FormHelperText error>{ errors.get('crmEnrollmentEndDate').get(0) }</FormHelperText>}
           </div>
           <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Course</InputLabel>
+            <InputLabel htmlFor='name-error'>{t('course')}</InputLabel>
             <Select
-              primarytext='Select Course'
+              primarytext={t('selectCourse')}
               name='crmCourse'
               onChange={(e) => { this._handleInputChange(e) }}
               value={classroom.crmCourse || ''}>
@@ -187,9 +185,9 @@ class DemoClassroomForm extends Component {
             {errors && errors.get('crmCourse') && <FormHelperText error>{ errors.get('crmCourse').get(0) }</FormHelperText>}
           </FormControl>
           <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Teacher</InputLabel>
+            <InputLabel htmlFor='name-error'>{t('student')}Teacher</InputLabel>
             <Select
-              primarytext='Select Teacher'
+              primarytext={t('selectTeacher')}
               name='teacherId'
               onChange={(e) => { this._handleInputChange(e) }}
               value={classroom.teacherId || ''}>
@@ -216,4 +214,4 @@ DemoClassroomForm = connect(
   })
 )(DemoClassroomForm);
 
-export default DemoClassroomForm;
+export default translate('translations')(DemoClassroomForm);

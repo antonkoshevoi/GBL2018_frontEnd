@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,
-  DialogContentText,
+  DialogContent,  
   Icon, IconButton,
   Toolbar, Typography,
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import { selectCreateRequest } from '../../../redux/classrooms/selectors';
 import { create, resetCreateRequest } from '../../../redux/classrooms/actions';
 import Modal from "../../../components/ui/Modal";
@@ -83,9 +83,8 @@ class CreateClassroomModal extends Component {
   }
 
   render() {
-    const { isOpen, createRequest } = this.props;
-    const loading = createRequest.get('loading');
-    const errorMessage = createRequest.get('errorMessage');
+    const { isOpen, createRequest, t } = this.props;
+    const loading = createRequest.get('loading');    
     const errors = createRequest.get('errors');
 
     return (
@@ -100,16 +99,13 @@ class CreateClassroomModal extends Component {
               )}
             </IconButton>
             <Typography type="title" color="inherit" >
-              Create Classroom
+              {t('createClassroom')}
             </Typography>
           </Toolbar>
         </AppBar>
 
         <DialogContent className="m--margin-top-25">
           <form id='create-classroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
-            <DialogContentText>
-              {/*{errorMessage && <span>{errorMessage}</span>}*/}
-            </DialogContentText>
             <div className="row">
               <div className="col-md-8">
                 <ClassroomForm
@@ -136,7 +132,7 @@ class CreateClassroomModal extends Component {
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Add New Classroom
+            {t('addNewClassroom')}
           </Button>
         </DialogActions>
       </Modal>
@@ -154,4 +150,4 @@ CreateClassroomModal = connect(
   })
 )(CreateClassroomModal);
 
-export default CreateClassroomModal;
+export default translate('translations')(CreateClassroomModal);

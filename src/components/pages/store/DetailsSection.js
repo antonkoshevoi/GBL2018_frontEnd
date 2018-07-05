@@ -74,10 +74,10 @@ class DetailsSection extends Component {
               </div>
 
             </div>
-
+            {data.get('videoLink') &&
             <div className="col-md-12 m--margin-top-15">
               <iframe className="full-width mainVideo" width={640} height={360} src={data.get('videoLink')}></iframe>
-            </div>
+            </div>}
           </div>
         </div>
         <div className='m-separator m-separator--dashed m-separator--'></div>

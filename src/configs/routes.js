@@ -48,7 +48,7 @@ import InvitationDetails from '../containers/invitations/InvitationDetails';
 import ShoppingCart from "../containers/pages/store/shopping-cart/ShoppingCart";
 import OnlyHeadLayout from "../containers/layouts/OnlyHeadLayout";
 import AutoCreate from "../containers/classrooms/AutoCreate";
-import ProfileEdit from "../containers/pages/profile/ProfileEdit";
+import ProfileEdit from "../containers/profile/ProfileEdit";
 import SplashContainer from "../containers/pages/Splash";
 import PrivacyPolicy from "../containers/pages/Static/PrivacyPolicy";
 import About from "../containers/pages/Static/About";
@@ -76,7 +76,13 @@ export default () => (
       <Route exact path='/signUp' name='signUp' component={SignUpIndex} />
       <Route exact path='/signUp/parent' name='signUpParent' component={SignUpParent} />
       <Route exact path='/signUp/principal' name='signUpPrincipal' component={SignUpPrincipal} />
+      
       <Route exact layout={MainLayout} path='/store' name='Store' component={Store}/>
+      <Route exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
+      <Route exact layout={MainLayout} path='/store/category/:category' name='Store' component={Products}/>
+      <Route exact layout={MainLayout} path='/store/category/:category/:subCategory' name='Store' component={Store}/>
+      <Route exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
+      <Route exact layout={MainLayout} path='/store/products/:category/:type' name='Store' component={Products}/>       
 
       <Route exact path='/' render={() => (
         <Redirect to='/splash'/>
@@ -102,12 +108,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id/edit' name='Student' component={ProfileEdit}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
 
-      {/*Store*/}
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category' name='Store' component={Products}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory' name='Store' component={Store}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:category/:type' name='Store' component={Products}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
+      {/*Store*/}    
       <AuthenticatedRoute exact layout={MainLayout} path='/store/shopping-cart' name='Details' component={ShoppingCart}/>
 
       <AuthenticatedRoute exact layout={OnlyHeadLayout} path='/shopping/checkout/:step?' name='Checkout' component={Checkout}/>

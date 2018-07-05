@@ -98,7 +98,7 @@ class Info extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, t } = this.props;
     const { changePasswordMode, passwordFields } = this.state;
     const errors = this.props.getChangePasswordRequest.get('errors');
     const loading = this.props.getChangeImageRequest.get('loading');
@@ -108,7 +108,7 @@ class Info extends Component {
         <div className="m-portlet__body">
           <div className="m-card-profile">
             <div className="m-card-profile__title m--hide">
-              Your Profile
+              {t('yourProfile')}
             </div>
             <div className="m-card-profile__pic">
               <div className="m-card-profile__pic-wrapper">
@@ -129,7 +129,7 @@ class Info extends Component {
           <div className="text-center m--margin-top-15">
             {!changePasswordMode && <button onClick={() => {
               this._handlePasswordModeSwitch(true)
-            }} className="m-btn btn m-btn--outline-2x btn-outline-success">Change Password</button>}
+            }} className="m-btn btn m-btn--outline-2x btn-outline-success">{t('changePassword')}</button>}
           </div>
           {changePasswordMode &&
             <div className="m-widget1 m-widget1--paddingless">
@@ -138,7 +138,7 @@ class Info extends Component {
                   <div className="form-group m-form__group ">
                     <input
                       type="password"
-                      placeholder="Enter Old Password"
+                      placeholder={t('enterOldPassword')}
                       name="oldPassword"
                       onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'oldPassword')}}
                       value={passwordFields.oldPassword || ''}
@@ -149,7 +149,7 @@ class Info extends Component {
                   <div className="form-group m-form__group">
                     <input
                       type="password"
-                      placeholder="Enter New Password"
+                      placeholder={t('enterNewPassword')}
                       name="newPassword"
                       onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword')}}
                       value={passwordFields.newPassword || ''}
@@ -160,7 +160,7 @@ class Info extends Component {
                   <div className="form-group m-form__group has-danger">
                     <input
                       type="password"
-                      placeholder="Confirm Password"
+                      placeholder={t('confirmPassword')}
                       name="newPassword_confirmation"
                       onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword_confirmation')}}
                       value={passwordFields.newPassword_confirmation || ''}
@@ -171,10 +171,10 @@ class Info extends Component {
                 </div>
                 <div className="text-center m--margin-top-15">
                     <button onClick={() => {this._handlePasswordModeSwitch(false)}} className="m-btn btn m-btn--air m-btn--outline-2x m--margin-right-10 btn-outline-danger">
-                        Cancel
+                        {t('cancel')}
                     </button>
                     <button className="m-btn btn m-btn--outline-2x btn-outline-success">
-                        Change
+                        {t('change')}
                     </button>
                 </div>
               </form>
@@ -187,7 +187,7 @@ class Info extends Component {
           open={this.state.uploadModal}
           onClose={() => this._closeUploadModal()}
         >
-         <Card title="Upload Avatar 123" icon="fa fa-upload" style={{minWidth:'280px'}}>
+         <Card title={t('uploadAvatar')} icon="fa fa-upload" style={{minWidth:'280px'}}>
             <ImageCropper saveButton={true} circularButton onSubmit={(cropImg) => this._changeImage(cropImg)} onCrop={(cropImg) => this._setCroppedImage(cropImg)} setFile={(img) => this._setImage(img)}/>
          </Card>
         </Dialog>
@@ -207,4 +207,4 @@ Info = connect(
   })
 )(Info);
 
-export default Info;
+export default translate('translations')(Info);

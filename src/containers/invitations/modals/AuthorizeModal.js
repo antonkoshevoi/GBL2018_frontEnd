@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core';
 import Modal from '../../../components/ui/Modal';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 
 class AuthorizeModal extends Component {
   static propTypes = {
@@ -15,22 +16,22 @@ class AuthorizeModal extends Component {
   };
 
   render () {
-    const { isOpen, onClose, toLogin, toRegistration } = this.props;
+    const { isOpen, onClose, toLogin, toRegistration, t } = this.props;
 
     return (
       <Modal isOpen={isOpen} onClose={() => onClose()}>
         <AppBar position='static' color='primary' className='dialogAppBar'>
           <Toolbar>
             <Typography type='title' color='inherit'>
-              Thanks for joining the Demo
+              {t('thanksForJoiningDemo')}
             </Typography>
           </Toolbar>
         </AppBar>
 
         <DialogContent className='m--margin-top-25'>
           <DialogContentText>
-            <p>Please login if you already have an account otherwise you may not register a new account.</p>
-            <p>Note that you will not be charged for this course or asked for a credit card.</p>
+            <p>{t('joinDemoLoginMessage')}</p>
+            <p>{t('joinDemoCorseIsFreeMessage')}</p>
           </DialogContentText>
         </DialogContent>
         <Divider className='full-width'/>
@@ -42,7 +43,7 @@ class AuthorizeModal extends Component {
             raised
             className='m--margin-top-10 pull-right mt-btn'
             color='primary'>
-            Login
+            {t('login')}
           </Button>
           <Button
             onClick={() => { toRegistration() }}
@@ -51,7 +52,7 @@ class AuthorizeModal extends Component {
             raised
             className='m--margin-top-10 pull-right mt-btn'
             color='primary'>
-            Register
+            {t('register')}
           </Button>
         </DialogActions>
       </Modal>
@@ -67,4 +68,4 @@ AuthorizeModal = connect(
   })
 )(AuthorizeModal);
 
-export default AuthorizeModal;
+export default translate('translations')(AuthorizeModal);

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Header from '../ui/Header';
-import Wrapper from '../../components/layouts/Wrapper';
 import {withRouter} from "react-router-dom";
 import {generateLinkId} from "../../helpers/utils";
 

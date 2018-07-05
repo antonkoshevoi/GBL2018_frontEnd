@@ -27,11 +27,9 @@ class UserDashboard extends Component {
     }
   }
 
-
   componentDidMount() {
     this._getRecords();
   }
-
 
   _getRecords() {
     const {params} = this.state;
@@ -114,7 +112,6 @@ class UserDashboard extends Component {
     })
   }
 
-
   _renderRosterStats(stats) {
     return stats.map(function (item, i) {
       return (
@@ -133,7 +130,6 @@ class UserDashboard extends Component {
   }
 
   render() {
-
     const {records} = this.props;
     return (
       <div className="fadeInLeft  animated">
@@ -182,9 +178,9 @@ UserDashboard = connect(
   (dispatch) => ({
     getRecords: (params = {type: 'recent'}) => {
       dispatch(getRecords(params))
-    },
+    }
   })
 )(UserDashboard);
 
 
-export default withRouter(translate("UserDashboard")(UserDashboard));
+export default withRouter(translate("translations")(UserDashboard));

@@ -56,7 +56,7 @@ class SecondStepForm extends Component {
   }
 
   _handleInputChange(event) {
-    const { name, type, value, checked } = event.target;
+    const { name, value } = event.target;
 
     this.setState({
       form: {

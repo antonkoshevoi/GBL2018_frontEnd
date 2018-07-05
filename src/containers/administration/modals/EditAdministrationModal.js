@@ -7,12 +7,9 @@ import {
     Button, DialogActions, DialogContent
 } from '@material-ui/core';
 import {connect} from 'react-redux';
-import {
-    selectGetSingleRecordRequest, selectUpdateRequest
-} from '../../../redux/administration/selectors';
-import {
-    update, resetGetSingleRecordRequest, resetUpdateRequest,
-} from '../../../redux/administration/actions';
+import {translate} from 'react-i18next';
+import {selectGetSingleRecordRequest, selectUpdateRequest} from '../../../redux/administration/selectors';
+import {update, resetGetSingleRecordRequest, resetUpdateRequest} from '../../../redux/administration/actions';
 import Modal from "../../../components/ui/Modal";
 import AdministrationForm from "../forms/AdministrationForm";
 import ImageCropper from "../../../components/ui/ImageCropper";
@@ -100,7 +97,7 @@ class EditAdministrationModal extends Component {
     }
 
     render() {
-        const {isOpen, updateRequest, getSingleRecordRequest} = this.props;
+        const {isOpen, updateRequest, getSingleRecordRequest, t} = this.props;
         const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');
         const errorMessage = updateRequest.get('errorMessage');
         const errors = updateRequest.get('errors');
@@ -117,7 +114,7 @@ class EditAdministrationModal extends Component {
                             )}
                         </IconButton>
                         <Typography type="title" color="inherit">
-                            Edit user
+                            {t('editUser')}
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -153,7 +150,7 @@ class EditAdministrationModal extends Component {
                         variant="raised"
                         className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
                         color='primary'>
-                        Update User
+                        {t('updateUser')}
                     </Button>
                 </DialogActions>
             </Modal>
@@ -179,4 +176,4 @@ EditAdministrationModal = connect(
     })
 )(EditAdministrationModal);
 
-export default EditAdministrationModal;
+export default translate('translations')(EditAdministrationModal);

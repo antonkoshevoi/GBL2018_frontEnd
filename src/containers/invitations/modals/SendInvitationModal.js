@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,
-  DialogContentText,
+  DialogContent, 
   Icon, IconButton,
   Toolbar, Typography,
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import { selectCreateRequest } from '../../../redux/invitations/selectors';
 import { create, resetCreateRequest } from '../../../redux/invitations/actions';
 import Modal from '../../../components/ui/Modal';
@@ -65,7 +65,7 @@ class SendInvitationModal extends Component {
   }
 
   render() {
-    const { isOpen, createRequest } = this.props;
+    const { isOpen, createRequest, t } = this.props;
     const loading = createRequest.get('loading');
     const errors = createRequest.get('errors');
 
@@ -81,16 +81,13 @@ class SendInvitationModal extends Component {
               )}
             </IconButton>
             <Typography type='title' color='inherit'>
-              Demo Course Invitation
+              {t('demoCourseInvitation')}
             </Typography>
           </Toolbar>
         </AppBar>
 
         <DialogContent className='m--margin-top-25'>
           <form id='create-student-form' onSubmit={(e) => { this._onSubmit(e) }}>
-            <DialogContentText>
-              {/*{errorMessage && <span>{errorMessage}</span>}*/}
-            </DialogContentText>
             <InvitationForm
               onChange={(student) => { this._onChange(student) }}
               invitation={this.state.invitation}
@@ -106,7 +103,7 @@ class SendInvitationModal extends Component {
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Send invitation
+            {t('sendInvitation')}
           </Button>
         </DialogActions>
       </Modal>
@@ -124,4 +121,4 @@ SendInvitationModal = connect(
   })
 )(SendInvitationModal);
 
-export default SendInvitationModal;
+export default translate('translations')(SendInvitationModal);
