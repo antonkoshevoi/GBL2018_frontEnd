@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MainLayout from '../layouts/MainLayout';
 import { connect } from 'react-redux';
+import { translate, Interpolate } from 'react-i18next';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
 import { selectGetSingleRecordRequest } from '../../redux/invitations/selectors';
 import { acceptInvitation, declineInvitation, getSingleRecord } from '../../redux/invitations/actions';
@@ -53,19 +54,17 @@ class InvitationDetails extends Component {
   }
 
   _renderInvitation () {
-    const { getRecordRequest } =  this.props;
+    const { getRecordRequest, t } =  this.props;
     const loading = getRecordRequest.get('loading');
     const record = getRecordRequest.get('record');
-    const image = record.getIn(['course', 'image']);
-    const sender = record.getIn(['sender', 'name']);
-    const title = record.getIn(['course', 'crsTitle']);
+    const image = record.getIn(['course', 'image']);    
     const description = record.getIn(['course', 'crsDescription']);
 
     if (record.get('isAccepted')) {
       return (
         <div>
-          <h3>Demo Course Invitation</h3>
-          <h2>Thanks for joining the Demo!</h2>
+          <h3>{t('demoCourseInvitation')}</h3>
+          <h2>{t('invitationAccepted')}</h2>
         </div>
       );
     }
@@ -73,17 +72,20 @@ class InvitationDetails extends Component {
     if (record.get('isDeclined')) {
       return (
         <div>
-          <h3>Demo Course Invitation</h3>
-          <h2>Invitation was declined.</h2>
+          <h3>{t('demoCourseInvitation')}</h3>
+          <h2>{t('invitationDeclined')}</h2>
         </div>
       );
     }
+    
+    const sender = <h4>{record.getIn(['sender', 'name'])}</h4>;
+    const course = <h2>{record.getIn(['course', 'crsTitle'])}</h2>;
 
     return loading ? (
       <h2 className='text-center'><CircularProgress color='accent'/></h2>
     ) : (
       <div>
-        <h3>Demo Course Invitation</h3>
+        <h3>{t('demoCourseInvitation')}</h3>
 
         <Grid container spacing={24}>
           {image && (
@@ -91,26 +93,24 @@ class InvitationDetails extends Component {
               padding: 20,
               textAlign: 'center'
             }}>
-              <img src={image}/>
+              <img src={image} alt="Demo Course" />
             </Grid>
           )}
-          <Grid item sm={image ? 9 : 12} style={{ padding: 20 }}>
-            <h4>{ sender }</h4>
-            <p>has invited you to join their Demo launch of</p>
-
-            <h2>{ title }</h2>
-
+          <Grid item sm={image ? 9 : 12} style={{ padding: 20 }}>            
+            <p>
+                <Interpolate i18nKey="userInvitedYouToDemoCourse" sender={sender} course={course} />
+            </p>            
             <br/>
-            <h4>Description:</h4>
+            <h4>{t('description')}:</h4>
             <p>{ description }</p>
           </Grid>
 
           <Grid item sm={12} style={{ textAlign: 'center', marginBottom: 20 }}>
             <Button raised onClick={() => { this._accept() }} className='mt-btn mt-btn-success m--margin-left-30 m--margin-right-30'>
-              Accept
+              {t('accept')}
             </Button>
             <Button raised onClick={() => { this._decline() }} className='mt-btn mt-btn-danger m--margin-left-30 m--margin-right-30'>
-              Decline
+              {t('decline')}
             </Button>
           </Grid>
         </Grid>
@@ -167,4 +167,4 @@ InvitationDetails = connect(
   }),
 )(InvitationDetails);
 
-export default InvitationDetails;
+export default translate('translations')(InvitationDetails);

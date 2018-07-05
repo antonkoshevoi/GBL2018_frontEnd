@@ -150,7 +150,7 @@ class InvitationsTab extends Component {
    * @private
    */
   _renderRecords () {
-    const { records, getRecordsRequest } = this.props;
+    const { records, getRecordsRequest, t } = this.props;
     const loading = getRecordsRequest.get('loading');
 
     if (!loading && records.size === 0) {
@@ -158,7 +158,7 @@ class InvitationsTab extends Component {
         <tr>
           <td>
             <div className='table-message'>
-              <h2>Invitations Not Found...</h2>
+              <h2>{t('invitationsNotFound')}</h2>
             </div>
           </td>
         </tr>
@@ -184,14 +184,16 @@ class InvitationsTab extends Component {
     ));
   }
   _renderStatus (record) {
+    const { t } = this.props;
+  
     if(record.get('isAccepted')) {
-      return <span className='m-badge m-badge--success m-badge--wide'>Accepted</span>;
+      return <span className='m-badge m-badge--success m-badge--wide'>{t('accepted')}</span>;
     }
     if(record.get('isDeclined')) {
-      return <span className='m-badge m-badge--danger m-badge--wide'>Declined</span>;
+      return <span className='m-badge m-badge--danger m-badge--wide'>{t('declined')}</span>;
     }
 
-    return <span className='m-badge m-badge--brand m-badge--wide'>Pending</span>;
+    return <span className='m-badge m-badge--brand m-badge--wide'>{t('pending')}</span>;
   }
 
   /**
@@ -207,7 +209,7 @@ class InvitationsTab extends Component {
   }
 
   render() {
-    const { getRecordsRequest, pagination } = this.props;
+    const { getRecordsRequest, pagination, t } = this.props;
     const { createModalIsOpen, sorters, page, perPage } = this.state;
     const loading = getRecordsRequest.get('loading');
     const totalPages = pagination.get('totalPages');
@@ -217,7 +219,6 @@ class InvitationsTab extends Component {
         <div className='m-portlet__body'>
           <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
             <div className='row align-items-center'>
-
               <div className='col-xl-12 order-1 order-xl-2 m--align-right'>
                 <Select
                   className='pull-left table-select'
@@ -230,7 +231,7 @@ class InvitationsTab extends Component {
                   <MenuItem value={100}>100</MenuItem>
                 </Select>
                 <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
-                  Send new invitation
+                  {t('sendNewInvitation')}
                   <Icon style={{marginLeft:'5px'}}>send</Icon>
                 </Button>
               </div>
@@ -239,12 +240,12 @@ class InvitationsTab extends Component {
           <Table>
             <Thead>
             <HeadRow>
-              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' first={true} width='152px'>Email</Th>
-              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>Name</Th>
-              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['status']} name='status' width='132px'>Status</Th>
-              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>Course</Th>
-              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['publisher']} name='publisher' width='132px'>Publisher</Th>
-              <Th width='100px'>Actions</Th>
+              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' first={true} width='152px'>{t('email')}</Th>
+              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
+              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['status']} name='status' width='132px'>{t('status')}</Th>
+              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>{t('course')}</Th>
+              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['publisher']} name='publisher' width='132px'>{t('publisher')}</Th>
+              <Th width='100px'>{t('actions')}</Th>
             </HeadRow>
             </Thead>
 
@@ -283,4 +284,4 @@ InvitationsTab = connect(
   })
 )(InvitationsTab);
 
-export default translate('invitations')(InvitationsTab);
+export default translate('translations')(InvitationsTab);

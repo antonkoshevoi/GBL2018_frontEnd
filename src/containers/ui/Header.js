@@ -2,24 +2,15 @@ import React, {Component} from 'react';
 import logo from '../../media/images/logo.png';
 import {translate} from 'react-i18next';
 import i18n from '../../configs/i18n';
-import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 import UserMenu from "./UserMenu";
 import {connect} from 'react-redux';
 import {logout} from '../../redux/auth/actions';
-import Messages from "../pushers/Messages";
-import Notifications from "../pushers/Notifications";
-import Tasks from "../pushers/Tasks";
-import {NavLink, withRouter,Redirect} from "react-router-dom";
-
+import {NavLink} from "react-router-dom";
 import {Icon, IconButton} from '@material-ui/core';
 import {getCartRecords} from "../../redux/store/actions";
-import {
-  selectAddToCartRequest, selectCardRedirect, selectCartRecords,
-  selectGetCartRecordsRequest
-} from "../../redux/store/selectors";
+import {selectCartRecords} from "../../redux/store/selectors";
 import Settings from "../pushers/Settings";
 import TabMenu from "../pushers/TabMenu";
-import {selectUserData} from "../../redux/user/selectors";
 import {getSchool} from "../../redux/schools/actions";
 import {selectSchool} from "../../redux/schools/selectors";
 
@@ -68,7 +59,7 @@ class Header extends Component {
   }
 
   _renderHeader() {
-    const {logout, cartRecords,cartAddRedirect, addToCartRequest, cartRecordsRequest, userData, auth} = this.props;
+    const {logout, cartRecords, auth} = this.props;
     const school = this.props.schoolRequest.get('record').toJS();
     const {headerPosition} = this.state;
     console.log();
@@ -140,12 +131,8 @@ class Header extends Component {
 Header = connect(
   (state) => ({
     auth: state.auth,
-    addToCartRequest: selectAddToCartRequest(state),
-    cartRecordsRequest: selectGetCartRecordsRequest(state),
-    cartRecords: selectCartRecords(state),
-    cartAddRedirect: selectCardRedirect(state),
-    userData: selectUserData(state),
-    schoolRequest: selectSchool(state),
+    cartRecords: selectCartRecords(state),        
+    schoolRequest: selectSchool(state)
   }),
   (dispatch) => ({
     logout: () => {

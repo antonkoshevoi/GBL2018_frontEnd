@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import { getDemoClassrooms } from '../../../redux/classrooms/actions';
 import { selectGetRecordsRequest, selectRecords } from '../../../redux/classrooms/selectors';
 
@@ -45,13 +46,13 @@ class InvitationForm extends Component {
   }
 
   render() {
-    const { invitation, errors } = this.props;
+    const { invitation, errors, t } = this.props;
 
     return (
       <div className='row'>
         <div className='col-sm-8 m-auto'>
           <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Course</InputLabel>
+            <InputLabel htmlFor='name-error'>{t('course')}</InputLabel>
             <Select
                 primarytext=""
                 name='classroomId'
@@ -64,7 +65,7 @@ class InvitationForm extends Component {
           </FormControl>
 
           <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Email</InputLabel>
+            <InputLabel htmlFor='name-error'>{t('email')}</InputLabel>
             <Input
               fullWidth
               name='email'
@@ -76,7 +77,7 @@ class InvitationForm extends Component {
           </FormControl>
 
           <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Name</InputLabel>
+            <InputLabel htmlFor='name-error'>{t('name')}</InputLabel>
             <Input
               fullWidth
               name='name'
@@ -88,7 +89,7 @@ class InvitationForm extends Component {
           </FormControl>
 
           <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>Message</InputLabel>
+            <InputLabel htmlFor='name-error'>{t('message')}</InputLabel>
             <Input
               fullWidth
               name='message'

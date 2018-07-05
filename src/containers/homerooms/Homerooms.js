@@ -204,7 +204,7 @@ class Homerooms extends Component {
   }
 
   render() {
-    const { getRecordsRequest, pagination } = this.props;
+    const { getRecordsRequest, pagination, t } = this.props;
     const { createModalIsOpen, editModalIsOpen, sorters, page, perPage } = this.state;
     const loading = getRecordsRequest.get('loading');
     const totalPages = pagination.get('totalPages');
@@ -216,11 +216,9 @@ class Homerooms extends Component {
           <div className='m-portlet__head'>
             <div className='m-portlet__head-caption'>
               <div className='m-portlet__head-title'>
-              <span className='m-portlet__head-icon'>
-							  <i className='la la-user' style={{fontSize:'55px'}}></i>
-						  </span>
+              <span className='m-portlet__head-icon'><i className='la la-user' style={{fontSize:'55px'}}></i></span>
                 <h3 className='m-portlet__head-text'>
-                  Homerooms
+                  {t('homerooms')}
                 </h3>
               </div>
             </div>
@@ -252,7 +250,7 @@ class Homerooms extends Component {
                     '[HomeRooms][Create][Any]'
                   ]}>
                     <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
-                      Add New
+                      {t('addNew')}
                       <Icon style={{marginLeft:'5px'}}>add</Icon>
                     </Button>
                   </HasPermission>
@@ -261,24 +259,22 @@ class Homerooms extends Component {
                   ]}>
                     <NavLink className='link-btn' to='/homerooms/csv'>
                       <Button variant="raised" className='btn-success mt-btn mt-btn-success'>
-                        Bulk Add homerooms
+                        {t('bulkAddHomerooms')}
                         <Icon style={{marginLeft:'5px'}}>person</Icon>
                       </Button>
                     </NavLink>
                   </HasPermission>
                 </div>
-
               </div>
             </div>
-
             <Table>
               <Thead>
                 <HeadRow>
                   <Th first={true} width='100px'>#</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>Name</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>School</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>Teacher</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='132px'>Students Count</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>{t('teacher')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='132px'>{t('studentsCount')}</Th>
                   <Th width='100px'>Actions</Th>
                 </HeadRow>
               </Thead>
@@ -329,4 +325,4 @@ Homerooms = connect(
 )(Homerooms);
 
 
-export default translate('homerooms')(Homerooms);
+export default translate('translations')(Homerooms);
