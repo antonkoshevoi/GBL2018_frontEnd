@@ -79,6 +79,10 @@ export default () => (
       
       <Route exact layout={MainLayout} path='/store' name='Store' component={Store}/>
       <Route exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
+      <Route exact layout={MainLayout} path='/store/category/:category' name='Store' component={Products}/>
+      <Route exact layout={MainLayout} path='/store/category/:category/:subCategory' name='Store' component={Store}/>
+      <Route exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
+      <Route exact layout={MainLayout} path='/store/products/:category/:type' name='Store' component={Products}/>       
 
       <Route exact path='/' render={() => (
         <Redirect to='/splash'/>
@@ -104,11 +108,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id/edit' name='Student' component={ProfileEdit}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
 
-      {/*Store*/}
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category' name='Store' component={Products}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory' name='Store' component={Store}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/store/products/:category/:type' name='Store' component={Products}/>      
+      {/*Store*/}    
       <AuthenticatedRoute exact layout={MainLayout} path='/store/shopping-cart' name='Details' component={ShoppingCart}/>
 
       <AuthenticatedRoute exact layout={OnlyHeadLayout} path='/shopping/checkout/:step?' name='Checkout' component={Checkout}/>

@@ -20,12 +20,6 @@ class Products extends Component {
     }
   }
 
-  componentDidMount() {
-    // console.log(this.props)
-    // this._getRecords();
-  }
-
-
   _getRecords(params) {
     this.props.getRecords(params);
   }
