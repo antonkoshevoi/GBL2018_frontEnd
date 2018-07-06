@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { MenuItem } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import { selectGetSchoolHomeroomsRequest, selectSchools } from '../../../redux/schools/selectors';
 import { getSchoolHomerooms, getSchools } from '../../../redux/schools/actions';
 import MetronicSelect from "../../../components/ui/metronic/MetronicSelect";
@@ -73,42 +74,42 @@ class TeacherForm extends Component {
   }
 
   render() {
-    const { teacher, errors } = this.props;
+    const { teacher, errors, t} = this.props;
 
     return (
         <div className='row'>
             <div className='col-sm-12 m-auto'>
                 <div className="m-form">
                     <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3" htmlFor="username">Username</label>
+                        <label className="col-form-label col-lg-3" htmlFor="username">{t('username')}</label>
                         <div className="col-lg-9">
                             <input type="text" onChange={(e) => { this._handleInputChange(e) }} value={teacher.username || ''} className="form-control m-input--air form-control-success m-input" name="username" id="username"/>
                             {errors && errors.get('username') && <div className="form-control-feedback error">{ errors.get('username').get(0) }</div>}
                         </div>
                     </div>
                     <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3" htmlFor="password">Password</label>
+                        <label className="col-form-label col-lg-3" htmlFor="password">{t('password')}</label>
                         <div className="col-lg-9">
                             <input type="password" onChange={(e) => { this._handleInputChange(e) }} value={teacher.password || ''} className="form-control m-input--air form-control-success m-input" name="password" id="password"/>
                             {errors && errors.get('password') && <div className="form-control-feedback error">{ errors.get('password').get(0) }</div>}
                         </div>
                     </div>
                     <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3" htmlFor="email">Email</label>
+                        <label className="col-form-label col-lg-3" htmlFor="email">{t('email')}</label>
                         <div className="col-lg-9">
                             <input type="email" onChange={(e) => { this._handleInputChange(e) }} value={teacher.email || ''} className="form-control m-input--air form-control-success m-input" name="email" id="email"/>
                             {errors && errors.get('email') && <div className="form-control-feedback error">{ errors.get('email').get(0) }</div>}
                         </div>
                     </div>
                     <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3" htmlFor="firsName">First Name</label>
+                        <label className="col-form-label col-lg-3" htmlFor="firstName">{t('firstName')}</label>
                         <div className="col-lg-9">
                             <input type="text" onChange={(e) => { this._handleInputChange(e) }} value={teacher.firstName || ''} className="form-control m-input--air form-control-success m-input" name="firstName" id="firstName"/>
                             {errors && errors.get('firstName') && <div className="form-control-feedback error">{ errors.get('firstName').get(0) }</div>}
                         </div>
                     </div>
                     <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3" htmlFor="lastName">Last Name</label>
+                        <label className="col-form-label col-lg-3" htmlFor="lastName">{t('lastName')}</label>
                         <div className="col-lg-9">
                             <input type="text" onChange={(e) => { this._handleInputChange(e) }} value={teacher.lastName || ''} className="form-control m-input--air form-control-success m-input" name="lastName" id="lastName"/>
                             {errors && errors.get('lastName') && <div className="form-control-feedback error">{ errors.get('lastName').get(0) }</div>}
@@ -116,7 +117,7 @@ class TeacherForm extends Component {
                     </div>
 
                     <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3" htmlFor="gender">Select Gender</label>
+                        <label className="col-form-label col-lg-3" htmlFor="gender">{t('selectGender')}</label>
                         <div className="col-lg-9">
                             <MetronicSelect
                                 primarytext=""
@@ -125,21 +126,21 @@ class TeacherForm extends Component {
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 value={teacher.gender || ''}>
                                 <MenuItem value={null} primarytext=""/>
-                                <MenuItem value='1'>Male</MenuItem>
-                                <MenuItem value='0'>Female</MenuItem>
+                                <MenuItem value='1'>{t('male')}</MenuItem>
+                                <MenuItem value='0'>{t('female')}</MenuItem>
                             </MetronicSelect>
                             {errors && errors.get('gender') && <div className="form-control-feedback error">{ errors.get('gender').get(0) }</div>}
                         </div>
                     </div>
                     <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3" htmlFor="firsName">Phone Number</label>
+                        <label className="col-form-label col-lg-3" htmlFor="phoneNumber">{t('phoneNumber')}</label>
                         <div className="col-lg-9">
                             <input type="text" onChange={(e) => { this._handleInputChange(e) }} value={teacher.phoneNumber || ''} className="form-control m-input--air form-control-success m-input" name="phoneNumber" id="phoneNumber"/>
                             {errors && errors.get('phoneNumber') && <div className="form-control-feedback error">{ errors.get('phoneNumber').get(0) }</div>}
                         </div>
                     </div>
                     <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3" htmlFor="homeroomId">Homeroom</label>
+                        <label className="col-form-label col-lg-3" htmlFor="homeroomId">{t('homeroom')}</label>
                         <div className="col-lg-9">
                             <MetronicSelect
                                 primarytext=""
@@ -154,23 +155,6 @@ class TeacherForm extends Component {
                         </div>
                     </div>
                 </div>
-
-
-
-
-                {/*<FormControl className='full-width form-inputs'>*/}
-                {/*<InputLabel htmlFor='name-error'>School</InputLabel>*/}
-                {/*<Select*/}
-                {/*primarytext=""*/}
-                {/*name='schoolId'*/}
-                {/*onChange={(e) => { this._handleSchoolChange(e) }}*/}
-                {/*value={teacher.schoolId || ''}>*/}
-                {/*<MenuItem value={null} primarytext=""/>*/}
-                {/*{this._renderSchools()}*/}
-                {/*</Select>*/}
-                {/*{errors && errors.get('schoolId') && <FormHelperText error>{ errors.get('schoolId').get(0) }</FormHelperText>}*/}
-                {/*</FormControl>*/}
-
             </div>
         </div>
     );
@@ -188,4 +172,4 @@ TeacherForm = connect(
   })
 )(TeacherForm);
 
-export default TeacherForm;
+export default translate('translations')(TeacherForm);

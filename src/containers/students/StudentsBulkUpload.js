@@ -2,14 +2,18 @@ import React, {Component} from 'react';
 import CsvUploadSection from "../../components/CsvUploadSection";
 import Insctruction from "../../components/ui/Insctruction";
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import { bulkUpload, resetBulkUploadRequest } from '../../redux/students/actions';
 import {getSchool, getSchools} from '../../redux/schools/actions';
 import { selectBulkUploadRequest } from '../../redux/students/selectors';
 import {selectSchool, selectSchools} from '../../redux/schools/selectors';
 
 class StudentsBulkUpload extends Component {
-
-  state = {
+  
+  constructor (props) {
+    super(props);
+    const { t } = this.props;
+    this.state = {
       csvExampleName: 'students.csv',
       csvTemplateHeaders: [
           {label: 'username', key: 'username'},
@@ -26,53 +30,28 @@ class StudentsBulkUpload extends Component {
           {username: 'Student 2', password: '123456', firstname: 'Student 2', lastname: 'Student 2', email: 'willy2@gmail.com', phone: '(095)36-36-55', homeroom: '2', student_id: '2'},
           {username: 'Student 3', password: '123456', firstname: 'Student 3', lastname: 'Student 3', email: 'willy3@gmail.com', phone: '(098)36-36-55', homeroom: '3', student_id: '3'}
       ],
-    instruction: [
-      {
-        title: 'Select the School, to which the users will be assigned, from the list',
-      },
-      {
-        title: 'Use the Homeroom names as how they are listed in this system',
-      },
-      {
-        title: 'Upload the csv file, with the following columns and separated by a comma \' , \'',
-        subList: [
+      instruction: [
+          {title: t('bulkAddInstruction1')},
+          {title: t('bulkAddInstruction2')},
           {
-            title: 'username'
+            title: t('bulkAddInstruction3'),
+            subList: [
+                {title: 'username'},
+                {title: 'password'},
+                {title: 'firstname'},
+                {title: 'lastname'},
+                {title: 'email'},
+                {title: 'phone'},
+                {title: 'homeroom_id'},
+                {title: 'student_id'}
+            ]
           },
-          {
-            title: 'password'
-          },
-          {
-            title: 'firstname'
-          },
-          {
-            title: 'lastname'
-          },
-          {
-            title: 'email'
-          },
-          {
-            title: 'phone'
-          },
-          {
-            title: 'homeroom_id'
-          },
-          {
-            title: 'student_id'
-          },
+          {title: t('bulkAddInstruction4')},
+          {title: t('bulkAddInstruction5')},
+          {title: t('bulkAddInstruction6')}
         ]
-      },
-      {
-        title: 'Make sure that you place the column name headings in the first row',
-      },
-      {
-        title: 'Make sure that data is arranged in the order as the columns',
-      },
-      {
-        title: 'You may leave other columns data blank except for the username and password. If they are empty, place a \'\' in their column position.',
-      },
-    ]
-  };
+      };
+  }  
 
   componentDidMount () {
     this.props.getSchools();
@@ -127,4 +106,4 @@ StudentsBulkUpload = connect(
   })
 )(StudentsBulkUpload);
 
-export default StudentsBulkUpload;
+export default translate('translations')(StudentsBulkUpload);

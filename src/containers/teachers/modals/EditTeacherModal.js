@@ -2,20 +2,16 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,
-  DialogContentText,
+  DialogContent,  
   Icon, IconButton,
   Toolbar, Typography,
   Divider, Button,
   DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import {
-  selectGetSingleRecordRequest, selectUpdateRequest,
-} from '../../../redux/teachers/selectors';
-import {
-  resetGetSingleRecordRequest, resetUpdateRequest, update
-} from '../../../redux/teachers/actions';
+import { translate } from 'react-i18next';
+import { selectGetSingleRecordRequest, selectUpdateRequest } from '../../../redux/teachers/selectors';
+import { resetGetSingleRecordRequest, resetUpdateRequest, update } from '../../../redux/teachers/actions';
 import Modal from "../../../components/ui/Modal";
 import TeacherForm from "../form/TeacherForm";
 import ImageCropper from "../../../components/ui/ImageCropper";
@@ -103,7 +99,7 @@ class EditTeacherModal extends Component {
     }
 
   render() {
-    const { isOpen, updateRequest, getSingleRecordRequest } = this.props;
+    const { isOpen, updateRequest, getSingleRecordRequest, t } = this.props;
     const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');
     const errorMessage = updateRequest.get('errorMessage');
     const errors = updateRequest.get('errors');
@@ -120,15 +116,12 @@ class EditTeacherModal extends Component {
               )}
             </IconButton>
             <Typography type="title" color="inherit" >
-              Edit Teacher
+              {t('editTeacher')}
             </Typography>
           </Toolbar>
         </AppBar>
 
         <DialogContent className="m--margin-top-25">
-          <DialogContentText>
-            {/*{errorMessage && <span>{errorMessage}</span>}*/}
-          </DialogContentText>
           <form id='update-teacher-form' onSubmit={(e) => { this._onSubmit(e) }}>
               <div className="row">
                   <div className="col-md-6">
@@ -156,7 +149,7 @@ class EditTeacherModal extends Component {
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Update Teacher
+            {t('updateTeacher')}
           </Button>
         </DialogActions>
       </Modal>
@@ -176,4 +169,4 @@ EditTeacherModal = connect(
   })
 )(EditTeacherModal);
 
-export default EditTeacherModal;
+export default translate('translations')(EditTeacherModal);

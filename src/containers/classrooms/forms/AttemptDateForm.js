@@ -7,6 +7,8 @@ import { scheduleLesson } from '../../../redux/classrooms/actions';
 
 class AttemptDateForm extends Component {
     
+    picker;
+
     static propTypes = {
         lesson:      PropTypes.object.isRequired,
         classroomId: PropTypes.any.isRequired
@@ -15,8 +17,7 @@ class AttemptDateForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            attDate: props.lesson.attDate,            
-            picker: null
+            attDate: props.lesson.attDate
         };
     }
     
@@ -26,8 +27,8 @@ class AttemptDateForm extends Component {
         this.props.scheduleLessonRequest.set('id', lesson.lessonId);
     }    
 
-    _showDatePicker = function () {
-        this.state.picker.open();
+    openPicker = () => {
+        this.picker.open();
     }
 
     _changeAttDate = function (date) {
@@ -51,13 +52,13 @@ class AttemptDateForm extends Component {
         return (                
             <div className="text-center" id={'lesson-att-date-' + lesson.lessonId}>
                 <p className="attemp-date">{attDate}</p>                
-                <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => {this._showDatePicker()}}>
+                <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={this.openPicker}>
                     <i className='la la-pencil'></i>
                 </button>                    
                 <div style={{'display': 'none'}}>   
                     <DatePicker
                       name={'lesson-att-date-' + lesson.lessonId}                      
-                      ref={(node) => {this.state.picker = node;}}                      
+                      ref={(node) => { this.picker = node; }}
                       value={this.state.attDate || ''}                      
                       onChange={(date) => {this._changeAttDate(date)}}                      
                       disabled={scheduleLessonRequest.get('loading')}
