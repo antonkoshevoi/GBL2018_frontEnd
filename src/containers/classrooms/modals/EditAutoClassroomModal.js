@@ -7,6 +7,7 @@ import {
   Toolbar, Typography,
   Divider, Button, DialogActions, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem
 } from '@material-ui/core';
+import {translate} from 'react-i18next';
 import {connect} from 'react-redux';
 import {
   selectGetSingleRecordRequest,
@@ -143,6 +144,7 @@ class EditAutoClassroomModal extends Component {
 
   _renderRollOverDay(){
     const {taskConfig} = this.state;
+    const {t} = this.props;
     const days = Array.from(Array(28).keys());
     return (
         <div>
@@ -150,19 +152,19 @@ class EditAutoClassroomModal extends Component {
 
         <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
           <FormControl>
-            <InputLabel htmlFor="age-simple">Rollover day</InputLabel>
+            <InputLabel htmlFor="age-simple">{t('rolloverDay')}</InputLabel>
             <Select
               name="rollOver"
               value={taskConfig.autoCreateTask.rollOver || ''}
               onChange={this._handleInputChange}
             >
-              <MenuItem value={'Monday'}>Monday</MenuItem>
-              <MenuItem value={'Tuesday'}>Tuesday</MenuItem>
-              <MenuItem value={'Wednesday'}>Wednesday</MenuItem>
-              <MenuItem value={'Thursday'}>Thursday</MenuItem>
-              <MenuItem value={'Friday'}>Friday</MenuItem>
-              <MenuItem value={'Saturday'}>Saturday</MenuItem>
-              <MenuItem value={'Sunday'}>Sunday</MenuItem>
+              <MenuItem value={'Monday'}>{t('monday')}</MenuItem>
+              <MenuItem value={'Tuesday'}>{t('tuesday')}</MenuItem>
+              <MenuItem value={'Wednesday'}>{t('wednesday')}</MenuItem>
+              <MenuItem value={'Thursday'}>{t('thursday')}</MenuItem>
+              <MenuItem value={'Friday'}>{t('friday')}</MenuItem>
+              <MenuItem value={'Saturday'}>{t('saturday')}</MenuItem>
+              <MenuItem value={'Sunday'}>{t('sunday')}</MenuItem>
             </Select>
           </FormControl>
         </FormControl>
@@ -172,7 +174,7 @@ class EditAutoClassroomModal extends Component {
           {taskConfig.autoCreateTask.frequencyId == 2 &&
           <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
             <FormControl>
-              <InputLabel htmlFor="age-simple">Rollover day number</InputLabel>
+              <InputLabel htmlFor="age-simple">{t('rolloverDayNumber')}</InputLabel>
               <Select
                 name="rollOver"
                 value={+taskConfig.autoCreateTask.rollOver || ''}
@@ -184,17 +186,14 @@ class EditAutoClassroomModal extends Component {
             </FormControl>
           </FormControl>
           }
-
         </div>
-
-  )
-
+    )
   }
 
 
   render() {
     const schoolTeachersSuccess = this.props.getSchoolTeacherRequest.get('success');
-    const {isOpen, updateRequest, getSingleRecordRequest} = this.props;
+    const {isOpen, updateRequest, getSingleRecordRequest, t} = this.props;
     const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');    
     const errors = updateRequest.get('errors');
     const {taskConfig} = this.state;
@@ -211,7 +210,7 @@ class EditAutoClassroomModal extends Component {
               )}
             </IconButton>
             <Typography type="title" color="inherit">
-              Auto Classroom Similarity Regular Creation
+              {t('autoClassroomSimilarityRegularCreation')}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -224,14 +223,14 @@ class EditAutoClassroomModal extends Component {
               <div className="col-md-12">
                 <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
                   <FormControl>
-                    <InputLabel htmlFor="age-simple">Frequency</InputLabel>
+                    <InputLabel htmlFor="age-simple">{t('frequency')}</InputLabel>
                     <Select
                       name="frequencyId"
                       value={taskConfig.autoCreateTask.frequencyId || ''}
                       onChange={this._handleInputChange}
                     >
-                      <MenuItem value={1}>Weekly</MenuItem>
-                      <MenuItem value={2}>Monthly</MenuItem>
+                      <MenuItem value={1}>{t('weekly')}</MenuItem>
+                      <MenuItem value={2}>{t('monthly')}</MenuItem>
                     </Select>
                   </FormControl>
                   {errors && errors.get('autoCreateTask.frequencyId') &&
@@ -239,7 +238,7 @@ class EditAutoClassroomModal extends Component {
                 </FormControl>
                 {this._renderRollOverDay()}
                 <FormControl aria-describedby='maxStudent-error-text' className='full-width form-inputs'>
-                  <InputLabel htmlFor='maxStudent-error'>Max Students</InputLabel>
+                  <InputLabel htmlFor='maxStudent-error'>{t('maxStudents')}</InputLabel>
                   <Input
                     type="number"
                     name='maxStudent'
@@ -251,7 +250,7 @@ class EditAutoClassroomModal extends Component {
                   <FormHelperText error>{errors.get('autoCreateTask.maxStudent').get(0)}</FormHelperText>}
                 </FormControl>
                 <FormControl aria-describedby='courseDuration-error-text' className='full-width form-inputs'>
-                  <InputLabel htmlFor='duration-error'>Duration in days</InputLabel>
+                  <InputLabel htmlFor='duration-error'>{t('durationInDays')}</InputLabel>
                   <Input
                     type="number"
                     name='courseDuration'
@@ -263,9 +262,9 @@ class EditAutoClassroomModal extends Component {
                   <FormHelperText error>{errors.get('autoCreateTask.courseDuration').get(0)}</FormHelperText>}
                 </FormControl>
                 <FormControl className='full-width form-inputs'>
-                  <InputLabel htmlFor='name-error'>Teacher</InputLabel>
+                  <InputLabel htmlFor='name-error'>{t('teacher')}</InputLabel>
                   <Select
-                    primarytext="Select Teacher"
+                    primarytext={t('selectTeacher')}
                     name='teacherId'
                     onChange={(e) => {
                       this._handleInputChange(e)
@@ -301,7 +300,7 @@ class EditAutoClassroomModal extends Component {
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Start Auto Classroom
+            {t('startAutoClassroom')}
           </Button>
         </DialogActions>
       </Modal>
@@ -328,4 +327,4 @@ EditAutoClassroomModal = connect(
   })
 )(EditAutoClassroomModal);
 
-export default EditAutoClassroomModal;
+export default translate('translations')(EditAutoClassroomModal);

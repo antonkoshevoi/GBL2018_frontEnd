@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import { Button, Icon, Select, MenuItem, Input, CircularProgress, FormControl, FormHelperText, InputLabel, Radio, FormControlLabel } from '@material-ui/core';
+import { Button, Select, MenuItem, FormHelperText, Radio, FormControlLabel } from '@material-ui/core';
 import DatePicker from '../../components/ui/DatePicker';
 import { HeadRow, Row, Table, Tbody, Td, Th, Thead, TablePreloader } from '../../components/ui/table';
 import { connect } from 'react-redux';
@@ -45,7 +45,7 @@ class ClassroomSchedule extends Component {
     }
   
     _handleInputChange(event) {
-        const { name, type, value, checked } = event.target;
+        const { name, value } = event.target;
                 
         this.setState({            
             ...this.state,        
