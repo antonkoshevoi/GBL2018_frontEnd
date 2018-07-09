@@ -129,4 +129,4 @@ Store = connect(
 )(Store);
 
 
-export default withRouter(translate("Store")(Store));
+export default withRouter(translate("translations")(Store));

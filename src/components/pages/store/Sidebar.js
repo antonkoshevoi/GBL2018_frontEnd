@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ProductCard from "./ProductCard";
 import {NavLink} from "react-router-dom";
+import {translate} from "react-i18next";
 
 class Sidebar extends Component {
 
@@ -15,15 +16,16 @@ class Sidebar extends Component {
   }
 
   _renderEmptyMsg() {
+    const {t} = this.props;
     return (
       <div className='text-center'>
-        <h5 className="m--margin-left-15 m--margin-top-15"> Products Not Found... </h5>
+        <h5 className="m--margin-left-15 m--margin-top-15">{t('productsNotFound')}</h5>
       </div>
     )
   }
 
   render() {
-    const {title, data, dataType} = this.props;
+    const {title, data, dataType, t} = this.props;
     return (
       <div>
         <div className="row">
@@ -31,7 +33,7 @@ class Sidebar extends Component {
             <h3 className="sidebarTitle">{title}</h3>
           </div>
           <div className="col-md-6 text-right m--padding-right-10 m--hide">
-            <NavLink to={`/store/products/courses/${dataType}`} className="btn no-border m-btn btn-sm btn-danger">More</NavLink>
+            <NavLink to={`/store/products/courses/${dataType}`} className="btn no-border m-btn btn-sm btn-danger">{t('more')}</NavLink>
           </div>
         </div>
         <div>
@@ -46,4 +48,4 @@ Sidebar.propTypes = {
   title: PropTypes.string,
 };
 
-export default Sidebar;
+export default translate('translations')(Sidebar);

@@ -5,6 +5,7 @@ import {
   withStyles
 } from '@material-ui/core';
 import {Manager, Popper, Target} from "react-popper";
+import {translate} from 'react-i18next';
 import classNames from 'classnames';
 import {NavLink, withRouter} from "react-router-dom";
 import {Search} from "@material-ui/icons";
@@ -27,7 +28,6 @@ const styles = {
     },
   }
 };
-
 
 class Filter extends Component {
 
@@ -58,7 +58,6 @@ class Filter extends Component {
     this._setCategoryFilter(match.params.category)
   }
 
-
   _setCategoryFilter(category){
     switch (category){
       case 'courses':
@@ -87,7 +86,6 @@ class Filter extends Component {
     }
   }
 
-
   componentWillReceiveProps(nextProps){
     if (!nextProps.isActive) {
       this._resetAll();
@@ -97,7 +95,6 @@ class Filter extends Component {
       this._setCategoryFilter(nextProps.match.params.category);
     }
   }
-
 
   _resetFilters() {
     this.setState({
@@ -186,7 +183,7 @@ class Filter extends Component {
 
 
   render() {
-    const {classes, isActive, type, isShow} = this.props;
+    const {classes, isActive, type, isShow, t} = this.props;
     const {categoryMenu, subjectMenu, sortMenu, sorters} = this.state;
 
       return (
@@ -202,8 +199,7 @@ class Filter extends Component {
                         this.handleMenuClick(e, 'categoryMenu')
                     }}
                 >
-                  <span> {this.state.active_target ? this.state.active_target : 'Target  Age'}</span> <i
-                    className="m--margin-left-10 fa fa-chevron-down"></i>
+                  <span> {this.state.active_target ? this.state.active_target : t('targetAge')}</span> <i className="m--margin-left-10 fa fa-chevron-down"></i>
                 </Button>
                 <Menu
                     id="category-menu"
@@ -216,33 +212,33 @@ class Filter extends Component {
                     {this.state.active_target && <MenuItem onClick={(e) => {
                         this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', '', e)
                     }}>All</MenuItem>}
-                  <MenuItem title="Elementary Grade 1" onClick={(e) => {
+                  <MenuItem title={t('elementaryGrade1')} onClick={(e) => {
                       this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 1, e)
-                  }}>Elementary Grade 1</MenuItem>
-                  <MenuItem title="Kindy Starter" onClick={(e) => {
+                  }}>{t('elementaryGrade1')}</MenuItem>
+                  <MenuItem title={t('KindyStarter')} onClick={(e) => {
                       this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 2, e)
-                  }}>Kindy Starter</MenuItem>
-                  <MenuItem title="Kindy Advanced" onClick={(e) => {
+                  }}>{t('kindyStarter')}</MenuItem>
+                  <MenuItem title={t('kindyAdvanced')} onClick={(e) => {
                       this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 3, e)
-                  }}>Kindy Advanced</MenuItem>
-                  <MenuItem title="Elementary 1-3" onClick={(e) => {
+                  }}>{t('kindyAdvanced')}</MenuItem>
+                  <MenuItem title={t('elementary1to3')} onClick={(e) => {
                       this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 4, e)
-                  }}>Elementary 1-3</MenuItem>
-                  <MenuItem title="Kindy Starter" onClick={(e) => {
+                  }}>{t('elementary1to3')}</MenuItem>
+                  <MenuItem title={t('elementary4to6')} onClick={(e) => {
                       this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 5, e)
-                  }}>Elementary 4-6</MenuItem>
-                  <MenuItem title="Elementary 4-6" onClick={(e) => {
+                  }}>{t('elementary4to6')}</MenuItem>
+                  <MenuItem title={t('juniorHighSchool')} onClick={(e) => {
                       this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 6, e)
-                  }}>Junior High School</MenuItem>
-                  <MenuItem title="Junior High School" onClick={(e) => {
+                  }}>{t('juniorHighSchool')}</MenuItem>
+                  <MenuItem title={t('highSchool')} onClick={(e) => {
                       this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 7, e)
-                  }}>High School</MenuItem>
-                  <MenuItem title="High School" onClick={(e) => {
+                  }}>{t('highSchool')}</MenuItem>
+                  <MenuItem title={t('adult')} onClick={(e) => {
                       this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 8, e)
-                  }}>Adult</MenuItem>
-                  <MenuItem title="Senior" onClick={(e) => {
+                  }}>{t('adult')}</MenuItem>
+                  <MenuItem title={t('senior')} onClick={(e) => {
                       this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 9, e)
-                  }}>Senior</MenuItem>
+                  }}>{t('senior')}</MenuItem>
                 </Menu>
               </div>
               }
@@ -256,8 +252,7 @@ class Filter extends Component {
                         this.handleMenuClick(e, 'subjectMenu')
                     }}
                 >
-                  <span> {this.state.active_subject ? this.state.active_subject : 'Subject'}</span> <i
-                    className="m--margin-left-10 fa fa-chevron-down"></i>
+                  <span> {this.state.active_subject ? this.state.active_subject : t('subject')}</span> <i className="m--margin-left-10 fa fa-chevron-down"></i>
                 </Button>
                 <Menu
                     id="subject-menu"
@@ -267,25 +262,25 @@ class Filter extends Component {
                         this.handleMenuClose(e, 'subjectMenu')
                     }}
                 >
-                    {this.state.active_subject &&
-                    <MenuItem title="English for Kids" onClick={(e) => {
+                {this.state.active_subject &&
+                  <MenuItem title={t('all')} onClick={(e) => {
                         this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', '', e)
-                    }}>All</MenuItem>}
-                  <MenuItem title="English for Kids" onClick={(e) => {
+                  }}>{t('all')}</MenuItem>}
+                  <MenuItem title={t('englishForKids')} onClick={(e) => {
                       this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 1, e)
-                  }}>English for Kids</MenuItem>
-                  <MenuItem title="Language" onClick={(e) => {
+                  }}>{t('englishForKids')}</MenuItem>
+                  <MenuItem title={t('language')} onClick={(e) => {
                       this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 2, e)
-                  }}>Language</MenuItem>
-                  <MenuItem title="Safety" onClick={(e) => {
+                  }}>{t('language')}</MenuItem>
+                  <MenuItem title={t('safety')} onClick={(e) => {
                       this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 3, e)
-                  }}>Safety</MenuItem>
-                  <MenuItem title="Fine Arts" onClick={(e) => {
+                  }}>{t('safety')}</MenuItem>
+                  <MenuItem title={t('fineArts')} onClick={(e) => {
                       this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 4, e)
-                  }}>Fine Arts</MenuItem>
-                  <MenuItem title="Flex" onClick={(e) => {
+                  }}>{t('fineArts')}</MenuItem>
+                  <MenuItem title={t('flex')} onClick={(e) => {
                       this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 5, e)
-                  }}>Flex</MenuItem>
+                  }}>{t('flex')}</MenuItem>
                 </Menu>
               </div>
               }
@@ -293,11 +288,10 @@ class Filter extends Component {
             <div className="store-filter-divider"></div>
             <div className="filter-buttons">
                 { isShow.all &&
-                 <NavLink to="/store" className={(!isActive && type !== 'details') ? ' activeFilter' : ''}><Button>All</Button></NavLink>
+                 <NavLink to="/store" className={(!isActive && type !== 'details') ? ' activeFilter' : ''}><Button>{t('all')}</Button></NavLink>
                 }
                 {isShow.newest &&
-                <NavLink to="/store/products/course/newest"
-                         className={(sorters.created == 'desc') ? ' activeFilter' : ''}><Button>Newest</Button></NavLink>
+                <NavLink to="/store/products/course/newest" className={(sorters.created == 'desc') ? ' activeFilter' : ''}><Button>{t('newest')}</Button></NavLink>
                 }
             </div>
           </div>
@@ -310,16 +304,13 @@ class Filter extends Component {
                   id="search"
                   type='search'
                   onChange={(e) => this._searchBarChange(e)}
-                  placeholder="Search"
+                  placeholder={t('search')}
                   classes={{
                     inkbar: classes.inputInkbar,
                   }}
                   endAdornment={
                     <InputAdornment position="end">
-                      <IconButton onClick={(e) => {
-                        this._initFilter(e)
-                      }}
-                      >
+                      <IconButton onClick={(e) => {this._initFilter(e)}}>
                         <Search/>
                       </IconButton>
                     </InputAdornment>
@@ -337,7 +328,7 @@ class Filter extends Component {
                       this.handleMenuClick(e, 'sortMenu')
                     }}
                   >
-                    Sort By: <i className="m--margin-left-10 fa fa-sort-amount-desc"></i>
+                    {t('sortBy')}: <i className="m--margin-left-10 fa fa-sort-amount-desc"></i>
                   </Button>
                   <Menu
                     id="category-menu"
@@ -349,13 +340,13 @@ class Filter extends Component {
                   >
                     <MenuItem onClick={(e) => {
                       this._selectSorter('price')
-                    }}>Price</MenuItem>
+                    }}>{t('price')}</MenuItem>
                     <MenuItem onClick={(e) => {
                       this._selectSorter('created')
-                    }}>Date</MenuItem>
+                    }}>{t('date')}</MenuItem>
                     <MenuItem onClick={(e) => {
                       this._selectSorter('rating')
-                    }}>Rating</MenuItem>
+                    }}>{t('rating')}</MenuItem>
                   </Menu>
                 </div>
               </div>
@@ -363,8 +354,6 @@ class Filter extends Component {
             </div>
           </div>
         </div>
-
-
       </div>
     );
   }
@@ -385,4 +374,4 @@ Filter.defaultProps = {
   },
 }
 
-export default withRouter(withStyles(styles)(Filter));
+export default withRouter(withStyles(styles)(translate('translations')(Filter)));

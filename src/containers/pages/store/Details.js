@@ -66,7 +66,7 @@ class Details extends Component {
   }
 
   render() {
-    const {record, records, addToCartRequest, getSingleRecordRequest, getRecordsRequest} = this.props;
+    const {record, records, addToCartRequest, getSingleRecordRequest, getRecordsRequest, t} = this.props;
     const loadingSingle = getSingleRecordRequest.get('loading');
     const successSingle = getSingleRecordRequest.get('success');    
     const successRecords = getRecordsRequest.get('success');
@@ -99,7 +99,7 @@ class Details extends Component {
             </div>
             <div className="col-lg-4">
               {successSingle &&
-              <Sidebar data={similarRecords} title="Similar" dataType="similar"/>}
+              <Sidebar data={similarRecords} title={t('similar')} dataType="similar"/>}
             </div>
           </div>
         </div>
@@ -134,5 +134,5 @@ Details = connect(
 )(Details);
 
 
-export default withRouter(translate("Details")(Details));
+export default withRouter(translate("translations")(Details));
 

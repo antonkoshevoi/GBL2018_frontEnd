@@ -74,7 +74,7 @@ class ShoppingCart extends Component {
                 <div className='m-portlet__head-caption'>
                   <div className='m-portlet__head-title'>
                     <h3 className='m-portlet__head-text'>
-                      {preview ? 'Our Account' : 'Shopping Cart'}
+                      {preview ? t('ourAccount') : t('shoppingCart')}
                     </h3>
                   </div>
                 </div>

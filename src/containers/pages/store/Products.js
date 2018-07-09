@@ -85,6 +85,6 @@ Products = connect(
 )(Products);
 
 
-export default withRouter(translate("Products")(Products));
+export default withRouter(translate("translations")(Products));
 
 
