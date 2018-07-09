@@ -15,6 +15,10 @@ class DatePicker extends PureComponent {
 
     return date;
   }
+  
+  open() {
+      this.picker.open();
+  }
 
   render () {
     const { InputProps, format, onChange, ...rest } = this.props;
@@ -31,6 +35,7 @@ class DatePicker extends PureComponent {
               clearable
               autoOk={true}
               returnMoment={false}
+              ref={(node) => { this.picker = node; }}
               invalidLabel=""
               format={format ? format : 'YYYY-MM-DD'}
               InputProps={InputProps ? InputProps : {

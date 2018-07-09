@@ -59,7 +59,8 @@ class ShoppingCart extends Component {
       cartRecordsSum ,
       cartRequest,
       preview,
-      deleteRequest
+      deleteRequest,
+      t
     } = this.props;
     const loading = cartRecordsRequest.get('loading') || cartRequest.get('loading') || deleteRequest.get('loading');
     const success = cartRecordsRequest.get('success');
@@ -73,7 +74,7 @@ class ShoppingCart extends Component {
                 <div className='m-portlet__head-caption'>
                   <div className='m-portlet__head-title'>
                     <h3 className='m-portlet__head-text'>
-                      {preview ? 'Our Account' : 'Shopping Cart'}
+                      {preview ? t('ourAccount') : t('shoppingCart')}
                     </h3>
                   </div>
                 </div>
@@ -95,8 +96,8 @@ class ShoppingCart extends Component {
               <div className="row d-flex justify-content-end dashboard-shopping-cart-buttons">
                 <div className="col-md-4 d-flex justify-content-end align-items-center">
                   <div className="form-group-inline btn-group">
-                    <NavLink to="/store/shopping-cart" className="btn m-btm btn-primary smaller-padding">View Cart</NavLink>
-                    <NavLink to="/shopping/checkout" className="btn m-btm btn-success smaller-padding">Checkout</NavLink>
+                    <NavLink to="/store/shopping-cart" className="btn m-btm btn-primary smaller-padding">{t('viewCart')}</NavLink>
+                    <NavLink to="/shopping/checkout" className="btn m-btm btn-success smaller-padding">{t('checkout')}</NavLink>
                   </div>
                 </div>
               </div>
@@ -135,4 +136,4 @@ ShoppingCart = connect(
   })
 )(ShoppingCart);
 
-export default withRouter(translate('OpenInvoices')(ShoppingCart));
+export default withRouter(translate('translations')(ShoppingCart));

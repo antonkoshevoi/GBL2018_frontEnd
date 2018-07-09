@@ -3,17 +3,11 @@ import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import '../../../../styles/store.css'
 import {withRouter} from 'react-router-dom';
-import {push} from 'react-router-redux';
-import * as queryString from 'query-string';
-import {executePayPalPayment, getInvoice} from '../../../../redux/payments/actions';
-import Loader from '../../../../components/layouts/Loader';
-import {invoiceRequest, selectExecutePayPalPaymentRequest} from '../../../../redux/payments/selectors';
-import {Button, Checkbox, CircularProgress, FormControlLabel, Typography} from '@material-ui/core';
-import {selectLoginRequest} from "../../../../redux/auth/selectors";
+import {getInvoice} from '../../../../redux/payments/actions';
+import {invoiceRequest} from '../../../../redux/payments/selectors';
 import {login, setRedirectUrl} from "../../../../redux/auth/actions";
-import ServiceList from "../../../../components/pages/store/payment/ServiceList";
 import CartItems from "../../../../components/pages/store/checkout/CartItems";
-import InvoiceDetail from "../../../../components/pages/store/checkout/InvoiceDetail";
+import Typography from '@material-ui/core/Typography';
 
 class PaymentSuccessContainer extends Component {
 
@@ -26,7 +20,6 @@ class PaymentSuccessContainer extends Component {
       remember: false
     };
   }
-
 
   componentDidMount() {
     const {history} = this.props;
@@ -47,6 +40,17 @@ class PaymentSuccessContainer extends Component {
     this.setState({remember: !this.state.remember});
   };
 
+  _renderAddress(data, prefix) {   
+    const address = ['address_1', 'address_2', 'country', 'region', 'city', 'zip'];
+    return address.map((item, index) =>
+      (
+        <Typography key={index} variant="subheading" gutterBottom>
+          {data.get(`${prefix}_${item}`)}
+        </Typography>
+      )
+    );
+  }
+  
   _login() {
     const {setRedirectUrl, login} = this.props;
     const {username, password, remember} = this.state;
@@ -60,38 +64,20 @@ class PaymentSuccessContainer extends Component {
     login(username, password, remember);
   }
 
-
   render() {
-
-    const {auth, loginRequest, history, invoiceRequest} = this.props;
+    const {invoiceRequest, t} = this.props;
     const invoice = invoiceRequest.get('data');
-    const isLoggedIn = auth.get('isLoggedIn');
-    const loading = loginRequest.get('loading');
-    const errors = loginRequest.get('errors');
     const distributor = invoice ? invoice.get('distributor') : null;
     return (
       <div className="row">
         <div className="col-md-10 m-auto">
-          {/*<div className="m-portlet m--margin-top-35">*/}
-            {/*<div className="m-portlet__body">*/}
-              {/*<div className="alert m-alert m-alert--default">*/}
-                {/*<h3 className="display-4 text-center">*/}
-                  {/*<i className="la la-check-circle align-middle m--margin-right-20" style={{*/}
-                    {/*color: '#7ac943',*/}
-                    {/*fontSize: '100px'*/}
-                  {/*}}/>*/}
-                  {/*Your payment was successful*/}
-                {/*</h3>*/}
-              {/*</div>*/}
-            {/*</div>*/}
-          {/*</div>*/}
           {invoice &&
           <div className="m-widget25">
               <span className="invoice-title">
-                  Yor invoice #{invoice.get('invoice_no')} Total ${invoice.get('total')}.
+                  {t('yourInvoice', {invoiceNo: invoice.get('invoice_no'), invoiceAmount: invoice.get('total')})}.
               </span>                
               <p class="text-center">
-                  <a className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">Download PDF</a>
+                  <a className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
               </p>
           </div>
           }
@@ -100,33 +86,52 @@ class PaymentSuccessContainer extends Component {
         <div className="col-md-10 m-auto">
             <div className="row">
               <div className="col-4">
-                Mail Cheque to:
+                {t('mailChequeTo')}:
                 <br/>
                 <span className="d-block">{distributor.get('company')}</span>
                 <span className="d-block">{distributor.get('address_1')}</span>
                 <span className="d-block">{distributor.get('city')}, {distributor.get('region')}, {distributor.get('country')}</span>
-
               </div>
               <div className="col-4">
-                Wire Transfer to:
+                {t('wireTransferTo')}:
                 <br/>
                 {distributor.get('bank_details')}
               </div>
               <div className="col-4">
-                Interact payment
-                <span className="d-block">Email to {distributor.get('email')}</span>
+                {t('interactPayment')}
+                <span className="d-block">{t('emailToDistributor', {email: distributor.get('email')})}</span>
                 <span className="d-block">
 
                 </span>
-
               </div>
             </div>
         </div>
         }
         {invoice &&
-        <div className="col-md-10 m-auto">
-          <InvoiceDetail data={invoice}/>
-        </div>
+          <div className="col-md-10 m-auto">
+            <div className="m-portlet m-portlet--bordered-semi">
+              <div className="m-portlet__body">
+                <div className="m-widget4 col-md-10 m-auto">
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div>
+                      </div>
+                      <h3 className="m-portlet__head-text">
+                        {t('billTo')}
+                      </h3>
+                      {this._renderAddress(invoice, 'billing')}
+                    </div>
+                    <div className="col-md-6">
+                      <h3 className="m-portlet__head-text">
+                        {t('shipTo')}
+                      </h3>
+                      {this._renderAddress(invoice, 'shipping')}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         }
         {invoice &&
         <div className="col-md-10 m-auto">
@@ -140,8 +145,6 @@ class PaymentSuccessContainer extends Component {
 
 PaymentSuccessContainer = connect(
   (state) => ({
-    loginRequest: selectLoginRequest(state),
-    auth: state.auth,
     invoiceRequest: invoiceRequest(state)
   }),
   (dispatch) => ({
@@ -155,4 +158,4 @@ PaymentSuccessContainer = connect(
   })
 )(PaymentSuccessContainer);
 
-export default withRouter(translate('PaymentSuccessContainer')(PaymentSuccessContainer));
+export default withRouter(translate('translations')(PaymentSuccessContainer));

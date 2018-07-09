@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {translate} from "react-i18next";
 import Card from "../../../ui/Card";
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../../ui/table";
@@ -18,17 +17,16 @@ class TransactionList extends Component {
     }
 
     _renderTransactions() {
-        const {data,request} = this.props;
+        const {data, request, t} = this.props;
 
         const loading = request.get('loading');
-
 
         if (!loading && data.size === 0) {
             return (
                 <tr>
                     <td>
                         <div className="table-message">
-                            <h2>No transactions...</h2>
+                            <h2>{t('noTransactions')}</h2>
                         </div>
                     </td>
                 </tr>
@@ -45,8 +43,7 @@ class TransactionList extends Component {
                         </Td>
                         <Td width='20px'>{i + 1}</Td>
                         <Td width='102px'><span style={{fontWeight:600}} className="g-blue">{item.get('total')}$</span></Td>
-                        <Td width='100px'><span
-                            className='m-badge m-badge--brand m-badge--wide'>{item.get('paymentType')}</span></Td>
+                        <Td width='100px'><span className='m-badge m-badge--brand m-badge--wide'>{item.get('paymentType')}</span></Td>
                         <Td width='140px'>{item.get('createdAt')}</Td>
                         <Td width='140px'>{item.get('authorizedAt') } {(!item.get('isAuthorized')) && <i className="fa fa-close g-red"></i>}</Td>
                     </Row>,
@@ -58,29 +55,27 @@ class TransactionList extends Component {
 
 
     _renderTransactionItemsBlock(data) {
+        const {t} = this.props;
         return (
             <tr key="block" className="animated fadeInDown m-datatable__row-subtable m-datatable__row sub-table m-datatable__row-subtable--even">
                 <td className="m-datatable__subtable" colSpan="9">
-
-                        <Table style={{minHeight:'300px'}}>
-                            <Thead >
-                                <HeadRow className="m-datatable__row">
-                                    <Th width="80px">Thumbnail</Th>
-                                    <Th width="180px">Title</Th>
-                                    <Th width="100px">Quantity</Th>
-                                    <Th width="150px">Price</Th>
-                                </HeadRow>
-                            </Thead>
-                            <Tbody >
-                                {this._renderTransactionItems(data)}
-                            </Tbody>
-                        </Table>
-
+                    <Table style={{minHeight:'300px'}}>
+                        <Thead >
+                            <HeadRow className="m-datatable__row">
+                                <Th width="80px">{t('thumbnail')}</Th>
+                                <Th width="180px">{t('title')}</Th>
+                                <Th width="100px">{t('quantity')}</Th>
+                                <Th width="150px">{t('price')}</Th>
+                            </HeadRow>
+                        </Thead>
+                        <Tbody >
+                            {this._renderTransactionItems(data)}
+                        </Tbody>
+                    </Table>
                 </td>
             </tr>
         )
     }
-
 
     _renderTransactionItems(data) {
         return data.map((item,i) => {
@@ -94,29 +89,27 @@ class TransactionList extends Component {
                     <Td  width="180px"><NavLink to={`/store/details/${item.get('item').get('id')}`}>{item.get('item').get('title')}</NavLink></Td>
                     <Td width='100px'><span style={{fontWeight:600}} className="g-blue">{item.get('quantity')}</span></Td>
                     <Td width='150px'><span style={{fontWeight:700,fontSize:'1.7rem'}} className="g-blue">{Number(item.get('item').get('price')).toFixed(2)} $</span></Td>
-
                 </Row>
             )
         })
     }
 
     render() {
-        const {request} = this.props;
+        const {request, t} = this.props;
         const loading = request.get('loading');
 
         return (
         <div className="transactionsList">
-            <Card title="Transactions" icon="la la-money">
-
+            <Card title={t('transactions')} icon="la la-money">
                 <Table >
                     <Thead>
                         <HeadRow>
                             <Th width='20px'></Th>
                             <Th first={true} width='20px'>#</Th>
-                            <Th name='total' width='102px'>Total</Th>
-                            <Th name='type' width='100px'>Type</Th>
-                            <Th name='created' width='140px'>Created</Th>
-                            <Th name='authorized' width='140px'>Authorized</Th>
+                            <Th name='total' width='102px'>{t('total')}</Th>
+                            <Th name='type' width='100px'>{t('type')}</Th>
+                            <Th name='created' width='140px'>{t('created')}</Th>
+                            <Th name='authorized' width='140px'>{t('authorized')}</Th>
                         </HeadRow>
                     </Thead>
                     <Tbody>
@@ -131,8 +124,6 @@ class TransactionList extends Component {
         </div>
         );
     }
-    }
+ }
 
-    TransactionList.propTypes = {};
-
-    export default translate("transactionList")(TransactionList);
+ export default translate("translations")(TransactionList);

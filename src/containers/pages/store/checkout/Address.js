@@ -5,6 +5,7 @@ import {selectRecords} from "../../../../redux/countries/selectors";
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {FormControl, MenuItem, Select} from '@material-ui/core';
+import {translate} from 'react-i18next';
 
 class Address extends Component {
 
@@ -37,7 +38,7 @@ class Address extends Component {
   }
 
   render() {
-    const {title,errors,name,disabled,form, countries} = this.props;
+    const {title,errors,name,disabled,form, countries, t} = this.props;
     const countriesList = countries.toJS();
     return (
          <div>
@@ -48,10 +49,10 @@ class Address extends Component {
                   onChange={(e) => {this._handleInputChange(e)}}
                   type='hidden'
                   />
-              <legend className='m--margin-bottom-10'>{title} contact information</legend>
+              <legend className='m--margin-bottom-10'>{t('contactInformation', {title: title})}</legend>
               <div className='m-form__section m-form__section--first'>
                 <div className="form-group m-form__group row">
-                  <label className="col-form-label col-lg-3 col-sm-12">First Name </label>
+                  <label className="col-form-label col-lg-3 col-sm-12">{t('firstName')}</label>
                   <div className="col-lg-9 col-md-9 col-sm-12">
                     <input
                       required
@@ -71,7 +72,7 @@ class Address extends Component {
               </div>
               <div className='m-form__section m-form__section--first'>
                 <div className="form-group m-form__group row">
-                  <label className="col-form-label col-lg-3 col-sm-12">Last Name </label>
+                  <label className="col-form-label col-lg-3 col-sm-12">{t('lastName')}</label>
                   <div className="col-lg-9 col-md-9 col-sm-12">
                     <input
                       required
@@ -91,7 +92,7 @@ class Address extends Component {
               </div>
               <div className='m-form__section m-form__section--first'>
                 <div className="form-group m-form__group row">
-                  <label className="col-form-label col-lg-3 col-sm-12">Email </label>
+                  <label className="col-form-label col-lg-3 col-sm-12">{t('email')}</label>
                   <div className="col-lg-9 col-md-9 col-sm-12">
                     <input
                       required
@@ -112,7 +113,7 @@ class Address extends Component {
 
               <div className='m-form__section m-form__section--first'>
                 <div className="form-group m-form__group row">
-                  <label className="col-form-label col-lg-3 col-sm-12">Telephone</label>
+                  <label className="col-form-label col-lg-3 col-sm-12">{t('telephone')}</label>
                   <div className="col-lg-9 col-md-9 col-sm-12">
                     <input
                       required
@@ -132,10 +133,10 @@ class Address extends Component {
               </div>
             </div>
           <div className='col-xs-12'>
-            <legend className='m--margin-bottom-10'>{title} Address</legend>
+            <legend className='m--margin-bottom-10'>{t('contactAddress', {title: title})}</legend>
             <address className='m-form__section m-form__section--first signUpOptional'>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">Address Line 1</label>
+                <label className="col-form-label col-lg-3 col-sm-12">{t('addressLine1')}</label>
                 <div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     disabled={disabled}
@@ -152,7 +153,7 @@ class Address extends Component {
                 </div>
               </div>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">Address Line 2</label>
+                <label className="col-form-label col-lg-3 col-sm-12">{t('addressLine2')}</label>
                 <div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     disabled={disabled}
@@ -171,7 +172,7 @@ class Address extends Component {
                 </div>
               </div>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">City</label>
+                <label className="col-form-label col-lg-3 col-sm-12">{t('city')}</label>
                 <div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     disabled={disabled}
@@ -190,7 +191,7 @@ class Address extends Component {
                 </div>
               </div>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">State or Province</label>
+                <label className="col-form-label col-lg-3 col-sm-12">{t('stateOrProvince')}</label>
                 <div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     disabled={disabled}
@@ -209,7 +210,7 @@ class Address extends Component {
                 </div>
               </div>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">Postal or Zip Code</label>
+                <label className="col-form-label col-lg-3 col-sm-12">{t('postalOrZipCode')}</label>
                 <div className="col-lg-8 col-md-9 col-sm-12">
                   <input
                     disabled={disabled}
@@ -228,7 +229,7 @@ class Address extends Component {
                 </div>
               </div>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">Country</label>
+                <label className="col-form-label col-lg-3 col-sm-12">{t('country')}</label>
                 <div className="col-lg-8 col-md-9 col-sm-12">
                   <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
                     <FormControl>
@@ -264,5 +265,5 @@ Address = connect(
   }),
 )(Address);
 
-export default withRouter(Address);
+export default withRouter(translate('translations')(Address));
 

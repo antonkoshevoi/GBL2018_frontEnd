@@ -98,7 +98,7 @@ class Students extends Component {
         <Td width='132px'>{record.get('firstName')}</Td>
         <Td width='132px'>{record.get('lastName')}</Td>
         <Td width='132px'>{record.get('email')}</Td>
-        <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>Student</span></Td>
+        <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>{t('student')}</span></Td>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
         <Td width='100px'>
           <HasPermission permissions={[
@@ -261,11 +261,11 @@ class Students extends Component {
                   <Th first={true} width='100px'>#</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['username']} name='username' width='132px'>{t('username')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['firstName']} name='firstName' width='132px'>{t('firstName')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName' width='132px'>{t('lastname')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName' width='132px'>{t('lastName')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' width='132px'>{t('email')}</Th>
-                  <Th width='132px'>Role</Th>
+                  <Th width='132px'>{t('role')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
-                  <Th width='100px'>Actions</Th>
+                  <Th width='100px'>{t('actions')}</Th>
                 </HeadRow>
               </Thead>
 

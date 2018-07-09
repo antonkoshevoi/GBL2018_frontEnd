@@ -34,7 +34,7 @@ class CreditCard extends Component {
 
     render() {        
         const years = Array.from(Array(10), (_,x) => (new Date().getFullYear() + x));
-        const {createCreditCardPaymentRequest} = this.props;
+        const {createCreditCardPaymentRequest, t} = this.props;
         const loading = createCreditCardPaymentRequest.get('loading');       
         const errors = createCreditCardPaymentRequest.get('errors');
         const success = createCreditCardPaymentRequest.get('success');
@@ -47,10 +47,10 @@ class CreditCard extends Component {
             <div className="row">
                 <div className="col-sm-12 col-md-10 col-lg-8 m-auto">
                     {loading && <Loader/>}
-                    <legend className='m--margin-bottom-10'>Credit Card</legend>
+                    <legend className='m--margin-bottom-10'>{t('creditCard')}</legend>
                     <div className='m-form__section m-form__section--first'>
                       <div className="form-group m-form__group row">
-                        <label className="col-form-label col-md-3 col-lg-3 col-sm-12">Credit Card Number </label>
+                        <label className="col-form-label col-md-3 col-lg-3 col-sm-12">{t('creditCardNumber')} </label>
                         <div className="col-lg-9 col-md-9 col-sm-12">
                           <input
                             required                    
@@ -68,7 +68,7 @@ class CreditCard extends Component {
                     </div>
                     <div className='m-form__section m-form__section--first'>
                       <div className="form-group m-form__group row">
-                        <label className="col-form-label col-md-3 col-lg-3 col-sm-12">Holder Name</label>
+                        <label className="col-form-label col-md-3 col-lg-3 col-sm-12">{t('holderName')}</label>
                         <div className="col-lg-9 col-md-9 col-sm-12">
                           <input
                             required                    
@@ -84,7 +84,7 @@ class CreditCard extends Component {
                       </div>
                     </div>
                     <div className="form-group m-form__group row">
-                      <label className="col-form-label col-lg-3 col-md-3 col-sm-12">Card Type</label> 
+                      <label className="col-form-label col-lg-3 col-md-3 col-sm-12">{t('cardType')}</label> 
                       <div className="col-lg-5 col-md-9 col-sm-12">
                         <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
                           <FormControl>
@@ -93,11 +93,11 @@ class CreditCard extends Component {
                               value={this.state.cardType || ''}
                               onChange={(e) => this._handleInputChange(e)}
                             >
-                                <MenuItem key='0' value='Visa' >Visa</MenuItem>
-                                <MenuItem key='1' value='MasterCard' >MasterCard</MenuItem>
-                                <MenuItem key='2' value='Discover' >Discover</MenuItem>
-                                <MenuItem key='3' value='Amex' >Amex</MenuItem>
-                                <MenuItem key='4' value='JCB' >JCB</MenuItem>                                
+                                <MenuItem key='0' value='Visa' >{t('visa')}</MenuItem>
+                                <MenuItem key='1' value='MasterCard' >{t('masterCard')}</MenuItem>
+                                <MenuItem key='2' value='Discover' >{t('discover')}</MenuItem>
+                                <MenuItem key='3' value='Amex' >{t('amex')}</MenuItem>
+                                <MenuItem key='4' value='JCB' >{t('jcb')}</MenuItem>                                
                             </Select>
                           </FormControl>
                           {errors && errors.get('cardType') && <FormHelperText error>{ errors.get('cardType').get(0) }</FormHelperText>}
@@ -105,7 +105,7 @@ class CreditCard extends Component {
                       </div>                      
                     </div>                    
                     <div className="form-group m-form__group row">
-                      <label className="col-form-label col-lg-3 col-md-3 col-sm-12">Exp. Date (YYYY/MM)</label>
+                      <label className="col-form-label col-lg-3 col-md-3 col-sm-12">{t('expDate')}</label>
                       <div className="col-lg-5 col-md-5 col-sm-12">
                         <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
                           <FormControl>
@@ -148,7 +148,7 @@ class CreditCard extends Component {
                     </div>
                     <div className='m-form__section m-form__section--first'>
                       <div className="form-group m-form__group row">
-                        <label className="col-form-label col-lg-3 col-md-3 col-sm-12">CVV Code </label>
+                        <label className="col-form-label col-lg-3 col-md-3 col-sm-12">{t('cvvCode')} </label>
                         <div className="col-lg-5 col-md-6 col-sm-12">
                           <input
                             required                    
@@ -158,7 +158,6 @@ class CreditCard extends Component {
                             type='text'
                             className='form-control m-input m-input--air '
                             placeholder=''/>
-                            
                           {errors && errors.get('cardCvv2') && <FormHelperText error>{ errors.get('cardCvv2').get(0) }</FormHelperText>}
                         </div>
                       </div>
@@ -166,10 +165,11 @@ class CreditCard extends Component {
                     <div className="d-flex justify-content-center">
                       <Button
                         variant="raised"
-                        color="primary"                    
+                        color="primary"
+                        className="text-uppercase"
                         onClick={(e) => { this._submitCreditCardPayment(e) }}
                       >
-                        MAKE PAYMENT
+                        {t('makePayment')}
                       </Button>
                     </div>  
                 </div>
@@ -188,4 +188,4 @@ CreditCard = connect(
   })
 )(CreditCard);
 
-export default withRouter(translate('CreditCard')(CreditCard));
+export default withRouter(translate('translations')(CreditCard));

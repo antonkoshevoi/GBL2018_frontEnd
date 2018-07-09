@@ -8,6 +8,7 @@ import {
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import { selectCreateRequest } from '../../../redux/teachers/selectors';
 import { create, resetCreateRequest } from '../../../redux/teachers/actions';
 import Modal from '../../../components/ui/Modal';
@@ -95,7 +96,7 @@ class CreateTeacherModal extends Component {
   }
 
   render() {
-    const { isOpen, createRequest } = this.props;
+    const { isOpen, createRequest, t } = this.props;
     const loading = createRequest.get('loading');    
     const errors = createRequest.get('errors');
 
@@ -112,7 +113,7 @@ class CreateTeacherModal extends Component {
               )}
             </IconButton>
             <Typography type='title' color='inherit' >
-              Create Teacher
+              {t('createTeacher')}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -141,7 +142,7 @@ class CreateTeacherModal extends Component {
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Add New Teacher
+            {t('addNewTeacher')}
           </Button>
         </DialogActions>
       </Modal>
@@ -159,4 +160,4 @@ CreateTeacherModal = connect(
   })
 )(CreateTeacherModal);
 
-export default CreateTeacherModal;
+export default translate('translations')(CreateTeacherModal);

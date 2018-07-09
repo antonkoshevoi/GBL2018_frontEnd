@@ -8,7 +8,8 @@ import {
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import Modal from '../../ui/Modal';
+import {translate} from "react-i18next";
+import Modal from '../../../components/ui/Modal';
 import {selectRecords} from "../../../redux/students/selectors";
 import {getRecords} from "../../../redux/students/actions";
 import { selectAssignCourseCreditRequest } from "../../../redux/classrooms/selectors";
@@ -80,7 +81,7 @@ class AssignStudentModal extends Component {
   }
   
   render() {
-    const { isOpen, course, assignCourseCreditRequest } = this.props;
+    const { isOpen, course, assignCourseCreditRequest, t } = this.props;
     const loading = assignCourseCreditRequest.get('loading');
     const errors  = assignCourseCreditRequest.get('errors');
         
@@ -96,7 +97,7 @@ class AssignStudentModal extends Component {
               )}
             </IconButton>
             <Typography type='title' color='inherit'>
-              Assign Student
+              {t('assignStudent')}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -115,9 +116,9 @@ class AssignStudentModal extends Component {
                 </div>
                 <div className='col-sm-6 col-lg-6 m-auto'>    
                     <FormControl className='full-width form-inputs'>
-                      <InputLabel htmlFor='studentId' shrink={!!this.state.studentId}>Select Student</InputLabel>
+                      <InputLabel htmlFor='studentId' shrink={!!this.state.studentId}>{t('selectStudent')}</InputLabel>
                       <Select
-                        primarytext="Select Student"
+                        primarytext={t('selectStudent')}
                         id='studentId'
                         name='studentId'
                         value={this.state.studentId}
@@ -147,7 +148,7 @@ class AssignStudentModal extends Component {
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Assign
+            {t('assign')}
           </Button>
         </DialogActions>
       </Modal>
@@ -167,4 +168,4 @@ AssignStudentModal = connect(
   })
 )(AssignStudentModal);
   
-export default AssignStudentModal;
+export default translate('translations')(AssignStudentModal);

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import StarRating from "../../ui/StarRating";
 import {Icon} from '@material-ui/core';
+import {translate} from "react-i18next";
 
 class DetailsSection extends Component {
 
@@ -17,8 +17,8 @@ class DetailsSection extends Component {
   }
 
   render() {
-    const {data, addedRequest} = this.props;
-    const category = 'No Info...';
+    const {data, addedRequest, t} = this.props;
+    const category = t('noInfo');
     const price = Number(data.get('price'));
     const discountPrice = Number(price - (price * data.get('discount') / 100));
 
@@ -42,9 +42,9 @@ class DetailsSection extends Component {
                       <div className="row">
                         <div className="col-md-7">
                           <p className="g-red productType  m--hide">{category}</p>
-                          <p className="m--margin-bottom-5">Product: {data.get('category').get('title')}</p>
-                          <p className="m--margin-bottom-5">Age: {data.get('target').get('title') ? data.get('target').get('title') : 'No Info...'}</p>
-                          <p className="m--margin-bottom-5">Subject: {data.get('subject').get('title') ? data.get('subject').get('title') : 'No Info...'}</p>
+                          <p className="m--margin-bottom-5">{t('product')}: {data.get('category').get('title')}</p>
+                          <p className="m--margin-bottom-5">{t('age')}: {data.get('target').get('title') ? data.get('target').get('title') : t('noInfo')}</p>
+                          <p className="m--margin-bottom-5">{t('subject')}: {data.get('subject').get('title') ? data.get('subject').get('title') : t('noInfo')}</p>
                         </div>
                         <div className="col-md-5 text-right">
                           <div className="align-text-bottom">
@@ -56,19 +56,17 @@ class DetailsSection extends Component {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="actionsBtn justify-content-end full-width align-items-end d-flex m--padding-right-20 align-self-end">
-
+                <div className="actionsBtn justify-content-end full-width align-items-end d-flex m--padding-right-20 align-self-end">
                   <button className="btn m-btn btn-danger m-btn--icon no-border" onClick={() => {
                     this.props.buyClick(data.get('id'))
                   }}>
-                                        <span>
-                                          {addedRequest.get('success') &&
-                                          <i className="fa floating-basket fa-shopping-basket"></i>}
-                                          <span className="discount"><span>${price.toFixed(2)}  </span></span>
-                                          <span>${discountPrice.toFixed(2)}</span>
-                                            <span>BUY</span>
-                                        </span>
+                    <span>
+                      {addedRequest.get('success') &&
+                      <i className="fa floating-basket fa-shopping-basket"></i>}
+                      <span className="discount"><span>${price.toFixed(2)}  </span></span>
+                      <span>${discountPrice.toFixed(2)}</span>
+                        <span className=".text-uppercase">{t('buy')}</span>
+                    </span>
                   </button>
                 </div>
               </div>
@@ -90,6 +88,4 @@ class DetailsSection extends Component {
   }
 }
 
-DetailsSection.propTypes = {};
-
-export default DetailsSection;
+export default translate('translations')(DetailsSection);

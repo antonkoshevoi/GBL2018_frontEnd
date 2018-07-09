@@ -25,8 +25,7 @@ class ClassroomSchedule extends Component {
         
         getSchedule(id);
     }
-    
-    
+        
     componentWillReceiveProps(nextProps) {
         const success       = this.props.updateScheduleRequest.get('success');
         const nextSuccess   = nextProps.updateScheduleRequest.get('success');
@@ -71,6 +70,7 @@ class ClassroomSchedule extends Component {
     _renderUnits(units) {
         
         const _self = this;
+        const {t} = this.props;
         
         return units.map(function (unit, unitIndex) {
             
@@ -79,7 +79,7 @@ class ClassroomSchedule extends Component {
             return (
                 <tr className="m-datatable__row m-datatable__row--even__none" key={unit.unitId + '-unitRow'}>                
                     <td className="m-datatable__cell rotate" width='50px' rowSpan={unitRowSpan} key={unit.unitId + '-unitName'}>
-                        <div><span><b>Unit {unitIndex + 1}</b> {unit.unitName}</span></div>
+                        <div><span><b>{t('unit')} {unitIndex + 1}</b> {unit.unitName}</span></div>
                     </td>
                     {_self._renderLessons(unitIndex, unit.lessons)}
                 </tr>
@@ -90,12 +90,13 @@ class ClassroomSchedule extends Component {
     _renderLessons(unitIndex, lessons) {        
         
         const {id} = this.props.match.params;
+        const {t} = this.props;
     
         return lessons.map(function (lesson, lessonIndex) {
             return (
                 <Row key={lesson.lessonId + '-lessonRow'}>
                     <Td width='350px'>
-                        <p className="text-center"><span class="m-badge m-badge--brand m-badge--wide">Unit {unitIndex + 1}, Lesson {lessonIndex + 1}</span> </p>                        
+                        <p className="text-center"><span class="m-badge m-badge--brand m-badge--wide">{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</span> </p>                        
                         <p className="text-center"><span>{lesson.lessonName}</span></p>
                     </Td>
                     <Td width='450px'><p className="text-center">{lesson.lessonDescription}</p></Td>
@@ -109,7 +110,7 @@ class ClassroomSchedule extends Component {
     }      
 
     render() {
-        const {getScheduleRequest, updateScheduleRequest} = this.props;
+        const {getScheduleRequest, updateScheduleRequest, t} = this.props;
         
         const loaded    = getScheduleRequest.get('success');
         const schedule  = loaded ? getScheduleRequest.get('results').toJS() : {};
@@ -124,7 +125,7 @@ class ClassroomSchedule extends Component {
                             <div className='m-portlet__head-title'>
                                 <span className='m-portlet__head-icon'><i className='la la-user' style={{fontSize: '55px'}}></i></span>
                                 <h3 className='m-portlet__head-text'>
-                                {loaded ? (schedule.crmName + '- ClassRoom Schedule') : '...' }
+                                {loaded ? t('classRoomSchedule', {classroom: schedule.crmName}) : '...'}
                                 </h3>
                             </div>
                         </div>
@@ -132,15 +133,15 @@ class ClassroomSchedule extends Component {
                     <div className='m-portlet__body'>
                         <div className='m-form m-form--label-align-left m--margin-top-20 m--margin-bottom-30'>
                             <div className="row">                                       
-                                <label className="col-lg-1 col-md-3 col-sm-4 m--margin-top-20">Schedule By:</label>
+                                <label className="col-lg-1 col-md-3 col-sm-4 m--margin-top-20">{t('scheduleBy')}:</label>
                                 <div className="col-lg-4 col-md-5 col-sm-6">
                                     <div>
                                         <FormControlLabel 
-                                            label="Unit"
+                                            label={t('unit')}
                                             control={<Radio name="scheduleType" checked={this.state.scheduleType == 'unit'} onChange={(e) => {this._handleInputChange(e)}} value="unit" />}          
                                         />                           
                                         <FormControlLabel 
-                                            label="Lesson"
+                                            label={t('lesson')}
                                             control={<Radio name="scheduleType" checked={this.state.scheduleType == 'lesson'} onChange={(e) => {this._handleInputChange(e)}} value="lesson" />}          
                                         />
                                     </div>
@@ -148,7 +149,7 @@ class ClassroomSchedule extends Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <label className="col-lg-1 col-md-3 col-sm-4">Frequency:</label>
+                                <label className="col-lg-1 col-md-3 col-sm-4">{t('frequency')}:</label>
                                 <div className="col-lg-4 col-md-5 col-sm-6">
                                     <div>
                                     <Select
@@ -164,7 +165,7 @@ class ClassroomSchedule extends Component {
                                     <MenuItem value="6">6</MenuItem>
                                     <MenuItem value="7">7</MenuItem>
                                   </Select>
-                                  <label className="col-lg-2 col-md-3 col-sm-4" htmlFor="days">Days</label>                     
+                                  <label className="col-lg-2 col-md-3 col-sm-4" htmlFor="days">{t('days')}</label>                     
                                     <Select
                                     name="weeks"                                                
                                     value={this.state.weeks || 0}
@@ -175,14 +176,14 @@ class ClassroomSchedule extends Component {
                                     <MenuItem value="3">3</MenuItem>
                                     <MenuItem value="4">4</MenuItem>
                                   </Select>
-                                  <label className="col-lg-3" htmlFor="weeks">Weeks</label>
+                                  <label className="col-lg-3" htmlFor="weeks">{t('weeks')}</label>
                                   </div>                                  
                                   {errors && errors.get('days') && <FormHelperText error>{errors.get('days').get(0)}</FormHelperText>}
                                   {errors && errors.get('weeks') && <FormHelperText error>{errors.get('weeks').get(0)}</FormHelperText>}
                                 </div>                                            
                             </div>
                             <div className="row">
-                                <label className="col-lg-1 col-md-3 col-sm-4" htmlFor="startDate">Start Date:</label>
+                                <label className="col-lg-1 col-md-3 col-sm-4" htmlFor="startDate">{t('startDate')}:</label>
                                 <div className="col-lg-4 col-md-5 col-sm-6">
                                     <div>
                                         <DatePicker
@@ -201,11 +202,11 @@ class ClassroomSchedule extends Component {
                         <Table className="unit-table">
                             <Thead>
                                 <HeadRow>
-                                    <Th width='50px'>Unit</Th>
-                                    <Th width='350px'>Lesson Title</Th>
-                                    <Th width='450px'>Lesson Description</Th>
-                                    <Th width='300px'>Lesson attempt</Th>    
-                                    <Th>Instructions</Th>
+                                    <Th width='50px'>{t('unit')}</Th>
+                                    <Th width='350px'>{t('lessonTitle')}</Th>
+                                    <Th width='450px'>{t('lessonDescription')}</Th>
+                                    <Th width='300px'>{t('lessonAttempt')}</Th>    
+                                    <Th>{t('instructions')}</Th>
                                 </HeadRow>
                             </Thead>
                             <Tbody>                           
@@ -234,4 +235,4 @@ ClassroomSchedule = connect(
     })
 )(ClassroomSchedule);
 
-export default ClassroomSchedule;
+export default translate('translations')(ClassroomSchedule);

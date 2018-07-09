@@ -84,6 +84,7 @@ class UnassignedCredits extends Component {
 
   render() {
     const { sorters } = this.state;
+    const { t } = this.props;
     const loading = this.props.getUnassignedsRequest.get('loading');
     
     return (
@@ -95,10 +96,10 @@ class UnassignedCredits extends Component {
               <Thead>
                 <HeadRow>
                   <Th first={true} width='100px'>#</Th>
-                  <Th width='100px'>Thumbnail</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['resurce']} name='resource' width='132px'>Resource</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['type']} name='type' width='132px'>Type</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['count']} name='count' width='132px'>Count</Th>
+                  <Th width='100px'>{t('thumbnail')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['resurce']} name='resource' width='132px'>{t('resource')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['type']} name='type' width='132px'>{t('type')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['count']} name='count' width='132px'>{t('count')}</Th>
                 </HeadRow>
               </Thead>
               <Tbody>

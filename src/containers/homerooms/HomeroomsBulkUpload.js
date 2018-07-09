@@ -66,7 +66,7 @@ class HomeroomsBulkUpload extends Component {
 
   componentDidMount () {
       this.props.getSchools();
-      this.props.resetBulkUploadRequest()
+      this.props.resetBulkUploadRequest();
   }
 
   render() {

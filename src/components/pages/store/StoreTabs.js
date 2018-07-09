@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {Paper, Tab, Tabs, Typography, Grid, CircularProgress } from '@material-ui/core';
 import ProductCard from "./ProductCard";
 import {NavLink} from "react-router-dom";
+import {translate} from "react-i18next";
 
 function TabContainer(props) {
   return (
@@ -25,7 +25,6 @@ class StoreTabs extends Component {
     window.addEventListener("resize", this._setTabsOptions.bind(this));
   }
 
-
   _setTabsOptions() {
     if (window.innerWidth <= 1400) {
       this.setState({
@@ -37,9 +36,10 @@ class StoreTabs extends Component {
   }
 
   _renderEmptyDataMsg(){
+    const {t} = this.props;
     return (
       <div className="display-1">
-        <h1 className="text-center">Store is empty</h1>
+        <h1 className="text-center">{t('storeIsEmpty')}</h1>
       </div>
     )
   }
@@ -72,11 +72,10 @@ class StoreTabs extends Component {
     this.props.getProducts(value);
   };
 
-
   render() {
 
     const {value,  tabCentered, tabFullWidth, tabScrollButtons} = this.state;
-    const {data, isLoading, isSuccess} = this.props;
+    const {data, isLoading, isSuccess, t} = this.props;
 
     return (
       <div className="row ">
@@ -94,20 +93,16 @@ class StoreTabs extends Component {
                       centered={tabCentered}
                       fullWidth={true}
                       scrollButtons={'on'}
-
-
                     >
-                      <Tab className="tab-header-item" value="courses" label="Courses"/>
-                      <Tab className="tab-header-item" value="teaching_aids" label="Teaching Aids"/>
-                      <Tab className="tab-header-item" value="books" label="Books"/>
-                      <Tab className="tab-header-item" value="student_rewards" label="Student Rewards"/>
-                      <Tab className="tab-header-item" value="stationary" label="Stationary"/>
-                      <Tab className="tab-header-item" value="bundles" label="Bundles"/>
+                      <Tab className="tab-header-item" value="courses" label={t('courses')}/>
+                      <Tab className="tab-header-item" value="teaching_aids" label={t('teachingAids')}/>
+                      <Tab className="tab-header-item" value="books" label={t('books')}/>
+                      <Tab className="tab-header-item" value="student_rewards" label={t('studentRewards')}/>
+                      <Tab className="tab-header-item" value="stationary" label={t('stationary')}/>
+                      <Tab className="tab-header-item" value="bundles" label={t('bundles')}/>
                     </Tabs>
                   </div>
-
                 </div>
-
               </div>
               <div className="m-portlet__body" style={{height: "100%"}}>
 
@@ -159,7 +154,6 @@ class StoreTabs extends Component {
                 }
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -167,6 +161,4 @@ class StoreTabs extends Component {
   }
 }
 
-StoreTabs.propTypes = {};
-
-export default StoreTabs;
+export default translate('translations')(StoreTabs);

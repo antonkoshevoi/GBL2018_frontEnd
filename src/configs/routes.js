@@ -16,7 +16,7 @@ import HomeroomsBulkUpload from '../containers/homerooms/HomeroomsBulkUpload';
 import Classrooms from "../containers/classrooms/Classrooms";
 import ClassroomSchedule from "../containers/classrooms/ClassroomSchedule";
 import StudentsBulkUpload from '../containers/students/StudentsBulkUpload';
-import Courses from '../containers/pages/courses/Courses';
+import Courses from '../containers/courses/Courses';
 import SignUpIndex from '../containers/auth/SignUpIndex';
 import SignUpParent from '../containers/auth/SignUpParent';
 import SignUpPrincipal from '../containers/auth/SignUpPrincipal';
