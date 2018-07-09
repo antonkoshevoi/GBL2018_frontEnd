@@ -3,18 +3,12 @@ import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import '../../../../styles/store.css'
 import { withRouter } from 'react-router-dom';
-import { push } from 'react-router-redux';
-import * as queryString from 'query-string';
-import { executePayPalPayment } from '../../../../redux/payments/actions';
-import Loader from '../../../../components/layouts/Loader';
-import { selectExecutePayPalPaymentRequest } from '../../../../redux/payments/selectors';
 import ServiceList from "../../../../components/pages/store/payment/ServiceList";
 import {selectLoginRequest} from "../../../../redux/auth/selectors";
 import {login, setRedirectUrl} from "../../../../redux/auth/actions";
 import {Button, Checkbox, CircularProgress, FormControlLabel} from '@material-ui/core';
 
 class PaymentFailedContainer extends Component {
-
 
     constructor (props) {
         super(props);
@@ -25,9 +19,7 @@ class PaymentFailedContainer extends Component {
             remember: false
         };
     }
-
-
-
+    
     componentDidMount(){
         const {history} = this.props;
 

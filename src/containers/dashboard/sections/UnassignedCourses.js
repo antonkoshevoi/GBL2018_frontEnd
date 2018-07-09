@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Card from "../../ui/Card";
-import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../../ui/table";
+import Card from "../../../components/ui/Card";
+import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../../../components/ui/table";
 import {connect} from "react-redux";
+import {translate} from "react-i18next";
 import {getUnassignedsRequest} from "../../../redux/store/selectors";
 import {getUnassigneds} from "../../../redux/store/actions";
-import AssignStudentModal from "./AssignStudentModal"
+import AssignStudentModal from "../modals/AssignStudentModal"
 
 const AssignButton = ({ id, onClick}) => {
   return (
@@ -55,13 +56,14 @@ class UnassignedCourses extends Component {
   
   _renderUnassigneds() {
     const unassigneds = this.props.getUnassignedsRequest.get('records');
-
+    const {t} = this.props;
+    
     if (!unassigneds.size) {
       return (
         <tr>
           <td>
             <div className="table-message">
-              <h2>No Unassigned credits...</h2>
+              <h2>{t('noUnassignedCredits')}</h2>
             </div>
           </td>
         </tr>
@@ -87,16 +89,17 @@ class UnassignedCourses extends Component {
   render() {
       
     const {selectedCourse, assignModalIsOpen} = this.state;
+    const {t} = this.props;
     
     return (
       <Card title="Unassigned Courses" icon="fa fa-list-alt" isMainCard={true} isStore={true} style={{marginTop:15, height:'unset'}}>
         <Table>
           <Thead>
           <HeadRow>
-            <Th name='image' width='70px'>Image</Th>
-            <Th name='name' width='150px'>Course Name</Th>
-            <Th name='count' width='50px'>Count</Th>
-            <Th name='assign' width='50px'>Assign</Th>
+            <Th name='image' width='70px'>{t('image')}</Th>
+            <Th name='name' width='150px'>{t('courseName')}</Th>
+            <Th name='count' width='50px'>{t('count')}</Th>
+            <Th name='assign' width='50px'>{t('assign')}</Th>
           </HeadRow>
           </Thead>
           <Tbody>
@@ -118,4 +121,4 @@ UnassignedCourses = connect(
   })
 )(UnassignedCourses);
 
-export default UnassignedCourses;
+export default translate('translations')(UnassignedCourses);

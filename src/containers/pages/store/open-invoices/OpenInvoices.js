@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
-import OpenInvoicesTable from '../../../../components/pages/store/OpenInvoicesTable';
 
 import {
   deleteFromCartRequest,

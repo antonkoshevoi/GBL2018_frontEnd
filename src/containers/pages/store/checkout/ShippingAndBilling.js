@@ -95,7 +95,7 @@ class ShippingAndBilling extends Component {
 
   render() {
     const {billingAddress, shippingAddress, sameShipping, successRequest} = this.state;
-    const {shippingAndBillingRequest} = this.props;
+    const {shippingAndBillingRequest, t} = this.props;
     const loading = shippingAndBillingRequest.get('loading');
     const success = shippingAndBillingRequest.get('success');
     const errors = shippingAndBillingRequest.get('errors');
@@ -122,19 +122,19 @@ class ShippingAndBilling extends Component {
               <div className="col-12">
                 <div className="d-flex justify-content-center">
                   <FormControlLabel
+                    label={t('sameShippingInformation')}
                     control={
                       <Checkbox
                         checked={sameShipping}
                         onChange={this._handleSameShipping}
                       />
-                    }
-                    label="same shipping information"
+                    }                    
                   />
                 </div>
               </div>
               <div className="col-md-6 col-sm-12">
                 <Address
-                  title='Billing'
+                  title={t('billing')}
                   onChange={(form) => this._handleForm(form, 'billingAddress')}
                   name={'billingAddress'}
                   errors={errors}
@@ -142,7 +142,7 @@ class ShippingAndBilling extends Component {
               </div>
               <div className="col-md-6 col-sm-12"> 
                 <Address
-                  title='Shipping'
+                  title={t('shipping')}
                   onChange={(form) => this._handleForm(form, 'shippingAddress')}
                   name={'shippingAddress'}
                   errors={errors}
@@ -158,7 +158,7 @@ class ShippingAndBilling extends Component {
                 disabled={successRequest}
                 onClick={this._submitShippingAndBilling}
               >
-                NEXT STEP
+                {t('nextStep')}
               </Button>
             </div>
           </form>
@@ -183,4 +183,4 @@ ShippingAndBilling = connect(
   }),
 )(ShippingAndBilling);
 
-export default withRouter(translate('ShippingAndBilling')(ShippingAndBilling));
+export default withRouter(translate('translations')(ShippingAndBilling));

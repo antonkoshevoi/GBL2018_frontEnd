@@ -16,8 +16,6 @@ import {Divider, Step, StepLabel, Stepper} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import {withStyles} from '@material-ui/core/styles';
 import {CircularProgress} from '@material-ui/core';
-
-
 import payPalImg from '../../../../media/images/payments/paypal.png'
 import creditCardImg from '../../../../media/images/payments/credit_card.png'
 import checkImg from '../../../../media/images/payments/check.png'
@@ -165,7 +163,8 @@ class Checkout extends Component {
       cartRecordsRequest,
       createPayPalPaymentRequest,
       createCheckPaymentRequest,
-      cartRecordsSum
+      cartRecordsSum,
+      t
     } = this.props;
     const loadingCarts = cartRecordsRequest.get('loading');
     const successCarts = cartRecordsRequest.get('success');
@@ -178,13 +177,13 @@ class Checkout extends Component {
             <Card header={false}>
               <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
                 <Step>
-                  <StepLabel>Payments Options</StepLabel>
+                  <StepLabel>{t('paymentsOptions')}</StepLabel>
                 </Step>
                 <Step>
-                  <StepLabel classes={{...classes}}>Shipping and Billing</StepLabel>
+                  <StepLabel classes={{...classes}}>{t('shippingAndBilling')}</StepLabel>
                 </Step>
                 <Step>
-                  <StepLabel>Confirmation</StepLabel>
+                  <StepLabel>{t('confirmation')}</StepLabel>
                 </Step>
               </Stepper>
               {[
@@ -196,13 +195,10 @@ class Checkout extends Component {
                         {successCarts &&
                         <div className="m-portlet__body">
                           <div className="m-widget25">
-                            {item &&
-                              <span className="invoice-title">Yor invoice {item.invoiceNo} Total ${cartRecordsSum}</span>
-                            }
+                            {item && <span className="invoice-title">{t('yourInvoice', {invoiceNo: item.invoiceNo, invoiceAmount: cartRecordsSum})}</span>}
                           </div>
                         </div>
                         }
-
                         {loadingCarts && !successCarts &&
                         <div className="row d-flex justify-content-center">
                           <CircularProgress color="primary" size={80}/>
@@ -210,30 +206,30 @@ class Checkout extends Component {
                         <br/>
                         <PaymentMethods methods={[
                           {
-                            title: 'PayPal',
+                            title: t('payPal'),
                             img: payPalImg,                            
                             onSelect: this._processPayPal,
                           },
                           {
-                            title: 'Credit Card',
+                            title: t('creditCard'),
                             img: creditCardImg,
                             onSelect: this._processCreditCard,
                           },
                           {
-                            title: 'Check',
+                            title: t('check'),
                             img: checkImg,
                             loading: createCheckPaymentRequest.get('loading'),
                             onSelect: this._processCheck,
                           },
                           {
-                            title: 'WireTransfer(TT)',
+                            title: t('wireTransfer'),
                             img: checkImg,                            
                             onSelect: () => {
                               this.handleNext();
                             },
                           },
                           {
-                            title: 'COG',
+                            title: t('cog'),
                             img: checkImg,                            
                             onSelect: () => {
                               this.handleNext();
@@ -270,7 +266,7 @@ class Checkout extends Component {
                   disabled={stepIndex === 0}
                   onClick={this.handleBack}
                 >
-                  Back
+                  {t('back')}
                 </Button>
               </div>
               }
@@ -302,4 +298,4 @@ Checkout = connect(
   })
 )(withStyles(styles)(Checkout));
 
-export default withRouter(translate('Checkout')(Checkout));
+export default withRouter(translate('translations')(Checkout));

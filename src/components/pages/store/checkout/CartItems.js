@@ -14,12 +14,12 @@ class CartItems extends Component {
       <div key={key} className="m-widget4__item">
 
         <div className="m-widget4__info">
-					<span className="m-widget4__title">
-            {item.get('title')}
-					</span> <br/>
-          <span className="m-widget4__sub">
-            {item.get('quantity')} items
-					</span>
+            <span className="m-widget4__title">
+                {item.get('title')}
+            </span> <br/>
+            <span className="m-widget4__sub">
+                {item.get('quantity')} items
+            </span>
         </div>
         <span className="m-widget4__ext">
             <span className="m-widget4__number m--font-danger">${item.get('total_price')}</span>

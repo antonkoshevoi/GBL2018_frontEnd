@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
-import products from '../../../data/json/products.json';
 import '../../../styles/store.css'
-
 import ProductsSection from "../../../components/pages/store/ProductsSection";
 import Filter from "../../../components/pages/store/Filter";
 import {withRouter} from "react-router-dom";
@@ -33,11 +31,12 @@ class Products extends Component {
 
 
   _renderNotFountMessage() {
+    const {t} = this.props; 
     return (
       <div className="notFountMessage">
         <div className="display-1 text-center">
           <i className="la g-red	la-times-circle"></i>
-          <h1>Products Not Found</h1>
+          <h1>{t('productsNotFound')}</h1>
         </div>
       </div>
     )
@@ -72,7 +71,6 @@ class Products extends Component {
     );
   }
 }
-
 
 Products = connect(
   (state) => ({
