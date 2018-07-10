@@ -50,7 +50,7 @@ class Courses extends Component {
   }
 
   render() {
-    const { activeTab } = this.state;
+    const { activeTab, t } = this.state;
 
     return (
       <div className='fadeInLeft  animated learning-areas'>
@@ -61,8 +61,8 @@ class Courses extends Component {
                 className="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x main-tabs "
                 value={this.state.activeTab}
                 onChange={this.handleChange}>
-                <Tab className="tab-header-item" value="1" label="Courses" />
-                <Tab className="tab-header-item" value="2" label="Invitations" />
+                <Tab className="tab-header-item" value="1" label={t('courses')} />
+                <Tab className="tab-header-item" value="2" label={t('invitations')} />
               </Tabs>
             </div>
             <div className="m-portlet__head-tools">
@@ -96,4 +96,4 @@ Courses = connect(
 )(Courses);
 
 
-export default translate('students')(Courses);
+export default translate('translations')(Courses);

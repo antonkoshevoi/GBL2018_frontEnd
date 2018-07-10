@@ -5,6 +5,7 @@ import "../../../styles/store.css"
 import {NavLink} from "react-router-dom";
 import DeleteButton from "../../ui/DeleteButton";
 import {debounce} from "../../../helpers/utils";
+import {translate} from 'react-i18next';
 
 class OpenInvoicesTable extends Component {
 
@@ -16,7 +17,6 @@ class OpenInvoicesTable extends Component {
     data: [],
     preview: false,
   };
-
 
   state = {
     data: this.props.data,
@@ -46,7 +46,6 @@ class OpenInvoicesTable extends Component {
     data[idx]['count'] = e.target.value;
     this._updateData(data);
     debounce(()=>this.props.setQuantity(data[idx]),1000)();
-
   }
 
   _getTotalSum(products) {
@@ -63,9 +62,10 @@ class OpenInvoicesTable extends Component {
 
 
   _getEmptyMessage() {
+    const {t} = this.props;
     return (
       <div className="m--padding-20">
-        <h2 className="text-center m--padding-10">No Open invoices</h2>
+        <h2 className="text-center m--padding-10">{t('noOpenInvoices')}</h2>
       </div>
     )
   }
@@ -76,7 +76,7 @@ class OpenInvoicesTable extends Component {
 
   _renderRows(rows, preview) {
     const _self = this;
-
+    const {t} = this.props;
 
     return rows.map(function (item, i) {
 
@@ -93,10 +93,10 @@ class OpenInvoicesTable extends Component {
                 <span>{item.storeItem.description.substr(0, 50) + '...'}</span>
                <div className="d-block" style={{ 'marginTop':'15px'}}>
                  <DeleteButton
-                   onClick={() => {   _self.props.onDelete (item.id) }}
-                   title={`Are you sure you want to delete ${item.storeItem.title} ${item.classroom ? `for ${item.classroom.crm_name}?` : `?`} `}
+                   onClick={() => { _self.props.onDelete (item.id) }}
+                   title={t('deleteItemFromCartConfirmation', {item: item.storeItem.title})}
                    icon={false}
-                   btnName={"Delete"}
+                   btnName={t('delete')}
                    classNameBtn="productLink g-blue"
                  />
                </div>
@@ -130,13 +130,8 @@ class OpenInvoicesTable extends Component {
             {item.isInvoice &&
             <span className="productLabel text-center">{item.count}</span>
             }
-
-
           </Td>
           <Td width='100px'>
-            {/*<span className="productPrice productLabel">*/}
-              {/*{'$' + parseInt(item.storeItem.price).toFixed(2)}*/}
-            {/*</span>*/}
             <span className="productPrice productLabel">
               {item.storeItem.discount != 0 &&
              <span>${parseFloat(item.storeItem.price).toFixed(2)}
@@ -160,16 +155,17 @@ class OpenInvoicesTable extends Component {
   }
 
   _renderTotalRow(sum,count) {
+    const {t} = this.props;
     return (
       <div>
         <div className="m alert  ">
           <div className="row text-right">
             <div className="col-md-2 text-center">
-              <h3>{count + ' Items'}</h3>
+              <h3>{t('itemsCount', {count: count})}</h3>
             </div>
             <div className="col-md-10">
               <div className="text-left d-inline-block">
-                <span>Total</span><br/>
+                <span>{t('total')}</span><br/>
                 <span className="productPrice">
                 {'$' + parseFloat(sum).toFixed(2)}
                 </span>
@@ -177,23 +173,22 @@ class OpenInvoicesTable extends Component {
             </div>
           </div>
         </div>
-
       </div>
-
     )
   }
   _renderTaxRow(tax = 0) {
+    const {t} = this.props;
     return (
       <div>
         <div className="m alert m-alert--default">
           <div className="row text-right">
             <div className="col-md-4">
               <div className="row text-left d-flex justify-content-center flex-column productTax">
-                <h4>Shipping & Tax</h4>
+                <h4>{t('shippingAndTax')}</h4>
               </div>
             </div>
             <div className="col-md-8">
-              <div className="text-left d-inline-block  ">
+              <div className="text-left d-inline-block">
                 <span className="productTaxPrice">
                 {'$' + parseFloat(tax).toFixed(2)}
                 </span>
@@ -201,14 +196,12 @@ class OpenInvoicesTable extends Component {
             </div>
           </div>
         </div>
-
       </div>
-
     )
   }
 
   render() {
-    const {data, sum,preview} = this.props;
+    const {data, sum, preview, t} = this.props;
     return (
       <div>
         {data.length > 0 ?
@@ -218,12 +211,12 @@ class OpenInvoicesTable extends Component {
               <Thead>
               <HeadRow>
                 <Th first={true} width='10px'>#</Th>
-                <Th name='product' width='400px'>Product</Th>
-                {!preview && <Th name='quantity' width='100px' classNames="text-center">Classroom</Th>}
-                {!preview && <Th name='quantity' width='100px' classNames="text-center">Homeroom</Th>}
-                <Th name='quantity' width='132px' classNames="text-center">Quantity</Th>
-                <Th name='price' width='100px'>Price</Th>
-                <Th name='actions' width='100px'>Total</Th>
+                <Th name='product' width='400px'>{t('product')}</Th>
+                {!preview && <Th name='quantity' width='100px' classNames="text-center">{t('classroom')}</Th>}
+                {!preview && <Th name='quantity' width='100px' classNames="text-center">{t('homeroom')}</Th>}
+                <Th name='quantity' width='132px' classNames="text-center">{t('quantity')}</Th>
+                <Th name='price' width='100px'>{t('price')}</Th>
+                <Th name='actions' width='100px'>{t('total')}</Th>
               </HeadRow>
               </Thead>
               <Tbody>
@@ -236,13 +229,12 @@ class OpenInvoicesTable extends Component {
             <div className="row d-flex justify-content-end ">
               <div className="col-md-4 d-flex justify-content-end align-items-center">
                 <div className="form-group-inline btn-group">
-                  <NavLink to="/store" className="btn m-btm btn-primary">Continue shopping</NavLink>
-                  <NavLink to="/shopping/checkout" className="btn m-btm btn-success">Checkout</NavLink>
+                  <NavLink to="/store" className="btn m-btm btn-primary">{t('continueShopping')}</NavLink>
+                  <NavLink to="/shopping/checkout" className="btn m-btm btn-success">{t('checkout')}</NavLink>
                 </div>
               </div>
             </div>
             }
-
           </div>
           :
           this._getEmptyMessage()
@@ -252,4 +244,4 @@ class OpenInvoicesTable extends Component {
   }
 }
 
-export default OpenInvoicesTable;
+export default translate('translations')(OpenInvoicesTable);

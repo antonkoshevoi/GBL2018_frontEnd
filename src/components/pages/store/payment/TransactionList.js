@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import {translate} from "react-i18next";
 import Card from "../../../ui/Card";
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../../ui/table";
-import {Icon, IconButton} from '@material-ui/core';
-import moment from "moment";
+import {IconButton} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
 
 class TransactionList extends Component {

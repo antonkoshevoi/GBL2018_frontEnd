@@ -8,6 +8,7 @@ import {
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { translate } from "react-i18next";
 import { selectCreateRequest } from '../../../redux/homerooms/selectors';
 import { create, resetCreateRequest } from '../../../redux/homerooms/actions';
 import Modal from "../../../components/ui/Modal";
@@ -84,7 +85,7 @@ class CreateHomeroomModal extends Component {
   }
 
   render() {
-    const { isOpen, createRequest } = this.props;
+    const { isOpen, createRequest, t } = this.props;
     const loading = createRequest.get('loading');    
     const errors = createRequest.get('errors');
 
@@ -100,7 +101,7 @@ class CreateHomeroomModal extends Component {
               )}
             </IconButton>
             <Typography type="title" color="inherit" >
-              Create Homeroom
+              {t('createHomeroom')}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -133,7 +134,7 @@ class CreateHomeroomModal extends Component {
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
-            Add New Homeroom
+            {t('addNewHomeroom')}
           </Button>
         </DialogActions>
       </Modal>
@@ -151,4 +152,4 @@ CreateHomeroomModal = connect(
   })
 )(CreateHomeroomModal);
 
-export default CreateHomeroomModal;
+export default translate('translations')(CreateHomeroomModal);

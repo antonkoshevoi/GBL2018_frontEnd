@@ -276,7 +276,7 @@ class DemoCoursesTab extends Component {
                 <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='122px'>{t('course')}</Th>
                 <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='122px'>{t('teacher')}</Th>
                 <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='122px'>{t('studentsCount')}</Th>
-                <Th width='100px'>Actions</Th>
+                <Th width='100px'>{t('actions')}</Th>
               </HeadRow>
             </Thead>
 
