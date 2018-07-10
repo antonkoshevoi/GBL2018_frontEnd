@@ -5,7 +5,7 @@ import UnassignedCourses from "./sections/UnassignedCourses";
 import {connect} from "react-redux";
 import {selectRecords, selectGetRecordsRequest} from "../../redux/students/selectors";
 import {getRecords} from "../../redux/students/actions";
-import {getParentRecords, getRecords as storeRecords} from "../../redux/store/actions";
+import {getParentRecords} from "../../redux/store/actions";
 import {Row, Td} from "../../components/ui/table";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
 import {push} from 'react-router-redux';
@@ -14,7 +14,7 @@ import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
 import FeaturedItems from "./sections/FeaturedItems";
 import {selectRecords as storeItems}  from "../../redux/store/selectors";
-import QuickLink from "../pages/reports/widgets/QuickLink";
+import QuickLink from "./sections/QuickLink";
 import Account from "../pages/reports/widgets/account";
 
 const styles = {

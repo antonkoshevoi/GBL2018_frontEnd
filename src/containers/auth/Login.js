@@ -142,4 +142,4 @@ Login = connect(
   })
 )(Login);
 
-export default withRouter(translate("LanguageSwitcher")(Login));
+export default withRouter(translate("translations")(Login));

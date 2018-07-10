@@ -6,6 +6,7 @@ import {
 import { NavLink } from "react-router-dom";
 import { Search } from "@material-ui/icons";
 import {connect} from "react-redux";
+import {translate} from 'react-i18next';
 import {
   selectClassroomsRequest, selectHomeroomsRequest,
   selectStudentsRequest
@@ -80,12 +81,12 @@ class DashboardTabs extends Component {
   }
 
   _renderStudents() {
-    const { goTo } = this.props;
+    const { goTo, t } = this.props;
     const students = this.props.getStudentsRequest.get('records').toJS();
     const defaultAvatar = '//s3.amazonaws.com/37assets/svn/765-default-avatar.png';
 
     if (this.props.getStudentsRequest.get('success') && !students.length) {
-      return this._renderEmptyDataMsg('No Students...');
+      return this._renderEmptyDataMsg(t('noStudents'));
     }
 
     return students.map(function (student, i) {
@@ -100,13 +101,13 @@ class DashboardTabs extends Component {
               <div>
                 <span className="text-right d-block">{student.passRate} %</span>
                 <div className="progress m-progress--sm">
-                  <div title="Completed" className="progress-bar bg-success" role="progressbar" style={{width: student.completed + '%'}}></div>
-                  <div title="In Progress" className="progress-bar bg-warning" role="progressbar" style={{width: student.inProgress + '%'}}></div>
+                  <div title={t('completed')} className="progress-bar bg-success" role="progressbar" style={{width: student.completed + '%'}}></div>
+                  <div title={t('inProgress')} className="progress-bar bg-warning" role="progressbar" style={{width: student.inProgress + '%'}}></div>
                 </div>
                 <br/>
                 <div className="progress m-progress--sm">
-                  <div title="Average Grade" className="progress-bar bg-success" role="progressbar" style={{width: student.averageGrade + '%'}}></div>
-                  <div title="Average Grade" className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(student.averageGrade)) + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-success" role="progressbar" style={{width: student.averageGrade + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(student.averageGrade)) + '%'}}></div>
                 </div>
               </div>
             )}
@@ -120,11 +121,11 @@ class DashboardTabs extends Component {
   }
 
   _renderHomerooms() {
-    const { goTo } = this.props;
+    const { goTo, t } = this.props;
     const homerooms = this.props.getHomeroomsRequest.get('records').toJS();
 
     if (this.props.getHomeroomsRequest.get('success') && !homerooms.length) {
-      return this._renderEmptyDataMsg('No Homerooms...');
+      return this._renderEmptyDataMsg(t('noHomerooms'));
     }
 
     return homerooms.map(function (homeroom, i) {
@@ -139,13 +140,13 @@ class DashboardTabs extends Component {
               <div>
                 <span className="text-right d-block">{homeroom.passRate} %</span>
                 <div className="progress m-progress--sm">
-                  <div title="Completed" className="progress-bar bg-success" role="progressbar" style={{width: homeroom.completed + '%'}}></div>
-                  <div title="In Progress" className="progress-bar bg-warning" role="progressbar" style={{width: homeroom.inProgress + '%'}}></div>
+                  <div title={t('completed')} className="progress-bar bg-success" role="progressbar" style={{width: homeroom.completed + '%'}}></div>
+                  <div title={t('inProgress')} className="progress-bar bg-warning" role="progressbar" style={{width: homeroom.inProgress + '%'}}></div>
                 </div>
                 <br/>
                 <div className="progress m-progress--sm">
-                  <div title="Average Grade" className="progress-bar bg-success" role="progressbar" style={{width: homeroom.averageGrade + '%'}}></div>
-                  <div title="Average Grade" className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(homeroom.averageGrade)) + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-success" role="progressbar" style={{width: homeroom.averageGrade + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(homeroom.averageGrade)) + '%'}}></div>
                 </div>
               </div>
             )}
@@ -159,11 +160,11 @@ class DashboardTabs extends Component {
   }
 
   _renderClassrooms() {
-    const { goTo } = this.props;
+    const { goTo, t } = this.props;
     const classrooms = this.props.getClassroomsRequest.get('records').toJS();
 
     if (this.props.getClassroomsRequest.get('success') && !classrooms.length) {
-      return this._renderEmptyDataMsg('No Classrooms...');
+      return this._renderEmptyDataMsg(t('noClassrooms'));
     }
 
     return classrooms.map(function (classroom, i) {
@@ -175,18 +176,16 @@ class DashboardTabs extends Component {
             className="myGridTileBar"
             title={classroom.crmName}
             subtitle={(
-              <div>
-                {/*<span className="text-right d-block">{classroom.passRate} %</span>*/}
+              <div>                
                 <div className="progress m-progress--sm">
-                  <div title="Average Grade" className="progress-bar bg-success" role="progressbar" style={{width: classroom.averageGrade + '%'}}></div>
-                  <div title="Average Grade" className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(classroom.averageGrade)) + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-success" role="progressbar" style={{width: classroom.averageGrade + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(classroom.averageGrade)) + '%'}}></div>
                 </div>
                 <br/>
                 <div className="progress m-progress--sm">
-                  <div title="Completed" className="progress-bar bg-success" role="progressbar" style={{width: classroom.completed + '%'}}></div>
-                  <div title="In Progress" className="progress-bar bg-warning" role="progressbar" style={{width: classroom.inProgress + '%'}}></div>
+                  <div title={t('completed')} className="progress-bar bg-success" role="progressbar" style={{width: classroom.completed + '%'}}></div>
+                  <div title={t('inProgress')} className="progress-bar bg-warning" role="progressbar" style={{width: classroom.inProgress + '%'}}></div>
                 </div>
-
               </div>
             )}
             actionIcon={
@@ -200,6 +199,7 @@ class DashboardTabs extends Component {
 
   render() {
     const { value, cols, tabCentered, tabFullWidth, tabScrollButtons } = this.state;
+    const { t } = this.props;
 
     return (
       <div className="m--margin-top-50">
@@ -215,9 +215,9 @@ class DashboardTabs extends Component {
                   centered={tabCentered}
                   fullWidth={tabFullWidth}
                 >
-                  <Tab className="tab-header-item" value="classRooms" label="Classrooms"/>
-                  <Tab className="tab-header-item" value="homeRooms" label="Homerooms"/>
-                  <Tab className="tab-header-item" value="students" label="Students"/>
+                  <Tab className="tab-header-item" value="classRooms" label={t('classrooms')}/>
+                  <Tab className="tab-header-item" value="homeRooms" label={t('homerooms')}/>
+                  <Tab className="tab-header-item" value="students" label={t('students')}/>
                 </Tabs>
               </div>
               <div className="m-portlet__head-tools col-sm-4">
@@ -225,7 +225,7 @@ class DashboardTabs extends Component {
                   className="portlet-header-input"
                   id="search"
                   type='search'
-                  placeholder="Search"
+                  placeholder={t('search')}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton>
@@ -277,4 +277,4 @@ DashboardTabs = connect(
   })
 )(DashboardTabs);
 
-export default DashboardTabs;
+export default translate('translations')(DashboardTabs);

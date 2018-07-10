@@ -121,4 +121,4 @@ UserMenu = connect(
   (dispatch) => ({})
 )(UserMenu);
 
-export default withRouter(translate("languageSwitcher")(UserMenu));
+export default withRouter(translate("translations")(UserMenu));

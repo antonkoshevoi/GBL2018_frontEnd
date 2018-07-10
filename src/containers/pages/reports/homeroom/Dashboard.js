@@ -49,4 +49,4 @@ class Dashboard extends Component {
   }
 }
 
-export default translate('reports')(Dashboard);
+export default translate('translations')(Dashboard);

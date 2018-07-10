@@ -90,7 +90,7 @@ class Sidebar extends Component {
           <NavLink
             to={(menu.subMenu !== undefined) ? `${menu.key == 'store' ? menu.link : '#' + menu.key }` : `/${menu.link}`}
             className={'googleMenuItem ' + menu.colorName + (activeMenu.key === menu.key ? ' active fadeInUp  animated' : activeMenu.subMenu !== undefined ? ' swapped' : '') }
-            onClick={(event) => {_self._googleMenuToggle(menu), _self._goToFirstPage(menu)}}>
+            onClick={(event) => {_self._googleMenuToggle(menu); _self._goToFirstPage(menu);}}>
             <span className="icon"><i className={menu.icon}></i></span>
             <span className="content">{_self.props.t(menu.title)}</span>
           </NavLink>
@@ -113,7 +113,7 @@ class Sidebar extends Component {
       return (
         <div key={i}>
           <NavLink activeClassName={'active'} to={`/${menu.link}`} key={i}>
-            <span className="content"> {_self.props.t(menu.key) }</span>
+            <span className="content"> {_self.props.t(menu.title) }</span>
           </NavLink >
         </div>
       )
@@ -147,9 +147,7 @@ class Sidebar extends Component {
         <div className="m-list-timeline__item" key={i}>
           <NavLink to={`/${item.link}`} className="timelineMenuItem">
             <span className="m-list-timeline__badge m-list-timeline__badge--success"></span>
-            <span className="m-list-timeline__text">
-                        {item.title}
-                    </span>
+            <span className="m-list-timeline__text">{item.title}</span>
           </NavLink>
           {item.subMenu !== undefined &&
           <div className="timelineSecondSubMenu  m-list-timeline">
@@ -170,7 +168,7 @@ class Sidebar extends Component {
         <li className="m-menu__item" key={i} aria-haspopup="true" data-menu-submenu-toggle="hover">
           <NavLink to={`/${menu.link}`} className="m-menu__link" onClick={() => {_self._resetMenu()}}>
             <i className={`m-menu__link-icon ${menu.icon}`}></i>
-            <span className="m-menu__link-text">{_self.props.t(menu.key)}</span>
+            <span className="m-menu__link-text">{_self.props.t(menu.title)}</span>
           </NavLink >
         </li>
       )
@@ -215,7 +213,7 @@ class Sidebar extends Component {
 
     return (
       isLoggedIn && (
-        <div id="m_aside_left" style={{marginTop:-headerPosition + mobileMenu}} className={`m-grid__item	m-aside-left  m-aside-left--skin-dark menu-active-${activeMenuClass.key}`}>
+        <div id="m_aside_left" style={{marginTop:-headerPosition + mobileMenu}} className={`m-grid__item m-aside-left  m-aside-left--skin-dark menu-active-${activeMenuClass.key}`}>
           <div
             id="m_ver_menu"
             className="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark "
@@ -243,4 +241,4 @@ Sidebar = connect(
 )(Sidebar);
 
 
-export default withRouter(translate("sidebar")(Sidebar));
+export default withRouter(translate("translations")(Sidebar));

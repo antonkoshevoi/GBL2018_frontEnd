@@ -9,7 +9,7 @@ import {withRouter} from "react-router-dom";
 import {getRecords} from "../../redux/store/actions";
 import {selectRecords} from "../../redux/store/selectors";
 import Account from "../pages/reports/widgets/account";
-import QuickLink from "../pages/reports/widgets/QuickLink";
+import QuickLink from "./sections/QuickLink";
 import FeaturedItems from "./sections/FeaturedItems";
 import Card from "../../components/ui/Card";
 
