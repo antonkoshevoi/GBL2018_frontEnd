@@ -9,6 +9,7 @@ import blue from '@material-ui/core/es/colors/blue';
 import moment from 'moment';
 import classNames from 'classnames';
 import {IconButton, withStyles, Button, Icon, createMuiTheme, MuiThemeProvider} from '@material-ui/core';
+import {translate} from 'react-i18next';
 
 class LineChart extends Component {
   apiClient = new ApiClient();
@@ -40,29 +41,30 @@ class LineChart extends Component {
   }
 
   render() {
+    const { t }  = this.props;
     return (
-      <Card title="Students Online" isChart={true} icon="flaticon-diagram" iconBackground="square-background"
+      <Card title={t('studentsOnline')} isChart={true} icon="flaticon-diagram" iconBackground="square-background"
             resetDate={this.handleResetDate} isResetChartButton={true}>
         <div className="date-group-selector">
           <div className={`date-group` + (this.state.selectorActive === 0 ? ' date-selector-active' : '')}
                onClick={() => {
                  this.changeDateGroup(0)
-               }}>1 day
+               }}>{t('oneDay')}
           </div>
           <div className={`date-group` + (this.state.selectorActive === 1 ? ' date-selector-active' : '')}
                onClick={() => {
                  this.changeDateGroup(1)
-               }}>7 days
+               }}>{t('oneWeek')}
           </div>
           <div className={`date-group` + (this.state.selectorActive === 2 ? ' date-selector-active' : '')}
                onClick={() => {
                  this.changeDateGroup(2)
-               }}>1 month
+               }}>{t('oneMonth')}
           </div>
           <div className={`date-group` + (this.state.selectorActive === 3 ? ' date-selector-active' : '')}
                onClick={() => {
                  this.changeDateGroup(3)
-               }}>1 year
+               }}>{t('oneYear')}
           </div>
         </div>
         {this.generateDateSelector()}
@@ -151,6 +153,7 @@ class LineChart extends Component {
   }
 
   generateDateSelector = () => {
+    const { t }  = this.props;
     const currInputDate = this.state.chosenDate;
     const theme = createMuiTheme({
       palette: {
@@ -187,7 +190,7 @@ class LineChart extends Component {
           <div style={{'display': 'none'}}>
             <MuiThemeProvider theme={theme}>              
                 <DatePicker
-                  label="Choose date"
+                  label={t('chooseDate')}
                   value={currInputDate}
                   maxDate={maxInputDate}
                   onChange={this.changeStartDate}
@@ -196,7 +199,7 @@ class LineChart extends Component {
                   ref={(node) => {
                     this.picker = node;
                   }}
-                  okLabel="Select day"
+                  okLabel={t('selectDay')}
                 />              
             </MuiThemeProvider>
           </div>
@@ -208,15 +211,15 @@ class LineChart extends Component {
       if (this.state.selectorActive === 1) {
         endDate = moment(this.state.chosenDate).add('weeks', 1).add('days', -1).format('MMMM Do');
         maxInputDate = moment().endOf('week').format('YYYY-MM-DD');
-        okLabel = 'Select week';
+        okLabel = t('selectWeek');
       } else if (this.state.selectorActive === 2) {
         endDate = moment(this.state.chosenDate).add('months', 1).add('days', -1).format('MMMM Do');
         maxInputDate = moment().endOf('month').format('YYYY-MM-DD');
-        okLabel = 'Select month';
+        okLabel = t('selectMonth');
       } else if (this.state.selectorActive === 3) {
         endDate = moment(this.state.chosenDate).add('years', 1).add('days', -1).format('MMMM Do');
         maxInputDate = moment().endOf('year').format('YYYY-MM-DD');
-        okLabel = 'Select year';
+        okLabel = t('selectYear');
       }
       this.state.maxInputDate = maxInputDate;
       return (
@@ -245,7 +248,7 @@ class LineChart extends Component {
           <div style={{'display': 'none'}}>
             <MuiThemeProvider theme={theme}>              
                 <DatePicker
-                  label="Choose start date"
+                  label={t('chooseStartDate')}
                   ref={(node) => {
                     this.picker = node;
                   }}
@@ -414,4 +417,4 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(LineChart);
+export default withStyles(styles)(translate('translations')(LineChart));

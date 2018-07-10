@@ -9,7 +9,7 @@ const apiClient = new ApiClient();
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{padding: 8 * 3}}>
+    <Typography component="div">
       {props.children}
     </Typography>
   );

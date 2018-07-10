@@ -46,6 +46,10 @@ export default {
     firstName: 'First Name',
     lastName: 'Last Name',
     uploadFile: 'Upload a file',
+    selectCountry: 'Select Country',
+    schoolCode: 'School Code',
+    schoolName: 'School Name',
+    schoolInformation: 'School Information',
     cropImage: 'Crop Image',
     profilePicUpload: 'Profile Pic Upload',
     username: 'Username',
@@ -327,8 +331,8 @@ export default {
     passFail: 'Pass/Fail',
     comments: 'Comments',
     passesAttempts: 'Passes/Attempts',
-    pass: 'pass',
-    fail: 'fail',
+    pass: 'Pass',
+    fail: 'Fail',
     detailedData: 'Detailed Data',    
     dashboard: 'Dashboard',
     studentsAndStaff: 'Students & Staff',
@@ -356,5 +360,7 @@ export default {
     noHomerooms: 'No Homerooms...',
     paypal: 'PayPal',
     creditcard: 'Credit Card',
-    completed: 'Completed'
+    completed: 'Completed',
+    personalInformation: 'Personal Information',
+    setupYourPrincipalProfile: 'Setup Your Principal Profile'
 }
