@@ -10,7 +10,7 @@ import {getRecords} from "../../redux/store/actions";
 import {selectRecords} from "../../redux/store/selectors";
 import Account from "../pages/reports/widgets/account";
 import QuickLink from "../pages/reports/widgets/QuickLink";
-import FeaturedItems from "../pages/reports/widgets/FeaturedItems";
+import FeaturedItems from "./sections/FeaturedItems";
 import Card from "../../components/ui/Card";
 
 class UserDashboard extends Component {
@@ -130,12 +130,12 @@ class UserDashboard extends Component {
   }
 
   render() {
-    const {records} = this.props;
+    const {records, t} = this.props;
     return (
-      <div className="fadeInLeft  animated">
+      <div className="fadeInLeft animated">
         <div className="row dashboard-main-top">
           <div className="col-sm-12 col-md-12 col-lg-12 col-xl-9 dashboard-reports-snapshot" style={{marginTop:'15px'}}>
-            <Card title="Reports Snapshot" isMainCard={true} boxShadow={false} style={{boxShadow:"none"}} bodyStyle={{padding:'0', background:'#f2f3f8'}}>
+            <Card title={t('reportsSnapshot')} isMainCard={true} boxShadow={false} style={{boxShadow:"none"}} bodyStyle={{padding:'0', background:'#f2f3f8'}}>
               <div className="row row-15">
                 <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">
                   <RosterStatistic/>

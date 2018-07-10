@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {getCharts} from "../../../../redux/reports/dashboard/actions";
 import {selectChartDatatRequest} from "../../../../redux/reports/dashboard/selectors";
 import {CircularProgress} from '@material-ui/core';
+import {translate} from 'react-i18next';
 
 class SchoolAverageChart extends Component {
 
@@ -74,11 +75,12 @@ class SchoolAverageChart extends Component {
   render() {
     const getChartDataRequest = this.props.getChartDataRequest.toJS();
     const { data, loading, success, fail } = getChartDataRequest;
+    const { t } = this.props;
 
     const progress = [
-      {color: "#79c942", label: "complete", value: data.completed},
-      {color: "#ff931e", label: "in progress", value: data.inProgress},
-      {color: "#dee6e9", label: "not started", value: data.notStarted}
+      {color: "#79c942", label: t('complete'), value: data.completed},
+      {color: "#ff931e", label: t('inProgress'), value: data.inProgress},
+      {color: "#dee6e9", label: t('notStarted'), value: data.notStarted}
     ];
 
     const progressChartData = {
@@ -86,12 +88,12 @@ class SchoolAverageChart extends Component {
         data: [+data.completed, +data.inProgress, +data.notStarted],
         backgroundColor: ['#79c942', '#ff931e', '#dee6e9']
       }],
-      labels: ['complete', 'in progress', 'not started']
+      labels: [t('complete'), t('inProgress'), t('notStarted')]
     };
 
     const performance = [
-      {color: "#79c942", label: "correct", value: data.averageGrade},
-      {color: "#fe1d25", label: "incorrect", value: 100 - parseInt(data.averageGrade)},
+      {color: "#79c942", label: t('correct'), value: data.averageGrade},
+      {color: "#fe1d25", label: t('incorrect'), value: 100 - parseInt(data.averageGrade)},
     ];
 
     const performanceChartData = {
@@ -99,7 +101,7 @@ class SchoolAverageChart extends Component {
         data: [+data.averageGrade, 100 - parseInt(data.averageGrade)],
         backgroundColor: ['#79c942', '#fe1d25']
       }],
-      labels: ['correct', 'incorrect']
+      labels: [t('correct'), t('incorrect')]
     };
 
     return (
@@ -113,8 +115,8 @@ class SchoolAverageChart extends Component {
             <div className="col-md-7  pie-block school-average-margins">
               <div
                 className="m-stack m--padding-left-20 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
-                <h5> School Average</h5>
-                <legend>Performance</legend>
+                <h5>{t('schoolAverage')}</h5>
+                <legend>{t('performance')}</legend>
                 {this._renderPieChartLabels(performance)}
               </div>
             </div>
@@ -130,8 +132,8 @@ class SchoolAverageChart extends Component {
             <div className="col-md-7 pie-block school-average-margins">
               <div
                 className="m-stack m--padding-left-20  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
-                <h5> School Average</h5>
-                <legend>Progress</legend>
+                <h5>{t('schoolAverage')}</h5>
+                <legend>{t('progress')}</legend>                
                 {this._renderPieChartLabels(progress)}
               </div>
             </div>
@@ -154,4 +156,4 @@ SchoolAverageChart = connect(
   })
 )(SchoolAverageChart);
 
-export default SchoolAverageChart;
+export default translate('translations')(SchoolAverageChart);

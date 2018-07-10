@@ -6,6 +6,7 @@ import Parser from 'html-react-parser';
 import ApiClient from "../../../../services/ApiClient";
 import {LessonsTable} from '../students/LessonsTable';
 import {getStudentClassReport} from '../../../../redux/reports/students/actions';
+import {translate} from 'react-i18next';
 
 function TabContainer(props) {
   return (
@@ -29,14 +30,14 @@ class TabSection extends Component {
   };
 
   _renderTabs(courses) {
+    const {t} = this.props;
     return [
       courses.map(function (item, i) {
         return <Tab key={i} className="tab-header-item" value={item.course.crsId} label={item.course.crsTitle}/>
       }),
-      <Tab key={-1} className="tab-header-item" value="details" label="Detailed Data"/>
+      <Tab key={-1} className="tab-header-item" value="details" label={t('detailedData')}/>
     ];
   }
-
 
   _renderTabContent(courses) {
     const {value} = this.state;
@@ -61,19 +62,20 @@ class TabSection extends Component {
   }
 
   _renderDetailedData(item) {
+    const {t} = this.props;
     return (
       <Table>
         <Thead>
         <HeadRow>
           <Th first={true} width='20px'>#</Th>
-          <Th width='150px'>Date</Th>
-          <Th width='150px'>Classroom</Th>
-          <Th width='150px'>Course</Th>
-          <Th width='200px'>Unit/Lesson</Th>
-          <Th width='50px'>Score</Th>
-          <Th width='50px'>Percent</Th>
-          <Th width='50px'>Pass/Fail</Th>
-          <Th width='50px'>Passes/Attempts</Th>
+          <Th width='150px'>{t('date')}</Th>
+          <Th width='150px'>{t('classroom')}</Th>
+          <Th width='150px'>{t('course')}</Th>
+          <Th width='200px'>{t('unitLesson')}</Th>
+          <Th width='50px'>{t('score')}</Th>
+          <Th width='50px'>{t('percent')}</Th>
+          <Th width='50px'>{t('passFail')}</Th>
+          <Th width='50px'>{t('passesAttempts')}</Th>
         </HeadRow>
         </Thead>
         <Tbody>
@@ -89,7 +91,7 @@ class TabSection extends Component {
               <Td width='50px'>{(attempt.scored_points / attempt.lesson_points) * 100}</Td>
               <Td width='50px'>
                 <span className='m-badge m-badge--brand m-badge--wide'>
-                  {attempt.pass ? 'pass' : 'fail'}
+                  {attempt.pass ? t('pass') : t('fail')}
                 </span>
               </Td>
               <Td width='50px'>{attempt.passes} / {attempt.attempts} </Td>
@@ -103,8 +105,9 @@ class TabSection extends Component {
 
   render() {
 
-    const {value} = this.state;
-    const {data} = this.props.data;
+    const {value}   = this.state;
+    const {data}    = this.props.data;
+    const {t}       = this.props;
 
     return (
       <div className="row ">
@@ -114,7 +117,7 @@ class TabSection extends Component {
               <div className="m-portlet__head d-flex justify-content-between align-items-center">
                 <div className="m-portlet__head-caption col-sm-4">
                   <div className="m-portlet__head-title"><span className="m-portlet__head-icon"><i
-                    className="flaticon-analytics"></i></span><h3 className="m-portlet__head-text">Reports</h3></div>
+                    className="flaticon-analytics"></i></span><h3 className="m-portlet__head-text">{t('reports')}</h3></div>
                 </div>
                 <div className="m-portlet__head-tools col-sm-8">
                   <Tabs
@@ -139,4 +142,4 @@ class TabSection extends Component {
 
 TabSection.propTypes = {};
 
-export default TabSection;
+export default translate('translations')(TabSection);

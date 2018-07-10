@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Card from "../../../ui/Card";
 import {TablePreloader, MyPreloader} from '../../../ui/table';
-import {Avatar, IconButton, LinearProgress} from '@material-ui/core';
+import {Avatar, IconButton, LinearProgress, CircularProgress} from '@material-ui/core';
 import {translate} from 'react-i18next';
 import {Delete, Edit} from "@material-ui/icons";
 import {OldProgressBar} from "../../../ui/LinearProgress";
@@ -9,7 +9,6 @@ import {withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
 import {getSchoolReportStudent} from '../../../../redux/reports/actions';
 import {selectGetStudentForReportRequest} from '../../../../redux/reports/selectors';
-import {CircularProgress} from '@material-ui/core';
 import {NavLink} from 'react-router-dom'
 
 class InfoSection extends Component {
@@ -49,7 +48,7 @@ class InfoSection extends Component {
     const {data} = this.props.data;
     const {id} = this.props.match.params;
     const coursesLoading = this.props.data.loading;
-    const {getStudentForReportRequest} = this.props;
+    const {getStudentForReportRequest, t} = this.props;
     const firstName = getStudentForReportRequest.get('record').toJS().firstName;
     const lastName = getStudentForReportRequest.get('record').toJS().lastName;
     const birthday = getStudentForReportRequest.get('record').toJS().birthday;
@@ -71,7 +70,7 @@ class InfoSection extends Component {
         <div className="col-md-9">
           <div className="row">
             <div className="col-lg-6 m--margin-bottom-20">
-              <Card title="About" icon="la la-info">
+              <Card title={t('about')} icon="la la-info">
                 <td className="text-center">
                   <div style={{position:'absolute',right:0, top:-50}}>
                     <NavLink to={`/reports/students/${id}/edit`}>
@@ -79,35 +78,22 @@ class InfoSection extends Component {
                         <Edit/>
                       </IconButton>
                     </NavLink>
-
-                    <IconButton color='primary'>
-                      <Delete/>
-                    </IconButton>
                   </div>
                 </td>
                 <div className="table-responsive">
                   <table className="table m-table m-table--head-separator-primary m-middle-table">
-                    <thead>
-                    <tr>
-
-                      {/*<IconButton color='primary'>*/}
-                      {/*<Delete/>*/}
-                      {/*</IconButton>*/}
-                    </tr>
-                    </thead>
                     <tbody>
                     <tr>
-                      <th>First Name</th>
+                      <th>{t('firstName')}</th>
                       <td>{loading && <CircularProgress color="primary"/>} {!loading && firstName}</td>
-
                     </tr>
                     <tr>
-                      <th>Last Name</th>
+                      <th>{t('lastName')}</th>
                       <td>{loading && <CircularProgress color="primary"/>} {!loading && lastName}</td>
                     </tr>
                     <tr>
-                      <th>Birthday</th>
-                      <td>{(birthday) ? birthday : 'N / A'}</td>
+                      <th>{t('birthday')}</th>
+                      <td>{loading && <CircularProgress color="primary"/>} {!loading && (birthday ? birthday : 'N / A')}</td>
                     </tr>
                     </tbody>
                   </table>
@@ -115,15 +101,14 @@ class InfoSection extends Component {
               </Card>
             </div>
             <div className="col-lg-6 m--margin-bottom-20">
-              <Card title="My Courses" icon="fa fa-sitemap">
-                {/*<h1>No Info...</h1>*/}
+              <Card title={t('myCourses')} icon="fa fa-sitemap">                
                 <div className="table-responsive">
                   <table className="table m-table  m-table--head-separator-primary m-middle-table">
                     <thead>
                     <tr>
-                      <th>Courses</th>
-                      <th>Progress</th>
-                      <th>Performance</th>
+                      <th>{t('courses')}</th>
+                      <th>{t('progress')}</th>
+                      <th>{t('performance')}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -137,13 +122,12 @@ class InfoSection extends Component {
               </Card>
             </div>
             <div className="col-md-12 m--margin-bottom-10">
-              <Card title="Remarks" icon="flaticon-edit">
-                <h1>No Info...</h1>
+              <Card title={t('remarks')} icon="flaticon-edit">
+                <h1>{t('noInfo')}</h1>
               </Card>
             </div>
           </div>
         </div>
-
       </div>
     );
   }
@@ -160,4 +144,4 @@ InfoSection = connect(
   })
 )(InfoSection);
 
-export default withRouter(translate('reports')(InfoSection));
+export default withRouter(translate('translations')(InfoSection));

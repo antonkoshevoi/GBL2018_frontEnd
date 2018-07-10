@@ -35,7 +35,7 @@ class Login extends Component {
   _login(e) {
     e.preventDefault();
 
-    const { setRedirectUrl, login, t } = this.props;
+    const { setRedirectUrl, login } = this.props;
     const { username, password, remember } = this.state;
 
     let pathname = '/dashboard';

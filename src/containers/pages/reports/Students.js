@@ -17,12 +17,24 @@ class Students extends Component {
 
   render() {
     const data = this.props.getReportRequest.toJS();
-
-    return (
-      <div className="animate fadeInLeftBig">
-        <InfoSection data={data}/>
-        <TabSection data={data} />
-      </div>
+    const {t} = this.props;
+    
+    return (      
+      <div className="fadeInLeft animated">
+        <div className="row dashboard-main-top row-reports-main-top-block m-portlet  m-portlet--head-solid-bg">
+          <div className="m-portlet__head report-snapshot-header-border border-b-blue">
+            <div className="m-portlet__head-caption">
+              <div className="m-portlet__head-title">
+                <h3 className="m-portlet__head-text reports-text-header">{t('reportsSnapshot')}</h3>
+              </div>
+            </div>
+          </div>
+          <div className='m-portlet__body'>
+            <InfoSection data={data}/>
+            <TabSection data={data} />
+          </div>
+        </div>
+      </div>      
     );
   }
 }
@@ -36,5 +48,5 @@ Students = connect(
   })
 )(Students);
 
-export default translate('students')(Students);
+export default translate('translations')(Students);
 

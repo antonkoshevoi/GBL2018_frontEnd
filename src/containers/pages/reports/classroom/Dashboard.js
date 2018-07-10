@@ -22,6 +22,7 @@ class Dashboard extends Component {
 
   render() {
     const {classroomId} = this.state;
+    const {t} = this.props;
 
     return (
       <div className="fadeInLeft animated">
@@ -29,7 +30,7 @@ class Dashboard extends Component {
           <div className="m-portlet__head report-snapshot-header-border border-b-blue">
             <div className="m-portlet__head-caption">
               <div className="m-portlet__head-title">
-                <h3 className="m-portlet__head-text reports-text-header">Reports Snapshot</h3>
+                <h3 className="m-portlet__head-text reports-text-header">{t('reportsSnapshot')}</h3>
               </div>
             </div>
           </div>
@@ -58,4 +59,4 @@ class Dashboard extends Component {
   }
 }
 
-export default translate('reports')(Dashboard);
+export default translate('translations')(Dashboard);

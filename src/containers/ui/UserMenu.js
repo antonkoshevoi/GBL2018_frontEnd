@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {translate} from "react-i18next";
-import * as AUTH from '../../services/AuthService';
 import {NavLink, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {selectUserData} from "../../redux/user/selectors";
@@ -62,7 +61,7 @@ class UserMenu extends Component {
                     <i className="m-nav__link-icon flaticon-profile-1"></i>
                     <span className="m-nav__link-title">
                       <span className="m-nav__link-wrap">
-                        <span className="m-nav__link-text">My Profile</span>
+                        <span className="m-nav__link-text">{t('myProfile')}</span>
                       </span>
                     </span>
                   </NavLink>
@@ -73,17 +72,16 @@ class UserMenu extends Component {
                         <i className="m-nav__link-icon flaticon-profile-1"></i>
                         <span className="m-nav__link-title">
                           <span className="m-nav__link-wrap">
-                            <span className="m-nav__link-text">School Profile</span>
+                            <span className="m-nav__link-text">{t('schoolProfile')}</span>
                           </span>
                         </span>
                       </NavLink>
                     </li>
                   }
-
                 <li className="m-nav__separator m-nav__separator--fit">
                 </li>
                 <li className="m-nav__item" onClick={logout}>
-                  <a className="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">{t('logout','Logout')}</a>
+                  <a className="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">{t('logout')}</a>
                 </li>
               </ul>
             </div>
@@ -94,7 +92,7 @@ class UserMenu extends Component {
   }
 
   render() {
-    const { t, userData, activeMenu } = this.props;
+    const { userData, activeMenu } = this.props;
 
     let user = userData.toJS();
 
@@ -123,4 +121,4 @@ UserMenu = connect(
   (dispatch) => ({})
 )(UserMenu);
 
-export default withRouter(translate("LanguageSwitcher")(UserMenu));
+export default withRouter(translate("languageSwitcher")(UserMenu));

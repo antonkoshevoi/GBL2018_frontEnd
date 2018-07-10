@@ -4,7 +4,6 @@ import {Avatar, Button} from '@material-ui/core';
 
 class Card extends Component {
 
-
   render() {
     const {
       avatar,
@@ -34,7 +33,7 @@ class Card extends Component {
            ${!header ? 'm--hide' : ''} border-b-${colorBorder}`}>
           <div className="m-portlet__head-caption">
             <div className={`m-portlet__head-title ${isResetChartButton && 'online-users-chart-header'}`}>
-              {!isMainCard && <span className="m-portlet__head-icon {{}}">
+              {!isMainCard && <span className="m-portlet__head-icon">
                             {avatar && avatar !== '' ?
                               <Avatar src={avatar}/> :
                               <i className={`${icon} ${iconBackground}`}></i>}

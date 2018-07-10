@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
+import {translate} from "react-i18next";
 import Card from "../../../../components/ui/Card";
 import { CircularProgress } from '@material-ui/core';
 import {selectRosterStatisticRequest} from "../../../../redux/reports/dashboard/selectors";
@@ -22,10 +23,11 @@ class RosterStatistic extends Component {
     const data = this.props.getRosterStatisticRequest.get('data').toJS();
     const loading = this.props.getRosterStatisticRequest.get('loading');
     const success = this.props.getRosterStatisticRequest.get('success');
+    const { t } = this.props;
 
     return (
       <Card
-        title={'Roster'}
+        title={t('roster')}
         className="profile-card"
         avatar={success && data.school.avatar ? data.school.avatar : ''}
         iconBackground="circle-background"
@@ -35,7 +37,7 @@ class RosterStatistic extends Component {
             <div className="m-widget1__item">
               <div className="row m-row--no-padding align-items-center">
                 <div className="col">
-                  <h3 className="m-widget1__title">Students</h3>
+                  <h3 className="m-widget1__title">{t('students')}</h3>
                 </div>
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
@@ -48,7 +50,7 @@ class RosterStatistic extends Component {
             <div className="m-widget1__item">
               <div className="row m-row--no-padding align-items-center">
                 <div className="col">
-                  <h3 className="m-widget1__title">Classrooms</h3>
+                  <h3 className="m-widget1__title">{t('classrooms')}</h3>
                 </div>
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
@@ -61,7 +63,7 @@ class RosterStatistic extends Component {
             <div className="m-widget1__item">
               <div className="row m-row--no-padding align-items-center">
                 <div className="col">
-                  <h3 className="m-widget1__title">Homerooms</h3>
+                  <h3 className="m-widget1__title">{t('homerooms')}</h3>
                 </div>
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
@@ -74,7 +76,7 @@ class RosterStatistic extends Component {
             <div className="m-widget1__item">
               <div className="row m-row--no-padding align-items-center">
                 <div className="col">
-                  <h3 className="m-widget1__title">Teachers</h3>
+                  <h3 className="m-widget1__title">{t('teachers')}</h3>
                 </div>
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
@@ -87,7 +89,7 @@ class RosterStatistic extends Component {
             <div className="m-widget1__item">
               <div className="row m-row--no-padding align-items-center">
                 <div className="col">
-                  <h3 className="m-widget1__title">Admins</h3>
+                  <h3 className="m-widget1__title">{t('admins')}</h3>
                 </div>
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
@@ -113,4 +115,4 @@ RosterStatistic = connect(
   })
 )(RosterStatistic);
 
-export default RosterStatistic;
+export default translate('translations')(RosterStatistic);

@@ -50,7 +50,8 @@ class Courses extends Component {
   }
 
   render() {
-    const { activeTab, t } = this.state;
+    const { activeTab } = this.state;
+    const { t } = this.props;
 
     return (
       <div className='fadeInLeft  animated learning-areas'>

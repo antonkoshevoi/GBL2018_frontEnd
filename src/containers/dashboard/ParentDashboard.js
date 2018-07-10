@@ -1,27 +1,21 @@
 import React, {Component} from 'react';
-import Card from "../../components/ui/Card";
-import {Avatar, CircularProgress, IconButton, Tooltip} from '@material-ui/core';
-import {OldProgressBar} from "../../components/ui/LinearProgress";
+import {Avatar, CircularProgress, Tooltip} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
-import DashboardStore from "../../components/pages/store/DashboardStore";
-import HowToMovies from "./sections/HowToMovies";
 import UnassignedCourses from "./sections/UnassignedCourses";
 import {connect} from "react-redux";
 import {selectRecords, selectGetRecordsRequest} from "../../redux/students/selectors";
 import {getRecords} from "../../redux/students/actions";
 import {getParentRecords, getRecords as storeRecords} from "../../redux/store/actions";
-import {Row, Table, TablePreloader, Tbody, Td} from "../../components/ui/table";
+import {Row, Td} from "../../components/ui/table";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
 import {push} from 'react-router-redux';
-import {Link} from 'react-router-dom'
-import {ModeEdit, GridOn} from "@material-ui/icons";
+import {GridOn} from "@material-ui/icons";
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
-import FeaturedItems from "../pages/reports/widgets/FeaturedItems";
+import FeaturedItems from "./sections/FeaturedItems";
 import {selectRecords as storeItems}  from "../../redux/store/selectors";
 import QuickLink from "../pages/reports/widgets/QuickLink";
 import Account from "../pages/reports/widgets/account";
-
 
 const styles = {
   row: {

@@ -14,13 +14,14 @@ class Dashboard extends Component {
   }
 
   render() {
+    const {t} = this.props;
     return (
       <div className="fadeInLeft animated">
         <div className="row dashboard-main-top row-reports-main-top-block m-portlet  m-portlet--head-solid-bg">
           <div className="m-portlet__head report-snapshot-header-border border-b-blue">
             <div className="m-portlet__head-caption">
               <div className="m-portlet__head-title">
-                <h3 className="m-portlet__head-text reports-text-header">Reports Snapshot</h3>
+                <h3 className="m-portlet__head-text reports-text-header">{t('reportsSnapshot')}</h3>
               </div>
             </div>
           </div>
@@ -49,4 +50,4 @@ class Dashboard extends Component {
   }
 }
 
-export default translate('reports')(Dashboard);
+export default translate('translations')(Dashboard);

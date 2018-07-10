@@ -1,4 +1,7 @@
 export default {
+    myProfile: 'My Profile',
+    schoolProfile: 'School Profile',
+    logout: 'Logout',
     language: 'Language',
     en: 'English',
     es: 'Español',
