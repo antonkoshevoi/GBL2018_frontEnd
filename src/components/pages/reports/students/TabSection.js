@@ -4,7 +4,7 @@ import {Tab, Tabs, Typography} from '@material-ui/core';
 import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../ui/table';
 import Parser from 'html-react-parser';
 import ApiClient from "../../../../services/ApiClient";
-import {LessonsTable} from '../students/LessonsTable';
+import LessonsTable from './LessonsTable';
 import {getStudentClassReport} from '../../../../redux/reports/students/actions';
 import {translate} from 'react-i18next';
 
