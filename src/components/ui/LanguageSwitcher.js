@@ -31,7 +31,7 @@ class LanguageSwitcher extends Component {
 
 
     componentWillMount() {
-        const currentLanguage = localStorage.getItem('language');
+        const currentLanguage = localStorage.getItem('language');        
         if (currentLanguage) {
             this._switchLanguage(currentLanguage)
         }
@@ -45,7 +45,7 @@ class LanguageSwitcher extends Component {
         this.setState({ anchorEl: event.currentTarget });
     };
 
-    _closeLanguageMenu = event => {
+    _closeLanguageMenu = event => {        
         this.setState({ anchorEl: null });
     };
 
@@ -53,8 +53,9 @@ class LanguageSwitcher extends Component {
     _switchLanguage = (lang_code) => {
         const { i18n } = this.props;
         i18n.changeLanguage(lang_code);
+                
         localStorage.setItem('language', lang_code);
-        this._closeLanguageMenu;
+        this.setState({ anchorEl: null });                
     };
 
     _renderLangsMenu(langs) {
@@ -74,7 +75,7 @@ class LanguageSwitcher extends Component {
         const  langs  = this.props.i18n.store.data;
 
         return (
-            <div className={this.props.className ? 'm-portlet__nav-item' : 'm-nav__item'}>
+            <div className={this.props.className ? this.props.className : 'm-nav__item'}>
                 <a  className="m-nav__link m-dropdown__toggle pointer"
                     aria-owns={this.state.anchorEl ? 'simple-menu' : null}
                     aria-haspopup="true"

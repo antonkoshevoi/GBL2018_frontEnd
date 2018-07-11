@@ -3,6 +3,7 @@ import {Avatar, CircularProgress, Tooltip} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
 import UnassignedCourses from "./sections/UnassignedCourses";
 import {connect} from "react-redux";
+import {translate} from 'react-i18next';
 import {selectRecords, selectGetRecordsRequest} from "../../redux/students/selectors";
 import {getRecords} from "../../redux/students/actions";
 import {getParentRecords} from "../../redux/store/actions";
@@ -15,7 +16,7 @@ import classNames from 'classnames';
 import FeaturedItems from "./sections/FeaturedItems";
 import {selectRecords as storeItems}  from "../../redux/store/selectors";
 import QuickLink from "./sections/QuickLink";
-import Account from "../pages/reports/widgets/account";
+import ShoppingCart from "../pages/store/shopping-cart/ShoppingCart";
 
 const styles = {
   row: {
@@ -94,9 +95,6 @@ class ParentDashboard extends Component {
     getParentStudents();
   }
 
-  /**
-   * Create Dialog
-   */
   _openCreateDialog = () => {
     this.setState({createModalIsOpen: true});
   };
@@ -104,38 +102,14 @@ class ParentDashboard extends Component {
     this.setState({createModalIsOpen: false});
   };
 
-  _renderStudentsList() {
-    const students = this.props.parentStudents;
-    const loading = this.props.getParentStudentsRequest.get('loading');
-    if (!loading && students.size === 0) {
-      return (
-        <tr>
-          <td>
-            <div className="table-message">
-              <h2>Students Not Found...</h2>
-            </div>
-          </td>
-        </tr>
-      )
-    }
-
-    return students.map((student, key) => (
-      <Row index={key} key={key}>
-        <Td width='132px'>{student.get('username')}</Td>
-        <Td width='132px'>{student.get('firstName')}</Td>
-        <Td width='132px'>{student.get('lastName')}</Td>
-      </Row>
-    ));
-  }
-
   _renderStudents() {
     const {goTo} = this.props;
     const students = this.props.parentStudents.toJS();
-    const {classes} = this.props;
+    const {classes, t} = this.props;
 
     if (!students.length) {
       return <div className="display-1">
-        <h1 className="text-center">No Students found</h1>
+        <h1 className="text-center">{t('studentsNotFound')}</h1>
       </div>
     }
 
@@ -148,7 +122,7 @@ class ParentDashboard extends Component {
             <div className="form-group-inline btn-group">
               <NavLink to="/profile" className={classNames(classes.btnProfile, classes.radiusLeft)}>
                 <GridOn className={classes.icon}/>
-                Report/Profile
+                {t('reportProfile')}
               </NavLink>
             </div>
           </div>
@@ -156,25 +130,19 @@ class ParentDashboard extends Component {
           <div className="d-flex align-items-center">
             <Avatar alt={student.firstName} src={student.avatar} className={classes.bigAvatar}/>
             <div className="info">
-              <h5
-                className={classes.name}>{(student.firstName || student.lastName) ? student.firstName + " " + student.lastName : student.username}</h5>
+              <h5 className={classes.name}>{(student.firstName || student.lastName) ? student.firstName + " " + student.lastName : student.username}</h5>
               <span className={classes.username}>{student.username}</span>
               <div className={classes.progress}>
                 <div className="progress m-progress--sm" style={{minWidth: 80, marginRight:5}}>
-                  <div title="Completed" className="progress-bar bg-success" role="progressbar"
-                       style={{width: student.completed + '%'}}></div>
-                  <div title="In Progress" className="progress-bar bg-warning" role="progressbar"
-                       style={{width: student.inProgress + '%'}}></div>
+                  <div title={t('completed')} className="progress-bar bg-success" role="progressbar" style={{width: student.completed + '%'}}></div>
+                  <div title={t('inProgress')} className="progress-bar bg-warning" role="progressbar" style={{width: student.inProgress + '%'}}></div>
                 </div>
                 <div className="progress m-progress--sm" style={{minWidth: 110, marginLeft: 5}}>
-                  <div title="Average Grade" className="progress-bar bg-success" role="progressbar"
-                       style={{width: student.averageGrade + '%'}}></div>
-                  <div title="Average Grade" className="progress-bar bg-danger" role="progressbar"
-                       style={{width: (100 - parseInt(student.averageGrade)) + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-success" role="progressbar" style={{width: student.averageGrade + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(student.averageGrade)) + '%'}}></div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       )
@@ -184,7 +152,7 @@ class ParentDashboard extends Component {
   render() {
     const students = this.props.parentStudents;
     const loading = this.props.getParentStudentsRequest.get('loading');
-    const {records} = this.props;
+    const {records, t} = this.props;
 
     return <div className="fadeInLeft animated">
       <div className="row">
@@ -198,14 +166,14 @@ class ParentDashboard extends Component {
                     {!loading && <span>{students.size}</span>}
                   </span>
                   <h3 className="m-portlet__head-text">
-                    My Learners
+                    {t('myLearners')}
                   </h3>
                 </div>
               </div>
               <div className="m-portlet__head-tools">
                 <ul className="m-portlet__nav">
                   <li className="m-portlet__nav-item">
-                    <Tooltip id="tooltip-icon" title="Add" placement="top">
+                    <Tooltip id="tooltip-icon" title={t('add')} placement="top">
                       <a onClick={() => {
                         this._openCreateDialog()
                       }} className=" pointer m-portlet__nav-link m-portlet__nav-link--icon">
@@ -230,7 +198,9 @@ class ParentDashboard extends Component {
           <QuickLink style={{marginTop:15, height:'80%'}}/>
         </div>
         <div className="col-md-6 col-lg-6 m--visible-tablet-and-mobile m--visible-desktop-lg" style={{marginTop:15}}>
-          <Account/>
+            <div>
+                <ShoppingCart preview = {true}/>
+            </div>
         </div>
       </div>
 
@@ -240,7 +210,9 @@ class ParentDashboard extends Component {
         </div>
 
         <div className="col-md-4 col-xl-4 m--hidden-tablet-and-mobile m--hidden-desktop-lg" style={{marginTop:15}}>
-          <Account/>
+            <div>
+                <ShoppingCart preview = {true}/>
+            </div>
         </div>
       </div>
      <div className="row">
@@ -252,14 +224,12 @@ class ParentDashboard extends Component {
        </div>
      </div>
 
-
       <CreateStudentModal
         isOpen={this.state.createModalIsOpen}
         onClose={() => {
           this._closeCreateDialog()
         }}
-        onSuccess={() => {
-        }}/>
+        onSuccess={() => {}}/>
 
     </div>
   }
@@ -285,4 +255,4 @@ ParentDashboard = connect(
   })
 )(ParentDashboard);
 
-export default withStyles(styles)(ParentDashboard);
+export default withStyles(styles)(translate('translations')(ParentDashboard));

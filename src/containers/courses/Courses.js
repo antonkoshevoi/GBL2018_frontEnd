@@ -72,7 +72,7 @@ class Courses extends Component {
               className="portlet-header-input"
               id="search"
               type='search'
-              placeholder="Search"
+              placeholder={t('search')}
               onChange={(e) => { this._handleSearch(e) }}/>
             </div>
           </div>

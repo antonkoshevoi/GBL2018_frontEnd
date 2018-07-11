@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import '../../../styles/widgets.css';
 import bz from '../../../media/images/bz.jpg'
 import teacher from '../../../media/images/teacher.jpg'
-import Card from "../../../components/ui/Card";
 import {translate} from "react-i18next";
 
 class QuickLink extends Component {
