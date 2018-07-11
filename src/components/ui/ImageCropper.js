@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { translate } from 'react-i18next';
 import 'cropperjs/dist/cropper.css';
 import Cropper from "react-cropper";
 
@@ -17,7 +18,6 @@ class ImageCropper extends Component {
     //   this.setState({file: image});
     // }
   }
-
 
   _handleFileChange(e) {
     e.preventDefault();
@@ -38,9 +38,7 @@ class ImageCropper extends Component {
       };
       reader.readAsDataURL(files[0]);
     }
-
   }
-
 
   onChange(e) {
     e.preventDefault();
@@ -142,13 +140,13 @@ class ImageCropper extends Component {
   render() {
 
     const {croppedFile, file} = this.state;
-    const {saveButton, circularButton, image} = this.props;
+    const {saveButton, circularButton, image, t} = this.props;
 
     return (
       <div className="CropperBlock">
         {!circularButton &&
         <div className='upload-btn-wrapper '>
-          <span className='btn pointer m-btn--air btn-outline-info'>Upload a file</span>
+          <span className='btn pointer m-btn--air btn-outline-info'>{t('uploadFile')}</span>
           <input type='file' ref={fileInput => this.fileInput = fileInput} name='myfile' onChange={(e) => {
             this._handleFileChange(e)
           }}/>
@@ -156,13 +154,13 @@ class ImageCropper extends Component {
         }
         {circularButton &&
         <div className={'upload-btn-wrapper ' + ((croppedFile || image) && 'withImage')}>
-              <span className="uploadImgBtn circular pointer" onClick={() => this._triggerFileInput()}>
-                   {(croppedFile || image) &&
-                   <img className='croppedThumbnail' src={(croppedFile || image)} alt='cropped image'/>
-                   }
-                <i className="uploadBtnText fa fa-upload"></i>
-                  <span className="uploadBtnText">Upload Photo</span>
-              </span>
+          <span className="uploadImgBtn circular pointer" onClick={() => this._triggerFileInput()}>
+               {(croppedFile || image) &&
+               <img className='croppedThumbnail' src={(croppedFile || image)} alt='Cropped'/>
+               }
+            <i className="uploadBtnText fa fa-upload"></i>
+              <span className="uploadBtnText">{t('uploadPhoto')}</span>
+          </span>
           <input type='file' className="m--hide" ref={fileInput => this.fileInput = fileInput} name='myfile'
                  onChange={(e) => {
                    this._handleFileChange(e)
@@ -186,14 +184,14 @@ class ImageCropper extends Component {
             onMouseDown={() => {
               this._reverseImage('vertical')
             }}>
-            <i className="fa 	fa-arrows-v"></i>
+            <i className="fa fa-arrows-v"></i>
           </a>
           <a
             className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
             onMouseDown={() => {
               this._reverseImage('horizontal')
             }}>
-            <i className="fa 	fa-arrows-h"></i>
+            <i className="fa fa-arrows-h"></i>
           </a>
           <a
             className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
@@ -230,18 +228,18 @@ class ImageCropper extends Component {
               this._handleImageCrop()
             }}
           >
-            Crop <span className='la la-crop'></span>
+            {t('crop')} <span className='la la-crop'></span>
           </span>
           {(saveButton && croppedFile) && (
           <span className='btn pointer m-btn m--margin-5 m-btn--pill m-btn--air btn-primary' onClick={() => { this._saveImages() }} >
-            Save <span className='la la-save'></span>
+            {t('save')} <span className='la la-save'></span>
           </span>              
           )}          
         </div>
         }
         <div className='croppedBlock'>
           {(croppedFile && !circularButton) &&
-          <img className='img-thumbnail' style={{width: '150px'}} src={croppedFile} alt='cropped image'/>
+          <img className='img-thumbnail' style={{width: '150px'}} src={croppedFile} alt='Cropped'/>
           }
         </div>
       </div>
@@ -260,4 +258,4 @@ ImageCropper.defaultProps = {
   saveButton: false
 };
 
-export default ImageCropper;
+export default translate('translations')(ImageCropper);

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {Tab, Tabs, Typography} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../ui/table';
+import {translate} from 'react-i18next';
 import Parser from 'html-react-parser';
 import ApiClient from '../../../../services/ApiClient';
 import formTableData from '../../../../services/course-template-manager';
@@ -9,13 +9,13 @@ const apiClient = new ApiClient();
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{padding: 8 * 3}}>
+    <Typography component="div">
       {props.children}
     </Typography>
   );
 }
 
-export class LessonsTable extends Component {
+class LessonsTable extends Component {
 
   constructor(props) {
     super(props);
@@ -54,20 +54,21 @@ export class LessonsTable extends Component {
   }
 
   _renderLessonsTables(data) {
+    const { t } = this.props;
     return (
       <Table className="unit-table">
         <Thead>
         <HeadRow>
-          <Th width='44px'>Unit</Th>
-          <Th width='193px'>Lesson Title</Th>
-          <Th width='193px'>Lesson Description</Th>
-          <Th width='93px'>Lesson attempt</Th>
-          <Th width='93px'>Status</Th>
-          <Th width='93px'>Attempt date</Th>
-          <Th width='93px'>Score</Th>
-          <Th width='93px'>Percent</Th>
-          <Th width='93px'>Pass/Fail</Th>
-          <Th classNames='comment-cell'>Comments</Th>
+          <Th width='44px'>{t('unit')}</Th>
+          <Th width='193px'>{t('lessonTitle')}</Th>
+          <Th width='193px'>{t('lessonDescription')}</Th>
+          <Th width='93px'>{t('lessonAttempt')}</Th>
+          <Th width='93px'>{t('status')}</Th>
+          <Th width='93px'>{t('attemptDate')}</Th>
+          <Th width='93px'>{t('score')}</Th>
+          <Th width='93px'>{t('percent')}</Th>
+          <Th width='93px'>{t('passFail')}</Th>
+          <Th classNames='comment-cell'>{t('comments')}</Th>
         </HeadRow>
         </Thead>
         <Tbody>
@@ -90,8 +91,9 @@ export class LessonsTable extends Component {
                 return (
                   <tr className="m-datatable__row" style={{height: '64px'}} key={lesson.lesson_id + '-lessonRow'}>
                     <td className="m-datatable__cell text-center" width='193px' rowSpan={lessonRowSpan} key={lesson.lesson_id + '-lessonName'}>
-                      <p><span class="m-badge m-badge--brand m-badge--wide">Unit {unitIndex + 1}, Lesson {lessonIndex + 1}</span></p>
-                      <span style={{width: '193px'}}>{lesson.lesson_name}</span></td>
+                      <p><span class="m-badge m-badge--brand m-badge--wide">{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</span></p>
+                      <span style={{width: '193px'}}>{lesson.lesson_name}</span>
+                    </td>
                     <td className="m-datatable__cell text-align-left" width='193px' rowSpan={lessonRowSpan}
                         key={lesson.lesson_id + '-lessonDesc'}><span
                       style={{width: '193px'}}>{lesson.lesson_description}</span></td>
@@ -109,14 +111,15 @@ export class LessonsTable extends Component {
   }
 
   renderAttemptRow = (lesson, attempt) => {
+    const { t } = this.props;
     const attemptFinished = !!attempt.att_date;
     return (<tr className="m-datatable__row" style={{height: '64px'}}
                 key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptRow'}>
         <td className="m-datatable__cell" width='93px' key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptNo'}>
           <span style={{width: '93px'}}>{attempt.attempt_no}</span></td>
-        <td className="m-datatable__cell" width='93px'
+        <td className="m-datatable__cell text-capitalize" width='93px'
             key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptStatus'}><span
-          style={{width: '93px'}}>{attemptFinished && (attempt.scored_points >= lesson.pass_weight ? 'Completed' : 'In progress')} </span>
+          style={{width: '93px'}}>{attemptFinished && (attempt.scored_points >= lesson.pass_weight ? t('completed') : t('inProgress'))} </span>
         </td>
         <td className="m-datatable__cell" width='93px'
             key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptDate'}><span
@@ -134,15 +137,14 @@ export class LessonsTable extends Component {
           style={{width: '93px'}}>{attemptFinished && (attempt.scored_points * 100 / lesson.lesson_points).toFixed(2) + '%'}</span>
         </td>
         {attemptFinished && (+attempt.scored_points >= +lesson.pass_weight ?
-          <td className="m-datatable__cell attempt-pass" width='93px'
+          <td className="m-datatable__cell attempt-pass text-uppercase" width='93px'
               key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptPass'}>
-            <div style={{width: '94px'}}>PASS</div>
-          </td> : <td className="m-datatable__cell attempt-fail" width='100px'
+            <div style={{width: '94px'}}>{t('pass')}</div>
+          </td> : <td className="m-datatable__cell attempt-fail text-uppercase" width='100px'
                       key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptFail'}>
-            <div style={{width: '94px'}}>FAIL</div>
+            <div style={{width: '94px'}}>{t('fail')}</div>
           </td>)}
-        {!attemptFinished && <td className="m-datatable__cell" width='100px'
-                                 key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptPass'}>
+        {!attemptFinished && <td className="m-datatable__cell" width='100px' key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptPass'}>
           <div style={{width: '94px'}}></div>
         </td>}
         <td className="m-datatable__cell comment-cell text-align-left"
@@ -173,7 +175,6 @@ export class LessonsTable extends Component {
 
     return numberOfAttempts;
   }
-
 }
 
-LessonsTable.propTypes = {};
+export default translate("translations")(LessonsTable);

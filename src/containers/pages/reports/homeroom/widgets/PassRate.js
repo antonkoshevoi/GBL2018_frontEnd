@@ -5,6 +5,7 @@ import {getCharts} from "../../../../../redux/reports/homerooms/actions";
 import {selectChartDatatRequest} from "../../../../../redux/reports/homerooms/selectors";
 import Card from "../../../../../components/ui/Card";
 import {CircularProgress} from '@material-ui/core';
+import {translate} from 'react-i18next';
 
 class PassRate extends Component {
   static propTypes = {
@@ -23,18 +24,18 @@ class PassRate extends Component {
   }
 
   render() {
-    const {getChartDataRequest} = this.props;
+    const {getChartDataRequest, t} = this.props;
     const data = getChartDataRequest.get('data').toJS();
     const loading = getChartDataRequest.get('loading');
     const success = getChartDataRequest.get('success');
     const fail = getChartDataRequest.get('fail');
 
     return (
-      <Card title="Pass Rate" icon="flaticon-list-2" className='passRateCard'>
+      <Card title={t('passRate')} icon="flaticon-list-2" className='passRateCard'>
         <h1  className="d-flex justify-content-center align-items-center absolute-center" style={{fontSize:'7rem',color:'rgb(0, 128, 0)'}}>
           {loading && !success && <CircularProgress color="primary"/>}
           {!loading && success && data.passRate + '%'}
-          {fail && <span style={{color: 'red' }}>Error</span>}
+          {fail && <span style={{color: 'red' }}>{t('error')}</span>}
         </h1>
       </Card>
     );
@@ -50,4 +51,4 @@ PassRate = connect(
   })
 )(PassRate);
 
-export default PassRate;
+export default translate('translations')(PassRate);

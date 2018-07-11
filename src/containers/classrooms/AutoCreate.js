@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import PropTypes from 'prop-types';
-import {NavLink} from "react-router-dom";
 import {withRouter} from "react-router";
 import {translate} from 'react-i18next';
-import {selectGetParentRecordsRequest} from "../../redux/store/selectors";
-import {getParentRecords} from "../../redux/store/actions";
 import {MenuItem, Select} from '@material-ui/core';
 import Card from "../../components/ui/Card";
 import {EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../components/ui/table";
@@ -14,13 +10,11 @@ import {
   selectRecords
 } from "../../redux/classrooms/selectors";
 import {
-  getRecordsPublic, getSingleAutoClassRecord, getSingleRecord,
-  resetUpdateAutoClass
+  getRecordsPublic, getSingleAutoClassRecord, getSingleRecord, resetUpdateAutoClass
 } from "../../redux/classrooms/actions";
 import HasPermission from "../middlewares/HasPermission";
 import EditAutoClassroomModal from "./modals/EditAutoClassroomModal";
 import {getSchoolTeachers} from "../../redux/schools/actions";
-
 
 class AutoCreate extends Component {
 
@@ -105,13 +99,13 @@ class AutoCreate extends Component {
   _renderRecords(){
     const records = this.props.classroomRecords;
     const loading = this.props.getParentPublicClassroom.get('loading');
-
+    const {t} = this.props; 
     if (!loading && records.size === 0) {
       return (
         <tr>
           <td>
             <div className="table-message">
-              <h2>Auto Classrooms Not Found...</h2>
+              <h2>{t('autoClassroomsNotFound')}</h2>
             </div>
           </td>
         </tr>
@@ -134,17 +128,15 @@ class AutoCreate extends Component {
           </HasPermission>
         </Td>
       </Row>
-
     ))
-
   }
 
   render() {
-    const {getParentPublicClassroom, classroomRecords} = this.props;
+    const {getParentPublicClassroom, classroomRecords, t} = this.props;
     const loading = getParentPublicClassroom.get('loading');
     const {editModalIsOpen} = this.state;
     return (
-      <Card title="Auto Class">
+      <Card title={t('autoClass')}>
         <div className='col-xl-12 order-1 order-xl-2 m--align-right'>
           {this._renderSelectPerPage()}
         </div>
@@ -153,12 +145,12 @@ class AutoCreate extends Component {
             <Thead>
             <HeadRow>
               <Th first={true} width='100px'>#</Th>
-              <Th name='name' width='132px'>Course name </Th>
-              <Th name='publisher' width='132px'>Publisher</Th>
-              <Th name='frequency' width='132px'>Frequency</Th>
-              <Th name='rollover' width='132px'>Rollover day time</Th>
-              <Th name='max' width='132px'>Max students</Th>
-              <Th name='action' width='150px'>Create now</Th>
+              <Th name='name' width='132px'>{t('courseName')} </Th>
+              <Th name='publisher' width='132px'>{t('publisher')}</Th>
+              <Th name='frequency' width='132px'>{t('frequency')}</Th>
+              <Th name='rollover' width='132px'>{t('rolloverDayTime')}</Th>
+              <Th name='max' width='132px'>{t('maxStudents')}</Th>
+              <Th name='action' width='150px'>{t('createNow')}</Th>
             </HeadRow>
             </Thead>
 
@@ -200,4 +192,4 @@ AutoCreate = connect(
 )(AutoCreate);
 
 
-export default withRouter(translate('AutoCreate')(AutoCreate));
+export default withRouter(translate('translations')(AutoCreate));

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import Card from "../../../components/ui/Card";
 import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../../../components/ui/table";
 import {connect} from "react-redux";
@@ -74,7 +73,7 @@ class UnassignedCourses extends Component {
         <Row index={i} key={i}>
           <Td width="70px">
             <div >
-              <img src={unassigned.get('item').get('thumbnail')} width={70}/>
+              <img alt="{unassigned.get('item').get('title')}" src={unassigned.get('item').get('thumbnail')} width={70}/>
             </div>
           </Td>
           <Td width='150px'>{unassigned.get('item').get('title')}</Td>

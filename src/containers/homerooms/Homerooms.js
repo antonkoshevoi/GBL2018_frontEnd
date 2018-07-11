@@ -227,7 +227,7 @@ class Homerooms extends Component {
                 className="portlet-header-input"
                 id="search"
                 type='search'
-                placeholder="Search"
+                placeholder={t('search')}
                 onChange={(e) => { this._search(e) }}/>
             </div>
           </div>
@@ -275,7 +275,7 @@ class Homerooms extends Component {
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>{t('teacher')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='132px'>{t('studentsCount')}</Th>
-                  <Th width='100px'>Actions</Th>
+                  <Th width='100px'>{t('actions')}</Th>
                 </HeadRow>
               </Thead>
 

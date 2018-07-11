@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { Typography, Icon, Tooltip, Select, MenuItem } from '@material-ui/core';
+import { Typography, Tooltip, Select, MenuItem } from '@material-ui/core';
 import { getSchoolHomerooms } from "../../../redux/schools/actions";
 import { selectGetSchoolHomeroomsRequest } from "../../../redux/schools/selectors";
 import MetronicDatePicker from "../../../components/ui/metronic/MetronicDatePicker";
@@ -123,8 +123,7 @@ class Details extends Component {
   render() {
     const { mode, user } = this.state;
     const { getUpdateRequest, t } = this.props;
-    const errors = getUpdateRequest.get('errors');
-    const loading = getUpdateRequest.get('loading');
+    const errors = getUpdateRequest.get('errors');    
 
     return (
       <div>
@@ -143,7 +142,7 @@ class Details extends Component {
                   }
                 </span>
                 <h3 className="m-portlet__head-text">
-                  {mode === 'overview' ? 'Info' : 'Edit'}
+                  {mode === 'overview' ? t('info') : t('edit')}
                 </h3>
               </div>
             </div>

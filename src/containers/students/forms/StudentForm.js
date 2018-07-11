@@ -102,7 +102,7 @@ class StudentForm extends Component {
                     </div>
                 </div>
                 <div className="form-group m-form__group row">
-                    <label className="col-form-label col-lg-3" htmlFor="firsName">{t('firsName')}</label>
+                    <label className="col-form-label col-lg-3" htmlFor="firstName">{t('firstName')}</label>
                     <div className="col-lg-9">
                         <input type="text" onChange={(e) => { this._handleInputChange(e) }} value={student.firstName || ''} className="form-control m-input--air form-control-success m-input" name="firstName" id="firstName"/>
                         {errors && errors.get('firstName') && <div className="form-control-feedback error">{ errors.get('firstName').get(0) }</div>}

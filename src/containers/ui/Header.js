@@ -13,6 +13,7 @@ import Settings from "../pushers/Settings";
 import TabMenu from "../pushers/TabMenu";
 import {getSchool} from "../../redux/schools/actions";
 import {selectSchool} from "../../redux/schools/selectors";
+import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 
 class Header extends Component {
 
@@ -49,7 +50,7 @@ class Header extends Component {
   };
 
   _switchLanguage = (lang_code) => {
-    i18n.changeLanguage('de');
+    i18n.changeLanguage('de');   
     localStorage.setItem('language', lang_code);
     this.setState({anchorEl: null});
   };
@@ -100,15 +101,16 @@ class Header extends Component {
                   <ul className="m-topbar__nav m-nav m-nav--inline">
 
                     <TabMenu activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
-                    <li
-                      className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width">
-
+                    <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width">
                       <NavLink to='/store/shopping-cart' className='m-nav__link m-dropdown__toggle pointer' id='m_topbar_notification_icon'>
                         <span className='m-nav__link-icon'>
                           <i className="fa fa-shopping-cart PageHeader-icon"></i>
                           {cartRecords.size > 0 && <span className="g-badge badge-red">{cartRecords.size}</span> }
                         </span>
                       </NavLink>
+                    </li>
+                    <li style={{paddingTop: '8px'}} className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width">
+                        <LanguageSwitcher className="m-nav__link"/>
                     </li>
                     <Settings activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
 

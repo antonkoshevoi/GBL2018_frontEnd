@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import Card from "../../../components/ui/Card";
 import {GridList, GridListTile, GridListTileBar, Icon, IconButton} from '@material-ui/core';
+import {translate} from 'react-i18next';
 
 class HowToMovies extends Component {
 
@@ -9,7 +9,7 @@ class HowToMovies extends Component {
         return videos.map(function (item,i) {
             return (
                 <GridListTile key={i} className="grid-tile">
-                    <img src="https://i.vimeocdn.com/blog/1527_1200.jpeg"/>
+                    <img alt="How To" src="https://i.vimeocdn.com/blog/1527_1200.jpeg"/>
 
                     <GridListTileBar
                         className="myGridTileBar"
@@ -17,7 +17,7 @@ class HowToMovies extends Component {
                         subtitle=""
                         actionIcon={
                             <IconButton>
-                                    <Icon>video</Icon>
+                                <Icon>video</Icon>
                             </IconButton>
                         }
                     />
@@ -28,8 +28,9 @@ class HowToMovies extends Component {
     }
 
     render() {
+        const { t } = this.props;
         return (
-            <Card title="How-to Movies" icon="fa fa-film">
+            <Card title={t('howToMovies')} icon="fa fa-film">
                 <GridList cellHeight={250} cols={3}>
                     {this._renderVideos([1,2])}
                 </GridList>
@@ -40,4 +41,4 @@ class HowToMovies extends Component {
 
 HowToMovies.propTypes = {};
 
-export default HowToMovies;
+export default translate('translations')(HowToMovies);

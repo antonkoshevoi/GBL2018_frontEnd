@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { translate } from 'react-i18next';
-import {Avatar, CircularProgress, Grid, Typography} from '@material-ui/core';
-import {withStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import {Avatar, CircularProgress, Grid, Paper, withStyles} from '@material-ui/core';
 import MetronicDatePicker from "../../components/ui/metronic/MetronicDatePicker";
 import {NavLink} from "react-router-dom";
 import {getSingleRecord, update} from "../../redux/students/actions";
@@ -144,9 +142,7 @@ class ProfileEdit extends Component {
     const {classes, student, updateRequest, t } = this.props;
     const loading = student.get('loading') || updateRequest.get('loading') || false;
     const errors = updateRequest.get('errors');
-    const {form, newAvatar} = this.state;
-
-    const defaultAvatar = '//s3.amazonaws.com/37assets/svn/765-default-avatar.png';
+    const {form, newAvatar} = this.state;   
 
     return (
       <div className="d-flex justify-content-center">

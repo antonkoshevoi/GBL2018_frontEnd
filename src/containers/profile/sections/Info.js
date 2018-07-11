@@ -4,7 +4,7 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import {selectChangePasswordRequest, selectChangeImageRequest} from "../../../redux/user/selectors";
 import {changePassword, changeImage} from "../../../redux/user/actions";
-import { Dialog, Modal, CircularProgress} from '@material-ui/core';
+import { Dialog, CircularProgress} from '@material-ui/core';
 import ImageCropper from "../../../components/ui/ImageCropper";
 import Card from "../../../components/ui/Card";
 
@@ -115,7 +115,7 @@ class Info extends Component {
                 <img src={user.avatar} alt=""/>
               </div>
               <div className="text-center m--margin-bottom-20">
-                {loading ? (<CircularProgress color="primary"/>) : (<button disabled={loading} className="m-btn btn btn-info m-btn--pill m--margin-10" onClick={()=>{this._openUploadModal()}}>Upload Avatar </button>)}
+                {loading ? (<CircularProgress color="primary"/>) : (<button disabled={loading} className="m-btn btn btn-info m-btn--pill m--margin-10" onClick={()=>{this._openUploadModal()}}>{t('uploadAvatar')}</button>)}
               </div>
             </div>
 

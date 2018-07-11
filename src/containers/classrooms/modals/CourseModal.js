@@ -7,7 +7,7 @@ import {
   Icon, IconButton,
   Toolbar, Typography,
   Divider, Button, DialogActions,
-  Paper, Tab, FormControlLabel, Radio
+  Paper, FormControlLabel, Radio
 } from '@material-ui/core';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
@@ -17,14 +17,6 @@ import {selectGetStoreRecordsRequest, selectGetUnassignedRecordsRequest} from ".
 import {getStoreRecords, getUnassignedRecords} from "../../../redux/courses/actions";
 import {Row, Table, TablePreloader, Tbody, Td, Thead, HeadRow, Th} from "../../../components/ui/table";
 import toastr from 'toastr';
-
-function TabContainer(props) {
-  return (
-    <Typography component="div">
-      {props.children}
-    </Typography>
-  );
-}
 
 class CourseModal extends Component {
   static propTypes = {
@@ -191,7 +183,7 @@ class CourseModal extends Component {
                 <Th width="100px">{t('courseTitle')}</Th>
                 <Th width="300px">{t('courseDescription')}</Th>
                 <Th width="100px">{t('priceEach')}</Th>
-                <Th width="100px">{t('Unassigned Credits')}</Th>
+                <Th width="100px">{t('unassignedCredits')}</Th>
               </HeadRow>
               </Thead>
               <Tbody>

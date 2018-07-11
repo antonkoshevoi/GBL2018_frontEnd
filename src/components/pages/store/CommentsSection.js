@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { translate } from 'react-i18next';
 
 class CommentsSection extends Component {
     render() {
+        const { t } = this.props;
         return (
             <div>
-                <h2 className="m--padding-20">No Info...</h2>
+                <h2 className="m--padding-20">{t('noInfo')}</h2>
             </div>
         );
     }
@@ -13,4 +15,4 @@ class CommentsSection extends Component {
 
 CommentsSection.propTypes = {};
 
-export default CommentsSection;
+export default translate('translations')(CommentsSection);

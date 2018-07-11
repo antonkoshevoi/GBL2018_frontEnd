@@ -8,10 +8,10 @@ import {translate} from "react-i18next";
 import {withRouter} from "react-router-dom";
 import {getRecords} from "../../redux/store/actions";
 import {selectRecords} from "../../redux/store/selectors";
-import Account from "../pages/reports/widgets/account";
-import QuickLink from "../pages/reports/widgets/QuickLink";
-import FeaturedItems from "../pages/reports/widgets/FeaturedItems";
+import QuickLink from "./sections/QuickLink";
+import FeaturedItems from "./sections/FeaturedItems";
 import Card from "../../components/ui/Card";
+import ShoppingCart from "../pages/store/shopping-cart/ShoppingCart";
 
 class UserDashboard extends Component {
   constructor(props) {
@@ -130,12 +130,12 @@ class UserDashboard extends Component {
   }
 
   render() {
-    const {records} = this.props;
+    const {records, t} = this.props;
     return (
-      <div className="fadeInLeft  animated">
+      <div className="fadeInLeft animated">
         <div className="row dashboard-main-top">
           <div className="col-sm-12 col-md-12 col-lg-12 col-xl-9 dashboard-reports-snapshot" style={{marginTop:'15px'}}>
-            <Card title="Reports Snapshot" isMainCard={true} boxShadow={false} style={{boxShadow:"none"}} bodyStyle={{padding:'0', background:'#f2f3f8'}}>
+            <Card title={t('reportsSnapshot')} isMainCard={true} boxShadow={false} style={{boxShadow:"none"}} bodyStyle={{padding:'0', background:'#f2f3f8'}}>
               <div className="row row-15">
                 <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">
                   <RosterStatistic/>
@@ -162,7 +162,9 @@ class UserDashboard extends Component {
             <FeaturedItems data={records}/>
           </div>
           <div className="col-md-6 col-lg-4">
-            <Account/>
+            <div>
+                <ShoppingCart preview = {true}/>
+            </div>
           </div>
         </div>
       </div>

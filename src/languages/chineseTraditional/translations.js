@@ -18,5 +18,9 @@ export default {
     endDate: 'End Date',
     enrollmentStartDate: 'Enrollment Start Date',
     enrollmentEndDate: 'Enrollment End Date',
-    selectTeacher: 'Select Teacher'
+    selectTeacher: 'Select Teacher',
+    dashboard: '仪表板',
+    studentsAndStaff: '学生和工作人员',
+    learningAreas: '学习领域',
+    reports: '报告',    
 }

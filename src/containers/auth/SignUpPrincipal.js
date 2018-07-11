@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {translate, Interpolate} from 'react-i18next';
 import background from '../../media/images/bg-3.jpg';
 import logo from '../../media/images/logo.png'
 import 'cropperjs/dist/cropper.css';
@@ -160,13 +160,14 @@ class SignUpPrincipal extends Component {
 
   render() {
     const { form } = this.state;
+    const { t } = this.props;
     const loading = this.props.signUpRequest.get('loading');
     const errors = this.props.signUpRequest.get('errors');
-
+    const loginBtn = <NavLink to="/login"><strong>{t('login')}</strong></NavLink>;
     return (
       <div className="">
         <div className="m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor  m-login--2 m-login-2--skin-2 m--full-height" id="m_login" style={{backgroundImage: `url(${background})`,minHeight:'100vh'}}>
-          <div className="m-grid__item m-grid__item--fluid	m-login__wrapper">
+          <div className="m-grid__item m-grid__item--fluid m-login__wrapper">
             <div className="m-login__container signup-page">
               <div className="m-login__logo  text-center">
                 <a href="#">
@@ -175,14 +176,14 @@ class SignUpPrincipal extends Component {
               </div>
               <div className="m-signup col-sm-6 m-auto">
                 <div className="m-signup__head">
-                  <h3 className="m-login__title">Sign Up</h3>
+                  <h3 className="m-login__title">{t('signUp')}</h3>
                 </div>
                 <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--info m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height ">
                   <div className="m-portlet__head">
                     <div className="m-portlet__head-caption">
                       <div className="m-portlet__head-title full-width">
                         <h3 className="m-portlet__head-text ">
-                          SETUP YOUR PRINCIPAL PROFILE
+                          {t('setupYourPrincipalProfile')}
                         </h3>
                       </div>
                     </div>
@@ -194,12 +195,14 @@ class SignUpPrincipal extends Component {
                   </div>
                   <form className="m-portlet__body" onSubmit={(e) => { e.preventDefault(); this._submit(); }}>
                     <div className="alert m-alert m-alert--default">
-                      <p className="text-center"> If you already have an account, <NavLink to="/login"><strong>Login</strong></NavLink> to start your session. Otherwise,</p>
+                      <p className="text-center">
+                        <Interpolate i18nKey="alreadyHaveAccountMessage" loginLink={loginBtn} />
+                      </p>
                     </div>
 
                     <div className="row m--margin-top-40">
                       <div className="col-md-6">
-                        <legend>Personal Information</legend>
+                        <legend>{t('personalInformation')}</legend>
                           <div className="m-form__section m-form__section--first">
                             <div className="form-group m-form__group">
                               <div>
@@ -209,7 +212,7 @@ class SignUpPrincipal extends Component {
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="text"
                                   className="form-control m-input m-input--air"
-                                  placeholder="First Name"/>
+                                  placeholder={t('firstName')} />
                               </div>
                               {errors && errors.get('firstName') &&
                                 <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
@@ -224,7 +227,7 @@ class SignUpPrincipal extends Component {
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="text"
                                   className="form-control m-input m-input--air "
-                                  placeholder="Last Name "/>
+                                  placeholder={t('lastName')}/>
                               </div>
                               {errors && errors.get('lastName') &&
                                 <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
@@ -239,7 +242,7 @@ class SignUpPrincipal extends Component {
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="text"
                                   className="form-control m-input m-input--air "
-                                  placeholder="Email "/>
+                                  placeholder={t('email')}/>
                               </div>
                               {errors && errors.get('email') &&
                                 <div className="form-control-feedback text-center error">{errors.get('email').get(0)}</div>}
@@ -254,7 +257,7 @@ class SignUpPrincipal extends Component {
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="text"
                                   className="form-control m-input m-input--air "
-                                  placeholder="Username "/>
+                                  placeholder={t('username')}/>
                               </div>
                               {errors && errors.get('username') &&
                                 <div className="form-control-feedback text-center error">{errors.get('username').get(0)}</div>}
@@ -269,7 +272,7 @@ class SignUpPrincipal extends Component {
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="password"
                                   className="form-control m-input m-input--air "
-                                  placeholder="Password "/>
+                                  placeholder={t('password')}/>
                               </div>
                               {errors && errors.get('password') &&
                                 <div className="form-control-feedback text-center error">{errors.get('password').get(0)}</div>}
@@ -284,13 +287,13 @@ class SignUpPrincipal extends Component {
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type="password"
                                   className="form-control m-input m-input--air "
-                                  placeholder="Confirm Password "/>
+                                  placeholder={t('confirmPassword')}/>
                               </div>
                             </div>
                           </div>
                         </div>
                       <div className="col-md-6">
-                        <legend>School Information</legend>
+                        <legend>{t('schoolInformation')}</legend>
                         <div className="m-form__section m-form__section--first">
                           <div className="form-group m-form__group">
                             <div>
@@ -300,7 +303,7 @@ class SignUpPrincipal extends Component {
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 type="text"
                                 className="form-control m-input m-input--air "
-                                placeholder="School Name"/>
+                                placeholder={t('schoolName')}/>
                             </div>
                             {errors && errors.get('schoolName') &&
                               <div className="form-control-feedback text-center error">{errors.get('schoolName').get(0)}</div>}
@@ -313,7 +316,7 @@ class SignUpPrincipal extends Component {
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 type="text"
                                 className="form-control m-input m-input--air "
-                                placeholder="School Code"/>
+                                placeholder={t('schoolCode')} />
                             </div>
                             {errors && errors.get('schoolCode') &&
                               <div className="form-control-feedback text-center error">{errors.get('schoolCode').get(0)}</div>}
@@ -325,7 +328,7 @@ class SignUpPrincipal extends Component {
                                 value={form.schoolCountry}
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 className="form-control m-input m-input--air">
-                                <option>Select Country</option>
+                                <option>{t('selectCountry')}</option>
                                 {this._renderCountries()}
                               </select>
                             </div>
@@ -336,11 +339,9 @@ class SignUpPrincipal extends Component {
 
                         <div className="CropperBlock">
                           <div className='upload-btn-wrapper '>
-                            <span className='btn m-btn--air pointer btn-outline-info'>Upload a file</span>
+                            <span className='btn m-btn--air pointer btn-outline-info'>{t('uploadFile')}</span>
                             <input type='file' name='myfile' onChange={(e) => { this._handleFileChange(e) }}/>
                           </div>
-
-
                           <Cropper
                             ref={cropper => { this.cropper = cropper; }}
                             src={form.schoolLogo}
@@ -355,7 +356,6 @@ class SignUpPrincipal extends Component {
                             guides={false}/>
                           {form.schoolLogo &&
                           <div className="text-center m--margin-10">
-
                             <input type="range" min="0.1" max="1" step="0.05"  value={this.state.zoom}  onChange={ (value)=>this._zoom(value)}></input>
                             <br/>
                             <span
@@ -383,7 +383,7 @@ class SignUpPrincipal extends Component {
                           disabled={loading}
                           loading={loading}
                           className='m-btn m-btn--air m--margin-5 btn btn-info'>
-                          NEXT
+                          {t('next')}
                         </MetronicProgressButton>
                       </div>
                     </div>
@@ -409,5 +409,5 @@ SignUpPrincipal = connect(
   })
 )(SignUpPrincipal);
 
-export default translate('SignUpPrincipal')(SignUpPrincipal);
+export default translate('translations')(SignUpPrincipal);
 

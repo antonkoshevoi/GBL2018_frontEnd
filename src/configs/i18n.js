@@ -28,7 +28,7 @@ i18n
         kr: {
            ...korean
         },
-        sp: {
+        es: {
             ...spanish
         },
         fr: {

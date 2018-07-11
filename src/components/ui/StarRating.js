@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import "../../styles/starRating.css"
-import starImage from '../../media/images/star-rating.png'
 
 class StarRating extends Component {
     render() {

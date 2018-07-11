@@ -125,4 +125,4 @@ UnassignedCredits = connect(
   })
 )(UnassignedCredits);
 
-export default translate('unassigneds')(UnassignedCredits);
+export default translate('translations')(UnassignedCredits);

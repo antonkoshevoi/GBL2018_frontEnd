@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent, DialogContentText, FormControl, InputLabel, FormHelperText,
+  DialogContent, FormControl, InputLabel, FormHelperText,
   Icon, IconButton,
   Toolbar, Typography, MenuItem, Select, Paper, FormGroup,
   Divider, Button, DialogActions

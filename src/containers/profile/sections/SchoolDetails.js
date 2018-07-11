@@ -96,7 +96,7 @@ class SchoolDetails extends Component {
                 }
               </span>
               <h3 className="m-portlet__head-text">
-              {mode === 'overview' ? 'Info' : 'Edit'}
+              {mode === 'overview' ? t('info') : t('edit')}
               </h3></div>}
             </div>
             <div className="m-portlet__head-tools">

@@ -6,6 +6,7 @@ import {
 import { NavLink } from "react-router-dom";
 import { Search } from "@material-ui/icons";
 import {connect} from "react-redux";
+import {translate} from "react-i18next";
 import {selectStudentsRequest} from "../../../../redux/reports/homerooms/selectors";
 import {getStudents} from "../../../../redux/reports/homerooms/actions";
 
@@ -71,9 +72,10 @@ class DashboardTabs extends Component {
   };
 
   _renderEmptyDataMsg(){
+    const { t } = this.props;
     return (
       <div className="display-1">
-        <h1 className="text-center">No Students...</h1>
+        <h1 className="text-center">{t('noStudents')}</h1>
       </div>
     )
   }
@@ -81,7 +83,8 @@ class DashboardTabs extends Component {
   _renderStudents() {
     const students = this.props.getStudentsRequest.get('records').toJS();
     const defaultAvatar = '//s3.amazonaws.com/37assets/svn/765-default-avatar.png';
-
+    const { t } = this.props;
+   
     if (this.props.getStudentsRequest.get('records') && !students.length) {
       return this._renderEmptyDataMsg();
     }
@@ -99,13 +102,13 @@ class DashboardTabs extends Component {
               <div>
                 <span className="text-right d-block">{student.passRate} %</span>
                 <div className="progress m-progress--sm">
-                  <div title="Completed" className="progress-bar bg-success" role="progressbar" style={{width: student.completed + '%'}}></div>
-                  <div title="In Progress" className="progress-bar bg-warning" role="progressbar" style={{width: student.inProgress + '%'}}></div>
+                  <div title={t('completed')} className="progress-bar bg-success" role="progressbar" style={{width: student.completed + '%'}}></div>
+                  <div title={t('inProgress')} className="progress-bar bg-warning" role="progressbar" style={{width: student.inProgress + '%'}}></div>
                 </div>
                 <br/>
                 <div className="progress m-progress--sm">
-                  <div title="Average Grade" className="progress-bar bg-success" role="progressbar" style={{width: student.averageGrade + '%'}}></div>
-                  <div title="Average Grade" className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(student.averageGrade)) + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-success" role="progressbar" style={{width: student.averageGrade + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(student.averageGrade)) + '%'}}></div>
                 </div>
               </div>
             )}
@@ -120,6 +123,7 @@ class DashboardTabs extends Component {
 
   render() {
     const { value, cols, tabCentered, tabFullWidth } = this.state;
+    const { t } = this.props;
 
     return (
       <div className="m--margin-top-50">
@@ -127,15 +131,15 @@ class DashboardTabs extends Component {
           <div className="m-portlet__head d-inline-block">
             <div className="row">
               <div className="m-portlet__head-tools text-left col-sm-8">
-                <Tabs
-                  className="main-tabs"
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                  scrollable={true}
-                  centered={tabCentered}
-                  fullWidth={tabFullWidth}
-                >
-                  <Tab className="tab-header-item" value="students" label="Students"/>
+                  <Tabs
+                      className="main-tabs"
+                      value={this.state.value}
+                      onChange={this.handleChange}
+                      scrollable={true}
+                      centered={tabCentered}
+                      fullWidth={tabFullWidth}
+                  >
+                  <Tab className="tab-header-item" value="students" label={t('students')}/>
                 </Tabs>
               </div>
               <div className="m-portlet__head-tools col-sm-4">
@@ -143,7 +147,7 @@ class DashboardTabs extends Component {
                   className="portlet-header-input"
                   id="search"
                   type='search'
-                  placeholder="Search"
+                  placeholder={t('search')}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton>
@@ -178,4 +182,4 @@ DashboardTabs = connect(
   })
 )(DashboardTabs);
 
-export default DashboardTabs;
+export default translate('translations')(DashboardTabs);

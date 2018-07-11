@@ -5,8 +5,6 @@ export const GET_THREADS = '[Messages] GET_THREADS';
 export const GET_THREADS_SUCCESS = '[Messages] GET_THREADS_SUCCESS';
 export const GET_THREADS_FAIL = '[Messages] GET_THREADS_FAIL';
 
-export const SELECT_THREAD = '[Messages] SELECT_THREAD';
-
 export const CREATE_NEW_THREAD = '[Messages] CREATE_NEW_THREAD';
 export const CREATE_NEW_THREAD_SUCCESS = '[Messages] CREATE_NEW_THREAD_SUCCESS';
 export const CREATE_NEW_THREAD_FAIL = '[Messages] CREATE_NEW_THREAD_FAIL';
