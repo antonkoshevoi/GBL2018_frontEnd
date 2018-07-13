@@ -178,7 +178,7 @@ class InvitationsTab extends Component {
           <a title="View Invitation" href={uri('invitations/details/' + record.get('id') + '/' + record.get('securityHash'))} className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill" target="_blank">
              <i className='la la-search'></i>
           </a>
-          <DeleteButton onClick={() => { this._deleteRecord(record.get('id')) }}/>
+          <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
         </Td>
       </Row>
     ));

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { MenuItem } from '@material-ui/core';
 import ConfirmButton from './ui/ConfirmButton';
 import { CSVLink } from 'react-csv';
 import PortletWidgets from './ui/PortletWidgets';
 import LinearProgress from './ui/LinearProgress';
 import PortletErrorsWidgets from './ui/PortletErrorsWidgets';
+import { translate } from 'react-i18next';
 
 class CsvUploadSection extends Component {
     static propTypes = {
@@ -66,7 +67,7 @@ class CsvUploadSection extends Component {
     }
 
     render() {
-        const { uploadRequest,schoolRequest } = this.props;
+        const { uploadRequest,schoolRequest, t } = this.props;
         const schoolId = schoolRequest.get('record').toJS().schId;
         const loading = uploadRequest.get('loading');
         const progress = uploadRequest.get('progress');
@@ -95,48 +96,21 @@ class CsvUploadSection extends Component {
                     <div className="m-portlet__body">
                         <div className="row" style={{ marginBottom: '30px' }}>
                             <div className="col-sm-12">
-                                <h6>
-                                    You may download this .csv template to use it as pattern for your csv file. Kindly
-                                    make sure that you have a valid .csv format before uploading to the system.
-                                </h6>
+                                <h6>{t('downloadCsvMessage')}</h6>
                                 <CSVLink
                                     headers={csvTemplateHeaders}
                                     data={csvTemplateData}
                                     filename={csvExampleName}
                                     className="btn btn-success"
                                 >
-                                    Download
+                                    {t('download')}
                                 </CSVLink>
                             </div>
                         </div>
                         <div className="row" style={{ marginLeft: 0 }}>
-                            {/*<div className="col-md-6">*/}
-                                {/*<div className="row">*/}
-                                    {/*<div className="col-xs-12 ">*/}
-                                        {/*<FormControl>*/}
-                                            {/*<InputLabel htmlFor="school-helper">Schools</InputLabel>*/}
-                                            {/*<Select*/}
-                                                {/*disabled={loading}*/}
-                                                {/*style={{ minWidth: '120px' }}*/}
-                                                {/*value={schoolId || ''}*/}
-                                                {/*onChange={e => {*/}
-                                                    {/*this._handleSchoolChange(e);*/}
-                                                {/*}}*/}
-                                                {/*input={<Input name="school" id="school-helper" />}*/}
-                                            {/*>*/}
-                                                {/*<MenuItem value="">*/}
-                                                    {/*<em>None</em>*/}
-                                                {/*</MenuItem>*/}
-                                                {/*{this._renderSchools()}*/}
-                                            {/*</Select>*/}
-                                            {/*<FormHelperText />*/}
-                                        {/*</FormControl>*/}
-                                    {/*</div>*/}
-                                {/*</div>*/}
-                            {/*</div>*/}
                             <div className={`col-md-6 ${loading || !schoolId ? ' not-allowed' : ''}`}>
                                 <div className={`react-csv-input ${loading || !schoolId ? ' disabled' : 'fdsfsf'}`}>
-                                    <label>Select CSV file</label>
+                                    <label>{t('selectCsvFile')}</label>
                                     <input
                                         id="file-input"
                                         className="csv-input"
@@ -160,7 +134,7 @@ class CsvUploadSection extends Component {
                                                     cancel('canceled by user');
                                                 }}
                                             >
-                                                Cancel
+                                                {t('cancel')}
                                                 <i className="la la-close m--margin-left-5" />
                                             </ConfirmButton>
                                         )}
@@ -175,22 +149,22 @@ class CsvUploadSection extends Component {
                             <PortletWidgets
                                 data={[
                                     {
-                                        title: 'Total',
+                                        title: t('total'),
                                         value: results.get('total'),
                                         colorName: 'info'
                                     },
                                     {
-                                        title: 'Inserted',
+                                        title: t('inserted'),
                                         value: results.get('inserted'),
                                         colorName: 'success'
                                     },
                                     {
-                                        title: 'Failed',
+                                        title: t('failed'),
                                         value: results.get('failed'),
                                         colorName: 'danger'
                                     }
                                 ]}
-                                title="Results"
+                                title={t('results')}
                                 icon="flaticon-list-3"
                             />
                         )}
@@ -204,4 +178,4 @@ class CsvUploadSection extends Component {
     }
 }
 
-export default CsvUploadSection;
+export default translate('translations')(CsvUploadSection);

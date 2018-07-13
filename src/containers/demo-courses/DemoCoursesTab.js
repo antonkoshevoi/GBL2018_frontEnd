@@ -203,7 +203,7 @@ class DemoCoursesTab extends Component {
         <Td width='132px'>{record.get('studentsCount')}</Td>
         <Td width='100px'>
           <EditButton onClick={(id) => { this._editRecord(id) }} id={ record.get('id') }/>
-          <DeleteButton onClick={() => { this._deleteRecord(record.get('id')) }}/>
+          <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
         </Td>
       </Row>
     ));

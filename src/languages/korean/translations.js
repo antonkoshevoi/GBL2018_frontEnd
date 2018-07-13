@@ -367,5 +367,14 @@ export default {
     personalInformation: 'KR: Personal Information',
     setupYourPrincipalProfile: 'KR: Setup Your Principal Profile',
     myLearners: 'KR: My Learners',
-    reportProfile: 'KR: Report/Profile'
+    reportProfile: 'KR: Report/Profile',
+    logInDifferentUser: 'KR: Log In different user',
+    logIn: 'KR: Log in',
+    reset: 'KR: Reset',
+    areYouSure: 'KR: Are you sure?',
+    downloadCsvMessage: 'KR: You may download this .csv template to use it as pattern for your csv file. Kindly make sure that you have a valid .csv format before uploading to the system.',    
+    selectCsvFile: 'KR: Select CSV file',    
+    inserted: 'KR: Inserted',
+    failed: 'KR: Failed',
+    results: 'KR: Results'    
 }

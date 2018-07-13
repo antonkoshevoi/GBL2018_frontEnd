@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {formChartData, formChartOptions} from '../../../../../data/Charts';
-import Card from '../../../../../components/ui/Card';
+import CardChart from '../../../../../components/ui/CardChart';
 import {Line} from 'react-chartjs-2';
 import ApiClient from '../../../../../services/ApiClient';
 import {DatePicker} from 'material-ui-pickers';
@@ -43,8 +43,7 @@ class LineChart extends Component {
   render() {
     const { t }  = this.props;
     return (
-      <Card title={t('studentsOnline')} isChart={true} icon="flaticon-diagram" iconBackground="square-background"
-            resetDate={this.handleResetDate} isResetChartButton={true}>
+      <CardChart title={t('studentsOnline')} resetButtonHandle={this.handleResetDate} resetButtonLabel={t('reset')}>
         <div className="date-group-selector">
           <div className={`date-group` + (this.state.selectorActive === 0 ? ' date-selector-active' : '')}
                onClick={() => {
@@ -70,7 +69,7 @@ class LineChart extends Component {
         {this.generateDateSelector()}
         {this.state.data && this.state.data.datasets &&
         <Line data={this.state.data} options={this.state.options} width={500} height={350}/>}
-      </Card>
+      </CardChart>
     );
   }
 

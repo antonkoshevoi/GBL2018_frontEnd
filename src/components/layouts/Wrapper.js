@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import SubHeader from "../../containers/ui/SubHeader";
 import {withRouter} from "react-router-dom"
 import {connect} from 'react-redux';
 

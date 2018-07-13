@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import {Avatar, ListItemText, Menu, MenuItem} from '@material-ui/core';
+import { ListItemText, Menu, MenuItem} from '@material-ui/core';
 import en_flag from '../../media/images/flags/gb.png';
 import es_flag from '../../media/images/flags/es.png';
 import fr_flag from '../../media/images/flags/fr.png';
@@ -26,9 +26,7 @@ class LanguageSwitcher extends Component {
             language: i18n.language,
             anchorEl: null
         };
-
     }
-
 
     componentWillMount() {
         const currentLanguage = localStorage.getItem('language');        
@@ -82,7 +80,7 @@ class LanguageSwitcher extends Component {
                     onClick={this._openLanguageMenu}
                 >
                         <span className="m-nav__link-icon">
-                            <i className="m--icon-font-size-lg5  fa fa-globe m--margin-right-5 d-md-inline"></i>
+                            <i className="m--icon-font-size-lg2 fa fa-globe m--margin-right-5 d-md-inline"></i>
                         </span>
                 </a>
                 <Menu
