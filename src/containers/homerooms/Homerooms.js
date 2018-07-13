@@ -60,7 +60,7 @@ class Homerooms extends Component {
    * @private
    */
   _renderRecords () {
-    const { records } = this.props;
+    const { records, t } = this.props;
     const loading = this.props.getRecordsRequest.get('loading');
 
       if (!loading && records.size === 0) {
@@ -68,7 +68,7 @@ class Homerooms extends Component {
         <tr>
           <td>
             <div className="table-message">
-              <h2>Homerooms Not Found...</h2>
+              <h2>{t('homeroomsNotFound')}</h2>
             </div>
           </td>
         </tr>
@@ -91,7 +91,7 @@ class Homerooms extends Component {
           <HasPermission permissions={[
             '[HomeRooms][Delete][Any]'
           ]}>
-            <DeleteButton onClick={() => { this._deleteRecord(record.get('id')) }}/>
+            <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
           </HasPermission>
         </Td>
       </Row>

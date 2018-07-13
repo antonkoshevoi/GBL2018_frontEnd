@@ -1,14 +1,8 @@
 import React, {Component} from 'react';
 import '../../../styles/widgets.css';
-import PropTypes from 'prop-types';
 import Card from "../../../components/ui/Card";
-import {
-  Paper, Tabs, Tab, Typography, GridList, GridListTile, GridListTileBar, IconButton, Icon,
-  LinearProgress, Input, InputAdornment
-} from '@material-ui/core';
 import {translate} from "react-i18next";
 import ProductCard from "../../../components/pages/store/ProductCard";
-
 
 class FeaturedItems extends Component {
 

@@ -111,7 +111,7 @@ class Teachers extends Component {
           <HasPermission permissions={[
             '[Users][Teachers][Delete][Any]'
           ]}>
-            <DeleteButton onClick={() => { this._deleteRecord(record.get('id')) }}/>
+            <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
           </HasPermission>
         </Td>
       </Row>

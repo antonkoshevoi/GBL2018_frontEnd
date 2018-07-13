@@ -369,5 +369,12 @@ export default {
     myLearners: 'My Learners',
     reportProfile: 'Report/Profile',
     logInDifferentUser: 'Log In different user',
-    logIn: 'Log in'
+    logIn: 'Log in',
+    reset: 'Reset',
+    areYouSure: 'Are you sure?',
+    downloadCsvMessage: 'You may download this .csv template to use it as pattern for your csv file. Kindly make sure that you have a valid .csv format before uploading to the system.',    
+    selectCsvFile: 'Select CSV file',    
+    inserted: 'Inserted',
+    failed: 'Failed',
+    results: 'Results'
 }

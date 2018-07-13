@@ -1,10 +1,9 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
 
 const ConfirmButton = ({ onClick, ...rest }) => {
 
   const _onClick = (e) => {
-    if(window.confirm('Are you sure?')) {
+    if (window.confirm('Are you sure?')) {
       return onClick (e);
     }
   };

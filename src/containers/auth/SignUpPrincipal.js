@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate, Interpolate} from 'react-i18next';
 import background from '../../media/images/bg-3.jpg';
-import logo from '../../media/images/logo.png'
 import 'cropperjs/dist/cropper.css';
 import Cropper from "react-cropper";
 import {NavLink} from "react-router-dom";
@@ -13,6 +12,8 @@ import MetronicProgressButton from '../../components/ui/metronic/MetronicProgres
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 import {selectRecords} from "../../redux/countries/selectors";
 import {getCountries} from "../../redux/countries/actions";
+
+const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
 
 class SignUpPrincipal extends Component {
 
@@ -169,9 +170,9 @@ class SignUpPrincipal extends Component {
         <div className="m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor  m-login--2 m-login-2--skin-2 m--full-height" id="m_login" style={{backgroundImage: `url(${background})`,minHeight:'100vh'}}>
           <div className="m-grid__item m-grid__item--fluid m-login__wrapper">
             <div className="m-login__container signup-page">
-              <div className="m-login__logo  text-center">
-                <a href="#">
-                  <img src={logo}/>
+              <div className="m-login__logo text-center  m--margin-top-15">
+                <a href="/">
+                   <img alt="GravityBrain" style={{width: '270px', height: 'auto'}} src={logoUrl} />
                 </a>
               </div>
               <div className="m-signup col-sm-6 m-auto">

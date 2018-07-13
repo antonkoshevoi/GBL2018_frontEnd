@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from '../../media/images/logo.png';
 import {translate} from 'react-i18next';
 import i18n from '../../configs/i18n';
 import UserMenu from "./UserMenu";
@@ -14,6 +13,8 @@ import TabMenu from "../pushers/TabMenu";
 import {getSchool} from "../../redux/schools/actions";
 import {selectSchool} from "../../redux/schools/selectors";
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
+
+const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
 
 class Header extends Component {
 
@@ -71,8 +72,8 @@ class Header extends Component {
             <div className="m-stack__item m-brand gravity-logo ">
               <div className="m-stack m-stack--ver m-stack--general">
                 <div className="m-stack__item m-stack__item--middle m-brand__logo">
-                  <NavLink to="/dashboard" className="m-brand__logo-wrapper">
-                      <img alt="GravityBrain" style={{"maxWidth": "100%"}} src={logo}/>
+                  <NavLink to="/dashboard" className="m-brand__logo-wrapper m--margin-left-5">
+                      <img alt="GravityBrain" style={{width: '220px', height: 'auto'}} src={logoUrl}/>
                   </NavLink>
                 </div>
               </div>

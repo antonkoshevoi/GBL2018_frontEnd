@@ -367,5 +367,14 @@ export default {
     personalInformation: 'FR: Personal Information',
     setupYourPrincipalProfile: 'FR: Setup Your Principal Profile',
     myLearners: 'FR: My Learners',
-    reportProfile: 'FR: Report/Profile'
+    reportProfile: 'FR: Report/Profile',
+    logInDifferentUser: 'FR: Log In different user',
+    logIn: 'FR: Log in',
+    reset: 'FR: Reset',
+    areYouSure: 'FR: Are you sure?',
+    downloadCsvMessage: 'FR: You may download this .csv template to use it as pattern for your csv file. Kindly make sure that you have a valid .csv format before uploading to the system.',    
+    selectCsvFile: 'FR: Select CSV file',    
+    inserted: 'FR: Inserted',
+    failed: 'FR: Failed',
+    results: 'FR: Results'    
 }
