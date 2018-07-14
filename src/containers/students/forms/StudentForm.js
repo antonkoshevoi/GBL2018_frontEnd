@@ -46,7 +46,7 @@ class StudentForm extends Component {
   }
 
   _handleInputChange(event) {
-    const { name, type, value, checked } = event.target;
+    const { name, value } = event.target;
       this.props.onChange({
       ...this.props.student,
       [name]: value

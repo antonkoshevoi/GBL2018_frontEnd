@@ -1,17 +1,11 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {Card, CardActions, CardContent, CardMedia, Typography} from '@material-ui/core';
-import StarRating from "../../ui/StarRating";
 import {NavLink} from "react-router-dom";
 import ProductCard from "./ProductCard";
 
 class ProductsSection extends Component {
 
-
     _renderProducts(products, categoryId) {
         const {all} = this.props;
-
-
 
         if (products.size === 0) {
             return this._renderEmptyMsg()
@@ -77,7 +71,7 @@ ProductsSection.propTypes = {};
 
 ProductsSection.defaultProps = {
     all: false,
-    categoryId: null,
+    categoryId: null
 }
 
 export default ProductsSection;

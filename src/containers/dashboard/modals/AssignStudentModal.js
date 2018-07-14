@@ -110,7 +110,7 @@ class AssignStudentModal extends Component {
                 <div className='col-sm-6 col-lg-6 m-auto'>
                 {course &&
                     <div className="text-center">
-                      <img src={course.image} width={70}/>
+                      <img alt={course.title} src={course.image} width={70}/>
                       <p className='m--margin-top-25'><strong>{course.title}</strong></p>
                     </div>}
                 </div>

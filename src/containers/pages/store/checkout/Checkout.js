@@ -7,12 +7,9 @@ import {selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest} fr
 import {calculateCartSum, getCartRecords} from '../../../../redux/store/actions';
 import {withRouter} from 'react-router-dom';
 import {push} from 'react-router-redux';
-import {
-  selectCreateCheckPaymentRequest,
-  selectCreatePayPalPaymentRequest, selectPaymentMethod
-} from '../../../../redux/payments/selectors';
+import {selectCreateCheckPaymentRequest, selectCreatePayPalPaymentRequest, selectPaymentMethod} from '../../../../redux/payments/selectors';
 import {createCheckPayment, createPayPalPayment, setPayType} from '../../../../redux/payments/actions';
-import {Divider, Step, StepLabel, Stepper, Button, CircularProgress, withStyles} from '@material-ui/core';
+import {Step, StepLabel, Stepper, Button, CircularProgress, withStyles} from '@material-ui/core';
 import payPalImg from '../../../../media/images/payments/paypal.png'
 import creditCardImg from '../../../../media/images/payments/credit_card.png'
 import checkImg from '../../../../media/images/payments/check.png'

@@ -7,7 +7,6 @@ import {translate} from 'react-i18next';
 import {selectRecords, selectGetRecordsRequest} from "../../redux/students/selectors";
 import {getRecords} from "../../redux/students/actions";
 import {getParentRecords} from "../../redux/store/actions";
-import {Row, Td} from "../../components/ui/table";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
 import {push} from 'react-router-redux';
 import {GridOn} from "@material-ui/icons";

@@ -25,7 +25,6 @@ import Route from '../containers/routing/Route';
 import Profile from "../containers/profile/Profile";
 import SchoolProfile from "../containers/profile/SchoolProfile";
 import StudentReports from "../containers/pages/reports/Students";
-import TeacherReports from "../containers/pages/reports/Teachers";
 import Store from "../containers/pages/store/Store";
 import Details from "../containers/pages/store/Details";
 import Products from "../containers/pages/store/Products";
@@ -105,8 +104,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReportDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/homerooms/:id' name='Homeroom' component={HomeRoomReportDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id/edit' name='Student' component={ProfileEdit}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id/edit' name='Student' component={ProfileEdit}/>      
 
       {/*Store*/}    
       <AuthenticatedRoute exact layout={MainLayout} path='/store/shopping-cart' name='Details' component={ShoppingCart}/>

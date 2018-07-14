@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
-import posterImage from "../../media/images/menu_poster.jpg"
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Messages from "./Messages";
 import Notifications from "./Notifications";
@@ -17,10 +16,7 @@ class TabMenu extends Component {
             activePusherMenu:null,
             tabIndex: 0
         };
-
-
     }
-
 
     render() {
         const {activeMenu} = this.props

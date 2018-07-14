@@ -15,7 +15,6 @@ import {
 } from '../../../../redux/store/actions';
 import {withRouter,NavLink} from 'react-router-dom';
 import Loader from '../../../../components/layouts/Loader';
-import {debounce} from "../../../../helpers/utils";
 
 class ShoppingCart extends Component {
 

@@ -42,13 +42,14 @@ class UnassignedCredits extends Component {
   _renderRecords () {
     const records = this.props.getUnassignedsRequest.get('records');
     const loading = this.props.getUnassignedsRequest.get('loading');
-
+    const { t } = this.props;
+    
     if (!loading && records.size === 0) {
       return (
         <tr>
           <td>
             <div className="table-message">
-              <h2>No records...</h2>
+              <h2>{t('noUnassignedCredits')}</h2>
             </div>
           </td>
         </tr>
@@ -60,7 +61,7 @@ class UnassignedCredits extends Component {
         <Td first={true} width='100px'>{key + 1}</Td>
         <Td width="80px">
           <div >
-            <img src={record.get('item').get('thumbnail')} width={70}/>
+            <img alt="{t('course')}" src={record.get('item').get('thumbnail')} width={70}/>
           </div>
         </Td>
         <Td width='132px'>{record.get('item').get('title')}</Td>

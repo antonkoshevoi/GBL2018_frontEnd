@@ -26,9 +26,7 @@ class SignUpPrincipal extends Component {
   }
 
   componentDidMount() {
-
     const { getCountries } = this.props;
-
     getCountries();
   }
 
@@ -38,9 +36,6 @@ class SignUpPrincipal extends Component {
     );
   };
 
-  /**
-   *
-   */
   _handleFileChange(e) {
     e.preventDefault();
     let files;
@@ -64,9 +59,6 @@ class SignUpPrincipal extends Component {
     reader.readAsDataURL(files[0]);
   }
 
-  /**
-   *
-   */
   _handleImageCrop() {
     if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
       return;
@@ -79,11 +71,8 @@ class SignUpPrincipal extends Component {
     });
   }
 
-  /**
-   *
-   */
   _handleInputChange(event) {
-    const { name, type, value, checked } = event.target;
+    const { name, value } = event.target;
 
     this.setState({
       form: {
@@ -369,7 +358,7 @@ class SignUpPrincipal extends Component {
                           }
                           <div className='croppedBlock'>
                             {form.schoolLogoCropped &&
-                              <img className='img-thumbnail' style={{ width: '150px' }} src={form.schoolLogoCropped} alt='cropped image'/>}
+                              <img className='img-thumbnail' style={{ width: '150px' }} src={form.schoolLogoCropped} alt={t('schoolProfile')}/>}
                           </div>
                         </div>
                       </div>

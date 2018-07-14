@@ -1,4 +1,4 @@
-import React, {Fragment, PureComponent  } from 'react';
+import React, { PureComponent  } from 'react';
 import { DatePicker as BaseDatePicker } from 'material-ui-pickers';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
 import blue from '@material-ui/core/es/colors/blue';

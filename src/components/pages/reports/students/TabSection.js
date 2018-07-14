@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {Tab, Tabs, Typography} from '@material-ui/core';
 import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../ui/table';
-import Parser from 'html-react-parser';
-import ApiClient from "../../../../services/ApiClient";
 import LessonsTable from './LessonsTable';
-import {getStudentClassReport} from '../../../../redux/reports/students/actions';
 import {translate} from 'react-i18next';
 
 function TabContainer(props) {
@@ -41,8 +37,7 @@ class TabSection extends Component {
 
   _renderTabContent(courses) {
     const {value} = this.state;
-    const _self = this;
-
+    
     if (value === 'details') {
       if (!courses.length) {
         return null;

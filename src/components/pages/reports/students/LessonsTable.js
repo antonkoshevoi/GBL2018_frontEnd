@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Typography} from '@material-ui/core';
-import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../ui/table';
+import {HeadRow, Table, Tbody, Th, Thead} from '../../../ui/table';
 import {translate} from 'react-i18next';
 import Parser from 'html-react-parser';
 import ApiClient from '../../../../services/ApiClient';
@@ -23,7 +23,6 @@ class LessonsTable extends Component {
       data: null
     };
     this._renderLessonsTables = this._renderLessonsTables.bind(this);
-
   }
 
   componentDidMount() {

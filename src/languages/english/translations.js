@@ -376,5 +376,7 @@ export default {
     selectCsvFile: 'Select CSV file',    
     inserted: 'Inserted',
     failed: 'Failed',
-    results: 'Results'
+    results: 'Results',
+    youHaveNoNewMessages: 'You have no new messages',
+    seeAll: 'See All'
 }

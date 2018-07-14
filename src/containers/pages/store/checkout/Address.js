@@ -28,7 +28,7 @@ class Address extends Component {
   }
 
   _handleInputChange(event) {
-    const { name, type, value, checked } = event.target;
+    const { name, value } = event.target;
     this.setState({
       form: {
         ...this.state.form,

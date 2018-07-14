@@ -3,7 +3,6 @@ import { push } from 'react-router-redux';
 import {
   Paper, Tabs, Tab, Typography, GridList, GridListTile, GridListTileBar, IconButton, Input, InputAdornment
 } from '@material-ui/core';
-import { NavLink } from "react-router-dom";
 import { Search } from "@material-ui/icons";
 import {connect} from "react-redux";
 import {translate} from 'react-i18next';
@@ -198,7 +197,7 @@ class DashboardTabs extends Component {
   }
 
   render() {
-    const { value, cols, tabCentered, tabFullWidth, tabScrollButtons } = this.state;
+    const { value, cols, tabCentered, tabFullWidth } = this.state;
     const { t } = this.props;
 
     return (

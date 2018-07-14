@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import Immutable from 'immutable';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import {
-  createNewThread, getAvailableUsers, getThreads, selectThread,
-  sendNewMessage
-} from '../../redux/messages/actions';
+import { createNewThread, getAvailableUsers, getThreads, sendNewMessage } from '../../redux/messages/actions';
 import {
   selectAllThreads, selectAvailableUsers, selectCreateNewThreadRequest, selectGetAvailableUsersRequest,
   selectGetThreadsRequest,

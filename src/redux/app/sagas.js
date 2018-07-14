@@ -1,11 +1,11 @@
 import { all, put, takeLatest } from 'redux-saga/effects';
 import {LOAD, LOAD_FAIL, LOAD_SUCCESS_AUTHENTICATED} from './actions';
-import {refreshLogin, restoreLogin, restoreLoginFail} from '../auth/actions';
+import {restoreLogin, restoreLoginFail} from '../auth/actions';
 import { subscribe as subscribeToNotifications } from '../notifications/actions';
 import { subscribe as subscribeToMessages } from '../messages/actions';
 import { getUserSuccess } from '../user/actions';
 import SessionStorage from '../../services/SessionStorage';
-import {destroyTokenSession} from "../../helpers/session";
+//import {destroyTokenSession} from "../../helpers/session";
 
 function* onLoad (action) {
   const token = SessionStorage.get('token');
@@ -32,7 +32,7 @@ function* afterLoadSuccess (action) {
 function* loadFail () {
     // destroyTokenSession();
 
-    const userData = SessionStorage.get('userData');
+    //const userData = SessionStorage.get('userData');
 
     // if (userData) {
         yield put(restoreLoginFail());
@@ -43,7 +43,7 @@ function* loadFail () {
 const appSagas = all([
   takeLatest(LOAD, onLoad),
   takeLatest(LOAD_SUCCESS_AUTHENTICATED, afterLoadSuccess),
-  takeLatest(LOAD_FAIL, loadFail),
+  takeLatest(LOAD_FAIL, loadFail)
 ]);
 
 export default appSagas;
