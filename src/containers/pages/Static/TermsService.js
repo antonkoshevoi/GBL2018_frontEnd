@@ -26,7 +26,7 @@ class TermsService extends Component {
     return paragraphs.map((record, key) => (           
       <div>
         <h4>{record.title}</h4>
-        <p>{record.content.split('\n').map(line => <p>{line.replace('{br}', '<br />')}</p>)}</p>
+        <p>{record.content.split('\n').map(line => <p>{line}</p>)}</p>
       </div>));
   }
 
