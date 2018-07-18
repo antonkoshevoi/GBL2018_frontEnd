@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
-import { Button, Icon, MenuItem, Select } from '@material-ui/core';
+import { translate, Interpolate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import { selectGetRecordsRequest, selectRecords } from '../../redux/subscriptions/selectors';
 import { getRecords } from '../../redux/subscriptions/actions';
+
+import './Subscriptions.css'
 
 class Subscriptions extends Component {
   constructor(props) {
@@ -23,75 +23,60 @@ class Subscriptions extends Component {
     const { subscriptions, t } = this.props;
     const loading = this.props.getRecordsRequest.get('loading');
 
-      if (!loading && subscriptions.size === 0) {
+    if (!loading && subscriptions.size === 0) {
       return (
-        <tr>
-          <td>
             <div className="table-message">
-              <h2>{t('usersNotFound')}</h2>
+              <h2>{t('subscriptionsNotFound')}</h2>
             </div>
-          </td>
-        </tr>
-      )
-    }
-
-    return subscriptions.map((record, key) => (
-      <Row index={key} key={key}>
-        <Td first={true} width='100px'>{key + 1}</Td>
-        <Td width='132px'>{record.get('title')}</Td>
-        <Td width='132px'>{record.get('description')}</Td>
-        <Td width='132px'>{record.get('bonuses')}</Td>
-        <Td width='132px'>{record.get('priceMonthly')}</Td>
-        <Td width='132px'>{record.get('priceYearly')}</Td>
-        <Td width='132px'>{record.get('allowedCourses')}</Td>        
-      </Row>
-    ));
+      );
+    }              
+    
+    return subscriptions.map((record, key) => {
+        const users = <strong>{record.get('allowedCourses')}</strong>;
+        return (        
+        <div className="subscription-item-block col-md-4 col-lg-4 col-xl-4 m--margin-top-35">
+            <div className="subscription-item">
+                <div className="subscription-header"><h1>{record.get('title')}</h1></div>
+                <div className="subscription-content">
+                    <div className="subscription-prices">
+                        <div className="row">
+                            <div className="monthly col-md-6"><span className="price">${record.get('priceMonthly')}</span> {t('perMonth')}</div>
+                            <div className="yearly col-md-6 text-right m--margin-top-20"><span className="price">${record.get('priceYearly')}</span> {t('perYear')}</div>            
+                        </div>
+                    </div>
+                    <div className="subscription-description">
+                        <div className="subscription-limits">
+                            <Interpolate i18nKey="maxSubscriptionCourses" users={users} />
+                            <br />
+                            <Interpolate i18nKey="maxSubscriptionUsers" users={users} />
+                        </div>            
+                        <div className="subscription-bonuses text-left">
+                            <span>{t('annualBonus')}:</span>
+                            <span className="bonus">{record.get('bonuses')}</span>
+                        </div>
+                        <p className="text-center">
+                            <button class="btn btn-info">Get This</button>
+                        </p>
+                    </div>
+                </div>
+            </div>  
+        </div>);
+    });
   }
 
   render() {
-    const { getRecordsRequest, t } = this.props;
-    const loading = getRecordsRequest.get('loading');    
+    const { t } = this.props;       
 
-    return (
-      <div className='fadeInLeft  animated'>
-
-        <div className='m-portlet m-portlet--head-solid-bg'>
-          <div className='m-portlet__head border-b-orange'>
-            <div className='m-portlet__head-caption'>
-              <div className='m-portlet__head-title'>
-              <span className='m-portlet__head-icon'><i className='la la-user' style={{fontSize:'55px'}}></i></span>
-                <h3 className='m-portlet__head-text'>{t('subscriptions')}</h3>
-              </div>
+    return (<div className="fadeInLeft animated">
+        <h1 className="text-center m--margin-top-25">{t('threeSubscriptionsOptions')}</h1>
+        <div className="row m--margin-bottom-25">
+            <div className="col-md-12 col-lg-11 col-xl-10" style={{margin: '0 auto'}}>
+                <div className="row">
+                  {this._renderRecords()}
+                </div>
             </div>
-            <div className="m-portlet__head-tools">
-            </div>
-          </div>
-          <div className='m-portlet__body'>
-
-            <Table>
-              <Thead>
-                <HeadRow>
-                  <Th first={true} width='100px'>#</Th>                  
-                  <Th width='132px'>{t('title')}</Th>
-                  <Th width='132px'>{t('description')}</Th>
-                  <Th width='132px'>{t('bonuses')}</Th>
-                  <Th width='132px'>{t('priceMonthly')}</Th>
-                  <Th width='132px'>{t('priceYearly')}</Th>
-                  <Th width='132px'>{t('allowedCourses')}</Th>
-                </HeadRow>
-              </Thead>
-
-              <Tbody>
-                {loading &&
-                  <TablePreloader text="Loading..." color="primary"/>
-                }
-                { this._renderRecords() }
-              </Tbody>
-            </Table>
-          </div>
         </div>
-      </div>
-    );
+    </div>);
   }
 }
 
