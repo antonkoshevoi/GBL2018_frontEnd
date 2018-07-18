@@ -194,7 +194,7 @@ class ParentDashboard extends Component {
             <UnassignedCourses/>
         </div>
         <div className="col-md-6 col-lg-6 col-xl-3">
-          <QuickLink style={{marginTop:15, height:'80%'}}/>
+          <QuickLink style={{marginTop:15}}/>
         </div>
         <div className="col-md-6 col-lg-6 m--visible-tablet-and-mobile m--visible-desktop-lg" style={{marginTop:15}}>
             <div>

@@ -378,5 +378,6 @@ export default {
     failed: 'Failed',
     results: 'Results',
     youHaveNoNewMessages: 'You have no new messages',
-    seeAll: 'See All'
+    seeAll: 'See All',
+    subscriptions: 'Subscriptions'
 }
