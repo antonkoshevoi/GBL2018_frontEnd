@@ -377,7 +377,7 @@ export default {
     inserted: 'FR: Inserted',
     failed: 'FR: Failed',
     results: 'FR: Results',
-    subscriptions: 'FR: Subscriptions'
+    subscriptions: 'FR: Subscriptions',
     courseAtTime: '{{number}} course at a time',
     courseAnyCourseSwitchAnyTime: 'Choose any course switch any time',
     courseAnyCoursesSwitchAnyTime: 'Choose any {{number}} courses switch any time',
