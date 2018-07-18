@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import posterImage from '../../media/images/menu_poster.jpg'
 import { Avatar } from '@material-ui/core';
 import { selectUserData } from '../../redux/user/selectors';
 import { push } from 'react-router-redux';
-import * as pluralize from 'pluralize';
 import {NavLink} from "react-router-dom";
 
 class Messages extends Component {
@@ -39,16 +37,14 @@ class Messages extends Component {
   }
 
   render() {
-    const { user, activeMenu, switchMenu } = this.props;
-    const active = activeMenu === 'messages';
-
+    const { user, t } = this.props;
+    
     const newMessages = user.get('unreadMessages');
 
     return (
 
           <div className=''>
             {newMessages ?
-
               <div className='m-dropdown__body'>
                 <div className='m-dropdown__content'>
                   <div className='tab-content'>
@@ -60,12 +56,12 @@ class Messages extends Component {
                   </div>
                 </div>
               </div> :
-              <h4 className="text-center m--padding-top-20 m--padding-bottom-10">You have no new messages</h4>
+              <h4 className="text-center m--padding-top-20 m--padding-bottom-10">{t('youHaveNoNewMessages')}</h4>
             }
 
             <div className="text-right m--margin-top-15">
               <NavLink to="/messages" className="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
-                <span className="m-nav__link-text">See All</span>
+                <span className="m-nav__link-text">{t('seeAll')}</span>
               </NavLink>
             </div>
 
@@ -83,4 +79,4 @@ Messages = connect(
   })
 )(Messages);
 
-export default translate('Messages')(Messages);
+export default translate('translations')(Messages);

@@ -376,5 +376,13 @@ export default {
     selectCsvFile: 'ES: Select CSV file',    
     inserted: 'ES: Inserted',
     failed: 'ES: Failed',
-    results: 'ES: Results'    
+    results: 'ES: Results',
+    subscriptions: 'ES: Subscriptions',   
+    maxSubscriptionCourses: '{{users}} course at a time',
+    maxSubscriptionUsers: 'Choose any course switch any time {{users}} user max',
+    annualBonus: 'Annual bonus',
+    perMonth: 'Per Month',
+    perYear: 'Per Year',
+    threeSubscriptionsOptions: 'Three subscriptions options',
+    subscriptionsNotFound: 'Subscriptions Not Found...'    
 }

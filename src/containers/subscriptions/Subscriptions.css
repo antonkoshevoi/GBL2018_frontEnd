@@ -1,0 +1,82 @@
+.subscription-item {
+    width: 90%;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+.subscription-header h1 {
+    color: #fff;
+    text-align: center;
+    background-color: #01B0F1;
+    margin: 0;
+    padding: 10px 0;
+    font-size: 1.8rem;
+}
+.subscription-prices {
+    background-color: #F2F2F2;
+    padding: 15px 25px;    
+    color: #727272;
+}
+.subscription-description {
+    padding: 25px 35px;
+}
+.subscription-limits {
+    color: #868585;
+    font-size: 1.5rem;    
+}
+.subscription-bonuses  {
+    padding: 10px 0 20px;
+}
+.subscription-bonuses span {   
+    display: block;        
+}
+.subscription-bonuses span:first-child {
+    font-size: 1.3rem;
+    color: #01B0F1;
+}
+.subscription-bonuses span.bonus {
+    font-size: 1.1rem;
+    color: red;    
+}
+.subscription-item .btn.btn-info {
+    background-color: #01B0F1;
+    border-color: #01B0F1;
+    font-size: 1.6rem;
+}
+.subscription-prices .price {
+    color: #181003;
+    display: block;
+}
+.subscription-prices .monthly {
+    font-size: 1.3rem;
+}
+.subscription-prices .monthly .price {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.subscription-prices .yearly {
+    font-size: 1rem;
+}
+.subscription-prices .yearly .price {
+    font-size: 1.5rem;
+}
+.subscription-item-block:nth-child(2) .subscription-item .subscription-header h1 {
+    background-color: #4F81BE;
+}
+.subscription-item-block:nth-child(3) .subscription-item .subscription-header h1 {
+    background-color: #1F487C;
+}
+.subscription-item-block:nth-child(2) .subscription-item .btn.btn-info {
+    background-color: #4F81BE;
+    border-color: #4F81BE;
+}
+.subscription-item-block:nth-child(3) .subscription-item .btn.btn-info {
+    background-color: #1F487C;
+    border-color: #1F487C;
+}
+.subscription-item-block:nth-child(2) .subscription-bonuses span:first-child {
+    color: #4F81BE;
+}
+.subscription-item-block:nth-child(3) .subscription-bonuses span:first-child {
+    color: #1F487C;
+}

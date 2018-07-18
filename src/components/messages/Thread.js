@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Avatar } from '@material-ui/core';
 import Immutable from "immutable";
 
 class Thread extends Component {
@@ -22,7 +21,7 @@ class Thread extends Component {
       if (userAvatar) {
         avatar = (
           <span className="m-list-search__result-item-pic">
-            <img className="m--img-rounded" src={userAvatar} title=""/>
+            <img className="m--img-rounded" src={userAvatar} alt=""/>
           </span>
         );
       } else {

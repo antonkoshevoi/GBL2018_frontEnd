@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import logo from '../../media/images/logo.png'
 import '../../styles/loader.css'
-
 
 class Loader extends Component {
     render() {
@@ -13,25 +10,17 @@ class Loader extends Component {
                 {type === 'initial' ? (
                     <div className="textLoader">
                         <svg viewBox="0 0 1000 800">
-
                             <symbol id="s-text">
                                 <text textAnchor="middle" style={{    whiteSpace: "pre"}}
                                       x="50%" y="50%" dy=".35em">
                                     Gravity Brain
                                 </text>
                             </symbol>
-
-                            <use xlinkHref="#s-text" className="text"
-                            ></use>
-                            <use xlinkHref="#s-text" className="text"
-                            ></use>
-                            <use xlinkHref="#s-text" className="text"
-                            ></use>
-                            <use xlinkHref="#s-text" className="text"
-                            ></use>
-                            <use xlinkHref="#s-text" className="text"
-                            ></use>
-
+                            <use xlinkHref="#s-text" className="text" ></use>
+                            <use xlinkHref="#s-text" className="text"></use>
+                            <use xlinkHref="#s-text" className="text"></use>
+                            <use xlinkHref="#s-text" className="text"></use>
+                            <use xlinkHref="#s-text" className="text"></use>
                         </svg>
                     </div>
 
@@ -42,7 +31,5 @@ class Loader extends Component {
         );
     }
 }
-
-Loader.propTypes = {};
 
 export default Loader;

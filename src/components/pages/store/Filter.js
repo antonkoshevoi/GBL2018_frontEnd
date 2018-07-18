@@ -1,30 +1,24 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {
-  Button, ClickAwayListener, Grow, Icon, IconButton, Input, InputAdornment, Menu, MenuItem, MenuList, Paper,
-  withStyles
-} from '@material-ui/core';
-import {Manager, Popper, Target} from "react-popper";
+import {Button, IconButton, Input, InputAdornment, Menu, MenuItem, withStyles} from '@material-ui/core';
 import {translate} from 'react-i18next';
-import classNames from 'classnames';
 import {NavLink, withRouter} from "react-router-dom";
 import {Search} from "@material-ui/icons";
 import red from "@material-ui/core/es/colors/red";
-import {buildSortersQuery, getUrlLastName} from "../../../helpers/utils";
+import {buildSortersQuery} from "../../../helpers/utils";
 
 const styles = {
   root: {
-    display: 'flex',
+    display: 'flex'
   },
   popperClose: {
-    pointerEvents: 'none',
+    pointerEvents: 'none'
   },
   inputLabelFocused: {
-    color: red[500],
+    color: red[500]
   },
   inputInkbar: {
     '&:after': {
-      backgroundColor: red[500],
+      backgroundColor: red[500]
     },
   }
 };
@@ -209,36 +203,18 @@ class Filter extends Component {
                         this.handleMenuClose(e, 'categoryMenu')
                     }}
                 >
-                    {this.state.active_target && <MenuItem onClick={(e) => {
-                        this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', '', e)
-                    }}>All</MenuItem>}
-                  <MenuItem title={t('elementaryGrade1')} onClick={(e) => {
-                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 1, e)
-                  }}>{t('elementaryGrade1')}</MenuItem>
-                  <MenuItem title={t('KindyStarter')} onClick={(e) => {
-                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 2, e)
-                  }}>{t('kindyStarter')}</MenuItem>
-                  <MenuItem title={t('kindyAdvanced')} onClick={(e) => {
-                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 3, e)
-                  }}>{t('kindyAdvanced')}</MenuItem>
-                  <MenuItem title={t('elementary1to3')} onClick={(e) => {
-                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 4, e)
-                  }}>{t('elementary1to3')}</MenuItem>
-                  <MenuItem title={t('elementary4to6')} onClick={(e) => {
-                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 5, e)
-                  }}>{t('elementary4to6')}</MenuItem>
-                  <MenuItem title={t('juniorHighSchool')} onClick={(e) => {
-                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 6, e)
-                  }}>{t('juniorHighSchool')}</MenuItem>
-                  <MenuItem title={t('highSchool')} onClick={(e) => {
-                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 7, e)
-                  }}>{t('highSchool')}</MenuItem>
-                  <MenuItem title={t('adult')} onClick={(e) => {
-                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 8, e)
-                  }}>{t('adult')}</MenuItem>
-                  <MenuItem title={t('senior')} onClick={(e) => {
-                      this.handleMenuClose(e, 'categoryMenu'), this._selectFilter('target', 9, e)
-                  }}>{t('senior')}</MenuItem>
+                  {this.state.active_target && 
+                     <MenuItem onClick={(e) => {this.handleMenuClose(e, 'categoryMenu'); this._selectFilter('target', '', e)}}>{t('all')}</MenuItem>
+                  }
+                  <MenuItem title={t('elementaryGrade1')} onClick={(e) => {this.handleMenuClose(e, 'categoryMenu'); this._selectFilter('target', 1, e) }}>{t('elementaryGrade1')}</MenuItem>
+                  <MenuItem title={t('KindyStarter')} onClick={(e) => {this.handleMenuClose(e, 'categoryMenu'); this._selectFilter('target', 2, e) }}>{t('kindyStarter')}</MenuItem>
+                  <MenuItem title={t('kindyAdvanced')} onClick={(e) => {this.handleMenuClose(e, 'categoryMenu'); this._selectFilter('target', 3, e) }}>{t('kindyAdvanced')}</MenuItem>
+                  <MenuItem title={t('elementary1to3')} onClick={(e) => {this.handleMenuClose(e, 'categoryMenu'); this._selectFilter('target', 4, e) }}>{t('elementary1to3')}</MenuItem>
+                  <MenuItem title={t('elementary4to6')} onClick={(e) => {this.handleMenuClose(e, 'categoryMenu'); this._selectFilter('target', 5, e) }}>{t('elementary4to6')}</MenuItem>
+                  <MenuItem title={t('juniorHighSchool')} onClick={(e) => {this.handleMenuClose(e, 'categoryMenu'); this._selectFilter('target', 6, e) }}>{t('juniorHighSchool')}</MenuItem>
+                  <MenuItem title={t('highSchool')} onClick={(e) => {this.handleMenuClose(e, 'categoryMenu'); this._selectFilter('target', 7, e) }}>{t('highSchool')}</MenuItem>
+                  <MenuItem title={t('adult')} onClick={(e) => {this.handleMenuClose(e, 'categoryMenu'); this._selectFilter('target', 8, e) }}>{t('adult')}</MenuItem>
+                  <MenuItem title={t('senior')} onClick={(e) => {this.handleMenuClose(e, 'categoryMenu'); this._selectFilter('target', 9, e) }}>{t('senior')}</MenuItem>
                 </Menu>
               </div>
               }
@@ -263,24 +239,12 @@ class Filter extends Component {
                     }}
                 >
                 {this.state.active_subject &&
-                  <MenuItem title={t('all')} onClick={(e) => {
-                        this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', '', e)
-                  }}>{t('all')}</MenuItem>}
-                  <MenuItem title={t('englishForKids')} onClick={(e) => {
-                      this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 1, e)
-                  }}>{t('englishForKids')}</MenuItem>
-                  <MenuItem title={t('language')} onClick={(e) => {
-                      this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 2, e)
-                  }}>{t('language')}</MenuItem>
-                  <MenuItem title={t('safety')} onClick={(e) => {
-                      this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 3, e)
-                  }}>{t('safety')}</MenuItem>
-                  <MenuItem title={t('fineArts')} onClick={(e) => {
-                      this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 4, e)
-                  }}>{t('fineArts')}</MenuItem>
-                  <MenuItem title={t('flex')} onClick={(e) => {
-                      this.handleMenuClose(e, 'subjectMenu'), this._selectFilter('subject', 5, e)
-                  }}>{t('flex')}</MenuItem>
+                  <MenuItem title={t('all')} onClick={(e) => { this.handleMenuClose(e, 'subjectMenu'); this._selectFilter('subject', '', e) }}>{t('all')}</MenuItem>}
+                  <MenuItem title={t('englishForKids')} onClick={(e) => { this.handleMenuClose(e, 'subjectMenu'); this._selectFilter('subject', 1, e) }}>{t('englishForKids')}</MenuItem>
+                  <MenuItem title={t('language')} onClick={(e) => { this.handleMenuClose(e, 'subjectMenu'); this._selectFilter('subject', 2, e) }}>{t('language')}</MenuItem>
+                  <MenuItem title={t('safety')} onClick={(e) => { this.handleMenuClose(e, 'subjectMenu'); this._selectFilter('subject', 3, e) }}>{t('safety')}</MenuItem>
+                  <MenuItem title={t('fineArts')} onClick={(e) => { this.handleMenuClose(e, 'subjectMenu'); this._selectFilter('subject', 4, e) }}>{t('fineArts')}</MenuItem>
+                  <MenuItem title={t('flex')} onClick={(e) => { this.handleMenuClose(e, 'subjectMenu'); this._selectFilter('subject', 5, e) }}>{t('flex')}</MenuItem>
                 </Menu>
               </div>
               }
@@ -358,8 +322,6 @@ class Filter extends Component {
     );
   }
 }
-
-Filter.propTypes = {};
 
 Filter.defaultProps = {
   type:'',

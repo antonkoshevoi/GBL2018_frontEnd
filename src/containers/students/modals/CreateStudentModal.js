@@ -106,8 +106,7 @@ class CreateStudentModal extends Component {
 
   render() {
     const {isOpen, createRequest, t} = this.props;
-    const loading = createRequest.get('loading');
-    const errorMessage = createRequest.get('errorMessage');
+    const loading = createRequest.get('loading');    
     const errors = createRequest.get('errors');
     return (
       <Modal isOpen={isOpen} bigger onClose={() => this._close()}>

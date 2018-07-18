@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
-import posterImage from "../../media/images/menu_poster.jpg"
-
 
 class Notifications extends Component {
 
@@ -12,18 +10,12 @@ class Notifications extends Component {
         this.state = {
             menuOpened:false
         };
-
     }
 
-
-
-    render() {
-        const {activeMenu} = this.props
-
+    render() {        
         return (
                 <div className="m-dropdown__body">
                             <div className="m-dropdown__content">
-
                                 <div className="tab-content">
                                     <div className="tab-pane active show">
                                         <div className="m-list-timeline">

@@ -9,14 +9,8 @@ import {
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import {
-  selectGetSingleRecordRequest,
-  selectUpdateRequest
-} from '../../../redux/classrooms/selectors';
-import {
-  getSchools, resetGetSingleRecordRequest, resetUpdateRequest,
-  update
-} from '../../../redux/classrooms/actions';
+import { selectGetSingleRecordRequest, selectUpdateRequest } from '../../../redux/classrooms/selectors';
+import { resetGetSingleRecordRequest, resetUpdateRequest, update } from '../../../redux/classrooms/actions';
 import Modal from "../../../components/ui/Modal";
 import ClassroomForm from "../forms/ClassroomForm";
 import ImageCropper from "../../../components/ui/ImageCropper";
@@ -108,8 +102,7 @@ class EditClassroomModal extends Component {
 
   render() {
     const { isOpen, updateRequest, getSingleRecordRequest,isPublic, t } = this.props;
-    const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');
-    const errorMessage = updateRequest.get('errorMessage');
+    const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');    
     const errors = updateRequest.get('errors');
 
     return (

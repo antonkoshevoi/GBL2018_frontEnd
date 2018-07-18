@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {isLoggedInWithoutPassword, selectIsLoggedIn, SelectRestoreLoginFail} from '../../redux/auth/selectors';
+import {selectIsLoggedIn, SelectRestoreLoginFail} from '../../redux/auth/selectors';
 import { Redirect, withRouter } from 'react-router-dom';
 import Route from './Route';
 

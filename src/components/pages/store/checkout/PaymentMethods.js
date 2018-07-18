@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Card from '../../../ui/Card';
 import { CircularProgress } from '@material-ui/core';
 
 class PaymentMethods extends Component {
@@ -29,7 +28,7 @@ class PaymentMethods extends Component {
                 }}/>
               ) : (
                 <div className='paymentImg'>
-                  <img src={method.img} width={80} className='img-responsive'/>
+                  <img alt={method.title} src={method.img} width={80} className='img-responsive'/>
                 </div>
               )}
             </span>

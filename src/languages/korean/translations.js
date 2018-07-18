@@ -376,5 +376,13 @@ export default {
     selectCsvFile: 'KR: Select CSV file',    
     inserted: 'KR: Inserted',
     failed: 'KR: Failed',
-    results: 'KR: Results'    
+    results: 'KR: Results',
+    subscriptions: 'KR: Subscriptions',    
+    maxSubscriptionCourses: '{{users}} course at a time',
+    maxSubscriptionUsers: 'Choose any course switch any time {{users}} user max',
+    annualBonus: 'Annual bonus',
+    perMonth: 'Per Month',
+    perYear: 'Per Year',
+    threeSubscriptionsOptions: 'Three subscriptions options',
+    subscriptionsNotFound: 'Subscriptions Not Found...'    
 }

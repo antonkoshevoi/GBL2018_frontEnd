@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Tab, Tabs, Typography} from '@material-ui/core';
+import {Tab, Tabs} from '@material-ui/core';
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
 import {getRecords} from "../../redux/students/actions";
@@ -7,15 +7,6 @@ import {selectGetRecordsRequest, selectPagination, selectRecords} from "../../re
 import InvitationsTab from '../invitations/InvitationsTab';
 import SearchInput from '../../components/ui/SearchInput';
 import DemoCoursesTab from '../demo-courses/DemoCoursesTab';
-
-
-function TabContainer(props) {
-  return (
-    <Typography component="div">
-      {props.children}
-    </Typography>
-  );
-}
 
 class Courses extends Component {
   constructor(props) {

@@ -25,7 +25,6 @@ import Route from '../containers/routing/Route';
 import Profile from "../containers/profile/Profile";
 import SchoolProfile from "../containers/profile/SchoolProfile";
 import StudentReports from "../containers/pages/reports/Students";
-import TeacherReports from "../containers/pages/reports/Teachers";
 import Store from "../containers/pages/store/Store";
 import Details from "../containers/pages/store/Details";
 import Products from "../containers/pages/store/Products";
@@ -41,6 +40,7 @@ import TransactionsContainer from "../containers/pages/store/payments/Transactio
 import UnassignedCredits from "../containers/unassigned-credits/UnassignedCredits";
 import PaymentCanceledContainer from '../containers/pages/store/payments/PaymentCanceledContainer';
 
+import Subscriptions from "../containers/subscriptions/Subscriptions";
 import ReportsDashboard from "../containers/pages/reports/Dashboard";
 import ClassRoomReportDashboard from "../containers/pages/reports/classroom/Dashboard";
 import HomeRoomReportDashboard from "../containers/pages/reports/homeroom/Dashboard";
@@ -100,17 +100,17 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/classrooms/auto' name='AutoCreation'  component={AutoCreate}/>
       
       <AuthenticatedRoute exact layout={MainLayout} path='/courses' component={Courses}/>
+      
+      <AuthenticatedRoute exact layout={MainLayout} path='/subscriptions' name='Subscriptions' component={Subscriptions} />
 
       <AuthenticatedRoute exact layout={MainLayout} path='/reports' component={ReportsDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReportDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/homerooms/:id' name='Homeroom' component={HomeRoomReportDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id/edit' name='Student' component={ProfileEdit}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/reports/teachers/:id' name='Student' component={TeacherReports}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id/edit' name='Student' component={ProfileEdit}/>      
 
       {/*Store*/}    
       <AuthenticatedRoute exact layout={MainLayout} path='/store/shopping-cart' name='Details' component={ShoppingCart}/>
-
       <AuthenticatedRoute exact layout={OnlyHeadLayout} path='/shopping/checkout/:step?' name='Checkout' component={Checkout}/>
 
       {/*User*/}

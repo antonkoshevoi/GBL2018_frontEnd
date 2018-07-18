@@ -73,7 +73,7 @@ class UnassignedCourses extends Component {
         <Row index={i} key={i}>
           <Td width="70px">
             <div >
-              <img alt="{unassigned.get('item').get('title')}" src={unassigned.get('item').get('thumbnail')} width={70}/>
+              <img alt={unassigned.get('item').get('title')} src={unassigned.get('item').get('thumbnail')} width={70}/>
             </div>
           </Td>
           <Td width='150px'>{unassigned.get('item').get('title')}</Td>

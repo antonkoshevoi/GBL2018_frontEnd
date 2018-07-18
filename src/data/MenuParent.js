@@ -9,6 +9,13 @@ export default  {
       colorName:'home',
     },
     {
+      key:'subscriptions',
+      title:'subscriptions',
+      link:'subscriptions',
+      icon:'fa fa-calendar-check-o',
+      colorName:'purple'
+    },    
+    {
       key:'store',
       title:'Store',
       link:'/store',

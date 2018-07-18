@@ -9,7 +9,7 @@ class QuickLink extends Component {
   render() {
     const {style, t} = this.props;
     return (
-      <div style={style ? style : {height:'80%'}} className="quick-link-inner-wrapper">
+      <div style={style ? style : ''} className="quick-link-inner-wrapper">
 
         <div className='m-portlet m-portlet--head-solid-bg quick-card-title quick-links-header quick-links-header-transparent'>
           <div className='m-portlet__head border-b-orange quick-links-header-border'>

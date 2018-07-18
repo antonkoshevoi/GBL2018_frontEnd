@@ -7,7 +7,6 @@ import {translate} from 'react-i18next';
 import {selectRecords, selectGetRecordsRequest} from "../../redux/students/selectors";
 import {getRecords} from "../../redux/students/actions";
 import {getParentRecords} from "../../redux/store/actions";
-import {Row, Td} from "../../components/ui/table";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
 import {push} from 'react-router-redux';
 import {GridOn} from "@material-ui/icons";
@@ -195,7 +194,7 @@ class ParentDashboard extends Component {
             <UnassignedCourses/>
         </div>
         <div className="col-md-6 col-lg-6 col-xl-3">
-          <QuickLink style={{marginTop:15, height:'80%'}}/>
+          <QuickLink style={{marginTop:15}}/>
         </div>
         <div className="col-md-6 col-lg-6 m--visible-tablet-and-mobile m--visible-desktop-lg" style={{marginTop:15}}>
             <div>

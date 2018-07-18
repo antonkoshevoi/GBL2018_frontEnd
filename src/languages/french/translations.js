@@ -376,5 +376,6 @@ export default {
     selectCsvFile: 'FR: Select CSV file',    
     inserted: 'FR: Inserted',
     failed: 'FR: Failed',
-    results: 'FR: Results'    
+    results: 'FR: Results',
+    subscriptions: 'FR: Subscriptions'
 }

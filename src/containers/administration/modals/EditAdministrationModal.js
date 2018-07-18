@@ -98,8 +98,7 @@ class EditAdministrationModal extends Component {
 
     render() {
         const {isOpen, updateRequest, getSingleRecordRequest, t} = this.props;
-        const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');
-        const errorMessage = updateRequest.get('errorMessage');
+        const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');        
         const errors = updateRequest.get('errors');
 
         return (

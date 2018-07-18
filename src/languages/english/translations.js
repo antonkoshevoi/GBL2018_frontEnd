@@ -376,5 +376,15 @@ export default {
     selectCsvFile: 'Select CSV file',    
     inserted: 'Inserted',
     failed: 'Failed',
-    results: 'Results'
+    results: 'Results',
+    youHaveNoNewMessages: 'You have no new messages',
+    seeAll: 'See All',
+    subscriptions: 'Subscriptions',
+    maxSubscriptionCourses: '{{users}} course at a time',
+    maxSubscriptionUsers: 'Choose any course switch any time {{users}} user max',
+    annualBonus: 'Annual bonus',
+    perMonth: 'Per Month',
+    perYear: 'Per Year',
+    threeSubscriptionsOptions: 'Three subscriptions options',
+    subscriptionsNotFound: 'Subscriptions Not Found...'
 }

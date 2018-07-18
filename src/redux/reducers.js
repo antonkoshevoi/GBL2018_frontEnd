@@ -22,6 +22,7 @@ import classroomsReportReducer from './reports/classroom/reducer';
 import homeroomsReportReducer from './reports/homerooms/reducer';
 import countriesReducer from './countries/reducer';
 import coursesReducer from './courses/reducer';
+import subscriptionsReducer from './subscriptions/reducer';
 
 export default {
   app: appReducer,
@@ -48,4 +49,5 @@ export default {
   homeroomReport: homeroomsReportReducer,
   countries: countriesReducer,
   courses: coursesReducer,
+  subscriptions: subscriptionsReducer
 };
