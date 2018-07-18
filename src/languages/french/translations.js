@@ -378,4 +378,14 @@ export default {
     failed: 'FR: Failed',
     results: 'FR: Results',
     subscriptions: 'FR: Subscriptions'
+    courseAtTime: '{{number}} course at a time',
+    courseAnyCourseSwitchAnyTime: 'Choose any course switch any time',
+    courseAnyCoursesSwitchAnyTime: 'Choose any {{number}} courses switch any time',
+    usersMax: '{{number}} user max',
+    annualBonus: 'Annual bonus',
+    perMonth: 'Per Month',
+    perYear: 'Per Year',
+    threeSubscriptionsOptions: 'Three subscriptions options',
+    subscriptionsNotFound: 'Subscriptions Not Found...',
+    getThis: 'Get This'    
 }

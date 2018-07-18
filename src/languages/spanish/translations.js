@@ -378,11 +378,14 @@ export default {
     failed: 'ES: Failed',
     results: 'ES: Results',
     subscriptions: 'ES: Subscriptions',   
-    maxSubscriptionCourses: '{{users}} course at a time',
-    maxSubscriptionUsers: 'Choose any course switch any time {{users}} user max',
+    courseAtTime: '{{number}} course at a time',
+    courseAnyCourseSwitchAnyTime: 'Choose any course switch any time',
+    courseAnyCoursesSwitchAnyTime: 'Choose any {{number}} courses switch any time',
+    usersMax: '{{number}} user max',
     annualBonus: 'Annual bonus',
     perMonth: 'Per Month',
     perYear: 'Per Year',
     threeSubscriptionsOptions: 'Three subscriptions options',
-    subscriptionsNotFound: 'Subscriptions Not Found...'    
+    subscriptionsNotFound: 'Subscriptions Not Found...',
+    getThis: 'Get This'
 }

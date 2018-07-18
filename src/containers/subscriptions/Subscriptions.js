@@ -32,30 +32,32 @@ class Subscriptions extends Component {
     }              
     
     return subscriptions.map((record, key) => {
-        const users = <strong>{record.get('allowedCourses')}</strong>;
+        const courses = <span style={{fontWeight: 500}}>{record.get('allowedCourses')}</span>;
         return (        
-        <div className="subscription-item-block col-md-4 col-lg-4 col-xl-4 m--margin-top-35">
+        <div className="subscription-item-block col-sm-12 col-md-4 col-lg-4 col-xl-4 m--margin-top-35">
             <div className="subscription-item">
                 <div className="subscription-header"><h1>{record.get('title')}</h1></div>
                 <div className="subscription-content">
                     <div className="subscription-prices">
                         <div className="row">
-                            <div className="monthly col-md-6"><span className="price">${record.get('priceMonthly')}</span> {t('perMonth')}</div>
-                            <div className="yearly col-md-6 text-right m--margin-top-20"><span className="price">${record.get('priceYearly')}</span> {t('perYear')}</div>            
+                            <div className="monthly col-6"><span className="price">${record.get('priceMonthly')}</span> {t('perMonth')}</div>
+                            <div className="yearly col-6 text-right m--margin-top-20"><span className="price">${record.get('priceYearly')}</span> {t('perYear')}</div>            
                         </div>
                     </div>
                     <div className="subscription-description">
                         <div className="subscription-limits">
-                            <Interpolate i18nKey="maxSubscriptionCourses" users={users} />
-                            <br />
-                            <Interpolate i18nKey="maxSubscriptionUsers" users={users} />
+                            <Interpolate i18nKey="courseAtTime" number={courses} />
+                            <br />                            
+                            <Interpolate i18nKey={record.get('allowedCourses') > 1 ? 'courseAnyCoursesSwitchAnyTime' : 'courseAnyCourseSwitchAnyTime'} number={courses} />
+                            <br />                            
+                            <Interpolate i18nKey="usersMax" number={courses} />
                         </div>            
                         <div className="subscription-bonuses text-left">
                             <span>{t('annualBonus')}:</span>
                             <span className="bonus">{record.get('bonuses')}</span>
                         </div>
                         <p className="text-center">
-                            <button class="btn btn-info">Get This</button>
+                            <button class="btn btn-info">{t('getThis')}</button>
                         </p>
                     </div>
                 </div>
@@ -69,8 +71,8 @@ class Subscriptions extends Component {
 
     return (<div className="fadeInLeft animated">
         <h1 className="text-center m--margin-top-25">{t('threeSubscriptionsOptions')}</h1>
-        <div className="row m--margin-bottom-25">
-            <div className="col-md-12 col-lg-11 col-xl-10" style={{margin: '0 auto'}}>
+        <div className="row">
+            <div className="subscriptions-block col-12">
                 <div className="row">
                   {this._renderRecords()}
                 </div>
