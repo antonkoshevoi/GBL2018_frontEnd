@@ -385,7 +385,7 @@ export default {
     annualBonus: 'FR: Annual bonus',
     perMonth: 'FR: Per Month',
     perYear: 'FR: Per Year',
-    threeSubscriptionsOptions: 'FR: Three subscriptions options',
+    courseSubscriptionOptions: 'Course Subscription Options',
     subscriptionsNotFound: 'FR: Subscriptions Not Found...',
     getThis: 'FR: Get This'    
 }

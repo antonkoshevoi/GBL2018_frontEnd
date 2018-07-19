@@ -84,3 +84,6 @@
 .subscription-item-block:nth-child(3) .subscription-bonuses span:first-child {
     color: #1F487C;
 }
+.m-form .m-form__section {
+    margin: 20px 0;
+}

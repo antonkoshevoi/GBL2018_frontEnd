@@ -3,6 +3,7 @@ import { translate, Interpolate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetRecordsRequest, selectRecords } from '../../redux/subscriptions/selectors';
 import { getRecords } from '../../redux/subscriptions/actions';
+import { push } from 'react-router-redux';
 
 import './Subscriptions.css'
 
@@ -20,7 +21,7 @@ class Subscriptions extends Component {
   }
   
   _renderRecords () {
-    const { subscriptions, t } = this.props;
+    const { subscriptions, goTo, t } = this.props;
     const loading = this.props.getRecordsRequest.get('loading');
 
     if (!loading && subscriptions.size === 0) {
@@ -57,7 +58,7 @@ class Subscriptions extends Component {
                             <span className="bonus">{record.get('bonuses')}</span>
                         </div>
                         <p className="text-center">
-                            <button class="btn btn-info">{t('getThis')}</button>
+                            <button onClick={() => { goTo(`/subscribe/${record.get('id')}`); }} class="btn btn-info">{t('getThis')}</button>
                         </p>
                     </div>
                 </div>
@@ -70,7 +71,7 @@ class Subscriptions extends Component {
     const { t } = this.props;       
 
     return (<div className="fadeInLeft animated">
-        <h1 className="text-center m--margin-top-25">{t('threeSubscriptionsOptions')}</h1>
+        <h1 className="text-center m--margin-top-25">{t('courseSubscriptionOptions')}</h1>
         <div className="row">
             <div className="subscriptions-block col-12">
                 <div className="row">
@@ -85,10 +86,11 @@ class Subscriptions extends Component {
 Subscriptions = connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),    
-    subscriptions: selectRecords(state)
+    subscriptions: selectRecords(state),
   }),
   (dispatch) => ({
-    getRecords: (params = {}) => { dispatch(getRecords(params)) }    
+    getRecords: (params = {}) => { dispatch(getRecords(params)) },
+    goTo: (url) => {dispatch(push(url))}
   })
 )(Subscriptions);
 
