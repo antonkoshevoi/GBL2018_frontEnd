@@ -1511,12 +1511,6 @@ td.rotate div span {
     transform: rotate(270deg);
 }
 
-@media (min-width: 768px) and (max-width: 1240px){
-    .quick-link-inner-wrapper {
-        height: 86% !important;
-    }
-}
-
 .unit-table .m-badge.m-badge--brand.m-badge--wide {    
     color: white !important;
     font-weight: bold;
@@ -1637,12 +1631,6 @@ td.rotate div span {
 .pie-block canvas {
     position: relative!important;
     margin: 0 auto;
-}
-
-@media (min-width: 1800px) {
-    .quick-link-inner-wrapper {
-        height: 89% !important;
-    }
 }
 
 @media (min-width: 1240px) {
