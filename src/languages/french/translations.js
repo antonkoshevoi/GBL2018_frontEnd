@@ -377,5 +377,15 @@ export default {
     inserted: 'FR: Inserted',
     failed: 'FR: Failed',
     results: 'FR: Results',
-    subscriptions: 'FR: Subscriptions'
+    subscriptions: 'FR: Subscriptions',
+    courseAtTime: 'FR: {{number}} course at a time',
+    courseAnyCourseSwitchAnyTime: 'FR: Choose any course switch any time',
+    courseAnyCoursesSwitchAnyTime: 'FR: Choose any {{number}} courses switch any time',
+    usersMax: 'FR: {{number}} user max',
+    annualBonus: 'FR: Annual bonus',
+    perMonth: 'FR: Per Month',
+    perYear: 'FR: Per Year',
+    courseSubscriptionOptions: 'Course Subscription Options',
+    subscriptionsNotFound: 'FR: Subscriptions Not Found...',
+    getThis: 'FR: Get This'    
 }

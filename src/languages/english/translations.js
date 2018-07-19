@@ -380,11 +380,14 @@ export default {
     youHaveNoNewMessages: 'You have no new messages',
     seeAll: 'See All',
     subscriptions: 'Subscriptions',
-    maxSubscriptionCourses: '{{users}} course at a time',
-    maxSubscriptionUsers: 'Choose any course switch any time {{users}} user max',
+    courseAtTime: '{{number}} course at a time',
+    courseAnyCourseSwitchAnyTime: 'Choose any course switch any time',
+    courseAnyCoursesSwitchAnyTime: 'Choose any {{number}} courses switch any time',
+    usersMax: '{{number}} user max',
     annualBonus: 'Annual bonus',
     perMonth: 'Per Month',
     perYear: 'Per Year',
-    threeSubscriptionsOptions: 'Three subscriptions options',
-    subscriptionsNotFound: 'Subscriptions Not Found...'
+    courseSubscriptionOptions: 'Course Subscription Options',
+    subscriptionsNotFound: 'Subscriptions Not Found...',
+    getThis: 'Get This'
 }
