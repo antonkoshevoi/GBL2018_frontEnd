@@ -1,6 +1,7 @@
 import {
   GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL,
-  GET_RECORD, GET_RECORD_FAIL, GET_RECORD_SUCCESS, RESET_GET_RECORD_REQUEST
+  GET_RECORD, GET_RECORD_FAIL, GET_RECORD_SUCCESS, RESET_GET_RECORD_REQUEST,
+  SUBSCRIBE, SUBSCRIBE_FAIL, SUBSCRIBE_SUCCESS, RESET_SUBSCRIBE_REQUEST
 } from './actions';
 import Immutable from 'immutable';
 
@@ -8,16 +9,21 @@ const initialState = Immutable.fromJS({
   getRecordsRequest: {
     loading: false,
     success: false,
-    fail: false,
-    errorResponse: null    
+    fail: false
   },
   getRecordRequest: {
     loading: false,
     success: false,
-    fail: false,
-    errorResponse: null,
+    fail: false,    
     record: {}
   },
+  subscribeRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,    
+    errors: {}
+  },  
   records: []
 });
 
@@ -72,6 +78,34 @@ export default function reducer (state = initialState, action) {
       return state
         .set('getRecordRequest', initialState.get('getRecordRequest'));
    
+   
+    case SUBSCRIBE:
+      return state
+        .set('subscribeRequest', state.get('subscribeRequest')
+          .set('loading', true)
+          .remove('success')
+          .remove('fail')
+        );
+    case SUBSCRIBE_SUCCESS:
+      return state
+        .set('subscribeRequest', state.get('subscribeRequest')
+          .set('loading', false)
+          .set('fail', false)
+          .set('success', true)
+        );
+    case SUBSCRIBE_FAIL:
+      const errorData = action.error.response.data;
+      return state
+        .set('subscribeRequest', state.get('subscribeRequest')
+          .set('loading', false)          
+          .set('fail', true)          
+          .set('errorMessage', errorData.message)
+          .set('errors', Immutable.fromJS(errorData.errors))
+        );
+    case RESET_SUBSCRIBE_REQUEST:
+      return state
+        .set('subscribeRequest', initialState.get('subscribeRequest'));
+           
     /**
      * default
      */

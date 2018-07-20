@@ -19,6 +19,15 @@ export const selectGetRecordRequest = createSelector(
     selectSubscriptionsDomain,
     (subState) => subState.get('getRecordRequest')
 );
+
+/**
+ * Get Subscribe Request
+ */
+export const selectSubscribeRequest = createSelector(
+    selectSubscriptionsDomain,
+    (subState) => subState.get('subscribeRequest')
+);
+
 /**
  * Records
  */

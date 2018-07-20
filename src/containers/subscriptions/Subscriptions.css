@@ -51,17 +51,17 @@
     color: #181003;
     display: block;
 }
-.subscription-prices .monthly {
+.subscription-prices .selected {
     font-size: 1.3rem;
 }
-.subscription-prices .monthly .price {
+.subscription-prices .selected .price {
     font-size: 2.5rem;
     font-weight: 500;
 }
-.subscription-prices .yearly {
+.subscription-prices {
     font-size: 1rem;
 }
-.subscription-prices .yearly .price {
+.subscription-prices .price {
     font-size: 1.5rem;
 }
 .subscription-item-block:nth-child(2) .subscription-item .subscription-header h1 {
