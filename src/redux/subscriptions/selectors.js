@@ -12,6 +12,15 @@ export const selectGetRecordsRequest = createSelector(
     selectSubscriptionsDomain,
     (subState) => subState.get('getRecordsRequest')
 );
+
+/**
+ * Get User Records Request
+ */
+export const selectGetUserRecordsRequest = createSelector(
+    selectSubscriptionsDomain,
+    (subState) => subState.get('getUserRecordsRequest')
+);
+
 /**
  * Get Single Request
  */
@@ -29,9 +38,17 @@ export const selectSubscribeRequest = createSelector(
 );
 
 /**
- * Records
+ * Get Subscribe Student Request
  */
-export const selectRecords = createSelector(
+export const selectSubscribeStudentRequest = createSelector(
     selectSubscriptionsDomain,
-    (subState) => subState.get('records')
+    (subState) => subState.get('subscribeStudentRequest')
+);
+
+/**
+ * Get Subscribe Student Request
+ */
+export const selectGetStudentsRecordsRequest = createSelector(
+    selectSubscriptionsDomain,
+    (subState) => subState.get('getStudentsRecordsRequest')
 );

@@ -1,7 +1,11 @@
 import {
   GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL,
+  GET_USER_RECORDS, GET_USER_RECORDS_SUCCESS, GET_USER_RECORDS_FAIL,
   GET_RECORD, GET_RECORD_FAIL, GET_RECORD_SUCCESS, RESET_GET_RECORD_REQUEST,
-  SUBSCRIBE, SUBSCRIBE_FAIL, SUBSCRIBE_SUCCESS, RESET_SUBSCRIBE_REQUEST
+  SUBSCRIBE, SUBSCRIBE_FAIL, SUBSCRIBE_SUCCESS, RESET_SUBSCRIBE_REQUEST,
+  SUBSCRIBE_STUDENT, SUBSCRIBE_STUDENT_SUCCESS, SUBSCRIBE_STUDENT_FAIL, RESET_SUBSCRIBE_STUDENT_REQUEST,
+  UNSUBSCRIBE_STUDENT, UNSUBSCRIBE_STUDENT_SUCCESS, UNSUBSCRIBE_STUDENT_FAIL, RESET_UNSUBSCRIBE_STUDENT_REQUEST,
+  GET_STUDENTS_RECORDS, GET_STUDENTS_RECORDS_SUCCESS, GET_STUDENTS_RECORDS_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -9,7 +13,8 @@ const initialState = Immutable.fromJS({
   getRecordsRequest: {
     loading: false,
     success: false,
-    fail: false
+    fail: false,
+    records: []
   },
   getRecordRequest: {
     loading: false,
@@ -17,14 +22,39 @@ const initialState = Immutable.fromJS({
     fail: false,    
     record: {}
   },
+  getUserRecordsRequest: {
+    loading: false,
+    success: false,
+    fail: false,    
+    records: []
+  },
+  getStudentsRecordsRequest: {
+    loading: false,
+    success: false,
+    fail: false,    
+    records: []
+  },  
   subscribeRequest: {
     loading: false,
     success: false,
     fail: false,
     errorMessage: null,    
     errors: {}
-  },  
-  records: []
+  },
+  subscribeStudentRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,    
+    errors: {}
+  },
+  unsubscribeStudentRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,    
+    errors: {}
+  }
 });
 
 export default function reducer (state = initialState, action) {
@@ -36,20 +66,74 @@ export default function reducer (state = initialState, action) {
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
           .set('loading', true)
+          .set('records', Immutable.List())
           .remove('success')
           .remove('fail')
-        ).set('records', Immutable.List());
+        );
     case GET_RECORDS_SUCCESS:
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
-          .set('success', true).remove('loading')
-        ).set('records', Immutable.fromJS(action.result.data));
+            .set('success', true)
+            .set('records', Immutable.fromJS(action.result.data))
+            .remove('loading')
+        );
     case GET_RECORDS_FAIL:
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
           .set('loading', false)
           .set('fail', true)
         );
+
+    /**
+     * Get User records
+     */
+    case GET_USER_RECORDS:
+      return state
+        .set('getUserRecordsRequest', state.get('getUserRecordsRequest')
+          .set('loading', true)
+          .set('records', Immutable.List())
+          .remove('success')
+          .remove('fail')
+        );
+    case GET_USER_RECORDS_SUCCESS:
+      return state
+        .set('getUserRecordsRequest', state.get('getUserRecordsRequest')
+            .set('success', true)
+            .set('records', Immutable.fromJS(action.result.data))
+            .remove('loading')
+        );
+    case GET_USER_RECORDS_FAIL:
+      return state
+        .set('getUserRecordsRequest', state.get('getUserRecordsRequest')
+          .set('loading', false)
+          .set('fail', true)
+        );
+
+    /**
+     * Get User Studetns
+     */
+    case GET_STUDENTS_RECORDS:
+      return state
+        .set('getStudentsRecordsRequest', state.get('getStudentsRecordsRequest')
+          .set('loading', true)
+          .set('records', Immutable.List())
+          .remove('success')
+          .remove('fail')
+        );
+    case GET_STUDENTS_RECORDS_SUCCESS:
+      return state
+        .set('getStudentsRecordsRequest', state.get('getStudentsRecordsRequest')
+            .set('success', true)
+            .set('records', Immutable.fromJS(action.result.data))
+            .remove('loading')
+        );
+    case GET_STUDENTS_RECORDS_FAIL:
+      return state
+        .set('getStudentsRecordsRequest', state.get('getStudentsRecordsRequest')
+          .set('loading', false)
+          .set('fail', true)
+        );
+
     /**
      * Get single record
      */
@@ -103,9 +187,36 @@ export default function reducer (state = initialState, action) {
           .set('errors', Immutable.fromJS(errorData.errors))
         );
     case RESET_SUBSCRIBE_REQUEST:
+      return state.set('subscribeRequest', initialState.get('subscribeRequest'));
+          
+    /**
+     * Subscribe Student
+     */          
+    case SUBSCRIBE_STUDENT:
       return state
-        .set('subscribeRequest', initialState.get('subscribeRequest'));
-           
+        .set('subscribeStudentRequest', state.get('subscribeStudentRequest')
+          .set('loading', true)
+          .remove('success')
+          .remove('fail')
+        );
+    case SUBSCRIBE_STUDENT_SUCCESS:
+      return state
+        .set('subscribeStudentRequest', state.get('subscribeStudentRequest')
+          .set('loading', false)
+          .set('fail', false)
+          .set('success', true)
+        );
+    case SUBSCRIBE_STUDENT_FAIL:      
+      return state
+        .set('subscribeStudentRequest', state.get('subscribeStudentRequest')
+          .set('loading', false)          
+          .set('fail', true)          
+          .set('errorMessage', action.error.response.data.message)
+          .set('errors', Immutable.fromJS(action.error.response.data.errors))
+        );
+    case RESET_SUBSCRIBE_STUDENT_REQUEST:
+      return state.set('subscribeStudentRequest', initialState.get('subscribeStudentRequest'));
+                    
     /**
      * default
      */

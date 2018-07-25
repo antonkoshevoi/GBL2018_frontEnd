@@ -389,5 +389,14 @@ export default {
     perYear: 'Per Year',
     courseSubscriptionOptions: 'Course Subscription Options',
     subscriptionsNotFound: 'Subscriptions Not Found...',
-    getThis: 'Get This'
+    getThis: 'Get This',
+    mySubscriptions: 'My Subscriptions',
+    allowedCourses: 'Courses Allowed',
+    assignedCourses: 'Courses Assigned',
+    expirationDate: 'Exp. Date',
+    isActive: 'Active',
+    assignedStudents: 'Assigned Students',
+    assignDate: 'Assign Date',
+    areYouSureWantToCancelSubscription: 'Are you sure want to cancel this subscription?',
+    areYouSureWantToCancelThisCourse: 'Are you sure want to cancel this course?',
 }

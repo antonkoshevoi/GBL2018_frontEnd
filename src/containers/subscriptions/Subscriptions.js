@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { translate, Interpolate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetRecordsRequest, selectRecords } from '../../redux/subscriptions/selectors';
+import { selectGetRecordsRequest } from '../../redux/subscriptions/selectors';
 import { getRecords } from '../../redux/subscriptions/actions';
 import { push } from 'react-router-redux';
 
@@ -10,9 +10,7 @@ import './Subscriptions.css'
 class Subscriptions extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-        subscriptions: []  
-    }
+    this.state = {}
   }
 
   componentDidMount () {
@@ -21,10 +19,10 @@ class Subscriptions extends Component {
   }
   
   _renderRecords () {
-    const { subscriptions, goTo, t } = this.props;
-    const loading = this.props.getRecordsRequest.get('loading');
+    const { getRecordsRequest, goTo, t } = this.props;
+    const loading = getRecordsRequest.get('loading');
 
-    if (!loading && subscriptions.size === 0) {
+    if (!loading && getRecordsRequest.get('records').size === 0) {
       return (
             <div className="table-message">
               <h2>{t('subscriptionsNotFound')}</h2>
@@ -32,7 +30,7 @@ class Subscriptions extends Component {
       );
     }              
     
-    return subscriptions.map((record, key) => {
+    return getRecordsRequest.get('records').map((record, key) => {
         const courses = <span style={{fontWeight: 500}}>{record.get('allowedCourses')}</span>;
         return (        
         <div className="subscription-item-block col-sm-12 col-md-4 col-lg-4 col-xl-4 m--margin-top-35">
@@ -85,8 +83,7 @@ class Subscriptions extends Component {
 
 Subscriptions = connect(
   (state) => ({
-    getRecordsRequest: selectGetRecordsRequest(state),    
-    subscriptions: selectRecords(state),
+    getRecordsRequest: selectGetRecordsRequest(state)    
   }),
   (dispatch) => ({
     getRecords: (params = {}) => { dispatch(getRecords(params)) },

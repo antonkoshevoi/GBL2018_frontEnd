@@ -41,6 +41,7 @@ import UnassignedCredits from "../containers/unassigned-credits/UnassignedCredit
 import PaymentCanceledContainer from '../containers/pages/store/payments/PaymentCanceledContainer';
 
 import Subscriptions from "../containers/subscriptions/Subscriptions";
+import MySubscriptions from "../containers/subscriptions/MySubscriptions";
 import Subscribe from "../containers/subscriptions/Subscribe";
 
 import ReportsDashboard from "../containers/pages/reports/Dashboard";
@@ -103,9 +104,9 @@ export default () => (
       
       <AuthenticatedRoute exact layout={MainLayout} path='/courses' component={Courses}/>
       
+      <AuthenticatedRoute exact layout={MainLayout} path='/my-subscriptions' name='MySubscriptions' component={MySubscriptions} />
       <AuthenticatedRoute exact layout={MainLayout} path='/subscriptions' name='Subscriptions' component={Subscriptions} />
-      <AuthenticatedRoute exact layout={MainLayout} path='/subscribe/:id' name='Subscribe' component={Subscribe} />
-      
+      <AuthenticatedRoute exact layout={MainLayout} path='/subscribe/:id' name='Subscribe' component={Subscribe} />      
 
       <AuthenticatedRoute exact layout={MainLayout} path='/reports' component={ReportsDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReportDashboard}/>

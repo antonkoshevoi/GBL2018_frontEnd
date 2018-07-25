@@ -34,13 +34,13 @@ class Subscribe extends Component {
             [name]: value
         });
     }
-    
-  _handlePeriodChange(event) {
-    const { value } = event.target;
+
+    _handlePeriodChange(event) {
+        const { value } = event.target;
         this.setState({
             period: value
         });
-  }
+    }
   
     _submitCreditCardPayment = () => {        
         this.props.subscribe(this.state);        
