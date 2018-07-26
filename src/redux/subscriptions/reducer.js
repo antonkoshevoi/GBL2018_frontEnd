@@ -3,6 +3,7 @@ import {
   GET_USER_RECORDS, GET_USER_RECORDS_SUCCESS, GET_USER_RECORDS_FAIL,
   GET_RECORD, GET_RECORD_FAIL, GET_RECORD_SUCCESS, RESET_GET_RECORD_REQUEST,
   SUBSCRIBE, SUBSCRIBE_FAIL, SUBSCRIBE_SUCCESS, RESET_SUBSCRIBE_REQUEST,
+  UNSUBSCRIBE, UNSUBSCRIBE_SUCCESS, UNSUBSCRIBE_FAIL, RESET_UNSUBSCRIBE_REQUEST,
   SUBSCRIBE_STUDENT, SUBSCRIBE_STUDENT_SUCCESS, SUBSCRIBE_STUDENT_FAIL, RESET_SUBSCRIBE_STUDENT_REQUEST,
   UNSUBSCRIBE_STUDENT, UNSUBSCRIBE_STUDENT_SUCCESS, UNSUBSCRIBE_STUDENT_FAIL, RESET_UNSUBSCRIBE_STUDENT_REQUEST,
   GET_STUDENTS_RECORDS, GET_STUDENTS_RECORDS_SUCCESS, GET_STUDENTS_RECORDS_FAIL
@@ -41,6 +42,13 @@ const initialState = Immutable.fromJS({
     errorMessage: null,    
     errors: {}
   },
+  unSubscribeRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,    
+    errors: {}
+  },  
   subscribeStudentRequest: {
     loading: false,
     success: false,
@@ -161,8 +169,7 @@ export default function reducer (state = initialState, action) {
     case RESET_GET_RECORD_REQUEST:
       return state
         .set('getRecordRequest', initialState.get('getRecordRequest'));
-   
-   
+     
     case SUBSCRIBE:
       return state
         .set('subscribeRequest', state.get('subscribeRequest')
@@ -177,17 +184,41 @@ export default function reducer (state = initialState, action) {
           .set('fail', false)
           .set('success', true)
         );
-    case SUBSCRIBE_FAIL:
-      const errorData = action.error.response.data;
+    case SUBSCRIBE_FAIL:      
       return state
         .set('subscribeRequest', state.get('subscribeRequest')
           .set('loading', false)          
           .set('fail', true)          
-          .set('errorMessage', errorData.message)
-          .set('errors', Immutable.fromJS(errorData.errors))
+          .set('errorMessage', action.error.response.data.message)
+          .set('errors', Immutable.fromJS(action.error.response.data.errors))
         );
     case RESET_SUBSCRIBE_REQUEST:
       return state.set('subscribeRequest', initialState.get('subscribeRequest'));
+      
+    case UNSUBSCRIBE:
+      return state
+        .set('unSubscribeRequest', state.get('unSubscribeRequest')
+          .set('loading', true)
+          .remove('success')
+          .remove('fail')
+        );
+    case UNSUBSCRIBE_SUCCESS:
+      return state
+        .set('unSubscribeRequest', state.get('unSubscribeRequest')
+          .set('loading', false)
+          .set('fail', false)
+          .set('success', true)
+        );
+    case UNSUBSCRIBE_FAIL:      
+      return state
+        .set('unSubscribeRequest', state.get('unSubscribeRequest')
+          .set('loading', false)          
+          .set('fail', true)          
+          .set('errorMessage', action.error.response.data.message)
+          .set('errors', Immutable.fromJS(action.error.response.data.errors))
+        );
+    case RESET_UNSUBSCRIBE_REQUEST:
+      return state.set('unSubscribeRequest', initialState.get('unSubscribeRequest'));      
           
     /**
      * Subscribe Student
@@ -216,7 +247,35 @@ export default function reducer (state = initialState, action) {
         );
     case RESET_SUBSCRIBE_STUDENT_REQUEST:
       return state.set('subscribeStudentRequest', initialState.get('subscribeStudentRequest'));
-                    
+
+    /**
+     * Unsubscribe Student
+     */          
+    case UNSUBSCRIBE_STUDENT:
+      return state
+        .set('unsubscribeStudentRequest', state.get('unsubscribeStudentRequest')
+          .set('loading', true)
+          .remove('success')
+          .remove('fail')
+        );
+    case UNSUBSCRIBE_STUDENT_SUCCESS:
+      return state
+        .set('unsubscribeStudentRequest', state.get('unsubscribeStudentRequest')
+          .set('loading', false)
+          .set('fail', false)
+          .set('success', true)
+        );
+    case UNSUBSCRIBE_STUDENT_FAIL:      
+      return state
+        .set('unsubscribeStudentRequest', state.get('unsubscribeStudentRequest')
+          .set('loading', false)          
+          .set('fail', true)          
+          .set('errorMessage', action.error.response.data.message)
+          .set('errors', Immutable.fromJS(action.error.response.data.errors))
+        );
+    case RESET_UNSUBSCRIBE_STUDENT_REQUEST:
+      return state.set('unsubscribeStudentRequest', initialState.get('unsubscribeStudentRequest'));
+      
     /**
      * default
      */

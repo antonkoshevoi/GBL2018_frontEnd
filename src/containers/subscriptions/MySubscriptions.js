@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { translate, Interpolate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetUserRecordsRequest } from '../../redux/subscriptions/selectors';
-import { getUserRecords } from '../../redux/subscriptions/actions';
-import { push } from 'react-router-redux';
-
+import Loader from "../../components/layouts/Loader";
+import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnSubscribeRequest } from '../../redux/subscriptions/selectors';
+import { getUserRecords, unSubscribe, resetUnSubscribeRequest } from '../../redux/subscriptions/actions';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from "../../components/ui/table";
 import Card from "../../components/ui/Card";
-import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../components/ui/table";
-import {NavLink} from "react-router-dom";
 import DeleteButton from "../../components/ui/DeleteButton";
 import AssignStudentModal from "./modals/AssignStudentModal";
 import StudentsModal from "./modals/StudentsModal";
@@ -26,14 +24,28 @@ class MySubscriptions extends Component {
     componentDidMount () {
         const { getUserRecords } = this.props;
         getUserRecords();
+    }
+    
+    componentWillReceiveProps (nextProps) {
+        const { getUserRecords, resetUnSubscribeRequest } = this.props;
+             
+        if (!this.props.unSubscribeStudentRequest.get('success') && nextProps.unSubscribeStudentRequest.get('success')) {
+            getUserRecords();
+        }
+        
+        if (!this.props.unSubscribeRequest.get('success') && nextProps.unSubscribeRequest.get('success')) {
+            resetUnSubscribeRequest();
+            getUserRecords();
+        }        
     }    
 
     _toggleSubTable(row) {
-        this.setState({[row]:!this.state[row]})
+        this.setState({[row]:!this.state[row]});
     }
     
     _cancelSubscription(id) {
-        alert(id);
+        const { unSubscribe } = this.props;
+        unSubscribe(id);
     }
 
     _showAssignModal(id) {
@@ -70,7 +82,7 @@ class MySubscriptions extends Component {
     }    
 
     _renderSubscriptions() {
-        const {data, subscriptionsRequest, t} = this.props;
+        const {data, subscriptionsRequest, unSubscribeRequest, t} = this.props;
         
         if (!subscriptionsRequest.get('loading') && subscriptionsRequest.get('records').size === 0) {
             return (
@@ -98,17 +110,19 @@ class MySubscriptions extends Component {
                         </Td>
                         <Td width='120px'>{item.get('createdAt')}</Td>
                         <Td width='120px'>{item.get('expiredAt')}</Td>
-                        <Td width='120px'><span className='m-badge m-badge--brand m-badge--wide'>{t(item.get('isActive') > 0 ? 'yes' : 'no')}</span></Td>
-                        <Td width='120px' name='actions'>
-                            {(item.get('isActive') > 0) && 
+                        <Td width='120px'>
+                            {(item.get('isActive') > 0) ? <span className='m-badge m-badge--brand m-badge--wide'>{t('yes')}</span> : <span className='m-badge m-badge--brand m-badge--wide m-badge--danger'>{t('no')}</span>}
+                        </Td>
+                        <Td width='120px' name='actions'>                                                        
+                        {(item.get('isActive') > 0) && 
                             <div>
                                 {(item.get('allowedCourses') > item.get('assignedCourses')) && 
                                 <button className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showAssignModal(item.get('id')) }} >
                                   <i className='la la-user-plus'></i>
                                 </button>}
                                 <DeleteButton title={t('areYouSureWantToCancelSubscription')} onClick={() => { this._cancelSubscription(item.get('id')) }}/>
-                            </div> 
-                            }
+                            </div>
+                        }
                         </Td>
                     </Row>,
                     ( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) && this._renderStudentsBlock()
@@ -118,12 +132,13 @@ class MySubscriptions extends Component {
     }
     
     render() {
-        const {subscriptionsRequest, t} = this.props;
+        const {subscriptionsRequest, unSubscribeRequest, t} = this.props;
         const {assignModalIsOpen, studentsModalIsOpen, selectedSubscription} = this.state;
         const loading = subscriptionsRequest.get('loading');
         
         return (
         <div>
+            {unSubscribeRequest.get('loading') && <Loader/>}
             <div className="transactionsList">
                 <Card title={t('mySubscriptions')} icon="la la-money">
                     <Table >
@@ -139,9 +154,8 @@ class MySubscriptions extends Component {
                                 <Th width='120px' name='actions'>{t('actions')}</Th>
                             </HeadRow>
                         </Thead>
-                        <Tbody>
-                            { this._renderSubscriptions() }
-                            { loading && <TablePreloader text="Loading..." color="primary"/> }
+                        <Tbody>                            
+                            { loading ? <TablePreloader text="Loading..." color="primary"/> : this._renderSubscriptions() }
                         </Tbody>
                     </Table>
                 </Card>
@@ -164,11 +178,14 @@ class MySubscriptions extends Component {
 
 MySubscriptions = connect(
   (state) => ({
-    subscriptionsRequest: selectGetUserRecordsRequest(state)    
+    subscriptionsRequest: selectGetUserRecordsRequest(state),
+    unSubscribeRequest: selectUnSubscribeRequest(state),
+    unSubscribeStudentRequest: selectUnSubscribeStudentRequest(state)
   }),
   (dispatch) => ({
     getUserRecords: (params = {}) => { dispatch(getUserRecords(params)) },
-    goTo: (url) => {dispatch(push(url))}
+    unSubscribe: (id, params = {}) => { dispatch(unSubscribe(id, params)) },
+    resetUnSubscribeRequest: (params = {}) => { dispatch(resetUnSubscribeRequest(params)) }
   })
 )(MySubscriptions);
 

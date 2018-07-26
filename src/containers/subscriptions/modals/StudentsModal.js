@@ -10,11 +10,10 @@ import {
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { selectGetStudentsRecordsRequest } from "../../../redux/subscriptions/selectors";
-import { getStudentsRecords } from "../../../redux/subscriptions/actions";
+import { selectGetStudentsRecordsRequest, selectUnSubscribeStudentRequest } from "../../../redux/subscriptions/selectors";
+import { getStudentsRecords, unSubscribeStudent, resetUnSubscribeStudentRequest } from "../../../redux/subscriptions/actions";
 import Modal from '../../../components/ui/Modal';
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../../components/ui/table";
-import {NavLink} from "react-router-dom";
 import DeleteButton from "../../../components/ui/DeleteButton";
 
 class StudentsModal extends Component {
@@ -33,23 +32,27 @@ class StudentsModal extends Component {
     }; 
     
     componentWillReceiveProps (nextProps) {
-        const { getStudentsRecords } = this.props;
+        const { getStudentsRecords, resetUnSubscribeStudentRequest } = this.props;
       
         if (!this.props.subscriptionId && nextProps.subscriptionId) {
             this.setState({
               subscriptionId: nextProps.subscriptionId
             });            
             getStudentsRecords(nextProps.subscriptionId);
-        }      
+        }        
+
+        if (!this.props.unSubscribeStudentRequest.get('success') && nextProps.unSubscribeStudentRequest.get('success')) {
+            getStudentsRecords(nextProps.subscriptionId);
+            resetUnSubscribeStudentRequest();
+        }        
     }
 
-    _close () {        
-        //alert('_close');
+    _close () {
         this.props.onClose();    
     };
     
-    _unsubscribeStudent () {        
-        alert('_unsubscribeStudent');
+    _unsubscribeStudent (id) {        
+        this.props.unSubscribeStudent(id);
     };
     
     _renderStudents () {
@@ -60,7 +63,7 @@ class StudentsModal extends Component {
                 <tr>
                     <td>
                         <div className="table-message">
-                            <h2>{t('noSubscriptions')}</h2>
+                            <h2>{t('noSubscribedUsers')}</h2>
                         </div>
                     </td>
                 </tr>
@@ -80,14 +83,14 @@ class StudentsModal extends Component {
     }
 
   render() {
-    const { isOpen, studentsRecordsRequest, t } = this.props;              
+    const { isOpen, studentsRecordsRequest, unSubscribeStudentRequest, t } = this.props;              
     
     return (
       <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position='static' color='primary' className='dialogAppBar'>
           <Toolbar>
             <IconButton color="inherit" aria-label='Close'>
-              { !studentsRecordsRequest.get('success') ? (
+              { (!studentsRecordsRequest.get('success') || unSubscribeStudentRequest.get('loading')) ? (
                 <CircularProgress style={{float: 'right'}} color='inherit'/>
               ) : (
                 <Icon>persone</Icon>
@@ -121,10 +124,13 @@ class StudentsModal extends Component {
 
 StudentsModal = connect(
     (state) => ({
-        studentsRecordsRequest: selectGetStudentsRecordsRequest(state)
+        studentsRecordsRequest: selectGetStudentsRecordsRequest(state),
+        unSubscribeStudentRequest: selectUnSubscribeStudentRequest(state)
     }),
     (dispatch) => ({
-        getStudentsRecords: (id, params = {}) => { dispatch(getStudentsRecords(id, params)) }
+        getStudentsRecords: (id, params = {}) => { dispatch(getStudentsRecords(id, params)) },
+        unSubscribeStudent: (id, params = {}) => { dispatch(unSubscribeStudent(id, params)) },
+        resetUnSubscribeStudentRequest: () => { dispatch(resetUnSubscribeStudentRequest()) }
     })
 )(StudentsModal);
   

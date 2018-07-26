@@ -399,4 +399,9 @@ export default {
     assignDate: 'Assign Date',
     areYouSureWantToCancelSubscription: 'Are you sure want to cancel this subscription?',
     areYouSureWantToCancelThisCourse: 'Are you sure want to cancel this course?',
+    noSubscriptions: 'No Subscriptions...',
+    noSubscribedUsers: 'No Subscribed Students...',
+    buySubscription: 'Buy Subscription',
+    yes: 'Yes',
+    no: 'No'
 }

@@ -38,6 +38,14 @@ export const selectSubscribeRequest = createSelector(
 );
 
 /**
+ * Get Unsubscribe Request
+ */
+export const selectUnSubscribeRequest = createSelector(
+    selectSubscriptionsDomain,
+    (subState) => subState.get('unSubscribeRequest')
+);
+
+/**
  * Get Subscribe Student Request
  */
 export const selectSubscribeStudentRequest = createSelector(
@@ -46,7 +54,15 @@ export const selectSubscribeStudentRequest = createSelector(
 );
 
 /**
- * Get Subscribe Student Request
+ * Get Unsubscribe Student Request
+ */
+export const selectUnSubscribeStudentRequest = createSelector(
+    selectSubscriptionsDomain,
+    (subState) => subState.get('unsubscribeStudentRequest')
+);
+
+/**
+ * Get Subscribed Students Request
  */
 export const selectGetStudentsRecordsRequest = createSelector(
     selectSubscriptionsDomain,

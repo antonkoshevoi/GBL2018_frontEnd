@@ -13,7 +13,21 @@ export default  {
       title:'subscriptions',
       link:'subscriptions',
       icon:'fa fa-calendar-check-o',
-      colorName:'purple'
+      colorName:'purple',
+      subMenu:[
+        {
+          key:'buySubscription',
+          title:'buySubscription',
+          link:'subscriptions',
+          icon:'flaticon flaticon-user-settings'
+        },
+        {
+          key:'mySubscriptions',
+          title:'mySubscriptions',
+          link:'my-subscriptions',
+          icon:'flaticon flaticon-user-ok'
+        }
+      ]
     },    
     {
       key:'store',
