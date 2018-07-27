@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { translate, Interpolate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetRecordsRequest, selectRecords } from '../../redux/subscriptions/selectors';
+import { selectGetRecordsRequest } from '../../redux/subscriptions/selectors';
 import { getRecords } from '../../redux/subscriptions/actions';
 import { push } from 'react-router-redux';
-
+import Loader from "../../components/layouts/Loader";
 import './Subscriptions.css'
 
 class Subscriptions extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-        subscriptions: []  
-    }
+    this.state = {}
   }
 
   componentDidMount () {
@@ -21,10 +19,10 @@ class Subscriptions extends Component {
   }
   
   _renderRecords () {
-    const { subscriptions, goTo, t } = this.props;
-    const loading = this.props.getRecordsRequest.get('loading');
+    const { getRecordsRequest, goTo, t } = this.props;
+    const loading = getRecordsRequest.get('loading');
 
-    if (!loading && subscriptions.size === 0) {
+    if (!loading && getRecordsRequest.get('records').size === 0) {
       return (
             <div className="table-message">
               <h2>{t('subscriptionsNotFound')}</h2>
@@ -32,17 +30,17 @@ class Subscriptions extends Component {
       );
     }              
     
-    return subscriptions.map((record, key) => {
+    return getRecordsRequest.get('records').map((record, key) => {
         const courses = <span style={{fontWeight: 500}}>{record.get('allowedCourses')}</span>;
         return (        
         <div className="subscription-item-block col-sm-12 col-md-4 col-lg-4 col-xl-4 m--margin-top-35">
-            <div className="subscription-item">
+            <div className={`subscription-item item-${key}`}>
                 <div className="subscription-header"><h1>{record.get('title')}</h1></div>
                 <div className="subscription-content">
                     <div className="subscription-prices">
                         <div className="row">
-                            <div className="monthly col-6"><span className="price">${record.get('priceMonthly')}</span> {t('perMonth')}</div>
-                            <div className="yearly col-6 text-right m--margin-top-20"><span className="price">${record.get('priceYearly')}</span> {t('perYear')}</div>            
+                            <div className="selected col-6"><span className="price">${record.get('priceMonthly')}</span> {t('perMonth')}</div>
+                            <div className="col-6 text-right m--margin-top-20"><span className="price">${record.get('priceYearly')}</span> {t('perYear')}</div>            
                         </div>
                     </div>
                     <div className="subscription-description">
@@ -68,14 +66,14 @@ class Subscriptions extends Component {
   }
 
   render() {
-    const { t } = this.props;       
+    const { t, getRecordsRequest } = this.props;       
 
     return (<div className="fadeInLeft animated">
         <h1 className="text-center m--margin-top-25">{t('courseSubscriptionOptions')}</h1>
         <div className="row">
             <div className="subscriptions-block col-12">
                 <div className="row">
-                  {this._renderRecords()}
+                    {getRecordsRequest.get('success') ? this._renderRecords() : <Loader />}
                 </div>
             </div>
         </div>
@@ -85,8 +83,7 @@ class Subscriptions extends Component {
 
 Subscriptions = connect(
   (state) => ({
-    getRecordsRequest: selectGetRecordsRequest(state),    
-    subscriptions: selectRecords(state),
+    getRecordsRequest: selectGetRecordsRequest(state)    
   }),
   (dispatch) => ({
     getRecords: (params = {}) => { dispatch(getRecords(params)) },

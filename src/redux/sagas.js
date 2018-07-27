@@ -33,7 +33,8 @@ function* rootSaga () {
     userSagas,
     storeSagas,
     invitationsSagas,
-    schoolSagas
+    schoolSagas,
+    subscriptionSagas
   ])
 }
 

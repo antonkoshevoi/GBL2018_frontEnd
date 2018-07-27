@@ -1,38 +1,5 @@
 @charset "UTF-8";
-/**
-$m--root-font: (
-    size: (
-        desktop: 13px,
-        tablet: 13px,
-        mobile: 13px
-    ), 
-    weight: 300, 
-    color: (
-        light: #333333, 
-        dark: #efefef
-    )
-);
-*/
-/*
-$table-inverse-bg:              $gray-900 !default;
-$table-inverse-accent-bg:       rgba($white, .05) !default;
-$table-inverse-hover-bg:        rgba($white, .075) !default;
-$table-inverse-border-color:    lighten($gray-900, 7.5%) !default;
-$table-inverse-color:           $body-bg !default;
-*/
-/*
-sm: 544px,
-md: 768px,
-lg: 1240px,
-xl: 1200px
-*/
-/*
-$table-inverse-bg:              $gray-900 !default;
-$table-inverse-accent-bg:       rgba($white, .05) !default;
-$table-inverse-hover-bg:        rgba($white, .075) !default;
-$table-inverse-border-color:    lighten($gray-900, 7.5%) !default;
-$table-inverse-color:           $body-bg !default;
-*/
+
 /*!
  * Bootstrap v4.0.0-beta.2 (https://getbootstrap.com)
  * Copyright 2011-2017 The Bootstrap Authors
@@ -7319,6 +7286,9 @@ body.m--skin-dark {
 
 .m--margin-right-5 {
   margin-right: 5px !important; }
+
+.m--padding-0 {
+  padding: 0px !important; }
 
 .m--padding-5 {
   padding: 5px !important; }
@@ -33968,3 +33938,13 @@ body.m-content--skin-light2 {
       text-align: center;
       float: none;
       margin: 0 auto; } }
+
+.sweet-alert h2 {
+    font-size: 18px !important;
+}
+.sweet-alert button {
+    font-size: 15px !important;
+}
+.sweet-alert button.confirm {    
+    background-color: #36a3f7 !important;
+}

@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {translate, Interpolate} from 'react-i18next';
-import {Button,  FormControl, FormHelperText, MenuItem, Select } from '@material-ui/core';
-import {selectCreateCreditCardPaymentRequest} from '../../redux/payments/selectors';
-import {createCreditCardPayment, resetCreditCardPayment} from '../../redux/payments/actions';
-import { selectGetRecordRequest } from '../../redux/subscriptions/selectors';
-import { getRecord } from '../../redux/subscriptions/actions';
+import {Checkbox} from '@material-ui/core';
+import {push} from 'react-router-redux';
+import {selectGetRecordsRequest, selectSubscribeRequest} from '../../redux/subscriptions/selectors';
+import {getRecords, subscribe, resetSubscribeRequest} from '../../redux/subscriptions/actions';
+import CreditCardForm from "./forms/CreditCardForm";
 import Loader from "../../components/layouts/Loader";
 
 import './Subscriptions.css'
@@ -15,231 +15,244 @@ class Subscribe extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            subscriptionId: null
-        }
+        this.state = {           
+            creditCard: {},
+            subscriptionId: null,
+            period: 'month',
+            showBillingForm: false
+        };
     }
 
     componentDidMount() {
         const subscriptionId = this.props.match.params.id;
-        const {getRecord} = this.props;
-        this.setState({subscriptionId});
+        const {getRecords} = this.props;
         
-        getRecord(subscriptionId);
+        this.setState({subscriptionId: subscriptionId});
+        
+        getRecords(subscriptionId);
+    }
+    
+    componentWillReceiveProps(nextProps) {                
+        const success = this.props.subscribeRequest.get('success');
+        const nextSuccess = nextProps.subscribeRequest.get('success');
+
+        if (!success && nextSuccess) {      
+            const userSubscriptionId = nextProps.subscribeRequest.get('userSubscriptionId');
+            
+            this.props.resetSubscribeRequest();
+            
+            this.setState({
+                showBillingForm: false,
+                subscriptionId: null,
+                creditCard: {}
+            });
+            
+            this.props.goTo(`/subscribed/${userSubscriptionId}`);
+        }
+    }    
+
+    getSelectedSubscription(subscriptions) {
+        return subscriptions.find((element) => {
+            return (element.get('id') == this.state.subscriptionId);
+        });
     }
 
     _handleInputChange(event) {
-        const { name, value, } = event.target;
+        const { name, value } = event.target;
 
         this.setState({
             [name]: value
         });
     }
+
+    _handlePeriodChange(event) {
+        const { value } = event.target;
+        this.setState({
+            period: value
+        });
+    }
     
-    _submitCreditCardPayment = () => {        
-        this.props.createCreditCardPayment(this.state);        
-    };  
+    _handleForm(form) {      
+        this.setState({
+            ...this.state,
+            creditCard: {
+                ...form
+            }
+        });
+    }    
+  
+    _submitCreditCardPayment = () => {
+        this.props.subscribe({
+            ...this.state.creditCard,
+            period: this.state.period,
+            subscriptionId: this.state.subscriptionId
+        });        
+    };
+    
+    _showBillingForm(value) {
+        this.setState({
+            showBillingForm: value
+        });        
+    }
+    
+    _renderSelected() {
+                
+        const {getRecordsRequest, t} = this.props;
+         
+        return getRecordsRequest.get('records').map((record, key) => {
+            
+            if (record.get('id') != this.state.subscriptionId) {
+                return;
+            }
+                                                        
+            const courses = <span style={{fontWeight: 500}}>{record ? record.get('allowedCourses') : '0'}</span>;       
+
+            return (
+                <div className="subscription-item-block m--margin-top-30" style={{maxWidth: '420px', margin: '0 auto'}}>
+                    <div className={`subscription-item item-${key}`}>
+                        <div className="subscription-header"><h1>{record.get('title')}</h1></div>
+                        <div className="subscription-content">
+                            <div className="subscription-prices m--padding-left-5 m--padding-right-5">
+                                <div className="row">                                                                        
+                                    <div className={`col-6 m--padding-0 text-center ${this.state.period == 'month' ? 'selected' : ''}`}>                           
+                                        <span className="price">
+                                        <Checkbox
+                                            checked={this.state.period == 'month'}
+                                            onChange={ (e) => {this._handlePeriodChange(e) }}
+                                            value="month"
+                                            color="primary"
+                                            style={{marginLeft: '-18px', width: '40px'}}
+                                            />
+                                            ${record.get('priceMonthly')}
+                                        </span> {t('perMonth')}
+                                    </div>
+                                    <div className={`col-6 m--padding-0 text-center ${this.state.period == 'year' ? 'selected' : ''}`}>
+                                        <span className="price">
+                                            <Checkbox
+                                                checked={this.state.period == 'year'}
+                                                onChange={ (e) => {this._handlePeriodChange(e) }}
+                                                value="year"
+                                                color="primary"
+                                                style={{marginLeft: '-18px', width: '40px'}}
+                                                />                                
+                                            ${record.get('priceYearly')}
+                                        </span> {t('perYear')}
+                                    </div>            
+                                </div>
+                            </div>
+                            <div className="subscription-description">
+                                <div className="subscription-limits">
+                                    <Interpolate i18nKey="courseAtTime" number={courses} />
+                                    <br />                            
+                                    <Interpolate i18nKey={record.get('allowedCourses') > 1 ? 'courseAnyCoursesSwitchAnyTime' : 'courseAnyCourseSwitchAnyTime'} number={courses} />
+                                    <br />                            
+                                    <Interpolate i18nKey="usersMax" number={courses} />
+                                </div>            
+                                <div className="subscription-bonuses text-left">
+                                    <span>{t('annualBonus')}:</span>
+                                    <span className="bonus">{record.get('bonuses')}</span>
+                                </div>
+                                <p className="text-center margin-bottom-0">
+                                    <button onClick={() => { this._showBillingForm(true) }} class="btn btn-info">{t('continue')}</button>
+                                </p>                                
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            );
+        });        
+    }
+    
+    _renderSubscriptions() {
+        
+        const {getRecordsRequest, t} = this.props;
+        return getRecordsRequest.get('records').map((record, key) => {
+            
+            if (record.get('id') == this.state.subscriptionId) {
+                return;
+            }
+                        
+            return (        
+                <div className="subscription-item-block col-sm-12 col-md-6 col-lg-6 col-xl-6 m--margin-top-25">
+                    <div className={`subscription-item item-${key}`} onClick={() => { this.setState({subscriptionId: record.get('id')}) }}>                        
+                        <div className="subscription-header"><h1>{record.get('title')}</h1></div>
+                        <div className="subscription-content">
+                            <div className="subscription-prices">
+                                <div className="row">
+                                    <div className="selected col-6"><span className="price">${record.get('priceMonthly')}</span> {t('perMonth')}</div>
+                                    <div className="col-6 text-right m--margin-top-10"><span className="price">${record.get('priceYearly')}</span> {t('perYear')}</div>            
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            );
+        });        
+    }
 
     render() {        
-        const years = Array.from(Array(10), (_,x) => (new Date().getFullYear() + x));
-        const {createCreditCardPaymentRequest, getRecordRequest, t} = this.props;
-        const loading = createCreditCardPaymentRequest.get('loading');       
-        const errors = createCreditCardPaymentRequest.get('errors');        
-
-        if (createCreditCardPaymentRequest.get('success')) {
-            this.props.resetCreditCardPayment();        
-            this.props.onDataSaved();
-        }
         
-        const record = getRecordRequest.get('record');
-        const courses = <span style={{fontWeight: 500}}>{record ? record.get('allowedCourses') : '0'}</span>;
-            
+        const {subscribeRequest, getRecordsRequest, t} = this.props;
+        const {creditCard} = this.state;
+        const errors = subscribeRequest.get('errors');
+                
+        if (subscribeRequest.get('success')) {
+            this.props.resetSubscribeRequest();
+        }
+
         return (
-      <div className='fadeInLeft  animated'>
-          <div class="row">
-          <div class="col-lg-4">
-        {getRecordRequest.get('success') ?
-        <div className="subscription-item-block m--margin-top-30" style={{maxWidth: '400px', margin: '0 auto'}}>
-            <div className="subscription-item">
-                <div className="subscription-header"><h1>{record.get('title')}</h1></div>
-                <div className="subscription-content">
-                    <div className="subscription-prices">
-                        <div className="row">
-                            <div className="monthly col-6"><span className="price">${record.get('priceMonthly')}</span> {t('perMonth')}</div>
-                            <div className="yearly col-6 text-right m--margin-top-20"><span className="price">${record.get('priceYearly')}</span> {t('perYear')}</div>            
+            <div className='fadeInLeft  animated'>
+                <h1 className="text-center m--margin-top-25">{t('subscriptions')}</h1>
+                {this.state.showBillingForm ? (
+                    <div className="col-sm-12 col-md-10 col-lg-9 col-xl-8 m-auto">
+                        <div className='m-portlet m-portlet--head-solid-bg m--margin-top-30'>
+                            <div className='m-portlet__body'>
+                                <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
+                                    <h2 className='m--margin-bottom-40 m--margin-left-20'>{t('creditCard')}</h2>                    
+                                    <div className='row align-items-center'>
+                                        {subscribeRequest.get('loading') && <Loader/>}
+                                        
+                                        <CreditCardForm errors={errors} onChange={(form) => this._handleForm(form)} form={creditCard} />
+                                        
+                                        <div className="col-sm-12 text-center">                                        
+                                            <button disabled={subscribeRequest.get('loading')} onClick={() => { this._submitCreditCardPayment() }} class="btn btn-info">{t('makePayment')}</button>
+                                            <button disabled={subscribeRequest.get('loading')} onClick={() => { this._showBillingForm(false) }} class="btn btn-default m--margin-left-10">{t('back')}</button>                                                                  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="subscription-description">
-                        <div className="subscription-limits">
-                            <Interpolate i18nKey="courseAtTime" number={courses} />
-                            <br />                            
-                            <Interpolate i18nKey={record.get('allowedCourses') > 1 ? 'courseAnyCoursesSwitchAnyTime' : 'courseAnyCourseSwitchAnyTime'} number={courses} />
-                            <br />                            
-                            <Interpolate i18nKey="usersMax" number={courses} />
-                        </div>            
-                        <div className="subscription-bonuses text-left">
-                            <span>{t('annualBonus')}:</span>
-                            <span className="bonus">{record.get('bonuses')}</span>
-                        </div>
+                ) : (
+                <div class="row">
+                    <div class="col-lg-12">                        
+                        {getRecordsRequest.get('success') ? this._renderSelected() : <Loader/>}
                     </div>
-                </div>
-            </div>  
-        </div> : <Loader/>}
-        </div>           
-        <div class="col-sm-12 col-md-12 col-lg-7">
-        <div className='m-portlet m-portlet--head-solid-bg m--margin-top-30'>
-          <div className='m-portlet__body'>
-            <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
-              <div className='row align-items-center'>
-                <div className="col-sm-12 col-md-10 col-lg-10 m-auto">
-                    {loading && <Loader/>}
-                    <h2 className='m--margin-bottom-20'>{t('creditCard')}</h2>
-                    <div className='m-form__section m-form__section--first'>
-                      <div className="form-group m-form__group row">
-                        <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('creditCardNumber')} </label>
-                        <div className="col-lg-8 col-md-8 col-sm-12">
-                          <input
-                            required                    
-                            value={this.state.cardNumber || ''}
-                            name='cardNumber'
-                            onChange={(e) => { this._handleInputChange(e) }}
-                            type='text'
-                            className='form-control m-input m-input--air '
-                            placeholder=''/>
-                            
-                          {errors && errors.get('cardNumber') && <FormHelperText error>{ errors.get('cardNumber').get(0) }</FormHelperText>}
-                          {errors && errors.get('message') && <FormHelperText error>{ errors.get('message') }</FormHelperText>}
+                    {getRecordsRequest.get('success') && <div class="col-sm-12">
+                        <h1 className="text-center m--margin-top-25">{t('switchPlan')}</h1>
+                        <div className="switch-subscriptions-block">
+                            <div className="row">
+                                {this._renderSubscriptions()}
+                            </div>
                         </div>
-                      </div>
-                    </div>
-                    <div className='m-form__section m-form__section--first'>
-                      <div className="form-group m-form__group row">
-                        <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('holderName')}</label>
-                        <div className="col-lg-8 col-md-8 col-sm-12">
-                          <input
-                            required                    
-                            value={this.state.cardHolder || ''}
-                            name='cardHolder'
-                            onChange={(e) => { this._handleInputChange(e) }}
-                            type='text'
-                            className='form-control m-input m-input--air '
-                            placeholder=''/>
-                            
-                          {errors && errors.get('cardHolder') && <FormHelperText error>{ errors.get('cardHolder').get(0) }</FormHelperText>}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="form-group m-form__group row">
-                      <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('cardType')}</label> 
-                      <div className="col-lg-5 col-md-8 col-sm-12">
-                        <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
-                          <FormControl>
-                            <Select                      
-                              name="cardType"
-                              value={this.state.cardType || ''}
-                              onChange={(e) => this._handleInputChange(e)}
-                            >
-                                <MenuItem key='0' value='Visa' >{t('visa')}</MenuItem>
-                                <MenuItem key='1' value='MasterCard' >{t('masterCard')}</MenuItem>
-                                <MenuItem key='2' value='Discover' >{t('discover')}</MenuItem>
-                                <MenuItem key='3' value='Amex' >{t('amex')}</MenuItem>
-                                <MenuItem key='4' value='JCB' >{t('jcb')}</MenuItem>                                
-                            </Select>
-                          </FormControl>
-                          {errors && errors.get('cardType') && <FormHelperText error>{ errors.get('cardType').get(0) }</FormHelperText>}
-                        </FormControl>
-                      </div>                      
-                    </div>                    
-                    <div className="form-group m-form__group row">
-                      <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('expDate')}</label>
-                      <div className="col-lg-5 col-md-5 col-sm-12">
-                        <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
-                          <FormControl>
-                            <Select                      
-                              name="cardExpYear"
-                              value={this.state.cardExpYear || ''}
-                              onChange={(e) => this._handleInputChange(e)}
-                            >
-                                {years.map((item,index) => <MenuItem key={index} value={item}>{item}</MenuItem>)}
-                            </Select>
-                          </FormControl>
-                          {errors && errors.get('cardExpYear') && <FormHelperText error>{ errors.get('cardExpYear').get(0) }</FormHelperText>}
-                        </FormControl>
-                      </div>
-                      <div className="col-md-3 col-lg-3 col-sm-12">
-                        <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
-                          <FormControl>
-                            <Select                      
-                              name="cardExpMonth"
-                              value={this.state.cardExpMonth || ''}
-                              onChange={(e) => this._handleInputChange(e)}
-                            >
-                                <MenuItem key='0' value='01' >01</MenuItem>
-                                <MenuItem key='1' value='02' >02</MenuItem>
-                                <MenuItem key='2' value='03' >03</MenuItem>
-                                <MenuItem key='3' value='04' >04</MenuItem>
-                                <MenuItem key='4' value='05' >05</MenuItem>
-                                <MenuItem key='5' value='06' >06</MenuItem>
-                                <MenuItem key='6' value='07' >07</MenuItem>
-                                <MenuItem key='7' value='08' >08</MenuItem>
-                                <MenuItem key='8' value='09' >09</MenuItem>
-                                <MenuItem key='9' value='10' >10</MenuItem>
-                                <MenuItem key='10' value='11' >11</MenuItem>
-                                <MenuItem key='11' value='12' >12</MenuItem>
-                            </Select>
-                          </FormControl>
-                          {errors && errors.get('cardExpMonth') && <FormHelperText error>{ errors.get('cardExpMonth').get(0) }</FormHelperText>}
-                        </FormControl>
-                      </div>                      
-                    </div>
-                    <div className='m-form__section m-form__section--first'>
-                      <div className="form-group m-form__group row">
-                        <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('cvvCode')} </label>
-                        <div className="col-lg-5 col-md-5 col-sm-12">
-                          <input
-                            required                    
-                            value={this.state.cardCvv2 || ''}
-                            name='cardCvv2'
-                            onChange={(e) => { this._handleInputChange(e) }}
-                            type='text'
-                            className='form-control m-input m-input--air '
-                            placeholder=''/>
-                          {errors && errors.get('cardCvv2') && <FormHelperText error>{ errors.get('cardCvv2').get(0) }</FormHelperText>}
-                        </div>
-                      </div>
-                    </div>                    
-                    <div className="d-flex justify-content-center">
-                      <Button
-                        variant="raised"
-                        color="primary"
-                        className="text-uppercase"
-                        onClick={(e) => { this._submitCreditCardPayment(e) }}
-                      >
-                        {t('makePayment')}
-                      </Button>
-                    </div>  
-                </div>            
-              </div>
-            </div>
-          </div>
-        </div>    
-        </div>      
-        </div>
-        </div>
+                    </div>}
+                </div>)}      
+            </div>        
         );
     }
 }
 
 Subscribe = connect(
-  (state) => ({
-    createCreditCardPaymentRequest: selectCreateCreditCardPaymentRequest(state),
-    getRecordRequest: selectGetRecordRequest(state)    
-  }),
-  (dispatch) => ({
-    createCreditCardPayment: (data) => dispatch(createCreditCardPayment(data)),
-    resetCreditCardPayment: () => dispatch(resetCreditCardPayment()),
-    getRecord: (data) => dispatch(getRecord(data))
-  })
+    (state) => ({
+        subscribeRequest:  selectSubscribeRequest(state),
+        getRecordsRequest: selectGetRecordsRequest(state)    
+    }),
+    (dispatch) => ({
+        subscribe: (data) => dispatch(subscribe(data)),
+        resetSubscribeRequest: () => dispatch(resetSubscribeRequest()),
+        getRecords: () => dispatch(getRecords()),
+        goTo: (url) => {dispatch(push(url))}
+    })
 )(Subscribe);
 
 export default withRouter(translate('translations')(Subscribe));
