@@ -25,6 +25,10 @@ export const UNSUBSCRIBE_SUCCESS = '[Subscription] UNSUBSCRIBE_SUCCESS';
 export const UNSUBSCRIBE_FAIL = '[Subscription] UNSUBSCRIBE_FAIL';
 export const RESET_UNSUBSCRIBE_REQUEST = '[Subscription] RESET_UNSUBSCRIBE_REQUEST';
 
+export const GET_INVOICE = '[Subscription] GET_INVOICE';
+export const GET_INVOICE_SUCCESS = '[Subscription] GET_INVOICE_SUCCESS';
+export const GET_INVOICE_FAIL = '[Subscription] GET_INVOICE_FAIL';
+
 export const SUBSCRIBE_STUDENT = '[Subscription] SUBSCRIBE_STUDENT';
 export const SUBSCRIBE_STUDENT_SUCCESS = '[Subscription] SUBSCRIBE_STUDENT_SUCCESS';
 export const SUBSCRIBE_STUDENT_FAIL = '[Subscription] SUBSCRIBE_STUDENT_FAIL';
@@ -73,6 +77,13 @@ export function resetSubscribeRequest () {
   return {
     type: RESET_SUBSCRIBE_REQUEST
   }
+}
+
+export function getInvoice(id, params = {}) {
+  return {
+    types: [GET_INVOICE, GET_INVOICE_SUCCESS, GET_INVOICE_FAIL],
+    promise: (apiClient) => apiClient.get(`subscriptions/invoice/${id}`, params)
+  };
 }
 
 export function subscribeStudent(params = {}) {

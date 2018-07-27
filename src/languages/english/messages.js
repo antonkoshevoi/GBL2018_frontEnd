@@ -3,6 +3,7 @@ export default {
     400: 'Bad Request',
     401: 'Unauthorized',
     422: 'Unprocessable data',
+    409: 'Bad Request',
     500: 'Server error. Please try again later',
     canceled: 'Request has been cancelled',
     unknown: 'Unknown error. Please try again later'

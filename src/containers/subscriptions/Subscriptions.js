@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { selectGetRecordsRequest } from '../../redux/subscriptions/selectors';
 import { getRecords } from '../../redux/subscriptions/actions';
 import { push } from 'react-router-redux';
-
+import Loader from "../../components/layouts/Loader";
 import './Subscriptions.css'
 
 class Subscriptions extends Component {
@@ -34,7 +34,7 @@ class Subscriptions extends Component {
         const courses = <span style={{fontWeight: 500}}>{record.get('allowedCourses')}</span>;
         return (        
         <div className="subscription-item-block col-sm-12 col-md-4 col-lg-4 col-xl-4 m--margin-top-35">
-            <div className="subscription-item">
+            <div className={`subscription-item item-${key}`}>
                 <div className="subscription-header"><h1>{record.get('title')}</h1></div>
                 <div className="subscription-content">
                     <div className="subscription-prices">
@@ -66,14 +66,14 @@ class Subscriptions extends Component {
   }
 
   render() {
-    const { t } = this.props;       
+    const { t, getRecordsRequest } = this.props;       
 
     return (<div className="fadeInLeft animated">
         <h1 className="text-center m--margin-top-25">{t('courseSubscriptionOptions')}</h1>
         <div className="row">
             <div className="subscriptions-block col-12">
                 <div className="row">
-                  {this._renderRecords()}
+                    {getRecordsRequest.get('success') ? this._renderRecords() : <Loader />}
                 </div>
             </div>
         </div>

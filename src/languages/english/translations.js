@@ -387,6 +387,8 @@ export default {
     annualBonus: 'Annual bonus',
     perMonth: 'Per Month',
     perYear: 'Per Year',
+    month: 'Month',
+    year: 'Year',    
     courseSubscriptionOptions: 'Course Subscription Options',
     subscriptionsNotFound: 'Subscriptions Not Found...',
     getThis: 'Get This',
@@ -403,5 +405,10 @@ export default {
     noSubscribedUsers: 'No Subscribed Students...',
     buySubscription: 'Buy Subscription',
     yes: 'Yes',
-    no: 'No'
+    no: 'No',
+    switchPlan: 'Switch Plan',
+    continue: 'Continue',
+    youBoughtSubscription: 'Congratulations! You successfully bought new subscription.',
+    viewMySubscriptions: 'View My Subscriptions',
+    subscriptionDetails: 'Subscription Details'
 }

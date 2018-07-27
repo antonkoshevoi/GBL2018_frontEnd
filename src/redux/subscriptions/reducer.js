@@ -6,7 +6,8 @@ import {
   UNSUBSCRIBE, UNSUBSCRIBE_SUCCESS, UNSUBSCRIBE_FAIL, RESET_UNSUBSCRIBE_REQUEST,
   SUBSCRIBE_STUDENT, SUBSCRIBE_STUDENT_SUCCESS, SUBSCRIBE_STUDENT_FAIL, RESET_SUBSCRIBE_STUDENT_REQUEST,
   UNSUBSCRIBE_STUDENT, UNSUBSCRIBE_STUDENT_SUCCESS, UNSUBSCRIBE_STUDENT_FAIL, RESET_UNSUBSCRIBE_STUDENT_REQUEST,
-  GET_STUDENTS_RECORDS, GET_STUDENTS_RECORDS_SUCCESS, GET_STUDENTS_RECORDS_FAIL
+  GET_STUDENTS_RECORDS, GET_STUDENTS_RECORDS_SUCCESS, GET_STUDENTS_RECORDS_FAIL,
+  GET_INVOICE, GET_INVOICE_SUCCESS, GET_INVOICE_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -39,9 +40,18 @@ const initialState = Immutable.fromJS({
     loading: false,
     success: false,
     fail: false,
-    errorMessage: null,    
-    errors: {}
+    errorMessage: null,       
+    errors: {},
+    userSubscriptionId: null
   },
+  getInvoiceRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,       
+    errors: {},
+    record: null
+  },  
   unSubscribeRequest: {
     loading: false,
     success: false,
@@ -176,6 +186,7 @@ export default function reducer (state = initialState, action) {
           .set('loading', true)
           .remove('success')
           .remove('fail')
+          .remove('userSubscriptionId')
         );
     case SUBSCRIBE_SUCCESS:
       return state
@@ -183,6 +194,7 @@ export default function reducer (state = initialState, action) {
           .set('loading', false)
           .set('fail', false)
           .set('success', true)
+          .set('userSubscriptionId', action.result.data.userSubscriptionId)
         );
     case SUBSCRIBE_FAIL:      
       return state
@@ -191,6 +203,7 @@ export default function reducer (state = initialState, action) {
           .set('fail', true)          
           .set('errorMessage', action.error.response.data.message)
           .set('errors', Immutable.fromJS(action.error.response.data.errors))
+          .remove('userSubscriptionId')
         );
     case RESET_SUBSCRIBE_REQUEST:
       return state.set('subscribeRequest', initialState.get('subscribeRequest'));
@@ -219,7 +232,32 @@ export default function reducer (state = initialState, action) {
         );
     case RESET_UNSUBSCRIBE_REQUEST:
       return state.set('unSubscribeRequest', initialState.get('unSubscribeRequest'));      
-          
+                   
+    /**
+     * Get invoice
+     */
+    case GET_INVOICE:
+      return state
+        .set('getInvoiceRequest', state.get('getInvoiceRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)
+          .remove('record')
+        );
+    case GET_INVOICE_SUCCESS:
+      return state
+        .set('getInvoiceRequest', state.get('getInvoiceRequest')
+          .set('success', true)
+          .set('loading', false)
+          .set('record', Immutable.fromJS(action.result.data))
+        );
+    case GET_INVOICE_FAIL:
+      return state
+        .set('getInvoiceRequest', state.get('getInvoiceRequest')
+          .set('loading', false)
+          .set('fail', true)
+        );
+                    
     /**
      * Subscribe Student
      */          

@@ -46,6 +46,14 @@ export const selectUnSubscribeRequest = createSelector(
 );
 
 /**
+ * Get Unsubscribe Request
+ */
+export const selectGetInvoiceRequest = createSelector(
+    selectSubscriptionsDomain,
+    (subState) => subState.get('getInvoiceRequest')
+);
+
+/**
  * Get Subscribe Student Request
  */
 export const selectSubscribeStudentRequest = createSelector(

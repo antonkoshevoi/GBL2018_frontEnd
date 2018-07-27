@@ -3,6 +3,20 @@
     max-width: 1100px;
     margin-bottom: 25px;
 }
+.switch-subscriptions-block {
+    margin: 0 auto;
+    max-width: 600px;
+}
+.switch-subscriptions-block .subscription-item-block {
+    cursor: pointer;
+}
+.switch-subscriptions-block .subscription-header h1 {
+    font-size: 1.5rem;
+    padding: 8px 0;
+}
+.switch-subscriptions-block .subscription-prices .selected .price {
+    font-size: 2.2rem;    
+}
 .subscription-item {    
     margin: 0 auto;
     background-color: #fff;
@@ -64,24 +78,24 @@
 .subscription-prices .price {
     font-size: 1.5rem;
 }
-.subscription-item-block:nth-child(2) .subscription-item .subscription-header h1 {
+.subscription-item-block .subscription-item.item-1 .subscription-header h1 {
     background-color: #4F81BE;
 }
-.subscription-item-block:nth-child(3) .subscription-item .subscription-header h1 {
+.subscription-item-block .subscription-item.item-2 .subscription-header h1 {
     background-color: #1F487C;
 }
-.subscription-item-block:nth-child(2) .subscription-item .btn.btn-info {
+.subscription-item-block .subscription-item.item-1 .btn.btn-info {
     background-color: #4F81BE;
     border-color: #4F81BE;
 }
-.subscription-item-block:nth-child(3) .subscription-item .btn.btn-info {
+.subscription-item-block .subscription-item.item-2 .btn.btn-info {
     background-color: #1F487C;
     border-color: #1F487C;
 }
-.subscription-item-block:nth-child(2) .subscription-bonuses span:first-child {
+.subscription-item-block .item-1 .subscription-bonuses span:first-child {
     color: #4F81BE;
 }
-.subscription-item-block:nth-child(3) .subscription-bonuses span:first-child {
+.subscription-item-block .item-2 .subscription-bonuses span:first-child {
     color: #1F487C;
 }
 .m-form .m-form__section {

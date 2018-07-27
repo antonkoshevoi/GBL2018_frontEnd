@@ -2,11 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,
-  DialogContentText,
+  DialogContent,  
   Icon, IconButton,
-  Toolbar, Typography,
-  Divider, Button, DialogActions
+  Toolbar, Typography
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
