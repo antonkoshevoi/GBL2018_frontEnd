@@ -10,7 +10,9 @@ import {
     SUBSCRIBE_STUDENT_FAIL, 
     UNSUBSCRIBE_STUDENT_FAIL, 
     SUBSCRIBE_STUDENT_SUCCESS, 
-    UNSUBSCRIBE_STUDENT_SUCCESS } from './actions';
+    UNSUBSCRIBE_STUDENT_SUCCESS,
+    UNSUBSCRIBE_SUCCESS
+} from './actions';
 
 import { yieldErrorToasts, yieldSuccessToasts } from '../../helpers/utils';
 import i18n from '../../configs/i18n';
