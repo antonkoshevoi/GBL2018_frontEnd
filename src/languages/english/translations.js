@@ -410,5 +410,6 @@ export default {
     continue: 'Continue',
     youBoughtSubscription: 'Congratulations! You successfully bought new subscription.',
     viewMySubscriptions: 'View My Subscriptions',
-    subscriptionDetails: 'Subscription Details'
+    subscriptionDetails: 'Subscription Details',
+    yourPlan: 'Your Plan'
 }
