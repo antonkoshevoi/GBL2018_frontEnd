@@ -52,7 +52,7 @@ class AssignStudentForm extends Component {
    
     return storeItems.map((storeItem, key) => (
       <MenuItem key={key} value={ storeItem.get('courseId') }>
-        <span><img src={storeItem.get('image')} /> { storeItem.get('title') }</span>
+        { storeItem.get('title') }
       </MenuItem>
     ));    
   }  
