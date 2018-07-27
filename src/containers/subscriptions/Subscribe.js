@@ -17,7 +17,7 @@ class Subscribe extends Component {
         super(props);
         this.state = {           
             creditCard: {},
-            subscriptionId: null,
+            subscriptionId: null,            
             period: 'month',
             showBillingForm: false
         };
@@ -29,7 +29,7 @@ class Subscribe extends Component {
         
         this.setState({subscriptionId: subscriptionId});
         
-        getRecords(subscriptionId);
+        getRecords();
     }
     
     componentWillReceiveProps(nextProps) {                
@@ -51,10 +51,22 @@ class Subscribe extends Component {
         }
     }    
 
-    getSelectedSubscription(subscriptions) {
-        return subscriptions.find((element) => {
+    _getSelectedPlan() {
+        const {getRecordsRequest, t} = this.props;
+        
+        const subscription = getRecordsRequest.get('records').find((element) => {
             return (element.get('id') == this.state.subscriptionId);
         });
+        
+        if (subscription) {
+            let price = (this.state.period === 'month' ? subscription.get('priceMonthly') : subscription.get('priceYearly'));
+        
+            return (
+                <div className="col-sm-12 text-center">                                                                                    
+                    <p className="display-6">{t('yourPlan')}: <strong className="g-blue">${price}</strong> / {t(this.state.period)}</p>     
+                </div>
+            );
+        }                
     }
 
     _handleInputChange(event) {
@@ -65,7 +77,7 @@ class Subscribe extends Component {
         });
     }
 
-    _handlePeriodChange(event) {
+    _handlePeriodChange(event) {        
         const { value } = event.target;
         this.setState({
             period: value
@@ -196,10 +208,6 @@ class Subscribe extends Component {
         const {creditCard} = this.state;
         const errors = subscribeRequest.get('errors');
                 
-        if (subscribeRequest.get('success')) {
-            this.props.resetSubscribeRequest();
-        }
-
         return (
             <div className='fadeInLeft  animated'>
                 <h1 className="text-center m--margin-top-25">{t('subscriptions')}</h1>
@@ -211,6 +219,8 @@ class Subscribe extends Component {
                                     <h2 className='m--margin-bottom-40 m--margin-left-20'>{t('creditCard')}</h2>                    
                                     <div className='row align-items-center'>
                                         {subscribeRequest.get('loading') && <Loader/>}
+                                        
+                                        {this._getSelectedPlan()}
                                         
                                         <CreditCardForm errors={errors} onChange={(form) => this._handleForm(form)} form={creditCard} />
                                         
