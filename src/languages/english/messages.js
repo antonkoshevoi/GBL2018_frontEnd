@@ -26,5 +26,8 @@ export default {
     scheduleUpdated: 'Classroom schedule has been updated'
   },
   courseRequired: 'You should select course',
-  loginOrCreateAccount: 'Please login or create new account to buy any products...'
+  loginOrCreateAccount: 'Please login or create new account to buy any products...',
+  studentSubscribedToCourse: 'Student successfully enrolled to the course',
+  studentUnsubscribedFromCourse: 'Student successfully unsubscribed from the course',
+  subscriptionCancelled: 'Subscription successfully cancelled'
 }

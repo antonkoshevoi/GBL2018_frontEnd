@@ -18,7 +18,8 @@ import i18n from '../../configs/i18n';
 const subscriptionSagas = all([
   yieldSuccessToasts({
     [SUBSCRIBE_STUDENT_SUCCESS]: i18n.t('messages:studentSubscribedToCourse'),
-    [UNSUBSCRIBE_STUDENT_SUCCESS]: i18n.t('messages:studentUnsubscribeFromCourse')
+    [UNSUBSCRIBE_STUDENT_SUCCESS]: i18n.t('messages:studentUnsubscribedFromCourse'),
+    [UNSUBSCRIBE_SUCCESS]: i18n.t('messages:subscriptionCancelled')
   }),    
   yieldErrorToasts([
     GET_RECORDS_FAIL, 
