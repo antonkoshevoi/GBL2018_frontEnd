@@ -106,9 +106,9 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/courses' component={Courses}/>
       
       <AuthenticatedRoute exact layout={MainLayout} path='/my-subscriptions' name='MySubscriptions' component={MySubscriptions} />
-      <AuthenticatedRoute exact layout={MainLayout} path='/subscriptions' name='Subscriptions' component={Subscriptions} />
-      <AuthenticatedRoute exact layout={MainLayout} path='/subscribe/:id' name='Subscribe' component={Subscribe} />
-      <AuthenticatedRoute exact layout={MainLayout} path='/subscribed/:id' name='Subscribed' component={Subscribed} />
+      <AuthenticatedRoute exact layout={OnlyHeadLayout} path='/subscriptions' name='Subscriptions' component={Subscriptions} />
+      <AuthenticatedRoute exact layout={OnlyHeadLayout} path='/subscribe/:id' name='Subscribe' component={Subscribe} />
+      <AuthenticatedRoute exact layout={OnlyHeadLayout} path='/subscribed/:id' name='Subscribed' component={Subscribed} />
 
       <AuthenticatedRoute exact layout={MainLayout} path='/reports' component={ReportsDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReportDashboard}/>

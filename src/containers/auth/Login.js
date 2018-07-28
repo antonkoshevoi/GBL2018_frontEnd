@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import background from '../../media/images/bg-3.jpg';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { login, setRedirectUrl } from '../../redux/auth/actions';
@@ -55,7 +54,7 @@ class Login extends Component {
 
     return (
       <div style={{position:'fixed'}} className="loginWrapper">
-        <div className="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2 m--full-height" id="m_login" style={{backgroundImage: `url(${background})`}}>
+        <div className="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2 m--full-height" id="m_login">
           <div className="m-grid__item m-grid__item--fluid m-login__wrapper">
             <div className="m-login__container">
               <div className="m-login__logo">

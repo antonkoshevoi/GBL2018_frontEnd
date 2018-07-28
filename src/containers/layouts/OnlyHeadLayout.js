@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Header from '../ui/Header';
 import {withRouter} from "react-router-dom";
 import {generateLinkId} from "../../helpers/utils";
+import background from '../../media/images/bg-3.jpg';
 
 class MainLayout extends Component {
 
@@ -28,7 +29,7 @@ class MainLayout extends Component {
             this.openMobileSidebar()
           }}/>
 
-          <div className="m-grid__item m-grid__item--fluid d-flex justify-content-center ">
+          <div style={{backgroundImage: `url(${background})`}} className="m-grid__item m-grid__item--fluid d-flex justify-content-center ">
             <div className="m-content col-10 ">
               {this.props.children}
             </div>

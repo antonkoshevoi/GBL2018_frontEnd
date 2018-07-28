@@ -40,9 +40,9 @@ class PaymentMethods extends Component {
 
   render() {
     return (
-            <div className='m-portlet'>
+            <div>
               <div className='m-portlet__body  m-portlet__body--no-padding'>
-                <div className='row m-row--no-padding m-row--col-separator-xl'>
+                <div className='row m-row--no-padding'>
                   { this._renderMethods() }
                 </div>
               </div>

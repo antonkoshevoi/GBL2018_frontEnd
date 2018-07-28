@@ -165,7 +165,7 @@ class Checkout extends Component {
     const {classes} = this.props;
     const item = cartRecords.toJS().shift();
     return (
-      <div>
+      <div className="m--margin-top-30">
         <div className='row d-flex justify-content-center'>
           <div className="col-12">
             <Card header={false}>
