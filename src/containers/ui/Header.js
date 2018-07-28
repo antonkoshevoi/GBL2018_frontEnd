@@ -61,7 +61,7 @@ class Header extends Component {
   }
 
   _renderHeader() {
-    const {logout, cartRecords, auth} = this.props;
+    const {logout, hideMenu, cartRecords, auth} = this.props;
     const school = this.props.schoolRequest.get('record').toJS();
     const {headerPosition} = this.state;
     
@@ -71,17 +71,16 @@ class Header extends Component {
           <div className="m-stack m-stack--ver m-stack--desktop">
             <div className="m-stack__item m-brand gravity-logo ">
               <div className="m-stack m-stack--ver m-stack--general">
-                <div className="m-stack__item m-stack__item--middle m-brand__logo">
+                <div className="m-stack__item m-stack__item--middle m-brand__logo text-center">
                   <NavLink to="/dashboard" className="m-brand__logo-wrapper m--margin-left-5">
-                      <img alt="GravityBrain" style={{width: '220px', height: 'auto'}} src={logoUrl}/>
+                      <img alt="GravityBrain" style={{width: (hideMenu ? '300px' : '220px'), height: 'auto'}} src={logoUrl}/>
                   </NavLink>
                 </div>
               </div>
             </div>
-            {auth.get('isLoggedIn') &&
+            {(auth.get('isLoggedIn') && !hideMenu) &&
             <div className="m-stack__item m-stack__item--fluid m-header-head d-flex" id="m_header_nav">
-              <button className="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-dark "
-                      id="m_aside_header_menu_mobile_close_btn">
+              <button className="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-dark" id="m_aside_header_menu_mobile_close_btn">
                 <i className="la la-close"></i>
               </button>
 
