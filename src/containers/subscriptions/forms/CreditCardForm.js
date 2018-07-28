@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {translate, Interpolate} from 'react-i18next';
-import {Button,  FormControl, FormHelperText, MenuItem, Select, Checkbox } from '@material-ui/core';
-import Loader from "../../../components/layouts/Loader";
+import {translate} from 'react-i18next';
+import {FormControl, FormHelperText, MenuItem, Select} from '@material-ui/core';
 
 import '../Subscriptions.css'
 
@@ -39,8 +38,7 @@ class CreditCardForm extends Component {
         const {form} = this.state;
         
         return (
-            <div className="col-sm-12 col-md-10 col-lg-10 m-auto">
-                
+            <div className="col-sm-12 col-md-10 col-lg-10 m-auto">                
                 <div className='m-form__section m-form__section--first'>
                   <div className="form-group m-form__group row">
                     <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('creditCardNumber')} </label>

@@ -101,3 +101,9 @@
 .m-form .m-form__section {
     margin: 20px 0;
 }
+
+.subscription-item {
+    -webkit-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08) ;
+    -moz-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08) ;
+    box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08) ;
+}
