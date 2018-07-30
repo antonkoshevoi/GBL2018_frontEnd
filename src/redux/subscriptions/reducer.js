@@ -196,13 +196,15 @@ export default function reducer (state = initialState, action) {
           .set('success', true)
           .set('userSubscriptionId', action.result.data.userSubscriptionId)
         );
-    case SUBSCRIBE_FAIL:      
+    case SUBSCRIBE_FAIL:
+      const data = action.error.response.data;
+      const errors = Immutable.fromJS(data.errors);
+      
       return state
         .set('subscribeRequest', state.get('subscribeRequest')
-          .set('loading', false)          
-          .set('fail', true)          
-          .set('errorMessage', action.error.response.data.message)
-          .set('errors', Immutable.fromJS(action.error.response.data.errors))
+          .set('loading', false)
+          .set('fail', true)
+          .set('errors', (errors.size ? errors : Immutable.fromJS(data)))
           .remove('userSubscriptionId')
         );
     case RESET_SUBSCRIBE_REQUEST:
