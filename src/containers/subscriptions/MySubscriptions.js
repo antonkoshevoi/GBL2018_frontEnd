@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { translate, Interpolate } from 'react-i18next';
 import { connect } from 'react-redux';
-import Loader from "../../components/layouts/Loader";
+import { push } from 'react-router-redux';
 import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnSubscribeRequest } from '../../redux/subscriptions/selectors';
 import { getUserRecords, unSubscribe, resetUnSubscribeRequest } from '../../redux/subscriptions/actions';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from "../../components/ui/table";
+import Loader from "../../components/layouts/Loader";
 import Card from "../../components/ui/Card";
 import DeleteButton from "../../components/ui/DeleteButton";
 import AssignStudentModal from "./modals/AssignStudentModal";
@@ -82,18 +83,11 @@ class MySubscriptions extends Component {
     }    
 
     _renderSubscriptions() {
-        const {data, subscriptionsRequest, unSubscribeRequest, t} = this.props;
+        const {data, subscriptionsRequest, unSubscribeRequest, goTo, t} = this.props;
         
-        if (!subscriptionsRequest.get('loading') && subscriptionsRequest.get('records').size === 0) {
-            return (
-                <tr>
-                    <td>
-                        <div className="table-message">
-                            <h2>{t('noSubscriptions')}</h2>
-                        </div>
-                    </td>
-                </tr>
-            )
+        if (subscriptionsRequest.get('success') && subscriptionsRequest.get('records').size === 0) {
+            goTo('/subscriptions');
+            return;
         }
 
         return subscriptionsRequest.get('records').map((item, i) => {
@@ -185,7 +179,8 @@ MySubscriptions = connect(
   (dispatch) => ({
     getUserRecords: (params = {}) => { dispatch(getUserRecords(params)) },
     unSubscribe: (id, params = {}) => { dispatch(unSubscribe(id, params)) },
-    resetUnSubscribeRequest: (params = {}) => { dispatch(resetUnSubscribeRequest(params)) }
+    resetUnSubscribeRequest: (params = {}) => { dispatch(resetUnSubscribeRequest(params)) },    
+    goTo: (url) => {dispatch(push(url))}
   })
 )(MySubscriptions);
 
