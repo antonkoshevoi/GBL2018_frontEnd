@@ -25,7 +25,7 @@ class MainLayout extends Component {
            id={generateLinkId(pathname.split('/'))}>
         <div
           className={`m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body ${sidebarIsOpen ? 'm-sidebar-is-open' : ''} justify-content-center`}>
-          <Header mobileSidebar={() => {
+          <Header hideMenu={true} mobileSidebar={() => {
             this.openMobileSidebar()
           }}/>
 

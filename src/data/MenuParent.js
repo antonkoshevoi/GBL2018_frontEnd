@@ -6,27 +6,28 @@ export default  {
       title:'Dashboard',
       link:'dashboard',
       icon:'fa fa-dashboard',
-      colorName:'home',
+      colorName:'home'
     },
     {
       key:'subscriptions',
       title:'subscriptions',
-      link:'subscriptions',
+      link:'my-subscriptions',
       icon:'fa fa-calendar-check-o',
       colorName:'purple',
       subMenu:[
+        {
+          key:'mySubscriptions',
+          title:'mySubscriptions',
+          link:'my-subscriptions',
+          icon:'flaticon flaticon-user-ok'
+        },          
         {
           key:'buySubscription',
           title:'buySubscription',
           link:'subscriptions',
           icon:'flaticon flaticon-user-settings'
         },
-        {
-          key:'mySubscriptions',
-          title:'mySubscriptions',
-          link:'my-subscriptions',
-          icon:'flaticon flaticon-user-ok'
-        }
+
       ]
     },    
     {
