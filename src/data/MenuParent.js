@@ -27,7 +27,12 @@ export default  {
           link:'subscriptions',
           icon:'flaticon flaticon-user-settings'
         },
-
+        {
+          key:'subscriptionPayments',
+          title:'subscriptionPayments',
+          link:'subscriptions/payments',
+          icon:'flaticon flaticon-user-settings'
+        }
       ]
     },    
     {

@@ -76,3 +76,19 @@ export const selectGetStudentsRecordsRequest = createSelector(
     selectSubscriptionsDomain,
     (subState) => subState.get('getStudentsRecordsRequest')
 );
+
+/**
+ * Get Payments
+ */
+export const selectGetPaymentsRequest = createSelector(
+    selectSubscriptionsDomain,
+    (subState) => subState.get('getPaymentsRequest')
+);
+
+/**
+ * Get Pagiantion
+ */
+export const selectPagination = createSelector(
+    selectSubscriptionsDomain,
+    (subState) => subState.get('pagination')
+);

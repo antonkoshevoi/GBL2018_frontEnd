@@ -39,6 +39,10 @@ export const UNSUBSCRIBE_STUDENT_SUCCESS = '[Subscription] UNSUBSCRIBE_STUDENT_S
 export const UNSUBSCRIBE_STUDENT_FAIL = '[Subscription] UNSUBSCRIBE_STUDENT_FAIL';
 export const RESET_UNSUBSCRIBE_STUDENT_REQUEST = '[Subscription] RESET_UNSUBSCRIBE_STUDENT_REQUEST';
 
+export const GET_PAYMENTS = '[Subscription] GET_PAYMENTS';
+export const GET_PAYMENTS_SUCCESS = '[Subscription] GET_PAYMENTS_SUCCESS';
+export const GET_PAYMENTS_FAIL = '[Subscription] GET_PAYMENTS_FAIL';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -131,3 +135,11 @@ export function resetUnSubscribeRequest () {
     type: RESET_UNSUBSCRIBE_REQUEST
   }
 }
+
+export function getPayments(params = {}) {
+  return {
+    types: [GET_PAYMENTS, GET_PAYMENTS_SUCCESS, GET_PAYMENTS_FAIL],
+    promise: (apiClient) => apiClient.get('subscriptions/payments', params)
+  };
+}
+
