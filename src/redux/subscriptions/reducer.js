@@ -7,7 +7,8 @@ import {
   SUBSCRIBE_STUDENT, SUBSCRIBE_STUDENT_SUCCESS, SUBSCRIBE_STUDENT_FAIL, RESET_SUBSCRIBE_STUDENT_REQUEST,
   UNSUBSCRIBE_STUDENT, UNSUBSCRIBE_STUDENT_SUCCESS, UNSUBSCRIBE_STUDENT_FAIL, RESET_UNSUBSCRIBE_STUDENT_REQUEST,
   GET_STUDENTS_RECORDS, GET_STUDENTS_RECORDS_SUCCESS, GET_STUDENTS_RECORDS_FAIL,
-  GET_INVOICE, GET_INVOICE_SUCCESS, GET_INVOICE_FAIL
+  GET_INVOICE, GET_INVOICE_SUCCESS, GET_INVOICE_FAIL,
+  GET_PAYMENTS, GET_PAYMENTS_SUCCESS, GET_PAYMENTS_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -30,6 +31,12 @@ const initialState = Immutable.fromJS({
     fail: false,    
     records: []
   },
+  getPaymentsRequest: {
+    loading: false,
+    success: false,
+    fail: false,    
+    records: []
+  },  
   getStudentsRecordsRequest: {
     loading: false,
     success: false,
@@ -72,7 +79,13 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorMessage: null,    
     errors: {}
-  }
+  },
+  pagination: {
+    page: 1,
+    perPage: 10,
+    total: 0,
+    totalPages: 1
+  }  
 });
 
 export default function reducer (state = initialState, action) {
@@ -316,6 +329,31 @@ export default function reducer (state = initialState, action) {
     case RESET_UNSUBSCRIBE_STUDENT_REQUEST:
       return state.set('unsubscribeStudentRequest', initialState.get('unsubscribeStudentRequest'));
       
+      
+    case GET_PAYMENTS:
+      return state
+        .set('getPaymentsRequest', state.get('getPaymentsRequest')
+          .set('loading', true)
+          .remove('success')
+          .remove('fail')
+          .set('records', Immutable.List())
+        );
+    case GET_PAYMENTS_SUCCESS:
+      return state
+        .set('getPaymentsRequest', state.get('getPaymentsRequest')
+          .set('success', true)
+          .set('loading', false)          
+          .set('records', Immutable.fromJS(action.result.data))
+        )
+        .set('pagination', Immutable.fromJS(action.result.meta.pagination));
+    case GET_PAYMENTS_FAIL:
+      return state
+        .set('getPaymentsRequest', state.get('getPaymentsRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('records', Immutable.List())
+        );
+              
     /**
      * default
      */

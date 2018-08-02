@@ -380,6 +380,7 @@ export default {
     youHaveNoNewMessages: 'You have no new messages',
     seeAll: 'See All',
     subscriptions: 'Subscriptions',
+    subscription: 'Subscription',
     courseAtTime: '{{number}} course at a time',
     courseAnyCourseSwitchAnyTime: 'Choose any course switch any time',
     courseAnyCoursesSwitchAnyTime: 'Choose any {{number}} courses switch any time',
@@ -411,5 +412,11 @@ export default {
     youBoughtSubscription: 'Congratulations! You successfully bought new subscription.',
     viewMySubscriptions: 'View My Subscriptions',
     subscriptionDetails: 'Subscription Details',
-    yourPlan: 'Your Plan'
+    yourPlan: 'Your Plan',
+    selectYourAccountType: 'Select your account type',
+    parent: 'Parent',
+    principal: 'Principal',
+    paymentsNotFound: 'No Subscription Payments...',
+    subscriptionPayments: 'Subscription Payments',
+    transactionCode: 'Transaction #',
 }

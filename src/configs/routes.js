@@ -44,6 +44,7 @@ import Subscriptions from "../containers/subscriptions/Subscriptions";
 import MySubscriptions from "../containers/subscriptions/MySubscriptions";
 import Subscribe from "../containers/subscriptions/Subscribe";
 import Subscribed from "../containers/subscriptions/Subscribed";
+import Payments from "../containers/subscriptions/Payments";
 
 import ReportsDashboard from "../containers/pages/reports/Dashboard";
 import ClassRoomReportDashboard from "../containers/pages/reports/classroom/Dashboard";
@@ -109,6 +110,7 @@ export default () => (
       <AuthenticatedRoute exact layout={OnlyHeadLayout} path='/subscriptions' name='Subscriptions' component={Subscriptions} />
       <AuthenticatedRoute exact layout={OnlyHeadLayout} path='/subscribe/:id' name='Subscribe' component={Subscribe} />
       <AuthenticatedRoute exact layout={OnlyHeadLayout} path='/subscribed/:id' name='Subscribed' component={Subscribed} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/subscriptions/payments' name='Payments' component={Payments} />      
 
       <AuthenticatedRoute exact layout={MainLayout} path='/reports' component={ReportsDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReportDashboard}/>
