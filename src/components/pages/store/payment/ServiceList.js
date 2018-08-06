@@ -32,7 +32,7 @@ class ServiceList extends Component {
                         <span className="m-pricing-table-1__price">{t('unassignedCredits')}</span>
 
                         <div className="m-pricing-table-1__btn">
-                            <NavLink to="/accounts/unassigned_credits" ><button type="button" className="btn m-btn--pill  btn-brand m-btn--wide m-btn--uppercase m-btn--bolder m-btn--sm">{t('')}</button></NavLink>
+                            <NavLink to="/accounts/unassigned_credits" ><button type="button" className="btn m-btn--pill  btn-brand m-btn--wide m-btn--uppercase m-btn--bolder m-btn--sm">{t('open')}</button></NavLink>
                         </div>
                     </div>
 

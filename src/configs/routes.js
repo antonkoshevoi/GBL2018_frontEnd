@@ -28,7 +28,6 @@ import StudentReports from "../containers/pages/reports/Students";
 import Store from "../containers/pages/store/Store";
 import Details from "../containers/pages/store/Details";
 import Products from "../containers/pages/store/Products";
-import OpenInvoices from "../containers/pages/store/open-invoices/OpenInvoices";
 import Messages from '../containers/messages/Messages';
 import Checkout from "../containers/pages/store/checkout/Checkout";
 import PayPalReturnContainer from '../containers/pages/store/payments/PayPalReturnContainer';
@@ -128,7 +127,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/school-profile' name='School Profile' component={SchoolProfile} />
 
       {/*Open Invoices*/}
-      <AuthenticatedRoute exact layout={MainLayout} path='/accounts/invoices' name='OpenInvoices' component={OpenInvoices}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/accounts/invoices' name='Open Invoices' component={ShoppingCart}/>
       {/*Unassigned Credits*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/accounts/unassigned_credits' name='Unassigned Credits' component={UnassignedCredits} />
 

@@ -191,7 +191,7 @@ export default {
     postalOrZipCode: 'ES: Postal or Zip Code',
     telephone: 'ES: Telephone',
     paymentsOptions: 'ES: Payments Options',
-    yourInvoice: 'ES: Your invoice {{invoiceNo}} Total {{invoiceAmount}}',
+    yourInvoice: 'ES: Your invoice {{invoiceNo}} Total ${{invoiceAmount}}',
     shippingAndBilling: 'ES: Shipping and Billing',
     payPal: 'ES: PayPal',
     creditCard: 'ES: Credit Card',

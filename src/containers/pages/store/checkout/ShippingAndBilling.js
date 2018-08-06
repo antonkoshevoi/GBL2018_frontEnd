@@ -70,12 +70,8 @@ class ShippingAndBilling extends Component {
     this.props.setShippingAndBillingData(this.state);
   };
 
-  _renderType() {
-    const payMethod = this.props.payMethod;
-    return (<div>{payMethod}</div>)
-  }
-
   _renderSuccess() {
+    const {t} = this.props;
     return (
       <div style={{width: '100%', height: '270px'}}>
         <div className="alert m-alert m-alert--default">
@@ -84,7 +80,8 @@ class ShippingAndBilling extends Component {
               color: '#7ac943',
               fontSize: '100px'
             }}/>
-            Your shipping and billing info is saved. <br/> Creating {this._renderType()} request ...
+            {t('yourShippingAndBillingInfoSaved')}. <br/> 
+            {t('creatingRequest', {paymentType: this.props.payMethod})}
           </h3>
         </div>
         <div className="row d-flex justify-content-center">

@@ -24,7 +24,7 @@ class PaymentFailedContainer extends Component {
         const {history} = this.props;
 
         if (history.action !== "PUSH") {
-            history.push('/login')
+            //history.push('/login')
         }
     }
 
