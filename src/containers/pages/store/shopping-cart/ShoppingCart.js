@@ -69,9 +69,12 @@ class ShoppingCart extends Component {
         <div className='row'>
           <div className={`shoppingCartPortlet m-auto col-xl-${preview ? '12': '9'}`} >
             <div className='m-portlet m-portlet--full-height dashboard-shopping-cart-transparent-bg'>
-              <div className='m-portlet__head account-header-border'>
+              <div className='m-portlet__head m--margin-top-20'>
                 <div className='m-portlet__head-caption'>
                   <div className='m-portlet__head-title'>
+                    <span className="m-portlet__head-icon">
+                        <i className="fa fa-shopping-cart"></i>
+                    </span>
                     <h3 className='m-portlet__head-text'>
                       {preview ? t('ourAccount') : t('shoppingCart')}
                     </h3>

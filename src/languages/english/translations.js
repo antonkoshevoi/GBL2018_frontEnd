@@ -191,7 +191,7 @@ export default {
     postalOrZipCode: 'Postal or Zip Code',
     telephone: 'Telephone',
     paymentsOptions: 'Payments Options',
-    yourInvoice: 'Your invoice {{invoiceNo}} Total {{invoiceAmount}}',
+    yourInvoice: 'Your invoice {{invoiceNo}} Total ${{invoiceAmount}}',
     shippingAndBilling: 'Shipping and Billing',
     payPal: 'PayPal',
     creditCard: 'Credit Card',
@@ -419,4 +419,6 @@ export default {
     paymentsNotFound: 'No Subscription Payments...',
     subscriptionPayments: 'Subscription Payments',
     transactionCode: 'Transaction #',
+    yourShippingAndBillingInfoSaved: 'Your shipping and billing info is saved',
+    creatingRequest: 'Creating {{paymentType}} request...'
 }
