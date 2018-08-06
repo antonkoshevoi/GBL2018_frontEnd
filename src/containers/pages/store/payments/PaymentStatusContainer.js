@@ -8,7 +8,7 @@ import {selectLoginRequest} from "../../../../redux/auth/selectors";
 import {login, setRedirectUrl} from "../../../../redux/auth/actions";
 import {Button, Checkbox, CircularProgress, FormControlLabel} from '@material-ui/core';
 
-class PaymentCanceledContainer extends Component {
+class PaymentStatusContainer extends Component {
 
   constructor (props) {
     super(props);
@@ -37,46 +37,45 @@ class PaymentCanceledContainer extends Component {
     login(username, password, remember);
   }
 
-
   render() {
 
-    const {auth, loginRequest} = this.props;
+    const {auth, loginRequest, t} = this.props;
     const isLoggedIn = auth.get('isLoggedIn')
-    const loading = loginRequest.get('loading');
-    const errors = loginRequest.get('errors');
-
-  return (
+    const loading   = loginRequest.get('loading');
+    const status    = this.props.status;
+    const errors    = loginRequest.get('errors');
+   
+    return (
       <div className="row">
         <div className="col-md-10 m-auto">
           <div className="m-portlet m--margin-top-35">
             <div className="m-portlet__body">
               <div className="alert m-alert m-alert--default">
                 <h3 className="display-4 text-center">
-                  <i className="la la-times align-middle m--margin-right-20" style={{
-                    color: 'rgb(210, 50, 45)',
+                  <i className={`la ${(status === 'pending') ? 'la-check-circle' : 'la-times'} align-middle m--margin-right-20`} style={{
+                    color: (status === 'pending') ? '#FFD844' : '#D2322D',
                     fontSize: '100px'
                   }}/>
-                  Your payment was canceled
+                  {t(status + 'PaymentMessage')}
                 </h3>
               </div>
               {!isLoggedIn &&
               <div className="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2 m--full-height" id="m_login">
-                <div className="m-grid__item m-grid__item--fluid	m-login__wrapper">
+                <div className="m-grid__item m-grid__item--fluid m-login__wrapper">
                   <div className="m-login__container">
                     <div className="paymentLoginBlock">
-                      <p className="text-center">For see your transaction please log in</p>
-
+                      <p className="text-center">{t('loginToSeeYourTransactions')}</p>
                       <div className="m-login__signin">
                         <div className="m-login__head">
-                          <h3 className="m-login__title">Sign In </h3>
+                          <h3 className="m-login__title">{t('signIn')} </h3>
                         </div>
                         <div className="m-login__form m-form" action="">
                           <div className="form-group m-form__group">
-                            <input className="form-control m-input" type="text" placeholder="Username" name="username" autoComplete="off" value={this.state.username} onChange={this._handleUsernameChange}/>
+                            <input className="form-control m-input" type="text" placeholder={t('username')} name="username" autoComplete="off" value={this.state.username} onChange={this._handleUsernameChange}/>
                             {(errors.errors !== undefined && errors.errors.username) && <div id="username-error" className="form-control-feedback  text-center error">{errors.errors.username[0]}</div>}
                           </div>
                           <div className="form-group m-form__group">
-                            <input className="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password" value={this.state.password} onChange={this._handlePasswordChange}/>
+                            <input className="form-control m-input m-login__form-input--last" type="password" placeholder={t('password')} name="password" value={this.state.password} onChange={this._handlePasswordChange}/>
                             {(errors.errors !== undefined && errors.errors.password) && <div id="password-error" className="form-control-feedback  text-center error">{errors.errors.password[0]}</div>}
                           </div>
                           <div className="row m-login__form-sub">
@@ -87,20 +86,18 @@ class PaymentCanceledContainer extends Component {
                                   onChange={this._handleRememberChange}
                                   value={''}
                                 />}
-                                label="Remember me"
+                                label={t('rememberMe')}
                               />
                             </div>
                             <div className="col m--align-right m-login__form-right m--hide">
-                              <a href="javascript:;" id="m_login_forget_password" className="m-link">Forget Password ?</a>
+                              <a href="javascript:;" id="m_login_forget_password" className="m-link">{t('forgetPassword')} ?</a>
                             </div>
                           </div>
                           <div className="m-login__form-action">
                             <Button id="m_login_signin_submit"  variant="raised" color="primary" onClick={() => { this._login() }}
                                 className="btn  m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primary">
-                              <span>Sign In</span>
-                              {loading &&
-                              <CircularProgress color="primary"/>
-                              }
+                              <span>{t('signIn')}</span>
+                              {loading && <CircularProgress color="primary"/> }
                             </Button>
                           </div>
                         </div>
@@ -110,28 +107,24 @@ class PaymentCanceledContainer extends Component {
                 </div>
               </div>
               }
-
-              {isLoggedIn &&
-                <ServiceList/>
-              }
+              {isLoggedIn && <ServiceList/> }
             </div>
           </div>
         </div>
       </div>
-
     );
   }
 }
 
-PaymentCanceledContainer = connect(
+PaymentStatusContainer = connect(
   (state) => ({
     loginRequest: selectLoginRequest(state),
     auth: state.auth
   }),
   (dispatch) => ({
     login: (username, password, remember) => { dispatch(login(username, password, remember)); },
-    setRedirectUrl: (uri) => { dispatch(setRedirectUrl(uri)); },
+    setRedirectUrl: (uri) => { dispatch(setRedirectUrl(uri)); }
   })
-)(PaymentCanceledContainer);
+)(PaymentStatusContainer);
 
-export default withRouter(translate('PaymentCanceledContainer')(PaymentCanceledContainer));
+export default withRouter(translate('translations')(PaymentStatusContainer));

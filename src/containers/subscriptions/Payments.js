@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import { Button, Icon, MenuItem, Select } from '@material-ui/core';
+import { MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
-import { buildSortersQuery } from '../../helpers/utils';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import { selectPagination, selectGetPaymentsRequest } from '../../redux/subscriptions/selectors';
 import { getPayments } from '../../redux/subscriptions/actions';
 import Pagination from '../../components/ui/Pagination';
@@ -57,7 +55,7 @@ class Payments extends Component {
         const { page, perPage } = this.state;
 
         this.props.getPayments({
-        page, perPage
+            page, perPage
         });
     }
 
@@ -71,8 +69,7 @@ class Payments extends Component {
 
     render() {
         const { paymentsRequest, pagination, t } = this.props;
-        const { sorters, page, perPage } = this.state;
-        const loading = paymentsRequest.get('loading');
+        const { page, perPage } = this.state;        
         const totalPages = pagination.get('totalPages');
 
         return (
