@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate, Interpolate } from 'react-i18next';
+import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnSubscribeRequest } from '../../redux/subscriptions/selectors';
@@ -83,7 +83,7 @@ class MySubscriptions extends Component {
     }    
 
     _renderSubscriptions() {
-        const {data, subscriptionsRequest, unSubscribeRequest, goTo, t} = this.props;
+        const { subscriptionsRequest, goTo, t} = this.props;
         
         if (subscriptionsRequest.get('success') && subscriptionsRequest.get('records').size === 0) {
             goTo('/subscriptions');

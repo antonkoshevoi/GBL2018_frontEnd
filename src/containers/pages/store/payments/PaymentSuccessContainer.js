@@ -6,7 +6,6 @@ import {withRouter} from 'react-router-dom';
 import {getInvoice} from '../../../../redux/payments/actions';
 import {invoiceRequest} from '../../../../redux/payments/selectors';
 import {login, setRedirectUrl} from "../../../../redux/auth/actions";
-import CartItems from "../../../../components/pages/store/checkout/CartItems";
 import Typography from '@material-ui/core/Typography';
 
 class PaymentSuccessContainer extends Component {
@@ -64,6 +63,27 @@ class PaymentSuccessContainer extends Component {
     login(username, password, remember);
   }
 
+  _renderItems(invoice) {
+    const {t} = this.props;
+    const items = invoice.get('items');
+    return items.map((item, key) => (
+      <div key={key} className="m-widget4__item">
+
+        <div className="m-widget4__info">
+            <span className="m-widget4__title">
+                {item.get('title')}
+            </span> <br/>
+            <span className="m-widget4__sub">
+                {item.get('quantity')} {t('items')}
+            </span>
+        </div>
+        <span className="m-widget4__ext">
+            <span className="m-widget4__number m--font-danger">${item.get('total_price')}</span>
+          </span>
+      </div>
+    ));
+  }
+  
   render() {
     const {invoiceRequest, t} = this.props;
     const invoice = invoiceRequest.get('data');
@@ -72,14 +92,14 @@ class PaymentSuccessContainer extends Component {
       <div className="row">
         <div className="col-md-10 m-auto">
           {invoice &&
-          <div className="m-widget25">
-              <span className="invoice-title">
-                  {t('yourInvoice', {invoiceNo: invoice.get('invoice_no'), invoiceAmount: invoice.get('total')})}.
-              </span>                
-              <p class="text-center">
-                  <a className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
-              </p>
-          </div>
+            <div className="m-widget25">
+                <span className="invoice-title">
+                    {t('yourInvoice', {invoiceNo: invoice.get('invoice_no'), invoiceAmount: invoice.get('total')})}.
+                </span>                
+                <p class="text-center">
+                    <a className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
+                </p>
+            </div>
           }
         </div>
         {distributor &&
@@ -101,7 +121,6 @@ class PaymentSuccessContainer extends Component {
                 {t('interactPayment')}
                 <span className="d-block">{t('emailToDistributor', {email: distributor.get('email')})}</span>
                 <span className="d-block">
-
                 </span>
               </div>
             </div>
@@ -134,9 +153,20 @@ class PaymentSuccessContainer extends Component {
           </div>
         }
         {invoice &&
-        <div className="col-md-10 m-auto">
-          <CartItems data={invoice}/>
-        </div>
+            <div className="col-md-10 m-auto">
+                <div className="m-portlet m-portlet--bordered-semi cartItems">
+                  <div className="m-portlet__body">
+                    <div className="m-widget25">
+                      <Typography variant="title" gutterBottom>
+                      </Typography>
+                      <span className="invoice-title">{t('orderDetails')}</span>
+                    </div>
+                    <div className="m-widget4 col-md-7 m-auto">
+                        {this._renderItems(invoice)}
+                    </div>
+                  </div>
+                </div>        
+            </div>
         }
       </div>
     );

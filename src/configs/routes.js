@@ -31,13 +31,11 @@ import Products from "../containers/pages/store/Products";
 import Messages from '../containers/messages/Messages';
 import Checkout from "../containers/pages/store/checkout/Checkout";
 import PayPalReturnContainer from '../containers/pages/store/payments/PayPalReturnContainer';
-import PaymentFailedContainer from '../containers/pages/store/payments/PaymentFailedContainer';
 import PaymentSuccessContainer from '../containers/pages/store/payments/PaymentSuccessContainer';
-import PaymentPendingContainer from '../containers/pages/store/payments/PaymentPendingContainer';
+import PaymentStatusContainer from '../containers/pages/store/payments/PaymentStatusContainer';
 import RestoreLogin from "../containers/auth/RestoreLogin";
-import TransactionsContainer from "../containers/pages/store/payments/TransactionsContainer";
+import Transactions from "../containers/pages/store/Transactions";
 import UnassignedCredits from "../containers/unassigned-credits/UnassignedCredits";
-import PaymentCanceledContainer from '../containers/pages/store/payments/PaymentCanceledContainer';
 
 import Subscriptions from "../containers/subscriptions/Subscriptions";
 import MySubscriptions from "../containers/subscriptions/MySubscriptions";
@@ -49,7 +47,7 @@ import ReportsDashboard from "../containers/pages/reports/Dashboard";
 import ClassRoomReportDashboard from "../containers/pages/reports/classroom/Dashboard";
 import HomeRoomReportDashboard from "../containers/pages/reports/homeroom/Dashboard";
 import InvitationDetails from '../containers/invitations/InvitationDetails';
-import ShoppingCart from "../containers/pages/store/shopping-cart/ShoppingCart";
+import ShoppingCart from "../containers/pages/store/ShoppingCart";
 import OnlyHeadLayout from "../containers/layouts/OnlyHeadLayout";
 import AutoCreate from "../containers/classrooms/AutoCreate";
 import ProfileEdit from "../containers/profile/ProfileEdit";
@@ -134,11 +132,11 @@ export default () => (
       {/*Payments*/}
       <Route exact path='/payments/paypal/return' component={PayPalReturnContainer} />
       <Route exact layout={MainLayout} path='/payments/success' component={PaymentSuccessContainer} />
-      <Route exact layout={MainLayout} path='/payments/fail' component={PaymentFailedContainer} />
-      <Route exact layout={MainLayout} path='/payments/pending' component={PaymentPendingContainer} />
-      <Route exact layout={MainLayout} path='/payments/canceled' component={PaymentCanceledContainer} />
+      <Route exact layout={MainLayout} path='/payments/fail' render={(props) => <PaymentStatusContainer {...props} status="fail" /> } />
+      <Route exact layout={MainLayout} path='/payments/pending' render={(props) => <PaymentStatusContainer {...props} status="pending" /> } />
+      <Route exact layout={MainLayout} path='/payments/canceled' render={(props) => <PaymentStatusContainer {...props} status="canceled" /> } />
 
-      <Route exact layout={MainLayout} path='/accounts/transactions' component={TransactionsContainer} />
+      <Route exact layout={MainLayout} path='/accounts/transactions' component={Transactions} />
 
       <Route exact path='/invitations/details/:id/:hash' component={InvitationDetails}/>
 

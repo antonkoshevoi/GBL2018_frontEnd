@@ -2,25 +2,21 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import '../../../../styles/store.css'
-import PaymentMethods from '../../../../components/pages/store/checkout/PaymentMethods';
 import {selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest} from '../../../../redux/store/selectors';
 import {calculateCartSum, getCartRecords} from '../../../../redux/store/actions';
 import {withRouter} from 'react-router-dom';
 import {push} from 'react-router-redux';
 import {selectCreateCheckPaymentRequest, selectCreatePayPalPaymentRequest, selectPaymentMethod} from '../../../../redux/payments/selectors';
 import {createCheckPayment, createPayPalPayment, setPayType} from '../../../../redux/payments/actions';
-import {Step, StepLabel, Stepper, Button, CircularProgress, withStyles} from '@material-ui/core';
+import {Step, StepLabel, Stepper, Button, CircularProgress} from '@material-ui/core';
 import payPalImg from '../../../../media/images/payments/paypal.png'
 import creditCardImg from '../../../../media/images/payments/credit_card.png'
 import checkImg from '../../../../media/images/payments/check.png'
 import Card from "../../../../components/ui/Card";
 import ShippingAndBilling from "./ShippingAndBilling";
 import CreditCard from "./CreditCard";
+import PaymentMethods from './PaymentMethods';
 import PaymentSuccessContainer from "../payments/PaymentSuccessContainer";
-
-const styles = () => ({
-  iconContainer: {}
-});
 
 class Checkout extends Component {
 
@@ -154,8 +150,7 @@ class Checkout extends Component {
     } = this.state;
     const {
       cartRecords,
-      cartRecordsRequest,
-      createPayPalPaymentRequest,
+      cartRecordsRequest,      
       createCheckPaymentRequest,
       cartRecordsSum,
       t
@@ -202,7 +197,7 @@ class Checkout extends Component {
                           {
                             title: t('payPal'),
                             img: payPalImg,                            
-                            onSelect: this._processPayPal,
+                            onSelect: this._processPayPal
                           },
                           {
                             title: t('creditCard'),
@@ -285,11 +280,10 @@ Checkout = connect(
     getCartRecords:     () => {dispatch(getCartRecords())},
     calculateSum:       (data) => {dispatch(calculateCartSum(data))},
     createPayPalPayment:(data) => {dispatch(createPayPalPayment(data))},
-    createCheckPayment: (data) => {dispatch(createCheckPayment(data))},
-    goToSuccessPage:    () => {dispatch(push('/shopping/checkout/2'))},
+    createCheckPayment: (data) => {dispatch(createCheckPayment(data))},    
     goToFailPage:       () => {dispatch(push('/payments/fail'))},
     setPayMethod:       (data) => {dispatch(setPayType(data))}
   })
-)(withStyles(styles)(Checkout));
+)(Checkout);
 
 export default withRouter(translate('translations')(Checkout));

@@ -11,7 +11,7 @@ import {selectRecords} from "../../redux/store/selectors";
 import QuickLink from "./sections/QuickLink";
 import FeaturedItems from "./sections/FeaturedItems";
 import Card from "../../components/ui/Card";
-import ShoppingCart from "../pages/store/shopping-cart/ShoppingCart";
+import ShoppingCart from "../pages/store/ShoppingCart";
 
 class UserDashboard extends Component {
   constructor(props) {

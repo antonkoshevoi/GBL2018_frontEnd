@@ -420,5 +420,10 @@ export default {
     subscriptionPayments: 'Subscription Payments',
     transactionCode: 'Transaction #',
     yourShippingAndBillingInfoSaved: 'Your shipping and billing info is saved',
-    creatingRequest: 'Creating {{paymentType}} request...'
+    creatingRequest: 'Creating {{paymentType}} request...',
+    failPaymentMessage: 'Unfortunately your payment has failed',
+    canceledPaymentMessage: 'Your payment was canceled',
+    pendingPaymentMessage: 'Your payment is now pending',
+    loginToSeeYourTransactions: 'For see your transaction please log in',
+    orderDetails: 'Order details'
 }

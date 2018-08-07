@@ -95,14 +95,13 @@ StudentsBulkUpload = connect(
   (dispatch) => ({
     getSchools: () => { dispatch(getSchools()) },
     getSchool: () => { dispatch(getSchool()) },
-    resetBulkUploadRequest: () => { dispatch(resetBulkUploadRequest()) },
+    resetBulkUploadRequest: () => { dispatch(resetBulkUploadRequest()) },    
     upload: (file, schoolId) => {
       dispatch(resetBulkUploadRequest());
       dispatch(bulkUpload(file, {
         schoolId
       }));
-    },
-    resetBulkUploadRequest: () => { dispatch(resetBulkUploadRequest()) }
+    }    
   })
 )(StudentsBulkUpload);
 

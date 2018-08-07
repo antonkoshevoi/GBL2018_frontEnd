@@ -1,26 +1,38 @@
 import React, {Component} from 'react';
-import {translate} from "react-i18next";
-import Card from "../../../ui/Card";
-import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../../ui/table";
+import {connect} from 'react-redux';
+import {translate} from 'react-i18next';
+import {withRouter} from "react-router-dom";
+import {getRecords} from "../../../redux/transactions/actions";
+import {selectGetRecordsRequest, selectRecords} from "../../../redux/transactions/selectors";
+import Card from "../../../components/ui/Card";
+import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../../components/ui/table";
 import {IconButton} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
 
-class TransactionList extends Component {
+class Transactions extends Component {
 
     state = {
 
     }
+    
+    componentDidMount(){
+        this._getTransactions();
+    }
+
+    _getTransactions(){
+        this.props.getRecords();
+    }    
 
     _toggleSubTable(row) {
         this.setState({[row]:!this.state[row]})
     }
 
     _renderTransactions() {
-        const {data, request, t} = this.props;
+        const {records, cartRecordsRequest, t} = this.props;
 
-        const loading = request.get('loading');
+        const loading = cartRecordsRequest.get('loading');
 
-        if (!loading && data.size === 0) {
+        if (!loading && records.size === 0) {
             return (
                 <tr>
                     <td>
@@ -32,7 +44,7 @@ class TransactionList extends Component {
             )
         }
 
-        return data.map((item, i) => {
+        return records.map((item, i) => {
             return ( [
                     <Row index={i} key={i}>
                         <Td first={true}  width='20px'>
@@ -51,7 +63,6 @@ class TransactionList extends Component {
             )
         })
     }
-
 
     _renderTransactionItemsBlock(data) {
         const {t} = this.props;
@@ -94,35 +105,47 @@ class TransactionList extends Component {
     }
 
     render() {
-        const {request, t} = this.props;
-        const loading = request.get('loading');
-
+        const {cartRecordsRequest, t} = this.props;
+        const loading = cartRecordsRequest.get('loading');
+         
         return (
-        <div className="transactionsList">
-            <Card title={t('transactions')} icon="la la-money">
-                <Table >
-                    <Thead>
-                        <HeadRow>
-                            <Th width='20px'></Th>
-                            <Th first={true} width='20px'>#</Th>
-                            <Th name='total' width='102px'>{t('total')}</Th>
-                            <Th name='type' width='100px'>{t('type')}</Th>
-                            <Th name='created' width='140px'>{t('created')}</Th>
-                            <Th name='authorized' width='140px'>{t('authorized')}</Th>
-                        </HeadRow>
-                    </Thead>
-                    <Tbody>
-                    {this._renderTransactions()}
-
-                    {loading &&
-                    <TablePreloader text="Loading..." color="primary"/>
-                    }
-                    </Tbody>
-                </Table>
-            </Card>
-        </div>
+            <div className="transactionsList">
+                <Card title={t('transactions')} icon="la la-money">
+                    <Table >
+                        <Thead>
+                            <HeadRow>
+                                <Th width='20px'></Th>
+                                <Th first={true} width='20px'>#</Th>
+                                <Th name='total' width='102px'>{t('total')}</Th>
+                                <Th name='type' width='100px'>{t('type')}</Th>
+                                <Th name='created' width='140px'>{t('created')}</Th>
+                                <Th name='authorized' width='140px'>{t('authorized')}</Th>
+                            </HeadRow>
+                        </Thead>
+                        <Tbody>
+                        {this._renderTransactions()}
+                        {loading && <TablePreloader text="Loading..." color="primary"/>}
+                        </Tbody>
+                    </Table>
+                </Card>
+            </div>
         );
-    }
- }
+    }    
+}
 
- export default translate("translations")(TransactionList);
+
+Transactions = connect(
+    (state) => ({
+        cartRecordsRequest: selectGetRecordsRequest(state),
+        records: selectRecords(state),
+        auth: state.auth
+    }),
+    (dispatch) => ({
+        getRecords: () => { dispatch(getRecords()) }
+    })
+)(Transactions);
+
+export default withRouter(translate("translations")(Transactions));
+
+
+

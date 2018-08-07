@@ -3,22 +3,20 @@ import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import PropTypes from 'prop-types';
 
-import OpenInvoicesTable from '../../../../components/pages/store/OpenInvoicesTable';
+import OpenInvoicesTable from '../../../components/pages/store/OpenInvoicesTable';
 
 import {
   deleteFromCartRequest, selectAddToCartRequest,
   selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest,
-} from '../../../../redux/store/selectors';
+} from '../../../redux/store/selectors';
 import {
   calculateCartSum, deleteCartRecord, getCartRecords, setItemQuantity,
   updateShoppingCart
-} from '../../../../redux/store/actions';
+} from '../../../redux/store/actions';
 import {withRouter,NavLink} from 'react-router-dom';
-import Loader from '../../../../components/layouts/Loader';
+import Loader from '../../../components/layouts/Loader';
 
 class ShoppingCart extends Component {
-
-
   componentDidMount() {
     const { records } = this.props;
 
@@ -66,7 +64,7 @@ class ShoppingCart extends Component {
     return (
       <div>
         {loading && <Loader/>}
-        <div className='row'>
+        <div className={`row ${preview ? '': 'cart-items'}`}>
           <div className={`shoppingCartPortlet m-auto col-xl-${preview ? '12': '9'}`} >
             <div className='m-portlet m-portlet--full-height dashboard-shopping-cart-transparent-bg'>
               <div className='m-portlet__head m--margin-top-20'>
