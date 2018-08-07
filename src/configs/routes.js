@@ -34,7 +34,7 @@ import PayPalReturnContainer from '../containers/pages/store/payments/PayPalRetu
 import PaymentSuccessContainer from '../containers/pages/store/payments/PaymentSuccessContainer';
 import PaymentStatusContainer from '../containers/pages/store/payments/PaymentStatusContainer';
 import RestoreLogin from "../containers/auth/RestoreLogin";
-import TransactionsContainer from "../containers/pages/store/payments/TransactionsContainer";
+import Transactions from "../containers/pages/store/Transactions";
 import UnassignedCredits from "../containers/unassigned-credits/UnassignedCredits";
 
 import Subscriptions from "../containers/subscriptions/Subscriptions";
@@ -47,7 +47,7 @@ import ReportsDashboard from "../containers/pages/reports/Dashboard";
 import ClassRoomReportDashboard from "../containers/pages/reports/classroom/Dashboard";
 import HomeRoomReportDashboard from "../containers/pages/reports/homeroom/Dashboard";
 import InvitationDetails from '../containers/invitations/InvitationDetails';
-import ShoppingCart from "../containers/pages/store/shopping-cart/ShoppingCart";
+import ShoppingCart from "../containers/pages/store/ShoppingCart";
 import OnlyHeadLayout from "../containers/layouts/OnlyHeadLayout";
 import AutoCreate from "../containers/classrooms/AutoCreate";
 import ProfileEdit from "../containers/profile/ProfileEdit";
@@ -136,7 +136,7 @@ export default () => (
       <Route exact layout={MainLayout} path='/payments/pending' render={(props) => <PaymentStatusContainer {...props} status="pending" /> } />
       <Route exact layout={MainLayout} path='/payments/canceled' render={(props) => <PaymentStatusContainer {...props} status="canceled" /> } />
 
-      <Route exact layout={MainLayout} path='/accounts/transactions' component={TransactionsContainer} />
+      <Route exact layout={MainLayout} path='/accounts/transactions' component={Transactions} />
 
       <Route exact path='/invitations/details/:id/:hash' component={InvitationDetails}/>
 

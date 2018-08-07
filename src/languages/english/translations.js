@@ -424,5 +424,6 @@ export default {
     failPaymentMessage: 'Unfortunately your payment has failed',
     canceledPaymentMessage: 'Your payment was canceled',
     pendingPaymentMessage: 'Your payment is now pending',
-    loginToSeeYourTransactions: 'For see your transaction please log in'
+    loginToSeeYourTransactions: 'For see your transaction please log in',
+    orderDetails: 'Order details'
 }

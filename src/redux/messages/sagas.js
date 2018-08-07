@@ -20,7 +20,7 @@ function* afterReceivedNewMessage (action) {
 
 const messagesSagas = all([
   takeLatest(SUBSCRIBE_FAIL, afterFailedToSubscribe),
-  // takeLatest(NEW_MESSAGE_RECEIVED, afterReceivedNewMessage),
+  takeLatest(NEW_MESSAGE_RECEIVED, afterReceivedNewMessage)
 ]);
 
 export default messagesSagas;

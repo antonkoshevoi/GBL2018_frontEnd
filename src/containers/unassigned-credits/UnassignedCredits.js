@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import {getUnassigneds} from "../../redux/store/actions";
 import {getUnassignedsRequest} from "../../redux/store/selectors";
 import {buildSortersQuery} from "../../helpers/utils";
+import Card from "../../components/ui/Card";
 
 class UnassignedCredits extends Component {
   constructor(props) {
@@ -22,13 +23,6 @@ class UnassignedCredits extends Component {
     getUnassigneds();
   }
 
-  componentWillReceiveProps(nextProps) {
-
-  }
-
-  /**
-   * Records
-   */
   _getRecords () {
     const { sorters, filters, page, perPage } = this.state;
 
@@ -61,7 +55,7 @@ class UnassignedCredits extends Component {
         <Td first={true} width='100px'>{key + 1}</Td>
         <Td width="80px">
           <div >
-            <img alt="{t('course')}" src={record.get('item').get('thumbnail')} width={70}/>
+            <img alt={t('course')} src={record.get('item').get('thumbnail')} width={70}/>
           </div>
         </Td>
         <Td width='132px'>{record.get('item').get('title')}</Td>
@@ -89,10 +83,8 @@ class UnassignedCredits extends Component {
     const loading = this.props.getUnassignedsRequest.get('loading');
     
     return (
-      <div className='fadeInLeft  animated'>
-
-        <div className='m-portlet m-portlet--head-solid-bg m-portlet--brand'>
-          <div className='m-portlet__body'>
+        <div>
+            <Card title={t('unassignedCredits')} icon="la la-money">
             <Table>
               <Thead>
                 <HeadRow>
@@ -104,14 +96,11 @@ class UnassignedCredits extends Component {
                 </HeadRow>
               </Thead>
               <Tbody>
-              {loading &&
-              <TablePreloader text="Loading..." color="primary"/>
-              }
+              { loading && <TablePreloader text="Loading..." color="primary"/> }
               { this._renderRecords() }
               </Tbody>
             </Table>
-          </div>
-        </div>
+          </Card>        
       </div>
     );
   }
