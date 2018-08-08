@@ -75,7 +75,7 @@ export default {
     unassignedCredits: 'Unassigned Credits',
     role: 'Role',
     users: 'Users',
-    usersNotFound: 'Users Not Found...',
+    usersNotFound: 'Users not found...',
     editUser: 'Edit User',
     updateUser: 'Update User',
     createUser: 'Create user',
@@ -425,5 +425,10 @@ export default {
     canceledPaymentMessage: 'Your payment was canceled',
     pendingPaymentMessage: 'Your payment is now pending',
     loginToSeeYourTransactions: 'For see your transaction please log in',
-    orderDetails: 'Order details'
+    orderDetails: 'Order details',
+    messages: 'Messages',
+    typeHere: 'Type here...',
+    noMessagesYet: 'No messages yet',
+    searchUser: 'Search...',    
+    conversations: 'Conversations'
 }

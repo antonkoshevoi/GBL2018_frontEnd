@@ -137,16 +137,25 @@ class Messages extends Component {
   }
 
   render() {
-    const { users, getUsersRequest, userData } = this.props;
+    const { users, getUsersRequest, userData, t } = this.props;
     const threads = this._getThreads();
     const selectedThread = this._getSelectedThread();
 
-    return (
-      <div className="row">
-        <div className="col-lg-12 animated fadeInLeft">
+    return (      
+        <div className="animated fadeInLeft">
           <div className="m-portlet messages-portlet  m-portlet--info">
-            <div className="m-portlet__body m-portlet__body--no-padding">
-              <div className="row  m-row--col-separator-xl">
+          <div className='m-portlet__head border-b-blue'>
+            <div className='m-portlet__head-caption'>
+              <div className='m-portlet__head-title'>
+                <span className='m-portlet__head-icon'>
+		  <i className='la la-comments-o' style={{fontSize:'55px'}}></i>
+                </span>
+                <h3 className='m-portlet__head-text'>{t('messages')}</h3>
+              </div>
+            </div>
+          </div>          
+            <div className="m-portlet__body">
+              <div className="row">
                 <div className="col-lg-3 no-padding">
                   <div className="m-list-search">
                     <Scrollbars autoHide>
@@ -171,8 +180,7 @@ class Messages extends Component {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div>      
     );
   }
 }
@@ -194,4 +202,4 @@ Messages = connect(
   })
 )(Messages);
 
-export default translate('profile')(Messages);
+export default translate('translations')(Messages);

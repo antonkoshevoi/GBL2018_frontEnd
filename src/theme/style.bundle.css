@@ -15940,11 +15940,11 @@ code {
     .m-messenger .m-messenger__form .m-messenger__form-controls .m-messenger__form-input {
       width: 100%;
       padding: 10px 20px;
-      -webkit-border-radius: 20px;
-      -moz-border-radius: 20px;
-      -ms-border-radius: 20px;
-      -o-border-radius: 20px;
-      border-radius: 20px; }
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      -ms-border-radius: 10px;
+      -o-border-radius: 10px;
+      border-radius: 10px; }
   .m-messenger .m-messenger__form .m-messenger__form-tools {
     display: table-cell;
     vertical-align: middle;
@@ -16184,11 +16184,12 @@ code {
     background-color: #ebedf2; }
 
 .m-messenger .m-messenger__form .m-messenger__form-attachment {
-  background-color: #f7f8fa;
-  color: #cfcedb; }
+  background-color: #589EE4;
+  color: #fff; }
   .m-messenger .m-messenger__form .m-messenger__form-attachment:hover {
-    background-color: #ebedf2;
-    color: #cfcedb; }
+    background-color: #337AB7;
+    color: #fff;
+  }
 
 .m-messenger .m-messenger__seperator {
   border-bottom: 1px solid #f4f5f8; }

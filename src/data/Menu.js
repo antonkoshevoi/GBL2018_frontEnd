@@ -85,14 +85,8 @@ export default  {
                 {
                     key: 'inbox',
                     title: 'inbox',
-                    link: 'inbox',
+                    link: 'messages',
                     icon: 'flaticon flaticon-user-settings',
-                },
-                {
-                    key: 'labels',
-                    title: 'labels',
-                    link: 'labels',
-                    icon: 'flaticon flaticon-user-ok',
                 },
                 {
                     key: 'sent',
