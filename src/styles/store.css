@@ -242,30 +242,6 @@ button .discount > span {
     margin-bottom: 0 !important;
 }
 
-/*@media (max-width: 1367px) {*/
-/*.productSection .cardItem:nth-child(9) {*/
-/*display: none;*/
-/*}*/
-/*}*/
-
-/*@media (max-width: 1000px) {*/
-/*.productSection .cardItem:nth-child(8) {*/
-/*display: none;*/
-/*}*/
-/*}*/
-
-/*@media (max-width: 900px) {*/
-/*.productSection .cardItem:nth-child(7) {*/
-/*display: none;*/
-/*}*/
-/*}*/
-
-/*@media (max-width: 700px) {*/
-/*.productSection .cardItem:nth-child(6) {*/
-/*display: none;*/
-/*}*/
-/*}*/
-
 @media (max-width: 600px) {
     .verticalCardItem.cardItem {
         max-width: 170px;
