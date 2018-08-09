@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {translate} from 'react-i18next';
 
-import SplashHeader from '../Splash/SplashHeader'
-import SplashNavigation from '../Splash/SplashNavigation'
-import SplashFooter from '../Splash/SplashFooter'
+import SplashHeader from './sections/SplashHeader'
+import SplashNavigation from './sections/SplashNavigation'
+import SplashFooter from './sections/SplashFooter'
 import {withRouter} from 'react-router-dom';
-import '../Splash/splash.css';
+import './splash.css';
 import 'react-sticky-header/styles.css';
 import StickyHeader from 'react-sticky-header';
 const minHeight = window.document.documentElement.clientHeight - 225;
