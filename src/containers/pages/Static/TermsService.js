@@ -10,11 +10,7 @@ import 'react-sticky-header/styles.css';
 import StickyHeader from 'react-sticky-header';
 
 class TermsService extends Component {
-    
-  constructor(props) {
-    super(props);
-  }    
-  
+      
   _renderContent() {
     const {t} = this.props;
     

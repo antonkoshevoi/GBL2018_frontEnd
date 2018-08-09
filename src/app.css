@@ -1868,13 +1868,11 @@ td.rotate div span {
 
 .store-container {
     white-space: nowrap;
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
-.store-featured {
-    max-width: 460px;
-    white-space: pre-wrap;
-    display: inline-block;
+.store-featured {    
+    white-space: pre-wrap;   
     zoom: 0.8;
 }
 .store-featured .verticalCardItem.cardItem{

@@ -156,47 +156,35 @@ class OpenInvoicesTable extends Component {
 
   _renderTotalRow(sum,count) {
     const {t} = this.props;
-    return (
-      <div>
-        <div className="m alert  ">
+    return (      
+        <div className="m alert">
           <div className="row text-right">
-            <div className="col-md-2 text-center">
+            <div className="col-md-6 text-left">
               <h3>{t('itemsCount', {count: count})}</h3>
             </div>
-            <div className="col-md-10">
-              <div className="text-left d-inline-block">
+            <div className="col-md-6 text-right">              
                 <span>{t('total')}</span><br/>
-                <span className="productPrice">
-                {'$' + parseFloat(sum).toFixed(2)}
-                </span>
-              </div>
+                <span className="productPrice"> {'$' + parseFloat(sum).toFixed(2)}</span>              
             </div>
           </div>
-        </div>
-      </div>
+        </div>      
     )
   }
   _renderTaxRow(tax = 0) {
     const {t} = this.props;
     return (
-      <div>
         <div className="m alert m-alert--default">
           <div className="row text-right">
-            <div className="col-md-4">
-              <div className="row text-left d-flex justify-content-center flex-column productTax">
-                <h4>{t('shippingAndTax')}</h4>
-              </div>
+            <div className="col-md-6 text-left">              
+                <h4>{t('shippingAndTax')}</h4>              
             </div>
-            <div className="col-md-8">
-              <div className="text-left d-inline-block">
+            <div className="col-md-6 text-right">              
                 <span className="productTaxPrice">
-                {'$' + parseFloat(tax).toFixed(2)}
-                </span>
-              </div>
+                    {'$' + parseFloat(tax).toFixed(2)}
+                </span>              
             </div>
           </div>
-        </div>
-      </div>
+        </div>     
     )
   }
 

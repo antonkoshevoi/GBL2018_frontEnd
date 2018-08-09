@@ -5,13 +5,8 @@ import {translate} from 'react-i18next';
 import {MenuItem, Select} from '@material-ui/core';
 import Card from "../../components/ui/Card";
 import {EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../components/ui/table";
-import {
-  selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination,
-  selectRecords
-} from "../../redux/classrooms/selectors";
-import {
-  getRecordsPublic, getSingleAutoClassRecord, getSingleRecord, resetUpdateAutoClass
-} from "../../redux/classrooms/actions";
+import {selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords} from "../../redux/classrooms/selectors";
+import {getRecordsPublic, getSingleAutoClassRecord, resetUpdateAutoClass} from "../../redux/classrooms/actions";
 import HasPermission from "../middlewares/HasPermission";
 import EditAutoClassroomModal from "./modals/EditAutoClassroomModal";
 import {getSchoolTeachers} from "../../redux/schools/actions";
@@ -67,6 +62,7 @@ class AutoCreate extends Component {
     //
     // this.setState({ perPage, page }, this._getRecords)
   };
+  
   _editRecord (id) {
     this.props.getSingleRecord(id);
     this.props.getSchoolTeachers();
@@ -132,7 +128,7 @@ class AutoCreate extends Component {
   }
 
   render() {
-    const {getParentPublicClassroom, classroomRecords, t} = this.props;
+    const {getParentPublicClassroom, t} = this.props;
     const loading = getParentPublicClassroom.get('loading');
     const {editModalIsOpen} = this.state;
     return (
@@ -179,7 +175,7 @@ AutoCreate = connect(
     getParentPublicClassroom: selectGetRecordsRequest(state),
     classroomRecords: selectRecords(state),
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
-    pagination: selectPagination(state),
+    pagination: selectPagination(state)
 
   }),
   (dispatch) => ({

@@ -191,7 +191,7 @@ export default {
     postalOrZipCode: 'KR: Postal or Zip Code',
     telephone: 'KR: Telephone',
     paymentsOptions: 'KR: Payments Options',
-    yourInvoice: 'KR: Your invoice {{invoiceNo}} Total ${{invoiceAmount}}',
+    yourInvoice: 'KR: Your invoice {{invoiceNo}} Total {{invoiceAmount}}',
     shippingAndBilling: 'KR: Shipping and Billing',
     payPal: 'KR: PayPal',
     creditCard: 'KR: Credit Card',

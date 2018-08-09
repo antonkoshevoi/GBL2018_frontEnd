@@ -11,11 +11,7 @@ import StickyHeader from 'react-sticky-header';
 
 
 class PrivacyPolicy extends Component {
-    
-  constructor(props) {
-    super(props);
-  }    
-  
+      
   _renderContent() {
     const {t} = this.props;
     

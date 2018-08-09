@@ -12,10 +12,6 @@ const minHeight = window.document.documentElement.clientHeight - 225;
 
 
 class About extends Component {
-    
-  constructor(props) {
-    super(props);
-  }    
   
   _renderContent() {
     const {t} = this.props;
