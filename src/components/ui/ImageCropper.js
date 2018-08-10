@@ -10,13 +10,10 @@ class ImageCropper extends Component {
     file: '',
     croppedFile: ''
   }
-
-
-  componentDidMount() {
-    // const {image} = this.props;
-    // if (image) {
-    //   this.setState({file: image});
-    // }
+  
+  size = {
+        width: 250,
+        height: 250      
   }
 
   _handleFileChange(e) {
@@ -65,12 +62,12 @@ class ImageCropper extends Component {
     }
 
     if (!saveButton) {
-      this.props.onCrop(this.cropper.getCroppedCanvas().toDataURL());
+      this.props.onCrop(this.cropper.getCroppedCanvas(this.size).toDataURL());
       this.props.setFile(this.state.file);
     }
 
     this.setState({
-      croppedFile: this.cropper.getCroppedCanvas().toDataURL(),
+      croppedFile: this.cropper.getCroppedCanvas(this.size).toDataURL()
     });
   }
 
@@ -112,13 +109,13 @@ class ImageCropper extends Component {
     }
 
     this.setState({
-      croppedFile: this.cropper.getCroppedCanvas().toDataURL()
+      croppedFile: this.cropper.getCroppedCanvas(this.size).toDataURL()
     });
 
     if (!saveButton) {
       this.props.setFile(this.state.file);
       setTimeout(() => {
-        this.props.onCrop(this.cropper.getCroppedCanvas().toDataURL());
+        this.props.onCrop(this.cropper.getCroppedCanvas(this.size).toDataURL());
       }, 200)
     }
   }
@@ -168,9 +165,11 @@ class ImageCropper extends Component {
         </div>
         }
         <Cropper
+          autoCrop={true}          
           ref={cropper => {
             this.cropper = cropper;
           }}
+          cropBoxResizable={false}
           src={file}
           className='signup-cropper'
           style={{height: 170, width: 250}}

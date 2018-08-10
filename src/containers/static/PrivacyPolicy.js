@@ -11,6 +11,10 @@ import StickyHeader from 'react-sticky-header';
 
 class PrivacyPolicy extends Component {
       
+  componentDidMount() {
+      window.scrollTo(0, 0)
+  }
+  
   _renderContent() {
     const {t} = this.props;
     
