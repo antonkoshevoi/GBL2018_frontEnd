@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {translate} from 'react-i18next';
-import SplashHeader from './SplashHeader'
-import SplashNavigation from './SplashNavigation'
-import SplashJumbotron from './SplashJumbotron'
-import SplashStore from './SplashStore'
-import SplashPlatform from './SplashPlatform'
-import SplashFooter from './SplashFooter'
+import SplashHeader from './sections/SplashHeader'
+import SplashNavigation from './sections/SplashNavigation'
+import SplashJumbotron from './sections/SplashJumbotron'
+import SplashStore from './sections/SplashStore'
+import SplashPlatform from './sections/SplashPlatform'
+import SplashFooter from './sections/SplashFooter'
 import {withRouter} from 'react-router-dom';
 import './splash.css';
 import 'react-sticky-header/styles.css';
@@ -30,8 +30,6 @@ const SplashContainer = props => {
         <SplashFooter {...props} />
       </section>
     </StickyHeader>
-
-
   </div>)
 }
 

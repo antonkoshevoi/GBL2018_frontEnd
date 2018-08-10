@@ -8,6 +8,7 @@ import {getSingleRecord, update} from "../../redux/students/actions";
 import {selectGetSingleRecordRequest, selectUpdateRequest} from "../../redux/students/selectors";
 import 'cropperjs/dist/cropper.css';
 import Cropper from 'react-cropper';
+import Loader from "../../components/layouts/Loader";
 
 const styles = theme => ({
   root: {
@@ -153,8 +154,8 @@ class ProfileEdit extends Component {
                 <Grid item xs={12}>
                   <legend className='m--margin-bottom-10'>{t('editProfile')}</legend>
                 </Grid>
-                {loading ? (<CircularProgress style={{margin: '10px auto', minHeight: 200}} color="inherit"/>)
-                  :
+                {loading && <Loader />}
+                  
                   <Grid container item spacing={0}>
                     <Grid item xs={12} md={4}>
                       <legend className='m--margin-bottom-10'>{t('profilePicUpload')}</legend>
@@ -298,8 +299,7 @@ class ProfileEdit extends Component {
                         </div>
                       </div>
                     </Grid>
-                  </Grid>
-                }
+                  </Grid>                
 
                 <Grid item xs={12}>
                   <NavLink to={`/reports/students/${this.state.id}/`}>

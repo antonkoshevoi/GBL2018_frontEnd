@@ -23,11 +23,10 @@ class Subscribe extends Component {
         };
     }
 
-    componentDidMount() {
-        const subscriptionId = this.props.match.params.id;
+    componentDidMount() {        
         const {getRecords} = this.props;
         
-        this.setState({subscriptionId: subscriptionId});
+        this._setSubscriptionId(this.props.match.params.id);
         
         getRecords();
     }
@@ -51,11 +50,16 @@ class Subscribe extends Component {
         }
     }    
 
+    _setSubscriptionId(subscriptionId)
+    {
+        this.setState({subscriptionId: Number(subscriptionId)});        
+    }
+
     _getSelectedPlan() {
         const {getRecordsRequest, t} = this.props;
         
         const subscription = getRecordsRequest.get('records').find((element) => {
-            return (element.get('id') == this.state.subscriptionId);
+            return (Number(element.get('id')) === this.state.subscriptionId);
         });
         
         if (subscription) {
@@ -113,7 +117,7 @@ class Subscribe extends Component {
          
         return getRecordsRequest.get('records').map((record, key) => {
             
-            if (record.get('id') != this.state.subscriptionId) {
+            if (Number(record.get('id')) !== this.state.subscriptionId) {
                 return;
             }
                                                         
@@ -126,10 +130,10 @@ class Subscribe extends Component {
                         <div className="subscription-content">
                             <div className="subscription-prices m--padding-left-5 m--padding-right-5">
                                 <div className="row">                                                                        
-                                    <div className={`col-6 m--padding-0 text-center ${this.state.period == 'month' ? 'selected' : ''}`}>                           
+                                    <div className={`col-6 m--padding-0 text-center ${this.state.period === 'month' ? 'selected' : ''}`}>                           
                                         <span className="price">
                                         <Checkbox
-                                            checked={this.state.period == 'month'}
+                                            checked={this.state.period === 'month'}
                                             onChange={ (e) => {this._handlePeriodChange(e) }}
                                             value="month"
                                             color="primary"
@@ -138,10 +142,10 @@ class Subscribe extends Component {
                                             ${record.get('priceMonthly')}
                                         </span> {t('perMonth')}
                                     </div>
-                                    <div className={`col-6 m--padding-0 text-center ${this.state.period == 'year' ? 'selected' : ''}`}>
+                                    <div className={`col-6 m--padding-0 text-center ${this.state.period === 'year' ? 'selected' : ''}`}>
                                         <span className="price">
                                             <Checkbox
-                                                checked={this.state.period == 'year'}
+                                                checked={this.state.period === 'year'}
                                                 onChange={ (e) => {this._handlePeriodChange(e) }}
                                                 value="year"
                                                 color="primary"
@@ -180,13 +184,13 @@ class Subscribe extends Component {
         const {getRecordsRequest, t} = this.props;
         return getRecordsRequest.get('records').map((record, key) => {
             
-            if (record.get('id') == this.state.subscriptionId) {
+            if (Number(record.get('id')) === this.state.subscriptionId) {
                 return;
             }
                         
             return (        
                 <div className="subscription-item-block col-sm-12 col-md-6 col-lg-6 col-xl-6 m--margin-top-25">
-                    <div className={`subscription-item item-${key}`} onClick={() => { this.setState({subscriptionId: record.get('id')}) }}>                        
+                    <div className={`subscription-item item-${key}`} onClick={() => { this._setSubscriptionId(record.get('id')) }}>                        
                         <div className="subscription-header"><h1>{record.get('title')}</h1></div>
                         <div className="subscription-content">
                             <div className="subscription-prices">

@@ -51,14 +51,14 @@ import ShoppingCart from "../containers/pages/store/ShoppingCart";
 import OnlyHeadLayout from "../containers/layouts/OnlyHeadLayout";
 import AutoCreate from "../containers/classrooms/AutoCreate";
 import ProfileEdit from "../containers/profile/ProfileEdit";
-import SplashContainer from "../containers/pages/Splash";
-import PrivacyPolicy from "../containers/pages/Static/PrivacyPolicy";
-import About from "../containers/pages/Static/About";
-import Disclaimer from "../containers/pages/Static/Disclaimer";
-import ParentStudent from "../containers/pages/Static/ParentStudent";
-import Publisher from "../containers/pages/Static/Publisher";
-import SchoolTeacher from "../containers/pages/Static/SchoolTeacher";
-import TermsService from "../containers/pages/Static/TermsService";
+import SplashContainer from "../containers/static/Splash";
+import PrivacyPolicy from "../containers/static/PrivacyPolicy";
+import About from "../containers/static/About";
+import Disclaimer from "../containers/static/Disclaimer";
+import ParentStudent from "../containers/static/ParentStudent";
+import Publisher from "../containers/static/Publisher";
+import SchoolTeacher from "../containers/static/SchoolTeacher";
+import TermsService from "../containers/static/TermsService";
 
 export default () => (
   <AppContainer>

@@ -1,8 +1,6 @@
 import i18n from '../configs/i18n';
-import { takeLatest , put} from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
 import toastr from 'toastr';
-import { push } from 'react-router-redux';
-
 
 export const buildSortersQuery = (sorters) => {
 

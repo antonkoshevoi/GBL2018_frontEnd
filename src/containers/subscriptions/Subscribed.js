@@ -35,7 +35,7 @@ class Subscribed extends Component {
                                 {invoice &&
                                     <div className="col-sm-12">
                                         <p className="text-center invoice-title">
-                                            {t('yourInvoice', {invoiceNo: invoice.get('subscriptionNo'), invoiceAmount: invoice.get('price')})}.
+                                            {t('yourInvoice', {invoiceNo: invoice.get('subscriptionNo'), invoiceAmount: ('$' + invoice.get('price'))})}.
                                         </p>
                                         <p>
                                             <h3>{t('subscriptionDetails')}</h3>
@@ -56,7 +56,7 @@ class Subscribed extends Component {
                                         </p>                                            
                                         <p class="text-center">
                                             <a className="btn btn-success" href={invoice.get('invoiceUrl')} target="_blank">{t('downloadPdf')}</a>                                                
-                                            <a href="#" className="btn btn-success m--margin-left-10" onClick={() => { goTo("/my-subscriptions") }} >{t('viewMySubscriptions')}</a>
+                                            <a className="btn btn-success m--margin-left-10" href="" onClick={() => { goTo("/my-subscriptions") }} >{t('viewMySubscriptions')}</a>
                                         </p>
                                     </div>
                                 }                                   

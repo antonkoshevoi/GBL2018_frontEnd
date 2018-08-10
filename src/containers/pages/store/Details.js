@@ -74,7 +74,8 @@ class Details extends Component {
     const similarRecords =
       (successRecords && successSingle) ?
       records.filter((item) => {
-      return (item.get('category').get('id') == record.get('category').get('id')) && (item.get('id') !== record.get('id'))}).slice(0, 5) : [];
+        return (item.get('category').get('id') === record.get('category').get('id')) && (item.get('id') !== record.get('id'))
+      }).slice(0, 5) : [];
 
     return (
       <div className="m-portlet store-wrapper fadeInLeft animated">

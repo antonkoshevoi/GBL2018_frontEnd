@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import flipperMap from  './platformContentMap.json'
-
 const spacerUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/bl-spacer.70e5290c.svg';
 const circleBookUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/circle-books.a4c524f8.svg';
 const circleParentChildUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/circle-parent-child.ab68fd20.svg';
@@ -19,9 +17,70 @@ const style = {
     position:'relative',
     marginTop: 41,
   }
-}
+};
 
-
+const flipperMap = [
+    {
+        "title": "studentAndParents",
+        "content": [
+            {
+                "title": "kids",
+                "contents": [
+                    "kidsOpt1",
+                    "kidsOpt2",
+                    "kidsOpt3"
+                ]
+            },
+            {
+                "title": "parent",
+                "contents": [
+                    "parentOpt1",
+                    "parentOpt2"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "schoolAndTeacher",
+        "content": [
+            {
+                "title": "principals",
+                "contents": [
+                    "principalsOpt1",
+                    "principalsOpt2",
+                    "principalsOpt3"
+                ]
+            },
+            {
+                "title": "teacher",
+                "contents": [
+                    "teacherOpt1",
+                    "teacherOpt2"
+                ]
+            }
+        ]
+    },
+    {
+        "title": "publishers",
+        "content": [
+            {
+                "title": "publishers",
+                "contents": [
+                    "publishersOpt1",
+                    "publishersOpt2",
+                    "publishersOpt3"
+                ]
+            },
+            {
+                "title": "authors",
+                "contents": [
+                    "authorsOpt1",
+                    "authorsOpt2"
+                ]
+            }
+        ]
+    }
+];
 
 class FlipperCards extends Component {
 
@@ -70,29 +129,10 @@ class FlipperCards extends Component {
                         )}
                       </ul>
                     </div>
-
                   )}
                 </p>
                 <div class="info-line"></div>
               </div>
-
-            {
-              // <div className="flipper-cards">
-              //   <hr />
-              //   {this.props.content.map((items, index) =>
-              //     <div>
-              //       <h5>{t(`${this.props.title}.${items.title}`)}</h5>
-              //       <ul>
-              //         {items.contents.map( cItems =>
-              //           <li>{t(`${this.props.title}.${cItems}`)}</li>
-              //         )}
-              //       </ul>
-              //     </div>
-
-              //   )}
-              //   <hr />
-              // </div>
-            }
             </div>
           </div>
         </div>
@@ -105,9 +145,7 @@ class FlipperCards extends Component {
 class SplashPlatform extends Component {
   render() {
     const {t} = this.props;
-    console.debug(t('studentsAndParents'))
-
-
+    
     return (
       <div className="splash-platform">
         <header className="header-break container text-center">

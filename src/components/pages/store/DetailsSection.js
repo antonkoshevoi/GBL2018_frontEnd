@@ -27,7 +27,7 @@ class DetailsSection extends Component {
         <div className="headerBlock">
           <div className="row">
             <div className="col-md-4">
-              <div className="productImage">
+              <div className="productImage m--margin-top-10">
                 <img src={data.get('thumbnail')} className="full-width" alt="product"/>
               </div>
             </div>

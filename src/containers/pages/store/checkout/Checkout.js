@@ -184,7 +184,7 @@ class Checkout extends Component {
                         {successCarts &&
                         <div className="m-portlet__body">
                           <div className="m-widget25">
-                            {item && <span className="invoice-title">{t('yourInvoice', {invoiceNo: item.invoiceNo, invoiceAmount: cartRecordsSum})}</span>}
+                            {item && <span className="invoice-title">{t('yourInvoice', {invoiceNo: item.invoiceNo, invoiceAmount: ('$' + cartRecordsSum)})}</span>}
                           </div>
                         </div>
                         }

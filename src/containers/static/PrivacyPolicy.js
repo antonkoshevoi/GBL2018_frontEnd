@@ -1,30 +1,33 @@
 import React, {Component} from 'react';
 import {translate} from 'react-i18next';
-
-import SplashHeader from '../Splash/SplashHeader'
-import SplashNavigation from '../Splash/SplashNavigation'
-import SplashFooter from '../Splash/SplashFooter'
+import SplashHeader from './sections/SplashHeader'
+import SplashNavigation from './sections/SplashNavigation'
+import SplashFooter from './sections/SplashFooter'
 import {withRouter} from 'react-router-dom';
-import '../Splash/splash.css';
+import './splash.css';
 import 'react-sticky-header/styles.css';
 import StickyHeader from 'react-sticky-header';
-const minHeight = window.document.documentElement.clientHeight - 225;
 
 
-class About extends Component {
-    
-  constructor(props) {
-    super(props);
-  }    
+class PrivacyPolicy extends Component {
+      
+  componentDidMount() {
+      window.scrollTo(0, 0)
+  }
   
   _renderContent() {
     const {t} = this.props;
-    const paragraphs = t('aboutContent.paragraphs', { returnObjects: true });
+    
+    const paragraphs = t('privacyPolicy.paragraphs', {
+        interpolation: {escapeValue: false}, 
+        returnObjects: true, 
+        br: '<br />'
+    });       
         
-    return paragraphs.map((record, key) => (
+    return paragraphs.map((record, key) => (           
       <div>
-        <h2>{record.title}</h2>
-        <p>{record.content}</p>
+        <h5>{record.title}</h5>
+        <p>{record.content.split('\n').map(line => <p>{line}</p>)}</p>
       </div>));
   }
 
@@ -42,8 +45,9 @@ class About extends Component {
             }
           >
             <section className="splash-container">
-              <div className="container" style={{minHeight: minHeight}}>
-                  <p><img className="img-thumbnail" alt="About Us" src={t('aboutContent.image')} /></p>
+              <div className="container">
+                  <h1>{t('privacyPolicy.title')}</h1>
+                  <h3 className="m--margin-top-15 m--margin-bottom-15">{t('privacyPolicy.subTitle')}</h3>
                   { this._renderContent() }
               </div>
               <SplashFooter {...this.props} />
@@ -53,4 +57,4 @@ class About extends Component {
     }
 };
 
-export default withRouter(translate('splashScreen')(About));
+export default withRouter(translate('splashScreen')(PrivacyPolicy));

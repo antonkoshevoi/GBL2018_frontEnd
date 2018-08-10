@@ -18,7 +18,7 @@ import subscriptionSagas from './subscriptions/sagas';
 
 
 function* rootSaga () {
-  yield all([,
+  yield all([
     appSagas,
     authSagas,
     parentSignUpSagas,

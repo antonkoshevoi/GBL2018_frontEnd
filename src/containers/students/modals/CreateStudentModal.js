@@ -69,9 +69,9 @@ class CreateStudentModal extends Component {
 
   _onSubmit(e) {
     e.preventDefault();
-    this.props.create(
-      this.state.student
-    );
+    let student = this.state.student;
+    delete student.avatar;
+    this.props.create( student );
   };
 
   _close() {
