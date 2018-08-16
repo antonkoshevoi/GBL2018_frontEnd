@@ -65,12 +65,10 @@ class Templates extends Component {
         return records.map((record, key) => (
             <Row index={key} key={key}>
                 <Td first={true} width='100px'>{key + 1}</Td>
-                <Td width='132px'>{record.get('username')}</Td>
-                <Td width='132px'>{record.get('firstName')}</Td>
-                <Td width='132px'>{record.get('lastName')}</Td>
-                <Td width='132px'>{record.get('email')}</Td>
-                <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>{record.getIn(['role', 'name'])}</span></Td>
-                <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
+                <Td width='132px'>{record.get('title')}</Td>
+                <Td width='132px'>{record.get('title')}</Td>                                
+                <Td width='132px'>{record.get('title')}</Td>
+                <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>{record.get('status')}</span></Td>
                 <Td width='100px'>
                     <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')} />
                     <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }} />                        
@@ -103,8 +101,8 @@ class Templates extends Component {
                     <div className='m-portlet__head border-b-orange'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
-                                <span className='m-portlet__head-icon'><i className='la la-user' style={{fontSize: '55px'}}></i></span>
-                                <h3 className='m-portlet__head-text'>{t('users')}</h3>
+                                <span className='m-portlet__head-icon'><i className='la la-comment-o' style={{fontSize: '55px'}}></i></span>
+                                <h3 className='m-portlet__head-text'>{t('sCap')}</h3>
                             </div>
                         </div>         
                     </div>

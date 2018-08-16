@@ -430,5 +430,7 @@ export default {
     typeHere: 'Type here...',
     noMessagesYet: 'No messages yet',
     searchUser: 'Search...',    
-    conversations: 'Conversations'
+    conversations: 'Conversations',
+    templatesNotFound: 'No S-Cap Templates...',
+    questions: 'Questions'
 }
