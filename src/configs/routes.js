@@ -60,6 +60,8 @@ import Publisher from "../containers/static/Publisher";
 import SchoolTeacher from "../containers/static/SchoolTeacher";
 import TermsService from "../containers/static/TermsService";
 
+import Templates from "../containers/scap/Templates";
+
 export default () => (
   <AppContainer>
     <Switch>
@@ -114,6 +116,8 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/homerooms/:id' name='Homeroom' component={HomeRoomReportDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id/edit' name='Student' component={ProfileEdit}/>      
+      
+      <AuthenticatedRoute exact layout={MainLayout} path='/scap' name='S-Cap' component={Templates}/>                 
 
       {/*Store*/}    
       <AuthenticatedRoute exact layout={MainLayout} path='/store/shopping-cart' name='Details' component={ShoppingCart}/>
