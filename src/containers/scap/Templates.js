@@ -67,9 +67,10 @@ class Templates extends Component {
             <Row index={key} key={key}>
                 <Td first={true} width='100px'>{key + 1}</Td>
                 <Td width='132px'>{record.get('title')}</Td>
-                <Td width='132px'>{record.get('title')}</Td>                                
-                <Td width='132px'>{record.get('title')}</Td>
-                <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>{record.get('status')}</span></Td>
+                <Td width='132px'>{record.get('questions')}</Td>                                
+                <Td width='132px'>{record.get('teacher') || '-'}</Td>
+                <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('status'))}</span></Td>
+                <Td width='132px'>{record.get('createdAt')}</Td>
                 <Td width='100px'>
                     <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')} />
                     <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }} />                        
@@ -138,6 +139,7 @@ class Templates extends Component {
                                 <Th width='132px'>{t('questions')}</Th>
                                 <Th width='132px'>{t('teacher')}</Th>
                                 <Th width='132px'>{t('status')}</Th>
+                                <Th width='132px'>{t('created')}</Th>
                                 <Th width='100px'>{t('actions')}</Th>
                             </HeadRow>
                             </Thead>

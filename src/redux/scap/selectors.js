@@ -3,13 +3,13 @@ import { createSelector } from 'reselect';
 /**
  * Select domain
  */
-export const selectSubscriptionsDomain = (state) => state.subscriptions;
+export const selectScapDomain = (state) => state.scap;
 
 /**
  * Get Records Request
  */
 export const selectGetRecordsRequest = createSelector(
-    selectSubscriptionsDomain,
+    selectScapDomain,
     (subState) => subState.get('getRecordsRequest')
 );
 
@@ -17,14 +17,22 @@ export const selectGetRecordsRequest = createSelector(
  * Get Single Request
  */
 export const selectGetRecordRequest = createSelector(
-    selectSubscriptionsDomain,
+    selectScapDomain,
     (subState) => subState.get('getRecordRequest')
+);
+
+/**
+ * Get Create Request
+ */
+export const selectCreateRequest = createSelector(
+    selectScapDomain,
+    (subState) => subState.get('createRequest')
 );
 
 /**
  * Get Pagiantion
  */
 export const selectPagination = createSelector(
-    selectSubscriptionsDomain,
+    selectScapDomain,
     (subState) => subState.get('pagination')
 );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import {
   Icon,
   FormControl,
@@ -9,12 +10,13 @@ import {
   TextField,
   InputLabel,
   MenuItem,
-  Select,
-  Typography,
+  Select,  
   Button
 } from '@material-ui/core';
 //import DraggableList from 'react-draggable-list';
 import QuestionModal from './modals/QuestionModal'
+import { selectCreateRequest } from '../../redux/scap/selectors';
+import { create, resetCreateRequest } from '../../redux/scap/actions';
 
 class BuildTemplate extends Component {
     constructor(props) {
@@ -64,6 +66,13 @@ class BuildTemplate extends Component {
         });
     }
     
+    _saveTemplate() {
+        this.props.create({
+            ... this.state.form,
+            questions: this.state.questions
+        });
+    }
+    
     _handleQuestionChange(event, key) {
         let questions = this.state.questions.slice();
         questions[key] = event.target.value; 
@@ -100,14 +109,15 @@ class BuildTemplate extends Component {
     }    
 
     render() {
-        const {t} = this.props;
+        const {t, createRequest} = this.props;
         const {form, showQuestionModal} = this.state;
-        const errors = null;
-
+        
+        const errors = createRequest.get('errors');
+        
         return (
             <div className='fadeInLeft  animated'>               
                 <div className='m-portlet m-portlet--head-solid-bg'>
-                    <div className='m-portlet__head border-b-orange'>
+                    <div className='m-portlet__head border-b-blue'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
                                 <span className='m-portlet__head-icon'><i className='la la-comment-o' style={{fontSize: '55px'}}></i></span>
@@ -151,12 +161,23 @@ class BuildTemplate extends Component {
                                 <h4 className="text-left">{t('questions')}</h4>
                                 <div>{this._renderQuestions()}</div>
                             </div>
-                          <div className="col-sm-12 m--margin-top-40 text-right">
-                                <Button onClick={() => { this._showQuestionModal() }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-5'>
+                            <div className="col-sm-12 m--margin-top-40 text-left">
+                                <Button onClick={() => { this._showQuestionModal() }} variant="raised" color='primary' className='mt-btn mt-btn-success'>
+                                    <Icon className="m--margin-right-10">add</Icon>
                                     {t('addNewQuestion')}
-                                    <Icon className="m--margin-left-5">add</Icon>
                                 </Button>                              
-                            </div>                            
+                            </div>
+                            <div className="col-sm-12 m--margin-top-40 text-center">
+                                <Button disabled={createRequest.get('loading')} onClick={() => { this._saveTemplate() }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
+                                    {t('saveTemplate')}
+                                    <Icon className="m--margin-left-5">check</Icon>
+                                </Button>
+                                <NavLink to="/scap" className="link-btn">
+                                    <Button disabled={createRequest.get('loading')} variant="raised" color='default' className='mt-btn mt-btn-cancel'>
+                                        {t('cancel')}                                    
+                                    </Button>
+                                </NavLink>
+                            </div>                              
                         </div>                        
                     </div>
                 </div>                              
@@ -168,10 +189,13 @@ class BuildTemplate extends Component {
 
 BuildTemplate = connect(
     (state) => ({
-             
+        createRequest: selectCreateRequest(state)
     }),
     (dispatch) => ({
-
+        create: (params = {}) => {
+            dispatch(create(params))
+        },
+        reset: () => {dispatch(resetCreateRequest())}
     })
 )(BuildTemplate);
 
