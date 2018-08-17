@@ -432,5 +432,9 @@ export default {
     searchUser: 'Search...',    
     conversations: 'Conversations',
     templatesNotFound: 'No S-Cap Templates...',
-    questions: 'Questions'
+    questions: 'Questions',
+    question: 'Question',
+    addNewQuestion: 'Add New Question',
+    buildTemplate: 'Build Template',
+    noAnyQuestions: 'No any questions added...'
 }

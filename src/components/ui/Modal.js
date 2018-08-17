@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Dialog, Slide, withStyles } from '@material-ui/core';
 
-function Transition(props) {
-  return <Slide direction='up' {...props} />;
-}
-
 class Modal extends Component {
 
   static propTypes = {
@@ -35,7 +31,7 @@ class Modal extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { classes, bigger, maxWidth } = this.props;
+    const { classes, bigger, maxWidth, minWidth } = this.props;
 
     return (
       <Dialog
@@ -43,10 +39,9 @@ class Modal extends Component {
           paper: bigger ? classes.biggerPaper : classes.paper
         }}
         open={isOpen}
-        maxWidth={maxWidth}
+        maxWidth={maxWidth}        
         className={'MainModal'}
-        onClose={() => this._onClose()}
-        transition={Transition}
+        onClose={() => this._onClose()}        
         aria-labelledby='form-dialog-title'>
         {this.props.children}
       </Dialog>
@@ -59,13 +54,12 @@ Modal.defaultProps = {
 };
 
 Modal = withStyles({
-  paper: {
-    // height: '80%',
+  paper: {    
     maxHeight: '100vh',
   },
   biggerPaper: {
     maxHeight: '100vh',
-    minWidth: '70%',
+    minWidth: '70%'
   },
   // paperWidthXs: {
   //   width: '80%'

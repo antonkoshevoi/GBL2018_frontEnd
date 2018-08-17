@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
@@ -38,7 +39,7 @@ class Templates extends Component {
     }
     
     _addNewRecord() {
-    
+        this.props.goToDashboard();
     }
     
     _deleteRecord() {
@@ -119,11 +120,13 @@ class Templates extends Component {
                                         <MenuItem value={25}>25</MenuItem>
                                         <MenuItem value={50}>50</MenuItem>
                                         <MenuItem value={100}>100</MenuItem>
-                                    </Select>     
-                                    <Button variant="raised" color='primary' onClick={() => { this._addNewRecord() }} className='mt-btn mt-btn-success' style={{marginRight: '7px'}}>
-                                        {t('addNew')}
-                                        <Icon style={{marginLeft: '5px'}}>add</Icon>
-                                    </Button>                                       
+                                    </Select>
+                                    <NavLink to="/scap/build" className="link-btn">
+                                        <Button variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-5'>
+                                            {t('addNew')}
+                                            <Icon className="m--margin-left-5">add</Icon>
+                                        </Button>
+                                    </NavLink>                                    
                                 </div>
                             </div>
                         </div>
