@@ -436,5 +436,9 @@ export default {
     question: 'Question',
     addNewQuestion: 'Add New Question',
     buildTemplate: 'Build Template',
-    noAnyQuestions: 'No any questions added...'
+    noAnyQuestions: 'No any questions added...',
+    enterQuestionText: 'Please enter question text here',
+    saveTemplate: 'Save Template',
+    pleaseAddAnyQuestions: 'Please add any questions to your S-CAP template...',
+    not_published: 'Not Published'
 }

@@ -29,5 +29,6 @@ export default {
   loginOrCreateAccount: 'Please login or create new account to buy any products...',
   studentSubscribedToCourse: 'Student successfully enrolled to the course',
   studentUnsubscribedFromCourse: 'Student successfully unsubscribed from the course',
-  subscriptionCancelled: 'Subscription successfully cancelled'
+  subscriptionCancelled: 'Subscription successfully cancelled',
+  scapTemplateCreated: 'S-Cap template successfully created'
 }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { push } from 'react-router-redux';
+import toastr from 'toastr';
 import {
   Icon,
   FormControl,
@@ -30,6 +32,16 @@ class BuildTemplate extends Component {
 
     componentDidMount() {
 
+    }
+    
+    componentWillReceiveProps(nextProps) {                
+        const success = this.props.createRequest.get('success');
+        const nextSuccess = nextProps.createRequest.get('success');
+
+        if (!success && nextSuccess) {
+            toastr.success(this.props.t(`messages:scapTemplateCreated`));
+            this.props.goTo('/scap');
+        }
     }    
     
     _handleInputChange(event) {
@@ -110,7 +122,7 @@ class BuildTemplate extends Component {
 
     render() {
         const {t, createRequest} = this.props;
-        const {form, showQuestionModal} = this.state;
+        const {form, questions, showQuestionModal} = this.state;
         
         const errors = createRequest.get('errors');
         
@@ -154,12 +166,13 @@ class BuildTemplate extends Component {
                                   }}/>
                                 {errors && errors.get('description') && <FormHelperText error>{errors.get('description').get(0)}</FormHelperText>}
                               </FormControl>
-                              </div>
+                              </div>                              
                         </div>
                         <div className="row">
                             <div className="col-sm-12 m--margin-top-40 text-right">
                                 <h4 className="text-left">{t('questions')}</h4>
                                 <div>{this._renderQuestions()}</div>
+                                {!questions.length && errors && errors.get('questions') && <p className="text-center m--margin-top-40 text-danger">{t('pleaseAddAnyQuestions')}</p>}
                             </div>
                             <div className="col-sm-12 m--margin-top-40 text-left">
                                 <Button onClick={() => { this._showQuestionModal() }} variant="raised" color='primary' className='mt-btn mt-btn-success'>
@@ -195,6 +208,7 @@ BuildTemplate = connect(
         create: (params = {}) => {
             dispatch(create(params))
         },
+        goTo: (url) => {dispatch(push(url))},
         reset: () => {dispatch(resetCreateRequest())}
     })
 )(BuildTemplate);
