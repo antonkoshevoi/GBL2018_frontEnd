@@ -430,5 +430,17 @@ export default {
     typeHere: 'Type here...',
     noMessagesYet: 'No messages yet',
     searchUser: 'Search...',    
-    conversations: 'Conversations'
+    conversations: 'Conversations',
+    templatesNotFound: 'No S-Cap Templates...',
+    questions: 'Questions',
+    question: 'Question',
+    addNewQuestion: 'Add New Question',
+    buildTemplate: 'Build Template',
+    noAnyQuestions: 'No any questions added...',
+    enterQuestionText: 'Please enter question text here',
+    saveTemplate: 'Save Template',
+    pleaseAddAnyQuestions: 'Please add any questions to your S-CAP template...',
+    not_published: 'Not Published',
+    templateDetails: 'Template Details',
+    updateScapTemplate: 'Update S-Cap Template'
 }

@@ -114,7 +114,9 @@ class MySubscriptions extends Component {
                                 <button className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showAssignModal(item.get('id')) }} >
                                   <i className='la la-user-plus'></i>
                                 </button>}
-                                <DeleteButton title={t('areYouSureWantToCancelSubscription')} onClick={() => { this._cancelSubscription(item.get('id')) }}/>
+                                {(item.get('isMobile') === 0) && 
+                                    <DeleteButton title={t('areYouSureWantToCancelSubscription')} onClick={() => { this._cancelSubscription(item.get('id')) }}/>
+                                }
                             </div>
                         }
                         </Td>

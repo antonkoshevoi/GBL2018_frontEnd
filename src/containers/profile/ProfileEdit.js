@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { translate } from 'react-i18next';
-import {Avatar, CircularProgress, Grid, Paper, withStyles} from '@material-ui/core';
+import {Avatar, Grid, Paper, withStyles} from '@material-ui/core';
 import MetronicDatePicker from "../../components/ui/metronic/MetronicDatePicker";
 import {NavLink} from "react-router-dom";
 import {getSingleRecord, update} from "../../redux/students/actions";
