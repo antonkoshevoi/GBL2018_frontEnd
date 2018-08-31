@@ -14,6 +14,7 @@ import {
   Select,  
   Button
 } from '@material-ui/core';
+import Loader from "../../components/layouts/Loader";
 //import DraggableList from 'react-draggable-list';
 import QuestionModal from './modals/QuestionModal'
 import { selectUpdateRequest, selectGetRecordRequest } from '../../redux/scap/selectors';
@@ -150,14 +151,15 @@ class EditTemplate extends Component {
     }    
 
     render() {
-        const {t, updateRequest} = this.props;
+        const {t, updateRequest, recordRequest} = this.props;
         const {form, questions, showQuestionModal} = this.state;
         
         const errors = updateRequest.get('errors');
         
         return (
             <div className='fadeInLeft  animated'>               
-                <div className='m-portlet m-portlet--head-solid-bg'>
+                {recordRequest.get('loading') ? <Loader/> : 
+                (<div className='m-portlet m-portlet--head-solid-bg'>
                     <div className='m-portlet__head border-b-blue'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
@@ -201,7 +203,7 @@ class EditTemplate extends Component {
                             <div className="col-sm-12 m--margin-top-30 text-right">
                                 <h5 className="text-left">{t('questions')}</h5>
                                 <div>{this._renderQuestions()}</div>
-                                {!questions.length && errors && errors.get('questions') && <p className="text-center m--margin-top-40 text-danger">{t('pleaseAddAnyQuestions')}</p>}
+                                {!Object.keys(questions).length && errors && errors.get('questions') && <p className="text-center m--margin-top-40 text-danger">{t('pleaseAddAnyQuestions')}</p>}
                             </div>
                             <div className="col-sm-12 m--margin-top-40 text-left">
                                 <Button onClick={() => { this._showQuestionModal() }} variant="raised" color='primary' className='mt-btn mt-btn-success'>
@@ -222,7 +224,7 @@ class EditTemplate extends Component {
                             </div>                              
                         </div>                        
                     </div>
-                </div>                              
+                </div>)}                     
                 <QuestionModal isOpen={showQuestionModal} onClose={() => { this._closeQuestionModal() }} onSuccess={(e) => { this._addQuestion(e) }}  />
             </div>
         );
@@ -238,8 +240,7 @@ EditTemplate = connect(
         getRecord: (id) => {
             dispatch(getRecord(id));
         },
-        update: (id, params = {}) => {
-            alert(id);        
+        update: (id, params = {}) => {            
             dispatch(update(id, params));
         },
         goTo: (url) => {dispatch(push(url))},

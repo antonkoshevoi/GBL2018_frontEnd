@@ -30,5 +30,6 @@ export default {
   studentSubscribedToCourse: 'Student successfully enrolled to the course',
   studentUnsubscribedFromCourse: 'Student successfully unsubscribed from the course',
   subscriptionCancelled: 'Subscription successfully cancelled',
-  scapTemplateCreated: 'S-Cap template successfully created'
+  scapTemplateCreated: 'S-Cap template successfully created',
+  scapTemplateUpdated: 'S-Cap template successfully updated'
 }
