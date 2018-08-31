@@ -238,8 +238,7 @@ EditTemplate = connect(
         getRecord: (id) => {
             dispatch(getRecord(id));
         },
-        update: (id, params = {}) => {
-            alert(id);        
+        update: (id, params = {}) => {            
             dispatch(update(id, params));
         },
         goTo: (url) => {dispatch(push(url))},
