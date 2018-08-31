@@ -9,7 +9,16 @@ export const GET_RECORD_FAIL = '[Surveys] GET_RECORD_FAIL';
 export const CREATE = '[Surveys] CREATE';
 export const CREATE_SUCCESS = '[Surveys] CREATE_SUCCESS';
 export const CREATE_FAIL = '[Surveys] CREATE_FAIL';
-export const RESET_CREATE_REQUEST = '[Surveys] RESET_CREATE_ERRORS';
+export const RESET_CREATE_REQUEST = '[Surveys] RESET_CREATE_REQUEST';
+
+export const UPDATE = '[Surveys] UPDATE';
+export const UPDATE_SUCCESS = '[Surveys] UPDATE_SUCCESS';
+export const UPDATE_FAIL = '[Surveys] UPDATE_FAIL';
+export const RESET_UPDATE_REQUEST = '[Surveys] RESET_UPDATE_REQUEST';
+
+export const DELETE = '[Surveys] DELETE';
+export const DELETE_SUCCESS = '[Surveys] DELETE_SUCCESS';
+export const DELETE_FAIL = '[Surveys] DELETE_FAIL';
 
 export function getRecords(params = {}) {
     return {
@@ -32,8 +41,28 @@ export function create(data, params = {}) {
     };
 }
 
+export function update(id, data, params = {}) {
+    return {
+        types: [UPDATE, UPDATE_SUCCESS, UPDATE_FAIL],
+        promise: (apiClient) => apiClient.post(`surveys/update/${id}`, data, params)
+    };
+}
+
 export function resetCreateRequest() {
     return {
         type: RESET_CREATE_REQUEST
     }
+}
+
+export function resetUpdateRequest() {
+    return {
+        type: RESET_UPDATE_REQUEST
+    }
+}
+
+export function deleteRecord(id) {
+    return {
+        types: [DELETE, DELETE_SUCCESS, DELETE_FAIL],
+        promise: (apiClient) => apiClient.get(`surveys/delete/${id}`)
+    };
 }

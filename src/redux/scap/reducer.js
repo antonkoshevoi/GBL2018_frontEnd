@@ -1,7 +1,9 @@
 import {
     GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, 
     GET_RECORD, GET_RECORD_SUCCESS, GET_RECORD_FAIL, RESET_GET_RECORD_REQUEST,
-    CREATE, CREATE_SUCCESS, CREATE_FAIL, RESET_CREATE_REQUEST
+    CREATE, CREATE_SUCCESS, CREATE_FAIL, RESET_CREATE_REQUEST,
+    UPDATE, UPDATE_SUCCESS, UPDATE_FAIL, RESET_UPDATE_REQUEST,
+    DELETE, DELETE_SUCCESS, DELETE_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -25,6 +27,21 @@ const initialState = Immutable.fromJS({
     errorMessage: null,
     errorCode: null,
     errors: {}
+  },
+  updateRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,
+    errorCode: null,
+    errors: {}
+  },  
+  deleteRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,
+    errorCode: null
   },  
   pagination: {
     page: 1,
@@ -86,7 +103,7 @@ export default function reducer (state = initialState, action) {
           .set('fail', true)
         );
          
-/**
+    /**
      * Create
      */
     case CREATE:
@@ -120,6 +137,68 @@ export default function reducer (state = initialState, action) {
         );
     case RESET_CREATE_REQUEST:
       return state.set('createRequest', initialState.get('createRequest'));
+
+    /**
+     * Update
+     */
+    case UPDATE:
+      return state
+        .set('updateRequest', state.get('updateRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)
+          .remove('errors')
+          .remove('errorMessage')
+          .remove('errorCode')
+        );
+    case UPDATE_SUCCESS:
+      return state
+        .set('updateRequest', state.get('updateRequest')
+          .set('loading', false)
+          .set('success', true)
+          .set('fail', false)
+          .remove('errors')
+          .remove('errorMessage')
+          .remove('errorCode')
+        );
+    case UPDATE_FAIL:      
+      return state
+        .set('updateRequest', state.get('updateRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('errorCode', action.error.response.data.code)
+          .set('errorMessage', action.error.response.data.message)
+          .set('errors', action.error.response.data.code === 422 ? Immutable.fromJS(action.error.response.data.errors) : undefined)
+        );
+    case RESET_UPDATE_REQUEST:
+      return state.set('updateRequest', initialState.get('updateRequest'));
+      
+    /**
+     * Delete
+     */
+    case DELETE:
+      return state
+        .set('deleteRequest', state.get('deleteRequest')
+          .set('loading', true)
+          .set('success', false)
+          .set('fail', false)          
+          .remove('errorMessage')
+          .remove('errorCode')
+        );
+    case DELETE_SUCCESS:
+      return state
+        .set('deleteRequest', state.get('deleteRequest')
+          .set('loading', false)
+          .set('success', true)
+        );
+    case DELETE_FAIL:
+      return state
+        .set('deleteRequest', state.get('deleteRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('errorCode', action.error.response.data.code)
+          .set('errorMessage', action.error.response.data.message)
+        );
 
     /**
      * default

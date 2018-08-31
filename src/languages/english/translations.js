@@ -440,5 +440,7 @@ export default {
     enterQuestionText: 'Please enter question text here',
     saveTemplate: 'Save Template',
     pleaseAddAnyQuestions: 'Please add any questions to your S-CAP template...',
-    not_published: 'Not Published'
+    not_published: 'Not Published',
+    templateDetails: 'Template Details',
+    updateScapTemplate: 'Update S-Cap Template'
 }

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
+import { push } from 'react-router-redux';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
-import { selectGetRecordsRequest, selectPagination } from '../../redux/scap/selectors';
-import { getRecords, getRecord } from '../../redux/scap/actions';
+import { selectGetRecordsRequest, selectDeleteRequest, selectPagination } from '../../redux/scap/selectors';
+import { getRecords, getRecord, deleteRecord } from '../../redux/scap/actions';
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from "../../components/ui/DeleteButton";
 
@@ -23,6 +24,15 @@ class Templates extends Component {
         getRecords();
     }
 
+    componentWillReceiveProps(nextProps) {
+        const deleteSuccess = this.props.deleteRecordRequest.get('success');
+        const nextDeleteSuccess = nextProps.deleteRecordRequest.get('success');
+
+        if (!deleteSuccess && nextDeleteSuccess) {
+            this._getRecords();
+        }
+    }
+  
     /**
      * Records
      */
@@ -34,16 +44,12 @@ class Templates extends Component {
         });
     }
     
-    _editRecord() {
+    _editRecord(id) {
+        this.props.goTo(`scap/update/${id}`);
+    }   
     
-    }
-    
-    _addNewRecord() {
-        this.props.goToDashboard();
-    }
-    
-    _deleteRecord() {
-        
+    _deleteRecord(id) {
+        this.props.deleteRecord(id);
     }
     
     _renderRecords() {
@@ -164,13 +170,18 @@ class Templates extends Component {
 
 Templates = connect(
         (state) => ({
-        getRecordsRequest: selectGetRecordsRequest(state),        
+        getRecordsRequest: selectGetRecordsRequest(state),
+        deleteRecordRequest: selectDeleteRequest(state),
         pagination: selectPagination(state)
     }),
     (dispatch) => ({
         getRecords: (params = {}) => {
-            dispatch(getRecords(params))
-        }
+            dispatch(getRecords(params));
+        },
+        deleteRecord: (id) => {
+            dispatch(deleteRecord(id));
+        },
+        goTo: (url) => {dispatch(push(url))}
     })
 )(Templates);
 

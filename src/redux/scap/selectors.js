@@ -30,6 +30,22 @@ export const selectCreateRequest = createSelector(
 );
 
 /**
+ * Get Update Request
+ */
+export const selectUpdateRequest = createSelector(
+    selectScapDomain,
+    (subState) => subState.get('updateRequest')
+);
+
+/**
+ * Get Delete Request
+ */
+export const selectDeleteRequest = createSelector(
+    selectScapDomain,
+    (subState) => subState.get('deleteRequest')
+);
+
+/**
  * Get Pagiantion
  */
 export const selectPagination = createSelector(

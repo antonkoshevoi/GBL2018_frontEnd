@@ -16,13 +16,15 @@ import {
 } from '@material-ui/core';
 //import DraggableList from 'react-draggable-list';
 import QuestionModal from './modals/QuestionModal'
-import { selectCreateRequest } from '../../redux/scap/selectors';
-import { create, resetCreateRequest } from '../../redux/scap/actions';
+import { selectUpdateRequest, selectGetRecordRequest } from '../../redux/scap/selectors';
+import { getRecord, update, resetUpdateRequest } from '../../redux/scap/actions';
+import DeleteButton from "../../components/ui/DeleteButton";
 
-class BuildTemplate extends Component {
+class EditTemplate extends Component {
     constructor(props) {
-        super(props);
+        super(props);        
         this.state = {
+            id: this.props.match.params.id,
             showQuestionModal: false,
             form: {},
             questions: []
@@ -30,12 +32,22 @@ class BuildTemplate extends Component {
     }
 
     componentDidMount() {
-
+        this.props.getRecord(this.props.match.params.id);
     }
     
-    componentWillReceiveProps(nextProps) {                
-        const success = this.props.createRequest.get('success');
-        const nextSuccess = nextProps.createRequest.get('success');
+    componentWillReceiveProps(nextProps) {        
+        const record = this.props.recordRequest.get('record');
+        const nextRecord = nextProps.recordRequest.get('record');
+
+        if (!record && nextRecord) {
+            this.setState({
+                form: nextRecord.toJS(),
+                questions: nextRecord.get('questions').toJS()
+            });
+        }
+        
+        const success = this.props.updateRequest.get('success');
+        const nextSuccess = nextProps.updateRequest.get('success');
 
         if (!success && nextSuccess) {            
             this.props.goTo('/scap');
@@ -68,7 +80,7 @@ class BuildTemplate extends Component {
     _addQuestion(question) {
         let { questions } = this.state;
         
-        questions.push(question);
+        questions[Math.random()] = question;
         
         this.setState({
             showQuestionModal: false,
@@ -76,16 +88,28 @@ class BuildTemplate extends Component {
         });
     }
     
-    _saveTemplate() {
-        this.props.create({
+    _deleteQuestion(key) {
+        let { questions } = this.state;
+        
+        delete questions[key];
+        
+        this.setState({            
+            questions: questions
+        });        
+    }
+    
+    _saveTemplate() {        
+        this.props.update(this.state.id, {
             ... this.state.form,
             questions: this.state.questions
         });
     }
     
     _handleQuestionChange(event, key) {
-        let questions = this.state.questions.slice();
+        let questions = this.state.questions;               
+        
         questions[key] = event.target.value; 
+        
         this.setState({questions: questions});
     }
     
@@ -98,31 +122,38 @@ class BuildTemplate extends Component {
             return (
                 <div className="text-center">{t('noAnyQuestions')}</div>
             ); 
-        }
+        }        
         
-        return questions.map((record, key) => (          
-            <div className="col-sm-12 col-md-8">
-                <FormControl aria-describedby='new-question-error-error-text' className='full-width form-inputs'>                      
-                    <TextField
-                      id={`question-${key}`}
-                      label={`${t('question')} #${(key + 1)}`}
-                      multiline
-                      rowsMax="100"                          
-                      value={record}                                 
-                      onChange={(e) => {
-                        this._handleQuestionChange(e, key)
-                      }}                      
-                    />                               
-                </FormControl>
-            </div>           
+        return Object.keys(questions).map((record, key) => (
+            <div className="row">
+                <div className="col-sm-10 col-md-10 col-lg-8">
+                    <FormControl aria-describedby='new-question-error-error-text' className='full-width form-inputs'>                      
+                        <TextField
+                          id={`question-${record}`}
+                          label={`${t('question')} #${(key + 1)}`}
+                          multiline
+                          rowsMax="100"                          
+                          value={questions[record]}                                 
+                          onChange={(e) => {
+                            this._handleQuestionChange(e, record)
+                          }}                      
+                        />                               
+                    </FormControl>
+                </div>  
+                <div className="col-sm-2 text-left">
+                    <a href="#" onClick={(e) => {e.preventDefault(); this._deleteQuestion(record) }}>
+                        <i className='la la-remove text-danger' style={{fontWeight: 'bold'}}></i>
+                    </a>
+                </div>
+            </div>
         ));        
     }    
 
     render() {
-        const {t, createRequest} = this.props;
+        const {t, updateRequest} = this.props;
         const {form, questions, showQuestionModal} = this.state;
         
-        const errors = createRequest.get('errors');
+        const errors = updateRequest.get('errors');
         
         return (
             <div className='fadeInLeft  animated'>               
@@ -131,7 +162,7 @@ class BuildTemplate extends Component {
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
                                 <span className='m-portlet__head-icon'><i className='la la-comment-o' style={{fontSize: '55px'}}></i></span>
-                                <h3 className='m-portlet__head-text'>{t('buildTemplate')}</h3>
+                                <h3 className='m-portlet__head-text'>{t('UpdateScapTemplate')}</h3>
                             </div>
                         </div>         
                     </div>
@@ -179,12 +210,12 @@ class BuildTemplate extends Component {
                                 </Button>                              
                             </div>
                             <div className="col-sm-12 m--margin-top-40 text-center">
-                                <Button disabled={createRequest.get('loading')} onClick={() => { this._saveTemplate() }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
+                                <Button disabled={updateRequest.get('loading')} onClick={() => { this._saveTemplate() }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
                                     {t('saveTemplate')}
                                     <Icon className="m--margin-left-5">check</Icon>
                                 </Button>
                                 <NavLink to="/scap" className="link-btn">
-                                    <Button disabled={createRequest.get('loading')} variant="raised" color='default' className='mt-btn mt-btn-cancel'>
+                                    <Button disabled={updateRequest.get('loading')} variant="raised" color='default' className='mt-btn mt-btn-cancel'>
                                         {t('cancel')}                                    
                                     </Button>
                                 </NavLink>
@@ -198,17 +229,22 @@ class BuildTemplate extends Component {
     }
 }
 
-BuildTemplate = connect(
+EditTemplate = connect(
     (state) => ({
-        createRequest: selectCreateRequest(state)
+        updateRequest: selectUpdateRequest(state),
+        recordRequest: selectGetRecordRequest(state)
     }),
     (dispatch) => ({
-        create: (params = {}) => {
-            dispatch(create(params))
+        getRecord: (id) => {
+            dispatch(getRecord(id));
+        },
+        update: (id, params = {}) => {
+            alert(id);        
+            dispatch(update(id, params));
         },
         goTo: (url) => {dispatch(push(url))},
-        reset: () => {dispatch(resetCreateRequest())}
+        reset: () => {dispatch(resetUpdateRequest())}
     })
-)(BuildTemplate);
+)(EditTemplate);
 
-export default translate('translations')(BuildTemplate);
+export default translate('translations')(EditTemplate);
