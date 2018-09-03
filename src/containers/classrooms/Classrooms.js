@@ -105,6 +105,7 @@ class Classrooms extends Component {
         <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
         <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
         <Td width='132px'>{record.get('studentsCount')}</Td>
+        <Td width='132px'>{(record.get('isPublic') ? t('yes') : t('no'))}</Td>
         <Td width='150px'>
           <HasPermission permissions={[
             '[ClassRooms][Update][Any]'
@@ -315,6 +316,7 @@ class Classrooms extends Component {
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>{t('course')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>{t('teacher')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='132px'>{t('studentsCount')}</Th>
+                  <Th width='132px'>{t('public')}</Th>
                   <Th width='150px'>{t('actions')}</Th>
                 </HeadRow>
               </Thead>
