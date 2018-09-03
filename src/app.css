@@ -1907,7 +1907,13 @@ td.rotate div span {
 .margin-bottom-15{
     margin-bottom: 15px;
 }
-
+.sortable-chosen {
+    border: 1px #cccccc dashed;
+    padding: 5px 16px;
+}
+.sortable-questions label {
+    cursor: move;
+}
 @media (max-width: 1240px) {
     .m--visible-desktop-lg {
         display: block !important; }

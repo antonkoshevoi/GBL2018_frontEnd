@@ -14,7 +14,7 @@ import {
   Select,  
   Button
 } from '@material-ui/core';
-//import DraggableList from 'react-draggable-list';
+import ReactSortable  from 'react-sortablejs';
 import QuestionModal from './modals/QuestionModal'
 import { selectCreateRequest } from '../../redux/scap/selectors';
 import { create, resetCreateRequest } from '../../redux/scap/actions';
@@ -27,10 +27,6 @@ class BuildTemplate extends Component {
             form: {},
             questions: []
         }
-    }
-
-    componentDidMount() {
-
     }
     
     componentWillReceiveProps(nextProps) {                
@@ -101,7 +97,7 @@ class BuildTemplate extends Component {
         }
         
         return questions.map((record, key) => (          
-            <div className="col-sm-12 col-md-8">
+            (<div className="col-sm-12 col-md-8" data-id={record}>
                 <FormControl aria-describedby='new-question-error-error-text' className='full-width form-inputs'>                      
                     <TextField
                       id={`question-${key}`}
@@ -114,7 +110,7 @@ class BuildTemplate extends Component {
                       }}                      
                     />                               
                 </FormControl>
-            </div>           
+            </div>)
         ));        
     }    
 
@@ -122,10 +118,14 @@ class BuildTemplate extends Component {
         const {t, createRequest} = this.props;
         const {form, questions, showQuestionModal} = this.state;
         
-        const errors = createRequest.get('errors');
-        
+        const errors = createRequest.get('errors');       
+
+        let sortable = null;
+
+const listItems = questions.map(val => (<div data-id={val}>List Item: {val}</div>));
+
         return (
-            <div className='fadeInLeft  animated'>               
+            <div className='fadeInLeft  animated'> 
                 <div className='m-portlet m-portlet--head-solid-bg'>
                     <div className='m-portlet__head border-b-blue'>
                         <div className='m-portlet__head-caption'>
@@ -169,8 +169,19 @@ class BuildTemplate extends Component {
                         <div className="row">
                             <div className="col-sm-12 m--margin-top-30 text-right">
                                 <h5 className="text-left">{t('questions')}</h5>
-                                <div>{this._renderQuestions()}</div>
-                                {!questions.length && errors && errors.get('questions') && <p className="text-center m--margin-top-40 text-danger">{t('pleaseAddAnyQuestions')}</p>}
+                                <div className="sortable-questions">
+                                    <ReactSortable
+                                        ref={(c) => { if (c) { sortable = c.sortable; } }}
+                                        options={{
+                                            handle: "label"                
+                                        }}
+                                        onChange={(order, sortable, evt) => {                    
+                                            this.setState({questions: order });
+                                        }}>
+                                        {this._renderQuestions()}
+                                    </ReactSortable>
+                                    {!questions.length && errors && errors.get('questions') && <p className="text-center m--margin-top-40 text-danger">{t('pleaseAddAnyQuestions')}</p>}
+                                </div>
                             </div>
                             <div className="col-sm-12 m--margin-top-40 text-left">
                                 <Button onClick={() => { this._showQuestionModal() }} variant="raised" color='primary' className='mt-btn mt-btn-success'>
