@@ -442,5 +442,6 @@ export default {
     pleaseAddAnyQuestions: 'Please add any questions to your S-CAP template...',
     not_published: 'Not Published',
     templateDetails: 'Template Details',
-    updateScapTemplate: 'Update S-Cap Template'
+    updateScapTemplate: 'Update S-Cap Template',
+    public: 'Public'
 }
