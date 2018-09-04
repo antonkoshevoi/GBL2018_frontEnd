@@ -9,13 +9,27 @@ import { selectGetRecordsRequest, selectDeleteRequest, selectPagination } from '
 import { getRecords, getRecord, deleteRecord } from '../../redux/scap/actions';
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from "../../components/ui/DeleteButton";
+import AssignTeachersModal from "./modals/AssignTeachersModal"
+
+const AssignButton = ({ id, onClick}) => {
+  return (
+    <button
+      className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15'
+      onClick={onClick && (() => { onClick(id) })}      
+    >
+      <i className='la la-user-plus'></i>
+    </button>
+  );
+};
 
 class Templates extends Component {
     constructor(props) {
         super(props);
         this.state = {
             page: props.pagination.get('page'),
-            perPage: props.pagination.get('perPage')
+            perPage: props.pagination.get('perPage'),
+            showAssignModal: false,
+            selectedTemplate: null
         }
     }
 
@@ -32,10 +46,25 @@ class Templates extends Component {
             this._getRecords();
         }
     }
-  
-    /**
-     * Records
-     */
+    
+    _showAssignModal(record) {
+        this.setState({
+            showAssignModal: true,
+            selectedTemplate: record
+        });
+    }
+    
+    _closeAssignModal() {
+        this.setState({
+            showAssignModal: false,
+            selectedTemplate: null
+        });        
+    }
+    
+    _onAssign() {
+        this._getRecords();
+    }
+    
     _getRecords() {
         const { page, perPage} = this.state;
 
@@ -74,10 +103,10 @@ class Templates extends Component {
                 <Td first={true} width='100px'>{key + 1}</Td>
                 <Td width='132px'>{record.get('title')}</Td>
                 <Td width='132px'>{record.get('questions')}</Td>                                
-                <Td width='132px'>{record.get('teacher') || '-'}</Td>
+                <Td width='132px'>{record.get('teachers')} <AssignButton onClick={() => { this._showAssignModal(record) }} /></Td>
                 <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('status'))}</span></Td>
                 <Td width='132px'>{record.get('createdAt')}</Td>
-                <Td width='100px'>
+                <Td width='132px'>                    
                     <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')} />
                     <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }} />                        
                 </Td>
@@ -99,9 +128,9 @@ class Templates extends Component {
 
     render() {
         const {getRecordsRequest, pagination, t} = this.props;
-        const {page, perPage}   = this.state;
-        const loading           = getRecordsRequest.get('loading');
-        const totalPages        = pagination.get('totalPages');
+        const {page, perPage, showAssignModal, selectedTemplate} = this.state;
+        const loading = getRecordsRequest.get('loading');
+        const totalPages = pagination.get('totalPages');
 
         return (
             <div className='fadeInLeft  animated'>               
@@ -143,10 +172,10 @@ class Templates extends Component {
                                 <Th first={true} width='100px'>#</Th>
                                 <Th width='132px'>{t('title')}</Th>
                                 <Th width='132px'>{t('questions')}</Th>
-                                <Th width='132px'>{t('teacher')}</Th>
+                                <Th width='132px'>{t('teachers')}</Th>
                                 <Th width='132px'>{t('status')}</Th>
                                 <Th width='132px'>{t('created')}</Th>
-                                <Th width='100px'>{t('actions')}</Th>
+                                <Th width='132px'>{t('actions')}</Th>
                             </HeadRow>
                             </Thead>
 
@@ -162,7 +191,12 @@ class Templates extends Component {
                             </div>
                         </div>
                     </div>
-                </div>                              
+                </div>
+                <AssignTeachersModal 
+                    isOpen={showAssignModal} 
+                    onClose={() => { this._closeAssignModal() }}
+                    onSuccess={() => { this._onAssign() }}
+                    template={selectedTemplate} />
             </div>
         );
     }

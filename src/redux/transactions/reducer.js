@@ -3,8 +3,6 @@ import {
 } from './actions';
 import Immutable from 'immutable';
 
-import data from "../../data/json/transactions.json";
-
 const initialState = Immutable.fromJS({
   getRecordsRequest: {
     loading: false,

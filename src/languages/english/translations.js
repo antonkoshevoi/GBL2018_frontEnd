@@ -443,5 +443,6 @@ export default {
     not_published: 'Not Published',
     templateDetails: 'Template Details',
     updateScapTemplate: 'Update S-Cap Template',
-    public: 'Public'
+    public: 'Public',
+    assignTeachers: 'Assign Teachers'
 }

@@ -31,5 +31,6 @@ export default {
   studentUnsubscribedFromCourse: 'Student successfully unsubscribed from the course',
   subscriptionCancelled: 'Subscription successfully cancelled',
   scapTemplateCreated: 'S-Cap template successfully created',
-  scapTemplateUpdated: 'S-Cap template successfully updated'
+  scapTemplateUpdated: 'S-Cap template successfully updated',
+  scapTemplateTeachersAssigned: 'S-Cap template is shared to selected teachers'
 }

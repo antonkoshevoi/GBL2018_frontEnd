@@ -20,6 +20,11 @@ export const DELETE = '[Surveys] DELETE';
 export const DELETE_SUCCESS = '[Surveys] DELETE_SUCCESS';
 export const DELETE_FAIL = '[Surveys] DELETE_FAIL';
 
+export const ASSIGN_TEACHERS = '[Surveys] ASSIGN_TEACHERS';
+export const ASSIGN_TEACHERS_SUCCESS = '[Surveys] ASSIGN_TEACHERS_SUCCESS';
+export const ASSIGN_TEACHERS_FAIL = '[Surveys] ASSIGN_TEACHERS_FAIL';
+export const RESET_ASSIGN_TEACHERS_REQUEST = '[Surveys] RESET_ASSIGN_TEACHERS_REQUEST';
+
 export function getRecords(params = {}) {
     return {
         types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -48,6 +53,13 @@ export function update(id, data, params = {}) {
     };
 }
 
+export function assignTeachers(id, data, params) {
+    return {
+        types: [ASSIGN_TEACHERS, ASSIGN_TEACHERS_SUCCESS, ASSIGN_TEACHERS_FAIL],
+        promise: (apiClient) => apiClient.post(`surveys/assign-teachers/${id}`, data, params)
+    };
+}
+
 export function resetCreateRequest() {
     return {
         type: RESET_CREATE_REQUEST
@@ -60,9 +72,16 @@ export function resetUpdateRequest() {
     }
 }
 
+export function resetAssignTeachersRequest() {
+    return {
+        type: RESET_ASSIGN_TEACHERS_REQUEST
+    }
+}
+
 export function deleteRecord(id) {
     return {
         types: [DELETE, DELETE_SUCCESS, DELETE_FAIL],
         promise: (apiClient) => apiClient.get(`surveys/delete/${id}`)
     };
 }
+

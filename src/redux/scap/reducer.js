@@ -3,7 +3,8 @@ import {
     GET_RECORD, GET_RECORD_SUCCESS, GET_RECORD_FAIL, RESET_GET_RECORD_REQUEST,
     CREATE, CREATE_SUCCESS, CREATE_FAIL, RESET_CREATE_REQUEST,
     UPDATE, UPDATE_SUCCESS, UPDATE_FAIL, RESET_UPDATE_REQUEST,
-    DELETE, DELETE_SUCCESS, DELETE_FAIL
+    DELETE, DELETE_SUCCESS, DELETE_FAIL,
+    ASSIGN_TEACHERS, ASSIGN_TEACHERS_SUCCESS, ASSIGN_TEACHERS_FAIL, RESET_ASSIGN_TEACHERS_REQUEST
 } from './actions';
 import Immutable from 'immutable';
 
@@ -42,7 +43,14 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorMessage: null,
     errorCode: null
-  },  
+  },
+  assignTeachersRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,
+    errorCode: null
+  },    
   pagination: {
     page: 1,
     perPage: 10,
@@ -200,6 +208,24 @@ export default function reducer (state = initialState, action) {
           .set('errorMessage', action.error.response.data.message)
         );
 
+    /**
+     * Assign teacher
+     */
+    case ASSIGN_TEACHERS:
+      return state.set('assignTeachersRequest', initialState.get('assignTeachersRequest').set('loading', true));
+    case ASSIGN_TEACHERS_SUCCESS:
+        return state.set('assignTeachersRequest', initialState.get('assignTeachersRequest').set('success', true));
+    case ASSIGN_TEACHERS_FAIL:      
+      return state
+        .set('assignTeachersRequest', state.get('assignTeachersRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('errorCode', action.error.response.data.code)
+          .set('errorMessage', action.error.response.data.message)          
+        );
+    case RESET_ASSIGN_TEACHERS_REQUEST:
+      return state.set('assignTeachersRequest', initialState.get('assignTeachersRequest'));
+      
     /**
      * default
      */

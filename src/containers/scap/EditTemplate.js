@@ -9,9 +9,7 @@ import {
   FormHelperText,
   Input,
   TextField,
-  InputLabel,
-  MenuItem,
-  Select,  
+  InputLabel, 
   Button
 } from '@material-ui/core';
 import Loader from "../../components/layouts/Loader";
@@ -19,7 +17,6 @@ import Loader from "../../components/layouts/Loader";
 import QuestionModal from './modals/QuestionModal'
 import { selectUpdateRequest, selectGetRecordRequest } from '../../redux/scap/selectors';
 import { getRecord, update, resetUpdateRequest } from '../../redux/scap/actions';
-import DeleteButton from "../../components/ui/DeleteButton";
 
 class EditTemplate extends Component {
     constructor(props) {
@@ -158,7 +155,7 @@ class EditTemplate extends Component {
         
         return (
             <div className='fadeInLeft  animated'>               
-                {recordRequest.get('loading') ? <Loader/> : 
+                {!recordRequest.get('success') ? <Loader/> : 
                 (<div className='m-portlet m-portlet--head-solid-bg'>
                     <div className='m-portlet__head border-b-blue'>
                         <div className='m-portlet__head-caption'>

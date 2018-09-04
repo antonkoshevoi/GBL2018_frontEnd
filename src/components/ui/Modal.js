@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Dialog, Slide, withStyles } from '@material-ui/core';
+import { Dialog, withStyles } from '@material-ui/core';
 
 class Modal extends Component {
 
@@ -31,7 +31,7 @@ class Modal extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { classes, bigger, maxWidth, minWidth } = this.props;
+    const { classes, bigger, maxWidth } = this.props;
 
     return (
       <Dialog

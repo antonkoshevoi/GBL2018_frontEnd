@@ -9,9 +9,7 @@ import {
   FormHelperText,
   Input,
   TextField,
-  InputLabel,
-  MenuItem,
-  Select,  
+  InputLabel,    
   Button
 } from '@material-ui/core';
 import ReactSortable  from 'react-sortablejs';
@@ -117,13 +115,8 @@ class BuildTemplate extends Component {
     render() {
         const {t, createRequest} = this.props;
         const {form, questions, showQuestionModal} = this.state;
-        
         const errors = createRequest.get('errors');       
-
-        let sortable = null;
-
-const listItems = questions.map(val => (<div data-id={val}>List Item: {val}</div>));
-
+        
         return (
             <div className='fadeInLeft  animated'> 
                 <div className='m-portlet m-portlet--head-solid-bg'>
@@ -170,8 +163,7 @@ const listItems = questions.map(val => (<div data-id={val}>List Item: {val}</div
                             <div className="col-sm-12 m--margin-top-30 text-right">
                                 <h5 className="text-left">{t('questions')}</h5>
                                 <div className="sortable-questions">
-                                    <ReactSortable
-                                        ref={(c) => { if (c) { sortable = c.sortable; } }}
+                                    <ReactSortable                                        
                                         options={{
                                             handle: "label"                
                                         }}
