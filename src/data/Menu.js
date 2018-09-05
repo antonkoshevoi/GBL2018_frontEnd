@@ -198,6 +198,6 @@ export default  {
             link: 'scap',
             icon: 'fa fa-id-card',
             colorName: 'purple'
-        },        
+        }     
     ]
 }

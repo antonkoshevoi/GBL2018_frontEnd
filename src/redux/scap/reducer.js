@@ -1,6 +1,8 @@
 import {
     GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, 
     GET_RECORD, GET_RECORD_SUCCESS, GET_RECORD_FAIL, RESET_GET_RECORD_REQUEST,
+    GET_ASSIGNED_RECORDS, GET_ASSIGNED_RECORDS_SUCCESS, GET_ASSIGNED_RECORDS_FAIL,
+    GET_ASSIGNED_RECORD, GET_ASSIGNED_RECORD_SUCCESS, GET_ASSIGNED_RECORD_FAIL,
     CREATE, CREATE_SUCCESS, CREATE_FAIL, RESET_CREATE_REQUEST,
     UPDATE, UPDATE_SUCCESS, UPDATE_FAIL, RESET_UPDATE_REQUEST,
     DELETE, DELETE_SUCCESS, DELETE_FAIL,
@@ -65,6 +67,7 @@ export default function reducer (state = initialState, action) {
      * Get records
      */
     case GET_RECORDS:
+    case GET_ASSIGNED_RECORDS:
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
           .set('loading', true)
@@ -73,6 +76,7 @@ export default function reducer (state = initialState, action) {
           .remove('fail')
         );
     case GET_RECORDS_SUCCESS:
+    case GET_ASSIGNED_RECORDS_SUCCESS:
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
             .set('success', true)
@@ -80,6 +84,7 @@ export default function reducer (state = initialState, action) {
             .remove('loading')
         );
     case GET_RECORDS_FAIL:
+    case GET_ASSIGNED_RECORDS_FAIL:
       return state
         .set('getRecordsRequest', state.get('getRecordsRequest')
           .set('loading', false)
@@ -90,6 +95,7 @@ export default function reducer (state = initialState, action) {
      * Get single record
      */
     case GET_RECORD:
+    case GET_ASSIGNED_RECORD:
       return state
         .set('getRecordRequest', state.get('getRecordRequest')
           .set('loading', true)
@@ -98,6 +104,7 @@ export default function reducer (state = initialState, action) {
           .remove('record')
         );
     case GET_RECORD_SUCCESS:
+    case GET_ASSIGNED_RECORD_SUCCESS:
       return state
         .set('getRecordRequest', state.get('getRecordRequest')
           .set('success', true)
@@ -105,6 +112,7 @@ export default function reducer (state = initialState, action) {
           .set('record', Immutable.fromJS(action.result.data))
         );
     case GET_RECORD_FAIL:
+    case GET_ASSIGNED_RECORD_FAIL:
       return state
         .set('getRecordRequest', state.get('getRecordRequest')
           .set('loading', false)

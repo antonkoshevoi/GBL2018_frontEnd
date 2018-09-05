@@ -1,7 +1,9 @@
 import { all } from 'redux-saga/effects';
 import { 
-    GET_RECORDS_FAIL, 
+    GET_RECORDS_FAIL,
+    GET_ASSIGNED_RECORDS_FAIL,
     GET_RECORD_FAIL,
+    GET_ASSIGNED_RECORD_FAIL,
     CREATE_FAIL,
     DELETE_FAIL,
     ASSIGN_TEACHERS_FAIL,
@@ -22,8 +24,10 @@ const scapSagas = all([
       [ASSIGN_TEACHERS_SUCCESS]: i18n.t('messages:scapTemplateTeachersAssigned')
   }),    
   yieldErrorToasts([
-    GET_RECORDS_FAIL, 
+    GET_RECORDS_FAIL,
+    GET_ASSIGNED_RECORDS_FAIL,
     GET_RECORD_FAIL,
+    GET_ASSIGNED_RECORD_FAIL,
     CREATE_FAIL,
     DELETE_FAIL,
     ASSIGN_TEACHERS_FAIL

@@ -2,6 +2,14 @@ export const GET_RECORDS = '[Surveys] GET_RECORDS';
 export const GET_RECORDS_SUCCESS = '[Surveys] GET_RECORDS_SUCCESS';
 export const GET_RECORDS_FAIL = '[Surveys] GET_RECORDS_FAIL';
 
+export const GET_ASSIGNED_RECORDS = '[Surveys] GET_ASSIGNED_RECORDS';
+export const GET_ASSIGNED_RECORDS_SUCCESS = '[Surveys] GET_ASSIGNED_RECORDS_SUCCESS';
+export const GET_ASSIGNED_RECORDS_FAIL = '[Surveys] GET_ASSIGNED_RECORDS_FAIL';
+
+export const GET_ASSIGNED_RECORD = '[Surveys] GET_ASSIGNED_RECORD';
+export const GET_ASSIGNED_RECORD_SUCCESS = '[Surveys] GET_ASSIGNED_RECORD_SUCCESS';
+export const GET_ASSIGNED_RECORD_FAIL = '[Surveys] GET_ASSIGNED_RECORD_FAIL';
+
 export const GET_RECORD = '[Surveys] GET_RECORD';
 export const GET_RECORD_SUCCESS = '[Surveys] GET_RECORD_SUCCESS';
 export const GET_RECORD_FAIL = '[Surveys] GET_RECORD_FAIL';
@@ -25,6 +33,11 @@ export const ASSIGN_TEACHERS_SUCCESS = '[Surveys] ASSIGN_TEACHERS_SUCCESS';
 export const ASSIGN_TEACHERS_FAIL = '[Surveys] ASSIGN_TEACHERS_FAIL';
 export const RESET_ASSIGN_TEACHERS_REQUEST = '[Surveys] RESET_ASSIGN_TEACHERS_REQUEST';
 
+export const ADD_ANSWERS = '[Surveys] ADD_ANSWERS';
+export const ADD_ANSWERS_SUCCESS = '[Surveys] ADD_ANSWERS_SUCCESS';
+export const ADD_ANSWERS_FAIL = '[Surveys] ADD_ANSWERS_FAIL';
+export const RESET_ADD_ANSWERS_REQUEST = '[Surveys] RESET_ADD_ANSWERS_REQUEST';
+
 export function getRecords(params = {}) {
     return {
         types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -32,10 +45,24 @@ export function getRecords(params = {}) {
     };
 }
 
+export function getAssignedRecords(params = {}) {
+    return {
+        types: [GET_ASSIGNED_RECORDS, GET_ASSIGNED_RECORDS_SUCCESS, GET_ASSIGNED_RECORDS_FAIL],
+        promise: (apiClient) => apiClient.get('surveys/assigned', params)
+    };
+}
+
 export function getRecord(id) {
     return {
         types: [GET_RECORD, GET_RECORD_SUCCESS, GET_RECORD_FAIL],
         promise: (apiClient) => apiClient.get(`surveys/detail/${id}`)
+    };
+}
+
+export function getAssignedRecord(id) {
+    return {
+        types: [GET_ASSIGNED_RECORD, GET_ASSIGNED_RECORD_SUCCESS, GET_ASSIGNED_RECORD_FAIL],
+        promise: (apiClient) => apiClient.get(`surveys/assigned-detail/${id}`)
     };
 }
 
@@ -85,3 +112,9 @@ export function deleteRecord(id) {
     };
 }
 
+export function addAnswers(id) {
+    return {
+        types: [ADD_ANSWERS,  ADD_ANSWERS_SUCCESS, ADD_ANSWERS_FAIL],
+        promise: (apiClient) => apiClient.get(`surveys/add-answers/${id}`)
+    };
+}

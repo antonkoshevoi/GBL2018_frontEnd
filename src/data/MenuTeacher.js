@@ -167,6 +167,13 @@ export default  {
                     icon: 'flaticon flaticon-user-ok',
                 }
             ]
-        }
+        },
+        {
+            key: 'sCap',
+            title: 'sCap',
+            link: 'scap',
+            icon: 'fa fa-id-card',
+            colorName: 'purple'
+        }  
     ]
 }

@@ -60,9 +60,10 @@ import Publisher from "../containers/static/Publisher";
 import SchoolTeacher from "../containers/static/SchoolTeacher";
 import TermsService from "../containers/static/TermsService";
 
-import Templates from "../containers/scap/Templates";
+import Scap from "../containers/scap/Scap";
 import BuildTemplate from "../containers/scap/BuildTemplate";
 import EditTemplate from "../containers/scap/EditTemplate";
+import FillTemplate from "../containers/scap/FillTemplate";
 
 export default () => (
   <AppContainer>
@@ -117,9 +118,10 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id/edit' name='Student' component={ProfileEdit}/>      
       
-      <AuthenticatedRoute exact layout={MainLayout} path='/scap' name='S-Cap' component={Templates}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/scap' name='S-Cap' component={Scap}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/scap/build' name='S-Cap Build Template' component={BuildTemplate}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/scap/update/:id' name='S-Cap Update Template' component={EditTemplate}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/scap/fill/:id' name='S-Cap Update Template' component={FillTemplate}/>            
 
       {/*Store*/}    
       <AuthenticatedRoute exact layout={MainLayout} path='/store/shopping-cart' name='Details' component={ShoppingCart}/>
