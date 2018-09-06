@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { push } from 'react-router-redux';
-import { Button, Icon, MenuItem, Select } from '@material-ui/core';
+import { MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import { selectGetRecordsRequest, selectPagination } from '../../redux/scap/selectors';
@@ -21,11 +21,7 @@ class TeacherScap extends Component {
         const {getRecords} = this.props;
         getRecords();
     }
-
-    componentWillReceiveProps(nextProps) {
-
-    }    
-    
+   
     _getRecords() {
         const { page, perPage} = this.state;
 
@@ -80,8 +76,8 @@ class TeacherScap extends Component {
     }
 
     render() {
-        const {getRecordsRequest, pagination, t, goTo} = this.props;
-        const {page, perPage, showAssignModal, selectedTemplate} = this.state;
+        const {getRecordsRequest, pagination, t} = this.props;
+        const {page, perPage} = this.state;
         const loading = getRecordsRequest.get('loading');
         const totalPages = pagination.get('totalPages');
 

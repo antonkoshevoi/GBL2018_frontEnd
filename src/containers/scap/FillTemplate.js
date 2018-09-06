@@ -1,33 +1,41 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import {
   Icon,
   FormControl,
   FormHelperText,
-  Input,
-  TextField,
+  Input,  
   InputLabel, 
-  Button
+  Button,
+  MenuItem, 
+  Select  
 } from '@material-ui/core';
 import Loader from "../../components/layouts/Loader";
-import { selectGetRecordRequest } from '../../redux/scap/selectors';
-import { getAssignedRecord, addAnswers, resetUpdateRequest } from '../../redux/scap/actions';
+import { selectGetRecordRequest, selectAddAnswersRequest } from '../../redux/scap/selectors';
+import { getAssignedRecord, resetGetRecordRequest, addAnswers, resetAddAnswersRequest } from '../../redux/scap/actions';
+import { getSchoolStudents } from "../../redux/schools/actions";
+import { selectGetSchoolStudentsRequest } from "../../redux/schools/selectors";
 
 class FillTemplate extends Component {
     constructor(props) {
         super(props);        
         this.state = {
-            id: this.props.match.params.id,            
-            form: {},
-            questions: []
+            surveyId: this.props.match.params.id,
+            studentId: null,
+            answers: {},
+            students: []
         }
     }
 
     componentDidMount() {
+        this.props.getSchoolStudents(this.props.match.params.id);
         this.props.getRecord(this.props.match.params.id);
+    }
+    
+    componentWillUnmount() {
+        this.props.resetGetRecordRequest();
     }
     
     componentWillReceiveProps(nextProps) {        
@@ -36,123 +44,120 @@ class FillTemplate extends Component {
 
         if (!record && nextRecord) {
             this.setState({
-                form: nextRecord.toJS(),
-                questions: nextRecord.get('questions').toJS()
+                scap: nextRecord.toJS()       
+            });            
+        }
+        
+        const students      = this.props.schoolStudentsRequest.get('records');
+        const nextStudents  = nextProps.schoolStudentsRequest.get('records');
+
+        if (!students && nextStudents) {
+            this.setState({            
+                students: nextStudents.toJS()
             });
-        }        
+        }
+        
+        const success      = this.props.addAnswersRequest.get('success');
+        const nextSuccess  = nextProps.addAnswersRequest.get('success');
+
+        if (!success && nextSuccess) {
+            this._goBack();
+        }         
+    }
+    
+    _saveAnswers() {        
+        this.props.addAnswers({
+            surveyId: this.state.surveyId,
+            studentId: this.state.studentId,
+            answers: this.state.answers
+        });
+    }
+        
+    _goBack() {
+        this.props.resetGetRecordRequest();
+        this.props.resetAddAnswersRequest();
+        this.props.goTo('/scap');
     }    
     
-    _handleInputChange(event) {
+    _handleAnswerChange(event, key) {
         const { name, value } = event.target;
+                
+        let answers = this.state.answers;
+        
+        answers[key] = {
+            ...(this.state.answers[key]),
+            [name]: value,
+            questionId: key
+        };
+        
+        this.setState({answers: answers});            
+    }
+    
+    _renderStudents() {
+        const { students } = this.state;
 
-        this.setState({
-          form: {
-            ...this.state.form,
-            [name]: value
-          }
-        });
+        return students.map((student, key) => (
+            <MenuItem key={key} value={ student.id }>
+                { student.firstName } { student.lastName }
+            </MenuItem>
+        ));
     }
-    
-    _showQuestionModal() {
-        this.setState({
-            showQuestionModal: true
-        });
-    }
-    
-    _closeQuestionModal() {
-        this.setState({
-            showQuestionModal: false
-        });        
-    }
-    
-    _addQuestion(question) {
-        let { questions } = this.state;
-        
-        questions[Math.random()] = question;
-        
-        this.setState({
-            showQuestionModal: false,
-            questions: questions
-        });
-    }
-    
-    _deleteQuestion(key) {
-        let { questions } = this.state;
-        
-        delete questions[key];
-        
-        this.setState({            
-            questions: questions
-        });        
-    }
-    
-    _saveTemplate() {        
-        this.props.update(this.state.id, {
-            ... this.state.form,
-            questions: this.state.questions
-        });
-    }
-    
-    _handleQuestionChange(event, key) {
-        let questions = this.state.questions;               
-        
-        questions[key] = event.target.value; 
-        
-        this.setState({questions: questions});
-    }
-    
+  
     _renderQuestions() {
-        const {t} = this.props;
-        const {questions} = this.state;
-        
-        
-        if (questions.length === 0) {            
+        const {t, recordRequest} = this.props;
+        const {scap, answers} = this.state;               
+         
+        if (!recordRequest.get('success') || scap.questions.length === 0) {            
             return (
                 <div className="text-center">{t('noAnyQuestions')}</div>
             ); 
         }        
         
-        return Object.keys(questions).map((record, key) => (
-            <div>
-                
-                    <h6 className="text-left">{questions[record]}</h6>
-                    <div className="row">
-                    <div className="col-sm-3 col-md-3 col-lg-3 text-left">
-                    
-                        <TextField
-                          id={`question-${record}`}
-                          label={t('rate')}
-                          multiline
-                          rowsMax="100"                          
-                          value={''}                                 
-                          onChange={(e) => {
-                            
-                          }}                      
-                        />    
-                        </div>
-                        <div className="col-sm-6 col-md-6 col-lg-6  text-left">
-                        <TextField
-                          id={`question-${record}`}
-                          label={t('notes')}
-                          multiline
-                          rowsMax="100"                          
-                          value={''}                                 
-                          onChange={(e) => {
-                            
-                          }}                      
-                        />       
-                        </div>                        
-                   
+        return scap.questions.map((question, key) => {
+            let answer = answers[question.id] || {};
+            return (<div key={key}>                
+                <h6 className="text-left pre-line">{question.question}</h6>
+                <div className="row">
+                    <div className="col-sm-3 col-md-3 col-lg-3 text-left">                    
+                        <FormControl className='full-width form-inputs'>
+                            <InputLabel htmlFor='name-error'>{t('score')}</InputLabel>
+                            <Select                              
+                                name='score'
+                                style={{minWidth: 200}}
+                                onChange={(e) => {
+                                    this._handleAnswerChange(e, question.id)                              
+                                }}
+                                value={answer.score || ''}>
+                                <MenuItem value={null} primarytext=""/>
+                                <MenuItem value="A" primarytext="A">A</MenuItem>
+                                <MenuItem value="B" primarytext="B">B</MenuItem>
+                                <MenuItem value="C" primarytext="C">C</MenuItem>
+                                <MenuItem value="D" primarytext="D">D</MenuItem>
+                                <MenuItem value="F" primarytext="F">F</MenuItem>
+                            </Select>                          
+                        </FormControl>
+                    </div>
+                    <div className="col-sm-6 col-md-6 col-lg-6 text-left">
+                        <FormControl className='full-width form-inputs'>
+                            <InputLabel htmlFor='name-error'>{t('notes')}</InputLabel>
+                            <Input
+                              name='notes'
+                              value={answer.notes || ''}                                 
+                              onChange={(e) => {
+                                  this._handleAnswerChange(e, question.id)
+                              }}                      
+                            />
+                        </FormControl>
+                    </div>
                 </div>  
-            </div>
-        ));        
+            </div>);
+        });        
     }    
 
     render() {
-        const {t, recordRequest} = this.props;
-        const {form, questions, showQuestionModal} = this.state;
-        
-        const errors = null;
+        const {t, recordRequest, addAnswersRequest} = this.props;
+        const {scap} = this.state;        
+        const errors = addAnswersRequest.get('errors');
         
         return (
             <div className='fadeInLeft  animated'>               
@@ -162,30 +167,44 @@ class FillTemplate extends Component {
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
                                 <span className='m-portlet__head-icon'><i className='la la-comment-o' style={{fontSize: '55px'}}></i></span>
-                                <h3 className='m-portlet__head-text'>{t('UpdateScapTemplate')}</h3>
+                                <h3 className='m-portlet__head-text'>{t('fillScapTemplate')}</h3>
                             </div>
                         </div>         
                     </div>
                     <div className='m-portlet__body'>
                         <div className="row">
                             <div className="col-sm-12 col-md-6 col-lg-4">                              
-                              <p><h6>{t('title')}</h6> {form.title}</p>
-                              <p><h6>{t('description')}</h6> {form.description}</p>                              
+                                <h6>{t('title')}</h6> 
+                                <p>{scap.title}</p>
+                                <h6>{t('description')}</h6> 
+                                <p className="pre-line">{scap.description}</p>
+                                <h6>{t('student')}</h6>
+                                <div>                    
+                                    <FormControl className='full-width form-inputs'>                                        
+                                        <Select                              
+                                            name='studentId'
+                                            style={{maxWidth: 250}}
+                                            onChange={(e) => { this.setState({studentId: e.target.value}) }}
+                                            value={this.state.studentId || ''}>
+                                            { this._renderStudents() }
+                                        </Select>   
+                                        {errors && errors.get('studentId') && <FormHelperText error>{ errors.get('studentId').get(0) }</FormHelperText>}
+                                    </FormControl>
+                                </div>                              
                             </div>                              
-                            <div className="col-sm-12 m--margin-top-20 text-right">
+                            <div className="col-sm-12">
                                 <h5 className="text-left m--margin-bottom-20">{t('questions')}</h5>
+                                {errors && errors.get('answers') && <FormHelperText error className="m--margin-bottom-15">{ errors.get('answers').get(0) }</FormHelperText>}
                                 <div>{this._renderQuestions()}</div>                                
                             </div>
                             <div className="col-sm-12 m--margin-top-40 text-center">
-                                <Button  onClick={() => { this._saveTemplate() }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
+                                <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._saveAnswers() }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
                                     {t('save')}
                                     <Icon className="m--margin-left-5">check</Icon>
-                                </Button>
-                                <NavLink to="/scap" className="link-btn">
-                                    <Button variant="raised" color='default' className='mt-btn mt-btn-cancel'>
-                                        {t('cancel')}                                    
-                                    </Button>
-                                </NavLink>
+                                </Button>                                
+                                <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._goBack() }} variant="raised" color='default' className='mt-btn mt-btn-cancel'>
+                                    {t('cancel')}                                    
+                                </Button>                                
                             </div>                              
                         </div>                        
                     </div>
@@ -197,12 +216,26 @@ class FillTemplate extends Component {
 
 FillTemplate = connect(
     (state) => ({        
-        recordRequest: selectGetRecordRequest(state)
+        recordRequest: selectGetRecordRequest(state),
+        addAnswersRequest: selectAddAnswersRequest(state),
+        schoolStudentsRequest: selectGetSchoolStudentsRequest(state)
     }),
     (dispatch) => ({
         getRecord: (id) => {
             dispatch(getAssignedRecord(id));
         },
+        getSchoolStudents: () => {
+            dispatch(getSchoolStudents());
+        },
+        resetGetRecordRequest: () => {
+            dispatch(resetGetRecordRequest());
+        },
+        addAnswers: (data) => {
+            dispatch(addAnswers(data));
+        },
+        resetAddAnswersRequest: () => {
+            dispatch(resetAddAnswersRequest());
+        },        
         goTo: (url) => {dispatch(push(url))}
     })
 )(FillTemplate);

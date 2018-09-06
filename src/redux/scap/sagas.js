@@ -7,10 +7,12 @@ import {
     CREATE_FAIL,
     DELETE_FAIL,
     ASSIGN_TEACHERS_FAIL,
+    ADD_ANSWERS_FAIL,
     DELETE_SUCCESS,
     CREATE_SUCCESS,
     UPDATE_SUCCESS,
-    ASSIGN_TEACHERS_SUCCESS
+    ASSIGN_TEACHERS_SUCCESS,
+    ADD_ANSWERS_SUCCESS
 } from './actions';
 
 import { yieldErrorToasts, yieldSuccessToasts } from '../../helpers/utils';
@@ -21,7 +23,8 @@ const scapSagas = all([
       [DELETE_SUCCESS]: i18n.t('messages:deleted'),
       [CREATE_SUCCESS]: i18n.t('messages:scapTemplateCreated'),
       [UPDATE_SUCCESS]: i18n.t('messages:scapTemplateUpdated'),
-      [ASSIGN_TEACHERS_SUCCESS]: i18n.t('messages:scapTemplateTeachersAssigned')
+      [ASSIGN_TEACHERS_SUCCESS]: i18n.t('messages:scapTemplateTeachersAssigned'),
+      [ADD_ANSWERS_SUCCESS]: i18n.t('messages:scapScoresAdded'),
   }),    
   yieldErrorToasts([
     GET_RECORDS_FAIL,
@@ -30,7 +33,8 @@ const scapSagas = all([
     GET_ASSIGNED_RECORD_FAIL,
     CREATE_FAIL,
     DELETE_FAIL,
-    ASSIGN_TEACHERS_FAIL
+    ASSIGN_TEACHERS_FAIL,
+    ADD_ANSWERS_FAIL
   ])
 ]);
 

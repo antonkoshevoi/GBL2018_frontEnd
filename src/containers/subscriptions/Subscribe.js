@@ -118,7 +118,7 @@ class Subscribe extends Component {
         return getRecordsRequest.get('records').map((record, key) => {
             
             if (Number(record.get('id')) !== this.state.subscriptionId) {
-                return;
+                return '';
             }
                                                         
             const courses = <span style={{fontWeight: 500}}>{record ? record.get('allowedCourses') : '0'}</span>;       
@@ -185,7 +185,7 @@ class Subscribe extends Component {
         return getRecordsRequest.get('records').map((record, key) => {
             
             if (Number(record.get('id')) === this.state.subscriptionId) {
-                return;
+                return '';
             }
                         
             return (        

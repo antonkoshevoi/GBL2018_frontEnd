@@ -13,6 +13,7 @@ export const GET_ASSIGNED_RECORD_FAIL = '[Surveys] GET_ASSIGNED_RECORD_FAIL';
 export const GET_RECORD = '[Surveys] GET_RECORD';
 export const GET_RECORD_SUCCESS = '[Surveys] GET_RECORD_SUCCESS';
 export const GET_RECORD_FAIL = '[Surveys] GET_RECORD_FAIL';
+export const RESET_GET_RECORD_REQUEST = '[Surveys] RESET_GET_RECORD_REQUEST';
 
 export const CREATE = '[Surveys] CREATE';
 export const CREATE_SUCCESS = '[Surveys] CREATE_SUCCESS';
@@ -66,6 +67,12 @@ export function getAssignedRecord(id) {
     };
 }
 
+export function resetGetRecordRequest() {
+    return {
+        type: RESET_GET_RECORD_REQUEST
+    };
+}
+
 export function create(data, params = {}) {
     return {
         types: [CREATE, CREATE_SUCCESS, CREATE_FAIL],
@@ -112,9 +119,15 @@ export function deleteRecord(id) {
     };
 }
 
-export function addAnswers(id) {
+export function addAnswers(data) {
     return {
         types: [ADD_ANSWERS,  ADD_ANSWERS_SUCCESS, ADD_ANSWERS_FAIL],
-        promise: (apiClient) => apiClient.get(`surveys/add-answers/${id}`)
+        promise: (apiClient) => apiClient.post('surveys/add-answers', data)
+    };
+}
+
+export function resetAddAnswersRequest() {
+    return {
+        type: RESET_ADD_ANSWERS_REQUEST
     };
 }

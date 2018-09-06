@@ -40,10 +40,10 @@ class BuildTemplate extends Component {
         const { name, value } = event.target;
 
         this.setState({
-          form: {
-            ...this.state.form,
-            [name]: value
-          }
+            form: {
+                ...this.state.form,
+                [name]: value
+            }
         });
     }
     
@@ -72,7 +72,7 @@ class BuildTemplate extends Component {
     
     _saveTemplate() {
         this.props.create({
-            ... this.state.form,
+            ...this.state.form,
             questions: this.state.questions
         });
     }
@@ -95,7 +95,7 @@ class BuildTemplate extends Component {
         }
         
         return questions.map((record, key) => (          
-            (<div className="col-sm-12 col-md-8" data-id={record}>
+            <div key={key} className="col-sm-12 col-md-8" data-id={record}>
                 <FormControl aria-describedby='new-question-error-error-text' className='full-width form-inputs'>                      
                     <TextField
                       id={`question-${key}`}
@@ -108,7 +108,7 @@ class BuildTemplate extends Component {
                       }}                      
                     />                               
                 </FormControl>
-            </div>)
+            </div>
         ));        
     }    
 

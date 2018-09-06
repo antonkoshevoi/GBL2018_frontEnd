@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import {
   Icon,
@@ -16,7 +15,7 @@ import Loader from "../../components/layouts/Loader";
 //import DraggableList from 'react-draggable-list';
 import QuestionModal from './modals/QuestionModal'
 import { selectUpdateRequest, selectGetRecordRequest } from '../../redux/scap/selectors';
-import { getRecord, update, resetUpdateRequest } from '../../redux/scap/actions';
+import { getRecord, resetGetRecordRequest, update, resetUpdateRequest } from '../../redux/scap/actions';
 
 class EditTemplate extends Component {
     constructor(props) {
@@ -47,10 +46,15 @@ class EditTemplate extends Component {
         const success = this.props.updateRequest.get('success');
         const nextSuccess = nextProps.updateRequest.get('success');
 
-        if (!success && nextSuccess) {            
+        if (!success && nextSuccess) {
+            this.props.resetGetRecordRequest();
             this.props.goTo('/scap');
         }
     }    
+    
+    componentWillUnmount() {
+        this.props.resetGetRecordRequest();
+    }
     
     _handleInputChange(event) {
         const { name, value } = event.target;
@@ -78,7 +82,7 @@ class EditTemplate extends Component {
     _addQuestion(question) {
         let { questions } = this.state;
         
-        questions[Math.random()] = question;
+        questions.push({question: question});
         
         this.setState({
             showQuestionModal: false,
@@ -87,9 +91,9 @@ class EditTemplate extends Component {
     }
     
     _deleteQuestion(key) {
-        let { questions } = this.state;
+        let { questions } = this.state;                
         
-        delete questions[key];
+        questions.splice(key, 1);
         
         this.setState({            
             questions: questions
@@ -98,15 +102,23 @@ class EditTemplate extends Component {
     
     _saveTemplate() {        
         this.props.update(this.state.id, {
-            ... this.state.form,
+            ...this.state.form,
             questions: this.state.questions
         });
+    }
+    
+    _goBack() {
+        this.props.resetGetRecordRequest();
+        this.props.goTo('/scap');
     }
     
     _handleQuestionChange(event, key) {
         let questions = this.state.questions;               
         
-        questions[key] = event.target.value; 
+        questions[key] = {
+            ...questions[key],        
+            question: event.target.value
+        }; 
         
         this.setState({questions: questions});
     }
@@ -114,32 +126,30 @@ class EditTemplate extends Component {
     _renderQuestions() {
         const {t} = this.props;
         const {questions} = this.state;
-        
-        
+                
         if (questions.length === 0) {            
             return (
                 <div className="text-center">{t('noAnyQuestions')}</div>
             ); 
         }        
         
-        return Object.keys(questions).map((record, key) => (
-            <div className="row">
+        return questions.map((question, key) => (
+            <div key={key} className="row">
                 <div className="col-sm-10 col-md-10 col-lg-8">
                     <FormControl aria-describedby='new-question-error-error-text' className='full-width form-inputs'>                      
-                        <TextField
-                          id={`question-${record}`}
+                        <TextField                          
                           label={`${t('question')} #${(key + 1)}`}
                           multiline
                           rowsMax="100"                          
-                          value={questions[record]}                                 
+                          value={question.question || ''}                                 
                           onChange={(e) => {
-                            this._handleQuestionChange(e, record)
+                            this._handleQuestionChange(e, key)
                           }}                      
                         />                               
                     </FormControl>
                 </div>  
                 <div className="col-sm-2 text-left">
-                    <a href="#" onClick={(e) => {e.preventDefault(); this._deleteQuestion(record) }}>
+                    <a href="#" onClick={(e) => {e.preventDefault(); this._deleteQuestion(key) }}>
                         <i className='la la-remove text-danger' style={{fontWeight: 'bold'}}></i>
                     </a>
                 </div>
@@ -212,12 +222,10 @@ class EditTemplate extends Component {
                                 <Button disabled={updateRequest.get('loading')} onClick={() => { this._saveTemplate() }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
                                     {t('saveTemplate')}
                                     <Icon className="m--margin-left-5">check</Icon>
-                                </Button>
-                                <NavLink to="/scap" className="link-btn">
-                                    <Button disabled={updateRequest.get('loading')} variant="raised" color='default' className='mt-btn mt-btn-cancel'>
-                                        {t('cancel')}                                    
-                                    </Button>
-                                </NavLink>
+                                </Button>                                
+                                <Button disabled={updateRequest.get('loading')} onClick={() => { this._goBack() }} variant="raised" color='default' className='mt-btn mt-btn-cancel'>
+                                    {t('cancel')}                                    
+                                </Button>                                
                             </div>                              
                         </div>                        
                     </div>
@@ -236,6 +244,9 @@ EditTemplate = connect(
     (dispatch) => ({
         getRecord: (id) => {
             dispatch(getRecord(id));
+        },
+        resetGetRecordRequest: () => {
+            dispatch(resetGetRecordRequest());
         },
         update: (id, params = {}) => {            
             dispatch(update(id, params));

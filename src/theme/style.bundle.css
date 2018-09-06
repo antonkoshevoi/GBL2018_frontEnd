@@ -33951,3 +33951,6 @@ body.m-content--skin-light2 {
 .sweet-alert button.confirm {    
     background-color: #36a3f7 !important;
 }
+.pre-line {
+    white-space: pre-line;
+}

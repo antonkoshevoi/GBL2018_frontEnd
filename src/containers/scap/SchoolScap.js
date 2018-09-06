@@ -6,7 +6,7 @@ import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
 import { selectGetRecordsRequest, selectDeleteRequest, selectPagination } from '../../redux/scap/selectors';
-import { getRecords, getRecord, deleteRecord } from '../../redux/scap/actions';
+import { getRecords, deleteRecord } from '../../redux/scap/actions';
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from "../../components/ui/DeleteButton";
 import AssignTeachersModal from "./modals/AssignTeachersModal"

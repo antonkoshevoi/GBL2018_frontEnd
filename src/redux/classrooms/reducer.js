@@ -447,12 +447,10 @@ export default function reducer(state = initialState, action) {
         }
         return record;
       });
-      return state
-        .set('assignStudentsRequest', state.get('assignStudentsRequest')
+      return state.set('assignStudentsRequest', state.get('assignStudentsRequest')
           .set('loading', false)
           .set('success', true)
-        ).set('records', assignedRecords);
-      return state
+        ).set('records', assignedRecords);      
     case ASSIGN_STUDENT_FAIL:
       const assignStudentsErrordata = action.error.response.data;
       return state

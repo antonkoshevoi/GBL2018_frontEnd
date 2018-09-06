@@ -54,6 +54,14 @@ export const selectAssignTeachersRequest = createSelector(
 );
 
 /**
+ * Get Add Answers Request
+ */
+export const selectAddAnswersRequest = createSelector(
+    selectScapDomain,
+    (subState) => subState.get('addAnswersRequest')
+);
+
+/**
  * Get Pagiantion
  */
 export const selectPagination = createSelector(
