@@ -46,6 +46,22 @@ export const selectDeleteRequest = createSelector(
 );
 
 /**
+ * Get Assign Teachers Request
+ */
+export const selectAssignTeachersRequest = createSelector(
+    selectScapDomain,
+    (subState) => subState.get('assignTeachersRequest')
+);
+
+/**
+ * Get Add Answers Request
+ */
+export const selectAddAnswersRequest = createSelector(
+    selectScapDomain,
+    (subState) => subState.get('addAnswersRequest')
+);
+
+/**
  * Get Pagiantion
  */
 export const selectPagination = createSelector(

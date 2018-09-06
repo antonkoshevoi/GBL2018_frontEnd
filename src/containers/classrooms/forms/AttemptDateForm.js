@@ -42,7 +42,7 @@ class AttemptDateForm extends Component {
             lessonId: lesson.lessonId
         });
         
-        this.state.attDate = date;
+        this.setState({attDate: date});
     }
 
     render() {

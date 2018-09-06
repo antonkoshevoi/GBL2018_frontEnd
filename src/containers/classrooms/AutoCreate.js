@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import {translate} from 'react-i18next';
-import {MenuItem, Select} from '@material-ui/core';
 import Card from "../../components/ui/Card";
 import {EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../components/ui/table";
 import {selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords} from "../../redux/classrooms/selectors";
@@ -49,20 +48,6 @@ class AutoCreate extends Component {
     }
   }
 
-
-
-  /**
-   * @param perPage
-   * @private
-   */
-  _selectPerPage = (perPage) => {
-    // const total = this.props.pagination.get('total');
-    // const totalPages = Math.ceil(total / perPage);
-    // const page = Math.min(this.state.page, totalPages);
-    //
-    // this.setState({ perPage, page }, this._getRecords)
-  };
-  
   _editRecord (id) {
     this.props.getSingleRecord(id);
     this.props.getSchoolTeachers();
@@ -74,23 +59,6 @@ class AutoCreate extends Component {
   _closeEditDialog = () => {
     this.setState({ editModalIsOpen: false });
   };
-
-
-  _renderSelectPerPage(){
-    let perPage = 10;
-    return (
-      <Select
-        className="pull-left table-select"
-        value={perPage}
-        onChange={ (e) => this._selectPerPage(e.target.value)}>
-        <MenuItem value={5}>5</MenuItem>
-        <MenuItem value={10}>10</MenuItem>
-        <MenuItem value={25}>25</MenuItem>
-        <MenuItem value={50}>50</MenuItem>
-        <MenuItem value={100}>100</MenuItem>
-      </Select>
-    )
-  }
 
   _renderRecords(){
     const records = this.props.classroomRecords;
@@ -132,11 +100,7 @@ class AutoCreate extends Component {
     const loading = getParentPublicClassroom.get('loading');
     const {editModalIsOpen} = this.state;
     return (
-      <Card title={t('autoClass')}>
-        <div className='col-xl-12 order-1 order-xl-2 m--align-right'>
-          {this._renderSelectPerPage()}
-        </div>
-        <div className="col-12">
+      <Card title={t('autoClass')}>     
           <Table>
             <Thead>
             <HeadRow>
@@ -156,15 +120,13 @@ class AutoCreate extends Component {
             }
             { this._renderRecords() }
             </Tbody>
-          </Table>
-        </div>
+          </Table>      
         <EditAutoClassroomModal
           isPublic={true}
           isOpen={editModalIsOpen}
           onClose={() => { this._closeEditDialog() }}
           onSuccess={() => { this._onCreate() }}/>
       </Card>
-
     );
   }
 }

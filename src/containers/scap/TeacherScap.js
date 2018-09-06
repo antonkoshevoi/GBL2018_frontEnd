@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
 import { push } from 'react-router-redux';
-import { Button, Icon, MenuItem, Select } from '@material-ui/core';
+import { MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
-import { selectGetRecordsRequest, selectDeleteRequest, selectPagination } from '../../redux/scap/selectors';
-import { getRecords, getRecord, deleteRecord } from '../../redux/scap/actions';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
+import { selectGetRecordsRequest, selectPagination } from '../../redux/scap/selectors';
+import { getAssignedRecords } from '../../redux/scap/actions';
 import Pagination from '../../components/ui/Pagination';
-import DeleteButton from "../../components/ui/DeleteButton";
 
-class Templates extends Component {
+class TeacherScap extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,37 +21,17 @@ class Templates extends Component {
         const {getRecords} = this.props;
         getRecords();
     }
-
-    componentWillReceiveProps(nextProps) {
-        const deleteSuccess = this.props.deleteRecordRequest.get('success');
-        const nextDeleteSuccess = nextProps.deleteRecordRequest.get('success');
-
-        if (!deleteSuccess && nextDeleteSuccess) {
-            this._getRecords();
-        }
-    }
-  
-    /**
-     * Records
-     */
+   
     _getRecords() {
         const { page, perPage} = this.state;
 
         this.props.getRecords({
             page, perPage
         });
-    }
-    
-    _editRecord(id) {
-        this.props.goTo(`scap/update/${id}`);
-    }   
-    
-    _deleteRecord(id) {
-        this.props.deleteRecord(id);
-    }
+    }    
     
     _renderRecords() {
-        const {t} = this.props;
+        const {t, goTo} = this.props;
         const loading = this.props.getRecordsRequest.get('loading');
         const records = this.props.getRecordsRequest.get('records');
         
@@ -73,13 +51,13 @@ class Templates extends Component {
             <Row index={key} key={key}>
                 <Td first={true} width='100px'>{key + 1}</Td>
                 <Td width='132px'>{record.get('title')}</Td>
-                <Td width='132px'>{record.get('questions')}</Td>                                
-                <Td width='132px'>{record.get('teacher') || '-'}</Td>
+                <Td width='132px'>{record.get('questions')}</Td>
                 <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('status'))}</span></Td>
                 <Td width='132px'>{record.get('createdAt')}</Td>
-                <Td width='100px'>
-                    <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')} />
-                    <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }} />                        
+                <Td width='132px'>
+                    <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo('scap/fill/' + record.get('id')) }}>
+                        <i className='la la-pencil'></i>
+                    </button>                
                 </Td>
             </Row>
         ));
@@ -99,9 +77,9 @@ class Templates extends Component {
 
     render() {
         const {getRecordsRequest, pagination, t} = this.props;
-        const {page, perPage}   = this.state;
-        const loading           = getRecordsRequest.get('loading');
-        const totalPages        = pagination.get('totalPages');
+        const {page, perPage} = this.state;
+        const loading = getRecordsRequest.get('loading');
+        const totalPages = pagination.get('totalPages');
 
         return (
             <div className='fadeInLeft  animated'>               
@@ -127,13 +105,7 @@ class Templates extends Component {
                                         <MenuItem value={25}>25</MenuItem>
                                         <MenuItem value={50}>50</MenuItem>
                                         <MenuItem value={100}>100</MenuItem>
-                                    </Select>
-                                    <NavLink to="/scap/build" className="link-btn">
-                                        <Button variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-5'>
-                                            {t('addNew')}
-                                            <Icon className="m--margin-left-5">add</Icon>
-                                        </Button>
-                                    </NavLink>                                    
+                                    </Select>                                          
                                 </div>
                             </div>
                         </div>
@@ -142,11 +114,10 @@ class Templates extends Component {
                             <HeadRow>
                                 <Th first={true} width='100px'>#</Th>
                                 <Th width='132px'>{t('title')}</Th>
-                                <Th width='132px'>{t('questions')}</Th>
-                                <Th width='132px'>{t('teacher')}</Th>
+                                <Th width='132px'>{t('questions')}</Th>                                
                                 <Th width='132px'>{t('status')}</Th>
                                 <Th width='132px'>{t('created')}</Th>
-                                <Th width='100px'>{t('actions')}</Th>
+                                <Th width='132px'>{t('actions')}</Th>
                             </HeadRow>
                             </Thead>
 
@@ -162,27 +133,23 @@ class Templates extends Component {
                             </div>
                         </div>
                     </div>
-                </div>                              
+                </div>
             </div>
         );
     }
 }
 
-Templates = connect(
+TeacherScap = connect(
         (state) => ({
-        getRecordsRequest: selectGetRecordsRequest(state),
-        deleteRecordRequest: selectDeleteRequest(state),
+        getRecordsRequest: selectGetRecordsRequest(state),        
         pagination: selectPagination(state)
     }),
     (dispatch) => ({
         getRecords: (params = {}) => {
-            dispatch(getRecords(params));
-        },
-        deleteRecord: (id) => {
-            dispatch(deleteRecord(id));
+            dispatch(getAssignedRecords(params));
         },
         goTo: (url) => {dispatch(push(url))}
     })
-)(Templates);
+)(TeacherScap);
 
-export default translate('translations')(Templates);
+export default translate('translations')(TeacherScap);

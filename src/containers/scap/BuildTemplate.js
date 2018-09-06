@@ -9,12 +9,10 @@ import {
   FormHelperText,
   Input,
   TextField,
-  InputLabel,
-  MenuItem,
-  Select,  
+  InputLabel,    
   Button
 } from '@material-ui/core';
-//import DraggableList from 'react-draggable-list';
+import ReactSortable  from 'react-sortablejs';
 import QuestionModal from './modals/QuestionModal'
 import { selectCreateRequest } from '../../redux/scap/selectors';
 import { create, resetCreateRequest } from '../../redux/scap/actions';
@@ -27,10 +25,6 @@ class BuildTemplate extends Component {
             form: {},
             questions: []
         }
-    }
-
-    componentDidMount() {
-
     }
     
     componentWillReceiveProps(nextProps) {                
@@ -46,10 +40,10 @@ class BuildTemplate extends Component {
         const { name, value } = event.target;
 
         this.setState({
-          form: {
-            ...this.state.form,
-            [name]: value
-          }
+            form: {
+                ...this.state.form,
+                [name]: value
+            }
         });
     }
     
@@ -78,7 +72,7 @@ class BuildTemplate extends Component {
     
     _saveTemplate() {
         this.props.create({
-            ... this.state.form,
+            ...this.state.form,
             questions: this.state.questions
         });
     }
@@ -101,7 +95,7 @@ class BuildTemplate extends Component {
         }
         
         return questions.map((record, key) => (          
-            <div className="col-sm-12 col-md-8">
+            <div key={key} className="col-sm-12 col-md-8" data-id={record}>
                 <FormControl aria-describedby='new-question-error-error-text' className='full-width form-inputs'>                      
                     <TextField
                       id={`question-${key}`}
@@ -114,18 +108,17 @@ class BuildTemplate extends Component {
                       }}                      
                     />                               
                 </FormControl>
-            </div>           
+            </div>
         ));        
     }    
 
     render() {
         const {t, createRequest} = this.props;
         const {form, questions, showQuestionModal} = this.state;
-        
-        const errors = createRequest.get('errors');
+        const errors = createRequest.get('errors');       
         
         return (
-            <div className='fadeInLeft  animated'>               
+            <div className='fadeInLeft  animated'> 
                 <div className='m-portlet m-portlet--head-solid-bg'>
                     <div className='m-portlet__head border-b-blue'>
                         <div className='m-portlet__head-caption'>
@@ -169,8 +162,18 @@ class BuildTemplate extends Component {
                         <div className="row">
                             <div className="col-sm-12 m--margin-top-30 text-right">
                                 <h5 className="text-left">{t('questions')}</h5>
-                                <div>{this._renderQuestions()}</div>
-                                {!questions.length && errors && errors.get('questions') && <p className="text-center m--margin-top-40 text-danger">{t('pleaseAddAnyQuestions')}</p>}
+                                <div className="sortable-questions">
+                                    <ReactSortable                                        
+                                        options={{
+                                            handle: "label"                
+                                        }}
+                                        onChange={(order, sortable, evt) => {                    
+                                            this.setState({questions: order });
+                                        }}>
+                                        {this._renderQuestions()}
+                                    </ReactSortable>
+                                    {!questions.length && errors && errors.get('questions') && <p className="text-center m--margin-top-40 text-danger">{t('pleaseAddAnyQuestions')}</p>}
+                                </div>
                             </div>
                             <div className="col-sm-12 m--margin-top-40 text-left">
                                 <Button onClick={() => { this._showQuestionModal() }} variant="raised" color='primary' className='mt-btn mt-btn-success'>
