@@ -8,6 +8,8 @@ import {
     DELETE_FAIL,
     ASSIGN_TEACHERS_FAIL,
     ADD_ANSWERS_FAIL,
+    GET_RESULTS_RECORDS_FAIL,
+    GET_RESULTS_DETAILS_RECORDS_FAIL,
     DELETE_SUCCESS,
     CREATE_SUCCESS,
     UPDATE_SUCCESS,
@@ -24,7 +26,7 @@ const scapSagas = all([
       [CREATE_SUCCESS]: i18n.t('messages:scapTemplateCreated'),
       [UPDATE_SUCCESS]: i18n.t('messages:scapTemplateUpdated'),
       [ASSIGN_TEACHERS_SUCCESS]: i18n.t('messages:scapTemplateTeachersAssigned'),
-      [ADD_ANSWERS_SUCCESS]: i18n.t('messages:scapScoresAdded'),
+      [ADD_ANSWERS_SUCCESS]: i18n.t('messages:scapScoresAdded')
   }),    
   yieldErrorToasts([
     GET_RECORDS_FAIL,
@@ -34,7 +36,9 @@ const scapSagas = all([
     CREATE_FAIL,
     DELETE_FAIL,
     ASSIGN_TEACHERS_FAIL,
-    ADD_ANSWERS_FAIL
+    ADD_ANSWERS_FAIL,
+    GET_RESULTS_RECORDS_FAIL,
+    GET_RESULTS_DETAILS_RECORDS_FAIL
   ])
 ]);
 

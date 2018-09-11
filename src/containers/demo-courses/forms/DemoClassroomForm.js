@@ -185,7 +185,7 @@ class DemoClassroomForm extends Component {
             {errors && errors.get('crmCourse') && <FormHelperText error>{ errors.get('crmCourse').get(0) }</FormHelperText>}
           </FormControl>
           <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>{t('student')}Teacher</InputLabel>
+            <InputLabel htmlFor='name-error'>{t('teacher')}</InputLabel>
             <Select
               primarytext={t('selectTeacher')}
               name='teacherId'

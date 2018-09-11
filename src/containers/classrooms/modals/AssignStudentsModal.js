@@ -88,9 +88,7 @@ class AssignStudentsModal extends Component {
 
     this.props.assignStudents(id, {
       studentIds: studentIds
-    });
-
-    this.props.resetAssignStudentsRequest();
+    });   
   };
 
   render() {

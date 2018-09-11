@@ -65,7 +65,7 @@ class ShoppingCart extends Component {
       <div>
         {loading && <Loader/>}
         <div className={`row ${preview ? '': 'cart-items'}`}>
-          <div className={`shoppingCartPortlet m-auto col-xl-${preview ? '12': '9'}`} >
+          <div className="shoppingCartPortlet m-auto col-xl-12">
             <div className='m-portlet m-portlet--full-height dashboard-shopping-cart-transparent-bg'>
               <div className='m-portlet__head m--margin-top-20'>
                 <div className='m-portlet__head-caption'>
