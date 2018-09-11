@@ -12,7 +12,7 @@ import {
   Button
 } from '@material-ui/core';
 import Loader from "../../components/layouts/Loader";
-//import DraggableList from 'react-draggable-list';
+import ReactSortable  from 'react-sortablejs';
 import QuestionModal from './modals/QuestionModal'
 import { selectUpdateRequest, selectGetRecordRequest } from '../../redux/scap/selectors';
 import { getRecord, resetGetRecordRequest, update, resetUpdateRequest } from '../../redux/scap/actions';
@@ -82,7 +82,10 @@ class EditTemplate extends Component {
     _addQuestion(question) {
         let { questions } = this.state;
         
-        questions.push({question: question});
+        questions.push({
+            id: Math.random().toString(36).substr(2, 9),
+            question: question
+        });
         
         this.setState({
             showQuestionModal: false,
@@ -91,7 +94,7 @@ class EditTemplate extends Component {
     }
     
     _deleteQuestion(key) {
-        let { questions } = this.state;                
+        let { questions } = this.state;
         
         questions.splice(key, 1);
         
@@ -123,6 +126,21 @@ class EditTemplate extends Component {
         this.setState({questions: questions});
     }
     
+    _sortQuestions(order)
+    {
+        let questions = this.state.questions;
+                        
+        questions.sort( function (a, b) {
+            if (order.indexOf(a.id.toString()) > order.indexOf(b.id.toString())) {
+                return 1;
+            } else {
+                return -1;
+            }
+        });
+        
+        this.setState({questions: questions});
+    }
+    
     _renderQuestions() {
         const {t} = this.props;
         const {questions} = this.state;
@@ -134,7 +152,7 @@ class EditTemplate extends Component {
         }        
         
         return questions.map((question, key) => (
-            <div key={key} className="row">
+            <div key={key} className="row" data-id={question.id}>
                 <div className="col-sm-10 col-md-10 col-lg-8">
                     <FormControl aria-describedby='new-question-error-error-text' className='full-width form-inputs'>                      
                         <TextField                          
@@ -209,7 +227,17 @@ class EditTemplate extends Component {
                         <div className="row">
                             <div className="col-sm-12 m--margin-top-30 text-right">
                                 <h5 className="text-left">{t('questions')}</h5>
-                                <div>{this._renderQuestions()}</div>
+                                <div className="sortable-questions">
+                                    <ReactSortable                                        
+                                        options={{
+                                            handle: "label"                
+                                        }}
+                                        onChange={(order, sortable, evt) => {    
+                                            this._sortQuestions(order);
+                                        }}>
+                                        {this._renderQuestions()}
+                                    </ReactSortable> 
+                                </div>
                                 {!Object.keys(questions).length && errors && errors.get('questions') && <p className="text-center m--margin-top-40 text-danger">{t('pleaseAddAnyQuestions')}</p>}
                             </div>
                             <div className="col-sm-12 m--margin-top-40 text-left">

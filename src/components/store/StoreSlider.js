@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Slider from "react-slick";
 
-
 class StoreSlider extends Component {
 
   _renderSlideItems(){

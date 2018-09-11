@@ -100,7 +100,14 @@ class Classrooms extends Component {
     return records.map((record, key) => (
       <Row index={key} key={key}>
         <Td first={true} width='100px'>{key + 1}</Td>
-        <Td width='132px'>{record.get('crmName')}</Td>
+        <Td width='132px'>
+            {record.get('crmName')}
+            {!record.get('paid') && 
+                <button title={t('classroomNotPaid')} className='m--margin-left-10 btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill'>
+                    <i className='la la-exclamation-triangle' style={{fontSize: '2rem'}}></i>
+                </button>
+            }
+        </Td>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
         <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
         <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
@@ -206,10 +213,7 @@ class Classrooms extends Component {
    */
   _search(value) {
     let filters = {
-      composed: value,
-      // name: value,
-      // school: value,
-      // teacher: value,
+      composed: value
     };
 
     this.setState({

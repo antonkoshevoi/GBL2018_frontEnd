@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Card from "../../../ui/Card";
-import {MyPreloader} from '../../../ui/table';
+import Card from "../../../../components/ui/Card";
+import {MyPreloader} from '../../../../components/ui/table';
 import {IconButton, CircularProgress} from '@material-ui/core';
 import {translate} from 'react-i18next';
 import {Edit} from "@material-ui/icons";

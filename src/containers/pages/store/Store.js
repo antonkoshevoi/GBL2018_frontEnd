@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import '../../../styles/store.css'
-import Filter from "../../../components/pages/store/Filter";
-import ProductsSection from "../../../components/pages/store/ProductsSection";
+import Filter from "../../../components/store/Filter";
+import ProductsSection from "../../../components/store/ProductsSection";
 import {selectGetRecordsRequest, selectRecords} from "../../../redux/store/selectors";
 import {withRouter} from "react-router-dom";
 import {getRecords} from "../../../redux/store/actions";
 import Loader from "../../../components/layouts/Loader";
-import StoreSlider from "../../../components/pages/store/StoreSlider";
+import StoreSlider from "../../../components/store/StoreSlider";
 
 const sliderData = [
   {

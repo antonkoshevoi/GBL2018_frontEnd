@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Card, CardContent, Typography} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
-import StarRating from "../../ui/StarRating";
-import "../../../styles/store.css"
+import StarRating from "../ui/StarRating";
+import "../../styles/store.css"
 
 class ProductCard extends Component {
 

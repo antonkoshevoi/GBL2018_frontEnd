@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../../ui/table";
+import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../ui/table";
 import PropTypes from 'prop-types';
-import "../../../styles/store.css"
+import "../../styles/store.css"
 import {NavLink} from "react-router-dom";
-import DeleteButton from "../../ui/DeleteButton";
-import {debounce} from "../../../helpers/utils";
+import DeleteButton from "../ui/DeleteButton";
+import {debounce} from "../../helpers/utils";
 import {translate} from 'react-i18next';
 
 class OpenInvoicesTable extends Component {
