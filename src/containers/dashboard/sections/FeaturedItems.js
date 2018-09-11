@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../../../styles/widgets.css';
 import Card from "../../../components/ui/Card";
 import {translate} from "react-i18next";
-import ProductCard from "../../../components/pages/store/ProductCard";
+import ProductCard from "../../../components/store/ProductCard";
 
 class FeaturedItems extends Component {
 

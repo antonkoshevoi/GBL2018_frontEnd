@@ -12,7 +12,7 @@ import {
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import Modal from "../../../components/ui/Modal";
-import Filter from "../../../components/pages/store/Filter";
+import Filter from "../../../components/store/Filter";
 import {selectGetStoreRecordsRequest, selectGetUnassignedRecordsRequest} from "../../../redux/courses/selectors";
 import {getStoreRecords, getUnassignedRecords} from "../../../redux/courses/actions";
 import {Row, Table, TablePreloader, Tbody, Td, Thead, HeadRow, Th} from "../../../components/ui/table";

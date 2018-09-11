@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Typography} from '@material-ui/core';
-import {HeadRow, Table, Tbody, Th, Thead} from '../../../ui/table';
+import {HeadRow, Table, Tbody, Th, Thead} from '../../../../components/ui/table';
 import {translate} from 'react-i18next';
 import Parser from 'html-react-parser';
 import ApiClient from '../../../../services/ApiClient';

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Tab, Tabs, Typography} from '@material-ui/core';
-import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../ui/table';
+import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../../components/ui/table';
 import LessonsTable from './LessonsTable';
 import {translate} from 'react-i18next';
 

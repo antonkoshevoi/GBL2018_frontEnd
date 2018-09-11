@@ -4,7 +4,7 @@ import {translate} from 'react-i18next';
 import {NavLink, withRouter} from "react-router-dom";
 import {Search} from "@material-ui/icons";
 import red from "@material-ui/core/es/colors/red";
-import {buildSortersQuery} from "../../../helpers/utils";
+import {buildSortersQuery} from "../../helpers/utils";
 
 const styles = {
   root: {
