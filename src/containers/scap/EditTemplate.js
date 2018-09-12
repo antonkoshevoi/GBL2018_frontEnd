@@ -168,7 +168,7 @@ class EditTemplate extends Component {
                     </FormControl>
                 </div>  
                 <div className="col-sm-2 text-left">
-                    <a href="#" onClick={(e) => {e.preventDefault(); this._deleteQuestion(key) }}>
+                    <a href="" onClick={(e) => {e.preventDefault(); this._deleteQuestion(key) }}>
                         <i className='la la-remove text-danger' style={{fontWeight: 'bold'}}></i>
                     </a>
                 </div>

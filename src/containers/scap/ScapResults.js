@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
 import { push } from 'react-router-redux';
-import { Button, Icon, MenuItem, Select } from '@material-ui/core';
+import { Button, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
-import { selectGetResultRecordsRequest, selectPagination } from '../../redux/scap/selectors';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
+import { selectGetResultRecordsRequest } from '../../redux/scap/selectors';
 import { getResultsRecords } from '../../redux/scap/actions';
 import Pagination from '../../components/ui/Pagination';
 import ResultsModal from "./modals/ResultsModal"
@@ -26,8 +25,8 @@ class ScapResults extends Component {
         super(props);
         this.state = {
             surveyId: this.props.match.params.id,
-            page: props.pagination.get('page'),
-            perPage: props.pagination.get('perPage'),
+            page: props.getRecordsRequest.get('pagination').get('page'),
+            perPage: props.getRecordsRequest.get('pagination').get('perPage'),
             showResultsModal: false,
             selectedItem: null
         }
@@ -63,7 +62,7 @@ class ScapResults extends Component {
     _getRecords() {
         const { page, perPage} = this.state;
 
-        this.props.getRecords({
+        this.props.getRecords(this.state.surveyId, {
             page, perPage
         });
     }
@@ -78,7 +77,7 @@ class ScapResults extends Component {
                 <tr>
                     <td>
                         <div className="table-message">
-                            <h2>{t('templatesNotFound')}</h2>
+                            <h2>{t('scapResultsNotFound')}</h2>
                         </div>
                     </td>
                 </tr>
@@ -100,7 +99,7 @@ class ScapResults extends Component {
     }
 
     _selectPerPage(perPage) {
-        const total      = this.props.pagination.get('total');
+        const total      = this.props.getRecordsRequest.get('pagination').get('total');
         const totalPages = Math.ceil(total / perPage);
         const page       = Math.min(this.state.page, totalPages);
 
@@ -115,7 +114,7 @@ class ScapResults extends Component {
         const {getRecordsRequest, pagination, t} = this.props;
         const {page, perPage, showResultsModal, selectedItem} = this.state;
         const loading = getRecordsRequest.get('loading');
-        const totalPages = pagination.get('totalPages');
+        const totalPages = getRecordsRequest.get('pagination').get('totalPages');
 
         return (
             <div className='fadeInLeft  animated'>               
@@ -185,12 +184,11 @@ class ScapResults extends Component {
 
 ScapResults = connect(
     (state) => ({
-        getRecordsRequest: selectGetResultRecordsRequest(state),       
-        pagination: selectPagination(state)
+        getRecordsRequest: selectGetResultRecordsRequest(state)
     }),
     (dispatch) => ({
-        getRecords: (id) => {
-            dispatch(getResultsRecords(id));
+        getRecords: (id, params = {}) => {
+            dispatch(getResultsRecords(id, params));
         },
         goTo: (url) => {dispatch(push(url))}
     })

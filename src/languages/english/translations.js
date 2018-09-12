@@ -448,5 +448,9 @@ export default {
     classroomNotPaid: 'Classroom is not paid',
     sCapResults: 'S-Cap Results',    
     fillScapTemplate: 'S-Cap Template',
-    summary: 'Summary'
+    summary: 'Summary',
+    shareScapToTeachers: 'Share S-Cap To Teachers',
+    viewScapResults: 'View S-Cap Results',
+    scapResultsNotFound: 'No S-Cap Results found...',
+    notes: 'Notes'
 }

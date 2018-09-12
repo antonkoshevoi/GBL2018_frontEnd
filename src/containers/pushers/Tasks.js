@@ -64,8 +64,5 @@ function mapStateToProps(state) {
     return {};
 }
 
-export default translate("Tasks")
-(connect(
-    mapStateToProps,
-)(Tasks));
+export default translate("Tasks")(connect(mapStateToProps)(Tasks));
 

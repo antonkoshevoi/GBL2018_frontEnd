@@ -5,40 +5,43 @@ import { push } from 'react-router-redux';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
-import { selectGetRecordsRequest, selectDeleteRequest, selectPagination } from '../../redux/scap/selectors';
+import { selectGetRecordsRequest, selectDeleteRequest } from '../../redux/scap/selectors';
 import { getRecords, deleteRecord } from '../../redux/scap/actions';
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from "../../components/ui/DeleteButton";
 import AssignTeachersModal from "./modals/AssignTeachersModal"
 
-const AssignButton = ({ id, onClick}) => {
-  return (
+const AssignButton = ({ onClick, t}) => {    
+    return (
     <button
       className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15'
-      onClick={onClick && (() => { onClick(id) })}      
+      onClick={() => { onClick() }}
+      title={t('shareScapToTeachers')}
     >
       <i className='la la-user-plus'></i>
     </button>
   );
 };
 
-const ResultsButton = ({ id, onClick}) => {
+const ResultsButton = ({ onClick, t}) => {    
   return (
     <button
       className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15'
-      onClick={onClick && (() => { onClick(id) })}      
+      onClick={() => { onClick() }} 
+      title={t('viewScapResults')}
     >
       <i className='la la-bar-chart'></i>
     </button>
   );
-};
-
+};  
+        
 class SchoolScap extends Component {
     constructor(props) {
         super(props);
+                
         this.state = {
-            page: props.pagination.get('page'),
-            perPage: props.pagination.get('perPage'),
+            page: props.getRecordsRequest.get('pagination').get('page'),
+            perPage: props.getRecordsRequest.get('pagination').get('perPage'),
             showAssignModal: false,
             selectedTemplate: null
         }
@@ -98,8 +101,9 @@ class SchoolScap extends Component {
     
     _renderRecords() {
         const {t} = this.props;
+        
         const loading = this.props.getRecordsRequest.get('loading');
-        const records = this.props.getRecordsRequest.get('records');
+        const records = this.props.getRecordsRequest.get('records');             
         
         if (!loading && records.size === 0) {
             return (
@@ -118,10 +122,10 @@ class SchoolScap extends Component {
                 <Td first={true} width='100px'>{key + 1}</Td>
                 <Td width='132px'>{record.get('title')}</Td>
                 <Td width='132px'>{record.get('questions')}</Td>                                
-                <Td width='132px'>{record.get('teachers')} <AssignButton onClick={() => { this._showAssignModal(record) }} /></Td>
+                <Td width='132px'>{record.get('teachers')} <AssignButton onClick={() => { this._showAssignModal(record) }} t={t} /></Td>
                 <Td width='132px'>
                     {record.get('completed')}
-                    {(record.get('completed') > 0) && <ResultsButton onClick={() => { this._showResults(record) }} />}
+                    {(record.get('completed') > 0) && <ResultsButton onClick={() => { this._showResults(record) }} t={t} />}
                 </Td>
                 <Td width='132px'>{record.get('createdAt')}</Td>
                 <Td width='132px'>                    
@@ -133,7 +137,7 @@ class SchoolScap extends Component {
     }
 
     _selectPerPage(perPage) {
-        const total      = this.props.pagination.get('total');
+        const total      = this.props.getRecordsRequest.get('pagination').get('total');
         const totalPages = Math.ceil(total / perPage);
         const page       = Math.min(this.state.page, totalPages);
 
@@ -148,7 +152,7 @@ class SchoolScap extends Component {
         const {getRecordsRequest, pagination, t} = this.props;
         const {page, perPage, showAssignModal, selectedTemplate} = this.state;
         const loading = getRecordsRequest.get('loading');
-        const totalPages = pagination.get('totalPages');
+        const totalPages = getRecordsRequest.get('pagination').get('totalPages');
 
         return (
             <div className='fadeInLeft  animated'>               
@@ -223,8 +227,7 @@ class SchoolScap extends Component {
 SchoolScap = connect(
         (state) => ({
         getRecordsRequest: selectGetRecordsRequest(state),
-        deleteRecordRequest: selectDeleteRequest(state),
-        pagination: selectPagination(state)
+        deleteRecordRequest: selectDeleteRequest(state)        
     }),
     (dispatch) => ({
         getRecords: (params = {}) => {

@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {
   AppBar, CircularProgress,
-  DialogContent,
-  FormControlLabel,
-  Icon, IconButton, Checkbox, Grid,
-  Toolbar, Typography, FormGroup,
+  DialogContent,  
+  Icon, IconButton,
+  Toolbar, Typography,
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
@@ -38,7 +37,7 @@ class ResultsModal extends Component {
                         
         if (answers.length === 0) {
             return <div>
-                <Typography type="display1" gutterBottom>No Answers...</Typography>
+                <Typography type="display1" gutterBottom>{t('scapResultsNotFound')}</Typography>
             </div>;
         }
     

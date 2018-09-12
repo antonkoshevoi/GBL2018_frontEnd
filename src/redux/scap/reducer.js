@@ -3,7 +3,7 @@ import {
     GET_RECORD, GET_RECORD_SUCCESS, GET_RECORD_FAIL, RESET_GET_RECORD_REQUEST,
     GET_ASSIGNED_RECORDS, GET_ASSIGNED_RECORDS_SUCCESS, GET_ASSIGNED_RECORDS_FAIL,
     GET_ASSIGNED_RECORD, GET_ASSIGNED_RECORD_SUCCESS, GET_ASSIGNED_RECORD_FAIL,
-    GET_RESULTS_RECORDS, GET_RESULTS_RECORDS_SUCCESS, GET_RESULTS_RECORDS_FAIL,
+    GET_RESULTS_RECORDS, GET_RESULTS_RECORDS_SUCCESS, GET_RESULTS_RECORDS_FAIL, RESET_RESULTS_RECORDS_REQUEST,
     GET_RESULTS_DETAILS_RECORD, GET_RESULTS_DETAILS_RECORD_SUCCESS, GET_RESULTS_DETAILS_RECORD_FAIL,
     CREATE, CREATE_SUCCESS, CREATE_FAIL, RESET_CREATE_REQUEST,
     UPDATE, UPDATE_SUCCESS, UPDATE_FAIL, RESET_UPDATE_REQUEST,
@@ -18,13 +18,25 @@ const initialState = Immutable.fromJS({
     loading: false,
     success: false,
     fail: false,
-    records: Immutable.List()
+    records: Immutable.List(),
+    pagination: {
+      page: 1,
+      perPage: 10,
+      total: 0,
+      totalPages: 1
+    }    
   },
   getResultRecordsRequest: {
     loading: false,
     success: false,
     fail: false,
-    records: Immutable.List()
+    records: Immutable.List(),
+    pagination: {
+      page: 1,
+      perPage: 10,
+      total: 0,
+      totalPages: 1
+    }    
   },
   getResultDetailsRecordsRequest: {
     loading: false,
@@ -73,12 +85,6 @@ const initialState = Immutable.fromJS({
     errorMessage: null,
     errorCode: null,
     errors: {}
-  },  
-  pagination: {
-    page: 1,
-    perPage: 10,
-    total: 0,
-    totalPages: 1
   }  
 });
 
@@ -95,6 +101,7 @@ export default function reducer (state = initialState, action) {
     case GET_ASSIGNED_RECORDS_SUCCESS:
         return state.set('getRecordsRequest', initialState.get('getRecordsRequest')
                 .set('success', true)
+                .set('pagination', Immutable.fromJS(action.result.meta.pagination))
                 .set('records', Immutable.fromJS(action.result.data)));        
     case GET_RECORDS_FAIL:
     case GET_ASSIGNED_RECORDS_FAIL:
@@ -108,9 +115,12 @@ export default function reducer (state = initialState, action) {
     case GET_RESULTS_RECORDS_SUCCESS:
         return state.set('getResultRecordsRequest', initialState.get('getResultRecordsRequest')
                 .set('success', true)
+                .set('pagination', Immutable.fromJS(action.result.meta.pagination))
                 .set('records', Immutable.fromJS(action.result.data)));
     case GET_RESULTS_RECORDS_FAIL:
         return state.set('getResultRecordsRequest', initialState.get('getResultRecordsRequest').set('fail', true));
+    case RESET_RESULTS_RECORDS_REQUEST:
+        return state.set('getResultRecordsRequest', initialState.get('getResultRecordsRequest'));
         
     /**
      * Get single record
