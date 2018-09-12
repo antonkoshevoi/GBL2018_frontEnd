@@ -13,6 +13,7 @@ import {
   Select  
 } from '@material-ui/core';
 import Loader from "../../components/layouts/Loader";
+import NotFoundPage from '../errors/404';
 import { selectGetRecordRequest, selectAddAnswersRequest } from '../../redux/scap/selectors';
 import { getAssignedRecord, resetGetRecordRequest, addAnswers, resetAddAnswersRequest } from '../../redux/scap/actions';
 import { getSchoolStudents } from "../../redux/schools/actions";
@@ -158,6 +159,10 @@ class FillTemplate extends Component {
         const {t, recordRequest, addAnswersRequest} = this.props;
         const {scap} = this.state;        
         const errors = addAnswersRequest.get('errors');
+        
+        if (recordRequest.get('fail'))  {
+            return <NotFoundPage/>;
+        }        
         
         return (
             <div className='fadeInLeft  animated'>               

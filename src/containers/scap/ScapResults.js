@@ -5,22 +5,10 @@ import { push } from 'react-router-redux';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
-import { selectGetRecordsRequest, selectDeleteRequest, selectPagination } from '../../redux/scap/selectors';
-import { getRecords, deleteRecord } from '../../redux/scap/actions';
+import { selectGetResultRecordsRequest, selectPagination } from '../../redux/scap/selectors';
+import { getResultsRecords } from '../../redux/scap/actions';
 import Pagination from '../../components/ui/Pagination';
-import DeleteButton from "../../components/ui/DeleteButton";
-import AssignTeachersModal from "./modals/AssignTeachersModal"
-
-const AssignButton = ({ id, onClick}) => {
-  return (
-    <button
-      className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15'
-      onClick={onClick && (() => { onClick(id) })}      
-    >
-      <i className='la la-user-plus'></i>
-    </button>
-  );
-};
+import ResultsModal from "./modals/ResultsModal"
 
 const ResultsButton = ({ id, onClick}) => {
   return (
@@ -28,57 +16,49 @@ const ResultsButton = ({ id, onClick}) => {
       className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15'
       onClick={onClick && (() => { onClick(id) })}      
     >
-      <i className='la la-bar-chart'></i>
+      <i className='la la-search'></i>
     </button>
   );
 };
 
-class SchoolScap extends Component {
+class ScapResults extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            surveyId: this.props.match.params.id,
             page: props.pagination.get('page'),
             perPage: props.pagination.get('perPage'),
-            showAssignModal: false,
-            selectedTemplate: null
+            showResultsModal: false,
+            selectedItem: null
         }
     }
 
     componentDidMount() {
         const {getRecords} = this.props;
-        getRecords();
+        getRecords(this.state.surveyId);
     }
 
     componentWillReceiveProps(nextProps) {
-        const deleteSuccess = this.props.deleteRecordRequest.get('success');
-        const nextDeleteSuccess = nextProps.deleteRecordRequest.get('success');
 
-        if (!deleteSuccess && nextDeleteSuccess) {
-            this._getRecords();
-        }
     }
     
-    _showAssignModal(record) {
+    _showResultsModal(record) {
         this.setState({
-            showAssignModal: true,
-            selectedTemplate: record
+            showResultsModal: true,
+            selectedItem: record
         });
     }
     
-    _showResults(record) {
-        this.props.goTo(`scap/results/${record.get('id')}`);
-    }
-    
-    _closeAssignModal() {
+    _closeResultsModal() {
         this.setState({
-            showAssignModal: false,
-            selectedTemplate: null
-        });        
-    }
+            showResultsModal: false,
+            selectedItem: null
+        });
+    }    
     
-    _onAssign() {
-        this._getRecords();
-    }
+    _goBack() {
+        this.props.goTo(`/scap`);
+    }   
     
     _getRecords() {
         const { page, perPage} = this.state;
@@ -87,15 +67,7 @@ class SchoolScap extends Component {
             page, perPage
         });
     }
-    
-    _editRecord(id) {
-        this.props.goTo(`scap/update/${id}`);
-    }   
-    
-    _deleteRecord(id) {
-        this.props.deleteRecord(id);
-    }
-    
+        
     _renderRecords() {
         const {t} = this.props;
         const loading = this.props.getRecordsRequest.get('loading');
@@ -115,18 +87,13 @@ class SchoolScap extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td first={true} width='100px'>{key + 1}</Td>
-                <Td width='132px'>{record.get('title')}</Td>
-                <Td width='132px'>{record.get('questions')}</Td>                                
-                <Td width='132px'>{record.get('teachers')} <AssignButton onClick={() => { this._showAssignModal(record) }} /></Td>
-                <Td width='132px'>
-                    {record.get('completed')}
-                    {(record.get('completed') > 0) && <ResultsButton onClick={() => { this._showResults(record) }} />}
-                </Td>
+                <Td first={true} width='100px'>{key + 1}</Td>                
+                <Td width='132px'>{record.get('teacher')}</Td>                                
+                <Td width='132px'>{record.get('homeroom')}</Td>
+                <Td width='132px'>{record.get('student')}</Td>
                 <Td width='132px'>{record.get('createdAt')}</Td>
                 <Td width='132px'>                    
-                    <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')} />
-                    <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }} />                        
+                    <ResultsButton onClick={() => { this._showResultsModal(record) }} id={record.get('id')} />                                     
                 </Td>
             </Row>
         ));
@@ -146,7 +113,7 @@ class SchoolScap extends Component {
 
     render() {
         const {getRecordsRequest, pagination, t} = this.props;
-        const {page, perPage, showAssignModal, selectedTemplate} = this.state;
+        const {page, perPage, showResultsModal, selectedItem} = this.state;
         const loading = getRecordsRequest.get('loading');
         const totalPages = pagination.get('totalPages');
 
@@ -157,7 +124,7 @@ class SchoolScap extends Component {
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
                                 <span className='m-portlet__head-icon'><i className='la la-comment-o' style={{fontSize: '55px'}}></i></span>
-                                <h3 className='m-portlet__head-text'>{t('sCap')}</h3>
+                                <h3 className='m-portlet__head-text'>{t('sCapResults')}</h3>
                             </div>
                         </div>         
                     </div>
@@ -175,12 +142,10 @@ class SchoolScap extends Component {
                                         <MenuItem value={50}>50</MenuItem>
                                         <MenuItem value={100}>100</MenuItem>
                                     </Select>
-                                    <NavLink to="/scap/build" className="link-btn">
-                                        <Button variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-5'>
-                                            {t('addNew')}
-                                            <Icon className="m--margin-left-5">add</Icon>
-                                        </Button>
-                                    </NavLink>                                    
+                                    <Button onClick={() => { this._goBack() }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-5'>
+                                        <i className='la la-mail-reply m--margin-right-10'></i>
+                                        {t('back')}                                        
+                                    </Button>                                    
                                 </div>
                             </div>
                         </div>
@@ -188,10 +153,9 @@ class SchoolScap extends Component {
                             <Thead>
                             <HeadRow>
                                 <Th first={true} width='100px'>#</Th>
-                                <Th width='132px'>{t('title')}</Th>
-                                <Th width='132px'>{t('questions')}</Th>
-                                <Th width='132px'>{t('teachers')}</Th>
-                                <Th width='132px'>{t('completed')}</Th>
+                                <Th width='132px'>{t('teacher')}</Th>
+                                <Th width='132px'>{t('homeroom')}</Th>                                
+                                <Th width='132px'>{t('student')}</Th>
                                 <Th width='132px'>{t('created')}</Th>
                                 <Th width='132px'>{t('actions')}</Th>
                             </HeadRow>
@@ -210,31 +174,26 @@ class SchoolScap extends Component {
                         </div>
                     </div>
                 </div>
-                <AssignTeachersModal 
-                    isOpen={showAssignModal} 
-                    onClose={() => { this._closeAssignModal() }}
-                    onSuccess={() => { this._onAssign() }}
-                    template={selectedTemplate} />
+                <ResultsModal 
+                    isOpen={showResultsModal} 
+                    onClose={() => { this._closeResultsModal() }}                    
+                    item={selectedItem} />
             </div>
         );
     }
 }
 
-SchoolScap = connect(
-        (state) => ({
-        getRecordsRequest: selectGetRecordsRequest(state),
-        deleteRecordRequest: selectDeleteRequest(state),
+ScapResults = connect(
+    (state) => ({
+        getRecordsRequest: selectGetResultRecordsRequest(state),       
         pagination: selectPagination(state)
     }),
     (dispatch) => ({
-        getRecords: (params = {}) => {
-            dispatch(getRecords(params));
-        },
-        deleteRecord: (id) => {
-            dispatch(deleteRecord(id));
+        getRecords: (id) => {
+            dispatch(getResultsRecords(id));
         },
         goTo: (url) => {dispatch(push(url))}
     })
-)(SchoolScap);
+)(ScapResults);
 
-export default translate('translations')(SchoolScap);
+export default translate('translations')(ScapResults);

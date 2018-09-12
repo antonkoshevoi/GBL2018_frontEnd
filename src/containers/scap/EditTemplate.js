@@ -14,6 +14,7 @@ import {
 import Loader from "../../components/layouts/Loader";
 import ReactSortable  from 'react-sortablejs';
 import QuestionModal from './modals/QuestionModal'
+import NotFoundPage from '../errors/404';
 import { selectUpdateRequest, selectGetRecordRequest } from '../../redux/scap/selectors';
 import { getRecord, resetGetRecordRequest, update, resetUpdateRequest } from '../../redux/scap/actions';
 
@@ -179,7 +180,11 @@ class EditTemplate extends Component {
         const {t, updateRequest, recordRequest} = this.props;
         const {form, questions, showQuestionModal} = this.state;
         
-        const errors = updateRequest.get('errors');
+        const errors = updateRequest.get('errors');        
+        
+        if (recordRequest.get('fail'))  {
+            return <NotFoundPage/>;
+        }
         
         return (
             <div className='fadeInLeft  animated'>               
@@ -189,7 +194,7 @@ class EditTemplate extends Component {
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
                                 <span className='m-portlet__head-icon'><i className='la la-comment-o' style={{fontSize: '55px'}}></i></span>
-                                <h3 className='m-portlet__head-text'>{t('UpdateScapTemplate')}</h3>
+                                <h3 className='m-portlet__head-text'>{t('updateScapTemplate')}</h3>
                             </div>
                         </div>         
                     </div>
@@ -238,7 +243,7 @@ class EditTemplate extends Component {
                                         {this._renderQuestions()}
                                     </ReactSortable> 
                                 </div>
-                                {!Object.keys(questions).length && errors && errors.get('questions') && <p className="text-center m--margin-top-40 text-danger">{t('pleaseAddAnyQuestions')}</p>}
+                                {!questions.length && errors && errors.get('questions') && <p className="text-center m--margin-top-40 text-danger">{t('pleaseAddAnyQuestions')}</p>}
                             </div>
                             <div className="col-sm-12 m--margin-top-40 text-left">
                                 <Button onClick={() => { this._showQuestionModal() }} variant="raised" color='primary' className='mt-btn mt-btn-success'>
