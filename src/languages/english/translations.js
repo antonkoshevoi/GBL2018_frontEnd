@@ -445,5 +445,12 @@ export default {
     updateScapTemplate: 'Update S-Cap Template',
     public: 'Public',
     assignTeachers: 'Assign Teachers',
-    classroomNotPaid: 'Classroom is not paid'
+    classroomNotPaid: 'Classroom is not paid',
+    sCapResults: 'S-Cap Results',    
+    fillScapTemplate: 'S-Cap Template',
+    summary: 'Summary',
+    shareScapToTeachers: 'Share S-Cap To Teachers',
+    viewScapResults: 'View S-Cap Results',
+    scapResultsNotFound: 'No S-Cap Results found...',
+    notes: 'Notes'
 }

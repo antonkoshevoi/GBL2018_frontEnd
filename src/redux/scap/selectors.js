@@ -14,6 +14,14 @@ export const selectGetRecordsRequest = createSelector(
 );
 
 /**
+ * Get Results Request
+ */
+export const selectGetResultRecordsRequest = createSelector(
+    selectScapDomain,
+    (subState) => subState.get('getResultRecordsRequest')
+);
+
+/**
  * Get Single Request
  */
 export const selectGetRecordRequest = createSelector(

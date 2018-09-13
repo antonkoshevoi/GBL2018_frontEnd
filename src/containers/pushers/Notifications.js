@@ -47,7 +47,7 @@ class Notifications extends Component {
                                                 <div className="m-list-timeline__item">
                                                     <span className="m-list-timeline__badge m-list-timeline__badge--brand"></span>
                                                     <span className="m-list-timeline__icon flaticon-exclamation-1"></span>
-                                                    <span className="m-list-timeline__text">System error occured and hard drive has been shutdown - <a href="#" className="m-link">Check</a></span>
+                                                    <span className="m-list-timeline__text">System error occured and hard drive has been shutdown</span>
                                                     <span className="m-list-timeline__time">2 hrs</span>
                                                 </div>
                                                 <div className="m-list-timeline__item">
@@ -70,8 +70,5 @@ function mapStateToProps(state) {
     return {};
 }
 
-export default translate("Notifications")
-(connect(
-    mapStateToProps,
-)(Notifications));
+export default translate("Notifications")(connect(mapStateToProps)(Notifications));
 

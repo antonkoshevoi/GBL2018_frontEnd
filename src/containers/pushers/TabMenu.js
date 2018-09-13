@@ -65,8 +65,5 @@ function mapStateToProps(state) {
     return {};
 }
 
-export default translate("TabMenu")
-(connect(
-    mapStateToProps,
-)(TabMenu));
+export default translate("TabMenu")(connect(mapStateToProps)(TabMenu));
 

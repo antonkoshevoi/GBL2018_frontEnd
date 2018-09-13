@@ -9780,7 +9780,7 @@ b, strong {
         .m-datatable.m-datatable--default > .m-datatable__table > .m-datatable__body .m-datatable__row > .m-datatable__cell,
         .m-datatable.m-datatable--default > .m-datatable__table > .m-datatable__foot .m-datatable__row > .m-datatable__cell {
           vertical-align: middle;
-          padding: 11px 10px;
+          padding: 8px 10px;
           font-size: 1rem; }
           .m-datatable.m-datatable--default > .m-datatable__table > .m-datatable__head .m-datatable__row > .m-datatable__cell i,
           .m-datatable.m-datatable--default > .m-datatable__table > .m-datatable__body .m-datatable__row > .m-datatable__cell i,

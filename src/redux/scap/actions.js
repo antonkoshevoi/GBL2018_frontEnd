@@ -9,10 +9,11 @@ export const GET_ASSIGNED_RECORDS_FAIL = '[Surveys] GET_ASSIGNED_RECORDS_FAIL';
 export const GET_RESULTS_RECORDS = '[Surveys] GET_RESULTS_RECORDS';
 export const GET_RESULTS_RECORDS_SUCCESS = '[Surveys] GET_RESULTS_RECORDS_SUCCESS';
 export const GET_RESULTS_RECORDS_FAIL = '[Surveys] GET_RESULTS_RECORDS_FAIL';
+export const RESET_RESULTS_RECORDS_REQUEST = '[Surveys] RESET_RESULTS_RECORDS_REQUEST';
 
-export const GET_RESULTS_DETAILS_RECORDS = '[Surveys] GET_RESULTS_DETAILS_RECORDS';
-export const GET_RESULTS_DETAILS_RECORDS_SUCCESS = '[Surveys] GET_RESULTS_DETAILS_RECORDS_SUCCESS';
-export const GET_RESULTS_DETAILS_RECORDS_FAIL = '[Surveys] GET_RESULTS_DETAILS_RECORDS_FAIL';
+export const GET_RESULTS_DETAILS_RECORD = '[Surveys] GET_RESULTS_DETAILS_RECORD';
+export const GET_RESULTS_DETAILS_RECORD_SUCCESS = '[Surveys] GET_RESULTS_DETAILS_RECORD_SUCCESS';
+export const GET_RESULTS_DETAILS_RECORD_FAIL = '[Surveys] GET_RESULTS_DETAILS_RECORD_FAIL';
 
 export const GET_ASSIGNED_RECORD = '[Surveys] GET_ASSIGNED_RECORD';
 export const GET_ASSIGNED_RECORD_SUCCESS = '[Surveys] GET_ASSIGNED_RECORD_SUCCESS';
@@ -64,14 +65,14 @@ export function getAssignedRecords(params = {}) {
 export function getResultsRecords(id, params = {}) {
     return {
         types: [GET_RESULTS_RECORDS, GET_RESULTS_RECORDS_SUCCESS, GET_RESULTS_RECORDS_FAIL],
-        promise: (apiClient) => apiClient.get(`/surveys/results/${id}`, params)
+        promise: (apiClient) => apiClient.get(`surveys/results/${id}`, params)
     };
 }
 
-export function getResultsDetailsRecords(id, params = {}) {
+export function getResultsDetailsRecord(id, params = {}) {
     return {
-        types: [GET_RESULTS_DETAILS_RECORDS, GET_RESULTS_DETAILS_RECORDS_SUCCESS, GET_RESULTS_DETAILS_RECORDS_FAIL],
-        promise: (apiClient) => apiClient.get(`/surveys/results-details/${id}`, params)
+        types: [GET_RESULTS_DETAILS_RECORD, GET_RESULTS_DETAILS_RECORD_SUCCESS, GET_RESULTS_DETAILS_RECORD_FAIL],
+        promise: (apiClient) => apiClient.get(`surveys/results-details/${id}`, params)
     };
 }
 
@@ -86,6 +87,12 @@ export function getAssignedRecord(id) {
     return {
         types: [GET_ASSIGNED_RECORD, GET_ASSIGNED_RECORD_SUCCESS, GET_ASSIGNED_RECORD_FAIL],
         promise: (apiClient) => apiClient.get(`surveys/assigned-detail/${id}`)
+    };
+}
+
+export function resetGetResultsRecordsRequest() {
+    return {
+        type: RESET_RESULTS_RECORDS_REQUEST
     };
 }
 

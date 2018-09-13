@@ -71,8 +71,5 @@ function mapStateToProps(state) {
     return {};
 }
 
-export default translate("Settings")
-(connect(
-    mapStateToProps,
-)(Settings));
+export default translate("Settings")(connect(mapStateToProps)(Settings));
 

@@ -7,13 +7,28 @@ import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../..
 import { selectGetRecordsRequest, selectPagination } from '../../redux/scap/selectors';
 import { getAssignedRecords } from '../../redux/scap/actions';
 import Pagination from '../../components/ui/Pagination';
+import TeacherResultsModal from './modals/TeacherResultsModal';
+
+const ResultsButton = ({ onClick, t}) => {    
+  return (
+    <button
+      className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15'
+      onClick={() => { onClick() }} 
+      title={t('viewScapResults')}
+    >
+      <i className='la la-bar-chart'></i>
+    </button>
+  );
+}; 
 
 class TeacherScap extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            page: props.pagination.get('page'),
-            perPage: props.pagination.get('perPage')
+            page: props.getRecordsRequest.get('pagination').get('page'),
+            perPage: props.getRecordsRequest.get('pagination').get('perPage'),
+            showResultsModal: false,
+            selectedItem: null
         }
     }
 
@@ -28,7 +43,21 @@ class TeacherScap extends Component {
         this.props.getRecords({
             page, perPage
         });
-    }    
+    }
+    
+    _showResultsModal(record) {
+        this.setState({
+            showResultsModal: true,
+            selectedItem: record
+        });
+    }
+    
+    _closeResultsModal() {
+        this.setState({
+            showResultsModal: false,
+            selectedItem: null
+        });
+    }      
     
     _renderRecords() {
         const {t, goTo} = this.props;
@@ -52,11 +81,14 @@ class TeacherScap extends Component {
                 <Td first={true} width='100px'>{key + 1}</Td>
                 <Td width='132px'>{record.get('title')}</Td>
                 <Td width='132px'>{record.get('questions')}</Td>
-                <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('status'))}</span></Td>
+                <Td width='132px'>
+                    {record.get('completed')}
+                    {(record.get('completed') > 0) && <ResultsButton onClick={() => { this._showResultsModal(record) }} t={t} />}
+                </Td>
                 <Td width='132px'>{record.get('createdAt')}</Td>
                 <Td width='132px'>
                     <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo('scap/fill/' + record.get('id')) }}>
-                        <i className='la la-pencil'></i>
+                        <i className='la la-plus'></i>
                     </button>                
                 </Td>
             </Row>
@@ -64,7 +96,7 @@ class TeacherScap extends Component {
     }
 
     _selectPerPage(perPage) {
-        const total      = this.props.pagination.get('total');
+        const total      = this.props.getRecordsRequest.get('pagination').get('total');
         const totalPages = Math.ceil(total / perPage);
         const page       = Math.min(this.state.page, totalPages);
 
@@ -77,9 +109,9 @@ class TeacherScap extends Component {
 
     render() {
         const {getRecordsRequest, pagination, t} = this.props;
-        const {page, perPage} = this.state;
+        const {page, perPage, showResultsModal, selectedItem} = this.state;
         const loading = getRecordsRequest.get('loading');
-        const totalPages = pagination.get('totalPages');
+        const totalPages = getRecordsRequest.get('pagination').get('totalPages');
 
         return (
             <div className='fadeInLeft  animated'>               
@@ -115,7 +147,7 @@ class TeacherScap extends Component {
                                 <Th first={true} width='100px'>#</Th>
                                 <Th width='132px'>{t('title')}</Th>
                                 <Th width='132px'>{t('questions')}</Th>                                
-                                <Th width='132px'>{t('status')}</Th>
+                                <Th width='132px'>{t('completed')}</Th>
                                 <Th width='132px'>{t('created')}</Th>
                                 <Th width='132px'>{t('actions')}</Th>
                             </HeadRow>
@@ -134,13 +166,17 @@ class TeacherScap extends Component {
                         </div>
                     </div>
                 </div>
+                <TeacherResultsModal 
+                    isOpen={showResultsModal} 
+                    onClose={() => { this._closeResultsModal() }}                    
+                    item={selectedItem} />                
             </div>
         );
     }
 }
 
 TeacherScap = connect(
-        (state) => ({
+    (state) => ({
         getRecordsRequest: selectGetRecordsRequest(state),        
         pagination: selectPagination(state)
     }),

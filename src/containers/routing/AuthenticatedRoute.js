@@ -7,12 +7,10 @@ import Route from './Route';
 class AuthenticatedRoute extends Component {
 
   render () {
-    const { component: Component, isLoggedIn,restoreLoginFail, location, ...rest } = this.props;
+        const { component: Component, isLoggedIn, restoreLoginFail, location, ...rest } = this.props;
 
       return <Route {...rest} render={(props) => (
-      isLoggedIn ? (
-        <Component {...props}/>
-      ) : restoreLoginFail ? (
+      isLoggedIn ? (<Component {...props}/>) : restoreLoginFail ? (
         <Redirect to={{
           pathname: '/restore-login',
           state: { from: location }
@@ -29,8 +27,8 @@ class AuthenticatedRoute extends Component {
 
 AuthenticatedRoute = connect(
   (state, ownProps) => ({
-    isLoggedIn: selectIsLoggedIn(state),
-      restoreLoginFail: SelectRestoreLoginFail(state)
+        isLoggedIn: selectIsLoggedIn(state),
+        restoreLoginFail: SelectRestoreLoginFail(state)
   }),
   (dispatch) => ({})
 )(AuthenticatedRoute);
