@@ -29,7 +29,7 @@ export const Tbody = (props) => {
 
 export const Row = ({ index, ...props}) => {
   return (
-  <tr data-row="0" className={`m-datatable__row ${(index % 2 !== 0 ? 'm-datatable__row--even__none' : '')}`} style={{height: '64px'}}>
+  <tr data-row="0" className={`m-datatable__row ${(index % 2 !== 0 ? 'm-datatable__row--even__none' : '')}`} style={{minHeight: '45px'}}>
     {props.children}
   </tr>
   );
@@ -37,7 +37,7 @@ export const Row = ({ index, ...props}) => {
 
 export const HeadRow = (props) => {
   return (
-  <tr className="m-datatable__row" style={{height: '56px'}}>
+  <tr className="m-datatable__row" style={{height: '50px'}}>
     {props.children}
   </tr>
   );

@@ -18,6 +18,8 @@ import { selectGetRecordRequest, selectAddAnswersRequest } from '../../redux/sca
 import { getAssignedRecord, resetGetRecordRequest, addAnswers, resetAddAnswersRequest } from '../../redux/scap/actions';
 import { getSchoolStudents } from "../../redux/schools/actions";
 import { selectGetSchoolStudentsRequest } from "../../redux/schools/selectors";
+import { selectGetSchoolHomeroomsRequest } from '../../redux/schools/selectors';
+import { getSchoolHomerooms } from '../../redux/schools/actions';
 
 class FillTemplate extends Component {
     constructor(props) {
@@ -25,14 +27,17 @@ class FillTemplate extends Component {
         this.state = {
             surveyId: this.props.match.params.id,
             studentId: null,
+            homeroomId: null,
             answers: {},
-            students: []
+            students: [],
+            homerooms: []
         }
     }
 
     componentDidMount() {
         this.props.getSchoolStudents(this.props.match.params.id);
         this.props.getRecord(this.props.match.params.id);
+        this.props.getSchoolHomerooms();        
     }
     
     componentWillUnmount() {
@@ -58,6 +63,15 @@ class FillTemplate extends Component {
             });
         }
         
+        const homerooms      = this.props.homeroomsRequest.get('records');
+        const nextHomerooms  = nextProps.homeroomsRequest.get('records');
+
+        if (!homerooms && nextHomerooms) {
+            this.setState({            
+                homerooms: nextHomerooms.toJS()
+            });
+        }        
+        
         const success      = this.props.addAnswersRequest.get('success');
         const nextSuccess  = nextProps.addAnswersRequest.get('success');
 
@@ -70,6 +84,7 @@ class FillTemplate extends Component {
         this.props.addAnswers({
             surveyId: this.state.surveyId,
             studentId: this.state.studentId,
+            homeroomId: this.state.homeroomId,
             answers: this.state.answers
         });
     }
@@ -94,6 +109,20 @@ class FillTemplate extends Component {
         this.setState({answers: answers});            
     }
     
+    _handleStudentChange(event) {
+        const { value } = event.target;
+        const { students } = this.state;
+        
+        this.setState({studentId: value});
+        
+        students.map((student, key) => {
+            if (student.id === value) {
+                this.setState({homeroomId: student.homeroomId});
+                return true;
+            }            
+        });        
+    }    
+    
     _renderStudents() {
         const { students } = this.state;
 
@@ -103,6 +132,16 @@ class FillTemplate extends Component {
             </MenuItem>
         ));
     }
+    
+    _renderHomerooms() {
+        const { homerooms } = this.state;
+
+        return homerooms.map((homeroom, key) => (
+            <MenuItem key={key} value={ homeroom.id }>
+                { homeroom.name }
+            </MenuItem>
+        ));
+    }    
   
     _renderQuestions() {
         const {t, recordRequest} = this.props;
@@ -189,13 +228,26 @@ class FillTemplate extends Component {
                                         <Select                              
                                             name='studentId'
                                             style={{maxWidth: 250}}
-                                            onChange={(e) => { this.setState({studentId: e.target.value}) }}
+                                            onChange={(e) => { this._handleStudentChange(e) }}
                                             value={this.state.studentId || ''}>
                                             { this._renderStudents() }
                                         </Select>   
                                         {errors && errors.get('studentId') && <FormHelperText error>{ errors.get('studentId').get(0) }</FormHelperText>}
                                     </FormControl>
-                                </div>                              
+                                </div>
+                                <h6>{t('homeroom')}</h6>
+                                <div>                    
+                                    <FormControl className='full-width form-inputs'>                                        
+                                        <Select                              
+                                            name='homeroomId'
+                                            style={{maxWidth: 250}}
+                                            onChange={(e) => { this.setState({homeroomId: e.target.value}) }}
+                                            value={this.state.homeroomId || ''}>
+                                            { this._renderHomerooms() }
+                                        </Select>   
+                                        {errors && errors.get('homeroomId') && <FormHelperText error>{ errors.get('homeroomId').get(0) }</FormHelperText>}
+                                    </FormControl>
+                                </div>                                 
                             </div>                              
                             <div className="col-sm-12">
                                 <h5 className="text-left m--margin-bottom-20">{t('questions')}</h5>
@@ -223,7 +275,8 @@ FillTemplate = connect(
     (state) => ({        
         recordRequest: selectGetRecordRequest(state),
         addAnswersRequest: selectAddAnswersRequest(state),
-        schoolStudentsRequest: selectGetSchoolStudentsRequest(state)
+        schoolStudentsRequest: selectGetSchoolStudentsRequest(state),
+        homeroomsRequest: selectGetSchoolHomeroomsRequest(state)
     }),
     (dispatch) => ({
         getRecord: (id) => {
@@ -232,6 +285,9 @@ FillTemplate = connect(
         getSchoolStudents: () => {
             dispatch(getSchoolStudents());
         },
+        getSchoolHomerooms: () => {
+            dispatch(getSchoolHomerooms());
+        },        
         resetGetRecordRequest: () => {
             dispatch(resetGetRecordRequest());
         },
