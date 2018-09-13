@@ -13,6 +13,7 @@ import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../..
 import { getResultsRecords, resetGetResultsRecordsRequest } from "../../../redux/scap/actions";
 import { selectGetResultRecordsRequest } from "../../../redux/scap/selectors";
 import Pagination from '../../../components/ui/Pagination';
+import ResultsModal from "./ResultsModal"
 
 class TeacherResultsModal extends Component {
 
@@ -21,7 +22,8 @@ class TeacherResultsModal extends Component {
         this.state = {
             page: props.getRecordsRequest.get('pagination').get('page'),
             perPage: props.getRecordsRequest.get('pagination').get('perPage'),
-            surveyId: null
+            surveyId: null,
+            showResultsModal: false
         }
     }
 
@@ -48,7 +50,21 @@ class TeacherResultsModal extends Component {
         this.props.getRecords(this.state.surveyId, {
             page, perPage
         });
-    }    
+    }
+        
+    _showResultsModal(record) {
+        this.setState({
+            showResultsModal: true,
+            selectedItem: record
+        });
+    }
+    
+    _closeResultsModal() {
+        this.setState({
+            showResultsModal: false,
+            selectedItem: null
+        });
+    }      
     
     _renderRecords() {
         const {t, goTo} = this.props;
@@ -72,7 +88,7 @@ class TeacherResultsModal extends Component {
                 <Td first={true} width='100px'>{key + 1}</Td>
                 <Td width='132px'>{record.get('homeroom')}</Td>
                 <Td width='132px'>{record.get('student')}</Td>
-                <Td width='132px'><span className={`m-badge m-badge--brand m-badge--wide ${(record.get('status') == 'completed' ? 'm-badge--success' : '')}`}>{t(record.get('status'))}</span></Td>
+                <Td width='132px'><span className={`m-badge m-badge--brand m-badge--wide ${(record.get('status') === 'completed' ? 'm-badge--success' : '')}`}>{t(record.get('status'))}</span></Td>
                 <Td width='132px'>{record.get('createdAt')}</Td>
                 <Td width='132px'>
                     {record.get('status') !== 'completed' &&
@@ -80,6 +96,11 @@ class TeacherResultsModal extends Component {
                             <i className='la la-pencil'></i>
                         </button>                               
                     }
+                    {record.get('status') === 'completed' &&
+                        <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showResultsModal(record) }}>
+                            <i className='la la-search'></i>
+                        </button>                               
+                    }                            
                 </Td>
             </Row>
         ));
@@ -87,7 +108,7 @@ class TeacherResultsModal extends Component {
   
     render() {
         const { isOpen, getRecordsRequest, t } = this.props;
-        const { page } = this.state;
+        const { page, showResultsModal, selectedItem } = this.state;
             
         const loading       = getRecordsRequest.get('loading');        
         const totalPages    = getRecordsRequest.get('pagination').get('totalPages');    
@@ -128,6 +149,10 @@ class TeacherResultsModal extends Component {
                             </div>
                         </div>                        
                     </div>
+                    <ResultsModal 
+                        isOpen={showResultsModal} 
+                        onClose={() => { this._closeResultsModal() }}                    
+                        item={selectedItem} />                    
                 </DialogContent>
             </Modal>
         );

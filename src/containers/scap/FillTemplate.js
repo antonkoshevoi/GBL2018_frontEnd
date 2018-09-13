@@ -118,9 +118,9 @@ class FillTemplate extends Component {
         
         students.map((student, key) => {
             if (student.id === value) {
-                this.setState({homeroomId: student.homeroomId});
-                return true;
-            }            
+                this.setState({homeroomId: student.homeroomId});                
+            }
+            return true;
         });        
     }    
     

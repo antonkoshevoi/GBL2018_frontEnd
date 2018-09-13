@@ -105,8 +105,8 @@ class UserMenu extends Component {
           <img src={user.avatar} className="m--img-rounded m--marginless m--img-centered" alt=""/>
         </span>
         </a>
-        {activeMenu == 'userMenu' &&
-        this._renderDropDownMenu()
+        {activeMenu === 'userMenu' &&
+            this._renderDropDownMenu()
         }
       </li>
     );
