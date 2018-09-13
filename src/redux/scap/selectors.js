@@ -66,13 +66,13 @@ export const selectAssignTeachersRequest = createSelector(
  */
 export const selectAddAnswersRequest = createSelector(
     selectScapDomain,
-    (subState) => subState.get('addAnswersRequest')
+    (subState) => subState.get('saveAnswersRequest')
 );
 
 /**
- * Get Pagiantion
+ * Get Update Answers Request
  */
-export const selectPagination = createSelector(
+export const selectUpdateAnswersRequest = createSelector(
     selectScapDomain,
-    (subState) => subState.get('pagination')
+    (subState) => subState.get('saveAnswersRequest')
 );

@@ -9,7 +9,8 @@ import {
     UPDATE, UPDATE_SUCCESS, UPDATE_FAIL, RESET_UPDATE_REQUEST,
     DELETE, DELETE_SUCCESS, DELETE_FAIL,
     ASSIGN_TEACHERS, ASSIGN_TEACHERS_SUCCESS, ASSIGN_TEACHERS_FAIL, RESET_ASSIGN_TEACHERS_REQUEST,
-    ADD_ANSWERS, ADD_ANSWERS_SUCCESS, ADD_ANSWERS_FAIL, RESET_ADD_ANSWERS_REQUEST
+    ADD_ANSWERS, ADD_ANSWERS_SUCCESS, ADD_ANSWERS_FAIL, RESET_ADD_ANSWERS_REQUEST,
+    UPDATE_ANSWERS, UPDATE_ANSWERS_SUCCESS, UPDATE_ANSWERS_FAIL, RESET_UPDATE_ANSWERS_REQUEST    
 } from './actions';
 import Immutable from 'immutable';
 
@@ -78,7 +79,7 @@ const initialState = Immutable.fromJS({
     errorMessage: null,
     errorCode: null
   },
-  addAnswersRequest: {
+  saveAnswersRequest: {
     loading: false,
     success: false,
     fail: false,
@@ -215,12 +216,15 @@ export default function reducer (state = initialState, action) {
      * Add answers
      */
     case ADD_ANSWERS:
-        return state.set('addAnswersRequest', initialState.get('addAnswersRequest').set('loading', true));
+    case UPDATE_ANSWERS:   
+        return state.set('saveAnswersRequest', initialState.get('saveAnswersRequest').set('loading', true));
     case ADD_ANSWERS_SUCCESS:
-        return state.set('addAnswersRequest', initialState.get('addAnswersRequest').set('success', true));
-    case ADD_ANSWERS_FAIL:      
+    case UPDATE_ANSWERS_SUCCESS:
+        return state.set('saveAnswersRequest', initialState.get('saveAnswersRequest').set('success', true));
+    case ADD_ANSWERS_FAIL:
+    case UPDATE_ANSWERS_FAIL:
       return state
-        .set('addAnswersRequest', state.get('addAnswersRequest')
+        .set('saveAnswersRequest', state.get('saveAnswersRequest')
           .set('loading', false)
           .set('fail', true)
           .set('errorCode', action.error.response.data.code)
@@ -228,7 +232,8 @@ export default function reducer (state = initialState, action) {
           .set('errors', action.error.response.data.code === 422 ? Immutable.fromJS(action.error.response.data.errors) : undefined)
         );
     case RESET_ADD_ANSWERS_REQUEST:
-      return state.set('addAnswersRequest', initialState.get('addAnswersRequest'));      
+    case RESET_UPDATE_ANSWERS_REQUEST:
+      return state.set('saveAnswersRequest', initialState.get('saveAnswersRequest'));      
     /**
      * default
      */

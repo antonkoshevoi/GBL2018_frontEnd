@@ -32,5 +32,7 @@ export default {
   subscriptionCancelled: 'Subscription successfully cancelled',
   scapTemplateCreated: 'S-Cap template successfully created',
   scapTemplateUpdated: 'S-Cap template successfully updated',
-  scapTemplateTeachersAssigned: 'S-Cap template is shared to selected teachers'
+  scapTemplateTeachersAssigned: 'S-Cap template is shared to selected teachers',
+  scapScoresAdded: 'S-Cap scores added',
+  scapScoresUpdated: 'S-Cap scores updated'
 }

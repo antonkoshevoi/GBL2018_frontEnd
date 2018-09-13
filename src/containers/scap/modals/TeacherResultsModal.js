@@ -51,7 +51,7 @@ class TeacherResultsModal extends Component {
     }    
     
     _renderRecords() {
-        const {t} = this.props;
+        const {t, goTo} = this.props;
         const loading = this.props.getRecordsRequest.get('loading');
         const records = this.props.getRecordsRequest.get('records');
         
@@ -72,11 +72,14 @@ class TeacherResultsModal extends Component {
                 <Td first={true} width='100px'>{key + 1}</Td>
                 <Td width='132px'>{record.get('homeroom')}</Td>
                 <Td width='132px'>{record.get('student')}</Td>
+                <Td width='132px'><span className={`m-badge m-badge--brand m-badge--wide ${(record.get('status') == 'completed' ? 'm-badge--success' : '')}`}>{t(record.get('status'))}</span></Td>
                 <Td width='132px'>{record.get('createdAt')}</Td>
-                <Td width='132px'>                    
-                    <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => {  }}>
-                        <i className='la la-pencil'></i>
-                    </button>                                
+                <Td width='132px'>
+                    {record.get('status') !== 'completed' &&
+                        <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo(`scap/edit-answers/${record.get('id')}`) }}>
+                            <i className='la la-pencil'></i>
+                        </button>                               
+                    }
                 </Td>
             </Row>
         ));
@@ -109,6 +112,7 @@ class TeacherResultsModal extends Component {
                                 <Th first={true} width='100px'>#</Th>                                
                                 <Th width='132px'>{t('homeroom')}</Th>                                
                                 <Th width='132px'>{t('student')}</Th>
+                                <Th width='132px'>{t('status')}</Th>
                                 <Th width='132px'>{t('created')}</Th>
                                 <Th width='132px'>{t('actions')}</Th>
                             </HeadRow>

@@ -48,6 +48,11 @@ export const ADD_ANSWERS_SUCCESS = '[Surveys] ADD_ANSWERS_SUCCESS';
 export const ADD_ANSWERS_FAIL = '[Surveys] ADD_ANSWERS_FAIL';
 export const RESET_ADD_ANSWERS_REQUEST = '[Surveys] RESET_ADD_ANSWERS_REQUEST';
 
+export const UPDATE_ANSWERS = '[Surveys] UPDATE_ANSWERS';
+export const UPDATE_ANSWERS_SUCCESS = '[Surveys] UPDATE_ANSWERS_SUCCESS';
+export const UPDATE_ANSWERS_FAIL = '[Surveys] UPDATE_ANSWERS_FAIL';
+export const RESET_UPDATE_ANSWERS_REQUEST = '[Surveys] RESET_UPDATE_ANSWERS_REQUEST';
+
 export function getRecords(params = {}) {
     return {
         types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -158,5 +163,18 @@ export function addAnswers(data) {
 export function resetAddAnswersRequest() {
     return {
         type: RESET_ADD_ANSWERS_REQUEST
+    };
+}
+
+export function updateAnswers(data) {
+    return {
+        types: [UPDATE_ANSWERS,  UPDATE_ANSWERS_SUCCESS, UPDATE_ANSWERS_FAIL],
+        promise: (apiClient) => apiClient.post('surveys/update-answers', data)
+    };
+}
+
+export function resetUpdateAnswersRequest() {
+    return {
+        type: RESET_UPDATE_ANSWERS_REQUEST
     };
 }

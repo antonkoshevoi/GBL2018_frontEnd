@@ -80,12 +80,13 @@ class FillTemplate extends Component {
         }         
     }
     
-    _saveAnswers() {        
+    _saveAnswers(isDraft = 0) {        
         this.props.addAnswers({
             surveyId: this.state.surveyId,
             studentId: this.state.studentId,
             homeroomId: this.state.homeroomId,
-            answers: this.state.answers
+            answers: this.state.answers,
+            isDraft: isDraft
         });
     }
         
@@ -255,10 +256,14 @@ class FillTemplate extends Component {
                                 <div>{this._renderQuestions()}</div>                                
                             </div>
                             <div className="col-sm-12 m--margin-top-40 text-center">
-                                <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._saveAnswers() }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
-                                    {t('save')}
+                                <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._saveAnswers(0) }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
+                                    {t('saveAndPublish')}
                                     <Icon className="m--margin-left-5">check</Icon>
-                                </Button>                                
+                                </Button>
+                                <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._saveAnswers(1) }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
+                                    {t('saveAsDraft')}
+                                    <Icon className="m--margin-left-5">check</Icon>
+                                </Button>                                 
                                 <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._goBack() }} variant="raised" color='default' className='mt-btn mt-btn-cancel'>
                                     {t('cancel')}                                    
                                 </Button>                                
