@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { Typography, Tooltip, Select, MenuItem } from '@material-ui/core';
+import { Typography, Select, MenuItem } from '@material-ui/core';
 import { getSchoolHomerooms } from "../../../redux/schools/actions";
 import { selectGetSchoolHomeroomsRequest } from "../../../redux/schools/selectors";
 import MetronicDatePicker from "../../../components/ui/metronic/MetronicDatePicker";
@@ -29,11 +29,12 @@ class Details extends Component {
     this.state = {
       user: {},
       schoolHomerooms: [],
-      mode: 'overview',
+      mode: 'overview'
     }
   }
 
   componentDidMount () {
+            
     this.setState({
       ...this.state,
       user: this.props.user
@@ -133,12 +134,10 @@ class Details extends Component {
               <div className="m-portlet__head-title">
                 <span className="m-portlet__head-icon">
                   {(mode === 'overview') ?
-                    <i className="flaticon-info"></i> :
-                    <Tooltip title="Back" placement="bottom">
-                      <a onClick={() => {
-                        this._handleSwitchMode('overview')
-                      }} className="pointer la la-arrow-left"></a>
-                    </Tooltip>
+                    <i className="flaticon-info"></i> :                    
+                    <a title={t('back')} onClick={() => { this._handleSwitchMode('overview') }} className="pointer">
+                        <i className="la la-arrow-left"></i>
+                    </a>                    
                   }
                 </span>
                 <h3 className="m-portlet__head-text">
@@ -149,15 +148,10 @@ class Details extends Component {
             <div className="m-portlet__head-tools">
               <ul className="m-portlet__nav">
                 <li className="m-portlet__nav-item">
-                  {mode === 'overview' &&
-                  <Tooltip id="tooltip-icon" title="Edit" placement="bottom">
-                    <a onClick={() => {
-                      this._handleSwitchMode('edit')
-                    }}
-                       className=" pointer m-portlet__nav-link m-portlet__nav-link--icon">
+                  {mode === 'overview' &&                  
+                    <a title={t('edit')} onClick={() => { this._handleSwitchMode('edit') }} className=" pointer m-portlet__nav-link m-portlet__nav-link--icon">
                       <i className="la la-edit"></i>
-                    </a>
-                  </Tooltip>
+                    </a>                  
                   }
                 </li>
               </ul>
@@ -208,7 +202,7 @@ class Details extends Component {
                 </div>
               </div>
             </TabContainer>}
-            {mode == 'edit' && <TabContainer>
+            {mode === 'edit' && <TabContainer>
               <form id='update-user-form' onSubmit={(e) => { this._onSubmit(e) }}>
                 <div className="alert m-alert m-alert--default">
                   <p>{t('updateUserProfileNote')}</p>

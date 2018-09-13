@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
   DialogContent,  
-  Icon, IconButton,
-  Toolbar, Typography
+  Icon, Toolbar, Typography
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
@@ -86,14 +85,12 @@ class StudentsModal extends Component {
     return (
       <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position='static' color='primary' className='dialogAppBar'>
-          <Toolbar>
-            <IconButton color="inherit" aria-label='Close'>
+          <Toolbar>            
               { (!studentsRecordsRequest.get('success') || unSubscribeStudentRequest.get('loading')) ? (
-                <CircularProgress style={{float: 'right'}} color='inherit'/>
+                <CircularProgress className="m--margin-right-15" color='inherit'/>
               ) : (
-                <Icon>persone</Icon>
-              )}
-            </IconButton>
+                <Icon className="m--margin-right-15">persone</Icon>
+              )}            
             <Typography type='title' color='inherit'>
               {t('assignedStudents')}
             </Typography>

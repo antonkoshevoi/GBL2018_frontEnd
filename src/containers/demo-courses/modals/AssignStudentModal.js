@@ -4,7 +4,7 @@ import {
   AppBar, CircularProgress,
   DialogContent,
   DialogContentText,
-  Icon, IconButton,
+  Icon,
   Toolbar, Typography,
   Divider, Button, DialogActions
 } from '@material-ui/core';
@@ -73,14 +73,12 @@ class AssignStudentModal extends Component {
     return (
       <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position='static' color='primary' className='dialogAppBar'>
-          <Toolbar>
-            <IconButton color="inherit" aria-label='Close'>
+          <Toolbar>            
               {loading ? (
-                <CircularProgress style={{float: 'right'}} color='inherit'/>
+                <CircularProgress className="m--margin-right-15" color='inherit'/>
               ) : (
-                <Icon>persone</Icon>
-              )}
-            </IconButton>
+                <Icon className="m--margin-right-15">persone</Icon>
+              )}            
             <Typography type='title' color='inherit'>
               {t('assignStudent')}
             </Typography>

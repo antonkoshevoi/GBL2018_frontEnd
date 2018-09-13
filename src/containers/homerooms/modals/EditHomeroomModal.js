@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
   DialogContent, 
-  Icon, IconButton,
+  Icon,
   Toolbar, Typography,
   Divider, Button, DialogActions
 } from '@material-ui/core';
@@ -72,9 +72,7 @@ class EditHomeroomModal extends Component {
     this.props.update(
       this.state.id,
       this.state.homeroom
-    );
-
-    this.props.resetUpdateRequest();
+    );  
   };
 
   _setCroppedImage(img) {
@@ -107,14 +105,12 @@ class EditHomeroomModal extends Component {
     return (
       <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
-          <Toolbar>
-            <IconButton color="inherit" aria-label="Close">
+          <Toolbar>            
               {loading ? (
-                <CircularProgress style={{float: 'right'}} color="inherit"/>
+                <CircularProgress className="m--margin-right-15" color="inherit"/>
               ) : (
-                <Icon>person</Icon>
-              )}
-            </IconButton>
+                <Icon className="m--margin-right-15">person</Icon>
+              )}            
             <Typography type="title" color="inherit" >
               {t('editHomeroom')}
             </Typography>

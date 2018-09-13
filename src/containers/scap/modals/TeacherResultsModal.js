@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
   AppBar,
   DialogContent,  
-  Icon, IconButton,
+  Icon,
   Toolbar, Typography  
 } from '@material-ui/core';
 import { push } from 'react-router-redux';
@@ -13,6 +13,7 @@ import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../..
 import { getResultsRecords, resetGetResultsRecordsRequest } from "../../../redux/scap/actions";
 import { selectGetResultRecordsRequest } from "../../../redux/scap/selectors";
 import Pagination from '../../../components/ui/Pagination';
+import ResultsModal from "./ResultsModal"
 
 class TeacherResultsModal extends Component {
 
@@ -21,7 +22,8 @@ class TeacherResultsModal extends Component {
         this.state = {
             page: props.getRecordsRequest.get('pagination').get('page'),
             perPage: props.getRecordsRequest.get('pagination').get('perPage'),
-            surveyId: null
+            surveyId: null,
+            showResultsModal: false
         }
     }
 
@@ -48,10 +50,24 @@ class TeacherResultsModal extends Component {
         this.props.getRecords(this.state.surveyId, {
             page, perPage
         });
-    }    
+    }
+        
+    _showResultsModal(record) {
+        this.setState({
+            showResultsModal: true,
+            selectedItem: record
+        });
+    }
+    
+    _closeResultsModal() {
+        this.setState({
+            showResultsModal: false,
+            selectedItem: null
+        });
+    }      
     
     _renderRecords() {
-        const {t} = this.props;
+        const {t, goTo} = this.props;
         const loading = this.props.getRecordsRequest.get('loading');
         const records = this.props.getRecordsRequest.get('records');
         
@@ -72,11 +88,19 @@ class TeacherResultsModal extends Component {
                 <Td first={true} width='100px'>{key + 1}</Td>
                 <Td width='132px'>{record.get('homeroom')}</Td>
                 <Td width='132px'>{record.get('student')}</Td>
+                <Td width='132px'><span className={`m-badge m-badge--brand m-badge--wide ${(record.get('status') === 'completed' ? 'm-badge--success' : '')}`}>{t(record.get('status'))}</span></Td>
                 <Td width='132px'>{record.get('createdAt')}</Td>
-                <Td width='132px'>                    
-                    <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => {  }}>
-                        <i className='la la-pencil'></i>
-                    </button>                                
+                <Td width='132px'>
+                    {record.get('status') !== 'completed' &&
+                        <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo(`scap/edit-answers/${record.get('id')}`) }}>
+                            <i className='la la-pencil'></i>
+                        </button>                               
+                    }
+                    {record.get('status') === 'completed' &&
+                        <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showResultsModal(record) }}>
+                            <i className='la la-search'></i>
+                        </button>                               
+                    }                            
                 </Td>
             </Row>
         ));
@@ -84,7 +108,7 @@ class TeacherResultsModal extends Component {
   
     render() {
         const { isOpen, getRecordsRequest, t } = this.props;
-        const { page } = this.state;
+        const { page, showResultsModal, selectedItem } = this.state;
             
         const loading       = getRecordsRequest.get('loading');        
         const totalPages    = getRecordsRequest.get('pagination').get('totalPages');    
@@ -92,10 +116,8 @@ class TeacherResultsModal extends Component {
         return (
             <Modal isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
-                    <Toolbar>
-                      <IconButton color="inherit" aria-label="Close">                   
-                            <Icon>poll</Icon>                       
-                      </IconButton>
+                    <Toolbar>          
+                      <Icon className="m--margin-right-15">poll</Icon>                                             
                       <Typography type="title" color="inherit" >
                             {t('sCapResults')}
                       </Typography>
@@ -109,6 +131,7 @@ class TeacherResultsModal extends Component {
                                 <Th first={true} width='100px'>#</Th>                                
                                 <Th width='132px'>{t('homeroom')}</Th>                                
                                 <Th width='132px'>{t('student')}</Th>
+                                <Th width='132px'>{t('status')}</Th>
                                 <Th width='132px'>{t('created')}</Th>
                                 <Th width='132px'>{t('actions')}</Th>
                             </HeadRow>
@@ -124,6 +147,10 @@ class TeacherResultsModal extends Component {
                             </div>
                         </div>                        
                     </div>
+                    <ResultsModal 
+                        isOpen={showResultsModal} 
+                        onClose={() => { this._closeResultsModal() }}                    
+                        item={selectedItem} />                    
                 </DialogContent>
             </Modal>
         );

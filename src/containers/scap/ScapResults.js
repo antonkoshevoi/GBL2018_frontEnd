@@ -111,7 +111,7 @@ class ScapResults extends Component {
     }
 
     render() {
-        const {getRecordsRequest, pagination, t} = this.props;
+        const {getRecordsRequest, t} = this.props;
         const {page, perPage, showResultsModal, selectedItem} = this.state;
         const loading = getRecordsRequest.get('loading');
         const totalPages = getRecordsRequest.get('pagination').get('totalPages');

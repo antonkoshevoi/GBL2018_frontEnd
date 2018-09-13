@@ -4,7 +4,7 @@ import { push } from 'react-router-redux';
 import { MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
-import { selectGetRecordsRequest, selectPagination } from '../../redux/scap/selectors';
+import { selectGetRecordsRequest } from '../../redux/scap/selectors';
 import { getAssignedRecords } from '../../redux/scap/actions';
 import Pagination from '../../components/ui/Pagination';
 import TeacherResultsModal from './modals/TeacherResultsModal';
@@ -108,7 +108,7 @@ class TeacherScap extends Component {
     }
 
     render() {
-        const {getRecordsRequest, pagination, t} = this.props;
+        const {getRecordsRequest, t} = this.props;
         const {page, perPage, showResultsModal, selectedItem} = this.state;
         const loading = getRecordsRequest.get('loading');
         const totalPages = getRecordsRequest.get('pagination').get('totalPages');
@@ -177,8 +177,7 @@ class TeacherScap extends Component {
 
 TeacherScap = connect(
     (state) => ({
-        getRecordsRequest: selectGetRecordsRequest(state),        
-        pagination: selectPagination(state)
+        getRecordsRequest: selectGetRecordsRequest(state)
     }),
     (dispatch) => ({
         getRecords: (params = {}) => {

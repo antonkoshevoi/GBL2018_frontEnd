@@ -167,10 +167,10 @@ class SignUpParent extends Component {
                     }
                     <div className='row'>
                       <div className='col-sm-12 text-right m--padding-top-20 text-center'>
-                        {activeStep == 0 &&
+                        {activeStep === 0 &&
                            <MetronicProgressButton type='submit' disabled={step1Loading} loading={step1Loading} className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>{t('next')}</MetronicProgressButton>
                         }
-                        {activeStep == 1 &&
+                        {activeStep === 1 &&
                           <div>
                             <button
                               type='button'
@@ -182,7 +182,7 @@ class SignUpParent extends Component {
                             <MetronicProgressButton type='submit' disabled={step2Loading} loading={step2Loading} className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>{t('next')}</MetronicProgressButton>
                           </div>
                         }
-                        {activeStep == 2 &&
+                        {activeStep === 2 &&
                           <div>
                             <p className="display-10"><strong>{t('signUpCompletedMessage')}</strong></p>            
                             <button type='submit' className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>{t('goToDashboard')}</button>

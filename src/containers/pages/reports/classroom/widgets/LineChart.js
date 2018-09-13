@@ -148,6 +148,8 @@ class LineChart extends Component {
         return 'month';
       case 3 :
         return 'year';
+      default:
+        return 'day';
     }
   }
 

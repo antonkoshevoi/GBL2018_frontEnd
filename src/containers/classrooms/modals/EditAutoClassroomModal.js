@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
   DialogContent, 
-  Icon, IconButton,
+  Icon,
   Toolbar, Typography,
   Divider, Button, DialogActions, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem
 } from '@material-ui/core';
@@ -181,7 +181,6 @@ class EditAutoClassroomModal extends Component {
                 onChange={this._handleInputChange}
               >
                 { days.map( (index,value) => (<MenuItem key={index+1} value={index+1}>{index+1}</MenuItem>)) }
-
               </Select>
             </FormControl>
           </FormControl>
@@ -201,14 +200,12 @@ class EditAutoClassroomModal extends Component {
     return (
       <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
-          <Toolbar>
-            <IconButton color="inherit" aria-label="Close">
+          <Toolbar>            
               {loading ? (
-                <CircularProgress style={{float: 'right'}} color="inherit"/>
+                <CircularProgress className="m--margin-right-15" color="inherit"/>
               ) : (
-                <Icon>person</Icon>
-              )}
-            </IconButton>
+                <Icon className="m--margin-right-15">person</Icon>
+              )}            
             <Typography type="title" color="inherit">
               {t('autoClassroomSimilarityRegularCreation')}
             </Typography>

@@ -452,5 +452,8 @@ export default {
     shareScapToTeachers: 'Share S-Cap To Teachers',
     viewScapResults: 'View S-Cap Results',
     scapResultsNotFound: 'No S-Cap Results found...',
-    notes: 'Notes'
+    notes: 'Notes',
+    saveAndPublish: 'Save and Publish',
+    saveAsDraft: 'Save as Draft',
+    draft: 'Draft'   
 }

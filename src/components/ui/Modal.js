@@ -55,10 +55,10 @@ Modal.defaultProps = {
 
 Modal = withStyles({
   paper: {    
-    maxHeight: '100vh',
+    maxHeight: '90vh'
   },
   biggerPaper: {
-    maxHeight: '100vh',
+    maxHeight: '90vh',
     minWidth: '70%'
   },
   // paperWidthXs: {

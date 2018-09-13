@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
   DialogContent,  
-  Icon, IconButton,
+  Icon,
   Toolbar, Typography,
   Divider, Button, DialogActions
 } from '@material-ui/core';
@@ -73,9 +73,7 @@ class EditClassroomModal extends Component {
     this.props.update(
       this.state.id,
       this.state.classroom
-    );
-
-    this.props.resetUpdateRequest();
+    );    
   };
 
   _setCroppedImage(img) {
@@ -109,13 +107,11 @@ class EditClassroomModal extends Component {
       <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
-            <IconButton color="inherit" aria-label="Close">
               {loading ? (
-                <CircularProgress style={{float: 'right'}} color="inherit"/>
+                <CircularProgress className="m--margin-right-15" color="inherit"/>
               ) : (
-                <Icon>person</Icon>
-              )}
-            </IconButton>
+                <Icon className="m--margin-right-15">person</Icon>
+              )}            
             <Typography type="title" color="inherit" >
               {t('editClassroom')}
             </Typography>

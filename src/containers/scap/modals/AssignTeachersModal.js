@@ -3,7 +3,7 @@ import {
   AppBar, CircularProgress,
   DialogContent,
   FormControlLabel,
-  Icon, IconButton, Checkbox, Grid,
+  Icon, Checkbox, Grid,
   Toolbar, Typography, FormGroup,
   Divider, Button, DialogActions
 } from '@material-ui/core';
@@ -24,10 +24,6 @@ class AssignTeachersModal extends Component {
             teacherIds: []
             
         };
-    }
-
-    componentDidMount() {
-  
     }
     
     componentWillReceiveProps(nextProps) {
@@ -123,17 +119,15 @@ class AssignTeachersModal extends Component {
         return (
             <Modal isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
-                    <Toolbar>
-                      <IconButton color="inherit" aria-label="Close">
+                    <Toolbar>                      
                         {loading ? (
-                          <CircularProgress style={{float: 'right'}} color="inherit"/>
+                          <CircularProgress className="m--margin-right-15" color="inherit"/>
                         ) : (
-                          <Icon>person</Icon>
-                        )}
-                      </IconButton>
-                      <Typography type="title" color="inherit" >
-                        {t('assignTeachers')}
-                      </Typography>
+                          <Icon className="m--margin-right-15">person</Icon>
+                        )}                      
+                        <Typography type="title" color="inherit" >
+                            {t('assignTeachers')}
+                        </Typography>
                     </Toolbar>
                 </AppBar>
                 <DialogContent className="m--margin-top-25">                    

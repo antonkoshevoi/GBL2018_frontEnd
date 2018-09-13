@@ -12,7 +12,7 @@ class ThreadBrowser extends Component {
     };
 
     _renderThreads() {
-        const {threads, onSelectThread, userData} = this.props;
+        const {threads, onSelectThread } = this.props;
         let views = [];
 
         threads.forEach((thread, key) => {

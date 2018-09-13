@@ -64,6 +64,7 @@ import Scap from "../containers/scap/Scap";
 import BuildTemplate from "../containers/scap/BuildTemplate";
 import EditTemplate from "../containers/scap/EditTemplate";
 import FillTemplate from "../containers/scap/FillTemplate";
+import EditAnswers from "../containers/scap/EditAnswers";
 import ScapResults from "../containers/scap/ScapResults";
 
 export default () => (
@@ -122,7 +123,8 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/scap' name='S-Cap' component={Scap}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/scap/build' name='S-Cap Build Template' component={BuildTemplate}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/scap/update/:id' name='S-Cap Update Template' component={EditTemplate}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/scap/fill/:id' name='S-Cap Update Template' component={FillTemplate}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/scap/fill/:id' name='S-Cap Fill Template' component={FillTemplate}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/scap/edit-answers/:id' name='S-Cap Edit Answers' component={EditAnswers}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/scap/results/:id' name='S-Cap Results' component={ScapResults}/>
 
       {/*Store*/}    
