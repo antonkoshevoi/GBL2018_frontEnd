@@ -68,7 +68,7 @@ class CsvUploadSection extends Component {
 
     render() {
         const { uploadRequest,schoolRequest, t } = this.props;
-        const schoolId = schoolRequest.get('record').toJS().schId;
+        
         const loading = uploadRequest.get('loading');
         const progress = uploadRequest.get('progress');
         const cancel = uploadRequest.get('cancel');
@@ -80,6 +80,8 @@ class CsvUploadSection extends Component {
         const csvTemplateHeaders = this.props.csvTemplateHeaders;
         const csvTemplateData = this.props.csvTemplateData;
 
+        const schoolId = success ? schoolRequest.get('record').toJS().schId : null;
+        
         return (
             <div>
                 <div className="m-portlet m-portlet--brand  m-portlet--head-solid-bg m-portlet--bordered">

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
   DialogContent,  
-  Icon, IconButton,
+  Icon,
   Toolbar, Typography,
   Divider, Button,
   DialogActions
@@ -107,13 +107,11 @@ class EditTeacherModal extends Component {
       <Modal isOpen={isOpen} bigger onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
-            <IconButton color="inherit" aria-label="Close">
               {loading ? (
-                <CircularProgress style={{float: 'right'}} color="inherit"/>
+                <CircularProgress className="m--margin-right-15" color="inherit"/>
               ) : (
-                <Icon>person</Icon>
-              )}
-            </IconButton>
+                <Icon className="m--margin-right-15">person</Icon>
+              )}            
             <Typography type="title" color="inherit" >
               {t('editTeacher')}
             </Typography>

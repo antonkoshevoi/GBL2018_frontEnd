@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
     AppBar, CircularProgress,    
-    Icon, IconButton,
+    Icon,
     Toolbar, Typography,
     Button, DialogActions, DialogContent
 } from '@material-ui/core';
@@ -104,14 +104,12 @@ class EditAdministrationModal extends Component {
         return (
             <Modal isOpen={isOpen} bigger onClose={() => this._onClose()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
-                    <Toolbar>
-                        <IconButton color="inherit" aria-label="Close">
-                            {loading ? (
-                                <CircularProgress style={{float: 'right'}} color="inherit"/>
-                            ) : (
-                                <Icon>person</Icon>
-                            )}
-                        </IconButton>
+                    <Toolbar>                        
+                        {loading ? (
+                            <CircularProgress className="m--margin-right-15" color="inherit"/>
+                        ) : (
+                            <Icon className="m--margin-right-15">person</Icon>
+                        )}                        
                         <Typography type="title" color="inherit">
                             {t('editUser')}
                         </Typography>

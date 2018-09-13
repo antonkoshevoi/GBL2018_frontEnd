@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
   AppBar,
   DialogContent,  
-  Icon, IconButton,
+  Icon,
   Toolbar, Typography,
   TextField,    
   FormControl,
@@ -70,9 +70,7 @@ class QuestionModal extends Component {
       <Modal minWidth="250" isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position='static' color='primary' className='dialogAppBar'>
           <Toolbar>
-            <IconButton color="inherit" aria-label='Close'>
-                <Icon>add_circle</Icon>              
-            </IconButton>
+            <Icon className="m--margin-right-15">add_circle</Icon>                          
             <Typography type='title' color='inherit'>
                 {t('addNewQuestion')}
             </Typography>

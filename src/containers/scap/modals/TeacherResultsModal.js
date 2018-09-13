@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
   AppBar,
   DialogContent,  
-  Icon, IconButton,
+  Icon,
   Toolbar, Typography  
 } from '@material-ui/core';
 import { push } from 'react-router-redux';
@@ -116,10 +116,8 @@ class TeacherResultsModal extends Component {
         return (
             <Modal isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
-                    <Toolbar>
-                      <IconButton color="inherit" aria-label="Close">                   
-                            <Icon>poll</Icon>                       
-                      </IconButton>
+                    <Toolbar>          
+                      <Icon className="m--margin-right-15">poll</Icon>                                             
                       <Typography type="title" color="inherit" >
                             {t('sCapResults')}
                       </Typography>

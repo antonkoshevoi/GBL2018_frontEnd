@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Avatar, CircularProgress, Tooltip} from '@material-ui/core';
+import {Avatar, CircularProgress} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
 import UnassignedCourses from "./sections/UnassignedCourses";
 import {connect} from "react-redux";
@@ -171,14 +171,10 @@ class ParentDashboard extends Component {
               </div>
               <div className="m-portlet__head-tools">
                 <ul className="m-portlet__nav">
-                  <li className="m-portlet__nav-item">
-                    <Tooltip id="tooltip-icon" title={t('add')} placement="top">
-                      <a onClick={() => {
-                        this._openCreateDialog()
-                      }} className=" pointer m-portlet__nav-link m-portlet__nav-link--icon">
+                  <li className="m-portlet__nav-item">                    
+                      <a title={t('add')} onClick={() => { this._openCreateDialog() }} className=" pointer m-portlet__nav-link m-portlet__nav-link--icon">
                         <i className="la la-plus"></i>
-                      </a>
-                    </Tooltip>
+                      </a>                    
                   </li>
                 </ul>
               </div>

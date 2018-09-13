@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
   AppBar, CircularProgress,
   DialogContent,  
-  Icon, IconButton,
+  Icon,
   Toolbar, Typography,
   Divider, Button, DialogActions
 } from '@material-ui/core';
@@ -61,9 +61,7 @@ class ResultsModal extends Component {
             <Modal isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>
-                      <IconButton color="inherit" aria-label="Close">                   
-                            <Icon>poll</Icon>                       
-                      </IconButton>
+                      <Icon className="m--margin-right-15">poll</Icon>
                       <Typography type="title" color="inherit" >
                             {t('sCapResults')}
                       </Typography>
