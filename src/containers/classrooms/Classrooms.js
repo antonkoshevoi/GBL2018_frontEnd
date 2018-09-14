@@ -102,17 +102,17 @@ class Classrooms extends Component {
         <Td first={true} width='100px'>{key + 1}</Td>
         <Td width='132px'>
             {record.get('crmName')}
-            {!record.get('paid') && 
-                <button title={t('classroomNotPaid')} className='m--margin-left-10 btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill'>
-                    <i className='la la-exclamation-triangle' style={{fontSize: '2rem'}}></i>
-                </button>
-            }
         </Td>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
         <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
         <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
         <Td width='132px'>{record.get('studentsCount')}</Td>
         <Td width='132px'>{(record.get('isPublic') ? t('yes') : t('no'))}</Td>
+        <Td width='132px'>            
+            <button title={t(record.get('paid') ? 'classroomPaid' : 'classroomNotPaid')} className={`btn m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ${record.get('paid') ? 'btn-success' : 'btn-danger '}`}>
+                <i className={`la ${record.get('paid') ? 'la-dollar' : 'la-exclamation-triangle'}`} style={{fontSize: '2rem'}}></i>
+            </button>             
+        </Td>
         <Td width='150px'>
           <HasPermission permissions={[
             '[ClassRooms][Update][Any]'
@@ -319,8 +319,9 @@ class Classrooms extends Component {
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>{t('course')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>{t('teacher')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='132px'>{t('studentsCount')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='132px'>{t('students')}</Th>
                   <Th width='132px'>{t('public')}</Th>
+                  <Th width='132px'>{t('status')}</Th>
                   <Th width='150px'>{t('actions')}</Th>
                 </HeadRow>
               </Thead>
