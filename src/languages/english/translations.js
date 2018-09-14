@@ -446,6 +446,7 @@ export default {
     public: 'Public',
     assignTeachers: 'Assign Teachers',
     classroomNotPaid: 'Classroom is not paid',
+    classroomPaid: 'Classroom is paid',
     sCapResults: 'S-Cap Results',    
     fillScapTemplate: 'S-Cap Template',
     summary: 'Summary',
@@ -455,5 +456,5 @@ export default {
     notes: 'Notes',
     saveAndPublish: 'Save and Publish',
     saveAsDraft: 'Save as Draft',
-    draft: 'Draft'   
+    draft: 'Draft'
 }
