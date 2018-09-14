@@ -8,6 +8,8 @@ import {translate} from "react-i18next";
 import {withRouter} from "react-router-dom";
 import {getRecords} from "../../redux/store/actions";
 import {selectRecords} from "../../redux/store/selectors";
+import {getCharts} from "../../redux/reports/dashboard/actions";
+import {selectChartDatatRequest} from "../../redux/reports/dashboard/selectors";
 import QuickLink from "./sections/QuickLink";
 import FeaturedItems from "./sections/FeaturedItems";
 import Card from "../../components/ui/Card";
@@ -34,6 +36,7 @@ class UserDashboard extends Component {
   _getRecords() {
     const {params} = this.state;
     this.props.getRecords(params);
+    this.props.getCharts();    
   }
 
   _setCategoryFilter(category) {
@@ -130,7 +133,7 @@ class UserDashboard extends Component {
   }
 
   render() {
-    const {records, t} = this.props;
+    const {records, dataRequest, t} = this.props;
     return (
       <div className="fadeInLeft animated">
         <div className="row dashboard-main-top">
@@ -143,8 +146,8 @@ class UserDashboard extends Component {
                 <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">
                   <LineChart/>
                 </div>
-                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">
-                  <SchoolAverageChart/>
+                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">                  
+                  <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--visible-tablet-and-mobile m--visible-desktop-lg">
                   <QuickLink/>
@@ -175,12 +178,16 @@ class UserDashboard extends Component {
 
 UserDashboard = connect(
   (state) => ({    
-    records: selectRecords(state)
+    records: selectRecords(state),
+    dataRequest: selectChartDatatRequest(state)
   }),
   (dispatch) => ({
     getRecords: (params = {type: 'recent'}) => {
       dispatch(getRecords(params))
-    }
+    },
+    getCharts: (params = {}) => {
+      dispatch(getCharts(params))
+    }    
   })
 )(UserDashboard);
 

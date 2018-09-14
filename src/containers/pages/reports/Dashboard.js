@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import {translate} from 'react-i18next';
+import {connect} from "react-redux";
 import LineChart from './widgets/LineChart';
 import PassRate from './widgets/PassRate';
 import SchoolAverageChart from './widgets/SchoolAverageChart';
 import RosterStatistic from './widgets/RosterStatistic';
 import DashboardTabs from './DashboardTabs';
+import {getCharts} from "../../../redux/reports/dashboard/actions";
+import {selectChartDatatRequest} from "../../../redux/reports/dashboard/selectors";
 
 class Dashboard extends Component {
 
@@ -13,8 +16,13 @@ class Dashboard extends Component {
     this.state = {}
   }
 
+  componentDidMount() {
+    const {getCharts} = this.props;
+    getCharts();
+  }
+  
   render() {
-    const {t} = this.props;
+    const {t, dataRequest} = this.props;
     return (
       <div className="fadeInLeft animated">
         <div className="row dashboard-main-top row-reports-main-top-block m-portlet  m-portlet--head-solid-bg">
@@ -33,10 +41,10 @@ class Dashboard extends Component {
               <LineChart/>
             </div>
             <div className="col-sm-12 col-md-6 col-lg-3">
-              <PassRate/>
+                <PassRate loading={dataRequest.get('loading')}  data={dataRequest.get('data').toJS()} />
             </div>
             <div className="col-sm-12 col-md-6 col-lg-3">
-              <SchoolAverageChart/>
+                <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
             </div>
           </div>
         </div>
@@ -49,5 +57,16 @@ class Dashboard extends Component {
     );
   }
 }
+    
+Dashboard = connect(
+  (state) => ({
+    dataRequest: selectChartDatatRequest(state)
+  }),
+  (dispatch) => ({
+    getCharts: (params = {}) => {
+      dispatch(getCharts(params))
+    }
+  })
+)(Dashboard);
 
 export default translate('translations')(Dashboard);

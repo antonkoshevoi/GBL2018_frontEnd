@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import {Pie} from "react-chartjs-2";
-import {connect} from "react-redux";
-import {getCharts} from "../../../../redux/reports/dashboard/actions";
-import {selectChartDatatRequest} from "../../../../redux/reports/dashboard/selectors";
 import {CircularProgress} from '@material-ui/core';
 import {translate} from 'react-i18next';
 
@@ -54,11 +51,6 @@ class SchoolAverageChart extends Component {
     this.state = {}
   }
 
-  componentDidMount() {
-    const {getCharts} = this.props;
-    getCharts();
-  }
-
   _renderPieChartLabels(labels) {
     return labels.map(function (item, i) {
       return (
@@ -72,9 +64,7 @@ class SchoolAverageChart extends Component {
   }
 
   render() {
-    const getChartDataRequest = this.props.getChartDataRequest.toJS();
-    const { data, loading, success, fail } = getChartDataRequest;
-    const { t } = this.props;
+    const { t, loading, data } = this.props;    
 
     const progress = [
       {color: "#79c942", label: t('complete'), value: data.completed},
@@ -106,8 +96,8 @@ class SchoolAverageChart extends Component {
     return (
       <div className="small-card-content">
         <div className="small-card">
-          {loading && !success && <div className="text-center col-md-12"><CircularProgress color="primary"/></div>}
-          {!loading && success && <div className="row">
+          {loading && <div className="text-center col-md-12"><CircularProgress color="primary"/></div>}
+          {!loading && <div className="row">
             <div className="col-md-5 pie-block school-average-margins">
               <Pie data={performanceChartData} options={this.options} width={100} height={100}/>
             </div>
@@ -119,12 +109,11 @@ class SchoolAverageChart extends Component {
                 {this._renderPieChartLabels(performance)}
               </div>
             </div>
-          </div>}
-          {fail && <div className="text-center col-md-12"><span style={{color: 'red' }}>Error</span></div>}
+          </div>}          
         </div>
         <div className="small-card">
-          {loading && !success && <div className="text-center col-md-12"><CircularProgress color="primary"/></div>}
-          {!loading && success && <div className="row">
+          {loading && <div className="text-center col-md-12"><CircularProgress color="primary"/></div>}
+          {!loading && <div className="row">
             <div className="col-md-5 pie-block school-average-margins">
               <Pie data={progressChartData} options={this.options} width={100} height={100}/>
             </div>
@@ -136,23 +125,11 @@ class SchoolAverageChart extends Component {
                 {this._renderPieChartLabels(progress)}
               </div>
             </div>
-          </div>}
-          {fail && <div className="text-center col-md-12"><span style={{color: 'red' }}>Error</span></div>}
+          </div>}          
         </div>
       </div>
     );
   }
 }
-
-SchoolAverageChart = connect(
-  (state) => ({
-    getChartDataRequest: selectChartDatatRequest(state)
-  }),
-  (dispatch) => ({
-    getCharts: (params = {}) => {
-      dispatch(getCharts(params))
-    },
-  })
-)(SchoolAverageChart);
 
 export default translate('translations')(SchoolAverageChart);
