@@ -6,7 +6,7 @@ import {translate} from 'react-i18next';
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{padding: 8 * 3}}>
+    <Typography component="div">
       {props.children}
     </Typography>
   );
