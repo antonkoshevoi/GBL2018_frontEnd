@@ -65,12 +65,6 @@ export default  {
                title:'homerooms',
                link:'homerooms/list',
                icon:'flaticon	flaticon-technology-1',
-             },
-             {
-               key:'professionalTrainings',
-               title:'professionalTrainings',
-               link:'trainings',
-               icon:'flaticon flaticon-technology-1',
              }
            ]
          },

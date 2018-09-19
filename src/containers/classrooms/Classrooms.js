@@ -17,6 +17,7 @@ import EditClassroomModal from "./modals/EditClassroomModal";
 import SearchInput from "../../components/ui/SearchInput";
 import DeleteButton from "../../components/ui/DeleteButton";
 import HasPermission from "../middlewares/HasPermission";
+import HasRole from "../middlewares/HasRole";
 import AssignStudentsModal from "./modals/AssignStudentsModal";
 
 const AssignButton = ({ id, onClick}) => {
@@ -99,39 +100,33 @@ class Classrooms extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='100px'>{key + 1}</Td>
+        <Td first={true} width='60px'>{key + 1}</Td>
         <Td width='132px'>
             {record.get('crmName')}
         </Td>
-        <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
+        <HasRole roles={['Superadministrator']}>
+            <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
+        </HasRole>
         <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
         <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
-        <Td width='132px'>{record.get('studentsCount')}</Td>
-        <Td width='132px'>{(record.get('isPublic') ? t('yes') : t('no'))}</Td>
-        <Td width='132px'>            
+        <Td width='75px'>{record.get('studentsCount')}</Td>
+        <Td width='75px'>{(record.get('isPublic') ? t('yes') : t('no'))}</Td>
+        <Td width='75px'>            
             <button title={t(record.get('paid') ? 'classroomPaid' : 'classroomNotPaid')} className={`btn m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ${record.get('paid') ? 'btn-success' : 'btn-danger '}`}>
                 <i className={`la ${record.get('paid') ? 'la-dollar' : 'la-exclamation-triangle'}`} style={{fontSize: '2rem'}}></i>
             </button>             
         </Td>
         <Td width='150px'>
-          <HasPermission permissions={[
-            '[ClassRooms][Update][Any]'
-          ]}>
+          <HasPermission permissions={['[ClassRooms][Update][Any]']}>
             <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
           </HasPermission>
-          <HasPermission permissions={[
-            '[ClassRooms][Update][Schedule]'
-          ]}>
+          <HasPermission permissions={['[ClassRooms][Update][Schedule]']}>
             <EditButton onClick={() => { goTo(`/classrooms/schedule/${record.get('id')}`); }} id={record.get('id')}/>
           </HasPermission>          
-          <HasPermission permissions={[
-            '[ClassRooms][Assign][Student]'
-          ]}>
+          <HasPermission permissions={['[ClassRooms][Assign][Student]']}>
             <AssignButton onClick={() => { this._assignStudent(record.get('id')) }}/>
           </HasPermission>
-          <HasPermission permissions={[
-            '[ClassRooms][Delete][Any]'
-          ]}>
+          <HasPermission permissions={['[ClassRooms][Delete][Any]']}>
             <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
           </HasPermission>
         </Td>
@@ -235,11 +230,6 @@ class Classrooms extends Component {
     this.setState({ perPage, page }, this._getRecords)
   }
 
-  /**
-   *
-   * @param page
-   * @private
-   */
   _goToPage (page) {
     this.setState({ page }, this._getRecords)
   }
@@ -261,14 +251,13 @@ class Classrooms extends Component {
 
     return (
       <div className='fadeInLeft  animated learning-areas'>
-
         <div className='m-portlet m-portlet--head-solid-bg'>
           <div className='m-portlet__head'>
             <div className='m-portlet__head-caption'>
               <div className='m-portlet__head-title'>
-              <span className='m-portlet__head-icon'>
-                <i className='la la-user' style={{fontSize:'55px'}}></i>
-              </span>
+                <span className='m-portlet__head-icon'>
+                    <i className='la la-user' style={{fontSize:'55px'}}></i>
+                </span>
                 <h3 className='m-portlet__head-text'>                  
                   {t('classrooms')}
                 </h3>
@@ -314,14 +303,16 @@ class Classrooms extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th first={true} width='100px'>#</Th>
+                  <Th first={true} width='60px'>#</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
+                  <HasRole roles={['Superadministrator']}>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                  </HasRole>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>{t('course')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>{t('teacher')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='132px'>{t('students')}</Th>
-                  <Th width='132px'>{t('public')}</Th>
-                  <Th width='132px'>{t('status')}</Th>
+                  <Th width='75px' onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount'>{t('students')}</Th>
+                  <Th width='75px'>{t('public')}</Th>
+                  <Th width='75px'>{t('status')}</Th>
                   <Th width='150px'>{t('actions')}</Th>
                 </HeadRow>
               </Thead>

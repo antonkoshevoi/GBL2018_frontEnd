@@ -17,6 +17,7 @@ import EditStudentModal from "./modals/EditStudentModal";
 import SearchInput from "../../components/ui/SearchInput";
 import DeleteButton from "../../components/ui/DeleteButton";
 import HasPermission from "../middlewares/HasPermission";
+import HasRole from "../middlewares/HasRole";
 
 class Students extends Component {
   constructor(props) {
@@ -93,22 +94,19 @@ class Students extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='100px'>{key + 1}</Td>
+        <Td first={true} width='60px'>{key + 1}</Td>
         <Td width='132px'>{record.get('username')}</Td>
         <Td width='132px'>{record.get('firstName')}</Td>
         <Td width='132px'>{record.get('lastName')}</Td>
-        <Td width='132px'>{record.get('email')}</Td>
-        <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>{t('student')}</span></Td>
-        <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
+        <Td width='132px'>{record.get('email')}</Td>        
+        <HasRole roles={['Superadministrator']}>
+            <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
+        </HasRole>
         <Td width='100px'>
-          <HasPermission permissions={[
-            '[Users][Students][Update][Any]'
-          ]}>
+          <HasPermission permissions={['[Users][Students][Update][Any]']}>
             <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
           </HasPermission>
-          <HasPermission permissions={[
-            '[Users][Students][Delete][Any]'
-          ]}>
+          <HasPermission permissions={['[Users][Students][Delete][Any]']}>
             <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
           </HasPermission>
         </Td>
@@ -222,7 +220,6 @@ class Students extends Component {
           <div className='m-portlet__body'>
             <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
               <div className='row align-items-center'>
-
                 <div className='col-xl-12 order-1 order-xl-2 m--align-right'>
                   <Select
                     className="pull-left table-select"
@@ -234,17 +231,13 @@ class Students extends Component {
                     <MenuItem value={50}>50</MenuItem>
                     <MenuItem value={100}>100</MenuItem>
                   </Select>
-                  <HasPermission permissions={[
-                    '[Users][Students][Create][Any]'
-                  ]}>
+                  <HasPermission permissions={['[Users][Students][Create][Any]']}>
                     <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
                       {t('addNew')}
                       <Icon style={{marginLeft:'5px'}}>add</Icon>
                     </Button>
                   </HasPermission>
-                  <HasPermission permissions={[
-                    '[Users][Students][Create][Bulk][Any]'
-                  ]}>
+                  <HasPermission permissions={['[Users][Students][Create][Bulk][Any]']}>
                     <NavLink className='link-btn' to='/students/csv'>
                     <Button variant="raised" className='btn-success mt-btn mt-btn-success'>
                       {t('bulkAddStudents')} 
@@ -258,13 +251,14 @@ class Students extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th first={true} width='100px'>#</Th>
+                  <Th first={true} width='60px'>#</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['username']} name='username' width='132px'>{t('username')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['firstName']} name='firstName' width='132px'>{t('firstName')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName' width='132px'>{t('lastName')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' width='132px'>{t('email')}</Th>
-                  <Th width='132px'>{t('role')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' width='132px'>{t('email')}</Th>                  
+                  <HasRole roles={['Superadministrator']}>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                  </HasRole>
                   <Th width='100px'>{t('actions')}</Th>
                 </HeadRow>
               </Thead>

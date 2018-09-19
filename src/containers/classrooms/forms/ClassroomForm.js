@@ -41,8 +41,7 @@ class ClassroomForm extends Component {
     onChange: PropTypes.func.isRequired,
     classroom: PropTypes.object.isRequired,
     schools: PropTypes.any,
-    errors: PropTypes.any,
-    isPublic: PropTypes.bool
+    errors: PropTypes.any   
   };
 
   constructor(props) {
@@ -143,48 +142,13 @@ class ClassroomForm extends Component {
     });
   }
 
-  _countStudentByHomerooms(selectedHomerooms) {
-    const {schoolHomerooms} = this.state;
-
-    if (schoolHomerooms && Array.isArray(selectedHomerooms)) {
-      const studentCount = schoolHomerooms
-        .filter(room => selectedHomerooms.includes(room.id))
-        .map(room => room.studentsCount)
-        .reduce(((count, studentCount) => count + studentCount), 0);
-
-      this.setState({studentCount});
-    }
-  }
-
   _handleInputChange(event) {
-    const {name, value} = event.target;
-    this._countStudentByHomerooms(value);
+    const {name, value} = event.target;    
     this.props.onChange({
       ...this.props.classroom,
       [name]: value
     });
     this.setState({name: value})
-  }
-
-  _renderSchools() {
-    const {schools} = this.props;
-
-    return schools.map((school, key) => (
-      <MenuItem key={key} value={school.get('schId')}>
-        {school.get('schName')}
-      </MenuItem>
-    ));
-  }
-
-  _renderCourses() {
-    const {courses} = this.state;
-
-    return courses.map((course, key) => (
-      <MenuItem key={key} value={course.crsId}>
-        {course.crsTitle}
-
-      </MenuItem>
-    ));
   }
 
   _renderTeachers() {
@@ -209,11 +173,11 @@ class ClassroomForm extends Component {
   }
 
   render() {
-    const {classroom, errors, isPublic, t} = this.props;
-    const {courseModalIsOpen, unassignedsAlert, course, studentCount} = this.state;
+    const {classroom, errors, t} = this.props;
+    const {courseModalIsOpen, unassignedsAlert, course } = this.state;    
+        
     return (
       <div className='row'>
-
         <SweetAlert
           show={unassignedsAlert}
           title={unassignedsAlert ? errors.get('unassignedsCount').get(0) : ''}
@@ -283,7 +247,7 @@ class ClassroomForm extends Component {
             {errors && errors.get('crmEnrollmentEndDate') &&
             <FormHelperText error>{errors.get('crmEnrollmentEndDate').get(0)}</FormHelperText>}
           </div>
-          {!isPublic &&
+          
           <FormControl className='full-width form-inputs'>
             <Button
               onClick={() => {
@@ -299,34 +263,28 @@ class ClassroomForm extends Component {
             {errors && errors.get('crmCourse') &&
             <FormHelperText error>{errors.get('crmCourse').get(0)}</FormHelperText>}
           </FormControl>
-          }
+          
           {course &&
           <div className="row">
             <div className="col-4">
               <img src={course.get('thumbnail')} width={70} alt={course.get('title')}/>
             </div>
-            <div className="col-4 d-flex justify-content-center flex-column">
+            <div className="col-8">
               {course.get('title')}
-            </div>
-            <div className="col-4 d-flex justify-content-center flex-column">
-              {t('studentCount')}: {studentCount ? studentCount : 0}
             </div>
           </div>
           }
-          {isPublic && classroom && classroom.course &&
+          {(classroom && classroom.course) &&
           <div className="row">
             <div className="col-4">
               <img src={classroom.course.image} width={70} alt={classroom.course.title}/>
             </div>
-            <div className="col-4 d-flex justify-content-center flex-column">
+            <div className="col-8">
               {classroom.course.title}
-            </div>
-            <div className="col-4 d-flex justify-content-center flex-column">
-              {t('studentCount')}: {studentCount ? studentCount : 0}
             </div>
           </div>
           }
-          {!isPublic &&
+          
           <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>{t('teacher')}</InputLabel>
             <Select
@@ -342,8 +300,7 @@ class ClassroomForm extends Component {
             {errors && errors.get('teacherId') &&
             <FormHelperText error>{errors.get('teacherId').get(0)}</FormHelperText>}
           </FormControl>
-          }
-          {!isPublic &&
+                    
           <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>{t('homeroomsMultiple')}</InputLabel>
             <Select
@@ -360,8 +317,7 @@ class ClassroomForm extends Component {
             </Select>
             {errors && errors.get('homerooms') &&
             <FormHelperText error>{errors.get('homerooms').get(0)}</FormHelperText>}
-          </FormControl>
-          }
+          </FormControl>          
         </div>
         <CourseModal
           courseId={classroom.crmCourse}

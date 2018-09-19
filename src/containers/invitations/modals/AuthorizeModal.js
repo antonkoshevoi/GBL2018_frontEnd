@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 import {
-  AppBar, Button, DialogActions, DialogContent, DialogContentText, Divider, Toolbar,
+  AppBar, Button, DialogActions, DialogContent, Divider, Toolbar,
   Typography
 } from '@material-ui/core';
 import Modal from '../../../components/ui/Modal';
@@ -28,11 +28,9 @@ class AuthorizeModal extends Component {
           </Toolbar>
         </AppBar>
 
-        <DialogContent className='m--margin-top-25'>
-          <DialogContentText>
-            <p>{t('joinDemoLoginMessage')}</p>
-            <p>{t('joinDemoCorseIsFreeMessage')}</p>
-          </DialogContentText>
+        <DialogContent className='m--margin-top-25'>          
+           <p>{t('joinDemoLoginMessage')}</p>
+           <p>{t('joinDemoCorseIsFreeMessage')}</p>          
         </DialogContent>
         <Divider className='full-width'/>
         <DialogActions>
@@ -41,7 +39,7 @@ class AuthorizeModal extends Component {
             type='button'
             form='create-student-form'
             raised
-            className='m--margin-top-10 pull-right mt-btn'
+            className='m--margin-10 pull-right mt-btn mt-btn-success'
             color='primary'>
             {t('login')}
           </Button>
@@ -50,7 +48,7 @@ class AuthorizeModal extends Component {
             type='button'
             form='create-student-form'
             raised
-            className='m--margin-top-10 pull-right mt-btn'
+            className='m--margin-10 pull-right mt-btn mt-btn-success'
             color='primary'>
             {t('register')}
           </Button>

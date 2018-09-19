@@ -99,10 +99,9 @@ class EditClassroomModal extends Component {
   }
 
   render() {
-    const { isOpen, updateRequest, getSingleRecordRequest,isPublic, t } = this.props;
+    const { isOpen, updateRequest, getSingleRecordRequest, t } = this.props;
     const loading = updateRequest.get('loading') || getSingleRecordRequest.get('loading');    
     const errors = updateRequest.get('errors');
-
     return (
       <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
@@ -122,8 +121,7 @@ class EditClassroomModal extends Component {
           <form id='update-classroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
             <div className="row">
               <div className="col-md-8">
-                <ClassroomForm
-                  isPublic={isPublic}
+                <ClassroomForm                  
                   onChange={(classroom) => { this._onChange(classroom) }}
                   classroom={this.state.classroom}
                   errors={errors}/>

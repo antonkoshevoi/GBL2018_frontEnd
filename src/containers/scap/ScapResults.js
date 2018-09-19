@@ -86,7 +86,7 @@ class ScapResults extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td first={true} width='100px'>{key + 1}</Td>                
+                <Td first={true} width='60px'>{key + 1}</Td>                
                 <Td width='132px'>{record.get('teacher')}</Td>                                
                 <Td width='132px'>{record.get('homeroom')}</Td>
                 <Td width='132px'>{record.get('student')}</Td>
@@ -151,7 +151,7 @@ class ScapResults extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>
-                                <Th first={true} width='100px'>#</Th>
+                                <Th first={true} width='60px'>#</Th>
                                 <Th width='132px'>{t('teacher')}</Th>
                                 <Th width='132px'>{t('homeroom')}</Th>                                
                                 <Th width='132px'>{t('student')}</Th>

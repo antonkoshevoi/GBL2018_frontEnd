@@ -60,7 +60,7 @@ class StudentsGrid extends Component {
                 <br/>
                 <div className="progress m-progress--sm">
                   <div title={t('averageGrade')} className="progress-bar bg-success" role="progressbar" style={{width: student.averageGrade + '%'}}></div>
-                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(student.averageGrade)) + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - Math.round(student.averageGrade)) + '%'}}></div>
                 </div>
               </div>
             )}

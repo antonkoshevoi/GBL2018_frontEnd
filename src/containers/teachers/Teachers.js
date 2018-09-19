@@ -17,6 +17,7 @@ import EditTeacherModal from "./modals/EditTeacherModal";
 import SearchInput from "../../components/ui/SearchInput";
 import DeleteButton from "../../components/ui/DeleteButton";
 import HasPermission from "../middlewares/HasPermission";
+import HasRole from "../middlewares/HasRole";
 import {selectSchool} from "../../redux/schools/selectors";
 import {getSchool} from "../../redux/schools/actions";
 
@@ -95,13 +96,14 @@ class Teachers extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='100px'>{key + 1}</Td>
+        <Td first={true} width='60px'>{key + 1}</Td>
         <Td width='132px'>{record.get('username')}</Td>
         <Td width='132px'>{record.get('firstName')}</Td>
         <Td width='132px'>{record.get('lastName')}</Td>
         <Td width='132px'>{record.get('email')}</Td>
-        <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>{t('teacher')}</span></Td>
+        <HasRole roles={['Superadministrator']}>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
+        </HasRole>
         <Td width='100px'>
           <HasPermission permissions={[
             '[Users][Teachers][Update][Any]'
@@ -261,13 +263,14 @@ class Teachers extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th first={true} width='100px'>#</Th>
+                  <Th first={true} width='60px'>#</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['username']} name='username' width='132px'>{t('username')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['firstName']} name='firstName' width='132px'>{t('firstName')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName' width='132px'>{t('lastName')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' width='132px'>{t('email')}</Th>
-                  <Th width='132px'>{t('role')}</Th>
+                  <HasRole roles={['Superadministrator']}>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                  </HasRole>
                   <Th width='100px'>{t('actions')}</Th>
                 </HeadRow>
               </Thead>

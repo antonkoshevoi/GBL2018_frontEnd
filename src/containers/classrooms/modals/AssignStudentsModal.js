@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,
-  DialogContentText,
+  DialogContent,  
   Icon,
   Toolbar, Typography,
   Divider, Button, DialogActions
@@ -111,8 +110,7 @@ class AssignStudentsModal extends Component {
           </Toolbar>
         </AppBar>
 
-        <DialogContent className="m--margin-top-25">
-          <DialogContentText></DialogContentText>
+        <DialogContent className="m--margin-top-25">          
           <form id='assign-students-form' onSubmit={(e) => { this._onSubmit(e) }}>
             <AssignStudentsForm
               onChange={(studentIds) => { this._onChange(studentIds) }}
