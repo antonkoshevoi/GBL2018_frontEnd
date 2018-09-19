@@ -78,10 +78,10 @@ class TeacherScap extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td first={true} width='100px'>{key + 1}</Td>
+                <Td first={true} width='60px'>{key + 1}</Td>
                 <Td width='132px'>{record.get('title')}</Td>
-                <Td width='132px'>{record.get('questions')}</Td>
-                <Td width='132px'>
+                <Td width='100px'>{record.get('questions')}</Td>
+                <Td width='100px'>
                     {record.get('completed')}
                     {(record.get('completed') > 0) && <ResultsButton onClick={() => { this._showResultsModal(record) }} t={t} />}
                 </Td>
@@ -144,10 +144,10 @@ class TeacherScap extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>
-                                <Th first={true} width='100px'>#</Th>
+                                <Th first={true} width='60px'>#</Th>
                                 <Th width='132px'>{t('title')}</Th>
-                                <Th width='132px'>{t('questions')}</Th>                                
-                                <Th width='132px'>{t('completed')}</Th>
+                                <Th width='100px'>{t('questions')}</Th>                                
+                                <Th width='100px'>{t('completed')}</Th>
                                 <Th width='132px'>{t('created')}</Th>
                                 <Th width='132px'>{t('actions')}</Th>
                             </HeadRow>

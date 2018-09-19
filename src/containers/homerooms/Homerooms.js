@@ -17,6 +17,7 @@ import EditHomeroomModal from "./modals/EditHomeroomModal";
 import SearchInput from "../../components/ui/SearchInput";
 import DeleteButton from "../../components/ui/DeleteButton";
 import HasPermission from "../middlewares/HasPermission";
+import HasRole from "../middlewares/HasRole";
 
 class Homerooms extends Component {
   constructor(props) {
@@ -77,23 +78,23 @@ class Homerooms extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='100px'>{key + 1}</Td>
+        <Td first={true} width='60px'>{key + 1}</Td>
         <Td width='132px'>{record.get('name')}</Td>
+        <HasRole roles={['Superadministrator']}>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
+        </HasRole>
         <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
         <Td width='132px'>{record.get('studentsCount')}</Td>
+        <HasPermission permissions={['[HomeRooms][Update][Any]', 'HomeRooms][Delete][Any']}>
         <Td width='100px'>
-          <HasPermission permissions={[
-            '[HomeRooms][Update][Any]'
-          ]}>
+          <HasPermission permissions={['[HomeRooms][Update][Any]']}>
             <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
           </HasPermission>
-          <HasPermission permissions={[
-            '[HomeRooms][Delete][Any]'
-          ]}>
+          <HasPermission permissions={['[HomeRooms][Delete][Any]']}>
             <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
           </HasPermission>
         </Td>
+        </HasPermission>
       </Row>
     ));
   }
@@ -246,17 +247,13 @@ class Homerooms extends Component {
                     <MenuItem value={50}>50</MenuItem>
                     <MenuItem value={100}>100</MenuItem>
                   </Select>
-                  <HasPermission permissions={[
-                    '[HomeRooms][Create][Any]'
-                  ]}>
+                  <HasPermission permissions={['[HomeRooms][Create][Any]']}>
                     <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
                       {t('addNew')}
                       <Icon style={{marginLeft:'5px'}}>add</Icon>
                     </Button>
                   </HasPermission>
-                  <HasPermission permissions={[
-                    '[HomeRooms][Create][Bulk][Any]'
-                  ]}>
+                  <HasPermission permissions={['[HomeRooms][Create][Bulk][Any]']}>
                     <NavLink className='link-btn' to='/homerooms/csv'>
                       <Button variant="raised" className='btn-success mt-btn mt-btn-success'>
                         {t('bulkAddHomerooms')}
@@ -270,12 +267,16 @@ class Homerooms extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th first={true} width='100px'>#</Th>
+                  <Th first={true} width='60px'>#</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                  <HasRole roles={['Superadministrator']}>
+                    <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                  </HasRole>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>{t('teacher')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='132px'>{t('studentsCount')}</Th>
-                  <Th width='100px'>{t('actions')}</Th>
+                  <HasPermission permissions={['[HomeRooms][Update][Any]', 'HomeRooms][Delete][Any']}>
+                    <Th width='100px'>{t('actions')}</Th>
+                  </HasPermission>
                 </HeadRow>
               </Thead>
 

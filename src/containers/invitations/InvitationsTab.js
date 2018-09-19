@@ -169,7 +169,7 @@ class InvitationsTab extends Component {
       <Row index={key} key={key}>
         <Td width='152px'>{record.get('email')}</Td>
         <Td width='132px'>{record.get('name')}</Td>
-        <Td width='132px'>
+        <Td width='80px'>
           { this._renderStatus(record) }
         </Td>
         <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
@@ -242,7 +242,7 @@ class InvitationsTab extends Component {
             <HeadRow>
               <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' first={true} width='152px'>{t('email')}</Th>
               <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
-              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['status']} name='status' width='132px'>{t('status')}</Th>
+              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['status']} name='status' width='80px'>{t('status')}</Th>
               <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>{t('course')}</Th>
               <Th onSort={ (name) => { this._sort(name) }} dir={sorters['publisher']} name='publisher' width='132px'>{t('publisher')}</Th>
               <Th width='100px'>{t('actions')}</Th>

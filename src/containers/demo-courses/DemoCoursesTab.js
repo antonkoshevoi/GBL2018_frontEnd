@@ -15,6 +15,7 @@ import { getDemoClassrooms, deleteRecord, getSingleRecord } from '../../redux/cl
 import CreateDemoClassroomModal from './modals/CreateDemoClassroomModal';
 import EditDemoClassroomModal from './modals/EditDemoClassroomModal';
 import AssignStudentModal from './modals/AssignStudentModal';
+import HasRole from "../middlewares/HasRole";
 
 function TabContainer(props) {
   return (
@@ -195,12 +196,14 @@ class DemoCoursesTab extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='100px'>{key + 1}</Td>
+        <Td first={true} width='60px'>{key + 1}</Td>
         <Td width='132px'>{record.get('crmName')}</Td>
-        <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
+        <HasRole roles={['Superadministrator']}>
+            <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
+        </HasRole>
         <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
         <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
-        <Td width='132px'>{record.get('studentsCount')}</Td>
+        <Td width='100px'>{record.get('studentsCount')}</Td>
         <Td width='100px'>
           <EditButton onClick={(id) => { this._editRecord(id) }} id={ record.get('id') }/>
           <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
@@ -270,12 +273,14 @@ class DemoCoursesTab extends Component {
           <Table>
             <Thead>
               <HeadRow>
-                <Th first={true} width='100px'>#</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='122px'>{t('name')}</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='122px'>{t('school')}</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='122px'>{t('course')}</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='122px'>{t('teacher')}</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='122px'>{t('studentsCount')}</Th>
+                <Th first={true} width='60px'>#</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
+                <HasRole roles={['Superadministrator']}>
+                    <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                </HasRole>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>{t('course')}</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>{t('teacher')}</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='100px'>{t('students')}</Th>
                 <Th width='100px'>{t('actions')}</Th>
               </HeadRow>
             </Thead>

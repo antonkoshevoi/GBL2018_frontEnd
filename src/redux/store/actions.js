@@ -160,11 +160,10 @@ export function setItemQuantity(data) {
 export function calculateCartSum(items = []) {
 
   const total = items.reduce((total, item) => {
-    if (item.storeItem && !isNaN(item.storeItem.discountPrice)) {
-         return total + parseFloat(item.storeItem.discountPrice).toFixed(2) * parseInt(item.count);
-
-      }
-    return total;
+        if (item.storeItem && !isNaN(item.storeItem.discountPrice)) {        
+            return total + (parseFloat(item.storeItem.discountPrice).toFixed(2) * item.count);
+        }
+        return total;
   },0);
 
   return {

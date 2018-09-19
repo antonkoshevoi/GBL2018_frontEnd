@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {translate} from 'react-i18next';
 import SplashHeader from './sections/SplashHeader'
 import SplashNavigation from './sections/SplashNavigation'
@@ -14,8 +14,7 @@ import StickyHeader from 'react-sticky-header';
 
 const SplashContainer = props => {
   return (<div className="splash">
-    <StickyHeader
-      // This is the sticky part of the header.
+    <StickyHeader      
       header={
         <section className="section-header">
           <SplashHeader {...props} />

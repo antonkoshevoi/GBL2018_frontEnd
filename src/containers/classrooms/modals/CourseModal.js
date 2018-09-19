@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,
-  DialogContentText,
+  DialogContent,  
   Icon,
   Toolbar, Typography,
   Divider, Button, DialogActions,
@@ -13,8 +12,8 @@ import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import Modal from "../../../components/ui/Modal";
 import Filter from "../../../components/store/Filter";
-import {selectGetStoreRecordsRequest, selectGetUnassignedRecordsRequest} from "../../../redux/courses/selectors";
-import {getStoreRecords, getUnassignedRecords} from "../../../redux/courses/actions";
+import {selectGetStoreRecordsRequest} from "../../../redux/courses/selectors";
+import {getStoreRecords} from "../../../redux/courses/actions";
 import {Row, Table, TablePreloader, Tbody, Td, Thead, HeadRow, Th} from "../../../components/ui/table";
 import toastr from 'toastr';
 
@@ -28,8 +27,8 @@ class CourseModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      courseId: null,
-      activeTab: 0,
+      course: null,
+      courseId: null,      
       filterShow: {
         sort: false,
         all: false,
@@ -49,7 +48,6 @@ class CourseModal extends Component {
     this.props.getStoreRecords(params);
   }
 
-
   _setFilters(params) {
     if (params)
       this.setState({isFiltered: true});
@@ -61,23 +59,17 @@ class CourseModal extends Component {
     const next = nextProps.isOpen;
 
     if (!prev && next) {
-      const {getStoreRecords, getUnassignedRecords, courseId} = this.props;
+      const {getStoreRecords, courseId} = this.props;
 
-      getStoreRecords();
-      getUnassignedRecords();
+      getStoreRecords();      
 
       this.setState({courseId})
     }
   }
 
-  _handleChangeTab = (event, activeTab) => {
-    this.setState({activeTab});
-  };
-
   _close() {
     this.setState({
-      courseId: this.props.courseId,
-      activeTab: 0
+      courseId: this.props.courseId      
     });
     this.props.onClose();
   };
@@ -85,7 +77,7 @@ class CourseModal extends Component {
   _onChange(course) {
     this.setState({course})
     const courseId = course.get('courseId');
-    this.setState({courseId})
+    this.setState({courseId: courseId})
 
   };
 
@@ -101,7 +93,7 @@ class CourseModal extends Component {
   };
 
   _renderStoreItems() {
-    const {courseId} = this.state;
+    const {courseId, course} = this.state;
     const {t} = this.props;
     const storeCourses = this.props.storeRecordsRequest.get('records');
 
@@ -116,7 +108,10 @@ class CourseModal extends Component {
         </tr>
       )
     } else {
-      return storeCourses.map((course, i) => {
+      return storeCourses.map((storeCourse ,i) => {
+        if (storeCourse.get('courseId') === courseId && !course) {
+           this._onChange(storeCourse);
+        }
         return (
           <Row key={i} index={i}>
             <Td width='30px' first={true}>
@@ -124,20 +119,20 @@ class CourseModal extends Component {
                 value="male"
                 name="courseId"
                 control={<Radio/>}                
-                checked={course.get('courseId') == courseId}
+                checked={storeCourse.get('courseId') === courseId}
                 onChange={() => {
-                  this._onChange(course)
+                  this._onChange(storeCourse)
                 }}/>
             </Td>
             <Td width='70px'>
               <div>
-                <img src={course.get('thumbnail')} width={70} alt={course.get('title')}/>
+                <img src={storeCourse.get('thumbnail')} width={70} alt={storeCourse.get('title')}/>
               </div>
             </Td>
-            <Td width='100px'><span style={{fontWeight: 600}}>{course.get('title')}</span></Td>
-            <Td width='300px'>{course.get('description')}</Td>
-            <Td width='100px'><span style={{fontWeight: 600}}>{course.get('price')}</span></Td>
-            <Td width='100px'><span style={{fontWeight: 600}}>{course.get('credit') ? course.get('credit') : '-'}</span></Td>
+            <Td width='100px'><span style={{fontWeight: 600}}>{storeCourse.get('title')}</span></Td>
+            <Td width='300px'>{storeCourse.get('description')}</Td>
+            <Td width='100px'><span style={{fontWeight: 600}}>{storeCourse.get('price')}</span></Td>
+            <Td width='100px'><span style={{fontWeight: 600}}>{storeCourse.get('credit') ? storeCourse.get('credit') : '-'}</span></Td>
           </Row>
         )
       });
@@ -146,15 +141,14 @@ class CourseModal extends Component {
 
   render() {
     const {isOpen, t} = this.props;
-    const {activeTab, filterShow, isFiltered} = this.state;
-    const storeRecordsLoading = this.props.storeRecordsRequest.get('loading');
-    const unassignedRecordsLoading = this.props.unassignedRecordsRequest.get('loading');
+    const {filterShow, isFiltered} = this.state;
+    const storeRecordsLoading = this.props.storeRecordsRequest.get('loading');    
 
     return (
       <Modal isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>            
-              {storeRecordsLoading && unassignedRecordsLoading ? (
+              {storeRecordsLoading ? (
                 <CircularProgress  className="m--margin-right-15" color="inherit"/>
               ) : (
                 <Icon className="m--margin-right-15">person</Icon>
@@ -165,8 +159,7 @@ class CourseModal extends Component {
           </Toolbar>
         </AppBar>
 
-        <DialogContent className="m--margin-top-25">
-          <DialogContentText></DialogContentText>
+        <DialogContent className="m--margin-top-25">          
           <Filter
             onChange={(params) => this._setFilters(params)}
             isActive={isFiltered}
@@ -201,7 +194,7 @@ class CourseModal extends Component {
             }}
             type='button'
             form='choose-course-form'
-            disabled={storeRecordsLoading && unassignedRecordsLoading}
+            disabled={storeRecordsLoading}
             variant="raised"
             className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
             color='primary'>
@@ -215,16 +208,12 @@ class CourseModal extends Component {
 
 CourseModal = connect(
   (state) => ({
-    storeRecordsRequest: selectGetStoreRecordsRequest(state),
-    unassignedRecordsRequest: selectGetUnassignedRecordsRequest(state),
+    storeRecordsRequest: selectGetStoreRecordsRequest(state)    
   }),
   (dispatch) => ({
     getStoreRecords: (params) => {
       dispatch(getStoreRecords(params))
-    },
-    getUnassignedRecords: () => {
-      dispatch(getUnassignedRecords())
-    },
+    }
   })
 )(CourseModal);
 

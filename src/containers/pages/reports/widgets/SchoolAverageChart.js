@@ -82,12 +82,12 @@ class SchoolAverageChart extends Component {
 
     const performance = [
       {color: "#79c942", label: t('correct'), value: data.averageGrade},
-      {color: "#fe1d25", label: t('incorrect'), value: 100 - parseInt(data.averageGrade)},
+      {color: "#fe1d25", label: t('incorrect'), value: 100 - Math.round(data.averageGrade)},
     ];
 
     const performanceChartData = {
       datasets: [{
-        data: [+data.averageGrade, 100 - parseInt(data.averageGrade)],
+        data: [+data.averageGrade, 100 - Math.round(data.averageGrade)],
         backgroundColor: ['#79c942', '#fe1d25']
       }],
       labels: [t('correct'), t('incorrect')]
