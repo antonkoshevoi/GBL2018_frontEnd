@@ -456,5 +456,7 @@ export default {
     notes: 'Notes',
     saveAndPublish: 'Save and Publish',
     saveAsDraft: 'Save as Draft',
-    draft: 'Draft'
+    draft: 'Draft',
+    googlepay: 'Google Pay',
+    applepay: 'Apple Pay'
 }

@@ -20,7 +20,7 @@ class AdministrationForm extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      schoolHomerooms: [],
+      schoolHomerooms: []
     };
   }
 
@@ -154,8 +154,8 @@ class AdministrationForm extends Component {
                               onChange={(e) => { this._handleInputChange(e) }}
                               value={adminUser.gender || ''}>
                               <MenuItem value={null} primarytext=""/>
-                              <MenuItem value='1'>{t('male')}</MenuItem>
-                              <MenuItem value='0'>{t('female')}</MenuItem>
+                              <MenuItem value='male'>{t('male')}</MenuItem>
+                              <MenuItem value='female'>{t('female')}</MenuItem>
                           </MetronicSelect>
                           {errors && errors.get('gender') && <div className="form-control-feedback error">{ errors.get('gender').get(0) }</div>}
                       </div>
