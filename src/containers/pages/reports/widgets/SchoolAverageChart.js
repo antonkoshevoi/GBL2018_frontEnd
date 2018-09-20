@@ -66,28 +66,34 @@ class SchoolAverageChart extends Component {
   render() {
     const { t, loading, data } = this.props;    
 
+    const averageGrade  =  data.averageGrade || 0;
+    const completed     = data.completed || 0;
+    const inProgress    = data.inProgress || 0;
+    const notStarted    = data.notStarted || 0;   
+    
     const progress = [
-      {color: "#79c942", label: t('complete'), value: data.completed},
-      {color: "#ff931e", label: t('inProgress'), value: data.inProgress},
-      {color: "#dee6e9", label: t('notStarted'), value: data.notStarted}
+      {color: "#79c942", label: t('complete'), value: completed},
+      {color: "#ff931e", label: t('inProgress'), value: inProgress},
+      {color: "#dee6e9", label: t('notStarted'), value: notStarted}
     ];
+    
 
     const progressChartData = {
       datasets: [{
-        data: [+data.completed, +data.inProgress, +data.notStarted],
+        data: [+completed, +inProgress, +notStarted],
         backgroundColor: ['#79c942', '#ff931e', '#dee6e9']
       }],
       labels: [t('complete'), t('inProgress'), t('notStarted')]
     };
 
     const performance = [
-      {color: "#79c942", label: t('correct'), value: data.averageGrade},
-      {color: "#fe1d25", label: t('incorrect'), value: 100 - Math.round(data.averageGrade)},
+      {color: "#79c942", label: t('correct'), value: averageGrade},
+      {color: "#fe1d25", label: t('incorrect'), value: 100 - Math.round(averageGrade)}
     ];
 
     const performanceChartData = {
       datasets: [{
-        data: [+data.averageGrade, 100 - Math.round(data.averageGrade)],
+        data: [+averageGrade, 100 - Math.round(averageGrade)],
         backgroundColor: ['#79c942', '#fe1d25']
       }],
       labels: [t('correct'), t('incorrect')]
@@ -97,7 +103,7 @@ class SchoolAverageChart extends Component {
       <div className="small-card-content">
         <div className="small-card">
           {loading && <div className="text-center col-md-12"><CircularProgress color="primary"/></div>}
-          {!loading && <div className="row">
+          {!loading && data && <div className="row">
             <div className="col-md-5 pie-block school-average-margins">
               <Pie data={performanceChartData} options={this.options} width={100} height={100}/>
             </div>
@@ -113,7 +119,7 @@ class SchoolAverageChart extends Component {
         </div>
         <div className="small-card">
           {loading && <div className="text-center col-md-12"><CircularProgress color="primary"/></div>}
-          {!loading && <div className="row">
+          {!loading && data && <div className="row">
             <div className="col-md-5 pie-block school-average-margins">
               <Pie data={progressChartData} options={this.options} width={100} height={100}/>
             </div>

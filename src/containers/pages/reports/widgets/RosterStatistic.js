@@ -5,6 +5,7 @@ import Card from "../../../../components/ui/Card";
 import { CircularProgress } from '@material-ui/core';
 import {selectRosterStatisticRequest} from "../../../../redux/reports/dashboard/selectors";
 import {getRosterStatistic} from "../../../../redux/reports/dashboard/actions";
+import HasRole from "../../../middlewares/HasRole";
 
 class RosterStatistic extends Component {
 
@@ -28,9 +29,8 @@ class RosterStatistic extends Component {
       <Card
         title={t('roster')}
         className="profile-card"
-        avatar={success && data.school.avatar ? data.school.avatar : ''}
         iconBackground="circle-background"
-        icon={'fa fa-institution'}>
+        icon="fa fa-institution">
         <div className="m-widget1 m-widget1--paddingless">
           <div className="m-widget1 m-widget1--paddingless">
             <div className="m-widget1__item">
@@ -41,7 +41,7 @@ class RosterStatistic extends Component {
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
                       { !success && <CircularProgress size={15} color="primary"/> }
-                      { !loading && data.studentsCount }
+                      { !loading && (data.studentsCount || 0) }
                   </span>
                 </div>
               </div>
@@ -54,7 +54,7 @@ class RosterStatistic extends Component {
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
                       { !success && <CircularProgress size={15} color="primary"/> }
-                      { !loading && data.classroomsCount }
+                      { !loading && (data.classroomsCount || 0) }
                   </span>
                 </div>
               </div>
@@ -67,11 +67,12 @@ class RosterStatistic extends Component {
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
                       { !success && <CircularProgress size={15} color="primary"/> }
-                      { !loading && data.homeroomsCount }
+                      { !loading && (data.homeroomsCount || 0) }
                   </span>
                 </div>
               </div>
             </div>
+            <HasRole roles={['Principal', 'Administrator', 'Superadministrator']}>
             <div className="m-widget1__item">
               <div className="row m-row--no-padding align-items-center">
                 <div className="col">
@@ -80,11 +81,13 @@ class RosterStatistic extends Component {
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
                       { !success && <CircularProgress size={15} color="primary"/> }
-                    { !loading && data.teachersCount }
+                    { !loading && (data.teachersCount || 0) }
                   </span>
                 </div>
               </div>
             </div>
+            </HasRole>
+            <HasRole roles={['Principal', 'Administrator', 'Superadministrator']}>
             <div className="m-widget1__item">
               <div className="row m-row--no-padding align-items-center">
                 <div className="col">
@@ -93,11 +96,12 @@ class RosterStatistic extends Component {
                 <div className="col m--align-right">
                   <span className="m-widget1__number m--font-brand">
                       { !success && <CircularProgress size={15} color="primary"/> }
-                    { !loading && data.adminsCount }
+                    { !loading && (data.adminsCount || 0) }
                   </span>
                 </div>
               </div>
             </div>
+          </HasRole>
           </div>
         </div>
       </Card>
