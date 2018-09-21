@@ -53,8 +53,8 @@ class Courses extends Component {
                 className="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x main-tabs "
                 value={this.state.activeTab}
                 onChange={this.handleChange}>
-                <Tab className="tab-header-item" value="1" label={t('courses')} />
-                <Tab className="tab-header-item" value="2" label={t('invitations')} />
+                <Tab value="1" label={t('courses')} />
+                <Tab value="2" label={t('invitations')} />
               </Tabs>
             </div>
             <div className="m-portlet__head-tools">

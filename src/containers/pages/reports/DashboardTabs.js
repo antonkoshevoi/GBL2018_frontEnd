@@ -10,6 +10,7 @@ import {
   selectClassroomsRequest, selectHomeroomsRequest, selectStudentsRequest
 } from "../../../redux/reports/dashboard/selectors";
 import {getClassrooms, getHomerooms, getStudents} from "../../../redux/reports/dashboard/actions";
+import StudentsGrid from "./widgets/StudentsGrid";
 
 function TabContainer(props) {
   return (
@@ -79,43 +80,7 @@ class DashboardTabs extends Component {
   }
 
   _renderStudents() {
-    const { goTo, t } = this.props;
-    const students = this.props.getStudentsRequest.get('records').toJS();
-    const defaultAvatar = '//s3.amazonaws.com/37assets/svn/765-default-avatar.png';
-
-    if (this.props.getStudentsRequest.get('success') && !students.length) {
-      return this._renderEmptyDataMsg(t('noStudents'));
-    }
-
-    return students.map(function (student, i) {
-      return (
-        <GridListTile key={i} className="grid-tile" onClick={() => { goTo(`/reports/students/${student.id}`); }} style={{ cursor: 'pointer' }}>
-
-          <img src={(!student.avatar) ? defaultAvatar : student.avatar} alt={student.firstName}/>
-          <GridListTileBar
-            className="myGridTileBar"
-            title={(student.firstName || student.lastName) ? student.firstName + " " + student.lastName : student.username}
-            subtitle={(
-              <div>
-                <span className="text-right d-block">{Math.round(student.passRate)} %</span>
-                <div className="progress m-progress--sm">
-                  <div title={t('completed')} className="progress-bar bg-success" role="progressbar" style={{width: student.completed + '%'}}></div>
-                  <div title={t('inProgress')} className="progress-bar bg-warning" role="progressbar" style={{width: student.inProgress + '%'}}></div>
-                </div>
-                <br/>
-                <div className="progress m-progress--sm">
-                  <div title={t('averageGrade')} className="progress-bar bg-success" role="progressbar" style={{width: student.averageGrade + '%'}}></div>
-                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - Math.round(student.averageGrade)) + '%'}}></div>
-                </div>
-              </div>
-            )}
-            actionIcon={
-              <IconButton color="default"></IconButton>
-            }
-          />
-        </GridListTile>
-      )
-    })
+        return <StudentsGrid students={this.props.getStudentsRequest.get('records').toJS()} hideHeader={true} />
   }
 
   _renderHomerooms() {
@@ -129,7 +94,6 @@ class DashboardTabs extends Component {
     return homerooms.map(function (homeroom, i) {
       return (
         <GridListTile key={i} className="grid-tile" onClick={() => { goTo(`/reports/homerooms/${homeroom.id}`); }} style={{ cursor: 'pointer' }}>
-
           <img src={homeroom.avatar} alt={homeroom.name}/>
           <GridListTileBar
             className="myGridTileBar"
@@ -198,62 +162,34 @@ class DashboardTabs extends Component {
     const { value, cols, tabCentered, tabFullWidth } = this.state;
     const { t } = this.props;
 
-    return (
-      <div className="m--margin-top-40">
-        <div className="m-portlet  m-portlet--info">
-          <div className="m-portlet__head d-inline-block border-b-blue">
-            <div className="row">
-              <div className="m-portlet__head-tools text-left col-sm-8">
-                <Tabs
-                  className="main-tabs"
+    return (           
+      <div className="m--margin-top-25">
+        <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
+          <div className="m-portlet__head d-flex justify-content-between align-items-center">
+            <div className="m-portlet__head-caption col-sm-4">
+              <div className="m-portlet__head-title">                
+              <Tabs                  
                   value={this.state.value}
                   onChange={this.handleChange}
-                  scrollable={true}
+                  scrollable={false}
                   centered={tabCentered}
-                  fullWidth={tabFullWidth}
+                  fullWidth={tabFullWidth}              
                 >
                   <Tab className="tab-header-item" value="classRooms" label={t('classrooms')}/>
                   <Tab className="tab-header-item" value="homeRooms" label={t('homerooms')}/>
                   <Tab className="tab-header-item" value="students" label={t('students')}/>
                 </Tabs>
-              </div>
-              <div className="m-portlet__head-tools col-sm-4">
-                <Input
-                  className="portlet-header-input"
-                  id="search"
-                  type='search'
-                  placeholder={t('search')}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton>
-                        <Search/>
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </div>
-            </div>
+                </div>
+            </div>                
           </div>
-          <div className="m-portlet__body" style={{height: "100%"}}>
-            {value === 'students' && <TabContainer>
-              <GridList cellHeight={200} cols={cols}>
-                {this._renderStudents()}
-              </GridList>
-            </TabContainer>}
-            {value === 'classRooms' && <TabContainer>
-              <GridList cellHeight={200} cols={cols}>
-                {this._renderClassrooms()}
-              </GridList>
-
-            </TabContainer>}
-            {value === 'homeRooms' && <TabContainer>
-              <GridList cellHeight={200} cols={cols}>
-                {this._renderHomerooms()}
-              </GridList>
-            </TabContainer>}
+          <div className="m-portlet__body" style={{height: '100%'}}>
+            <TabContainer>
+                {value === 'students' && this._renderStudents() }
+                {value === 'classRooms' && <GridList cellHeight={200} cols={cols}>{this._renderClassrooms()}</GridList> }
+                {value === 'homeRooms' && <GridList cellHeight={200} cols={cols}> {this._renderHomerooms()} </GridList> }
+            </TabContainer>              
           </div>
         </div>
-        <Paper></Paper>
       </div>
     );
   }

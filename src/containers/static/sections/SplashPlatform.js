@@ -105,33 +105,33 @@ class FlipperCards extends Component {
         <div className={`flip-container ${this.state.flipped ? 'hover' : ''}`} onTouchStart={this.handleTouchOnFlip}>
           <div className="flipper">
             <div className="front">
-              <div class="info-box">
-                <span class="circle-icon icon-gurantee icon-align">
+              <div className="info-box">
+                <span className="circle-icon icon-gurantee icon-align">
                   <img src={flippers[this.props.index].icon} alt="" className="flipperIcon"/>
                 </span>
-                <div class="info-line"></div>
-                <h3 class="heading-content">{t(`${this.props.title}.title`)}</h3>
-                <p class="content-about">{t(`${this.props.title}.title`)}</p>
-                <div class="info-line"></div>
+                <div className="info-line"></div>
+                <h3 className="heading-content">{t(`${this.props.title}.title`)}</h3>
+                <p className="content-about">{t(`${this.props.title}.title`)}</p>
+                <div className="info-line"></div>
               </div>
             </div>
 
             <div className="back">
-              <div class="info-box info-content">
-                <div class="info-line"></div>
-                <p class="content-about">
+              <div className="info-box info-content">
+                <div className="info-line"></div>
+                <div className="content-about">
                   {this.props.content.map((items, index) =>
-                    <div>
+                    <div key={index}>
                       <h5>{t(`${this.props.title}.${items.title}`)}</h5>
                       <ul>
-                        {items.contents.map( cItems =>
-                          <li>{t(`${this.props.title}.${cItems}`)}</li>
+                        {items.contents.map((cItems, cIndex)  =>
+                          <li key={cIndex}>{t(`${this.props.title}.${cItems}`)}</li>
                         )}
                       </ul>
                     </div>
                   )}
-                </p>
-                <div class="info-line"></div>
+                </div>
+                <div className="info-line"></div>
               </div>
             </div>
           </div>
@@ -140,7 +140,6 @@ class FlipperCards extends Component {
     )
   }
 }
-
 
 class SplashPlatform extends Component {
   render() {

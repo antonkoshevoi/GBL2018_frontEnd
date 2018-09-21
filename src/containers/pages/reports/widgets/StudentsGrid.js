@@ -52,7 +52,7 @@ class StudentsGrid extends Component {
             }
             subtitle={(
               <div>
-                <span className="text-right d-block">{student.passRate} %</span>
+                <span className="text-right d-block">{Math.round(student.passRate)} %</span>
                 <div className="progress m-progress--sm">
                   <div title={t('completed')} className="progress-bar bg-success" role="progressbar" style={{width: student.completed + '%'}}></div>
                   <div title={t('inProgress')} className="progress-bar bg-warning" role="progressbar" style={{width: student.inProgress + '%'}}></div>
@@ -75,7 +75,15 @@ class StudentsGrid extends Component {
 
   render() {
     const { cols } = this.state;
-    const { t } = this.props;
+    const { t, hideHeader } = this.props;
+    
+    const grid = <GridList cellHeight={250} cols={cols}>
+        {this._renderStudents()}
+    </GridList>;
+    
+    if (hideHeader) {
+        return grid;
+    }
 
     return (
       <div className="m--margin-top-25">
@@ -87,9 +95,7 @@ class StudentsGrid extends Component {
             </div>                
           </div>
           <div className="m-portlet__body" style={{height: '100%'}}>
-            <GridList cellHeight={250} cols={cols}>
-                {this._renderStudents()}
-            </GridList>
+              {grid}
           </div>
         </div>
       </div>  
