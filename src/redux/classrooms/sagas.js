@@ -6,7 +6,7 @@ import {
   BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL,
   ASSIGN_STUDENT_SUCCESS, ASSIGN_STUDENT_FAIL, ASSIGN_DEMO_STUDENT_SUCCESS, ASSIGN_DEMO_STUDENT_FAIL,
   GET_RECORD_FOR_ASSIGN_STUDENTS_FAIL, GET_CLASSROOM_SCHEDULE_FAIL, CLASSROOM_SCHEDULE_LESSON_FAIL, UPDATE_CLASSROOM_SCHEDULE_FAIL, ASSIGN_COURSE_CREDIT_FAIL,
-  UPDATE_CLASSROOM_SCHEDULE_SUCCESS
+  UPDATE_CLASSROOM_SCHEDULE_SUCCESS, ASSIGN_COURSE_CREDIT_SUCCESS
 } from './actions';
 import {yieldErrorToasts, yieldSuccessToasts} from '../../helpers/utils';
 import i18n from '../../configs/i18n';
@@ -24,7 +24,8 @@ const classroomsSagas = all([
     [DELETE_SUCCESS]: i18n.t('messages:deleted'),
     [ASSIGN_STUDENT_SUCCESS]: i18n.t('messages:classrooms:assigned:students'),
     [ASSIGN_DEMO_STUDENT_SUCCESS]: i18n.t('messages:classrooms:assigned:demoStudent'),
-    [UPDATE_CLASSROOM_SCHEDULE_SUCCESS]: i18n.t('messages:classrooms:scheduleUpdated')
+    [UPDATE_CLASSROOM_SCHEDULE_SUCCESS]: i18n.t('messages:classrooms:scheduleUpdated'),
+    [ASSIGN_COURSE_CREDIT_SUCCESS]: i18n.t('messages:courseCreditAssigned')
   }),
   yieldErrorToasts([
     GET_RECORDS_FAIL,

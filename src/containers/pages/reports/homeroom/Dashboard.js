@@ -43,7 +43,7 @@ class Dashboard extends Component {
               </div>
             </div>
           </div>
-          <div className="reports-flex-row">
+          <div className="row">
             <div className="col-sm-12 col-md-6 col-lg-3">
               <RosterStatistic homeroomId={homeroomId}/>
             </div>
@@ -56,8 +56,6 @@ class Dashboard extends Component {
             <div className="col-sm-12 col-md-6 col-lg-3">
               <LineChart homeroomId={homeroomId}/>
             </div>
-          </div>
-          <div className="row">
             <div className="col-md-12">
                 {studentsRequest.get('success') && <StudentsGrid students={studentsRequest.get('records').toJS()}/>}
             </div>

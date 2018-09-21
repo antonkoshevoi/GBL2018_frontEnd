@@ -35,5 +35,6 @@ export default {
   scapTemplateUpdated: 'S-Cap template successfully updated',
   scapTemplateTeachersAssigned: 'S-Cap template is shared to selected teachers',
   scapScoresAdded: 'S-Cap scores added',
-  scapScoresUpdated: 'S-Cap scores updated'
+  scapScoresUpdated: 'S-Cap scores updated',
+  courseCreditAssigned: 'Student successfully enrolled to the course'
 }

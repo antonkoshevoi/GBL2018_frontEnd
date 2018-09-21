@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
   DialogContent, FormControl, InputLabel, FormHelperText,
-  Icon,
-  Toolbar, Typography, MenuItem, Select, Paper, FormGroup,
+  Icon, Toolbar, Typography, MenuItem, Select, FormGroup,
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
@@ -100,40 +99,36 @@ class AssignStudentModal extends Component {
           </Toolbar>
         </AppBar>
 
-        <DialogContent className='m--margin-top-25'>
-        
-        <div className='row'>
-          <Paper className='full-width' style={{boxShadow:'0 0 0 0'}}>            
-            <FormGroup row style={{minWidth: '500px'}}>
-                <div className='col-sm-6 col-lg-6 m-auto'>
-                {course &&
-                    <div className="text-center">
-                      <img alt={course.title} src={course.image} width={70}/>
-                      <p className='m--margin-top-25'><strong>{course.title}</strong></p>
-                    </div>}
-                </div>
-                <div className='col-sm-6 col-lg-6 m-auto'>    
-                    <FormControl className='full-width form-inputs'>
-                      <InputLabel htmlFor='studentId' shrink={!!this.state.studentId}>{t('selectStudent')}</InputLabel>
-                      <Select
-                        primarytext={t('selectStudent')}
-                        id='studentId'
-                        name='studentId'
-                        value={this.state.studentId}
-                        onChange={(e) => {
-                          this._handleInputChange(e)
-                        }}> 
-                        <MenuItem value={null} primarytext=""/>
-                        {this._renderStudents()}
-                      </Select>
-                      {errors && errors.get('studentId') &&
-                      <FormHelperText error>{errors.get('studentId').get(0)}</FormHelperText>}
-                    </FormControl>            
-                  </div>
-            </FormGroup>
-          </Paper>
-        </div>
-        
+        <DialogContent className='m--margin-top-25'>        
+            <div className='row'>                    
+                <FormGroup row style={{minWidth: '500px'}}>
+                    <div className='col-sm-6 col-lg-6 m-auto'>
+                    {course &&
+                        <div className="text-center">
+                          <img alt={course.title} src={course.image} width={70}/>
+                          <p className='m--margin-top-25'><strong>{course.title}</strong></p>
+                        </div>}
+                    </div>
+                    <div className='col-sm-6 col-lg-6 m-auto'>    
+                        <FormControl className='full-width form-inputs'>
+                          <InputLabel htmlFor='studentId' shrink={!!this.state.studentId}>{t('selectStudent')}</InputLabel>
+                          <Select
+                            primarytext={t('selectStudent')}
+                            id='studentId'
+                            name='studentId'
+                            value={this.state.studentId}
+                            onChange={(e) => {
+                              this._handleInputChange(e)
+                            }}> 
+                            <MenuItem value={null} primarytext=""/>
+                            {this._renderStudents()}
+                          </Select>
+                          {errors && errors.get('studentId') &&
+                          <FormHelperText error>{errors.get('studentId').get(0)}</FormHelperText>}
+                        </FormControl>            
+                      </div>
+                </FormGroup>          
+            </div>       
         </DialogContent>
         
         <Divider className='full-width'/>

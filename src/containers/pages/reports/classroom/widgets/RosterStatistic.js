@@ -33,7 +33,8 @@ class RosterStatistic extends Component {
       <Card
         title={success ? data.classroom.crmName : ''}
         className="profile-card"
-        avatar={success ? data.classroom.avatar : ''}>
+        iconBackground="circle-background"
+        icon="fa fa-institution">
         <div className="m-widget1 m-widget1--paddingless">
           <div className="m-widget1 m-widget1--paddingless">
             <div className="m-widget1__item">

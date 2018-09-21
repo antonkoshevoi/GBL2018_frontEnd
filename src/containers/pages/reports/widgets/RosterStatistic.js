@@ -33,6 +33,21 @@ class RosterStatistic extends Component {
         icon="fa fa-institution">
         <div className="m-widget1 m-widget1--paddingless">
           <div className="m-widget1 m-widget1--paddingless">
+          <HasRole roles={['Superadministrator', 'Superintendent']}>
+            <div className="m-widget1__item">
+              <div className="row m-row--no-padding align-items-center">
+                <div className="col">
+                  <h3 className="m-widget1__title">{t('schools')}</h3>
+                </div>
+                <div className="col m--align-right">
+                  <span className="m-widget1__number m--font-brand">
+                      { !success && <CircularProgress size={15} color="primary"/> }
+                      { !loading && (data.schoolsCount || 0) }
+                  </span>
+                </div>
+              </div>
+            </div>          
+          </HasRole>
             <div className="m-widget1__item">
               <div className="row m-row--no-padding align-items-center">
                 <div className="col">
