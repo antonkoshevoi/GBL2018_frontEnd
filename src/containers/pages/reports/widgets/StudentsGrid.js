@@ -22,11 +22,11 @@ class StudentsGrid extends Component {
     if (window.innerWidth <= 768) {      
       this.setState({cols: 2});
     } else if (window.innerWidth > 767 && window.innerWidth <= 1024) {
-      this.setState({cols: 3});
-    } else if (window.innerWidth > 1024 && window.innerWidth <= 1367) {
       this.setState({cols: 4});
-    } else if (window.innerWidth > 1367) {
+    } else if (window.innerWidth > 1024 && window.innerWidth <= 1367) {
       this.setState({cols: 6});
+    } else if (window.innerWidth > 1367) {
+      this.setState({cols: 8});
     }
   }
 
@@ -78,7 +78,7 @@ class StudentsGrid extends Component {
     const { t } = this.props;
 
     return (
-      <div className="m--margin-top-40">
+      <div className="m--margin-top-25">
         <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
           <div className="m-portlet__head d-flex justify-content-between align-items-center">
             <div className="m-portlet__head-caption col-sm-4">

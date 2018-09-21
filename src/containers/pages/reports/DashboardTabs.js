@@ -7,8 +7,7 @@ import { Search } from "@material-ui/icons";
 import {connect} from "react-redux";
 import {translate} from 'react-i18next';
 import {
-  selectClassroomsRequest, selectHomeroomsRequest,
-  selectStudentsRequest
+  selectClassroomsRequest, selectHomeroomsRequest, selectStudentsRequest
 } from "../../../redux/reports/dashboard/selectors";
 import {getClassrooms, getHomerooms, getStudents} from "../../../redux/reports/dashboard/actions";
 
@@ -98,7 +97,7 @@ class DashboardTabs extends Component {
             title={(student.firstName || student.lastName) ? student.firstName + " " + student.lastName : student.username}
             subtitle={(
               <div>
-                <span className="text-right d-block">{student.passRate} %</span>
+                <span className="text-right d-block">{Math.round(student.passRate)} %</span>
                 <div className="progress m-progress--sm">
                   <div title={t('completed')} className="progress-bar bg-success" role="progressbar" style={{width: student.completed + '%'}}></div>
                   <div title={t('inProgress')} className="progress-bar bg-warning" role="progressbar" style={{width: student.inProgress + '%'}}></div>
@@ -167,9 +166,8 @@ class DashboardTabs extends Component {
     }
 
     return classrooms.map(function (classroom, i) {
-      return (
+      return (             
         <GridListTile key={i} className="grid-tile" onClick={() => { goTo(`/reports/classrooms/${classroom.id}`); }} style={{ cursor: 'pointer' }}>
-
           <img src={classroom.avatar} alt={classroom.crmName}/>
           <GridListTileBar
             className="myGridTileBar"
@@ -201,7 +199,7 @@ class DashboardTabs extends Component {
     const { t } = this.props;
 
     return (
-      <div className="m--margin-top-50">
+      <div className="m--margin-top-40">
         <div className="m-portlet  m-portlet--info">
           <div className="m-portlet__head d-inline-block border-b-blue">
             <div className="row">

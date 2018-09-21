@@ -459,5 +459,6 @@ export default {
     draft: 'Draft',
     googlepay: 'Google Pay',
     applepay: 'Apple Pay',
-    Superadministrator: 'Super Admin'
+    Superadministrator: 'Super Admin',
+    schools: 'Schools'
 }
