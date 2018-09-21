@@ -35,6 +35,7 @@ class EditAutoClassroomModal extends Component {
     super(props);
     this.state = {
       id: undefined,
+      schoolTeachers: [],
       taskConfig: {
         autoCreateTask: {
           frequencyId: 1,
@@ -127,9 +128,8 @@ class EditAutoClassroomModal extends Component {
   _onSubmit(e) {
     e.preventDefault();
     const {taskConfig} = this.state;
-    console.log('_onSubmit', taskConfig);
-    this.props.update(taskConfig.crsId, taskConfig);
-    // this.props.resetUpdateRequest();
+    
+    this.props.update(taskConfig.crsId, taskConfig);    
   };
 
   _renderTeachers() {

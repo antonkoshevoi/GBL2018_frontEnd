@@ -10,8 +10,8 @@ import {getCartRecords} from "../../redux/store/actions";
 import {selectCartRecords} from "../../redux/store/selectors";
 import Settings from "../pushers/Settings";
 import TabMenu from "../pushers/TabMenu";
-import {getSchool} from "../../redux/schools/actions";
-import {selectSchool} from "../../redux/schools/selectors";
+import {selectGetUserRequest, selectUserData} from "../../redux/user/selectors";
+
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 
 const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
@@ -29,10 +29,9 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    const { getSchool, getCartRecords, auth} = this.props;
+    const { getCartRecords, auth} = this.props;
     
-    if (auth.get('isLoggedIn')) {
-        getSchool();
+    if (auth.get('isLoggedIn')) {       
         getCartRecords();
     }
     window.addEventListener('scroll',this.setHeaderPosition.bind(this));    
@@ -61,10 +60,9 @@ class Header extends Component {
   }
 
   _renderHeader() {
-    const {logout, hideMenu, cartRecords, auth} = this.props;
-    const school = this.props.schoolRequest.get('record').toJS();
+    const {logout, hideMenu, cartRecords, userRequest, auth} = this.props;    
     const {headerPosition} = this.state;
-    
+    const user = this.props.user.toJS();    
     return (
       <header className="m-grid__item  m-header " style={{top:-headerPosition}} ref="header" data-minimize-offset="200" data-minimize-mobile-offset="200">
         <div className="m-container general-header m-container--fluid m-container--full-height">
@@ -85,9 +83,9 @@ class Header extends Component {
               </button>
 
               <div className="d-flex justify-content-center headerSchoolName align-items-center flex-1 hidden-sm">
-                <h4 style={{color: '#777'}}>
-                  {school.schName}
-                </h4>
+                {userRequest.get('success') && <h4 style={{color: '#777'}}>
+                  {user.school ? user.school.schName : ''}
+                </h4>}
               </div>
 
               <div id="m_header_topbar" className="m-topbar  m-stack m-stack--ver m-stack--general">
@@ -134,7 +132,8 @@ Header = connect(
   (state) => ({
     auth: state.auth,
     cartRecords: selectCartRecords(state),        
-    schoolRequest: selectSchool(state)
+    user: selectUserData(state),
+    userRequest: selectGetUserRequest(state)
   }),
   (dispatch) => ({
     logout: () => {
@@ -143,7 +142,7 @@ Header = connect(
     getCartRecords: () => {
       dispatch(getCartRecords())
     },
-    getSchool: () => { dispatch(getSchool()) },
+   // getSchool: () => { dispatch(getSchool()) },
   })
 )(Header);
 

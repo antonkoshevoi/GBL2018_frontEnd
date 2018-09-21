@@ -140,7 +140,7 @@ class Details extends Component {
                       </div>
                       {record.get('videoLink') &&
                       <div className="col-md-12 m--margin-top-15">
-                        <iframe className="full-width mainVideo" width={640} height={360} src={record.get('videoLink')}></iframe>
+                        <iframe title={record.get('title')} className="full-width mainVideo" width={640} height={360} src={record.get('videoLink')}></iframe>
                       </div>}
                     </div>
                   </div>

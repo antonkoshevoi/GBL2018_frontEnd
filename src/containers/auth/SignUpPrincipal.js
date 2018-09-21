@@ -106,38 +106,9 @@ class SignUpPrincipal extends Component {
     });
   }
 
-  _rotateImage(angle = 0){
-    this.cropper.rotate(++angle)
-  }
-
-  _zoomIn(){
-    this.cropper.zoom(0.1)
-  }
-
-  _zoomOut() {
-    this.cropper.zoom(-0.1)
-  }
-
   _zoom(e){
     this.setState({'zoom':e.target.value});
     this.cropper.zoomTo(e.target.value)
-  }
-
-  _reverseImage(scale) {
-    if (scale === 'vertical') {
-      if (this.cropper.cropper.imageData.scaleY == 1) {
-        this.cropper.scaleY(-1)
-      } else {
-        this.cropper.scaleY(1)
-      }
-
-    } else {
-      if (this.cropper.cropper.imageData.scaleX == 1) {
-        this.cropper.scaleX(-1)
-      } else {
-        this.cropper.scaleX(1)
-      }
-    }
   }
 
   _renderCountries() {

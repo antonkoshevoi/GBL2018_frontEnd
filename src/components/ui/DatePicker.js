@@ -34,7 +34,6 @@ class DatePicker extends PureComponent {
               onChange={(m) => onChange(this._convertReturnValue(m))}
               clearable
               autoOk={true}
-              returnMoment={false}
               ref={(node) => { this.picker = node; }}
               invalidLabel=""
               format={format ? format : 'YYYY-MM-DD'}

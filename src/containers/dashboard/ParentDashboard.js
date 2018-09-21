@@ -138,7 +138,7 @@ class ParentDashboard extends Component {
                 </div>
                 <div className="progress m-progress--sm" style={{minWidth: 110, marginLeft: 5}}>
                   <div title={t('averageGrade')} className="progress-bar bg-success" role="progressbar" style={{width: student.averageGrade + '%'}}></div>
-                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(student.averageGrade)) + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - Math.round(student.averageGrade)) + '%'}}></div>
                 </div>
               </div>
             </div>
@@ -234,7 +234,7 @@ ParentDashboard = connect(
   (state) => ({
     parentStudents: selectRecords(state),
     getParentStudentsRequest: selectGetRecordsRequest(state),
-    records: storeItems(state),
+    records: storeItems(state)
 
   }),
   (dispatch) => ({
@@ -246,7 +246,7 @@ ParentDashboard = connect(
     },
     getRecords: (params = {type: 'recent'}) => {
       dispatch(getParentRecords(params))
-    },
+    }
   })
 )(ParentDashboard);
 

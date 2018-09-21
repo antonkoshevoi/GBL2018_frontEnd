@@ -16,7 +16,7 @@ class PassRate extends Component {
     return (
       <Card title={t('passRate')} icon="flaticon-list-2" className='passRateCard'>
         <h1  className="d-flex justify-content-center align-items-center absolute-center" style={{fontSize:'7rem',color:'rgb(0, 128, 0)'}}>
-          {loading ? <CircularProgress color="primary"/> : (data.passRate + '%')}          
+          {loading ? <CircularProgress color="primary"/> : ((data.passRate || 0) + '%')}          
         </h1>
       </Card>
     );
