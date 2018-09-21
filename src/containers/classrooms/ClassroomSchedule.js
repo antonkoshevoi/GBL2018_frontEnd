@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { Button, Select, MenuItem, FormHelperText, Radio, FormControlLabel } from '@material-ui/core';
 import DatePicker from '../../components/ui/DatePicker';
-import { HeadRow, Row, Table, Tbody, Td, Th, Thead, TablePreloader } from '../../components/ui/table';
+import { HeadRow, Row, Table, Tbody, Td, Th, Thead } from '../../components/ui/table';
+import Loader from '../../components/layouts/Loader';
 import { connect } from 'react-redux';
 import { selectGetScheduleRequest, selectUpdateScheduleRequest } from '../../redux/classrooms/selectors';
 import { getSchedule , updateSchedule} from '../../redux/classrooms/actions';
@@ -138,11 +139,11 @@ class ClassroomSchedule extends Component {
                                     <div>
                                         <FormControlLabel 
                                             label={t('unit')}
-                                            control={<Radio name="scheduleType" checked={this.state.scheduleType == 'unit'} onChange={(e) => {this._handleInputChange(e)}} value="unit" />}          
+                                            control={<Radio name="scheduleType" checked={this.state.scheduleType === 'unit'} onChange={(e) => {this._handleInputChange(e)}} value="unit" />}          
                                         />                           
                                         <FormControlLabel 
                                             label={t('lesson')}
-                                            control={<Radio name="scheduleType" checked={this.state.scheduleType == 'lesson'} onChange={(e) => {this._handleInputChange(e)}} value="lesson" />}          
+                                            control={<Radio name="scheduleType" checked={this.state.scheduleType === 'lesson'} onChange={(e) => {this._handleInputChange(e)}} value="lesson" />}          
                                         />
                                     </div>
                                     {errors && errors.get('scheduleType') &&  <FormHelperText error>{errors.get('scheduleType').get(0)}</FormHelperText>}                                    
@@ -199,7 +200,8 @@ class ClassroomSchedule extends Component {
                         </div>   
                     </div>
                     <div className='m-portlet__body'>
-                        <Table className="unit-table">
+                        {loaded ?
+                            <Table className="unit-table">
                             <Thead>
                                 <HeadRow>
                                     <Th width='50px'>{t('unit')}</Th>
@@ -210,9 +212,9 @@ class ClassroomSchedule extends Component {
                                 </HeadRow>
                             </Thead>
                             <Tbody>                           
-                            {loaded ? this._renderUnits(schedule.units) : <TablePreloader text="Loading..." color="primary"/>}
+                                {this._renderUnits(schedule.units)}
                             </Tbody>
-                        </Table>            
+                        </Table> : <Loader/>}
                     </div>                                        
                 </div>
             </div>

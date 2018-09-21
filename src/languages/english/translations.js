@@ -458,5 +458,6 @@ export default {
     saveAsDraft: 'Save as Draft',
     draft: 'Draft',
     googlepay: 'Google Pay',
-    applepay: 'Apple Pay'
+    applepay: 'Apple Pay',
+    Superadministrator: 'Super Admin'
 }

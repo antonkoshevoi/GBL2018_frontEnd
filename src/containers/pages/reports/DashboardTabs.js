@@ -106,7 +106,7 @@ class DashboardTabs extends Component {
                 <br/>
                 <div className="progress m-progress--sm">
                   <div title={t('averageGrade')} className="progress-bar bg-success" role="progressbar" style={{width: student.averageGrade + '%'}}></div>
-                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(student.averageGrade)) + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - Math.round(student.averageGrade)) + '%'}}></div>
                 </div>
               </div>
             )}
@@ -145,7 +145,7 @@ class DashboardTabs extends Component {
                 <br/>
                 <div className="progress m-progress--sm">
                   <div title={t('averageGrade')} className="progress-bar bg-success" role="progressbar" style={{width: homeroom.averageGrade + '%'}}></div>
-                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(homeroom.averageGrade)) + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - Math.round(homeroom.averageGrade)) + '%'}}></div>
                 </div>
               </div>
             )}
@@ -178,7 +178,7 @@ class DashboardTabs extends Component {
               <div>                
                 <div className="progress m-progress--sm">
                   <div title={t('averageGrade')} className="progress-bar bg-success" role="progressbar" style={{width: classroom.averageGrade + '%'}}></div>
-                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - parseInt(classroom.averageGrade)) + '%'}}></div>
+                  <div title={t('averageGrade')} className="progress-bar bg-danger" role="progressbar" style={{width: (100 - Math.round(classroom.averageGrade)) + '%'}}></div>
                 </div>
                 <br/>
                 <div className="progress m-progress--sm">

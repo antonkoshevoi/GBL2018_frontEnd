@@ -29,7 +29,7 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    const { getSchool, getCartRecords, auth} = this.props;
+    const { getCartRecords, auth} = this.props;
     
     if (auth.get('isLoggedIn')) {       
         getCartRecords();

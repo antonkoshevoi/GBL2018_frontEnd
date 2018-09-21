@@ -52,15 +52,15 @@ class UnassignedCredits extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='100px'>{key + 1}</Td>
-        <Td width="80px">
+        <Td first={true} width='60px'>{key + 1}</Td>
+        <Td width="100px">
           <div >
             <img alt={t('course')} src={record.get('item').get('thumbnail')} width={70}/>
           </div>
         </Td>
-        <Td width='132px'>{record.get('item').get('title')}</Td>
-        <Td width='132px'>{record.get('item').getIn(['resource', 'type'])}</Td>
-        <Td width='132px'>{record.get('quantity')}</Td>
+        <Td width='130px'>{record.get('item').get('title')}</Td>
+        <Td width='150px'>{record.get('item').get('description')}</Td>
+        <Td width='130px'>{record.get('quantity')}</Td>
       </Row>
     ));
   }
@@ -88,11 +88,11 @@ class UnassignedCredits extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th first={true} width='100px'>#</Th>
+                  <Th first={true} width='60px'>#</Th>
                   <Th width='100px'>{t('thumbnail')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['resurce']} name='resource' width='132px'>{t('resource')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['type']} name='type' width='132px'>{t('type')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['count']} name='count' width='132px'>{t('count')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['resurce']} name='resource' width='130px'>{t('resource')}</Th>
+                  <Th width='150px'>{t('description')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['count']} name='count' width='130px'>{t('count')}</Th>
                 </HeadRow>
               </Thead>
               <Tbody>

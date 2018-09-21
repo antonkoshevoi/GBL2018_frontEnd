@@ -13,11 +13,10 @@ import {
   Button,
   Checkbox
 } from '@material-ui/core';
-import {getSchoolTeachers, getSchools, getSchoolHomerooms} from '../../../redux/schools/actions';
+import {getSchoolTeachers, getSchoolHomerooms} from '../../../redux/schools/actions';
 import {
   selectGetSchoolHomeroomsRequest,
-  selectGetSchoolTeachersRequest,
-  selectSchools
+  selectGetSchoolTeachersRequest  
 } from '../../../redux/schools/selectors';
 import DatePicker from '../../../components/ui/DatePicker';
 import CourseModal from '../modals/CourseModal';
@@ -40,7 +39,6 @@ class ClassroomForm extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     classroom: PropTypes.object.isRequired,
-    schools: PropTypes.any,
     errors: PropTypes.any   
   };
 
@@ -55,13 +53,14 @@ class ClassroomForm extends Component {
   }
 
   componentDidMount() {
-    const {getSchoolTeachers, getSchoolHomerooms, getSchools} = this.props;
+    const {getSchoolTeachers, getSchoolHomerooms, classroom} = this.props;
 
     this._setInitialHomerooms();
-
-    getSchools();
-    getSchoolTeachers();
-    getSchoolHomerooms();
+    
+    const params = classroom ? {schoolId: classroom.schoolId} : {};
+    
+    getSchoolTeachers(params);
+    getSchoolHomerooms(params);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -349,20 +348,16 @@ class ClassroomForm extends Component {
 }
 
 ClassroomForm = connect(
-  (state) => ({
-    schools: selectSchools(state),
+  (state) => ({    
     getSchoolTeacherRequest: selectGetSchoolTeachersRequest(state),
     getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state)
   }),
   (dispatch) => ({
-    getSchools: () => {
-      dispatch(getSchools())
+    getSchoolTeachers: (params = {}) => {
+      dispatch(getSchoolTeachers(params))
     },
-    getSchoolTeachers: () => {
-      dispatch(getSchoolTeachers())
-    },
-    getSchoolHomerooms: () => {
-      dispatch(getSchoolHomerooms())
+    getSchoolHomerooms: (params = {}) => {
+      dispatch(getSchoolHomerooms(params))
     }
   })
 )(ClassroomForm);

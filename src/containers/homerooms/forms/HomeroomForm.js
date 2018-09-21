@@ -36,7 +36,7 @@ class HomeroomForm extends Component {
       schoolTeachers: [],
       schoolStudents: [],
       activeTab: 0,
-      studentIds: [],
+      studentIds: []
     };
   }
 
@@ -60,10 +60,12 @@ class HomeroomForm extends Component {
         studentIds: studentIds
       });
     }
+    
+    const params = homeroom.id ? {schoolId: homeroom.schoolId} : {};
 
     getSchools();
-    getSchoolTeachers();
-    getSchoolStudents();
+    getSchoolTeachers(params);
+    getSchoolStudents(params);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -274,8 +276,8 @@ HomeroomForm = connect(
   }),
   (dispatch) => ({
     getSchools: () => { dispatch(getSchools()) },
-    getSchoolTeachers: () => { dispatch(getSchoolTeachers()) },
-    getSchoolStudents: () => { dispatch(getSchoolStudents()) },
+    getSchoolTeachers: (params = {}) => { dispatch(getSchoolTeachers(params)) },
+    getSchoolStudents: (params = {}) => { dispatch(getSchoolStudents(params)) }
   })
 )(HomeroomForm);
 

@@ -30,6 +30,7 @@ class AssignStudentsModal extends Component {
     super(props);
     this.state = {
       id: null,
+      schoolId: null,
       studentIds: []
     };
   }
@@ -52,6 +53,7 @@ class AssignStudentsModal extends Component {
 
       this.setState({
         id: classroom.id,
+        schoolId: classroom.schoolId,
         studentIds: studentIds
       });
     }
@@ -115,6 +117,7 @@ class AssignStudentsModal extends Component {
             <AssignStudentsForm
               onChange={(studentIds) => { this._onChange(studentIds) }}
               studentIds={this.state.studentIds}
+              schoolId={this.state.schoolId}
               errors={errors}/>
           </form>
         </DialogContent>

@@ -19,6 +19,7 @@ class AutoCreate extends Component {
   componentDidMount() {
     this.props.resetUpdateAutoClass();
     this.props.getPublicClassrooms();
+    this.props.getSchoolTeachers();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -49,8 +50,7 @@ class AutoCreate extends Component {
   }
 
   _editRecord (id) {
-    this.props.getSingleRecord(id);
-    this.props.getSchoolTeachers();
+    this.props.getSingleRecord(id);    
   }
 
   _openEditDialog = () => {

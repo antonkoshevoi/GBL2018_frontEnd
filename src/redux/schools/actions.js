@@ -54,33 +54,30 @@ export function update(data, params = {}) {
 /**
  * School Teachers
  */
-export function getSchoolTeachers() {
+export function getSchoolTeachers(params = {}) {
+    params.perPage = 0;
     return {
         types: [GET_SCHOOL_TEACHERS, GET_SCHOOL_TEACHERS_SUCCESS, GET_SCHOOL_TEACHERS_FAIL],
-        promise: (apiClient) => apiClient.get(`schools/teachers`, {
-            perPage: 0
-        })
+        promise: (apiClient) => apiClient.get(`schools/teachers`, params)
     };
 }
 /**
  * School Students
  */
-export function getSchoolStudents() {
+export function getSchoolStudents(params = {}) {
+    params.perPage = 0;
     return {
         types: [GET_SCHOOL_STUDENTS, GET_SCHOOL_STUDENTS_SUCCESS, GET_SCHOOL_STUDENTS_FAIL],
-        promise: (apiClient) => apiClient.get(`schools/students`, {
-            perPage: 0
-        })
+        promise: (apiClient) => apiClient.get(`schools/students`, params)
     };
 }
 /**
  * School Homerooms
  */
-export function getSchoolHomerooms() {
+export function getSchoolHomerooms(params = {}) {
+    params.perPage = 0;
     return {
         types: [GET_SCHOOL_HOMEROOMS, GET_SCHOOL_HOMEROOMS_SUCCESS, GET_SCHOOL_HOMEROOMS_FAIL],
-        promise: (apiClient) => apiClient.get(`schools/homerooms`, {
-            perPage: 0
-        })
+        promise: (apiClient) => apiClient.get(`schools/homerooms`, params)
     };
 }

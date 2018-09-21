@@ -8,22 +8,25 @@ import { selectGetSchoolStudentsRequest } from "../../../redux/schools/selectors
 class AssignStudentsForm extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
+    schoolId: PropTypes.any,
     studentIds: PropTypes.array.isRequired,
     errors: PropTypes.any
   };
 
   constructor (props) {
     super(props);
+    console.log(this.props.classroom);
     this.state = {
       schoolStudents: [],
-      studentIds: this.props.studentIds,
+      schoolId: this.props.schoolId,
+      studentIds: this.props.studentIds
     };
   }
 
   componentDidMount() {
     const { getSchoolStudents } = this.props;
 
-    getSchoolStudents();
+    getSchoolStudents({schoolId: this.state.schoolId});
   }
 
   componentWillReceiveProps(nextProps) {
@@ -101,10 +104,10 @@ class AssignStudentsForm extends Component {
 
 AssignStudentsForm = connect(
   (state) => ({
-    getSchoolStudentsRequest: selectGetSchoolStudentsRequest(state),
+    getSchoolStudentsRequest: selectGetSchoolStudentsRequest(state)
   }),
   (dispatch) => ({
-    getSchoolStudents: () => { dispatch(getSchoolStudents()) },
+    getSchoolStudents: (params = {}) => { dispatch(getSchoolStudents(params)) }
   })
 )(AssignStudentsForm);
 
