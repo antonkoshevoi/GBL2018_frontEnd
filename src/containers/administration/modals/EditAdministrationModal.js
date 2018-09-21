@@ -77,8 +77,8 @@ class EditAdministrationModal extends Component {
     _setCroppedImage(img) {
         this.setState(
             {
-                student: {
-                    ...this.state.student,
+                adminUser: {
+                    ...this.state.adminUser,
                     croppedAvatar: img
                 }
             }
@@ -88,8 +88,8 @@ class EditAdministrationModal extends Component {
     _setImage(img) {
         this.setState(
             {
-                student: {
-                    ...this.state.student,
+                adminUser: {
+                    ...this.state.adminUser,
                     avatar: img
                 }
             }

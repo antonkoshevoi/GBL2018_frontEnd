@@ -79,8 +79,8 @@ class EditTeacherModal extends Component {
     _setCroppedImage(img) {
         this.setState(
             {
-                student: {
-                    ...this.state.student,
+                teacher: {
+                    ...this.state.teacher,
                     croppedAvatar: img
                 }
             }
@@ -90,8 +90,8 @@ class EditTeacherModal extends Component {
     _setImage(img) {
         this.setState(
             {
-                student: {
-                    ...this.state.student,
+                teacher: {
+                    ...this.state.teacher,
                     avatar: img
                 }
             }
