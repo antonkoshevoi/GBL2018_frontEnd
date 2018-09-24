@@ -56,10 +56,11 @@ class Homerooms extends Component {
     this.setState({ editModalIsOpen: false });
   };
 
-  /**
-   *
-   * @private
-   */
+  _recordNumber(key) {
+    const { page, perPage } = this.state;
+    return (key + 1 + ((page - 1) * perPage));
+  } 
+    
   _renderRecords () {
     const { records, t } = this.props;
     const loading = this.props.getRecordsRequest.get('loading');
@@ -78,7 +79,7 @@ class Homerooms extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='60px'>{key + 1}</Td>
+        <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
         <Td width='132px'>{record.get('name')}</Td>
         <HasRole roles={['Superadministrator']}>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>

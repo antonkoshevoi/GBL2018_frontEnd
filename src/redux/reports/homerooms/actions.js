@@ -6,10 +6,6 @@ export const GET_ROSTER_STATISTIC = '[Reports][Homeroom] GET_ROSTER_STATISTIC';
 export const GET_ROSTER_STATISTIC_SUCCESS = '[Reports][Homeroom] GET_ROSTER_STATISTIC_SUCCESS';
 export const GET_ROSTER_STATISTIC_FAIL = '[Reports][Homeroom] GET_ROSTER_STATISTIC_FAIL';
 
-export const GET_STUDENTS = '[Reports][Homeroom] GET_STUDENTS';
-export const GET_STUDENTS_SUCCESS = '[Reports][Homeroom] GET_STUDENTS_SUCCESS';
-export const GET_STUDENTS_FAIL = '[Reports][Homeroom] GET_STUDENTS_FAIL';
-
 /**
  * @param id
  * @param params
@@ -31,17 +27,5 @@ export function getRosterStatistic(id, params = {}) {
   return {
     types: [GET_ROSTER_STATISTIC, GET_ROSTER_STATISTIC_SUCCESS, GET_ROSTER_STATISTIC_FAIL],
     promise: (apiClient) => apiClient.get(`reports/homerooms/roster-statistic/${id}`, params)
-  };
-}
-
-/**
- * @param id
- * @param params
- * @returns {{types: [null,null,null], promise: (function(*))}}
- */
-export function getStudents(id, params = {}) {
-  return {
-    types: [GET_STUDENTS, GET_STUDENTS_SUCCESS, GET_STUDENTS_FAIL],
-    promise: (apiClient) => apiClient.get(`reports/homerooms/students/${id}`, params)
   };
 }

@@ -1,7 +1,6 @@
 import {
   GET_CHARTS_DATA, GET_CHARTS_DATA_SUCCESS, GET_CHARTS_DATA_FAIL,
-  GET_ROSTER_STATISTIC, GET_ROSTER_STATISTIC_SUCCESS, GET_ROSTER_STATISTIC_FAIL,
-  GET_STUDENTS,GET_STUDENTS_SUCCESS, GET_STUDENTS_FAIL
+  GET_ROSTER_STATISTIC, GET_ROSTER_STATISTIC_SUCCESS, GET_ROSTER_STATISTIC_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -19,14 +18,7 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorResponse: null,
     data: {}
-  },
-  getStudentsRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorResponse: null,
-    records: []
-  },
+  }
 });
 
 export default function reducer(state = initialState, action) {
@@ -76,30 +68,6 @@ export default function reducer(state = initialState, action) {
     case GET_ROSTER_STATISTIC_FAIL:
       return state
         .set('getRosterStatisticRequest', state.get('getRosterStatisticRequest')
-          .set('loading', false)
-          .set('fail', true)
-        );
-    /**
-     * Get Students
-     */
-    case GET_STUDENTS:
-      return state
-        .set('getStudentsRequest', state.get('getStudentsRequest')
-          .set('loading', true)
-          .set('success', false)
-          .set('fail', false)
-          .set('records', Immutable.List())
-        );
-    case GET_STUDENTS_SUCCESS:
-      return state
-        .set('getStudentsRequest', state.get('getStudentsRequest')
-          .set('success', true)
-          .set('loading', false)
-          .set('records', Immutable.fromJS(action.result.data))
-        );
-    case GET_STUDENTS_FAIL:
-      return state
-        .set('getStudentsRequest', state.get('getStudentsRequest')
           .set('loading', false)
           .set('fail', true)
         );

@@ -99,10 +99,8 @@ HomeroomsBulkUpload = connect(
   (dispatch) => ({
     getSchools: () => { dispatch(getSchools()) },
     resetBulkUploadRequest: () => { dispatch(resetBulkUploadRequest()) },
-    upload: (file, schoolId) => {
-      dispatch(bulkUpload(file, {
-        schoolId
-      }));
+    upload: (file) => {
+      dispatch(bulkUpload(file));
     }
   })
 )(HomeroomsBulkUpload);

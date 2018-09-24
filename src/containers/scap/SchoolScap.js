@@ -98,6 +98,11 @@ class SchoolScap extends Component {
     _deleteRecord(id) {
         this.props.deleteRecord(id);
     }
+
+    _recordNumber(key) {
+        const { page, perPage } = this.state;
+        return (key + 1 + ((page - 1) * perPage));
+    }    
     
     _renderRecords() {
         const {t} = this.props;
@@ -119,7 +124,7 @@ class SchoolScap extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td first={true} width='60px'>{key + 1}</Td>
+                <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
                 <Td width='132px'>{record.get('title')}</Td>
                 <Td width='100px'>{record.get('questions')}</Td>                                
                 <Td width='100px'>{record.get('teachers')} <AssignButton onClick={() => { this._showAssignModal(record) }} t={t} /></Td>

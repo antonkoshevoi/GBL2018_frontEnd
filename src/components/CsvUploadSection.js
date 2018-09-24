@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { MenuItem } from '@material-ui/core';
-import ConfirmButton from './ui/ConfirmButton';
 import { CSVLink } from 'react-csv';
 import PortletWidgets from './ui/PortletWidgets';
-import LinearProgress from './ui/LinearProgress';
 import PortletErrorsWidgets from './ui/PortletErrorsWidgets';
+import Loader from './layouts/Loader';
 import { translate } from 'react-i18next';
 
 class CsvUploadSection extends Component {
-    static propTypes = {
-        schools: PropTypes.any.isRequired,
+    static propTypes = {        
         onUpload: PropTypes.func.isRequired,
         uploadRequest: PropTypes.any.isRequired
     };
 
-    state = {
-        schoolId: undefined,
+    state = {        
         file: undefined
     };
 
@@ -24,28 +20,15 @@ class CsvUploadSection extends Component {
         this.setState({ school: event.target.value });
     }
 
-    _renderSchools() {
-        const { schools } = this.props;
-
-        return schools.map((school, key) => (
-            <MenuItem key={key} value={school.get('schId')}>
-                {school.get('schName')}
-            </MenuItem>
-        ));
-    }
-
     _handleSchoolChange(e) {
         document.getElementById('file-input').value = '';
 
-        this.setState({
-            schoolId: e.target.value,
+        this.setState({            
             file: undefined
         });
     }
 
-    _handleFileChange(e) {
-      const { schoolRequest } = this.props;
-      const schoolId = schoolRequest.get('record').toJS().schId;
+    _handleFileChange(e) {            
 
       if (typeof e.target.files[0] !== 'undefined') {
             this.setState(
@@ -53,7 +36,7 @@ class CsvUploadSection extends Component {
                     file: e.target.files[0]
                 },
                 () => {
-                    this.props.onUpload(this.state.file, schoolId);
+                    this.props.onUpload(this.state.file);
                 }
             );
         }
@@ -67,20 +50,15 @@ class CsvUploadSection extends Component {
     }
 
     render() {
-        const { uploadRequest,schoolRequest, t } = this.props;
+        const { uploadRequest, t } = this.props;
         
-        const loading = uploadRequest.get('loading');
-        const progress = uploadRequest.get('progress');
-        const cancel = uploadRequest.get('cancel');
-        const uploading = loading && progress < 100;
+        const loading = uploadRequest.get('loading');       
         const success = uploadRequest.get('success');
         const results = uploadRequest.get('results');
         const errors = this._hasErrors(results);
         const csvExampleName = this.props.csvExampleName;
         const csvTemplateHeaders = this.props.csvTemplateHeaders;
-        const csvTemplateData = this.props.csvTemplateData;
-
-        const schoolId = success ? schoolRequest.get('record').toJS().schId : null;
+        const csvTemplateData = this.props.csvTemplateData;      
         
         return (
             <div>
@@ -110,8 +88,8 @@ class CsvUploadSection extends Component {
                             </div>
                         </div>
                         <div className="row" style={{ marginLeft: 0 }}>
-                            <div className={`col-md-6 ${loading || !schoolId ? ' not-allowed' : ''}`}>
-                                <div className={`react-csv-input ${loading || !schoolId ? ' disabled' : 'fdsfsf'}`}>
+                            <div className={`col-md-6 ${loading ? ' not-allowed' : ''}`}>
+                                <div className={`react-csv-input ${loading ? ' disabled' : 'fdsfsf'}`}>
                                     <label>{t('selectCsvFile')}</label>
                                     <input
                                         id="file-input"
@@ -123,26 +101,7 @@ class CsvUploadSection extends Component {
                                 </div>
                             </div>
                         </div>
-                        {loading && (
-                            <div className="row" style={{ marginTop: '10px' }}>
-                                <div className="col-sm-12">
-                                    {!uploading && <LinearProgress color="primary" />}
-                                    {uploading && <LinearProgress mode="determinate" value={progress} />}
-                                    {cancel &&
-                                        uploading && (
-                                            <ConfirmButton
-                                                className="m--margin-top-10 btn mt-btn mt-btn-danger"
-                                                onClick={() => {
-                                                    cancel('canceled by user');
-                                                }}
-                                            >
-                                                {t('cancel')}
-                                                <i className="la la-close m--margin-left-5" />
-                                            </ConfirmButton>
-                                        )}
-                                </div>
-                            </div>
-                        )}
+                        {loading && <Loader /> }
                     </div>
                 </div>
                 <div className="row">

@@ -64,7 +64,12 @@ class TeacherResultsModal extends Component {
             showResultsModal: false,
             selectedItem: null
         });
-    }      
+    }
+    
+    _recordNumber(key) {
+        const { page, perPage } = this.state;
+        return (key + 1 + ((page - 1) * perPage));
+    }    
     
     _renderRecords() {
         const {t, goTo} = this.props;
@@ -85,7 +90,7 @@ class TeacherResultsModal extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td first={true} width='60px'>{key + 1}</Td>
+                <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
                 <Td width='132px'>{record.get('homeroom')}</Td>
                 <Td width='132px'>{record.get('student')}</Td>
                 <Td width='132px'><span className={`m-badge m-badge--brand m-badge--wide ${(record.get('status') === 'completed' ? 'm-badge--success' : '')}`}>{t(record.get('status'))}</span></Td>
