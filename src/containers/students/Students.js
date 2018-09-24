@@ -78,6 +78,7 @@ class Students extends Component {
   }
   _renderRecords () {
     const { records, t } = this.props;
+    const { page, perPage } = this.state;
     const loading = this.props.getRecordsRequest.get('loading');
 
       if (!loading && records.size === 0) {
@@ -94,7 +95,7 @@ class Students extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='60px'>{key + 1}</Td>
+        <Td first={true} width='60px'>{key + 1 + ((page - 1) * perPage)}</Td>
         <Td width='132px'>{record.get('username')}</Td>
         <Td width='132px'>{record.get('firstName')}</Td>
         <Td width='132px'>{record.get('lastName')}</Td>

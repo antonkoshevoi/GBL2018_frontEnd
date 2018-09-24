@@ -4,33 +4,28 @@ import {connect} from "react-redux";
 import LineChart from './widgets/LineChart';
 import PassRate from '../widgets/PassRate';
 import SchoolAverageChart from '../widgets/SchoolAverageChart';
-import StudentsGrid from "../widgets/StudentsGrid";
 import RosterStatistic from './widgets/RosterStatistic';
+import Students from "../widgets/Students";
 import {getCharts} from "../../../../redux/reports/classroom/actions";
 import {selectChartDatatRequest} from "../../../../redux/reports/classroom/selectors";
-import {getStudents} from "../../../../redux/reports/classroom/actions";
-import {selectStudentsRequest} from "../../../../redux/reports/classroom/selectors";
 
 class Dashboard extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      classroomId: null
+      classroomId: this.props.match.params.id
     }
   }
 
-  componentDidMount() {
-    const classroomId = this.props.match.params.id;
-    const { getCharts, getStudents } = this.props;
-    this.setState({classroomId});
-    getCharts(classroomId);   
-    getStudents(classroomId);
+  componentDidMount() {    
+    const { getCharts } = this.props;    
+    getCharts(this.state.classroomId);       
   }
 
   render() {
     const {classroomId} = this.state;
-    const {t, dataRequest, studentsRequest} = this.props;
+    const {t, dataRequest } = this.props;        
 
     return (
       <div className="fadeInLeft animated">
@@ -56,7 +51,19 @@ class Dashboard extends Component {
               <LineChart classroomId={classroomId}/>
             </div>    
             <div className="col-md-12">
-                {studentsRequest.get('success') && <StudentsGrid students={studentsRequest.get('records').toJS()}/>}           
+                <div className="m--margin-top-25">
+                  <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
+                    <div className="m-portlet__head d-flex justify-content-between align-items-center">
+                      <div className="m-portlet__head-caption col-sm-4">
+                        <div className="m-portlet__head-title"><span className="m-portlet__head-icon"><i
+                          className="flaticon-analytics"></i></span><h3 className="m-portlet__head-text">{t('students')}</h3></div>
+                      </div>                
+                    </div>
+                    <div className="m-portlet__body" style={{height: '100%'}}>
+                        <Students filters={{ classroomId: classroomId }} />
+                    </div>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -67,12 +74,10 @@ class Dashboard extends Component {
     
 Dashboard = connect(
   (state) => ({
-    dataRequest: selectChartDatatRequest(state),
-    studentsRequest: selectStudentsRequest(state)
+    dataRequest: selectChartDatatRequest(state)
   }),
   (dispatch) => ({
-    getCharts: (id, params = {}) => { dispatch(getCharts(id, params))},
-    getStudents: (id, params = {}) => { dispatch(getStudents(id, params))}
+    getCharts: (id, params = {}) => { dispatch(getCharts(id, params))}
   })
 )(Dashboard);
 
