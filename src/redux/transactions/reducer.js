@@ -13,11 +13,11 @@ const initialState = Immutable.fromJS({
 
   pagination: {
     page: 1,
-    perPage: 10,
+    perPage: 25,
     total: 0,
     totalPages: 1
   },
-  records: [],
+  records: []
 });
 
 export default function reducer (state = initialState, action) {

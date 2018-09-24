@@ -22,7 +22,7 @@ const initialState = Immutable.fromJS({
     records: Immutable.List(),
     pagination: {
       page: 1,
-      perPage: 10,
+      perPage: 25,
       total: 0,
       totalPages: 1
     }    
@@ -34,7 +34,7 @@ const initialState = Immutable.fromJS({
     records: Immutable.List(),
     pagination: {
       page: 1,
-      perPage: 10,
+      perPage: 25,
       total: 0,
       totalPages: 1
     }    

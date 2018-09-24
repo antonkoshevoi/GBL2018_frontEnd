@@ -78,6 +78,10 @@ class Classrooms extends Component {
     this.setState({ assignStudentsModalIsOpen: false });
   };
 
+  _recordNumber(key) {
+      const { page, perPage } = this.state;
+      return (key + 1 + ((page - 1) * perPage));
+  }
   /**
    *
    * @private
@@ -85,8 +89,9 @@ class Classrooms extends Component {
   _renderRecords () {
     const { records, goTo, t } = this.props;
     const loading = this.props.getRecordsRequest.get('loading');
-
-      if (!loading && records.size === 0) {
+    
+    
+    if (!loading && records.size === 0) {
       return (
         <tr>
           <td>
@@ -100,7 +105,7 @@ class Classrooms extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='60px'>{key + 1}</Td>
+        <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
         <Td width='132px'>
             {record.get('crmName')}
         </Td>

@@ -174,13 +174,14 @@ class DemoCoursesTab extends Component {
     this.setState({ page }, this._getRecords)
   }
 
-  /**
-   *
-   * @private
-   */
+  _recordNumber(key) {
+      const { page, perPage } = this.state;
+      return (key + 1 + ((page - 1) * perPage));
+  }
+  
   _renderRecords () {
     const { records, t } = this.props;
-    const loading = this.props.getRecordsRequest.get('loading');
+    const loading = this.props.getRecordsRequest.get('loading');    
 
     if (!loading && records.size === 0) {
       return (
@@ -196,7 +197,7 @@ class DemoCoursesTab extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='60px'>{key + 1}</Td>
+        <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
         <Td width='132px'>{record.get('crmName')}</Td>
         <HasRole roles={['Superadministrator']}>
             <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>

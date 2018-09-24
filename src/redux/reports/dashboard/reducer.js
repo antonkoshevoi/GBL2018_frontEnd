@@ -27,22 +27,40 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errorResponse: null,
-    records: []
+    records: [],
+    pagination: {
+      page: 1,
+      perPage: 25,
+      total: 0,
+      totalPages: 1
+    }    
   },
   getHomeroomsRequest: {
     loading: false,
     success: false,
     fail: false,
     errorResponse: null,
-    records: []
+    records: [],
+    pagination: {
+      page: 1,
+      perPage: 25,
+      total: 0,
+      totalPages: 1
+    }  
   },
   getClassroomsRequest: {
     loading: false,
     success: false,
     fail: false,
     errorResponse: null,
-    records: []
-  },
+    records: [],
+    pagination: {
+      page: 1,
+      perPage: 25,
+      total: 0,
+      totalPages: 1
+    }  
+  }
 });
 
 export default function reducer(state = initialState, action) {
@@ -88,6 +106,7 @@ export default function reducer(state = initialState, action) {
           .set('success', true)
           .set('loading', false)
           .set('data', Immutable.fromJS(action.result.data))
+          .set('pagination', Immutable.fromJS(action.result.meta.pagination))
         );
     case GET_ROSTER_STATISTIC_FAIL:
       return state
@@ -112,6 +131,7 @@ export default function reducer(state = initialState, action) {
           .set('success', true)
           .set('loading', false)
           .set('records', Immutable.fromJS(action.result.data))
+          .set('pagination', Immutable.fromJS(action.result.meta.pagination))
         );
     case GET_STUDENTS_FAIL:
       return state
@@ -136,6 +156,7 @@ export default function reducer(state = initialState, action) {
           .set('success', true)
           .set('loading', false)
           .set('records', Immutable.fromJS(action.result.data))
+          .set('pagination', Immutable.fromJS(action.result.meta.pagination))
         );
     case GET_HOMEROOMS_FAIL:
       return state
@@ -160,6 +181,7 @@ export default function reducer(state = initialState, action) {
           .set('success', true)
           .set('loading', false)
           .set('records', Immutable.fromJS(action.result.data))
+          .set('pagination', Immutable.fromJS(action.result.meta.pagination))
         );
     case GET_CLASSROOMS_FAIL:
       return state

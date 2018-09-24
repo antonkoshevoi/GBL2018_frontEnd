@@ -20,11 +20,3 @@ export const selectRosterStatisticRequest = createSelector(
   selectHomeroomReportDomain,
   (subState) => subState.get('getRosterStatisticRequest')
 );
-
-/**
- * Students
- */
-export const selectStudentsRequest = createSelector(
-  selectHomeroomReportDomain,
-  (subState) => subState.get('getStudentsRequest')
-);

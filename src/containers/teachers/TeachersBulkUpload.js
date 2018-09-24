@@ -92,10 +92,8 @@ TeachersBulkUpload = connect(
     getSchools: () => { dispatch(getSchools()) },
     getSchool: () => { dispatch(getSchool()) },
     resetBulkUploadRequest: () => { dispatch(resetBulkUploadRequest()) },
-    upload: (file, schoolId) => {
-      dispatch(bulkUpload(file, {
-        schoolId
-      }));
+    upload: (file) => {
+      dispatch(bulkUpload(file));
     }
   })
 )(TeachersBulkUpload);
