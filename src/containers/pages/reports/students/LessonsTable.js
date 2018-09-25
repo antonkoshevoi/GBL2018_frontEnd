@@ -4,7 +4,7 @@ import {translate} from 'react-i18next';
 import {connect} from 'react-redux';
 import Parser from 'html-react-parser';
 import ApiClient from '../../../../services/ApiClient';
-import formTableData from '../../../../services/course-template-manager';
+import formTableData from '../../../../services/CourseTemplate';
 import {selectStudentReportDetailsRequest} from "../../../../redux/reports/students/selectors";
 import {getReportDetails, resetGetReportDetails} from "../../../../redux/reports/students/actions";
 import Loader from "../../../../components/layouts/Loader";
