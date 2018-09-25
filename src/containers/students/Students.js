@@ -83,8 +83,7 @@ class Students extends Component {
   }
   
   _renderRecords () {
-    const { records, t } = this.props;
-    const { page, perPage } = this.state;
+    const { records, t } = this.props;    
     const loading = this.props.getRecordsRequest.get('loading');
 
       if (!loading && records.size === 0) {
@@ -109,7 +108,12 @@ class Students extends Component {
         <HasRole roles={['Superadministrator']}>
             <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
         </HasRole>
-        <Td width='100px'>
+        <Td width='150px'>
+          <NavLink className='link-btn' to={`/reports/students/${record.get('id')}`}>
+            <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-right-5' title={t('viewReport')}>
+              <i className='la la-bar-chart'></i>
+            </button>
+          </NavLink>
           <HasPermission permissions={['[Users][Students][Update][Any]']}>
             <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
           </HasPermission>
@@ -266,7 +270,7 @@ class Students extends Component {
                   <HasRole roles={['Superadministrator']}>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
                   </HasRole>
-                  <Th width='100px'>{t('actions')}</Th>
+                  <Th width='150px'>{t('actions')}</Th>
                 </HeadRow>
               </Thead>
 

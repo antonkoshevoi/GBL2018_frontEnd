@@ -10,13 +10,6 @@ const initialState = Immutable.fromJS({
         fail: false,
         errorResponse: null,
         record: {}
-    },
-    school: {
-        loading: false,
-        success: false,
-        fail: false,
-        errorResponse: null,
-        records: {}
     }
 });
 

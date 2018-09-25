@@ -1,19 +1,15 @@
 import React, {Component} from 'react';
-import {Typography} from '@material-ui/core';
 import {HeadRow, Table, Tbody, Th, Thead} from '../../../../components/ui/table';
 import {translate} from 'react-i18next';
+import {connect} from 'react-redux';
 import Parser from 'html-react-parser';
 import ApiClient from '../../../../services/ApiClient';
 import formTableData from '../../../../services/course-template-manager';
-const apiClient = new ApiClient();
+import {selectStudentReportDetailsRequest} from "../../../../redux/reports/students/selectors";
+import {getReportDetails, resetGetReportDetails} from "../../../../redux/reports/students/actions";
+import Loader from "../../../../components/layouts/Loader";
 
-function TabContainer(props) {
-  return (
-    <Typography component="div">
-      {props.children}
-    </Typography>
-  );
-}
+const apiClient = new ApiClient();
 
 class LessonsTable extends Component {
 
@@ -21,39 +17,53 @@ class LessonsTable extends Component {
     super(props);
     this.state = {
       data: null
-    };
-    this._renderLessonsTables = this._renderLessonsTables.bind(this);
+    };    
   }
 
-  componentDidMount() {
-    const {studentId, classroomId} = this.props;
-    let tableData;
-    apiClient.get(`students/report-details/${studentId}/${classroomId}`).then(data => {
-      let courseTemplate = localStorage.getItem(data.data.course_template);
-      if (!courseTemplate) {
-        apiClient.getJson(data.data.course_template).then((json) => {
-          courseTemplate = json;
-          localStorage.setItem(data.data.course_template, JSON.stringify(courseTemplate));
-          tableData = formTableData(data.data, courseTemplate);
-          this.setState({data: tableData});
+  componentDidMount() {      
+    const {studentId, classroomId, getReport} = this.props;       
+    getReport(studentId, classroomId);
+  }
+  
+  componentWillUnmount() {
+      alert('resetGetReportDetails');
+    this.props.resetGetReportDetails();
+  }  
+  
+  componentWillReceiveProps(nextProps) {
+    const success = this.props.getReportRequest.get('success');
+    const nextSuccess = nextProps.getReportRequest.get('success');
+
+    if (!success && nextSuccess) {
+        let data = nextProps.getReportRequest.get('data').toJS();
+        let courseTemplate = localStorage.getItem(data.course_template);
+        let tableData;
+        
+        if (!courseTemplate) {
+            apiClient.getJson(data.course_template).then((json) => {
+            courseTemplate = json;
+            
+            localStorage.setItem(data.course_template, JSON.stringify(courseTemplate));
+            tableData = formTableData(data, courseTemplate);
+            this.setState({data: tableData});
         });
       } else {
-        courseTemplate = JSON.parse(courseTemplate);
-        tableData = formTableData(data.data, courseTemplate);
-        this.setState({data: tableData});
-      }
-    });
-  }
+            courseTemplate = JSON.parse(courseTemplate);
+            tableData = formTableData(data, courseTemplate);
+            this.setState({data: tableData});
+      }      
+    }      
+  }  
 
   render() {
-    const {data} = this.state;
-    return (data && <TabContainer>
-      {this._renderLessonsTables(data)}
-    </TabContainer>);
-  }
 
-  _renderLessonsTables(data) {
-    const { t } = this.props;
+    const { t, getReportRequest} = this.props;
+    const {data} = this.state;    
+    
+    if (!getReportRequest.get('success') || !data) {
+        return <Loader />
+    }
+    
     return (
       <Table className="unit-table">
         <Thead>
@@ -78,14 +88,15 @@ class LessonsTable extends Component {
           }
           return (
             <tr className="m-datatable__row" style={{height: '64px'}} key={unit.unit_id + '-unitRow'}>
-              <td className="m-datatable__cell rotate" width='50px' rowSpan={unitRowSpan}
-                  key={unit.unit_id + '-unitName'}>
-                <div><span><b>Unit {unitIndex + 1}</b> {unit.unit_name}</span></div>
+              <td className="m-datatable__cell rotate" width='50px' rowSpan={unitRowSpan} key={unit.unit_id + '-unitName'}>
+                <div>
+                    <span><b>Unit {unitIndex + 1}</b> {unit.unit_name}</span>
+                </div>
               </td>
               {unit.lessons.map((lesson, lessonIndex) => {
                 const lessonRowSpan = this.countNumberOfLessonAttempts(lesson) + '';
                 if (lessonRowSpan === '0') {
-                  return (false);
+                    return (false);
                 }
                 return (
                   <tr className="m-datatable__row" style={{height: '64px'}} key={lesson.lesson_id + '-lessonRow'}>
@@ -93,17 +104,16 @@ class LessonsTable extends Component {
                       <p><span class="m-badge m-badge--brand m-badge--wide">{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</span></p>
                       <span style={{width: '193px'}}>{lesson.lesson_name}</span>
                     </td>
-                    <td className="m-datatable__cell text-align-left" width='193px' rowSpan={lessonRowSpan}
-                        key={lesson.lesson_id + '-lessonDesc'}><span
-                      style={{width: '193px'}}>{lesson.lesson_description}</span></td>
+                    <td className="m-datatable__cell text-align-left" width='193px' rowSpan={lessonRowSpan} key={lesson.lesson_id + '-lessonDesc'}>
+                        <span style={{width: '193px'}}>{lesson.lesson_description} +-</span>
+                    </td>
                     {lesson.attempts.map((attempt) => {
-                      return (this.renderAttemptRow(lesson, attempt))
+                        return (this.renderAttemptRow(lesson, attempt))
                     })}
                   </tr>)
               })}
             </tr>)
         })}
-
         </Tbody>
       </Table>
     )
@@ -112,43 +122,41 @@ class LessonsTable extends Component {
   renderAttemptRow = (lesson, attempt) => {
     const { t } = this.props;
     const attemptFinished = !!attempt.att_date;
-    return (<tr className="m-datatable__row" style={{height: '64px'}}
-                key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptRow'}>
-        <td className="m-datatable__cell" width='93px' key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptNo'}>
-          <span style={{width: '93px'}}>{attempt.attempt_no}</span></td>
-        <td className="m-datatable__cell text-capitalize" width='93px'
-            key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptStatus'}><span
-          style={{width: '93px'}}>{attemptFinished && (attempt.scored_points >= lesson.pass_weight ? t('completed') : t('inProgress'))} </span>
+    const rowKey = lesson.lesson_id + '' + attempt.attempt_no;
+    const passed = parseInt(attempt.scored_points, 10) >=  parseInt(lesson.pass_weight, 10);
+    
+    return (<tr className="m-datatable__row" style={{height: '64px'}} key={rowKey + '-attemptRow'}>
+        <td className="m-datatable__cell" width='93px' key={rowKey + '-attemptNo'}>
+            <span style={{width: '93px'}}>{attempt.attempt_no}</span>
         </td>
-        <td className="m-datatable__cell" width='93px'
-            key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptDate'}><span
-          style={{width: '93px'}}>{attemptFinished && (new Date(attempt.att_date)).toLocaleDateString('en-US', {
-          day: 'numeric',
-          month: 'numeric',
-          year: 'numeric'
-        })}</span></td>
-        <td className="m-datatable__cell" width='93px'
-            key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptScored'}><span
-          style={{width: '93px'}}>{attemptFinished && (attempt.scored_points + '/' + lesson.lesson_points)}</span>
+        <td className="m-datatable__cell text-capitalize" width='93px' key={rowKey + '-attemptStatus'}>
+            <span style={{width: '93px'}}>
+                {attemptFinished && (attempt.scored_points >= lesson.pass_weight ? t('completed') : t('inProgress'))} 
+            </span>
         </td>
-        <td className="m-datatable__cell" width='93px'
-            key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptScoredToLesson'}><span
-          style={{width: '93px'}}>{attemptFinished && (attempt.scored_points * 100 / lesson.lesson_points).toFixed(2) + '%'}</span>
+        <td className="m-datatable__cell" width='93px' key={rowKey + '-attemptDate'}>
+            <span style={{width: '93px'}}>
+                {attemptFinished && (new Date(attempt.att_date)).toLocaleDateString('en-US', { day: 'numeric', month: 'numeric', year: 'numeric' })}
+            </span>
         </td>
-        {attemptFinished && (+attempt.scored_points >= +lesson.pass_weight ?
-          <td className="m-datatable__cell attempt-pass text-uppercase" width='93px'
-              key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptPass'}>
-            <div style={{width: '94px'}}>{t('pass')}</div>
-          </td> : <td className="m-datatable__cell attempt-fail text-uppercase" width='100px'
-                      key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptFail'}>
-            <div style={{width: '94px'}}>{t('fail')}</div>
-          </td>)}
-        {!attemptFinished && <td className="m-datatable__cell" width='100px' key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptPass'}>
+        <td className="m-datatable__cell" width='93px' key={rowKey + '-attemptScored'}>
+            <span style={{width: '93px'}}>
+                {attemptFinished && (attempt.scored_points + '/' + lesson.lesson_points)}
+            </span>
+        </td>
+        <td className="m-datatable__cell" width='93px' key={rowKey + '-attemptScoredToLesson'}>
+            <span style={{width: '93px'}}>
+                {attemptFinished && (attempt.scored_points * 100 / lesson.lesson_points).toFixed(2) + '%'}
+            </span>
+        </td>
+        {attemptFinished && <td className={`m-datatable__cell attempt-${passed ? 'pass' : 'fail'} text-uppercase`} width='93px' key={rowKey + '-attemptPass'}>
+            <div style={{width: '94px'}}>{t(passed ? 'pass' : 'fail')}</div>
+          </td>}
+        {!attemptFinished && <td className="m-datatable__cell" width='100px' key={rowKey + '-attemptPass'}>
           <div style={{width: '94px'}}></div>
         </td>}
-        <td className="m-datatable__cell comment-cell text-align-left"
-            key={lesson.lesson_id + '' + attempt.attempt_no + '-attemptComment'}>
-          <span>{attemptFinished && Parser(attempt.comment)}</span>
+        <td className="m-datatable__cell comment-cell text-align-left" key={rowKey + '-attemptComment'}>
+            <span>{attemptFinished && Parser(attempt.comment)}</span>
         </td>
       </tr>
     )
@@ -175,5 +183,15 @@ class LessonsTable extends Component {
     return numberOfAttempts;
   }
 }
+
+LessonsTable = connect(
+  (state) => ({
+    getReportRequest: selectStudentReportDetailsRequest(state)
+  }),
+  (dispatch) => ({
+    getReport: (studentId, classroomId) => {dispatch(getReportDetails(studentId, classroomId))},
+    resetGetReportDetails: () => {dispatch(resetGetReportDetails())}
+  })
+)(LessonsTable);
 
 export default translate("translations")(LessonsTable);
