@@ -26,7 +26,6 @@ class LessonsTable extends Component {
   }
   
   componentWillUnmount() {
-      alert('resetGetReportDetails');
     this.props.resetGetReportDetails();
   }  
   

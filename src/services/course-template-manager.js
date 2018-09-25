@@ -228,6 +228,9 @@ export default function formTableData(serverData, jsonTemplateData) {
 
   function formAnswer(description, correctAnswer, chosenAnswer) {
     // TODO maybe resolve 'attempt num'
+    if (!chosenAnswer || chosenAnswer === undefined) {
+        chosenAnswer = 'no answer';
+    }
     return '<span>Q: ' + description + ' A: <font color="Green">' + correctAnswer + '</font> SA: <font color="red"> ' + chosenAnswer + '</font></span> <br/>';
   }
 
