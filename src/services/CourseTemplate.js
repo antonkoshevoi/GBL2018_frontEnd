@@ -85,11 +85,11 @@ export default function formTableData(serverData, jsonTemplateData) {
         const correctIndex = mistakeDetails[0];
         const correctAnswer = (questionTemplate && questionTemplate.question_meta &&
           questionTemplate.question_meta[correctIndex] && questionTemplate.question_meta[correctIndex][0]
-          && questionTemplate.question_meta[correctIndex][0].label) || '';
+          && questionTemplate.question_meta[correctIndex][0].hidden_answer) || '';
         const chosenIndex = +mistakeDetails[1];
         const chosenAnswer = (questionTemplate && questionTemplate.question_meta &&
           questionTemplate.question_meta[chosenIndex] && questionTemplate.question_meta[chosenIndex][0]
-          && questionTemplate.question_meta[chosenIndex][0].label) || '';
+          && questionTemplate.question_meta[chosenIndex][0].hidden_answer) || '';
         return formAnswer(description, correctAnswer, chosenAnswer);
       }
       case '11': {
@@ -231,6 +231,9 @@ export default function formTableData(serverData, jsonTemplateData) {
     if (!chosenAnswer || (typeof chosenAnswer === "undefined")) {
         chosenAnswer = 'no answer';
     }
+    if (!correctAnswer || (typeof correctAnswer === "undefined")) {
+        correctAnswer = 'no answer';
+    }    
     return '<span>Q: ' + description + ' A: <font color="Green">' + correctAnswer + '</font> SA: <font color="red"> ' + chosenAnswer + '</font></span> <br/>';
   }
 
@@ -238,5 +241,4 @@ export default function formTableData(serverData, jsonTemplateData) {
     // TODO maybe resolve 'attempt num'    
     return 'Q: ' + description + ' Mistakes: <font color="red"> ' + chosenAnswer + '</font> <br/>';
   }
-
 }
