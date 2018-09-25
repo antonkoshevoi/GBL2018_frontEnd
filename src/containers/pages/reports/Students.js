@@ -16,8 +16,8 @@ class Students extends Component {
   }
 
   render() {
-    const data = this.props.getReportRequest.toJS();
-    const {t} = this.props;
+    const {t, getReportRequest} = this.props;
+    const data = getReportRequest.toJS();
     
     return (      
       <div className="fadeInLeft animated">
@@ -41,7 +41,7 @@ class Students extends Component {
 
 Students = connect(
   (state) => ({
-    getReportRequest: selectStudentReportRequest(state),
+    getReportRequest: selectStudentReportRequest(state)
   }),
   (dispatch) => ({
     getReport: (id, params = {}) => {dispatch(getReport(id, params))}

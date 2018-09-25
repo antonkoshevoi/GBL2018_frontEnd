@@ -227,12 +227,15 @@ export default function formTableData(serverData, jsonTemplateData) {
   }
 
   function formAnswer(description, correctAnswer, chosenAnswer) {
-    // TODO maybe resolve 'attempt num'
+    // TODO maybe resolve 'attempt num'    
+    if (!chosenAnswer || (typeof chosenAnswer === "undefined")) {
+        chosenAnswer = 'no answer';
+    }
     return '<span>Q: ' + description + ' A: <font color="Green">' + correctAnswer + '</font> SA: <font color="red"> ' + chosenAnswer + '</font></span> <br/>';
   }
 
   function formMistakes(description, chosenAnswer) {
-    // TODO maybe resolve 'attempt num'
+    // TODO maybe resolve 'attempt num'    
     return 'Q: ' + description + ' Mistakes: <font color="red"> ' + chosenAnswer + '</font> <br/>';
   }
 

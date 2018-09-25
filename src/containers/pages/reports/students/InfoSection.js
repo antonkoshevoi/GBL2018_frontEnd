@@ -21,20 +21,17 @@ class InfoSection extends Component {
       return (
         <tr key={i}>
           <td>{item.course.crsTitle}</td>
+          <td>{item.classroomName}</td>
           <td>
             <div className="progress m-progress--sm">
-              <div className="progress-bar bg-success" role="progressbar"
-                   style={{width: item.progress.completedProgress + '%'}}></div>
-              <div className="progress-bar bg-warning" role="progressbar"
-                   style={{width: item.progress.inprogressProgress + '%'}}></div>
+              <div className="progress-bar bg-success" role="progressbar" style={{width: item.progress.completedProgress + '%'}}></div>
+              <div className="progress-bar bg-warning" role="progressbar" style={{width: item.progress.inprogressProgress + '%'}}></div>
             </div>
           </td>
           <td>
             <div className="progress m-progress--sm">
-              <div className="progress-bar bg-success" role="progressbar"
-                   style={{width: item.averageGrade + '%'}}></div>
-              <div className="progress-bar bg-danger" role="progressbar"
-                   style={{width: (100 - item.averageGrade) + '%'}}></div>
+              <div className="progress-bar bg-success" role="progressbar" style={{width: item.averageGrade + '%'}}></div>
+              <div className="progress-bar bg-danger" role="progressbar" style={{width: (100 - item.averageGrade) + '%'}}></div>
             </div>
           </td>
         </tr>
@@ -61,23 +58,39 @@ class InfoSection extends Component {
           <div className="imgBlock">
             {loading && <MyPreloader text="Loading..." color="primary"/>}
             <div className="avatar m--margin-bottom-20">
-              {!loading && <img src={(avatar) ? avatar : defaultAvatar} alt="" className=""/>}
+              {!loading && <img src={(avatar) ? avatar : defaultAvatar} alt="" className="" />}
             </div>
           </div>
         </div>
         <div className="col-md-9">
           <div className="row">
-            <div className="col-lg-6 m--margin-bottom-20">
-              <Card title={t('about')} icon="la la-info">
-                <td className="text-center">
-                  <div style={{position:'absolute',right:0, top:-50}}>
+            <div className="col-lg-4 m--margin-bottom-20">
+            
+      <div className="m-portlet  m-portlet--head-solid-bg">
+        <div className="m-portlet__head">
+          <div className="m-portlet__head-caption">
+            <div className="m-portlet__head-title">
+            
+              <span className="m-portlet__head-icon">
+        
+                              <i className="la la-info"></i></span>
+              
+
+              <h3 className="m-portlet__head-text">
+                {t('about')}
+              </h3>
+            </div>
+            
+          </div>
+        </div>
+        <div className='m-portlet__body position-relative'>
+                  <div style={{position:'absolute', right:10, top:-60}}>
                     <NavLink to={`/reports/students/${id}/edit`}>
                       <IconButton color='primary'>
                         <Edit/>
                       </IconButton>
                     </NavLink>
-                  </div>
-                </td>
+                  </div>                
                 <div className="table-responsive">
                   <table className="table m-table m-table--head-separator-primary m-middle-table">
                     <tbody>
@@ -95,16 +108,20 @@ class InfoSection extends Component {
                     </tr>
                     </tbody>
                   </table>
-                </div>
-              </Card>
+                </div>          
+        </div>
+      </div>
+      
+
             </div>
-            <div className="col-lg-6 m--margin-bottom-20">
+            <div className="col-lg-8 m--margin-bottom-20">
               <Card title={t('myCourses')} icon="fa fa-sitemap">                
                 <div className="table-responsive">
                   <table className="table m-table  m-table--head-separator-primary m-middle-table">
                     <thead>
                     <tr>
-                      <th>{t('courses')}</th>
+                      <th>{t('course')}</th>
+                      <th>{t('classroom')}</th>
                       <th>{t('progress')}</th>
                       <th>{t('performance')}</th>
                     </tr>
@@ -117,11 +134,6 @@ class InfoSection extends Component {
                     </tbody>
                   </table>
                 </div>
-              </Card>
-            </div>
-            <div className="col-md-12 m--margin-bottom-10">
-              <Card title={t('remarks')} icon="flaticon-edit">
-                <h1>{t('noInfo')}</h1>
               </Card>
             </div>
           </div>

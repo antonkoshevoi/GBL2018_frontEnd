@@ -12,3 +12,11 @@ export const selectStudentReportRequest = createSelector(
   selectStudentReportDomain,
   (subState) => subState.get('getReportRequest')
 );
+
+/**
+ * Student Report
+ */
+export const selectStudentReportDetailsRequest = createSelector(
+  selectStudentReportDomain,
+  (subState) => subState.get('getReportDetailsRequest')
+);
