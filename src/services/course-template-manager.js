@@ -235,8 +235,7 @@ export default function formTableData(serverData, jsonTemplateData) {
   }
 
   function formMistakes(description, chosenAnswer) {
-    // TODO maybe resolve 'attempt num'
-    alert(chosenAnswer);
+    // TODO maybe resolve 'attempt num'    
     return 'Q: ' + description + ' Mistakes: <font color="red"> ' + chosenAnswer + '</font> <br/>';
   }
 
