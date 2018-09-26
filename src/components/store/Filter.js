@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {Button, IconButton, Input, InputAdornment, Menu, MenuItem, withStyles} from '@material-ui/core';
+import {Button, IconButton, Input, InputAdornment, Menu, MenuItem, withStyles, Icon} from '@material-ui/core';
 import {translate} from 'react-i18next';
 import {NavLink, withRouter} from "react-router-dom";
-import {Search} from "@material-ui/icons";
 import red from "@material-ui/core/es/colors/red";
 import {buildSortersQuery} from "../../helpers/utils";
 
@@ -129,8 +128,7 @@ class Filter extends Component {
 
   _selectFilter = (type,value,e) => {
       const {title} = e.currentTarget;
-      let activeFilter = 'active_' + type;
-      console.log(activeFilter);
+      let activeFilter = 'active_' + type;      
       this.setState({[activeFilter]:title})
       this.setState({params: {...this.state.params, filter: {...this.state.params.filter, [type]: value,}}}, this._initFilter);
   };
@@ -275,7 +273,9 @@ class Filter extends Component {
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton onClick={(e) => {this._initFilter(e)}}>
-                        <Search/>
+                        <Icon className="material-icons">
+                          search_icon
+                        </Icon>
                       </IconButton>
                     </InputAdornment>
                   }

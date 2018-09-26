@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Avatar, CircularProgress} from '@material-ui/core';
+import {Avatar, CircularProgress, Icon} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
 import UnassignedCourses from "./sections/UnassignedCourses";
 import {connect} from "react-redux";
@@ -9,7 +9,6 @@ import {getRecords} from "../../redux/students/actions";
 import {getParentRecords} from "../../redux/store/actions";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
 import {push} from 'react-router-redux';
-import {GridOn} from "@material-ui/icons";
 import {withStyles} from '@material-ui/core/styles';
 import classNames from 'classnames';
 import FeaturedItems from "./sections/FeaturedItems";
@@ -39,7 +38,7 @@ const styles = {
   },
   profileBlock: {
     position:'relative',
-    background: '#9600ff',
+    background: '#adadad',
     borderRadius: 5,
     margin: '3px 0',
     display: 'flex',
@@ -47,20 +46,8 @@ const styles = {
   btnGroup: {
     display: 'flex',
     position: 'absolute',
-    right: 10,
-    top: 10
-  },
-  btnProfile: {
-    color: 'white',
-    background: '#2e40d4',
-    padding: 5,
-    width: '100%',
-    display: 'flex'
-  },
-  icon: {
-    height: 14,
-    width: 14,
-    margin: '3px 0'
+    right: 15,
+    top: 15
   },
   radiusLeft: {
     borderRadius: '5px 0 0 5px',
@@ -119,10 +106,7 @@ class ParentDashboard extends Component {
         }} style={{cursor: 'pointer'}}>
           <div className={classes.btnGroup}>
             <div className="form-group-inline btn-group">
-              <NavLink to="/profile" className={classNames(classes.btnProfile, classes.radiusLeft)}>
-                <GridOn className={classes.icon}/>
-                {t('reportProfile')}
-              </NavLink>
+              <NavLink to="/profile" className="btn m-btm btn-primary smaller-padding pull-right"><i className="la la-th"></i> {t('reportProfile')}</NavLink>
             </div>
           </div>
 

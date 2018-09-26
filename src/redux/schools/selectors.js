@@ -49,3 +49,10 @@ export const selectGetSchoolHomeroomsRequest = createSelector(
     (subState) => subState.get('getSchoolHomeroomsRequest')
 );
 
+/**
+ * School Homerooms
+ */
+export const selectGetSchoolClassroomsRequest = createSelector(
+    selectSchoolsDomain,
+    (subState) => subState.get('getSchoolClassroomsRequest')
+);
