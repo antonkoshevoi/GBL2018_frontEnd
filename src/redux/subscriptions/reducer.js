@@ -1,6 +1,6 @@
 import {
   GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL,
-  GET_USER_RECORDS, GET_USER_RECORDS_SUCCESS, GET_USER_RECORDS_FAIL,
+  GET_USER_RECORDS, GET_USER_RECORDS_SUCCESS, GET_USER_RECORDS_FAIL, RESET_GET_USER_RECORDS_REQUEST,
   GET_RECORD, GET_RECORD_FAIL, GET_RECORD_SUCCESS, RESET_GET_RECORD_REQUEST,
   SUBSCRIBE, SUBSCRIBE_FAIL, SUBSCRIBE_SUCCESS, RESET_SUBSCRIBE_REQUEST,
   UNSUBSCRIBE, UNSUBSCRIBE_SUCCESS, UNSUBSCRIBE_FAIL, RESET_UNSUBSCRIBE_REQUEST,
@@ -139,7 +139,8 @@ export default function reducer (state = initialState, action) {
           .set('loading', false)
           .set('fail', true)
         );
-
+    case RESET_GET_USER_RECORDS_REQUEST: 
+      return state.set('getUserRecordsRequest', initialState.get('getUserRecordsRequest'));    
     /**
      * Get User Studetns
      */

@@ -5,7 +5,7 @@ import {translate, Interpolate} from 'react-i18next';
 import {Checkbox} from '@material-ui/core';
 import {push} from 'react-router-redux';
 import {selectGetRecordsRequest, selectSubscribeRequest} from '../../redux/subscriptions/selectors';
-import {getRecords, subscribe, resetSubscribeRequest} from '../../redux/subscriptions/actions';
+import {getRecords, subscribe, resetSubscribeRequest, resetGetUserRecordsRequest} from '../../redux/subscriptions/actions';
 import CreditCardForm from "./forms/CreditCardForm";
 import Loader from "../../components/layouts/Loader";
 
@@ -39,6 +39,7 @@ class Subscribe extends Component {
             const userSubscriptionId = nextProps.subscribeRequest.get('userSubscriptionId');
             
             this.props.resetSubscribeRequest();
+            this.props.resetGetUserRecordsRequest();
             
             this.setState({
                 showBillingForm: false,
@@ -264,6 +265,7 @@ Subscribe = connect(
     (dispatch) => ({
         subscribe: (data) => dispatch(subscribe(data)),
         resetSubscribeRequest: () => dispatch(resetSubscribeRequest()),
+        resetGetUserRecordsRequest: () => dispatch(resetGetUserRecordsRequest()),
         getRecords: () => dispatch(getRecords()),
         goTo: (url) => {dispatch(push(url))}
     })
