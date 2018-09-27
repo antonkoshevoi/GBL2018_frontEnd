@@ -460,5 +460,13 @@ export default {
     googlepay: 'Google Pay',
     applepay: 'Apple Pay',
     Superadministrator: 'Super Admin',
-    schools: 'Schools'
+    schools: 'Schools',
+    newMessage: 'New Message',
+    mail: 'Mail',
+    alert: 'Alert!',
+    annoucement: 'Annoucement',
+    recipients: 'Recipients',
+    entireSchool: 'Entire School',
+    composeMessage: 'Compose Message',
+    studentsAndParents: 'Students & Parents'
 }

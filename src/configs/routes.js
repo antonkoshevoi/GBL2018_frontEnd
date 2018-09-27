@@ -29,6 +29,7 @@ import Store from "../containers/pages/store/Store";
 import Details from "../containers/pages/store/Details";
 import Products from "../containers/pages/store/Products";
 import Messages from '../containers/messages/Messages';
+import Compose from '../containers/messages/Compose';
 import Checkout from "../containers/pages/store/checkout/Checkout";
 import PayPalReturnContainer from '../containers/pages/store/payments/PayPalReturnContainer';
 import PaymentSuccessContainer from '../containers/pages/store/payments/PaymentSuccessContainer';
@@ -135,6 +136,8 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/:threadId?' name='Messages' component={Messages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />
       <AuthenticatedRoute exact layout={MainLayout} path='/school-profile' name='School Profile' component={SchoolProfile} />
+      
+      <AuthenticatedRoute exact layout={MainLayout} path='/compose' name='Compose' component={Compose} />
 
       {/*Open Invoices*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/accounts/invoices' name='Open Invoices' component={ShoppingCart}/>

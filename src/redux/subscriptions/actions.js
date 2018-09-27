@@ -5,6 +5,7 @@ export const GET_RECORDS_FAIL = '[Subscription] GET_RECORDS_FAIL';
 export const GET_USER_RECORDS = '[Subscription] GET_USER_RECORDS';
 export const GET_USER_RECORDS_SUCCESS = '[Subscription] GET_USER_RECORDS_SUCCESS';
 export const GET_USER_RECORDS_FAIL = '[Subscription] GET_USER_RECORDS_FAIL';
+export const RESET_GET_USER_RECORDS_REQUEST = '[Subscription] RESET_GET_USER_RECORDS_REQUEST';
 
 export const GET_STUDENTS_RECORDS = '[Subscription] GET_STUDENTS_RECORDS';
 export const GET_STUDENTS_RECORDS_SUCCESS = '[Subscription] GET_STUDENTS_RECORDS_SUCCESS';
@@ -55,6 +56,12 @@ export function getUserRecords(params = {}) {
     types: [GET_USER_RECORDS, GET_USER_RECORDS_SUCCESS, GET_USER_RECORDS_FAIL],
     promise: (apiClient) => apiClient.get('subscriptions/user', params)
   };
+}
+
+export function resetGetUserRecordsRequest () {
+  return {
+    type: RESET_GET_USER_RECORDS_REQUEST
+  }
 }
 
 export function getRecord(id) {

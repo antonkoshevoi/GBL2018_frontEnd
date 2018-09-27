@@ -60,6 +60,9 @@ class Messages extends Component {
             }
 
             <div className="text-right m--margin-top-15">
+              <NavLink to="/compose" className="m--margin-right-15 btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+                <span className="m-nav__link-text">{t('newMessage')}</span>
+              </NavLink>            
               <NavLink to="/messages" className="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
                 <span className="m-nav__link-text">{t('seeAll')}</span>
               </NavLink>

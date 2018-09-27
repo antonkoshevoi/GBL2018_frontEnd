@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import Card from "../../../../components/ui/Card";
 import {MyPreloader} from '../../../../components/ui/table';
-import {IconButton, CircularProgress} from '@material-ui/core';
+import {IconButton, CircularProgress, Icon} from '@material-ui/core';
 import {translate} from 'react-i18next';
-import {Edit} from "@material-ui/icons";
 import {withRouter, NavLink} from 'react-router-dom';
 import {connect} from "react-redux";
 import {getSchoolReportStudent} from '../../../../redux/reports/actions';
@@ -86,8 +85,10 @@ class InfoSection extends Component {
         <div className='m-portlet__body position-relative'>
                   <div style={{position:'absolute', right:10, top:-60}}>
                     <NavLink to={`/reports/students/${id}/edit`}>
-                      <IconButton color='primary'>
-                        <Edit/>
+                      <IconButton color='primary'>                        
+                        <Icon className="material-icons">
+                          edit_icon
+                        </Icon>
                       </IconButton>
                     </NavLink>
                   </div>                

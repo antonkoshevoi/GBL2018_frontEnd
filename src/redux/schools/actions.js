@@ -18,6 +18,10 @@ export const GET_SCHOOL_HOMEROOMS = '[Schools] GET_SCHOOL_HOMEROOMS';
 export const GET_SCHOOL_HOMEROOMS_SUCCESS = '[Schools] GET_SCHOOL_HOMEROOMS_SUCCESS';
 export const GET_SCHOOL_HOMEROOMS_FAIL = '[Schools] GET_SCHOOL_HOMEROOMS_FAIL';
 
+export const GET_SCHOOL_CLASSROOMS = '[Schools] GET_SCHOOL_CLASSROOMS';
+export const GET_SCHOOL_CLASSROOMS_SUCCESS = '[Schools] GET_SCHOOL_CLASSROOMS_SUCCESS';
+export const GET_SCHOOL_CLASSROOMS_FAIL = '[Schools] GET_SCHOOL_CLASSROOMS_FAIL';
+
 export const UPDATE = '[Schools] UPDATE';
 export const UPDATE_SUCCESS = '[Schools] UPDATE_SUCCESS';
 export const UPDATE_FAIL = '[Schools] UPDATE_FAIL';
@@ -79,5 +83,15 @@ export function getSchoolHomerooms(params = {}) {
     return {
         types: [GET_SCHOOL_HOMEROOMS, GET_SCHOOL_HOMEROOMS_SUCCESS, GET_SCHOOL_HOMEROOMS_FAIL],
         promise: (apiClient) => apiClient.get(`schools/homerooms`, params)
+    };
+}
+/**
+ * School Homerooms
+ */
+export function getSchoolClassrooms(params = {}) {
+    params.perPage = 0;
+    return {
+        types: [GET_SCHOOL_CLASSROOMS, GET_SCHOOL_CLASSROOMS_SUCCESS, GET_SCHOOL_CLASSROOMS_FAIL],
+        promise: (apiClient) => apiClient.get(`schools/classrooms`, params)
     };
 }

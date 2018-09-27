@@ -3,6 +3,7 @@ import {
   GET_SCHOOL_TEACHERS, GET_SCHOOL_TEACHERS_SUCCESS, GET_SCHOOL_TEACHERS_FAIL,
   GET_SCHOOL_STUDENTS, GET_SCHOOL_STUDENTS_SUCCESS, GET_SCHOOL_STUDENTS_FAIL,
   GET_SCHOOL_HOMEROOMS, GET_SCHOOL_HOMEROOMS_SUCCESS, GET_SCHOOL_HOMEROOMS_FAIL,
+  GET_SCHOOL_CLASSROOMS, GET_SCHOOL_CLASSROOMS_SUCCESS, GET_SCHOOL_CLASSROOMS_FAIL,
   GET_SCHOOL, GET_SCHOOL_SUCCESS, GET_SCHOOL_FAIL,
   UPDATE, UPDATE_SUCCESS, UPDATE_FAIL
 } from './actions';
@@ -45,6 +46,13 @@ const initialState = Immutable.fromJS({
       errorResponse: null,
       records: {}
   },
+  getSchoolClassroomsRequest: {
+      loading: false,
+      success: false,
+      fail: false,
+      errorResponse: null,
+      records: {}
+  },  
   schools: []
 });
 
@@ -136,6 +144,31 @@ export default function reducer (state = initialState, action) {
             .set('fail', true)
           );
 
+      /**
+       * School Classrooms
+       */
+      case GET_SCHOOL_CLASSROOMS:
+        return state
+          .set('getSchoolClassroomsRequest', state.get('getSchoolClassroomsRequest')
+            .set('loading', true)
+            .set('success', false)
+            .set('fail', false)
+            .remove('records')
+          );
+      case GET_SCHOOL_CLASSROOMS_SUCCESS:
+        return state
+          .set('getSchoolClassroomsRequest', state.get('getSchoolClassroomsRequest')
+            .set('success', true)
+            .set('loading', false)
+            .set('records', Immutable.fromJS(action.result.data))
+          );
+      case GET_SCHOOL_CLASSROOMS_FAIL:
+        return state
+          .set('getSchoolClassroomsRequest', state.get('getSchoolClassroomsRequest')
+            .set('loading', false)
+            .set('fail', true)
+          );
+  
     /**
      * School
      */
