@@ -468,5 +468,15 @@ export default {
     recipients: 'Recipients',
     entireSchool: 'Entire School',
     composeMessage: 'Compose Message',
-    studentsAndParents: 'Students & Parents'
+    studentsAndParents: 'Students & Parents',
+    studentRole: 'Students',
+    principalRole: 'Principals',
+    administratorRole: 'School Administrators',
+    superadministratorRole: 'Super Administrators',
+    superintendentRole: 'Superintendents',
+    selectHomerooms: 'Select Homerooms',
+    selectClassrooms: 'Select Classrooms',
+    selectRoles: 'Select Roles',
+    sendMessage: 'Send Message',
+    selectAll: 'Select All'
 }

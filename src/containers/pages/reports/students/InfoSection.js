@@ -63,57 +63,48 @@ class InfoSection extends Component {
         </div>
         <div className="col-md-9">
           <div className="row">
-            <div className="col-lg-4 m--margin-bottom-20">
-            
-      <div className="m-portlet  m-portlet--head-solid-bg">
-        <div className="m-portlet__head">
-          <div className="m-portlet__head-caption">
-            <div className="m-portlet__head-title">
-            
-              <span className="m-portlet__head-icon">
-        
-                              <i className="la la-info"></i></span>
-              
-
-              <h3 className="m-portlet__head-text">
-                {t('about')}
-              </h3>
-            </div>
-            
-          </div>
-        </div>
-        <div className='m-portlet__body position-relative'>
-                  <div style={{position:'absolute', right:10, top:-60}}>
-                    <NavLink to={`/reports/students/${id}/edit`}>
-                      <IconButton color='primary'>                        
-                        <Icon className="material-icons">
-                          edit_icon
-                        </Icon>
-                      </IconButton>
-                    </NavLink>
-                  </div>                
-                <div className="table-responsive">
-                  <table className="table m-table m-table--head-separator-primary m-middle-table">
-                    <tbody>
-                    <tr>
-                      <th>{t('firstName')}</th>
-                      <td>{loading && <CircularProgress color="primary"/>} {!loading && firstName}</td>
-                    </tr>
-                    <tr>
-                      <th>{t('lastName')}</th>
-                      <td>{loading && <CircularProgress color="primary"/>} {!loading && lastName}</td>
-                    </tr>
-                    <tr>
-                      <th>{t('birthday')}</th>
-                      <td>{loading && <CircularProgress color="primary"/>} {!loading && (birthday ? birthday : 'N / A')}</td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>          
-        </div>
-      </div>
-      
-
+             <div className="col-lg-4 m--margin-bottom-20">           
+                <div className="m-portlet  m-portlet--head-solid-bg">
+                  <div className="m-portlet__head">
+                    <div className="m-portlet__head-caption">
+                      <div className="m-portlet__head-title">
+                        <span className="m-portlet__head-icon"><i className="la la-info"></i></span>              
+                        <h3 className="m-portlet__head-text">
+                          {t('about')}
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='m-portlet__body position-relative'>
+                    <div style={{position:'absolute', right:10, top:-60}}>
+                      <NavLink to={`/reports/students/${id}/edit`}>
+                        <IconButton color='primary'>                        
+                          <Icon className="material-icons">
+                            edit_icon
+                          </Icon>
+                        </IconButton>
+                      </NavLink>
+                    </div>                
+                    <div className="table-responsive">
+                      <table className="table m-table m-table--head-separator-primary m-middle-table">
+                        <tbody>
+                        <tr>
+                          <th>{t('firstName')}</th>
+                          <td>{loading && <CircularProgress color="primary"/>} {!loading && firstName}</td>
+                        </tr>
+                        <tr>
+                          <th>{t('lastName')}</th>
+                          <td>{loading && <CircularProgress color="primary"/>} {!loading && lastName}</td>
+                        </tr>
+                        <tr>
+                          <th>{t('birthday')}</th>
+                          <td>{loading && <CircularProgress color="primary"/>} {!loading && (birthday ? birthday : 'N / A')}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>          
+                  </div>
+               </div>      
             </div>
             <div className="col-lg-8 m--margin-bottom-20">
               <Card title={t('myCourses')} icon="fa fa-sitemap">                
@@ -151,7 +142,7 @@ InfoSection = connect(
   (dispatch) => ({
     getSchoolReportStudent: (id) => {
       dispatch(getSchoolReportStudent(id))
-    },
+    }
   })
 )(InfoSection);
 
