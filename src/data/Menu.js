@@ -67,7 +67,7 @@ export default  {
             title: 'reports',
             link: 'reports',
             icon: 'fa  fa-line-chart ',
-            colorName: 'purple',
+            colorName: 'purple'
         },
         {
             key: 'sharing',

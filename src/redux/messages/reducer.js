@@ -2,7 +2,8 @@ import {
   NEW_MESSAGE_RECEIVED,
   GET_THREADS, GET_THREADS_FAIL, GET_THREADS_SUCCESS, SEND_NEW_MESSAGE, GET_AVAILABLE_USERS,
   GET_AVAILABLE_USERS_SUCCESS, GET_AVAILABLE_USERS_FAIL, CREATE_NEW_THREAD, CREATE_NEW_THREAD_SUCCESS,
-  NEW_THREAD_CREATED
+  NEW_THREAD_CREATED,
+  SEND_MESSAGE, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAIL
 } from './actions';
 import Immutable from 'immutable';
 import {
@@ -24,7 +25,8 @@ const initialState = Immutable.fromJS({
   sendMessageRequest: {
     loading: false,
     success: false,
-    fail: false
+    fail: false,
+    errors: []
   },
   getAvailableUsersRequest: {
     loading: false,
@@ -111,6 +113,7 @@ export default function reducer (state = initialState, action) {
             state.getIn(['threads', `${threadId}`]).toJS(), action.message
           )
         ));
+
     /**
      * New Thread
      */
@@ -140,6 +143,24 @@ export default function reducer (state = initialState, action) {
           .set('loading', false)
           .set('fail', true)
         );
+
+    /**
+     *  send message
+     */
+    case SEND_MESSAGE:
+        return state.set('sendMessageRequest', initialState.get('sendMessageRequest').set('loading', true));
+    case SEND_MESSAGE_SUCCESS:
+        return state.set('sendMessageRequest', initialState.get('sendMessageRequest').set('success', true));
+    case SEND_MESSAGE_FAIL:        
+      return state
+        .set('sendMessageRequest', state.get('sendMessageRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('errorCode', action.error.response.data.code)
+          .set('errorMessage', action.error.response.data.message)
+          .set('errors', action.error.response.data.code === 422 ? Immutable.fromJS(action.error.response.data.errors) : undefined)
+        );
+
     /**
      * default
      */

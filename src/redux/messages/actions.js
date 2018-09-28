@@ -13,6 +13,10 @@ export const SEND_NEW_MESSAGE = '[Messages] SEND_NEW_MESSAGE';
 export const SEND_NEW_MESSAGE_SUCCESS = '[Messages] SEND_NEW_MESSAGE_SUCCESS';
 export const SEND_NEW_MESSAGE_FAIL = '[Messages] SEND_NEW_MESSAGE_FAIL';
 
+export const SEND_MESSAGE = '[Messages] SEND_MESSAGE';
+export const SEND_MESSAGE_SUCCESS = '[Messages] SEND_MESSAGE_SUCCESS';
+export const SEND_MESSAGE_FAIL = '[Messages] SEND_MESSAGE_FAIL';
+
 export const NEW_THREAD_CREATED = '[Messages] NEW_THREAD_CREATED';
 export const NEW_MESSAGE_RECEIVED = '[Messages] NEW_MESSAGE_RECEIVED';
 
@@ -65,3 +69,11 @@ export function getAvailableUsers(keyword = '') {
     promise: (apiClient) => apiClient.get(`user/messages/availableUsers`, { filter: { username: keyword } })
   };
 }
+
+export function sendMessage(params = {}) {
+  return {    
+    types: [SEND_MESSAGE, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAIL],
+    promise: (apiClient) => apiClient.post(`messages/send`, params)
+  };
+}
+
