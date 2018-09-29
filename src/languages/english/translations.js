@@ -470,6 +470,7 @@ export default {
     composeMessage: 'Compose Message',
     studentsAndParents: 'Students & Parents',
     studentRole: 'Students',
+    teacherRole: 'Teachers',
     principalRole: 'Principals',
     administratorRole: 'School Administrators',
     superadministratorRole: 'Super Administrators',

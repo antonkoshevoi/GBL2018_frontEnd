@@ -1,44 +1,49 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { Select, MenuItem, InputLabel, TextField, FormHelperText, FormControl, FormControlLabel, Checkbox, Button} from '@material-ui/core';
+import { Select, MenuItem, InputLabel, TextField, FormHelperText, FormControlLabel, Checkbox, Button} from '@material-ui/core';
 import Loader from '../../components/layouts/Loader';
-import { selectGetSchoolHomeroomsRequest, selectGetSchoolClassroomsRequest } from '../../redux/schools/selectors';
-import { getSchoolHomerooms, getSchoolClassrooms } from '../../redux/schools/actions';
-
+import { selectGetSchoolHomeroomsRequest, selectGetSchoolClassroomsRequest, selectGetSchoolTeachersRequest } from '../../redux/schools/selectors';
+import { getSchoolHomerooms, getSchoolClassrooms, getSchoolTeachers} from '../../redux/schools/actions';
 import { selectSendMessageRequest } from '../../redux/messages/selectors';
+import { selectGetUserRequest, selectUserData } from "../../redux/user/selectors";
+import { selectUserRoles } from "../../redux/user/selectors";
 import { sendMessage } from '../../redux/messages/actions';
-
+import HasRole from "../middlewares/HasRole";
 
 class Compose extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            recipient: 'roleIds',
+            recipient: '',
             type: 'mail',            
             homerooms: null,
             classrooms: null,
+            teachers: null,
             roles: [
                 'student',
+                'teacher',
                 'principal',
-                'administrator',
-                'superadministrator',
+                'administrator',                
                 'superintendent'
             ],
             homeroomIds: [],
             classroomIds: [],
             roleIds: [],
+            teacherId: [],
             message: ''
         }
     }
 
-    componentDidMount() {        
+    componentDidMount() {
+        
+
     }
 
     componentWillReceiveProps(nextProps) {
        
-        const {homeroomsRequest, classroomsRequest} = this.props;
+        const {homeroomsRequest, classroomsRequest, teachersRequest} = this.props;
 
         if (!homeroomsRequest.get('success') && nextProps.homeroomsRequest.get('success')) {
             this.setState({homerooms: nextProps.homeroomsRequest.get('records').toJS()});
@@ -46,7 +51,11 @@ class Compose extends Component {
         
         if (!classroomsRequest.get('success') && nextProps.classroomsRequest.get('success')) {
             this.setState({classrooms: nextProps.classroomsRequest.get('records').toJS()});
-        }        
+        }
+        
+        if (!teachersRequest.get('success') && nextProps.teachersRequest.get('success')) {
+            this.setState({teachers: nextProps.teachersRequest.get('records').toJS()});
+        }         
     }
     
     _handleChange(event) {
@@ -58,14 +67,18 @@ class Compose extends Component {
     _handleChangeRecipients(event) {
         const { value } = event.target;  
         this.setState({recipient: value});                
-        
+        alert(value);
         if (value === 'classroomIds' && !this.state.classrooms) {
             this.props.getClassrooms();
         }
         
         if (value === 'homeroomIds' && !this.state.homerooms) {
             this.props.getHomerooms();
-        }               
+        }
+        
+        if (value === 'teacherId' && !this.state.teachers) {
+            this.props.getTeachers();
+        }        
     }
     
     _handleCheckboxChange(event) {
@@ -103,8 +116,10 @@ class Compose extends Component {
     
     _renderRecipients()
     {        
-        const {recipient, roles, homerooms, classrooms, classroomIds, homeroomIds, roleIds} = this.state;        
-        const {t} = this.props;
+        const {recipient, roles, homerooms, classrooms, teachers, classroomIds, homeroomIds, roleIds} = this.state;        
+        const {t, sendMessageRequest, userRequest, userData} = this.props;
+        const errors = sendMessageRequest.get('errors');
+        const userId = userRequest.get('success') ? userData.get('id') : null;
         
         if (recipient === 'homeroomIds' && homerooms) {
             return this._renderRecipientCheckboxes('selectHomerooms', 'homeroomIds', homerooms.map(option => ({
@@ -125,7 +140,28 @@ class Compose extends Component {
                 id:     option,
                 name:   t(option + 'Role')
             })), roleIds);
-        }        
+        }
+        
+        if (recipient === 'teacherId' && teachers) {        
+            return (<div className="row">
+                <div className="col-sm-6 col-md-5 col-lg-4">
+                    <div aria-describedby='recipients' className='full-width form-inputs d-inline-flex flex-column'>
+                        <InputLabel htmlFor='recipients'>{t('teacher')}</InputLabel>
+
+                        <Select
+                            value={this.state.teacherId}
+                            onChange={(e) => { this._handleChange(e) }}
+                            inputProps={{ name: 'teacherId', id: 'teacherId' }}
+                            >
+                            {teachers.map((teacher, key) => (
+                               (userId !== teacher.id) && <MenuItem key={key} value="{teacher.id.toString()}">{teacher.firstName} {teacher.lastName}</MenuItem>
+                            ))}                        
+                        </Select>                        
+                    </div>
+                    {errors && errors.get('recipients') && <FormHelperText error>{errors.get('recipients').get(0)}</FormHelperText>}
+                </div>
+            </div>);
+        }
     }
     
     _renderRecipientCheckboxes(title, name, options, selected)
@@ -152,11 +188,18 @@ class Compose extends Component {
     }
     
     render() {
-        const {homeroomsRequest, classroomsRequest, sendMessageRequest, t} = this.props;
+        const {homeroomsRequest, classroomsRequest, teachersRequest, sendMessageRequest, t} = this.props;
 
-        const loading = homeroomsRequest.get('loading') || classroomsRequest.get('loading') || sendMessageRequest.get('loading');                
+        const loading = homeroomsRequest.get('loading') || classroomsRequest.get('loading') || teachersRequest.get('loading') || sendMessageRequest.get('loading');                
         
         const errors = sendMessageRequest.get('errors');
+        
+        const roles = this.props.userRoles.toJS();
+        
+        if (roles && roles[0] && roles[0].name === 'Parents' && !this.state.recipient) {
+            this.props.getTeachers();
+            this.setState({recipient: 'teacherId'});
+        }
         
         return (
             <div className="animated fadeInLeft">
@@ -174,26 +217,40 @@ class Compose extends Component {
                     </div>          
                     <div className="m-portlet__body">
                         <div className="row">
+                            <HasRole roles={['Superadministrator', 'Superintendent', 'Principal', 'Administrator', 'Teacher']}>
                             <div className="col-sm-6 col-md-5 col-lg-4">
                                 <div aria-describedby='recipients' className='full-width form-inputs d-inline-flex flex-column'>
                                     <InputLabel htmlFor='recipients'>{t('recipients')}</InputLabel>
-
-                                    <Select
-                                        value={this.state.recipient}
-                                        onChange={(e) => { this._handleChangeRecipients(e) }}
-                                        inputProps={{
-                                            name: 'recipients',
-                                            id: 'recipients'
-                                        }}
-                                        >
-                                        <MenuItem key={1} value="roleIds">{t('entireSchool')}</MenuItem>
-                                        <MenuItem key={2} value="classroomIds">{t('classrooms')}</MenuItem>
-                                        <MenuItem key={3} value="homeroomIds">{t('homerooms')}</MenuItem>
-                                        <MenuItem key={4} value="teachers">{t('teachers')}</MenuItem>
-                                        <MenuItem key={5} value="students">{t('studentsAndParents')}</MenuItem>    
-                                    </Select>
+                                    <HasRole roles={['Teacher']}>
+                                        <Select
+                                            value={this.state.recipient || ''}
+                                            onChange={(e) => { this._handleChangeRecipients(e) }}
+                                            inputProps={{  name: 'recipients', id: 'recipients' }}
+                                            >
+                                            <MenuItem value="0"></MenuItem>
+                                            <MenuItem value="classroomIds">{t('classrooms')}</MenuItem>
+                                            <MenuItem value="homeroomIds">{t('homerooms')}</MenuItem>                                        
+                                            <MenuItem value="teacherId">{t('teacher')}</MenuItem>
+                                        </Select>
+                                    </HasRole>
+                                    <HasRole roles={['Superadministrator', 'Superintendent', 'Principal', 'Administrator']}>
+                                        <Select
+                                            value={this.state.recipient || ''}
+                                            onChange={(e) => { this._handleChangeRecipients(e) }}
+                                            inputProps={{  name: 'recipients', id: 'recipients' }}
+                                            >
+                                            <MenuItem value="0"></MenuItem>
+                                            <MenuItem value="roleIds">{t('entireSchool')}</MenuItem>
+                                            <MenuItem value="classroomIds">{t('classrooms')}</MenuItem>
+                                            <MenuItem value="homeroomIds">{t('homerooms')}</MenuItem>                                           
+                                            <MenuItem value="teachers">{t('teachers')}</MenuItem>
+                                            <MenuItem value="students">{t('studentsAndParents')}</MenuItem>
+                                        </Select>
+                                    </HasRole>
                                 </div>
+                                {errors && errors.get('recipients') && <FormHelperText error>{errors.get('recipients').get(0)}</FormHelperText>}
                             </div>
+                            </HasRole> 
                             <div className="col-sm-6 col-md-5 col-lg-4">
                                 <div aria-describedby='recipients' className='full-width form-inputs d-inline-flex flex-column'>
                                     <InputLabel htmlFor='type'>{t('type')}</InputLabel>
@@ -205,15 +262,15 @@ class Compose extends Component {
                                             id: 'type'
                                         }}
                                         >
-                                        <MenuItem key={3} value="mail">{t('mail')}</MenuItem> 
-                                        <MenuItem key={1} value="alert">{t('alert')}</MenuItem>
-                                        <MenuItem key={2} value="annoucement">{t('annoucement')}</MenuItem>
+                                        <MenuItem value="mail">{t('mail')}</MenuItem> 
+                                        <MenuItem value="alert">{t('alert')}</MenuItem>
+                                        <MenuItem value="annoucement">{t('annoucement')}</MenuItem>
                                     </Select>
                                 </div>
                             </div>
                         </div>
 
-                        {this._renderRecipients()}                                                
+                        {this._renderRecipients()}
                         
                         <div className='row'>
                           <div className='col-sm-12 col-md-12'>
@@ -264,12 +321,17 @@ Compose = connect(
     (state) => ({    
         sendMessageRequest: selectSendMessageRequest(state),
         homeroomsRequest: selectGetSchoolHomeroomsRequest(state),
-        classroomsRequest: selectGetSchoolClassroomsRequest(state)        
+        classroomsRequest: selectGetSchoolClassroomsRequest(state),
+        teachersRequest: selectGetSchoolTeachersRequest(state),
+        userRoles: selectUserRoles(state),
+        userRequest: selectGetUserRequest(state),
+        userData: selectUserData(state)
     }),
     (dispatch) => ({
         sendMessage: (params = {}) => { dispatch(sendMessage(params)) },
         getHomerooms: (params = {}) => { dispatch(getSchoolHomerooms(params)) },
-        getClassrooms: (params = {}) => { dispatch(getSchoolClassrooms(params)) }        
+        getClassrooms: (params = {}) => { dispatch(getSchoolClassrooms(params)) },
+        getTeachers: (params = {}) => { dispatch(getSchoolTeachers(params)) }
     })
 )(Compose);
 
