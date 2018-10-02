@@ -14,9 +14,9 @@ import i18n from '../../configs/i18n';
 
 const messagesSagas = all([
     yieldSuccessToasts({
-        [SEND_MESSAGE_SUCCESS]: i18n.t('messages:messageIsSend'),
-        [DELETE_MESSAGE_SUCCESS]: i18n.t('messages:messageDelete'),
-        [DELETE_DRAFT_MESSAGE_SUCCESS]: i18n.t('messages:messageDelete'),
+        [SEND_MESSAGE_SUCCESS]: i18n.t('messages:messageIsSent'),
+        [DELETE_MESSAGE_SUCCESS]: i18n.t('messages:messageDeleted'),
+        [DELETE_DRAFT_MESSAGE_SUCCESS]: i18n.t('messages:messageDeleted'),
     }),
     yieldErrorToasts([
         SEND_MESSAGE_FAIL, 

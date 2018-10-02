@@ -43,16 +43,14 @@ class MainLayout extends Component {
         <div className={`m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body ${sidebarIsOpen ? 'm-sidebar-is-open' : ''}`}>
           <Header mobileSidebar={() => {this.openMobileSidebar()}}/>
           <HasRole roles={[
-            'Superintendent',
-            'Student',
+            'Superintendent',            
             'Principal',
-            'Administrator',
-            'Affiliate'
+            'Administrator'
           ]}>
             <Sidebar mobileSidebar={() => {this.openMobileSidebar()}} structure={MenuSchool}/>
           </HasRole>
           <HasRole roles={[
-            'Superadministrator',
+            'Superadministrator'
           ]}>
             <Sidebar mobileSidebar={() => {this.openMobileSidebar()}} structure={SuperAdminMenu}/>
           </HasRole>

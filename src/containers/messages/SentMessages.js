@@ -3,7 +3,6 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetRecordsRequest } from '../../redux/messages/selectors';
 import { getSentMessages } from '../../redux/messages/actions';
-import { push } from 'react-router-redux';
 import { MenuItem, Select } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import Pagination from '../../components/ui/Pagination';

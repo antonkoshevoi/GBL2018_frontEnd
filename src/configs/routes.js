@@ -70,6 +70,7 @@ import SentMessages from '../containers/messages/SentMessages';
 import InboxMessages from '../containers/messages/InboxMessages';
 import DraftMessages from '../containers/messages/DraftMessages';
 import Compose from '../containers/messages/Compose';
+import ViewMessage from '../containers/messages/ViewMessage';
 
 export default () => (
   <AppContainer>
@@ -141,6 +142,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/drafts' name='Draft Messages' component={DraftMessages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/sent' name='Sent Messages' component={SentMessages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages' name='Inbox Messages' component={InboxMessages} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/messages/view/:id' name='View Message' component={ViewMessage} />
       <AuthenticatedRoute exact layout={MainLayout} path='/compose' name='Compose' component={Compose} />
             
       {/*User*/}
