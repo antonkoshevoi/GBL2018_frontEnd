@@ -8,14 +8,6 @@ import {NavLink} from "react-router-dom";
 
 class Messages extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      menuOpened: false
-    };
-  }
-
   _renderMessages () {
     const { user, goToThread } = this.props;
 
@@ -43,7 +35,7 @@ class Messages extends Component {
 
     return (
 
-          <div className=''>
+          <div>
             {newMessages ?
               <div className='m-dropdown__body'>
                 <div className='m-dropdown__content'>
@@ -67,7 +59,6 @@ class Messages extends Component {
                 <span className="m-nav__link-text">{t('seeAll')}</span>
               </NavLink>
             </div>
-
           </div>
     );
   }

@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { Select, MenuItem, InputLabel, TextField, FormHelperText, FormControlLabel, Checkbox, Button} from '@material-ui/core';
-import Loader from '../../components/layouts/Loader';
+import { push } from 'react-router-redux';
+import { Select, MenuItem, InputLabel, Input, TextField, FormControl, FormHelperText, FormControlLabel, Checkbox, Button} from '@material-ui/core';
 import { selectGetSchoolHomeroomsRequest, selectGetSchoolClassroomsRequest, selectGetSchoolTeachersRequest } from '../../redux/schools/selectors';
 import { getSchoolHomerooms, getSchoolClassrooms, getSchoolTeachers} from '../../redux/schools/actions';
 import { selectSendMessageRequest } from '../../redux/messages/selectors';
 import { selectGetUserRequest, selectUserData } from "../../redux/user/selectors";
 import { selectUserRoles } from "../../redux/user/selectors";
-import { sendMessage } from '../../redux/messages/actions';
+import { sendMessage, resetSendMessageRequest } from '../../redux/messages/actions';
+import Loader from '../../components/layouts/Loader';
 import HasRole from "../middlewares/HasRole";
 
 class Compose extends Component {
 
     constructor(props) {
         super(props);
+        
         this.state = {
             recipient: '',
             type: 'mail',            
@@ -22,7 +24,7 @@ class Compose extends Component {
             classrooms: null,
             teachers: null,
             roles: [
-                'student',
+                'student',                
                 'teacher',
                 'principal',
                 'administrator',                
@@ -31,19 +33,17 @@ class Compose extends Component {
             homeroomIds: [],
             classroomIds: [],
             roleIds: [],
-            teacherId: [],
-            message: ''
+            teacherId: []            
         }
     }
 
     componentDidMount() {
         
-
     }
 
     componentWillReceiveProps(nextProps) {
        
-        const {homeroomsRequest, classroomsRequest, teachersRequest} = this.props;
+        const {homeroomsRequest, classroomsRequest, teachersRequest, sendMessageRequest, resetSendMessageRequest, goTo} = this.props;
 
         if (!homeroomsRequest.get('success') && nextProps.homeroomsRequest.get('success')) {
             this.setState({homerooms: nextProps.homeroomsRequest.get('records').toJS()});
@@ -55,7 +55,12 @@ class Compose extends Component {
         
         if (!teachersRequest.get('success') && nextProps.teachersRequest.get('success')) {
             this.setState({teachers: nextProps.teachersRequest.get('records').toJS()});
-        }         
+        }
+        
+        if (!sendMessageRequest.get('success') && nextProps.sendMessageRequest.get('success')) {
+            resetSendMessageRequest();
+            goTo(`messages/${this.state.isDraft ? 'drafts' : 'sent'}`);
+        }        
     }
     
     _handleChange(event) {
@@ -67,7 +72,7 @@ class Compose extends Component {
     _handleChangeRecipients(event) {
         const { value } = event.target;  
         this.setState({recipient: value});                
-        alert(value);
+        
         if (value === 'classroomIds' && !this.state.classrooms) {
             this.props.getClassrooms();
         }
@@ -103,15 +108,29 @@ class Compose extends Component {
     }
     
     _sendMessage() {
+        this.setState({isDraft: false});
+        
+        this._send(false);
+    }
+    
+    _saveAsDraft() {        
+        this.setState({isDraft: true});
+        
+        this._send(true);
+    }
+    
+    _send(draft) {
         const {sendMessage} = this.props;
-        const {message, type, recipient } = this.state;
+        const {message, type, recipient, subject } = this.state;                
         
         sendMessage({
             message:        message,
+            subject:        subject,
             type:           type,
             recipients:     recipient,
-            [recipient]:    this.state[recipient] || 'all'
-        });
+            ids:            this.state[recipient] || 'all',
+            isDraft:        draft
+        });        
     }
     
     _renderRecipients()
@@ -219,7 +238,7 @@ class Compose extends Component {
                         <div className="row">
                             <HasRole roles={['Superadministrator', 'Superintendent', 'Principal', 'Administrator', 'Teacher']}>
                             <div className="col-sm-6 col-md-5 col-lg-4">
-                                <div aria-describedby='recipients' className='full-width form-inputs d-inline-flex flex-column'>
+                                <FormControl className='full-width form-inputs'>
                                     <InputLabel htmlFor='recipients'>{t('recipients')}</InputLabel>
                                     <HasRole roles={['Teacher']}>
                                         <Select
@@ -247,12 +266,12 @@ class Compose extends Component {
                                             <MenuItem value="students">{t('studentsAndParents')}</MenuItem>
                                         </Select>
                                     </HasRole>
-                                </div>
-                                {errors && errors.get('recipients') && <FormHelperText error>{errors.get('recipients').get(0)}</FormHelperText>}
+                                    {errors && errors.get('recipients') && <FormHelperText error>{errors.get('recipients').get(0)}</FormHelperText>}
+                                </FormControl>
                             </div>
                             </HasRole> 
                             <div className="col-sm-6 col-md-5 col-lg-4">
-                                <div aria-describedby='recipients' className='full-width form-inputs d-inline-flex flex-column'>
+                                <FormControl className='full-width form-inputs'>
                                     <InputLabel htmlFor='type'>{t('type')}</InputLabel>
                                     <Select
                                         value={this.state.type}
@@ -266,7 +285,7 @@ class Compose extends Component {
                                         <MenuItem value="alert">{t('alert')}</MenuItem>
                                         <MenuItem value="annoucement">{t('annoucement')}</MenuItem>
                                     </Select>
-                                </div>
+                                </FormControl>
                             </div>
                         </div>
 
@@ -274,24 +293,42 @@ class Compose extends Component {
                         
                         <div className='row'>
                           <div className='col-sm-12 col-md-12'>
-                                <TextField                                                                                    
-                                    multiline
-                                    id="message"                   
-                                    placeholder={t('message')}          
-                                    fullWidth
-                                    margin="normal"
-                                    variant="outlined"                                          
-                                    rows="20"                                  
-                                    value={this.state.message || ''}   
-                                    inputProps={{
-                                      name: 'message',
-                                      id: 'message'
-                                    }}                                          
-                                    onChange={(e) => {
-                                        this._handleChange(e)
-                                    }}                      
-                                />
-                                {errors && errors.get('message') && <FormHelperText error>{errors.get('message').get(0)}</FormHelperText>}
+                              <FormControl className='full-width form-inputs'>
+                                <InputLabel htmlFor='title-error'>{t('subject')}</InputLabel>
+                                <Input
+                                  name='subject'                                  
+                                  fullWidth
+                                  value={this.state.subject || ''}
+                                  onChange={(e) => {
+                                    this._handleChange(e)
+                                  }}/>
+                                {errors && errors.get('subject') && <FormHelperText error>{errors.get('subject').get(0)}</FormHelperText>}
+                              </FormControl>
+                          </div>        
+                        </div>
+                        
+                        <div className='row'>
+                            <div className='col-sm-12 col-md-12'>
+                                <FormControl className='full-width form-inputs'>
+                                    <TextField                                                                                    
+                                        multiline
+                                        id="message"                   
+                                        placeholder={t('message')}          
+                                        fullWidth
+                                        margin="normal"
+                                        variant="outlined"                                          
+                                        rows="20"                                  
+                                        value={this.state.message || ''}   
+                                        inputProps={{
+                                          name: 'message',
+                                          id: 'message'
+                                        }}                                          
+                                        onChange={(e) => {
+                                            this._handleChange(e)
+                                        }}                      
+                                    />
+                                    {errors && errors.get('message') && <FormHelperText error>{errors.get('message').get(0)}</FormHelperText>}
+                                </FormControl>
                           </div>        
                         </div>
                         <div className='row'>
@@ -300,11 +337,23 @@ class Compose extends Component {
                                   type='submit'
                                   form='create-student-form'            
                                   variant="raised"
+                                  className='mt-btn-success m--margin-top-10 btn btn-success mt-btn m--margin-right-10'
+                                  color='primary'
+                                  disabled={loading}
+                                  onClick={() => {
+                                      this._saveAsDraft()
+                                  }} >
+                                  {t('saveAsDraft')}                                     
+                                </Button>                             
+                                <Button
+                                  type='submit'
+                                  form='create-student-form'            
+                                  variant="raised"
                                   className='mt-btn-success m--margin-top-10 btn btn-success mt-btn'
                                   color='primary'
                                   disabled={loading}
-                                  onClick={(e) => {
-                                      this._sendMessage(e)
+                                  onClick={() => {
+                                      this._sendMessage()
                                   }} >
                                   {t('sendMessage')}                                     
                                 </Button>                                                                    
@@ -329,9 +378,11 @@ Compose = connect(
     }),
     (dispatch) => ({
         sendMessage: (params = {}) => { dispatch(sendMessage(params)) },
+        resetSendMessageRequest: () => { dispatch(resetSendMessageRequest()) },
         getHomerooms: (params = {}) => { dispatch(getSchoolHomerooms(params)) },
         getClassrooms: (params = {}) => { dispatch(getSchoolClassrooms(params)) },
-        getTeachers: (params = {}) => { dispatch(getSchoolTeachers(params)) }
+        getTeachers: (params = {}) => { dispatch(getSchoolTeachers(params)) },
+        goTo: (page) => { dispatch(push(page)) }
     })
 )(Compose);
 

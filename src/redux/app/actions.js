@@ -14,8 +14,7 @@ export function load()
     return {
       types: [LOAD, LOAD_SUCCESS_AUTHENTICATED, LOAD_FAIL],
       promise: (apiClient) => Promise.all([
-        apiClient.get('user'),
-        apiClient.get('user/threads')
+        apiClient.get('user')        
       ])
     }
   } else if (refreshToken) {
@@ -33,6 +32,6 @@ export function load()
   }
 
   return {
-    type: LOAD_SUCCESS_UNAUTHENTICATED,
+    type: LOAD_SUCCESS_UNAUTHENTICATED
   }
 }

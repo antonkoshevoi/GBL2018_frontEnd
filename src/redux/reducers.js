@@ -11,7 +11,6 @@ import classroomsReducer from './classrooms/reducer';
 import schoolsReducer from './schools/reducer';
 import reportsReducer from './reports/reducer';
 import studentReportsReducer from './reports/students/reducer';
-import notificationsReducer from './notifications/reducer';
 import messagesReducer from './messages/reducer';
 import storeReducer from './store/reducer';
 import paymentsReducer from './payments/reducer';
@@ -37,8 +36,7 @@ export default {
   homerooms: homeroomsReducer,
   classrooms: classroomsReducer,
   schools: schoolsReducer,
-  reports: reportsReducer,
-  notifications: notificationsReducer,
+  reports: reportsReducer,  
   messages: messagesReducer,
   store: storeReducer,
   payments: paymentsReducer,

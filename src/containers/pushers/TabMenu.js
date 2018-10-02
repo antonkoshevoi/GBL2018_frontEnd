@@ -5,17 +5,13 @@ import {Typography} from '@material-ui/core';
 
 class TabMenu extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const {activeMenu, t} = this.props
         return (
             <li className="m-nav__item m-topbar__Tasks m-topbar__Tasks--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width" data-dropdown-toggle="click" data-dropdown-persistent="true">
                 <a  className="m-nav__link m-dropdown__toggle pointer" id="m_topbar_notification_icon" onClick={() => {this.props.switchMenu('messages')}}>
                     <span className="m-nav__link-icon">
-                            <i className="fa fa-envelope"></i>
+                        <i className="fa fa-envelope"></i>
                     </span>
                 </a>
                 {activeMenu == 'messages' && 

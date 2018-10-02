@@ -470,6 +470,7 @@ export default {
     composeMessage: 'Compose Message',
     studentsAndParents: 'Students & Parents',
     studentRole: 'Students',
+    parentsRole: 'Parents',
     teacherRole: 'Teachers',
     principalRole: 'Principals',
     administratorRole: 'School Administrators',
@@ -479,5 +480,19 @@ export default {
     selectClassrooms: 'Select Classrooms',
     selectRoles: 'Select Roles',
     sendMessage: 'Send Message',
-    selectAll: 'Select All'
+    selectAll: 'Select All',
+    sentDate: 'Sent At',
+    sentMessages: 'Sent Messages',
+    inboxMessages: 'Inbox Messages',
+    draftMessages: 'Draft Messages',
+    messagesNotFound: 'No messages found...',
+    new: 'New',
+    recipientsGroups: {        
+        roleIds: 'Entire School',
+        classroomIds: 'Classroom Users',
+        homeroomIds: 'Homeroom Users',
+        teachers: 'School Teachers',
+        students: 'School Students',
+        teacher: 'Teacher',
+    }
 }

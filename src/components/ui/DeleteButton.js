@@ -15,7 +15,7 @@ class DeleteButton extends Component {
   };
 
   static defaultProps = {
-    classNameBtn: "btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill",
+    classNameBtn: "btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5",                   
     btnName: 'Delete',
     title: 'Are you sure?',
     icon: true,
@@ -44,7 +44,7 @@ class DeleteButton extends Component {
   render() {
     const {classNameBtn, title, icon, btnName} = this.props;
     return (
-      <a className={classNameBtn} style={{marginLeft: '5px'}} onClick={() => {
+      <a className={classNameBtn} style={{color: '#fff'}} onClick={() => {
         this._openConfirm()
       }}>
         {icon ?
