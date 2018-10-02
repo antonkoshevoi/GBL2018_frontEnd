@@ -133,7 +133,7 @@ class OpenInvoicesTable extends Component {
           </Td>
           <Td width='100px'>
             <span className="productPrice productLabel">
-              {item.storeItem.discount != 0 &&
+              {item.storeItem.discount > 0 &&
              <span>${parseFloat(item.storeItem.price).toFixed(2)}
               <span className="discount"></span>
              </span>

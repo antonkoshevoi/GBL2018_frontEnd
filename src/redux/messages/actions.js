@@ -1,74 +1,34 @@
-export const SUBSCRIBE = '[Messages] SUBSCRIBE';
-export const SUBSCRIBE_FAIL = '[Messages] SUBSCRIBE_FAIL';
 
-export const GET_THREADS = '[Messages] GET_THREADS';
-export const GET_THREADS_SUCCESS = '[Messages] GET_THREADS_SUCCESS';
-export const GET_THREADS_FAIL = '[Messages] GET_THREADS_FAIL';
-
-export const CREATE_NEW_THREAD = '[Messages] CREATE_NEW_THREAD';
-export const CREATE_NEW_THREAD_SUCCESS = '[Messages] CREATE_NEW_THREAD_SUCCESS';
-export const CREATE_NEW_THREAD_FAIL = '[Messages] CREATE_NEW_THREAD_FAIL';
-
-export const SEND_NEW_MESSAGE = '[Messages] SEND_NEW_MESSAGE';
-export const SEND_NEW_MESSAGE_SUCCESS = '[Messages] SEND_NEW_MESSAGE_SUCCESS';
-export const SEND_NEW_MESSAGE_FAIL = '[Messages] SEND_NEW_MESSAGE_FAIL';
+export const GET_MESSAGE = '[Messages] GET_MESSAGE';
+export const GET_MESSAGE_SUCCESS = '[Messages] GET_MESSAGE_SUCCESS';
+export const GET_MESSAGE_FAIL = '[Messages] GET_MESSAGE_FAIL';
+export const RESET_GET_MESSAGE_REQUEST = '[Messages] RESET_GET_MESSAGE_REQUEST';
 
 export const SEND_MESSAGE = '[Messages] SEND_MESSAGE';
 export const SEND_MESSAGE_SUCCESS = '[Messages] SEND_MESSAGE_SUCCESS';
 export const SEND_MESSAGE_FAIL = '[Messages] SEND_MESSAGE_FAIL';
+export const RESET_SEND_MESSAGE_REQUEST = '[Messages] RESET_SEND_MESSAGE_REQUEST';
 
-export const NEW_THREAD_CREATED = '[Messages] NEW_THREAD_CREATED';
-export const NEW_MESSAGE_RECEIVED = '[Messages] NEW_MESSAGE_RECEIVED';
+export const GET_SENT_MESSAGES = '[Messages] GET_SENT_MESSAGES';
+export const GET_SENT_MESSAGES_SUCCESS = '[Messages] GET_SENT_MESSAGES_SUCCESS';
+export const GET_SENT_MESSAGES_FAIL = '[Messages] GET_SENT_MESSAGES_FAIL';
 
-export const GET_AVAILABLE_USERS = '[Messages] GET_AVAILABLE_USERS';
-export const GET_AVAILABLE_USERS_SUCCESS = '[Messages] GET_AVAILABLE_USERS_SUCCESS';
-export const GET_AVAILABLE_USERS_FAIL = '[Messages] GET_AVAILABLE_USERS_FAIL';
+export const GET_DRAFT_MESSAGES = '[Messages] GET_DRAFT_MESSAGES';
+export const GET_DRAFT_MESSAGES_SUCCESS = '[Messages] GET_DRAFT_MESSAGES_SUCCESS';
+export const GET_DRAFT_MESSAGES_FAIL = '[Messages] GET_DRAFT_MESSAGES_FAIL';
 
-export function subscribe (userId) {
-  return {
-    type: SUBSCRIBE,
-    userId
-  }
-}
+export const GET_INBOX_MESSAGES = '[Messages] GET_INBOX_MESSAGES';
+export const GET_INBOX_MESSAGES_SUCCESS = '[Messages] GET_INBOX_MESSAGES_SUCCESS';
+export const GET_INBOX_MESSAGES_FAIL = '[Messages] GET_INBOX_MESSAGES_FAIL';
 
-/**
- * Get threads
- */
-export function getThreads(params = {}) {
-  return {
-    types: [GET_THREADS, GET_THREADS_SUCCESS, GET_THREADS_FAIL],
-    promise: (apiClient) => apiClient.get('user/threads', params)
-  };
-}
+export const DELETE_MESSAGE = '[Messages] DELETE_MESSAGE';
+export const DELETE_MESSAGE_SUCCESS = '[Messages] DELETE_MESSAGE_SUCCESS';
+export const DELETE_MESSAGE_FAIL = '[Messages] DELETE_MESSAGE_FAIL';
+export const RESET_DELETE_MESSAGE_REQUEST = '[Messages] RESET_DELETE_MESSAGE_REQUEST';
 
-/**
- * create thread
- */
-export function createNewThread(userId, messageBody) {
-  return {
-    userId, messageBody,
-    types: [CREATE_NEW_THREAD, CREATE_NEW_THREAD_SUCCESS, CREATE_NEW_THREAD_FAIL],
-    promise: (apiClient) => apiClient.post(`user/threads/${userId}`, { message: messageBody })
-  };
-}
-
-/**
- * send message
- */
-export function sendNewMessage(threadId, messageBody) {
-  return {
-    threadId, messageBody,
-    types: [SEND_NEW_MESSAGE, SEND_NEW_MESSAGE_SUCCESS, SEND_NEW_MESSAGE_FAIL],
-    promise: (apiClient) => apiClient.post(`user/messages/${threadId}`, { message: messageBody })
-  };
-}
-
-export function getAvailableUsers(keyword = '') {
-  return {
-    types: [GET_AVAILABLE_USERS, GET_AVAILABLE_USERS_SUCCESS, GET_AVAILABLE_USERS_FAIL],
-    promise: (apiClient) => apiClient.get(`user/messages/availableUsers`, { filter: { username: keyword } })
-  };
-}
+export const DELETE_DRAFT_MESSAGE = '[Messages] DELETE_DRAFT_MESSAGE';
+export const DELETE_DRAFT_MESSAGE_SUCCESS = '[Messages] DELETE_DRAFT_MESSAGE_SUCCESS';
+export const DELETE_DRAFT_MESSAGE_FAIL = '[Messages] DELETE_DRAFT_MESSAGE_FAIL';
 
 export function sendMessage(params = {}) {
   return {    
@@ -77,3 +37,62 @@ export function sendMessage(params = {}) {
   };
 }
 
+export function resetSendMessageRequest() {
+    return {
+        type: RESET_SEND_MESSAGE_REQUEST
+    };
+}
+
+export function getMessage(id) {
+  return {    
+    types: [GET_MESSAGE, GET_MESSAGE_SUCCESS, GET_MESSAGE_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/details/${id}`)
+  };
+}
+
+export function resetGetMessageRequest() {
+    return {
+        type: RESET_GET_MESSAGE_REQUEST
+    };
+}
+
+export function getSentMessages(params = {}) {
+  return {    
+    types: [GET_SENT_MESSAGES, GET_SENT_MESSAGES_SUCCESS, GET_SENT_MESSAGES_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/sent`, params)
+  };
+}
+
+export function getDraftMessages(params = {}) {
+  return {    
+    types: [GET_DRAFT_MESSAGES, GET_DRAFT_MESSAGES_SUCCESS, GET_DRAFT_MESSAGES_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/drafts`, params)
+  };
+}
+
+export function getInboxMessages(params = {}) {
+  return {    
+    types: [GET_INBOX_MESSAGES, GET_INBOX_MESSAGES_SUCCESS, GET_INBOX_MESSAGES_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/inbox`, params)
+  };
+}
+
+export function deleteMessage(id) {
+  return {    
+    types: [DELETE_MESSAGE, DELETE_MESSAGE_SUCCESS, DELETE_MESSAGE_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/delete/${id}`)
+  };
+}
+
+export function deleteDraftMessage(id) {
+  return {    
+    types: [DELETE_DRAFT_MESSAGE, DELETE_DRAFT_MESSAGE_SUCCESS, DELETE_DRAFT_MESSAGE_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/delete-draft/${id}`)
+  };
+}
+
+export function resetDeleteMessageRequest() {
+    return {
+        type: RESET_DELETE_MESSAGE_REQUEST
+    };
+}

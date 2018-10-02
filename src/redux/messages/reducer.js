@@ -1,148 +1,49 @@
 import {
-  NEW_MESSAGE_RECEIVED,
-  GET_THREADS, GET_THREADS_FAIL, GET_THREADS_SUCCESS, SEND_NEW_MESSAGE, GET_AVAILABLE_USERS,
-  GET_AVAILABLE_USERS_SUCCESS, GET_AVAILABLE_USERS_FAIL, CREATE_NEW_THREAD, CREATE_NEW_THREAD_SUCCESS,
-  NEW_THREAD_CREATED,
-  SEND_MESSAGE, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAIL
+    GET_MESSAGE, GET_MESSAGE_SUCCESS, GET_MESSAGE_FAIL, RESET_GET_MESSAGE_REQUEST,
+    SEND_MESSAGE, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAIL, RESET_SEND_MESSAGE_REQUEST,
+    GET_SENT_MESSAGES, GET_SENT_MESSAGES_SUCCESS, GET_SENT_MESSAGES_FAIL,
+    GET_DRAFT_MESSAGES, GET_DRAFT_MESSAGES_SUCCESS, GET_DRAFT_MESSAGES_FAIL,
+    GET_INBOX_MESSAGES, GET_INBOX_MESSAGES_SUCCESS, GET_INBOX_MESSAGES_FAIL,
+    DELETE_MESSAGE, DELETE_MESSAGE_SUCCESS, DELETE_MESSAGE_FAIL, RESET_DELETE_MESSAGE_REQUEST,
+    DELETE_DRAFT_MESSAGE, DELETE_DRAFT_MESSAGE_SUCCESS, DELETE_DRAFT_MESSAGE_FAIL
 } from './actions';
 import Immutable from 'immutable';
-import {
-  addColorsForParticipants, addIncomingMessageToQuery, addOutgoingMessageToQuery,
-  buildMessagesQueue
-} from '../../helpers/messages';
 
 const initialState = Immutable.fromJS({
-  getThreadsRequest: {
+  getRecordRequest: {
     loading: false,
     success: false,
-    fail: false
+    fail: false,    
+    record: null
   },
-  createThreadRequest: {
+  deleteRecordRequest: {
     loading: false,
     success: false,
-    fail: false
+    fail: false,
+    errors: []
+  },  
+  getRecordsRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    records: Immutable.List(),
+    pagination: {
+      page: 1,
+      perPage: 25,
+      total: 0,
+      totalPages: 1
+    }    
   },
   sendMessageRequest: {
     loading: false,
     success: false,
     fail: false,
     errors: []
-  },
-  getAvailableUsersRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-  },
-  threads: {},
-  availableUsers: [],
-  recentMessages: {},
+  }
 });
 
 export default function reducer (state = initialState, action) {
   switch(action.type) {
-    /**
-     *  Threads
-     */
-    case GET_THREADS:
-      return state
-        .set('getThreadsRequest', state.get('getThreadsRequest')
-          .set('loading', true)
-          .remove('success')
-          .remove('fail')
-        ).set('threads', Immutable.Map());
-    case GET_THREADS_SUCCESS:
-      let threads = {};
-      for (let res of action.result.data) {
-        threads[res.id] = buildMessagesQueue(
-          addColorsForParticipants(res)
-        );
-      }
-
-      return state
-        .set('getThreadsRequest', state.get('getThreadsRequest')
-          .set('success', true)
-          .remove('loading')
-        ).set('threads', Immutable.fromJS(threads));
-    case GET_THREADS_FAIL:
-      return state
-        .set('getThreadsRequest', state.get('getThreadsRequest')
-          .set('loading', false)
-          .set('fail', true)
-        );
-    /**
-     * New Thread
-     */
-    case CREATE_NEW_THREAD:
-      return state
-        .set('createThreadRequest', state.get('createThreadRequest')
-          .set('loading', true)
-          .remove('success')
-          .remove('fail')
-        );
-    case CREATE_NEW_THREAD_SUCCESS:
-      return state
-        .set('createThreadRequest', state.get('createThreadRequest')
-          .set('success', true)
-          .remove('loading')
-        ).set('threads', state.get('threads')
-          .set(`${action.result.data.id}`, Immutable.fromJS(action.result.data))
-        );
-    /**
-     * New Message
-     */
-    case SEND_NEW_MESSAGE:
-      return state
-        .setIn(['threads', `${action.threadId}`], Immutable.fromJS(
-          addOutgoingMessageToQuery(
-            state.getIn(['threads', `${action.threadId}`]).toJS(), action.messageBody
-          )
-        ));
-    /**
-     * New Message
-     */
-    case NEW_MESSAGE_RECEIVED:
-      const threadId = action.message.threadId;
-
-      if (!state.getIn(['threads', `${threadId}`])) {
-        return state;
-      }
-
-      return state
-        .setIn(['threads', `${threadId}`], Immutable.fromJS(
-          addIncomingMessageToQuery(
-            state.getIn(['threads', `${threadId}`]).toJS(), action.message
-          )
-        ));
-
-    /**
-     * New Thread
-     */
-    case NEW_THREAD_CREATED:
-      return state.set('threads', state.get('threads')
-        .set(`${action.thread.id}`, Immutable.fromJS(action.thread))
-      );
-    /**
-     *  available users
-     */
-    case GET_AVAILABLE_USERS:
-      return state
-        .set('getAvailableUsersRequest', state.get('getAvailableUsersRequest')
-          .set('loading', true)
-          .remove('success')
-          .remove('fail')
-        ).set('availableUsers', Immutable.List());
-    case GET_AVAILABLE_USERS_SUCCESS:
-      return state
-        .set('getAvailableUsersRequest', state.get('getAvailableUsersRequest')
-          .set('success', true)
-          .remove('loading')
-        ).set('availableUsers', Immutable.fromJS(action.result.data));
-    case GET_AVAILABLE_USERS_FAIL:
-      return state
-        .set('getAvailableUsersRequest', state.get('getAvailableUsersRequest')
-          .set('loading', false)
-          .set('fail', true)
-        );
 
     /**
      *  send message
@@ -160,7 +61,58 @@ export default function reducer (state = initialState, action) {
           .set('errorMessage', action.error.response.data.message)
           .set('errors', action.error.response.data.code === 422 ? Immutable.fromJS(action.error.response.data.errors) : undefined)
         );
+    case RESET_SEND_MESSAGE_REQUEST:
+        return state.set('sendMessageRequest', initialState.get('sendMessageRequest'));
+        
+    case DELETE_MESSAGE:
+    case DELETE_DRAFT_MESSAGE:
+        return state.set('deleteRecordRequest', initialState.get('deleteRecordRequest').set('loading', true));
+    case DELETE_MESSAGE_SUCCESS:
+    case DELETE_DRAFT_MESSAGE_SUCCESS:
+        return state.set('deleteRecordRequest', initialState.get('deleteRecordRequest').set('success', true));
+    case DELETE_MESSAGE_FAIL:
+    case DELETE_DRAFT_MESSAGE_FAIL:
+      return state
+        .set('deleteRecordRequest', state.get('deleteRecordRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('errorCode', action.error.response.data.code)
+          .set('errorMessage', action.error.response.data.message)
+          .set('errors', action.error.response.data.code === 422 ? Immutable.fromJS(action.error.response.data.errors) : undefined)
+        );
+    case RESET_DELETE_MESSAGE_REQUEST:
+        return state.set('deleteRecordRequest', initialState.get('deleteRecordRequest'));        
 
+    case GET_MESSAGE:
+        return state.set('getRecordRequest', initialState.get('getRecordRequest').set('loading', true));
+    case GET_MESSAGE_SUCCESS:
+        return state
+        .set('getRecordRequest', state.get('getRecordRequest')
+          .set('success', true)
+          .set('loading', false)
+          .set('record', Immutable.fromJS(action.result.data))
+        );
+    case GET_MESSAGE_FAIL:
+        return state.set('getRecordRequest', initialState.get('getRecordRequest').set('fail', true));
+    case RESET_GET_MESSAGE_REQUEST:
+        return state.set('getRecordRequest', initialState.get('getRecordRequest'));
+        
+    case GET_SENT_MESSAGES:
+    case GET_DRAFT_MESSAGES:
+    case GET_INBOX_MESSAGES:
+        return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('loading', true));
+    case GET_SENT_MESSAGES_SUCCESS:
+    case GET_DRAFT_MESSAGES_SUCCESS:
+    case GET_INBOX_MESSAGES_SUCCESS:
+        return state.set('getRecordsRequest', initialState.get('getRecordsRequest')
+                .set('success', true)
+                .set('pagination', Immutable.fromJS(action.result.meta.pagination))
+                .set('records', Immutable.fromJS(action.result.data)));        
+    case GET_SENT_MESSAGES_FAIL:
+    case GET_DRAFT_MESSAGES_FAIL:
+    case GET_INBOX_MESSAGES_FAIL:
+        return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('fail', true));
+        
     /**
      * default
      */

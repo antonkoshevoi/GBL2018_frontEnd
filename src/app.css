@@ -376,16 +376,6 @@ table th .sort-arrow {
     z-index: 5;
 }
 
-.btn {
-    /*border: 2px solid gray;*/
-    /*color: gray;*/
-    /*background-color: white;*/
-    /*padding: 8px 20px;*/
-    /*border-radius: 8px;*/
-    /*font-size: 20px;*/
-    /*font-weight: bold;*/
-}
-
 .upload-btn-wrapper input[type=file] {
     font-size: 100px;
     position: absolute;
@@ -1219,37 +1209,6 @@ table .sub-table .m-datatable {
 
 div.m-widget25 .m-widget25__price {
     font-size: 60px;
-}
-
-.g-tab-list {
-    display: flex;
-    list-style: none;
-    align-items: center;
-    background: #f2f3f8;
-    padding: 0;
-}
-
-.g-tab-list > li {
-    padding: 15px;
-    text-align: center;
-    cursor: pointer;
-}
-
-.g-tab-list > li.react-tabs__tab--selected {
-    background-color: #fff;
-}
-
-.g-tab-list.center-tabs {
-    justify-content: center;
-}
-
-.g-tab-list.fill-tabs > li {
-    flex: 1;
-}
-
-.g-tab-list.fill-tabs > li > .fa {
-    font-size: 1.5rem;
-    color: #adadad
 }
 
 .settingsMenuBlock {

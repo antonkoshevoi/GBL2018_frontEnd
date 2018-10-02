@@ -85,7 +85,7 @@ export default  {
                 {
                     key: 'sent',
                     title: 'sent',
-                    link: 'sent',
+                    link: 'messages/sent',
                     icon: 'flaticon flaticon-technology-1',
                 },
                 {
@@ -97,13 +97,7 @@ export default  {
                 {
                     key: 'drafts',
                     title: 'drafts',
-                    link: 'drafts',
-                    icon: 'flaticon flaticon-technology-1',
-                },
-                {
-                    key: 'chat',
-                    title: 'chat',
-                    link: 'chat',
+                    link: 'messages/drafts',
                     icon: 'flaticon flaticon-technology-1',
                 }
             ]

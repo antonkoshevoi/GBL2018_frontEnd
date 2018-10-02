@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Avatar, CircularProgress, Icon} from '@material-ui/core';
+import {Avatar, CircularProgress} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
 import UnassignedCourses from "./sections/UnassignedCourses";
 import {connect} from "react-redux";
@@ -10,7 +10,6 @@ import {getParentRecords} from "../../redux/store/actions";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
 import {push} from 'react-router-redux';
 import {withStyles} from '@material-ui/core/styles';
-import classNames from 'classnames';
 import FeaturedItems from "./sections/FeaturedItems";
 import {selectRecords as storeItems}  from "../../redux/store/selectors";
 import QuickLink from "./sections/QuickLink";
@@ -132,8 +131,7 @@ class ParentDashboard extends Component {
     })
   }
 
-  render() {
-    const students = this.props.parentStudents;
+  render() {    
     const loading = this.props.getParentStudentsRequest.get('loading');
     const {records, t} = this.props;
 
@@ -145,8 +143,7 @@ class ParentDashboard extends Component {
               <div className="m-portlet__head-caption">
                 <div className="m-portlet__head-title">
                   <span className="m-portlet__head-icon">
-                    {loading && <CircularProgress color="inherit"/>}
-                    {!loading && <span>{students.size}</span>}
+                    {loading && <CircularProgress color="inherit"/>}                    
                   </span>
                   <h3 className="m-portlet__head-text">
                     {t('myLearners')}
@@ -164,7 +161,7 @@ class ParentDashboard extends Component {
               </div>
             </div>
             <div className="m-portlet__body m--padding-top-5" style={{height: "100%"}}>
-              <div style={{maxHeight:320,overflowY:'auto',overflowX:'hidden'}}>
+              <div style={{maxHeight:330,overflowY:'auto',overflowX:'hidden'}}>
                 {!loading && this._renderStudents()}
               </div>
             </div>
@@ -185,7 +182,7 @@ class ParentDashboard extends Component {
 
       <div className="row">
         <div className="col-md-12 col-lg-12 col-xl-8 margin-top-15">
-          <FeaturedItems data={records}/>
+            <FeaturedItems data={records}/>
         </div>
 
         <div className="col-md-4 col-xl-4 m--hidden-tablet-and-mobile m--hidden-desktop-lg" style={{marginTop:15}}>
@@ -209,7 +206,6 @@ class ParentDashboard extends Component {
           this._closeCreateDialog()
         }}
         onSuccess={() => {}}/>
-
     </div>
   }
 }
@@ -219,7 +215,6 @@ ParentDashboard = connect(
     parentStudents: selectRecords(state),
     getParentStudentsRequest: selectGetRecordsRequest(state),
     records: storeItems(state)
-
   }),
   (dispatch) => ({
     getParentStudents: (params = {}) => {
