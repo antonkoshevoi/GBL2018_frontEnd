@@ -3,8 +3,6 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetRecordRequest } from '../../redux/messages/selectors';
 import { getMessage } from '../../redux/messages/actions';
-import { push } from 'react-router-redux';
-import { MenuItem, Select } from '@material-ui/core';
 import Loader from "../../components/layouts/Loader";
 import NotFoundPage from '../errors/404';
 import moment from "moment/moment";
@@ -25,8 +23,7 @@ class ViewMessage extends Component {
 
 
     render() {
-        const {getRecordRequest, t} = this.props;
-        const {page, perPage} = this.state;
+        const {getRecordRequest, t} = this.props;        
         const loading = getRecordRequest.get('loading');
         const success = getRecordRequest.get('success');
         const data = getRecordRequest.get('record');

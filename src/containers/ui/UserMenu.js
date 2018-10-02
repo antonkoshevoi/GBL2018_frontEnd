@@ -4,12 +4,11 @@ import {translate} from "react-i18next";
 import {NavLink, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {selectUserData} from "../../redux/user/selectors";
-import {selectUserRoles} from "../../redux/user/selectors";
+import HasRole from "../middlewares/HasRole";
 
 class UserMenu extends Component {
 
-  static propTypes = {
-    // logout function
+  static propTypes = {    
     logout: PropTypes.func.isRequired
   };
 
@@ -32,8 +31,7 @@ class UserMenu extends Component {
   _renderDropDownMenu() {
     const { logout, userData, t, roles } = this.props;
 
-    let user = userData.toJS();
-    let prettyRoles = roles.toJS();
+        let user = userData.toJS();    
 
       return (
         <div className="m-dropdown__wrapper animated m--padding-right-20" onMouseLeave={() => {this.props.switchMenu(null)}} style={{display:'block'}}>
@@ -66,7 +64,12 @@ class UserMenu extends Component {
                     </span>
                   </NavLink>
                 </li>
-                  {prettyRoles && prettyRoles[0] && prettyRoles[0].name !== 'Parents' &&
+                <HasRole roles={[
+                    'Superadministrator',
+                    'Superintendent',            
+                    'Principal',
+                    'Administrator'
+                  ]}>
                     <li className="m-nav__item">
                       <NavLink to="/school-profile" className="m-nav__link">
                         <i className="m-nav__link-icon flaticon-profile-1"></i>
@@ -77,7 +80,7 @@ class UserMenu extends Component {
                         </span>
                       </NavLink>
                     </li>
-                  }
+                </HasRole>
                 <li className="m-nav__separator m-nav__separator--fit">
                 </li>
                 <li className="m-nav__item" onClick={logout}>
@@ -115,8 +118,7 @@ class UserMenu extends Component {
 
 UserMenu = connect(
   (state) => ({
-    userData: selectUserData(state),
-    roles: selectUserRoles(state)
+    userData: selectUserData(state)    
   }),
   (dispatch) => ({})
 )(UserMenu);
