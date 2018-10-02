@@ -12,7 +12,7 @@ class Messages extends Component {
     const { user, goToThread } = this.props;
 
     return user.get('messages').map((message, key) => (
-      <div key={key} className='m-widget1__item' onClick={() => { goToThread(message.get('threadId')) }}>
+      <div key={key} className='m-widget1__item' onClick={() => { goToThread(message.get('id'))}}>
         <div className='row m-row--no-padding align-items-center'>
           <div className='col-md-2 m--align-left'>
             <span className='m-widget1__number m--font-brand'>
@@ -21,7 +21,7 @@ class Messages extends Component {
           </div>
           <div className='col'>
             <h3 className='m-widget1__title'>{ message.get('user').get('username') }</h3>
-            <span className='m-widget1__desc'>{ message.get('body') }</span>
+            <span className='m-widget1__desc'>{ message.get('subject') }</span>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@ Messages = connect(
     user: selectUserData(state)
   }),
   (dispatch) => ({
-    goToThread: (threadId) => { dispatch(push(`/messages/${threadId}`)) }
+    goToThread: (id) => { dispatch(push(`/messages/view/${id}`)) }
   })
 )(Messages);
 

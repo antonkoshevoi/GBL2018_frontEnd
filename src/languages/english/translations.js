@@ -485,6 +485,7 @@ export default {
     sentMessages: 'Sent Messages',
     inboxMessages: 'Inbox Messages',
     draftMessages: 'Draft Messages',
+    viewMessage: 'View Message',
     messagesNotFound: 'No messages found...',
     new: 'New',
     recipientsGroups: {        

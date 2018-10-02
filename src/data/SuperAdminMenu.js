@@ -82,42 +82,30 @@ export default  {
            icon:'fa fa-share-alt',
            colorName:'blue',
            subMenu:[
-             {
-               key:'inbox',
-               title:'inbox',
-               link:'inbox',
-               icon:'flaticon flaticon-user-settings',
-             },
-             {
-               key:'labels',
-               title:'labels',
-               link:'labels',
-               icon:'flaticon flaticon-user-ok',
-             },
-             {
-               key:'sent',
-               title:'sent',
-               link:'sent',
-               icon:'flaticon	flaticon-technology-1',
-             },
-             {
-               key:'compose',
-               title:'compose',
-               link:'compose',
-               icon:'flaticon flaticon-technology-1',
-             },
-             {
-               key:'drafts',
-               title:'drafts',
-               link:'drafts',
-               icon:'flaticon flaticon-technology-1',
-             },
-             {
-               key:'chat',
-               title:'chat',
-               link:'chat',
-               icon:'flaticon flaticon-technology-1',
-             }
+                {
+                    key: 'inbox',
+                    title: 'inbox',
+                    link: 'messages',
+                    icon: 'flaticon flaticon-user-settings',
+                },
+                {
+                    key: 'sent',
+                    title: 'sent',
+                    link: 'messages/sent',
+                    icon: 'flaticon flaticon-technology-1',
+                },
+                {
+                    key: 'compose',
+                    title: 'compose',
+                    link: 'compose',
+                    icon: 'flaticon flaticon-technology-1',
+                },
+                {
+                    key: 'drafts',
+                    title: 'drafts',
+                    link: 'messages/drafts',
+                    icon: 'flaticon flaticon-technology-1',
+                }
            ]
          },
            {

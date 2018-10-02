@@ -53,20 +53,14 @@ export default  {
                 {
                     key: 'inbox',
                     title: 'inbox',
-                    link: 'inbox',
+                    link: 'messages',
                     icon: 'flaticon flaticon-user-settings',
-                },
-                {
-                    key: 'labels',
-                    title: 'labels',
-                    link: 'labels',
-                    icon: 'flaticon flaticon-user-ok',
                 },
                 {
                     key: 'sent',
                     title: 'sent',
-                    link: 'sent',
-                    icon: 'flaticon	flaticon-technology-1',
+                    link: 'messages/sent',
+                    icon: 'flaticon flaticon-technology-1',
                 },
                 {
                     key: 'compose',
@@ -77,13 +71,7 @@ export default  {
                 {
                     key: 'drafts',
                     title: 'drafts',
-                    link: 'drafts',
-                    icon: 'flaticon flaticon-technology-1',
-                },
-                {
-                    key: 'chat',
-                    title: 'chat',
-                    link: 'chat',
+                    link: 'messages/drafts',
                     icon: 'flaticon flaticon-technology-1',
                 }
             ]

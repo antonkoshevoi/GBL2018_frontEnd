@@ -14,7 +14,7 @@ const initialState = Immutable.fromJS({
     loading: false,
     success: false,
     fail: false,    
-    record: null
+    record: {}
   },
   deleteRecordRequest: {
     loading: false,
