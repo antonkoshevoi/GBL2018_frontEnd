@@ -5,7 +5,10 @@ import {
     GET_DRAFT_MESSAGES, GET_DRAFT_MESSAGES_SUCCESS, GET_DRAFT_MESSAGES_FAIL,
     GET_INBOX_MESSAGES, GET_INBOX_MESSAGES_SUCCESS, GET_INBOX_MESSAGES_FAIL,
     DELETE_MESSAGE, DELETE_MESSAGE_SUCCESS, DELETE_MESSAGE_FAIL, RESET_DELETE_MESSAGE_REQUEST,
-    DELETE_DRAFT_MESSAGE, DELETE_DRAFT_MESSAGE_SUCCESS, DELETE_DRAFT_MESSAGE_FAIL
+    DELETE_DRAFT_MESSAGE, DELETE_DRAFT_MESSAGE_SUCCESS, DELETE_DRAFT_MESSAGE_FAIL,
+    GET_UNREAD_MESSAGES, GET_UNREAD_MESSAGES_SUCCESS, GET_UNREAD_MESSAGES_FAIL,
+    VIEW_MESSAGE, VIEW_MESSAGE_SUCCESS, VIEW_MESSAGE_FAIL,
+    RESET_GET_MESSAGES_REQUEST
 } from './actions';
 import Immutable from 'immutable';
 
@@ -34,6 +37,13 @@ const initialState = Immutable.fromJS({
       totalPages: 1
     }    
   },
+  getUnreadMessagesRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    records: Immutable.List(),
+    total: 0    
+  },  
   sendMessageRequest: {
     loading: false,
     success: false,
@@ -84,8 +94,10 @@ export default function reducer (state = initialState, action) {
         return state.set('deleteRecordRequest', initialState.get('deleteRecordRequest'));        
 
     case GET_MESSAGE:
+    case VIEW_MESSAGE:
         return state.set('getRecordRequest', initialState.get('getRecordRequest').set('loading', true));
     case GET_MESSAGE_SUCCESS:
+    case VIEW_MESSAGE_SUCCESS:
         return state
         .set('getRecordRequest', state.get('getRecordRequest')
           .set('success', true)
@@ -93,6 +105,7 @@ export default function reducer (state = initialState, action) {
           .set('record', Immutable.fromJS(action.result.data))
         );
     case GET_MESSAGE_FAIL:
+    case VIEW_MESSAGE_FAIL:
         return state.set('getRecordRequest', initialState.get('getRecordRequest').set('fail', true));
     case RESET_GET_MESSAGE_REQUEST:
         return state.set('getRecordRequest', initialState.get('getRecordRequest'));
@@ -113,6 +126,19 @@ export default function reducer (state = initialState, action) {
     case GET_INBOX_MESSAGES_FAIL:
         return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('fail', true));
         
+    case RESET_GET_MESSAGES_REQUEST: 
+        return state.set('getRecordsRequest', initialState.get('getRecordsRequest'));
+    
+    case GET_UNREAD_MESSAGES:    
+        return state.set('getUnreadMessagesRequest', initialState.get('getUnreadMessagesRequest').set('loading', true));
+    case GET_UNREAD_MESSAGES_SUCCESS:    
+        return state.set('getUnreadMessagesRequest', initialState.get('getUnreadMessagesRequest')
+                .set('success', true)
+                .set('total', action.result.data.total)
+                .set('records', Immutable.fromJS(action.result.data.messages)));        
+    case GET_UNREAD_MESSAGES_FAIL:    
+        return state.set('getUnreadMessagesRequest', initialState.get('getUnreadMessagesRequest').set('fail', true));
+    
     /**
      * default
      */

@@ -24,3 +24,8 @@ export const selectDeleteRecordRequest = createSelector(
   selectMessagesDomain,
   (subState) => subState.get('deleteRecordRequest')
 );
+
+export const selectGetUnreadMessagesRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('getUnreadMessagesRequest')
+);

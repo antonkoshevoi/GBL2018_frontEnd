@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetRecordRequest } from '../../redux/messages/selectors';
-import { getMessage } from '../../redux/messages/actions';
+import { selectGetRecordRequest, selectDeleteRecordRequest } from '../../redux/messages/selectors';
+import { viewMessage, getUnreadMessages, deleteMessage, resetDeleteMessageRequest, resetGetMessageRequest } from '../../redux/messages/actions';
+import {Divider} from '@material-ui/core';
+import { push } from 'react-router-redux';
 import Loader from "../../components/layouts/Loader";
 import NotFoundPage from '../errors/404';
 import moment from "moment/moment";
+import DeleteButton from '../../components/ui/DeleteButton';
 
 class ViewMessage extends Component {
 
@@ -21,12 +24,46 @@ class ViewMessage extends Component {
         getRecord(this.state.id);
     }        
 
+    componentWillReceiveProps(nextProps) {
+        const {getRecordRequest, getRecord, getUnreadMessages, deleteRecordRequest, resetDeleteMessageRequest} = this.props;      
+            
+        if (this.props.match.params.id !== nextProps.match.params.id) {
+            this.setState({id: nextProps.match.params.id});
+            
+            getRecord(nextProps.match.params.id);            
+        }
+        
+        if (!getRecordRequest.get('success') && nextProps.getRecordRequest.get('success')) {                        
+            if (!nextProps.getRecordRequest.get('record').get('isRead')) {            
+                getUnreadMessages();
+            }
+        }                
+        
+        if (!deleteRecordRequest.get('success') && nextProps.deleteRecordRequest.get('success')) {
+            resetDeleteMessageRequest();
+            this._goBack();
+        }         
+    }
+        
+    _goBack() {
+        this.props.resetGetMessageRequest();        
+        this.props.goTo('/messages');
+    }     
+    
+    _deleteRecord(id) {
+        const {deleteMessage} = this.props;
+        deleteMessage(id);        
+    }    
 
     render() {
-        const {getRecordRequest, t} = this.props;        
-        const loading = getRecordRequest.get('loading');
-        const success = getRecordRequest.get('success');
-        const data = getRecordRequest.get('record');
+        const {getRecordRequest, deleteRecordRequest, t} = this.props;        
+        const loading   = getRecordRequest.get('loading') || deleteRecordRequest.get('loading');
+        const success   = getRecordRequest.get('success');
+        const data      = getRecordRequest.get('record');
+        
+        if (getRecordRequest.get('fail')) {
+            return <NotFoundPage />;
+        }
 
         return (
             <div className='fadeInLeft  animated'>               
@@ -43,16 +80,24 @@ class ViewMessage extends Component {
                     {success &&
                     <div className='m-portlet__body'>
                         <div className="row">
-                            <div className="col-sm-12">                              
-                                <p className="pull-right">{moment(data.get('sent')).format('lll')}</p>
-                                <h6>{t('subject')}</h6> 
-                                <p>{data.get('subject')}</p>
-                                <h6>{t('description')}</h6> 
-                                <p className="pre-line">{data.get('body')}</p>
-                                <h6>{t('type')}</h6>
-                                <p>
-                                    <span className={`m-badge m-badge--brand m-badge--wide ${(data.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(data.get('type'))}</span>
-                                </p>                                                                                                                                
+                            <div className="col-sm-12">
+                                <h5 className="m--margin-bottom-20">{data.get('subject')} <span className={`m-badge m-badge--brand m-badge--wide ${(data.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(data.get('type'))}</span></h5>
+                                <p>{t('date')}: <strong>{moment(data.get('sent')).format('lll')}</strong></p>
+                                <p>{t('from')}: <strong>{data.get('user').get('name')}</strong></p>
+                                <Divider className="m--margin-top-20 m--margin-bottom-30" /> 
+                                <p className="pre-line" style={{minHeight: 300}}>{data.get('body')}</p>                                                         
+                                <Divider className="m--margin-top-30 m--margin-bottom-30" /> 
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-12">
+                                <button onClick={() => { this._goBack() }} disabled={loading} className="btn btn-default" >{t('back')}</button>
+                                <DeleteButton                    
+                                    onClick={() => { this._deleteRecord(data.get('id')) }}                                                                  
+                                    btnName={t('delete')}
+                                    icon={false}
+                                    disabled={loading}
+                                    classNameBtn="m--margin-left-10 btn btn-danger" />
                             </div>
                         </div>
                     </div>}
@@ -64,12 +109,26 @@ class ViewMessage extends Component {
 
 ViewMessage = connect(
     (state) => ({
-        getRecordRequest: selectGetRecordRequest(state)
+        getRecordRequest: selectGetRecordRequest(state),
+        deleteRecordRequest: selectDeleteRecordRequest(state)
     }),
     (dispatch) => ({
         getRecord: (params = {}) => {
-            dispatch(getMessage(params));
-        }
+            dispatch(viewMessage(params));
+        },
+        deleteMessage: (id) => {
+            dispatch(deleteMessage(id));
+        },
+        getUnreadMessages: () => {
+            dispatch(getUnreadMessages());
+        },
+        resetGetMessageRequest: () => {
+            dispatch(resetGetMessageRequest());
+        },
+        resetDeleteMessageRequest: () => {
+            dispatch(resetDeleteMessageRequest());
+        },        
+        goTo: (url) => {dispatch(push(url))}
     })
 )(ViewMessage);
 

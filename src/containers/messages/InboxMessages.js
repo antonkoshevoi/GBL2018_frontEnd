@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetRecordsRequest, selectDeleteRecordRequest } from '../../redux/messages/selectors';
-import { getInboxMessages, deleteMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
+import { getInboxMessages, deleteMessage, resetDeleteMessageRequest, resetGetMessagesRequest } from '../../redux/messages/actions';
 import { MenuItem, Select } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
+import { NavLink } from "react-router-dom";
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
 import moment from 'moment/moment';
@@ -31,6 +32,10 @@ class InboxMessages extends Component {
             resetDeleteMessageRequest();
             this._getRecords();
         }        
+    }
+    
+    componentWillUnmount () {
+        this.props.resetGetMessagesRequest();
     }
     
     _getRecords() {
@@ -70,10 +75,11 @@ class InboxMessages extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
+                <Td first={true} width='40px'>{this._recordNumber(key)}</Td>
                 <Td width='150px'>
-                    {record.get('subject')}
-                    {!record.get('isRead') && <span className="m--margin-left-5 m-badge m-badge--brand m-badge--wide m-badge--warning">{t('new')}!</span>}
+                    {!record.get('isRead') && <span className="m-badge m-badge--brand m-badge--wide m-badge--warning">!</span>}
+                    
+                    <NavLink className="m--margin-left-5 g-blue" to={`/messages/view/${record.get('id')}`}>{record.get('subject')}</NavLink>
                 </Td>
                 <Td width='130px'>
                     <span className={`m-badge m-badge--brand m-badge--wide ${(record.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(record.get('type'))}</span>
@@ -81,9 +87,9 @@ class InboxMessages extends Component {
                 <Td width='100px'>{record.get('user').get('name')}</Td>
                 <Td width='100px'>{moment(record.get('sent')).format('lll')}</Td>
                 <Td width='100px'>
-                    <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo('messages/details/' + record.get('id')) }}>
+                    <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' to={`/messages/view/${record.get('id')}`}>
                         <i className='la la-search'></i>
-                    </button>                
+                    </NavLink>                
                     <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>                   
                 </Td>
             </Row>
@@ -139,10 +145,10 @@ class InboxMessages extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>
-                                <Th first={true} width='60px'>#</Th>
+                                <Th first={true} width='40px'>#</Th>
                                 <Th width='150px'>{t('subject')}</Th>
                                 <Th width='130px'>{t('type')}</Th>
-                                <Th width='100px'>{t('recipients')}</Th>
+                                <Th width='100px'>{t('from')}</Th>
                                 <Th width='100px'>{t('sentDate')}</Th>                                
                                 <Th width='100px'>{t('actions')}</Th>
                             </HeadRow>
@@ -180,7 +186,10 @@ InboxMessages = connect(
         },
         resetDeleteMessageRequest: () => {
             dispatch(resetDeleteMessageRequest());
-        }        
+        },
+        resetGetMessagesRequest: () => {
+            dispatch(resetGetMessagesRequest());
+        }
     })
 )(InboxMessages);
 
