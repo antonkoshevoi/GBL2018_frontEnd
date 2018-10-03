@@ -6,8 +6,8 @@ import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typog
 import { getSchoolTeachers } from '../../../redux/schools/actions';
 import { selectGetSchoolTeachersRequest, selectSchools } from '../../../redux/schools/selectors';
 import DatePicker from '../../../components/ui/DatePicker';
-import { getDemoCourses } from '../../../redux/classrooms/actions';
-import {selectCoursesRequest} from '../../../redux/classrooms/selectors';
+import { getDemoCourses } from '../../../redux/courses/actions';
+import {selectCoursesRequest} from '../../../redux/courses/selectors';
 
 function TabContainer(props) {
   return (

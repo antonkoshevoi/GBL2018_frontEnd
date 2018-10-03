@@ -5,14 +5,14 @@ import {IconButton, CircularProgress, Icon} from '@material-ui/core';
 import {translate} from 'react-i18next';
 import {withRouter, NavLink} from 'react-router-dom';
 import {connect} from "react-redux";
-import {getSchoolReportStudent} from '../../../../redux/reports/actions';
-import {selectGetStudentForReportRequest} from '../../../../redux/reports/selectors';
+import {getSingleRecord} from '../../../../redux/students/actions';
+import {selectGetSingleRecordRequest} from '../../../../redux/students/selectors';
 
 class InfoSection extends Component {
 
   componentDidMount() {
     const studentId = this.props.match.params.id;
-    this.props.getSchoolReportStudent(studentId);
+    this.props.getStudent(studentId);
   }
 
   _renderCourseTable(courses) {
@@ -38,16 +38,12 @@ class InfoSection extends Component {
     })
   }
 
-  render() {
-    const {data} = this.props.data;
-    const {id} = this.props.match.params;
-    const coursesLoading = this.props.data.loading;
-    const {getStudentForReportRequest, t} = this.props;
-    const firstName = getStudentForReportRequest.get('record').toJS().firstName;
-    const lastName = getStudentForReportRequest.get('record').toJS().lastName;
-    const birthday = getStudentForReportRequest.get('record').toJS().birthday;
-    const avatar = getStudentForReportRequest.get('record').toJS().avatar;
-    const loading = getStudentForReportRequest.get('loading');
+  render() {    
+    const {id}   = this.props.match.params;        
+    const {studentRequest, data, t} = this.props;
+
+    const loading = studentRequest.get('loading');
+    const student = loading ? null : studentRequest.get('record').toJS();
 
     const defaultAvatar = '//s3.amazonaws.com/37assets/svn/765-default-avatar.png';
 
@@ -57,7 +53,7 @@ class InfoSection extends Component {
           <div className="imgBlock">
             {loading && <MyPreloader text="Loading..." color="primary"/>}
             <div className="avatar m--margin-bottom-20">
-              {!loading && <img src={(avatar) ? avatar : defaultAvatar} alt="" className="" />}
+              {!loading && <img src={(student.avatar || defaultAvatar)} alt="" className="" />}
             </div>
           </div>
         </div>
@@ -90,15 +86,15 @@ class InfoSection extends Component {
                         <tbody>
                         <tr>
                           <th>{t('firstName')}</th>
-                          <td>{loading && <CircularProgress color="primary"/>} {!loading && firstName}</td>
+                          <td>{loading ? <CircularProgress color="primary"/> : student.firstName}</td>
                         </tr>
                         <tr>
                           <th>{t('lastName')}</th>
-                          <td>{loading && <CircularProgress color="primary"/>} {!loading && lastName}</td>
+                          <td>{loading ? <CircularProgress color="primary"/> : student.lastName}</td>
                         </tr>
                         <tr>
                           <th>{t('birthday')}</th>
-                          <td>{loading && <CircularProgress color="primary"/>} {!loading && (birthday ? birthday : 'N / A')}</td>
+                          <td>{loading ? <CircularProgress color="primary"/> : (student.birthday || 'N / A')}</td>
                         </tr>
                         </tbody>
                       </table>
@@ -119,10 +115,10 @@ class InfoSection extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {coursesLoading && <tr>
+                    {data.loading && <tr>
                       <td colSpan="3" className="text-center"><CircularProgress color="primary"/></td>
                     </tr>}
-                    {!coursesLoading && this._renderCourseTable(data)}
+                    {!data.loading && this._renderCourseTable(data.data)}
                     </tbody>
                   </table>
                 </div>
@@ -137,12 +133,10 @@ class InfoSection extends Component {
 
 InfoSection = connect(
   (state) => ({
-    getStudentForReportRequest: selectGetStudentForReportRequest(state),
+    studentRequest: selectGetSingleRecordRequest(state)
   }),
   (dispatch) => ({
-    getSchoolReportStudent: (id) => {
-      dispatch(getSchoolReportStudent(id))
-    }
+    getStudent: (id) => { dispatch(getSingleRecord(id)) }
   })
 )(InfoSection);
 

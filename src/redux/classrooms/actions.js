@@ -43,14 +43,6 @@ export const BULK_UPLOAD_SUCCESS = '[Classrooms] BULK_UPLOAD_SUCCESS';
 export const BULK_UPLOAD_FAIL = '[Classrooms] BULK_UPLOAD_FAIL';
 export const RESET_BULK_UPLOAD_REQUEST = '[Classrooms] RESET_BULK_UPLOAD_REQUEST';
 
-export const GET_COURSES = '[Classrooms] GET_COURSES';
-export const GET_COURSES_SUCCESS = '[Classrooms] GET_COURSES_SUCCESS';
-export const GET_COURSES_FAIL = '[Classrooms] GET_COURSES_FAIL';
-
-export const GET_DEMO_COURSES = '[Classrooms] GET_DEMO_COURSES';
-export const GET_DEMO_COURSES_SUCCESS = '[Classrooms] GET_DEMO_COURSES_SUCCESS';
-export const GET_DEMO_COURSES_FAIL = '[Classrooms] GET_DEMO_COURSES_FAIL';
-
 export const GET_DEMO_CLASSROOMS = '[Classrooms] GET_DEMO_CLASSROOMS';
 export const GET_DEMO_CLASSROOMS_SUCCESS = '[Classrooms] GET_DEMO_CLASSROOMS_SUCCESS';
 export const GET_DEMO_CLASSROOMS_FAIL = '[Classrooms] GET_DEMO_CLASSROOMS_FAIL';
@@ -203,26 +195,6 @@ export function deleteRecord(id, params = {}) {
   return {
     types: [DELETE, DELETE_SUCCESS, DELETE_FAIL],
     promise: (apiClient) => apiClient.delete(`classroom/${id}`, params)
-  };
-}
-
-/**
- * Courses
- */
-export function getCourses() {
-  return {
-    types: [GET_COURSES, GET_COURSES_SUCCESS, GET_COURSES_FAIL],
-    promise: (apiClient) => apiClient.get(`courses`)
-  };
-}
-
-/**
- * Courses
- */
-export function getDemoCourses(params = {}) {
-  return {
-    types: [GET_DEMO_COURSES, GET_DEMO_COURSES_SUCCESS, GET_DEMO_COURSES_FAIL],
-    promise: (apiClient) => apiClient.get(`courses/demo`, params)
   };
 }
 

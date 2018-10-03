@@ -20,8 +20,7 @@ function TabContainer(props) {
 class Details extends Component {
 
   static propTypes = {
-    user: PropTypes.object.isRequired,
-    schools: PropTypes.array.isRequired,
+    user: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -98,15 +97,7 @@ class Details extends Component {
     this.setState({mode})
   }
 
-  _renderSchools() {
-    const { schools } = this.props;
-
-    return schools.map((school,i)=>{
-      return <MenuItem key={i} value={school.schId}>{school.schName}</MenuItem>
-    });
-  }
-
-  _renderHmerooms() {
+  _renderHomerooms() {
     const { schoolHomerooms } = this.state;
 
     return schoolHomerooms.map((schoolHomeroom,i)=>{
@@ -298,7 +289,7 @@ class Details extends Component {
                       value={user.homeroomId || ''}
                       onChange={(e) => { this._handleInputChange(e) }}>
                       <MenuItem value={null} primarytext=""><em>{t('none')}</em></MenuItem>
-                      {this._renderHmerooms()}
+                      {this._renderHomerooms()}
                     </Select>
                     {errors && errors.get('homeroomId') && <div className="form-control-feedback text-center error">{errors.get('homeroomId').get(0)}</div>}
                   </div>

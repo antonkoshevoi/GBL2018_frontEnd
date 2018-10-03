@@ -21,9 +21,9 @@ class InvitationForm extends Component {
   }
 
   componentDidMount() {
-    const { getDemoCourses } = this.props;
+    const { getDemoClassrooms } = this.props;
 
-    getDemoCourses();
+    getDemoClassrooms();
   }
 
   _handleInputChange(event) {
@@ -112,9 +112,9 @@ InvitationForm = connect(
     demoClassrooms: selectRecords(state),
   }),
   (dispatch) => ({
-    getDemoCourses: () => { dispatch(getDemoClassrooms({
+    getDemoClassrooms: () => { dispatch(getDemoClassrooms({
       perPage: 0
-    })) },
+    })) }
   })
 )(InvitationForm);
 

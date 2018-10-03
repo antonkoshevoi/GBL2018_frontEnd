@@ -10,32 +10,6 @@ class Summery extends Component {
     schools: PropTypes.array.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
-
-  _renderSchools() {
-    const { schools } = this.props;
-
-    return (
-      schools.map((school, key) => {
-        return <div className="m-timeline-2 my-timeline" key={key}>
-          <div className="m-timeline-2__items  m--padding-top-5 m--padding-bottom-10">
-            <div className="m-timeline-2__item m--margin-bottom-10">
-              <div className="m-timeline-2__item-cricle">
-                <i className={`fa fa-genderless m--font-${randColorName()}`}></i>
-              </div>
-              <div className="m-timeline-2__item-text  m--padding-top-5">
-                {school.schName}
-              </div>
-            </div>
-          </div>
-        </div>
-      })
-    )
-  }
-
   _renderHomerooms() {
     const { homerooms } = this.props.user;
     const { t } = this.props; 
@@ -113,7 +87,6 @@ class Summery extends Component {
           {this._renderClassrooms()}
         </div>
       </div>
-
     );
   }
 }

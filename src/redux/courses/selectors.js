@@ -10,7 +10,10 @@ export const selectGetStoreRecordsRequest = createSelector(
   (subState) => subState.get('getStoreRecordsRequest')
 );
 
-export const selectGetUnassignedRecordsRequest = createSelector(
+/**
+ * Courses
+ */
+export const selectCoursesRequest = createSelector(
   selectCoursesDomain,
-  (subState) => subState.get('getUnassignedRecordsRequest')
+  (subState) => subState.get('getCoursesRequest')
 );
