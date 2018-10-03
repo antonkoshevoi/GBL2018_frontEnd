@@ -57,7 +57,7 @@ class InboxMessages extends Component {
     }    
     
     _renderRecords() {
-        const {t, goTo} = this.props;
+        const {t} = this.props;
         const loading = this.props.getRecordsRequest.get('loading');
         const records = this.props.getRecordsRequest.get('records');
         

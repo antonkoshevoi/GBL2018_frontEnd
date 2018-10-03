@@ -71,11 +71,10 @@ class Details extends Component {
     const price         = successSingle ? Number(record.get('price')) : 0;
     const discountPrice = Number(price - (price * record.get('discount') / 100));    
 
-    const similarRecords = [];/*
-      (successRecords && successSingle) ?
+    const similarRecords = (successRecords && successSingle) ?
       records.filter((item) => {
         return (item.get('category').get('id') === record.get('category').get('id')) && (item.get('id') !== record.get('id'))
-      }).slice(0, 5) : [];*/
+      }).slice(0, 5) : [];
 
     return (
       <div className="m-portlet store-wrapper fadeInLeft animated">
