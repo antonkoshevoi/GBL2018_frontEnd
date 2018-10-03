@@ -11,15 +11,15 @@ import moment from "moment/moment";
 class SentMessages extends Component {
 
     constructor(props) {
-        super(props);
+        super(props);        
         this.state = {
             page: props.getRecordsRequest.get('pagination').get('page'),
             perPage: props.getRecordsRequest.get('pagination').get('perPage')
         }
     }
 
-    componentDidMount() {
-        const {getRecords} = this.props;
+    componentWillMount() {
+        const {getRecords} = this.props;        
         getRecords();
     }
     
@@ -44,6 +44,7 @@ class SentMessages extends Component {
         const {t, goTo} = this.props;
         const loading = this.props.getRecordsRequest.get('loading');
         const records = this.props.getRecordsRequest.get('records');
+        const success = this.props.getRecordsRequest.get('success');                
         
         if (!loading && records.size === 0) {
             return (

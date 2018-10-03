@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Select, MenuItem, InputLabel, Input, TextField, FormControl, FormHelperText, FormControlLabel, Checkbox, Button} from '@material-ui/core';
+import { Select, MenuItem, InputLabel, Input, TextField, FormControl, FormHelperText, FormControlLabel, Checkbox } from '@material-ui/core';
 import { selectGetSchoolHomeroomsRequest, selectGetSchoolClassroomsRequest, selectGetSchoolTeachersRequest } from '../../redux/schools/selectors';
 import { getSchoolHomerooms, getSchoolClassrooms, getSchoolTeachers} from '../../redux/schools/actions';
-import { selectSendMessageRequest } from '../../redux/messages/selectors';
+import { selectSendMessageRequest, selectGetRecordRequest } from '../../redux/messages/selectors';
 import { selectGetUserRequest, selectUserData } from "../../redux/user/selectors";
 import { selectUserRoles } from "../../redux/user/selectors";
-import { sendMessage, resetSendMessageRequest } from '../../redux/messages/actions';
+import { sendMessage, getDraftMessage, resetSendMessageRequest, resetGetMessageRequest } from '../../redux/messages/actions';
 import Loader from '../../components/layouts/Loader';
 import HasRole from "../middlewares/HasRole";
 
@@ -17,9 +17,16 @@ class Compose extends Component {
     constructor(props) {
         super(props);
         
-        this.state = {
-            recipient: '',
-            type: 'mail',            
+        this.state = this.getInitialState();
+    }
+    
+    getInitialState() {
+        return {
+            draftId: null,
+            subject: null,
+            type: null, 
+            recipient: null,
+            message: null,
             homerooms: null,
             classrooms: null,
             teachers: null,
@@ -38,13 +45,33 @@ class Compose extends Component {
     }
 
     componentDidMount() {
-        
+        if (this.props.match.params.id) {            
+            this.props.getDraftMessage(this.props.match.params.id);
+        }
     }
 
     componentWillReceiveProps(nextProps) {
        
-        const {homeroomsRequest, classroomsRequest, teachersRequest, sendMessageRequest, resetSendMessageRequest, goTo} = this.props;
+        const {
+            homeroomsRequest,
+            classroomsRequest, 
+            teachersRequest, 
+            sendMessageRequest, 
+            resetSendMessageRequest,
+            resetGetMessageRequest,
+            messageRequest, 
+            goTo} = this.props;
 
+        if (this.props.match.params.id !== nextProps.match.params.id) {
+            resetGetMessageRequest();
+            this.setState(this.getInitialState());
+        }
+        
+        if (!messageRequest.get('success') && nextProps.messageRequest.get('success')) {
+            resetSendMessageRequest();
+            this._setDraftMessage(nextProps.messageRequest.get('record').toJS());
+        }
+        
         if (!homeroomsRequest.get('success') && nextProps.homeroomsRequest.get('success')) {
             this.setState({homerooms: nextProps.homeroomsRequest.get('records').toJS()});
         }
@@ -59,29 +86,44 @@ class Compose extends Component {
         
         if (!sendMessageRequest.get('success') && nextProps.sendMessageRequest.get('success')) {
             resetSendMessageRequest();
-            goTo(`messages/${this.state.isDraft ? 'drafts' : 'sent'}`);
+            goTo(`/messages/${this.state.isDraft ? 'drafts' : 'sent'}`);
         }        
     }
     
-    _handleChange(event) {
-        const { value, name } = event.target;  
+    _setDraftMessage(message)
+    {
+        this.setState({
+            draftId: message.id,
+            recipient: message.recipients,
+            type: message.type,
+            message: message.body,
+            subject: message.subject,
+            [message.recipients]: message.recipientsIds
+        });
         
-        this.setState({[name]: value});        
+        this._changeRecipients(message.recipients);
     }
     
-    _handleChangeRecipients(event) {
-        const { value } = event.target;  
-        this.setState({recipient: value});                
+    _handleChange(event) {
+        const { value, name } = event.target;
         
-        if (value === 'classroomIds' && !this.state.classrooms) {
+        this.setState({[name]: value});
+        
+        if (name === 'recipients') {
+            this._changeRecipients(value);
+        }
+    }
+    
+    _changeRecipients(recipients) {                   
+        if (recipients === 'classroomIds' && !this.state.classrooms) {
             this.props.getClassrooms();
         }
         
-        if (value === 'homeroomIds' && !this.state.homerooms) {
+        if (recipients === 'homeroomIds' && !this.state.homerooms) {
             this.props.getHomerooms();
         }
         
-        if (value === 'teacherId' && !this.state.teachers) {
+        if (recipients === 'teacherId' && !this.state.teachers) {
             this.props.getTeachers();
         }        
     }
@@ -121,9 +163,10 @@ class Compose extends Component {
     
     _send(draft) {
         const {sendMessage} = this.props;
-        const {message, type, recipient, subject } = this.state;                
+        const {message, type, recipient, subject, draftId } = this.state;                
         
         sendMessage({
+            draftId:        draftId,
             message:        message,
             subject:        subject,
             type:           type,
@@ -132,6 +175,12 @@ class Compose extends Component {
             isDraft:        draft
         });        
     }
+    
+    _goBack() {
+        this.props.resetGetMessageRequest();     
+        this.props.resetSendMessageRequest();        
+        this.props.goTo(this.state.draftId ? '/messages/drafts' : '/messages');
+    }     
     
     _renderRecipients()
     {        
@@ -207,9 +256,9 @@ class Compose extends Component {
     }
     
     render() {
-        const {homeroomsRequest, classroomsRequest, teachersRequest, sendMessageRequest, t} = this.props;
+        const {homeroomsRequest, classroomsRequest, teachersRequest, sendMessageRequest, messageRequest, t} = this.props;
 
-        const loading = homeroomsRequest.get('loading') || classroomsRequest.get('loading') || teachersRequest.get('loading') || sendMessageRequest.get('loading');                
+        const loading = homeroomsRequest.get('loading') || classroomsRequest.get('loading') || teachersRequest.get('loading') || sendMessageRequest.get('loading') || messageRequest.get('loading');
         
         const errors = sendMessageRequest.get('errors');
         
@@ -243,7 +292,7 @@ class Compose extends Component {
                                     <HasRole roles={['Teacher']}>
                                         <Select
                                             value={this.state.recipient || ''}
-                                            onChange={(e) => { this._handleChangeRecipients(e) }}
+                                            onChange={(e) => { this._handleChange(e) }}
                                             inputProps={{  name: 'recipients', id: 'recipients' }}
                                             >
                                             <MenuItem value="0"></MenuItem>
@@ -274,7 +323,7 @@ class Compose extends Component {
                                 <FormControl className='full-width form-inputs'>
                                     <InputLabel htmlFor='type'>{t('type')}</InputLabel>
                                     <Select
-                                        value={this.state.type}
+                                        value={this.state.type || ''}
                                         onChange={(e) => { this._handleChange(e) }}
                                         inputProps={{
                                             name: 'type',
@@ -333,30 +382,11 @@ class Compose extends Component {
                         </div>
                         <div className='row'>
                             <div className='col-sm-12 col-md-12 text-center'>
-                                <Button
-                                  type='submit'
-                                  form='create-student-form'            
-                                  variant="raised"
-                                  className='mt-btn-success m--margin-top-10 btn btn-success mt-btn m--margin-right-10'
-                                  color='primary'
-                                  disabled={loading}
-                                  onClick={() => {
-                                      this._saveAsDraft()
-                                  }} >
-                                  {t('saveAsDraft')}                                     
-                                </Button>                             
-                                <Button
-                                  type='submit'
-                                  form='create-student-form'            
-                                  variant="raised"
-                                  className='mt-btn-success m--margin-top-10 btn btn-success mt-btn'
-                                  color='primary'
-                                  disabled={loading}
-                                  onClick={() => {
-                                      this._sendMessage()
-                                  }} >
-                                  {t('sendMessage')}                                     
-                                </Button>                                                                    
+                                <button onClick={() => { this._goBack() }} disabled={loading} className="btn btn-default m--margin-right-10" >{t('back')}</button>
+                                
+                                <button onClick={() => { this._saveAsDraft() }} disabled={loading} className="btn btn-success m--margin-right-10" >{t('saveAsDraft')}</button>
+                                                                        
+                                <button onClick={() => { this._sendMessage() }} disabled={loading} className="btn btn-success" >{t('sendMessage')}</button>
                             </div>
                         </div>
                     </div>
@@ -368,6 +398,7 @@ class Compose extends Component {
 
 Compose = connect(
     (state) => ({    
+        messageRequest: selectGetRecordRequest(state),
         sendMessageRequest: selectSendMessageRequest(state),
         homeroomsRequest: selectGetSchoolHomeroomsRequest(state),
         classroomsRequest: selectGetSchoolClassroomsRequest(state),
@@ -377,6 +408,8 @@ Compose = connect(
         userData: selectUserData(state)
     }),
     (dispatch) => ({
+        getDraftMessage: (id) => { dispatch(getDraftMessage(id)) },
+        resetGetMessageRequest: () => { dispatch(resetGetMessageRequest()) },
         sendMessage: (params = {}) => { dispatch(sendMessage(params)) },
         resetSendMessageRequest: () => { dispatch(resetSendMessageRequest()) },
         getHomerooms: (params = {}) => { dispatch(getSchoolHomerooms(params)) },

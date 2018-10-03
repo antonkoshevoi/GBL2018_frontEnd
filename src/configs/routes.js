@@ -144,6 +144,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/messages' name='Inbox Messages' component={InboxMessages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/view/:id' name='View Message' component={ViewMessage} />
       <AuthenticatedRoute exact layout={MainLayout} path='/compose' name='Compose' component={Compose} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/messages/draft/:id' name='Edit Draft' component={Compose} />
             
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />

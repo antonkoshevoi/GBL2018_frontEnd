@@ -25,6 +25,10 @@ export const GET_DRAFT_MESSAGES = '[Messages] GET_DRAFT_MESSAGES';
 export const GET_DRAFT_MESSAGES_SUCCESS = '[Messages] GET_DRAFT_MESSAGES_SUCCESS';
 export const GET_DRAFT_MESSAGES_FAIL = '[Messages] GET_DRAFT_MESSAGES_FAIL';
 
+export const GET_DRAFT_MESSAGE = '[Messages] GET_DRAFT_MESSAGE';
+export const GET_DRAFT_MESSAGE_SUCCESS = '[Messages] GET_DRAFT_MESSAGE_SUCCESS';
+export const GET_DRAFT_MESSAGE_FAIL = '[Messages] GET_DRAFT_MESSAGE_FAIL';
+
 export const GET_INBOX_MESSAGES = '[Messages] GET_INBOX_MESSAGES';
 export const GET_INBOX_MESSAGES_SUCCESS = '[Messages] GET_INBOX_MESSAGES_SUCCESS';
 export const GET_INBOX_MESSAGES_FAIL = '[Messages] GET_INBOX_MESSAGES_FAIL';
@@ -57,6 +61,13 @@ export function getMessage(id) {
   return {    
     types: [GET_MESSAGE, GET_MESSAGE_SUCCESS, GET_MESSAGE_FAIL],
     promise: (apiClient) => apiClient.get(`messages/details/${id}`)
+  };
+}
+
+export function getDraftMessage(id) {
+  return {    
+    types: [GET_DRAFT_MESSAGE, GET_DRAFT_MESSAGE_SUCCESS, GET_DRAFT_MESSAGE_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/draft/${id}`)
   };
 }
 

@@ -90,7 +90,7 @@ class ViewMessage extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-sm-12">
+                            <div className="col-sm-12 text-center">
                                 <button onClick={() => { this._goBack() }} disabled={loading} className="btn btn-default" >{t('back')}</button>
                                 <DeleteButton                    
                                     onClick={() => { this._deleteRecord(data.get('id')) }}                                                                  

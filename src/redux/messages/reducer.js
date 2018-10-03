@@ -1,5 +1,6 @@
 import {
     GET_MESSAGE, GET_MESSAGE_SUCCESS, GET_MESSAGE_FAIL, RESET_GET_MESSAGE_REQUEST,
+    GET_DRAFT_MESSAGE, GET_DRAFT_MESSAGE_SUCCESS, GET_DRAFT_MESSAGE_FAIL,
     SEND_MESSAGE, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAIL, RESET_SEND_MESSAGE_REQUEST,
     GET_SENT_MESSAGES, GET_SENT_MESSAGES_SUCCESS, GET_SENT_MESSAGES_FAIL,
     GET_DRAFT_MESSAGES, GET_DRAFT_MESSAGES_SUCCESS, GET_DRAFT_MESSAGES_FAIL,
@@ -95,9 +96,11 @@ export default function reducer (state = initialState, action) {
 
     case GET_MESSAGE:
     case VIEW_MESSAGE:
+    case GET_DRAFT_MESSAGE:
         return state.set('getRecordRequest', initialState.get('getRecordRequest').set('loading', true));
     case GET_MESSAGE_SUCCESS:
     case VIEW_MESSAGE_SUCCESS:
+    case GET_DRAFT_MESSAGE_SUCCESS:
         return state
         .set('getRecordRequest', state.get('getRecordRequest')
           .set('success', true)
@@ -106,8 +109,9 @@ export default function reducer (state = initialState, action) {
         );
     case GET_MESSAGE_FAIL:
     case VIEW_MESSAGE_FAIL:
+    case GET_DRAFT_MESSAGE_FAIL:
         return state.set('getRecordRequest', initialState.get('getRecordRequest').set('fail', true));
-    case RESET_GET_MESSAGE_REQUEST:
+    case RESET_GET_MESSAGE_REQUEST:        
         return state.set('getRecordRequest', initialState.get('getRecordRequest'));
         
     case GET_SENT_MESSAGES:
@@ -126,7 +130,7 @@ export default function reducer (state = initialState, action) {
     case GET_INBOX_MESSAGES_FAIL:
         return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('fail', true));
         
-    case RESET_GET_MESSAGES_REQUEST: 
+    case RESET_GET_MESSAGES_REQUEST:         
         return state.set('getRecordsRequest', initialState.get('getRecordsRequest'));
     
     case GET_UNREAD_MESSAGES:    
