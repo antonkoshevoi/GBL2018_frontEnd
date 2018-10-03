@@ -488,6 +488,7 @@ export default {
     viewMessage: 'View Message',
     messagesNotFound: 'No messages found...',
     new: 'New',
+    from: 'From',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

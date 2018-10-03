@@ -64,14 +64,6 @@ export const selectBulkUploadRequest = createSelector(
 );
 
 /**
- * Courses
- */
-export const selectCoursesRequest = createSelector(
-  selectClassroomsDomain,
-  (subState) => subState.get('getCoursesRequest')
-);
-
-/**
  * Get record for assign students
  */
 export const selectGetRecordForAssignStudentsRequest = createSelector(

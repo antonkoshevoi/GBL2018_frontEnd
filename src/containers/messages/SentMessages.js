@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetRecordsRequest } from '../../redux/messages/selectors';
-import { getSentMessages } from '../../redux/messages/actions';
+import { getSentMessages, resetGetMessagesRequest } from '../../redux/messages/actions';
 import { MenuItem, Select } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import Pagination from '../../components/ui/Pagination';
@@ -21,6 +21,10 @@ class SentMessages extends Component {
     componentDidMount() {
         const {getRecords} = this.props;
         getRecords();
+    }
+    
+    componentWillUnmount () {
+        this.props.resetGetMessagesRequest();
     }
    
     _getRecords() {
@@ -154,7 +158,10 @@ SentMessages = connect(
     (dispatch) => ({
         getRecords: (params = {}) => {
             dispatch(getSentMessages(params));
-        }
+        },
+        resetGetMessagesRequest: () => {
+            dispatch(resetGetMessagesRequest());
+        }        
     })
 )(SentMessages);
 

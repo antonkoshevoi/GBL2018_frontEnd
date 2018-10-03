@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import {translate} from 'react-i18next';
 import i18n from '../../configs/i18n';
-import UserMenu from "./UserMenu";
 import {connect} from 'react-redux';
 import {logout} from '../../redux/auth/actions';
 import {NavLink} from "react-router-dom";
 import {Icon, IconButton} from '@material-ui/core';
 import {getCartRecords} from "../../redux/store/actions";
 import {selectCartRecords} from "../../redux/store/selectors";
-import Settings from "../pushers/Settings";
-import TabMenu from "../pushers/TabMenu";
 import {selectGetUserRequest, selectUserData} from "../../redux/user/selectors";
+import UserMenu from "./UserMenu";
+import Messages from "./Messages";
 
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 
@@ -97,8 +96,7 @@ class Header extends Component {
                   </IconButton>
 
                   <ul className="m-topbar__nav m-nav m-nav--inline">
-
-                    <TabMenu activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
+                    <Messages activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
                     <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width">
                       <NavLink to='/store/shopping-cart' className='m-nav__link m-dropdown__toggle pointer' id='m_topbar_notification_icon'>
                         <span className='m-nav__link-icon'>
@@ -110,8 +108,6 @@ class Header extends Component {
                     <li style={{paddingTop: '8px'}} className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width">
                         <LanguageSwitcher className="m-nav__link"/>
                     </li>
-                    <Settings activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
-
                     <UserMenu activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus} logout={logout}/>
                   </ul>
                 </div>
@@ -141,8 +137,7 @@ Header = connect(
     },
     getCartRecords: () => {
       dispatch(getCartRecords())
-    },
-   // getSchool: () => { dispatch(getSchool()) },
+    }
   })
 )(Header);
 

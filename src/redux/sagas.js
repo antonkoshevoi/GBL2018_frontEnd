@@ -11,7 +11,7 @@ import classroomsSagas from './classrooms/sagas';
 import messagesSagas from './messages/sagas';
 import userSagas from './user/sagas';
 import storeSagas from './store/sagas';
-import invitationsSagas from './store/sagas';
+import invitationsSagas from './invitations/sagas';
 import schoolSagas from './schools/sagas';
 import subscriptionSagas from './subscriptions/sagas';
 import scapSagas from './scap/sagas';

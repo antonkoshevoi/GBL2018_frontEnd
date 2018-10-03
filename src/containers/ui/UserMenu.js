@@ -29,7 +29,7 @@ class UserMenu extends Component {
   };
 
   _renderDropDownMenu() {
-    const { logout, userData, t, roles } = this.props;
+    const { logout, userData, t } = this.props;
 
         let user = userData.toJS();    
 

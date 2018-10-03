@@ -71,11 +71,11 @@ class Details extends Component {
     const price         = successSingle ? Number(record.get('price')) : 0;
     const discountPrice = Number(price - (price * record.get('discount') / 100));    
 
-    const similarRecords =
+    const similarRecords = [];/*
       (successRecords && successSingle) ?
       records.filter((item) => {
         return (item.get('category').get('id') === record.get('category').get('id')) && (item.get('id') !== record.get('id'))
-      }).slice(0, 5) : [];
+      }).slice(0, 5) : [];*/
 
     return (
       <div className="m-portlet store-wrapper fadeInLeft animated">
@@ -115,7 +115,7 @@ class Details extends Component {
                                   <div className="col-md-5 text-right">
                                     <div className="align-text-bottom">
                                       <StarRating score={record.get('score') || 4}/>
-                                      <span className="m--margin-left-5">{record.get('count') || 54} <Icon fontSize={true} style={{fontSize:17, color:'#737373', transform: 'translateY(3px)'}}>person</Icon></span>
+                                      <span className="m--margin-left-5">{record.get('count') || 54} <Icon style={{fontSize:17, color:'#737373', transform: 'translateY(3px)'}}>person</Icon></span>
                                     </div>
                                   </div>
                                 </div>

@@ -1,17 +1,10 @@
 import {
   GET_STORE_RECORDS, GET_STORE_RECORDS_SUCCESS, GET_STORE_RECORDS_FAIL,
-  GET_UNASSIGNED_RECORDS, GET_UNASSIGNED_RECORDS_FAIL, GET_UNASSIGNED_RECORDS_SUCCESS
+    GET_DEMO_COURSES, GET_DEMO_COURSES_SUCCESS, GET_DEMO_COURSES_FAIL,
 } from './actions';
 import Immutable from 'immutable';
 
 const initialState = Immutable.fromJS({
-  getUnassignedRecordsRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorResponse: null,
-    records: []
-  },
   getStoreRecordsRequest: {
     loading: false,
     success: false,
@@ -19,6 +12,13 @@ const initialState = Immutable.fromJS({
     errorResponse: null,
     records: []
   },
+  getCoursesRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null,
+    records: {}
+  }  
 });
 
 export default function reducer (state = initialState, action) {
@@ -49,30 +49,29 @@ export default function reducer (state = initialState, action) {
         );
 
     /**
-     * Get unassigned records
-     */
-    case GET_UNASSIGNED_RECORDS:
+     * Courses
+     */    
+    case GET_DEMO_COURSES:
       return state
-        .set('getUnassignedRecordsRequest', state.get('getUnassignedRecordsRequest')
+        .set('getCoursesRequest', state.get('getCoursesRequest')
           .set('loading', true)
           .set('success', false)
           .set('fail', false)
-          .set('records', Immutable.List())
-        );
-    case GET_UNASSIGNED_RECORDS_SUCCESS:
+          .remove('records')
+        );    
+    case GET_DEMO_COURSES_SUCCESS:
       return state
-        .set('getUnassignedRecordsRequest', state.get('getUnassignedRecordsRequest')
+        .set('getCoursesRequest', state.get('getCoursesRequest')
           .set('success', true)
           .set('loading', false)
           .set('records', Immutable.fromJS(action.result.data))
-        );
-    case GET_UNASSIGNED_RECORDS_FAIL:
+        );    
+    case GET_DEMO_COURSES_FAIL:
       return state
-        .set('getUnassignedRecordsRequest', state.get('getUnassignedRecordsRequest')
+        .set('getCoursesRequest', state.get('getCoursesRequest')
           .set('loading', false)
           .set('fail', true)
         );
-
 
     /**
      * default

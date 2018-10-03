@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { MenuItem } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { selectGetSchoolHomeroomsRequest, selectSchools } from '../../../redux/schools/selectors';
-import { getSchoolHomerooms, getSchools } from '../../../redux/schools/actions';
+import { selectGetSchoolHomeroomsRequest } from '../../../redux/schools/selectors';
+import { getSchoolHomerooms } from '../../../redux/schools/actions';
 import MetronicSelect from "../../../components/ui/metronic/MetronicSelect";
 import HasPermission from "../../middlewares/HasPermission";
 
@@ -23,9 +23,8 @@ class StudentForm extends Component {
   }
 
   componentDidMount() {
-    const { getSchools, getSchoolHomerooms } = this.props;
-
-    getSchools();
+    const { getSchoolHomerooms } = this.props;
+    
     getSchoolHomerooms();
   }
 
@@ -51,16 +50,6 @@ class StudentForm extends Component {
       ...this.props.student,
       [name]: value
     });
-  }
-
-  _renderSchools() {
-    const { schools } = this.props;
-
-    return schools.map((school, key) => (
-      <MenuItem key={key} value={ school.get('schId') }>
-        { school.get('schName') }
-      </MenuItem>
-    ));
   }
 
   _renderSchoolHomerooms() {
@@ -166,12 +155,10 @@ class StudentForm extends Component {
 }
 
 StudentForm = connect(
-  (state) => ({
-    schools: selectSchools(state),
+  (state) => ({    
     getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state),
   }),
-  (dispatch) => ({
-    getSchools: () => { dispatch(getSchools()) },
+  (dispatch) => ({    
     getSchoolHomerooms: () => { dispatch(getSchoolHomerooms()) }
   })
 )(StudentForm);

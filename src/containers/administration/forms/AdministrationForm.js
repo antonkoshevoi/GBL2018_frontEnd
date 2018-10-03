@@ -5,8 +5,8 @@ import { getRoles } from '../../../redux/administration/actions';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { selectRoles } from '../../../redux/administration/selectors';
-import { selectGetSchoolHomeroomsRequest, selectSchools } from "../../../redux/schools/selectors";
-import { getSchoolHomerooms, getSchools } from "../../../redux/schools/actions";
+import { selectGetSchoolHomeroomsRequest } from "../../../redux/schools/selectors";
+import { getSchoolHomerooms } from "../../../redux/schools/actions";
 import MetronicSelect from "../../../components/ui/metronic/MetronicSelect";
 
 class AdministrationForm extends Component {
@@ -25,9 +25,8 @@ class AdministrationForm extends Component {
   }
 
   componentDidMount() {
-    const { getSchools, getRoles, getSchoolHomerooms } = this.props;
-
-    getSchools();
+    const { getRoles, getSchoolHomerooms } = this.props;
+    
     getRoles();
     getSchoolHomerooms();
   }
@@ -63,16 +62,6 @@ class AdministrationForm extends Component {
     return roles.map((role, key) => (
       <MenuItem key={key} value={ role.get('roleId') }>
         { role.get('name') }
-      </MenuItem>
-    ));
-  }
-
-  _renderSchools() {
-    const { schools } = this.props;
-
-    return schools.map((school, key) => (
-      <MenuItem key={key} value={ school.get('schId') }>
-        { school.get('schName') }
       </MenuItem>
     ));
   }
@@ -190,13 +179,11 @@ class AdministrationForm extends Component {
 }
 
 AdministrationForm = connect(
-  (state) => ({
-    schools: selectSchools(state),
+  (state) => ({    
     roles: selectRoles(state),
     getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state)
   }),
-  (dispatch) => ({
-    getSchools: () => { dispatch(getSchools()) },
+  (dispatch) => ({    
     getRoles: () => { dispatch(getRoles()) },
     getSchoolHomerooms: () => { dispatch(getSchoolHomerooms()) }
   })

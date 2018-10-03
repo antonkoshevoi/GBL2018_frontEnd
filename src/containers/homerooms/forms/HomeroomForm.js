@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { FormControl, FormControlLabel, FormGroup, FormHelperText, Input, Checkbox, InputLabel, MenuItem, Select, Typography, Tab, Tabs, Paper, Grid } from '@material-ui/core';
-import {getSchoolTeachers, getSchoolStudents, getSchools} from "../../../redux/schools/actions";
+import {getSchoolTeachers, getSchoolStudents} from "../../../redux/schools/actions";
 import {
-    selectGetSchoolStudentsRequest, selectGetSchoolTeachersRequest,
-    selectSchools
+    selectGetSchoolStudentsRequest, selectGetSchoolTeachersRequest    
 } from "../../../redux/schools/selectors";
 import DatePicker from '../../../components/ui/DatePicker';
 
@@ -25,8 +24,7 @@ TabContainer.propTypes = {
 class HomeroomForm extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
-    homeroom: PropTypes.object.isRequired,
-    schools: PropTypes.any,
+    homeroom: PropTypes.object.isRequired,    
     errors: PropTypes.any
   };
 
@@ -48,7 +46,7 @@ class HomeroomForm extends Component {
   };
 
   componentDidMount() {
-    const { homeroom, getSchoolTeachers, getSchoolStudents, getSchools } = this.props;
+    const { homeroom, getSchoolTeachers, getSchoolStudents } = this.props;
 
     if (homeroom.id) {
       const studentIds = homeroom.students.map((student) => {
@@ -62,8 +60,7 @@ class HomeroomForm extends Component {
     }
     
     const params = homeroom.id ? {schoolId: homeroom.schoolId} : {};
-
-    getSchools();
+    
     getSchoolTeachers(params);
     getSchoolStudents(params);
   }
@@ -127,16 +124,6 @@ class HomeroomForm extends Component {
       ...this.props.homeroom,
       homeroomStudents: this.state.studentIds
     });
-  }
-
-  _renderSchools() {
-    const { schools } = this.props;
-
-    return schools.map((school, key) => (
-      <MenuItem key={key} value={ school.get('schId') }>
-        { school.get('schName') }
-      </MenuItem>
-    ));
   }
 
   _renderTeachers() {
@@ -269,13 +256,11 @@ class HomeroomForm extends Component {
 }
 
 HomeroomForm = connect(
-  (state) => ({
-    schools: selectSchools(state),
+  (state) => ({    
     getSchoolTeacherRequest: selectGetSchoolTeachersRequest(state),
     getSchoolStudentsRequest: selectGetSchoolStudentsRequest(state),
   }),
-  (dispatch) => ({
-    getSchools: () => { dispatch(getSchools()) },
+  (dispatch) => ({    
     getSchoolTeachers: (params = {}) => { dispatch(getSchoolTeachers(params)) },
     getSchoolStudents: (params = {}) => { dispatch(getSchoolStudents(params)) }
   })

@@ -4,8 +4,7 @@ import {
   GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS,
   DELETE, DELETE_SUCCESS, DELETE_FAIL,
   RESET_BULK_UPLOAD_REQUEST, BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS,
-  GET_COURSES, GET_COURSES_FAIL, GET_COURSES_SUCCESS, GET_DEMO_CLASSROOMS, GET_DEMO_CLASSROOMS_SUCCESS,
-  GET_DEMO_CLASSROOMS_FAIL, GET_DEMO_COURSES, GET_DEMO_COURSES_SUCCESS, GET_DEMO_COURSES_FAIL,
+  GET_DEMO_CLASSROOMS, GET_DEMO_CLASSROOMS_SUCCESS, GET_DEMO_CLASSROOMS_FAIL, 
   GET_RECORD_FOR_ASSIGN_STUDENTS, GET_RECORD_FOR_ASSIGN_STUDENTS_SUCCESS, GET_RECORD_FOR_ASSIGN_STUDENTS_FAIL,
   RESET_GET_RECORD_FOR_ASSIGN_STUDENTS_REQUEST,
   ASSIGN_STUDENT, ASSIGN_STUDENT_FAIL, ASSIGN_STUDENT_SUCCESS, RESET_ASSIGN_STUDENT_REQUEST, 
@@ -68,13 +67,6 @@ const initialState = Immutable.fromJS({
     errors: {},
     cancel: undefined,
     results: {}
-  },
-  getCoursesRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorResponse: null,
-    records: {}
   },
   schools: [],
   records: [],
@@ -372,33 +364,6 @@ export default function reducer(state = initialState, action) {
           .set('errors', deleteError.code === 422 ? Immutable.fromJS(deleteError.errors) : undefined)
         );
 
-    /**
-     * Courses
-     */
-    case GET_COURSES:
-    case GET_DEMO_COURSES:
-      return state
-        .set('getCoursesRequest', state.get('getCoursesRequest')
-          .set('loading', true)
-          .set('success', false)
-          .set('fail', false)
-          .remove('records')
-        );
-    case GET_COURSES_SUCCESS:
-    case GET_DEMO_COURSES_SUCCESS:
-      return state
-        .set('getCoursesRequest', state.get('getCoursesRequest')
-          .set('success', true)
-          .set('loading', false)
-          .set('records', Immutable.fromJS(action.result.data))
-        );
-    case GET_COURSES_FAIL:
-    case GET_DEMO_COURSES_FAIL:
-      return state
-        .set('getCoursesRequest', state.get('getCoursesRequest')
-          .set('loading', false)
-          .set('fail', true)
-        );
     /**
      * Get record for assign students
      */

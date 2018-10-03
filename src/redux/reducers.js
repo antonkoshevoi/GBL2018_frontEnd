@@ -9,14 +9,13 @@ import administrationReducer from './administration/reducer';
 import homeroomsReducer from './homerooms/reducer';
 import classroomsReducer from './classrooms/reducer';
 import schoolsReducer from './schools/reducer';
-import reportsReducer from './reports/reducer';
-import studentReportsReducer from './reports/students/reducer';
 import messagesReducer from './messages/reducer';
 import storeReducer from './store/reducer';
 import paymentsReducer from './payments/reducer';
 import transactionsReducer from './transactions/reducer';
-import reportsDashboardReducer from './reports/dashboard/reducer';
 import invitationsReducer from './invitations/reducer';
+import studentReportsReducer from './reports/students/reducer';
+import reportsDashboardReducer from './reports/dashboard/reducer';
 import classroomsReportReducer from './reports/classroom/reducer';
 import homeroomsReportReducer from './reports/homerooms/reducer';
 import countriesReducer from './countries/reducer';
@@ -35,8 +34,7 @@ export default {
   administration: administrationReducer,
   homerooms: homeroomsReducer,
   classrooms: classroomsReducer,
-  schools: schoolsReducer,
-  reports: reportsReducer,  
+  schools: schoolsReducer,  
   messages: messagesReducer,
   store: storeReducer,
   payments: paymentsReducer,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetRecordsRequest, selectDeleteRecordRequest, } from '../../redux/messages/selectors';
-import { getDraftMessages, deleteDraftMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
+import { getDraftMessages, deleteDraftMessage, resetDeleteMessageRequest, resetGetMessagesRequest } from '../../redux/messages/actions';
 import { MenuItem, Select } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import Pagination from '../../components/ui/Pagination';
@@ -32,6 +32,10 @@ class DraftMessages extends Component {
             resetDeleteMessageRequest();
             this._getRecords();
         }        
+    }
+    
+    componentWillUnmount () {
+        this.props.resetGetMessagesRequest();
     }    
    
     _getRecords() {
@@ -181,6 +185,9 @@ DraftMessages = connect(
         },
         resetDeleteMessageRequest: () => {
             dispatch(resetDeleteMessageRequest());
+        },
+        resetGetMessagesRequest: () => {
+            dispatch(resetGetMessagesRequest());
         }
     })
 )(DraftMessages);
