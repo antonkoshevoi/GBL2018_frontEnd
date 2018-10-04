@@ -9,13 +9,15 @@ import Loader from "../../components/layouts/Loader";
 import NotFoundPage from '../errors/404';
 import moment from "moment/moment";
 import DeleteButton from '../../components/ui/DeleteButton';
+import ReplyMessageModal from './modals/ReplyMessageModal';
 
 class ViewMessage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.match.params.id
+            id: this.props.match.params.id,
+            showReplyModal: false
         }
     }
 
@@ -53,6 +55,18 @@ class ViewMessage extends Component {
     _deleteRecord(id) {
         const {deleteMessage} = this.props;
         deleteMessage(id);        
+    }
+    
+    _showReplyModal() {
+        this.setState({
+            showReplyModal: true
+        });
+    }
+    
+    _closeReplyModal() {
+        this.setState({
+            showReplyModal: false
+        });        
     }    
 
     render() {
@@ -90,18 +104,20 @@ class ViewMessage extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-sm-12">
-                                <button onClick={() => { this._goBack() }} disabled={loading} className="btn btn-default" >{t('back')}</button>
+                            <div className="col-sm-12 text-center">
+                                { (data.get('type') === 'mail') && <button onClick={() => { this._showReplyModal() }} disabled={loading} className="m--margin-right-10 btn btn-success" >{t('reply')}</button> }
                                 <DeleteButton                    
                                     onClick={() => { this._deleteRecord(data.get('id')) }}                                                                  
                                     btnName={t('delete')}
                                     icon={false}
                                     disabled={loading}
-                                    classNameBtn="m--margin-left-10 btn btn-danger" />
+                                    classNameBtn="m--margin-right-10 btn btn-danger" />
+                                <button onClick={() => { this._goBack() }} disabled={loading} className="btn btn-default" >{t('back')}</button>
                             </div>
                         </div>
                     </div>}
-                </div>          
+                </div>
+                <ReplyMessageModal message={data.toJS()} onClose={() => { this._closeReplyModal() }} isOpen={this.state.showReplyModal} />
             </div>
         );
     }

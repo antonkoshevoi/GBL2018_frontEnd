@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetRecordsRequest } from '../../redux/messages/selectors';
-import { getSentMessages, resetGetMessagesRequest } from '../../redux/messages/actions';
+import { selectGetSentRecordsRequest } from '../../redux/messages/selectors';
+import { getSentMessages } from '../../redux/messages/actions';
 import { MenuItem, Select } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import Pagination from '../../components/ui/Pagination';
@@ -11,20 +11,16 @@ import moment from "moment/moment";
 class SentMessages extends Component {
 
     constructor(props) {
-        super(props);
+        super(props);        
         this.state = {
             page: props.getRecordsRequest.get('pagination').get('page'),
             perPage: props.getRecordsRequest.get('pagination').get('perPage')
         }
     }
 
-    componentDidMount() {
-        const {getRecords} = this.props;
+    componentWillMount() {
+        const {getRecords} = this.props;        
         getRecords();
-    }
-    
-    componentWillUnmount () {
-        this.props.resetGetMessagesRequest();
     }
    
     _getRecords() {
@@ -44,6 +40,7 @@ class SentMessages extends Component {
         const {t, goTo} = this.props;
         const loading = this.props.getRecordsRequest.get('loading');
         const records = this.props.getRecordsRequest.get('records');
+        const success = this.props.getRecordsRequest.get('success');                
         
         if (!loading && records.size === 0) {
             return (
@@ -64,7 +61,7 @@ class SentMessages extends Component {
                 <Td width='130px'>
                     <span className={`m-badge m-badge--brand m-badge--wide ${(record.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(record.get('type'))}</span>
                 </Td>
-                <Td width='100px'>{t('recipientsGroups.' + record.get('recipients'))}</Td>
+                <Td width='100px'>{record.get('isPrivate') ? record.get('recipients') : t('recipientsGroups.' + record.get('recipients'))}</Td>
                 <Td width='100px'>{moment(record.get('sent')).format('lll')}</Td>
                 <Td width='100px'>
                     <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo('messages/details/' + record.get('id')) }}>
@@ -153,14 +150,11 @@ class SentMessages extends Component {
 
 SentMessages = connect(
     (state) => ({
-        getRecordsRequest: selectGetRecordsRequest(state)
+        getRecordsRequest: selectGetSentRecordsRequest(state)
     }),
     (dispatch) => ({
         getRecords: (params = {}) => {
             dispatch(getSentMessages(params));
-        },
-        resetGetMessagesRequest: () => {
-            dispatch(resetGetMessagesRequest());
         }        
     })
 )(SentMessages);

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetRecordsRequest, selectDeleteRecordRequest, } from '../../redux/messages/selectors';
-import { getDraftMessages, deleteDraftMessage, resetDeleteMessageRequest, resetGetMessagesRequest } from '../../redux/messages/actions';
+import { selectGetDraftRecordsRequest, selectDeleteRecordRequest, } from '../../redux/messages/selectors';
+import { getDraftMessages, deleteDraftMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
 import { MenuItem, Select } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
+import { NavLink } from "react-router-dom";
 import moment from 'moment/moment';
 
 class DraftMessages extends Component {
@@ -19,13 +20,12 @@ class DraftMessages extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const {getRecords} = this.props;
         getRecords();
     }
     
-    componentWillReceiveProps(nextProps) {
-       
+    componentWillReceiveProps(nextProps) {       
         const {deleteRecordRequest, resetDeleteMessageRequest} = this.props;
 
         if (!deleteRecordRequest.get('success') && nextProps.deleteRecordRequest.get('success')) {
@@ -34,10 +34,6 @@ class DraftMessages extends Component {
         }        
     }
     
-    componentWillUnmount () {
-        this.props.resetGetMessagesRequest();
-    }    
-   
     _getRecords() {
         const { page, perPage} = this.state;
 
@@ -83,12 +79,9 @@ class DraftMessages extends Component {
                 <Td width='100px'>{t('recipientsGroups.' + record.get('recipients'))}</Td>
                 <Td width='100px'>{moment(record.get('created')).format('lll')}</Td>
                 <Td width='150px'>
-                    <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo('messages/edit/' + record.get('id')) }}>
+                    <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' to={`/messages/draft/${record.get('id')}`}>
                         <i className='la la-edit'></i>
-                    </button>                
-                    <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { goTo('messages/details/' + record.get('id')) }}>
-                        <i className='la la-search'></i>
-                    </button>
+                    </NavLink>                     
                     <DeleteButton disabled={this.props.deleteRecordRequest.get('loading')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
                 </Td>
             </Row>
@@ -173,7 +166,7 @@ class DraftMessages extends Component {
 
 DraftMessages = connect(
     (state) => ({
-        getRecordsRequest: selectGetRecordsRequest(state),
+        getRecordsRequest: selectGetDraftRecordsRequest(state),
         deleteRecordRequest: selectDeleteRecordRequest(state)
     }),
     (dispatch) => ({
@@ -185,9 +178,6 @@ DraftMessages = connect(
         },
         resetDeleteMessageRequest: () => {
             dispatch(resetDeleteMessageRequest());
-        },
-        resetGetMessagesRequest: () => {
-            dispatch(resetGetMessagesRequest());
         }
     })
 )(DraftMessages);

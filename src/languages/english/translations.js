@@ -465,6 +465,7 @@ export default {
     mail: 'Mail',
     alert: 'Alert!',
     annoucement: 'Annoucement',
+    recipient: 'Recipient',
     recipients: 'Recipients',
     entireSchool: 'Entire School',
     composeMessage: 'Compose Message',
@@ -487,6 +488,8 @@ export default {
     draftMessages: 'Draft Messages',
     viewMessage: 'View Message',
     messagesNotFound: 'No messages found...',
+    reply: 'Reply',
+    replyMessage: 'Reply Message',
     new: 'New',
     from: 'From',
     recipientsGroups: {        

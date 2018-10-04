@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetRecordsRequest, selectDeleteRecordRequest } from '../../redux/messages/selectors';
-import { getInboxMessages, deleteMessage, resetDeleteMessageRequest, resetGetMessagesRequest } from '../../redux/messages/actions';
+import { selectGetInboxRecordsRequest, selectDeleteRecordRequest } from '../../redux/messages/selectors';
+import { getInboxMessages, deleteMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
 import { MenuItem, Select } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import { NavLink } from "react-router-dom";
@@ -13,15 +13,15 @@ import moment from 'moment/moment';
 class InboxMessages extends Component {
 
     constructor(props) {
-        super(props);
+        super(props);        
         this.state = {
             page: props.getRecordsRequest.get('pagination').get('page'),
             perPage: props.getRecordsRequest.get('pagination').get('perPage')
         }
     }
 
-    componentDidMount() {
-        const {getRecords} = this.props;
+    componentWillMount() {
+        const {getRecords} = this.props;        
         getRecords();
     }
    
@@ -32,11 +32,7 @@ class InboxMessages extends Component {
             resetDeleteMessageRequest();
             this._getRecords();
         }        
-    }
-    
-    componentWillUnmount () {
-        this.props.resetGetMessagesRequest();
-    }
+    }   
     
     _getRecords() {
         const { page, perPage} = this.state;
@@ -57,9 +53,9 @@ class InboxMessages extends Component {
     }    
     
     _renderRecords() {
-        const {t, goTo} = this.props;
+        const {t} = this.props;
         const loading = this.props.getRecordsRequest.get('loading');
-        const records = this.props.getRecordsRequest.get('records');
+        const records = this.props.getRecordsRequest.get('records');                               
         
         if (!loading && records.size === 0) {
             return (
@@ -84,7 +80,7 @@ class InboxMessages extends Component {
                 <Td width='130px'>
                     <span className={`m-badge m-badge--brand m-badge--wide ${(record.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(record.get('type'))}</span>
                 </Td>
-                <Td width='100px'>{record.get('user').get('name')}</Td>
+                <Td width='100px'>{record.get('user') ? record.get('user').get('name') : ''}</Td>
                 <Td width='100px'>{moment(record.get('sent')).format('lll')}</Td>
                 <Td width='100px'>
                     <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' to={`/messages/view/${record.get('id')}`}>
@@ -112,6 +108,7 @@ class InboxMessages extends Component {
         const {getRecordsRequest, t} = this.props;
         const {page, perPage} = this.state;
         const loading = getRecordsRequest.get('loading');
+        const success = getRecordsRequest.get('success');
         const totalPages = getRecordsRequest.get('pagination').get('totalPages');
 
         return (
@@ -156,7 +153,7 @@ class InboxMessages extends Component {
 
                             <Tbody>
                                 {loading && <TablePreloader text="Loading..." color="primary"/> }
-                                { this._renderRecords() }
+                                {success && this._renderRecords() }
                             </Tbody>
                         </Table>
 
@@ -174,7 +171,7 @@ class InboxMessages extends Component {
 
 InboxMessages = connect(
     (state) => ({
-        getRecordsRequest: selectGetRecordsRequest(state),
+        getRecordsRequest: selectGetInboxRecordsRequest(state),
         deleteRecordRequest: selectDeleteRecordRequest(state)
     }),
     (dispatch) => ({
@@ -186,9 +183,6 @@ InboxMessages = connect(
         },
         resetDeleteMessageRequest: () => {
             dispatch(resetDeleteMessageRequest());
-        },
-        resetGetMessagesRequest: () => {
-            dispatch(resetGetMessagesRequest());
         }
     })
 )(InboxMessages);

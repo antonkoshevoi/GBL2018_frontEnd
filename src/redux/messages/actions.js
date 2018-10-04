@@ -13,6 +13,11 @@ export const SEND_MESSAGE_SUCCESS = '[Messages] SEND_MESSAGE_SUCCESS';
 export const SEND_MESSAGE_FAIL = '[Messages] SEND_MESSAGE_FAIL';
 export const RESET_SEND_MESSAGE_REQUEST = '[Messages] RESET_SEND_MESSAGE_REQUEST';
 
+export const REPLY_MESSAGE = '[Messages] REPLY_MESSAGE';
+export const REPLY_MESSAGE_SUCCESS = '[Messages] REPLY_MESSAGE_SUCCESS';
+export const REPLY_MESSAGE_FAIL = '[Messages] REPLY_MESSAGE_FAIL';
+export const RESET_REPLY_MESSAGE_REQUEST = '[Messages] RESET_REPLY_MESSAGE_REQUEST';
+
 export const GET_UNREAD_MESSAGES = '[Messages] GET_UNREAD_MESSAGES';
 export const GET_UNREAD_MESSAGES_SUCCESS = '[Messages] GET_UNREAD_MESSAGES_SUCCESS';
 export const GET_UNREAD_MESSAGES_FAIL = '[Messages] GET_UNREAD_MESSAGES_FAIL';
@@ -24,6 +29,10 @@ export const GET_SENT_MESSAGES_FAIL = '[Messages] GET_SENT_MESSAGES_FAIL';
 export const GET_DRAFT_MESSAGES = '[Messages] GET_DRAFT_MESSAGES';
 export const GET_DRAFT_MESSAGES_SUCCESS = '[Messages] GET_DRAFT_MESSAGES_SUCCESS';
 export const GET_DRAFT_MESSAGES_FAIL = '[Messages] GET_DRAFT_MESSAGES_FAIL';
+
+export const GET_DRAFT_MESSAGE = '[Messages] GET_DRAFT_MESSAGE';
+export const GET_DRAFT_MESSAGE_SUCCESS = '[Messages] GET_DRAFT_MESSAGE_SUCCESS';
+export const GET_DRAFT_MESSAGE_FAIL = '[Messages] GET_DRAFT_MESSAGE_FAIL';
 
 export const GET_INBOX_MESSAGES = '[Messages] GET_INBOX_MESSAGES';
 export const GET_INBOX_MESSAGES_SUCCESS = '[Messages] GET_INBOX_MESSAGES_SUCCESS';
@@ -38,8 +47,6 @@ export const DELETE_DRAFT_MESSAGE = '[Messages] DELETE_DRAFT_MESSAGE';
 export const DELETE_DRAFT_MESSAGE_SUCCESS = '[Messages] DELETE_DRAFT_MESSAGE_SUCCESS';
 export const DELETE_DRAFT_MESSAGE_FAIL = '[Messages] DELETE_DRAFT_MESSAGE_FAIL';
 
-export const RESET_GET_MESSAGES_REQUEST = '[Messages] RESET_GET_MESSAGES_REQUEST';
-
 export function sendMessage(params = {}) {
   return {    
     types: [SEND_MESSAGE, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAIL],
@@ -53,10 +60,30 @@ export function resetSendMessageRequest() {
     };
 }
 
+export function replyMessage(id, params = {}) {
+  return {    
+    types: [REPLY_MESSAGE, REPLY_MESSAGE_SUCCESS, REPLY_MESSAGE_FAIL],
+    promise: (apiClient) => apiClient.post(`messages/reply/${id}`, params)
+  };
+}
+
+export function resetReplyMessageRequest() {
+    return {
+        type: RESET_REPLY_MESSAGE_REQUEST
+    };
+}
+
 export function getMessage(id) {
   return {    
     types: [GET_MESSAGE, GET_MESSAGE_SUCCESS, GET_MESSAGE_FAIL],
     promise: (apiClient) => apiClient.get(`messages/details/${id}`)
+  };
+}
+
+export function getDraftMessage(id) {
+  return {    
+    types: [GET_DRAFT_MESSAGE, GET_DRAFT_MESSAGE_SUCCESS, GET_DRAFT_MESSAGE_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/draft/${id}`)
   };
 }
 
@@ -99,12 +126,6 @@ export function getInboxMessages(params = {}) {
     types: [GET_INBOX_MESSAGES, GET_INBOX_MESSAGES_SUCCESS, GET_INBOX_MESSAGES_FAIL],
     promise: (apiClient) => apiClient.get(`messages/inbox`, params)
   };
-}
-
-export function resetGetMessagesRequest() {
-    return {
-        type: RESET_GET_MESSAGES_REQUEST
-    };
 }
 
 export function deleteMessage(id) {

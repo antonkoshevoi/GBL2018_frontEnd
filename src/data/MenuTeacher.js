@@ -65,7 +65,7 @@ export default  {
                 {
                     key: 'compose',
                     title: 'compose',
-                    link: 'compose',
+                    link: 'messages/new',
                     icon: 'flaticon flaticon-technology-1',
                 },
                 {

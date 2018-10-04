@@ -38,7 +38,7 @@ class Messages extends Component {
     }
           
   _renderMessages () {
-    const { unreadMessagesRequest, goToThread } = this.props;
+    const { unreadMessagesRequest } = this.props;
 
     return unreadMessagesRequest.get('records').map((message, key) => (
       <div key={key} className='m-widget1__item'>
@@ -72,7 +72,7 @@ class Messages extends Component {
                     {(newMessages > 0) && <span className="g-badge badge-red">{newMessages}</span> }
                 </span>
             </a>
-            {activeMenu == 'messages' && 
+            {activeMenu === 'messages' && 
             <div className="m-dropdown__wrapper" onMouseLeave={() => {this.props.switchMenu(null)}} style={{display: 'block'}}>
                 <span className="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style={{right:'89.5px', color:'white'}}></span>
                 <span className="m-dropdown__arrow m-dropdown__arrow--center"></span>
@@ -98,7 +98,7 @@ class Messages extends Component {
                                 <h4 className="text-center m--padding-top-20 m--padding-bottom-10">{t('youHaveNoNewMessages')}</h4>
                               }
                               <div className="text-right m--margin-top-15">
-                                <NavLink to="/compose" className="m--margin-right-15 btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+                                <NavLink to="/messages/new" className="m--margin-right-15 btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
                                   <span className="m-nav__link-text">{t('newMessage')}</span>
                                 </NavLink>            
                                 <NavLink to="/messages" className="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
