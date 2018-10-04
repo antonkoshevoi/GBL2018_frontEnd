@@ -10,6 +10,10 @@ export const GET_SCHOOL_TEACHERS = '[Schools] GET_SCHOOL_TEACHERS';
 export const GET_SCHOOL_TEACHERS_SUCCESS = '[Schools] GET_SCHOOL_TEACHERS_SUCCESS';
 export const GET_SCHOOL_TEACHERS_FAIL = '[Schools] GET_SCHOOL_TEACHERS_FAIL';
 
+export const GET_SCHOOL_ADMINS = '[Schools] GET_SCHOOL_ADMINS';
+export const GET_SCHOOL_ADMINS_SUCCESS = '[Schools] GET_SCHOOL_ADMINS_SUCCESS';
+export const GET_SCHOOL_ADMINS_FAIL = '[Schools] GET_SCHOOL_ADMINS_FAIL';
+
 export const GET_SCHOOL_STUDENTS = '[Schools] GET_SCHOOL_STUDENTS';
 export const GET_SCHOOL_STUDENTS_SUCCESS = '[Schools] GET_SCHOOL_STUDENTS_SUCCESS';
 export const GET_SCHOOL_STUDENTS_FAIL = '[Schools] GET_SCHOOL_STUDENTS_FAIL';
@@ -63,6 +67,16 @@ export function getSchoolTeachers(params = {}) {
     return {
         types: [GET_SCHOOL_TEACHERS, GET_SCHOOL_TEACHERS_SUCCESS, GET_SCHOOL_TEACHERS_FAIL],
         promise: (apiClient) => apiClient.get(`schools/teachers`, params)
+    };
+}
+/**
+ * School Admins
+ */
+export function getSchoolAdmins(params = {}) {
+    params.perPage = 0;
+    return {
+        types: [GET_SCHOOL_ADMINS, GET_SCHOOL_ADMINS_SUCCESS, GET_SCHOOL_ADMINS_FAIL],
+        promise: (apiClient) => apiClient.get(`schools/admins`, params)
     };
 }
 /**

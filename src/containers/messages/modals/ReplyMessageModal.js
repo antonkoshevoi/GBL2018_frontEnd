@@ -24,7 +24,7 @@ class ReplyMessageModal extends Component {
             origin: {}
         };
     }
-    
+       
     componentWillReceiveProps(nextProps) {
         if (!this.props.isOpen && nextProps.isOpen) {
             this.setState({
@@ -37,8 +37,7 @@ class ReplyMessageModal extends Component {
     }
 
     _handleSuccess(nextProps) {
-        if (!this.props.replyMessageRequest.get('success') && nextProps.replyMessageRequest.get('success')) {
-            this.props.resetReplyMessageRequest();
+        if (!this.props.replyMessageRequest.get('success') && nextProps.replyMessageRequest.get('success')) {            
             this._close();
         }
     }
@@ -50,6 +49,11 @@ class ReplyMessageModal extends Component {
     }
 
     _close () {
+        this.setState({            
+            subject: null,
+            message: null            
+        });    
+        this.props.resetReplyMessageRequest();    
         this.props.onClose();
     };
 

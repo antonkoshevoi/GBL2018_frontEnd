@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { Select, MenuItem, InputLabel, Input, TextField, FormControl, FormHelperText, FormControlLabel, Checkbox } from '@material-ui/core';
-import { selectGetSchoolHomeroomsRequest, selectGetSchoolClassroomsRequest, selectGetSchoolTeachersRequest } from '../../../redux/schools/selectors';
-import { getSchoolHomerooms, getSchoolClassrooms, getSchoolTeachers} from '../../../redux/schools/actions';
+import { selectGetSchoolHomeroomsRequest, selectGetSchoolClassroomsRequest, selectGetSchoolTeachersRequest, selectGetSchoolAdminsRequest } from '../../../redux/schools/selectors';
+import { getSchoolHomerooms, getSchoolClassrooms, getSchoolTeachers, getSchoolAdmins} from '../../../redux/schools/actions';
 import { selectGetUserRequest, selectUserData } from "../../../redux/user/selectors";
 import { selectUserRoles } from "../../../redux/user/selectors";
 import Loader from '../../../components/layouts/Loader';
@@ -22,9 +22,6 @@ class MessageForm extends Component {
             type: 'mail', 
             recipient: null,
             message: null,
-            homerooms: null,
-            classrooms: null,
-            teachers: null,
             roles: [
                 'student',                
                 'teacher',
@@ -35,7 +32,8 @@ class MessageForm extends Component {
             homeroomIds: [],
             classroomIds: [],
             roleIds: [],
-            teacherId: []            
+            teacherId: null,
+            adminId: null
         }
     }
     
@@ -53,20 +51,11 @@ class MessageForm extends Component {
         const {
             homeroomsRequest,
             classroomsRequest, 
-            teachersRequest
+            teachersRequest,
+            adminsRequest
         } = this.props;
                 
-        if (!homeroomsRequest.get('success') && nextProps.homeroomsRequest.get('success')) {
-            this.setState({homerooms: nextProps.homeroomsRequest.get('records').toJS()});
-        }
         
-        if (!classroomsRequest.get('success') && nextProps.classroomsRequest.get('success')) {
-            this.setState({classrooms: nextProps.classroomsRequest.get('records').toJS()});
-        }
-        
-        if (!teachersRequest.get('success') && nextProps.teachersRequest.get('success')) {
-            this.setState({teachers: nextProps.teachersRequest.get('records').toJS()});
-        }     
     }    
     
     _handleChange(event) {
@@ -79,38 +68,44 @@ class MessageForm extends Component {
         }
     }
     
-    _changeRecipients(recipient) {        
-        if (recipient === 'classroomIds' && !this.state.classrooms) {
+    _changeRecipients(recipient) {
+        
+        const {homeroomsRequest, classroomsRequest, teachersRequest, adminsRequest} = this.props;
+    
+        if (recipient === 'classroomIds' && !(classroomsRequest.get('success') || classroomsRequest.get('loading'))) {
             this.props.getClassrooms();
         }
         
-        if (recipient === 'homeroomIds' && !this.state.homerooms) {
+        if (recipient === 'homeroomIds' && !(homeroomsRequest.get('success') || homeroomsRequest.get('loading'))) {
             this.props.getHomerooms();
         }
         
-        if (recipient === 'teacherId' && !this.state.teachers) {
+        if (recipient === 'teacherId' && !(teachersRequest.get('success') || teachersRequest.get('loading'))) {
             this.props.getTeachers();
-        }        
+        }
+        
+        if (recipient === 'adminId' && !(adminsRequest.get('success') || adminsRequest.get('loading'))) {
+            this.props.getAdmins();
+        }          
     }
     
     _handleCheckboxChange(event) {
-        const { value, name } = event.target;
-        
-        let selected = this.state[name];
+        let { value, name } = event.target;
+        let {[name]: selected} = this.state;                
         let index = selected.indexOf(value.toString());
-        
+
         if (index < 0) {
             selected.push(value.toString());
         } else {
-            selected.splice(index, 1);
+            let rem = selected.splice(index, 1);
         }
         
         this.setState({[name]: selected});
     }
     
-    _handleSelectAllChange(event, ids) {
+    _handleSelectAllChange(event, ids) {            
         const { checked, name } = event.target;
-        this.setState({[name]: (checked ? ids : [])});
+        this.setState({[name]: (checked ? ids.toJS() : [])});
     }
     
     _sendMessage() {
@@ -132,7 +127,7 @@ class MessageForm extends Component {
             subject:        subject,
             type:           type,
             recipients:     recipient,
-            ids:            this.state[recipient] || 'all',
+            ids:            this.state[recipient] || null,
             isDraft:        draft
         });        
     }
@@ -143,56 +138,68 @@ class MessageForm extends Component {
     
     _renderRecipients()
     {        
-        const {recipient, roles, homerooms, classrooms, teachers, classroomIds, homeroomIds, roleIds} = this.state;        
-        const {t, errors, userRequest, userData} = this.props;        
-        const userId = userRequest.get('success') ? userData.get('id') : null;
+        const {recipient, roles} = this.state;
+        const {homeroomsRequest, classroomsRequest, teachersRequest, adminsRequest, t}   = this.props;                
         
-        if (recipient === 'homeroomIds' && homerooms) {
-            return this._renderRecipientCheckboxes('selectHomerooms', 'homeroomIds', homerooms.map(option => ({
-                id:     option.id,
-                name:   option.name
-            })), homeroomIds);
+        if (recipient === 'homeroomIds' && homeroomsRequest.get('success')) {
+            return this._renderRecipientCheckboxes('selectHomerooms', 'homeroomIds', this._getOptions(homeroomsRequest));
         }
         
-        if (recipient === 'classroomIds' && classrooms) {
-            return this._renderRecipientCheckboxes('selectClassrooms', 'classroomIds', classrooms.map(option => ({
-                id:     option.crmId,
-                name:   option.crmName
-            })), classroomIds);
+        if (recipient === 'classroomIds' && classroomsRequest.get('success')) {
+            return this._renderRecipientCheckboxes('selectClassrooms', 'classroomIds', this._getOptions(classroomsRequest, 'crmId', 'crmName'));
         }        
                
         if (recipient === 'roleIds') {
-            return this._renderRecipientCheckboxes('selectRoles', 'roleIds', roles.map(option => ({
-                id:     option,
-                name:   t(option + 'Role')
-            })), roleIds);
+            return this._renderRecipientCheckboxes('selectRoles', 'roleIds', roles.map(item => ({
+                id:     item,
+                name:   t(item + 'Role')
+            })));
         }
         
-        if (recipient === 'teacherId' && teachers) {        
-            return (<div className="row">
-                <div className="col-sm-6 col-md-5 col-lg-4">
-                    <div aria-describedby='recipients' className='full-width form-inputs d-inline-flex flex-column'>
-                        <InputLabel htmlFor='recipients'>{t('teacher')}</InputLabel>
-
-                        <Select
-                            value={this.state.teacherId}
-                            onChange={(e) => { this._handleChange(e) }}
-                            inputProps={{ name: 'teacherId', id: 'teacherId' }}
-                            >
-                            {teachers.map((teacher, key) => (
-                               (userId !== teacher.id) && <MenuItem key={key} value="{teacher.id.toString()}">{teacher.firstName} {teacher.lastName}</MenuItem>
-                            ))}                        
-                        </Select>                        
-                    </div>
-                    {errors && errors.get('recipients') && <FormHelperText error>{errors.get('recipients').get(0)}</FormHelperText>}
-                </div>
-            </div>);
+        if (recipient === 'teacherId' && teachersRequest.get('success')) {   
+            return this._renderRecipientSelectbox('selectTeacher', 'teacherId', this._getOptions(teachersRequest));
+        }
+        
+        if (recipient === 'adminId' && adminsRequest.get('success')) {   
+            return this._renderRecipientSelectbox('schoolManagement', 'adminId', this._getOptions(adminsRequest));
         }
     }
     
-    _renderRecipientCheckboxes(title, name, options, selected)
-    {
+    _getOptions(request, id = 'id', name = 'name') {
+        let mapper = value => ({
+            id:     value.get(id),
+            name:   value.get(name)
+        });
+        return request.get('records').map(item => mapper(item));
+    }
+    
+    _renderRecipientSelectbox(title, name, options) {
+        const {t, errors, userRequest, userData} = this.props;        
+        const {[name]: selected} = this.state;
+        const userId = userRequest.get('success') ? userData.get('id') : null;       
+        
+        return <div className="row">
+            <div className="col-sm-6 col-md-5 col-lg-4">
+                <div aria-describedby='recipients' className='full-width form-inputs d-inline-flex flex-column'>
+                    <InputLabel htmlFor='recipients'>{t(title)}</InputLabel>
+                    <Select
+                        value={selected || ''}
+                        onChange={(e) => { this._handleChange(e) }}
+                        name={name}
+                        >
+                        {options.map((option, key) => (
+                           (userId !== option.id) && <MenuItem key={key} value={option.id.toString()}>{option.name}</MenuItem>
+                        ))}                        
+                    </Select>                        
+                </div>
+                {errors && errors.get('recipients') && <FormHelperText error>{errors.get('recipients').get(0)}</FormHelperText>}
+            </div>
+        </div>;       
+    }
+    
+    _renderRecipientCheckboxes(title, name, options) {
         const {t, errors} = this.props;        
+        const {[name]: selected} = this.state;
         
         return <div className="row">
             <div className="col-sm-12">{t(title)}</div>
@@ -205,7 +212,7 @@ class MessageForm extends Component {
             ))}
             <div className="col-sm-4 col-lg-3 margin-0">
                 <FormControlLabel
-                  control={<Checkbox name={name} checked={(selected.length === options.length)} onChange={ (e) => {this._handleSelectAllChange(e, options.map(option => option.id.toString())) }} value="1" />}
+                  control={<Checkbox name={name} checked={(selected.length === options.size)} onChange={ (e) => {this._handleSelectAllChange(e, options.map(option => option.id.toString())) }} value="1" />}
                   label={t('selectAll')} />                            
             </div>
             {errors && errors.get('recipients') && <div className="col-sm-12"><FormHelperText error>{errors.get('recipients').get(0)}</FormHelperText></div>}
@@ -213,9 +220,9 @@ class MessageForm extends Component {
     }
     
     render() {
-        const {homeroomsRequest, classroomsRequest, teachersRequest, errors, t} = this.props;
+        const {homeroomsRequest, classroomsRequest, teachersRequest, adminsRequest, errors, t} = this.props;
 
-        const loading = homeroomsRequest.get('loading') || classroomsRequest.get('loading') || teachersRequest.get('loading');                
+        const loading = homeroomsRequest.get('loading') || classroomsRequest.get('loading') || teachersRequest.get('loading') || adminsRequest.get('loading');                
         
         const roles = this.props.userRoles.toJS();
         
@@ -236,19 +243,20 @@ class MessageForm extends Component {
                                 <Select
                                     value={this.state.recipient || ''}
                                     onChange={(e) => { this._handleChange(e) }}
-                                    inputProps={{  name: 'recipient', id: 'recipient' }}
+                                    inputProps={{  name: 'recipient' }}
                                     >
                                     <MenuItem value="0"></MenuItem>
                                     <MenuItem value="classroomIds">{t('classrooms')}</MenuItem>
                                     <MenuItem value="homeroomIds">{t('homerooms')}</MenuItem>                                        
                                     <MenuItem value="teacherId">{t('teacher')}</MenuItem>
+                                    <MenuItem value="adminId">{t('schoolManagement')}</MenuItem>
                                 </Select>
                             </HasRole>
                             <HasRole roles={['Superadministrator', 'Superintendent', 'Principal', 'Administrator']}>
                                 <Select
                                     value={this.state.recipient || ''}
                                     onChange={(e) => { this._handleChange(e) }}
-                                    inputProps={{  name: 'recipient', id: 'recipient' }}
+                                    inputProps={{ name: 'recipient' }}
                                     >
                                     <MenuItem value="0"></MenuItem>
                                     <MenuItem value="roleIds">{t('entireSchool')}</MenuItem>
@@ -269,8 +277,7 @@ class MessageForm extends Component {
                                 value={this.state.type || ''}
                                 onChange={(e) => { this._handleChange(e) }}
                                 inputProps={{
-                                    name: 'type',
-                                    id: 'type'
+                                    name: 'type'
                                 }}
                                 >
                                 <MenuItem value=""></MenuItem>
@@ -302,8 +309,7 @@ class MessageForm extends Component {
                     <div className='col-sm-12 col-md-12'>
                         <FormControl className='full-width form-inputs'>
                             <TextField                                                                                    
-                                multiline
-                                id="message"                   
+                                multiline                                             
                                 placeholder={t('message')}          
                                 fullWidth
                                 margin="normal"
@@ -311,8 +317,7 @@ class MessageForm extends Component {
                                 rows="20"                                  
                                 value={this.state.message || ''}   
                                 inputProps={{
-                                  name: 'message',
-                                  id: 'message'
+                                  name: 'message'
                                 }}                                          
                                 onChange={(e) => {
                                     this._handleChange(e)
@@ -342,6 +347,7 @@ MessageForm = connect(
         homeroomsRequest: selectGetSchoolHomeroomsRequest(state),
         classroomsRequest: selectGetSchoolClassroomsRequest(state),
         teachersRequest: selectGetSchoolTeachersRequest(state),
+        adminsRequest: selectGetSchoolAdminsRequest(state),
         userRoles: selectUserRoles(state),
         userRequest: selectGetUserRequest(state),
         userData: selectUserData(state)
@@ -349,7 +355,8 @@ MessageForm = connect(
     (dispatch) => ({
         getHomerooms: (params = {}) => { dispatch(getSchoolHomerooms(params)) },
         getClassrooms: (params = {}) => { dispatch(getSchoolClassrooms(params)) },
-        getTeachers: (params = {}) => { dispatch(getSchoolTeachers(params)) }        
+        getTeachers: (params = {}) => { dispatch(getSchoolTeachers(params)) },
+        getAdmins: (params = {}) => { dispatch(getSchoolAdmins(params)) }
     })
 )(MessageForm);
 
