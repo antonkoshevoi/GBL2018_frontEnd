@@ -69,7 +69,8 @@ import ScapResults from "../containers/scap/ScapResults";
 import SentMessages from '../containers/messages/SentMessages';
 import InboxMessages from '../containers/messages/InboxMessages';
 import DraftMessages from '../containers/messages/DraftMessages';
-import Compose from '../containers/messages/Compose';
+import NewMessage from '../containers/messages/NewMessage';
+import EditMessage from '../containers/messages/EditMessage';
 import ViewMessage from '../containers/messages/ViewMessage';
 
 export default () => (
@@ -143,8 +144,8 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/sent' name='Sent Messages' component={SentMessages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages' name='Inbox Messages' component={InboxMessages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/view/:id' name='View Message' component={ViewMessage} />
-      <AuthenticatedRoute exact layout={MainLayout} path='/compose' name='Compose' component={Compose} />
-      <AuthenticatedRoute exact layout={MainLayout} path='/messages/draft/:id' name='Edit Draft' component={Compose} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/messages/new' name='New Message' component={NewMessage} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/messages/draft/:id' name='Edit Draft' component={EditMessage} />
             
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />

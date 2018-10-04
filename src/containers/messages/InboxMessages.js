@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetRecordsRequest, selectDeleteRecordRequest } from '../../redux/messages/selectors';
-import { getInboxMessages, deleteMessage, resetDeleteMessageRequest, resetGetMessagesRequest } from '../../redux/messages/actions';
+import { selectGetInboxRecordsRequest, selectDeleteRecordRequest } from '../../redux/messages/selectors';
+import { getInboxMessages, deleteMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
 import { MenuItem, Select } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import { NavLink } from "react-router-dom";
@@ -32,11 +32,7 @@ class InboxMessages extends Component {
             resetDeleteMessageRequest();
             this._getRecords();
         }        
-    }
-    
-    componentWillUnmount () {
-        this.props.resetGetMessagesRequest();
-    }
+    }   
     
     _getRecords() {
         const { page, perPage} = this.state;
@@ -175,7 +171,7 @@ class InboxMessages extends Component {
 
 InboxMessages = connect(
     (state) => ({
-        getRecordsRequest: selectGetRecordsRequest(state),
+        getRecordsRequest: selectGetInboxRecordsRequest(state),
         deleteRecordRequest: selectDeleteRecordRequest(state)
     }),
     (dispatch) => ({
@@ -187,9 +183,6 @@ InboxMessages = connect(
         },
         resetDeleteMessageRequest: () => {
             dispatch(resetDeleteMessageRequest());
-        },
-        resetGetMessagesRequest: () => {
-            dispatch(resetGetMessagesRequest());
         }
     })
 )(InboxMessages);

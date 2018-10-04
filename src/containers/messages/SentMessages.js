@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetRecordsRequest } from '../../redux/messages/selectors';
-import { getSentMessages, resetGetMessagesRequest } from '../../redux/messages/actions';
+import { selectGetSentRecordsRequest } from '../../redux/messages/selectors';
+import { getSentMessages } from '../../redux/messages/actions';
 import { MenuItem, Select } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import Pagination from '../../components/ui/Pagination';
@@ -21,10 +21,6 @@ class SentMessages extends Component {
     componentWillMount() {
         const {getRecords} = this.props;        
         getRecords();
-    }
-    
-    componentWillUnmount () {
-        this.props.resetGetMessagesRequest();
     }
    
     _getRecords() {
@@ -65,7 +61,7 @@ class SentMessages extends Component {
                 <Td width='130px'>
                     <span className={`m-badge m-badge--brand m-badge--wide ${(record.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(record.get('type'))}</span>
                 </Td>
-                <Td width='100px'>{t('recipientsGroups.' + record.get('recipients'))}</Td>
+                <Td width='100px'>{record.get('isPrivate') ? record.get('recipients') : t('recipientsGroups.' + record.get('recipients'))}</Td>
                 <Td width='100px'>{moment(record.get('sent')).format('lll')}</Td>
                 <Td width='100px'>
                     <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo('messages/details/' + record.get('id')) }}>
@@ -154,14 +150,11 @@ class SentMessages extends Component {
 
 SentMessages = connect(
     (state) => ({
-        getRecordsRequest: selectGetRecordsRequest(state)
+        getRecordsRequest: selectGetSentRecordsRequest(state)
     }),
     (dispatch) => ({
         getRecords: (params = {}) => {
             dispatch(getSentMessages(params));
-        },
-        resetGetMessagesRequest: () => {
-            dispatch(resetGetMessagesRequest());
         }        
     })
 )(SentMessages);

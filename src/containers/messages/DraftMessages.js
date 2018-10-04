@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetRecordsRequest, selectDeleteRecordRequest, } from '../../redux/messages/selectors';
-import { getDraftMessages, deleteDraftMessage, resetDeleteMessageRequest, resetGetMessagesRequest } from '../../redux/messages/actions';
+import { selectGetDraftRecordsRequest, selectDeleteRecordRequest, } from '../../redux/messages/selectors';
+import { getDraftMessages, deleteDraftMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
 import { MenuItem, Select } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import Pagination from '../../components/ui/Pagination';
@@ -34,10 +34,6 @@ class DraftMessages extends Component {
         }        
     }
     
-    componentWillUnmount () {            
-        this.props.resetGetMessagesRequest();
-    }    
-   
     _getRecords() {
         const { page, perPage} = this.state;
 
@@ -170,7 +166,7 @@ class DraftMessages extends Component {
 
 DraftMessages = connect(
     (state) => ({
-        getRecordsRequest: selectGetRecordsRequest(state),
+        getRecordsRequest: selectGetDraftRecordsRequest(state),
         deleteRecordRequest: selectDeleteRecordRequest(state)
     }),
     (dispatch) => ({
@@ -182,9 +178,6 @@ DraftMessages = connect(
         },
         resetDeleteMessageRequest: () => {
             dispatch(resetDeleteMessageRequest());
-        },
-        resetGetMessagesRequest: () => {
-            dispatch(resetGetMessagesRequest());
         }
     })
 )(DraftMessages);

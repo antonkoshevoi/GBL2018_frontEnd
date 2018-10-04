@@ -98,7 +98,7 @@ class Messages extends Component {
                                 <h4 className="text-center m--padding-top-20 m--padding-bottom-10">{t('youHaveNoNewMessages')}</h4>
                               }
                               <div className="text-right m--margin-top-15">
-                                <NavLink to="/compose" className="m--margin-right-15 btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+                                <NavLink to="/messages/new" className="m--margin-right-15 btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
                                   <span className="m-nav__link-text">{t('newMessage')}</span>
                                 </NavLink>            
                                 <NavLink to="/messages" className="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">

@@ -13,6 +13,11 @@ export const SEND_MESSAGE_SUCCESS = '[Messages] SEND_MESSAGE_SUCCESS';
 export const SEND_MESSAGE_FAIL = '[Messages] SEND_MESSAGE_FAIL';
 export const RESET_SEND_MESSAGE_REQUEST = '[Messages] RESET_SEND_MESSAGE_REQUEST';
 
+export const REPLY_MESSAGE = '[Messages] REPLY_MESSAGE';
+export const REPLY_MESSAGE_SUCCESS = '[Messages] REPLY_MESSAGE_SUCCESS';
+export const REPLY_MESSAGE_FAIL = '[Messages] REPLY_MESSAGE_FAIL';
+export const RESET_REPLY_MESSAGE_REQUEST = '[Messages] RESET_REPLY_MESSAGE_REQUEST';
+
 export const GET_UNREAD_MESSAGES = '[Messages] GET_UNREAD_MESSAGES';
 export const GET_UNREAD_MESSAGES_SUCCESS = '[Messages] GET_UNREAD_MESSAGES_SUCCESS';
 export const GET_UNREAD_MESSAGES_FAIL = '[Messages] GET_UNREAD_MESSAGES_FAIL';
@@ -42,8 +47,6 @@ export const DELETE_DRAFT_MESSAGE = '[Messages] DELETE_DRAFT_MESSAGE';
 export const DELETE_DRAFT_MESSAGE_SUCCESS = '[Messages] DELETE_DRAFT_MESSAGE_SUCCESS';
 export const DELETE_DRAFT_MESSAGE_FAIL = '[Messages] DELETE_DRAFT_MESSAGE_FAIL';
 
-export const RESET_GET_MESSAGES_REQUEST = '[Messages] RESET_GET_MESSAGES_REQUEST';
-
 export function sendMessage(params = {}) {
   return {    
     types: [SEND_MESSAGE, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAIL],
@@ -54,6 +57,19 @@ export function sendMessage(params = {}) {
 export function resetSendMessageRequest() {
     return {
         type: RESET_SEND_MESSAGE_REQUEST
+    };
+}
+
+export function replyMessage(id, params = {}) {
+  return {    
+    types: [REPLY_MESSAGE, REPLY_MESSAGE_SUCCESS, REPLY_MESSAGE_FAIL],
+    promise: (apiClient) => apiClient.post(`messages/reply/${id}`, params)
+  };
+}
+
+export function resetReplyMessageRequest() {
+    return {
+        type: RESET_REPLY_MESSAGE_REQUEST
     };
 }
 
@@ -110,12 +126,6 @@ export function getInboxMessages(params = {}) {
     types: [GET_INBOX_MESSAGES, GET_INBOX_MESSAGES_SUCCESS, GET_INBOX_MESSAGES_FAIL],
     promise: (apiClient) => apiClient.get(`messages/inbox`, params)
   };
-}
-
-export function resetGetMessagesRequest() {
-    return {
-        type: RESET_GET_MESSAGES_REQUEST
-    };
 }
 
 export function deleteMessage(id) {
