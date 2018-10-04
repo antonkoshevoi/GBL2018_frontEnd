@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Select, MenuItem, InputLabel, Input, TextField, FormControl, FormHelperText, FormControlLabel, Checkbox } from '@material-ui/core';
 import { selectGetSchoolHomeroomsRequest, selectGetSchoolClassroomsRequest, selectGetSchoolTeachersRequest } from '../../../redux/schools/selectors';
 import { getSchoolHomerooms, getSchoolClassrooms, getSchoolTeachers} from '../../../redux/schools/actions';
-import { selectSendMessageRequest } from '../../../redux/messages/selectors';
 import { selectGetUserRequest, selectUserData } from "../../../redux/user/selectors";
 import { selectUserRoles } from "../../../redux/user/selectors";
 import Loader from '../../../components/layouts/Loader';
@@ -54,7 +53,7 @@ class MessageForm extends Component {
         const {
             homeroomsRequest,
             classroomsRequest, 
-            teachersRequest,        
+            teachersRequest
         } = this.props;
                 
         if (!homeroomsRequest.get('success') && nextProps.homeroomsRequest.get('success')) {
@@ -74,8 +73,8 @@ class MessageForm extends Component {
         const { value, name } = event.target;
         
         this.setState({[name]: value});
-        
-        if (name === 'recipients') {
+                       
+        if (name === 'recipient') {
             this._changeRecipients(value);
         }
     }

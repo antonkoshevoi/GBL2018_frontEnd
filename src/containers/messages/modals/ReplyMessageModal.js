@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {
   AppBar, CircularProgress,
   DialogContent,  
-  Icon, Checkbox, Grid,
-  Toolbar, Typography, FormGroup,
+  Icon, Checkbox,
+  Toolbar, Typography,
   Divider, Button, DialogActions,
   InputLabel, Input, TextField, FormControl, FormHelperText, FormControlLabel
 } from '@material-ui/core';
@@ -141,7 +141,7 @@ class ReplyMessageModal extends Component {
                       form='assign-students-form'
                       disabled={loading}
                       variant="raised"
-                      className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+                      className='mt-btn-success pull-right btn btn-success mt-btn'
                       onClick={ (e) => {this._onSubmit(e) }}
                       color='primary'>
                       {t('reply')}
