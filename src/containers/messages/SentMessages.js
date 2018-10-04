@@ -6,6 +6,7 @@ import { getSentMessages } from '../../redux/messages/actions';
 import { MenuItem, Select } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import Pagination from '../../components/ui/Pagination';
+import ViewMessageModal from './modals/ViewMessageModal';
 import moment from "moment/moment";
 
 class SentMessages extends Component {
@@ -14,7 +15,9 @@ class SentMessages extends Component {
         super(props);        
         this.state = {
             page: props.getRecordsRequest.get('pagination').get('page'),
-            perPage: props.getRecordsRequest.get('pagination').get('perPage')
+            perPage: props.getRecordsRequest.get('pagination').get('perPage'),
+            showMessageModal: false,
+            showMessage: null
         }
     }
 
@@ -30,6 +33,20 @@ class SentMessages extends Component {
             page, perPage
         });
     }
+    
+    _showMessageModal(record) {
+        this.setState({
+            showMessageModal: true,
+            showMessage: record.toJS()
+        });
+    }
+    
+    _closeMessageModal() {
+        this.setState({
+            showMessageModal: false,
+            showMessage: null
+        });        
+    }     
       
     _recordNumber(key) {
         const { page, perPage } = this.state;
@@ -64,7 +81,7 @@ class SentMessages extends Component {
                 <Td width='100px'>{record.get('isPrivate') ? record.get('recipients') : t('recipientsGroups.' + record.get('recipients'))}</Td>
                 <Td width='100px'>{moment(record.get('sent')).format('lll')}</Td>
                 <Td width='100px'>
-                    <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo('messages/details/' + record.get('id')) }}>
+                    <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showMessageModal(record) }}>
                         <i className='la la-search'></i>
                     </button>                
                 </Td>
@@ -86,10 +103,10 @@ class SentMessages extends Component {
 
     render() {
         const {getRecordsRequest, t} = this.props;
-        const {page, perPage} = this.state;
+        const {page, perPage, showMessageModal, showMessage} = this.state;
         const loading = getRecordsRequest.get('loading');
         const totalPages = getRecordsRequest.get('pagination').get('totalPages');
-
+            
         return (
             <div className='fadeInLeft  animated'>               
                 <div className='m-portlet m-portlet--head-solid-bg'>
@@ -142,7 +159,8 @@ class SentMessages extends Component {
                             </div>
                         </div>
                     </div>
-                </div>          
+                </div>
+                <ViewMessageModal isOpen={showMessageModal} message={showMessage} onClose={() => this._closeMessageModal()} />
             </div>
         );
     }

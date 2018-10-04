@@ -492,6 +492,8 @@ export default {
     replyMessage: 'Reply Message',
     new: 'New',
     from: 'From',
+    to: 'To',
+    schoolManagement: 'School Management',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',
@@ -499,5 +501,7 @@ export default {
         teachers: 'School Teachers',
         students: 'School Students',
         teacher: 'Teacher',
+        teacherId: 'Teacher',
+        adminId: 'School Management'
     }
 }

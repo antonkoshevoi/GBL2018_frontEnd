@@ -9,6 +9,7 @@ import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
 import { NavLink } from "react-router-dom";
 import moment from 'moment/moment';
+import ViewMessageModal from './modals/ViewMessageModal';
 
 class DraftMessages extends Component {
 
@@ -16,7 +17,9 @@ class DraftMessages extends Component {
         super(props);
         this.state = {
             page: props.getRecordsRequest.get('pagination').get('page'),
-            perPage: props.getRecordsRequest.get('pagination').get('perPage')
+            perPage: props.getRecordsRequest.get('pagination').get('perPage'),
+            showMessageModal: false,
+            showMessage: null            
         }
     }
 
@@ -52,6 +55,20 @@ class DraftMessages extends Component {
         return (key + 1 + ((page - 1) * perPage));
     }    
     
+    _showMessageModal(record) {
+        this.setState({
+            showMessageModal: true,
+            showMessage: record.toJS()
+        });
+    }
+    
+    _closeMessageModal() {
+        this.setState({
+            showMessageModal: false,
+            showMessage: null
+        });        
+    } 
+    
     _renderRecords() {
         const {t, goTo} = this.props;
         const loading = this.props.getRecordsRequest.get('loading');
@@ -74,12 +91,15 @@ class DraftMessages extends Component {
                 <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
                 <Td width='150px'>{record.get('subject')}</Td>
                 <Td width='130px'>
-                    <span className={`m-badge m-badge--brand m-badge--wide ${(record.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(record.get('type'))}</span>
+                    {record.get('type') ? <span className={`m-badge m-badge--brand m-badge--wide ${(record.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(record.get('type'))}</span> : '-'}
                 </Td>
-                <Td width='100px'>{t('recipientsGroups.' + record.get('recipients'))}</Td>
+                <Td width='100px'>{record.get('recipients') ? t('recipientsGroups.' + record.get('recipients')) : '-'}</Td>
                 <Td width='100px'>{moment(record.get('created')).format('lll')}</Td>
                 <Td width='150px'>
-                    <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' to={`/messages/draft/${record.get('id')}`}>
+                    <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showMessageModal(record) }}>
+                        <i className='la la-search'></i>
+                    </button>
+                    <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill' to={`/messages/draft/${record.get('id')}`}>
                         <i className='la la-edit'></i>
                     </NavLink>                     
                     <DeleteButton disabled={this.props.deleteRecordRequest.get('loading')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
@@ -102,7 +122,7 @@ class DraftMessages extends Component {
 
     render() {
         const {getRecordsRequest, t} = this.props;
-        const {page, perPage} = this.state;
+        const {page, perPage, showMessageModal, showMessage} = this.state;
         const loading = getRecordsRequest.get('loading');
         const totalPages = getRecordsRequest.get('pagination').get('totalPages');
 
@@ -158,7 +178,8 @@ class DraftMessages extends Component {
                             </div>
                         </div>
                     </div>
-                </div>          
+                </div>
+                <ViewMessageModal isOpen={showMessageModal} message={showMessage} onClose={() => this._closeMessageModal()} />
             </div>
         );
     }

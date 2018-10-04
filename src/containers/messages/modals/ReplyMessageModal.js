@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {
   AppBar, CircularProgress,
   DialogContent,  
-  Icon, Checkbox, Grid,
-  Toolbar, Typography, FormGroup,
+  Icon, Checkbox,
+  Toolbar, Typography,
   Divider, Button, DialogActions,
   InputLabel, Input, TextField, FormControl, FormHelperText, FormControlLabel
 } from '@material-ui/core';
@@ -24,7 +24,7 @@ class ReplyMessageModal extends Component {
             origin: {}
         };
     }
-    
+       
     componentWillReceiveProps(nextProps) {
         if (!this.props.isOpen && nextProps.isOpen) {
             this.setState({
@@ -37,8 +37,7 @@ class ReplyMessageModal extends Component {
     }
 
     _handleSuccess(nextProps) {
-        if (!this.props.replyMessageRequest.get('success') && nextProps.replyMessageRequest.get('success')) {
-            this.props.resetReplyMessageRequest();
+        if (!this.props.replyMessageRequest.get('success') && nextProps.replyMessageRequest.get('success')) {            
             this._close();
         }
     }
@@ -50,6 +49,11 @@ class ReplyMessageModal extends Component {
     }
 
     _close () {
+        this.setState({            
+            subject: null,
+            message: null            
+        });    
+        this.props.resetReplyMessageRequest();    
         this.props.onClose();
     };
 
@@ -141,7 +145,7 @@ class ReplyMessageModal extends Component {
                       form='assign-students-form'
                       disabled={loading}
                       variant="raised"
-                      className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+                      className='mt-btn-success pull-right btn btn-success mt-btn'
                       onClick={ (e) => {this._onSubmit(e) }}
                       color='primary'>
                       {t('reply')}
