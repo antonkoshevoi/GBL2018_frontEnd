@@ -50,7 +50,7 @@ class SecondStepForm extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        avatarCropped: this.cropper.getCroppedCanvas().toDataURL()
+        avatarCropped: this.cropper.getCroppedCanvas({width: 250, height: 250}).toDataURL()
       }
     }, () => { this.props.onChange(this.state.form); });
   }
