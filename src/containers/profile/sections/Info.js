@@ -129,10 +129,11 @@ class Info extends Component {
           <div className="text-center m--margin-top-15">
             {!changePasswordMode && <button onClick={() => {
               this._handlePasswordModeSwitch(true)
-            }} className="m-btn btn m-btn--outline-2x btn-outline-success">{t('changePassword')}</button>}
+            }} className="m-btn btn btn-success">{t('changePassword')}</button>}
           </div>
           {changePasswordMode &&
             <div className="m-widget1 m-widget1--paddingless">
+              <h5 className='text-center'>{t('changePassword')}</h5>
               <form id='change-password-form' onSubmit={(e) => { this._changePassword(e) }}>
                 <div className="m-widget1__item">
                   <div className="form-group m-form__group ">
@@ -170,11 +171,11 @@ class Info extends Component {
                   </div>
                 </div>
                 <div className="text-center m--margin-top-15">
-                    <button onClick={() => {this._handlePasswordModeSwitch(false)}} className="m-btn btn m-btn--air m-btn--outline-2x m--margin-right-10 btn-outline-danger">
-                        {t('cancel')}
-                    </button>
-                    <button className="m-btn btn m-btn--outline-2x btn-outline-success">
+                    <button className="m-btn btn btn-success m--margin-right-10 ">
                         {t('change')}
+                    </button>
+                    <button onClick={() => {this._handlePasswordModeSwitch(false)}} className="m-btn btn btn-default">
+                        {t('cancel')}
                     </button>
                 </div>
               </form>

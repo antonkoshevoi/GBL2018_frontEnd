@@ -7292,6 +7292,9 @@ body.m--skin-dark {
 .m--padding-0 {
   padding: 0px !important; }
 
+.m--padding-bottom-0 {
+  padding-bottom: 0px !important; }
+
 .m--padding-5 {
   padding: 5px !important; }
 
@@ -22475,8 +22478,8 @@ body.m-portlet--fullscreen {
 
 .m-form .m-form__group {
   margin-bottom: 0;
-  padding-top: 15px;
-  padding-bottom: 15px; }
+  padding-top: 5px;
+  padding-bottom: 5px; }
   .m-form .m-form__group .form-control-label,
   .m-form .m-form__group label {
     font-weight: 400;

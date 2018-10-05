@@ -5,7 +5,7 @@ import { translate } from 'react-i18next';
 import { Typography, Select, MenuItem } from '@material-ui/core';
 import { getSchoolHomerooms } from "../../../redux/schools/actions";
 import { selectGetSchoolHomeroomsRequest } from "../../../redux/schools/selectors";
-import MetronicDatePicker from "../../../components/ui/metronic/MetronicDatePicker";
+import DatePicker from "../../../components/ui/DatePicker";
 import { update } from "../../../redux/user/actions";
 import { selectUpdateRequest } from "../../../redux/user/selectors";
 
@@ -123,16 +123,11 @@ class Details extends Component {
           <div className="m-portlet__head">
             <div className="m-portlet__head-caption">
               <div className="m-portlet__head-title">
-                <span className="m-portlet__head-icon">
-                  {(mode === 'overview') ?
-                    <i className="flaticon-info"></i> :                    
-                    <a title={t('back')} onClick={() => { this._handleSwitchMode('overview') }} className="pointer">
-                        <i className="la la-arrow-left"></i>
-                    </a>                    
-                  }
+                <span className="m-portlet__head-icon">                  
+                    <i className="flaticon-info"></i>
                 </span>
                 <h3 className="m-portlet__head-text">
-                  {mode === 'overview' ? t('info') : t('edit')}
+                  {t('info')}
                 </h3>
               </div>
             </div>
@@ -269,10 +264,17 @@ class Details extends Component {
                   </div>
                   <div className="form-group m-form__group row">
                     <label className="col-form-label col-lg-3" htmlFor="phone">{t('birthday')}</label>
-                    <div className="col-lg-9">
-                      <MetronicDatePicker
-                        value={user.birthday || null}
+                    <div className="col-lg-9">                            
+                      <DatePicker
+                        InputProps={{
+                            className: "form-control m-input m-input--air m--padding-top-5 m--padding-bottom-0",
+                            disableUnderline: true                    
+                        }}
+                        style={{width: '100%'}}
+                        disableUnderline={true}
+                        value={user.birthday || ''}
                         onChange={(date) => { this._handleDateChange(date, 'birthday') }}/>
+                                
                       {errors && errors.get('birthday') && <div className="form-control-feedback text-center error">{errors.get('birthday').get(0)}</div>}
                     </div>
                   </div>
@@ -296,7 +298,8 @@ class Details extends Component {
                 </div>
                 <div className="m-separator m-separator--dashed"></div>
                 <div className="text-right">
-                  <button className="btn-outline-success m-btn--outline-2x m-btn btn">{t('saveChanges')}</button>
+                  <button className="btn-success m-btn btn m--margin-right-10">{t('saveChanges')}</button>
+                  <button className="btn-default m-btn btn" onClick={() => { this._handleSwitchMode('overview') }}>{t('cancel')}</button>
                 </div>
               </form>
             </TabContainer>}

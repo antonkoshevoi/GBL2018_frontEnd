@@ -10,7 +10,7 @@ import SecondStepForm from './forms/SecondStepForm';
 import ThirdStepForm from './forms/ThirdStepForm';
 import {signUp, validateStep1} from '../../redux/signUpParent/actions';
 import {selectSignUpRequest, selectValidateStep1Request} from '../../redux/signUpParent/selectors';
-import MetronicProgressButton from "../../components/ui/metronic/MetronicProgressButton";
+import ProgressButton from "../../components/ui/ProgressButton";
 import { push } from 'react-router-redux';
 import { load } from '../../redux/app/actions';
 import './Signup.css'
@@ -184,7 +184,7 @@ class SignUpParent extends Component {
                     <div className='row'>
                       <div className='col-sm-12 text-right m--padding-top-20 text-center'>
                         {activeStep === 0 &&
-                           <MetronicProgressButton type='submit' disabled={step1Loading} loading={step1Loading} className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>{t('next')}</MetronicProgressButton>
+                           <ProgressButton type='submit' disabled={step1Loading} loading={step1Loading} className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>{t('next')}</ProgressButton>
                         }
                         {activeStep === 1 &&
                           <div>
@@ -195,7 +195,7 @@ class SignUpParent extends Component {
                               className='m-btn m-btn--air m--margin-5 btn btn-default text-uppercase'>
                               {t('back')}
                             </button>
-                            <MetronicProgressButton type='submit' disabled={step2Loading} loading={step2Loading} className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>{t('next')}</MetronicProgressButton>
+                            <ProgressButton type='submit' disabled={step2Loading} loading={step2Loading} className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>{t('next')}</ProgressButton>
                           </div>
                         }
                         {activeStep === 2 &&

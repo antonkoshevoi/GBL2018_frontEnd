@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { translate } from 'react-i18next';
-import {Avatar, Grid, Paper, withStyles} from '@material-ui/core';
-import MetronicDatePicker from "../../components/ui/metronic/MetronicDatePicker";
+import {Avatar, Grid, Paper, withStyles, Input} from '@material-ui/core';
+import DatePicker from "../../components/ui/DatePicker";
 import {NavLink} from "react-router-dom";
 import {getSingleRecord, update} from "../../redux/students/actions";
 import {selectGetSingleRecordRequest, selectUpdateRequest} from "../../redux/students/selectors";
@@ -167,7 +167,7 @@ class ProfileEdit extends Component {
                       <div className='col-md-12 text-center'>
                         <div className='CropperBlock text-center'>
                           <div className='upload-btn-wrapper '>
-                            <button className='btn m-btn--air btn-outline-info'>{t('uploadAvatar')}</button>
+                            <button className='btn m-btn--air btn-success'>{t('uploadAvatar')}</button>
                             <input type='file' name='myfile' onChange={(e) => {
                               this._handleFileChange(e)
                             }}/>
@@ -247,15 +247,17 @@ class ProfileEdit extends Component {
                       <div className="form-group m-form__group row">
                         <label className="col-form-label col-lg-3 col-sm-12" htmlFor="phone">{t('birthday')}</label>
                         <div className="col-lg-8 col-md-12 col-sm-12">
-                          <MetronicDatePicker
-                            className="form-control m-input m-input--air "
+                          <DatePicker
+                            InputProps={{
+                                className: "form-control m-input m-input--air m--padding-top-5 m--padding-bottom-0",
+                                disableUnderline: true                    
+                            }}
+                            style={{width: '100%'}}
+                            disableUnderline={true}
                             value={form.birthday || null}
-                            onChange={(date) => {
-                              this._handleDateChange(date, 'birthday')
-                            }}/>
+                            onChange={(date) => { this._handleDateChange(date, 'birthday') }}/>
                           {errors && errors.get('birthday') &&
-                          <div
-                            className="form-control-feedback text-center error">{errors.get('birthday').get(0)}</div>}
+                          <div className="form-control-feedback text-center error">{errors.get('birthday').get(0)}</div>}
                         </div>
                       </div>
                       
@@ -302,10 +304,10 @@ class ProfileEdit extends Component {
                   </Grid>                
 
                 <Grid item xs={12}>
+                  <button className='btn m-btn--air btn-success  m--margin-right-10' onClick={this.updateProfile}>{t('save')}</button>
                   <NavLink to={`/reports/students/${this.state.id}/`}>
-                            <button className='btn m-btn--air btn-primary m--margin-right-10'>{t('back')}</button>
+                        <button className='btn btn-default'>{t('back')}</button>
                   </NavLink>
-                  <button className='btn m-btn--air btn-success' onClick={this.updateProfile}>{t('save')}</button>
                 </Grid>
               </Grid>
             </Paper>

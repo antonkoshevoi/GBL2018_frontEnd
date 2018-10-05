@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CircularProgress } from '@material-ui/core';
 
-class MetronicProgressButton extends Component {
+class ProgressButton extends Component {
 
   render () {
     const { loading, style, children, ...rest } = this.props;
@@ -29,4 +29,4 @@ class MetronicProgressButton extends Component {
   }
 }
 
-export default MetronicProgressButton;
+export default ProgressButton;
