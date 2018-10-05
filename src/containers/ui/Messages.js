@@ -11,13 +11,28 @@ class Messages extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { seconds: 0 };
+        
+        this.state = { 
+            seconds: 0,
+            messages: [],
+            count: 0
+        };
     }
           
     componentDidMount() {
-        this.props.getMessages();
-        
+        this.props.getMessages();        
         this.interval = setInterval(() => this.tick(), 1000);
+    }
+    
+    componentWillReceiveProps(nextProps) {
+        const {unreadMessagesRequest} = this.props;
+
+        if (!unreadMessagesRequest.get('success') && nextProps.unreadMessagesRequest.get('success')) {
+            this.setState({             
+                messages: nextProps.unreadMessagesRequest.get('records'),
+                count: nextProps.unreadMessagesRequest.get('total')
+            });
+        }        
     }
     
     tick() {        
@@ -38,9 +53,7 @@ class Messages extends Component {
     }
           
   _renderMessages () {
-    const { unreadMessagesRequest } = this.props;
-
-    return unreadMessagesRequest.get('records').map((message, key) => (
+    return this.state.messages.map((message, key) => (
       <div key={key} className='m-widget1__item'>
         <div className='row m-row--no-padding align-items-center'>
           <div className='col-md-2 m--align-left'>
@@ -60,16 +73,14 @@ class Messages extends Component {
   }
 
   render() {
-    const { unreadMessagesRequest, activeMenu, t } = this.props;    
-    
-    const newMessages = unreadMessagesRequest.get('success') ?  unreadMessagesRequest.get('total') : null;
+    const { activeMenu, t } = this.props;        
 
     return (
         <li className="m-nav__item m-topbar__Tasks m-topbar__Tasks--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width" data-dropdown-toggle="click" data-dropdown-persistent="true">
             <a  className="m-nav__link m-dropdown__toggle pointer" id="m_topbar_notification_icon" onClick={() => {this.props.switchMenu('messages')}}>
                 <span className="m-nav__link-icon">
                     <i className="fa fa-envelope"></i>
-                    {(newMessages > 0) && <span className="g-badge badge-red">{newMessages}</span> }
+                    {(this.state.count > 0) && <span className="g-badge badge-red">{this.state.count}</span> }
                 </span>
             </a>
             {activeMenu === 'messages' && 
@@ -83,7 +94,7 @@ class Messages extends Component {
                                 <i className="fa fa-envelope"></i> {t('messages')}
                             </Typography>                                                               
                             <div>
-                              {newMessages ?
+                              {(this.state.count > 0) ?
                                 <div className='m-dropdown__body'>
                                   <div className='m-dropdown__content'>
                                     <div className='tab-content'>

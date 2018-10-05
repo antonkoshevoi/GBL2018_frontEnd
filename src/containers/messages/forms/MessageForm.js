@@ -45,18 +45,6 @@ class MessageForm extends Component {
             this._changeRecipients((formData.recipient || ''));
         }                
     }
-
-    componentWillReceiveProps(nextProps) {
-       
-        const {
-            homeroomsRequest,
-            classroomsRequest, 
-            teachersRequest,
-            adminsRequest
-        } = this.props;
-                
-        
-    }    
     
     _handleChange(event) {
         const { value, name } = event.target;
@@ -97,7 +85,7 @@ class MessageForm extends Component {
         if (index < 0) {
             selected.push(value.toString());
         } else {
-            let rem = selected.splice(index, 1);
+            selected.splice(index, 1);
         }
         
         this.setState({[name]: selected});
@@ -183,7 +171,7 @@ class MessageForm extends Component {
                 <div aria-describedby='recipients' className='full-width form-inputs d-inline-flex flex-column'>
                     <InputLabel htmlFor='recipients'>{t(title)}</InputLabel>
                     <Select
-                        value={selected || ''}
+                        value={selected ? selected.toString() : ''}
                         onChange={(e) => { this._handleChange(e) }}
                         name={name}
                         >
@@ -192,7 +180,7 @@ class MessageForm extends Component {
                         ))}                        
                     </Select>                        
                 </div>
-                {errors && errors.get('recipients') && <FormHelperText error>{errors.get('recipients').get(0)}</FormHelperText>}
+                {errors && errors.get('ids') && <FormHelperText error className="margin-0">{errors.get('ids').get(0)}</FormHelperText>}
             </div>
         </div>;       
     }
@@ -215,7 +203,7 @@ class MessageForm extends Component {
                   control={<Checkbox name={name} checked={(selected.length === options.size)} onChange={ (e) => {this._handleSelectAllChange(e, options.map(option => option.id.toString())) }} value="1" />}
                   label={t('selectAll')} />                            
             </div>
-            {errors && errors.get('recipients') && <div className="col-sm-12"><FormHelperText error>{errors.get('recipients').get(0)}</FormHelperText></div>}
+            {errors && errors.get('ids') && <div className="col-sm-12"><FormHelperText error className="margin-0">{errors.get('ids').get(0)}</FormHelperText></div>}
         </div>;       
     }
     
@@ -228,14 +216,17 @@ class MessageForm extends Component {
         
         if (roles && roles[0] && roles[0].name === 'Parents' && !this.state.recipient) {
             this.props.getTeachers();
-            this.setState({recipient: 'teacherId'});
+            this.setState({
+                type: 'mail',
+                recipient: 'teacherId'
+            });
         }
         
         return (
             <div>
                 { loading && <Loader/> }
+                <HasRole roles={['Superadministrator', 'Superintendent', 'Principal', 'Administrator', 'Teacher']}>
                 <div className="row">
-                    <HasRole roles={['Superadministrator', 'Superintendent', 'Principal', 'Administrator', 'Teacher']}>
                     <div className="col-sm-6 col-md-5 col-lg-4">
                         <FormControl className='full-width form-inputs'>
                             <InputLabel htmlFor='recipients'>{t('recipients')}</InputLabel>
@@ -245,7 +236,7 @@ class MessageForm extends Component {
                                     onChange={(e) => { this._handleChange(e) }}
                                     inputProps={{  name: 'recipient' }}
                                     >
-                                    <MenuItem value="0"></MenuItem>
+                                    <MenuItem value=""></MenuItem>
                                     <MenuItem value="classroomIds">{t('classrooms')}</MenuItem>
                                     <MenuItem value="homeroomIds">{t('homerooms')}</MenuItem>                                        
                                     <MenuItem value="teacherId">{t('teacher')}</MenuItem>
@@ -258,7 +249,7 @@ class MessageForm extends Component {
                                     onChange={(e) => { this._handleChange(e) }}
                                     inputProps={{ name: 'recipient' }}
                                     >
-                                    <MenuItem value="0"></MenuItem>
+                                    <MenuItem value=""></MenuItem>
                                     <MenuItem value="roleIds">{t('entireSchool')}</MenuItem>
                                     <MenuItem value="classroomIds">{t('classrooms')}</MenuItem>
                                     <MenuItem value="homeroomIds">{t('homerooms')}</MenuItem>                                           
@@ -268,8 +259,7 @@ class MessageForm extends Component {
                             </HasRole>
                             {errors && errors.get('recipients') && <FormHelperText error>{errors.get('recipients').get(0)}</FormHelperText>}
                         </FormControl>
-                    </div>
-                    </HasRole> 
+                    </div>                    
                     <div className="col-sm-6 col-md-5 col-lg-4">
                         <FormControl className='full-width form-inputs'>
                             <InputLabel htmlFor='type'>{t('type')}</InputLabel>
@@ -289,6 +279,7 @@ class MessageForm extends Component {
                         </FormControl>
                     </div>
                 </div>
+                </HasRole> 
                 {this._renderRecipients()}
                 <div className='row'>
                   <div className='col-sm-12 col-md-12'>

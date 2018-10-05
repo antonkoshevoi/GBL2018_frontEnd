@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 import {
-  AppBar, CircularProgress,
-  DialogContent,  
-  Icon, Checkbox,
-  Toolbar, Typography,
-  Divider, Button, DialogActions,
-  InputLabel, Input, TextField, FormControl, FormHelperText, FormControlLabel
+  AppBar, CircularProgress, DialogContent, Icon, Toolbar, Typography,
+  Divider, Button, DialogActions, TextField, FormControl, FormHelperText
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
@@ -69,10 +65,9 @@ class ReplyMessageModal extends Component {
     };
   
     render() {
-        const { isOpen, replyMessageRequest, message, t } = this.props;
+        const { isOpen, replyMessageRequest, t } = this.props;
             
-        const loading = replyMessageRequest.get('loading');
-        const success = replyMessageRequest.get('success');
+        const loading = replyMessageRequest.get('loading');        
         const errors  = replyMessageRequest.get('errors');
 
         return (

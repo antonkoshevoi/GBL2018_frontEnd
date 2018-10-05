@@ -39,7 +39,7 @@ class NewMessage extends Component {
     }    
     
     render() {
-        const {messageRequest, sendMessageRequest, t} = this.props;
+        const {sendMessageRequest, t} = this.props;
         const loading = sendMessageRequest.get('loading');        
         const errors = sendMessageRequest.get('errors');       
         
