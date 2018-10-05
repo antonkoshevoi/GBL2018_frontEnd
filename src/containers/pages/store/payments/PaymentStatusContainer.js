@@ -151,9 +151,6 @@ class PaymentStatusContainer extends Component {
                                         label={t('rememberMe')}
                                       />
                                     </div>
-                                    <div className="col m--align-right m-login__form-right m--hide">
-                                      <a href="javascript:;" id="m_login_forget_password" className="m-link">{t('forgetPassword')} ?</a>
-                                    </div>
                                   </div>
                                   <div className="m-login__form-action">
                                     <Button id="m_login_signin_submit"  variant="raised" color="primary" onClick={() => { this._login() }}

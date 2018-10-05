@@ -79,15 +79,31 @@ class SignUpParent extends Component {
   }
 
   _submitStep1() {
-    this.props.validateStep1(
-      this.state.form.step1
-    );
+    this.props.validateStep1({
+        email:          this.state.form.step1.email,
+        password:       this.state.form.step1.password,
+        firstName:      this.state.form.step1.firstName,
+        lastName:       this.state.form.step1.lastName
+    });
   };
 
   _submitStep2() {
-    this.props.signUp(
-      this.state.form
-    );
+    this.props.signUp({
+        step1: {
+            avatarCropped:  this.state.form.step1.avatarCropped,
+            email:          this.state.form.step1.email,
+            password:       this.state.form.step1.password,
+            firstName:      this.state.form.step1.firstName,
+            lastName:       this.state.form.step1.lastName
+        },
+        step2: {
+            avatarCropped:  this.state.form.step2.avatarCropped,
+            username:       this.state.form.step2.username,
+            password:       this.state.form.step2.password,
+            firstName:      this.state.form.step2.firstName,
+            lastName:       this.state.form.step2.lastName
+        }
+    });
   };
 
   _goToDashboard() {

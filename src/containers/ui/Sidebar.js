@@ -88,7 +88,7 @@ class Sidebar extends Component {
               return;
              } }>
           <NavLink
-            to={(menu.subMenu !== undefined) ? `${menu.key == 'store' ? menu.link : '#' + menu.key }` : `/${menu.link}`}
+            to={(menu.subMenu !== undefined) ? `${menu.key === 'store' ? menu.link : '#' + menu.key }` : `/${menu.link}`}
             className={'googleMenuItem ' + menu.colorName + (activeMenu.key === menu.key ? ' active fadeInUp  animated' : activeMenu.subMenu !== undefined ? ' swapped' : '') }
             onClick={(event) => {_self._googleMenuToggle(menu); _self._goToFirstPage(menu);}}>
             <span className="icon"><i className={menu.icon}></i></span>
@@ -127,7 +127,7 @@ class Sidebar extends Component {
     return (
       <div className={'second_level ' + (activeMenu.key === menu.key ? 'activeSubMenu fadeInUp  animated' : '')}
            id={menu.key}>
-        <a href="#" className="menu-back-arrow back" onMouseOver={() => {
+        <a href="" className="menu-back-arrow back" onMouseOver={() => {
           _self._menuBackHover()
         }}>
           <i className="la la-angle-left"></i>

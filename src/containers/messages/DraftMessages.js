@@ -3,7 +3,7 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetDraftRecordsRequest, selectDeleteRecordRequest, } from '../../redux/messages/selectors';
 import { getDraftMessages, deleteDraftMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
-import { MenuItem, Select } from '@material-ui/core';
+import { MenuItem, Select, Button, Icon } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
@@ -70,7 +70,7 @@ class DraftMessages extends Component {
     } 
     
     _renderRecords() {
-        const {t, goTo} = this.props;
+        const {t} = this.props;
         const loading = this.props.getRecordsRequest.get('loading');
         const records = this.props.getRecordsRequest.get('records');
         
@@ -150,7 +150,13 @@ class DraftMessages extends Component {
                                         <MenuItem value={25}>25</MenuItem>
                                         <MenuItem value={50}>50</MenuItem>
                                         <MenuItem value={100}>100</MenuItem>
-                                    </Select>                                          
+                                    </Select>
+                                    <NavLink to="/messages/new">
+                                        <Button color='primary' className='mt-btn mt-btn-success'>
+                                          {t('newMessage')}
+                                          <Icon className="m--margin-left-10">send</Icon>
+                                        </Button>
+                                    </NavLink>
                                 </div>
                             </div>
                         </div>

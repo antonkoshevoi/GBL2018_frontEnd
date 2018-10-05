@@ -76,10 +76,10 @@ export default  {
                colorName:'purple',
            },
            {
-           key:'sharing',
-           title:'sharing',
-           link:'dashboard',
-           icon:'fa fa-share-alt',
+           key: 'messages',
+           title: 'messages',
+           link: 'messages',
+           icon: 'fa fa-weixin',
            colorName:'blue',
            subMenu:[
                 {

@@ -87,11 +87,37 @@ export default  {
       ]
     },
     {
-      key:'calendar',
-      title:'calendar',
-      link:'calendar',
-      icon:'fa fa-calendar',
-      colorName:'orange',
+        key: 'messages',
+        title: 'messages',
+        link: 'messages',
+        icon: 'fa fa-weixin',
+        colorName: 'blue',
+        subMenu: [
+            {
+                key: 'inbox',
+                title: 'inbox',
+                link: 'messages',
+                icon: 'flaticon flaticon-user-settings',
+            },
+            {
+                key: 'sent',
+                title: 'sent',
+                link: 'messages/sent',
+                icon: 'flaticon flaticon-technology-1',
+            },
+            {
+                key: 'compose',
+                title: 'compose',
+                link: 'messages/new',
+                icon: 'flaticon flaticon-technology-1',
+            },
+            {
+                key: 'drafts',
+                title: 'drafts',
+                link: 'messages/drafts',
+                icon: 'flaticon flaticon-technology-1',
+            }
+        ]
     },
     {
       key:'orders',
