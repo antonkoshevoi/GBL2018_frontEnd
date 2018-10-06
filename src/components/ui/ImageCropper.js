@@ -32,8 +32,9 @@ class ImageCropper extends Component {
         this.setState({
           file: reader.result
         });
+        this._triggerCrop();
       };
-      reader.readAsDataURL(files[0]);
+      reader.readAsDataURL(files[0]);      
     }
   }
 
@@ -48,40 +49,26 @@ class ImageCropper extends Component {
     const reader = new FileReader();
     if (files.length) {
       reader.onload = () => {
-        this.setState({src: reader.result});
+        this.setState({src: reader.result});        
+        this._triggerCrop();        
       };
       reader.readAsDataURL(files[0]);
     }
   }
 
-  cropImage() {
-    const {saveButton} = this.props;
-
-    if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
-      return;
-    }
-
-    if (!saveButton) {
-      this.props.onCrop(this.cropper.getCroppedCanvas(this.size).toDataURL());
-      this.props.setFile(this.state.file);
-    }
-
-    this.setState({
-      croppedFile: this.cropper.getCroppedCanvas(this.size).toDataURL()
-    });
-  }
-
   _rotateImage(angle = 0) {
-    this.cropper.rotate(++angle)
+    this.cropper.rotate(++angle);
+    this._handleImageCrop();
   }
-
 
   _zoomIn() {
-    this.cropper.zoom(0.1)
+    this.cropper.zoom(0.1);
+    this._handleImageCrop();
   }
 
   _zoomOut() {
-    this.cropper.zoom(-0.1)
+    this.cropper.zoom(-0.1);
+    this._handleImageCrop();
   }
 
   _reverseImage(scale) {
@@ -91,7 +78,6 @@ class ImageCropper extends Component {
       } else {
         this.cropper.scaleY(1)
       }
-
     } else {
       if (this.cropper.cropper.imageData.scaleX == 1) {
         this.cropper.scaleX(-1)
@@ -99,12 +85,12 @@ class ImageCropper extends Component {
         this.cropper.scaleX(1)
       }
     }
+    this._handleImageCrop();
   }
-
 
   _handleImageCrop() {
     const {saveButton} = this.props;
-    if (typeof this.cropper.getCroppedCanvas() === 'undefined') {
+    if (typeof this.cropper.getCroppedCanvas() === undefined) {
       return;
     }
 
@@ -116,14 +102,14 @@ class ImageCropper extends Component {
       this.props.setFile(this.state.file);
       setTimeout(() => {
         this.props.onCrop(this.cropper.getCroppedCanvas(this.size).toDataURL());
-      }, 200)
+      }, 200);
     }
   }
 
 
   _saveImages() {
     const {croppedFile, file} = this.state;
-    this.props.onSubmit(croppedFile, file)
+    this.props.onSubmit(croppedFile, file);
     this.props.setFile(file);
     setTimeout(() => {
       this.props.onCrop(croppedFile);
@@ -134,6 +120,12 @@ class ImageCropper extends Component {
     this.fileInput.click();
   }
 
+  _triggerCrop() {    
+    setTimeout(() => {
+      this.cropButton.click();
+    }, 200);
+  }
+  
   render() {
 
     const {croppedFile, file} = this.state;
@@ -144,9 +136,7 @@ class ImageCropper extends Component {
         {!circularButton &&
         <div className='upload-btn-wrapper '>
           <span className='btn pointer m-btn--air btn-outline-info'>{t('uploadFile')}</span>
-          <input type='file' ref={fileInput => this.fileInput = fileInput} name='myfile' onChange={(e) => {
-            this._handleFileChange(e)
-          }}/>
+          <input type='file' ref={fileInput => this.fileInput = fileInput} name='myfile' onChange={(e) => { this._handleFileChange(e) }}/>
         </div>
         }
         {circularButton &&
@@ -158,10 +148,7 @@ class ImageCropper extends Component {
             <i className="uploadBtnText fa fa-upload"></i>
               <span className="uploadBtnText">{t('uploadPhoto')}</span>
           </span>
-          <input type='file' className="m--hide" ref={fileInput => this.fileInput = fileInput} name='myfile'
-                 onChange={(e) => {
-                   this._handleFileChange(e)
-                 }}/>
+          <input type='file' className="m--hide" ref={fileInput => this.fileInput = fileInput} name='myfile' onChange={(e) => { this._handleFileChange(e) }}/>
         </div>
         }
         <Cropper
@@ -223,6 +210,7 @@ class ImageCropper extends Component {
           <br/>
           <span
             className='btn pointer m-btn m--margin-5 m-btn--pill m-btn--air btn-success'
+            ref={cropButton => this.cropButton = cropButton}
             onClick={() => {
               this._handleImageCrop()
             }}

@@ -72,14 +72,7 @@ class CreateHomeroomModal extends Component {
   }
 
   _setImage(img) {
-    this.setState(
-      {
-        homeroom: {
-          ...this.state.homeroom,
-          avatar: img
-        }
-      }
-    );
+    this.setState({avatar: img});
   }
 
   render() {
@@ -105,13 +98,13 @@ class CreateHomeroomModal extends Component {
         <DialogContent className="m--margin-top-25">
           <form id='create-homeroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
             <div className="row">
-              <div className="col-md-8">
+              <div className="col-md-7">
                 <HomeroomForm
                   onChange={(homeroom) => { this._onChange(homeroom) }}
                   homeroom={this.state.homeroom}
                   errors={errors}/>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-5">
                 <ImageCropper
                   circularButton
                   onCrop={(cropImg) => this._setCroppedImage(cropImg)}

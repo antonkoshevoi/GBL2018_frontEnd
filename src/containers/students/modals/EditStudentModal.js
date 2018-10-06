@@ -41,7 +41,8 @@ class EditStudentModal extends Component {
         if (!record && nextRecord) {
             this.setState({
                 id: nextRecord.get('id'),
-                student: nextRecord.toJS()
+                student: nextRecord.toJS(),
+                avatar: nextRecord.toJS().avatar
             });
         }
 
@@ -70,33 +71,22 @@ class EditStudentModal extends Component {
 
     _onSubmit(e) {
         e.preventDefault();
-        this.props.update(
-            this.state.id,
-            this.state.student
-        );
+        let {id, student} = this.state;        
+        this.props.update( id, student );
     };
 
 
-    _setCroppedImage(img) {
-        this.setState(
-            {
-                student: {
-                    ...this.state.student,
-                    croppedAvatar: img
-                }
+    _setCroppedImage(img) {      
+        this.setState({
+            student: {
+                ...this.state.student,
+                avatarCropped: img                
             }
-        );
+        });
     }
 
     _setImage(img) {
-        this.setState(
-            {
-                student: {
-                    ...this.state.student,
-                    avatar: img
-                }
-            }
-        );
+        this.setState({avatar: img});
     }
 
     render() {
@@ -106,6 +96,7 @@ class EditStudentModal extends Component {
 
         return (
             <Modal isOpen={isOpen} bigger onClose={() => this._close()}>
+
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>                        
                         {loading ? (
@@ -127,7 +118,7 @@ class EditStudentModal extends Component {
                             <div className="col-md-6">
                                 <ImageCropper
                                     circularButton
-                                    image={this.state.student.avatar}
+                                    image={this.state.avatar || ''}
                                     onCrop={(cropImg) => this._setCroppedImage(cropImg)}
                                     setFile={(img) => this._setImage(img)}/>
                             </div>

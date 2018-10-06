@@ -39,7 +39,8 @@ class EditAdministrationModal extends Component {
         if (!record && nextRecord) {
             this.setState({
                 id: nextRecord.get('id'),
-                adminUser: nextRecord.toJS()
+                adminUser: nextRecord.toJS(),
+                avatar: nextRecord.toJS().avatar
             });
         }
 
@@ -79,21 +80,14 @@ class EditAdministrationModal extends Component {
             {
                 adminUser: {
                     ...this.state.adminUser,
-                    croppedAvatar: img
+                    avatarCropped: img
                 }
             }
         );
     }
 
     _setImage(img) {
-        this.setState(
-            {
-                adminUser: {
-                    ...this.state.adminUser,
-                    avatar: img
-                }
-            }
-        );
+        this.setState({avatar: img});
     }
 
     render() {
@@ -124,7 +118,7 @@ class EditAdministrationModal extends Component {
                             <div className="col-md-6">
                                 <ImageCropper
                                     circularButton
-                                    image={this.state.adminUser.avatar}
+                                    image={this.state.avatar || ''}
                                     onCrop={(cropImg) => this._setCroppedImage(cropImg)}
                                     setFile={(img) => this._setImage(img)}/>
                             </div>

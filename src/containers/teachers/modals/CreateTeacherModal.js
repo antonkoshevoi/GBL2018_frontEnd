@@ -37,9 +37,9 @@ class CreateTeacherModal extends Component {
         phone: '',
         schoolId: '',
         homeroomId: '',
-        croppedAvatar: '',
-        avatar: '',
-      }
+        avatarCropped: '',
+      },
+      avatar: ''
     };
   }
 
@@ -70,21 +70,14 @@ class CreateTeacherModal extends Component {
       {
         teacher: {
           ...this.state.teacher,
-          croppedAvatar:img
+          avatarCropped:img
         }
       }
     );
   }
 
   _setImage(img){
-    this.setState(
-      {
-        teacher: {
-          ...this.state.teacher,
-          avatar:img
-        }
-      }
-    );
+    this.setState({avatar:img});
   }
 
   _close () {

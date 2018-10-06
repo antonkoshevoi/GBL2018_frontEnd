@@ -124,7 +124,7 @@ class DemoClassroomForm extends Component {
 
     return (
       <div className='row'>
-        <div className='col-sm-8 m-auto'>
+        <div className='col-sm-10 m-auto'>
           <FormControl aria-describedby='crmName-error-text' className='full-width form-inputs'>
             <InputLabel htmlFor='crmName-error'>{t('name')}</InputLabel>
             <Input
@@ -181,7 +181,7 @@ class DemoClassroomForm extends Component {
               <MenuItem value={null} primarytext=''/>
               {this._renderCourses()}
             </Select>
-            {this.props.getCoursesRequest.get('success') && !this.state.courses.length && <h5 className='text-center' style={{color: 'red'}}>No Unassigned Courses found (You should buy from Store)</h5>}
+            {this.props.getCoursesRequest.get('success') && !this.state.courses.length && <p className='text-center m--margin-top-5 text-danger'>{t('noDemoCoursesFound')}</p>}
             {errors && errors.get('crmCourse') && <FormHelperText error>{ errors.get('crmCourse').get(0) }</FormHelperText>}
           </FormControl>
           <FormControl className='full-width form-inputs'>

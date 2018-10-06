@@ -7,14 +7,46 @@ import {withRouter, NavLink} from 'react-router-dom';
 import {connect} from "react-redux";
 import {getSingleRecord} from '../../../../redux/students/actions';
 import {selectGetSingleRecordRequest} from '../../../../redux/students/selectors';
+import EditStudentModal from "../../../students/modals/EditStudentModal";
 
 class InfoSection extends Component {
 
-  componentDidMount() {
-    const studentId = this.props.match.params.id;
-    this.props.getStudent(studentId);
+  constructor(props) {
+    super(props);
+    this.state = {
+        student: null,
+        editModalIsOpen: false
+    }
   }
+  
+  componentDidMount() {
+        const studentId = this.props.match.params.id;
+        this.props.getStudent(studentId);
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    const success = this.props.studentRequest.get('success');
+    const nextSuccess = nextProps.studentRequest.get('success');
+    
+    if (!success && nextSuccess) {
+        this.setState({student: nextProps.studentRequest.get('record').toJS()});
+    }
+  }  
 
+  _openEditDialog() {
+        this.props.getStudent(this.props.match.params.id);  
+        this.setState({ editModalIsOpen: true });
+  };
+  
+  _closeEditDialog() {      
+        
+        this.setState({ editModalIsOpen: false });
+  };
+  
+  _onStudentUpdate() {
+      this.props.getStudent(this.props.match.params.id);    
+  }
+    
   _renderCourseTable(courses) {
     return courses.map(function (item, i) {
       return (
@@ -38,12 +70,11 @@ class InfoSection extends Component {
     })
   }
 
-  render() {    
-    const {id}   = this.props.match.params;        
+  render() {               
     const {studentRequest, data, t} = this.props;
 
-    const loading = studentRequest.get('loading');
-    const student = loading ? null : studentRequest.get('record').toJS();
+    const loading       = data.loading;
+    const student       = this.state.student;
 
     const defaultAvatar = '//s3.amazonaws.com/37assets/svn/765-default-avatar.png';
 
@@ -51,10 +82,10 @@ class InfoSection extends Component {
       <div className="row">
         <div className="col-md-3">
           <div className="imgBlock">
-            {loading && <MyPreloader text="Loading..." color="primary"/>}
+            {studentRequest.get('loading') ? <MyPreloader text="Loading..." color="primary"/> : 
             <div className="avatar m--margin-bottom-20">
-              {!loading && <img src={(student.avatar || defaultAvatar)} alt="" className="" />}
-            </div>
+              {student && <img src={(student.avatar || defaultAvatar)} alt="" className="" />}
+            </div>}
           </div>
         </div>
         <div className="col-md-9">
@@ -72,29 +103,27 @@ class InfoSection extends Component {
                     </div>
                   </div>
                   <div className='m-portlet__body position-relative'>
-                    <div style={{position:'absolute', right:10, top:-60}}>
-                      <NavLink to={`/reports/students/${id}/edit`}>
-                        <IconButton color='primary'>                        
+                    <div style={{position:'absolute', right:10, top:-60}}>                      
+                        <IconButton color='primary' onClick={() => { this._openEditDialog() }}>                        
                           <Icon className="material-icons">
                             edit_icon
                           </Icon>
-                        </IconButton>
-                      </NavLink>
+                        </IconButton>                      
                     </div>                
                     <div className="table-responsive">
                       <table className="table m-table m-table--head-separator-primary m-middle-table">
                         <tbody>
                         <tr>
                           <th>{t('firstName')}</th>
-                          <td>{loading ? <CircularProgress color="primary"/> : student.firstName}</td>
+                          <td>{!student ? <CircularProgress color="primary"/> : student.firstName}</td>
                         </tr>
                         <tr>
                           <th>{t('lastName')}</th>
-                          <td>{loading ? <CircularProgress color="primary"/> : student.lastName}</td>
+                          <td>{!student ? <CircularProgress color="primary"/> : student.lastName}</td>
                         </tr>
                         <tr>
                           <th>{t('birthday')}</th>
-                          <td>{loading ? <CircularProgress color="primary"/> : (student.birthday || 'N / A')}</td>
+                          <td>{!student ? <CircularProgress color="primary"/> : (student.birthday || 'N / A')}</td>
                         </tr>
                         </tbody>
                       </table>
@@ -115,10 +144,10 @@ class InfoSection extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {data.loading && <tr>
+                    {loading && <tr>
                       <td colSpan="3" className="text-center"><CircularProgress color="primary"/></td>
                     </tr>}
-                    {!data.loading && this._renderCourseTable(data.data)}
+                    {!loading && this._renderCourseTable(data.data)}
                     </tbody>
                   </table>
                 </div>
@@ -126,6 +155,10 @@ class InfoSection extends Component {
             </div>
           </div>
         </div>
+        <EditStudentModal
+          isOpen={this.state.editModalIsOpen}
+          onClose={() => { this._closeEditDialog() }}
+          onSuccess={() => { this._onStudentUpdate() }}/>        
       </div>
     );
   }

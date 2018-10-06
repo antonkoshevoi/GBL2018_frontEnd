@@ -494,6 +494,7 @@ export default {
     from: 'From',
     to: 'To',
     schoolManagement: 'School Management',
+    noDemoCoursesFound: 'No Demo Courses found...',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

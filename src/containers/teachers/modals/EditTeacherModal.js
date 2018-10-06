@@ -41,7 +41,8 @@ class EditTeacherModal extends Component {
     if (!record && nextRecord) {
       this.setState({
         id: nextRecord.get('id'),
-        teacher: nextRecord.toJS()
+        teacher: nextRecord.toJS(),
+        avatar: nextRecord.toJS().avatar
       });
     }
 
@@ -77,25 +78,16 @@ class EditTeacherModal extends Component {
   };
 
     _setCroppedImage(img) {
-        this.setState(
-            {
-                teacher: {
-                    ...this.state.teacher,
-                    croppedAvatar: img
-                }
+        this.setState({
+            teacher: {
+                ...this.state.teacher,
+                avatarCropped: img
             }
-        );
+        });
     }
 
     _setImage(img) {
-        this.setState(
-            {
-                teacher: {
-                    ...this.state.teacher,
-                    avatar: img
-                }
-            }
-        );
+        this.setState({avatar: img});
     }
 
   render() {
@@ -124,7 +116,7 @@ class EditTeacherModal extends Component {
                   <div className="col-md-6">
                       <ImageCropper
                           circularButton
-                          image={this.state.teacher.avatar}
+                          image={this.state.avatar || ''}
                           onCrop={(cropImg) => this._setCroppedImage(cropImg)}
                           setFile={(img) => this._setImage(img)}/>
                   </div>

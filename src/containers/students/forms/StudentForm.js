@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { selectGetSchoolHomeroomsRequest } from '../../../redux/schools/selectors';
 import { getSchoolHomerooms } from '../../../redux/schools/actions';
+import DatePicker from "../../../components/ui/DatePicker";
 import HasPermission from "../../middlewares/HasPermission";
 
 class StudentForm extends Component {
@@ -50,6 +51,13 @@ class StudentForm extends Component {
       [name]: value
     });
   }
+  
+  _handleDateChange(value, name) {    
+      this.props.onChange({
+        ...this.props.student,
+        [name]: value
+    });
+  };  
 
   _renderSchoolHomerooms() {
     const { schoolHomerooms } = this.state;
@@ -128,6 +136,24 @@ class StudentForm extends Component {
                         {errors && errors.get('phoneNumber') && <div className="form-control-feedback error">{ errors.get('phoneNumber').get(0) }</div>}
                     </div>
                 </div>
+                
+                <div className="form-group m-form__group row">
+                  <label className="col-form-label col-lg-3 col-sm-12" htmlFor="phone">{t('birthday')}</label>
+                  <div className="col-lg-8 col-md-12 col-sm-12">
+                    <DatePicker
+                      InputProps={{
+                          className: "form-control m-input m-input--air m--padding-top-5 m--padding-bottom-0",
+                          disableUnderline: true                    
+                      }}
+                      style={{width: '100%'}}
+                      disableUnderline={true}
+                      value={student.birthday || null}
+                      onChange={(date) => { this._handleDateChange(date, 'birthday') }}/>
+                    {errors && errors.get('birthday') &&
+                    <div className="form-control-feedback text-center error">{errors.get('birthday').get(0)}</div>}
+                  </div>
+                </div>
+                      
                 <HasPermission permissions={['[Users][Students][Create][Any]']}>
                   <div className="form-group m-form__group row">
                       <label className="col-form-label col-lg-3" htmlFor="homeroomId">{t('homeroom')}</label>

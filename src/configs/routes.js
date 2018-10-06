@@ -49,7 +49,6 @@ import InvitationDetails from '../containers/invitations/InvitationDetails';
 import ShoppingCart from "../containers/pages/store/ShoppingCart";
 import OnlyHeadLayout from "../containers/layouts/OnlyHeadLayout";
 import AutoCreate from "../containers/classrooms/AutoCreate";
-import ProfileEdit from "../containers/profile/ProfileEdit";
 import SplashContainer from "../containers/static/Splash";
 import PrivacyPolicy from "../containers/static/PrivacyPolicy";
 import About from "../containers/static/About";
@@ -124,8 +123,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/reports' component={ReportsDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReportDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} path='/reports/homerooms/:id' name='Homeroom' component={HomeRoomReportDashboard}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>
-      <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id/edit' name='Student' component={ProfileEdit}/>      
+      <AuthenticatedRoute exact layout={MainLayout} path='/reports/students/:id' name='Student' component={StudentReports}/>        
       
       {/*S-Cap*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/scap' name='S-Cap' component={Scap}/>

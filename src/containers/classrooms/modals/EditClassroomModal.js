@@ -41,7 +41,8 @@ class EditClassroomModal extends Component {
     if (!record && nextRecord) {
       this.setState({
         id: nextRecord.get('id'),
-        classroom: nextRecord.toJS()
+        classroom: nextRecord.toJS(),
+        avatar: nextRecord.toJS().avatar
       });
     }
 
@@ -88,14 +89,7 @@ class EditClassroomModal extends Component {
   }
 
   _setImage(img) {
-    this.setState(
-      {
-        classroom: {
-          ...this.state.classroom,
-          avatar: img
-        }
-      }
-    );
+    this.setState({avatar: img});
   }
 
   render() {
@@ -120,15 +114,15 @@ class EditClassroomModal extends Component {
         <DialogContent className="m--margin-top-25">
           <form id='update-classroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
             <div className="row">
-              <div className="col-md-8">
+              <div className="col-md-7">
                 <ClassroomForm                  
                   onChange={(classroom) => { this._onChange(classroom) }}
                   classroom={this.state.classroom}
                   errors={errors}/>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-5">
                 <ImageCropper
-                  image={this.state.classroom.avatar}
+                  image={this.state.avatar || ''}
                   circularButton
                   onCrop={(cropImg) => this._setCroppedImage(cropImg)}
                   setFile={(img) => this._setImage(img)}

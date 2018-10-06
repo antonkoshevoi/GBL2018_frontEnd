@@ -40,7 +40,8 @@ class EditHomeroomModal extends Component {
     if (!record && nextRecord) {
       this.setState({
         id: nextRecord.get('id'),
-        homeroom: nextRecord.toJS()
+        homeroom: nextRecord.toJS(),
+        avatar: nextRecord.toJS().avatar
       });
     }
 
@@ -87,14 +88,7 @@ class EditHomeroomModal extends Component {
   }
 
   _setImage(img) {
-    this.setState(
-      {
-        homeroom: {
-          ...this.state.homeroom,
-          avatar: img
-        }
-      }
-    );
+    this.setState({ avatar: img });
   }
 
   render() {
@@ -120,15 +114,15 @@ class EditHomeroomModal extends Component {
         <DialogContent className="m--margin-top-25">
           <form id='update-homeroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
             <div className="row">
-              <div className="col-md-8">
+              <div className="col-md-7">
                 <HomeroomForm
                   onChange={(homeroom) => { this._onChange(homeroom) }}
                   homeroom={this.state.homeroom}
                   errors={errors}/>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-5">
                 <ImageCropper
-                  image={this.state.homeroom.avatar}
+                  image={this.state.avatar || ''}
                   circularButton
                   onCrop={(cropImg) => this._setCroppedImage(cropImg)}
                   setFile={(img) => this._setImage(img)}
