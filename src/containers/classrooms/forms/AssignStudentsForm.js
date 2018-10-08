@@ -14,8 +14,7 @@ class AssignStudentsForm extends Component {
   };
 
   constructor (props) {
-    super(props);
-    console.log(this.props.classroom);
+    super(props);   
     this.state = {
       schoolStudents: [],
       schoolId: this.props.schoolId,

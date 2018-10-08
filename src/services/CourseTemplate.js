@@ -24,8 +24,7 @@ export default function formTableData(serverData, jsonTemplateData) {
       lessons: lessons
     };
     return unit;
-  });
-  console.log(units);
+  });  
   return units;
 
   function createComment(attempt, jsonQuizzes) {

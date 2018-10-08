@@ -23,13 +23,11 @@ export const getErrorMessage = (response) => {
     const code = response.status;
     return i18n.t (`messages:errors:${code}`);
   }
-
   return i18n.t (`messages:errors:unknown`);
 };
 
 export const yieldSuccessToasts = (messages) => {
-  return takeLatest(Object.keys(messages), function* (action) {
-    console.log('messages', messages);
+  return takeLatest(Object.keys(messages), function* (action) {    
     debounce(() => toastr.success(
       messages[action.type],
       '',
@@ -41,8 +39,7 @@ export const yieldSuccessToasts = (messages) => {
 
 
 export const yieldErrorToasts = (types) => {
-  return takeLatest([...types], function* (action) {
-    console.log(action.error.response);
+  return takeLatest([...types], function* (action) {    
     if(typeof action.error !== 'undefined') {
       toastr.error(
         getErrorMessage(action.error.response)
@@ -50,7 +47,6 @@ export const yieldErrorToasts = (types) => {
       if (action.error.response.status === 401) {
 
       }
-
     }
   });
 };
