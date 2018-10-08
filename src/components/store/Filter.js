@@ -267,9 +267,6 @@ class Filter extends Component {
                   type='search'
                   onChange={(e) => this._searchBarChange(e)}
                   placeholder={t('search')}
-                  classes={{
-                    inkbar: classes.inputInkbar,
-                  }}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton onClick={(e) => {this._initFilter(e)}}>

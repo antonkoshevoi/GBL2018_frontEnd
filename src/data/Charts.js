@@ -12,7 +12,7 @@ export function formChartData(history, selector, startDate, currOnline) {
     if (colors[index] !== 'transparent') {
       return value;
     }
-    return;
+    return null;
   });
   return {
     labels: data.labels,
@@ -99,12 +99,10 @@ export function formChartOptions(maxStudents, selector) {
   };
 
   function renderXAxis(selector, value, index, xAxesArray) {
-    if (selector === 0) {
-      let isSameDay = false;
+    if (selector === 0) {      
       const cases = [0, 3, 6, 9, 12, 15, 18, 21];
       for (const datum of xAxesArray) {
-        if (typeof datum === 'string') {
-          isSameDay = true;
+        if (typeof datum === 'string') {          
           break;
         }
       }

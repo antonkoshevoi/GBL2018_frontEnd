@@ -149,8 +149,7 @@ export default function reducer(state = initialState, action) {
           .remove('success')
           .remove('fail')
         ).set('records', Immutable.List());
-    case GET_RECORDS_PARENT_SUCCESS:
-      console.log(action.result);
+    case GET_RECORDS_PARENT_SUCCESS:      
       return state
         .set('getRecordsParentRequest', state.get('getRecordsParentRequest')
           .set('success', true)

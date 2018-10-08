@@ -33,8 +33,12 @@ class Header extends Component {
     if (auth.get('isLoggedIn')) {       
         getCartRecords();
     }
-    window.addEventListener('scroll',this.setHeaderPosition.bind(this));    
+    window.addEventListener('scroll', this.setHeaderPosition.bind(this));    
   }
+  
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.setHeaderPosition.bind(this));
+  }  
 
   setHeaderPosition(){
     const { headerHeight } = this.state

@@ -15,22 +15,25 @@ class HasRole extends Component {
     'Teacher',
     'Principal',
     'Administrator',
-    'Superadministrator',
-    'Affiliate',
+    'Superadministrator'
   ]
 
   render () {
-    const { userRoles } = this.props;
+    let { userRoles, roles, onFail } = this.props;
 
     let hasRole = false;
+    
+    if (roles.indexOf('School') > -1) {
+        roles.push('Superintendent', 'Principal', 'Administrator', 'Superadministrator');        
+    }
 
     userRoles.map(role => {
-      if (this.props.roles.indexOf(role.get('name')) > -1) {
-        hasRole = true;
-      }
-    })
+        if (roles.indexOf(role.get('name')) > -1) {
+            hasRole = true;
+        }
+    });
 
-    return hasRole ? this.props.children : null;
+    return hasRole ? this.props.children : (onFail || null);
   }
 }
 
