@@ -6,6 +6,7 @@ import { selectGetUnreadMessagesRequest } from '../../redux/messages/selectors';
 import { getUnreadMessages } from '../../redux/messages/actions';
 import {NavLink} from "react-router-dom";
 import {Typography} from '@material-ui/core';
+import HasPermission from "../middlewares/HasPermission";
 
 class Messages extends Component {
 
@@ -109,9 +110,11 @@ class Messages extends Component {
                                 <h4 className="text-center m--padding-top-20 m--padding-bottom-10">{t('youHaveNoNewMessages')}</h4>
                               }
                               <div className="text-right m--margin-top-15">
-                                <NavLink to="/messages/new" className="m--margin-right-15 btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
-                                  <span className="m-nav__link-text">{t('newMessage')}</span>
-                                </NavLink>            
+                                <HasPermission permissions={['[Messages][Create]']}>
+                                  <NavLink to="/messages/new" className="m--margin-right-15 btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+                                    <span className="m-nav__link-text">{t('newMessage')}</span>
+                                  </NavLink>
+                                </HasPermission>
                                 <NavLink to="/messages" className="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
                                   <span className="m-nav__link-text">{t('seeAll')}</span>
                                 </NavLink>

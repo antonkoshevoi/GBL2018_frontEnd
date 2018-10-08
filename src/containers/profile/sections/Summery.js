@@ -1,20 +1,14 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import { randColorName } from "../../../helpers/colors";
 import { translate } from 'react-i18next';
 
 class Summery extends Component {
 
-  static propTypes = {
-    user: PropTypes.object.isRequired,
-    schools: PropTypes.array.isRequired
-  };
-
-  _renderHomerooms() {
-    const { homerooms } = this.props.user;
-    const { t } = this.props; 
+  _renderData(name) {    
+    const { t } = this.props;
+    const { [name]: data } = this.props.user;
     
-    if (!homerooms || !homerooms.length) {
+    if (!data || !data.length) {
       return <div className="m-timeline-2 my-timeline">
         <div className="m-timeline-2__items  m--padding-top-5 m--padding-bottom-10">
           <div className="m-timeline-2__item m--margin-bottom-10">
@@ -22,14 +16,14 @@ class Summery extends Component {
               <i className={`fa fa-genderless m--font-${randColorName()}`}></i>
             </div>
             <div className="m-timeline-2__item-text  m--padding-top-5">              
-              {t('homeroomsNotFound')}
+              {t(name + 'NotFound')}
             </div>
           </div>
         </div>
       </div>
     }
     return (
-      homerooms.map((homeroom, key) => {
+      data.map((item, key) => {
         return <div className="m-timeline-2 my-timeline" key={key}>
           <div className="m-timeline-2__items  m--padding-top-5 m--padding-bottom-10">
             <div className="m-timeline-2__item m--margin-bottom-10">
@@ -37,7 +31,7 @@ class Summery extends Component {
                 <i className={`fa fa-genderless m--font-${randColorName()}`}></i>
               </div>
               <div className="m-timeline-2__item-text  m--padding-top-5">
-                {homeroom.name}
+                {item.name}
               </div>
             </div>
           </div>
@@ -46,26 +40,9 @@ class Summery extends Component {
     )
   }
 
-  _renderClassrooms() {
-    const { t } = this.props;
-    return (
-      <div className="m-timeline-2 my-timeline">
-        <div className="m-timeline-2__items  m--padding-top-5 m--padding-bottom-10">
-          <div className="m-timeline-2__item m--margin-bottom-10">
-            <div className="m-timeline-2__item-cricle">
-              <i className={`fa fa-genderless m--font-${randColorName()}`}></i>
-            </div>
-            <div className="m-timeline-2__item-text  m--padding-top-5">
-              {t('classroomsNotFound')}
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   render() {
     const { t } = this.props;
+    
     return (
       <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
         <div className="m-portlet__head">
@@ -82,9 +59,9 @@ class Summery extends Component {
         </div>
         <div className="m-portlet__body">         
           <h3>{t('homerooms')}</h3>
-          {this._renderHomerooms()}
+          {this._renderData('homerooms')}
           <h3>{t('classrooms')}</h3>
-          {this._renderClassrooms()}
+          {this._renderData('classrooms')}
         </div>
       </div>
     );

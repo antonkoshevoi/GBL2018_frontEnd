@@ -38,10 +38,10 @@ class CreateStudentModal extends Component {
         gender: null,
         phone: '',
         schoolId: '',
-        homeroomId: '',
-        avatar: '',
-        croppedAvatar: ''
-      }
+        homeroomId: '',        
+        avatarCropped: ''
+      },
+      avatar: ''
     };
   }
 
@@ -83,25 +83,16 @@ class CreateStudentModal extends Component {
   }
 
   _setCroppedImage(img) {
-    this.setState(
-      {
+    this.setState({
         student: {
           ...this.state.student,
-          croppedAvatar: img
+          avatarCropped: img
         }
-      }
-    );
+    });
   }
 
   _setImage(img) {
-    this.setState(
-      {
-        student: {
-          ...this.state.student,
-          avatar: img
-        }
-      }
-    );
+    this.setState({avatar: img});
   }
 
   render() {

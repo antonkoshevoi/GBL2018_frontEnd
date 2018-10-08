@@ -179,7 +179,7 @@ class HomeroomForm extends Component {
           </Tabs>
 
           {activeTab === 0 && <TabContainer>
-            <div className="col-sm-8 m-auto">
+            <div className="col-sm-10 m-auto">
             <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
               <InputLabel htmlFor='name-error'>{t('name')}</InputLabel>
               <Input

@@ -85,15 +85,12 @@ class SchoolDetails extends Component {
           <div className="m-portlet__head">
             <div className="m-portlet__head-caption">
               {loading && <div className="m-portlet__head-title"><span className="m-portlet__head-icon"><CircularProgress style={{float: 'right'}} color="inherit"/></span></div>}
-              {!loading && <div className="m-portlet__head-title"><span className="m-portlet__head-icon">
-                {(mode === 'overview') ?
-                  <i className="flaticon-info"></i> :                  
-                    <a title={t('back')} onClick={() => { this._handleSwitchMode('overview') }} className="pointer"><i className="la la-arrow-left"></i></a>                  
-                }
-              </span>
-              <h3 className="m-portlet__head-text">
-              {mode === 'overview' ? t('info') : t('edit')}
-              </h3></div>}
+              {!loading && <div className="m-portlet__head-title">
+                <span className="m-portlet__head-icon">                
+                    <i className="flaticon-info"></i>
+                </span>
+                <h3 className="m-portlet__head-text">{t('info')}</h3>
+              </div>}
             </div>
             <div className="m-portlet__head-tools">
               <ul className="m-portlet__nav">
@@ -111,36 +108,48 @@ class SchoolDetails extends Component {
             {mode === 'overview' && <TabContainer>
               <div className="m-widget1 m-widget1--paddingless">
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding align-items-center">
+                  <div className="row m-row--no-padding">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('name')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__number m--font-brand">{school.schName}</span>
+                      <span className="m-widget1__title m--font-brand">{school.schName}</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="m-widget1 m-widget1--paddingless">
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding align-items-center">
+                  <div className="row m-row--no-padding">
+                    <div className="col">
+                      <h3 className="m-widget1__title">{t('code')}</h3>
+                    </div>
+                    <div className="col m--align-right">
+                      <span className="m-widget1__title m--font-brand">{school.schCode}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+              <div className="m-widget1 m-widget1--paddingless">
+                <div className="m-widget1__item">
+                  <div className="row m-row--no-padding">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('billing')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__number m--font-brand">{school.billing}</span>
+                      <span className="m-widget1__title m--font-brand">{school.billing || '-'}</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="m-widget1 m-widget1--paddingless">
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding align-items-center">
+                  <div className="row m-row--no-padding">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('shippingAddress')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__number m--font-brand">{school.shippingAddress}</span>
+                      <span className="m-widget1__title m--font-brand">{school.shippingAddress || '-'}</span>
                     </div>
                   </div>
                 </div>
@@ -197,7 +206,8 @@ class SchoolDetails extends Component {
                 </div>
                 <div className="m-separator m-separator--dashed"></div>
                 <div className="text-right">
-                  <button className="btn-outline-success m-btn--outline-2x m-btn btn">{t('saveChanges')}</button>
+                  <button className="btn-success m-btn btn m--margin-right-10">{t('saveChanges')}</button>
+                  <button className="btn-default m-btn btn" onClick={() => { this._handleSwitchMode('overview') }} >{t('cancel')}</button>
                 </div>
               </form>
             </TabContainer>}

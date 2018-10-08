@@ -10,7 +10,7 @@ import {selectCartRecords} from "../../redux/store/selectors";
 import {selectGetUserRequest, selectUserData} from "../../redux/user/selectors";
 import UserMenu from "./UserMenu";
 import Messages from "./Messages";
-
+import HasRole from "../middlewares/HasRole";
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 
 const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
@@ -97,14 +97,16 @@ class Header extends Component {
 
                   <ul className="m-topbar__nav m-nav m-nav--inline">
                     <Messages activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
-                    <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width">
-                      <NavLink to='/store/shopping-cart' className='m-nav__link m-dropdown__toggle pointer' id='m_topbar_notification_icon'>
-                        <span className='m-nav__link-icon'>
-                          <i className="fa fa-shopping-cart PageHeader-icon"></i>
-                          {cartRecords.size > 0 && <span className="g-badge badge-red">{cartRecords.size}</span> }
-                        </span>
-                      </NavLink>
-                    </li>
+                    <HasRole roles={['Superadministrator','Superintendent','Principal','Administrator','Teacher','Parents']}>
+                        <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width">
+                          <NavLink to='/store/shopping-cart' className='m-nav__link m-dropdown__toggle pointer' id='m_topbar_notification_icon'>
+                            <span className='m-nav__link-icon'>
+                              <i className="fa fa-shopping-cart PageHeader-icon"></i>
+                              {cartRecords.size > 0 && <span className="g-badge badge-red">{cartRecords.size}</span> }
+                            </span>
+                          </NavLink>
+                        </li>
+                    </HasRole>
                     <li style={{paddingTop: '8px'}} className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width">
                         <LanguageSwitcher className="m-nav__link"/>
                     </li>

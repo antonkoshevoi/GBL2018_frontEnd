@@ -37,9 +37,9 @@ class CreateAdministrationModal extends Component {
         phone: '',
         schoolId: '',
         homeroomId: '',
-        croppedAvatar: '',
-        avatar: '',
-      }
+        avatarCropped: ''
+      },
+      avatar: ''
     };
   }
 
@@ -79,22 +79,14 @@ class CreateAdministrationModal extends Component {
       {
         adminUser: {
           ...this.state.adminUser,
-          croppedAvatar:img
+          avatarCropped:img
         }
       }
     );
   }
 
   _setImage(img){
-
-    this.setState(
-      {
-        adminUser: {
-          ...this.state.adminUser,
-          avatar:img
-        }
-      }
-    );
+    this.setState({avatar:img});
   }
 
   render() {

@@ -8,6 +8,7 @@ import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../..
 import { NavLink } from "react-router-dom";
 import Pagination from '../../components/ui/Pagination';
 import ViewMessageModal from './modals/ViewMessageModal';
+import HasPermission from "../middlewares/HasPermission";
 import moment from "moment/moment";
 
 class SentMessages extends Component {
@@ -132,12 +133,14 @@ class SentMessages extends Component {
                                         <MenuItem value={50}>50</MenuItem>
                                         <MenuItem value={100}>100</MenuItem>
                                     </Select>
-                                    <NavLink to="/messages/new">
-                                        <Button color='primary' className='mt-btn mt-btn-success'>
-                                          {t('newMessage')}
-                                          <Icon className="m--margin-left-10">send</Icon>
-                                        </Button>
-                                    </NavLink>                                    
+                                    <HasPermission permissions={['[Messages][Create]']}>
+                                        <NavLink to="/messages/new">
+                                            <Button color='primary' className='mt-btn mt-btn-success'>
+                                              {t('newMessage')}
+                                              <Icon className="m--margin-left-10">send</Icon>
+                                            </Button>
+                                        </NavLink>
+                                    </HasPermission>
                                 </div>
                             </div>
                         </div>

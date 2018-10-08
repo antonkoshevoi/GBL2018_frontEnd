@@ -79,7 +79,7 @@ class MessageForm extends Component {
     
     _handleCheckboxChange(event) {
         let { value, name } = event.target;
-        let {[name]: selected} = this.state;                
+        let {[name]: selected} = this.state;
         let index = selected.indexOf(value.toString());
 
         if (index < 0) {
@@ -91,24 +91,24 @@ class MessageForm extends Component {
         this.setState({[name]: selected});
     }
     
-    _handleSelectAllChange(event, ids) {            
+    _handleSelectAllChange(event, ids) {
         const { checked, name } = event.target;
-        this.setState({[name]: (checked ? ids.toJS() : [])});
+        this.setState({[name]: (checked ? ids : [])});
     }
     
     _sendMessage() {
-        this.setState({isDraft: false});        
+        this.setState({isDraft: false});
         this._send(false);
     }
     
     _saveAsDraft() {        
-        this.setState({isDraft: true});        
+        this.setState({isDraft: true});
         this._send(true);
     }
     
     _send(draft) {
         const {onSubmit} = this.props;
-        const {message, type, recipient, subject } = this.state;                
+        const {message, type, recipient, subject } = this.state;
         
         onSubmit({            
             message:        message,
@@ -154,11 +154,10 @@ class MessageForm extends Component {
     }
     
     _getOptions(request, id = 'id', name = 'name') {
-        let mapper = value => ({
-            id:     value.get(id),
-            name:   value.get(name)
-        });
-        return request.get('records').map(item => mapper(item));
+        return request.get('records').toJS().map(item => ({
+            id:     item[id],
+            name:   item[name]
+        }));
     }
     
     _renderRecipientSelectbox(title, name, options) {
@@ -177,8 +176,8 @@ class MessageForm extends Component {
                         >
                         {options.map((option, key) => (
                            (userId !== option.id) && <MenuItem key={key} value={option.id.toString()}>{option.name}</MenuItem>
-                        ))}                        
-                    </Select>                        
+                        ))}
+                    </Select>
                 </div>
                 {errors && errors.get('ids') && <FormHelperText error className="margin-0">{errors.get('ids').get(0)}</FormHelperText>}
             </div>
@@ -200,7 +199,7 @@ class MessageForm extends Component {
             ))}
             <div className="col-sm-4 col-lg-3 margin-0">
                 <FormControlLabel
-                  control={<Checkbox name={name} checked={(selected.length === options.size)} onChange={ (e) => {this._handleSelectAllChange(e, options.map(option => option.id.toString())) }} value="1" />}
+                  control={<Checkbox name={name} checked={(selected.length === options.length)} onChange={ (e) => {this._handleSelectAllChange(e, options.map(option => option.id.toString())) }} value="1" />}
                   label={t('selectAll')} />                            
             </div>
             {errors && errors.get('ids') && <div className="col-sm-12"><FormHelperText error className="margin-0">{errors.get('ids').get(0)}</FormHelperText></div>}
@@ -286,7 +285,7 @@ class MessageForm extends Component {
                       <FormControl className='full-width form-inputs'>
                         <InputLabel htmlFor='title-error'>{t('subject')}</InputLabel>
                         <Input
-                          name='subject'                                  
+                          name='subject'
                           fullWidth
                           value={this.state.subject || ''}
                           onChange={(e) => {
@@ -299,20 +298,20 @@ class MessageForm extends Component {
                 <div className='row'>
                     <div className='col-sm-12 col-md-12'>
                         <FormControl className='full-width form-inputs'>
-                            <TextField                                                                                    
-                                multiline                                             
-                                placeholder={t('message')}          
+                            <TextField
+                                multiline
+                                placeholder={t('message')}
                                 fullWidth
                                 margin="normal"
-                                variant="outlined"                                          
-                                rows="20"                                  
-                                value={this.state.message || ''}   
+                                variant="outlined"
+                                rows="20"
+                                value={this.state.message || ''}
                                 inputProps={{
                                   name: 'message'
-                                }}                                          
+                                }}
                                 onChange={(e) => {
                                     this._handleChange(e)
-                                }}                      
+                                }}
                             />
                             {errors && errors.get('message') && <FormHelperText error>{errors.get('message').get(0)}</FormHelperText>}
                         </FormControl>
@@ -334,7 +333,7 @@ class MessageForm extends Component {
 }
 
 MessageForm = connect(
-    (state) => ({            
+    (state) => ({
         homeroomsRequest: selectGetSchoolHomeroomsRequest(state),
         classroomsRequest: selectGetSchoolClassroomsRequest(state),
         teachersRequest: selectGetSchoolTeachersRequest(state),

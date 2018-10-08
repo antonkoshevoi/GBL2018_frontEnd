@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { MenuItem } from '@material-ui/core';
+import { Select, MenuItem } from '@material-ui/core';
 import { getRoles } from '../../../redux/administration/actions';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { selectRoles } from '../../../redux/administration/selectors';
 import { selectGetSchoolHomeroomsRequest } from "../../../redux/schools/selectors";
 import { getSchoolHomerooms } from "../../../redux/schools/actions";
-import MetronicSelect from "../../../components/ui/metronic/MetronicSelect";
 
 class AdministrationForm extends Component {
   static propTypes = {
@@ -86,14 +85,15 @@ class AdministrationForm extends Component {
                   <div className="form-group m-form__group row">
                       <label className="col-form-label col-lg-3" htmlFor="gender">{t('group')}</label>
                       <div className="col-lg-9">
-                          <MetronicSelect
-                              primarytext=""
+                          <Select
                               name='roleId'
                               id="roleId"
+                              className='form-control m-input m-input--air main-select'
+                              disableUnderline={true}
                               onChange={(e) => { this._handleInputChange(e) }}
                               value={adminUser.roleId || ''}>
                               {this._renderRoles()}
-                          </MetronicSelect>
+                          </Select>
                           {errors && errors.get('roleId') && <div className="form-control-feedback error">{ errors.get('roleId').get(0) }</div>}
                       </div>
                   </div>
@@ -136,16 +136,17 @@ class AdministrationForm extends Component {
                   <div className="form-group m-form__group row">
                       <label className="col-form-label col-lg-3" htmlFor="gender">{t('selectGender')}</label>
                       <div className="col-lg-9">
-                          <MetronicSelect
-                              primarytext=""
+                          <Select
                               name='gender'
-                              id="gender"
+                              id='gender'
+                              className='form-control m-input m-input--air main-select'
+                              disableUnderline={true}
                               onChange={(e) => { this._handleInputChange(e) }}
                               value={adminUser.gender || ''}>
                               <MenuItem value={null} primarytext=""/>
                               <MenuItem value='male'>{t('male')}</MenuItem>
                               <MenuItem value='female'>{t('female')}</MenuItem>
-                          </MetronicSelect>
+                          </Select>
                           {errors && errors.get('gender') && <div className="form-control-feedback error">{ errors.get('gender').get(0) }</div>}
                       </div>
                   </div>
@@ -159,15 +160,16 @@ class AdministrationForm extends Component {
                   <div className="form-group m-form__group row">
                       <label className="col-form-label col-lg-3" htmlFor="homeroomId">{t('homeroom')}</label>
                       <div className="col-lg-9">
-                          <MetronicSelect
-                              primarytext=""
+                          <Select
                               name='homeroomId'
                               id="homeroomId"
+                              className='form-control m-input m-input--air main-select'
+                              disableUnderline={true}
                               onChange={(e) => { this._handleInputChange(e) }}
                               value={adminUser.homeroomId || ''}>
                               <MenuItem value={null} primarytext=""/>
                               {this._renderSchoolHomerooms()}
-                          </MetronicSelect>
+                          </Select>
                           {errors && errors.get('homeroom') && <div className="form-control-feedback error">{ errors.get('homeroom').get(0) }</div>}
                       </div>
                   </div>

@@ -54,14 +54,6 @@ class FirstStepForm extends Component {
     }, () => { this.props.onChange(this.state.form); });
   }
 
-  _zoomIn(){
-    this.cropper.zoom(0.1)
-  }
-
-  _zoomOut() {
-    this.cropper.zoom(-0.1)
-  }
-
   _zoom(e) {          
     this.setState({'zoom':e.target.value});
     this.cropper.zoomTo(e.target.value)

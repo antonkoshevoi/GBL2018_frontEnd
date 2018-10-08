@@ -185,7 +185,7 @@ class ClassroomForm extends Component {
           }}
         />
 
-        <div className="col-sm-8 m-auto">
+        <div className="col-sm-10 m-auto">
           <FormControl aria-describedby='crmName-error-text' className='full-width form-inputs'>
             <InputLabel htmlFor='crmName-error'>{t('name')}</InputLabel>
             <Input

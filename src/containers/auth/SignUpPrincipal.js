@@ -8,7 +8,7 @@ import {NavLink} from "react-router-dom";
 import {Divider} from '@material-ui/core';
 import { selectSignUpRequest } from '../../redux/signUpPrincipal/selectors';
 import { signUp } from '../../redux/signUpPrincipal/actions';
-import MetronicProgressButton from '../../components/ui/metronic/MetronicProgressButton';
+import ProgressButton from '../../components/ui/ProgressButton';
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 import {selectRecords} from "../../redux/countries/selectors";
 import {getCountries} from "../../redux/countries/actions";
@@ -339,13 +339,13 @@ class SignUpPrincipal extends Component {
 
                     <div className="row">
                       <div className="col-sm-12 text-right m--padding-top-20">
-                        <MetronicProgressButton
+                        <ProgressButton
                           type='submit'
                           disabled={loading}
                           loading={loading}
                           className='m-btn m-btn--air m--margin-5 btn btn-info'>
                           {t('next')}
-                        </MetronicProgressButton>
+                        </ProgressButton>
                       </div>
                     </div>
                   </form>

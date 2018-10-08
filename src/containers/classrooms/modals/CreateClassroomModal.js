@@ -72,14 +72,7 @@ class CreateClassroomModal extends Component {
   }
 
   _setImage(img) {
-    this.setState(
-      {
-        classroom: {
-          ...this.state.classroom,
-          avatar: img
-        }
-      }
-    );
+    this.setState({avatar: img});
   }
 
   render() {
@@ -105,13 +98,13 @@ class CreateClassroomModal extends Component {
         <DialogContent className="m--margin-top-25">
           <form id='create-classroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
             <div className="row">
-              <div className="col-md-8">
+              <div className="col-md-7">
                 <ClassroomForm
                   onChange={(classroom) => { this._onChange(classroom) }}
                   classroom={this.state.classroom}
                   errors={errors}/>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-5">
                 <ImageCropper
                   circularButton
                   onCrop={(cropImg) => this._setCroppedImage(cropImg)}
