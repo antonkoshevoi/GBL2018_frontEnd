@@ -108,36 +108,48 @@ class SchoolDetails extends Component {
             {mode === 'overview' && <TabContainer>
               <div className="m-widget1 m-widget1--paddingless">
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding align-items-center">
+                  <div className="row m-row--no-padding">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('name')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__number m--font-brand">{school.schName}</span>
+                      <span className="m-widget1__title m--font-brand">{school.schName}</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="m-widget1 m-widget1--paddingless">
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding align-items-center">
+                  <div className="row m-row--no-padding">
+                    <div className="col">
+                      <h3 className="m-widget1__title">{t('code')}</h3>
+                    </div>
+                    <div className="col m--align-right">
+                      <span className="m-widget1__title m--font-brand">{school.schCode}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+              <div className="m-widget1 m-widget1--paddingless">
+                <div className="m-widget1__item">
+                  <div className="row m-row--no-padding">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('billing')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__number m--font-brand">{school.billing}</span>
+                      <span className="m-widget1__title m--font-brand">{school.billing || '-'}</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="m-widget1 m-widget1--paddingless">
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding align-items-center">
+                  <div className="row m-row--no-padding">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('shippingAddress')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__number m--font-brand">{school.shippingAddress}</span>
+                      <span className="m-widget1__title m--font-brand">{school.shippingAddress || '-'}</span>
                     </div>
                   </div>
                 </div>

@@ -8,6 +8,7 @@ import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../..
 import { NavLink } from "react-router-dom";
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
+import HasPermission from "../middlewares/HasPermission";
 import moment from 'moment/moment';
 
 class InboxMessages extends Component {
@@ -85,8 +86,10 @@ class InboxMessages extends Component {
                 <Td width='100px'>
                     <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' to={`/messages/view/${record.get('id')}`}>
                         <i className='la la-search'></i>
-                    </NavLink>                
-                    <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>                   
+                    </NavLink>
+                    <HasPermission permissions={['[Messages][Create]']}>
+                        <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
+                    </HasPermission>
                 </Td>
             </Row>
         ));
@@ -136,12 +139,14 @@ class InboxMessages extends Component {
                                         <MenuItem value={50}>50</MenuItem>
                                         <MenuItem value={100}>100</MenuItem>
                                     </Select>
-                                    <NavLink to="/messages/new">
-                                        <Button color='primary' className='mt-btn mt-btn-success'>
-                                          {t('newMessage')}
-                                          <Icon className="m--margin-left-10">send</Icon>
-                                        </Button>
-                                    </NavLink>
+                                    <HasPermission permissions={['[Messages][Create]']}>
+                                        <NavLink to="/messages/new">
+                                            <Button color='primary' className='mt-btn mt-btn-success'>
+                                              {t('newMessage')}
+                                              <Icon className="m--margin-left-10">send</Icon>
+                                            </Button>
+                                        </NavLink>
+                                    </HasPermission>
                                 </div>
                             </div>
                         </div>

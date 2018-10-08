@@ -7,6 +7,7 @@ import {changePassword, changeImage} from "../../../redux/user/actions";
 import { Dialog, CircularProgress} from '@material-ui/core';
 import ImageCropper from "../../../components/ui/ImageCropper";
 import Card from "../../../components/ui/Card";
+import HasRole from "../../middlewares/HasRole";
 
 class Info extends Component {
 
@@ -110,78 +111,79 @@ class Info extends Component {
             <div className="m-card-profile__title m--hide">
               {t('yourProfile')}
             </div>
+            <div className="m-card-profile__details">
+              <span className="m-card-profile__name">{user.firstName} {user.lastName}</span>
+              <span className="m-card-profile__email">{user.username}</span>
+            </div>
             <div className="m-card-profile__pic">
               <div className="m-card-profile__pic-wrapper">
                 <img src={user.avatar} alt=""/>
               </div>
-              <div className="text-center m--margin-bottom-20">
-                {loading ? (<CircularProgress color="primary"/>) : (<button disabled={loading} className="m-btn btn btn-info m-btn--pill m--margin-10" onClick={()=>{this._openUploadModal()}}>{t('uploadAvatar')}</button>)}
+              <div className="text-center">
+                {loading ? (<CircularProgress color="primary"/>) : (<button disabled={loading} className="m-btn btn btn-info m--margin-10" onClick={()=>{this._openUploadModal()}}>{t('uploadAvatar')}</button>)}
               </div>
             </div>
-
-            <div className="m-card-profile__details">
-              <span className="m-card-profile__name">{user.firstName} {user.lastName}</span>
-              <a href="" className="m-card-profile__email m-link">{user.username}</a>
-            </div>
           </div>
-
-          <div className="m-portlet__body-separator"></div>
-          <div className="text-center m--margin-top-15">
-            {!changePasswordMode && <button onClick={() => {
-              this._handlePasswordModeSwitch(true)
-            }} className="m-btn btn btn-success">{t('changePassword')}</button>}
+            <HasRole roles={['Superadministrator','Superintendent','Principal','Administrator','Teacher','Parents']}>
+            <div>
+              <div className="m-portlet__body-separator"></div>
+              <div className="text-center m--margin-top-15">
+                {!changePasswordMode && <button onClick={() => {
+                  this._handlePasswordModeSwitch(true)
+                }} className="m-btn btn btn-success">{t('changePassword')}</button>}
+              </div>
+              {changePasswordMode &&
+                <div className="m-widget1 m-widget1--paddingless">
+                  <h5 className='text-center'>{t('changePassword')}</h5>
+                  <form id='change-password-form' onSubmit={(e) => { this._changePassword(e) }}>
+                    <div className="m-widget1__item">
+                      <div className="form-group m-form__group ">
+                        <input
+                          type="password"
+                          placeholder={t('enterOldPassword')}
+                          name="oldPassword"
+                          onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'oldPassword')}}
+                          value={passwordFields.oldPassword || ''}
+                          className="form-control  m-input--air form-control-danger m-input"
+                          id="oldPassword"/>
+                        {errors && errors.get('oldPassword') && <div className="form-control-feedback text-center error">{errors.get('oldPassword').get(0)}</div>}
+                      </div>
+                      <div className="form-group m-form__group">
+                        <input
+                          type="password"
+                          placeholder={t('enterNewPassword')}
+                          name="newPassword"
+                          onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword')}}
+                          value={passwordFields.newPassword || ''}
+                          className="form-control  m-input--air form-control-danger m-input"
+                          id="newPassword"/>
+                        {errors && errors.get('newPassword') && <div className="form-control-feedback text-center error">{errors.get('newPassword').get(0)}</div>}
+                      </div>
+                      <div className="form-group m-form__group has-danger">
+                        <input
+                          type="password"
+                          placeholder={t('confirmPassword')}
+                          name="newPassword_confirmation"
+                          onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword_confirmation')}}
+                          value={passwordFields.newPassword_confirmation || ''}
+                          className="form-control  m-input--air form-control-danger m-input"
+                          id="confirmPassword"/>
+                        {errors && errors.get('newPassword_confirmation') && <div className="form-control-feedback text-center error">{errors.get('newPassword_confirmation').get(0)}</div>}
+                      </div>
+                    </div>
+                    <div className="text-center m--margin-top-15">
+                        <button className="m-btn btn btn-success m--margin-right-10 ">
+                            {t('change')}
+                        </button>
+                        <button onClick={() => {this._handlePasswordModeSwitch(false)}} className="m-btn btn btn-default">
+                            {t('cancel')}
+                        </button>
+                    </div>
+                  </form>
+                </div>}
+              </div>
+            </HasRole>
           </div>
-          {changePasswordMode &&
-            <div className="m-widget1 m-widget1--paddingless">
-              <h5 className='text-center'>{t('changePassword')}</h5>
-              <form id='change-password-form' onSubmit={(e) => { this._changePassword(e) }}>
-                <div className="m-widget1__item">
-                  <div className="form-group m-form__group ">
-                    <input
-                      type="password"
-                      placeholder={t('enterOldPassword')}
-                      name="oldPassword"
-                      onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'oldPassword')}}
-                      value={passwordFields.oldPassword || ''}
-                      className="form-control  m-input--air form-control-danger m-input"
-                      id="oldPassword"/>
-                    {errors && errors.get('oldPassword') && <div className="form-control-feedback text-center error">{errors.get('oldPassword').get(0)}</div>}
-                  </div>
-                  <div className="form-group m-form__group">
-                    <input
-                      type="password"
-                      placeholder={t('enterNewPassword')}
-                      name="newPassword"
-                      onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword')}}
-                      value={passwordFields.newPassword || ''}
-                      className="form-control  m-input--air form-control-danger m-input"
-                      id="newPassword"/>
-                    {errors && errors.get('newPassword') && <div className="form-control-feedback text-center error">{errors.get('newPassword').get(0)}</div>}
-                  </div>
-                  <div className="form-group m-form__group has-danger">
-                    <input
-                      type="password"
-                      placeholder={t('confirmPassword')}
-                      name="newPassword_confirmation"
-                      onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword_confirmation')}}
-                      value={passwordFields.newPassword_confirmation || ''}
-                      className="form-control  m-input--air form-control-danger m-input"
-                      id="confirmPassword"/>
-                    {errors && errors.get('newPassword_confirmation') && <div className="form-control-feedback text-center error">{errors.get('newPassword_confirmation').get(0)}</div>}
-                  </div>
-                </div>
-                <div className="text-center m--margin-top-15">
-                    <button className="m-btn btn btn-success m--margin-right-10 ">
-                        {t('change')}
-                    </button>
-                    <button onClick={() => {this._handlePasswordModeSwitch(false)}} className="m-btn btn btn-default">
-                        {t('cancel')}
-                    </button>
-                </div>
-              </form>
-            </div>}
-          </div>
-
         <Dialog
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"

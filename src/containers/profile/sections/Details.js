@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { Typography, Select, MenuItem } from '@material-ui/core';
-import { getSchoolHomerooms } from "../../../redux/schools/actions";
-import { selectGetSchoolHomeroomsRequest } from "../../../redux/schools/selectors";
 import DatePicker from "../../../components/ui/DatePicker";
 import { update } from "../../../redux/user/actions";
 import { selectUpdateRequest } from "../../../redux/user/selectors";
+import HasRole from "../../middlewares/HasRole";
 
 function TabContainer(props) {
   return (
@@ -26,39 +25,20 @@ class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
-      schoolHomerooms: [],
+      user: {},      
       mode: 'overview'
     }
   }
 
   componentDidMount () {
-            
     this.setState({
       ...this.state,
       user: this.props.user
     });
-
-    const { getSchoolHomerooms } = this.props;
-
-    getSchoolHomerooms();
   }
 
   componentWillReceiveProps(nextProps) {
-    this._updateUserSuccess(nextProps);
-    this._getSchoolHomeroomsSuccess(nextProps);
-  }
-
-  _getSchoolHomeroomsSuccess(nextProps) {
-    const schoolHomerooms = this.props.getSchoolHomeroomsRequest.get('records');
-    const nextSchoolHomerooms = nextProps.getSchoolHomeroomsRequest.get('records');
-
-    if (!schoolHomerooms && nextSchoolHomerooms) {
-      this.setState({
-        ...this.state,
-        schoolHomerooms: nextSchoolHomerooms.toJS()
-      });
-    }
+    this._updateUserSuccess(nextProps);    
   }
 
   _updateUserSuccess(nextProps) {
@@ -95,14 +75,6 @@ class Details extends Component {
 
   _handleSwitchMode(mode) {
     this.setState({mode})
-  }
-
-  _renderHomerooms() {
-    const { schoolHomerooms } = this.state;
-
-    return schoolHomerooms.map((schoolHomeroom,i)=>{
-      return <MenuItem key={i} value={schoolHomeroom.id}>{schoolHomeroom.name}</MenuItem>
-    });
   }
 
   _onSubmit (e) {
@@ -147,43 +119,63 @@ class Details extends Component {
             {mode === 'overview' && <TabContainer>
               <div className="m-widget1 m-widget1--paddingless">
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding align-items-center">
+                  <div className="row m-row--no-padding">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('firstName')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__number m--font-brand">{user.firstName}</span>
+                      <span className="m-widget1__title m--font-brand">{user.firstName}</span>
                     </div>
                   </div>
                 </div>
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding align-items-center">
+                  <div className="row m-row--no-padding">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('lastName')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__number m--font-brand">{user.lastName}</span>
+                      <span className="m-widget1__title m--font-brand">{user.lastName}</span>
                     </div>
                   </div>
                 </div>
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding align-items-center">
+                  <div className="row m-row--no-padding">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('email')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__number m--font-brand">{user.email}</span>
+                      <span className="m-widget1__title m--font-brand">{user.email}</span>
                     </div>
                   </div>
                 </div>
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding align-items-center">
+                    <div className="row m-row--no-padding">
+                    <div className="col">
+                      <h3 className="m-widget1__title">{t('phoneNumber')}</h3>
+                    </div>
+                    <div className="col m--align-right">
+                      <span className="m-widget1__title m--font-brand">{user.phoneNumber || '-'}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="m-widget1__item">
+                    <div className="row m-row--no-padding">
+                    <div className="col">
+                      <h3 className="m-widget1__title">{t('gender')}</h3>
+                    </div>
+                    <div className="col m--align-right">
+                      <span className="m-widget1__title m--font-brand">{user.gender ? t(user.gender) : '-'}</span>
+                    </div>
+                  </div>
+                </div>                 
+                <div className="m-widget1__item">
+                    <div className="row m-row--no-padding">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('birthday')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__number m--font-brand">{user.birthday}</span>
-                    </div>
+                      <span className="m-widget1__title m--font-brand">{user.birthday || '-'}</span>
+                    </div>  
                   </div>
                 </div>
               </div>
@@ -191,7 +183,7 @@ class Details extends Component {
             {mode === 'edit' && <TabContainer>
               <form id='update-user-form' onSubmit={(e) => { this._onSubmit(e) }}>
                 <div className="alert m-alert m-alert--default">
-                  <p>{t('updateUserProfileNote')}</p>
+                  <p className='margin-0'>{t('updateUserProfileNote')}</p>
                 </div>
                 <div className="m-form">
                   <div className="form-group m-form__group row">
@@ -220,6 +212,7 @@ class Details extends Component {
                       {errors && errors.get('lastName') && <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
                     </div>
                   </div>
+                  <HasRole roles={['Superadministrator','Superintendent','Principal','Administrator','Teacher','Parents']}>
                   <div className="form-group m-form__group row">
                     <label className="col-form-label col-lg-3" htmlFor="email">{t('email')}</label>
                     <div className="col-lg-9">
@@ -233,6 +226,7 @@ class Details extends Component {
                       {errors && errors.get('email') && <div className="form-control-feedback text-center error">{errors.get('email').get(0)}</div>}
                     </div>
                   </div>
+                  </HasRole>
                   <div className="form-group m-form__group row">
                     <label className="col-form-label col-lg-3" htmlFor="phone">{t('phoneNumber')}</label>
                     <div className="col-lg-9">
@@ -270,30 +264,12 @@ class Details extends Component {
                             className: "form-control m-input m-input--air m--padding-top-5 m--padding-bottom-0",
                             disableUnderline: true                    
                         }}
-                        style={{width: '100%'}}
-                        disableUnderline={true}
+                        style={{width: '100%'}}                        
                         value={user.birthday || ''}
                         onChange={(date) => { this._handleDateChange(date, 'birthday') }}/>
                                 
                       {errors && errors.get('birthday') && <div className="form-control-feedback text-center error">{errors.get('birthday').get(0)}</div>}
                     </div>
-                  </div>
-                </div>
-                <div className="m-separator m-separator--dashed"></div>
-                <div className="row form-group m-form__group">
-                  <label className="col-form-label col-md-3" htmlFor="gender">{t('homerooms')}</label>
-                  <div className="col-md-9">
-                    <Select
-                      id="homerooms"
-                      name="homeroomId"
-                      className="form-control m-input  m-input--air  main-select"
-                      style={{minWidth:'120px'}}
-                      value={user.homeroomId || ''}
-                      onChange={(e) => { this._handleInputChange(e) }}>
-                      <MenuItem value={null} primarytext=""><em>{t('none')}</em></MenuItem>
-                      {this._renderHomerooms()}
-                    </Select>
-                    {errors && errors.get('homeroomId') && <div className="form-control-feedback text-center error">{errors.get('homeroomId').get(0)}</div>}
                   </div>
                 </div>
                 <div className="m-separator m-separator--dashed"></div>
@@ -311,13 +287,11 @@ class Details extends Component {
 }
 
 Details = connect(
-  (state) => ({
-    getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state),
-    getUpdateRequest: selectUpdateRequest(state),
+  (state) => ({    
+    getUpdateRequest: selectUpdateRequest(state)
   }),
-  (dispatch) => ({
-    getSchoolHomerooms: () => { dispatch(getSchoolHomerooms()) },
-    update: (form, params = {}) => { dispatch(update(form, params)) },
+  (dispatch) => ({    
+    update: (form, params = {}) => { dispatch(update(form, params)) }
   })
 )(Details);
 

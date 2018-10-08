@@ -10,6 +10,7 @@ import NotFoundPage from '../errors/404';
 import moment from "moment/moment";
 import DeleteButton from '../../components/ui/DeleteButton';
 import ReplyMessageModal from './modals/ReplyMessageModal';
+import HasPermission from "../middlewares/HasPermission";
 
 class ViewMessage extends Component {
 
@@ -105,13 +106,17 @@ class ViewMessage extends Component {
                         </div>
                         <div className="row">
                             <div className="col-sm-12 text-center">
-                                { (data.get('type') === 'mail') && <button onClick={() => { this._showReplyModal() }} disabled={loading} className="m--margin-right-10 btn btn-success" >{t('reply')}</button> }
-                                <DeleteButton                    
-                                    onClick={() => { this._deleteRecord(data.get('id')) }}                                                                  
-                                    btnName={t('delete')}
-                                    icon={false}
-                                    disabled={loading}
-                                    classNameBtn="m--margin-right-10 btn btn-danger" />
+                                <HasPermission permissions={['[Messages][Reply]']}>
+                                    { (data.get('type') === 'mail') && <button onClick={() => { this._showReplyModal() }} disabled={loading} className="m--margin-right-10 btn btn-success" >{t('reply')}</button> }
+                                </HasPermission>
+                                <HasPermission permissions={['[Messages][Delete]']}>
+                                    <DeleteButton                    
+                                        onClick={() => { this._deleteRecord(data.get('id')) }}                                                                  
+                                        btnName={t('delete')}
+                                        icon={false}
+                                        disabled={loading}
+                                        classNameBtn="m--margin-right-10 btn btn-danger" />
+                                </HasPermission>
                                 <button onClick={() => { this._goBack() }} disabled={loading} className="btn btn-default" >{t('back')}</button>
                             </div>
                         </div>

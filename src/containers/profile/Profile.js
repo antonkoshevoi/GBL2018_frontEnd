@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Info from "./sections/Info";
 import Details from "./sections/Details";
 import Summery from "./sections/Summery";
+import HasRole from "../middlewares/HasRole";
 import { selectGetUserRequest, selectUserData } from "../../redux/user/selectors";
 
 class Profile extends Component {
@@ -21,9 +22,11 @@ class Profile extends Component {
         <div className="col-lg-6">
           {getUserRequest.get('success') && <Details user={user} />}
         </div>
-        <div className="col-lg-3">
-          <Summery user={user} />
-        </div>
+        <HasRole roles={['Student', 'Teacher']}>        
+            <div className="col-lg-3">
+              <Summery user={user} />
+            </div>
+        </HasRole>
       </div>
     );
   }

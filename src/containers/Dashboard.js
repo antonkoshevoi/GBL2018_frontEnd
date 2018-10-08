@@ -2,17 +2,9 @@ import React, {Component} from 'react';
 import HasRole from "./middlewares/HasRole";
 import UserDashboard from "./dashboard/UserDashboard";
 import ParentDashboard from "./dashboard/ParentDashboard";
+import Profile from "./profile/Profile";
 
 class Dashboard extends Component {
-
-
-  constructor(props){
-    super(props);
-    this.state = {
-
-    }
-  }
-
   render() {
     return (
       <div>
@@ -28,11 +20,12 @@ class Dashboard extends Component {
           <HasRole roles={["Parents"]}>
               <ParentDashboard/>
           </HasRole>
+          <HasRole roles={['Student']}>
+              <Profile/>
+          </HasRole>          
       </div>
     );
   }
 }
-
-Dashboard.propTypes = {};
 
 export default Dashboard;

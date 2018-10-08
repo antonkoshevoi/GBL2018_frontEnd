@@ -8,6 +8,7 @@ import HasRole from "../middlewares/HasRole";
 
 import MenuSchool from "../../data/Menu";
 import MenuParent from "../../data/MenuParent";
+import MenuStudent from "../../data/MenuStudent";
 import SuperAdminMenu from "../../data/SuperAdminMenu";
 import MenuTeacher from "../../data/MenuTeacher";
 
@@ -64,6 +65,11 @@ class MainLayout extends Component {
           ]}>
             <Sidebar mobileSidebar={() => {this.openMobileSidebar()}} structure={MenuParent}/>
           </HasRole>
+          <HasRole roles={[
+            "Student"
+          ]}>
+            <Sidebar mobileSidebar={() => {this.openMobileSidebar()}} structure={MenuStudent}/>
+          </HasRole>          
           <Wrapper>
             {this.props.children}
           </Wrapper>

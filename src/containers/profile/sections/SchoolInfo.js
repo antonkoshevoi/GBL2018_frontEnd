@@ -60,21 +60,18 @@ class SchoolInfo extends Component {
       <div className="m-portlet ">
         <div className="m-portlet__body">
           <div className="m-card-profile">
-            <div className="m-card-profile__title m--hide">
-              {t('schoolLogo')}
+            <div className="m-card-profile__details">
+              <span className="m-card-profile__name">{school.schName}</span>
             </div>
             <div className="m-card-profile__pic">
               <div className="m-card-profile__pic-wrapper">
                 <img src={school.logo} alt=""/>
               </div>
               <div className="text-center m--margin-bottom-20">
-                <button className="m-btn btn btn-info m-btn--pill" onClick={()=>{this._openUploadModal()}}>{t('uploadLogo')}</button>
+                <button className="m-btn btn btn-info" onClick={()=>{this._openUploadModal()}}>{t('uploadLogo')}</button>
               </div>
             </div>
 
-            <div className="m-card-profile__details">
-              <span className="m-card-profile__name">{school.schName}</span>
-            </div>
           </div>
         </div>
 
