@@ -1,24 +1,10 @@
 import React, {Component} from 'react';
-import {withRouter} from "react-router-dom"
 import {connect} from 'react-redux';
 
 class Wrapper extends Component {
 
-    state = {
-        isLoading:false
-    }
-
-
     render() {
-        const { history, auth } = this.props;
-
-        history.listen((location, action) => {
-            const _self = this;
-            _self.setState({isLoading:true});
-            setTimeout(function () {
-                _self.setState({isLoading:false});
-            },1500)
-        });
+        const { auth } = this.props;
 
         return (
             <div className={`m-grid__item m-grid__item--fluid m-wrapper ${auth.get('isLoggedIn') ? '' : 'margin-0'}`}>               
@@ -36,5 +22,5 @@ Wrapper = connect(
   })
 )(Wrapper);
 
-export default withRouter(Wrapper);
+export default Wrapper;
 

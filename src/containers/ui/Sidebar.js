@@ -32,6 +32,11 @@ class Sidebar extends Component {
     window.addEventListener('resize', this.updateDimensions.bind(this));
     this._generateMenusPosition(key);
   }
+  
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.setHeaderPosition.bind(this));
+    window.removeEventListener('resize', this.updateDimensions.bind(this));
+  }   
 
   updateDimensions() {
     this.setState({mobileMenu: $(window).width() <= 1240 ? 53 : 0});
@@ -63,7 +68,6 @@ class Sidebar extends Component {
     }
   }
 
-
   _generateMenusPosition(key){
     setTimeout(() => {
       const activeMenuKey = $('.second_level .active').closest('.menuItem').data('key');
@@ -75,7 +79,6 @@ class Sidebar extends Component {
       }
     })
   }
-
 
   _renderGoogleMenus() {
     const activeMenu = this.state.activeMenu;

@@ -148,7 +148,7 @@ class EditAutoClassroomModal extends Component {
     const days = Array.from(Array(28).keys());
     return (
         <div>
-        {taskConfig.autoCreateTask.frequencyId == 1 &&
+        {taskConfig.autoCreateTask.frequencyId === 1 &&
 
         <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
           <FormControl>
@@ -171,7 +171,7 @@ class EditAutoClassroomModal extends Component {
 
         }
 
-          {taskConfig.autoCreateTask.frequencyId == 2 &&
+          {taskConfig.autoCreateTask.frequencyId === 2 &&
           <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
             <FormControl>
               <InputLabel htmlFor="age-simple">{t('rolloverDayNumber')}</InputLabel>

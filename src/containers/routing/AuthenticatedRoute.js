@@ -25,7 +25,7 @@ class AuthenticatedRoute extends Component {
         }
 
         if (roles) {
-            return <HasRole roles={roles} onFail={( <Route component={NotFoundPage} /> )} >
+            return <HasRole roles={roles} onFail={( <Route layout={layout} component={NotFoundPage} /> )} >
                 <Route layout={layout} path={path} exact={exact} component={component} name={name} />
             </HasRole>;
         }
