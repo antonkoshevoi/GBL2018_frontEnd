@@ -13,7 +13,7 @@ export default  {
         title: 'messages',
         link: 'messages',
         icon: 'fa fa-weixin',
-        colorName: 'blue',
+        colorName: 'green',
         subMenu: [
             {
                 key: 'inbox',
@@ -28,5 +28,12 @@ export default  {
                 icon: 'flaticon flaticon-technology-1'
             }
         ]
-    }]   
+    },
+    {
+        key: 'reports',
+        title: 'Reports',
+        link: 'my-reports',
+        icon: 'fa fa-line-chart',
+        colorName: 'purple'
+    }]
 }

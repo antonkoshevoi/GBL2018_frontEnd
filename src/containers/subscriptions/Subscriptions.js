@@ -56,7 +56,7 @@ class Subscriptions extends Component {
                             <span className="bonus">{record.get('bonuses')}</span>
                         </div>
                         <p className="text-center">
-                            <button onClick={() => { goTo(`/subscribe/${record.get('id')}`); }} class="btn btn-info">{t('getThis')}</button>
+                            <button onClick={() => { goTo(`/subscribe/${record.get('id')}`); }} className="btn btn-info">{t('getThis')}</button>
                         </p>
                     </div>
                 </div>

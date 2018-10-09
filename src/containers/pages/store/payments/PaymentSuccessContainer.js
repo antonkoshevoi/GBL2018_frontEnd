@@ -96,7 +96,7 @@ class PaymentSuccessContainer extends Component {
                 <span className="invoice-title">
                     {t('yourInvoice', {invoiceNo: invoice.get('invoice_no'), invoiceAmount: ('$' + invoice.get('total'))})}.
                 </span>                
-                <p class="text-center">
+                <p className="text-center">
                     <a className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
                 </p>
             </div>

@@ -170,7 +170,7 @@ class Subscribe extends Component {
                                     <span className="bonus">{record.get('bonuses')}</span>
                                 </div>
                                 <p className="text-center margin-bottom-0">
-                                    <button onClick={() => { this._showBillingForm(true) }} class="btn btn-info">{t('continue')}</button>
+                                    <button onClick={() => { this._showBillingForm(true) }} className="btn btn-info">{t('continue')}</button>
                                 </p>                                
                             </div>
                         </div>
@@ -230,8 +230,8 @@ class Subscribe extends Component {
                                         <CreditCardForm errors={errors} onChange={(form) => this._handleForm(form)} form={creditCard} />
                                         
                                         <div className="col-sm-12 text-center">                                        
-                                            <button disabled={subscribeRequest.get('loading')} onClick={() => { this._submitCreditCardPayment() }} class="btn btn-info">{t('makePayment')}</button>
-                                            <button disabled={subscribeRequest.get('loading')} onClick={() => { this._showBillingForm(false) }} class="btn btn-default m--margin-left-10">{t('back')}</button>                                                                  
+                                            <button disabled={subscribeRequest.get('loading')} onClick={() => { this._submitCreditCardPayment() }} className="btn btn-info">{t('makePayment')}</button>
+                                            <button disabled={subscribeRequest.get('loading')} onClick={() => { this._showBillingForm(false) }} className="btn btn-default m--margin-left-10">{t('back')}</button>                                                                  
                                         </div>
                                     </div>
                                 </div>
@@ -239,11 +239,11 @@ class Subscribe extends Component {
                         </div>
                     </div>
                 ) : (
-                <div class="row">
-                    <div class="col-lg-12">                        
+                <div className="row">
+                    <div className="col-lg-12">                        
                         {getRecordsRequest.get('success') ? this._renderSelected() : <Loader/>}
                     </div>
-                    {getRecordsRequest.get('success') && <div class="col-sm-12">
+                    {getRecordsRequest.get('success') && <div className="col-sm-12">
                         <h1 className="text-center m--margin-top-25">{t('switchPlan')}</h1>
                         <div className="switch-subscriptions-block">
                             <div className="row">

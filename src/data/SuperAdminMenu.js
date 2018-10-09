@@ -185,20 +185,13 @@ export default  {
                        icon:'flaticon flaticon-user-ok',
                    }
                ]
-           }
-       ],
-       singleMenu:[
-           {
-               key:'sCap',
-               title:'sCap',
-               link:'scap',
-               icon:'fa fa-id-card',
            },
-           {
-               key:'howToMovies',
-               title:'howToMovies',
-               link:'movies',
-               icon:'fa fa-film'
-           }
+            {
+                key: 'sCap',
+                title: 'sCap',
+                link: 'scap',
+                icon: 'fa fa-id-card',
+                colorName: 'purple'
+            }            
        ]
 }

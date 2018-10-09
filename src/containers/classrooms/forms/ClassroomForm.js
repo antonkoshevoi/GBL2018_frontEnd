@@ -187,7 +187,7 @@ class ClassroomForm extends Component {
 
         <div className="col-sm-10 m-auto">
           <FormControl aria-describedby='crmName-error-text' className='full-width form-inputs'>
-            <InputLabel htmlFor='crmName-error'>{t('name')}</InputLabel>
+            <InputLabel htmlFor='crmName'>{t('name')}</InputLabel>
             <Input
               name='crmName'
               margin='dense'
@@ -198,8 +198,8 @@ class ClassroomForm extends Component {
               }}/>
             {errors && errors.get('crmName') && <FormHelperText error>{errors.get('crmName').get(0)}</FormHelperText>}
           </FormControl>
-          <div aria-describedby='crmStartDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmStartDate-error' shrink={!!classroom.crmStartDate}>{t('startDate')}</InputLabel>            
+          <div className='full-width form-inputs d-inline-flex flex-column'>
+            <InputLabel htmlFor='crmStartDate' shrink={!!classroom.crmStartDate}>{t('startDate')}</InputLabel>            
               <DatePicker
                 name='crmStartDate'
                 value={classroom.crmStartDate || null}
@@ -207,11 +207,10 @@ class ClassroomForm extends Component {
                   this._handleDateChange(m, 'crmStartDate')
                 }}
               />            
-            {errors && errors.get('crmStartDate') &&
-            <FormHelperText error>{errors.get('crmStartDate').get(0)}</FormHelperText>}
+            {errors && errors.get('crmStartDate') && <FormHelperText error>{errors.get('crmStartDate').get(0)}</FormHelperText>}
           </div>
-          <div aria-describedby='crmEndDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEndDate-error' shrink={!!classroom.crmEndDate}>{t('endDate')}</InputLabel>            
+          <div className='full-width form-inputs d-inline-flex flex-column'>
+            <InputLabel htmlFor='crmEndDate' shrink={!!classroom.crmEndDate}>{t('endDate')}</InputLabel>            
               <DatePicker
                 name='crmEndDate'
                 value={classroom.crmEndDate || null}
@@ -219,11 +218,10 @@ class ClassroomForm extends Component {
                   this._handleDateChange(m, 'crmEndDate')
                 }}
               />
-            {errors && errors.get('crmEndDate') &&
-            <FormHelperText error>{errors.get('crmEndDate').get(0)}</FormHelperText>}
+            {errors && errors.get('crmEndDate') && <FormHelperText error>{errors.get('crmEndDate').get(0)}</FormHelperText>}
           </div>
-          <div aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEnrollmentStartDate-error' shrink={!!classroom.crmEnrollmentStartDate}>{t('enrollmentStartDate')}</InputLabel>            
+          <div className='full-width form-inputs d-inline-flex flex-column'>
+            <InputLabel htmlFor='crmEnrollmentStartDate' shrink={!!classroom.crmEnrollmentStartDate}>{t('enrollmentStartDate')}</InputLabel>            
               <DatePicker
                 name='crmEnrollmentStartDate'
                 value={classroom.crmEnrollmentStartDate || null}
@@ -231,11 +229,10 @@ class ClassroomForm extends Component {
                   this._handleDateChange(m, 'crmEnrollmentStartDate')
                 }}
               />            
-            {errors && errors.get('crmEnrollmentStartDate') &&
-            <FormHelperText error>{errors.get('crmEnrollmentStartDate').get(0)}</FormHelperText>}
+            {errors && errors.get('crmEnrollmentStartDate') && <FormHelperText error>{errors.get('crmEnrollmentStartDate').get(0)}</FormHelperText>}
           </div>
-          <div aria-describedby='crmEnrollmentEndDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEnrollmentEndDate-error' shrink={!!classroom.crmEnrollmentEndDate}>{t('enrollmentEndDate')}</InputLabel>            
+          <div className='full-width form-inputs d-inline-flex flex-column'>
+              <InputLabel htmlFor='crmEnrollmentEndDate' shrink={!!classroom.crmEnrollmentEndDate}>{t('enrollmentEndDate')}</InputLabel>            
               <DatePicker
                 name='crmEnrollmentEndDate'
                 value={classroom.crmEnrollmentEndDate || null}
@@ -246,46 +243,48 @@ class ClassroomForm extends Component {
             {errors && errors.get('crmEnrollmentEndDate') &&
             <FormHelperText error>{errors.get('crmEnrollmentEndDate').get(0)}</FormHelperText>}
           </div>
-          
-          <FormControl className='full-width form-inputs'>
-            <Button
-              onClick={() => {
-                this._openCourseDialog()
-              }}
-              type='button'
-              form='create-classroom-form'
-              variant="raised"
-              className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
-              color='primary'>
-              {t('chooseCourse')}
-            </Button>
-            {errors && errors.get('crmCourse') &&
-            <FormHelperText error>{errors.get('crmCourse').get(0)}</FormHelperText>}
-          </FormControl>
-          
-          {course &&
-          <div className="row">
-            <div className="col-4">
-              <img src={course.get('thumbnail')} width={70} alt={course.get('title')}/>
-            </div>
-            <div className="col-8">
-              {course.get('title')}
-            </div>
-          </div>
+          {!classroom.id &&
+              <FormControl className='full-width form-inputs'>
+                <Button
+                  onClick={() => {
+                    this._openCourseDialog()
+                  }}
+                  type='button'
+                  form='create-classroom-form'
+                  variant="raised"
+                  className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+                  color='primary'>
+                  {t('chooseCourse')}
+                </Button>
+                {!course && errors && errors.get('crmCourse') && <FormHelperText error>{errors.get('crmCourse').get(0)}</FormHelperText>}
+                {course &&
+                    <div className="row m--margin-top-15">
+                        <div className="col-4">
+                          <img src={course.get('thumbnail')} width={70} alt={course.get('title')}/>
+                        </div>
+                        <div className="col-8">
+                          {course.get('title')}
+                        </div>
+                    </div>
+                }
+              </FormControl>                      
           }
+          
           {(classroom && classroom.course) &&
-          <div className="row">
-            <div className="col-4">
-              <img src={classroom.course.image} width={70} alt={classroom.course.title}/>
-            </div>
-            <div className="col-8">
-              {classroom.course.title}
-            </div>
-          </div>
-          }
-          
+            <FormControl className='full-width form-inputs'>
+              <InputLabel htmlFor='course'>{t('course')}</InputLabel>
+              <Input
+                name='course'
+                margin='dense'
+                fullWidth
+                InputProps={{
+                  readOnly: true
+                }}              
+                value={classroom.course.crsTitle || ''} />            
+            </FormControl>          
+          }          
           <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>{t('teacher')}</InputLabel>
+            <InputLabel htmlFor='teacherId'>{t('teacher')}</InputLabel>
             <Select
               primarytext={t('selectTeacher')}
               name='teacherId'
@@ -301,7 +300,7 @@ class ClassroomForm extends Component {
           </FormControl>
                     
           <FormControl className='full-width form-inputs'>
-            <InputLabel htmlFor='name-error'>{t('homeroomsMultiple')}</InputLabel>
+            <InputLabel htmlFor='homeroomIds'>{t('homeroomsMultiple')}</InputLabel>
             <Select
               multiple={true}
               renderValue={(e) => this._getSelectedRooms(e)}
@@ -314,20 +313,14 @@ class ClassroomForm extends Component {
               {this._renderHomerooms(classroom.homeroomIds)}
 
             </Select>
-            {errors && errors.get('homerooms') &&
-            <FormHelperText error>{errors.get('homerooms').get(0)}</FormHelperText>}
+            {errors && errors.get('homerooms') && <FormHelperText error>{errors.get('homerooms').get(0)}</FormHelperText>}
           </FormControl>          
         </div>
         <CourseModal
           courseId={classroom.crmCourse}
           isOpen={courseModalIsOpen}
-          onClose={() => {
-            this._closeCourseDialog()
-          }}
-          onSuccess={(course) => {
-            this._submitCourseDialog(course)
-          }}/>
-
+          onClose={() => { this._closeCourseDialog() }}
+          onSuccess={(course) => { this._submitCourseDialog(course) }}/>
       </div>
     );
   }
