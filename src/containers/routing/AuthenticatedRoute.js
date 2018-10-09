@@ -18,7 +18,7 @@ class AuthenticatedRoute extends Component {
     }
 
     render() {
-        const {isLoggedIn, auth, roles, component, exact, path, name, layout} = this.props;       
+        const {isLoggedIn, roles, component, exact, path, name, layout} = this.props;       
 
         if (!isLoggedIn) {
             return this.redirect();

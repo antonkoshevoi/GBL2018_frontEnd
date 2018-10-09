@@ -175,7 +175,7 @@ class Filter extends Component {
 
 
   render() {
-    const {classes, isActive, type, isShow, t} = this.props;
+    const {isActive, type, isShow, t} = this.props;
     const {categoryMenu, subjectMenu, sortMenu, sorters} = this.state;
 
       return (
