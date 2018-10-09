@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {getSingleRecord} from '../../../../redux/students/actions';
 import {selectGetSingleRecordRequest} from '../../../../redux/students/selectors';
 import EditStudentModal from "../../../students/modals/EditStudentModal";
+import HasRole from "../../../middlewares/HasRole";
 
 class InfoSection extends Component {
 
@@ -19,9 +20,8 @@ class InfoSection extends Component {
     }
   }
   
-  componentDidMount() {
-        const studentId = this.props.match.params.id;
-        this.props.getStudent(studentId);
+  componentDidMount() {        
+        this.props.getStudent(this.props.studentId);
   }
   
   componentWillReceiveProps(nextProps) {
@@ -34,7 +34,7 @@ class InfoSection extends Component {
   }  
 
   _openEditDialog() {
-        this.props.getStudent(this.props.match.params.id);  
+        this.props.getStudent(this.props.studentId);  
         this.setState({ editModalIsOpen: true });
   };
   
@@ -44,7 +44,7 @@ class InfoSection extends Component {
   };
   
   _onStudentUpdate() {
-      this.props.getStudent(this.props.match.params.id);    
+      this.props.getStudent(this.props.studentId);    
   }
     
   _renderCourseTable(courses) {
@@ -103,13 +103,15 @@ class InfoSection extends Component {
                     </div>
                   </div>
                   <div className='m-portlet__body position-relative'>
-                    <div style={{position:'absolute', right:10, top:-60}}>                      
-                        <IconButton color='primary' onClick={() => { this._openEditDialog() }}>                        
-                          <Icon className="material-icons">
-                            edit_icon
-                          </Icon>
-                        </IconButton>                      
-                    </div>                
+                    <HasRole roles={['Superadministrator', 'School', 'Teacher', 'Parent']}>
+                        <div style={{position:'absolute', right:10, top:-60}}>                      
+                            <IconButton color='primary' onClick={() => { this._openEditDialog() }}>                        
+                              <Icon className="material-icons">
+                                edit_icon
+                              </Icon>
+                            </IconButton>                      
+                        </div>
+                    </HasRole>
                     <div className="table-responsive">
                       <table className="table m-table m-table--head-separator-primary m-middle-table">
                         <tbody>

@@ -136,7 +136,8 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/reports' component={ReportsDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/reports/classrooms/:id' name='Classroom' component={ClassRoomReportDashboard}/>
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/reports/homerooms/:id' name='Homeroom' component={HomeRoomReportDashboard}/>
-      <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/reports/students/:id' name='Student' component={StudentReports}/>        
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/reports/students/:id' name='Student' component={StudentReports}/>
+      <AuthenticatedRoute exact layout={MainLayout} path='/my-reports' name='Student' component={StudentReports}/>
       
       {/*S-Cap*/}
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/scap' name='S-Cap' component={Scap}/>

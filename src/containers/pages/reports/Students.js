@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import {translate} from 'react-i18next';
 import InfoSection from "./students/InfoSection";
 import TabSection from "./students/TabSection";
@@ -7,18 +8,20 @@ import {selectStudentReportRequest} from "../../../redux/reports/students/select
 import {getReport} from "../../../redux/reports/students/actions";
 
 class Students extends Component {
-
+   
   componentDidMount() {
-    const { id } = this.props.match.params;
     const { getReport } = this.props;
-
-    getReport(id);
+    const { id } = this.props.match.params;
+  
+    getReport((id || 'my'));
   }
 
   render() {
     const {t, getReportRequest} = this.props;
-    const data = getReportRequest.toJS();
+    const data = getReportRequest.toJS();    
     
+    const { id } = this.props.match.params;
+       
     return (      
       <div className="fadeInLeft animated">
         <div className="row dashboard-main-top row-reports-main-top-block m-portlet  m-portlet--head-solid-bg">
@@ -30,8 +33,8 @@ class Students extends Component {
             </div>
           </div>
           <div className='m-portlet__body'>
-            <InfoSection data={data}/>
-            <TabSection data={data} />
+            <InfoSection data={data} studentId={(id || 'my')} />
+            <TabSection data={data} studentId={(id || 'my')} />
           </div>
         </div>
       </div>      
@@ -40,13 +43,13 @@ class Students extends Component {
 }
 
 Students = connect(
-  (state) => ({
-    getReportRequest: selectStudentReportRequest(state)
-  }),
-  (dispatch) => ({
-    getReport: (id, params = {}) => {dispatch(getReport(id, params))}
-  })
+    (state) => ({
+        getReportRequest: selectStudentReportRequest(state)
+    }),
+    (dispatch) => ({
+        getReport: (id, params = {}) => {dispatch(getReport(id, params))},    
+    })
 )(Students);
 
-export default translate('translations')(Students);
+export default withRouter(translate('translations')(Students));
 

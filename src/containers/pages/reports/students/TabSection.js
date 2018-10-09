@@ -41,6 +41,7 @@ class TabSection extends Component {
 
   _renderTabContent(courses) {
     const {classroom} = this.state;
+    const {studentId} = this.props;
     
     if (classroom === 'details') {
       if (!courses.length) {
@@ -50,7 +51,7 @@ class TabSection extends Component {
     } else {
       return courses.map(function (item, i) {
         if (classroom == item.classroomId) {
-          return (<LessonsTable studentId={item.studentId} classroomId={item.classroomId} key={i}></LessonsTable>)
+          return (<LessonsTable studentId={studentId} classroomId={item.classroomId} key={i}></LessonsTable>)
         }
         return false;        
       })
