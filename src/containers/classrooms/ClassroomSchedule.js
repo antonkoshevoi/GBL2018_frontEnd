@@ -97,7 +97,7 @@ class ClassroomSchedule extends Component {
             return (
                 <Row key={lesson.lessonId + '-lessonRow'}>
                     <Td width='350px'>
-                        <p className="text-center"><span class="m-badge m-badge--brand m-badge--wide">{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</span> </p>                        
+                        <p className="text-center"><span className="m-badge m-badge--brand m-badge--wide">{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</span> </p>                        
                         <p className="text-center"><span>{lesson.lessonName}</span></p>
                     </Td>
                     <Td width='450px'><p className="text-center">{lesson.lessonDescription}</p></Td>

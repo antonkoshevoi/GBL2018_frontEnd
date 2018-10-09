@@ -17,6 +17,8 @@ const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
 
 class Header extends Component {
 
+  isActive = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -30,6 +32,8 @@ class Header extends Component {
   componentDidMount() {
     const { getCartRecords, auth} = this.props;
     
+    this.isActive = true;
+    
     if (auth.get('isLoggedIn')) {       
         getCartRecords();
     }
@@ -37,15 +41,18 @@ class Header extends Component {
   }
   
   componentWillUnmount() {
+    this.isActive = false;
     window.removeEventListener('scroll', this.setHeaderPosition.bind(this));
   }  
 
   setHeaderPosition(){
-    const { headerHeight } = this.state
-    window.scrollY <= headerHeight?
-      this.setState({headerPosition:window.scrollY})
-      :
-      this.setState({headerPosition:headerHeight})
+    if (this.isActive) {
+        let position = this.state.headerHeight;
+        if (window.scrollY <= position) {
+            position = window.scrollY;
+        }
+        this.setState({headerPosition: position});
+    }
   }
 
   _openLanguageMenu = event => {

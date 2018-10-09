@@ -54,7 +54,7 @@ class Subscribed extends Component {
                                                 </div>
                                             }
                                         </p>                                            
-                                        <p class="text-center">
+                                        <p className="text-center">
                                             <a className="btn btn-success" href={invoice.get('invoiceUrl')} target="_blank">{t('downloadPdf')}</a>                                                
                                             <a className="btn btn-success m--margin-left-10" href="" onClick={() => { goTo("/my-subscriptions") }} >{t('viewMySubscriptions')}</a>
                                         </p>

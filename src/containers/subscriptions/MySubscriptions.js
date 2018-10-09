@@ -97,7 +97,7 @@ class MySubscriptions extends Component {
                         <Td width='120px'><strong className="g-blue">{item.get('price')}$</strong> / {t(item.get('period'))}</Td>
                         <Td width='120px'>{item.get('allowedCourses')}</Td>
                         <Td width='120px'>
-                            <span class="m--margin-right-15">{item.get('assignedCourses')}</span>
+                            <span className="m--margin-right-15">{item.get('assignedCourses')}</span>
                             { (item.get('assignedCourses') > 0) && <button className='btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={ ()=> {this._showStudentsModal(item.get('id')) }}>
                                 <i className="la la-search"></i>
                             </button> }                                                      
