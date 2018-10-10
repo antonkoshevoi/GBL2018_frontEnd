@@ -9,34 +9,46 @@ import { selectGetUserRequest, selectUserData } from "../../redux/user/selectors
 
 class Profile extends Component {
 
-  render() {
-    const { userData, getUserRequest } = this.props;
+    render() {
+        const {userData, getUserRequest} = this.props;
 
-    const user = userData.toJS();    
+        const user = userData.toJS();
 
-    return (
-      <div className="row">
-        <div className="col-lg-3">
-          <Info user={user}/>
-        </div>
-        <div className="col-lg-6">
-          {getUserRequest.get('success') && <Details user={user} />}
-        </div>
-        <HasRole roles={['Student', 'Teacher']}>        
-            <div className="col-lg-3">
-              <Summery user={user} />
+        return (
+            <div className="row m--margin-top-20">
+                <HasRole roles={['Superadministrator', 'School', 'Parents']}>
+                    <div className="col-md-12 col-lg-9 m-auto">
+                        <div className="row">
+                            <div className="col-lg-4">
+                                <Info user={user}/>
+                            </div>
+                            <div className="col-lg-8">
+                                {getUserRequest.get('success') && <Details user={user} />}
+                            </div>
+                        </div>
+                    </div>
+                </HasRole>
+                <HasRole roles={['Student', 'Teacher']}>
+                    <div className="col-lg-3">
+                        <Info user={user}/>
+                    </div>
+                    <div className="col-lg-6">
+                        {getUserRequest.get('success') && <Details user={user} />}
+                    </div>        
+                    <div className="col-lg-3">
+                        <Summery user={user} />
+                    </div>        
+                </HasRole>                
             </div>
-        </HasRole>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 Profile = connect(
-  (state) => ({
-    userData: selectUserData(state),    
-    getUserRequest: selectGetUserRequest(state)
-  })
+    (state) => ({
+        userData: selectUserData(state),
+        getUserRequest: selectGetUserRequest(state)
+    })
 )(Profile);
 
-export default translate('profile')(Profile);
+export default translate('translations')(Profile);

@@ -3,7 +3,9 @@ import {
   RESET_CREATE_REQUEST, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
   GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS,
   RESET_BULK_UPLOAD_REQUEST, BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS,
-  DELETE, DELETE_SUCCESS, DELETE_FAIL
+  DELETE, DELETE_SUCCESS, DELETE_FAIL,
+  GET_PARENT, GET_PARENT_SUCCESS, GET_PARENT_FAIL,
+  LINK_TO_PARENT, LINK_TO_PARENT_SUCCESS, LINK_TO_PARENT_FAIL, RESET_LINK_TO_PARENT_REQUEST
 } from './actions';
 import Immutable from 'immutable';
 
@@ -21,6 +23,13 @@ const initialState = Immutable.fromJS({
     errorResponse: null,
     record: {}
   },
+  getParentRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null,
+    record: {}
+  },  
   createRequest: {
     loading: false,
     success: false,
@@ -45,6 +54,14 @@ const initialState = Immutable.fromJS({
     errorCode: null,
     errors: {}
   },
+  linkToParentRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,
+    errorCode: null,
+    errors: {}
+  },  
   bulkUploadRequest: {
     loading: false,
     progress: 0,
@@ -116,8 +133,43 @@ export default function reducer (state = initialState, action) {
           .set('fail', true)
         );
     case RESET_GET_SINGLE_RECORD_REQUEST:
+      return state.set('getSingleRecordRequest', initialState.get('getSingleRecordRequest'));
+
+
+    /**
+     * Get parent record
+     */
+    case GET_PARENT:
+      return state.set('getParentRequest', initialState.get('getParentRequest').set('loading', true));
+    case GET_PARENT_SUCCESS:
       return state
-        .set('getSingleRecordRequest', initialState.get('getSingleRecordRequest'));
+        .set('getParentRequest', initialState.get('getParentRequest')
+          .set('success', true)
+          .set('record', Immutable.fromJS(action.result.data))
+        );
+    case GET_PARENT_FAIL:
+      return state.set('getParentRequest', initialState.get('getParentRequest').set('fail', true));
+
+    /**
+     * Link to parent
+     */
+    case LINK_TO_PARENT:
+      return state.set('linkToParentRequest', initialState.get('linkToParentRequest').set('loading', true));
+    case LINK_TO_PARENT_SUCCESS:
+      return state
+        .set('linkToParentRequest', initialState.get('linkToParentRequest')
+          .set('success', true)          
+          .set('record', Immutable.fromJS(action.result.data))
+        );
+    case LINK_TO_PARENT_FAIL:
+      return state.set('linkToParentRequest', initialState.get('linkToParentRequest')
+              .set('fail', true)
+              .set('errorCode', action.error.response.data.code)
+              .set('errorMessage', action.error.response.data.message)
+              .set('errors', action.error.response.data.code === 422 ? Immutable.fromJS(action.error.response.data.errors) : undefined));
+    case RESET_LINK_TO_PARENT_REQUEST:
+      return state.set('linkToParentRequest', initialState.get('linkToParentRequest'));
+      
     /**
      * Create
      */

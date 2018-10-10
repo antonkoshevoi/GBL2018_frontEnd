@@ -9,6 +9,10 @@ export const GET_SINGLE_RECORD_SUCCESS = '[Students] GET_SINGLE_RECORD_SUCCESS';
 export const GET_SINGLE_RECORD_FAIL = '[Students] GET_SINGLE_RECORD_FAIL';
 export const RESET_GET_SINGLE_RECORD_REQUEST = '[Students] RESET_GET_SINGLE_RECORD_REQUEST';
 
+export const GET_PARENT = '[Students] GET_PARENT';
+export const GET_PARENT_SUCCESS = '[Students] GET_PARENT_SUCCESS';
+export const GET_PARENT_FAIL = '[Students] GET_PARENT_FAIL';
+
 export const CREATE = '[Students] CREATE';
 export const CREATE_SUCCESS = '[Students] CREATE_SUCCESS';
 export const CREATE_FAIL = '[Students] CREATE_FAIL';
@@ -29,6 +33,11 @@ export const DELETE = '[Students] DELETE';
 export const DELETE_SUCCESS = '[Students] DELETE_SUCCESS';
 export const DELETE_FAIL = '[Students] DELETE_FAIL';
 
+export const LINK_TO_PARENT = '[Students] LINK_TO_PARENT';
+export const LINK_TO_PARENT_SUCCESS = '[Students] LINK_TO_PARENT_SUCCESS';
+export const LINK_TO_PARENT_FAIL = '[Students] LINK_TO_PARENT_FAIL';
+export const RESET_LINK_TO_PARENT_REQUEST = '[Students] RESET_LINK_TO_PARENT_REQUEST';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -45,9 +54,30 @@ export function getSingleRecord(id, params = {}) {
     promise: (apiClient) => apiClient.get(`students/${id}`, params)
   };
 }
+
 export function resetGetSingleRecordRequest () {
   return {
     type: RESET_GET_SINGLE_RECORD_REQUEST
+  }
+}
+
+export function getParent() {
+  return {
+    types: [GET_PARENT, GET_PARENT_SUCCESS, GET_PARENT_FAIL],
+    promise: (apiClient) => apiClient.get('students/my-parent')
+  };
+}
+
+export function linkToParent(params = {}) {
+  return {
+    types: [LINK_TO_PARENT, LINK_TO_PARENT_SUCCESS, LINK_TO_PARENT_FAIL],
+    promise: (apiClient) => apiClient.post('students/link-to-parent', params)
+  };
+}
+
+export function resetLinkToParentRequest () {
+  return {
+    type: RESET_LINK_TO_PARENT_REQUEST
   }
 }
 /**

@@ -7,43 +7,41 @@ import SchoolInfo from "./sections/SchoolInfo";
 import SchoolDetails from "./sections/SchoolDetails";
 
 class SchoolProfile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
 
+    componentDidMount() {
+        const {getSchool} = this.props;
+
+        getSchool();
     }
-  }
 
-  componentDidMount () {
-    const { getSchool } = this.props;
+    render() {
+        const school = this.props.schoolRequest.get('record').toJS();
+        const success = this.props.schoolRequest.get('success');
 
-    getSchool();
-  }
-
-  render() {
-    const school = this.props.schoolRequest.get('record').toJS();
-    const success = this.props.schoolRequest.get('success');
-
-    return (
-      <div className="row">
-        <div className="col-lg-3">
-          <SchoolInfo school={school}/>
-        </div>
-        <div className="col-lg-9">
-          {success && <SchoolDetails school={school}/>}
-        </div>
-      </div>
-    );
-  }
+        return (
+            <div className="row m--margin-top-20">
+                <div className="col-md-12 col-lg-9 m-auto">
+                    <div className="row">
+                        <div className="col-lg-4">
+                            <SchoolInfo school={school}/>
+                        </div>
+                        <div className="col-lg-8">
+                            {success && <SchoolDetails school={school}/>}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
 SchoolProfile = connect(
-  (state) => ({
-    schoolRequest: selectSchool(state),
-  }),
-  (dispatch) => ({
-    getSchool: () => { dispatch(getSchool()) },
-  })
+    (state) => ({
+        schoolRequest: selectSchool(state)
+    }),
+    (dispatch) => ({
+        getSchool: () => {dispatch(getSchool())}
+    })
 )(SchoolProfile);
 
-export default translate('profile')(SchoolProfile);
+export default translate('translations')(SchoolProfile);

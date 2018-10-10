@@ -499,6 +499,10 @@ export default {
     areYouSureWantToArchiveClassroom: 'Are you sure want to archive this classroom?',
     invitationExpired: 'Sorry, this invitation has been expired...',
     expired: 'Expired',
+    enterParentUsernameOrEmail: 'Enter parent username or email',
+    linkToParent: 'Link to parent account',
+    createParentAccount: 'Create Parent Account',
+    sendRequest: 'Send Request',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

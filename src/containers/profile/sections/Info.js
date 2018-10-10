@@ -105,12 +105,9 @@ class Info extends Component {
     const loading = this.props.getChangeImageRequest.get('loading');
 
     return (
-      <div className="m-portlet ">
+      <div className="m-portlet">
         <div className="m-portlet__body">
           <div className="m-card-profile">
-            <div className="m-card-profile__title m--hide">
-              {t('yourProfile')}
-            </div>
             <div className="m-card-profile__details">
               <span className="m-card-profile__name">{user.firstName} {user.lastName}</span>
               <span className="m-card-profile__email">{user.username}</span>
