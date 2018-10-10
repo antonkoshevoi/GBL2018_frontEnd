@@ -16,6 +16,7 @@ import CreateDemoClassroomModal from './modals/CreateDemoClassroomModal';
 import EditDemoClassroomModal from './modals/EditDemoClassroomModal';
 import AssignStudentModal from './modals/AssignStudentModal';
 import HasRole from "../middlewares/HasRole";
+import moment from 'moment/moment';
 
 function TabContainer(props) {
   return (
@@ -205,9 +206,10 @@ class DemoCoursesTab extends Component {
         <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
         <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
         <Td width='100px'>{record.get('studentsCount')}</Td>
+        <Td width='100px'>{moment(record.get('crmEndDate')).format('ll')}</Td>
         <Td width='100px'>
           <EditButton onClick={(id) => { this._editRecord(id) }} id={ record.get('id') }/>
-          <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
+          <DeleteButton title={t('areYouSureWantToArchiveClassroom')} icon="la la-archive" onClick={() => { this._deleteRecord(record.get('id')) }}/>
         </Td>
       </Row>
     ));
@@ -282,6 +284,7 @@ class DemoCoursesTab extends Component {
                 <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>{t('course')}</Th>
                 <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>{t('teacher')}</Th>
                 <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='100px'>{t('students')}</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['endDate']} name='endDate' width='100px'>{t('endDate')}</Th>
                 <Th width='100px'>{t('actions')}</Th>
               </HeadRow>
             </Thead>

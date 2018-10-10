@@ -6,6 +6,7 @@ import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../..
 import { selectPagination, selectGetPaymentsRequest } from '../../redux/subscriptions/selectors';
 import { getPayments } from '../../redux/subscriptions/actions';
 import Pagination from '../../components/ui/Pagination';
+import moment from 'moment/moment';
 
 class Payments extends Component {
     constructor(props) {
@@ -41,12 +42,12 @@ class Payments extends Component {
         }
         return paymentsRequest.get('records').map((record, key) => (
             <Row index={key} key={key}>
-                <Td first={true} width='100px'>{key + 1}</Td>
-                <Td width='132px'><strong className="g-blue">{record.get('total')}$</strong></Td>
-                <Td width='132px'><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('type'))}</span></Td>                
-                <Td width='132px'>{record.get('transactionCode')}</Td>
+                <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
+                <Td width='100px'><strong className="g-blue">{record.get('total')}$</strong></Td>
+                <Td width='100px'><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('type'))}</span></Td>                
+                <Td width='150px'>{record.get('transactionCode')}</Td>
                 <Td width='132px'>{record.get('subscription')} {t('subscription')}</Td>        
-                <Td width='132px'>{record.get('createdAt')}</Td>
+                <Td width='132px'>{moment(record.get('createdAt')).format('lll')}</Td>
             </Row>
         ));
     }
@@ -67,6 +68,11 @@ class Payments extends Component {
         this.setState({ perPage, page }, this._getRecords)
     }
 
+    _recordNumber(key) {
+        const { page, perPage } = this.state;
+        return (key + 1 + ((page - 1) * perPage));
+    }
+  
     render() {
         const { paymentsRequest, pagination, t } = this.props;
         const { page, perPage } = this.state;        
@@ -107,10 +113,10 @@ class Payments extends Component {
                 <Table>
                   <Thead>
                     <HeadRow>
-                      <Th first={true} width='100px'>#</Th>
-                      <Th width='132px'>{t('total')}</Th>
-                      <Th width='132px'>{t('type')}</Th>
-                      <Th width='132px'>{t('transactionCode')}</Th>
+                      <Th first={true} width='60px'>#</Th>
+                      <Th width='100px'>{t('total')}</Th>
+                      <Th width='100px'>{t('type')}</Th>
+                      <Th width='150px'>{t('transactionCode')}</Th>
                       <Th width='132px'>{t('subscription')}</Th>
                       <Th width='132px'>{t('created')}</Th>                  
                     </HeadRow>

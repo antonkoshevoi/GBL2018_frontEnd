@@ -12,6 +12,7 @@ import { getStudentsRecords, unSubscribeStudent, resetUnSubscribeStudentRequest 
 import Modal from '../../../components/ui/Modal';
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../../components/ui/table";
 import DeleteButton from "../../../components/ui/DeleteButton";
+import moment from 'moment/moment';
 
 class StudentsModal extends Component {
 
@@ -71,7 +72,7 @@ class StudentsModal extends Component {
             return <Row index={i} key={i}>                     
                 <Td width='120px'>{item.get('studentFirstName')} {item.get('studentLastName')}</Td>                        
                 <Td width='120px'>{item.get('courseTitle')}</Td>    
-                <Td width='120px'>{item.get('createdAt')}</Td>                                                
+                <Td width='120px'>{moment(item.get('createdAt')).format('ll')}</Td>                                                
                 <Td width='120px' name='actions'>
                     <DeleteButton title={t('areYouSureWantToCancelThisCourse')} onClick={() => { this._unsubscribeStudent(item.get('id')) }}/>                                                
                 </Td>
@@ -83,7 +84,7 @@ class StudentsModal extends Component {
     const { isOpen, studentsRecordsRequest, unSubscribeStudentRequest, t } = this.props;              
     
     return (
-      <Modal isOpen={isOpen} onClose={() => this._close()}>
+      <Modal bigger={true} isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position='static' color='primary' className='dialogAppBar'>
           <Toolbar>            
               { (!studentsRecordsRequest.get('success') || unSubscribeStudentRequest.get('loading')) ? (

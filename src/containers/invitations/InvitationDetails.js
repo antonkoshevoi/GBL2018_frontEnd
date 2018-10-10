@@ -60,11 +60,20 @@ class InvitationDetails extends Component {
     const image = record.getIn(['course', 'image']);    
     const description = record.getIn(['course', 'crsDescription']);
 
+    if (record.get('isExpired')) {
+      return (
+        <div>
+          <h3>{t('demoCourseInvitation')}</h3>
+          <h2 className="m--margin-top-100 m--margin-bottom-100">{t('invitationExpired')}</h2>
+        </div>
+      );
+    }
+    
     if (record.get('isAccepted')) {
       return (
         <div>
           <h3>{t('demoCourseInvitation')}</h3>
-          <h2>{t('invitationAccepted')}</h2>
+          <h2 className="m--margin-top-100 m--margin-bottom-100">{t('invitationAccepted')}</h2>
         </div>
       );
     }
@@ -73,7 +82,7 @@ class InvitationDetails extends Component {
       return (
         <div>
           <h3>{t('demoCourseInvitation')}</h3>
-          <h2>{t('invitationDeclined')}</h2>
+          <h2 className="m--margin-top-100 m--margin-bottom-100">{t('invitationDeclined')}</h2>
         </div>
       );
     }

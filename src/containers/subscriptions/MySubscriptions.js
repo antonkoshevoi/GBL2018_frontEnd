@@ -10,6 +10,7 @@ import Card from "../../components/ui/Card";
 import DeleteButton from "../../components/ui/DeleteButton";
 import AssignStudentModal from "./modals/AssignStudentModal";
 import StudentsModal from "./modals/StudentsModal";
+import moment from 'moment/moment';
 
 class MySubscriptions extends Component {
 
@@ -102,8 +103,8 @@ class MySubscriptions extends Component {
                                 <i className="la la-search"></i>
                             </button> }                                                      
                         </Td>
-                        <Td width='120px'>{item.get('createdAt')}</Td>
-                        <Td width='120px'>{item.get('expiredAt')}</Td>
+                        <Td width='120px'>{moment(item.get('createdAt')).format('ll')}</Td>
+                        <Td width='120px'>{moment(item.get('expiredAt')).format('ll')}</Td>
                         <Td width='120px'>
                             {(item.get('isActive') > 0) ? <span className='m-badge m-badge--brand m-badge--wide'>{t('yes')}</span> : <span className='m-badge m-badge--brand m-badge--wide m-badge--danger'>{t('no')}</span>}
                         </Td>
