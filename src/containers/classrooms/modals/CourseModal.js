@@ -145,7 +145,7 @@ class CourseModal extends Component {
     const storeRecordsLoading = this.props.storeRecordsRequest.get('loading');    
 
     return (
-      <Modal isOpen={isOpen} onClose={() => this._close()}>
+      <Modal bigger={true}  isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>            
               {storeRecordsLoading ? (
