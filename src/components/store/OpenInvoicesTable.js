@@ -70,10 +70,6 @@ class OpenInvoicesTable extends Component {
     )
   }
 
-  _renderTableHomerooms(homerooms) {
-    return homerooms.map((homeroom,i) => <span key={i} className="d-block productLabel font-weight-normal text-center">{homeroom.name}</span>)
-  }
-
   _renderRows(rows, preview) {
     const _self = this;
     const {t} = this.props;
@@ -104,15 +100,10 @@ class OpenInvoicesTable extends Component {
             </div>
           </Td>
           {!preview &&
-          <Td width="100px">
+          <Td width="132px">
             <span className="productLabel font-weight-normal text-center">
                { item.classroom ? item.classroom.crm_name : ''}
             </span>
-          </Td>
-          }
-          {!preview &&
-          <Td width="100px" classNames="text-center">
-            {item.classroom && _self._renderTableHomerooms(item.classroom.homerooms)}
           </Td>
           }
 
@@ -135,7 +126,7 @@ class OpenInvoicesTable extends Component {
             <span className="productPrice productLabel">
               {item.storeItem.discount > 0 &&
              <span>${parseFloat(item.storeItem.price).toFixed(2)}
-              <span className="discount"></span>
+                <span className="discount"></span>
              </span>
               }
               <br/>
@@ -200,8 +191,7 @@ class OpenInvoicesTable extends Component {
               <HeadRow>
                 <Th first={true} width='10px'>#</Th>
                 <Th name='product' width='400px'>{t('product')}</Th>
-                {!preview && <Th name='quantity' width='100px' classNames="text-center">{t('classroom')}</Th>}
-                {!preview && <Th name='quantity' width='100px' classNames="text-center">{t('homeroom')}</Th>}
+                {!preview && <Th name='quantity' width='132px' classNames="text-center">{t('classroom')}</Th>}                
                 <Th name='quantity' width='132px' classNames="text-center">{t('quantity')}</Th>
                 <Th name='price' width='100px'>{t('price')}</Th>
                 <Th name='actions' width='100px'>{t('total')}</Th>

@@ -8,6 +8,7 @@ import Card from "../../../components/ui/Card";
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../../components/ui/table";
 import {IconButton} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
+import moment from 'moment/moment';
 
 class Transactions extends Component {
 
@@ -55,8 +56,8 @@ class Transactions extends Component {
                         <Td width='20px'>{i + 1}</Td>
                         <Td width='102px'><span style={{fontWeight:600}} className="g-blue">{item.get('total')}$</span></Td>
                         <Td width='100px'><span className='m-badge m-badge--brand m-badge--wide'>{t(item.get('paymentType'))}</span></Td>
-                        <Td width='140px'>{item.get('createdAt')}</Td>
-                        <Td width='140px'>{item.get('authorizedAt') } {(!item.get('isAuthorized')) && <i className="fa fa-close g-red"></i>}</Td>
+                        <Td width='140px'>{moment(item.get('createdAt')).format('lll')}</Td>
+                        <Td width='140px'>{item.get('authorizedAt') ? moment(item.get('authorizedAt')).format('lll') : (<i className="fa fa-close g-red"></i>)}</Td>
                     </Row>,
                     ( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) && this._renderTransactionItemsBlock(item.get('items'))
                 ]

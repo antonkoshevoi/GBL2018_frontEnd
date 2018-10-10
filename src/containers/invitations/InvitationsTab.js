@@ -14,6 +14,7 @@ import { buildSortersQuery } from '../../helpers/utils';
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
 import SendInvitationModal from './modals/SendInvitationModal';
+import moment from 'moment/moment';
 
 function TabContainer(props) {
   return (
@@ -172,8 +173,8 @@ class InvitationsTab extends Component {
         <Td width='80px'>
           { this._renderStatus(record) }
         </Td>
-        <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
-        <Td width='132px'>{record.getIn(['course', 'publisher', 'name'])}</Td>
+        <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>        
+        <Td width='132px'>{moment(record.get('date')).format('ll')}</Td>
         <Td width='100px'>
           <a title="View Invitation" href={uri('invitations/details/' + record.get('id') + '/' + record.get('securityHash'))} className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill" target="_blank">
              <i className='la la-search'></i>
@@ -192,7 +193,9 @@ class InvitationsTab extends Component {
     if(record.get('isDeclined')) {
       return <span className='m-badge m-badge--danger m-badge--wide'>{t('declined')}</span>;
     }
-
+    if(record.get('isExpired')) {
+      return <span className='m-badge m-badge--warning m-badge--wide'>{t('expired')}</span>;
+    }
     return <span className='m-badge m-badge--brand m-badge--wide'>{t('pending')}</span>;
   }
 
@@ -244,7 +247,7 @@ class InvitationsTab extends Component {
               <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
               <Th onSort={ (name) => { this._sort(name) }} dir={sorters['status']} name='status' width='80px'>{t('status')}</Th>
               <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>{t('course')}</Th>
-              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['publisher']} name='publisher' width='132px'>{t('publisher')}</Th>
+              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['date']} name='date' width='132px'>{t('date')}</Th>
               <Th width='100px'>{t('actions')}</Th>
             </HeadRow>
             </Thead>

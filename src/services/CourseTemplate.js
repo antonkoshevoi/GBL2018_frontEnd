@@ -222,6 +222,9 @@ export default function formTableData(serverData, jsonTemplateData) {
 
         return formMistakes(description, chosenAnswer);
       }
+      default: {
+          return '';
+      }
     }
   }
 

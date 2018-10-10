@@ -144,7 +144,7 @@ class Details extends Component {
                       <h3 className="m-widget1__title">{t('email')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{user.email}</span>
+                      <span className="m-widget1__title m--font-brand">{user.email || '-'}</span>
                     </div>
                   </div>
                 </div>

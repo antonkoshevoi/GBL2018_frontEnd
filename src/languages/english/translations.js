@@ -371,7 +371,7 @@ export default {
     logInDifferentUser: 'Log In different user',
     logIn: 'Log in',
     reset: 'Reset',
-    areYouSure: 'Are you sure?',
+    areYouSure: 'Are you sure want to remove this item?',
     downloadCsvMessage: 'You may download this .csv template to use it as pattern for your csv file. Kindly make sure that you have a valid .csv format before uploading to the system.',    
     selectCsvFile: 'Select CSV file',    
     inserted: 'Inserted',
@@ -496,6 +496,9 @@ export default {
     schoolManagement: 'School Management',
     noDemoCoursesFound: 'No Demo Courses found...',
     code: 'Code',
+    areYouSureWantToArchiveClassroom: 'Are you sure want to archive this classroom?',
+    invitationExpired: 'Sorry, this invitation has been expired...',
+    expired: 'Expired',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

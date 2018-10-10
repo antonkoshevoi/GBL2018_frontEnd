@@ -19,6 +19,7 @@ import DeleteButton from "../../components/ui/DeleteButton";
 import HasPermission from "../middlewares/HasPermission";
 import HasRole from "../middlewares/HasRole";
 import AssignStudentsModal from "./modals/AssignStudentsModal";
+import moment from 'moment/moment';
 
 const AssignButton = ({ id, onClick}) => {
   return (
@@ -121,6 +122,7 @@ class Classrooms extends Component {
                 <i className={`la ${record.get('paid') ? 'la-dollar' : 'la-exclamation-triangle'}`} style={{fontSize: '2rem'}}></i>
             </button>             
         </Td>
+        <Td width='100px'>{moment(record.get('crmEndDate')).format('ll')}</Td>
         <Td width='150px'>
           <HasPermission permissions={['[ClassRooms][Update][Any]']}>
             <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
@@ -132,7 +134,7 @@ class Classrooms extends Component {
             <AssignButton onClick={() => { this._assignStudent(record.get('id')) }}/>
           </HasPermission>
           <HasPermission permissions={['[ClassRooms][Delete][Any]']}>
-            <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
+            <DeleteButton title={t('areYouSureWantToArchiveClassroom')} icon="la la-archive" onClick={() => { this._deleteRecord(record.get('id')) }}/>
           </HasPermission>
         </Td>
       </Row>
@@ -318,6 +320,7 @@ class Classrooms extends Component {
                   <Th width='75px' onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount'>{t('students')}</Th>
                   <Th width='75px'>{t('public')}</Th>
                   <Th width='75px'>{t('status')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['endDate']} name='endDate' width='100px'>{t('endDate')}</Th>
                   <Th width='150px'>{t('actions')}</Th>
                 </HeadRow>
               </Thead>
