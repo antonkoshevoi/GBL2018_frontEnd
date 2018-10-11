@@ -41,5 +41,8 @@ export default {
   messageIsSent: 'Message sent succesfully',
   messageDeleted: 'Message succesfully removed',
   requestHasBeenSent: 'Request to parent account successfully sent',
-  parentAccountCreated: 'Parent account successfully created' 
+  parentAccountCreated: 'Parent account successfully created',
+  studentRequestIsAccepted: 'Request successfully accepted',
+  studentRequestIsDeclined: 'Request successfully declined',
+  studentRequestIsDeleted: 'Request successfully deleted'
 }

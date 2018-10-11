@@ -6,9 +6,10 @@ import { Typography, Divider } from '@material-ui/core';
 import HasRole from "../middlewares/HasRole";
 import { getUser } from "../../redux/user/actions";
 import { selectGetUserRequest, selectUserData } from "../../redux/user/selectors";
-import { linkToParent, getParent, resetLinkToParentRequest, createParent, resetCreateParentRequest } from "../../redux/students/actions";
-import { selectLinkToParentRequest, selectGetParentRequest, selectCreateParentRequest } from "../../redux/students/selectors";
+import { linkToParent, getParent, deleteStudentRequest, resetLinkToParentRequest, createParent, resetCreateParentRequest } from "../../redux/students/actions";
+import { selectLinkToParentRequest, selectGetParentRequest, selectCreateParentRequest, selectUpdateStudentStatusRequest } from "../../redux/students/selectors";
 import Loader from '../../components/layouts/Loader';
+import moment from 'moment/moment';
 
 function TabContainer(props) {
     return (
@@ -36,7 +37,7 @@ class ParentProfile extends Component {
     }    
   
     componentWillReceiveProps(nextProps) {        
-        const {linkToParentRequest, createParentRequest } = this.props;
+        const {linkToParentRequest, createParentRequest, updateStudentStatusRequest } = this.props;
         
         if (!linkToParentRequest.get('success') && nextProps.linkToParentRequest.get('success')) {
             this.props.getParent();
@@ -44,6 +45,11 @@ class ParentProfile extends Component {
         }
                
         if (!createParentRequest.get('success') && nextProps.createParentRequest.get('success')) {
+            this.props.getParent();
+            this.props.resetCreateParentRequest();
+        }
+        
+        if (!updateStudentStatusRequest.get('success') && nextProps.updateStudentStatusRequest.get('success')) {
             this.props.getParent();
             this.props.resetCreateParentRequest();
         }        
@@ -64,7 +70,11 @@ class ParentProfile extends Component {
     }
     
     _createParent() {
-        this.props.createParent(this.state);        
+        this.props.createParent(this.state);
+    }
+    
+    _removeRequest(id) {
+        this.props.deleteStudentRequest(id);
     }
     
     _renderRequestForm()
@@ -317,10 +327,12 @@ class ParentProfile extends Component {
     
     _renderParentStatus(parent)
     {
-        const {t} = this.props;
+        const {t, updateStudentStatusRequest} = this.props;
+        const loading = updateStudentStatusRequest.get('loading');
             
         return (<div className="row">
             <div className="col-lg-8  m-auto">
+                {loading &&  <Loader />}
                 <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
                     <div className="m-portlet__head">
                         <div className="m-portlet__head-caption">
@@ -334,12 +346,30 @@ class ParentProfile extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="m-portlet__body m--padding-top-5" style={{height: "100%"}}>
+                    <div className="m-portlet__body m--pading-top-5" style={{height: "100%"}}>
+                        {(parent.accepted.toString() === '0' && parent.rejected.toString() === '0') && 
                         <div className="alert alert-success  m--margin-top-25">
                             <p className='margin-0'>{t('youSentRequestToParent')}</p>
-                        </div>                        
+                        </div> }
+                        {(parent.rejected.toString() === '1') && 
+                        <div className="alert alert-danger  m--margin-top-25">
+                            <p className='margin-0'>
+                                {t('parentRejectedYourRequest')}
+                                <button type="button" onClick={ () => { this._removeRequest(parent.requestId) }} class="close m--padding-top-5" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </p>
+                        </div> }                        
                         <TabContainer>
                             <div className="m-widget1 m-widget1--paddingless">
+                                <div className="m-widget1__item">
+                                    <div className="row m-row--no-padding">
+                                        <div className="col">
+                                            <h3 className="m-widget1__title">{t('requestSentDate')}</h3>
+                                        </div>
+                                        <div className="col m--align-right">
+                                            <span className="m-widget1__title m--font-brand">{moment(parent.sentAt).format('lll')}</span>
+                                        </div>
+                                    </div>
+                                </div>                            
                                 <div className="m-widget1__item">
                                     <div className="row m-row--no-padding">
                                         <div className="col">
@@ -381,6 +411,14 @@ class ParentProfile extends Component {
                                     </div>
                                 </div>
                             </div>
+                            {(parent.accepted.toString() === '0' && parent.rejected.toString() === '0') && 
+                            <div className="m-widget1__item m--margin-top-20">
+                                <div className="row m-row--no-padding">
+                                    <div className="col">
+                                        <input type="button" value={t('rejectRequest')} onClick={() => { this._removeRequest(parent.requestId) }} className="btn btn-success" /> 
+                                    </div>
+                                </div>
+                            </div> }                            
                         </TabContainer>            
                     </div>
                 </div>
@@ -411,14 +449,16 @@ ParentProfile = connect(
     (state) => ({
         parentRequest: selectGetParentRequest(state),
         linkToParentRequest: selectLinkToParentRequest(state),
-        createParentRequest: selectCreateParentRequest(state)
+        createParentRequest: selectCreateParentRequest(state),
+        updateStudentStatusRequest: selectUpdateStudentStatusRequest(state)
     }),
     (dispatch) => ({    
         linkToParent: (params = {}) => { dispatch(linkToParent(params)) },
         resetLinkToParentRequest: () => { dispatch(resetLinkToParentRequest()) },
         getParent: () => { dispatch(getParent()) },
         createParent: (params = {}) => { dispatch(createParent(params)) },
-        resetCreateParentRequest: () => { dispatch(resetCreateParentRequest()) }
+        resetCreateParentRequest: () => { dispatch(resetCreateParentRequest()) },
+        deleteStudentRequest: (id) => { dispatch(deleteStudentRequest(id)) }
     })    
 )(ParentProfile);
 

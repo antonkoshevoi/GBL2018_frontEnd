@@ -505,6 +505,9 @@ export default {
     sendRequest: 'Send Request',
     youSentRequestToParent: 'You successfully sent request to link your account to this parent. Please wait while your request will be accepted...',
     myParent: 'My Parents',
+    requestSentDate: 'Request sent at',
+    parentRejectedYourRequest: 'Parent rejected your request...',
+    rejectRequest: 'Reject Request',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

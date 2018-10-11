@@ -6,7 +6,11 @@ import {
   DELETE, DELETE_SUCCESS, DELETE_FAIL,
   GET_PARENT, GET_PARENT_SUCCESS, GET_PARENT_FAIL,
   CREATE_PARENT, CREATE_PARENT_SUCCESS, CREATE_PARENT_FAIL, RESET_CREATE_PARENT_REQUEST,
-  LINK_TO_PARENT, LINK_TO_PARENT_SUCCESS, LINK_TO_PARENT_FAIL, RESET_LINK_TO_PARENT_REQUEST
+  LINK_TO_PARENT, LINK_TO_PARENT_SUCCESS, LINK_TO_PARENT_FAIL, RESET_LINK_TO_PARENT_REQUEST,
+  GET_STUDENT_REQUESTS, GET_STUDENT_REQUESTS_SUCCESS, GET_STUDENT_REQUESTS_FAIL,
+  ACCEPT_STUDENT, ACCEPT_STUDENT_SUCCESS, ACCEPT_STUDENT_FAIL,
+  DECLINE_STUDENT, DECLINE_STUDENT_SUCCESS, DECLINE_STUDENT_FAIL, RESET_UPDATE_STUDENT_STATUS_REQUEST,
+  DELETE_STUDENT_REQUST, DELETE_STUDENT_REQUST_SUCCESS, DELETE_STUDENT_REQUST_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -16,6 +20,13 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errorResponse: null
+  },
+  getStudentRequestsRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null,
+    records: {}
   },
   getSingleRecordRequest: {
     loading: false,
@@ -53,6 +64,11 @@ const initialState = Immutable.fromJS({
     errorCode: null,
     errors: {}
   },
+  updateStudentStatusRequest: {
+    loading: false,
+    success: false,
+    fail: false
+  },  
   deleteRequest: {
     loading: false,
     success: false,
@@ -114,6 +130,18 @@ export default function reducer (state = initialState, action) {
           .set('loading', false)
           .set('fail', true)
         );
+
+    /**
+     * Get student requests
+     */
+    case GET_STUDENT_REQUESTS:
+      return state
+        .set('getStudentRequestsRequest', initialState.get('getStudentRequestsRequest').set('loading', true).set('records', Immutable.List()));
+    case GET_STUDENT_REQUESTS_SUCCESS:
+      return state
+        .set('getStudentRequestsRequest', initialState.get('getStudentRequestsRequest').set('success', true).set('records', Immutable.fromJS(action.result.data)));
+    case GET_STUDENT_REQUESTS_FAIL:
+      return state.set('getStudentRequestsRequest', initialState.get('getStudentRequestsRequest').set('fail', true));
 
     /**
      * Get single record
@@ -189,6 +217,24 @@ export default function reducer (state = initialState, action) {
     case RESET_LINK_TO_PARENT_REQUEST:
       return state.set('linkToParentRequest', initialState.get('linkToParentRequest'));
       
+    /**
+     * Change student status
+     */
+    case ACCEPT_STUDENT:
+    case DECLINE_STUDENT:
+    case DELETE_STUDENT_REQUST:
+      return state.set('updateStudentStatusRequest', initialState.get('updateStudentStatusRequest').set('loading', true));
+    case ACCEPT_STUDENT_SUCCESS:
+    case DECLINE_STUDENT_SUCCESS:
+    case DELETE_STUDENT_REQUST_SUCCESS:
+      return state.set('updateStudentStatusRequest', initialState.get('updateStudentStatusRequest').set('success', true));
+    case ACCEPT_STUDENT_FAIL:
+    case DECLINE_STUDENT_FAIL:        
+    case DELETE_STUDENT_REQUST_FAIL:
+      return state.set('updateStudentStatusRequest', initialState.get('updateStudentStatusRequest') .set('fail', true));
+    case RESET_UPDATE_STUDENT_STATUS_REQUEST:
+      return state.set('updateStudentStatusRequest', initialState.get('updateStudentStatusRequest'));
+  
     /**
      * Create
      */

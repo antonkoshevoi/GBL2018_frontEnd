@@ -4,6 +4,23 @@ export const GET_RECORDS = '[Students] GET_RECORDS';
 export const GET_RECORDS_SUCCESS = '[Students] GET_RECORDS_SUCCESS';
 export const GET_RECORDS_FAIL = '[Students] GET_RECORDS_FAIL';
 
+export const GET_STUDENT_REQUESTS = '[Students] GET_STUDENT_REQUESTS';
+export const GET_STUDENT_REQUESTS_SUCCESS = '[Students] GET_STUDENT_REQUESTS_SUCCESS';
+export const GET_STUDENT_REQUESTS_FAIL = '[Students] GET_STUDENT_REQUESTS_FAIL';
+
+export const ACCEPT_STUDENT = '[Students] ACCEPT_STUDENT';
+export const ACCEPT_STUDENT_SUCCESS = '[Students] ACCEPT_STUDENT_SUCCESS';
+export const ACCEPT_STUDENT_FAIL = '[Students] ACCEPT_STUDENT_FAIL';
+
+export const DECLINE_STUDENT = '[Students] DECLINE_STUDENT';
+export const DECLINE_STUDENT_SUCCESS = '[Students] DECLINE_STUDENT_SUCCESS';
+export const DECLINE_STUDENT_FAIL = '[Students] DECLINE_STUDENT_FAIL';
+export const RESET_UPDATE_STUDENT_STATUS_REQUEST = '[Students] RESET_UPDATE_STUDENT_STATUS_REQUEST';
+
+export const DELETE_STUDENT_REQUST = '[Students] DELETE_STUDENT_REQUST';
+export const DELETE_STUDENT_REQUST_SUCCESS = '[Students] DELETE_STUDENT_REQUST_SUCCESS';
+export const DELETE_STUDENT_REQUST_FAIL = '[Students] DELETE_STUDENT_REQUST_FAIL';
+
 export const GET_SINGLE_RECORD = '[Students] GET_SINGLE_RECORD';
 export const GET_SINGLE_RECORD_SUCCESS = '[Students] GET_SINGLE_RECORD_SUCCESS';
 export const GET_SINGLE_RECORD_FAIL = '[Students] GET_SINGLE_RECORD_FAIL';
@@ -71,6 +88,40 @@ export function getParent() {
     types: [GET_PARENT, GET_PARENT_SUCCESS, GET_PARENT_FAIL],
     promise: (apiClient) => apiClient.get('students/my-parent')
   };
+}
+
+export function getStudentRequests(params = {}) {
+  return {
+    types: [GET_STUDENT_REQUESTS, GET_STUDENT_REQUESTS_SUCCESS, GET_STUDENT_REQUESTS_FAIL],
+    promise: (apiClient) => apiClient.get('students/requests', params)
+  };
+}
+
+export function acceptStudentRequest(id) {
+  return {
+    types: [ACCEPT_STUDENT, ACCEPT_STUDENT_SUCCESS, ACCEPT_STUDENT_FAIL],
+    promise: (apiClient) => apiClient.get(`students/request/accept/${id}`)
+  };
+}
+
+export function declineStudentRequest(id) {
+  return {
+    types: [DECLINE_STUDENT, DECLINE_STUDENT_SUCCESS, DECLINE_STUDENT_FAIL],
+    promise: (apiClient) => apiClient.get(`students/request/decline/${id}`)
+  };
+}
+
+export function deleteStudentRequest(id) {
+  return {
+    types: [DELETE_STUDENT_REQUST, DELETE_STUDENT_REQUST_SUCCESS, DELETE_STUDENT_REQUST_FAIL],
+    promise: (apiClient) => apiClient.get(`students/request/delete/${id}`)
+  };
+}
+
+export function resetUpdateStudentStatusRequest() {
+  return {
+    type: RESET_UPDATE_STUDENT_STATUS_REQUEST
+  }
 }
 
 export function createParent(params = {}) {

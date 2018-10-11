@@ -46,6 +46,23 @@ export const selectLinkToParentRequest = createSelector(
 );
 
 /**
+ * Get student requests request
+ */
+export const selectStudentRequestsRequest = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('getStudentRequestsRequest')
+);
+
+
+/**
+ * Get update student status request
+ */
+export const selectUpdateStudentStatusRequest = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('updateStudentStatusRequest')
+);
+
+/**
  * Records
  */
 export const selectRecords = createSelector(

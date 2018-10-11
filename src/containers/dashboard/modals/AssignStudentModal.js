@@ -19,8 +19,7 @@ class AssignStudentModal extends Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,    
-    onSuccess: PropTypes.func.isRequired,    
-    course: PropTypes.object.isRequired
+    onSuccess: PropTypes.func.isRequired    
   };
   
   constructor (props) {
