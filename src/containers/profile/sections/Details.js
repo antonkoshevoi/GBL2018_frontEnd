@@ -89,8 +89,7 @@ class Details extends Component {
     const { getUpdateRequest, t } = this.props;
     const errors = getUpdateRequest.get('errors');    
 
-    return (
-      <div>
+    return (      
         <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
           <div className="m-portlet__head">
             <div className="m-portlet__head-caption">
@@ -281,7 +280,6 @@ class Details extends Component {
             </TabContainer>}
           </div>
         </div>
-      </div>
     );
   }
 }

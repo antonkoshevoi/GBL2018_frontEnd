@@ -24,6 +24,7 @@ import NotFoundPage from '../containers/errors/404';
 import Route from '../containers/routing/Route';
 import Profile from "../containers/profile/Profile";
 import SchoolProfile from "../containers/profile/SchoolProfile";
+import ParentProfile from "../containers/profile/ParentProfile";
 import StudentReports from "../containers/pages/reports/Students";
 import Store from "../containers/pages/store/Store";
 import Details from "../containers/pages/store/Details";
@@ -154,6 +155,7 @@ export default () => (
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School']} path='/school-profile' name='School Profile' component={SchoolProfile} />
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Student']} path='/parent-profile' name='Parent Profile' component={ParentProfile} />
       
 
       {/*Open Invoices*/}

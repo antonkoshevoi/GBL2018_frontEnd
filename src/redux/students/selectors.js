@@ -20,6 +20,48 @@ export const selectGetSingleRecordRequest = createSelector(
   selectStudentsDomain,
   (subState) => subState.get('getSingleRecordRequest')
 );
+
+/**
+ * Get Parent Request
+ */
+export const selectGetParentRequest = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('getParentRequest')
+);
+
+/**
+ * Get Create Parent Request
+ */
+export const selectCreateParentRequest = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('createParentRequest')
+);
+
+/**
+ * Get Link to Parent Request
+ */
+export const selectLinkToParentRequest = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('linkToParentRequest')
+);
+
+/**
+ * Get student requests request
+ */
+export const selectStudentRequestsRequest = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('getStudentRequestsRequest')
+);
+
+
+/**
+ * Get update student status request
+ */
+export const selectUpdateStudentStatusRequest = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('updateStudentStatusRequest')
+);
+
 /**
  * Records
  */
