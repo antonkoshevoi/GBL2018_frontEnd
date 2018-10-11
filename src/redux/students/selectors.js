@@ -30,6 +30,14 @@ export const selectGetParentRequest = createSelector(
 );
 
 /**
+ * Get Create Parent Request
+ */
+export const selectCreateParentRequest = createSelector(
+  selectStudentsDomain,
+  (subState) => subState.get('createParentRequest')
+);
+
+/**
  * Get Link to Parent Request
  */
 export const selectLinkToParentRequest = createSelector(

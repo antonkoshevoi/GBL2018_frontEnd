@@ -39,5 +39,7 @@ export default {
   scapScoresUpdated: 'S-Cap scores updated',
   courseCreditAssigned: 'Student successfully enrolled to the course',
   messageIsSent: 'Message sent succesfully',
-  messageDeleted: 'Message succesfully removed'
+  messageDeleted: 'Message succesfully removed',
+  requestHasBeenSent: 'Request to parent account successfully sent',
+  parentAccountCreated: 'Parent account successfully created' 
 }

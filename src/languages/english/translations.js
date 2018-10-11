@@ -500,9 +500,11 @@ export default {
     invitationExpired: 'Sorry, this invitation has been expired...',
     expired: 'Expired',
     enterParentUsernameOrEmail: 'Enter parent username or email',
-    linkToParent: 'Link to parent account',
-    createParentAccount: 'Create Parent Account',
+    linkToParent: 'Link to Parent\'s Account',
+    createParentAccount: 'Create Parent\'s Account',
     sendRequest: 'Send Request',
+    youSentRequestToParent: 'You successfully sent request to link your account to this parent. Please wait while your request will be accepted...',
+    myParent: 'My Parents',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

@@ -13,6 +13,11 @@ export const GET_PARENT = '[Students] GET_PARENT';
 export const GET_PARENT_SUCCESS = '[Students] GET_PARENT_SUCCESS';
 export const GET_PARENT_FAIL = '[Students] GET_PARENT_FAIL';
 
+export const CREATE_PARENT = '[Students] CREATE_PARENT';
+export const CREATE_PARENT_SUCCESS = '[Students] CREATE_PARENT_SUCCESS';
+export const CREATE_PARENT_FAIL = '[Students] CREATE_PARENT_FAIL';
+export const RESET_CREATE_PARENT_REQUEST = '[Students] RESET_CREATE_PARENT_REQUEST';
+
 export const CREATE = '[Students] CREATE';
 export const CREATE_SUCCESS = '[Students] CREATE_SUCCESS';
 export const CREATE_FAIL = '[Students] CREATE_FAIL';
@@ -66,6 +71,19 @@ export function getParent() {
     types: [GET_PARENT, GET_PARENT_SUCCESS, GET_PARENT_FAIL],
     promise: (apiClient) => apiClient.get('students/my-parent')
   };
+}
+
+export function createParent(params = {}) {
+  return {
+    types: [CREATE_PARENT, CREATE_PARENT_SUCCESS, CREATE_PARENT_FAIL],
+    promise: (apiClient) => apiClient.post('students/my-parent', params)
+  };
+}
+
+export function resetCreateParentRequest() {
+  return {
+    type: RESET_CREATE_PARENT_REQUEST
+  }
 }
 
 export function linkToParent(params = {}) {

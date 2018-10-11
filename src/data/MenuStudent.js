@@ -31,9 +31,16 @@ export default  {
     },
     {
         key: 'reports',
-        title: 'Reports',
+        title: 'reports',
         link: 'my-reports',
         icon: 'fa fa-line-chart',
         colorName: 'purple'
+    },
+    {
+        key: 'parent',
+        title: 'myParent',
+        link: 'parent-profile',
+        icon: 'fa fa-user-circle',
+        colorName: 'orange'
     }]
 }

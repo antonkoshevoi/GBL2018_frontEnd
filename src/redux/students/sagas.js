@@ -2,7 +2,9 @@ import { all, takeLatest } from 'redux-saga/effects';
 import {
   BULK_UPLOAD_FAIL, BULK_UPLOAD_SUCCESS, CREATE_FAIL, CREATE_SUCCESS, GET_RECORDS_FAIL,
   GET_SINGLE_RECORD_FAIL, UPDATE_FAIL,
-  UPDATE_SUCCESS, DELETE_FAIL, DELETE_SUCCESS
+  UPDATE_SUCCESS, DELETE_FAIL, DELETE_SUCCESS,
+  GET_PARENT_FAIL, LINK_TO_PARENT_FAIL, CREATE_PARENT_FAIL,
+  CREATE_PARENT_SUCCESS, LINK_TO_PARENT_SUCCESS  
 } from './actions';
 import { getErrorMessage, yieldErrorToasts, yieldSuccessToasts } from '../../helpers/utils';
 import i18n from '../../configs/i18n';
@@ -27,13 +29,18 @@ const studentsSagas = all([
     [UPDATE_SUCCESS]: i18n.t('messages:updated'),
     [BULK_UPLOAD_SUCCESS]: i18n.t('messages:uploaded'),
     [DELETE_SUCCESS]: i18n.t('messages:deleted'),
+    [CREATE_PARENT_SUCCESS]: i18n.t('messages:requestHasBeenSent'),
+    [LINK_TO_PARENT_SUCCESS]: i18n.t('messages:parentAccountCreated')
   }),
   yieldErrorToasts([
     GET_RECORDS_FAIL,
     GET_SINGLE_RECORD_FAIL,
     CREATE_FAIL,
     UPDATE_FAIL,
-    DELETE_FAIL
+    DELETE_FAIL,
+    GET_PARENT_FAIL, 
+    LINK_TO_PARENT_FAIL, 
+    CREATE_PARENT_FAIL
   ]),
 ]);
 
