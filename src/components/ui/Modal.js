@@ -59,7 +59,7 @@ Modal = withStyles({
   },
   biggerPaper: {
     maxHeight: '90vh',
-    minWidth: '70%'
+    minWidth: '65%'
   },
   // paperWidthXs: {
   //   width: '80%'

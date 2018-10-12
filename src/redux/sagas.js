@@ -15,6 +15,7 @@ import invitationsSagas from './invitations/sagas';
 import schoolSagas from './schools/sagas';
 import subscriptionSagas from './subscriptions/sagas';
 import scapSagas from './scap/sagas';
+import parentsSagas from './parents/sagas';
 
 function* rootSaga () {
   yield all([
@@ -33,7 +34,8 @@ function* rootSaga () {
     invitationsSagas,
     schoolSagas,
     subscriptionSagas,
-    scapSagas
+    scapSagas,
+    parentsSagas
   ])
 }
 

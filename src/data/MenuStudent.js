@@ -38,8 +38,8 @@ export default  {
     },
     {
         key: 'parent',
-        title: 'myParent',
-        link: 'parent-profile',
+        title: 'myParents',
+        link: 'my-parents',
         icon: 'fa fa-user-circle',
         colorName: 'orange'
     }]

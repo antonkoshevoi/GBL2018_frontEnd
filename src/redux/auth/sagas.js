@@ -1,4 +1,4 @@
-import { all, select, put, call, takeLatest } from 'redux-saga/effects';
+import { all, select, put, takeLatest } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { LOGIN_SUCCESS, LOGIN_SUCCESS_REMEMBER, LOGOUT_SUCCESS, RESTORE_LOGIN, setCallback } from './actions';
 import { selectRedirectAfterLogin, selectCallback } from "./selectors";

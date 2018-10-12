@@ -3,14 +3,7 @@ import {
   RESET_CREATE_REQUEST, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
   GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS,
   RESET_BULK_UPLOAD_REQUEST, BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS,
-  DELETE, DELETE_SUCCESS, DELETE_FAIL,
-  GET_PARENT, GET_PARENT_SUCCESS, GET_PARENT_FAIL,
-  CREATE_PARENT, CREATE_PARENT_SUCCESS, CREATE_PARENT_FAIL, RESET_CREATE_PARENT_REQUEST,
-  LINK_TO_PARENT, LINK_TO_PARENT_SUCCESS, LINK_TO_PARENT_FAIL, RESET_LINK_TO_PARENT_REQUEST,
-  GET_STUDENT_REQUESTS, GET_STUDENT_REQUESTS_SUCCESS, GET_STUDENT_REQUESTS_FAIL,
-  ACCEPT_STUDENT, ACCEPT_STUDENT_SUCCESS, ACCEPT_STUDENT_FAIL,
-  DECLINE_STUDENT, DECLINE_STUDENT_SUCCESS, DECLINE_STUDENT_FAIL, RESET_UPDATE_STUDENT_STATUS_REQUEST,
-  DELETE_STUDENT_REQUST, DELETE_STUDENT_REQUST_SUCCESS, DELETE_STUDENT_REQUST_FAIL
+  DELETE, DELETE_SUCCESS, DELETE_FAIL
 } from './actions';
 import Immutable from 'immutable';
 
@@ -21,13 +14,6 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorResponse: null
   },
-  getStudentRequestsRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorResponse: null,
-    records: {}
-  },
   getSingleRecordRequest: {
     loading: false,
     success: false,
@@ -35,19 +21,6 @@ const initialState = Immutable.fromJS({
     errorResponse: null,
     record: {}
   },
-  getParentRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorResponse: null,
-    record: {}
-  },
-  createParentRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errors: {}
-  },  
   createRequest: {
     loading: false,
     success: false,
@@ -64,11 +37,6 @@ const initialState = Immutable.fromJS({
     errorCode: null,
     errors: {}
   },
-  updateStudentStatusRequest: {
-    loading: false,
-    success: false,
-    fail: false
-  },  
   deleteRequest: {
     loading: false,
     success: false,
@@ -132,18 +100,6 @@ export default function reducer (state = initialState, action) {
         );
 
     /**
-     * Get student requests
-     */
-    case GET_STUDENT_REQUESTS:
-      return state
-        .set('getStudentRequestsRequest', initialState.get('getStudentRequestsRequest').set('loading', true).set('records', Immutable.List()));
-    case GET_STUDENT_REQUESTS_SUCCESS:
-      return state
-        .set('getStudentRequestsRequest', initialState.get('getStudentRequestsRequest').set('success', true).set('records', Immutable.fromJS(action.result.data)));
-    case GET_STUDENT_REQUESTS_FAIL:
-      return state.set('getStudentRequestsRequest', initialState.get('getStudentRequestsRequest').set('fail', true));
-
-    /**
      * Get single record
      */
     case GET_SINGLE_RECORD:
@@ -169,72 +125,7 @@ export default function reducer (state = initialState, action) {
         );
     case RESET_GET_SINGLE_RECORD_REQUEST:
       return state.set('getSingleRecordRequest', initialState.get('getSingleRecordRequest'));
-
-
-    /**
-     * Get parent record
-     */
-    case GET_PARENT:
-      return state.set('getParentRequest', initialState.get('getParentRequest').set('loading', true));
-    case GET_PARENT_SUCCESS:
-      return state
-        .set('getParentRequest', initialState.get('getParentRequest')
-          .set('success', true)
-          .set('record', Immutable.fromJS(action.result.data))
-        );
-    case GET_PARENT_FAIL:
-      return state.set('getParentRequest', initialState.get('getParentRequest').set('fail', true));
-
-    /**
-     * Create parent record
-     */
-    case CREATE_PARENT:
-      return state.set('createParentRequest', initialState.get('createParentRequest').set('loading', true));
-    case CREATE_PARENT_SUCCESS:
-      return state.set('createParentRequest', initialState.get('createParentRequest').set('success', true));
-    case CREATE_PARENT_FAIL:
-      return state.set('createParentRequest', initialState.get('createParentRequest')
-              .set('fail', true)
-              .set('errorCode', action.error.response.data.code)
-              .set('errorMessage', action.error.response.data.message)
-              .set('errors', action.error.response.data.code === 422 ? Immutable.fromJS(action.error.response.data.errors) : undefined));
-    case RESET_CREATE_PARENT_REQUEST:
-      return state.set('createParentRequest', initialState.get('createParentRequest'));
-      
-    /**
-     * Link to parent
-     */
-    case LINK_TO_PARENT:
-      return state.set('linkToParentRequest', initialState.get('linkToParentRequest').set('loading', true));
-    case LINK_TO_PARENT_SUCCESS:
-      return state.set('linkToParentRequest', initialState.get('linkToParentRequest').set('success', true));
-    case LINK_TO_PARENT_FAIL:
-      return state.set('linkToParentRequest', initialState.get('linkToParentRequest')
-              .set('fail', true)
-              .set('errorCode', action.error.response.data.code)
-              .set('errorMessage', action.error.response.data.message)
-              .set('errors', action.error.response.data.code === 422 ? Immutable.fromJS(action.error.response.data.errors) : undefined));
-    case RESET_LINK_TO_PARENT_REQUEST:
-      return state.set('linkToParentRequest', initialState.get('linkToParentRequest'));
-      
-    /**
-     * Change student status
-     */
-    case ACCEPT_STUDENT:
-    case DECLINE_STUDENT:
-    case DELETE_STUDENT_REQUST:
-      return state.set('updateStudentStatusRequest', initialState.get('updateStudentStatusRequest').set('loading', true));
-    case ACCEPT_STUDENT_SUCCESS:
-    case DECLINE_STUDENT_SUCCESS:
-    case DELETE_STUDENT_REQUST_SUCCESS:
-      return state.set('updateStudentStatusRequest', initialState.get('updateStudentStatusRequest').set('success', true));
-    case ACCEPT_STUDENT_FAIL:
-    case DECLINE_STUDENT_FAIL:        
-    case DELETE_STUDENT_REQUST_FAIL:
-      return state.set('updateStudentStatusRequest', initialState.get('updateStudentStatusRequest') .set('fail', true));
-    case RESET_UPDATE_STUDENT_STATUS_REQUEST:
-      return state.set('updateStudentStatusRequest', initialState.get('updateStudentStatusRequest'));
-  
+ 
     /**
      * Create
      */
