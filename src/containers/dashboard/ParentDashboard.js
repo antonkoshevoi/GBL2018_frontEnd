@@ -114,9 +114,10 @@ class ParentDashboard extends Component {
     _renderStudents() {
         const {goTo} = this.props;
         const students = this.props.parentStudents.toJS();
+        const requests = this.props.studentRequestsRequest.get('records').toJS();
         const {classes, t} = this.props;
 
-        if (!students.length) {
+        if (!students.length && !requests.length) {
             return <div className="display-1">
                 <h1 className="text-center">{t('studentsNotFound')}</h1>
             </div>
