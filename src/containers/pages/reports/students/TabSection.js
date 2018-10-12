@@ -44,60 +44,63 @@ class TabSection extends Component {
     const {studentId} = this.props;
     
     if (classroom === 'details') {
-      if (!courses.length) {
-        return null;
-      }
-      return this._renderDetailedData(courses[0]);
-    } else {
-      return courses.map(function (item, i) {
+        return this._renderDetailedData(courses[0] || null);
+    }
+    return courses.map(function (item, i) {
         if (classroom == item.classroomId) {
-          return (<LessonsTable studentId={studentId} classroomId={item.classroomId} key={i}></LessonsTable>)
+            return (<LessonsTable studentId={studentId} classroomId={item.classroomId} key={i}></LessonsTable>)
         }
         return false;        
-      })
-    }
+    });    
   }
 
-  _renderDetailedData(item) {
+  _renderDetailedData(course) {
     const {t} = this.props;
-    return (
-      <Table>
-        <Thead>
-        <HeadRow>
-          <Th first={true} width='20px'>#</Th>
-          <Th width='150px'>{t('date')}</Th>
-          <Th width='150px'>{t('classroom')}</Th>
-          <Th width='150px'>{t('course')}</Th>
-          <Th width='200px'>{t('unitLesson')}</Th>
-          <Th width='50px'>{t('score')}</Th>
-          <Th width='50px'>{t('percent')}</Th>
-          <Th width='50px'>{t('passFail')}</Th>
-          <Th width='50px'>{t('passesAttempts')}</Th>
-        </HeadRow>
-        </Thead>
-        <Tbody>
-        {item.attempts.map(function (attempt, i) {
-          return (
-            <Row index={i} key={i}>
-              <Td first={true} width='20px'>{i + 1}</Td>
-              <Td width='150px'>{attempt.att_date}</Td>
-              <Td width='150px'>{attempt.classroom_name}</Td>
-              <Td width='150px'>{attempt.course_name}</Td>
-              <Td width='200px'>{attempt.lesson}</Td>
-              <Td width='50px'>{attempt.scored_points} / {attempt.lesson_points}</Td>
-              <Td width='50px'>{(attempt.scored_points / attempt.lesson_points) * 100}</Td>
-              <Td width='50px'>
-                <span className={`m-badge m-badge--brand m-badge--wide ${attempt.pass ? 'm-badge--success' : 'm-badge--danger'}`}>
-                  {attempt.pass ? t('pass') : t('fail')}
-                </span>
-              </Td>
-              <Td width='50px'>{attempt.passes} / {attempt.attempts} </Td>
+    
+    if (!course) {
+        return <Table>
+            <Row index={0} key={0}>
+                <Td><h2>{t('noData')}</h2></Td>
             </Row>
-          )
-        })}
-        </Tbody>
-      </Table>
-    )
+        </Table>;
+    }
+    
+    return (
+        <Table>
+            <Thead>
+                <HeadRow>
+                  <Th first={true} width='20px'>#</Th>
+                  <Th width='150px'>{t('date')}</Th>
+                  <Th width='150px'>{t('classroom')}</Th>
+                  <Th width='150px'>{t('course')}</Th>
+                  <Th width='200px'>{t('unitLesson')}</Th>
+                  <Th width='50px'>{t('score')}</Th>
+                  <Th width='50px'>{t('percent')}</Th>
+                  <Th width='50px'>{t('passFail')}</Th>
+                  <Th width='50px'>{t('passesAttempts')}</Th>
+                </HeadRow>
+            </Thead>
+            <Tbody>
+                {course.attempts.map(function (attempt, i) {
+                  return (
+                    <Row index={i} key={i}>
+                      <Td first={true} width='20px'>{i + 1}</Td>
+                      <Td width='150px'>{attempt.att_date}</Td>
+                      <Td width='150px'>{attempt.classroom_name}</Td>
+                      <Td width='150px'>{attempt.course_name}</Td>
+                      <Td width='200px'>{attempt.lesson}</Td>
+                      <Td width='50px'>{attempt.scored_points} / {attempt.lesson_points}</Td>
+                      <Td width='50px'>{(attempt.scored_points / attempt.lesson_points) * 100}</Td>
+                      <Td width='50px'>
+                        <span className={`m-badge m-badge--brand m-badge--wide ${attempt.pass ? 'm-badge--success' : 'm-badge--danger'}`}>
+                          {attempt.pass ? t('pass') : t('fail')}
+                        </span>
+                      </Td>
+                      <Td width='50px'>{attempt.passes} / {attempt.attempts} </Td>
+                    </Row>)
+                })}
+            </Tbody>
+        </Table>);
   }
 
   render() {
