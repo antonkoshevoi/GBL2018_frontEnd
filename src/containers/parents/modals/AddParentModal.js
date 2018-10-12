@@ -61,7 +61,7 @@ class AddParentModal extends Component {
     }  
     
     _createParent() {
-        this.props.createParent(this.state);
+        this.props.createParent(this.state.form);
     }
         
     _renderRequestForm()
