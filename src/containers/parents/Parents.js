@@ -27,7 +27,6 @@ class Parents extends Component {
         this._deleteRequestSuccess(nextProps);
     }
 
-
     _openViewDialog(record) {
         this.setState({
             viewModalIsOpen: true,
@@ -108,7 +107,7 @@ class Parents extends Component {
     }
 
     _deleteRequestSuccess(nextProps) {
-        const deleteSuccess = this.props.studentStatusRequest.get('success');
+        const deleteSuccess     = this.props.studentStatusRequest.get('success');
         const nextDeleteSuccess = nextProps.studentStatusRequest.get('success');
 
         if (!deleteSuccess && nextDeleteSuccess) {

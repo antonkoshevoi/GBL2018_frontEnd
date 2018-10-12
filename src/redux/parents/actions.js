@@ -27,12 +27,12 @@ export const DECLINE_STUDENT_FAIL = '[Parents] DECLINE_STUDENT_FAIL';
 export const DELETE_STUDENT_REQUST = '[Parents] DELETE_STUDENT_REQUST';
 export const DELETE_STUDENT_REQUST_SUCCESS = '[Parents] DELETE_STUDENT_REQUST_SUCCESS';
 export const DELETE_STUDENT_REQUST_FAIL = '[Parents] DELETE_STUDENT_REQUST_FAIL';
+export const RESET_STUDENT_REQUEST = '[Parents] RESET_STUDENT_REQUEST';
 
 export const SENT_STUDENT_REQUEST = '[Parents] SENT_STUDENT_REQUEST';
 export const SENT_STUDENT_REQUEST_SUCCESS = '[Parents] SENT_STUDENT_REQUEST_SUCCESS';
 export const SENT_STUDENT_REQUEST_FAIL = '[Parents] SENT_STUDENT_REQUEST_FAIL';
-
-export const RESET_STUDENT_REQUEST = '[Parents] RESET_STUDENT_REQUEST';
+export const RESET_SENT_STUDENT_REQUEST = '[Parents] RESET_SENT_STUDENT_REQUEST';
 
 export function getRecords(params = {}) {
   return {
@@ -85,6 +85,12 @@ export function deleteStudentRequest(id) {
 export function resetStudentRequest() {
   return {
     type: RESET_STUDENT_REQUEST
+  }
+}
+
+export function resetSentStudentRequest() {
+  return {
+    type: RESET_SENT_STUDENT_REQUEST
   }
 }
 

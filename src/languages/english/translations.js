@@ -512,6 +512,7 @@ export default {
     addParent: 'Add parent',
     rejected: 'Rejected',
     rejectedAt: 'Rejected at',
+    noData: 'No data found...',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',
