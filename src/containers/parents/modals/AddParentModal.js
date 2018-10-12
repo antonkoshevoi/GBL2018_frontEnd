@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import {
   AppBar, CircularProgress, DialogContent, Icon, Toolbar, Typography, Divider
 } from '@material-ui/core';
-import { sentStudentRequest, resetStudentRequest, create, resetCreateRequest } from "../../../redux/parents/actions";
-import { selectStudentStatusRequest, selectCreateRequest } from "../../../redux/parents/selectors";
+import { sentStudentRequest, resetSentStudentRequest, create, resetCreateRequest } from "../../../redux/parents/actions";
+import { selectSentStudentRequest, selectCreateRequest } from "../../../redux/parents/selectors";
 import Modal from "../../../components/ui/Modal";
 
 class AddParentModal extends Component {
@@ -22,10 +22,10 @@ class AddParentModal extends Component {
         this.props.resetCreateParentRequest();
     }    
   
-    componentWillReceiveProps(nextProps) {        
-        const {studentStatusRequest, createParentRequest } = this.props;
+    componentWillReceiveProps(nextProps) {
+        const {sentStudentRequest, createParentRequest } = this.props;
         
-        if (!studentStatusRequest.get('success') && nextProps.studentStatusRequest.get('success')) {
+        if (!sentStudentRequest.get('success') && nextProps.sentStudentRequest.get('success')) {
             this._close();
             this.props.onSuccess();
         }
@@ -48,12 +48,12 @@ class AddParentModal extends Component {
     }
     
     _sendRequest() {
-        this.props.sentStudentRequest({
+        this.props.sentRequest({
             parentUsername: this.state.form.parentUsername
         });
     }
     
-    _close() {
+    _close() {        
         this.props.onClose();
         this.props.resetCreateParentRequest();
         this.props.resetStudentRequest();
@@ -66,10 +66,10 @@ class AddParentModal extends Component {
         
     _renderRequestForm()
     {
-        const {studentStatusRequest, createParentRequest, t} = this.props;
+        const {sentStudentRequest, createParentRequest, t} = this.props;
         const {form}        = this.state;
-        const loading       = studentStatusRequest.get('loading') || createParentRequest.get('loading');        
-        const errors        = studentStatusRequest.get('errors');
+        const loading       = sentStudentRequest.get('loading') || createParentRequest.get('loading');        
+        const errors        = sentStudentRequest.get('errors');
         const formErrors    = createParentRequest.get('errors');
         
         return (             
@@ -188,8 +188,8 @@ class AddParentModal extends Component {
     }    
     
     render() {
-        const {studentStatusRequest, createParentRequest, t, isOpen} = this.props;
-        const loading = studentStatusRequest.get('loading') || createParentRequest.get('loading');
+        const {sentStudentRequest, createParentRequest, t, isOpen} = this.props;
+        const loading = sentStudentRequest.get('loading') || createParentRequest.get('loading');
         return (
             <Modal bigger={true} isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
@@ -210,12 +210,12 @@ class AddParentModal extends Component {
 
 AddParentModal = connect(
     (state) => ({
-        studentStatusRequest: selectStudentStatusRequest(state),
+        sentStudentRequest: selectSentStudentRequest(state),
         createParentRequest: selectCreateRequest(state)
     }),
     (dispatch) => ({    
-        sentStudentRequest: (params = {}) => { dispatch(sentStudentRequest(params)) },
-        resetStudentRequest: () => { dispatch(resetStudentRequest()) },        
+        sentRequest: (params = {}) => { dispatch(sentStudentRequest(params)) },
+        resetStudentRequest: () => { dispatch(resetSentStudentRequest()) },        
         createParent: (params = {}) => { dispatch(create(params)) },
         resetCreateParentRequest: () => { dispatch(resetCreateRequest()) }
     })    

@@ -38,6 +38,13 @@ export const selectStudentStatusRequest = createSelector(
   (subState) => subState.get('studentStatusRequest')
 );
 
+/**
+ * Get sent student request
+ */
+export const selectSentStudentRequest = createSelector(
+  selectParentsDomain,
+  (subState) => subState.get('sentStudentRequest')
+);
 
 /**
  * Create parent

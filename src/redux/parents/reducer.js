@@ -7,7 +7,7 @@ import {
     DECLINE_STUDENT, DECLINE_STUDENT_SUCCESS, DECLINE_STUDENT_FAIL, 
     DELETE_STUDENT_REQUST, DELETE_STUDENT_REQUST_SUCCESS, DELETE_STUDENT_REQUST_FAIL, 
     SENT_STUDENT_REQUEST, SENT_STUDENT_REQUEST_SUCCESS, SENT_STUDENT_REQUEST_FAIL, 
-    RESET_STUDENT_REQUEST
+    RESET_SENT_STUDENT_REQUEST, RESET_STUDENT_REQUEST
 } from './actions';
 import Immutable from 'immutable';
 
@@ -44,7 +44,18 @@ const initialState = Immutable.fromJS({
   studentStatusRequest: {
     loading: false,
     success: false,
-    fail: false
+    fail: false,
+    errorMessage: null,
+    errorCode: null,
+    errors: {}    
+  },
+  sentStudentRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,
+    errorCode: null,
+    errors: {}    
   }
 });
 
@@ -90,29 +101,37 @@ export default function reducer (state = initialState, action) {
     case RESET_GET_RECORD_REQUEST:
       return state.set('getRecordRequest', initialState.get('getRecordRequest'));
 
-      
+    /**
+     * Link to parent
+     */ 
+    case SENT_STUDENT_REQUEST:
+      return state.set('sentStudentRequest', initialState.get('sentStudentRequest').set('loading', true));  
+    case SENT_STUDENT_REQUEST_SUCCESS:        
+       return state.set('sentStudentRequest', initialState.get('sentStudentRequest').set('success', true));       
+    case SENT_STUDENT_REQUEST_FAIL:
+      return state.set('sentStudentRequest', initialState.get('sentStudentRequest')
+              .set('fail', true)
+              .set('errorCode', action.error.response.data.code)
+              .set('errorMessage', action.error.response.data.message)
+              .set('errors', action.error.response.data.errors ? Immutable.fromJS(action.error.response.data.errors) : undefined));
+    case RESET_SENT_STUDENT_REQUEST:
+      return state.set('sentStudentRequest', initialState.get('sentStudentRequest'));
+  
     /**
      * Link to parent
      */
     case ACCEPT_STUDENT:
     case DECLINE_STUDENT:
-    case DELETE_STUDENT_REQUST:    
-    case SENT_STUDENT_REQUEST:
+    case DELETE_STUDENT_REQUST:        
       return state.set('studentStatusRequest', initialState.get('studentStatusRequest').set('loading', true));
     case ACCEPT_STUDENT_SUCCESS:
     case DECLINE_STUDENT_SUCCESS:
-    case DELETE_STUDENT_REQUST_SUCCESS:      
-    case SENT_STUDENT_REQUEST_SUCCESS:
-      return state.set('studentStatusRequest', initialState.get('studentStatusRequest').set('success', true));
+    case DELETE_STUDENT_REQUST_SUCCESS:                  
+       return state.set('studentStatusRequest', initialState.get('studentStatusRequest').set('success', true));
     case ACCEPT_STUDENT_FAIL:
     case DECLINE_STUDENT_FAIL:        
-    case DELETE_STUDENT_REQUST_FAIL:      
-    case SENT_STUDENT_REQUEST_FAIL:
-      return state.set('studentStatusRequest', initialState.get('studentStatusRequest')
-              .set('fail', true)
-              .set('errorCode', action.error.response.data.code)
-              .set('errorMessage', action.error.response.data.message)
-              .set('errors', action.error.response.data.errors ? Immutable.fromJS(action.error.response.data.errors) : undefined));
+    case DELETE_STUDENT_REQUST_FAIL:         
+      return state.set('studentStatusRequest', initialState.get('studentStatusRequest').set('fail', true));
     case RESET_STUDENT_REQUEST:
       return state.set('studentStatusRequest', initialState.get('studentStatusRequest'));
   
