@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 import {translate} from 'react-i18next';
-import i18n from '../../configs/i18n';
 import {connect} from 'react-redux';
 import {logout} from '../../redux/auth/actions';
 import {NavLink} from "react-router-dom";
 import {Icon, IconButton} from '@material-ui/core';
-import {getCartRecords} from "../../redux/store/actions";
-import {selectCartRecords} from "../../redux/store/selectors";
 import {selectGetUserRequest, selectUserData} from "../../redux/user/selectors";
 import UserMenu from "./UserMenu";
 import Messages from "./Messages";
+import ShoppingCart from "./ShoppingCart";
 import HasRole from "../middlewares/HasRole";
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 
@@ -21,8 +19,7 @@ class Header extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      anchorEl: null,
+    this.state = {     
       activePusherMenu: null,
       headerPosition: 0,
       headerHeight:window.innerWidth <= 1240 ? 60 : 70
@@ -30,13 +27,7 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    const { getCartRecords, auth} = this.props;
-    
-    this.isActive = true;
-    
-    if (auth.get('isLoggedIn')) {       
-        getCartRecords();
-    }
+    this.isActive = true;    
     window.addEventListener('scroll', this.setHeaderPosition.bind(this));    
   }
   
@@ -55,24 +46,15 @@ class Header extends Component {
     }
   }
 
-  _openLanguageMenu = event => {
-    this.setState({anchorEl: event.currentTarget});
-  };
-
-  _switchLanguage = (lang_code) => {
-    i18n.changeLanguage('de');   
-    localStorage.setItem('language', lang_code);
-    this.setState({anchorEl: null});
-  };
-
   _switchPushMenus = (menu) => {
-    this.setState({activePusherMenu: menu})
+    this.setState({activePusherMenu: menu});
   }
 
-  _renderHeader() {
-    const {logout, hideMenu, cartRecords, userRequest, auth} = this.props;    
+  render() {
+    const {logout, hideMenu, userRequest, auth} = this.props;    
     const {headerPosition} = this.state;
-    const user = this.props.user.toJS();    
+    const user = this.props.user.toJS();
+    
     return (
       <header className="m-grid__item  m-header " style={{top:-headerPosition}} ref="header" data-minimize-offset="200" data-minimize-mobile-offset="200">
         <div className="m-container general-header m-container--fluid m-container--full-height">
@@ -93,30 +75,19 @@ class Header extends Component {
               </button>
 
               <div className="d-flex justify-content-center headerSchoolName align-items-center flex-1 hidden-sm">
-                {userRequest.get('success') && <h4 style={{color: '#777'}}>
-                  {user.school ? user.school.schName : ''}
-                </h4>}
+                {userRequest.get('success') && <h4 style={{color: '#777'}}> {user.school ? user.school.schName : ''} </h4>}
               </div>
 
               <div id="m_header_topbar" className="m-topbar  m-stack m-stack--ver m-stack--general">
                 <div className="m-stack__item m-topbar__nav-wrapper">
-                  <IconButton color='primary' className="m--hide mobile-sidebar-out-toggle" onClick={() => {
-                    this.props.mobileSidebar()
-                  }}>
+                  <IconButton color='primary' className="m--hide mobile-sidebar-out-toggle" onClick={() => { this.props.mobileSidebar() }}>
                     <Icon>menu</Icon>
                   </IconButton>
 
                   <ul className="m-topbar__nav m-nav m-nav--inline">
                     <Messages activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
                     <HasRole roles={['Superadministrator','Superintendent','Principal','Administrator','Teacher','Parents']}>
-                        <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width">
-                          <NavLink to='/store/shopping-cart' className='m-nav__link m-dropdown__toggle pointer' id='m_topbar_notification_icon'>
-                            <span className='m-nav__link-icon'>
-                              <i className="fa fa-shopping-cart PageHeader-icon"></i>
-                              {cartRecords.size > 0 && <span className="g-badge badge-red">{cartRecords.size}</span> }
-                            </span>
-                          </NavLink>
-                        </li>
+                        <ShoppingCart />
                     </HasRole>
                     <li style={{paddingTop: '8px'}} className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width">
                         <LanguageSwitcher className="m-nav__link"/>
@@ -129,28 +100,18 @@ class Header extends Component {
           </div>
         </div>
       </header>
-    )
-  }
-
-  render() {
-      return this._renderHeader();  
+    );
   }
 }
 
 Header = connect(
   (state) => ({
-    auth: state.auth,
-    cartRecords: selectCartRecords(state),        
+    auth: state.auth,          
     user: selectUserData(state),
     userRequest: selectGetUserRequest(state)
   }),
   (dispatch) => ({
-    logout: () => {
-      dispatch(logout())
-    },
-    getCartRecords: () => {
-      dispatch(getCartRecords())
-    }
+    logout: () => { dispatch(logout()) }
   })
 )(Header);
 

@@ -149,8 +149,8 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/scap/results/:id' name='S-Cap Results' component={ScapResults}/>
 
       {/*Store*/}    
-      <AuthenticatedRoute exact layout={MainLayout}     roles={['Superadministrator', 'School', 'Teacher']}  path='/store/shopping-cart' name='Details' component={ShoppingCart}/>
-      <AuthenticatedRoute exact layout={OnlyHeadLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/shopping/checkout/:step?' name='Checkout' component={Checkout}/>
+      <AuthenticatedRoute exact layout={MainLayout}     roles={['Superadministrator', 'School', 'Teacher', 'Parents']}  path='/store/shopping-cart' name='Details' component={ShoppingCart}/>
+      <AuthenticatedRoute exact layout={OnlyHeadLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/shopping/checkout/:step?' name='Checkout' component={Checkout}/>
             
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />
