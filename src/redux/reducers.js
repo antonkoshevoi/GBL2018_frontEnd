@@ -22,6 +22,7 @@ import countriesReducer from './countries/reducer';
 import coursesReducer from './courses/reducer';
 import subscriptionsReducer from './subscriptions/reducer';
 import scapReducer from './scap/reducer';
+import parentsReducer from './parents/reducer';
 
 export default {
   app: appReducer,
@@ -31,6 +32,7 @@ export default {
   signUpPrincipal: signUpPrincipalReducer,
   students: studentsReducer,
   teachers: teachersReducer,
+  parents: parentsReducer,
   administration: administrationReducer,
   homerooms: homeroomsReducer,
   classrooms: classroomsReducer,

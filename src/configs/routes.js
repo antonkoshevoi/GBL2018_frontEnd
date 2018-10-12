@@ -9,6 +9,7 @@ import Dashboard from '../containers/Dashboard';
 import Login from '../containers/auth/Login';
 import Students from '../containers/students/Students';
 import Teachers from "../containers/teachers/Teachers";
+import Parents from "../containers/parents/Parents";
 import TeachersBulkUpload from '../containers/teachers/TeachersBulkUpload';
 import Administration from "../containers/administration/Administration";
 import Homerooms from "../containers/homerooms/Homerooms";
@@ -24,7 +25,6 @@ import NotFoundPage from '../containers/errors/404';
 import Route from '../containers/routing/Route';
 import Profile from "../containers/profile/Profile";
 import SchoolProfile from "../containers/profile/SchoolProfile";
-import ParentProfile from "../containers/profile/ParentProfile";
 import StudentReports from "../containers/pages/reports/Students";
 import Store from "../containers/pages/store/Store";
 import Details from "../containers/pages/store/Details";
@@ -155,9 +155,8 @@ export default () => (
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School']} path='/school-profile' name='School Profile' component={SchoolProfile} />
-      <AuthenticatedRoute exact layout={MainLayout} roles={['Student']} path='/parent-profile' name='Parent Profile' component={ParentProfile} />
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Student']} path='/my-parents' name='Parent Profile' component={Parents} />
       
-
       {/*Open Invoices*/}
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/accounts/invoices' name='Open Invoices' component={ShoppingCart}/>
       {/*Unassigned Credits*/}

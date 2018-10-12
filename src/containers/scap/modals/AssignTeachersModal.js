@@ -104,7 +104,7 @@ class AssignTeachersModal extends Component {
                 onChange={ (e) => {this._handleCheckboxChange(e) }}
                 value={teacher.get('id').toString()}
               />}
-              label={teacher.get('fullName')}
+              label={teacher.get('name')}
             />
           </Grid>
         ));

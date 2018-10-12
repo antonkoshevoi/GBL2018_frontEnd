@@ -1,4 +1,4 @@
-import { all, takeLatest } from 'redux-saga/effects';
+import { all } from 'redux-saga/effects';
 import {
     SEND_MESSAGE_FAIL,
     REPLY_MESSAGE_FAIL,

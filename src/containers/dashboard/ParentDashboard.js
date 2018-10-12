@@ -4,8 +4,12 @@ import {NavLink} from "react-router-dom";
 import UnassignedCourses from "./sections/UnassignedCourses";
 import {connect} from "react-redux";
 import {translate} from 'react-i18next';
-import {selectRecords, selectGetRecordsRequest, selectStudentRequestsRequest, selectUpdateStudentStatusRequest} from "../../redux/students/selectors";
-import {getRecords, getStudentRequests, acceptStudentRequest, declineStudentRequest, resetUpdateStudentStatusRequest} from "../../redux/students/actions";
+import {selectRecords, selectGetRecordsRequest } from "../../redux/students/selectors";
+import {getRecords } from "../../redux/students/actions";
+
+import { selectStudentRequestsRequest, selectStudentStatusRequest} from "../../redux/parents/selectors";
+import { getStudentRequests, acceptStudentRequest, declineStudentRequest, resetStudentRequest} from "../../redux/parents/actions"; 
+
 import {getParentRecords} from "../../redux/store/actions";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
 import {push} from 'react-router-redux';
@@ -82,12 +86,12 @@ class ParentDashboard extends Component {
     }
   
     componentWillReceiveProps(nextProps) {        
-        const {getParentStudents, getStudentRequests, updateStudentStatusRequest, resetUpdateStudentStatusRequest} = this.props;
+        const {getParentStudents, getStudentRequests, studentStatusRequest, resetStudentRequest} = this.props;
         
-        if (!updateStudentStatusRequest.get('success') && nextProps.updateStudentStatusRequest.get('success')) {
+        if (!studentStatusRequest.get('success') && nextProps.studentStatusRequest.get('success')) {
             getStudentRequests();
             getParentStudents();
-            resetUpdateStudentStatusRequest();
+            resetStudentRequest();
         }     
     }  
 
@@ -151,9 +155,9 @@ class ParentDashboard extends Component {
     }
 
   _renderStudentRequests() {
-        const {studentRequestsRequest, updateStudentStatusRequest, classes, t} = this.props;
+        const {studentRequestsRequest, studentStatusRequest, classes, t} = this.props;
         const requests = studentRequestsRequest.get('records').toJS();
-        const loading = updateStudentStatusRequest.get('loading') ;
+        const loading = studentStatusRequest.get('loading') ;
 
         if (!requests.length) {
             return '';
@@ -262,7 +266,7 @@ ParentDashboard = connect(
         studentsRequest: selectGetRecordsRequest(state),
         studentRequestsRequest: selectStudentRequestsRequest(state),
         records: storeItems(state),
-        updateStudentStatusRequest: selectUpdateStudentStatusRequest(state)
+        studentStatusRequest: selectStudentStatusRequest(state)
     }),
     (dispatch) => ({
         getParentStudents: (params = {}) => { dispatch(getRecords(params)) },
@@ -271,7 +275,7 @@ ParentDashboard = connect(
         getStudentRequests: () => {dispatch(getStudentRequests())},
         acceptStudentRequest: (id) => {dispatch(acceptStudentRequest(id))},
         declineStudentRequest: (id) => {dispatch(declineStudentRequest(id))},
-        resetUpdateStudentStatusRequest: () => {dispatch(resetUpdateStudentStatusRequest())}    
+        resetStudentRequest: () => {dispatch(resetStudentRequest())}    
     })
 )(ParentDashboard);
 
