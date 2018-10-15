@@ -4,12 +4,14 @@ import {
     CREATE, CREATE_SUCCESS, CREATE_FAIL, RESET_CREATE_REQUEST, 
     GET_STUDENT_REQUESTS, GET_STUDENT_REQUESTS_SUCCESS, GET_STUDENT_REQUESTS_FAIL, 
     ACCEPT_STUDENT, ACCEPT_STUDENT_SUCCESS, ACCEPT_STUDENT_FAIL,
+    ACCEPT_STUDENT_PUBLIC, ACCEPT_STUDENT_PUBLIC_SUCCESS, ACCEPT_STUDENT_PUBLIC_FAIL,
     DECLINE_STUDENT, DECLINE_STUDENT_SUCCESS, DECLINE_STUDENT_FAIL, 
     DELETE_STUDENT_REQUST, DELETE_STUDENT_REQUST_SUCCESS, DELETE_STUDENT_REQUST_FAIL, 
     SENT_STUDENT_REQUEST, SENT_STUDENT_REQUEST_SUCCESS, SENT_STUDENT_REQUEST_FAIL, 
     RESET_SENT_STUDENT_REQUEST, RESET_STUDENT_REQUEST
 } from './actions';
 import Immutable from 'immutable';
+import { saveSession } from '../../helpers/session';
 
 const initialState = Immutable.fromJS({
   getRecordsRequest: {
@@ -121,20 +123,26 @@ export default function reducer (state = initialState, action) {
      * Link to parent
      */
     case ACCEPT_STUDENT:
+    case ACCEPT_STUDENT_PUBLIC:
     case DECLINE_STUDENT:
     case DELETE_STUDENT_REQUST:        
       return state.set('studentStatusRequest', initialState.get('studentStatusRequest').set('loading', true));
+
     case ACCEPT_STUDENT_SUCCESS:
     case DECLINE_STUDENT_SUCCESS:
-    case DELETE_STUDENT_REQUST_SUCCESS:                  
+    case DELETE_STUDENT_REQUST_SUCCESS:
        return state.set('studentStatusRequest', initialState.get('studentStatusRequest').set('success', true));
     case ACCEPT_STUDENT_FAIL:
+    case ACCEPT_STUDENT_PUBLIC_FAIL:
     case DECLINE_STUDENT_FAIL:        
     case DELETE_STUDENT_REQUST_FAIL:         
       return state.set('studentStatusRequest', initialState.get('studentStatusRequest').set('fail', true));
     case RESET_STUDENT_REQUEST:
       return state.set('studentStatusRequest', initialState.get('studentStatusRequest'));
   
+    case ACCEPT_STUDENT_PUBLIC_SUCCESS:        
+        saveSession(action.result.data);
+        return state.set('studentStatusRequest', initialState.get('studentStatusRequest').set('success', true));
     /**
      * Create
      */

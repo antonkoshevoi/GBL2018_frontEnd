@@ -131,7 +131,7 @@ class InvitationDetails extends Component {
 
     return (
       <div className="row">
-        <div className="col-md-10 m-auto">
+        <div className="col-md-10 col-lg-8 col-xl-6 m-auto">
           <div className="m-portlet m--margin-top-35">
             <div className="m-portlet__body">
               { this._renderInvitation() }

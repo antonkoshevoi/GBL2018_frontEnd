@@ -73,6 +73,8 @@ import NewMessage from '../containers/messages/NewMessage';
 import EditMessage from '../containers/messages/EditMessage';
 import ViewMessage from '../containers/messages/ViewMessage';
 
+import AcceptStudent from '../containers/parents/AcceptStudent';
+
 export default () => (
   <AppContainer>
     <Switch>
@@ -96,6 +98,8 @@ export default () => (
       <Route exact layout={MainLayout} path='/store/category/:category/:subCategory' name='Store' component={Store}/>
       <Route exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
       <Route exact layout={MainLayout} path='/store/products/:category/:type' name='Store' component={Products}/>       
+      
+      <Route exact layout={MainLayout} path='/students/accept/:id/:hash' name='Accept student request' component={AcceptStudent}/>       
 
       <Route exact path='/' render={() => (
         <Redirect to='/splash'/>

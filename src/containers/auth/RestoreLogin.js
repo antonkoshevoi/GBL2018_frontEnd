@@ -6,7 +6,6 @@ import { login, setRedirectUrl } from '../../redux/auth/actions';
 import { selectLoginRequest } from '../../redux/auth/selectors';
 import {FormControlLabel, Button, CircularProgress, Checkbox, Avatar} from '@material-ui/core';
 import { withRouter, NavLink } from 'react-router-dom';
-import SessionStorage from "../../services/SessionStorage";
 
 const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
 
@@ -22,7 +21,6 @@ class RestoreLogin extends Component {
     };
   }
 
-
   componentWillMount(){
       const {history, auth} = this.props;
 
@@ -37,7 +35,7 @@ class RestoreLogin extends Component {
 
   _login() {
     const { setRedirectUrl, login, auth } = this.props;
-    const { username, password, remember } = this.state;
+    const { password, remember } = this.state;
 
     let pathname = '/';
 
@@ -97,9 +95,6 @@ class RestoreLogin extends Component {
                             />}
                             label={t('rememberMe')}
                         />
-                      </div>
-                      <div className="col m--align-right m-login__form-right m--hide">
-                        <a href="javascript:;" id="m_login_forget_password" className="m-link">{t('forgetPassword')} ?</a>
                       </div>
                     </div>
                     <div className="m-login__form-action">
