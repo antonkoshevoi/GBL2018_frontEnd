@@ -1,3 +1,5 @@
+import { uri } from '../../helpers/uri';
+
 export const GET_RECORDS = '[Parents] GET_RECORDS';
 export const GET_RECORDS_SUCCESS = '[Parents] GET_RECORDS_SUCCESS';
 export const GET_RECORDS_FAIL = '[Parents] GET_RECORDS_FAIL';
@@ -19,6 +21,10 @@ export const GET_STUDENT_REQUESTS_FAIL = '[Parents] GET_STUDENT_REQUESTS_FAIL';
 export const ACCEPT_STUDENT = '[Parents] ACCEPT_STUDENT';
 export const ACCEPT_STUDENT_SUCCESS = '[Parents] ACCEPT_STUDENT_SUCCESS';
 export const ACCEPT_STUDENT_FAIL = '[Parents] ACCEPT_STUDENT_FAIL';
+
+export const ACCEPT_STUDENT_PUBLIC = '[Parents] ACCEPT_STUDENT_PUBLIC';
+export const ACCEPT_STUDENT_PUBLIC_SUCCESS = '[Parents] ACCEPT_STUDENT_PUBLIC_SUCCESS';
+export const ACCEPT_STUDENT_PUBLIC_FAIL = '[Parents] ACCEPT_STUDENT_PUBLIC_FAIL';
 
 export const DECLINE_STUDENT = '[Parents] DECLINE_STUDENT';
 export const DECLINE_STUDENT_SUCCESS = '[Parents] DECLINE_STUDENT_SUCCESS';
@@ -68,6 +74,13 @@ export function acceptStudentRequest(id) {
   };
 }
 
+export function acceptStudentRequestPublic(id, hash) {
+  return {
+    types: [ACCEPT_STUDENT_PUBLIC, ACCEPT_STUDENT_PUBLIC_SUCCESS, ACCEPT_STUDENT_PUBLIC_FAIL],
+    promise: (apiClient) => apiClient.get(`parents/request/accept-public/${id}/${hash}`)
+  };
+}
+
 export function declineStudentRequest(id) {
   return {
     types: [DECLINE_STUDENT, DECLINE_STUDENT_SUCCESS, DECLINE_STUDENT_FAIL],
@@ -97,7 +110,7 @@ export function resetSentStudentRequest() {
 export function sentStudentRequest(params = {}) {
   return {
     types: [SENT_STUDENT_REQUEST, SENT_STUDENT_REQUEST_SUCCESS, SENT_STUDENT_REQUEST_FAIL],
-    promise: (apiClient) => apiClient.post('parents/request', params)
+    promise: (apiClient) => apiClient.post('parents/request', {...params, returnUrl: uri('students/accept')})
   };
 }
 

@@ -73,6 +73,8 @@ import NewMessage from '../containers/messages/NewMessage';
 import EditMessage from '../containers/messages/EditMessage';
 import ViewMessage from '../containers/messages/ViewMessage';
 
+import AcceptStudent from '../containers/parents/AcceptStudent';
+
 export default () => (
   <AppContainer>
     <Switch>
@@ -96,6 +98,8 @@ export default () => (
       <Route exact layout={MainLayout} path='/store/category/:category/:subCategory' name='Store' component={Store}/>
       <Route exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
       <Route exact layout={MainLayout} path='/store/products/:category/:type' name='Store' component={Products}/>       
+      
+      <Route exact layout={MainLayout} path='/students/accept/:id/:hash' name='Accept student request' component={AcceptStudent}/>       
 
       <Route exact path='/' render={() => (
         <Redirect to='/splash'/>
@@ -149,8 +153,8 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/scap/results/:id' name='S-Cap Results' component={ScapResults}/>
 
       {/*Store*/}    
-      <AuthenticatedRoute exact layout={MainLayout}     roles={['Superadministrator', 'School', 'Teacher']}  path='/store/shopping-cart' name='Details' component={ShoppingCart}/>
-      <AuthenticatedRoute exact layout={OnlyHeadLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/shopping/checkout/:step?' name='Checkout' component={Checkout}/>
+      <AuthenticatedRoute exact layout={MainLayout}     roles={['Superadministrator', 'School', 'Teacher', 'Parents']}  path='/store/shopping-cart' name='Details' component={ShoppingCart}/>
+      <AuthenticatedRoute exact layout={OnlyHeadLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/shopping/checkout/:step?' name='Checkout' component={Checkout}/>
             
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' name='Profile' component={Profile} />

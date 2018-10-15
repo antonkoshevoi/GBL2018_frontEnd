@@ -9,7 +9,7 @@ export const LOAD_FAIL = '[App] LOAD_FAIL';
 export function load()
 {
   const token = SessionStorage.get('token');
-  const refreshToken = SessionStorage.get('refreshToken');
+  const refreshToken = SessionStorage.get('refreshToken');  
   if (token) {
     return {
       types: [LOAD, LOAD_SUCCESS_AUTHENTICATED, LOAD_FAIL],
