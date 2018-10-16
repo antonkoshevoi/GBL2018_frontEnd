@@ -8,8 +8,8 @@ import {NavLink} from "react-router-dom";
 import {Divider} from '@material-ui/core';
 import { selectSignUpRequest } from '../../redux/signUpPrincipal/selectors';
 import { signUp } from '../../redux/signUpPrincipal/actions';
-import ProgressButton from '../../components/ui/ProgressButton';
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
+import Loader from "../../components/layouts/Loader";
 import {selectRecords} from "../../redux/countries/selectors";
 import {getCountries} from "../../redux/countries/actions";
 
@@ -126,7 +126,8 @@ class SignUpPrincipal extends Component {
     const errors = this.props.signUpRequest.get('errors');
     const loginBtn = <NavLink to="/login"><strong>{t('login')}</strong></NavLink>;
     return (
-      <div className="">
+      <div>
+        {loading && <Loader />}
         <div className="m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor  m-login--2 m-login-2--skin-2 m--full-height" id="m_login" style={{backgroundImage: `url(${background})`,minHeight:'100vh'}}>
           <div className="m-grid__item m-grid__item--fluid m-login__wrapper">
             <div className="m-login__container signup-page">
@@ -339,13 +340,12 @@ class SignUpPrincipal extends Component {
 
                     <div className="row">
                       <div className="col-sm-12 text-right m--padding-top-20">
-                        <ProgressButton
+                        <button
                           type='submit'
-                          disabled={loading}
-                          loading={loading}
+                          disabled={loading}                          
                           className='m-btn m-btn--air m--margin-5 btn btn-info'>
                           {t('next')}
-                        </ProgressButton>
+                        </button>
                       </div>
                     </div>
                   </form>

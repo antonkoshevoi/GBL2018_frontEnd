@@ -14,7 +14,7 @@ class ThirdStepForm extends Component {
 
     return (
      <div className='row'>
-       <div className="col-lg-6 col-md-6 col-sm-12">                                  
+       <div className={`col-lg-6 col-md-6 col-sm-12 ${form.step2.skip ? 'm-auto' : ''}`}>                                  
             <p className="text-center text-uppercase"><strong>{t('parentProfile')}</strong></p>
             <div className='row'>
                 {form.step1.avatarCropped && 
@@ -30,7 +30,8 @@ class ThirdStepForm extends Component {
                     </p>
                 </div>            
             </div>
-        </div>                             
+        </div>
+        {!form.step2.skip && 
         <div className="col-lg-6 col-md-6 col-sm-12">
             <Divider className='m--margin-bottom-30 m--hidden-tablet m--hidden-desktop'/>
             <p className="text-center text-uppercase"><strong>{t('studentProfile')}</strong></p>
@@ -48,7 +49,7 @@ class ThirdStepForm extends Component {
                     </p>                    
                 </div>            
             </div>
-        </div>              
+        </div>}
      </div>
     );
   }

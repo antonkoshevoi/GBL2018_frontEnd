@@ -77,7 +77,9 @@ class Checkout extends Component {
           stepIndex: 1,
           showCreditCard: true
         });            
-        break;        
+        break;
+      default:
+        return;        
     }
   };
 
