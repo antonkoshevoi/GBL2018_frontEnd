@@ -131,7 +131,7 @@ export default  {
       title:'Transactions',
       link:'accounts/transactions',
       icon:'fa fa-dollar',
-      colorName:'blue',
+      colorName:'grey'
     }
   ]
 }

@@ -52,12 +52,6 @@ const styles = {
     right: 15,
     top: 15
   },
-  radiusLeft: {
-    borderRadius: '5px 0 0 5px',
-  },
-  radiusRight: {
-    borderRadius: '0 5px 5px 0',
-  },
   username: {
     color: 'white',
   },
@@ -119,7 +113,7 @@ class ParentDashboard extends Component {
 
         if (!students.length && !requests.length) {
             return <div className="display-1">
-                <h1 className="text-center">{t('studentsNotFound')}</h1>
+                <h2 className="text-center m--margin-top-75 m--margin-bottom-75">{t('studentsNotFound')}</h2>
             </div>
         }
 
