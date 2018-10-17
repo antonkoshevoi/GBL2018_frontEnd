@@ -1,8 +1,7 @@
 import appReducer from './app/reducer';
 import authReducer from './auth/reducer';
 import userReducer from './user/reducer';
-import signUpParentReducer from './signUpParent/reducer';
-import signUpPrincipalReducer from './signUpPrincipal/reducer';
+import signupReducer from './signup/reducer';
 import studentsReducer from './students/reducer';
 import teachersReducer from './teachers/reducer';
 import administrationReducer from './administration/reducer';
@@ -23,13 +22,13 @@ import coursesReducer from './courses/reducer';
 import subscriptionsReducer from './subscriptions/reducer';
 import scapReducer from './scap/reducer';
 import parentsReducer from './parents/reducer';
+import connectionsReducer from './connections/reducer';
 
 export default {
   app: appReducer,
   auth: authReducer,
   user: userReducer,
-  signUpParent: signUpParentReducer,
-  signUpPrincipal: signUpPrincipalReducer,
+  signup: signupReducer,  
   students: studentsReducer,
   teachers: teachersReducer,
   parents: parentsReducer,
@@ -49,5 +48,6 @@ export default {
   countries: countriesReducer,
   courses: coursesReducer,
   subscriptions: subscriptionsReducer,
-  scap: scapReducer
+  scap: scapReducer,
+  connections: connectionsReducer
 };
