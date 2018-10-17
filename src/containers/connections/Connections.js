@@ -3,19 +3,21 @@ import { translate } from 'react-i18next';
 import { Button, Icon } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
-import { selectGetRecordsRequest, selectStudentStatusRequest } from '../../redux/parents/selectors';
-import { getRecords, deleteStudentRequest, resetStudentRequest } from '../../redux/parents/actions';
+import { selectGetRecordsRequest, selectDeleteRequest, selectChangeStatusRequest } from '../../redux/connections/selectors';
+import { getRecords, deleteRecord, resetDeleteRequest, accept, decline, resetChangeStatusRequest } from '../../redux/connections/actions';
 import DeleteButton from "../../components/ui/DeleteButton";
-import AddParentModal from "./modals/AddParentModal";
-import ViewParentModal from "./modals/ViewParentModal";
+import AddConnectionModal from "./modals/AddConnectionModal";
+import ViewConnectionModal from "./modals/ViewConnectionModal";
+import SendMessageModal from "../messages/modals/SendMessageModal";
 
-class Parents extends Component {
+class Connections extends Component {
     constructor(props) {
         super(props);
         this.state = {
             createModalIsOpen: false,
             viewModalIsOpen: false,
-            viewRecord: null
+            messageModalIsOpen: false,
+            record: null
         }
     }
 
@@ -25,21 +27,36 @@ class Parents extends Component {
 
     componentWillReceiveProps(nextProps) {
         this._deleteRequestSuccess(nextProps);
+        this._changeStatusRequestSuccess(nextProps);
     }
 
+    _openMessageDialog(record) {
+        this.setState({
+            messageModalIsOpen: true,
+            record: record.toJS()
+        });
+    }    
+   
+    _closeMessageDialog() {
+        this.setState({
+            messageModalIsOpen: false,
+            record: null
+        });
+    }
+    
     _openViewDialog(record) {
         this.setState({
             viewModalIsOpen: true,
-            viewRecord: record.toJS()
+            record: record.toJS()
         });
     }    
    
     _closeViewDialog() {
         this.setState({
             viewModalIsOpen: false,
-            viewRecord: null
+            record: null
         });
-    }
+    }    
     
     _openCreateDialog() {
         this.setState({createModalIsOpen: true});
@@ -52,6 +69,18 @@ class Parents extends Component {
     _getRecords() {
         const {getRecords} = this.props;
         getRecords();        
+    }
+
+    _accept(id) {
+        this.props.accept(id);
+    }
+    
+    _decline(id) {
+        this.props.decline(id);
+    }
+    
+    _delete(id) {
+        this.props.delete(id);
     }
     
     _getStatus(record) {        
@@ -66,20 +95,24 @@ class Parents extends Component {
             status = 'declined';
             className = 'm-badge--danger';              
         }
+        if (record.get('waiting')) {
+            status = 'waiting';
+            className = 'm-badge--warning';              
+        }        
         return <span className={`m-badge m-badge--brand m-badge--wide ${className}`}>{this.props.t(status)}</span>;
     }
 
     _renderRecords() {
-        const {t} = this.props;
-        const loading = this.props.getRecordsRequest.get('loading');
-        const records = this.props.getRecordsRequest.get('records');
+        const {t, getRecordsRequest} = this.props;
+        const loading = getRecordsRequest.get('loading');
+        const records = getRecordsRequest.get('records');
 
         if (!loading && records.size === 0) {
             return (
             <tr>
                 <td>
                     <div className="table-message">
-                        <h2>{t('parentsNotFound')}</h2>
+                        <h2>{t('connectionsNotFound')}</h2>
                     </div>
                 </td>
             </tr>);
@@ -90,35 +123,50 @@ class Parents extends Component {
                 <Td first={true} width='80px'><img width="100%" src={record.get('avatar')} alt={record.get('name')} /></Td>
                 <Td width='132px'>{record.get('name')}</Td>                
                 <Td width='132px'>{record.get('username') || '-'}</Td>
-                <Td width='132px'>{record.get('email') || '-'}</Td>
+                <Td width='150px'>{record.get('email') || '-'}</Td>
                 <Td width='132px'>{this._getStatus(record)}</Td>
-                <Td width='132px' className='text-center'>                    
+                <Td width='150px' className='text-center'>
                     <button onClick={() => { this._openViewDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
                         <i className='la la-search'></i>
                     </button>
-                    <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('requestId')) }}/>
+                    {record.get('accepted') && 
+                        <button onClick={() => { this._openMessageDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
+                            <i className='la la-envelope'></i>
+                        </button>                            
+                    }
+                    {record.get('isCreatedByMy') ?
+                        <DeleteButton title={t('areYouSure')} onClick={() => { this._delete(record.get('connectionId')) }} />
+                    :                            
+                        <DeleteButton title={t('areYouSureWantToDeclineThisRequest')} onClick={() => { this._decline(record.get('connectionId')) }} />                            
+                    }
                 </Td>
             </Row>
         ));
     }
 
-    _deleteRecord(id) {
-        this.props.deleteStudentRequest(id);
-    }
-
     _deleteRequestSuccess(nextProps) {
-        const deleteSuccess     = this.props.studentStatusRequest.get('success');
-        const nextDeleteSuccess = nextProps.studentStatusRequest.get('success');
+        const success     = this.props.deleteRequest.get('success');
+        const nextSuccess = nextProps.deleteRequest.get('success');
 
-        if (!deleteSuccess && nextDeleteSuccess) {
-            this.props.resetStudentRequest();
+        if (!success && nextSuccess) {
+            this.props.resetDeleteRequest();
             this._getRecords();
         }
     }
+    
+    _changeStatusRequestSuccess(nextProps) {
+        const success     = this.props.changeStatusRequest.get('success');
+        const nextSuccess = nextProps.changeStatusRequest.get('success');
+
+        if (!success && nextSuccess) {
+            this.props.resetChangeStatusRequest();
+            this._getRecords();
+        }
+    }    
 
     render() {
         const {getRecordsRequest, t} = this.props;
-        const {createModalIsOpen, viewModalIsOpen, viewRecord} = this.state;
+        const {createModalIsOpen, viewModalIsOpen, messageModalIsOpen, record} = this.state;
         const loading = getRecordsRequest.get('loading');
 
         return (
@@ -128,7 +176,7 @@ class Parents extends Component {
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
                                 <span className='m-portlet__head-icon'><i className='la la-user' style={{fontSize: '55px'}}></i></span>
-                                <h3 className='m-portlet__head-text'>{t('myParents')}</h3>
+                                <h3 className='m-portlet__head-text'>{t('myConnections')}</h3>
                             </div>
                         </div>
                     </div>
@@ -137,7 +185,7 @@ class Parents extends Component {
                             <div className='row align-items-center'>
                                 <div className='col-xl-12 order-1 order-xl-2 m--align-right margin-0'>       
                                     <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
-                                        {t('addNew')} <Icon style={{marginLeft: '5px'}}>add</Icon>
+                                        {t('sentRequest')} <Icon style={{marginLeft: '5px'}}>add</Icon>
                                     </Button>                  
                                 </div>
                             </div>
@@ -148,9 +196,9 @@ class Parents extends Component {
                                 <Th width='80px'>&nbsp;</Th>
                                 <Th width='132px'>{t('name')}</Th>
                                 <Th width='132px'>{t('username')}</Th>                                
-                                <Th width='132px'>{t('email')}</Th>                                
+                                <Th width='150px'>{t('email')}</Th>                                
                                 <Th width='132px'>{t('status')}</Th>
-                                <Th width='132px'>{t('actions')}</Th>
+                                <Th width='150px'>{t('actions')}</Th>
                             </HeadRow>
                             </Thead>
                             <Tbody>
@@ -160,22 +208,27 @@ class Parents extends Component {
                         </Table>
                     </div>
                 </div>
-                <AddParentModal isOpen={createModalIsOpen} onSuccess={() => { this._getRecords() }} onClose={() => { this._closeCreateDialog() }} />                
-                <ViewParentModal data={viewRecord} isOpen={viewModalIsOpen} onSuccess={() => { this._closeViewDialog() }} onClose={() => { this._closeViewDialog() }} />
+                <AddConnectionModal isOpen={createModalIsOpen} onSuccess={() => { this._getRecords() }} onClose={() => { this._closeCreateDialog() }} />
+                <ViewConnectionModal data={record} isOpen={viewModalIsOpen} onAccept={(id) => { this._accept(id) }} onDecline={(id) => { this._decline(id) }} onClose={() => { this._closeViewDialog() }} />
+                <SendMessageModal recipient={record} isOpen={messageModalIsOpen} onClose={() => { this._closeMessageDialog() }} />
             </div>);
     }
 }
 
-Parents = connect(
+Connections = connect(
     (state) => ({
         getRecordsRequest: selectGetRecordsRequest(state),
-        studentStatusRequest: selectStudentStatusRequest(state)
+        deleteRequest: selectDeleteRequest(state),
+        changeStatusRequest: selectChangeStatusRequest(state)
     }),
     (dispatch) => ({
         getRecords: (params = {}) => { dispatch(getRecords(params)) },
-        deleteStudentRequest: (id) => { dispatch(deleteStudentRequest(id)) },
-        resetStudentRequest: () => { dispatch(resetStudentRequest()) }
+        delete: (id) => { dispatch(deleteRecord(id)) },
+        resetDeleteRequest: () => { dispatch(resetDeleteRequest()) },        
+        accept: (id) => { dispatch(accept(id)) },
+        decline: (id) => { dispatch(decline(id)) },
+        resetChangeStatusRequest: () => { dispatch(resetChangeStatusRequest()) }        
     })
-)(Parents);
+)(Connections);
 
-export default translate('translations')(Parents);
+export default translate('translations')(Connections);

@@ -1,5 +1,6 @@
 import {
-    GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, 
+    GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL,
+    GET_RECEIVED_RECORDS, GET_RECEIVED_RECORDS_SUCCESS, GET_RECEIVED_RECORDS_FAIL,
     GET_RECORD, GET_RECORD_SUCCESS, GET_RECORD_FAIL, RESET_GET_RECORD_REQUEST, 
     CREATE, CREATE_SUCCESS, CREATE_FAIL, RESET_CREATE_REQUEST, 
     ACCEPT, ACCEPT_SUCCESS, ACCEPT_FAIL, 
@@ -16,8 +17,21 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errorResponse: null,
-    records: {}
+    records: {},
+    pagination: {
+      page: 1,
+      perPage: 25,
+      total: 0,
+      totalPages: 1
+    }    
   },
+  getReceivedRecordsRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null,
+    records: {}   
+  },  
   getRecordRequest: {
     loading: false,
     success: false,
@@ -67,6 +81,19 @@ export default function reducer (state = initialState, action) {
         );
     case GET_RECORDS_FAIL:
       return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('fail', true));
+
+
+    case GET_RECEIVED_RECORDS:
+      return state.set('getReceivedRecordsRequest', initialState.get('getReceivedRecordsRequest').set('loading', true).set('records', Immutable.List()));
+    case GET_RECEIVED_RECORDS_SUCCESS:
+      return state
+        .set('getReceivedRecordsRequest', state.get('getReceivedRecordsRequest')
+          .set('success', true)
+          .set('records', Immutable.fromJS(action.result.data))
+          .remove('loading')
+        );
+    case GET_RECEIVED_RECORDS_FAIL:
+      return state.set('getReceivedRecordsRequest', initialState.get('getReceivedRecordsRequest').set('fail', true));
 
     /**
      * Get single record

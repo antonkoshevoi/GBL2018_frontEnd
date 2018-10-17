@@ -14,6 +14,14 @@ export const selectGetRecordsRequest = createSelector(
 );
 
 /**
+ * Get Records Request
+ */
+export const selectGetReceivedRecordsRequest = createSelector(
+  selectConnectionsDomain,
+  (subState) => subState.get('getReceivedRecordsRequest')
+);
+
+/**
  * Get Single Request
  */
 export const selectGetRecordRequest = createSelector(

@@ -4,6 +4,10 @@ export const GET_RECORDS = '[Connections] GET_RECORDS';
 export const GET_RECORDS_SUCCESS = '[Connections] GET_RECORDS_SUCCESS';
 export const GET_RECORDS_FAIL = '[Connections] GET_RECORDS_FAIL';
 
+export const GET_RECEIVED_RECORDS = '[Connections] GET_REQUESTS';
+export const GET_RECEIVED_RECORDS_SUCCESS = '[Connections] GET_RECEIVED_RECORDS_SUCCESS';
+export const GET_RECEIVED_RECORDS_FAIL = '[Connections] GET_RECEIVED_RECORDS_FAIL';
+
 export const GET_RECORD = '[Connections] GET_RECORD';
 export const GET_RECORD_SUCCESS = '[Connections] GET_RECORD_SUCCESS';
 export const GET_RECORD_FAIL = '[Connections] GET_RECORD_FAIL';
@@ -36,14 +40,21 @@ export const RESET_DELETE_REQUEST = '[Connections] RESET_DELETE_REQUEST';
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
-    promise: (apiClient) => apiClient.get('parents', params)
+    promise: (apiClient) => apiClient.get('connections', params)
+  };
+}
+
+export function getReceivedRecords(params = {}) {
+  return {
+    types: [GET_RECEIVED_RECORDS, GET_RECEIVED_RECORDS_SUCCESS, GET_RECEIVED_RECORDS_FAIL],
+    promise: (apiClient) => apiClient.get('connections/received', params)
   };
 }
 
 export function getRecord(id, params = {}) {
   return {
     types: [GET_RECORD, GET_RECORD_SUCCESS, GET_RECORD_FAIL],
-    promise: (apiClient) => apiClient.get(`parents/${id}`, params)
+    promise: (apiClient) => apiClient.get(`connections/${id}`, params)
   };
 }
 
@@ -96,7 +107,7 @@ export function resetDeleteRequest() {
 export function create(data, params = {}) {
   return {
     types: [CREATE, CREATE_SUCCESS, CREATE_FAIL],
-    promise: (apiClient) => apiClient.post('parents', {...data, returnUrl: uri('connections/accept')}, params)
+    promise: (apiClient) => apiClient.post('connections', {...data, returnUrl: uri('connections/accept')}, params)
   };
 }
 

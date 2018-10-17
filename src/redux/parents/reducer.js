@@ -2,6 +2,7 @@ import {
     GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, 
     GET_RECORD, GET_RECORD_SUCCESS, GET_RECORD_FAIL, RESET_GET_RECORD_REQUEST,
     CREATE, CREATE_SUCCESS, CREATE_FAIL, RESET_CREATE_REQUEST, 
+    GET_STUDENTS, GET_STUDENTS_SUCCESS, GET_STUDENTS_FAIL,
     GET_STUDENT_REQUESTS, GET_STUDENT_REQUESTS_SUCCESS, GET_STUDENT_REQUESTS_FAIL, 
     ACCEPT_STUDENT, ACCEPT_STUDENT_SUCCESS, ACCEPT_STUDENT_FAIL,
     ACCEPT_STUDENT_PUBLIC, ACCEPT_STUDENT_PUBLIC_SUCCESS, ACCEPT_STUDENT_PUBLIC_FAIL,
@@ -28,7 +29,7 @@ const initialState = Immutable.fromJS({
     errorResponse: null,
     record: {}
   },
-  getStudentRequestsRequest: {
+  getStudentsRequest: {
     loading: false,
     success: false,
     fail: false,
@@ -81,14 +82,17 @@ export default function reducer (state = initialState, action) {
     /**
      * Get student requests
      */
+    case GET_STUDENTS: 
     case GET_STUDENT_REQUESTS:
       return state
-        .set('getStudentRequestsRequest', initialState.get('getStudentRequestsRequest').set('loading', true).set('records', Immutable.List()));
+        .set('getStudentsRequest', initialState.get('getStudentsRequest').set('loading', true).set('records', Immutable.List()));
+    case GET_STUDENTS_SUCCESS:
     case GET_STUDENT_REQUESTS_SUCCESS:
       return state
-        .set('getStudentRequestsRequest', initialState.get('getStudentRequestsRequest').set('success', true).set('records', Immutable.fromJS(action.result.data)));
+        .set('getStudentsRequest', initialState.get('getStudentsRequest').set('success', true).set('records', Immutable.fromJS(action.result.data)));
+    case GET_STUDENTS_FAIL:
     case GET_STUDENT_REQUESTS_FAIL:
-      return state.set('getStudentRequestsRequest', initialState.get('getStudentRequestsRequest').set('fail', true));
+      return state.set('getStudentsRequest', initialState.get('getStudentsRequest').set('fail', true));
 
     /**
      * Get single record

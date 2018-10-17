@@ -4,11 +4,9 @@ import {NavLink} from "react-router-dom";
 import UnassignedCourses from "./sections/UnassignedCourses";
 import {connect} from "react-redux";
 import {translate} from 'react-i18next';
-import {selectRecords, selectGetRecordsRequest } from "../../redux/students/selectors";
-import {getRecords } from "../../redux/students/actions";
 
-import { selectStudentRequestsRequest, selectStudentStatusRequest} from "../../redux/parents/selectors";
-import { getStudentRequests, acceptStudentRequest, declineStudentRequest, resetStudentRequest} from "../../redux/parents/actions"; 
+import { selectStudentsRequest, selectStudentStatusRequest} from "../../redux/parents/selectors";
+import { getStudents, acceptStudentRequest, declineStudentRequest, resetStudentRequest} from "../../redux/parents/actions"; 
 
 import {getParentRecords} from "../../redux/store/actions";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
@@ -73,18 +71,16 @@ class ParentDashboard extends Component {
     }
 
     componentDidMount() {
-        const {getParentStudents, getStudentRequests, getCartItems} = this.props;
+        const {getStudents, getCartItems} = this.props;
         getCartItems();
-        getStudentRequests();
-        getParentStudents();
+        getStudents();                
     }
   
     componentWillReceiveProps(nextProps) {        
-        const {getParentStudents, getStudentRequests, studentStatusRequest, resetStudentRequest} = this.props;
+        const {getStudents, studentStatusRequest, resetStudentRequest} = this.props;
         
-        if (!studentStatusRequest.get('success') && nextProps.studentStatusRequest.get('success')) {
-            getStudentRequests();
-            getParentStudents();
+        if (!studentStatusRequest.get('success') && nextProps.studentStatusRequest.get('success')) {            
+            getStudents();
             resetStudentRequest();
         }     
     }  
@@ -106,18 +102,22 @@ class ParentDashboard extends Component {
     };
   
     _renderStudents() {
-        const {goTo} = this.props;
-        const students = this.props.parentStudents.toJS();
-        const requests = this.props.studentRequestsRequest.get('records').toJS();
-        const {classes, t} = this.props;
+        const {studentsRequest, goTo, classes, t} = this.props;
+        const requests = studentsRequest.get('records').toJS();        
 
-        if (!students.length && !requests.length) {
+        if (!requests.length) {
             return <div className="display-1">
                 <h2 className="text-center m--margin-top-75 m--margin-bottom-75">{t('studentsNotFound')}</h2>
             </div>
         }
 
-        return students.map(function (student, i) {
+        return requests.map(function (request, i) {
+            let student = request.student;
+
+            if (!request.accepted) {
+                return '';
+            }
+            
             return (
               <div key={i} className={classes.profileBlock} onClick={() => {
                 goTo(`/reports/students/${student.id}`);
@@ -150,8 +150,8 @@ class ParentDashboard extends Component {
     }
 
   _renderStudentRequests() {
-        const {studentRequestsRequest, studentStatusRequest, classes, t} = this.props;
-        const requests = studentRequestsRequest.get('records').toJS();
+        const {studentsRequest, studentStatusRequest, classes, t} = this.props;
+        const requests = studentsRequest.get('records').toJS();
         const loading = studentStatusRequest.get('loading') ;
 
         if (!requests.length) {
@@ -159,6 +159,10 @@ class ParentDashboard extends Component {
         }
 
         return requests.map((request, i) => {
+            if (request.accepted) {
+                return '';
+            }
+        
             return (
             <div key={i} className={classes.profileBlock} style={{background: '#D3A9A9'}}>
               <div className={classes.btnGroup}>
@@ -177,21 +181,18 @@ class ParentDashboard extends Component {
             </div>);
         });
     }
-  
+      
     render() {    
-        const {records, studentRequestsRequest, studentsRequest, t} = this.props;
-        const loading = studentsRequest.get('loading') || studentRequestsRequest.get('loading');
+        const {storeItems, getStudents, studentsRequest, t} = this.props;
+        const loading = studentsRequest.get('loading');
 
-        return <div className="fadeInLeft animated">
+        return <div className="fadeInLeft animated">            
             <div className="row">
               <div className="col-sm-12 col-md-6 col-lg-5 col-xl-4">
                 <div className="m-portlet m-portlet--head-solid-bg m-portlet--info" style={{marginTop:15}}>
                   <div className="m-portlet__head">
                     <div className="m-portlet__head-caption">
                       <div className="m-portlet__head-title">
-                        <span className="m-portlet__head-icon">
-                          {loading && <CircularProgress color="inherit"/>}                    
-                        </span>
                         <h3 className="m-portlet__head-text">
                           {t('myLearners')}
                         </h3>
@@ -211,6 +212,7 @@ class ParentDashboard extends Component {
                     <div style={{maxHeight:330,overflowY:'auto',overflowX:'hidden'}}>
                       {!loading && this._renderStudentRequests()}
                       {!loading && this._renderStudents()}
+                      {loading && <div style={{width: 100}} className="m-auto m--margin-top-50 m--margin-bottom-50"><CircularProgress /></div>}    
                     </div>
                   </div>
                 </div>
@@ -229,7 +231,7 @@ class ParentDashboard extends Component {
             </div>
             <div className="row">
               <div className="col-md-12 col-lg-12 col-xl-8 margin-top-15">
-                  <FeaturedItems data={records}/>
+                  <FeaturedItems data={storeItems}/>
               </div>
               <div className="col-md-4 col-xl-4 m--hidden-tablet-and-mobile m--hidden-desktop-lg m--margin-top-15">
                   <div>
@@ -237,37 +239,28 @@ class ParentDashboard extends Component {
                   </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-sm-12 col-md-8 col-lg-8">
-                <div className="row">
-                  <div className="col-md-12">
-                  </div>
-                </div>
-              </div>
-            </div>
             <CreateStudentModal
             isOpen={this.state.createModalIsOpen}
             onClose={() => {
               this._closeCreateDialog()
             }}
-            onSuccess={() => {}}/>
+            onSuccess={() => {
+                getStudents()
+            }}/>
         </div>
     }
 }
 
 ParentDashboard = connect(
-    (state) => ({
-        parentStudents: selectRecords(state),
-        studentsRequest: selectGetRecordsRequest(state),
-        studentRequestsRequest: selectStudentRequestsRequest(state),
-        records: storeItems(state),
+    (state) => ({        
+        storeItems: storeItems(state),
+        studentsRequest: selectStudentsRequest(state),
         studentStatusRequest: selectStudentStatusRequest(state)
     }),
-    (dispatch) => ({
-        getParentStudents: (params = {}) => { dispatch(getRecords(params)) },
+    (dispatch) => ({        
         goTo: (url) => { dispatch(push(url)) },
         getCartItems: (params = {type: 'recent'}) => { dispatch(getParentRecords(params)) },
-        getStudentRequests: () => {dispatch(getStudentRequests())},
+        getStudents: () => {dispatch(getStudents())},        
         acceptStudentRequest: (id) => {dispatch(acceptStudentRequest(id))},
         declineStudentRequest: (id) => {dispatch(declineStudentRequest(id))},
         resetStudentRequest: () => {dispatch(resetStudentRequest())}    

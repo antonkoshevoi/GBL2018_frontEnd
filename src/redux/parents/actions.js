@@ -14,6 +14,10 @@ export const CREATE_SUCCESS = '[Parents] CREATE_SUCCESS';
 export const CREATE_FAIL = '[Parents] CREATE_FAIL';
 export const RESET_CREATE_REQUEST = '[Parents] RESET_CREATE_ERRORS';
 
+export const GET_STUDENTS = '[Parents] GET_STUDENTS';
+export const GET_STUDENTS_SUCCESS = '[Parents] GET_STUDENTS_SUCCESS';
+export const GET_STUDENTS_FAIL = '[Parents] GET_STUDENTS_FAIL';
+
 export const GET_STUDENT_REQUESTS = '[Parents] GET_STUDENT_REQUESTS';
 export const GET_STUDENT_REQUESTS_SUCCESS = '[Parents] GET_STUDENT_REQUESTS_SUCCESS';
 export const GET_STUDENT_REQUESTS_FAIL = '[Parents] GET_STUDENT_REQUESTS_FAIL';
@@ -58,6 +62,13 @@ export function resetGetRecordRequest () {
   return {
     type: RESET_GET_RECORD_REQUEST
   }
+}
+
+export function getStudents(params = {}) {
+  return {
+    types: [GET_STUDENT_REQUESTS, GET_STUDENT_REQUESTS_SUCCESS, GET_STUDENT_REQUESTS_FAIL],
+    promise: (apiClient) => apiClient.get('parents/students', params)
+  };
 }
 
 export function getStudentRequests(params = {}) {

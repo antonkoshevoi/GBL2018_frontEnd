@@ -75,6 +75,8 @@ import ViewMessage from '../containers/messages/ViewMessage';
 
 import AcceptStudent from '../containers/parents/AcceptStudent';
 
+import Connections from '../containers/connections/Connections';
+
 export default () => (
   <AppContainer>
     <Switch>
@@ -167,6 +169,9 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/accounts/unassigned_credits' name='Unassigned Credits' component={UnassignedCredits} />
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/accounts/transactions' name='Transactions' component={Transactions} />
 
+      {/*Connections*/}
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Parents']} path='/connections' name='Connections' component={Connections} />
+      
       {/*Payments*/}
       <Route exact path='/payments/paypal/return' component={PayPalReturnContainer} />
       <Route exact layout={MainLayout} path='/payments/success' component={PaymentSuccessContainer} />

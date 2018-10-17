@@ -104,7 +104,7 @@ class MySubscriptions extends Component {
                             </button> }                                                      
                         </Td>
                         <Td width='120px'>{moment(item.get('createdAt')).format('ll')}</Td>
-                        <Td width='120px'>{moment(item.get('expiredAt')).format('ll')}</Td>
+                        <Td width='120px'>{item.get('expiredAt') ? moment(item.get('expiredAt')).format('ll') : '-'}</Td>
                         <Td width='120px'>
                             {(item.get('isActive') > 0) ? <span className='m-badge m-badge--brand m-badge--wide'>{t('yes')}</span> : <span className='m-badge m-badge--brand m-badge--wide m-badge--danger'>{t('no')}</span>}
                         </Td>
