@@ -48,7 +48,7 @@ class DeleteButton extends Component {
     
     return (
       <span>
-        <a className={classNameBtn} style={{color: '#fff'}} onClick={() => { this._openConfirm() }}> { icon ? <i className={icon}></i> : btnName } </a>
+        <a title={btnName} className={classNameBtn} style={{color: '#fff'}} onClick={() => { this._openConfirm() }}> { icon ? <i className={icon}></i> : btnName } </a>
         <Dialog
           open={opened}
           onClose={() => { this._onCancel() }}

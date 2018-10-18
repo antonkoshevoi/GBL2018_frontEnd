@@ -2,32 +2,32 @@ import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { push } from 'react-router-redux';
-import { selectStudentStatusRequest } from "../../redux/parents/selectors";
-import { acceptStudentRequestPublic, acceptStudentRequest, resetStudentRequest } from "../../redux/parents/actions"; 
+import { selectChangeStatusRequest } from "../../redux/connections/selectors";
+import { accept, acceptPublic, resetChangeStatusRequest } from "../../redux/connections/actions"; 
 import { load } from '../../redux/app/actions';
 import Loader from '../../components/layouts/Loader';
 
-class AcceptStudent extends Component {
+class AcceptConnection extends Component {
 
     componentDidMount () {
-        const { acceptStudentRequest, acceptStudentRequestPublic, match, auth } = this.props;
+        const { accept, acceptPublic, match, auth } = this.props;
         const id = match.params.id;
         const hash = match.params.hash;
         
         if (auth.get('isLoggedIn')) {
-            acceptStudentRequest(id);
+            accept(id);
         } else {
-            acceptStudentRequestPublic(id, hash);            
+            acceptPublic(id, hash);            
         }
     }    
   
     componentWillReceiveProps(nextProps) {        
-        const {studentStatusRequest, resetStudentRequest, appLoad, goTo, auth} = this.props;                
+        const {changeStatusRequest, resetChangeStatusRequest, appLoad, goTo, auth} = this.props;                
                 
-        if ((!studentStatusRequest.get('success') && nextProps.studentStatusRequest.get('success')) 
-                || (!studentStatusRequest.get('fail') && nextProps.studentStatusRequest.get('fail'))) {
+        if ((!changeStatusRequest.get('success') && nextProps.changeStatusRequest.get('success')) 
+                || (!changeStatusRequest.get('fail') && nextProps.changeStatusRequest.get('fail'))) {
             
-            resetStudentRequest();
+            resetChangeStatusRequest();
             
             if (auth.get('isLoggedIn')) {
                 goTo('/dashboard');
@@ -43,18 +43,18 @@ class AcceptStudent extends Component {
     }
 }
 
-AcceptStudent = connect(
+AcceptConnection = connect(
     (state) => ({
-        studentStatusRequest: selectStudentStatusRequest(state),
+        changeStatusRequest: selectChangeStatusRequest(state),
         auth: state.auth
     }),
     (dispatch) => ({        
         goTo: (url) => { dispatch(push(url)) },
-        acceptStudentRequest: (id) => {dispatch(acceptStudentRequest(id))},
-        acceptStudentRequestPublic: (id, hash) => {dispatch(acceptStudentRequestPublic(id, hash))},
-        resetStudentRequest: () => {dispatch(resetStudentRequest())},
+        accept: (id) => {dispatch(accept(id))},
+        acceptPublic: (id, hash) => {dispatch(acceptPublic(id, hash))},
+        resetChangeStatusRequest: () => {dispatch(resetChangeStatusRequest())},
         appLoad: () => { dispatch(load()) }
     })
-)(AcceptStudent);
+)(AcceptConnection);
 
-export default withRouter(AcceptStudent);   
+export default withRouter(AcceptConnection);   

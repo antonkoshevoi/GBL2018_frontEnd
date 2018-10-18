@@ -44,5 +44,9 @@ export default {
   parentAccountCreated: 'Parent account successfully created',
   studentRequestIsAccepted: 'Request successfully accepted',
   studentRequestIsDeclined: 'Request successfully declined',
-  studentRequestIsDeleted: 'Request successfully deleted'
+  studentRequestIsDeleted: 'Request successfully deleted',
+  connectionRequestHasBeenSent: 'Connection request has been sent',
+  connectionRequestIsAccepted: 'Connection request is accepted!',
+  connectionRequestIsDeclined: 'Connection request is declined',
+  connectionRequestIsDeleted: 'Connection request is deleted'
 }

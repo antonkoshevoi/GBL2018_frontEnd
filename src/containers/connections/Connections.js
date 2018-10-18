@@ -126,16 +126,16 @@ class Connections extends Component {
                 <Td width='150px'>{record.get('email') || '-'}</Td>
                 <Td width='132px'>{this._getStatus(record)}</Td>
                 <Td width='150px' className='text-center'>
-                    <button onClick={() => { this._openViewDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
+                    <button title={t('connectionDetails')}  onClick={() => { this._openViewDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
                         <i className='la la-search'></i>
                     </button>
                     {record.get('accepted') && 
-                        <button onClick={() => { this._openMessageDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
+                        <button title={t('sendMessage')} onClick={() => { this._openMessageDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
                             <i className='la la-envelope'></i>
                         </button>
                     }
                     {record.get('waiting') && 
-                        <button onClick={() => { this._accept(record.get('connectionId')) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
+                        <button title={t('accept')} onClick={() => { this._accept(record.get('connectionId')) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
                             <i className='la la-check'></i>
                         </button>                             
                     }

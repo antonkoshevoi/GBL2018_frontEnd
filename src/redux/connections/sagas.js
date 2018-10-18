@@ -19,9 +19,10 @@ function* onSuccess (action) {
 
 const connectionsSagas = all([ 
   takeLatest(ACCEPT_PUBLIC_SUCCESS, onSuccess),
-  yieldSuccessToasts({
-    [CREATE_SUCCESS]: i18n.t('messages:connectionRequestHasBeenSent'),            
-    [ACCEPT_SUCCESS]: i18n.t('messages:connectionRequestIsAccepted'),       
+  yieldSuccessToasts({      
+    [CREATE_SUCCESS]: i18n.t('messages:connectionRequestHasBeenSent'),   
+    [ACCEPT_SUCCESS]: i18n.t('messages:connectionRequestIsAccepted'),
+    [ACCEPT_PUBLIC_SUCCESS]: i18n.t('messages:connectionRequestIsAccepted'),
     [DECLINE_SUCCESS]: i18n.t('messages:connectionRequestIsDeclined'),
     [DELETE_SUCCESS]: i18n.t('messages:connectionRequestIsDeleted')
   }),
