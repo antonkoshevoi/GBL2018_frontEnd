@@ -132,7 +132,12 @@ class Connections extends Component {
                     {record.get('accepted') && 
                         <button onClick={() => { this._openMessageDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
                             <i className='la la-envelope'></i>
-                        </button>                            
+                        </button>
+                    }
+                    {record.get('waiting') && 
+                        <button onClick={() => { this._accept(record.get('connectionId')) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
+                            <i className='la la-check'></i>
+                        </button>                             
                     }
                     {record.get('isCreatedByMy') ?
                         <DeleteButton title={t('areYouSure')} onClick={() => { this._delete(record.get('connectionId')) }} />

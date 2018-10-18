@@ -38,10 +38,10 @@ class EditAutoClassroomModal extends Component {
       schoolTeachers: [],
       taskConfig: {
         autoCreateTask: {
-          frequencyId: 1,
+          frequency: 'weekly',
           courseDuration: 150,
           maxStudent: 100,
-          rollOver: null,
+          rollOver: null
         }
       }
     };
@@ -53,8 +53,8 @@ class EditAutoClassroomModal extends Component {
 
     if (!record && nextRecord) {
       this.setState({
-        id: nextRecord.get('courseId'),
-        taskConfig: nextRecord.get('courses').toJS()
+        id: nextRecord.get('crsId'),
+        taskConfig: nextRecord.toJS()
       });
     }
     this._getSchoolTeachersSuccess(nextProps);
@@ -84,10 +84,10 @@ class EditAutoClassroomModal extends Component {
       id: undefined,
       taskConfig: {
         autoCreateTask: {
-          frequencyId: 1,
+          frequency: 'weekly',
           courseDuration: 150,
           maxStudent: 100,
-          rollOver: null,
+          rollOver: null
         }
       }
     });
@@ -148,7 +148,7 @@ class EditAutoClassroomModal extends Component {
     const days = Array.from(Array(28).keys());
     return (
         <div>
-        {taskConfig.autoCreateTask.frequencyId === 1 &&
+        {taskConfig.autoCreateTask.frequency === 'weekly' &&
 
         <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
           <FormControl>
@@ -171,7 +171,7 @@ class EditAutoClassroomModal extends Component {
 
         }
 
-          {taskConfig.autoCreateTask.frequencyId === 2 &&
+          {taskConfig.autoCreateTask.frequency === 'monthly' &&
           <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
             <FormControl>
               <InputLabel htmlFor="age-simple">{t('rolloverDayNumber')}</InputLabel>
@@ -222,16 +222,16 @@ class EditAutoClassroomModal extends Component {
                   <FormControl>
                     <InputLabel htmlFor="age-simple">{t('frequency')}</InputLabel>
                     <Select
-                      name="frequencyId"
-                      value={taskConfig.autoCreateTask.frequencyId || ''}
+                      name="frequency"
+                      value={taskConfig.autoCreateTask.frequency || ''}
                       onChange={this._handleInputChange}
                     >
-                      <MenuItem value={1}>{t('weekly')}</MenuItem>
-                      <MenuItem value={2}>{t('monthly')}</MenuItem>
+                      <MenuItem value="weekly">{t('weekly')}</MenuItem>
+                      <MenuItem value="monthly">{t('monthly')}</MenuItem>
                     </Select>
                   </FormControl>
-                  {errors && errors.get('autoCreateTask.frequencyId') &&
-                  <FormHelperText error>{errors.get('autoCreateTask.frequencyId').get(0)}</FormHelperText>}
+                  {errors && errors.get('autoCreateTask.frequency') &&
+                  <FormHelperText error>{errors.get('autoCreateTask.frequency').get(0)}</FormHelperText>}
                 </FormControl>
                 {this._renderRollOverDay()}
                 <FormControl aria-describedby='maxStudent-error-text' className='full-width form-inputs'>

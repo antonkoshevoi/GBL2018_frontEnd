@@ -520,6 +520,7 @@ export default {
     connectionRequestWaitingForYourApproval: 'This connection request is waiting for your approval...',
     connectionRequestSent: 'You successfully sent connection request to this user. Please wait while your request will be accepted...',
     connectionRequestDeclined: 'This connection requst has been declined by receiver...',
+    areYouSureWantToDeclineThisRequest: 'Are you sure want to decline this connection?',
     connectionDetails: 'Connection Details',
     waiting: 'Waiting',
     recipientsGroups: {        

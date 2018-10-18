@@ -79,16 +79,16 @@ class AutoCreate extends Component {
     return records.map((record, key) => (
       <Row index={key} key={key}>
         <Td first={true} width='100px'>{key + 1}</Td>
-        <Td width='132px'>{record.getIn(['courses', 'crsTitle'])}</Td>
-        <Td width='132px'>{record.getIn(['courses', 'publisher','name'])}</Td>
-        <Td width='132px'>{record.getIn(['courses', 'autoCreateTask', 'frequency', 'name'])}</Td>
-        <Td width='132px'>{record.getIn(['courses', 'autoCreateTask', 'rollOver'])}</Td>
-        <Td width='132px'>{record.getIn(['courses', 'autoCreateTask', 'maxStudent'])}</Td>
+        <Td width='132px'>{record.get('crsTitle')}</Td>
+        <Td width='132px'>{record.getIn(['publisher','name'])}</Td>
+        <Td width='132px'>{t(record.getIn(['autoCreateTask', 'frequency']))}</Td>
+        <Td width='132px'>{record.getIn(['autoCreateTask', 'rollOver'])}</Td>
+        <Td width='132px'>{record.getIn(['autoCreateTask', 'maxStudent'])}</Td>
         <Td width='150px'>
           <HasPermission permissions={[
             '[ClassRooms][Update][Any]'
           ]}>
-            <EditButton onClick={(id) => { this._editRecord(id) }} id={record.getIn(['courses','crsId'])}/>
+            <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('crsId')}/>
           </HasPermission>
         </Td>
       </Row>
