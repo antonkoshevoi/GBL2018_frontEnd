@@ -8,8 +8,8 @@ import Loader from "../../components/layouts/Loader";
 import FirstStepForm from './forms/FirstStepForm';
 import SecondStepForm from './forms/SecondStepForm';
 import ThirdStepForm from './forms/ThirdStepForm';
-import {signUp, validateStep1} from '../../redux/signUpParent/actions';
-import {selectSignUpRequest, selectValidateStep1Request} from '../../redux/signUpParent/selectors';
+import {signUpParent, validate, resetSignUpRequest, resetValidateRequest} from '../../redux/signup/actions';
+import {selectSignUpRequest, selectValidateRequest} from '../../redux/signup/selectors';
 import { push } from 'react-router-redux';
 import { load } from '../../redux/app/actions';
 import './Signup.css'
@@ -36,8 +36,8 @@ class SignUpParent extends Component {
     }
 
     _goForwardOnStep1Success (nextProps) {
-        const success = this.props.validateStep1Request.get('success');
-        const nextSuccess = nextProps.validateStep1Request.get('success');
+        const success = this.props.validateRequest.get('success');
+        const nextSuccess = nextProps.validateRequest.get('success');
         const { activeStep } = this.state;
 
         if(!success && nextSuccess) {
@@ -78,7 +78,7 @@ class SignUpParent extends Component {
     }
 
     _submitStep1() {
-        this.props.validateStep1({
+        this.props.validate({
             email:          this.state.form.step1.email,
             password:       this.state.form.step1.password,
             firstName:      this.state.form.step1.firstName,
@@ -119,6 +119,8 @@ class SignUpParent extends Component {
 
     _goToDashboard() {
         this.props.appLoad();
+        this.props.resetSignUpRequest();
+        this.props.resetValidateRequest();
         this.props.goToDashboard();
     };
 
@@ -147,8 +149,8 @@ class SignUpParent extends Component {
         const { activeStep, form } = this.state;
         const { t } = this.props;
 
-        const loading = this.props.validateStep1Request.get('loading') || this.props.signUpRequest.get('loading');
-        const step1Errors = this.props.validateStep1Request.get('errors');
+        const loading = this.props.validateRequest.get('loading') || this.props.signUpRequest.get('loading');
+        const step1Errors = this.props.validateRequest.get('errors');
         const step2Errors = this.props.signUpRequest.get('errors').get('step2');
 
         const loginBtn =  <NavLink to='/login'><strong>Login</strong></NavLink>;
@@ -233,12 +235,14 @@ class SignUpParent extends Component {
 
 SignUpParent = connect(
     (state) => ({
-        validateStep1Request: selectValidateStep1Request(state),
-        signUpRequest: selectSignUpRequest(state),
+        validateRequest: selectValidateRequest(state),
+        signUpRequest: selectSignUpRequest(state)
     }),
     (dispatch) => ({
-        validateStep1: (form, params = {}) => { dispatch(validateStep1(form, params)) },
-        signUp: (form, params = {}) => { dispatch(signUp(form, params)) },
+        validate: (form, params = {}) => { dispatch(validate(form, params)) },
+        signUp: (form, params = {}) => { dispatch(signUpParent(form, params)) },
+        resetValidateRequest: () => { dispatch(resetValidateRequest()) },
+        resetSignUpRequest: () => { dispatch(resetSignUpRequest()) }, 
         goToDashboard: () => { dispatch(push('/dashboard')) },
         appLoad: () => { dispatch(load()) }
     })

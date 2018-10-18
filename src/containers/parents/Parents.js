@@ -62,8 +62,8 @@ class Parents extends Component {
             status = 'accepted';
             className = 'm-badge--success';
         }
-        if (record.get('rejected')) {
-            status = 'rejected';
+        if (record.get('declined')) {
+            status = 'declined';
             className = 'm-badge--danger';              
         }
         return <span className={`m-badge m-badge--brand m-badge--wide ${className}`}>{this.props.t(status)}</span>;

@@ -6,8 +6,8 @@ import 'cropperjs/dist/cropper.css';
 import Cropper from "react-cropper";
 import {NavLink} from "react-router-dom";
 import {Divider} from '@material-ui/core';
-import { selectSignUpRequest } from '../../redux/signUpPrincipal/selectors';
-import { signUp } from '../../redux/signUpPrincipal/actions';
+import { selectSignUpRequest } from '../../redux/signup/selectors';
+import { signUpPrincipal, resetSignUpRequest } from '../../redux/signup/actions';
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 import Loader from "../../components/layouts/Loader";
 import {selectRecords} from "../../redux/countries/selectors";
@@ -365,8 +365,9 @@ SignUpPrincipal = connect(
     countries: selectRecords(state),
   }),
   (dispatch) => ({
-    signUp: (form, params = {}) => { dispatch(signUp(form, params)) },
-    getCountries: (params = {}) => { dispatch(getCountries(params)) },
+    signUp: (form, params = {}) => { dispatch(signUpPrincipal(form, params)) },
+    resetSignUpRequest: () => { dispatch(resetSignUpRequest()) },
+    getCountries: (params = {}) => { dispatch(getCountries(params)) }
   })
 )(SignUpPrincipal);
 

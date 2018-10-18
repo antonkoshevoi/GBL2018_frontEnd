@@ -120,6 +120,13 @@ export default  {
         ]
     },
     {
+        key: 'connections',
+        title: 'myConnections',
+        link: 'connections',
+        icon: 'fa fa-group',
+        colorName: 'orange'
+    },
+    {
       key:'orders',
       title:'myOrders',
       link:'store/shopping-cart',

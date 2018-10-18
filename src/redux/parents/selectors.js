@@ -24,9 +24,9 @@ export const selectGetRecordRequest = createSelector(
 /**
  * Get student requests request
  */
-export const selectStudentRequestsRequest = createSelector(
+export const selectStudentsRequest = createSelector(
   selectParentsDomain,
-  (subState) => subState.get('getStudentRequestsRequest')
+  (subState) => subState.get('getStudentsRequest')
 );
 
 

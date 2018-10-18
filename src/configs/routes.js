@@ -74,6 +74,8 @@ import EditMessage from '../containers/messages/EditMessage';
 import ViewMessage from '../containers/messages/ViewMessage';
 
 import AcceptStudent from '../containers/parents/AcceptStudent';
+import AcceptConnection from '../containers/connections/AcceptConnection';
+import Connections from '../containers/connections/Connections';
 
 export default () => (
   <AppContainer>
@@ -99,7 +101,8 @@ export default () => (
       <Route exact layout={MainLayout} path='/store/category/:category/:subCategory/:type' name='Store' component={Store}/>
       <Route exact layout={MainLayout} path='/store/products/:category/:type' name='Store' component={Products}/>       
       
-      <Route exact layout={MainLayout} path='/students/accept/:id/:hash' name='Accept student request' component={AcceptStudent}/>       
+      <Route exact layout={MainLayout} path='/students/accept/:id/:hash' name='Accept student request' component={AcceptStudent}/>
+      <Route exact layout={MainLayout} path='/connections/accept/:id/:hash' name='Accept connection request' component={AcceptConnection}/>
 
       <Route exact path='/' render={() => (
         <Redirect to='/splash'/>
@@ -167,6 +170,9 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/accounts/unassigned_credits' name='Unassigned Credits' component={UnassignedCredits} />
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/accounts/transactions' name='Transactions' component={Transactions} />
 
+      {/*Connections*/}
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Parents']} path='/connections' name='Connections' component={Connections} />
+      
       {/*Payments*/}
       <Route exact path='/payments/paypal/return' component={PayPalReturnContainer} />
       <Route exact layout={MainLayout} path='/payments/success' component={PaymentSuccessContainer} />
