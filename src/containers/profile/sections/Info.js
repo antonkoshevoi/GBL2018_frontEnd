@@ -109,7 +109,7 @@ class Info extends Component {
         <div className="m-portlet__body">
           <div className="m-card-profile">
             <div className="m-card-profile__details">
-              <span className="m-card-profile__name">{user.firstName} {user.lastName}</span>
+              <span className="m-card-profile__name">{user.name}</span>
               <span className="m-card-profile__email">{user.username}</span>
             </div>
             <div className="m-card-profile__pic">

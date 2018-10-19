@@ -1959,6 +1959,8 @@ fieldset[disabled] a.btn {
 .btn-link {
   font-weight: 400;
   color: #5867dd;
+  border-color: transparent;
+  padding: 0;
   background-color: transparent; }
   .btn-link:hover {
     color: #2739c1;

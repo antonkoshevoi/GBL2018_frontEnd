@@ -2,6 +2,7 @@ import {
     GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL,
     GET_RECEIVED_RECORDS, GET_RECEIVED_RECORDS_SUCCESS, GET_RECEIVED_RECORDS_FAIL,
     GET_RECORD, GET_RECORD_SUCCESS, GET_RECORD_FAIL, RESET_GET_RECORD_REQUEST, 
+    GET_USERS, GET_USERS_SUCCESS, GET_USERS_FAIL,
     CREATE, CREATE_SUCCESS, CREATE_FAIL, RESET_CREATE_REQUEST, 
     ACCEPT, ACCEPT_SUCCESS, ACCEPT_FAIL, 
     ACCEPT_PUBLIC, ACCEPT_PUBLIC_SUCCESS, ACCEPT_PUBLIC_FAIL, 
@@ -26,6 +27,13 @@ const initialState = Immutable.fromJS({
     }    
   },
   getReceivedRecordsRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null,
+    records: {}   
+  },
+  getUsersRequest: {
     loading: false,
     success: false,
     fail: false,
@@ -77,24 +85,32 @@ export default function reducer (state = initialState, action) {
         .set('getRecordsRequest', state.get('getRecordsRequest')
           .set('success', true)
           .set('records', Immutable.fromJS(action.result.data))
+          .set('pagination', Immutable.fromJS(action.result.pagination))
           .remove('loading')
         );
     case GET_RECORDS_FAIL:
       return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('fail', true));
 
-
+    /**
+     * Get pending requests
+     */
     case GET_RECEIVED_RECORDS:
       return state.set('getReceivedRecordsRequest', initialState.get('getReceivedRecordsRequest').set('loading', true).set('records', Immutable.List()));
     case GET_RECEIVED_RECORDS_SUCCESS:
-      return state
-        .set('getReceivedRecordsRequest', state.get('getReceivedRecordsRequest')
-          .set('success', true)
-          .set('records', Immutable.fromJS(action.result.data))
-          .remove('loading')
-        );
+      return state.set('getReceivedRecordsRequest', initialState.get('getReceivedRecordsRequest').set('success', true).set('records', Immutable.fromJS(action.result.data)));
     case GET_RECEIVED_RECORDS_FAIL:
       return state.set('getReceivedRecordsRequest', initialState.get('getReceivedRecordsRequest').set('fail', true));
 
+    /**
+     * Get connected users
+     */
+    case GET_USERS:
+      return state.set('getUsersRequest', initialState.get('getUsersRequest').set('loading', true).set('records', Immutable.List()));
+    case GET_USERS_SUCCESS:
+      return state.set('getUsersRequest', initialState.get('getUsersRequest').set('success', true).set('records', Immutable.fromJS(action.result.data)));
+    case GET_USERS_FAIL:
+      return state.set('getUsersRequest', initialState.get('getUsersRequest').set('fail', true));
+      
     /**
      * Get single record
      */

@@ -12,14 +12,16 @@ class DeleteButton extends Component {
     message: PropTypes.any,
     classNameBtn: PropTypes.any,
     icon: PropTypes.any,
-    btnName: PropTypes.any
+    btnName: PropTypes.any,
+    confirmOnly: PropTypes.any
   };
 
   static defaultProps = {
-    classNameBtn: "btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5",                   
+    className: "btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5",
     btnName: 'Delete',
     title: 'Are you sure?',
-    icon: 'la la-remove'
+    icon: 'la la-remove',
+    confirmOnly: false
   };
 
   constructor(props) {
@@ -38,17 +40,17 @@ class DeleteButton extends Component {
   };
 
   _onConfirm() {
-    this.setState({opened: false});    
+    this.setState({opened: false});
     this.props.onClick();
   };
 
   render() {
-    const {classNameBtn, title, icon, btnName} = this.props;
+    const {className, title, icon, btnName, confirmOnly} = this.props;
     const {opened} = this.state;
     
     return (
       <span>
-        <a title={btnName} className={classNameBtn} style={{color: '#fff'}} onClick={() => { this._openConfirm() }}> { icon ? <i className={icon}></i> : btnName } </a>
+        <button title={btnName} className={className} onClick={() => { this._openConfirm() }}> { icon ? <i className={icon}></i> : btnName } </button>
         <Dialog
           open={opened}
           onClose={() => { this._onCancel() }}
@@ -57,9 +59,7 @@ class DeleteButton extends Component {
           <DialogTitle className="text-center" id="alert-dialog-title" style={{minWidth: 300}}>{title}</DialogTitle>
           <div className="text-center m--margin-bottom-20 m--margin-top-10">
             <button onClick={() => { this._onConfirm() }} className="btn-success m-btn btn m--margin-right-10">Ok</button>
-            <button onClick={() => { this._onCancel() }} className="btn-default m-btn btn btn">
-              Cancel
-            </button>
+            {!confirmOnly && <button onClick={() => { this._onCancel() }} className="btn-default m-btn btn btn">Cancel</button>}
           </div>
         </Dialog>
       </span>

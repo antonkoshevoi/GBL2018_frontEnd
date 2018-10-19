@@ -42,7 +42,7 @@ class AssignStudentForm extends Component {
     const { parentStudents } = this.props;    
     return parentStudents.toJS().map((student, key) => (
       <MenuItem key={key} value={ student.id }>
-        { student.firstName } { student.lastName }
+        { student.name }
       </MenuItem>
     ));    
   }

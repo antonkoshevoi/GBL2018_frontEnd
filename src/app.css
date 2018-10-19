@@ -45,7 +45,7 @@ textarea {
 }
 
 .g-metal {
-    color: #555 !important;
+    color: #777 !important;
 }
 
 .img-responsive {
@@ -114,10 +114,6 @@ textarea {
 
 .gravity-logo {
     padding: 0 50px 0 0;
-}
-
-.gravity-input{
-
 }
 
 .table.m-table-noborder th, .table.m-table-noborder td {

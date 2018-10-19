@@ -83,6 +83,11 @@ export const selectCartRecordsSum = createSelector(
     (subState) => subState.get('totalSum')
 );
 
+export const selectCartRecordsCount = createSelector(
+    selectStoreDomain,
+    (subState) => subState.get('itemsCount')
+);
+
 /**
  * Add To Cart Request
  */

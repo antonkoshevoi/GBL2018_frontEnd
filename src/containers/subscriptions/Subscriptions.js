@@ -33,7 +33,7 @@ class Subscriptions extends Component {
     return getRecordsRequest.get('records').map((record, key) => {
         const courses = <span style={{fontWeight: 500}}>{record.get('allowedCourses')}</span>;
         return (        
-        <div className="subscription-item-block col-sm-12 col-md-4 col-lg-4 col-xl-4 m--margin-top-35">
+        <div key={key} className="subscription-item-block col-sm-12 col-md-4 col-lg-4 col-xl-4 m--margin-top-35">
             <div className={`subscription-item item-${key}`}>
                 <div className="subscription-header"><h1>{record.get('title')}</h1></div>
                 <div className="subscription-content">

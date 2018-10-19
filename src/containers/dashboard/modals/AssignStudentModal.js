@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import {translate} from "react-i18next";
 import Modal from '../../../components/ui/Modal';
-import {selectRecords} from "../../../redux/students/selectors";
+import {selectRecords, selectGetRecordsRequest} from "../../../redux/students/selectors";
 import {getRecords} from "../../../redux/students/actions";
 import { selectAssignCourseCreditRequest } from "../../../redux/classrooms/selectors";
 import { assignCourseCreditRequest, resetAssignCourseCreditRequest } from "../../../redux/classrooms/actions";
@@ -30,10 +30,6 @@ class AssignStudentModal extends Component {
     };
   };
 
-  componentDidMount() {    
-    const {getStudents} = this.props;    
-    getStudents();
-  }
   
   componentWillReceiveProps(nextProps) {    
     const success = this.props.assignCourseCreditRequest.get('success');
@@ -42,7 +38,11 @@ class AssignStudentModal extends Component {
     if (!success && nextSuccess) {
       this._close();     
       this.props.onSuccess();
-    } 
+    }
+    
+    if (!this.props.isOpen && nextProps.isOpen) {
+        this.props.getStudents();
+    }    
   };
   
   _close () {     
@@ -67,7 +67,7 @@ class AssignStudentModal extends Component {
 
     return students.map((student, key) => (
       <MenuItem key={key} value={student.id}>
-        {student.firstName} {student.lastName}
+        {student.name}
       </MenuItem>
     ));
   }  
@@ -79,8 +79,8 @@ class AssignStudentModal extends Component {
   }
   
   render() {
-    const { isOpen, course, assignCourseCreditRequest, t } = this.props;
-    const loading = assignCourseCreditRequest.get('loading');
+    const { isOpen, course, assignCourseCreditRequest, getStudentsRequest, t } = this.props;
+    const loading = assignCourseCreditRequest.get('loading') || getStudentsRequest.get('loading');
     const errors  = assignCourseCreditRequest.get('errors');
         
     return (
@@ -151,6 +151,7 @@ class AssignStudentModal extends Component {
 AssignStudentModal = connect(
   (state) => ({
     students: selectRecords(state),
+    getStudentsRequest: selectGetRecordsRequest(state),
     assignCourseCreditRequest: selectAssignCourseCreditRequest(state)
   }),
   (dispatch) => ({

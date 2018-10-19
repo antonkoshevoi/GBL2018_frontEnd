@@ -4,8 +4,8 @@ import { translate } from 'react-i18next';
 import { Avatar } from '@material-ui/core';
 import { selectGetUnreadMessagesRequest } from '../../redux/messages/selectors';
 import { getUnreadMessages } from '../../redux/messages/actions';
-import {NavLink} from "react-router-dom";
-import {Typography} from '@material-ui/core';
+import { selectUserData } from "../../redux/user/selectors";
+import { NavLink } from "react-router-dom";
 import HasPermission from "../middlewares/HasPermission";
 
 class Messages extends Component {
@@ -21,7 +21,13 @@ class Messages extends Component {
     }
           
     componentDidMount() {
-        this.props.getMessages();        
+        const {userData} = this.props;
+        if (userData.get('newMessagesCount')) {
+            this.setState({
+                messages:   userData.get('newMessages'),
+                count:      userData.get('newMessagesCount')
+            });
+        }
         this.interval = setInterval(() => this.tick(), 1000);
     }
     
@@ -40,7 +46,7 @@ class Messages extends Component {
         this.setState((prevState) => {
             let seconds = prevState.seconds;
             if (seconds > 60) {
-                this.props.getMessages();            
+                this.props.getMessages();
                 seconds = 0;
             }
             return {
@@ -90,10 +96,10 @@ class Messages extends Component {
                 <span className="m-dropdown__arrow m-dropdown__arrow--center"></span>
                 <div className="m-dropdown__inner">
                     <div className="m-dropdown__body">
-                        <div className="m-dropdown__content">                                            
-                            <Typography variant="subheading" style={{color: '#999'}}>
-                                <i className="fa fa-envelope"></i> {t('messages')}
-                            </Typography>                                                               
+                        <div className="m-dropdown__content">
+                            <h5 className="g-metal">
+                                <i className="fa fa-envelope m--margin-right-5"></i> {t('messages')}
+                            </h5>
                             <div>
                               {(this.state.count > 0) ?
                                 <div className='m-dropdown__body'>
@@ -124,18 +130,19 @@ class Messages extends Component {
                     </div>
                 </div>
             </div>}
-        </li>          
+        </li>
     );
   }
 }
 
 Messages = connect(
-  (state) => ({
-    unreadMessagesRequest: selectGetUnreadMessagesRequest(state)
-  }),
-  (dispatch) => ({    
-    getMessages: () => { dispatch(getUnreadMessages())}    
-  })
+    (state) => ({
+        userData: selectUserData(state),
+        unreadMessagesRequest: selectGetUnreadMessagesRequest(state)
+    }),
+    (dispatch) => ({    
+        getMessages: () => { dispatch(getUnreadMessages())}    
+    })
 )(Messages);
 
 export default translate('translations')(Messages);
