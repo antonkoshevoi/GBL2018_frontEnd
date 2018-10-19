@@ -1,5 +1,3 @@
-import { updateCartItems } from '../user/actions';
-
 export const GET_RECORDS = '[Store] GET_RECORDS';
 export const GET_RECORDS_SUCCESS = '[Store] GET_RECORDS_SUCCESS';
 export const GET_RECORDS_FAIL = '[Store] GET_RECORDS_FAIL';

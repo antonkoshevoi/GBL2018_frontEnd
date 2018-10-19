@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {translate} from "react-i18next";
-import LineChart from "./widgets/LineChart";
+import LineChart from "../widgets/LineChart";
 import PassRate from "../widgets/PassRate";
 import SchoolAverageChart from "../widgets/SchoolAverageChart";
 import RosterStatistic from "./widgets/RosterStatistic";
@@ -47,7 +47,7 @@ class Dashboard extends Component {
               <PassRate loading={dataRequest.get('loading')}  data={dataRequest.get('data').toJS()} />
             </div>
             <div className="col-sm-12 col-md-6 col-lg-3">
-              <LineChart homeroomId={homeroomId}/>
+              <LineChart type='homeroom' id={homeroomId} />
             </div>            
             <div className="col-md-12">
                 <div className="m--margin-top-25">

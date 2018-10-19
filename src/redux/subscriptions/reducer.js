@@ -353,8 +353,7 @@ export default function reducer (state = initialState, action) {
           .set('success', true)
           .set('loading', false)          
           .set('records', Immutable.fromJS(action.result.data))
-        )
-        .set('pagination', Immutable.fromJS(action.result.meta.pagination));
+        ).set('pagination', Immutable.fromJS(action.result.meta.pagination));
     case GET_PAYMENTS_FAIL:
       return state
         .set('getPaymentsRequest', state.get('getPaymentsRequest')
@@ -368,7 +367,8 @@ export default function reducer (state = initialState, action) {
     case GIFT_SUBSCRIPTION_SUCCESS:
         return state.set('giftSubscriptionRequest', initialState.get('giftSubscriptionRequest').set('success', true));
     case GIFT_SUBSCRIPTION_FAIL:
-        return state.set('giftSubscriptionRequest', initialState.get('giftSubscriptionRequest').set('fail', true));
+        return state.set('giftSubscriptionRequest', initialState.get('giftSubscriptionRequest').set('fail', true)
+                .set('errors', Immutable.fromJS(action.error.response.data.errors)));
     case RESET_GIFT_SUBSCRIPTION_REQUEST:
         return state.set('giftSubscriptionRequest', initialState.get('giftSubscriptionRequest'));
     /**

@@ -53,6 +53,7 @@ class GiftForm extends Component {
         <div className='col-sm-8 col-lg-12 m-auto'>
         {(usersRequest.get('success')) ? (
             <div>
+            {usersRequest.get('records').size ?
                 <FormControl className='full-width form-inputs'>
                   <InputLabel htmlFor='name-error'>{t('giftToPersone')}</InputLabel>                 
                   <Select
@@ -64,8 +65,11 @@ class GiftForm extends Component {
                     <MenuItem value={null} primarytext=""/>
                     { this._renderFriends() }
                   </Select>
-                  {errors && errors.get('studentId') && <FormHelperText error>{ errors.get('userId').get(0) }</FormHelperText>}            
+                  {errors && errors.get('userId') && <FormHelperText error>{ errors.get('userId').get(0) }</FormHelperText>}            
                 </FormControl>
+                :
+                    <p>{t('youDonNotHaveAnyConnections')}</p>
+                }
             </div>
         ) : (
             <div className="text-center" style={{width: '100%'}}><CircularProgress color="primary"/></div>

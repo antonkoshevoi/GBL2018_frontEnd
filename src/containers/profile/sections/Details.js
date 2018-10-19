@@ -123,7 +123,7 @@ class Details extends Component {
                       <h3 className="m-widget1__title">{t('firstName')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{user.firstName}</span>
+                      <span className="m-widget1__title m--font-brand">{user.firstName || '-'}</span>
                     </div>
                   </div>
                 </div>
@@ -133,7 +133,7 @@ class Details extends Component {
                       <h3 className="m-widget1__title">{t('lastName')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{user.lastName}</span>
+                      <span className="m-widget1__title m--font-brand">{user.lastName || '-'}</span>
                     </div>
                   </div>
                 </div>
