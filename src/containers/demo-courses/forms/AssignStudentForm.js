@@ -59,7 +59,7 @@ class AssignStudentForm extends Component {
 
     return schoolStudents.map((students, key) => (
       <MenuItem key={key} value={ students.id }>
-        { students.firstName } { students.lastName }
+        { students.name }
       </MenuItem>
     ));
   }

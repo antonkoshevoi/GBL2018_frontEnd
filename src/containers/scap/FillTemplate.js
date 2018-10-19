@@ -129,7 +129,7 @@ class FillTemplate extends Component {
 
         return students.map((student, key) => (
             <MenuItem key={key} value={ student.id }>
-                { student.firstName } { student.lastName }
+                { student.name }
             </MenuItem>
         ));
     }

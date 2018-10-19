@@ -114,7 +114,7 @@ class Classrooms extends Component {
             <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
         </HasRole>
         <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
-        <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
+        <Td width='132px'>{record.getIn(['teacher', 'name'])}</Td>
         <Td width='75px'>{record.get('studentsCount')}</Td>
         <Td width='75px'>{(record.get('isPublic') ? t('yes') : t('no'))}</Td>
         <Td width='75px'>            

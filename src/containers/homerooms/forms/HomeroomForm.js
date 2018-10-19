@@ -131,7 +131,7 @@ class HomeroomForm extends Component {
 
     return schoolTeachers.map((teacher, key) => (
       <MenuItem key={key} value={ teacher.id }>
-        { teacher.firstName } { teacher.lastName }
+        { teacher.name }
       </MenuItem>
     ));
   }
@@ -159,7 +159,7 @@ class HomeroomForm extends Component {
             onChange={ (e) => {this._handleStudentsCheckboxChange(e) }}
             value={student.id.toString()}
           />}
-          label={(student.firstName ? student.firstName : '-') + ' ' + (student.lastName ? student.lastName : '-')}
+          label={student.name}
         />
       </Grid>
     ))

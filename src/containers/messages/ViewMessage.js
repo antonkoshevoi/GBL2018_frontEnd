@@ -115,7 +115,7 @@ class ViewMessage extends Component {
                                         btnName={t('delete')}
                                         icon={false}
                                         disabled={loading}
-                                        classNameBtn="m--margin-right-10 btn btn-danger" />
+                                        className="m--margin-right-10 btn btn-danger" />
                                 </HasPermission>
                                 <button onClick={() => { this._goBack() }} disabled={loading} className="btn btn-default" >{t('back')}</button>
                             </div>

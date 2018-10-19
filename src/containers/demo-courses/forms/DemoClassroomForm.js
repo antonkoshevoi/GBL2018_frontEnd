@@ -114,7 +114,7 @@ class DemoClassroomForm extends Component {
 
     return schoolTeachers.map((teacher, key) => (
       <MenuItem key={key} value={ teacher.id }>
-        { teacher.firstName } { teacher.lastName }
+        { teacher.name }
       </MenuItem>
     ));
   }

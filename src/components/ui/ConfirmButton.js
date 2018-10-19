@@ -1,19 +1,40 @@
-import React from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
-const ConfirmButton = ({ onClick, ...rest }) => {
+import DeleteButton from './DeleteButton';
 
-  const _onClick = (e) => {
-    if (window.confirm('Are you sure?')) {
-      return onClick (e);
-    }
+class ConfirmButton extends Component {
+
+  static propTypes = {
+        onClick: PropTypes.func,
+        title: PropTypes.any,
+        message: PropTypes.any,
+        classNameBtn: PropTypes.any,
+        icon: PropTypes.any,
+        btnName: PropTypes.any,
+        confirmOnly: PropTypes.any
   };
 
-  return (
-    <button
-      {...rest}
-      onClick={_onClick}>
-    </button>
-  );
+    static defaultProps = {
+        className: "btn-info",
+        classNameDefault: "btn m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5",
+        btnName: 'Delete',
+        title: 'Are you sure?',
+        icon: 'la la-remove',
+        confirmOnly: false
+    };
+    
+    _onConfirm() {
+        if (this.props.onClick) {
+            this.props.onClick();
+        }
+    }
+
+    render() {
+        const {classNameDefault, className, title, icon, btnName, confirmOnly} = this.props;    
+    
+        return <DeleteButton onClick={() => { this._onConfirm() }} title={title} icon={icon} btnName={btnName} confirmOnly={confirmOnly} className={`${classNameDefault} ${className}`}/>;
+    }
 };
 
 export default ConfirmButton;

@@ -131,7 +131,7 @@ class ParentDashboard extends Component {
                 <div className="d-flex align-items-center">
                   <Avatar alt={student.firstName} src={student.avatar} className={classes.bigAvatar}/>
                   <div className="info">
-                    <h5 className={classes.name}>{(student.firstName || student.lastName) ? student.firstName + " " + student.lastName : student.username}</h5>
+                    <h5 className={classes.name}>{student.name}</h5>
                     <span className={classes.username}>{student.username}</span>
                     <div className={classes.progress}>
                       <div className="progress m-progress--sm" style={{minWidth: 80, marginRight:5}}>
@@ -223,20 +223,13 @@ class ParentDashboard extends Component {
               <div className="col-md-6 col-lg-6 col-xl-3">
                 <QuickLink className="m--margin-top-15"/>
               </div>
-              <div className="col-md-6 col-lg-6 m--visible-tablet-and-mobile m--visible-desktop-lg m--margin-top-15">
-                  <div>
-                      <ShoppingCart preview = {true}/>
-                  </div>
-              </div>
             </div>
             <div className="row">
               <div className="col-md-12 col-lg-12 col-xl-8 margin-top-15">
                   <FeaturedItems data={storeItems}/>
               </div>
               <div className="col-md-4 col-xl-4 m--hidden-tablet-and-mobile m--hidden-desktop-lg m--margin-top-15">
-                  <div>
-                      <ShoppingCart preview = {true}/>
-                  </div>
+                  <ShoppingCart preview = {true}/>
               </div>
             </div>
             <CreateStudentModal

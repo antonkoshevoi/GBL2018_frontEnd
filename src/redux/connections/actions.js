@@ -8,6 +8,10 @@ export const GET_RECEIVED_RECORDS = '[Connections] GET_REQUESTS';
 export const GET_RECEIVED_RECORDS_SUCCESS = '[Connections] GET_RECEIVED_RECORDS_SUCCESS';
 export const GET_RECEIVED_RECORDS_FAIL = '[Connections] GET_RECEIVED_RECORDS_FAIL';
 
+export const GET_USERS = '[Connections] GET_USERS';
+export const GET_USERS_SUCCESS = '[Connections] GET_USERS_SUCCESS';
+export const GET_USERS_FAIL = '[Connections] GET_USERS_FAIL';
+
 export const GET_RECORD = '[Connections] GET_RECORD';
 export const GET_RECORD_SUCCESS = '[Connections] GET_RECORD_SUCCESS';
 export const GET_RECORD_FAIL = '[Connections] GET_RECORD_FAIL';
@@ -41,6 +45,13 @@ export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
     promise: (apiClient) => apiClient.get('connections', params)
+  };
+}
+
+export function getUsers(params = {}) {
+  return {
+    types: [GET_USERS, GET_USERS_SUCCESS, GET_USERS_FAIL],
+    promise: (apiClient) => apiClient.get('connections/users', params)
   };
 }
 

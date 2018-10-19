@@ -84,7 +84,7 @@ class Homerooms extends Component {
         <HasRole roles={['Superadministrator']}>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
         </HasRole>
-        <Td width='132px'>{record.getIn(['teacher', 'firstName'])} {record.getIn(['teacher', 'lastName'])}</Td>
+        <Td width='132px'>{record.getIn(['teacher', 'name'])}</Td>
         <Td width='132px'>{record.get('studentsCount')}</Td>
         <HasPermission permissions={['[HomeRooms][Update][Any]', 'HomeRooms][Delete][Any']}>
         <Td width='100px'>

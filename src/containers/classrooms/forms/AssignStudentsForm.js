@@ -76,7 +76,7 @@ class AssignStudentsForm extends Component {
             onChange={ (e) => {this._handleStudentsCheckboxChange(e) }}
             value={student.id.toString()}
           />}
-          label={(student.firstName ? student.firstName : '-') + ' ' + (student.lastName ? student.lastName : '-')}
+          label={student.name}
         />
       </Grid>
     ))

@@ -93,7 +93,7 @@ class OpenInvoicesTable extends Component {
                    title={t('deleteItemFromCartConfirmation', {item: item.storeItem.title})}
                    icon={false}
                    btnName={t('delete')}
-                   classNameBtn="productLink g-blue"
+                   className="productLink g-blue btn-link"
                  />
                </div>
               </div>

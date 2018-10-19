@@ -1,3 +1,5 @@
+import { updateCartItems } from '../user/actions';
+
 export const GET_RECORDS = '[Store] GET_RECORDS';
 export const GET_RECORDS_SUCCESS = '[Store] GET_RECORDS_SUCCESS';
 export const GET_RECORDS_FAIL = '[Store] GET_RECORDS_FAIL';
@@ -29,6 +31,7 @@ export const ADD_TO_CART_FAIL = '[Store] ADD_TO_CART_FAIL';
 
 export const UPDATE_SHOPPING_CART = '[Store] UPDATE_SHOPPING_CART';
 export const CALCULATE_CART_SUM = '[Store] CALCULATE_CART_SUM';
+export const UPDATE_SHOPPING_CART_COUNT = '[Store] UPDATE_SHOPPING_CART_COUNT';
 
 export const GET_UNASSIGNEDS = '[Store] GET_UNASSIGNEDS';
 export const GET_UNASSIGNEDS_SUCCESS = '[Store] GET_UNASSIGNEDS_SUCCESS';
@@ -139,13 +142,19 @@ export function getUnassigneds(params = {}) {
 /**
  *
  * @param data
- * @param total
- * @returns {{type: string, data: *, total: *}}
+ * @returns {{type: string, data: *}}
  */
-export function updateShoppingCart(data) {
+export function updateShoppingCart(data) {  
   return {
     type: UPDATE_SHOPPING_CART,
     data
+  }
+}
+
+export function updateShoppingCartCount(count) {  
+  return {
+    type: UPDATE_SHOPPING_CART_COUNT,
+    count
   }
 }
 

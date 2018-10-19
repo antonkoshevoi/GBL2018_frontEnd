@@ -68,16 +68,14 @@ class Header extends Component {
                 </div>
               </div>
             </div>
-            {(auth.get('isLoggedIn') && !hideMenu) &&
+            {(auth.get('isLoggedIn') && userRequest.get('success') && !hideMenu) &&
             <div className="m-stack__item m-stack__item--fluid m-header-head d-flex" id="m_header_nav">
               <button className="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-dark" id="m_aside_header_menu_mobile_close_btn">
                 <i className="la la-close"></i>
               </button>
-
               <div className="d-flex justify-content-center headerSchoolName align-items-center flex-1 hidden-sm">
-                {userRequest.get('success') && <h4 style={{color: '#777'}}> {user.school ? user.school.schName : ''} </h4>}
-              </div>
-
+                <h4 className="g-metal"> {user.school ? user.school.schName : ''} </h4>
+              </div>              
               <div id="m_header_topbar" className="m-topbar  m-stack m-stack--ver m-stack--general">
                 <div className="m-stack__item m-topbar__nav-wrapper">
                   <IconButton color='primary' className="m--hide mobile-sidebar-out-toggle" onClick={() => { this.props.mobileSidebar() }}>
