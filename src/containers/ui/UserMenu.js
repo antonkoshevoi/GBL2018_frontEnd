@@ -56,7 +56,7 @@ class UserMenu extends Component {
                 </li>
                 <li className="m-nav__item">
                   <NavLink to="/profile" className="m-nav__link">
-                    <i className="m-nav__link-icon flaticon-profile-1"></i>
+                    <i className="m-nav__link-icon la la-user"></i>
                     <span className="m-nav__link-title">
                       <span className="m-nav__link-wrap">
                         <span className="m-nav__link-text">{t('myProfile')}</span>
@@ -67,7 +67,7 @@ class UserMenu extends Component {
                 <HasRole roles={['Superadministrator', 'School']}>
                     <li className="m-nav__item">
                       <NavLink to="/school-profile" className="m-nav__link">
-                        <i className="m-nav__link-icon flaticon-profile-1"></i>
+                        <i className="m-nav__link-icon la la-bank"></i>
                         <span className="m-nav__link-title">
                           <span className="m-nav__link-wrap">
                             <span className="m-nav__link-text">{t('schoolProfile')}</span>

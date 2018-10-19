@@ -115,7 +115,7 @@ class TabSection extends Component {
             <div className="m-portlet__head-caption col-sm-4">
               <div className="m-portlet__head-title">
               <span className="m-portlet__head-icon">
-                <i className="flaticon-analytics"></i>
+                <i className="fa fa-line-chart"></i>
               </span>
               <h3 className="m-portlet__head-text">{t('reports')}</h3></div>
             </div>

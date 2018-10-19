@@ -25,14 +25,12 @@ export default  {
                 {
                     key: 'classrooms',
                     title: 'classrooms',
-                    link: 'classrooms/list',
-                    icon: 'flaticon flaticon-user-settings',
+                    link: 'classrooms/list'
                 },
                 {
                     key: 'homerooms',
                     title: 'homerooms',
-                    link: 'homerooms/list',
-                    icon: 'flaticon	flaticon-technology-1',
+                    link: 'homerooms/list'
                 }
             ]
         },
@@ -53,26 +51,22 @@ export default  {
                 {
                     key: 'inbox',
                     title: 'inbox',
-                    link: 'messages',
-                    icon: 'flaticon flaticon-user-settings',
+                    link: 'messages'
                 },
                 {
                     key: 'sent',
                     title: 'sent',
-                    link: 'messages/sent',
-                    icon: 'flaticon flaticon-technology-1',
+                    link: 'messages/sent'
                 },
                 {
                     key: 'compose',
                     title: 'compose',
-                    link: 'messages/new',
-                    icon: 'flaticon flaticon-technology-1',
+                    link: 'messages/new'
                 },
                 {
                     key: 'drafts',
                     title: 'drafts',
-                    link: 'messages/drafts',
-                    icon: 'flaticon flaticon-technology-1',
+                    link: 'messages/drafts'
                 }
             ]
         },
@@ -86,46 +80,37 @@ export default  {
                 {
                     key: 'courses',
                     title: 'courses',
-                    link: 'store/category/courses',
-                    icon: 'flaticon flaticon-user-settings'
+                    link: 'store/category/courses'
                 },
                 {
                     key: 'books',
                     title: 'Books',
-                    link: 'store/category/books',
-                    icon: 'flaticon flaticon-user-ok'
+                    link: 'store/category/books'
                 },
                 {
                     key: 'teaching_aids',
                     title: 'teachingAids',
-                    link: 'store/category/teaching_aids',
-                    icon: 'flaticon	flaticon-technology-1'
+                    link: 'store/category/teaching_aids'
                 },
                 {
                     key: 'stationary',
                     title: 'stationary',
-                    link: 'store/category/stationary',
-                    icon: 'flaticon	flaticon-technology-1'
+                    link: 'store/category/stationary'
                 },
                 {
                     key: 'student_rewards',
                     title: 'studentRewards',
-                    link: 'store/category/student_rewards',
-                    icon: 'flaticon flaticon-technology-1'
-   
+                    link: 'store/category/student_rewards'
                 },
                 {
                     key: 'tutoring_services',
                     title: 'tutoringServices',
-                    link: 'store/category/tutoring_services',
-                    icon: 'flaticon flaticon-technology-1'
-       
+                    link: 'store/category/tutoring_services'
                 },
                 {
                     key: 'bundles',
                     title: 'bundles',
-                    link: 'store/category/bundles',
-                    icon: 'flaticon flaticon-technology-1'
+                    link: 'store/category/bundles'
                 }
             ]
         },
@@ -139,20 +124,17 @@ export default  {
                 {
                     key: 'open_invoices',
                     title: 'openInvoices',
-                    link: 'accounts/invoices',
-                    icon: 'flaticon flaticon-user-settings',
+                    link: 'accounts/invoices'
                 },
                 {
                     key: 'unassigned_credits',
                     title: 'unassignedCredits',
-                    link: 'accounts/unassigned_credits',
-                    icon: 'flaticon flaticon-user-settings',
+                    link: 'accounts/unassigned_credits'
                 },
                 {
                     key: 'history',
                     title: 'historyTransactions',
-                    link: 'accounts/transactions',
-                    icon: 'flaticon flaticon-user-ok',
+                    link: 'accounts/transactions'
                 }
             ]
         },

@@ -67,7 +67,7 @@ class CsvUploadSection extends Component {
                         <div className="m-portlet__head-caption">
                             <div className="m-portlet__head-title">
                                 <span className="m-portlet__head-icon">
-                                    <i className="flaticon-cogwheel-2" />
+                                    <i className="fa fa-cog" />
                                 </span>
                                 <h3 className="m-portlet__head-text">CSV</h3>
                             </div>
@@ -126,7 +126,7 @@ class CsvUploadSection extends Component {
                                     }
                                 ]}
                                 title={t('results')}
-                                icon="flaticon-list-3"
+                                icon="fa fa-list-ul"
                             />
                         )}
                     </div>
