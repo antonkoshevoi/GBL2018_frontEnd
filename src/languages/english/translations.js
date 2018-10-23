@@ -527,6 +527,7 @@ export default {
     giftSubscription: 'Gift Subscription',
     makeGift: 'Make Gift',
     giftToPersone: 'Select Persone',
+    selectPersone: 'Select Persone',
     activeSubscriptions: 'Active Subscriptions',
     expiredSubscriptions: 'Expired Subscriptions',
     filterSubscriptions: 'Filter Subscriptions',
@@ -544,6 +545,7 @@ export default {
         students: 'School Students',
         teacher: 'Teacher',
         teacherId: 'Teacher',
+        userId: 'Connections',
         adminId: 'School Management'
     }
 }

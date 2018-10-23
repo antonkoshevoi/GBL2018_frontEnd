@@ -73,13 +73,13 @@ class ImageCropper extends Component {
 
   _reverseImage(scale) {
     if (scale === 'vertical') {
-      if (this.cropper.cropper.imageData.scaleY == 1) {
+      if (this.cropper.cropper.imageData.scaleY === 1) {
         this.cropper.scaleY(-1)
       } else {
         this.cropper.scaleY(1)
       }
     } else {
-      if (this.cropper.cropper.imageData.scaleX == 1) {
+      if (this.cropper.cropper.imageData.scaleX === 1) {
         this.cropper.scaleX(-1)
       } else {
         this.cropper.scaleX(1)
