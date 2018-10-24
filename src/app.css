@@ -1105,11 +1105,18 @@ address.signUpOptional {
     height: 60px;
 }
 
-
-.g-stepper > div > div:last-child {
+.g-stepper > div > div {
     top: 30px;
-    left: calc(50% + 30px);
-    right: calc(-50% + 30px);
+    width: calc(100% - 60px);
+    left: auto;
+    right: calc(50% + 30px);
+    position: absolute;
+}
+
+.g-stepper > div:last-child > div {    
+    left: calc(-50% + 25px);
+    width: calc(100% - 50px);
+    right: auto;
 }
 
 .m-portlet--info .m-portlet__nav-item .fa {
