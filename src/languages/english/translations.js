@@ -523,6 +523,7 @@ export default {
     areYouSureWantToDeclineThisRequest: 'Are you sure want to decline this connection?',
     connectionDetails: 'Connection Details',
     giftNotification: 'NOTE: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae libero ac eros porttitor sagittis sed vel velit. Donec ullamcorper diam elit, quis luctus nibh posuere vitae. Integer mattis quam risus, et cursus nisl consequat ut.',
+    giftCourseCreditNotification: 'NOTE: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae libero ac eros porttitor sagittis sed vel velit. Donec ullamcorper diam elit, quis luctus nibh posuere vitae. Integer mattis quam risus, et cursus nisl consequat ut.',
     waiting: 'Waiting',
     giftSubscription: 'Gift Subscription',
     makeGift: 'Make Gift',
