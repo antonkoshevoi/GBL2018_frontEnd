@@ -104,8 +104,7 @@ class QuestionModal extends Component {
           <Button
             type='submit'
             form='create-student-form'            
-            variant="raised"
-            className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+            className='mt-btn-success pull-right btn btn-success mt-btn'
             color='primary'>
             {t('add')}
           </Button>

@@ -129,9 +129,8 @@ class CreateTeacherModal extends Component {
           <Button
             type='submit'
             form='create-teacher-form'
-            disabled={loading}
-            variant="raised"
-            className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+            disabled={loading}            
+            className='mt-btn-success pull-right btn btn-success mt-btn'
             color='primary'>
             {t('addNewTeacher')}
           </Button>

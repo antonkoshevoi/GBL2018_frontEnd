@@ -194,9 +194,8 @@ class CourseModal extends Component {
             }}
             type='button'
             form='choose-course-form'
-            disabled={storeRecordsLoading}
-            variant="raised"
-            className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+            disabled={storeRecordsLoading}            
+            className='mt-btn-success pull-right btn btn-success mt-btn'
             color='primary'>
             {t('chooseCourse')}
           </Button>
