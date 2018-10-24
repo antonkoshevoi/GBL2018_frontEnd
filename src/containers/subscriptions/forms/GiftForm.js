@@ -55,7 +55,7 @@ class GiftForm extends Component {
             <div>
             {usersRequest.get('records').size ?
                 <FormControl className='full-width form-inputs'>
-                  <InputLabel htmlFor='name-error'>{t('giftToPersone')}</InputLabel>                 
+                  <InputLabel htmlFor='userId'>{t('giftToPersone')}</InputLabel>                 
                   <Select
                       primarytext=""
                       name='userId'

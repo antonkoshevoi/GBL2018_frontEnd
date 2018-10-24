@@ -536,7 +536,9 @@ export default {
     giftForYou: 'You',
     deleteMobileSubscription: 'This subscription is created via mobile appliation. You can cancel this one using mobile application only.',
     giftFrom: 'This subscription is purchased for you by {{user}}.',
+    giftCourseFrom: 'This course credit is purchased for you by {{user}}.',
     youDonNotHaveAnyConnections: 'You don\'t have any connections yet. Please use "My Connections" interface to sent connection requests to other users.',
+    giftCourseCredit: 'Gift Course Credit',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

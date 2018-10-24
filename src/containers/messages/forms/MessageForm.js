@@ -67,14 +67,13 @@ class MessageForm extends Component {
             }
         };
         
-        switch (recipient) {
-            case 'classroomIds': return load('getClassrooms',   'classroomsRequest');
-            case 'homeroomIds':  return load('getHomerooms',    'homeroomsRequest');
-            case 'teacherId':    return load('getTeachers',     'teachersRequest');
-            case 'adminId':      return load('getAdmins',       'adminsRequest');
-            case 'userId':       return load('getUsers',        'usersRequest');
-            default:             return false;
-        };
+        (({
+            classroomIds:   () => load('getClassrooms',   'classroomsRequest'),
+            homeroomIds:    () => load('getHomerooms',    'homeroomsRequest'),
+            teacherId:      () => load('getTeachers',     'teachersRequest'),
+            adminId:        () => load('getAdmins',       'adminsRequest'),
+            userId:         () => load('getUsers',        'usersRequest')
+        })[recipient] || (() => false))();
     }
     
     _handleCheckboxChange(event) {

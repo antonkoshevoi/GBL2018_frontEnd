@@ -11,8 +11,8 @@ import {translate} from "react-i18next";
 import Modal from '../../../components/ui/Modal';
 import {selectRecords, selectGetRecordsRequest} from "../../../redux/students/selectors";
 import {getRecords} from "../../../redux/students/actions";
-import { selectAssignCourseCreditRequest } from "../../../redux/classrooms/selectors";
-import { assignCourseCreditRequest, resetAssignCourseCreditRequest } from "../../../redux/classrooms/actions";
+import { selectAssignCourseCreditRequest } from "../../../redux/course-credits/selectors";
+import { assignCourseCredit, resetAssignCourseCreditRequest } from "../../../redux/course-credits/actions";
 
 class AssignStudentModal extends Component {
 
@@ -54,10 +54,10 @@ class AssignStudentModal extends Component {
   _handleSubmit (e) {            
     e.preventDefault();
        
-    const { course } = this.props;
+    const { unassignedItem } = this.props;
     
     this.props.assignCourseCredit({
-        creditId: course.id,
+        creditId: unassignedItem.id,
         studentId: this.state.studentId
     });    
   };
@@ -79,7 +79,7 @@ class AssignStudentModal extends Component {
   }
   
   render() {
-    const { isOpen, course, assignCourseCreditRequest, getStudentsRequest, t } = this.props;
+    const { isOpen, unassignedItem, assignCourseCreditRequest, getStudentsRequest, t } = this.props;
     const loading = assignCourseCreditRequest.get('loading') || getStudentsRequest.get('loading');
     const errors  = assignCourseCreditRequest.get('errors');
         
@@ -102,10 +102,10 @@ class AssignStudentModal extends Component {
             <div className='row'>                    
                 <FormGroup row style={{minWidth: '500px'}}>
                     <div className='col-sm-6 col-lg-6 m-auto'>
-                    {course &&
+                    {unassignedItem &&
                         <div className="text-center">
-                          <img alt={course.title} src={course.image} width={70}/>
-                          <p className='m--margin-top-25'><strong>{course.title}</strong></p>
+                          <img alt={unassignedItem.item.title} src={unassignedItem.item.thumbnail} width={70}/>
+                          <p className='m--margin-top-25'><strong>{unassignedItem.item.title}</strong></p>
                         </div>}
                     </div>
                     <div className='col-sm-6 col-lg-6 m-auto'>    
@@ -115,7 +115,7 @@ class AssignStudentModal extends Component {
                             primarytext={t('selectStudent')}
                             id='studentId'
                             name='studentId'
-                            value={this.state.studentId}
+                            value={this.state.studentId || ''}
                             onChange={(e) => {
                               this._handleInputChange(e)
                             }}> 
@@ -156,7 +156,7 @@ AssignStudentModal = connect(
   }),
   (dispatch) => ({
     getStudents: (params = {}) => { dispatch(getRecords(params)) },
-    assignCourseCredit: (form, params = {}) => { dispatch(assignCourseCreditRequest(form, params)) },
+    assignCourseCredit: (form, params = {}) => { dispatch(assignCourseCredit(form, params)) },
     resetAssignCourseCreditRequest: () => { dispatch(resetAssignCourseCreditRequest()) }
   })
 )(AssignStudentModal);

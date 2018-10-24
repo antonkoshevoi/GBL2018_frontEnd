@@ -102,7 +102,7 @@ class OpenInvoicesTable extends Component {
           {!preview &&
           <Td width="132px">
             <span className="productLabel font-weight-normal text-center">
-               { item.classroom ? item.classroom.crm_name : ''}
+               { item.classroom ? item.classroom.crm_name : '-'}
             </span>
           </Td>
           }

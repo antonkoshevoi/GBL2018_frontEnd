@@ -154,7 +154,7 @@ class MySubscriptions extends Component {
                     </Td>
                     <Td width='150px'>
                         {item.isGift ? t('giftForYou') : (isOwner ? t('self') : item.ownerName)}
-                        {item.isGift && <ConfirmButton icon='la la-gift' className='btn-success m--margin-left-15' confirmOnly={true} title={t('giftFrom', {user: item.ownerName}) } /> }
+                        {item.isGift && <ConfirmButton icon='la la-gift' className='btn-success m--margin-left-15' confirmOnly={true} title={t('giftFrom', {user: item.userName}) } /> }
                     </Td>
                     <Td width='120px'>{moment(item.createdAt).format('ll')}</Td>
                     <Td width='120px'>{item.expiredAt ? moment(item.expiredAt).format('ll') : '-'}</Td>  
