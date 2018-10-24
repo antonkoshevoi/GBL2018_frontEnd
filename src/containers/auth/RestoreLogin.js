@@ -70,10 +70,10 @@ class RestoreLogin extends Component {
                   </div>
                   <div className="m-login__form m-form" action="">
                     <div className="form-group m-form__group">
-                      <div className="m-list-search form-control m-input m--padding-10 d-flex align-items-center">
+                      <div className="form-control m-input m--padding-10 d-flex align-items-center">
                         <Avatar src={user.get('avatar')}/>
                         <span
-                            className="m-list-search__result-item-text m--margin-left-10">{user.get('username')}</span>
+                            className="m--margin-left-10">{user.get('username')}</span>
                       </div>
                         {(errors.errors !== undefined && errors.errors.username) && <div id="username-error"
                                                                                          className="form-control-feedback  text-center error">{errors.errors.username[0]}</div>}

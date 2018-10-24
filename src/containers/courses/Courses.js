@@ -49,8 +49,7 @@ class Courses extends Component {
         <div className='m-portlet m-portlet--head-solid-bg'>
           <div className='m-portlet__head'>
             <div className="m-portlet__head-tools">
-              <Tabs
-                className="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x main-tabs "
+              <Tabs                
                 value={this.state.activeTab}
                 onChange={this.handleChange}>
                 <Tab value="1" label={t('courses')} />

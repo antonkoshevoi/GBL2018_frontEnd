@@ -49,7 +49,7 @@ class Dashboard extends Component {
               <RosterStatistic/>
             </div>
             <div className="col-sm-12 col-md-6 col-lg-3">
-              <LineChart/>
+              <LineChart type='school'/>
             </div>
             <div className="col-sm-12 col-md-6 col-lg-3">
                 <PassRate loading={dataRequest.get('loading')}  data={dataRequest.get('data').toJS()} />

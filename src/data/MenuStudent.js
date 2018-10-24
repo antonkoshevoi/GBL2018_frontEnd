@@ -18,14 +18,12 @@ export default  {
             {
                 key: 'inbox',
                 title: 'inbox',
-                link: 'messages',
-                icon: 'flaticon flaticon-user-settings'
+                link: 'messages'
             },
             {
                 key: 'sent',
                 title: 'sent',
-                link: 'messages/sent',
-                icon: 'flaticon flaticon-technology-1'
+                link: 'messages/sent'
             }
         ]
     },

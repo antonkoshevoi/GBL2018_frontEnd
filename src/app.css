@@ -96,6 +96,10 @@ textarea {
     border-bottom: #4fa1ea solid 1px !important;
 }
 
+.border-b-darkblue {
+    border-bottom: #385774 solid 1px !important;
+}
+
 .border-b-darkgreen {
     border-bottom: #558436 solid 1px !important;
 }

@@ -95,7 +95,7 @@ class Details extends Component {
             <div className="m-portlet__head-caption">
               <div className="m-portlet__head-title">
                 <span className="m-portlet__head-icon">                  
-                    <i className="flaticon-info"></i>
+                    <i className="fa fa-id-card-o"></i>
                 </span>
                 <h3 className="m-portlet__head-text">
                   {t('info')}
@@ -123,7 +123,7 @@ class Details extends Component {
                       <h3 className="m-widget1__title">{t('firstName')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{user.firstName}</span>
+                      <span className="m-widget1__title m--font-brand">{user.firstName || '-'}</span>
                     </div>
                   </div>
                 </div>
@@ -133,7 +133,7 @@ class Details extends Component {
                       <h3 className="m-widget1__title">{t('lastName')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{user.lastName}</span>
+                      <span className="m-widget1__title m--font-brand">{user.lastName || '-'}</span>
                     </div>
                   </div>
                 </div>

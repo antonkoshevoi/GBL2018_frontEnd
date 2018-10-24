@@ -15,9 +15,6 @@ import {
   GET_SINGLE_RECORD_FAIL,
   GET_SINGLE_RECORD_SUCCESS,
   RESET_GET_SINGLE_RECORD_REQUEST,
-  GET_UNASSIGNEDS,
-  GET_UNASSIGNEDS_SUCCESS,
-  GET_UNASSIGNEDS_FAIL,
   UPDATE_SHOPPING_CART, CALCULATE_CART_SUM, UPDATE_SHOPPING_CART_COUNT,
   GET_CART_INVOICE_RECORDS,
   GET_CART_INVOICE_RECORDS_FAIL,
@@ -74,19 +71,12 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorResponse: null
   },
-  getUnassignedsRequest: {
+  giftCourseCreditRequest: {
     loading: false,
     success: false,
     fail: false,
-    errorResponse: null,
-    records: [],
-    pagination: {
-      page: 1,
-      perPage: 10,
-      total: 0,
-      totalPages: 1
-    },
-  },
+    errorResponse: null
+  },  
   setShippingAndBilling: {
     loading: false,
     success: false,
@@ -306,31 +296,6 @@ export default function reducer(state = initialState, action) {
           .set('fail', true)
         );
 
-    /**
-     * Unassigneds
-     */
-    case GET_UNASSIGNEDS:
-      return state
-        .set('getUnassignedsRequest', state.get('getUnassignedsRequest')
-          .set('loading', true)
-          .set('success', false)
-          .set('fail', false)
-          .set('records', Immutable.List())
-        );
-    case GET_UNASSIGNEDS_SUCCESS:
-      return state
-        .set('getUnassignedsRequest', state.get('getUnassignedsRequest')
-          .set('success', true)
-          .set('loading', false)
-          .set('records', Immutable.fromJS(action.result.data))
-          .set('pagination', Immutable.fromJS(action.result.meta.pagination))
-        );
-    case GET_UNASSIGNEDS_FAIL:
-      return state
-        .set('getUnassignedsRequest', state.get('getUnassignedsRequest')
-          .set('loading', false)
-          .set('fail', true)
-        );
     /*
     * Set/Get shipping and billing address
     * */

@@ -3,6 +3,7 @@ import { push } from 'react-router-redux';
 import { LOGIN_SUCCESS, LOGIN_SUCCESS_REMEMBER, LOGOUT_SUCCESS, RESTORE_LOGIN, setCallback } from './actions';
 import { selectRedirectAfterLogin, selectCallback } from "./selectors";
 import { load } from '../app/actions';
+import { resetGetUserRequest } from '../user/actions';
 
 function* afterLoginSuccess (action) {
   let redirectTo = yield select( selectRedirectAfterLogin );
@@ -29,7 +30,8 @@ function* afterLoginWasRestored (action) {
 }
 
 function* afterLogoutSuccess (action) {
-  yield put(push('/login'));
+  yield put(resetGetUserRequest());
+  yield put(push('/dashboard'));
 }
 
 const authSagas = all([

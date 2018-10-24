@@ -144,7 +144,7 @@ class UserDashboard extends Component {
                   <RosterStatistic/>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">
-                  <LineChart/>
+                  <LineChart type='school'/>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">                  
                   <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />

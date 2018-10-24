@@ -57,11 +57,6 @@ export const ASSIGN_STUDENT_SUCCESS = '[Classrooms] ASSIGN_STUDENT_SUCCESS';
 export const ASSIGN_STUDENT_FAIL = '[Classrooms] ASSIGN_STUDENT_FAIL';
 export const RESET_ASSIGN_STUDENT_REQUEST = '[Classrooms] RESET_ASSIGN_STUDENT_REQUEST';
 
-export const ASSIGN_COURSE_CREDIT = '[Classrooms] ASSIGN_COURSE_CREDIT';
-export const ASSIGN_COURSE_CREDIT_SUCCESS = '[Classrooms] ASSIGN_COURSE_CREDIT_SUCCESS';
-export const ASSIGN_COURSE_CREDIT_FAIL = '[Classrooms] ASSIGN_COURSE_CREDIT_FAIL';
-export const RESET_ASSIGN_COURSE_CREDIT_REQUEST = '[Classrooms] RESET_ASSIGN_COURSE_CREDIT_REQUEST';
-
 export const ASSIGN_DEMO_STUDENT = '[Classrooms] ASSIGN_DEMO_STUDENT';
 export const ASSIGN_DEMO_STUDENT_SUCCESS = '[Classrooms] ASSIGN_DEMO_STUDENT_SUCCESS';
 export const ASSIGN_DEMO_STUDENT_FAIL = '[Classrooms] ASSIGN_DEMO_STUDENT_FAIL';
@@ -250,19 +245,6 @@ export function assignDemoStudent(data, params = {}) {
 export function resetAssignDemoStudentRequest () {
   return {
     type: RESET_ASSIGN_DEMO_STUDENT_REQUEST
-  }
-}
-
-export function assignCourseCreditRequest(data, params = {}) {
-  return {
-    types: [ASSIGN_COURSE_CREDIT, ASSIGN_COURSE_CREDIT_SUCCESS, ASSIGN_COURSE_CREDIT_FAIL],
-    promise: (apiClient) => apiClient.post(`classrooms/assign/course-credit`, data, params)
-  };
-}
-
-export function resetAssignCourseCreditRequest () {
-  return {
-    type: RESET_ASSIGN_COURSE_CREDIT_REQUEST
   }
 }
 

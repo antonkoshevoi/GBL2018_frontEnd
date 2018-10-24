@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { Select, MenuItem, InputLabel, Input, TextField, FormControl, FormHelperText, FormControlLabel, Checkbox } from '@material-ui/core';
 import { selectGetSchoolHomeroomsRequest, selectGetSchoolClassroomsRequest, selectGetSchoolTeachersRequest, selectGetSchoolAdminsRequest } from '../../../redux/schools/selectors';
 import { getSchoolHomerooms, getSchoolClassrooms, getSchoolTeachers, getSchoolAdmins} from '../../../redux/schools/actions';
+import { getUsers } from "../../../redux/connections/actions";
 import { selectGetUserRequest, selectUserData } from "../../../redux/user/selectors";
-import { selectUserRoles } from "../../../redux/user/selectors";
+import { selectGetUsersRequest} from "../../../redux/connections/selectors";
 import Loader from '../../../components/layouts/Loader';
 import HasRole from "../../middlewares/HasRole";
 
@@ -23,22 +24,23 @@ class MessageForm extends Component {
             recipient: null,
             message: null,
             roles: [
-                'student',                
+                'student',
                 'teacher',
                 'principal',
-                'administrator',                
+                'administrator',
                 'superintendent'
             ],
             homeroomIds: [],
             classroomIds: [],
             roleIds: [],
             teacherId: null,
-            adminId: null
+            adminId: null,
+            userId: null
         }
     }
     
     componentDidMount() {
-        const {formData} = this.props;                
+        const {formData} = this.props;
         
         if (formData) {
             this.setState(formData);
@@ -58,23 +60,20 @@ class MessageForm extends Component {
     
     _changeRecipients(recipient) {
         
-        const {homeroomsRequest, classroomsRequest, teachersRequest, adminsRequest} = this.props;
-    
-        if (recipient === 'classroomIds' && !(classroomsRequest.get('success') || classroomsRequest.get('loading'))) {
-            this.props.getClassrooms();
-        }
+        const load = (actionName, requestName) => {
+            const {[actionName]: action, [requestName]: request} = this.props;
+            if (!(request.get('success') || request.get('loading'))) {
+                action();
+            }
+        };
         
-        if (recipient === 'homeroomIds' && !(homeroomsRequest.get('success') || homeroomsRequest.get('loading'))) {
-            this.props.getHomerooms();
-        }
-        
-        if (recipient === 'teacherId' && !(teachersRequest.get('success') || teachersRequest.get('loading'))) {
-            this.props.getTeachers();
-        }
-        
-        if (recipient === 'adminId' && !(adminsRequest.get('success') || adminsRequest.get('loading'))) {
-            this.props.getAdmins();
-        }          
+        (({
+            classroomIds:   () => load('getClassrooms',   'classroomsRequest'),
+            homeroomIds:    () => load('getHomerooms',    'homeroomsRequest'),
+            teacherId:      () => load('getTeachers',     'teachersRequest'),
+            adminId:        () => load('getAdmins',       'adminsRequest'),
+            userId:         () => load('getUsers',        'usersRequest')
+        })[recipient] || (() => false))();
     }
     
     _handleCheckboxChange(event) {
@@ -127,7 +126,7 @@ class MessageForm extends Component {
     _renderRecipients()
     {        
         const {recipient, roles} = this.state;
-        const {homeroomsRequest, classroomsRequest, teachersRequest, adminsRequest, t}   = this.props;                
+        const {homeroomsRequest, classroomsRequest, teachersRequest, adminsRequest, usersRequest, t}   = this.props;                
         
         if (recipient === 'homeroomIds' && homeroomsRequest.get('success')) {
             return this._renderRecipientCheckboxes('selectHomerooms', 'homeroomIds', this._getOptions(homeroomsRequest));
@@ -150,6 +149,10 @@ class MessageForm extends Component {
         
         if (recipient === 'adminId' && adminsRequest.get('success')) {   
             return this._renderRecipientSelectbox('schoolManagement', 'adminId', this._getOptions(adminsRequest));
+        }
+        
+        if (recipient === 'userId' && usersRequest.get('success')) {   
+            return this._renderRecipientSelectbox('selectPersone', 'userId', this._getOptions(usersRequest));
         }
     }
     
@@ -207,28 +210,27 @@ class MessageForm extends Component {
     }
     
     render() {
-        const {homeroomsRequest, classroomsRequest, teachersRequest, adminsRequest, errors, t} = this.props;
-
-        const loading = homeroomsRequest.get('loading') || classroomsRequest.get('loading') || teachersRequest.get('loading') || adminsRequest.get('loading');                
-        
-        const roles = this.props.userRoles.toJS();
-        
-        if (roles && roles[0] && roles[0].name === 'Parents' && !this.state.recipient) {
-            this.props.getTeachers();
-            this.setState({
-                type: 'mail',
-                recipient: 'teacherId'
-            });
-        }
+        const {homeroomsRequest, classroomsRequest, teachersRequest, adminsRequest, usersRequest, errors, t} = this.props;
+        const loading = homeroomsRequest.get('loading') || classroomsRequest.get('loading') || teachersRequest.get('loading') || adminsRequest.get('loading') || usersRequest.get('loading');
         
         return (
             <div>
-                { loading && <Loader/> }
-                <HasRole roles={['Superadministrator', 'Superintendent', 'Principal', 'Administrator', 'Teacher']}>
+                { loading && <Loader/> }                
                 <div className="row">
                     <div className="col-sm-6 col-md-5 col-lg-4">
                         <FormControl className='full-width form-inputs'>
                             <InputLabel htmlFor='recipients'>{t('recipients')}</InputLabel>
+                            <HasRole roles={['Parents']}>
+                                <Select
+                                    value={this.state.recipient || ''}
+                                    onChange={(e) => { this._handleChange(e) }}
+                                    inputProps={{  name: 'recipient' }}
+                                    >
+                                    <MenuItem value=""></MenuItem>
+                                    <MenuItem value="teacherId">{t('teacher')}</MenuItem>
+                                    <MenuItem value="userId">{t('myConnections')}</MenuItem>
+                                </Select>
+                            </HasRole>                            
                             <HasRole roles={['Teacher']}>
                                 <Select
                                     value={this.state.recipient || ''}
@@ -258,7 +260,8 @@ class MessageForm extends Component {
                             </HasRole>
                             {errors && errors.get('recipients') && <FormHelperText error>{errors.get('recipients').get(0)}</FormHelperText>}
                         </FormControl>
-                    </div>                    
+                    </div>
+                    <HasRole roles={['Superadministrator', 'Superintendent', 'Principal', 'Administrator', 'Teacher']}>
                     <div className="col-sm-6 col-md-5 col-lg-4">
                         <FormControl className='full-width form-inputs'>
                             <InputLabel htmlFor='type'>{t('type')}</InputLabel>
@@ -277,8 +280,8 @@ class MessageForm extends Component {
                             {errors && errors.get('type') && <FormHelperText error>{errors.get('type').get(0)}</FormHelperText>}
                         </FormControl>
                     </div>
+                    </HasRole>
                 </div>
-                </HasRole> 
                 {this._renderRecipients()}
                 <div className='row'>
                   <div className='col-sm-12 col-md-12'>
@@ -338,7 +341,7 @@ MessageForm = connect(
         classroomsRequest: selectGetSchoolClassroomsRequest(state),
         teachersRequest: selectGetSchoolTeachersRequest(state),
         adminsRequest: selectGetSchoolAdminsRequest(state),
-        userRoles: selectUserRoles(state),
+        usersRequest: selectGetUsersRequest(state),
         userRequest: selectGetUserRequest(state),
         userData: selectUserData(state)
     }),
@@ -346,6 +349,7 @@ MessageForm = connect(
         getHomerooms: (params = {}) => { dispatch(getSchoolHomerooms(params)) },
         getClassrooms: (params = {}) => { dispatch(getSchoolClassrooms(params)) },
         getTeachers: (params = {}) => { dispatch(getSchoolTeachers(params)) },
+        getUsers: (params = {}) => { dispatch(getUsers(params)) },
         getAdmins: (params = {}) => { dispatch(getSchoolAdmins(params)) }
     })
 )(MessageForm);

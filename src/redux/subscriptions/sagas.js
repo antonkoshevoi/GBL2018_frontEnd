@@ -12,7 +12,9 @@ import {
     GET_PAYMENTS_FAIL,
     SUBSCRIBE_STUDENT_SUCCESS, 
     UNSUBSCRIBE_STUDENT_SUCCESS,
-    UNSUBSCRIBE_SUCCESS
+    UNSUBSCRIBE_SUCCESS,
+    GIFT_SUBSCRIPTION_SUCCESS,
+    GIFT_SUBSCRIPTION_FAIL
 } from './actions';
 
 import { yieldErrorToasts, yieldSuccessToasts } from '../../helpers/utils';
@@ -22,7 +24,8 @@ const subscriptionSagas = all([
   yieldSuccessToasts({
     [SUBSCRIBE_STUDENT_SUCCESS]: i18n.t('messages:studentSubscribedToCourse'),
     [UNSUBSCRIBE_STUDENT_SUCCESS]: i18n.t('messages:studentUnsubscribedFromCourse'),
-    [UNSUBSCRIBE_SUCCESS]: i18n.t('messages:subscriptionCancelled')
+    [UNSUBSCRIBE_SUCCESS]: i18n.t('messages:subscriptionCancelled'),
+    [GIFT_SUBSCRIPTION_SUCCESS]: i18n.t('messages:subscriptionDonated')
   }),    
   yieldErrorToasts([
     GET_RECORDS_FAIL, 
@@ -34,7 +37,8 @@ const subscriptionSagas = all([
     UNSUBSCRIBE_FAIL, 
     GET_INVOICE_FAIL, 
     SUBSCRIBE_STUDENT_FAIL, 
-    UNSUBSCRIBE_STUDENT_FAIL
+    UNSUBSCRIBE_STUDENT_FAIL,
+    GIFT_SUBSCRIPTION_FAIL
   ])
 ]);
 

@@ -108,7 +108,7 @@ class InfoSection extends Component {
                     </div>
                   </div>
                   <div className='m-portlet__body position-relative'>
-                    <HasRole roles={['Superadministrator', 'School', 'Teacher', 'Parent']}>
+                    <HasRole roles={['Superadministrator', 'School', 'Teacher', 'Parents']}>
                         <div style={{position:'absolute', right:10, top:-60}}>                      
                             <IconButton color='primary' onClick={() => { this._openEditDialog() }}>                        
                               <Icon className="material-icons">

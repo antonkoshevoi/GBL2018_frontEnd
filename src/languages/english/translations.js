@@ -509,8 +509,7 @@ export default {
     parentDeclinedYourRequest: 'Your requst has been declined...',
     rejectRequest: 'Reject Request',
     parentsNotFound: 'No parents found...',
-    connectionsNotFound: 'No connections found...',
-    subscriptionsNotFound: 'No subscriptions found...',
+    connectionsNotFound: 'No connections found...',    
     addParent: 'Add parent',    
     declinedAt: 'Declined at',
     noData: 'No data found...',
@@ -528,6 +527,7 @@ export default {
     giftSubscription: 'Gift Subscription',
     makeGift: 'Make Gift',
     giftToPersone: 'Select Persone',
+    selectPersone: 'Select Persone',
     activeSubscriptions: 'Active Subscriptions',
     expiredSubscriptions: 'Expired Subscriptions',
     filterSubscriptions: 'Filter Subscriptions',
@@ -536,6 +536,9 @@ export default {
     giftForYou: 'You',
     deleteMobileSubscription: 'This subscription is created via mobile appliation. You can cancel this one using mobile application only.',
     giftFrom: 'This subscription is purchased for you by {{user}}.',
+    giftCourseFrom: 'This course credit is purchased for you by {{user}}.',
+    youDonNotHaveAnyConnections: 'You don\'t have any connections yet. Please use "My Connections" interface to sent connection requests to other users.',
+    giftCourseCredit: 'Gift Course Credit',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',
@@ -544,6 +547,7 @@ export default {
         students: 'School Students',
         teacher: 'Teacher',
         teacherId: 'Teacher',
+        userId: 'Connections',
         adminId: 'School Management'
     }
 }

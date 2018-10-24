@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {translate} from 'react-i18next';
 import {connect} from "react-redux";
-import LineChart from './widgets/LineChart';
+import LineChart from '../widgets/LineChart';
 import PassRate from '../widgets/PassRate';
 import SchoolAverageChart from '../widgets/SchoolAverageChart';
 import RosterStatistic from './widgets/RosterStatistic';
@@ -48,7 +48,7 @@ class Dashboard extends Component {
               <PassRate loading={dataRequest.get('loading')}  data={dataRequest.get('data').toJS()} />
             </div>
             <div className="col-sm-12 col-md-6 col-lg-3">
-              <LineChart classroomId={classroomId}/>
+              <LineChart type='classroom' id={classroomId}/>
             </div>    
             <div className="col-md-12">
                 <div className="m--margin-top-25">
@@ -56,7 +56,7 @@ class Dashboard extends Component {
                     <div className="m-portlet__head d-flex justify-content-between align-items-center">
                       <div className="m-portlet__head-caption col-sm-4">
                         <div className="m-portlet__head-title"><span className="m-portlet__head-icon"><i
-                          className="flaticon-analytics"></i></span><h3 className="m-portlet__head-text">{t('students')}</h3></div>
+                          className="fa fa-line-chart"></i></span><h3 className="m-portlet__head-text">{t('students')}</h3></div>
                       </div>                
                     </div>
                     <div className="m-portlet__body" style={{height: '100%'}}>

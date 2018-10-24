@@ -18,20 +18,17 @@ export default  {
         {
           key:'mySubscriptions',
           title:'mySubscriptions',
-          link:'my-subscriptions',
-          icon:'flaticon flaticon-user-ok'
+          link:'my-subscriptions'
         },          
         {
           key:'buySubscription',
           title:'buySubscription',
-          link:'subscriptions',
-          icon:'flaticon flaticon-user-settings'
+          link:'subscriptions'
         },
         {
           key:'subscriptionPayments',
           title:'subscriptionPayments',
-          link:'subscriptions/payments',
-          icon:'flaticon flaticon-user-settings'
+          link:'subscriptions/payments'
         }
       ]
     },    
@@ -45,44 +42,37 @@ export default  {
         {
           key:'courses',
           title:'Courses',
-          link:'store/category/courses',
-          icon:'flaticon flaticon-user-settings'
+          link:'store/category/courses'
         },
         {
           key:'books',
           title:'Books',
-          link:'store/category/books',
-          icon:'flaticon flaticon-user-ok'
+          link:'store/category/books'
         },
         {
           key:'teaching_aids',
           title:'teachingAids',
-          link:'store/category/teaching_aids',
-          icon:'flaticon flaticon-technology-1'
+          link:'store/category/teaching_aids'
         },
         {
           key:'stationary',
           title:'Stationary',
-          link:'store/category/stationary',
-          icon:'flaticon flaticon-technology-1'
+          link:'store/category/stationary'
         },
         {
           key:'student_rewards',
           title:'studentRewards',
-          link:'store/category/student_rewards',
-          icon:'flaticon flaticon-technology-1'
+          link:'store/category/student_rewards'
         },
         {
           key:'tutoring_services',
           title:'tutoringServices',
-          link:'store/category/tutoring_services',
-          icon:'flaticon flaticon-technology-1',
+          link:'store/category/tutoring_services'
         },
         {
           key:'bundles',
           title:'bundles',
-          link:'store/category/bundles',
-          icon:'flaticon flaticon-technology-1',
+          link:'store/category/bundles'
         }
       ]
     },
@@ -96,26 +86,22 @@ export default  {
             {
                 key: 'inbox',
                 title: 'inbox',
-                link: 'messages',
-                icon: 'flaticon flaticon-user-settings',
+                link: 'messages'
             },
             {
                 key: 'sent',
                 title: 'sent',
-                link: 'messages/sent',
-                icon: 'flaticon flaticon-technology-1',
+                link: 'messages/sent'
             },
             {
                 key: 'compose',
                 title: 'compose',
-                link: 'messages/new',
-                icon: 'flaticon flaticon-technology-1',
+                link: 'messages/new'
             },
             {
                 key: 'drafts',
                 title: 'drafts',
-                link: 'messages/drafts',
-                icon: 'flaticon flaticon-technology-1',
+                link: 'messages/drafts'
             }
         ]
     },

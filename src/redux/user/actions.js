@@ -1,6 +1,7 @@
 export const GET_USER = '[User] GET_USER';
 export const GET_USER_SUCCESS = '[User] GET_USER_SUCCESS';
 export const GET_USER_FAIL = '[User] GET_USER_FAIL';
+export const RESET_GET_USER_REQUEST = '[User] RESET_GET_USER_REQUEST';
 
 export const UPDATE = '[User] UPDATE';
 export const UPDATE_SUCCESS = '[User] UPDATE_SUCCESS';
@@ -18,6 +19,12 @@ export function getUser(params = {}) {
   return {
     types: [GET_USER, GET_USER_SUCCESS, GET_USER_FAIL],
     promise: (apiClient) => apiClient.get('user', params)
+  };
+}
+
+export function resetGetUserRequest() {
+  return {
+    type: RESET_GET_USER_REQUEST
   };
 }
 

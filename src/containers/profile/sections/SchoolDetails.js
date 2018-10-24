@@ -87,7 +87,7 @@ class SchoolDetails extends Component {
               {loading && <div className="m-portlet__head-title"><span className="m-portlet__head-icon"><CircularProgress style={{float: 'right'}} color="inherit"/></span></div>}
               {!loading && <div className="m-portlet__head-title">
                 <span className="m-portlet__head-icon">                
-                    <i className="flaticon-info"></i>
+                    <i className="fa fa-id-card-o"></i>
                 </span>
                 <h3 className="m-portlet__head-text">{t('info')}</h3>
               </div>}
@@ -113,7 +113,7 @@ class SchoolDetails extends Component {
                       <h3 className="m-widget1__title">{t('name')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{school.schName}</span>
+                      <span className="m-widget1__title m--font-brand">{school.schName || '-'}</span>
                     </div>
                   </div>
                 </div>
@@ -125,7 +125,7 @@ class SchoolDetails extends Component {
                       <h3 className="m-widget1__title">{t('code')}</h3>
                     </div>
                     <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{school.schCode}</span>
+                      <span className="m-widget1__title m--font-brand">{school.schCode || '-'}</span>
                     </div>
                   </div>
                 </div>

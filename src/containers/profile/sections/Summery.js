@@ -49,7 +49,7 @@ class Summery extends Component {
           <div className="m-portlet__head-caption">
             <div className="m-portlet__head-title">
               <span className="m-portlet__head-icon">
-                    <i className='flaticon-list-2'></i>
+                    <i className='fa fa-id-card-o'></i>
               </span>
               <h3 className="m-portlet__head-text">
                 {t('summery')}

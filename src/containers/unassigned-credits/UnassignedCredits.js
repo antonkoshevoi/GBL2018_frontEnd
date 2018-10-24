@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from '../../components/ui/table';
 import { connect } from 'react-redux';
-import {getUnassigneds} from "../../redux/store/actions";
-import {getUnassignedsRequest} from "../../redux/store/selectors";
+import {getRecords} from "../../redux/course-credits/actions";
+import {selectGetRecordsRequest} from "../../redux/course-credits/selectors";
 import {buildSortersQuery} from "../../helpers/utils";
 import Card from "../../components/ui/Card";
 
@@ -13,20 +13,20 @@ class UnassignedCredits extends Component {
     this.state = {
       sorters: {},
       filters: {},
-      page: props.getUnassignedsRequest.get('pagination').get('page'),
-      perPage: props.getUnassignedsRequest.get('pagination').get('perPage')
+      page: props.recordsRequest.get('pagination').get('page'),
+      perPage: props.recordsRequest.get('pagination').get('perPage')
     }
   }
 
   componentDidMount () {
-    const { getUnassigneds } = this.props;
-    getUnassigneds();
+    const { getRecords } = this.props;
+    getRecords();
   }
 
   _getRecords () {
     const { sorters, filters, page, perPage } = this.state;
 
-    this.props.getUnassigneds({
+    this.props.getRecords({
       orderBy: buildSortersQuery(sorters),
       filter: filters,
       page, perPage
@@ -34,8 +34,8 @@ class UnassignedCredits extends Component {
   }
 
   _renderRecords () {
-    const records = this.props.getUnassignedsRequest.get('records');
-    const loading = this.props.getUnassignedsRequest.get('loading');
+    const records = this.props.recordsRequest.get('records');
+    const loading = this.props.recordsRequest.get('loading');
     const { t } = this.props;
     
     if (!loading && records.size === 0) {
@@ -80,7 +80,7 @@ class UnassignedCredits extends Component {
   render() {
     const { sorters } = this.state;
     const { t } = this.props;
-    const loading = this.props.getUnassignedsRequest.get('loading');
+    const loading = this.props.recordsRequest.get('loading');
     
     return (
         <div>
@@ -108,10 +108,10 @@ class UnassignedCredits extends Component {
 
 UnassignedCredits = connect(
   (state) => ({
-    getUnassignedsRequest: getUnassignedsRequest(state),
+    recordsRequest: selectGetRecordsRequest(state)
   }),
   (dispatch) => ({
-    getUnassigneds: (params = {}) => { dispatch(getUnassigneds(params)) },
+    getRecords: (params = {}) => { dispatch(getRecords(params)) }
   })
 )(UnassignedCredits);
 

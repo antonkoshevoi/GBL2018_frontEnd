@@ -1,5 +1,5 @@
 import {
-  GET_USER, GET_USER_SUCCESS, GET_USER_FAIL,
+  GET_USER, GET_USER_SUCCESS, GET_USER_FAIL, RESET_GET_USER_REQUEST,
   UPDATE, UPDATE_SUCCESS, UPDATE_FAIL,
   CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAIL,
   CHANGE_IMAGE, CHANGE_IMAGE_SUCCESS, CHANGE_IMAGE_FAIL
@@ -79,6 +79,11 @@ export default function reducer (state = initialState, action) {
           .set('loading', false)
           .set('fail', true)
         );
+    case RESET_GET_USER_REQUEST:
+      return state
+        .set('getUserRequest', initialState.get('getUserRequest')).set('userData', Immutable.Map())
+        .set('permissions', Immutable.List())
+        .set('roles', Immutable.List()); 
     /**
      * Update
      */

@@ -23,6 +23,7 @@ import subscriptionsReducer from './subscriptions/reducer';
 import scapReducer from './scap/reducer';
 import parentsReducer from './parents/reducer';
 import connectionsReducer from './connections/reducer';
+import courseCreditsReducer from './course-credits/reducer';
 
 export default {
   app: appReducer,
@@ -49,5 +50,6 @@ export default {
   courses: coursesReducer,
   subscriptions: subscriptionsReducer,
   scap: scapReducer,
-  connections: connectionsReducer
+  connections: connectionsReducer,
+  courseCredits: courseCreditsReducer
 };

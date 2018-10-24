@@ -57,12 +57,8 @@ class Insctruction extends Component {
                 <div className="m-portlet__head">
                     <div className="m-portlet__head-caption">
                         <div className="m-portlet__head-title">
-												<span className="m-portlet__head-icon m--hide">
-													<i className="flaticon-statistics"></i>
-												</span>
-
                             <h2 className="m-portlet__head-label m-portlet__head-label--info">
-													<span style={{fontSize: "2rem"}}>?</span>
+                                    <span style={{fontSize: "2rem"}}>?</span>
                             </h2>
                         </div>
                     </div>

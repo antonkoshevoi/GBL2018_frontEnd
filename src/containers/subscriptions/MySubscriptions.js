@@ -7,7 +7,6 @@ import { getUserRecords, unSubscribe, resetUnSubscribeRequest } from '../../redu
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from "../../components/ui/table";
 import { Select, MenuItem, FormHelperText } from '@material-ui/core';
 import Loader from "../../components/layouts/Loader";
-import Card from "../../components/ui/Card";
 import DeleteButton from "../../components/ui/DeleteButton";
 import ConfirmButton from "../../components/ui/ConfirmButton";
 import AssignStudentModal from "./modals/AssignStudentModal";
@@ -155,7 +154,7 @@ class MySubscriptions extends Component {
                     </Td>
                     <Td width='150px'>
                         {item.isGift ? t('giftForYou') : (isOwner ? t('self') : item.ownerName)}
-                        {item.isGift && <ConfirmButton icon='la la-gift' className='btn-success m--margin-left-15' confirmOnly={true} title={t('giftFrom', {user: item.ownerName}) } /> }
+                        {item.isGift && <ConfirmButton icon='la la-gift' className='btn-success m--margin-left-15' confirmOnly={true} title={t('giftFrom', {user: item.userName}) } /> }
                     </Td>
                     <Td width='120px'>{moment(item.createdAt).format('ll')}</Td>
                     <Td width='120px'>{item.expiredAt ? moment(item.expiredAt).format('ll') : '-'}</Td>  
@@ -184,14 +183,13 @@ class MySubscriptions extends Component {
         const {subscriptionsRequest, unSubscribeRequest, goTo, t} = this.props;
         const {filter, assignModalIsOpen, studentsModalIsOpen, giftModalIsOpen, selectedSubscription} = this.state;
         const loading = subscriptionsRequest.get('loading');
-        
+           
         if (subscriptionsRequest.get('success') && subscriptionsRequest.get('records').size === 0) {
             goTo('/subscriptions');
-            return;
+            return <Loader/>;
         }
         
-        return (
-                
+        return (                
         <div className='fadeInLeft  animated learning-areas'>
             {unSubscribeRequest.get('loading') && <Loader/>}
             <div className='m-portlet m-portlet--head-solid-bg'>        

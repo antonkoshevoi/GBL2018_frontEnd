@@ -107,7 +107,7 @@ class GiftModal extends Component {
             form='create-student-form'
             disabled={loading}
             variant="raised"
-            className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+            className='mt-btn-success btn btn-success mt-btn'
             color='primary'>
             {t('makeGift')}
           </Button>

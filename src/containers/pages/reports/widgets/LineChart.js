@@ -107,17 +107,27 @@ class LineChart extends Component {
     this.getChartData(newSelector, currDate);
   };
 
-  getChartData = (selector, date) => {
-    const period = this.getStringPeriodFromNumber(selector);
+  getChartData = (selector, date) => {    
     const params = {
-      'period': period,
+      'period': this.getStringPeriodFromNumber(selector),
       'date-from': date,
       'offset': this.clientTimeOffset
     };
+            
+    let historyUrl = 'history/school';
+    let onlineUrl  = 'schools/online-students';
+            
+    if (this.props.type === 'classroom') {
+        historyUrl  = 'history/classroom/' + this.props.id;
+        onlineUrl   = 'classrooms/online-students/' + this.props.id;
+    }
+    
+    if (this.props.type === 'homeroom') {
+        // TODO send request to homeroom instead of school
+    }     
+    
     this.setState({disabled: true});
-    Promise.all([this.apiClient.get('history/school', params),
-      this.apiClient.get('schools/online-students')]).then(
-      (response) => {
+    Promise.all([this.apiClient.get(historyUrl, params), this.apiClient.get(onlineUrl)]).then((response) => {
         this.setState({
           selectorActive: selector,
           chosenDate: date,
