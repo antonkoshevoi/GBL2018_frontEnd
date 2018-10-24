@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {ChartData} from "../../data/Charts";
-import SchoolAverageChart from "../pages/reports/widgets/SchoolAverageChart";
-import RosterStatistic from "../pages/reports/widgets/RosterStatistic";
-import LineChart from "../pages/reports/widgets/LineChart";
+import SchoolAverageChart from "../reports/widgets/SchoolAverageChart";
+import RosterStatistic from "../reports/widgets/RosterStatistic";
+import LineChart from "../reports/widgets/LineChart";
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
 import {withRouter} from "react-router-dom";
@@ -13,7 +13,7 @@ import {selectChartDatatRequest} from "../../redux/reports/dashboard/selectors";
 import QuickLink from "./sections/QuickLink";
 import FeaturedItems from "./sections/FeaturedItems";
 import Card from "../../components/ui/Card";
-import ShoppingCart from "../pages/store/ShoppingCart";
+import ShoppingCart from "../store/ShoppingCart";
 
 class UserDashboard extends Component {
   constructor(props) {

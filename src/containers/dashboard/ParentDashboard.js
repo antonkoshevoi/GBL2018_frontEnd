@@ -15,7 +15,7 @@ import {withStyles} from '@material-ui/core/styles';
 import FeaturedItems from "./sections/FeaturedItems";
 import {selectRecords as storeItems}  from "../../redux/store/selectors";
 import QuickLink from "./sections/QuickLink";
-import ShoppingCart from "../pages/store/ShoppingCart";
+import ShoppingCart from "../store/ShoppingCart";
 
 const styles = {
   row: {
