@@ -165,7 +165,8 @@ class CreditCard extends Component {
                       <Button
                         variant="raised"
                         color="primary"
-                        className="text-uppercase"
+                        className='mt-btn-success pull-right btn btn-success mt-btn'
+                        disabled={loading}
                         onClick={(e) => { this._submitCreditCardPayment(e) }}
                       >
                         {t('makePayment')}

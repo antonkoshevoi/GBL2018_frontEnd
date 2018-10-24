@@ -25,11 +25,9 @@ class TabSection extends Component {
         return <div>          
           <Select
             value={this.state.classroom}
-            onChange={(e) => { this.handleChange(e) }}
-            inputProps={{
-              name: 'classroom',
-              id: 'classroom'
-            }}
+            onChange={(e) => { this.handleChange(e) }}            
+            name='classroom'
+            id='classroom'            
           >
             <MenuItem key={-1} value="details">{t('detailedData')}</MenuItem>
             {courses.map(function (item, i) {

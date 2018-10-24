@@ -96,9 +96,8 @@ class SendMessageModal extends Component {
                                     id="standard-read-only-input"
                                     label={t('recipient')}
                                     defaultValue={this.state.recipientName}                                     
-                                    InputProps={{
-                                      disabled: true
-                                    }}/>
+                                    disabled={true}
+                                />
                                 </FormControl>
                             </div>
                             

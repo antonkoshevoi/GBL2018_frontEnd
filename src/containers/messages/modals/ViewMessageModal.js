@@ -58,8 +58,7 @@ class ViewMessageModal extends Component {
                 </DialogContent>
                 <Divider className='full-width'/>
                 <DialogActions>
-                    <Button                                                                 
-                      variant="raised"
+                    <Button
                       className='mt-btn-success pull-right btn btn-success mt-btn'
                       onClick={ (e) => {this._close() }}
                       color='primary'>

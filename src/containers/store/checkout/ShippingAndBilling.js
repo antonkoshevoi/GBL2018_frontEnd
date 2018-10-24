@@ -152,6 +152,7 @@ class ShippingAndBilling extends Component {
               <Button
                 variant="raised"
                 color="primary"
+                className='mt-btn-success pull-right btn btn-success mt-btn'
                 disabled={successRequest}
                 onClick={this._submitShippingAndBilling}
               >

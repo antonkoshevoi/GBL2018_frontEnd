@@ -92,10 +92,9 @@ class ReplyMessageModal extends Component {
                                 <TextField
                                     id="standard-read-only-input"
                                     label={t('recipient')}
-                                    defaultValue={this.state.from}                                     
-                                    InputProps={{
-                                      disabled: true
-                                    }}/>
+                                    defaultValue={this.state.from}                                                                         
+                                    disabled={true}
+                                />
                                 </FormControl>
                             </div>
                             
@@ -138,8 +137,7 @@ class ReplyMessageModal extends Component {
                     <Button
                       type='submit'
                       form='assign-students-form'
-                      disabled={loading}
-                      variant="raised"
+                      disabled={loading}                      
                       className='mt-btn-success pull-right btn btn-success mt-btn'
                       onClick={ (e) => {this._onSubmit(e) }}
                       color='primary'>

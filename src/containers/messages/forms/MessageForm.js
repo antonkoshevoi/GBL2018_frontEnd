@@ -224,7 +224,7 @@ class MessageForm extends Component {
                                 <Select
                                     value={this.state.recipient || ''}
                                     onChange={(e) => { this._handleChange(e) }}
-                                    inputProps={{  name: 'recipient' }}
+                                    name="recipient"
                                     >
                                     <MenuItem value=""></MenuItem>
                                     <MenuItem value="teacherId">{t('teacher')}</MenuItem>
@@ -235,7 +235,7 @@ class MessageForm extends Component {
                                 <Select
                                     value={this.state.recipient || ''}
                                     onChange={(e) => { this._handleChange(e) }}
-                                    inputProps={{  name: 'recipient' }}
+                                    name="recipient"
                                     >
                                     <MenuItem value=""></MenuItem>
                                     <MenuItem value="classroomIds">{t('classrooms')}</MenuItem>
@@ -248,7 +248,7 @@ class MessageForm extends Component {
                                 <Select
                                     value={this.state.recipient || ''}
                                     onChange={(e) => { this._handleChange(e) }}
-                                    inputProps={{ name: 'recipient' }}
+                                    name="recipient"
                                     >
                                     <MenuItem value=""></MenuItem>
                                     <MenuItem value="roleIds">{t('entireSchool')}</MenuItem>
@@ -268,9 +268,7 @@ class MessageForm extends Component {
                             <Select
                                 value={this.state.type || ''}
                                 onChange={(e) => { this._handleChange(e) }}
-                                inputProps={{
-                                    name: 'type'
-                                }}
+                                name="type"          
                                 >
                                 <MenuItem value=""></MenuItem>
                                 <MenuItem value="mail">{t('mail')}</MenuItem> 
@@ -309,9 +307,7 @@ class MessageForm extends Component {
                                 variant="outlined"
                                 rows="20"
                                 value={this.state.message || ''}
-                                inputProps={{
-                                  name: 'message'
-                                }}
+                                name="message"
                                 onChange={(e) => {
                                     this._handleChange(e)
                                 }}

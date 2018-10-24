@@ -8,8 +8,7 @@ import {
   Input,
   InputLabel,
   MenuItem,
-  Select,
-  Typography,
+  Select,  
   Button,
   Checkbox
 } from '@material-ui/core';
@@ -20,18 +19,6 @@ import {
 } from '../../../redux/schools/selectors';
 import DatePicker from '../../../components/ui/DatePicker';
 import CourseModal from '../modals/CourseModal';
-
-function TabContainer(props) {
-  return (
-    <Typography component="div" style={{padding: 8 * 3}}>
-      {props.children}
-    </Typography>
-  );
-}
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired
-};
 
 class ClassroomForm extends Component {
   static propTypes = {
@@ -222,8 +209,7 @@ class ClassroomForm extends Component {
                     this._openCourseDialog()
                   }}
                   type='button'
-                  form='create-classroom-form'
-                  variant="raised"
+                  form='create-classroom-form'                  
                   className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
                   color='primary'>
                   {t('chooseCourse')}
@@ -248,10 +234,8 @@ class ClassroomForm extends Component {
               <Input
                 name='course'
                 margin='dense'
-                fullWidth
-                InputProps={{
-                  readOnly: true
-                }}              
+                fullWidth                
+                readOnly={true}                            
                 value={classroom.course.crsTitle || ''} />            
             </FormControl>          
           }          
