@@ -11,7 +11,7 @@ import DatePicker from '../../../components/ui/DatePicker';
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component="div" className="m--margin-top-35">
       {props.children}
     </Typography>
   );

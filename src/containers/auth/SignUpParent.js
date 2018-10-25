@@ -151,8 +151,7 @@ class SignUpParent extends Component {
 
         const loading = this.props.validateRequest.get('loading') || this.props.signUpRequest.get('loading');
         const step1Errors = this.props.validateRequest.get('errors');
-        const step2Errors = this.props.signUpRequest.get('errors').get('step2');
-
+        const step2Errors = this.props.signUpRequest.getIn(['errors', 'step2']);
         const loginBtn =  <NavLink to='/login'><strong>Login</strong></NavLink>;
 
         return (

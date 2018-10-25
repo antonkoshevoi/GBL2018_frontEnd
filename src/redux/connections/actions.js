@@ -22,6 +22,11 @@ export const CREATE_SUCCESS = '[Connections] CREATE_SUCCESS';
 export const CREATE_FAIL = '[Connections] CREATE_FAIL';
 export const RESET_CREATE_REQUEST = '[Connections] RESET_CREATE_REQUEST';
 
+export const INVITE = '[Connections] INVITE';
+export const INVITE_SUCCESS = '[Connections] INVITE_SUCCESS';
+export const INVITE_FAIL = '[Connections] INVITE_FAIL';
+export const RESET_INVITE_REQUEST = '[Connections] RESET_INVITE_REQUEST';
+
 export const ACCEPT = '[Connections] ACCEPT';
 export const ACCEPT_SUCCESS = '[Connections] ACCEPT_SUCCESS';
 export const ACCEPT_FAIL = '[Connections] ACCEPT_FAIL';
@@ -62,10 +67,10 @@ export function getReceivedRecords(params = {}) {
   };
 }
 
-export function getRecord(id, params = {}) {
+export function getRecord(id, hash) {
   return {
     types: [GET_RECORD, GET_RECORD_SUCCESS, GET_RECORD_FAIL],
-    promise: (apiClient) => apiClient.get(`connections/${id}`, params)
+    promise: (apiClient) => apiClient.get(`connections/${id}/${hash}`)
   };
 }
 
@@ -86,6 +91,13 @@ export function acceptPublic(id, hash) {
   return {
     types: [ACCEPT_PUBLIC, ACCEPT_PUBLIC_SUCCESS, ACCEPT_PUBLIC_FAIL],
     promise: (apiClient) => apiClient.get(`connections/accept-public/${id}/${hash}`)
+  };
+}
+
+export function acceptAndCreate(id, hash, data) {
+  return {
+    types: [ACCEPT_PUBLIC, ACCEPT_PUBLIC_SUCCESS, ACCEPT_PUBLIC_FAIL],
+    promise: (apiClient) => apiClient.post(`connections/create-account/${id}/${hash}`, data)
   };
 }
 
@@ -115,10 +127,23 @@ export function resetDeleteRequest() {
   }
 }
 
+export function invite(data, params = {}) {
+  return {
+    types: [INVITE, INVITE_SUCCESS, INVITE_FAIL],
+    promise: (apiClient) => apiClient.post('connections/invite', {...data, returnUrl: uri('connections/accept')}, params)
+  };
+}
+
+export function resetInviteRequest() {
+  return {
+    type: RESET_INVITE_REQUEST
+  };
+}
+
 export function create(data, params = {}) {
   return {
     types: [CREATE, CREATE_SUCCESS, CREATE_FAIL],
-    promise: (apiClient) => apiClient.post('connections', {...data, returnUrl: uri('connections/accept')}, params)
+    promise: (apiClient) => apiClient.post('connections/create', {...data, returnUrl: uri('create-account')}, params)
   };
 }
 

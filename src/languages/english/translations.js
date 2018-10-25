@@ -540,6 +540,11 @@ export default {
     giftCourseFrom: 'This course credit is purchased for you by {{user}}.',
     youDonNotHaveAnyConnections: 'You don\'t have any connections yet. Please use "My Connections" interface to sent connection requests to other users.',
     giftCourseCredit: 'Gift Course Credit',
+    acceptInviteAndCreateAccount: 'Accept Invitation from {{ user }}',
+    createAccount: 'Create Account',
+    inviteAlreadyRegisteredUser: 'Invite Already Registered User',
+    inviteNewUser: 'Invite New User',
+    invite: 'Invite',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

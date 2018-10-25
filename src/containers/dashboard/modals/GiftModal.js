@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
   DialogContent, FormControl, InputLabel, FormHelperText,
-  Icon, Toolbar, Typography, MenuItem, Select, FormGroup,
+  Icon, Toolbar, Typography, MenuItem, Select,
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
