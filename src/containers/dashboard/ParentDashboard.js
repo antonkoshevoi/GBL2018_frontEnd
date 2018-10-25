@@ -225,7 +225,7 @@ class ParentDashboard extends Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-12 col-lg-12 col-xl-8 margin-top-15">
+              <div className="col-md-12 col-lg-12 col-xl-8 m--margin-top-15">
                   <FeaturedItems data={storeItems}/>
               </div>
               <div className="col-md-4 col-xl-4 m--hidden-tablet-and-mobile m--hidden-desktop-lg m--margin-top-15">

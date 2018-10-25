@@ -30,10 +30,10 @@ class SignUpIndex extends Component {
                       <h4 className="text-center m--margin-top-25">{t('selectYourAccountType')}</h4>
 
                       <div className="signup-btns flex-column d-flex flex m--margin-top-15 m--margin-bottom-15">
-                        <NavLink to="/signUp/parent" activeClassName="link-active" className="btn m-btn--pill m--margin-bottom-10 btn-lg m-btn m-btn--gradient-from-primary m-btn--gradient-to-info">
+                        <NavLink to="/signUp/parent" activeClassName="link-active" className="btn m-btn--pill m--margin-bottom-10 btn-lg m-btn btn-primary">
                           {t('parent')}
                         </NavLink>
-                        <NavLink to="/signUp/principal" activeClassName="link-active" className="btn m-btn--pill btn-lg m-btn m-btn--gradient-from-success m-btn--gradient-to-info">
+                        <NavLink to="/signUp/principal" activeClassName="link-active" className="btn m-btn--pill btn-lg m-btn btn-success">
                           {t('principal')}
                         </NavLink>
                       </div>

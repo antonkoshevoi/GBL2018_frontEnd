@@ -70,9 +70,6 @@ class Header extends Component {
             </div>
             {(auth.get('isLoggedIn') && userRequest.get('success') && !hideMenu) &&
             <div className="m-stack__item m-stack__item--fluid m-header-head d-flex" id="m_header_nav">
-              <button className="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-dark" id="m_aside_header_menu_mobile_close_btn">
-                <i className="la la-close"></i>
-              </button>
               <div className="d-flex justify-content-center headerSchoolName align-items-center flex-1 hidden-sm">
                 <h4 className="g-metal"> {user.school ? user.school.schName : ''} </h4>
               </div>              

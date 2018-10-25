@@ -227,10 +227,6 @@
         display: inline-block;
     }
 
-    /*.general-header  .m-brand__logo-wrapper{*/
-        /*display: none !important;*/
-    /*}*/
-
     .general-header {
         background: #fff;
     }
@@ -241,17 +237,6 @@
         top: 0;
         left: 0;
     }
-
-    .m-subheader .m-subheader__breadcrumbs.m-nav {
-        display: none;
-    }
-
-
-    .m-subheader__title.m-subheader__title--separator {
-        vertical-align: middle;
-        display: inline-block;
-    }
-
 
     .header-menu {
         display: none !important;
