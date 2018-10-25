@@ -8,8 +8,7 @@ import MomentUtils from 'material-ui-pickers/utils/moment-utils';
 
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(
-    (
+ReactDOM.render((
         <MuiPickersUtilsProvider utils={MomentUtils}>
             <App />
         </MuiPickersUtilsProvider>
