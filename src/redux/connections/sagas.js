@@ -7,7 +7,8 @@ import {
     ACCEPT_SUCCESS, ACCEPT_FAIL, 
     ACCEPT_PUBLIC_SUCCESS, ACCEPT_PUBLIC_FAIL, 
     DECLINE_SUCCESS, DECLINE_FAIL, 
-    DELETE_SUCCESS, DELETE_FAIL
+    DELETE_SUCCESS, DELETE_FAIL, 
+    INVITE_SUCCESS, INVITE_FAIL
 } from './actions';
 import { yieldErrorToasts, yieldSuccessToasts } from '../../helpers/utils';
 import i18n from '../../configs/i18n';
@@ -21,6 +22,7 @@ const connectionsSagas = all([
   takeLatest(ACCEPT_PUBLIC_SUCCESS, onSuccess),
   yieldSuccessToasts({      
     [CREATE_SUCCESS]: i18n.t('messages:connectionRequestHasBeenSent'),   
+    [INVITE_SUCCESS]: i18n.t('messages:connectionRequestHasBeenSent'),   
     [ACCEPT_SUCCESS]: i18n.t('messages:connectionRequestIsAccepted'),
     [ACCEPT_PUBLIC_SUCCESS]: i18n.t('messages:connectionRequestIsAccepted'),
     [DECLINE_SUCCESS]: i18n.t('messages:connectionRequestIsDeclined'),
@@ -33,7 +35,8 @@ const connectionsSagas = all([
     ACCEPT_FAIL, 
     ACCEPT_PUBLIC_FAIL,
     DECLINE_FAIL, 
-    DELETE_FAIL
+    DELETE_FAIL,
+    INVITE_FAIL
   ])
 ]);
 

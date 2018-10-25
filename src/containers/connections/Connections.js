@@ -139,7 +139,7 @@ class Connections extends Component {
                             <i className='la la-check'></i>
                         </button>                             
                     }
-                    {record.get('isCreatedByMy') ?
+                    {record.get('isCreatedByMe') ?
                         <DeleteButton title={t('areYouSure')} onClick={() => { this._delete(record.get('connectionId')) }} />
                     :                            
                         <DeleteButton title={t('areYouSureWantToDeclineThisRequest')} onClick={() => { this._decline(record.get('connectionId')) }} />                            

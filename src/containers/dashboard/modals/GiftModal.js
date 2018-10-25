@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
   DialogContent, FormControl, InputLabel, FormHelperText,
-  Icon, Toolbar, Typography, MenuItem, Select, FormGroup,
+  Icon, Toolbar, Typography, MenuItem, Select,
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
@@ -105,47 +105,48 @@ class GiftModal extends Component {
           </Toolbar>
         </AppBar>
 
-        <DialogContent className='m--margin-top-25'>        
-            <div className='row'>                    
-                <FormGroup row style={{minWidth: '500px'}}>
-                    <div className='col-sm-6 col-lg-6 m-auto'>
-                    {unassignedItem &&
-                        <div className="text-center">
-                            <img alt={unassignedItem.item.title} src={unassignedItem.item.thumbnail} width={70}/>
-                            <p className='m--margin-top-25'><strong>{unassignedItem.item.title}</strong></p>
-                        </div>}
-                    </div>
-                    <div className='col-sm-6 col-lg-6 m-auto'>
-                    {(unassignedItem && unassignedItem.quantity > 1) && 
-                        <FormControl className='full-width form-inputs'>
-                            <InputLabel htmlFor='userId'>{t('quantity')}</InputLabel>
-                            <Select
-                              primarytext={t('quantity')}
-                              id='quantity'
-                              name='quantity'
-                              value={this.state.quantity || '1'}
-                              onChange={(e) => { this._handleInputChange(e) }}>
-                              {Array.from({length: unassignedItem.quantity}, (i, x) => (x + 1)).map((count, i) =>    
-                                  <MenuItem key={i} value={count}>{count}</MenuItem>
-                              )}  
-                            </Select>
-                            {errors && errors.get('quantity') && <FormHelperText error>{errors.get('quantity').get(0)}</FormHelperText>}
-                        </FormControl>}                        
-                        <FormControl className='full-width form-inputs'>
-                            <InputLabel htmlFor='userId'>{t('selectPersone')}</InputLabel>
-                            <Select
-                              primarytext={t('selectPersone')}
-                              id='userId'
-                              name='userId'
-                              value={this.state.userId || ''}
-                              onChange={(e) => { this._handleInputChange(e) }}> 
-                              <MenuItem value={null} primarytext=""/>
-                              {this._renderConnections()}
-                            </Select>
-                            {errors && errors.get('userId') && <FormHelperText error>{errors.get('userId').get(0)}</FormHelperText>}
-                        </FormControl>            
-                    </div>
-                </FormGroup>          
+        <DialogContent className='m--margin-top-25'>             
+            <div className="alert m-alert m-alert--default m--margin-bottom-25">
+                <p className="text-center margin-bottom-0">{t('giftCourseCreditNotification')}</p>
+            </div>            
+            <div className='row m-auto' style={{maxWidth: 600}}>                 
+                <div className='col-sm-6 col-lg-6'>
+                {unassignedItem &&
+                    <div className="text-center">
+                        <img alt={unassignedItem.item.title} src={unassignedItem.item.thumbnail} width={70}/>
+                        <p className='m--margin-top-25'><strong>{unassignedItem.item.title}</strong></p>
+                    </div>}
+                </div>
+                <div className='col-sm-6 col-lg-6 m-auto'>
+                {(unassignedItem && unassignedItem.quantity > 1) && 
+                    <FormControl className='full-width form-inputs'>
+                        <InputLabel htmlFor='userId'>{t('quantity')}</InputLabel>
+                        <Select
+                          primarytext={t('quantity')}
+                          id='quantity'
+                          name='quantity'
+                          value={this.state.quantity || '1'}
+                          onChange={(e) => { this._handleInputChange(e) }}>
+                          {Array.from({length: unassignedItem.quantity}, (i, x) => (x + 1)).map((count, i) =>    
+                              <MenuItem key={i} value={count}>{count}</MenuItem>
+                          )}  
+                        </Select>
+                        {errors && errors.get('quantity') && <FormHelperText error>{errors.get('quantity').get(0)}</FormHelperText>}
+                    </FormControl>}                        
+                    <FormControl className='full-width form-inputs'>
+                        <InputLabel htmlFor='userId'>{t('selectPersone')}</InputLabel>
+                        <Select
+                          primarytext={t('selectPersone')}
+                          id='userId'
+                          name='userId'
+                          value={this.state.userId || ''}
+                          onChange={(e) => { this._handleInputChange(e) }}> 
+                          <MenuItem value={null} primarytext=""/>
+                          {this._renderConnections()}
+                        </Select>
+                        {errors && errors.get('userId') && <FormHelperText error>{errors.get('userId').get(0)}</FormHelperText>}
+                    </FormControl>            
+                </div>                       
             </div>       
         </DialogContent>
         

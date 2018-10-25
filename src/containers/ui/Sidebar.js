@@ -170,10 +170,10 @@ class Sidebar extends Component {
     const {headerPosition, activeMenuClass, mobileMenu} = this.state;
 
     return (      
-        <div id="m_aside_left" style={{marginTop:-headerPosition + mobileMenu}} className={`m-grid__item m-aside-left  m-aside-left--skin-dark menu-active-${activeMenuClass.key}`}>
+        <div id="m_aside_left" style={{marginTop:-headerPosition + mobileMenu}} className={`m-grid__item m-aside-left  m-aside-left--sk1in-dark menu-active-${activeMenuClass.key}`}>
           <div
             id="m_ver_menu"
-            className="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark "
+            className="m-aside-menu"
             data-menu-vertical="true"
             data-menu-scrollable="false" data-menu-dropdown-timeout="500"
             onMouseLeave={() => {

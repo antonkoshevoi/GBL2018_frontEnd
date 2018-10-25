@@ -54,6 +54,14 @@ export const selectCreateRequest = createSelector(
 );
 
 /**
+ * Invite connection
+ */
+export const selectInviteRequest = createSelector(
+  selectConnectionsDomain,
+  (subState) => subState.get('inviteRequest')
+);
+
+/**
  * Delete connection
  */
 export const selectDeleteRequest = createSelector(

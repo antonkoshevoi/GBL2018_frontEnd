@@ -7,7 +7,8 @@ import {
     ACCEPT, ACCEPT_SUCCESS, ACCEPT_FAIL, 
     ACCEPT_PUBLIC, ACCEPT_PUBLIC_SUCCESS, ACCEPT_PUBLIC_FAIL, 
     DECLINE, DECLINE_SUCCESS, DECLINE_FAIL, RESET_CHANGE_STATUS_REQUEST, 
-    DELETE, DELETE_SUCCESS, DELETE_FAIL, RESET_DELETE_REQUEST
+    DELETE, DELETE_SUCCESS, DELETE_FAIL, RESET_DELETE_REQUEST,
+    INVITE, INVITE_SUCCESS, INVITE_FAIL, RESET_INVITE_REQUEST
 } from './actions';
 import Immutable from 'immutable';
 import { saveSession } from '../../helpers/session';
@@ -52,15 +53,20 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errorMessage: null,
-    errorCode: null,
     errors: {}
   },
+  inviteRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorMessage: null,
+    errors: {}
+  },  
   changeStatusRequest: {
     loading: false,
     success: false,
     fail: false,
     errorMessage: null,
-    errorCode: null,
     errors: {}    
   },
   deleteRequest: {
@@ -68,7 +74,6 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errorMessage: null,
-    errorCode: null,
     errors: {}    
   }
 });
@@ -140,7 +145,10 @@ export default function reducer (state = initialState, action) {
     case ACCEPT_FAIL:
     case ACCEPT_PUBLIC_FAIL:
     case DECLINE_FAIL:               
-      return state.set('changeStatusRequest', initialState.get('changeStatusRequest').set('fail', true));  
+      return state.set('changeStatusRequest', initialState.get('changeStatusRequest')
+              .set('fail', true)         
+              .set('errorMessage', action.error.response.data.message)
+              .set('errors', Immutable.fromJS(action.error.response.data.errors || [])));  
     case RESET_CHANGE_STATUS_REQUEST:
       return state.set('changeStatusRequest', initialState.get('changeStatusRequest'));
       
@@ -155,14 +163,30 @@ export default function reducer (state = initialState, action) {
       return state
         .set('createRequest', state.get('createRequest')
           .set('loading', false)
-          .set('fail', true)
-          .set('errorCode', action.error.response.data.code)
+          .set('fail', true)          
           .set('errorMessage', action.error.response.data.message)
           .set('errors', action.error.response.data.errors ? Immutable.fromJS(action.error.response.data.errors) : undefined)
         );
     case RESET_CREATE_REQUEST:
       return state.set('createRequest', initialState.get('createRequest'));
 
+    /**
+     * Invite
+     */
+    case INVITE:
+      return state.set('inviteRequest', initialState.get('inviteRequest').set('loading', true));
+    case INVITE_SUCCESS:
+      return state.set('inviteRequest', initialState.get('inviteRequest').set('success', true));
+    case INVITE_FAIL:      
+      return state
+        .set('inviteRequest', state.get('inviteRequest')
+          .set('loading', false)
+          .set('fail', true)          
+          .set('errorMessage', action.error.response.data.message)
+          .set('errors', action.error.response.data.errors ? Immutable.fromJS(action.error.response.data.errors) : undefined)
+        );
+    case RESET_INVITE_REQUEST:
+      return state.set('inviteRequest', initialState.get('inviteRequest'));
     /**
      * Delete
      */

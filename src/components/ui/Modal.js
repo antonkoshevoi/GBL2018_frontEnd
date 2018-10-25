@@ -31,12 +31,12 @@ class Modal extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { classes, bigger, maxWidth } = this.props;
+    const { classes, bigger, middle, maxWidth } = this.props;
 
     return (
       <Dialog
         classes={{
-          paper: bigger ? classes.biggerPaper : classes.paper
+          paper: bigger ? classes.bigger : (middle ? classes.middle : classes.paper)
         }}
         open={isOpen}
         maxWidth={maxWidth}        
@@ -57,10 +57,14 @@ Modal = withStyles({
   paper: {    
     maxHeight: '90vh'
   },
-  biggerPaper: {
+  bigger: {
     maxHeight: '90vh',
-    minWidth: '65%'
+    minWidth: '70%'
   },
+  middle: {
+    maxHeight: '90vh',
+    minWidth: '40%'
+  }  
   // paperWidthXs: {
   //   width: '80%'
   // },

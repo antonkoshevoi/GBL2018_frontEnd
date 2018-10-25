@@ -56,15 +56,15 @@ class InfoSection extends Component {
     return courses.map(function (item, i) {
       return (
         <tr key={i}>
-          <td>{item.course.crsTitle}</td>
-          <td>{item.classroomName}</td>
-          <td>
+          <td className="align-middle">{item.course.crsTitle}</td>
+          <td className="align-middle">{item.classroomName}</td>
+          <td className="align-middle">
             <div className="progress m-progress--sm">
               <div className="progress-bar bg-success" role="progressbar" style={{width: item.progress.completedProgress + '%'}}></div>
               <div className="progress-bar bg-warning" role="progressbar" style={{width: item.progress.inprogressProgress + '%'}}></div>
             </div>
           </td>
-          <td>
+          <td className="align-middle">
             <div className="progress m-progress--sm">
               <div className="progress-bar bg-success" role="progressbar" style={{width: item.averageGrade + '%'}}></div>
               <div className="progress-bar bg-danger" role="progressbar" style={{width: (100 - item.averageGrade) + '%'}}></div>
@@ -118,7 +118,7 @@ class InfoSection extends Component {
                         </div>
                     </HasRole>
                     <div className="table-responsive">
-                      <table className="table m-table m-table--head-separator-primary m-middle-table">
+                      <table className="table">
                         <tbody>
                         <tr>
                           <th>{t('firstName')}</th>
@@ -141,7 +141,7 @@ class InfoSection extends Component {
             <div className="col-lg-8 m--margin-bottom-20">
               <Card title={t('myCourses')} icon="fa fa-sitemap">                
                 <div className="table-responsive">
-                  <table className="table m-table  m-table--head-separator-primary m-middle-table">
+                  <table className="table">
                     <thead>
                     <tr>
                       <th>{t('course')}</th>

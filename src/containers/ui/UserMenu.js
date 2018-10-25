@@ -38,7 +38,7 @@ class UserMenu extends Component {
         <span className="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style={{right:'21px', color:'#385774'}}></span>
         <div className="m-dropdown__inner">
           <div className="m-dropdown__header m--align-center" style={{backgroundColor:`#385774`}}>
-            <div className="m-card-user m-card-user--skin-dark">
+            <div className="m-card-user m-card-user--skin">
               <div className="m-card-user__pic">
                 <img src={user.avatar} className="m--img-rounded m--marginless" alt=""/>
               </div>
@@ -50,10 +50,7 @@ class UserMenu extends Component {
           </div>
           <div className="m-dropdown__body">
             <div className="m-dropdown__content">
-              <ul className="m-nav m-nav--skin-light">
-                <li className="m-nav__section m--hide">
-                  <span className="m-nav__section-text">Section</span>
-                </li>
+              <ul className="m-nav">
                 <li className="m-nav__item">
                   <NavLink to="/profile" className="m-nav__link">
                     <i className="m-nav__link-icon la la-user"></i>
@@ -95,17 +92,13 @@ class UserMenu extends Component {
     let user = userData.toJS();
 
     return (
-      <li className="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" data-dropdown-toggle="click">
-
+      <li className="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width" data-dropdown-toggle="click">
         <a className="m-nav__link m-dropdown__toggle pointer"  onClick={() => {this.props.switchMenu('userMenu')}}>
-
         <span className="m-topbar__userpic">
           <img src={user.avatar} className="m--img-rounded m--marginless m--img-centered" alt=""/>
         </span>
         </a>
-        {activeMenu === 'userMenu' &&
-            this._renderDropDownMenu()
-        }
+        { activeMenu === 'userMenu' && this._renderDropDownMenu() }
       </li>
     );
   }
