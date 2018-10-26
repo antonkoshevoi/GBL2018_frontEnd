@@ -17,7 +17,7 @@ import {
   selectGetSchoolHomeroomsRequest,
   selectGetSchoolTeachersRequest  
 } from '../../../redux/schools/selectors';
-import DatePicker from '../../../components/ui/DatePicker';
+import MuiDatePicker from '../../../components/ui/MuiDatePicker';
 import CourseModal from '../modals/CourseModal';
 
 class ClassroomForm extends Component {
@@ -159,7 +159,7 @@ class ClassroomForm extends Component {
           </FormControl>
           <div className='full-width form-inputs d-inline-flex flex-column'>
             <InputLabel htmlFor='crmStartDate' shrink={!!classroom.crmStartDate}>{t('startDate')}</InputLabel>            
-              <DatePicker
+              <MuiDatePicker
                 name='crmStartDate'
                 value={classroom.crmStartDate || null}
                 onChange={(m) => {
@@ -170,7 +170,7 @@ class ClassroomForm extends Component {
           </div>
           <div className='full-width form-inputs d-inline-flex flex-column'>
             <InputLabel htmlFor='crmEndDate' shrink={!!classroom.crmEndDate}>{t('endDate')}</InputLabel>            
-              <DatePicker
+              <MuiDatePicker
                 name='crmEndDate'
                 value={classroom.crmEndDate || null}
                 onChange={(m) => {
@@ -181,7 +181,7 @@ class ClassroomForm extends Component {
           </div>
           <div className='full-width form-inputs d-inline-flex flex-column'>
             <InputLabel htmlFor='crmEnrollmentStartDate' shrink={!!classroom.crmEnrollmentStartDate}>{t('enrollmentStartDate')}</InputLabel>            
-              <DatePicker
+              <MuiDatePicker
                 name='crmEnrollmentStartDate'
                 value={classroom.crmEnrollmentStartDate || null}
                 onChange={(m) => {
@@ -192,7 +192,7 @@ class ClassroomForm extends Component {
           </div>
           <div className='full-width form-inputs d-inline-flex flex-column'>
               <InputLabel htmlFor='crmEnrollmentEndDate' shrink={!!classroom.crmEnrollmentEndDate}>{t('enrollmentEndDate')}</InputLabel>            
-              <DatePicker
+              <MuiDatePicker
                 name='crmEnrollmentEndDate'
                 value={classroom.crmEnrollmentEndDate || null}
                 onChange={(m) => {

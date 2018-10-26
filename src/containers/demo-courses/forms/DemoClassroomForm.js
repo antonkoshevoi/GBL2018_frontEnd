@@ -5,7 +5,7 @@ import { translate } from 'react-i18next';
 import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography } from '@material-ui/core';
 import { getSchoolTeachers } from '../../../redux/schools/actions';
 import { selectGetSchoolTeachersRequest, selectSchools } from '../../../redux/schools/selectors';
-import DatePicker from '../../../components/ui/DatePicker';
+import MuiDatePicker from '../../../components/ui/MuiDatePicker';
 import { getDemoCourses } from '../../../redux/courses/actions';
 import {selectCoursesRequest} from '../../../redux/courses/selectors';
 
@@ -137,7 +137,7 @@ class DemoClassroomForm extends Component {
           </FormControl>
           <div aria-describedby='crmStartDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
             <InputLabel htmlFor='crmStartDate-error' shrink={!!classroom.crmStartDate}>{t('startDate')}</InputLabel>            
-            <DatePicker
+            <MuiDatePicker
               name='crmStartDate'
               value={classroom.crmStartDate || null}
               onChange={(m) => { this._handleDateChange(m, 'crmStartDate') }}
@@ -146,7 +146,7 @@ class DemoClassroomForm extends Component {
           </div>
           <div aria-describedby='crmEndDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
             <InputLabel htmlFor='crmEndDate-error' shrink={!!classroom.crmEndDate}>{t('endDate')}</InputLabel>            
-            <DatePicker
+            <MuiDatePicker
               name='crmEndDate'
               value={classroom.crmEndDate || null}
               onChange={(m) => { this._handleDateChange(m, 'crmEndDate') }}
@@ -155,7 +155,7 @@ class DemoClassroomForm extends Component {
           </div>
           <div aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
             <InputLabel htmlFor='crmEnrollmentStartDate-error' shrink={!!classroom.crmEnrollmentStartDate}>{t('enrollmentStartDate')}</InputLabel>            
-            <DatePicker
+            <MuiDatePicker
               name='crmEnrollmentStartDate'
               value={classroom.crmEnrollmentStartDate || null}
               onChange={(m) => { this._handleDateChange(m, 'crmEnrollmentStartDate') }}
@@ -164,7 +164,7 @@ class DemoClassroomForm extends Component {
           </div>
           <div aria-describedby='crmEnrollmentEndDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
             <InputLabel htmlFor='crmEnrollmentEndDate-error' shrink={!!classroom.crmEnrollmentEndDate}>{t('enrollmentEndDate')}</InputLabel>            
-            <DatePicker
+            <MuiDatePicker
               name='crmEnrollmentEndDate'
               value={classroom.crmEnrollmentEndDate || null}
               onChange={(m) => { this._handleDateChange(m, 'crmEnrollmentEndDate') }}

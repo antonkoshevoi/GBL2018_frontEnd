@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import DatePicker from '../../../components/ui/DatePicker';
+import MuiDatePicker from '../../../components/ui/MuiDatePicker';
 import { selectScheduleLessonRequest } from '../../../redux/classrooms/selectors';
 import { scheduleLesson } from '../../../redux/classrooms/actions';
 
@@ -56,7 +56,7 @@ class AttemptDateForm extends Component {
                     <i className='la la-pencil'></i>
                 </button>                    
                 <div style={{'display': 'none'}}>   
-                    <DatePicker
+                    <MuiDatePicker
                       name={'lesson-att-date-' + lesson.lessonId}                      
                       ref={(node) => { this.picker = node; }}
                       value={this.state.attDate || ''}                      

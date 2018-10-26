@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { Typography, Select, MenuItem } from '@material-ui/core';
-import DatePicker from "../../../components/ui/DatePicker";
+import MuiDatePicker from "../../../components/ui/MuiDatePicker";
 import { update } from "../../../redux/user/actions";
 import { selectUpdateRequest } from "../../../redux/user/selectors";
 import HasRole from "../../middlewares/HasRole";
@@ -258,7 +258,7 @@ class Details extends Component {
                   <div className="form-group m-form__group row">
                     <label className="col-form-label col-lg-3" htmlFor="phone">{t('birthday')}</label>
                     <div className="col-lg-9">                            
-                      <DatePicker
+                      <MuiDatePicker
                         InputProps={{
                             className: "form-control m-input m-input--air m--padding-top-5 m--padding-bottom-0",
                             disableUnderline: true                    

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { Button, Select, MenuItem, FormHelperText, Radio, FormControlLabel } from '@material-ui/core';
-import DatePicker from '../../components/ui/DatePicker';
+import MuiDatePicker from '../../components/ui/MuiDatePicker';
 import { HeadRow, Row, Table, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import Loader from '../../components/layouts/Loader';
 import { connect } from 'react-redux';
@@ -187,7 +187,7 @@ class ClassroomSchedule extends Component {
                                 <label className="col-lg-1 col-md-3 col-sm-4" htmlFor="startDate">{t('startDate')}:</label>
                                 <div className="col-lg-4 col-md-5 col-sm-6">
                                     <div>
-                                        <DatePicker
+                                        <MuiDatePicker
                                             name='startDate'
                                             value={this.state.startDate || null}
                                             onChange={(e) => { this._handleDateChange(e, 'startDate') }}
