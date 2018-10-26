@@ -62,7 +62,7 @@ class ResultsModal extends Component {
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>
                       <Icon className="m--margin-right-15">poll</Icon>
-                      <Typography type="title" color="inherit" >
+                      <Typography variant="h6" color="inherit" >
                             {t('sCapResults')}
                       </Typography>
                     </Toolbar>

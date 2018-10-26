@@ -78,7 +78,7 @@ class SendInvitationModal extends Component {
               ) : (
                 <Icon className="m--margin-right-15">send</Icon>
               )}            
-            <Typography type='title' color='inherit'>
+            <Typography variant="h6" color='inherit'>
               {t('demoCourseInvitation')}
             </Typography>
           </Toolbar>

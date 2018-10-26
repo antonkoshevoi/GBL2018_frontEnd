@@ -1,7 +1,5 @@
 import React, { Component  } from 'react';
 import { DatePicker } from 'material-ui-pickers';
-import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
-import blue from '@material-ui/core/es/colors/blue';
 import moment from "moment/moment";
 
 class MuiDatePicker extends Component {
@@ -20,15 +18,8 @@ class MuiDatePicker extends Component {
 
   render () {     
     const { InputProps, format, onChange, ...rest } = this.props;
-    const theme = createMuiTheme({
-        palette: {
-            primary: blue
-        },
-        useNextVariants: true
-    });
     
-    return (     
-        <MuiThemeProvider theme={theme}>
+    return (
             <DatePicker
               {...rest}
               onChange={(m) => onChange(this._convertReturnValue(m))}
@@ -39,8 +30,7 @@ class MuiDatePicker extends Component {
               format={format ? format : 'YYYY-MM-DD'}
               InputProps={InputProps ? InputProps : {
                 style: {}
-              }}/>
-        </MuiThemeProvider>
+              }}/>        
     );
   }
 }

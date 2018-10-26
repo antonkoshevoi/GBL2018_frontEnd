@@ -124,7 +124,7 @@ class ClassroomSchedule extends Component {
                     <div className='m-portlet__head'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
-                                <span className='m-portlet__head-icon'><i className='la la-user' style={{fontSize: '55px'}}></i></span>
+                                <span className='m-portlet__head-icon'><i className='la la-user'></i></span>
                                 <h3 className='m-portlet__head-text'>
                                 {loaded ? t('classRoomSchedule', {classroom: schedule.crmName}) : '...'}
                                 </h3>
@@ -192,7 +192,7 @@ class ClassroomSchedule extends Component {
                                             value={this.state.startDate || null}
                                             onChange={(e) => { this._handleDateChange(e, 'startDate') }}
                                         />
-                                        <Button disabled={disabled} variant="raised" color='primary' onClick={() => { this._saveSchedule() }} className='mt-btn mt-btn-success m--margin-left-15'>Execute</Button>
+                                        <Button disabled={disabled} variant="contained" color='primary' onClick={() => { this._saveSchedule() }} className='mt-btn mt-btn-success m--margin-left-15'>Execute</Button>
                                     </div>
                                     {errors && errors.get('startDate') && <FormHelperText error>{errors.get('startDate').get(0)}</FormHelperText>}                                    
                                 </div>                       

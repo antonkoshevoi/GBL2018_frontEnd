@@ -62,7 +62,7 @@ class AssignStudentsForm extends Component {
 
     if (!schoolStudents.length) {
       return <div>
-        <Typography type="display1" gutterBottom>
+        <Typography variant="h6" gutterBottom>
           No Students in School
         </Typography>
       </div>

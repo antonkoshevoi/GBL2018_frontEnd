@@ -180,7 +180,7 @@ class Connections extends Component {
                     <div className='m-portlet__head border-b-orange'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
-                                <span className='m-portlet__head-icon'><i className='la la-user' style={{fontSize: '55px'}}></i></span>
+                                <span className='m-portlet__head-icon'><i className='la la-user'></i></span>
                                 <h3 className='m-portlet__head-text'>{t('myConnections')}</h3>
                             </div>
                         </div>
@@ -189,7 +189,7 @@ class Connections extends Component {
                         <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
                             <div className='row align-items-center'>
                                 <div className='col-xl-12 order-1 order-xl-2 m--align-right margin-0'>       
-                                    <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
+                                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
                                         {t('sentRequest')} <Icon style={{marginLeft: '5px'}}>add</Icon>
                                     </Button>                  
                                 </div>

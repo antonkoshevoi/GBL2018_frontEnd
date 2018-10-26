@@ -23,7 +23,7 @@ const Pagination = ({ page, totalPages, onPageSelect, dockLength }) => {
     pages.push(
       <Button key={i}
         style={{color:'white'}}
-        variant="raised"
+        variant="contained"
         onClick={() => onPageSelect(k) }
         className={`m-btn btn  btn-info  m-btn--air radius-0 ${(page === k ? ' active' : ' ')}`}>{i}
       </Button>
@@ -34,14 +34,14 @@ const Pagination = ({ page, totalPages, onPageSelect, dockLength }) => {
   return (
     <div className="m-btn-group m-btn-group--pill m-btn-group--air btn-group m-btn-group m-btn-group--pill btn-group-sm paggination-group">
       { showPrev &&
-        <Button variant="raised"
+        <Button variant="contained"
           color='default'
           onClick={() => onPageSelect(1) }
           className='m-btn btn btn-metal m-btn--air'><i className="la la-angle-double-left"></i>
         </Button>
       }
       { showPrev &&
-        <Button variant="raised"
+        <Button variant="contained"
           color='default'
           onClick={() => onPageSelect(page - 1) }
           className='m-btn btn  btn-metal m-btn--air'><i className="la la-angle-left"></i>
@@ -49,14 +49,14 @@ const Pagination = ({ page, totalPages, onPageSelect, dockLength }) => {
       }
       { pages }
       { showNext &&
-        <Button variant="raised"
+        <Button variant="contained"
           color='default'
           onClick={() => onPageSelect(page + 1) }
           className='m-btn btn  btn-metal m-btn--air'><i className="la la-angle-right"></i>
         </Button>
       }
       { showNext &&
-        <Button variant="raised"
+        <Button variant="contained"
           color='default'
           onClick={() => onPageSelect(totalPages) }
           className='m-btn btn btn-metal m-btn--air'><i className="la la-angle-double-right"></i>

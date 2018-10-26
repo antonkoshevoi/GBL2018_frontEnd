@@ -92,7 +92,7 @@ class AssignStudentModal extends Component {
               ) : (
                 <Icon className="m--margin-right-15">persone</Icon>
               )}            
-            <Typography type='title' color='inherit'>
+            <Typography variant="h6" color='inherit'>
               {t('assignStudent')}
             </Typography>
           </Toolbar>

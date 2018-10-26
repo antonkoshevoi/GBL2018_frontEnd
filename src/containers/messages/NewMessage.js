@@ -51,7 +51,7 @@ class NewMessage extends Component {
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
                                 <span className='m-portlet__head-icon'>
-                                    <i className='la la-comments-o' style={{fontSize: '55px'}}></i>
+                                    <i className='la la-comments-o'></i>
                                 </span>
                                 <h3 className='m-portlet__head-text'>{t('Message')}</h3>
                             </div>

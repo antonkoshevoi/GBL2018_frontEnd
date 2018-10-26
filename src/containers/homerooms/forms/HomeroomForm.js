@@ -142,11 +142,8 @@ class HomeroomForm extends Component {
     
     if (!schoolStudents.length) {
       return <div>
-        <Typography type="display1" gutterBottom>
-          {t('Assign students to homeroom')}
-        </Typography>
-        <Typography type="title" gutterBottom>
-          {t('selectSchoolForStudents')}
+        <Typography variant="h6" gutterBottom>
+          {t('studentsNotFound')}
         </Typography>
       </div>
     }

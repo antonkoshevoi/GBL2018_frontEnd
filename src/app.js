@@ -13,21 +13,41 @@ import Routes from './configs/routes';
 import configureStore from './redux/store';
 import createHistory from 'history/createBrowserHistory'
 
+import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
+import blue from '@material-ui/core/es/colors/blue';
+import MomentUtils from 'material-ui-pickers/utils/moment-utils';
+
 import ApiClient from "./services/ApiClient";
 
-const history = createHistory();
+const history   = createHistory();
 const apiClient = new ApiClient();
-const store = configureStore(history, apiClient);
+const store     = configureStore(history, apiClient);
+
 
 class App extends Component {
 
   render() {
+      
+    const theme = createMuiTheme({
+        palette: {
+            primary: blue
+        },
+        typography: {
+            useNextVariants: true
+        }
+    });
+    
     return (
-      <Router history={history}>
-        <Provider store={store}>
-          <Routes />
-        </Provider>
-      </Router>
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+            <MuiThemeProvider theme={theme}>
+                <Router history={history}>
+                    <Provider store={store}>
+                        <Routes />
+                    </Provider>
+                </Router>
+            </MuiThemeProvider>
+        </MuiPickersUtilsProvider>
     );
   }
 }

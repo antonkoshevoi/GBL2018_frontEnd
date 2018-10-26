@@ -157,7 +157,7 @@ class PaymentSuccessContainer extends Component {
                 <div className="m-portlet m-portlet--bordered-semi cartItems">
                   <div className="m-portlet__body">
                     <div className="m-widget25">
-                      <Typography variant="title" gutterBottom>
+                      <Typography variant="h6" gutterBottom>
                       </Typography>
                       <span className="invoice-title">{t('orderDetails')}</span>
                     </div>

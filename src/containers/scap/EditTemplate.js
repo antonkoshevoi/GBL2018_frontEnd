@@ -193,7 +193,7 @@ class EditTemplate extends Component {
                     <div className='m-portlet__head border-b-blue'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
-                                <span className='m-portlet__head-icon'><i className='la la-comment-o' style={{fontSize: '55px'}}></i></span>
+                                <span className='m-portlet__head-icon'><i className='la la-comment-o'></i></span>
                                 <h3 className='m-portlet__head-text'>{t('updateScapTemplate')}</h3>
                             </div>
                         </div>         
@@ -246,17 +246,17 @@ class EditTemplate extends Component {
                                 {!questions.length && errors && errors.get('questions') && <p className="text-center m--margin-top-40 text-danger">{t('pleaseAddAnyQuestions')}</p>}
                             </div>
                             <div className="col-sm-12 m--margin-top-40 text-left">
-                                <Button onClick={() => { this._showQuestionModal() }} variant="raised" color='primary' className='mt-btn mt-btn-success'>
+                                <Button onClick={() => { this._showQuestionModal() }} variant="contained" color='primary' className='mt-btn mt-btn-success'>
                                     <Icon className="m--margin-right-10">add</Icon>
                                     {t('addNewQuestion')}
                                 </Button>                              
                             </div>
                             <div className="col-sm-12 m--margin-top-40 text-center">
-                                <Button disabled={updateRequest.get('loading')} onClick={() => { this._saveTemplate() }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
+                                <Button disabled={updateRequest.get('loading')} onClick={() => { this._saveTemplate() }} variant="contained" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
                                     {t('saveTemplate')}
                                     <Icon className="m--margin-left-5">check</Icon>
                                 </Button>                                
-                                <Button disabled={updateRequest.get('loading')} onClick={() => { this._goBack() }} variant="raised" color='default' className='mt-btn mt-btn-cancel'>
+                                <Button disabled={updateRequest.get('loading')} onClick={() => { this._goBack() }} variant="contained" color='default' className='mt-btn mt-btn-cancel'>
                                     {t('cancel')}                                    
                                 </Button>                                
                             </div>                              

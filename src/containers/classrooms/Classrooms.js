@@ -263,7 +263,7 @@ class Classrooms extends Component {
             <div className='m-portlet__head-caption'>
               <div className='m-portlet__head-title'>
                 <span className='m-portlet__head-icon'>
-                    <i className='la la-user' style={{fontSize:'55px'}}></i>
+                    <i className='la la-user'></i>
                 </span>
                 <h3 className='m-portlet__head-text'>                  
                   {t('classrooms')}
@@ -297,7 +297,7 @@ class Classrooms extends Component {
                   <HasPermission permissions={[
                     '[ClassRooms][Create][Any]'
                   ]}>
-                    <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
                       {t('addNew')}
                       <Icon style={{marginLeft:'5px'}}>add</Icon>
                     </Button>

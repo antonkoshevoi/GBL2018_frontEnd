@@ -127,7 +127,7 @@ class ScapResults extends Component {
                     <div className='m-portlet__head border-b-orange'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
-                                <span className='m-portlet__head-icon'><i className='la la-comment-o' style={{fontSize: '55px'}}></i></span>
+                                <span className='m-portlet__head-icon'><i className='la la-comment-o'></i></span>
                                 <h3 className='m-portlet__head-text'>{t('sCapResults')}</h3>
                             </div>
                         </div>         
@@ -146,7 +146,7 @@ class ScapResults extends Component {
                                         <MenuItem value={50}>50</MenuItem>
                                         <MenuItem value={100}>100</MenuItem>
                                     </Select>
-                                    <Button onClick={() => { this._goBack() }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-5'>
+                                    <Button onClick={() => { this._goBack() }} variant="contained" color='primary' className='mt-btn mt-btn-success m--margin-right-5'>
                                         <i className='la la-mail-reply m--margin-right-10'></i>
                                         {t('back')}                                        
                                     </Button>                                    

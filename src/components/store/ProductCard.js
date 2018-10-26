@@ -22,7 +22,7 @@ class ProductCard extends Component {
             <img src={productThumb} className="full-width" alt="book"/>
           </NavLink>
           <CardContent className="cardContent">
-            <Typography className="cardTitle" type="headline" component="h2">
+            <Typography className="cardTitle" variant="h2" component="h2">
               <NavLink to={`/store/details/${product.get('id')}`}>
                 {product.get('title')}
               </NavLink>
