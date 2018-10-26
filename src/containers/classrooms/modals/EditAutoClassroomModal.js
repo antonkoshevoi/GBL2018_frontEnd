@@ -206,7 +206,7 @@ class EditAutoClassroomModal extends Component {
               ) : (
                 <Icon className="m--margin-right-15">person</Icon>
               )}            
-            <Typography type="title" color="inherit">
+            <Typography variant="h6" color="inherit">
               {t('autoClassroomSimilarityRegularCreation')}
             </Typography>
           </Toolbar>

@@ -114,7 +114,7 @@ class SentMessages extends Component {
                     <div className='m-portlet__head border-b-darkblue'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
-                                <span className='m-portlet__head-icon'><i className='la la-comment-o' style={{fontSize: '55px'}}></i></span>
+                                <span className='m-portlet__head-icon'><i className='la la-comment-o'></i></span>
                                 <h3 className='m-portlet__head-text'>{t('sentMessages')}</h3>
                             </div>
                         </div>         

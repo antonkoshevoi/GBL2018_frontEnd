@@ -195,7 +195,7 @@ class AddParentModal extends Component {
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>                             
                         {loading ? <CircularProgress className="m--margin-right-15" color="inherit"/> : <Icon className="m--margin-right-15">person</Icon>}                
-                        <Typography type="title" color="inherit" >
+                        <Typography variant="h6" color="inherit" >
                             {t('addParent')}
                         </Typography>                        
                     </Toolbar>

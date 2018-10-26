@@ -98,7 +98,7 @@ class RestoreLogin extends Component {
                       </div>
                     </div>
                     <div className="m-login__form-action">
-                      <Button id="m_login_signin_submit" variant="raised" color="primary" onClick={() => {
+                      <Button id="m_login_signin_submit" variant="contained" color="primary" onClick={() => {
                           this._login()
                       }}
                               className="btn  m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primary">

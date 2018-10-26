@@ -22,7 +22,7 @@ class AuthorizeModal extends Component {
       <Modal isOpen={isOpen} onClose={() => onClose()}>
         <AppBar position='static' color='primary' className='dialogAppBar'>
           <Toolbar>
-            <Typography type='title' color='inherit'>
+            <Typography variant="h6" color='inherit'>
               {t('thanksForJoiningDemo')}
             </Typography>
           </Toolbar>
@@ -37,8 +37,7 @@ class AuthorizeModal extends Component {
           <Button
             onClick={() => { toLogin() }}
             type='button'
-            form='create-student-form'
-            raised
+            form='create-student-form'            
             className='m--margin-10 pull-right mt-btn mt-btn-success'
             color='primary'>
             {t('login')}
@@ -46,8 +45,7 @@ class AuthorizeModal extends Component {
           <Button
             onClick={() => { toRegistration() }}
             type='button'
-            form='create-student-form'
-            raised
+            form='create-student-form'            
             className='m--margin-10 pull-right mt-btn mt-btn-success'
             color='primary'>
             {t('register')}

@@ -115,10 +115,10 @@ class InvitationDetails extends Component {
           </Grid>
 
           <Grid item sm={12} style={{ textAlign: 'center', marginBottom: 20 }}>
-            <Button raised onClick={() => { this._accept() }} className='mt-btn mt-btn-success m--margin-left-30 m--margin-right-30'>
+            <Button contained onClick={() => { this._accept() }} className='mt-btn mt-btn-success m--margin-left-30 m--margin-right-30'>
               {t('accept')}
             </Button>
-            <Button raised onClick={() => { this._decline() }} className='mt-btn mt-btn-danger m--margin-left-30 m--margin-right-30'>
+            <Button contained onClick={() => { this._decline() }} className='mt-btn mt-btn-danger m--margin-left-30 m--margin-right-30'>
               {t('decline')}
             </Button>
           </Grid>

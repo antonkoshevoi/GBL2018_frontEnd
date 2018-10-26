@@ -7,7 +7,7 @@ import {getSchoolTeachers, getSchoolStudents} from "../../../redux/schools/actio
 import {
     selectGetSchoolStudentsRequest, selectGetSchoolTeachersRequest    
 } from "../../../redux/schools/selectors";
-import DatePicker from '../../../components/ui/DatePicker';
+import MuiDatePicker from '../../../components/ui/MuiDatePicker';
 
 function TabContainer(props) {
   return (
@@ -142,11 +142,8 @@ class HomeroomForm extends Component {
     
     if (!schoolStudents.length) {
       return <div>
-        <Typography type="display1" gutterBottom>
-          {t('Assign students to homeroom')}
-        </Typography>
-        <Typography type="title" gutterBottom>
-          {t('selectSchoolForStudents')}
+        <Typography variant="h6" gutterBottom>
+          {t('studentsNotFound')}
         </Typography>
       </div>
     }
@@ -192,7 +189,7 @@ class HomeroomForm extends Component {
             </FormControl>
             <div aria-describedby='name-error-text' className='full-width form-inputs d-inline-flex flex-column'>
               <InputLabel htmlFor='name-error' shrink={!!homeroom.startDate}>{t('startDate')}</InputLabel>              
-                <DatePicker
+                <MuiDatePicker
                   name='startDate'
                   value={homeroom.startDate || null}
                   onChange={(m) => { this._handleDateChange(m, 'startDate') }}
@@ -201,7 +198,7 @@ class HomeroomForm extends Component {
             </div>
             <div aria-describedby='name-error-text' className='full-width form-inputs d-inline-flex flex-column'>
               <InputLabel htmlFor='name-error' shrink={!!homeroom.endDate}>{t('endDate')}</InputLabel>              
-                <DatePicker
+                <MuiDatePicker
                   name='endDate'
                   value={homeroom.endDate || null}
                   onChange={(m) => { this._handleDateChange(m, 'endDate') }}
@@ -210,7 +207,7 @@ class HomeroomForm extends Component {
             </div>
             <div aria-describedby='name-error-text' className='full-width form-inputs d-inline-flex flex-column'>
               <InputLabel htmlFor='name-error' shrink={!!homeroom.enrollmentStartDate}>{t('enrollmentStartDate')}</InputLabel>             
-                <DatePicker
+                <MuiDatePicker
                   name='enrollmentStartDate'
                   value={homeroom.enrollmentStartDate || null}
                   onChange={(m) => { this._handleDateChange(m, 'enrollmentStartDate') }}
@@ -219,7 +216,7 @@ class HomeroomForm extends Component {
             </div>
             <div aria-describedby='name-error-text' className='full-width form-inputs d-inline-flex flex-column'>
               <InputLabel htmlFor='name-error' shrink={!!homeroom.enrollmentEndDate}>{t('enrollmentEndDate')}</InputLabel>              
-                <DatePicker
+                <MuiDatePicker
                   name='enrollmentEndDate'
                   value={homeroom.enrollmentEndDate || null}
                   onChange={(m) => { this._handleDateChange(m, 'enrollmentEndDate') }}

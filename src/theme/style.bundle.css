@@ -11667,10 +11667,10 @@ code {
           padding: 0 13px 0 0; }
           .m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class^="la-"],
           .m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class*=" la-"] {
-            font-size: 1.6rem; }
+            font-size: 3rem; }
           .m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class^="fa-"],
           .m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class*=" fa-"] {
-            font-size: 1.4rem; }
+            font-size: 2.2rem; }
           .m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon i {
             vertical-align: middle;
             line-height: 0;

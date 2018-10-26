@@ -211,7 +211,7 @@ class FillTemplate extends Component {
                     <div className='m-portlet__head border-b-blue'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
-                                <span className='m-portlet__head-icon'><i className='la la-comment-o' style={{fontSize: '55px'}}></i></span>
+                                <span className='m-portlet__head-icon'><i className='la la-comment-o'></i></span>
                                 <h3 className='m-portlet__head-text'>{t('fillScapTemplate')}</h3>
                             </div>
                         </div>         
@@ -256,15 +256,15 @@ class FillTemplate extends Component {
                                 <div>{this._renderQuestions()}</div>                                
                             </div>
                             <div className="col-sm-12 m--margin-top-40 text-center">
-                                <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._saveAnswers(0) }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
+                                <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._saveAnswers(0) }} variant="contained" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
                                     {t('saveAndPublish')}
                                     <Icon className="m--margin-left-5">check</Icon>
                                 </Button>
-                                <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._saveAnswers(1) }} variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
+                                <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._saveAnswers(1) }} variant="contained" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
                                     {t('saveAsDraft')}
                                     <Icon className="m--margin-left-5">check</Icon>
                                 </Button>                                 
-                                <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._goBack() }} variant="raised" color='default' className='mt-btn mt-btn-cancel'>
+                                <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._goBack() }} variant="contained" color='default' className='mt-btn mt-btn-cancel'>
                                     {t('cancel')}                                    
                                 </Button>                                
                             </div>                              

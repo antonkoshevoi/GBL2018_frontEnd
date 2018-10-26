@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { selectGetSchoolHomeroomsRequest } from '../../../redux/schools/selectors';
 import { getSchoolHomerooms } from '../../../redux/schools/actions';
-import DatePicker from "../../../components/ui/DatePicker";
+import MuiDatePicker from "../../../components/ui/MuiDatePicker";
 import HasPermission from "../../middlewares/HasPermission";
 
 class StudentForm extends Component {
@@ -140,7 +140,7 @@ class StudentForm extends Component {
                 <div className="form-group m-form__group row">
                   <label className="col-form-label col-lg-3 col-sm-12" htmlFor="phone">{t('birthday')}</label>
                   <div className="col-lg-8 col-md-12 col-sm-12">
-                    <DatePicker
+                    <MuiDatePicker
                       InputProps={{
                           className: "form-control m-input m-input--air m--padding-top-5 m--padding-bottom-0",
                           disableUnderline: true                    

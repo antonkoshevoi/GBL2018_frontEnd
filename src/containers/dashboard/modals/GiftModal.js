@@ -101,7 +101,7 @@ class GiftModal extends Component {
               ) : (
                 <Icon className="m--margin-right-15">card_giftcard</Icon>
               )}            
-            <Typography type='title' color='inherit'>{t('giftCourseCredit')} </Typography>
+            <Typography variant="h6" color='inherit'>{t('giftCourseCredit')} </Typography>
           </Toolbar>
         </AppBar>
 

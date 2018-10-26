@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { Button, Select, MenuItem, FormHelperText, Radio, FormControlLabel } from '@material-ui/core';
-import DatePicker from '../../components/ui/DatePicker';
+import MuiDatePicker from '../../components/ui/MuiDatePicker';
 import { HeadRow, Row, Table, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import Loader from '../../components/layouts/Loader';
 import { connect } from 'react-redux';
@@ -124,7 +124,7 @@ class ClassroomSchedule extends Component {
                     <div className='m-portlet__head'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
-                                <span className='m-portlet__head-icon'><i className='la la-user' style={{fontSize: '55px'}}></i></span>
+                                <span className='m-portlet__head-icon'><i className='la la-user'></i></span>
                                 <h3 className='m-portlet__head-text'>
                                 {loaded ? t('classRoomSchedule', {classroom: schedule.crmName}) : '...'}
                                 </h3>
@@ -187,12 +187,12 @@ class ClassroomSchedule extends Component {
                                 <label className="col-lg-1 col-md-3 col-sm-4" htmlFor="startDate">{t('startDate')}:</label>
                                 <div className="col-lg-4 col-md-5 col-sm-6">
                                     <div>
-                                        <DatePicker
+                                        <MuiDatePicker
                                             name='startDate'
                                             value={this.state.startDate || null}
                                             onChange={(e) => { this._handleDateChange(e, 'startDate') }}
                                         />
-                                        <Button disabled={disabled} variant="raised" color='primary' onClick={() => { this._saveSchedule() }} className='mt-btn mt-btn-success m--margin-left-15'>Execute</Button>
+                                        <Button disabled={disabled} variant="contained" color='primary' onClick={() => { this._saveSchedule() }} className='mt-btn mt-btn-success m--margin-left-15'>Execute</Button>
                                     </div>
                                     {errors && errors.get('startDate') && <FormHelperText error>{errors.get('startDate').get(0)}</FormHelperText>}                                    
                                 </div>                       

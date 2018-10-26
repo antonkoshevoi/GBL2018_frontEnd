@@ -212,7 +212,7 @@ class Students extends Component {
             <div className='m-portlet__head-caption'>
               <div className='m-portlet__head-title'>
                 <span className='m-portlet__head-icon'>
-		  <i className='la la-user' style={{fontSize:'55px'}}></i>
+		  <i className='la la-user'></i>
                 </span>
                 <h3 className='m-portlet__head-text'>
                   {t('students')}
@@ -243,14 +243,14 @@ class Students extends Component {
                     <MenuItem value={100}>100</MenuItem>
                   </Select>
                   <HasPermission permissions={['[Users][Students][Create][Any]']}>
-                    <Button variant="raised" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
                       {t('addNew')}
                       <Icon style={{marginLeft:'5px'}}>add</Icon>
                     </Button>
                   </HasPermission>
                   <HasPermission permissions={['[Users][Students][Create][Bulk][Any]']}>
                     <NavLink className='link-btn' to='/students/csv'>
-                    <Button variant="raised" className='btn-success mt-btn mt-btn-success'>
+                    <Button variant="contained" className='btn-success mt-btn mt-btn-success'>
                       {t('bulkAddStudents')} 
                       <Icon style={{marginLeft:'5px'}}>person</Icon>
                     </Button>

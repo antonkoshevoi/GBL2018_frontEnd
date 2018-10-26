@@ -71,7 +71,7 @@ class QuestionModal extends Component {
         <AppBar position='static' color='primary' className='dialogAppBar'>
           <Toolbar>
             <Icon className="m--margin-right-15">add_circle</Icon>                          
-            <Typography type='title' color='inherit'>
+            <Typography variant="h6" color='inherit'>
                 {t('addNewQuestion')}
             </Typography>
           </Toolbar>

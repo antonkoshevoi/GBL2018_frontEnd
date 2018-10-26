@@ -82,7 +82,7 @@ class SendMessageModal extends Component {
                         ) : (
                           <Icon className="m--margin-right-15">message</Icon>
                         )}                      
-                        <Typography type="title" color="inherit" >
+                        <Typography variant="h6" color="inherit" >
                             {t('sendMessage')}
                         </Typography>
                     </Toolbar>

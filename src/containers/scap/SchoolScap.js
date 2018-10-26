@@ -165,7 +165,7 @@ class SchoolScap extends Component {
                     <div className='m-portlet__head border-b-orange'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
-                                <span className='m-portlet__head-icon'><i className='la la-comment-o' style={{fontSize: '55px'}}></i></span>
+                                <span className='m-portlet__head-icon'><i className='la la-comment-o'></i></span>
                                 <h3 className='m-portlet__head-text'>{t('sCap')}</h3>
                             </div>
                         </div>         
@@ -185,7 +185,7 @@ class SchoolScap extends Component {
                                         <MenuItem value={100}>100</MenuItem>
                                     </Select>
                                     <NavLink to="/scap/build" className="link-btn">
-                                        <Button variant="raised" color='primary' className='mt-btn mt-btn-success m--margin-right-5'>
+                                        <Button variant="contained" color='primary' className='mt-btn mt-btn-success m--margin-right-5'>
                                             {t('addNew')}
                                             <Icon className="m--margin-left-5">add</Icon>
                                         </Button>

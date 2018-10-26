@@ -92,7 +92,7 @@ class AssignTeachersModal extends Component {
 
         if (!teachers.size) {
             return <div>
-                <Typography type="display1" gutterBottom>No Teachers...</Typography>
+                <Typography variant="h4" gutterBottom>No Teachers...</Typography>
             </div>
         }
     
@@ -125,7 +125,7 @@ class AssignTeachersModal extends Component {
                         ) : (
                           <Icon className="m--margin-right-15">person</Icon>
                         )}                      
-                        <Typography type="title" color="inherit" >
+                        <Typography variant="h6" color="inherit" >
                             {t('assignTeachers')}
                         </Typography>
                     </Toolbar>
