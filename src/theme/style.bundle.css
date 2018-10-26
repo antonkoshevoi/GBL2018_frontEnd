@@ -400,8 +400,11 @@ h6, .h6 {
   font-size: 3.5rem;
   font-weight: 300;
   line-height: 1.2; }
+.display-5 {
+  font-size: 2rem !important;
+}
 .display-6 {
-  font-size: 1.5rem;
+  font-size: 1.5rem !important;
 }
 .display-10 {
   font-size: 1.25rem;

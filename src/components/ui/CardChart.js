@@ -15,7 +15,7 @@ class CardChart extends Component {
         <div className="m-portlet__head border-b-blue">
           <div className="m-portlet__head-caption">
             <div className="m-portlet__head-title online-users-chart-header">
-              <span className="m-portlet__head-icon"><i className="fa fa-line-chart square-background circle-background"></i></span>              
+              <span className="m-portlet__head-icon"><i className="fa fa-line-chart display-6 square-background circle-background"></i></span>              
               <h3 className="m-portlet__head-text">
                 {title}
               </h3>

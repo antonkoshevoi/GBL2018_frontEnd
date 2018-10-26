@@ -100,7 +100,7 @@ class InfoSection extends Component {
                   <div className="m-portlet__head">
                     <div className="m-portlet__head-caption">
                       <div className="m-portlet__head-title">
-                        <span className="m-portlet__head-icon"><i className="la la-info"></i></span>              
+                        <span className="m-portlet__head-icon"><i className="display-5 la la-info"></i></span>              
                         <h3 className="m-portlet__head-text">
                           {t('about')}
                         </h3>
@@ -139,7 +139,7 @@ class InfoSection extends Component {
                </div>      
             </div>
             <div className="col-lg-8 m--margin-bottom-20">
-              <Card title={t('myCourses')} icon="fa fa-sitemap">                
+              <Card title={t('myCourses')} icon="display-5 la la-sitemap">                
                 <div className="table-responsive">
                   <table className="table">
                     <thead>

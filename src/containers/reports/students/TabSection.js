@@ -3,7 +3,7 @@ import {Select, MenuItem} from '@material-ui/core';
 import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../components/ui/table';
 import LessonsTable from './LessonsTable';
 import {translate} from 'react-i18next';
-
+import moment from "moment/moment";
 class TabSection extends Component {
 
   constructor(props) {
@@ -83,7 +83,7 @@ class TabSection extends Component {
                   return (
                     <Row index={i} key={i}>
                       <Td first={true} width='20px'>{i + 1}</Td>
-                      <Td width='150px'>{attempt.att_date}</Td>
+                      <Td width='150px'>{moment(attempt.att_date).format('lll')}</Td>
                       <Td width='150px'>{attempt.classroom_name}</Td>
                       <Td width='150px'>{attempt.course_name}</Td>
                       <Td width='200px'>{attempt.lesson}</Td>
@@ -113,7 +113,7 @@ class TabSection extends Component {
             <div className="m-portlet__head-caption col-sm-4">
               <div className="m-portlet__head-title">
               <span className="m-portlet__head-icon">
-                <i className="fa fa-line-chart"></i>
+                <i className="fa fa-line-chart display-6"></i>
               </span>
               <h3 className="m-portlet__head-text">{t('reports')}</h3></div>
             </div>

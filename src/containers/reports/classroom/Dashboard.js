@@ -56,7 +56,7 @@ class Dashboard extends Component {
                     <div className="m-portlet__head d-flex justify-content-between align-items-center">
                       <div className="m-portlet__head-caption col-sm-4">
                         <div className="m-portlet__head-title"><span className="m-portlet__head-icon"><i
-                          className="fa fa-line-chart"></i></span><h3 className="m-portlet__head-text">{t('students')}</h3></div>
+                          className="fa fa-line-chart display-6"></i></span><h3 className="m-portlet__head-text">{t('students')}</h3></div>
                       </div>                
                     </div>
                     <div className="m-portlet__body" style={{height: '100%'}}>
