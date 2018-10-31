@@ -8,8 +8,7 @@ import {
   UNSUBSCRIBE_STUDENT, UNSUBSCRIBE_STUDENT_SUCCESS, UNSUBSCRIBE_STUDENT_FAIL, RESET_UNSUBSCRIBE_STUDENT_REQUEST,
   GET_STUDENTS_RECORDS, GET_STUDENTS_RECORDS_SUCCESS, GET_STUDENTS_RECORDS_FAIL,
   GET_INVOICE, GET_INVOICE_SUCCESS, GET_INVOICE_FAIL,
-  GET_PAYMENTS, GET_PAYMENTS_SUCCESS, GET_PAYMENTS_FAIL,
-  GIFT_SUBSCRIPTION, GIFT_SUBSCRIPTION_SUCCESS, GIFT_SUBSCRIPTION_FAIL, RESET_GIFT_SUBSCRIPTION_REQUEST
+  GET_PAYMENTS, GET_PAYMENTS_SUCCESS, GET_PAYMENTS_FAIL  
 } from './actions';
 import Immutable from 'immutable';
 
@@ -80,14 +79,7 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorMessage: null,    
     errors: {}
-  },
-  giftSubscriptionRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorMessage: null,    
-    errors: {}
-  },  
+  }, 
   pagination: {
     page: 1,
     perPage: 25,
@@ -362,15 +354,6 @@ export default function reducer (state = initialState, action) {
           .set('records', Immutable.List())
         );
 
-    case GIFT_SUBSCRIPTION:
-        return state.set('giftSubscriptionRequest', initialState.get('giftSubscriptionRequest').set('loading', true));
-    case GIFT_SUBSCRIPTION_SUCCESS:
-        return state.set('giftSubscriptionRequest', initialState.get('giftSubscriptionRequest').set('success', true));
-    case GIFT_SUBSCRIPTION_FAIL:
-        return state.set('giftSubscriptionRequest', initialState.get('giftSubscriptionRequest').set('fail', true)
-                .set('errors', Immutable.fromJS(action.error.response.data.errors)));
-    case RESET_GIFT_SUBSCRIPTION_REQUEST:
-        return state.set('giftSubscriptionRequest', initialState.get('giftSubscriptionRequest'));
     /**
      * default
      */

@@ -30,7 +30,7 @@ class RosterStatistic extends Component {
         title={t('roster')}
         className="profile-card"
         iconBackground="circle-background"
-        icon="fa fa-institution">
+        icon="fa fa-institution display-6">
         <div className="m-widget1 m-widget1--paddingless">
           <div className="m-widget1 m-widget1--paddingless">
           <HasRole roles={['Superadministrator', 'Superintendent']}>

@@ -35,6 +35,18 @@ class App extends Component {
         },
         typography: {
             useNextVariants: true
+        },
+        overrides: {
+            MuiFormHelperText: {
+                root: {
+                    fontSize: '0.9rem'
+                }
+            },
+            MuiTab: {
+                label: {
+                    fontSize: '1rem'
+                }
+            }
         }
     });
     
