@@ -77,6 +77,7 @@ import AcceptStudent from '../containers/parents/AcceptStudent';
 import AcceptConnection from '../containers/connections/AcceptConnection';
 import CreateAccount from '../containers/connections/CreateAccount';
 import Connections from '../containers/connections/Connections';
+import Gifts from '../containers/gifts/Gifts';
 
 export default () => (
   <AppContainer>
@@ -174,6 +175,9 @@ export default () => (
 
       {/*Connections*/}
       <AuthenticatedRoute exact layout={MainLayout} roles={['Parents']} path='/connections' name='Connections' component={Connections} />
+      
+      {/*Gifts*/}
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Parents']} path='/gifts' name='Gifts' component={Gifts} />
       
       {/*Payments*/}
       <Route exact path='/payments/paypal/return' component={PayPalReturnContainer} />

@@ -19,3 +19,14 @@ export const selectGiftRequest = createSelector(
   selectGiftsDomain,
   (subState) => subState.get('giftRequest')
 );
+
+export const selectDeleteRequest = createSelector(
+  selectGiftsDomain,
+  (subState) => subState.get('deleteRequest')
+);
+
+export const selectChangeStatusRequest = createSelector(
+  selectGiftsDomain,
+  (subState) => subState.get('changeStatusRequest')
+);
+

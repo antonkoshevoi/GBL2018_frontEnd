@@ -41,6 +41,11 @@ class App extends Component {
                 root: {
                     fontSize: '0.9rem'
                 }
+            },
+            MuiTab: {
+                label: {
+                    fontSize: '1rem'
+                }
             }
         }
     });

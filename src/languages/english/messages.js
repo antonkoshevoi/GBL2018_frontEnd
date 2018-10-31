@@ -50,5 +50,8 @@ export default {
   connectionRequestHasBeenSent: 'Connection request has been sent',
   connectionRequestIsAccepted: 'Connection request is accepted!',
   connectionRequestIsDeclined: 'Connection request is declined',
-  connectionRequestIsDeleted: 'Connection request is deleted'
+  connectionRequestIsDeleted: 'Connection request is deleted',
+  giftDeleted: 'Gift successfully deleted',
+  giftDeclined: 'Gift is declined',
+  giftAccepted: 'Gift is accepted'
 }

@@ -7,6 +7,20 @@ export const GET_RECORD_SUCCESS = '[Gifts] GET_RECORD_SUCCESS';
 export const GET_RECORD_FAIL = '[Gifts] GET_RECORD_FAIL';
 export const RESET_GET_RECORD_REQUEST = '[Gifts] RESET_GET_RECORD_REQUEST';
 
+export const DELETE = '[Gifts] DELETE';
+export const DELETE_SUCCESS = '[Gifts] DELETE_SUCCESS';
+export const DELETE_FAIL = '[Gifts] DELETE_FAIL';
+export const RESET_DELETE_REQUEST = '[Gifts] RESET_DELETE_REQUEST';
+
+export const ACCEPT = '[Gifts] ACCEPT';
+export const ACCEPT_SUCCESS = '[Gifts] ACCEPT_SUCCESS';
+export const ACCEPT_FAIL = '[Gifts] ACCEPT_FAIL';
+
+export const DECLINE = '[Gifts] DECLINE';
+export const DECLINE_SUCCESS = '[Gifts] DECLINE_SUCCESS';
+export const DECLINE_FAIL = '[Gifts] DECLINE_FAIL';
+export const RESET_CHANGE_STATUS_REQUEST = '[Gifts] RESET_CHANGE_STATUS_REQUEST';
+
 export const GIFT = '[Gifts] GIFT';
 export const GIFT_COURSE_SUCCESS = '[Gifts] GIFT_COURSE_SUCCESS';
 export const GIFT_SUBSCRIPTION_SUCCESS = '[Gifts] GIFT_SUBSCRIPTION_SUCCESS';
@@ -16,7 +30,7 @@ export const RESET_GIFT_REQUST = '[Gifts] RESET_GIFT_REQUST';
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
-    promise: (apiClient) => apiClient.get('unassigned-items', params)
+    promise: (apiClient) => apiClient.get('gifts', params)
   };
 }
 
@@ -47,4 +61,37 @@ export function resetGiftRequest() {
   return {
     type: RESET_GIFT_REQUST
   };
+}
+
+export function deleteRecord(id) {  
+  return {
+    types: [DELETE, DELETE_SUCCESS, DELETE_FAIL],
+    promise: (apiClient) => apiClient.delete(`gifts/${id}`)
+  };
+}
+
+export function resetDeleteRequest() {
+  return {
+    type: RESET_DELETE_REQUEST
+  };
+}
+
+export function accept(id) {  
+  return {
+    types: [ACCEPT, ACCEPT_SUCCESS, ACCEPT_FAIL],
+    promise: (apiClient) => apiClient.delete(`gifts/accept/${id}`)
+  };
+}
+
+export function decline(id) {  
+  return {
+    types: [DECLINE, DECLINE_SUCCESS, DECLINE_FAIL],
+    promise: (apiClient) => apiClient.delete(`gifts/decline/${id}`)
+  };
+}
+
+export function resetChangeStatusRequest() {
+  return {
+    type: RESET_CHANGE_STATUS_REQUEST
+  }
 }

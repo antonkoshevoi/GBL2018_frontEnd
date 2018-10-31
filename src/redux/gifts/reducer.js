@@ -1,7 +1,10 @@
 import {
     GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL,
     GET_RECORD, GET_RECORD_SUCCESS, GET_RECORD_FAIL, RESET_GET_RECORD_REQUEST,
-    GIFT, GIFT_COURSE_SUCCESS, GIFT_SUBSCRIPTION_SUCCESS, GIFT_FAIL, RESET_GIFT_REQUST,     
+    GIFT, GIFT_COURSE_SUCCESS, GIFT_SUBSCRIPTION_SUCCESS, GIFT_FAIL, RESET_GIFT_REQUST, 
+    DELETE, DELETE_SUCCESS, DELETE_FAIL, RESET_DELETE_REQUEST,
+    ACCEPT, ACCEPT_SUCCESS, ACCEPT_FAIL, 
+    DECLINE, DECLINE_SUCCESS, DECLINE_FAIL, RESET_CHANGE_STATUS_REQUEST
 } from './actions';
 import Immutable from 'immutable';
 
@@ -25,6 +28,18 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorResponse: null
   },
+  deleteRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null
+  },
+  changeStatusRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null
+  },   
   getRecordRequest: {
     loading: false,
     success: false,
@@ -78,11 +93,38 @@ export default function reducer(state = initialState, action) {
         return state.set('giftRequest', initialState.get('giftRequest').set('fail', true).set('errors', Immutable.fromJS(action.error.response.data.errors)));
     case RESET_GIFT_REQUST:
         return state.set('giftRequest', initialState.get('giftRequest'));
-              
+                   
+    /**
+     * Delete
+     */
+    case DELETE:
+        return state.set('deleteRequest', initialState.get('deleteRequest').set('loading', true));
+    case DELETE_SUCCESS:
+        return state.set('deleteRequest', initialState.get('deleteRequest').set('success', true));
+    case DELETE_FAIL:
+        return state.set('deleteRequest', initialState.get('deleteRequest').set('fail', true));
+    case RESET_DELETE_REQUEST:
+        return state.set('deleteRequest', initialState.get('deleteRequest'));
+        
+    /**
+     * Accept / Decline
+     */
+    case ACCEPT:    
+    case DECLINE:         
+        return state.set('changeStatusRequest', initialState.get('changeStatusRequest').set('loading', true));
+    case ACCEPT_SUCCESS:    
+    case DECLINE_SUCCESS:    
+        return state.set('changeStatusRequest', initialState.get('changeStatusRequest').set('success', true));
+    case ACCEPT_FAIL:    
+    case DECLINE_FAIL:               
+        return state.set('changeStatusRequest', initialState.get('changeStatusRequest').set('fail', true)); 
+    case RESET_CHANGE_STATUS_REQUEST:
+        return state.set('changeStatusRequest', initialState.get('changeStatusRequest'));
+  
     /**
      * default
      */
     default:
-      return state;
+        return state;
   }
 }

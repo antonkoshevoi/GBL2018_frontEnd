@@ -113,6 +113,13 @@ export default  {
         colorName: 'orange'
     },
     {
+        key: 'gifts',
+        title: 'myGifts',
+        link: 'gifts',
+        icon: 'fa fa-gift',
+        colorName: 'purple'
+    },    
+    {
       key:'orders',
       title:'myOrders',
       link:'store/shopping-cart',

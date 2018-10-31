@@ -94,12 +94,14 @@ class GiftModal extends Component {
         const {name, value} = event.target;
         let {form} = this.state;
         
-        if (name === 'userId') {
-            form = {
-                quantity: form.quantity
-            };
-        } else {
-            form.userId = null;
+        if (name !== 'quantity') {
+            if (name === 'userId') {
+                form = {
+                    quantity: form.quantity
+                };
+            } else {
+                form.userId = null;
+            }
         }
 
         this.setState({form: {
