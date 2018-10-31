@@ -1,6 +1,5 @@
 import {
-    GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL,
-    GIFT, GIFT_SUCCESS, GIFT_FAIL, RESET_GIFT_REQUST, 
+    GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL,    
     ASSIGN, ASSIGN_SUCCESS, ASSIGN_FAIL, RESET_ASSIGN_REQUST
 } from './actions';
 import Immutable from 'immutable';
@@ -18,12 +17,6 @@ const initialState = Immutable.fromJS({
       total: 0,
       totalPages: 1
     }    
-  },
-  giftRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorResponse: null
   },
   assignRequest: {
     loading: false,
@@ -50,19 +43,7 @@ export default function reducer(state = initialState, action) {
     case GET_RECORDS_FAIL:
         return state.set('getRecordsRequest', initialState.get('getRecordsRequest')
                 .set('fail', true)
-                .set('records', Immutable.List()));
-
-    /**
-     * Gift
-     */    
-    case GIFT:
-        return state.set('giftRequest', initialState.get('giftRequest').set('loading', true));
-    case GIFT_SUCCESS:
-        return state.set('giftRequest', initialState.get('giftRequest').set('success', true));
-    case GIFT_FAIL:
-        return state.set('giftRequest', initialState.get('giftRequest').set('fail', true).set('errors', Immutable.fromJS(action.error.response.data.errors)));
-    case RESET_GIFT_REQUST:
-        return state.set('giftRequest', initialState.get('giftRequest'));
+                .set('records', Immutable.List()));   
         
     /**
      * Assign

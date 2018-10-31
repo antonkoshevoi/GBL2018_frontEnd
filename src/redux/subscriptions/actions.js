@@ -21,11 +21,6 @@ export const SUBSCRIBE_SUCCESS = '[Subscription] SUBSCRIBE_SUCCESS';
 export const SUBSCRIBE_FAIL = '[Subscription] SUBSCRIBE_FAIL';
 export const RESET_SUBSCRIBE_REQUEST = '[Subscription] RESET_SUBSCRIBE_REQUEST';
 
-export const GIFT_SUBSCRIPTION = '[Subscription] GIFT_SUBSCRIPTION';
-export const GIFT_SUBSCRIPTION_SUCCESS = '[Subscription] GIFT_SUBSCRIPTION_SUCCESS';
-export const GIFT_SUBSCRIPTION_FAIL = '[Subscription] GIFT_SUBSCRIPTION_FAIL';
-export const RESET_GIFT_SUBSCRIPTION_REQUEST = '[Subscription] RESET_GIFT_SUBSCRIPTION_REQUEST';
-
 export const UNSUBSCRIBE = '[Subscription] UNSUBSCRIBE';
 export const UNSUBSCRIBE_SUCCESS = '[Subscription] UNSUBSCRIBE_SUCCESS';
 export const UNSUBSCRIBE_FAIL = '[Subscription] UNSUBSCRIBE_FAIL';
@@ -92,19 +87,6 @@ export function subscribe(params = {}) {
 export function resetSubscribeRequest () {
   return {
     type: RESET_SUBSCRIBE_REQUEST
-  }
-}
-
-export function giftSubscription(params) {
-  return {
-    types: [GIFT_SUBSCRIPTION, GIFT_SUBSCRIPTION_SUCCESS, GIFT_SUBSCRIPTION_FAIL],
-    promise: (apiClient) => apiClient.post('subscriptions/gift', params)
-  };
-}
-
-export function resetGiftSubscriptionRequest () {
-  return {
-    type: RESET_GIFT_SUBSCRIPTION_REQUEST
   }
 }
 

@@ -407,7 +407,7 @@ h6, .h6 {
   font-size: 1.5rem !important;
 }
 .display-10 {
-  font-size: 1.25rem;
+  font-size: 1.25rem !important;
 }
 hr {
   margin-top: 1rem;

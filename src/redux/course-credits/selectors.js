@@ -10,11 +10,6 @@ export const selectGetRecordsRequest = createSelector(
   (subState) => subState.get('getRecordsRequest')
 );
 
-export const selectGiftCourseCreditRequest = createSelector(
-  selectCourseCreditsDomain,
-  (subState) => subState.get('giftRequest')
-);
-
 export const selectAssignCourseCreditRequest = createSelector(
   selectCourseCreditsDomain,
   (subState) => subState.get('assignRequest')

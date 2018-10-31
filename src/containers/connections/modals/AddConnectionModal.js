@@ -22,12 +22,13 @@ class AddConnectionModal extends Component {
     }    
   
     componentWillReceiveProps(nextProps) {
-        const {createRequest } = this.props;
+        const {createRequest, inviteRequest } = this.props;
                        
-        if (!createRequest.get('success') && nextProps.createRequest.get('success')) {
+        if ((!createRequest.get('success') && nextProps.createRequest.get('success')) || 
+                (!inviteRequest.get('success') && nextProps.inviteRequest.get('success'))) {
             this._close();
             this.props.onSuccess();
-        }      
+        }       
     }
    
     _handleInputChange(event) {
@@ -58,10 +59,10 @@ class AddConnectionModal extends Component {
     
     render() {
         const {createRequest, inviteRequest, t, isOpen} = this.props;
-        const loading   = createRequest.get('loading') || inviteRequest.get('loading');
-        const errors    = createRequest.get('errors') || inviteRequest.get('errors');        
-        
-        const {form}    = this.state;
+        const loading       = createRequest.get('loading') || inviteRequest.get('loading');
+        const createErrors  = createRequest.get('errors');        
+        const inviteErrors  = inviteRequest.get('errors');
+        const {form}        = this.state;
         
         return (
             <Modal middle={true} isOpen={isOpen} onClose={() => this._close()}>
@@ -85,9 +86,8 @@ class AddConnectionModal extends Component {
                                         name="username"
                                         onChange={(e) => { this._handleInputChange(e) }}
                                         value={form.username || ''}
-                                        className="form-control m-input--air form-control-success m-input"
-                                        id="firsName"/>
-                                    {errors && errors.get('username') && <div className="form-control-feedback text-center error">{errors.get('username').get(0)}</div>}
+                                        className="form-control m-input--air form-control-success m-input" />
+                                    {inviteErrors && inviteErrors.get('username') && <div className="form-control-feedback text-center error">{inviteErrors.get('username').get(0)}</div>}
                                 </div>
                                 <div className="col-lg-2">
                                     <input
@@ -112,7 +112,7 @@ class AddConnectionModal extends Component {
                                         value={form.email || ''}
                                         className="form-control m-input--air form-control-success m-input"
                                         id="email"/>
-                                    {errors && errors.get('email') && <div className="form-control-feedback text-center error">{errors.get('email').get(0)}</div>}
+                                    {createErrors && createErrors.get('email') && <div className="form-control-feedback text-center error">{createErrors.get('email').get(0)}</div>}
                                 </div>
                             </div>
                             <div className="form-group m-form__group row">
@@ -125,7 +125,7 @@ class AddConnectionModal extends Component {
                                         value={form.firstName || ''}
                                         className="form-control m-input--air form-control-success m-input"
                                         id="firsName"/>
-                                    {errors && errors.get('firstName') && <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
+                                    {createErrors && createErrors.get('firstName') && <div className="form-control-feedback text-center error">{createErrors.get('firstName').get(0)}</div>}
                                 </div>
                             </div>
                             <div className="form-group m-form__group row">
@@ -138,7 +138,7 @@ class AddConnectionModal extends Component {
                                         value={form.lastName || ''}
                                         className="form-control m-input--air form-control-success m-input"
                                         id="lastName"/>
-                                    {errors && errors.get('lastName') && <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
+                                    {createErrors && createErrors.get('lastName') && <div className="form-control-feedback text-center error">{createErrors.get('lastName').get(0)}</div>}
                                 </div>
                             </div>
                             <div className="form-group m-form__group row">

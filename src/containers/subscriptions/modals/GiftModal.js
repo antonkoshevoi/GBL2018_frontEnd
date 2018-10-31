@@ -4,13 +4,13 @@ import {
   AppBar, CircularProgress,
   DialogContent,  
   Icon,
-  Toolbar, Typography,
+  Toolbar, Typography, FormHelperText,
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { translate, Interpolate } from 'react-i18next';
-import { selectGiftSubscriptionRequest } from "../../../redux/subscriptions/selectors";
-import { giftSubscription, resetGiftSubscriptionRequest } from "../../../redux/subscriptions/actions";
+import { selectGiftRequest } from "../../../redux/gifts/selectors";
+import { giftSubscription, resetGiftRequest } from "../../../redux/gifts/actions";
 import Modal from '../../../components/ui/Modal';
 import GiftForm from '../forms/GiftForm';
 
@@ -30,8 +30,8 @@ class GiftModal extends Component {
   };
   
   componentWillReceiveProps(nextProps) {
-    const success = this.props.giftSubscriptionRequest.get('success');
-    const nextSuccess = nextProps.giftSubscriptionRequest.get('success');
+    const success = this.props.giftRequest.get('success');
+    const nextSuccess = nextProps.giftRequest.get('success');
 
     if (!success && nextSuccess) {
       this._close();     
@@ -44,29 +44,37 @@ class GiftModal extends Component {
         form: { userId: '' }
     });
     this.props.onClose();
-    this.props.resetGiftSubscriptionRequest();        
+    this.props.resetGiftRequest();        
   };
 
   _onChange (form) {  
       this.setState({ form });
   };
 
-  _onSubmit (e) {            
-    e.preventDefault();
+  _handleSubmit() {            
+    const {giftSubscription, t} = this.props;
+    const {form} = this.state;
     
-    this.props.giftSubscription({
-        ...this.state.form, 
-        subscriptionId: this.props.subscription.id
+    if (!form.userId && !form.email) {
+        this.setState({error: t('pleaseSelectConnectedUserOrEnterEmailAddress')});
+        return false;
+    } else {
+        this.setState({error: null});
+    }
+        
+    giftSubscription({
+        ...form, 
+        productId: this.props.subscription.id
     });    
   };
 
   render() {
-    const { isOpen, giftSubscriptionRequest, subscription, t } = this.props;
-    const loading = giftSubscriptionRequest.get('loading');        
-    const errors  = giftSubscriptionRequest.get('errors');        
+    const { isOpen, giftRequest, subscription, t } = this.props;
+    const loading = giftRequest.get('loading');        
+    const errors  = giftRequest.get('errors');        
     
     return (
-      <Modal isOpen={isOpen} onClose={() => this._close()}>
+      <Modal middle={true} isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position='static' color='primary' className='dialogAppBar'>
           <Toolbar>            
             {loading ? (
@@ -80,32 +88,38 @@ class GiftModal extends Component {
           </Toolbar>
         </AppBar>
 
-        <DialogContent className='m--margin-top-25' style={{minWidth: 400, maxWidth: 600}}>
+        <DialogContent className='m--margin-top-25' style={{minWidth: 400}}>
             <div className="alert m-alert m-alert--default m--margin-bottom-15">
                 <p className="text-center margin-bottom-0">{t('giftNotification')}</p>
-            </div>          
-            {subscription &&            
-            <div className="row m--margin-bottom-15" >
-                <div className="col-sm-12"><h3 className="m--visible-desktop-inline">{subscription.title}</h3> (<strong className="g-blue">{subscription.price}$</strong> / {t(subscription.period)})</div>                        
-                <div className="col-sm-12">
-                    <Interpolate i18nKey="courseAtTime" number={subscription.allowedCourses} />                            
-                    <br />                            
-                    <Interpolate i18nKey="usersMax" number={subscription.allowedCourses} />
+            </div>
+            {this.state.error &&            
+                <FormHelperText className="text-center m--margin-bottom-15" error variant="filled">{this.state.error}</FormHelperText>
+            }             
+            <div className="row">
+                <div className='col-sm-6 col-lg-5 m-auto'>
+                    {subscription &&            
+                    <div className="row m--margin-bottom-15" >
+                        <div className="col-sm-12"><h3 className="m--visible-desktop-inline">{subscription.title}</h3> (<strong className="g-blue">{subscription.price}$</strong> / {t(subscription.period)})</div>                        
+                        <div className="col-sm-12">
+                            <Interpolate i18nKey="courseAtTime" number={subscription.allowedCourses} />                            
+                            <br />                            
+                            <Interpolate i18nKey="usersMax" number={subscription.allowedCourses} />
+                        </div>
+                    </div>}
                 </div>
-            </div>}
-          <form id='create-student-form' onSubmit={(e) => { this._onSubmit(e) }}>            
-            <GiftForm
-              onChange={(e) => { this._onChange(e) }}
-              form={this.state.form}
-              errors={errors}/>
-          </form>
+                <div className='col-sm-6 col-lg-5 m-auto'>                    
+                  <GiftForm
+                    onChange={(e) => { this._onChange(e) }}
+                    form={this.state.form}
+                    errors={errors}/>                    
+                </div>
+            </div>
         </DialogContent>
         <Divider className='full-width'/>
         <DialogActions>
           <Button
-            type='submit'
-            form='create-student-form'
-            disabled={loading}            
+            disabled={loading}     
+            onClick={(e) => { this._handleSubmit(e) }}
             className='mt-btn-success btn btn-success mt-btn'
             color='primary'>
             {t('makeGift')}
@@ -118,11 +132,11 @@ class GiftModal extends Component {
 
 GiftModal = connect(
   (state) => ({
-    giftSubscriptionRequest: selectGiftSubscriptionRequest(state)
+    giftRequest: selectGiftRequest(state)
   }),
   (dispatch) => ({
     giftSubscription: (form) => { dispatch(giftSubscription(form)) },
-    resetGiftSubscriptionRequest: () => { dispatch(resetGiftSubscriptionRequest()) }
+    resetGiftRequest: () => { dispatch(resetGiftRequest()) }
   })
 )(GiftModal);
   

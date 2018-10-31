@@ -86,17 +86,9 @@ export const selectGetPaymentsRequest = createSelector(
 );
 
 /**
- * Get Pagiantion
+ * Get Pagination
  */
 export const selectPagination = createSelector(
     selectSubscriptionsDomain,
     (subState) => subState.get('pagination')
-);
-
-/**
- * GiftSubscription Request
- */
-export const selectGiftSubscriptionRequest = createSelector(
-    selectSubscriptionsDomain,
-    (subState) => subState.get('giftSubscriptionRequest')
 );
