@@ -60,10 +60,10 @@ class ShoppingCart extends Component {
           <div className="shoppingCartPortlet m-auto col-xl-12">
             <div className='m-portlet m-portlet--full-height dashboard-shopping-cart-transparent-bg'>
             {preview ?  
-                <div class="m-portlet__head report-snapshot-header-border border-b-green">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                            <h3 class="m-portlet__head-text">{t('shoppingCart')}</h3>
+                <div className="m-portlet__head report-snapshot-header-border border-b-green">
+                    <div className="m-portlet__head-caption">
+                        <div className="m-portlet__head-title">
+                            <h3 className="m-portlet__head-text">{t('shoppingCart')}</h3>
                         </div>
                     </div>
                 </div> :

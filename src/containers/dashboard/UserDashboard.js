@@ -12,6 +12,7 @@ import {getCharts} from "../../redux/reports/dashboard/actions";
 import {selectChartDatatRequest} from "../../redux/reports/dashboard/selectors";
 import QuickLink from "./sections/QuickLink";
 import FeaturedItems from "./sections/FeaturedItems";
+import Alerts from "./sections/Alerts";
 import Card from "../../components/ui/Card";
 import ShoppingCart from "../store/ShoppingCart";
 
@@ -136,6 +137,7 @@ class UserDashboard extends Component {
     const {records, dataRequest, t} = this.props;
     return (
       <div className="fadeInLeft animated">
+        <Alerts />
         <div className="row dashboard-main-top">
           <div className="col-sm-12 col-md-12 col-lg-12 col-xl-9 dashboard-reports-snapshot" style={{marginTop:'15px'}}>
             <Card title={t('reportsSnapshot')} isMainCard={true} boxShadow={false} style={{boxShadow:"none"}} bodyStyle={{padding:'0', background:'#f2f3f8'}}>

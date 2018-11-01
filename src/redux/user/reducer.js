@@ -4,6 +4,11 @@ import {
   CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAIL,
   CHANGE_IMAGE, CHANGE_IMAGE_SUCCESS, CHANGE_IMAGE_FAIL
 } from './actions';
+
+import {
+  VIEW_MESSAGE_SUCCESS
+} from '../messages/actions';
+
 import Immutable from 'immutable';
 import {saveUserDataSession} from "../../helpers/session";
 
@@ -83,7 +88,15 @@ export default function reducer (state = initialState, action) {
       return state
         .set('getUserRequest', initialState.get('getUserRequest')).set('userData', Immutable.Map())
         .set('permissions', Immutable.List())
-        .set('roles', Immutable.List()); 
+        .set('roles', Immutable.List());
+
+    case VIEW_MESSAGE_SUCCESS:
+        let alers = state.get('userData').get('alerts');
+        
+        return state.set('userData', state.get('userData').set('alerts', alers.delete(
+            alers.findIndex(x => x.get('id') === action.result.data.id)
+        )));
+       
     /**
      * Update
      */
