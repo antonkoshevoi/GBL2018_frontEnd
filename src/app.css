@@ -1569,7 +1569,7 @@ td.rotate div span {
         border-bottom-width: 2px !important;
         padding: 0 0 3px 0 !important ;
         min-height: 0 !important;
-        margin: 15px 4px 10px 4px !important;
+        margin: 0 4px 10px 4px !important;
         width: 99% !important;
     }
 
@@ -1582,7 +1582,7 @@ td.rotate div span {
         border-bottom-width: 2px !important;
         padding: 0 0 3px 0 !important ;
         min-height: 0 !important;
-        margin: 15px 4px 10px 2px !important;
+        margin: 0 4px 10px 2px !important;
         width: 99% !important;
         border-color: #575962 !important;
     }

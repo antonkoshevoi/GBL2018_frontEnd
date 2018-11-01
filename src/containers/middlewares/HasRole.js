@@ -24,7 +24,7 @@ class HasRole extends Component {
     let hasRole = false;
     
     if (roles.indexOf('School') > -1) {
-        roles.push('Superintendent', 'Principal', 'Administrator', 'Superadministrator');        
+        roles.push('Superintendent', 'Principal', 'Administrator');
     }
 
     userRoles.map(role => {

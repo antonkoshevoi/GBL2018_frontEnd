@@ -78,7 +78,7 @@ class UnassignedCourses extends Component {
               <Td width='50px'>{record.get('quantity')}</Td>
               <Td width='100px'>
                 {record.get('isGift') ?  
-                    <ConfirmButton icon='la la-gift' className='btn-success' confirmOnly={true} title={t('giftCourseFrom', {user: record.get('userName')}) } />
+                    <ConfirmButton icon='la la-gift' className='btn-success margin-0' confirmOnly={true} title={t('giftCourseFrom', {user: record.get('userName')}) } />
                 :
                     <button className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._openGiftDialog(record) }} >
                         <i className='la la-gift'></i>
