@@ -59,19 +59,26 @@ class ShoppingCart extends Component {
         <div className={`row ${preview ? '': 'cart-items'}`}>
           <div className="shoppingCartPortlet m-auto col-xl-12">
             <div className='m-portlet m-portlet--full-height dashboard-shopping-cart-transparent-bg'>
-              <div className='m-portlet__head m--margin-top-20'>
-                <div className='m-portlet__head-caption'>
-                  <div className='m-portlet__head-title'>
-                    <span className="m-portlet__head-icon">
-                        <i className="fa fa-shopping-cart"></i>
-                    </span>
-                    <h3 className='m-portlet__head-text'>
-                      {preview ? t('ourAccount') : t('shoppingCart')}
-                    </h3>
-                  </div>
+            {preview ?  
+                <div class="m-portlet__head report-snapshot-header-border border-b-green">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">{t('shoppingCart')}</h3>
+                        </div>
+                    </div>
+                </div> :
+                <div className='m-portlet__head'>
+                    <div className='m-portlet__head-caption'>
+                        <div className='m-portlet__head-title'>
+                        <span className="m-portlet__head-icon">
+                            <i className="fa fa-shopping-cart"></i>
+                        </span>
+                        <h3 className='m-portlet__head-text'>
+                            {t('shoppingCart')}
+                        </h3>
+                    </div>
                 </div>
-
-              </div>
+              </div>}
               <div className={`m-portlet__body dashboard-shopping-cart-body ${preview ? 'zoom-preview': ''}`}>
                 {success &&
                  <OpenInvoicesTable

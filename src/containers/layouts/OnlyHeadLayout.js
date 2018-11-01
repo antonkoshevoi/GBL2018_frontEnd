@@ -1,33 +1,19 @@
 import React, {Component} from 'react';
 import Header from '../ui/Header';
 import {withRouter} from "react-router-dom";
-import {generateLinkId} from "../../helpers/utils";
 import background from '../../media/images/bg-3.jpg';
 
 class MainLayout extends Component {
 
-  state = {
-    sidebarIsOpen: false
-  }
-
-  openMobileSidebar = event => {
-    // this.setState({sidebarIsOpen:!this.state.sidebarIsOpen})
-  }
-
-
   render() {
-    const {pathname} = this.props.location;
-    const {sidebarIsOpen} = this.state;
-
-
+    const {pathname} = this.props.location;                
+    const segments = pathname.split('/').filter(Boolean);         
+    
     return (
-      <div className={`m-grid m-grid--hor m-grid--root m-page m--full-height ${pathname.split('/')[1]}`}
-           id={generateLinkId(pathname.split('/'))}>
+      <div className={`m-grid m-grid--hor m-grid--root m-page m--full-height ${segments[0]}`} id={segments.join('_')}>
         <div
-          className={`m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body ${sidebarIsOpen ? 'm-sidebar-is-open' : ''} justify-content-center`}>
-          <Header hideMenu={true} mobileSidebar={() => {
-            this.openMobileSidebar()
-          }}/>
+          className="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body justify-content-center">
+          <Header hideMenu={true} mobileSidebar={ () => {} }/>
 
           <div style={{backgroundImage: `url(${background})`}} className="m-grid__item m-grid__item--fluid d-flex justify-content-center ">
             <div className="m-content col-10 ">

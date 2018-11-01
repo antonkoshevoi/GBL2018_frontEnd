@@ -50,7 +50,7 @@ class InfoSection extends Component {
   _renderCourseTable(courses) {
     if (!courses.length) {
         return <tr>
-            <td colspan='4'><h5 className='text-center m--margin-20'>{this.props.t('noData')}</h5></td>
+            <td colSpan='4'><h5 className='text-center m--margin-20'>{this.props.t('noData')}</h5></td>
         </tr>;
     }
     return courses.map(function (item, i) {
