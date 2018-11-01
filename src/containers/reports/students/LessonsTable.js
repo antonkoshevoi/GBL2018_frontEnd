@@ -68,7 +68,7 @@ class LessonsTable extends Component {
         <Thead>
         <HeadRow>
           <Th width='44px'>{t('unit')}</Th>
-          <Th width='193px'>{t('lessonTitle')} / {t('description')}</Th>
+          <Th width='193px'>{t('lessonInfo')}</Th>
           <Th width='93px'>{t('lessonAttempt')}</Th>
           <Th width='93px'>{t('status')}</Th>
           <Th width='93px'>{t('attemptDate')}</Th>
@@ -100,7 +100,7 @@ class LessonsTable extends Component {
                   <tr className="m-datatable__row" style={{height: '64px'}} key={lesson.lesson_id + '-lessonRow'}>
                     <td className="m-datatable__cell text-center" width='193px' rowSpan={lessonRowSpan} key={lesson.lesson_id + '-lessonName'}>
                       <p><span className="m-badge m-badge--brand m-badge--wide">{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</span></p>
-                      <strong style={{width: '193px'}}>{lesson.lesson_name}</strong>
+                      <strong className="font-italic" style={{width: '193px'}}>{lesson.lesson_name}</strong>
                       <span style={{width: '193px'}}>{lesson.lesson_description}</span>    
                           
                     </td>
