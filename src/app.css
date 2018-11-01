@@ -1536,12 +1536,10 @@ td.rotate div span {
         margin-right: 0!important;
         padding: 5px;
         padding-bottom: 0 !important;
-        background-color: #f2f3f7;
-        box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
     }
 
     .dashboard-main-bottom {
-        background-color: #f2f3f7;
+        
     }
 
     .dashboard-reports-snapshot {
