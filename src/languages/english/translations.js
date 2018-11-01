@@ -552,6 +552,7 @@ export default {
     receiver: 'Receiver',
     myGifts: 'My Gifts',
     sender: 'Sender',
+    lessonInfo: 'Lesson Info',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',
