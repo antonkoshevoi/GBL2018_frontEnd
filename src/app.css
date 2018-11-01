@@ -204,7 +204,7 @@ li > .small-avatar {
 }
 
 .m-dropdown.m-dropdown--header-bg-fill .m-dropdown__header {
-    background-image: url(/src/media/images/menu_poster.jpg);
+    background-image: url(/media/images/menu_poster.jpg);
     background-size: cover;
 }
 
