@@ -21,8 +21,7 @@ const Pagination = ({ page, totalPages, onPageSelect, dockLength }) => {
   while (i <= totalPages && pages.length < dockLength * 2 + 1) {
     let k = i;
     pages.push(
-      <Button key={i}
-        style={{color:'white'}}
+      <Button key={i}        
         variant="contained"
         onClick={() => onPageSelect(k) }
         className={`m-btn btn  btn-info  m-btn--air radius-0 ${(page === k ? ' active' : ' ')}`}>{i}

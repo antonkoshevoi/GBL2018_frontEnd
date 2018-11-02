@@ -29,7 +29,7 @@ class Dashboard extends Component {
 
     return (
       <div className="fadeInLeft animated">
-        <div className="row dashboard-main-top row-reports-main-top-block m-portlet  m-portlet--head-solid-bg">
+        <div className="dashboard-main-top row-reports-main-top-block m-portlet  m-portlet--head-solid-bg">
           <div className="m-portlet__head report-snapshot-header-border border-b-blue">
             <div className="m-portlet__head-caption">
               <div className="m-portlet__head-title">

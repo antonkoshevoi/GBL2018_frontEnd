@@ -262,13 +262,13 @@ class DemoCoursesTab extends Component {
                   <MenuItem value={50}>50</MenuItem>
                   <MenuItem value={100}>100</MenuItem>
                 </Select>
-                <Button variant="contained" color='primary' onClick={() => { this._openAssignDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                <Button variant="contained" color='primary' onClick={() => { this._openAssignDialog() }} className='mt-btn mt-btn-success m--margin-right-10'>
                   {t('assignStudent')}
-                  <Icon style={{marginLeft:'5px'}}>persone</Icon>
+                  <Icon className="m--margin-left-5">persone</Icon>
                 </Button>                 
-                <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
                   {t('addNew')}
-                  <Icon style={{marginLeft:'5px'}}>add</Icon>
+                  <Icon className="m--margin-left-5">add</Icon>
                 </Button>
               </div>
             </div>

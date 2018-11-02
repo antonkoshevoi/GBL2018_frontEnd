@@ -137,7 +137,7 @@ class Parents extends Component {
                             <div className='row align-items-center'>
                                 <div className='col-xl-12 order-1 order-xl-2 m--align-right margin-0'>       
                                     <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
-                                        {t('addNew')} <Icon style={{marginLeft: '5px'}}>add</Icon>
+                                        {t('addNew')} <Icon className="m--margin-left-5">add</Icon>
                                     </Button>                  
                                 </div>
                             </div>

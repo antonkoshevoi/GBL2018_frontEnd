@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { Button, Select, MenuItem, FormHelperText, Radio, FormControlLabel } from '@material-ui/core';
 import MuiDatePicker from '../../components/ui/MuiDatePicker';
-import { HeadRow, Row, Table, Tbody, Td, Th, Thead } from '../../components/ui/table';
 import Loader from '../../components/layouts/Loader';
 import { connect } from 'react-redux';
 import { selectGetScheduleRequest, selectUpdateScheduleRequest } from '../../redux/classrooms/selectors';
@@ -68,47 +67,33 @@ class ClassroomSchedule extends Component {
         updateSchedule(id, this.state);
     }
     
-    _renderUnits(units) {
+    _renderUnits(units) {                
+        const {t}   = this.props;
+        const {id}  = this.props.match.params;
         
-        const _self = this;
-        const {t} = this.props;
-        
-        return units.map(function (unit, unitIndex) {
+        return units.map((unit, unitIndex) => {
             
             let unitRowSpan = unit.lessons.length;
+            let lessons      = unit.lessons;
             
-            return (
-                <tr className="m-datatable__row m-datatable__row--even__none" key={unit.unitId + '-unitRow'}>                
+            return lessons.map((lesson, lessonIndex) => {
+                return <tr className="m-datatable__row m-datatable__row--even__none" key={'row-' + unitIndex + '-' + lessonIndex }>
+                    {!lessonIndex &&
                     <td className="m-datatable__cell rotate" width='50px' rowSpan={unitRowSpan} key={unit.unitId + '-unitName'}>
                         <div><span><b>{t('unit')} {unitIndex + 1}</b> {unit.unitName}</span></div>
-                    </td>
-                    {_self._renderLessons(unitIndex, unit.lessons)}
-                </tr>
-            );
-        });
-    }
-    
-    _renderLessons(unitIndex, lessons) {        
-        
-        const {id} = this.props.match.params;
-        const {t} = this.props;
-    
-        return lessons.map(function (lesson, lessonIndex) {
-            return (
-                <Row key={lesson.lessonId + '-lessonRow'}>
-                    <Td width='350px'>
+                    </td>}
+                    <td width='350px'>
                         <p className="text-center"><span className="m-badge m-badge--brand m-badge--wide">{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</span> </p>                        
                         <p className="text-center"><span>{lesson.lessonName}</span></p>
-                    </Td>
-                    <Td width='450px'><p className="text-center">{lesson.lessonDescription}</p></Td>
-                    <Td width='300px'>
+                    </td>
+                    <td width='450px'><p className="text-center">{lesson.lessonDescription}</p></td>
+                    <td width='300px'>
                         <AttemptDateForm lesson={lesson} classroomId={id} />
-                    </Td>
-                    <Td>-</Td>                    
-                </Row>
-            );
+                    </td>                    
+                </tr>
+            });
         });
-    }      
+    }    
 
     render() {
         const {getScheduleRequest, updateScheduleRequest, t} = this.props;
@@ -200,21 +185,22 @@ class ClassroomSchedule extends Component {
                         </div>   
                     </div>
                     <div className='m-portlet__body'>
-                        {loaded ?
-                            <Table className="unit-table">
-                            <Thead>
-                                <HeadRow>
-                                    <Th width='50px'>{t('unit')}</Th>
-                                    <Th width='350px'>{t('lessonTitle')}</Th>
-                                    <Th width='450px'>{t('lessonDescription')}</Th>
-                                    <Th width='300px'>{t('lessonAttempt')}</Th>    
-                                    <Th>{t('instructions')}</Th>
-                                </HeadRow>
-                            </Thead>
-                            <Tbody>                           
+                        <div className="table-responsive">
+                        {loaded ?                                  
+                        <table className="table table-bordered">
+                            <thead>
+                                <tr class="active">
+                                    <th>{t('unit')}</th>
+                                    <th>{t('lessonTitle')}</th>
+                                    <th>{t('lessonDescription')}</th>
+                                    <th>{t('lessonAttempt')}</th>                                        
+                                </tr>
+                            </thead>
+                            <tbody>                           
                                 {this._renderUnits(schedule.units)}
-                            </Tbody>
-                        </Table> : <Loader/>}
+                            </tbody>
+                        </table> : <Loader/>}
+                        </div>
                     </div>                                        
                 </div>
             </div>

@@ -89,7 +89,7 @@ class AssignStudentsForm extends Component {
 
     return (
       <div className='row'>
-        <Paper className='full-width' style={{boxShadow:'0 0 0 0'}}>
+        <Paper className='full-width' elevation='0'>
           {errors && errors.get('studentIds') && <FormHelperText error>{ errors.get('studentIds').get(0) }</FormHelperText>}
           <FormGroup row style={{minWidth: '500px'}}>
             {studentsLoading && !studentsSuccess && <div className="text-center" style={{width: '100%'}}><CircularProgress color="primary"/></div>}

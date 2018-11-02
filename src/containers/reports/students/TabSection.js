@@ -57,9 +57,11 @@ class TabSection extends Component {
     
     if (!course) {
         return <Table>
-            <Row index={0} key={0}>
-                <Td><h2>{t('noData')}</h2></Td>
-            </Row>
+            <Tbody>
+                <Row index={0} key={0}>
+                    <Td><h2>{t('noData')}</h2></Td>
+                </Row>
+            </Tbody>
         </Table>;
     }
     

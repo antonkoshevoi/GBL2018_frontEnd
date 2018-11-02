@@ -242,9 +242,9 @@ class Administration extends Component {
                   <HasPermission permissions={[
                     '[Users][Administration][Create][SuperAdmin]'
                   ]}>
-                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
                       {t('addNew')}
-                      <Icon style={{marginLeft:'5px'}}>add</Icon>
+                      <Icon className="m--margin-left-5">add</Icon>
                     </Button>
                   </HasPermission>
                 </div>

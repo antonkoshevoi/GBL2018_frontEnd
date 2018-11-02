@@ -129,10 +129,10 @@ class CourseModal extends Component {
                 <img src={storeCourse.get('thumbnail')} width={70} alt={storeCourse.get('title')}/>
               </div>
             </Td>
-            <Td width='100px'><span style={{fontWeight: 600}}>{storeCourse.get('title')}</span></Td>
+            <Td width='100px'><strong>{storeCourse.get('title')}</strong></Td>
             <Td width='300px'>{storeCourse.get('description')}</Td>
-            <Td width='100px'><span style={{fontWeight: 600}}>{storeCourse.get('price')}</span></Td>
-            <Td width='100px'><span style={{fontWeight: 600}}>{storeCourse.get('credit') ? storeCourse.get('credit') : '-'}</span></Td>
+            <Td width='100px'><strong>{storeCourse.get('price')}</strong></Td>
+            <Td width='100px'><strong>{storeCourse.get('credit') ? storeCourse.get('credit') : '-'}</strong></Td>
           </Row>
         )
       });
@@ -165,7 +165,7 @@ class CourseModal extends Component {
             isActive={isFiltered}
             isShow={filterShow}
           ></Filter>
-          <Paper className='full-width' style={{boxShadow: '0 0 0 0'}}>
+          <Paper className='full-width' elevation='0'>
             <Table>
               <Thead>
               <HeadRow>

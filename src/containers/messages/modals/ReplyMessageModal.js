@@ -71,7 +71,7 @@ class ReplyMessageModal extends Component {
         const errors  = replyMessageRequest.get('errors');
 
         return (
-            <Modal isOpen={isOpen} onClose={() => this._close()}>
+            <Modal middle={true} isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>                      
                         {loading ? (
@@ -84,7 +84,7 @@ class ReplyMessageModal extends Component {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <DialogContent className="m--margin-top-25" style={{minWidth: 650}}>                    
+                <DialogContent className="m--margin-top-25">                    
                     <form id='assign-teachers-form' onSubmit={(e) => { this._onSubmit(e) }}>
                         <div className='row'>
                             <div className='col-sm-12 col-md-12'>

@@ -98,7 +98,7 @@ class UnassignedCourses extends Component {
     const {t} = this.props;
     
     return (
-      <Card title="Unassigned Courses" icon="fa fa-list-alt" isMainCard={true} isStore={true} style={{marginTop:15, height:'unset'}}>
+      <Card title={t('unassignedCourses')} icon="fa fa-list-alt" isMainCard={true} isStore={true} className="m--margin-top-15">
         <Table>
           <Thead>
           <HeadRow>

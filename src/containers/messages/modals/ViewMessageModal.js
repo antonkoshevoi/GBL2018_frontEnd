@@ -33,7 +33,7 @@ class ViewMessageModal extends Component {
         const { isOpen, message, t } = this.props;            
 
         return (
-            <Modal isOpen={isOpen} onClose={() => this._close()}>
+            <Modal middle={true}  isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>                             
                         <Icon className="m--margin-right-15">message</Icon>                        
@@ -42,7 +42,7 @@ class ViewMessageModal extends Component {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <DialogContent className="m--margin-top-25" style={{minWidth: 650}}>
+                <DialogContent className="m--margin-top-25">
                     {message &&                     
                     <div className="row">
                         <div className="col-sm-12">

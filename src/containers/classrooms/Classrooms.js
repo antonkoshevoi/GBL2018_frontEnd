@@ -24,9 +24,8 @@ import moment from 'moment/moment';
 const AssignButton = ({ id, onClick}) => {
   return (
     <button
-      className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill'
-      onClick={onClick && (() => { onClick(id) })}
-      style={{marginLeft: '5px'}}
+      className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5'
+      onClick={onClick && (() => { onClick(id) })}      
     >
       <i className='la la-user-plus'></i>
     </button>
@@ -297,9 +296,9 @@ class Classrooms extends Component {
                   <HasPermission permissions={[
                     '[ClassRooms][Create][Any]'
                   ]}>
-                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
                       {t('addNew')}
-                      <Icon style={{marginLeft:'5px'}}>add</Icon>
+                      <Icon className="m--margin-left-5">add</Icon>
                     </Button>
                   </HasPermission>
                 </div>
