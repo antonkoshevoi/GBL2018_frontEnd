@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow } from '../../components/ui/table';
 import { selectGetRecordsRequest, selectDeleteRequest } from '../../redux/scap/selectors';
 import { getRecords, deleteRecord } from '../../redux/scap/actions';
 import Pagination from '../../components/ui/Pagination';
@@ -112,13 +112,7 @@ class SchoolScap extends Component {
         
         if (!loading && records.size === 0) {
             return (
-                <tr>
-                    <td>
-                        <div className="table-message">
-                            <h2>{t('templatesNotFound')}</h2>
-                        </div>
-                    </td>
-                </tr>
+                <MessageRow>{t('templatesNotFound')}</MessageRow>
             );
         }
 

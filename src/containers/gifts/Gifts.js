@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { Tab, Tabs } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { selectGetRecordsRequest, selectDeleteRequest, selectChangeStatusRequest } from '../../redux/gifts/selectors';
 import { getRecords, deleteRecord, accept, decline, resetDeleteRequest, resetChangeStatusRequest } from '../../redux/gifts/actions';
 import DeleteButton from "../../components/ui/DeleteButton";
@@ -96,14 +96,7 @@ class Gifts extends Component {
         });
         
         if (records.size === 0) {
-            return (
-            <tr>
-                <td>
-                    <div className="table-message">
-                        <h2>{t('giftsNotFound')}</h2>
-                    </div>
-                </td>
-            </tr>);
+            return (<MessageRow>{t('giftsNotFound')}</MessageRow>);
         }
                
         return records.map((record, key) => {           

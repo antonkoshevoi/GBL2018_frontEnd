@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { Button, Icon, MenuItem, Select, Typography } from '@material-ui/core';
 import { uri } from '../../helpers/uri';
 import { connect } from 'react-redux';
@@ -156,13 +156,7 @@ class InvitationsTab extends Component {
 
     if (!loading && records.size === 0) {
       return (
-        <tr>
-          <td>
-            <div className='table-message'>
-              <h2>{t('invitationsNotFound')}</h2>
-            </div>
-          </td>
-        </tr>
+        <MessageRow>{t('invitationsNotFound')}</MessageRow>
       )
     }
 

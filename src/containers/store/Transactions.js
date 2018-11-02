@@ -5,7 +5,7 @@ import {withRouter} from "react-router-dom";
 import {getRecords} from "../../redux/transactions/actions";
 import {selectGetRecordsRequest, selectRecords} from "../../redux/transactions/selectors";
 import Card from "../../components/ui/Card";
-import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../components/ui/table";
+import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/table";
 import {IconButton} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
 import moment from 'moment/moment';
@@ -35,13 +35,7 @@ class Transactions extends Component {
 
         if (!loading && records.size === 0) {
             return (
-                <tr>
-                    <td>
-                        <div className="table-message">
-                            <h2>{t('noTransactions')}</h2>
-                        </div>
-                    </td>
-                </tr>
+                <MessageRow>{t('noTransactions')}</MessageRow>
             )
         }
 

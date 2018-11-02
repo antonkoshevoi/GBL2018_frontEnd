@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { selectPagination, selectGetPaymentsRequest } from '../../redux/subscriptions/selectors';
 import { getPayments } from '../../redux/subscriptions/actions';
 import Pagination from '../../components/ui/Pagination';
@@ -31,13 +31,7 @@ class Payments extends Component {
     
         if (paymentsRequest.get('success') && paymentsRequest.get('records').size === 0) {
             return (
-              <tr>
-                <td>
-                  <div className="table-message">
-                    <h2>{t('paymentsNotFound')}</h2>
-                  </div>
-                </td>
-              </tr>
+              <MessageRow>{t('paymentsNotFound')}</MessageRow>
             );
         }
         return paymentsRequest.get('records').map((record, key) => (

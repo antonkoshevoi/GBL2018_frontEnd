@@ -14,7 +14,7 @@ import Modal from "../../../components/ui/Modal";
 import Filter from "../../../components/store/Filter";
 import {selectGetStoreRecordsRequest} from "../../../redux/courses/selectors";
 import {getStoreRecords} from "../../../redux/courses/actions";
-import {Row, Table, TablePreloader, Tbody, Td, Thead, HeadRow, Th} from "../../../components/ui/table";
+import {Row, Table, TablePreloader, Tbody, Td, Thead, HeadRow, Th, MessageRow} from "../../../components/ui/table";
 import toastr from 'toastr';
 
 class CourseModal extends Component {
@@ -99,13 +99,7 @@ class CourseModal extends Component {
 
     if (!storeCourses.size) {
       return (
-        <tr>
-          <td>
-            <div className="table-message">
-              <h2>{t('noStoreItems')}</h2>
-            </div>
-          </td>
-        </tr>
+        <MessageRow>{t('noStoreItems')}</MessageRow>
       )
     } else {
       return storeCourses.map((storeCourse ,i) => {

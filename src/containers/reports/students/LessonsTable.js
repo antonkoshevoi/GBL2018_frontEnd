@@ -194,7 +194,7 @@ class LessonsTable extends Component {
                         </td>
                     }                
                     {attemptIndex === 0 &&
-                    <td  style={{ maxWidth: 350}} className="text-center" rowSpan={lessonRowSpan}>
+                    <td style={{ maxWidth: 350}} className="text-center" rowSpan={lessonRowSpan}>
                         <p>                        
                             <span aria-haspopup="true" onMouseEnter={this._handleStatusPopoverOpen} onMouseLeave={this._handleStatusPopoverClose} className={`m-badge m-badge--brand m-badge--wide ${badgeClass}`}>
                                 <strong>{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</strong>

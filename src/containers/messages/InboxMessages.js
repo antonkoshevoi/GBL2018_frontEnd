@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { selectGetInboxRecordsRequest, selectDeleteRecordRequest } from '../../redux/messages/selectors';
 import { getInboxMessages, deleteMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
 import { MenuItem, Select, Button, Icon } from '@material-ui/core';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { NavLink } from "react-router-dom";
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
@@ -60,13 +60,7 @@ class InboxMessages extends Component {
         
         if (!loading && records.size === 0) {
             return (
-                <tr>
-                    <td>
-                        <div className="table-message">
-                            <h2>{t('messagesNotFound')}</h2>
-                        </div>
-                    </td>
-                </tr>
+                <MessageRow>{t('messagesNotFound')}</MessageRow>
             );
         }
 

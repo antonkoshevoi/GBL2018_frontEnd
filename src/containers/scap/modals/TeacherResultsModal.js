@@ -9,7 +9,7 @@ import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Modal from "../../../components/ui/Modal";
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../../components/ui/table';
 import { getResultsRecords, resetGetResultsRecordsRequest } from "../../../redux/scap/actions";
 import { selectGetResultRecordsRequest } from "../../../redux/scap/selectors";
 import Pagination from '../../../components/ui/Pagination';
@@ -78,13 +78,7 @@ class TeacherResultsModal extends Component {
         
         if (!loading && records.size === 0) {
             return (
-                <tr>
-                    <td>
-                        <div className="table-message">
-                            <h2>{t('scapResultsNotFound')}</h2>
-                        </div>
-                    </td>
-                </tr>
+                <MessageRow>{t('scapResultsNotFound')}</MessageRow>
             );
         }
 

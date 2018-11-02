@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from '../../components/ui/table';
+import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from '../../components/ui/table';
 import { connect } from 'react-redux';
 import {getRecords} from "../../redux/course-credits/actions";
 import {selectGetRecordsRequest} from "../../redux/course-credits/selectors";
@@ -40,13 +40,7 @@ class UnassignedCredits extends Component {
     
     if (!loading && records.size === 0) {
       return (
-        <tr>
-          <td>
-            <div className="table-message">
-              <h2>{t('noUnassignedCredits')}</h2>
-            </div>
-          </td>
-        </tr>
+        <MessageRow>{t('noUnassignedCredits')}</MessageRow>
       )
     }
 

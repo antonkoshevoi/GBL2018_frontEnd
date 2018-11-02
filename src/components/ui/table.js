@@ -76,6 +76,17 @@ export const EditButton = ({ id, onClick, ...props}) => {
     );
 };
 
+export const MessageRow = ({colSpan = 10, ...props}) => {
+  return (
+    <tr>
+      <td colSpan={colSpan}>
+        <div className="table-message">
+          <h2>{props.children}</h2>
+        </div>
+      </td>
+    </tr>
+  );
+};
 
 export const TablePreloader = ({color,text, ...props}) => {
   return (
