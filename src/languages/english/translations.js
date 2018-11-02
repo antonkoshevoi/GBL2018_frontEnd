@@ -552,7 +552,9 @@ export default {
     receiver: 'Receiver',
     myGifts: 'My Gifts',
     sender: 'Sender',
-    lessonInfo: 'Lesson Info',
+    lessonInformation: 'Lesson Information',
+    perfomance: 'Perfomance',
+    unassignedCourses: 'Unassigned Courses',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

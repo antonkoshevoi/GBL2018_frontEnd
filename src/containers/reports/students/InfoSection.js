@@ -97,7 +97,7 @@ class InfoSection extends Component {
           <div className="row">
              <div className="col-lg-4 m--margin-bottom-20">           
                 <div className="m-portlet  m-portlet--head-solid-bg">
-                  <div className="m-portlet__head">
+                  <div className="m-portlet__head border-b-blue">
                     <div className="m-portlet__head-caption">
                       <div className="m-portlet__head-title">
                         <span className="m-portlet__head-icon"><i className="display-5 la la-info"></i></span>              

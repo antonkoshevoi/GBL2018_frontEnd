@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {HeadRow, Table, Tbody, Th, Thead} from '../../../components/ui/table';
 import {translate} from 'react-i18next';
 import {connect} from 'react-redux';
 import Parser from 'html-react-parser';
+import Popover from '@material-ui/core/Popover';
+import { withStyles } from '@material-ui/core/styles';
 import ApiClient from '../../../services/ApiClient';
 import formTableData from '../../../services/CourseTemplate';
 import {selectStudentReportDetailsRequest} from "../../../redux/reports/students/selectors";
@@ -11,15 +12,42 @@ import Loader from "../../../components/layouts/Loader";
 import moment from "moment/moment";
 const apiClient = new ApiClient();
 
+const styles = theme => ({
+  popover: {
+    pointerEvents: 'none'
+  },
+  paper: {
+    padding: theme.spacing.unit
+  }
+});
+
 class LessonsTable extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      data: null
+      data: null,
+      statusPopoverAnchor: null,
+      ratePopoverAnchor: null
     };    
   }
 
+  _handleStatusPopoverOpen = event => {      
+    this.setState({ statusPopoverAnchor: event.currentTarget });
+  };
+
+  _handleStatusPopoverClose = () => {
+    this.setState({ statusPopoverAnchor: null });
+  };
+  
+ _handleRatePopoverOpen = event => {      
+    this.setState({ ratePopoverAnchor: event.currentTarget });
+  };
+
+  _handleRatePopoverClose = () => {
+    this.setState({ ratePopoverAnchor: null });
+  };
+  
   componentDidMount() {      
     const {studentId, classroomId, getReport} = this.props;       
     getReport(studentId, classroomId);
@@ -56,108 +84,148 @@ class LessonsTable extends Component {
 
   render() {
 
-    const { t, getReportRequest} = this.props;
-    const {data} = this.state;    
+    const { t, classes, getReportRequest} = this.props;
+    const {data, statusPopoverAnchor, ratePopoverAnchor} = this.state;    
     
     if (!getReportRequest.get('success') || !data) {
         return <Loader />
-    }
-    
+    }        
+
     return (
-      <Table className="unit-table">
-        <Thead>
-        <HeadRow>
-          <Th width='44px'>{t('unit')}</Th>
-          <Th width='193px'>{t('lessonInfo')}</Th>
-          <Th width='93px'>{t('lessonAttempt')}</Th>
-          <Th width='93px'>{t('status')}</Th>
-          <Th width='93px'>{t('attemptDate')}</Th>
-          <Th width='93px'>{t('score')}</Th>
-          <Th width='93px'>{t('percent')}</Th>
-          <Th width='93px'>{t('passFail')}</Th>
-          <Th classNames='comment-cell'>{t('comments')}</Th>
-        </HeadRow>
-        </Thead>
-        <Tbody>
-        {data.map((unit, unitIndex) => {
-          let unitRowSpan = this.countNumberOfUnitAttempts(unit) + '';
-          if (unitRowSpan === '0') {
-            return (false);
-          }
-          return (
-            <tr className="m-datatable__row" style={{height: '64px'}} key={unit.unit_id + '-unitRow'}>
-              <td className="m-datatable__cell rotate" width='50px' rowSpan={unitRowSpan} key={unit.unit_id + '-unitName'}>
-                <div>
-                    <span><b>Unit {unitIndex + 1}</b> {unit.unit_name}</span>
-                </div>
-              </td>
-              {unit.lessons.map((lesson, lessonIndex) => {
-                const lessonRowSpan = this.countNumberOfLessonAttempts(lesson) + '';
-                if (lessonRowSpan === '0') {
-                    return (false);
-                }
-                return (
-                  <tr className="m-datatable__row" style={{height: '64px'}} key={lesson.lesson_id + '-lessonRow'}>
-                    <td className="m-datatable__cell text-center" width='193px' rowSpan={lessonRowSpan} key={lesson.lesson_id + '-lessonName'}>
-                      <p><span className="m-badge m-badge--brand m-badge--wide">{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</span></p>
-                      <strong className="font-italic" style={{width: '193px'}}>{lesson.lesson_name}</strong>
-                      <span style={{width: '193px'}}>{lesson.lesson_description}</span>    
-                          
-                    </td>
-                    {lesson.attempts.map((attempt) => {
-                        return (this.renderAttemptRow(lesson, attempt))
-                    })}
-                  </tr>)
-              })}
-            </tr>)
-        })}
-        </Tbody>
-      </Table>
+      <div className="table-responsive">
+        <table className="table table-bordered">
+          <thead>
+            <tr className="active">
+              <th style={{ minWidth: 50}}>{t('unit')}</th>
+              <th>{t('lessonInformation')}</th>
+              <th>{t('lessonAttempt')}</th>              
+              <th>{t('attemptDate')}</th>              
+              <th>{t('score')} / {t('percent')}</th>              
+              <th className='comment-cell'>{t('comments')}</th>
+            </tr>
+          </thead>
+          <tbody>
+          {data.map((unit, unitIndex) => {
+              if (this.countNumberOfUnitAttempts(unit) > 0) {
+                  return this.renderLessonRow(unit, unitIndex);
+              }
+              return '';
+          })}
+          </tbody>
+        </table>       
+
+        <Popover
+            id="mouse-over-popover-status"
+            className={classes.popover}
+            classes={{ paper: classes.paper }}
+            open={Boolean(statusPopoverAnchor)}
+            anchorEl={statusPopoverAnchor}
+            anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
+            transformOrigin={{ vertical: 'center', horizontal: 'left' }}
+            onClose={this._handleStatusPopoverClose}
+            disableRestoreFocus >
+            <div className="m--margin-right-10 m--margin-left-10">
+                <h6>{t('status')}</h6>
+                <p className="text-capitalize">
+                    <span className="m-badge m-badge--brand m-badge--wide m-badge--metal m--margin-right-10"></span> {t('notStarted')}
+                </p>
+                <p className="text-capitalize">
+                    <span className="m-badge m-badge--brand m-badge--wide m-badge--warning m--margin-right-10"></span> {t('inProgress')} 
+                </p>
+                <p className="text-capitalize margin-0">
+                    <span className="m-badge m-badge--brand m-badge--wide m-badge--success m--margin-right-10"></span> {t('completed')}
+                </p>            
+            </div>
+        </Popover>
+        
+        <Popover
+            id="mouse-over-popover-rate"
+            className={classes.popover}
+            classes={{ paper: classes.paper }}
+            open={Boolean(ratePopoverAnchor)}
+            anchorEl={ratePopoverAnchor}
+            anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
+            transformOrigin={{ vertical: 'center', horizontal: 'left' }}
+            onClose={this._handleRatePopoverClose}
+            disableRestoreFocus >
+            <div className="m--margin-right-10 m--margin-left-10">
+                <h6>{t('perfomance')}</h6>
+                <p className="text-capitalize">
+                    <span className="m-badge m-badge--brand m-badge--wide m-badge--success m--margin-right-10"></span> {t('pass')}
+                </p>
+                <p className="text-capitalize margin-0">
+                    <span className="m-badge m-badge--brand m-badge--wide m-badge--danger m--margin-right-10"></span> {t('fail')} 
+                </p>            
+            </div>
+        </Popover>        
+      </div>
     )
   }
 
-  renderAttemptRow = (lesson, attempt) => {
-    const { t } = this.props;
-    const attemptFinished = !!attempt.att_date;
-    const rowKey = lesson.lesson_id + '' + attempt.attempt_no;
-    const passed = parseInt(attempt.scored_points, 10) >=  parseInt(lesson.pass_weight, 10);
-    
-    return (<tr className="m-datatable__row" style={{height: '64px'}} key={rowKey + '-attemptRow'}>
-        <td className="m-datatable__cell" width='93px' key={rowKey + '-attemptNo'}>
-            <span style={{width: '93px'}}>{attempt.attempt_no}</span>
-        </td>
-        <td className="m-datatable__cell text-capitalize" width='93px' key={rowKey + '-attemptStatus'}>
-            <span style={{width: '93px'}}>
-                {attemptFinished && (attempt.scored_points >= lesson.pass_weight ? t('completed') : t('inProgress'))} 
-            </span>
-        </td>
-        <td className="m-datatable__cell" width='93px' key={rowKey + '-attemptDate'}>
-            <span style={{width: '93px'}}>
-                {attemptFinished && moment(attempt.att_date).format('ll')}
-            </span>
-        </td>
-        <td className="m-datatable__cell" width='93px' key={rowKey + '-attemptScored'}>
-            <span style={{width: '93px'}}>
-                {attemptFinished && (attempt.scored_points + '/' + lesson.lesson_points)}
-            </span>
-        </td>
-        <td className="m-datatable__cell" width='93px' key={rowKey + '-attemptScoredToLesson'}>
-            <span style={{width: '93px'}}>
-                {attemptFinished && (attempt.scored_points * 100 / lesson.lesson_points).toFixed(2) + '%'}
-            </span>
-        </td>
-        {attemptFinished && <td className={`m-datatable__cell attempt-${passed ? 'pass' : 'fail'} text-uppercase`} width='93px' key={rowKey + '-attemptPass'}>
-            <div style={{width: '94px'}}>{t(passed ? 'pass' : 'fail')}</div>
-          </td>}
-        {!attemptFinished && <td className="m-datatable__cell" width='100px' key={rowKey + '-attemptPass'}>
-          <div style={{width: '94px'}}></div>
-        </td>}
-        <td className="m-datatable__cell comment-cell text-align-left" key={rowKey + '-attemptComment'}>
-            <span>{attemptFinished && Parser(attempt.comment)}</span>
-        </td>
-      </tr>
-    )
-  };
+    renderLessonRow(unit, unitIndex) {
+        const { t } = this.props;
+        const unitRowSpan = this.countNumberOfUnitAttempts(unit);
+        
+        return unit.lessons.map((lesson, lessonIndex) => {
+            const lessonRowSpan = this.countNumberOfLessonAttempts(lesson);
+            
+            if (lessonRowSpan === 0) {
+                return (false);
+            }
+                
+            let completed  = lesson.attempts.filter(item => (!!item.att_date)).length;            
+            let badgeClass = 'm-badge--metal';
+            
+            if (completed > 0) {
+                badgeClass = completed === lesson.attempts.length ? 'm-badge--success' : 'm-badge--warning';
+            }
+            
+            return lesson.attempts.map((attempt, attemptIndex) => {
+                
+                const attemptFinished = !!attempt.att_date;                
+                const passed = parseInt(attempt.scored_points, 10) >=  parseInt(lesson.pass_weight, 10);
+                                         
+                return <tr key={lesson.lesson_id + '-' + attempt.attempt_no + '-lessonRow'}>
+                    {(lessonIndex === 0 && attemptIndex === 0) &&                    
+                        <td className="rotate" rowSpan={unitRowSpan} key={unit.unit_id + '-unitName'}>
+                            <div>
+                                <span><b>Unit {unitIndex + 1}</b> {unit.unit_name}</span>
+                            </div>
+                        </td>
+                    }                
+                    {attemptIndex === 0 &&
+                    <td  style={{ maxWidth: 350}} className="text-center" rowSpan={lessonRowSpan}>
+                        <p>                        
+                            <span aria-haspopup="true" onMouseEnter={this._handleStatusPopoverOpen} onMouseLeave={this._handleStatusPopoverClose} className={`m-badge m-badge--brand m-badge--wide ${badgeClass}`}>
+                                <strong>{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</strong>
+                            </span>                        
+                        </p>
+                        <strong className="font-italic">{lesson.lesson_name}</strong>
+                        <div>{lesson.lesson_description}</div>
+                    </td>}
+                    <td className='text-center'>
+                        <span>{attempt.attempt_no}</span>
+                    </td>
+                    <td className='text-center'>                            
+                        {attemptFinished && moment(attempt.att_date).format('ll')}                            
+                    </td>          
+                    {attemptFinished ? <td className={`attempt-${passed ? 'pass' : 'fail'} text-center`}>
+                        <div aria-haspopup="true" onMouseEnter={this._handleRatePopoverOpen} onMouseLeave={this._handleRatePopoverClose}>
+                            <p>
+                                {attempt.scored_points + '/' + lesson.lesson_points}
+                            </p>
+                            <p>
+                                {(attempt.scored_points * 100 / lesson.lesson_points).toFixed(2) + '%'}    
+                            </p>
+                        </div>
+                    </td> : <td>-</td>}
+                    <td className="text-left">
+                        <span>{attemptFinished && Parser(attempt.comment)}</span>
+                    </td>            
+                </tr>
+            });                                                  
+        });
+   }
 
   countNumberOfUnitAttempts(unit) {
     let numberOfAttempts = 0;
@@ -191,4 +259,6 @@ LessonsTable = connect(
   })
 )(LessonsTable);
 
-export default translate("translations")(LessonsTable);
+export default translate("translations")(withStyles(styles)(LessonsTable));
+    
+    

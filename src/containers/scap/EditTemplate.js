@@ -169,7 +169,7 @@ class EditTemplate extends Component {
                 </div>  
                 <div className="col-sm-2 text-left">
                     <a href="" onClick={(e) => {e.preventDefault(); this._deleteQuestion(key) }}>
-                        <i className='la la-remove text-danger' style={{fontWeight: 'bold'}}></i>
+                        <strong className='la la-remove text-danger'></strong>
                     </a>
                 </div>
             </div>

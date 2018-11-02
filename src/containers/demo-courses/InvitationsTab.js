@@ -233,9 +233,9 @@ class InvitationsTab extends Component {
                   <MenuItem value={50}>50</MenuItem>
                   <MenuItem value={100}>100</MenuItem>
                 </Select>
-                <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
                   {t('sendNewInvitation')}
-                  <Icon style={{marginLeft:'5px'}}>send</Icon>
+                  <Icon className="m--margin-left-5">send</Icon>
                 </Button>
               </div>
             </div>
