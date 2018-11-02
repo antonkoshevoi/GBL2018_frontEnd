@@ -10,7 +10,7 @@ import { translate } from 'react-i18next';
 import { selectGetStudentsRecordsRequest, selectUnSubscribeStudentRequest } from "../../../redux/subscriptions/selectors";
 import { getStudentsRecords, unSubscribeStudent, resetUnSubscribeStudentRequest } from "../../../redux/subscriptions/actions";
 import Modal from '../../../components/ui/Modal';
-import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../../components/ui/table";
+import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../../components/ui/table";
 import DeleteButton from "../../../components/ui/DeleteButton";
 import moment from 'moment/moment';
 
@@ -58,13 +58,7 @@ class StudentsModal extends Component {
         
         if (studentsRecordsRequest.get('success') && studentsRecordsRequest.get('records').size === 0) {
             return (
-                <tr>
-                    <td>
-                        <div className="table-message">
-                            <h2>{t('noSubscribedUsers')}</h2>
-                        </div>
-                    </td>
-                </tr>
+                <MessageRow>{t('noSubscribedUsers')}</MessageRow>
             );
         }
 

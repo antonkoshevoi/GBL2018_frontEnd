@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow, EditButton } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
 import {
   selectDeleteRequest,
@@ -86,15 +86,7 @@ class Administration extends Component {
     const loading = this.props.getRecordsRequest.get('loading');
 
       if (!loading && records.size === 0) {
-      return (
-        <tr>
-          <td>
-            <div className="table-message">
-              <h2>{t('usersNotFound')}</h2>
-            </div>
-          </td>
-        </tr>
-      )
+      return (<MessageRow>{t('usersNotFound')}</MessageRow>)
     }
 
     return records.map((record, key) => (
@@ -267,7 +259,7 @@ class Administration extends Component {
                 </HeadRow>
               </Thead>
 
-              <Tbody>
+              <Tbody>              
                 {loading &&
                   <TablePreloader text="Loading..." color="primary"/>
                 }

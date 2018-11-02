@@ -3,7 +3,7 @@ import { translate } from 'react-i18next';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
 import {
   selectDeleteRequest,
@@ -88,13 +88,7 @@ class Students extends Component {
 
       if (!loading && records.size === 0) {
       return (
-        <tr>
-          <td>
-            <div className="table-message">
-              <h2>{t('studentsNotFound')}</h2>
-            </div>
-          </td>
-        </tr>
+        <MessageRow>{t('studentsNotFound')}</MessageRow>
       )
     }
 
@@ -270,7 +264,7 @@ class Students extends Component {
                   <HasRole roles={['Superadministrator']}>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
                   </HasRole>
-                  <Th width='150px'>{t('actions')}</Th>
+                  <Th width='150px' className='actios'>{t('actions')}</Th>
                 </HeadRow>
               </Thead>
 

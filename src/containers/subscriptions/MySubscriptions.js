@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnSubscribeRequest } from '../../redux/subscriptions/selectors';
 import { getUserRecords, unSubscribe, resetUnSubscribeRequest } from '../../redux/subscriptions/actions';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from "../../components/ui/table";
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from "../../components/ui/table";
 import { Select, MenuItem, FormHelperText } from '@material-ui/core';
 import Loader from "../../components/layouts/Loader";
 import DeleteButton from "../../components/ui/DeleteButton";
@@ -129,11 +129,7 @@ class MySubscriptions extends Component {
         
         if (!subscriptions.length) {
             return (
-                <tr>
-                    <td>
-                        <div className="table-message"><h2>{t('subscriptionsNotFound')}</h2></div>
-                    </td>
-                </tr>
+                <MessageRow>{t('subscriptionsNotFound')}</MessageRow>
             );
         }
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Card from "../../../components/ui/Card";
-import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../../../components/ui/table";
+import {HeadRow, Row, Table, Tbody, Td, Th, Thead, MessageRow} from "../../../components/ui/table";
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
 import {getRecords} from "../../../redux/course-credits/actions";
@@ -58,13 +58,7 @@ class UnassignedCourses extends Component {
     
         if (!records.size && !recordsRequest.get('loading')) {
             return (
-                <tr>
-                    <td>
-                        <div className="table-message">
-                            <h2>{t('noUnassignedCredits')}</h2>
-                        </div>
-                    </td>
-                </tr>
+                <MessageRow>{t('noUnassignedCredits')}</MessageRow>
             );
         }
 

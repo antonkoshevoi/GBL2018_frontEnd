@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { selectGetDraftRecordsRequest, selectDeleteRecordRequest, } from '../../redux/messages/selectors';
 import { getDraftMessages, deleteDraftMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
 import { MenuItem, Select, Button, Icon } from '@material-ui/core';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
 import { NavLink } from "react-router-dom";
@@ -75,15 +75,7 @@ class DraftMessages extends Component {
         const records = this.props.getRecordsRequest.get('records');
         
         if (!loading && records.size === 0) {
-            return (
-                <tr>
-                    <td>
-                        <div className="table-message">
-                            <h2>{t('messagesNotFound')}</h2>
-                        </div>
-                    </td>
-                </tr>
-            );
+            return (<MessageRow>{t('messagesNotFound')}</MessageRow>);
         }
 
         return records.map((record, key) => (

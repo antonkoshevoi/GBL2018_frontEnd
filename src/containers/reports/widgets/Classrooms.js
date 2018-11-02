@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from '../../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../../components/ui/table';
 import Pagination from '../../../components/ui/Pagination';
 import { selectClassroomsRequest } from "../../../redux/reports/dashboard/selectors";
 import { getClassrooms } from "../../../redux/reports/dashboard/actions";
@@ -32,13 +32,7 @@ class Classrooms extends Component {
 
     if (!loading && records.size === 0) {
       return (
-        <tr>
-          <td>
-            <div className="table-message">
-              <h2>{t('classroomsNotFound')}</h2>
-            </div>
-          </td>
-        </tr>
+        <MessageRow>{t('classroomsNotFound')}</MessageRow>
       )
     }
 

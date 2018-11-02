@@ -3,7 +3,7 @@ import { translate } from 'react-i18next';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow} from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
 import {
   selectDeleteRequest, selectGetRecordForAssignStudentsRequest,
@@ -93,13 +93,7 @@ class Classrooms extends Component {
     
     if (!loading && records.size === 0) {
       return (
-        <tr>
-          <td>
-            <div className="table-message">
-              <h2>{t('classroomsNotFound')}</h2>
-            </div>
-          </td>
-        </tr>
+        <MessageRow>{t('classroomsNotFound')}</MessageRow>
       )
     }
 

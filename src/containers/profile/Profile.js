@@ -5,6 +5,7 @@ import Info from "./sections/Info";
 import Details from "./sections/Details";
 import Summery from "./sections/Summery";
 import HasRole from "../middlewares/HasRole";
+import Alerts from "../dashboard/sections/Alerts";
 import { selectGetUserRequest, selectUserData } from "../../redux/user/selectors";
 
 class Profile extends Component {
@@ -15,32 +16,36 @@ class Profile extends Component {
         const user = userData.toJS();
 
         return (
-            <div className="row m--margin-top-20">
-                <HasRole roles={['Superadministrator', 'School', 'Parents']}>
-                    <div className="col-md-12 col-lg-9 m-auto">
-                        <div className="row">
-                            <div className="col-lg-4">
-                                <Info user={user}/>
-                            </div>
-                            <div className="col-lg-8">
-                                {getUserRequest.get('success') && <Details user={user} />}
+            <div >
+                <HasRole roles={['Student']}>
+                    <Alerts />
+                </HasRole>
+                <div className="row m--margin-top-20">                        
+                    <HasRole roles={['Superadministrator', 'School', 'Parents']}>
+                        <div className="col-md-12 col-lg-9 m-auto">
+                            <div className="row">
+                                <div className="col-lg-4">
+                                    <Info user={user}/>
+                                </div>
+                                <div className="col-lg-8">
+                                    {getUserRequest.get('success') && <Details user={user} />}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </HasRole>
-                <HasRole roles={['Student', 'Teacher']}>
-                    <div className="col-lg-3">
-                        <Info user={user}/>
-                    </div>
-                    <div className="col-lg-6">
-                        {getUserRequest.get('success') && <Details user={user} />}
-                    </div>        
-                    <div className="col-lg-3">
-                        <Summery user={user} />
-                    </div>        
-                </HasRole>                
-            </div>
-        );
+                    </HasRole>
+                    <HasRole roles={['Student', 'Teacher']}>
+                        <div className="col-lg-3">
+                            <Info user={user}/>
+                        </div>
+                        <div className="col-lg-6">
+                            {getUserRequest.get('success') && <Details user={user} />}
+                        </div>        
+                        <div className="col-lg-3">
+                            <Summery user={user} />
+                        </div>        
+                    </HasRole>                
+                </div>
+            </div>);
     }
 }
 

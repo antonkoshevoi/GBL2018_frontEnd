@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import {translate} from 'react-i18next';
 import Card from "../../components/ui/Card";
-import {EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead} from "../../components/ui/table";
+import {EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/table";
 import {selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords} from "../../redux/classrooms/selectors";
 import {getRecordsPublic, getSingleAutoClassRecord, resetUpdateAutoClass} from "../../redux/classrooms/actions";
 import HasPermission from "../middlewares/HasPermission";
@@ -66,13 +66,7 @@ class AutoCreate extends Component {
     const {t} = this.props; 
     if (!loading && records.size === 0) {
       return (
-        <tr>
-          <td>
-            <div className="table-message">
-              <h2>{t('autoClassroomsNotFound')}</h2>
-            </div>
-          </td>
-        </tr>
+        <MessageRow>{t('autoClassroomsNotFound')}</MessageRow>
       )
     }
 

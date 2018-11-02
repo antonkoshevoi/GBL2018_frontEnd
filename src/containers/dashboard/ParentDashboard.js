@@ -16,6 +16,7 @@ import FeaturedItems from "./sections/FeaturedItems";
 import {selectRecords as storeItems}  from "../../redux/store/selectors";
 import QuickLink from "./sections/QuickLink";
 import ShoppingCart from "../store/ShoppingCart";
+import Alerts from "./sections/Alerts";
 
 const styles = {
   row: {
@@ -186,7 +187,8 @@ class ParentDashboard extends Component {
         const {storeItems, getStudents, studentsRequest, t} = this.props;
         const loading = studentsRequest.get('loading');
 
-        return <div className="fadeInLeft animated">            
+        return <div className="fadeInLeft animated">
+            <Alerts />
             <div className="row">
               <div className="col-sm-12 col-md-6 col-lg-5 col-xl-4">
                 <div className="m-portlet m-portlet--head-solid-bg m-portlet--info" style={{marginTop:15}}>
