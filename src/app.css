@@ -347,6 +347,10 @@ table th .sort-arrow {
     background-color: #2f8eed;
 }
 
+.paggination-group .btn-info {
+    color: white;
+}
+
 .radius-0 {
     border-radius: 0 !important;
 }
