@@ -220,6 +220,7 @@ nav.navigation > .menuItem > a.swapped {
 nav.navigation > .menuItem > a + .second_level.activeSubMenu {
     transition: all .4s;
     display:table;
+    width: 100%;
 }
 
 nav.navigation.hovered .menuItem >  a + .second_level.activeSubMenu  {
@@ -232,16 +233,8 @@ nav.navigation.hovered  > .menuItem > a.swapped  {
     position:relative;
 }
 
-.m-aside-left.m-aside-left--skin-dark {
-    background-color: #e3e5ea !important;
-}
-
 .m-menu__item .m-menu__link.active {
     background: #f2f3f8;
-}
-
-.m-aside-left {
-    z-index:555;
 }
 
 .timelineSubMenu  {

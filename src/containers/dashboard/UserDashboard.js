@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {ChartData} from "../../data/Charts";
 import SchoolAverageChart from "../reports/widgets/SchoolAverageChart";
 import RosterStatistic from "../reports/widgets/RosterStatistic";
 import LineChart from "../reports/widgets/LineChart";
@@ -19,15 +18,7 @@ import ShoppingCart from "../store/ShoppingCart";
 class UserDashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      ...ChartData,
-      params: {
-        filter: {
-          category: '1'
-        },
-        courses: null,
-      }
-    }
+    this.state = {}
   }
 
   componentDidMount() {
@@ -46,7 +37,7 @@ class UserDashboard extends Component {
       <div className="fadeInLeft animated">
         <Alerts />
         <div className="row dashboard-main-top">
-          <div className="col-sm-12 col-md-12 col-lg-12 col-xl-9 dashboard-reports-snapshot" style={{marginTop:'15px'}}>
+          <div className="col-sm-12 col-md-12 col-lg-12 col-xl-9 dashboard-reports-snapshot m--margin-top-15">
             <Card title={t('reportsSnapshot')} isMainCard={true} boxShadow={false} style={{boxShadow:"none"}} bodyStyle={{padding:'0', background:'#f2f3f8'}}>
               <div className="row row-15">
                 <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">
@@ -63,7 +54,6 @@ class UserDashboard extends Component {
                 </div>
               </div>
             </Card>
-
           </div>
           <div className="col-sm-12 col-xl-3 m--hidden-tablet-and-mobile m--hidden-desktop-lg dashboard-quick-links">
             <QuickLink/>
@@ -74,9 +64,7 @@ class UserDashboard extends Component {
             <FeaturedItems data={records}/>
           </div>
           <div className="col-md-6 col-lg-4">
-            <div>
-                <ShoppingCart preview = {true}/>
-            </div>
+            <ShoppingCart preview = {true}/>
           </div>
         </div>
       </div>

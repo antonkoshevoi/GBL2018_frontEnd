@@ -143,6 +143,7 @@
 
     .mobile-sidebar-out-toggle {
         display: inline-block !important;
+margin: 50px;        
     }
 
     .small-card-content .small-card .row {

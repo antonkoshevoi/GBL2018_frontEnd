@@ -75,8 +75,8 @@ class Header extends Component {
               </div>              
               <div id="m_header_topbar" className="m-topbar  m-stack m-stack--ver m-stack--general">
                 <div className="m-stack__item m-topbar__nav-wrapper">
-                  <IconButton color='primary' className="m--hide mobile-sidebar-out-toggle" onClick={() => { this.props.mobileSidebar() }}>
-                    <Icon>menu</Icon>
+                  <IconButton color='primary' className="m--hide mobile-sidebar-out-toggle m--margin-top-5" onClick={() => { this.props.mobileSidebar() }}>
+                    <Icon fontSize="large">menu</Icon>
                   </IconButton>
 
                   <ul className="m-topbar__nav m-nav m-nav--inline">

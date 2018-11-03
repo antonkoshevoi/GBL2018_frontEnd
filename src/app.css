@@ -1587,11 +1587,6 @@ td.rotate div span {
 
 @media (max-width: 1240px) {
 
-    .menu-back-arrow {
-        /*TODO delete this and fix bug with arrow on mobile*/
-        display: none !important;
-    }
-
     .m-wrapper {
         transition: margin 0.5s ease-in;
         padding-top: 0 !important;

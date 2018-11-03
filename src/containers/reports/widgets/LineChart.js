@@ -126,12 +126,15 @@ class LineChart extends Component {
     }     
     
     this.setState({disabled: true});
-    Promise.all([this.apiClient.get(historyUrl, params), this.apiClient.get(onlineUrl)]).then((response) => {
+    
+    Promise.all([this.apiClient.get(historyUrl, params)]).then((response) => {
+        
+        console.log(response);
         this.setState({
           selectorActive: selector,
           chosenDate: date,
           disabled: false,
-          data: formChartData(response[0].data.history, selector, date, response[1].data.online),
+          data: formChartData(response[0].data.history, selector, date),
           options: formChartOptions(response[0].data.maxCount, selector)
         });
       },
