@@ -208,22 +208,6 @@ li > .small-avatar {
     background-size: cover;
 }
 
-.main-tabs > div > div > div:last-child, .main-tabs div > span {
-    background-color: #555;
-}
-
-.main-tabs .tab-header-item > span > div {
-    color: #fff;
-}
-
-.main-tabs button span {
-    color: #555;
-}
-
-.main-tabs.report-tabs-white button span {
-    color: #ffffff;
-}
-
 .full-width {
     width: 100%;
 }
@@ -731,11 +715,10 @@ div.m-card-profile .m-card-profile__pic img {
     margin: 0 5px;
 }
 
-.store-filter {
+.store-filter.left-block {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
-    height: 40px;
+    align-items: center;    
 }
 
 div.m-portlet.m-portlet--info.m-portlet--head-solid-bg .m-portlet__head {

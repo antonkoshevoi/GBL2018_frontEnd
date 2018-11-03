@@ -34,8 +34,7 @@
 }
 
 .store .store-filter button, .store .filterMenu > button {
-    height: 50px;
-    font-weight: 300;
+    height: 50px;    
     border-radius: 0;
 }
 

@@ -7229,6 +7229,9 @@ router-outlet {
 .m--margin-bottom-0 {
   margin-bottom: 0 !important; }
 
+.m--margin-left-0 {
+  margin-left: 0 !important; }
+
 .m--margin-top-5 {
   margin-top: 5px !important; }
 
@@ -7243,6 +7246,9 @@ router-outlet {
 
 .m--padding-0 {
   padding: 0px !important; }
+
+.m--padding-left-0 {
+  padding-left: 0px !important; }
 
 .m--padding-bottom-0 {
   padding-bottom: 0px !important; }

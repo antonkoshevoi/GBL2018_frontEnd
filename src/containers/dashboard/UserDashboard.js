@@ -36,28 +36,19 @@ class UserDashboard extends Component {
     return (
       <div className="fadeInLeft animated">
         <Alerts />
-        <div className="row dashboard-main-top">
-          <div className="col-sm-12 col-md-12 col-lg-12 col-xl-9 dashboard-reports-snapshot m--margin-top-15">
-            <Card title={t('reportsSnapshot')} isMainCard={true} boxShadow={false} style={{boxShadow:"none"}} bodyStyle={{padding:'0', background:'#f2f3f8'}}>
-              <div className="row row-15">
-                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">
-                  <RosterStatistic/>
-                </div>
-                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">
-                  <LineChart type='school'/>
-                </div>
-                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">                  
-                  <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
-                </div>
-                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--visible-tablet-and-mobile m--visible-desktop-lg">
-                  <QuickLink/>
-                </div>
-              </div>
-            </Card>
-          </div>
-          <div className="col-sm-12 col-xl-3 m--hidden-tablet-and-mobile m--hidden-desktop-lg dashboard-quick-links">
-            <QuickLink/>
-          </div>
+        <div className="row dashboard-main-top m--margin-top-15">
+            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--padding-left-0">
+              <RosterStatistic/>
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+              <LineChart type='school'/>
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3">                  
+              <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+              <QuickLink hideHeader={true} />
+            </div>                         
         </div>
         <div className="row dashboard-main-bottom">
           <div className="col-md-6 col-lg-8">

@@ -1,7 +1,6 @@
 
 @media (max-width: 1600px) {
-    .small-card .m-stack {
-        font-size: 75%;
+    .small-card .m-stack {        
         padding-left: 0;
     }
 
@@ -84,8 +83,7 @@
     }
 
     .small-card .m-stack {
-        padding-left: 5px !important;
-        font-size: 50%;
+        padding-left: 5px !important;       
     }
 
     .small-card .m-stack legend {
@@ -150,10 +148,6 @@ margin: 50px;
         display: flex;
         flex-direction: row;
         flex-wrap: unset;
-    }
-
-    .small-card .m-stack {
-        font-size: 75%;
     }
 
     .small-card .m-stack h5 {
