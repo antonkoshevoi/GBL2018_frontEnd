@@ -23,7 +23,7 @@ class Card extends Component {
     return (
       <div style={{marginBottom: 0, height: '100%', display: 'flex', flexDirection: 'column', ...this.props.style}}
            className={className + ' m-portlet  m-portlet--head-solid-bg m-portlet--' + colorName +
-           (transparent ? ' transparent' : '') + (isStore ? ' dashboard-store' : '')}
+           (transparent ? ' transparent' : '') + (isStore ? ' m-portlet--transparent-header' : '')}
       >
         <div className={`m-portlet__head ${isMainCard ? 'report-snapshot-header-border' : ''}
            ${!header ? 'm--hide' : ''} border-b-${colorBorder}`}>
@@ -43,7 +43,7 @@ class Card extends Component {
           </div>
         </div>
         <div
-          className={(isStore ? 'dashboard-store-body ' : '') + 'm-portlet__body position-relative'}
+          className='m-portlet__body position-relative'
           style={{height: '100%', ...bodyStyle}}>
           {children}
         </div>

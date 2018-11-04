@@ -54,11 +54,9 @@ class ShoppingCart extends Component {
     const loading = cartRecordsRequest.get('loading') || cartRequest.get('loading') || deleteRequest.get('loading');
     const success = cartRecordsRequest.get('success');
     return (
-      <div>
-        {loading && <Loader/>}
-        <div className={`row ${preview ? '': 'cart-items'}`}>
-          <div className="shoppingCartPortlet m-auto col-xl-12">
-            <div className='m-portlet m-portlet--full-height dashboard-shopping-cart-transparent-bg'>
+      <div className={`${preview ? '' : 'fadeInLeft animated'}`}>
+            <div className={`m-portlet m-portlet--full-height ${preview ? 'm-portlet--transparent-header' : ''}`}>
+            {loading && <Loader/>}
             {preview ?  
                 <div className="m-portlet__head report-snapshot-header-border border-b-green">
                     <div className="m-portlet__head-caption">
@@ -67,18 +65,14 @@ class ShoppingCart extends Component {
                         </div>
                     </div>
                 </div> :
-                <div className='m-portlet__head'>
+                <div className='m-portlet__head border-b-green'>
                     <div className='m-portlet__head-caption'>
                         <div className='m-portlet__head-title'>
-                        <span className="m-portlet__head-icon">
-                            <i className="fa fa-shopping-cart"></i>
-                        </span>
-                        <h3 className='m-portlet__head-text'>
-                            {t('shoppingCart')}
-                        </h3>
+                            <span className='m-portlet__head-icon'><i className='fa fa-shopping-cart'></i></span>
+                            <h3 className='m-portlet__head-text'>{t('shoppingCart')}</h3>
+                        </div>
                     </div>
-                </div>
-              </div>}
+                </div> }
               <div className={`m-portlet__body dashboard-shopping-cart-body ${preview ? 'zoom-preview': ''}`}>
                 {success &&
                  <OpenInvoicesTable
@@ -103,8 +97,6 @@ class ShoppingCart extends Component {
               }
             </div>
           </div>
-        </div>
-      </div>
     );
   }
 }

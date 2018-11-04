@@ -36,21 +36,21 @@ class UserDashboard extends Component {
     return (
       <div className="fadeInLeft animated">
         <Alerts />
-        <div className="row dashboard-main-top m--margin-top-15">
-            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--padding-left-0">
+        <div className="row m--margin-top-15">
+            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--margin-bottom-10">
               <RosterStatistic/>
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--margin-bottom-10">
               <LineChart type='school'/>
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3">                  
+            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--margin-bottom-10">                  
               <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--margin-bottom-10">
               <QuickLink hideHeader={true} />
             </div>                         
         </div>
-        <div className="row dashboard-main-bottom">
+        <div className="row">
           <div className="col-md-6 col-lg-8">
             <FeaturedItems data={records}/>
           </div>

@@ -1475,10 +1475,12 @@ td.rotate div span {
         margin-top: 0;
     }
 
+    .head-transparent > .m-portlet,
     .dashboard-reports-snapshot > .m-portlet {
         background-color: transparent;
     }
 
+    .head-transparent,
     .report-snapshot-header-border {
         border-bottom-width: 2px !important;
         padding: 0 0 3px 0 !important ;
@@ -1524,16 +1526,13 @@ td.rotate div span {
         border-color: #467822 !important;
     }
 
-    .dashboard-store {
+    .m-portlet--transparent-header {
         margin-top: 0 !important;
-    }
-
-    .dashboard-store, .dashboard-shopping-cart-transparent-bg {
         background-color: transparent;
         box-shadow: none;
     }
 
-    .dashboard-store-body, .dashboard-shopping-cart-body {
+    .m-portlet--transparent-header .m-portlet__body {
         background-color: #ffffff;
     }
 
@@ -1551,10 +1550,6 @@ td.rotate div span {
     .reports-flex-row > div:last-child {
         padding-right: 1px;
     }
-}
-
-.row-reports-main-top-block {
-    flex-direction: column;    
 }
 
 .reports-flex-row {

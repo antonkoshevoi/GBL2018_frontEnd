@@ -78,7 +78,8 @@ class OpenInvoicesTable extends Component {
 
       return (item && item.storeItem &&
         <Row index={i} key={i}>
-          <Td first={true} width='10px'>{i + 1}</Td>
+          {!preview &&
+          <Td first={true} width='10px'>{i + 1}</Td>}
           <Td width='400px'>
             <div className="productInfo">
               <div className="productImg">
@@ -189,7 +190,7 @@ class OpenInvoicesTable extends Component {
             <Table>
               <Thead>
               <HeadRow>
-                <Th first={true} width='10px'>#</Th>
+                {!preview && <Th first={true} width='10px'>#</Th>}
                 <Th name='product' width='400px'>{t('product')}</Th>
                 {!preview && <Th name='quantity' width='132px' classNames="text-center">{t('classroom')}</Th>}                
                 <Th name='quantity' width='132px' classNames="text-center">{t('quantity')}</Th>
