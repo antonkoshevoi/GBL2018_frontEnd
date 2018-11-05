@@ -124,10 +124,6 @@
     font-size: 0.9rem;
 }
 
-.m-widget25__desc .discount {
-    position: relative;
-    color: #771f1e;
-}
 
 .discount::after {
     position: absolute;
@@ -143,10 +139,6 @@
     -ms-transform:rotate(-7deg);
     -o-transform:rotate(-7deg);
     transform:rotate(-7deg);
-}
-
-.m-widget25__desc .discount > span {
-    color: #5c7b8b;
 }
 
 .cardItem .productPrice .discount > span {
@@ -269,15 +261,6 @@ button .discount > span {
 
 #product-details .productTitle {
     font-weight: 400;
-}
-
-#product-details .m-widget25 {
-    line-height: 1;
-}
-
-#product-details .m-widget25 .m-widget25__price {
-    line-height: 0;
-    font-size: 50px;
 }
 
 /* =====================================

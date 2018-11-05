@@ -37,14 +37,14 @@ class UserMenu extends Component {
         <div className="m-dropdown__wrapper animated m--padding-right-20" onMouseLeave={() => {this.props.switchMenu(null)}} style={{display:'block'}}>
         <span className="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style={{right:'21px', color:'#385774'}}></span>
         <div className="m-dropdown__inner">
-          <div className="m-dropdown__header m--align-center" style={{backgroundColor:`#385774`}}>
+          <div className="m-dropdown__header user-menu-header">
             <div className="m-card-user m-card-user--skin">
               <div className="m-card-user__pic">
                 <img src={user.avatar} className="m--img-rounded m--marginless" alt=""/>
               </div>
               <div className="m-card-user__details">
                 <span className="m-card-user__name m--font-weight-500">{user.firstName + ' ' +  user.lastName}</span>
-                <a href={`mailto:${user.email}`} className="m-card-user__email m--font-weight-300 m-link" style={{ fontSize: '0.8rem'}}>{user.email}</a>
+                <a href={`mailto:${user.email}`} className="m-card-user__email m--font-weight-300">{user.email}</a>
               </div>
             </div>
           </div>

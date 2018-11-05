@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Card from "../../../components/ui/Card";
 import {HeadRow, Row, Table, Tbody, Td, Th, Thead, MessageRow} from "../../../components/ui/table";
 import {connect} from "react-redux";
 import {translate} from "react-i18next";

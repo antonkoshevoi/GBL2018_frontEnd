@@ -35,11 +35,11 @@ class UserDashboard extends Component {
     return (
       <div className="fadeInLeft animated">
         <Alerts />
-        <div className="row m--margin-top-15">
-            <div className="col-sm-12 col-md-12 col-lg-9 col-xl-9 m--padding-left-0">
-                <div className="row m--margin-left-0">
-                    <div className="col-sm-12">                        
-                        <div className='block-header border-b-blue'>                                                      
+        <div className="row">
+            <div className="col-sm-12 col-md-12 col-lg-9 col-xl-9">
+                <div className="row row-15 1m--margin-left-0">
+                    <div className="col-sm-12">
+                        <div className='block-header border-b-blue'>
                             <h3 className='m-portlet__head-text'>{t('reportsSnapshot')}</h3>
                         </div>
                     </div>
@@ -52,12 +52,12 @@ class UserDashboard extends Component {
                     <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 m--margin-bottom-10">                  
                       <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
                     </div>
-                    <div className="col-sm-12 col-md-6 m--margin-bottom-10 m--visible-desktop-lg m--hidden-desktop-xl">
+                    <div className="col-sm-12 col-md-6 m--visible-desktop-lg m--margin-bottom-10 m--hidden-desktop-xl">
                         <QuickLink />
                     </div>                    
                 </div>
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--margin-bottom-10 m--hidden-desktop-lg m--visible-desktop-xl">
+            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3  m--margin-bottom-10 m--hidden-desktop-lg m--visible-desktop-xl">
                 <QuickLink />
             </div>
         </div>

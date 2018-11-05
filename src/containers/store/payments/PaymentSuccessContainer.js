@@ -92,11 +92,11 @@ class PaymentSuccessContainer extends Component {
       <div className="row">
         <div className="col-md-10 m-auto">
           {invoice &&
-            <div className="m-widget25">
+            <div>
                 <span className="invoice-title">
                     {t('yourInvoice', {invoiceNo: invoice.get('invoice_no'), invoiceAmount: ('$' + invoice.get('total'))})}.
                 </span>                
-                <p className="text-center">
+                <p className="text-center m--margin-15">
                     <a className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
                 </p>
             </div>
@@ -129,8 +129,8 @@ class PaymentSuccessContainer extends Component {
         {invoice &&
           <div className="col-md-10 m-auto">
             <div className="m-portlet m-portlet--bordered-semi">
-              <div className="m-portlet__body">
-                <div className="m-widget4 col-md-10 m-auto">
+              <div className="m-portlet__body m--padding-top-25">
+                <div className="col-md-10 m-auto">
                   <div className="row">
                     <div className="col-md-6">
                       <div>
@@ -146,27 +146,21 @@ class PaymentSuccessContainer extends Component {
                       </h3>
                       {this._renderAddress(invoice, 'shipping')}
                     </div>
-                  </div>
-                </div>
+                  </div>                            
+                    <div className="row">
+                        <div className="col-md-10 m-auto cartItems m--margin-15">
+                            <div>
+                              <span className="invoice-title">{t('orderDetails')}</span>
+                            </div>
+                            <div className="m-widget4 col-md-7 m-auto">
+                                {this._renderItems(invoice)}
+                            </div>        
+                        </div>
+                    </div>
+                 </div>             
               </div>
             </div>
           </div>
-        }
-        {invoice &&
-            <div className="col-md-10 m-auto">
-                <div className="m-portlet m-portlet--bordered-semi cartItems">
-                  <div className="m-portlet__body">
-                    <div className="m-widget25">
-                      <Typography variant="h6" gutterBottom>
-                      </Typography>
-                      <span className="invoice-title">{t('orderDetails')}</span>
-                    </div>
-                    <div className="m-widget4 col-md-7 m-auto">
-                        {this._renderItems(invoice)}
-                    </div>
-                  </div>
-                </div>        
-            </div>
         }
       </div>
     );
