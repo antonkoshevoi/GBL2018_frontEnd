@@ -113,12 +113,10 @@ class LineChart extends Component {
       'offset': this.clientTimeOffset
     };
             
-    let historyUrl = 'history/school';
-    let onlineUrl  = 'schools/online-students';
+    let historyUrl = 'history/school';    
             
     if (this.props.type === 'classroom') {
         historyUrl  = 'history/classroom/' + this.props.id;
-        onlineUrl   = 'classrooms/online-students/' + this.props.id;
     }
     
     if (this.props.type === 'homeroom') {

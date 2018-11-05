@@ -10,18 +10,9 @@ class QuickLink extends Component {
     const {t, hideHeader} = this.props;
     return (                     
           <div className="small-card-content">
-            {!hideHeader &&
-            <div className='m-portlet m-portlet--head-solid-bg quick-card-title quick-links-header quick-links-header-transparent'>
-              <div className='m-portlet__head border-b-orange quick-links-header-border'>
-                <div className='m-portlet__head-caption'>
-                  <div className='m-portlet__head-title'>
-                    <h3 className='m-portlet__head-text'>
-                      {t('quickLinks')}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            </div> }
+            {!hideHeader && <div className='block-header border-b-grey'>                                                      
+                            <h3 className='m-portlet__head-text'>{t('quickLinks')}</h3>
+                        </div>}
             <div className="small-card">
                 <div className="row">
                   <div className="col-6 quick-link-image">

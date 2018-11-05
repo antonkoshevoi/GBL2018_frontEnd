@@ -6,6 +6,7 @@ import {NavLink} from "react-router-dom";
 import DeleteButton from "../ui/DeleteButton";
 import {debounce} from "../../helpers/utils";
 import {translate} from 'react-i18next';
+import {Divider} from '@material-ui/core';
 
 class OpenInvoicesTable extends Component {
 
@@ -70,12 +71,10 @@ class OpenInvoicesTable extends Component {
     )
   }
 
-  _renderRows(rows, preview) {
-    const _self = this;
+  _renderRows(rows, preview) {    
     const {t} = this.props;
 
-    return rows.map(function (item, i) {
-
+    return rows.map((item, i) => {
       return (item && item.storeItem &&
         <Row index={i} key={i}>
           {!preview &&
@@ -90,7 +89,7 @@ class OpenInvoicesTable extends Component {
                 <span>{item.storeItem.description.substr(0, 50) + '...'}</span>
                <div className="d-block m--margin-top-15">
                  <DeleteButton
-                   onClick={() => { _self.props.onDelete (item.id) }}
+                   onClick={() => { this.props.onDelete (item.id) }}
                    title={t('deleteItemFromCartConfirmation', {item: item.storeItem.title})}
                    icon={false}
                    btnName={t('delete')}
@@ -112,12 +111,9 @@ class OpenInvoicesTable extends Component {
             {!item.isInvoice &&
             <input
               type="number"
-              onChange={(e) => {
-                _self._changeItemCount(i, e)
-              }}
+              onChange={(e) => { this._changeItemCount(i, e) }}
               value={item.count}
-              className="form-control productQuantity productLabel m-input m-input--solid"
-              style={{height: "50px"}}/>
+              className="form-control productQuantity productLabel m-input m-input--solid" />
             }
             {item.isInvoice &&
             <span className="productLabel text-center">{item.count}</span>
@@ -143,40 +139,36 @@ class OpenInvoicesTable extends Component {
           </Td>
         </Row>
       )
-    })
+    });
   }
 
   _renderTotalRow(sum,count) {
     const {t} = this.props;
-    return (      
-        <div className="m alert">
-          <div className="row text-right">
-            <div className="col-md-6 text-left">
+    return (
+        <div className="row text-right m--margin-top-15 m--margin-bottom-10">
+            <div className="col-xs-6 col-sm-6 text-left">
               <h3>{t('itemsCount', {count: count})}</h3>
             </div>
-            <div className="col-md-6 text-right">              
+            <div className="col-xs-6 col-sm-6 text-right">              
                 <span>{t('total')}</span><br/>
                 <span className="productPrice"> {'$' + parseFloat(sum).toFixed(2)}</span>              
             </div>
-          </div>
-        </div>      
+        </div>            
     )
   }
   _renderTaxRow(tax = 0) {
     const {t} = this.props;
-    return (
-        <div className="m alert m-alert--default">
-          <div className="row text-right">
-            <div className="col-md-6 text-left">              
+    return (        
+        <div className="row text-right m--margin-top-15 m--margin-bottom-10">
+            <div className="col-xs-6 col-sm-6 text-left">              
                 <h4>{t('shippingAndTax')}</h4>              
             </div>
-            <div className="col-md-6 text-right">              
+            <div className="col-xs-6 col-sm-6 text-right">              
                 <span className="productTaxPrice">
                     {'$' + parseFloat(tax).toFixed(2)}
                 </span>              
             </div>
-          </div>
-        </div>     
+        </div>        
     )
   }
 
@@ -185,7 +177,6 @@ class OpenInvoicesTable extends Component {
     return (
       <div>
         {data.length > 0 ?
-
           <div className="shoppingCartTable">
             <Table>
               <Thead>
@@ -202,18 +193,10 @@ class OpenInvoicesTable extends Component {
               {this._renderRows(data,preview)}
               </Tbody>
             </Table>
+            <Divider />
             {this._renderTaxRow(0)}
+            <Divider />
             {this._renderTotalRow(sum,data.length)}
-            {!preview &&
-            <div className="row d-flex justify-content-end ">
-              <div className="col-md-4 d-flex justify-content-end align-items-center">
-                <div className="form-group-inline btn-group">
-                  <NavLink to="/store" className="btn m-btm btn-primary">{t('continueShopping')}</NavLink>
-                  <NavLink to="/shopping/checkout" className="btn m-btm btn-success">{t('checkout')}</NavLink>
-                </div>
-              </div>
-            </div>
-            }
           </div>
           :
           this._getEmptyMessage()

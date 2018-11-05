@@ -12,8 +12,7 @@ import {selectChartDatatRequest} from "../../redux/reports/dashboard/selectors";
 import QuickLink from "./sections/QuickLink";
 import FeaturedItems from "./sections/FeaturedItems";
 import Alerts from "./sections/Alerts";
-import Card from "../../components/ui/Card";
-import ShoppingCart from "../store/ShoppingCart";
+import ShoppingCart from "./sections/ShoppingCart";
 
 class UserDashboard extends Component {
   constructor(props) {
@@ -37,24 +36,36 @@ class UserDashboard extends Component {
       <div className="fadeInLeft animated">
         <Alerts />
         <div className="row m--margin-top-15">
-            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--margin-bottom-10">
-              <RosterStatistic/>
+            <div className="col-sm-12 col-md-12 col-lg-9 col-xl-9 m--padding-left-0">
+                <div className="row m--margin-left-0">
+                    <div className="col-sm-12">                        
+                        <div className='block-header border-b-blue'>                                                      
+                            <h3 className='m-portlet__head-text'>{t('reportsSnapshot')}</h3>
+                        </div>
+                    </div>
+                    <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 m--margin-bottom-10">
+                      <RosterStatistic/>
+                    </div>
+                    <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 m--margin-bottom-10">
+                      <LineChart type='school'/>
+                    </div>
+                    <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 m--margin-bottom-10">                  
+                      <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
+                    </div>
+                    <div className="col-sm-12 col-md-6 m--margin-bottom-10 m--visible-desktop-lg m--hidden-desktop-xl">
+                        <QuickLink />
+                    </div>                    
+                </div>
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--margin-bottom-10">
-              <LineChart type='school'/>
+            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--margin-bottom-10 m--hidden-desktop-lg m--visible-desktop-xl">
+                <QuickLink />
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--margin-bottom-10">                  
-              <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
-            </div>
-            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--margin-bottom-10">
-              <QuickLink hideHeader={true} />
-            </div>                         
         </div>
         <div className="row">
-          <div className="col-md-6 col-lg-8">
+          <div className="col-md-6 col-lg-7">
             <FeaturedItems data={records}/>
           </div>
-          <div className="col-md-6 col-lg-4">
+          <div className="col-md-6 col-lg-5">
             <ShoppingCart preview = {true}/>
           </div>
         </div>

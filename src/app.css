@@ -69,39 +69,39 @@ textarea {
     padding: 0 !important;
 }
 
-.m-portlet--brand {
-}
-
-.learning-areas .m-portlet__head {
-    border-bottom: red solid 1px;
-}
-
 .App {
     text-align: center;
 }
 
+.border-b-grey {
+    border-bottom: #575962 solid 2px !important;
+}
+
 .border-b-green {
-    border-bottom: #7bc848 solid 1px !important;
+    border-bottom: #7bc848 solid 2px !important;
 }
 
 .border-b-red {
-    border-bottom: #ce342c solid 1px !important;
+    border-bottom: #ce342c solid 2px !important;
 }
 
 .border-b-orange {
-    border-bottom: #f8912a solid 1px !important;
+    border-bottom: #f8912a solid 2px !important;
 }
 
 .border-b-blue {
-    border-bottom: #4fa1ea solid 1px !important;
+    border-bottom: #4fa1ea solid 2px !important;
+}
+.border-b-blue a, .border-b-blue a i {
+    color: #4fa1ea;
 }
 
 .border-b-darkblue {
-    border-bottom: #385774 solid 1px !important;
+    border-bottom: #385774 solid 2px !important;
 }
 
 .border-b-darkgreen {
-    border-bottom: #558436 solid 1px !important;
+    border-bottom: #558436 solid 2px !important;
 }
 
 .App-logo {
@@ -916,10 +916,6 @@ div[class^='col-'] {
     color: white;
 }
 
-.small-card [class^='col-'], .m-portlet__body [class^='col-'] {
-    margin-bottom: 15px;
-}
-
 div.row {
     margin-right: -7px;
     margin-left: -7px;
@@ -1437,6 +1433,20 @@ td.rotate div span {
     margin: 0 auto;
 }
 
+.block-header {
+    border-bottom-width: 2px !important;
+    padding: 0 0 3px 0 !important ;
+    min-height: 0 !important;
+    margin: 0 0 10px 0 !important;        
+}
+
+.block-header h3 {
+    font-size: 1.3rem;
+    margin: 30px 0 10px 0; 
+    font-family: Roboto  !important;
+    color: #575962;
+}
+
 @media (min-width: 1240px) {
     .margin-bottom-zero {
         margin-bottom: 0 !important;
@@ -1454,10 +1464,6 @@ td.rotate div span {
         padding-bottom: 0 !important;
     }
 
-    .dashboard-main-bottom {
-        
-    }
-
     .dashboard-reports-snapshot {
         margin-top: 0 !important;
         padding: 0;
@@ -1466,41 +1472,17 @@ td.rotate div span {
         max-width: 74%;
     }
 
-    .dashboard-quick-links {
-        padding: 0;
-        margin-left: 5px;
-    }
-
-    .quick-links-header {
-        margin-top: 0;
-    }
-
     .head-transparent > .m-portlet,
     .dashboard-reports-snapshot > .m-portlet {
-        background-color: transparent;
+        background-color: transparent !important;
     }
 
-    .head-transparent,
+    .head-transparent,    
     .report-snapshot-header-border {
         border-bottom-width: 2px !important;
         padding: 0 0 3px 0 !important ;
         min-height: 0 !important;
-        margin: 0 4px 10px 4px !important;
-        width: 99% !important;
-    }
-
-    .quick-links-header-transparent {
-        background-color: transparent;
-        box-shadow: none;
-    }
-
-    .quick-links-header-border {
-        border-bottom-width: 2px !important;
-        padding: 0 0 3px 0 !important ;
-        min-height: 0 !important;
-        margin: 0 4px 10px 2px !important;
-        width: 99% !important;
-        border-color: #575962 !important;
+        margin: 0 0 10px 0 !important;        
     }
 
     .quick-link-image {
@@ -1528,18 +1510,11 @@ td.rotate div span {
 
     .m-portlet--transparent-header {
         margin-top: 0 !important;
-        background-color: transparent;
-        box-shadow: none;
+        background-color: transparent !important;
+        box-shadow: none !important;
     }
 
     .m-portlet--transparent-header .m-portlet__body {
-        background-color: #ffffff;
-    }
-
-    .dashboard-shopping-cart-buttons {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        padding-bottom: 20px;
         background-color: #ffffff;
     }
 
@@ -1625,10 +1600,6 @@ td.rotate div span {
     }
 }
 
-.quick-link {
-
-}
-
 .quick-link .quick-link-title {
     display: block;
     color: #575962;
@@ -1637,7 +1608,6 @@ td.rotate div span {
 .quick-link .quick-link-title span {
     font-size: 1.5vw;
     font-weight: 600;
-
 }
 
 .quick-link .quick-link-title h5 {
@@ -1678,7 +1648,7 @@ td.rotate div span {
 }
 
 .store-featured-title {
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 600;
     margin-left: 5px;
     color: #aeaeb0;
