@@ -23,21 +23,17 @@ class Students extends Component {
     const { id } = this.props.match.params;
        
     return (      
-      <div className="fadeInLeft animated">
-        <div className="dashboard-main-top m-portlet--transparent-header m-portlet  m-portlet--head-solid-bg">
-          <div className="m-portlet__head report-snapshot-header-border border-b-blue">
-            <div className="m-portlet__head-caption">
-              <div className="m-portlet__head-title">
-                <h3 className="m-portlet__head-text reports-text-header">{t('reportsSnapshot')}</h3>
-              </div>
+        <div className="fadeInLeft animated">
+            <div className='m--margin-left-10 m--margin-right-10'>
+                <div className='block-header border-b-blue'>
+                    <h3 className='m-portlet__head-text'>{t('reportsSnapshot')}</h3>
+                </div>
             </div>
-          </div>
-          <div>
-            <InfoSection data={data} studentId={(id || 'my')} />
-            <TabSection data={data} studentId={(id || 'my')} />
-          </div>
-        </div>
-      </div>      
+            <div>
+                <InfoSection data={data} studentId={(id || 'my')} />
+                <TabSection data={data} studentId={(id || 'my')} />
+            </div>        
+        </div>      
     );
   }
 }

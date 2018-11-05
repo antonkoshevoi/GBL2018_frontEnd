@@ -36,25 +36,22 @@ class Dashboard extends Component {
     
     return (
       <div className="fadeInLeft animated">
-        <div className="dashboard-main-top m-portlet--transparent-header m-portlet  m-portlet--head-solid-bg">
-          <div className="m-portlet__head report-snapshot-header-border border-b-blue">
-            <div className="m-portlet__head-caption">
-              <div className="m-portlet__head-title">
-                <h3 className="m-portlet__head-text reports-text-header">{t('reportsSnapshot')}</h3>
-              </div>
-            </div>
-          </div>
           <div className="row">
-            <div className="col-sm-12 col-md-6 col-lg-3">
+            <div className="col-sm-12">
+                <div className='block-header border-b-blue'>
+                    <h3 className='m-portlet__head-text'>{t('reportsSnapshot')}</h3>
+                </div>
+            </div>          
+            <div className="col-sm-12 col-md-6 col-lg-3 m--margin-bottom-10">
               <RosterStatistic/>
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-3">
+            <div className="col-sm-12 col-md-6 col-lg-3 m--margin-bottom-10">
               <LineChart type='school'/>
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-3">
+            <div className="col-sm-12 col-md-6 col-lg-3 m--margin-bottom-10">
                 <PassRate loading={dataRequest.get('loading')}  data={dataRequest.get('data').toJS()} />
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-3">
+            <div className="col-sm-12 col-md-6 col-lg-3 m--margin-bottom-10">
                 <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
             </div>
         </div>
@@ -81,8 +78,7 @@ class Dashboard extends Component {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div>          
       </div>      
     );
   }

@@ -1190,35 +1190,6 @@ td.rotate div span {
         margin-bottom: 7px !important;
     }
 
-    .dashboard-main-top {
-        margin: 5px;
-        margin-left: 6px !important;
-        margin-right: 0!important;
-        padding: 5px;
-        padding-bottom: 0 !important;
-    }
-
-    .dashboard-reports-snapshot {
-        margin-top: 0 !important;
-        padding: 0;
-        margin-right: 5px;
-        flex: 0 0 74%;
-        max-width: 74%;
-    }
-
-    .head-transparent > .m-portlet,
-    .dashboard-reports-snapshot > .m-portlet {
-        background-color: transparent !important;
-    }
-
-    .head-transparent,    
-    .report-snapshot-header-border {
-        border-bottom-width: 2px !important;
-        padding: 0 0 3px 0 !important ;
-        min-height: 0 !important;
-        margin: 0 0 10px 0 !important;        
-    }
-
     .quick-link-image {
         margin-top: 15px;
     }
@@ -1241,35 +1212,6 @@ td.rotate div span {
         width: 99% !important;
         border-color: #467822 !important;
     }
-
-    .m-portlet--transparent-header {
-        margin-top: 0 !important;
-        background-color: transparent !important;
-        box-shadow: none !important;
-    }
-
-    .m-portlet--transparent-header .m-portlet__body {
-        background-color: #ffffff;
-    }
-
-    .reports-flex-row > div:first-child {
-        padding-left: 1px;
-    }
-
-    .reports-flex-row > div:last-child {
-        padding-right: 1px;
-    }
-}
-
-.reports-flex-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-bottom: 10px;
-}
-
-.reports-flex-row > div {
-    max-height: 390px;
 }
 
 @media (max-width: 1240px) {

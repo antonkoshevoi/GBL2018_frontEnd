@@ -94,7 +94,7 @@ class InfoSection extends Component {
           </div>
         </div>
         <div className="col-md-9">
-          <div className="row">
+          <div className="row row-15">
              <div className="col-lg-4 m--margin-bottom-20">           
                 <div className="m-portlet  m-portlet--head-solid-bg">
                   <div className="m-portlet__head border-b-blue">
