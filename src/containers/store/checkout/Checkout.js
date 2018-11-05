@@ -12,7 +12,6 @@ import {Step, StepLabel, Stepper, Button, CircularProgress} from '@material-ui/c
 import payPalImg from '../../../media/images/payments/paypal.png'
 import creditCardImg from '../../../media/images/payments/credit_card.png'
 import checkImg from '../../../media/images/payments/check.png'
-import Card from "../../../components/ui/Card";
 import ShippingAndBilling from "./ShippingAndBilling";
 import CreditCard from "./CreditCard";
 import PaymentMethods from './PaymentMethods';
@@ -161,11 +160,11 @@ class Checkout extends Component {
     const successCarts = cartRecordsRequest.get('success');
     const {classes} = this.props;
     const item = cartRecords.toJS().shift();
-    return (
-      <div className="m--margin-top-30">
-        <div className='row d-flex justify-content-center'>
-          <div className="col-12">
-            <Card header={false}>
+    return (      
+        <div className='row d-flex justify-content-center m--margin-top-30'>
+          <div className="col-12">                       
+            <div className="m-portlet  m-portlet--head-solid-bg">
+                <div className='m-portlet__body position-relative'>               
               <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
                 <Step>
                   <StepLabel>{t('paymentsOptions')}</StepLabel>
@@ -260,8 +259,8 @@ class Checkout extends Component {
                   {t('back')}
                 </Button>
               </div>
-              }
-            </Card>
+              }            
+            </div>
           </div>
         </div>
       </div>

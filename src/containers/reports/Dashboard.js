@@ -36,7 +36,7 @@ class Dashboard extends Component {
     
     return (
       <div className="fadeInLeft animated">
-        <div className="dashboard-main-top row-reports-main-top-block m-portlet  m-portlet--head-solid-bg">
+        <div className="dashboard-main-top m-portlet--transparent-header m-portlet  m-portlet--head-solid-bg">
           <div className="m-portlet__head report-snapshot-header-border border-b-blue">
             <div className="m-portlet__head-caption">
               <div className="m-portlet__head-title">
@@ -44,7 +44,7 @@ class Dashboard extends Component {
               </div>
             </div>
           </div>
-          <div className="reports-flex-row">
+          <div className="row">
             <div className="col-sm-12 col-md-6 col-lg-3">
               <RosterStatistic/>
             </div>
@@ -57,10 +57,9 @@ class Dashboard extends Component {
             <div className="col-sm-12 col-md-6 col-lg-3">
                 <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
             </div>
-          </div>
         </div>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div className="m--margin-top-25">
               <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
                 <div className="m-portlet__head d-flex justify-content-between align-items-center">
@@ -84,6 +83,7 @@ class Dashboard extends Component {
           </div>
         </div>
       </div>
+      </div>      
     );
   }
 }

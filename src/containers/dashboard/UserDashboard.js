@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {ChartData} from "../../data/Charts";
 import SchoolAverageChart from "../reports/widgets/SchoolAverageChart";
 import RosterStatistic from "../reports/widgets/RosterStatistic";
 import LineChart from "../reports/widgets/LineChart";
@@ -13,21 +12,12 @@ import {selectChartDatatRequest} from "../../redux/reports/dashboard/selectors";
 import QuickLink from "./sections/QuickLink";
 import FeaturedItems from "./sections/FeaturedItems";
 import Alerts from "./sections/Alerts";
-import Card from "../../components/ui/Card";
-import ShoppingCart from "../store/ShoppingCart";
+import ShoppingCart from "./sections/ShoppingCart";
 
 class UserDashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      ...ChartData,
-      params: {
-        filter: {
-          category: '1'
-        },
-        courses: null,
-      }
-    }
+    this.state = {}
   }
 
   componentDidMount() {
@@ -45,38 +35,38 @@ class UserDashboard extends Component {
     return (
       <div className="fadeInLeft animated">
         <Alerts />
-        <div className="row dashboard-main-top">
-          <div className="col-sm-12 col-md-12 col-lg-12 col-xl-9 dashboard-reports-snapshot" style={{marginTop:'15px'}}>
-            <Card title={t('reportsSnapshot')} isMainCard={true} boxShadow={false} style={{boxShadow:"none"}} bodyStyle={{padding:'0', background:'#f2f3f8'}}>
-              <div className="row row-15">
-                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">
-                  <RosterStatistic/>
+        <div className="row m--margin-top-15">
+            <div className="col-sm-12 col-md-12 col-lg-9 col-xl-9 m--padding-left-0">
+                <div className="row m--margin-left-0">
+                    <div className="col-sm-12">                        
+                        <div className='block-header border-b-blue'>                                                      
+                            <h3 className='m-portlet__head-text'>{t('reportsSnapshot')}</h3>
+                        </div>
+                    </div>
+                    <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 m--margin-bottom-10">
+                      <RosterStatistic/>
+                    </div>
+                    <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 m--margin-bottom-10">
+                      <LineChart type='school'/>
+                    </div>
+                    <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 m--margin-bottom-10">                  
+                      <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
+                    </div>
+                    <div className="col-sm-12 col-md-6 m--margin-bottom-10 m--visible-desktop-lg m--hidden-desktop-xl">
+                        <QuickLink />
+                    </div>                    
                 </div>
-                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">
-                  <LineChart type='school'/>
-                </div>
-                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 margin-bottom-zero">                  
-                  <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
-                </div>
-                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--visible-tablet-and-mobile m--visible-desktop-lg">
-                  <QuickLink/>
-                </div>
-              </div>
-            </Card>
-
-          </div>
-          <div className="col-sm-12 col-xl-3 m--hidden-tablet-and-mobile m--hidden-desktop-lg dashboard-quick-links">
-            <QuickLink/>
-          </div>
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3 m--margin-bottom-10 m--hidden-desktop-lg m--visible-desktop-xl">
+                <QuickLink />
+            </div>
         </div>
-        <div className="row dashboard-main-bottom">
-          <div className="col-md-6 col-lg-8">
+        <div className="row">
+          <div className="col-md-6 col-lg-7">
             <FeaturedItems data={records}/>
           </div>
-          <div className="col-md-6 col-lg-4">
-            <div>
-                <ShoppingCart preview = {true}/>
-            </div>
+          <div className="col-md-6 col-lg-5">
+            <ShoppingCart preview = {true}/>
           </div>
         </div>
       </div>

@@ -179,9 +179,9 @@ class Filter extends Component {
     const {categoryMenu, subjectMenu, sortMenu, sorters} = this.state;
 
       return (
-      <div className="col-md-12 ">
+     
         <div className="row">
-          <div className="col-md-12 col-lg-8 store-filter left-block">
+          <div className="col-lg-6 col-md-6 col-sm-12 store-filter left-block">
               {isShow.target &&
               <div className="filterMenu">
                 <Button
@@ -246,7 +246,6 @@ class Filter extends Component {
                 </Menu>
               </div>
               }
-
             <div className="store-filter-divider"></div>
             <div className="filter-buttons">
                 { isShow.all &&
@@ -257,37 +256,13 @@ class Filter extends Component {
                 }
             </div>
           </div>
-          <div className="col-lg-4 col-md-12 store-filter right-block">
-            <div className="row">
-                { isShow.search &&
-                <div className="col-xs-6 search-field col-sm-6 col-md-6 col-lg-8 text-right">
-                <Input
-                  className=" store-search"
-                  id="search"
-                  type='search'
-                  onChange={(e) => this._searchBarChange(e)}
-                  placeholder={t('search')}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton onClick={(e) => {this._initFilter(e)}}>
-                        <Icon className="material-icons">
-                          search_icon
-                        </Icon>
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </div>
-              }
-             { isShow.sort &&
-              <div className="col-xs-6 col-sm-6 col-md-6 col-lg-4 text-right">
-                <div className="filterMenu">
+          <div className="col-lg-6 col-md-6 col-sm-12 store-filter">                            
+                { isShow.sort &&              
+                <div className="filterMenu pull-right">
                   <Button
                     aria-owns={sortMenu ? 'category-menu' : null}
                     aria-haspopup="true"
-                    onClick={(e) => {
-                      this.handleMenuClick(e, 'sortMenu')
-                    }}
+                    onClick={(e) => { this.handleMenuClick(e, 'sortMenu') }}
                   >
                     {t('sortBy')}: <i className="m--margin-left-10 fa fa-sort-amount-desc"></i>
                   </Button>
@@ -299,23 +274,34 @@ class Filter extends Component {
                       this.handleMenuClose(e, 'sortMenu')
                     }}
                   >
-                    <MenuItem onClick={(e) => {
-                      this._selectSorter('price')
-                    }}>{t('price')}</MenuItem>
-                    <MenuItem onClick={(e) => {
-                      this._selectSorter('created')
-                    }}>{t('date')}</MenuItem>
-                    <MenuItem onClick={(e) => {
-                      this._selectSorter('rating')
-                    }}>{t('rating')}</MenuItem>
+                    <MenuItem onClick={(e) => { this._selectSorter('price') }}>{t('price')}</MenuItem>
+                    <MenuItem onClick={(e) => { this._selectSorter('created') }}>{t('date')}</MenuItem>
+                    <MenuItem onClick={(e) => { this._selectSorter('rating') }}>{t('rating')}</MenuItem>
                   </Menu>
-                </div>
-              </div>
+                </div>              
                 }
-            </div>
+                { isShow.search &&
+                <div className="filterMenu pull-right">
+                    <Input
+                      className="store-search m--margin-top-10 m--margin-right-10"
+                      id="search"
+                      type='search'
+                      onChange={(e) => this._searchBarChange(e)}
+                      placeholder={t('search')}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton onClick={(e) => {this._initFilter(e)}}>
+                            <Icon className="material-icons">
+                              search_icon
+                            </Icon>
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    /> 
+                </div>
+              }
           </div>
-        </div>
-      </div>
+        </div>      
     );
   }
 }

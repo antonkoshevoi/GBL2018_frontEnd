@@ -555,6 +555,7 @@ export default {
     lessonInformation: 'Lesson Information',
     perfomance: 'Perfomance',
     unassignedCourses: 'Unassigned Courses',
+    courseManagement: 'Course Management',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

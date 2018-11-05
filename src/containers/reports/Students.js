@@ -24,7 +24,7 @@ class Students extends Component {
        
     return (      
       <div className="fadeInLeft animated">
-        <div className="dashboard-main-top row-reports-main-top-block m-portlet  m-portlet--head-solid-bg">
+        <div className="dashboard-main-top m-portlet--transparent-header m-portlet  m-portlet--head-solid-bg">
           <div className="m-portlet__head report-snapshot-header-border border-b-blue">
             <div className="m-portlet__head-caption">
               <div className="m-portlet__head-title">
@@ -32,7 +32,7 @@ class Students extends Component {
               </div>
             </div>
           </div>
-          <div className='m-portlet__body'>
+          <div>
             <InfoSection data={data} studentId={(id || 'my')} />
             <TabSection data={data} studentId={(id || 'my')} />
           </div>

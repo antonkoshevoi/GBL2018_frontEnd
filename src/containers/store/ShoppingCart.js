@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
-import PropTypes from 'prop-types';
 import OpenInvoicesTable from '../../components/store/OpenInvoicesTable';
 import { deleteFromCartRequest, selectAddToCartRequest, selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest } from '../../redux/store/selectors';
 import { calculateCartSum, deleteCartRecord, getCartRecords, setItemQuantity, updateShoppingCart } from '../../redux/store/actions';
@@ -11,9 +10,7 @@ import Loader from '../../components/layouts/Loader';
 class ShoppingCart extends Component {
   componentDidMount() {
     const { records } = this.props;
-
     this._getRecords();
-
     this._calculateSum(records.toJS());
   }
 
@@ -46,76 +43,50 @@ class ShoppingCart extends Component {
       records,
       cartRecordsRequest,
       cartRecordsSum ,
-      cartRequest,
-      preview,
+      cartRequest,      
       deleteRequest,
       t
     } = this.props;
     const loading = cartRecordsRequest.get('loading') || cartRequest.get('loading') || deleteRequest.get('loading');
     const success = cartRecordsRequest.get('success');
     return (
-      <div>
-        {loading && <Loader/>}
-        <div className={`row ${preview ? '': 'cart-items'}`}>
-          <div className="shoppingCartPortlet m-auto col-xl-12">
-            <div className='m-portlet m-portlet--full-height dashboard-shopping-cart-transparent-bg'>
-            {preview ?  
-                <div className="m-portlet__head report-snapshot-header-border border-b-green">
-                    <div className="m-portlet__head-caption">
-                        <div className="m-portlet__head-title">
-                            <h3 className="m-portlet__head-text">{t('shoppingCart')}</h3>
-                        </div>
-                    </div>
-                </div> :
-                <div className='m-portlet__head'>
+      <div className='fadeInLeft animated'>
+            <div className="m-portlet m-portlet--full-height">
+                {loading && <Loader/>}
+                <div className='m-portlet__head border-b-green'>
                     <div className='m-portlet__head-caption'>
                         <div className='m-portlet__head-title'>
-                        <span className="m-portlet__head-icon">
-                            <i className="fa fa-shopping-cart"></i>
-                        </span>
-                        <h3 className='m-portlet__head-text'>
-                            {t('shoppingCart')}
-                        </h3>
+                            <span className='m-portlet__head-icon'><i className='fa fa-shopping-cart'></i></span>
+                            <h3 className='m-portlet__head-text'>{t('shoppingCart')}</h3>
+                        </div>
                     </div>
                 </div>
-              </div>}
-              <div className={`m-portlet__body dashboard-shopping-cart-body ${preview ? 'zoom-preview': ''}`}>
+              <div className="m-portlet__body dashboard-shopping-cart-body">
                 {success &&
-                 <OpenInvoicesTable
-                   preview = {preview}
-                   sum={cartRecordsSum}
-                   setQuantity={(data) => this.props.setQuantity(data)}
-                   onUpdate={(data,total) => {this._updateData(data,total)}}
-                   onDelete={(id) => {this._deleteRecordFromCart (id)}}
-                   data={records.toJS()}
-                 />
+                <div>
+                    <OpenInvoicesTable                   
+                      sum={cartRecordsSum}
+                      setQuantity={(data) => this.props.setQuantity(data)}
+                      onUpdate={(data,total) => {this._updateData(data,total)}}
+                      onDelete={(id) => {this._deleteRecordFromCart (id)}}
+                      data={records.toJS()}
+                    />
+                   <div className="row">
+                     <div className="col-md-12 text-right">
+                       <div className="form-group-inline btn-group">
+                         <NavLink to="/store" className="btn m-btm btn-primary">{t('continueShopping')}</NavLink>
+                         <NavLink to="/shopping/checkout" className="btn m-btm btn-success">{t('checkout')}</NavLink>
+                       </div>
+                     </div>
+                   </div>
+                </div>
                 }
               </div>
-              {preview &&
-              <div className="row d-flex justify-content-end dashboard-shopping-cart-buttons">
-                <div className="col-md-4 d-flex justify-content-end align-items-center">
-                  <div className="form-group-inline btn-group">
-                    <NavLink to="/store/shopping-cart" className="btn m-btm btn-primary smaller-padding">{t('viewCart')}</NavLink>
-                    <NavLink to="/shopping/checkout" className="btn m-btm btn-success smaller-padding">{t('checkout')}</NavLink>
-                  </div>
-                </div>
-              </div>
-              }
             </div>
           </div>
-        </div>
-      </div>
     );
   }
 }
-
-ShoppingCart.propTypes = {
-  preview: PropTypes.bool
-};
-
-ShoppingCart.defaultProps = {
-  preview: false
-};
 
 ShoppingCart = connect(
   (state) => ({

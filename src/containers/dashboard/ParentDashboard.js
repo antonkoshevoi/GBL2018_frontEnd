@@ -15,7 +15,7 @@ import {withStyles} from '@material-ui/core/styles';
 import FeaturedItems from "./sections/FeaturedItems";
 import {selectRecords as storeItems}  from "../../redux/store/selectors";
 import QuickLink from "./sections/QuickLink";
-import ShoppingCart from "../store/ShoppingCart";
+import ShoppingCart from "./sections/ShoppingCart";
 import Alerts from "./sections/Alerts";
 
 const styles = {
@@ -32,27 +32,22 @@ const styles = {
     margin: 10,
     border: 'solid 3px white'
   },
-  name: {
-    color: 'white',
+  name: {    
     display: 'block',
-    marginTop: 35,
+    marginTop: 30,
     marginBottom:5
   },
   profileBlock: {
     position:'relative',
-    background: '#adadad',
+    background: '#f4f3f8',
     borderRadius: 5,
     margin: '3px 0',
     display: 'flex',
   },
-  btnGroup: {
-    display: 'flex',
+  btnGroup: {    
     position: 'absolute',
     right: 15,
     top: 15
-  },
-  username: {
-    color: 'white',
   },
   progress: {
     display: 'flex',
@@ -190,28 +185,16 @@ class ParentDashboard extends Component {
         return <div className="fadeInLeft animated">
             <Alerts />
             <div className="row">
-              <div className="col-sm-12 col-md-6 col-lg-5 col-xl-4">
-                <div className="m-portlet m-portlet--head-solid-bg m-portlet--info" style={{marginTop:15}}>
-                  <div className="m-portlet__head">
-                    <div className="m-portlet__head-caption">
-                      <div className="m-portlet__head-title">
-                        <h3 className="m-portlet__head-text">
-                          {t('myLearners')}
-                        </h3>
-                      </div>
-                    </div>
-                    <div className="m-portlet__head-tools">
-                      <ul className="m-portlet__nav">
-                        <li className="m-portlet__nav-item">                    
-                            <a title={t('add')} onClick={() => { this._openCreateDialog() }} className=" pointer m-portlet__nav-link m-portlet__nav-link--icon">
-                              <i className="la la-plus"></i>
-                            </a>                    
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="m-portlet__body m--padding-top-5" style={{height: "100%"}}>
-                    <div style={{maxHeight:330,overflowY:'auto',overflowX:'hidden'}}>
+              <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <div className='block-header border-b-blue'>                                                      
+                    <a title={t('add')} onClick={() => { this._openCreateDialog() }} className="pull-right pointer m--margin-right-15">
+                      <i className="display-5 fa fa-plus-circle"></i>
+                    </a> 
+                    <h3 className='m-portlet__head-text'>{t('myLearners')}</h3>
+                </div>              
+                <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
+                  <div className="m-portlet__body m--padding-top-10" style={{height: "100%"}}>
+                    <div style={{maxHeight:340, minHeight:340, overflowY:'auto',overflowX:'hidden'}}>
                       {!loading && this._renderStudentRequests()}
                       {!loading && this._renderStudents()}
                       {loading && <div style={{width: 100}} className="m-auto m--margin-top-50 m--margin-bottom-50"><CircularProgress /></div>}    
@@ -219,29 +202,28 @@ class ParentDashboard extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-12 col-md-6 col-lg-7 col-xl-5">
+              <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                   <UnassignedCourses/>
               </div>
-              <div className="col-md-6 col-lg-6 col-xl-3">
-                <QuickLink className="m--margin-top-15"/>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12 col-lg-12 col-xl-8 m--margin-top-15">
-                  <FeaturedItems data={storeItems}/>
-              </div>
-              <div className="col-md-4 col-xl-4 m--hidden-tablet-and-mobile m--hidden-desktop-lg m--margin-top-15">
+              <div className="col-md-6 col-xl-4">
                   <ShoppingCart preview = {true}/>
               </div>
+              <div className="col-sm-12 col-md-6  m--visible-desktop-lg m--hidden-desktop-xl">
+                  <QuickLink />
+              </div>              
+            </div>
+            <div className="row">
+              <div className="col-md-12 col-lg-8 col-xl-8">
+                  <FeaturedItems data={storeItems}/>
+              </div>
+              <div className="col-md-6 col-lg-4 col-xl-4 m--hidden-desktop-lg m--visible-desktop-xl">
+                <QuickLink />
+              </div>         
             </div>
             <CreateStudentModal
             isOpen={this.state.createModalIsOpen}
-            onClose={() => {
-              this._closeCreateDialog()
-            }}
-            onSuccess={() => {
-                getStudents()
-            }}/>
+            onClose={() => { this._closeCreateDialog() }}
+            onSuccess={() => { getStudents() }}/>
         </div>
     }
 }

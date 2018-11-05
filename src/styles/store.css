@@ -34,8 +34,7 @@
 }
 
 .store .store-filter button, .store .filterMenu > button {
-    height: 50px;
-    font-weight: 300;
+    height: 50px;    
     border-radius: 0;
 }
 
@@ -292,7 +291,7 @@ button .discount > span {
 .shoppingCartTable .productInfo > div {
     display: table-cell;
     vertical-align: middle;
-    padding: 15px;
+    padding: 15px 15px 15px 0;
 }
 
 .shoppingCartTable table th {

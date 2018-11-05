@@ -115,7 +115,7 @@ class Parents extends Component {
         const loading = getRecordsRequest.get('loading');
 
         return (
-            <div className='fadeInLeft  animated'>                
+            <div className='fadeInLeft animated'>
                 <div className='m-portlet m-portlet--head-solid-bg'>
                     <div className='m-portlet__head border-b-orange'>
                         <div className='m-portlet__head-caption'>

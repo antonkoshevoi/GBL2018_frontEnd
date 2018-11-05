@@ -4,9 +4,9 @@ const _randomScalingFactor = function () {
   return Math.round(Math.random() * 40)
 };
 
-export function formChartData(history, selector, startDate, currOnline) {
+export function formChartData(history, selector, startDate) {
   const data = generateChartTemplate(selector, startDate);
-  generateChartDataFromTemplate(data, history, selector, startDate, currOnline);
+  generateChartDataFromTemplate(data, history, selector);
   const colors = generateColors(selector, startDate);
   data.values = data.values.map((value, index) => {
     if (colors[index] !== 'transparent') {
@@ -214,7 +214,7 @@ export function generateColors(selector, startDate) {
 
 }
 
-export function generateChartDataFromTemplate(template, history, selector, startDate, currOnline) {
+export function generateChartDataFromTemplate(template, history, selector) {
   Object.keys(history).forEach((key) => {
     if (selector === 0) {
       const newKey = +key.slice(-5, -3);
@@ -231,12 +231,6 @@ export function generateChartDataFromTemplate(template, history, selector, start
       template.values[index] = history[key];
     }
   });
-  const currDate = moment();
-  if (currDate.isSame(startDate, 'day')) {
-    const currHour = +currDate.format('HH') + 1;
-    template.values.splice(currHour, 0, currOnline);
-  }
-
 }
 
 export function generateChartTemplate(selector, startDate) {

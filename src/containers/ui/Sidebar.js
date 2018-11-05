@@ -21,9 +21,8 @@ class Sidebar extends Component {
       },
       hovered: false,
       headerPosition: 0,
-      headerHeight:window.innerWidth <= 1240 ? 60 : 70,
-      mobileMenu: $(window).width() <= 1240 ? 53 : 0,
-      
+      headerHeight:window.innerWidth <= 1240 ? 65 : 70,
+      mobileMenu: $(window).width() <= 1240 ? 65 : 0      
     }
   }
 
@@ -51,7 +50,7 @@ class Sidebar extends Component {
 
   updateDimensions() {
     if (this.isActive) {  
-        this.setState({mobileMenu: $(window).width() <= 1240 ? 53 : 0});
+        this.setState({mobileMenu: $(window).width() <= 1240 ? 65 : 0});
     }
   }
 
@@ -170,10 +169,9 @@ class Sidebar extends Component {
     const {headerPosition, activeMenuClass, mobileMenu} = this.state;
 
     return (      
-        <div id="m_aside_left" style={{marginTop:-headerPosition + mobileMenu}} className={`m-grid__item m-aside-left  m-aside-left--sk1in-dark menu-active-${activeMenuClass.key}`}>
+        <div id="m_aside_left" style={{marginTop:-headerPosition + mobileMenu}} className={`m-grid__item menu-active-${activeMenuClass.key}`}>
           <div
             id="m_ver_menu"
-            className="m-aside-menu"
             data-menu-vertical="true"
             data-menu-scrollable="false" data-menu-dropdown-timeout="500"
             onMouseLeave={() => {
