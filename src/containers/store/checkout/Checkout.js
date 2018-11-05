@@ -184,7 +184,7 @@ class Checkout extends Component {
                       <div className='col-10'>
                         {successCarts &&
                         <div className="m-portlet__body">
-                          <div className="m-widget25">
+                          <div>
                             {item && <span className="invoice-title">{t('yourInvoice', {invoiceNo: item.invoiceNo, invoiceAmount: ('$' + cartRecordsSum)})}</span>}
                           </div>
                         </div>

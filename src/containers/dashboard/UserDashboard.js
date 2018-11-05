@@ -35,7 +35,7 @@ class UserDashboard extends Component {
     return (
       <div className="fadeInLeft animated">
         <Alerts />
-        <div className="row m--margin-top-15">
+        <div className="row">
             <div className="col-sm-12 col-md-12 col-lg-9 col-xl-9 m--padding-left-0">
                 <div className="row m--margin-left-0">
                     <div className="col-sm-12">                        
