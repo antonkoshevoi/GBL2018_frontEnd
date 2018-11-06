@@ -100,6 +100,7 @@ class AssignTeachersModal extends Component {
           <Grid item xs={4} key={key}>
             <FormControlLabel
               control={<Checkbox
+                color="primary"
                 checked={this.state.teacherIds.indexOf(teacher.get('id').toString()) > -1}
                 onChange={ (e) => {this._handleCheckboxChange(e) }}
                 value={teacher.get('id').toString()}

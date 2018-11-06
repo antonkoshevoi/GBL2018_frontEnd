@@ -80,12 +80,12 @@ class Parents extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td first={true} width='80px'><img width="100%" src={record.get('avatar')} alt={record.get('name')} /></Td>
+                <Td width='80px'><img width="100%" src={record.get('avatar')} alt={record.get('name')} /></Td>
                 <Td width='132px'>{record.get('name')}</Td>                
                 <Td width='132px'>{record.get('username') || '-'}</Td>
                 <Td width='132px'>{record.get('email') || '-'}</Td>
                 <Td width='132px'>{this._getStatus(record)}</Td>
-                <Td width='132px' className='text-center'>                    
+                <Td width='132px' className='text-center actions'>                    
                     <button onClick={() => { this._openViewDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
                         <i className='la la-search'></i>
                     </button>

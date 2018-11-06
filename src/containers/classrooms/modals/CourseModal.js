@@ -112,7 +112,7 @@ class CourseModal extends Component {
               <FormControlLabel
                 value="male"
                 name="courseId"
-                control={<Radio/>}                
+                control={<Radio color="primary"/>}                
                 checked={storeCourse.get('courseId') === courseId}
                 onChange={() => {
                   this._onChange(storeCourse)

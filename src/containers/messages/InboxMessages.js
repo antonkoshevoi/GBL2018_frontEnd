@@ -66,7 +66,7 @@ class InboxMessages extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td first={true} width='40px'>{this._recordNumber(key)}</Td>
+                <Td width='40px'>{this._recordNumber(key)}</Td>
                 <Td width='150px'>
                     {!record.get('isRead') && <span className="m-badge m-badge--brand m-badge--wide m-badge--warning">!</span>}
                     
@@ -77,7 +77,7 @@ class InboxMessages extends Component {
                 </Td>
                 <Td width='100px'>{record.get('user') ? record.get('user').get('name') : ''}</Td>
                 <Td width='100px'>{moment(record.get('sent')).format('lll')}</Td>
-                <Td width='100px'>
+                <Td width='100px' className="actions">
                     <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' to={`/messages/view/${record.get('id')}`}>
                         <i className='la la-search'></i>
                     </NavLink>
@@ -147,7 +147,7 @@ class InboxMessages extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>
-                                <Th first={true} width='40px'>#</Th>
+                                <Th width='40px'>#</Th>
                                 <Th width='150px'>{t('subject')}</Th>
                                 <Th width='130px'>{t('type')}</Th>
                                 <Th width='100px'>{t('from')}</Th>

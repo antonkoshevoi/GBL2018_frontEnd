@@ -73,7 +73,7 @@ class Homerooms extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
+        <Td width='60px'>{this._recordNumber(key)}</Td>
         <Td width='132px'>{record.get('name')}</Td>
         <HasRole roles={['Superadministrator']}>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
@@ -81,7 +81,7 @@ class Homerooms extends Component {
         <Td width='132px'>{record.getIn(['teacher', 'name'])}</Td>
         <Td width='132px'>{record.get('studentsCount')}</Td>
         <HasPermission permissions={['[HomeRooms][Update][Any]', 'HomeRooms][Delete][Any']}>
-        <Td width='100px'>
+        <Td width='100px' className="actions">
           <HasPermission permissions={['[HomeRooms][Update][Any]']}>
             <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
           </HasPermission>
@@ -259,7 +259,7 @@ class Homerooms extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th first={true} width='60px'>#</Th>
+                  <Th width='60px'>#</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
                   <HasRole roles={['Superadministrator']}>
                     <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>

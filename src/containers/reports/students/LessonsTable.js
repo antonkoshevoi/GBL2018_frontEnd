@@ -97,11 +97,11 @@ class LessonsTable extends Component {
           <thead>
             <tr className="active">
               <th style={{ minWidth: 50}}>{t('unit')}</th>
-              <th>{t('lessonInformation')}</th>
-              <th>{t('lessonAttempt')}</th>              
-              <th>{t('attemptDate')}</th>              
-              <th>{t('score')} / {t('percent')}</th>              
-              <th className='comment-cell'>{t('comments')}</th>
+              <th className="text-center">{t('lessonInformation')}</th>
+              <th className="text-center">{t('lessonAttempt')}</th>              
+              <th className="text-center">{t('attemptDate')}</th>              
+              <th className="text-center">{t('score')} / {t('percent')}</th>              
+              <th className='text-center'>{t('comments')}</th>
             </tr>
           </thead>
           <tbody>

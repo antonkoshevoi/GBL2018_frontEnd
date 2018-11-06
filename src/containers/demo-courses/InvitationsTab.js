@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
-import { Button, Icon, MenuItem, Select, Typography } from '@material-ui/core';
+import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { uri } from '../../helpers/uri';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
@@ -15,14 +15,6 @@ import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
 import SendInvitationModal from './modals/SendInvitationModal';
 import moment from 'moment/moment';
-
-function TabContainer(props) {
-  return (
-    <Typography component='div'>
-      {props.children}
-    </Typography>
-  );
-}
 
 class InvitationsTab extends Component {
   static propTypes = {
@@ -169,7 +161,7 @@ class InvitationsTab extends Component {
         </Td>
         <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>        
         <Td width='132px'>{moment(record.get('date')).format('ll')}</Td>
-        <Td width='100px'>
+        <Td width='100px' className="actions">
           <a title="View Invitation" href={uri('invitations/details/' + record.get('id') + '/' + record.get('securityHash'))} className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill" target="_blank">
              <i className='la la-search'></i>
           </a>
@@ -211,8 +203,7 @@ class InvitationsTab extends Component {
     const loading = getRecordsRequest.get('loading');
     const totalPages = pagination.get('totalPages');
 
-    return (
-      <TabContainer>
+    return (      
         <div className='m-portlet__body'>
           <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
             <div className='row align-items-center'>
@@ -257,13 +248,12 @@ class InvitationsTab extends Component {
               <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
             </div>
           </div>
+          
+          <SendInvitationModal
+              isOpen={createModalIsOpen}
+              onClose={() => { this._closeCreateDialog() }}
+              onSuccess={() => { this._onCreate() }}/>      
         </div>
-
-        <SendInvitationModal
-          isOpen={createModalIsOpen}
-          onClose={() => { this._closeCreateDialog() }}
-          onSuccess={() => { this._onCreate() }}/>
-      </TabContainer>
     );
   }
 }

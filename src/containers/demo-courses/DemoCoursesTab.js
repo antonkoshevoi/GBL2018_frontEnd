@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
-import { Button, Icon, MenuItem, Select, Typography } from '@material-ui/core';
+import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import {
@@ -17,14 +17,6 @@ import EditDemoClassroomModal from './modals/EditDemoClassroomModal';
 import AssignStudentModal from './modals/AssignStudentModal';
 import HasRole from "../middlewares/HasRole";
 import moment from 'moment/moment';
-
-function TabContainer(props) {
-  return (
-    <Typography component='div'>
-      {props.children}
-    </Typography>
-  );
-}
 
 class DemoCoursesTab extends Component {
   static propTypes = {
@@ -192,7 +184,7 @@ class DemoCoursesTab extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
+        <Td width='60px'>{this._recordNumber(key)}</Td>
         <Td width='132px'>{record.get('crmName')}</Td>
         <HasRole roles={['Superadministrator']}>
             <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
@@ -201,7 +193,7 @@ class DemoCoursesTab extends Component {
         <Td width='132px'>{record.getIn(['teacher', 'name'])}</Td>
         <Td width='100px'>{record.get('studentsCount')}</Td>
         <Td width='100px'>{moment(record.get('crmEndDate')).format('ll')}</Td>
-        <Td width='100px'>
+        <Td width='100px' className="actions">
           <EditButton onClick={(id) => { this._editRecord(id) }} id={ record.get('id') }/>
           <DeleteButton title={t('areYouSureWantToArchiveClassroom')} icon="la la-archive" onClick={() => { this._deleteRecord(record.get('id')) }}/>
         </Td>
@@ -240,7 +232,6 @@ class DemoCoursesTab extends Component {
     const totalPages = pagination.get('totalPages');
 
     return (
-      <TabContainer>
         <div className='m-portlet__body'>
           <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
             <div className='row align-items-center'>
@@ -270,7 +261,7 @@ class DemoCoursesTab extends Component {
           <Table>
             <Thead>
               <HeadRow>
-                <Th first={true} width='60px'>#</Th>
+                <Th width='60px'>#</Th>
                 <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
                 <HasRole roles={['Superadministrator']}>
                     <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
@@ -294,23 +285,22 @@ class DemoCoursesTab extends Component {
               <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
             </div>
           </div>
+          
+          <CreateDemoClassroomModal
+              isOpen={createModalIsOpen}
+              onClose={() => { this._closeCreateDialog() }}
+              onSuccess={() => { this._onCreate() }}/>
+
+          <EditDemoClassroomModal
+              isOpen={editModalIsOpen}
+              onClose={() => { this._closeEditDialog() }}
+              onSuccess={() => { this._onCreate() }}/>
+
+          <AssignStudentModal
+              isOpen={assignModalIsOpen}
+              onClose={() => { this._closeAssignDialog() }}
+              onSuccess={() => { this._onCreate() }}/>          
         </div>
-
-        <CreateDemoClassroomModal
-          isOpen={createModalIsOpen}
-          onClose={() => { this._closeCreateDialog() }}
-          onSuccess={() => { this._onCreate() }}/>
-
-        <EditDemoClassroomModal
-          isOpen={editModalIsOpen}
-          onClose={() => { this._closeEditDialog() }}
-          onSuccess={() => { this._onCreate() }}/>
-                      
-        <AssignStudentModal
-          isOpen={assignModalIsOpen}
-          onClose={() => { this._closeAssignDialog() }}
-          onSuccess={() => { this._onCreate() }}/>                           
-      </TabContainer>
     );
   }
 }

@@ -43,14 +43,16 @@ class Alerts extends Component {
             return '';
         }
         
-        return (<div className="row m--margin-top-10 m--margin-left-10 m--margin-right-10">
+        return (<div className="row m--margin-top-10">
             {alers.map((message, i) => {
-                return <div className={`col-sm-12 alert alert-warning m--margin-bottom-0 ${i ? 'm--margin-top-15' : ''}`} key={i}>
-                    <button onClick={() => { this._markAsRead(message.get('id')) } } type="button" className="close pull-right no-padding" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 className="alert-heading">{message.get('subject')}</h4>
-                    <p>{message.get('body')}</p>
+                return <div className="col-sm-12">
+                    <div className={`alert alert-warning m--margin-bottom-0 ${i ? 'm--margin-top-15' : ''}`} key={i}>
+                        <button onClick={() => { this._markAsRead(message.get('id')) } } type="button" className="close pull-right no-padding" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 className="alert-heading">{message.get('subject')}</h4>
+                        <p>{message.get('body')}</p>
+                    </div>
                 </div>;
             })}
         </div>);

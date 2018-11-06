@@ -108,6 +108,24 @@ textarea {
     border-bottom: #558436 solid 2px !important;
 }
 
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.table td.actions {
+    white-space: nowrap;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.user-avatar {
+    max-width: 100px;
+    display: block;
+}
+.user-avatar img { 
+    width: 100%;
+}
+
 .App-logo {
     animation: App-logo-spin infinite 20s linear;
     height: 80px;
@@ -139,7 +157,10 @@ textarea {
 .no-padding {
     padding: 0 !important;
 }
-
+.row > div {
+    padding-left: 7px;
+    padding-right: 7px;
+}
 .App-title {
     font-size: 1.5em;
 }
@@ -286,10 +307,6 @@ div.gridProgressBar {
     border-radius: 6px;
 }
 
-table.m-datatable__table {
-    position: relative;
-}
-
 table th.sort-table-head {
     position: relative;
     cursor: pointer;
@@ -307,8 +324,7 @@ table th .sort-arrow {
     color: rgba(5, 65, 112, 0.64);
 }
 
-.table-message {
-    position: absolute;
+.table-message {    
     width: 100%;
     height: 100%;
     display: flex;
@@ -459,12 +475,6 @@ table th .sort-arrow {
 
 table.m-middle-table td, table.m-middle-table th {
     vertical-align: middle;
-}
-
-div.m-datatable.m-datatable--default.m-datatable--loaded > .m-datatable__table {
-    display: inline-block;
-    width: auto;
-    min-width: 100%;
 }
 
 div.m-card-profile .m-card-profile__pic img {
@@ -836,18 +846,6 @@ div#notFoundPage {
     margin: 0;
 }
 
-table .sub-table {
-    background-color: #f5f4f7;
-}
-
-table .sub-table > td {
-    padding: 30px;
-}
-
-table .sub-table .m-datatable {
-    box-shadow: 0 0 15px 1px rgba(113, 106, 202, .2);
-}
-
 .transactionsList table td, .transactionsList table th {
     text-align: center;
 }
@@ -1000,8 +998,7 @@ table .sub-table .m-datatable {
 }
 .table thead tr.active th {
     background-color: #F4F3F8;
-    vertical-align: middle;
-    text-align: center;
+    vertical-align: middle;    
     font-size: 1rem;
     font-weight: 600;
     padding: 16px 10px;
@@ -1272,7 +1269,7 @@ td.rotate div span {
     }
 
     .m-wrapper {
-        margin-left: 0;
+        margin-left: 0 !important;
     }
 }
 
@@ -1382,3 +1379,13 @@ td.rotate div span {
     border-bottom: 1px solid #bbbee6;
     opacity: 0.3 ;
     filter: alpha(opacity=30) ; }
+
+
+@media (max-width: 1400px) {   
+    .table thead tr.active th {
+        padding: 8px 8px;        
+    }
+    .table thead tr.active th {
+        padding: 10px 8px;    
+    }    
+}

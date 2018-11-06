@@ -36,7 +36,7 @@ class Payments extends Component {
         }
         return paymentsRequest.get('records').map((record, key) => (
             <Row index={key} key={key}>
-                <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
+                <Td width='60px'>{this._recordNumber(key)}</Td>
                 <Td width='100px'><strong className="g-blue">{record.get('total')}$</strong></Td>
                 <Td width='100px'><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('type'))}</span></Td>                
                 <Td width='150px'>{record.get('transactionCode')}</Td>
@@ -107,7 +107,7 @@ class Payments extends Component {
                 <Table>
                   <Thead>
                     <HeadRow>
-                      <Th first={true} width='60px'>#</Th>
+                      <Th width='60px'>#</Th>
                       <Th width='100px'>{t('total')}</Th>
                       <Th width='100px'>{t('type')}</Th>
                       <Th width='150px'>{t('transactionCode')}</Th>

@@ -118,7 +118,7 @@ class SchoolScap extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
+                <Td width='60px'>{this._recordNumber(key)}</Td>
                 <Td width='132px'>{record.get('title')}</Td>
                 <Td width='100px'>{record.get('questions')}</Td>                                
                 <Td width='100px'>{record.get('teachers')} <AssignButton onClick={() => { this._showAssignModal(record) }} t={t} /></Td>
@@ -127,7 +127,7 @@ class SchoolScap extends Component {
                     {(record.get('completed') > 0) && <ResultsButton onClick={() => { this._showResults(record) }} t={t} />}
                 </Td>
                 <Td width='132px'>{record.get('createdAt')}</Td>
-                <Td width='132px'>                    
+                <Td width='132px' className="actions">                    
                     <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')} />
                     <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }} />                        
                 </Td>
@@ -190,7 +190,7 @@ class SchoolScap extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>
-                                <Th first={true} width='60px'>#</Th>
+                                <Th width='60px'>#</Th>
                                 <Th width='132px'>{t('title')}</Th>
                                 <Th width='100px'>{t('questions')}</Th>
                                 <Th width='100px'>{t('teachers')}</Th>

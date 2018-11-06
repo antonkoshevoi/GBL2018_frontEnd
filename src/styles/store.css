@@ -140,7 +140,9 @@
     -o-transform:rotate(-7deg);
     transform:rotate(-7deg);
 }
-
+td .productPrice {
+    width: 100px;
+}
 .cardItem .productPrice .discount > span {
     color: #525672;
 }
@@ -340,21 +342,18 @@ button .discount > span {
     cursor: pointer;
 }
 
-.shoppingCartTable div.m-datatable .m-datatable__head .m-datatable__row > .m-datatable__cell {
+.shoppingCartTable th {
     background: #7bc848!important;
-
+    color: white;
 }
-.shoppingCartTable div.m-datatable .m-datatable__row  {
+.shoppingCartTable th span {
+    color: white;
+}
+.shoppingCartTable tbody tr  {
     border-bottom: #f2f3f8 solid 2px;
  }
-.shoppingCartTable div.m-datatable .m-datatable__row .m-datatable__row--even {
-     background: #FFFFFF !important;
- }
-.shoppingCartTable div.m-datatable .m-datatable__row:last-child  {
+.shoppingCartTable tbody tr:last-child  {
     border-bottom: none!important;
- }
-.shoppingCartTable div.m-datatable .m-datatable__head .m-datatable__row > .m-datatable__cell > span {
-     color: white!important;
  }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -364,7 +363,6 @@ input[type=number]::-webkit-outer-spin-button {
     display: block;
     background: transparent;
 }
-
 
 
 

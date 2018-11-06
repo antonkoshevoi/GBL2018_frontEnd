@@ -182,7 +182,7 @@ class ParentDashboard extends Component {
         const {storeItems, getStudents, studentsRequest, t} = this.props;
         const loading = studentsRequest.get('loading');
 
-        return <div className="fadeInLeft animated">
+        return <div className="fadeInLeft animated m--margin-left-15 m--margin-right-15">
             <Alerts />
             <div className="row">
               <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
@@ -210,9 +210,7 @@ class ParentDashboard extends Component {
               </div>
               <div className="col-sm-12 col-md-6  m--visible-desktop-lg m--hidden-desktop-xl">
                   <QuickLink />
-              </div>              
-            </div>
-            <div className="row">
+              </div>
               <div className="col-md-12 col-lg-8 col-xl-8">
                   <FeaturedItems data={storeItems}/>
               </div>

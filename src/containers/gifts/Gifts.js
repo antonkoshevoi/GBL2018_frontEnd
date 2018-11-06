@@ -109,7 +109,7 @@ class Gifts extends Component {
                 <Td width='132px'>{(currentTab === 'sent') ? record.get('ownerName') : record.get('userName')}</Td>
                 <Td width='132px'>{this._getStatus(record)}</Td>
                 <Td width='132px'>{moment(record.get('createdAt')).format('lll')}</Td>
-                <Td width='150px' className='text-center'>
+                <Td width='150px' className='text-center actions'>
                     {(currentTab === 'sent' && !record.get('accepted')) &&
                         <DeleteButton title={t('areYouSure')} onClick={() => { this._delete(record.get('id')) }} />
                     }

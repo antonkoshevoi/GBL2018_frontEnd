@@ -32,12 +32,12 @@ class UserDashboard extends Component {
 
   render() {
     const {records, dataRequest, t} = this.props;
-    return (
-      <div className="fadeInLeft animated">
+    return ( 
+      <div className="fadeInLeft animated m--margin-left-15 m--margin-right-15">
         <Alerts />
         <div className="row">
             <div className="col-sm-12 col-md-12 col-lg-9 col-xl-9">
-                <div className="row row-15 1m--margin-left-0">
+                <div className="row">
                     <div className="col-sm-12">
                         <div className='block-header border-b-blue'>
                             <h3 className='m-portlet__head-text'>{t('reportsSnapshot')}</h3>

@@ -92,7 +92,7 @@ class Teachers extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
+        <Td width='60px'>{this._recordNumber(key)}</Td>
         <Td width='132px'>{record.get('username')}</Td>
         <Td width='132px'>{record.get('firstName')}</Td>
         <Td width='132px'>{record.get('lastName')}</Td>
@@ -100,7 +100,7 @@ class Teachers extends Component {
         <HasRole roles={['Superadministrator']}>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
         </HasRole>
-        <Td width='100px'>
+        <Td width='100px' className="actions">
           <HasPermission permissions={[
             '[Users][Teachers][Update][Any]'
           ]}>
@@ -259,7 +259,7 @@ class Teachers extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th first={true} width='60px'>#</Th>
+                  <Th width='60px'>#</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['username']} name='username' width='132px'>{t('username')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['firstName']} name='firstName' width='132px'>{t('firstName')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName' width='132px'>{t('lastName')}</Th>
