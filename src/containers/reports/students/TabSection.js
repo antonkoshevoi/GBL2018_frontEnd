@@ -81,7 +81,7 @@ class TabSection extends Component {
                 </HeadRow>
             </Thead>
             <Tbody>
-                {course.attempts.map(function (attempt, i) {
+                {course.attempts.map(function (attempt, i) {                                    
                   return (
                     <Row index={i} key={i}>
                       <Td width='20px'>{i + 1}</Td>
@@ -90,7 +90,7 @@ class TabSection extends Component {
                       <Td width='150px'>{attempt.course_name}</Td>
                       <Td width='200px'>{attempt.lesson}</Td>
                       <Td width='50px'>{attempt.scored_points} / {attempt.lesson_points}</Td>
-                      <Td width='50px'>{(attempt.scored_points / attempt.lesson_points) * 100}</Td>
+                      <Td width='50px'>{((attempt.scored_points / attempt.lesson_points) * 100).toFixed(1).replace('.0', '')}</Td>
                       <Td width='50px'>
                         <span className={`m-badge m-badge--brand m-badge--wide ${attempt.pass ? 'm-badge--success' : 'm-badge--danger'}`}>
                           {attempt.pass ? t('pass') : t('fail')}
