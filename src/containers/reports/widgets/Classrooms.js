@@ -39,7 +39,7 @@ class Classrooms extends Component {
     return records.map((record, key) => (
       <Row index={key} key={key}>        
         <Td width='60px'>
-            <NavLink to={`/reports/classrooms/${record.get('id')}`}>
+            <NavLink className="user-avatar" to={`/reports/classrooms/${record.get('id')}`}>
                 <img width="100%" src={record.get('avatar')} alt={record.get('crmName')} />
             </NavLink>
         </Td>

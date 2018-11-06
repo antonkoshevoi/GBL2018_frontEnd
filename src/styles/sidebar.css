@@ -203,8 +203,7 @@ nav.navigation .second_level > .back {
     width: 5px;
 }
 
-nav.navigation .second_level > .content {
-    padding: 6px 0;
+nav.navigation .second_level > .content {    
     text-align: left;
     width: 100%;
     display: table-cell;
@@ -237,63 +236,6 @@ nav.navigation.hovered  > .menuItem > a.swapped  {
     background: #f2f3f8;
 }
 
-.timelineSubMenu  {
-    padding: 5px 10px;
-}
-
-.timelineSubMenu .timelineMenuItem .m-list-timeline__text {
-    padding-left: 15px;
-}
-
-.timelineSecondSubMenu  {
-    padding: 5px 15px;
-}
-
-.timelineSubMenu .m-list-timeline__items:before{
-    left: 13px;
-}
-
-.timelineSubMenu  .m-list-timeline__items .m-list-timeline__item:first-child:before, .timelineSubMenu  .m-list-timeline__items .m-list-timeline__item:last-child:before {
-    content: none;
-}
-
-
-.timelineSubMenu {
-    transition: all .4s;
-    will-change: auto;
-    overflow: hidden;
-    display: none;
-    position: absolute;
-    left: 60px;
-    width: 100%;
-    background: #f5f5f5;
-    z-index:5555;
-    box-shadow: -3px 3px 15px rgba(128, 128, 128, 0.17);
-}
-
-.timelineMenuItem.active {
-    background: rgba(208, 208, 208, 0.68);
-}
-
-nav.navigation .second_level .content >div:hover > .timelineSubMenu {
-    display: block;
-    animation-duration: .3s;
-    animation-name: slidein;
-}
-nav.navigation .second_level .timelineSubMenu .m-list-timeline__item:hover .timelineSecondSubMenu  {
-    display: block;
-    animation-duration: .3s;
-    animation-name: slidein;
-}
-
-.timelineSubMenu m-list-timeline__item:hover > .timelineMenuItem {
-    display: block;
-    animation-duration: .3s;
-    animation-name: slidein;
-}
-
-
-
 @keyframes slidein {
     from {
         transform: scale(1.1);
@@ -302,4 +244,34 @@ nav.navigation .second_level .timelineSubMenu .m-list-timeline__item:hover .time
     to {
         transform: scale(1);
     }
+}
+
+@media (max-width: 1440px) {
+    .m-wrapper {
+        margin-left: 190px;
+    }
+    
+    #m_aside_left {
+        width: 190px;
+    }
+    
+    nav.navigation {
+        padding-top: 45px;
+    }
+    
+    nav.navigation > .menuItem > a, nav.navigation .second_level a {
+        font-size: 16px;
+        height: 45px;
+    }
+    
+    nav.navigation > .menuItem > a, nav.navigation .second_level a{
+        height: 45px;
+    }
+    nav.navigation > .menuItem > a > .icon > i {
+        font-size: 24px;
+        margin: 0 8px;
+    }
+    nav.navigation > .menuItem > a > .icon {
+        width: 45px;
+    }     
 }

@@ -80,14 +80,14 @@ class DraftMessages extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
+                <Td width='60px'>{this._recordNumber(key)}</Td>
                 <Td width='150px'>{record.get('subject')}</Td>
                 <Td width='130px'>
                     {record.get('type') ? <span className={`m-badge m-badge--brand m-badge--wide ${(record.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(record.get('type'))}</span> : '-'}
                 </Td>
                 <Td width='100px'>{record.get('recipients') ? t('recipientsGroups.' + record.get('recipients')) : '-'}</Td>
                 <Td width='100px'>{moment(record.get('created')).format('lll')}</Td>
-                <Td width='150px'>
+                <Td width='150px' className="actions">
                     <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showMessageModal(record) }}>
                         <i className='la la-search'></i>
                     </button>
@@ -130,9 +130,9 @@ class DraftMessages extends Component {
                         </div>         
                     </div>
                     <div className='m-portlet__body'>
-                        <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
-                            <div className='row align-items-center'>               
-                                <div className='col-xl-12 order-1 order-xl-2 m--align-right'>
+                        <div className='m--margin-top-10 m--margin-bottom-30'>
+                            <div className='row'>               
+                                <div className='col-sm-12 m--align-right'>
                                     <Select
                                         className="pull-left table-select"
                                         value={perPage}
@@ -155,7 +155,7 @@ class DraftMessages extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>
-                                <Th first={true} width='60px'>#</Th>
+                                <Th width='60px'>#</Th>
                                 <Th width='150px'>{t('subject')}</Th>
                                 <Th width='130px'>{t('type')}</Th>
                                 <Th width='100px'>{t('recipients')}</Th>

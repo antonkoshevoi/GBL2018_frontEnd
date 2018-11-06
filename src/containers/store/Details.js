@@ -93,7 +93,7 @@ class Details extends Component {
                   <div className="headerBlock">
                     <div className="row">
                       <div className="col-md-4">
-                        <div className="productImage m--margin-top-10">
+                        <div className="productImage m--margin-10">
                           <img src={record.get('thumbnail')} className="full-width" alt="product"/>
                         </div>
                       </div>

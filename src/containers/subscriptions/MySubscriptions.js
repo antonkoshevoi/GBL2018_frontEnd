@@ -155,7 +155,7 @@ class MySubscriptions extends Component {
                     <Td width='120px'>{moment(item.createdAt).format('ll')}</Td>
                     <Td width='120px'>{item.expiredAt ? moment(item.expiredAt).format('ll') : '-'}</Td>  
                     {(filter !== 'expired') &&
-                    <Td width='150px'>                        
+                    <Td width='150px' className='actions'>                        
                         <div>
                             {(!item.assignedCourses && isMine) && 
                             <button className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { this._showGiftModal(item) }} >

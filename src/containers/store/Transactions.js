@@ -42,7 +42,7 @@ class Transactions extends Component {
         return records.map((item, i) => {
             return ( [
                     <Row index={i} key={i}>
-                        <Td first={true}  width='20px'>
+                        <Td  width='20px'>
                             <IconButton  color="primary" onClick={()=> {this._toggleSubTable(`sub_${i}`)}}>
                                 <i className={`fa fa-arrow-${( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) ? 'down' : 'right'}`}></i>
                             </IconButton>
@@ -62,11 +62,11 @@ class Transactions extends Component {
     _renderTransactionItemsBlock(data) {
         const {t} = this.props;
         return (
-            <tr key="block" className="animated fadeInDown m-datatable__row-subtable m-datatable__row sub-table m-datatable__row-subtable--even">
-                <td className="m-datatable__subtable" colSpan="9">
-                    <Table style={{minHeight:'300px'}}>
+            <tr key="block" className="animated fadeInDown sub-table">
+                <td colSpan="9" className="no-padding">
+                    <Table className="table-bordered m--margin-bottom-0">
                         <Thead >
-                            <HeadRow className="m-datatable__row">
+                            <HeadRow>
                                 <Th width="80px">{t('thumbnail')}</Th>
                                 <Th width="180px">{t('title')}</Th>
                                 <Th width="100px">{t('quantity')}</Th>
@@ -110,7 +110,7 @@ class Transactions extends Component {
                         <Thead>
                             <HeadRow>
                                 <Th width='20px'></Th>
-                                <Th first={true} width='20px'>#</Th>
+                                <Th width='20px'>#</Th>
                                 <Th name='total' width='102px'>{t('total')}</Th>
                                 <Th name='type' width='100px'>{t('type')}</Th>
                                 <Th name='created' width='140px'>{t('created')}</Th>

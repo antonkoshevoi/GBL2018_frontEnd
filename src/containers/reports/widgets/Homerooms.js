@@ -39,8 +39,8 @@ class Homerooms extends Component {
     return records.map((record, key) => (
       <Row index={key} key={key}>        
         <Td width='60px'>
-            <NavLink to={`/reports/homerooms/${record.get('id')}`}>
-                <img width="100%" src={record.get('avatar')} alt={record.get('crmName')} />
+            <NavLink className="user-avatar" to={`/reports/homerooms/${record.get('id')}`}>
+                <img src={record.get('avatar')} alt={record.get('crmName')} />
             </NavLink>
         </Td>
         <Td width='150px'>{record.get('name')}</Td>               

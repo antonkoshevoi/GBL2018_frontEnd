@@ -23,8 +23,8 @@ class Students extends Component {
     const { id } = this.props.match.params;
        
     return (      
-        <div className="fadeInLeft animated">
-            <div className='m--margin-left-10 m--margin-right-10'>
+        <div className="fadeInLeft animated m--margin-left-15 m--margin-right-15">
+            <div>
                 <div className='block-header border-b-blue'>
                     <h3 className='m-portlet__head-text'>{t('reportsSnapshot')}</h3>
                 </div>

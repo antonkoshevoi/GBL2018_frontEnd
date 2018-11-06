@@ -34,7 +34,7 @@ const styles = {
   },
   name: {    
     display: 'block',
-    marginTop: 30,
+    marginTop: 15,
     marginBottom:5
   },
   profileBlock: {
@@ -115,12 +115,15 @@ class ParentDashboard extends Component {
             }
             
             return (
-              <div key={i} className={classes.profileBlock} onClick={() => {
-                goTo(`/reports/students/${student.id}`);
-              }} style={{cursor: 'pointer'}}>
+              <div key={i} className={classes.profileBlock} onClick={() => { goTo(`/reports/students/${student.id}`); }} style={{cursor: 'pointer'}}>
                 <div className={classes.btnGroup}>
-                  <div className="form-group-inline btn-group">
-                    <NavLink to="/profile" className="btn m-btm btn-primary smaller-padding pull-right"><i className="la la-th"></i> {t('reportProfile')}</NavLink>
+                  <div className="form-group-inline">
+                    <div className="m--hidden-tablet-and-mobile m--hidden-desktop-lg m--visible-desktop-xl">
+                        <NavLink to="/profile" className="btn m-btm btn-info smaller-padding pull-right"><i className="la la-th"></i> {t('reports')}</NavLink>
+                    </div>
+                    <div className="m--visible-tablet-and-mobile m--visible-desktop-lg m--hidden-desktop-xl">
+                        <NavLink to="/profile" title={t('reportProfile')} className="btn m-btm btn-info pull-right m-btn--icon m-btn--icon-only  m-btn--pill"><i className="la la-search"></i></NavLink>                                       
+                    </div>
                   </div>
                 </div>
 
@@ -163,12 +166,16 @@ class ParentDashboard extends Component {
             <div key={i} className={classes.profileBlock} style={{background: '#D3A9A9'}}>
               <div className={classes.btnGroup}>
                 <div className="form-group-inline">
-                  <button disabled={loading} className="btn m-btm btn-danger pull-right" onClick={() => { this._declineRequest(request.id) }}>{t('decline')}</button>
-                  <button disabled={loading} className="btn m-btm btn-success pull-right m--margin-right-5" onClick={() => { this._acceptRequest(request.id) }}>{t('accept')}</button>
-                </div>
+                    <button title={t('accept')} onClick={() => { this._declineRequest(request.id) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill'>
+                        <i className='la la-check'></i>
+                    </button> 
+                    <button title={t('decline')} onClick={() => { this._declineRequest(request.id) }} className='btn btn-danger m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill'>
+                        <i className='la la-close'></i>
+                    </button>                                           
+                </div>                
               </div>
               <div className="d-flex align-items-center">
-                <Avatar alt={request.student.name} src={request.student.avatar} className={classes.bigAvatar}/>
+                <Avatar alt={request.student.name} src={request.student.avatar} className={classes.bigAvatar} />
                 <div className="info">
                   <h5 className={classes.name}>{request.student.name}</h5>
                   <span className={classes.username}>{request.student.username}</span>
@@ -182,7 +189,7 @@ class ParentDashboard extends Component {
         const {storeItems, getStudents, studentsRequest, t} = this.props;
         const loading = studentsRequest.get('loading');
 
-        return <div className="fadeInLeft animated">
+        return <div className="fadeInLeft animated m--margin-left-15 m--margin-right-15">
             <Alerts />
             <div className="row">
               <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
@@ -205,18 +212,16 @@ class ParentDashboard extends Component {
               <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                   <UnassignedCourses/>
               </div>
-              <div className="col-md-6 col-xl-4">
+              <div className="col-md-6 col-lg-4 col-xl-4">
                   <ShoppingCart preview = {true}/>
               </div>
-              <div className="col-sm-12 col-md-6  m--visible-desktop-lg m--hidden-desktop-xl">
+              <div className="col-sm-12 col-md-6 m--visible-tablet-and-mobile m--hidden-desktop-lg m--hidden-desktop-xl ">
                   <QuickLink />
-              </div>              
-            </div>
-            <div className="row">
+              </div>
               <div className="col-md-12 col-lg-8 col-xl-8">
                   <FeaturedItems data={storeItems}/>
               </div>
-              <div className="col-md-6 col-lg-4 col-xl-4 m--hidden-desktop-lg m--visible-desktop-xl">
+              <div className="col-lg-4 col-xl-4 m--hidden-tablet-and-mobile m--visible-desktop-lg m--visible-desktop-xl">
                 <QuickLink />
               </div>         
             </div>

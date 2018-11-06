@@ -75,29 +75,35 @@ class OpenInvoicesTable extends Component {
     const {t} = this.props;
 
     return rows.map((item, i) => {
+        
+        const countInput = <input
+              type="number"
+              onChange={(e) => { this._changeItemCount(i, e) }}
+              value={item.count}
+              className={`form-control productQuantity productLabel m-input m-input--solid ${preview ? 'margin-0' : ''}`} />;
+        
       return (item && item.storeItem &&
         <Row index={i} key={i}>
-          {!preview &&
-          <Td first={true} width='10px'>{i + 1}</Td>}
+          {!preview && <Td width='10px'>{i + 1}</Td>}
           <Td width='400px'>
-            <div className="productInfo">
-              <div className="productImg">
+                <div className="productInfo">
+              <div className="user-avatar">
                 <img src={item.storeItem.thumbnail} className="img-responsive" alt=""/>
               </div>
-              <div className="productContent">
+              <div>
                 <NavLink to={`/store/details/${item.storeItem.id}`}><h5>{item.storeItem.title}</h5></NavLink>
-                <span>{item.storeItem.description.substr(0, 50) + '...'}</span>
-               <div className="d-block m--margin-top-15">
-                 <DeleteButton
-                   onClick={() => { this.props.onDelete (item.id) }}
-                   title={t('deleteItemFromCartConfirmation', {item: item.storeItem.title})}
-                   icon={false}
-                   btnName={t('delete')}
-                   className="productLink g-blue btn-link"
-                 />
-               </div>
+                <span>{preview ? (item.storeItem.description.substr(0, 50) + '...') : item.storeItem.description}</span>
+                <div className="d-block m--margin-top-15">
+                  <DeleteButton
+                    onClick={() => { this.props.onDelete (item.id) }}
+                    title={t('deleteItemFromCartConfirmation', {item: item.storeItem.title})}
+                    icon={false}
+                    btnName={t('delete')}
+                    className="productLink g-blue btn-link"
+                  />
+                </div>
               </div>
-            </div>
+              </div>  
           </Td>
           {!preview &&
           <Td width="132px">
@@ -106,19 +112,11 @@ class OpenInvoicesTable extends Component {
             </span>
           </Td>
           }
-
+          {!preview &&
           <Td width='132px'>
-            {!item.isInvoice &&
-            <input
-              type="number"
-              onChange={(e) => { this._changeItemCount(i, e) }}
-              value={item.count}
-              className="form-control productQuantity productLabel m-input m-input--solid" />
-            }
-            {item.isInvoice &&
-            <span className="productLabel text-center">{item.count}</span>
-            }
-          </Td>
+            {!item.isInvoice ? countInput : <span className="productLabel text-center">{item.count}</span>}            
+          </Td>}
+          {!preview &&
           <Td width='100px'>
             <span className="productPrice productLabel">
               {item.storeItem.discount > 0 &&
@@ -131,8 +129,15 @@ class OpenInvoicesTable extends Component {
                 ${parseFloat(item.storeItem.discountPrice).toFixed(2)}
               </div>
             </span>
-          </Td>
+          </Td>}
           <Td width='100px'>
+          {preview && <div>                          
+              <div className="m--margin-top-5 m--margin-bottom-10">${parseFloat(item.storeItem.discountPrice).toFixed(2)}</div>              
+              <div className="m--margin-top-5 m--margin-bottom-10">
+                {!item.isInvoice ? countInput : <span className="productLabel text-center">{item.count}</span>}                    
+              </div>
+              <Divider className="m--margin-bottom-10" />
+            </div>}
             <span className="productPrice productLabel">
               {'$' + parseFloat(item.storeItem.discountPrice * item.count).toFixed(2)}
             </span>
@@ -146,12 +151,14 @@ class OpenInvoicesTable extends Component {
     const {t} = this.props;
     return (
         <div className="row text-right m--margin-top-15 m--margin-bottom-10">
-            <div className="col-xs-6 col-sm-6 text-left">
-              <h3>{t('itemsCount', {count: count})}</h3>
+            <div className="col-sm-7 text-left">
+              <h4 className="m--margin-left-15">{t('itemsCount', {count: count})}</h4>
             </div>
-            <div className="col-xs-6 col-sm-6 text-right">              
-                <span>{t('total')}</span><br/>
-                <span className="productPrice"> {'$' + parseFloat(sum).toFixed(2)}</span>              
+            <div className="col-sm-5 text-right">
+                <div className="m--margin-right-15">
+                    <span>{t('total')}</span><br/>
+                    <span className="productPrice"> {'$' + parseFloat(sum).toFixed(2)}</span>
+                </div>
             </div>
         </div>            
     )
@@ -160,11 +167,11 @@ class OpenInvoicesTable extends Component {
     const {t} = this.props;
     return (        
         <div className="row text-right m--margin-top-15 m--margin-bottom-10">
-            <div className="col-xs-6 col-sm-6 text-left">              
-                <h4>{t('shippingAndTax')}</h4>              
+            <div className="col-sm-7 text-left">              
+                <h4 className="m--margin-left-15">{t('shippingAndTax')}</h4>              
             </div>
-            <div className="col-xs-6 col-sm-6 text-right">              
-                <span className="productTaxPrice">
+            <div className="col-sm-5 text-right">              
+                <span className="productTaxPrice m--margin-right-15">
                     {'$' + parseFloat(tax).toFixed(2)}
                 </span>              
             </div>
@@ -177,15 +184,15 @@ class OpenInvoicesTable extends Component {
     return (
       <div>
         {data.length > 0 ?
-          <div className="shoppingCartTable">
+          <div className={`shoppingCartTable ${preview ? 'preview' : ''}`}>
             <Table>
               <Thead>
               <HeadRow>
-                {!preview && <Th first={true} width='10px'>#</Th>}
+                {!preview && <Th width='10px'>#</Th>}
                 <Th name='product' width='400px'>{t('product')}</Th>
                 {!preview && <Th name='quantity' width='132px' classNames="text-center">{t('classroom')}</Th>}                
-                <Th name='quantity' width='132px' classNames="text-center">{t('quantity')}</Th>
-                <Th name='price' width='100px'>{t('price')}</Th>
+                {!preview && <Th name='quantity' width='132px' classNames="text-center">{t('quantity')}</Th>}  
+                {!preview && <Th name='price' width='100px'>{t('price')}</Th>}  
                 <Th name='actions' width='100px'>{t('total')}</Th>
               </HeadRow>
               </Thead>

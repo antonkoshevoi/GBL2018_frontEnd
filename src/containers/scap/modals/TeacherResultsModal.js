@@ -84,12 +84,12 @@ class TeacherResultsModal extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
+                <Td width='60px'>{this._recordNumber(key)}</Td>
                 <Td width='132px'>{record.get('homeroom')}</Td>
                 <Td width='132px'>{record.get('student')}</Td>
                 <Td width='132px'><span className={`m-badge m-badge--brand m-badge--wide ${(record.get('status') === 'completed' ? 'm-badge--success' : '')}`}>{t(record.get('status'))}</span></Td>
                 <Td width='132px'>{record.get('createdAt')}</Td>
-                <Td width='100px'>
+                <Td width='100px' className="actions">
                     {record.get('status') !== 'completed' &&
                         <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo(`scap/edit-answers/${record.get('id')}`) }}>
                             <i className='la la-pencil'></i>
@@ -127,7 +127,7 @@ class TeacherResultsModal extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>
-                                <Th first={true} width='60px'>#</Th>
+                                <Th width='60px'>#</Th>
                                 <Th width='132px'>{t('homeroom')}</Th>                                
                                 <Th width='132px'>{t('student')}</Th>
                                 <Th width='132px'>{t('status')}</Th>

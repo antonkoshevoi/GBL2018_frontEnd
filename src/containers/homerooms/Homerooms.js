@@ -73,7 +73,7 @@ class Homerooms extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='60px'>{this._recordNumber(key)}</Td>
+        <Td width='60px'>{this._recordNumber(key)}</Td>
         <Td width='132px'>{record.get('name')}</Td>
         <HasRole roles={['Superadministrator']}>
         <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
@@ -81,7 +81,7 @@ class Homerooms extends Component {
         <Td width='132px'>{record.getIn(['teacher', 'name'])}</Td>
         <Td width='132px'>{record.get('studentsCount')}</Td>
         <HasPermission permissions={['[HomeRooms][Update][Any]', 'HomeRooms][Delete][Any']}>
-        <Td width='100px'>
+        <Td width='100px' className="actions">
           <HasPermission permissions={['[HomeRooms][Update][Any]']}>
             <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
           </HasPermission>
@@ -225,10 +225,9 @@ class Homerooms extends Component {
             </div>
           </div>
           <div className='m-portlet__body'>
-            <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
-              <div className='row align-items-center'>
-
-                <div className='col-xl-12 order-1 order-xl-2 m--align-right'>
+            <div className='m--margin-top-10 m--margin-bottom-30'>
+              <div className='row'>
+                <div className='col-sm-12 m--align-right'>
                   <Select
                     className="pull-left table-select"
                     value={perPage}
@@ -259,7 +258,7 @@ class Homerooms extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th first={true} width='60px'>#</Th>
+                  <Th width='60px'>#</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
                   <HasRole roles={['Superadministrator']}>
                     <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>

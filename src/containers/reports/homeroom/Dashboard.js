@@ -28,7 +28,7 @@ class Dashboard extends Component {
     const { dataRequest, t } = this.props;
 
     return (
-        <div className="fadeInLeft animated">
+        <div className="fadeInLeft animated m--margin-left-15 m--margin-right-15">
           <div className="row">
             <div className="col-sm-12">
                 <div className='block-header border-b-blue'>

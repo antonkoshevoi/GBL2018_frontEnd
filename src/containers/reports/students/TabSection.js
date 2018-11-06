@@ -69,7 +69,7 @@ class TabSection extends Component {
         <Table>
             <Thead>
                 <HeadRow>
-                  <Th first={true} width='20px'>#</Th>
+                  <Th width='20px'>#</Th>
                   <Th width='150px'>{t('date')}</Th>
                   <Th width='150px'>{t('classroom')}</Th>
                   <Th width='150px'>{t('course')}</Th>
@@ -84,7 +84,7 @@ class TabSection extends Component {
                 {course.attempts.map(function (attempt, i) {
                   return (
                     <Row index={i} key={i}>
-                      <Td first={true} width='20px'>{i + 1}</Td>
+                      <Td width='20px'>{i + 1}</Td>
                       <Td width='150px'>{moment(attempt.att_date).format('lll')}</Td>
                       <Td width='150px'>{attempt.classroom_name}</Td>
                       <Td width='150px'>{attempt.course_name}</Td>

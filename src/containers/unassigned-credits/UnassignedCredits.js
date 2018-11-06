@@ -46,7 +46,7 @@ class UnassignedCredits extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td first={true} width='60px'>{key + 1}</Td>
+        <Td width='60px'>{key + 1}</Td>
         <Td width="100px">
           <div >
             <img alt={t('course')} src={record.get('item').get('thumbnail')} width={70}/>
@@ -82,7 +82,7 @@ class UnassignedCredits extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th first={true} width='60px'>#</Th>
+                  <Th width='60px'>#</Th>
                   <Th width='100px'>{t('thumbnail')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['resurce']} name='resource' width='130px'>{t('resource')}</Th>
                   <Th width='150px'>{t('description')}</Th>

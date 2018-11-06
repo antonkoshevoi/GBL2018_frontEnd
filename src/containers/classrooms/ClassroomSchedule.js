@@ -77,9 +77,9 @@ class ClassroomSchedule extends Component {
             let lessons      = unit.lessons;
             
             return lessons.map((lesson, lessonIndex) => {
-                return <tr className="m-datatable__row m-datatable__row--even__none" key={'row-' + unitIndex + '-' + lessonIndex }>
+                return <tr key={'row-' + unitIndex + '-' + lessonIndex }>
                     {!lessonIndex &&
-                    <td className="m-datatable__cell rotate" width='50px' rowSpan={unitRowSpan} key={unit.unitId + '-unitName'}>
+                    <td className="rotate" width='50px' rowSpan={unitRowSpan} key={unit.unitId + '-unitName'}>
                         <div><span><b>{t('unit')} {unitIndex + 1}</b> {unit.unitName}</span></div>
                     </td>}
                     <td width='350px'>
@@ -119,23 +119,23 @@ class ClassroomSchedule extends Component {
                     <div className='m-portlet__body'>
                         <div className='m-form m-form--label-align-left m--margin-top-20 m--margin-bottom-30'>
                             <div className="row">                                       
-                                <label className="col-lg-1 col-md-3 col-sm-4 m--margin-top-20">{t('scheduleBy')}:</label>
+                                <label className="col-lg-1 col-md-3 col-sm-4 m--margin-top-15">{t('scheduleBy')}:</label>
                                 <div className="col-lg-4 col-md-5 col-sm-6">
                                     <div>
                                         <FormControlLabel 
                                             label={t('unit')}
-                                            control={<Radio name="scheduleType" checked={this.state.scheduleType === 'unit'} onChange={(e) => {this._handleInputChange(e)}} value="unit" />}          
+                                            control={<Radio color="primary" name="scheduleType" checked={this.state.scheduleType === 'unit'} onChange={(e) => {this._handleInputChange(e)}} value="unit" />}          
                                         />                           
                                         <FormControlLabel 
                                             label={t('lesson')}
-                                            control={<Radio name="scheduleType" checked={this.state.scheduleType === 'lesson'} onChange={(e) => {this._handleInputChange(e)}} value="lesson" />}          
+                                            control={<Radio color="primary" name="scheduleType" checked={this.state.scheduleType === 'lesson'} onChange={(e) => {this._handleInputChange(e)}} value="lesson" />}          
                                         />
                                     </div>
                                     {errors && errors.get('scheduleType') &&  <FormHelperText error>{errors.get('scheduleType').get(0)}</FormHelperText>}                                    
                                 </div>
                             </div>
                             <div className="row">
-                                <label className="col-lg-1 col-md-3 col-sm-4">{t('frequency')}:</label>
+                                <label className="col-lg-1 col-md-3 col-sm-4 m--margin-top-10">{t('frequency')}:</label>
                                 <div className="col-lg-4 col-md-5 col-sm-6">
                                     <div>
                                     <Select
@@ -168,8 +168,8 @@ class ClassroomSchedule extends Component {
                                   {errors && errors.get('weeks') && <FormHelperText error>{errors.get('weeks').get(0)}</FormHelperText>}
                                 </div>                                            
                             </div>
-                            <div className="row">
-                                <label className="col-lg-1 col-md-3 col-sm-4" htmlFor="startDate">{t('startDate')}:</label>
+                            <div className="row m--margin-top-15">
+                                <label className="col-lg-1 col-md-3 col-sm-4 m--margin-top-10" htmlFor="startDate">{t('startDate')}:</label>
                                 <div className="col-lg-4 col-md-5 col-sm-6">
                                     <div>
                                         <MuiDatePicker
@@ -191,9 +191,9 @@ class ClassroomSchedule extends Component {
                             <thead>
                                 <tr class="active">
                                     <th>{t('unit')}</th>
-                                    <th>{t('lessonTitle')}</th>
-                                    <th>{t('lessonDescription')}</th>
-                                    <th>{t('lessonAttempt')}</th>                                        
+                                    <th className="text-center">{t('lessonTitle')}</th>
+                                    <th className="text-center">{t('lessonDescription')}</th>
+                                    <th className="text-center">{t('lessonAttempt')}</th>                                        
                                 </tr>
                             </thead>
                             <tbody>                           
