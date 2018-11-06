@@ -126,9 +126,9 @@ class Parents extends Component {
                         </div>
                     </div>
                     <div className='m-portlet__body'>
-                        <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
-                            <div className='row align-items-center'>
-                                <div className='col-xl-12 order-1 order-xl-2 m--align-right margin-0'>       
+                        <div className='m--margin-top-10 m--margin-bottom-30'>
+                            <div className='row'>
+                                <div className='col-sm-12 m--align-right margin-0'>       
                                     <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
                                         {t('addNew')} <Icon className="m--margin-left-5">add</Icon>
                                     </Button>                  

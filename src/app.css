@@ -124,6 +124,7 @@ textarea {
 }
 .user-avatar img { 
     width: 100%;
+    min-width: 50px;
 }
 
 .App-logo {
@@ -1232,7 +1233,7 @@ td.rotate div span {
 
     .m-sidebar-is-open #m_aside_left {
         transition-delay: 0s;
-        max-height: 348px;
+        max-height: 400px;
         transition: max-height 0.5s ease-in;
     }
 
@@ -1338,7 +1339,7 @@ td.rotate div span {
 .sortable-questions label {
     cursor: move;
 }
-@media (max-width: 1240px) {
+@media (min-width: 1240px) {
     .m--visible-desktop-lg {
         display: block !important; }
     .m--visible-desktop-lg-inline-block {
@@ -1352,7 +1353,7 @@ td.rotate div span {
     .m--hidden-desktop-lg {
         display: none !important; } }
 
-@media (min-width: 1240px) {
+@media (min-width: 1440px) {
     .m--visible-desktop-xl {
         display: block !important; }
     .m--visible-desktop-xl-inline-block {
@@ -1381,7 +1382,7 @@ td.rotate div span {
     filter: alpha(opacity=30) ; }
 
 
-@media (max-width: 1400px) {   
+@media (max-width: 1440px) {   
     .table thead tr.active th {
         padding: 8px 8px;        
     }

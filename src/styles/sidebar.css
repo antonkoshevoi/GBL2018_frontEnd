@@ -246,7 +246,7 @@ nav.navigation.hovered  > .menuItem > a.swapped  {
     }
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1440px) {
     .m-wrapper {
         margin-left: 190px;
     }

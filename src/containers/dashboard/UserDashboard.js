@@ -43,21 +43,21 @@ class UserDashboard extends Component {
                             <h3 className='m-portlet__head-text'>{t('reportsSnapshot')}</h3>
                         </div>
                     </div>
-                    <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 m--margin-bottom-10">
+                    <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4 m--margin-bottom-10">
                       <RosterStatistic/>
                     </div>
-                    <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 m--margin-bottom-10">
+                    <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4 m--margin-bottom-10">
                       <LineChart type='school'/>
                     </div>
-                    <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 m--margin-bottom-10">                  
+                    <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4 m--margin-bottom-10">                  
                       <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
                     </div>
-                    <div className="col-sm-12 col-md-6 m--visible-desktop-lg m--margin-bottom-10 m--hidden-desktop-xl">
+                    <div className="col-sm-12 col-md-6 m--margin-bottom-10 m--visible-tablet-and-mobile m--hidden-desktop-lg m--hidden-desktop-xl">
                         <QuickLink />
                     </div>                    
                 </div>
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-6 col-xl-3  m--margin-bottom-10 m--hidden-desktop-lg m--visible-desktop-xl">
+            <div className="col-lg-3 col-xl-3 m--margin-bottom-10 m--hidden-tablet-and-mobile m--visible-desktop-lg m--visible-desktop-xl">
                 <QuickLink />
             </div>
         </div>

@@ -279,12 +279,16 @@ button .discount > span {
     padding: 15px 15px 15px 0;
 }
 
+.shoppingCartTable.preview .productInfo > div {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0;
+}
+.shoppingCartTable.preview .productInfo .user-avatar {
+    padding-right: 10px;
+}
 .shoppingCartTable table th {
     padding: 15px;
-}
-
-.shoppingCartTable .productInfo .productImg {
-    width: 100px;
 }
 
 .shoppingCartTable .productPrice {

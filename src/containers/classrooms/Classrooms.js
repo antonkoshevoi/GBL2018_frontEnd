@@ -273,10 +273,9 @@ class Classrooms extends Component {
             </div>
           </div>
           <div className='m-portlet__body'>
-            <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
-              <div className='row align-items-center'>
-
-                <div className='col-xl-12 order-1 order-xl-2 m--align-right'>
+            <div className='m--margin-top-10 m--margin-bottom-30'>
+              <div className='row'>
+                <div className='col-sm-12 m--align-right'>
                   <Select
                     className="pull-left table-select"
                     value={perPage}
@@ -296,7 +295,6 @@ class Classrooms extends Component {
                     </Button>
                   </HasPermission>
                 </div>
-
               </div>
             </div>
 
