@@ -289,12 +289,12 @@ nav .nav-narrow {
     position: relative;
 }
 
-.front,
-.back {
-    /*-webkit-backface-visibility: hidden;
+.splash .front,
+.splash .back {
+    -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     -o-backface-visibility: hidden;
-    backface-visibility: hidden;*/
+    backface-visibility: hidden;
     position: absolute;
     top: 0;
     left: 0;
@@ -305,6 +305,13 @@ nav .nav-narrow {
     z-index: 2;
     -webkit-transform: rotateY(0deg);
     transform: rotateY(0deg);
+}
+
+.splash .back {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }
 
 /* About box */
