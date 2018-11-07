@@ -54,7 +54,7 @@ class Students extends Component {
       <Row index={key} key={key}>        
         <Td width='60px'>
             <NavLink className="user-avatar" to={`/reports/students/${record.get('id')}`}>
-                <img src={record.get('avatar')} alt={record.get('crmName')} />
+                <img src={record.get('avatarSmall')} alt={record.get('crmName')} />
             </NavLink>
         </Td>
         <Td width='100px'>{record.get('firstName')}</Td>

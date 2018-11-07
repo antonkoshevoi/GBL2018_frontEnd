@@ -44,13 +44,13 @@ class MainLayout extends Component {
             'my-reports'
         ];
         
-        const hideMenu = (fullScreenPages.indexOf(segments[0]) !== -1) || !auth.get('isLoggedIn'); 
+        const hideSidebar = (fullScreenPages.indexOf(segments[0]) !== -1) || !auth.get('isLoggedIn'); 
 
         return (
             <div className={`m-grid m-grid--hor m-grid--root m-page m--full-height ${segments[0]}`} id={segments.join('_')}>          
                 <div className={`m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body ${sidebarIsOpen ? 'm-sidebar-is-open' : ''}`}>
-                    <Header mobileSidebar={() => {this.openMobileSidebar()}}/>
-                    {! hideMenu && <div>
+                    <Header mobileSidebar={() => {this.openMobileSidebar()}} hideSidebar={hideSidebar}/>
+                    {! hideSidebar && <div>
                         <HasRole roles={['School']}>
                           <Sidebar mobileSidebar={() => {this.openMobileSidebar()}} structure={MenuSchool}/>
                         </HasRole>
@@ -67,7 +67,7 @@ class MainLayout extends Component {
                           <Sidebar mobileSidebar={() => {this.openMobileSidebar()}} structure={MenuStudent}/>
                         </HasRole>
                     </div>}
-                    <div className={`m-grid__item m-grid__item--fluid m-wrapper ${hideMenu ? 'margin-0' : ''}`}>               
+                    <div className={`m-grid__item m-grid__item--fluid m-wrapper ${hideSidebar ? 'margin-0' : ''}`}>               
                         <div className="m-content">
                             {this.props.children}
                         </div>

@@ -90,9 +90,9 @@ class CreateAccount extends Component {
     
         return <div>
             {loading && <Loader/>}
-            <div className='m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor  m-login--2 m-login-2--skin-2 m--full-height' id='m_login' style={{backgroundImage: `url(${background})`,minHeight:'100vh'}}>
-              <div className='m-grid__item m-grid__item--fluid m-login__wrapper'>
-                <div className='m-login__container signup-page'>
+            <div className='m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor m--full-height' id='m_login' style={{backgroundImage: `url(${background})`,minHeight:'100vh'}}>
+              <div className='m-grid__item m-grid__item--fluid'>
+                <div className='signup-page'>
                   <div className='m-login__logo text-center m--margin-top-15'>
                     <a href='/'>
                       <img alt="GravityBrain" style={{width: '270px', height: 'auto'}} src='//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg' />
@@ -187,7 +187,7 @@ class CreateAccount extends Component {
                             </button>                                      
                           </div>
                         </div>
-                        <div className='alert m-alert m-alert--default'>
+                        <div className='alert m-alert m-alert--default m--margin-top-25'>
                           <p className='text-center margin-0'>
                             <Interpolate i18nKey="alreadyHaveAccountMessage" loginLink={loginBtn} />
                           </p>                              

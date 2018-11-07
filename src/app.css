@@ -331,7 +331,7 @@ table th .sort-arrow {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 350px;
+    min-height: 300px;
 }
 
 .table-message h2 {
@@ -342,6 +342,10 @@ table th .sort-arrow {
 
 .table-message [role="progressbar"] {
     margin-left: 29px;
+}
+
+.slick-prev::before, .slick-next::before {
+    color: grey !important;
 }
 
 .paggination-group button {

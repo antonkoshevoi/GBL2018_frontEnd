@@ -73,16 +73,16 @@ class LanguageSwitcher extends Component {
         const  langs  = this.props.i18n.store.data;
 
         return (
-            <div className={this.props.className ? this.props.className : 'm-nav__item'}>
+            [
                 <a  className="m-nav__link m-dropdown__toggle pointer"
                     aria-owns={this.state.anchorEl ? 'simple-menu' : null}
                     aria-haspopup="true"
                     onClick={this._openLanguageMenu}
                 >
-                        <span className="m-nav__link-icon">
-                            <i className="m--icon-font-size-lg2 fa fa-globe m--margin-right-5 d-md-inline"></i>
-                        </span>
-                </a>
+                    <span className="m-nav__link-icon">
+                        <i className="m--icon-font-size-lg2 fa fa-globe m--margin-right-5 d-md-inline"></i>
+                    </span>
+                </a>,
                 <Menu
                     id="simple-menu"
                     anchorEl={this.state.anchorEl}
@@ -90,9 +90,8 @@ class LanguageSwitcher extends Component {
                     onClose={this._closeLanguageMenu}
                 >
                     {this._renderLangsMenu(langs)}
-
                 </Menu>
-            </div>
+            ]
         );
     }
 }

@@ -89,7 +89,9 @@ class LessonsTable extends Component {
     
     if (!getReportRequest.get('success') || !data) {
         return <Loader />
-    }        
+    }
+    
+    let reportIsEmpty = true;
 
     return (
       <div className="table-responsive">
@@ -107,10 +109,16 @@ class LessonsTable extends Component {
           <tbody>
           {data.map((unit, unitIndex) => {
               if (this.countNumberOfUnitAttempts(unit) > 0) {
+                  reportIsEmpty = false;
                   return this.renderLessonRow(unit, unitIndex);
               }
               return '';
           })}
+          {reportIsEmpty && <tr>
+                <td colSpan="6" className='text-center'>
+                    <div className="table-message"><h2>{t('noData')}</h2></div>
+                </td>
+            </tr>}
           </tbody>
         </table>       
 
@@ -234,7 +242,7 @@ class LessonsTable extends Component {
     }
     unit.lessons.forEach((lesson) => {
       numberOfAttempts += this.countNumberOfLessonAttempts(lesson);
-    });
+    });    
     return numberOfAttempts;
   }
 

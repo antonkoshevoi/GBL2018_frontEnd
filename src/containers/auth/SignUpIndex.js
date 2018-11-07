@@ -9,11 +9,11 @@ class SignUpIndex extends Component {
   render() {      
     const { t } = this.props;
     const loginBtn = <NavLink to="/login"><strong>{t('login')}</strong></NavLink>;
-    return (
-      <div id="signUpSwitch" className="animate fadeInLeftBig">
-        <div style={{position:'fixed'}} className="loginWrapper">
-          <div className="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2 m--full-height" id="m_login" style={{backgroundImage: `url(${background})`}}>
-            <div className="m-grid__item m-grid__item--fluid	m-login__wrapper">
+    return (            
+      <div className="m-grid m-grid--hor m-grid--root m-page m--full-height">
+        <div className="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop justify-content-center m-login m-login--2 m-login-2--skin-2">
+          <div style={{backgroundImage: `url(${background})`}} className="m-grid__item m-grid__item--fluid d-flex justify-content-center m-login__wrapper">
+            <div className="m-content ">
               <div className="m-login__container">
                 <div className="m-login__logo">
                   <a href={"/"}>
@@ -37,19 +37,17 @@ class SignUpIndex extends Component {
                           {t('principal')}
                         </NavLink>
                       </div>
-
                       <div className="alert m-alert m-alert--default margin-bottom-0">
                         <p className="text-center margin-bottom-0"><Interpolate i18nKey="alreadyHaveAccountMessage" loginLink={loginBtn} /></p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>              
             </div>
           </div>
         </div>
-      </div>
-    );
+      </div>);    
   }
 }
 
