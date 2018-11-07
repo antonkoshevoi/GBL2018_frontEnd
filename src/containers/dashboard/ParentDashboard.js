@@ -128,7 +128,7 @@ class ParentDashboard extends Component {
                 </div>
 
                 <div className="d-flex align-items-center">
-                  <Avatar alt={student.firstName} src={student.avatar} className={classes.bigAvatar}/>
+                  <Avatar alt={student.firstName} src={student.avatarSmall} className={classes.bigAvatar}/>
                   <div className="info">
                     <h5 className={classes.name}>{student.name}</h5>
                     <span className={classes.username}>{student.username}</span>
@@ -175,7 +175,7 @@ class ParentDashboard extends Component {
                 </div>                
               </div>
               <div className="d-flex align-items-center">
-                <Avatar alt={request.student.name} src={request.student.avatar} className={classes.bigAvatar} />
+                <Avatar alt={request.student.name} src={request.student.avatarSmall} className={classes.bigAvatar} />
                 <div className="info">
                   <h5 className={classes.name}>{request.student.name}</h5>
                   <span className={classes.username}>{request.student.username}</span>

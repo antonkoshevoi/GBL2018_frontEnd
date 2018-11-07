@@ -331,7 +331,7 @@ table th .sort-arrow {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 350px;
+    min-height: 300px;
 }
 
 .table-message h2 {

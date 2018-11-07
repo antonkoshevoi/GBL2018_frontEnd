@@ -113,7 +113,7 @@ class Connections extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td width='80px'><div className="user-avatar"><img width="100%" src={record.get('avatar')} alt={record.get('name')} /></div></Td>
+                <Td width='80px'><div className="user-avatar"><img width="100%" src={record.get('avatarSmall')} alt={record.get('name')} /></div></Td>
                 <Td width='132px'>{record.get('name') || '-'}</Td>
                 <Td width='132px'>{record.get('username') || '-'}</Td>
                 <Td width='150px'>{record.get('email') || '-'}</Td>
