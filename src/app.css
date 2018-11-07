@@ -344,6 +344,10 @@ table th .sort-arrow {
     margin-left: 29px;
 }
 
+.slick-prev::before, .slick-next::before {
+    color: grey !important;
+}
+
 .paggination-group button {
     min-width: 50px;
 }

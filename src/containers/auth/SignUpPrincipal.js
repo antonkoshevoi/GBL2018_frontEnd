@@ -128,10 +128,10 @@ class SignUpPrincipal extends Component {
     return (
       <div>
         {loading && <Loader />}
-        <div className="m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor  m-login--2 m-login-2--skin-2 m--full-height" id="m_login" style={{backgroundImage: `url(${background})`,minHeight:'100vh'}}>
-          <div className="m-grid__item m-grid__item--fluid m-login__wrapper">
-            <div className="m-login__container signup-page">
-              <div className="m-login__logo text-center  m--margin-top-15">
+        <div className="m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor m--full-height" style={{backgroundImage: `url(${background})`,minHeight:'100vh'}}>
+          <div className="m-grid__item m-grid__item--fluid">
+            <div className="signup-page">
+              <div className="text-center m--margin-top-15">
                 <a href="/">
                    <img alt="GravityBrain" style={{width: '270px', height: 'auto'}} src={logoUrl} />
                 </a>
@@ -150,14 +150,14 @@ class SignUpPrincipal extends Component {
                       </div>
                     </div>
                     <div className="m-portlet__head-tools">
-                      <ul className="m-portlet__nav">
-                        <LanguageSwitcher className="m-portlet__nav-item"/>
-                      </ul>
+                        <div className="m-portlet__nav-item">
+                            <LanguageSwitcher className="m-portlet__nav-item"/>
+                        </div>                      
                     </div>
                   </div>
                   <form className="m-portlet__body" onSubmit={(e) => { e.preventDefault(); this._submit(); }}>
-                    <div className="alert m-alert m-alert--default">
-                      <p className="text-center">
+                    <div className="alert m-alert m-alert--default m--margin-top-15">
+                      <p className="text-center margin-0">
                         <Interpolate i18nKey="alreadyHaveAccountMessage" loginLink={loginBtn} />
                       </p>
                     </div>

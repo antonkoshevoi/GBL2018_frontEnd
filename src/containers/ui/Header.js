@@ -51,7 +51,7 @@ class Header extends Component {
   }
 
   render() {
-    const {logout, hideMenu, userRequest, auth} = this.props;    
+    const {logout, hideMenu, hideSidebar, userRequest, auth} = this.props;    
     const {headerPosition} = this.state;
     const user = this.props.user.toJS();
     
@@ -75,16 +75,17 @@ class Header extends Component {
               </div>              
               <div id="m_header_topbar" className="m-topbar  m-stack m-stack--ver m-stack--general">
                 <div className="m-stack__item m-topbar__nav-wrapper">
+                  {!hideSidebar &&
                   <IconButton color='primary' className="m--hide mobile-sidebar-out-toggle m--margin-top-5" onClick={() => { this.props.mobileSidebar() }}>
                     <Icon fontSize="large">menu</Icon>
-                  </IconButton>
+                  </IconButton>}
 
                   <ul className="m-topbar__nav m-nav m-nav--inline">
                     <Messages activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
                     <HasRole roles={['Superadministrator','Superintendent','Principal','Administrator','Teacher','Parents']}>
                         <ShoppingCart />
                     </HasRole>
-                    <li style={{paddingTop: '8px'}} className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width">
+                    <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width">
                         <LanguageSwitcher className="m-nav__link"/>
                     </li>
                     <UserMenu activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus} logout={logout}/>
