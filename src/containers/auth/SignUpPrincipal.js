@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate, Interpolate} from 'react-i18next';
-import background from '../../media/images/bg-3.jpg';
 import 'cropperjs/dist/cropper.css';
 import Cropper from "react-cropper";
 import {NavLink} from "react-router-dom";
@@ -128,7 +127,7 @@ class SignUpPrincipal extends Component {
     return (
       <div>
         {loading && <Loader />}
-        <div className="m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor m--full-height" style={{backgroundImage: `url(${background})`,minHeight:'100vh'}}>
+        <div className="main-background m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor m--full-height" style={{minHeight:'100vh'}}>
           <div className="m-grid__item m-grid__item--fluid">
             <div className="signup-page">
               <div className="text-center m--margin-top-15">

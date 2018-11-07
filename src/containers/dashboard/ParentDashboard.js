@@ -166,10 +166,10 @@ class ParentDashboard extends Component {
             <div key={i} className={classes.profileBlock} style={{background: '#D3A9A9'}}>
               <div className={classes.btnGroup}>
                 <div className="form-group-inline">
-                    <button title={t('accept')} onClick={() => { this._declineRequest(request.id) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill'>
+                    <button title={t('accept')} disabled={loading} onClick={() => { this._declineRequest(request.id) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill'>
                         <i className='la la-check'></i>
                     </button> 
-                    <button title={t('decline')} onClick={() => { this._declineRequest(request.id) }} className='btn btn-danger m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill'>
+                    <button title={t('decline')} disabled={loading} onClick={() => { this._declineRequest(request.id) }} className='btn btn-danger m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill'>
                         <i className='la la-close'></i>
                     </button>                                           
                 </div>                

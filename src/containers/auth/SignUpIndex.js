@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {translate, Interpolate} from 'react-i18next';
-import background from '../../media/images/bg-3.jpg';
 import {NavLink} from "react-router-dom";
 
 const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
@@ -11,16 +10,15 @@ class SignUpIndex extends Component {
     const loginBtn = <NavLink to="/login"><strong>{t('login')}</strong></NavLink>;
     return (            
       <div className="m-grid m-grid--hor m-grid--root m-page m--full-height">
-        <div className="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop justify-content-center m-login m-login--2 m-login-2--skin-2">
-          <div style={{backgroundImage: `url(${background})`}} className="m-grid__item m-grid__item--fluid d-flex justify-content-center m-login__wrapper">
-            <div className="m-content ">
+        <div className="main-background m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop justify-content-center m-login">
+          <div className="m-login__wrapper">           
               <div className="m-login__container">
                 <div className="m-login__logo">
                   <a href={"/"}>
                     <img src={logoUrl} alt="GravityBrain"/>
                   </a>
                 </div>
-                <div className="m-login__signin">
+                <div>
                   <div className="m-login__head"> 
                     <h3 className="m-login__title">{t('signUp')}</h3> 
                   </div> 
@@ -30,10 +28,10 @@ class SignUpIndex extends Component {
                       <h4 className="text-center m--margin-top-25">{t('selectYourAccountType')}</h4>
 
                       <div className="signup-btns flex-column d-flex flex m--margin-top-15 m--margin-bottom-15">
-                        <NavLink to="/signUp/parent" activeClassName="link-active" className="btn m-btn--pill m--margin-bottom-10 btn-lg m-btn btn-primary">
+                        <NavLink to="/signUp/parent" activeClassName="link-active" className="btn m-btn--pill m--margin-top-15 m--margin-bottom-25 btn-lg m-btn btn-primary">
                           {t('parent')}
                         </NavLink>
-                        <NavLink to="/signUp/principal" activeClassName="link-active" className="btn m-btn--pill btn-lg m-btn btn-success">
+                        <NavLink to="/signUp/principal" activeClassName="link-active" className="btn m-btn--pill m--margin-bottom-15 btn-lg m-btn btn-success">
                           {t('principal')}
                         </NavLink>
                       </div>
@@ -44,8 +42,7 @@ class SignUpIndex extends Component {
                   </div>
                 </div>
               </div>              
-            </div>
-          </div>
+            </div>          
         </div>
       </div>);    
   }

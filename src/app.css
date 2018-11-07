@@ -218,6 +218,10 @@ li > .small-avatar {
     border-radius: 0 !important;
 }
 
+.main-background {
+    background-image: url(./media/images/bg-3.jpg);    
+}
+
 .loginWrapper {
     top: 0;
     left: 0;
