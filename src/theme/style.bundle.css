@@ -8909,7 +8909,7 @@ b, strong {
     .m-grid.m-grid--hor-tablet.m-grid--tablet > .m-grid__item {
       flex: none; }
       .m-grid.m-grid--hor-tablet.m-grid--tablet > .m-grid__item.m-grid__item--fluid {
-        flex: 1 0 auto; }
+        flex: 1 1 auto; }
     .m-grid.m-grid--hor-tablet.m-grid--tablet > .m-grid__item.m-grid__item--order-tablet-1 {
       order: 1; }
     .m-grid.m-grid--hor-tablet.m-grid--tablet > .m-grid__item.m-grid__item--order-tablet-2 {
@@ -12353,356 +12353,63 @@ body.m-portlet--fullscreen {
 .m-pricing-table-1 .m-pricing-table-1__items .m-pricing-table-1__item .m-pricing-table-1__label {
   color: #a4a6ae; }
 
-.m-login.m-login--1 {
-  background: white; }
-  .m-login.m-login--1 .m-login__aside {
-    width: 700px;
-    padding: 2rem 11rem; }
-  .m-login.m-login--1 .m-login__content {
-    padding: 5rem 10rem 10rem 10rem;
-    background-attachment: fixed;
-    background-size: cover; }
-    .m-login.m-login--1 .m-login__content .m-login__welcome {
-      color: #ffffff;
-      font-size: 3.5rem;
-      font-weight: 500;
-      margin-bottom: 2rem; }
-    .m-login.m-login--1 .m-login__content .m-login__msg {
-      color: #ffffff;
-      font-size: 1.1rem;
-      font-weight: 200; }
-  .m-login.m-login--1 .m-login__wrapper {    
-    padding: 35% 2rem 2rem 2rem; }
-    .m-login.m-login--1 .m-login__wrapper .m-login__logo {
-      text-align: center;
-      margin: 0 auto 4rem auto; }
-    .m-login.m-login--1 .m-login__wrapper .m-login__head {
-      margin-top: 1rem; }
-      .m-login.m-login--1 .m-login__wrapper .m-login__head .m-login__title {
-        text-align: center;
-        font-size: 1.5rem; }
-      .m-login.m-login--1 .m-login__wrapper .m-login__head .m-login__desc {
-        margin-top: 1.5rem;
-        text-align: center;
-        font-size: font-get-size(regular); }
-    .m-login.m-login--1 .m-login__wrapper .m-login__form {
-      margin-top: 4rem; }
-      .m-login.m-login--1 .m-login__wrapper .m-login__form .m-form__group {
-        margin: 0;
-        padding: 0;
-        position: relative; }
-        .m-login.m-login--1 .m-login__wrapper .m-login__form .m-form__group .form-control {
-          -webkit-border-radius: 0;
-          -moz-border-radius: 0;
-          -ms-border-radius: 0;
-          -o-border-radius: 0;
-          border-radius: 0;
-          border: 0;
-          border-bottom: 1px solid #ebedf2;
-          padding: 1rem 0;
-          margin-top: 0.1rem; }
-          .m-login.m-login--1 .m-login__wrapper .m-login__form .m-form__group .form-control::-moz-placeholder {
-            color: #9496a0;
-            opacity: 1; }
-          .m-login.m-login--1 .m-login__wrapper .m-login__form .m-form__group .form-control:-ms-input-placeholder {
-            color: #9496a0; }
-          .m-login.m-login--1 .m-login__wrapper .m-login__form .m-form__group .form-control::-webkit-input-placeholder {
-            color: #9496a0; }
-          .m-login.m-login--1 .m-login__wrapper .m-login__form .m-form__group .form-control.m-login__form-input--last {
-            border: 0; }
-          .m-login.m-login--1 .m-login__wrapper .m-login__form .m-form__group .form-control:focus::-moz-placeholder {
-            color: #589ee4;
-            opacity: 1; }
-          .m-login.m-login--1 .m-login__wrapper .m-login__form .m-form__group .form-control:focus:-ms-input-placeholder {
-            color: #589ee4; }
-          .m-login.m-login--1 .m-login__wrapper .m-login__form .m-form__group .form-control:focus::-webkit-input-placeholder {
-            color: #589ee4; }
-        .m-login.m-login--1 .m-login__wrapper .m-login__form .m-form__group.has-danger .form-control-feedback {
-          font-weight: 400;
-          font-size: 0.85rem; }
-      .m-login.m-login--1 .m-login__wrapper .m-login__form .m-login__form-sub {
-        margin-top: 2rem; }
-        .m-login.m-login--1 .m-login__wrapper .m-login__form .m-login__form-sub .m-checkbox {
-          font-size: 1rem; }
-        .m-login.m-login--1 .m-login__wrapper .m-login__form .m-login__form-sub .m-link {
-          font-size: 1rem; }
-      .m-login.m-login--1 .m-login__wrapper .m-login__form .m-login__form-action {
-        margin: 3rem 0 3rem 0;
-        text-align: center; }
-        .m-login.m-login--1 .m-login__wrapper .m-login__form .m-login__form-action .btn {
-          display: inline-block;
-          text-align: center;
-          padding: 1.2rem 3rem; }
-  .m-login.m-login--1 .m-login__account {
-    text-align: center; }
-    .m-login.m-login--1 .m-login__account .m-login__account-msg {
-      font-size: 1.1rem;
-      font-weight: 400;
-      color: #898b96; }
-    .m-login.m-login--1 .m-login__account .m-login__account-link {
-      font-size: 1.1rem;
-      font-weight: 400; }
-
-.m-login.m-login--1.m-login--signin .m-login__signup {
-  display: none; }
-
-.m-login.m-login--1.m-login--signin .m-login__signin {
-  display: block; }
-
-.m-login.m-login--1.m-login--signin .m-login__forget-password {
-  display: none; }
-
-.m-login.m-login--1.m-login--signup .m-login__signup {
-  display: block; }
-
-.m-login.m-login--1.m-login--signup .m-login__signin {
-  display: none; }
-
-.m-login.m-login--1.m-login--signup .m-login__forget-password {
-  display: none; }
-
-.m-login.m-login--1.m-login--signup .m-login__account {
-  display: none; }
-
-.m-login.m-login--1.m-login--forget-password .m-login__signup {
-  display: none; }
-
-.m-login.m-login--1.m-login--forget-password .m-login__signin {
-  display: none; }
-
-.m-login.m-login--1.m-login--forget-password .m-login__forget-password {
-  display: block; }
-
-@media (min-width: 1241px) and (max-width: 1200px) {
-  .m-login.m-login--1 .m-login__aside {
-    width: 400px;
-    margin: 0 auto;
-    padding: 3rem 3rem; }
-  .m-login.m-login--1 .m-login__content {
-    padding: 2rem; }
-    .m-login.m-login--1 .m-login__content .m-login__welcome {
-      font-size: 1.5rem; } }
-
-@media (max-width: 1240px) {
-  .m-login.m-login--1 .m-login__aside {
-    width: 500px;
-    margin: 0 auto;
-    padding: 2rem 3rem; }
-    .m-login.m-login--1 .m-login__aside .m-login__wrapper {
-      padding-top: 3rem; }
-      .m-login.m-login--1 .m-login__aside .m-login__wrapper .m-login__logo {
-        margin: 2rem auto 3.5rem auto; }
-  .m-login.m-login--1 .m-login__content {
-    padding: 2rem; }
-    .m-login.m-login--1 .m-login__content .m-login__welcome {
-      font-size: 1.5rem;
-      margin-bottom: 1rem; }
-    .m-login.m-login--1 .m-login__content .m-login__msg {
-      font-size: 1rem;
-      margin: 0; } }
-
-@media (max-width: 768px) {
-  .m-login.m-login--1 .m-login__aside {
-    width: 100%;
-    padding: 2rem 3rem; }
-    .m-login.m-login--1 .m-login__aside .m-login__wrapper {
-      padding-top: 2rem; } }
-
-.m-login.m-login--2 {
+.m-login {
   background-size: cover;
   background-repeat: no-repeat; }
-  .m-login.m-login--2 .m-login__wrapper {
+  .m-login .m-login__wrapper {
     padding: 6% 2rem 1rem 2rem;    
     }
-    .m-login.m-login--2 .m-login__wrapper .m-login__container {
+    .m-login .m-login__wrapper .m-login__container {
       width: 430px;
       margin: 0 auto; }
-      .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__logo {
+      .m-login .m-login__wrapper .m-login__container .m-login__logo {
         text-align: center;
         margin: 0 auto 4rem auto; }
-      .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__head {
+      .m-login .m-login__wrapper .m-login__container .m-login__head {
         margin-top: 1rem; }
-        .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__head .m-login__title {
+        .m-login .m-login__wrapper .m-login__container .m-login__head .m-login__title {
           text-align: center;
           font-size: 1.5rem; }
-        .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__head .m-login__desc {
-          margin-top: 1.5rem;
-          text-align: center;
-          font-size: font-get-size(regular); }
-      .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form {
-        margin: 4rem auto; }
-        .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-form__group {
-          margin: 0;
-          padding: 0;
-          margin: 0 auto; }
-          .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-form__group .form-control {
-            border-radius: 40px;
-            border: none;
-            padding: 1.5rem 1.5rem;
-            margin-top: 1.5rem; }
-            .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-form__group .form-control.m-login__form-input--last {
-              border: 0; }
-          .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-form__group.has-danger .form-control-feedback {
-            font-weight: 400;
-            font-size: 0.85rem;
-            padding-left: 1.6rem; }
-        .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-login__form-sub {
-          padding-left: 7px;
-          padding-right: 7px;
-          margin: 15px auto; }
-          .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-login__form-sub .m-checkbox {
-            font-size: 1rem; }
-          .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-login__form-sub .m-link {
-            font-size: 1rem; }
-        .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-login__form-action {
-          text-align: center;
-          margin-top: 7%; }
-          .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-login__form-action .m-login__btn {
-            display: inline-block;
-            text-align: center;
-            padding: 1.4rem 4rem;
-            margin-top: 0.8rem; }
-      .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__account {
+      .m-login .m-login__wrapper .m-login__container .m-login__account {
         text-align: center;
         margin-top: 5%; }
-        .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__account .m-login__account-msg {
+        .m-login .m-login__wrapper .m-login__container .m-login__account .m-login__account-msg {
           font-size: 1.1rem;
           font-weight: 400; }
-        .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__account .m-login__account-link {
+        .m-login .m-login__wrapper .m-login__container .m-login__account .m-login__account-link {
           font-size: 1.1rem;
           font-weight: 400; }
-
-.m-login.m-login--2.m-login--signin .m-login__signup {
-  display: none; }
-
-.m-login.m-login--2.m-login--signin .m-login__signin {
-  display: block; }
-
-.m-login.m-login--2.m-login--signin .m-login__forget-password {
-  display: none; }
-
-.m-login.m-login--2.m-login--signup .m-login__signup {
-  display: block; }
-
-.m-login.m-login--2.m-login--signup .m-login__signin {
-  display: none; }
-
-.m-login.m-login--2.m-login--signup .m-login__forget-password {
-  display: none; }
-
-.m-login.m-login--2.m-login--signup .m-login__account {
-  display: none; }
-
-.m-login.m-login--2.m-login--forget-password .m-login__signup {
-  display: none; }
-
-.m-login.m-login--2.m-login--forget-password .m-login__signin {
-  display: none; }
-
-.m-login.m-login--2.m-login--forget-password .m-login__forget-password {
-  display: block; }
 
 @media (max-width: 1240px) {
-  .m-login.m-login--2 .m-login__wrapper {
+  .m-login .m-login__wrapper {
     padding-top: 3rem; }
-    .m-login.m-login--2 .m-login__wrapper .m-login__account {
+    .m-login .m-login__wrapper .m-login__account {
       margin-top: 10rem; } }
 
 @media (max-width: 768px) {
-  .m-login.m-login--2 .m-login__wrapper .m-login__container {
+  .m-login .m-login__wrapper .m-login__container {
     width: 100%;
     margin: 0 auto; }
-    .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form {
-      width: 100%;
-      margin: 0 auto; }
-      .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-login__form-sub .m-login__form-left {
-        padding-right: 0; }
-      .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-login__form-sub .m-login__form-right {
-        padding-left: 0; }
-      .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-login__form-action {
-        padding-top: 3rem; }
-        .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-login__form-action .btn {
-          padding: 0.8rem 3rem;
-          margin-top: 10px; }
-    .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form-action .btn {
-      padding: 1rem 3rem; }
-    .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__account {
+    .m-login .m-login__wrapper .m-login__container .m-login__account {
       margin-top: 20%; } }
 
 @media (max-width: 1240px) {
-  .m-login.m-login--2 .m-login__wrapper {
-    width: 100%; }
-    .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-login__form-action {
-      padding-top: 0; } }
+  .m-login .m-login__wrapper {
+    width: 100%; }}
 
-@media (max-width: 768px) {
-  .m-login.m-login--2 .m-login__wrapper .m-login__container .m-login__form .m-login__form-sub {
-    padding-left: 0;
-    padding-right: 0; } }
-
-.m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__head .m-login__title, .m-signup__head .m-login__title {
+.m-login .m-login__container .m-login__head .m-login__title, .m-signup__head .m-login__title {
   color: #9e97aa; }
 
-.m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__head .m-login__desc {
+.m-login .m-login__container .m-login__head .m-login__desc {
   color: #aba5b6; }
 
-.m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__form {
-  color: #aba5b6; }
-  .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__form .form-control {
-    color: #91899f;
-    background: #f7f6f9; }
-    .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__form .form-control::-moz-placeholder {
-      color: #9e97aa;
-      opacity: 1; }
-    .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__form .form-control:-ms-input-placeholder {
-      color: #9e97aa; }
-    .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__form .form-control::-webkit-input-placeholder {
-      color: #9e97aa; }
-    .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__form .form-control:focus {
-      color: #776e87; }
-      .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__form .form-control:focus::-moz-placeholder {
-        color: #91899f;
-        opacity: 1; }
-      .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__form .form-control:focus:-ms-input-placeholder {
-        color: #91899f; }
-      .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__form .form-control:focus::-webkit-input-placeholder {
-        color: #91899f; }
-  .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__form .m-login__form-sub .m-checkbox {
-    color: #aba5b6; }
-  .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__form .m-login__form-sub .m-link {
-    color: #aba5b6; }
-    .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__form .m-login__form-sub .m-link:hover {
-      color: #776e87; }
-      .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__form .m-login__form-sub .m-link:hover:after {
-        border-bottom: 1px solid #776e87;
-        opacity: 0.3 ;
-        filter: alpha(opacity=30) ; }
-
-.m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__account .m-login__account-msg {
+.m-login .m-login__container .m-login__account .m-login__account-msg {
   color: #aba5b6; }
 
-.m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__account .m-login__account-link {
+.m-login .m-login__container .m-login__account .m-login__account-link {
   color: #847b93; }
-  .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__account .m-login__account-link:hover {
+  .m-login .m-login__container .m-login__account .m-login__account-link:hover {
     color: #6a6279; }
-    .m-login.m-login--2.m-login-2--skin-2 .m-login__container .m-login__account .m-login__account-link:hover:after {
-      border-bottom: 1px solid #6a6279;
-      opacity: 0.3 ;
-      filter: alpha(opacity=30) ; }
-
-body.m-page--boxed {
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover; }
-
-.m-page--loading .m-page {
-  display: none; }
-
-@media (min-width: 1400px) {
-  .m-page--boxed .m-page {
-    width: 1340px;
-    margin-left: auto;
-    margin-right: auto; } }
 
 .m-body .m-content {
   padding: 9px; }
@@ -12772,9 +12479,6 @@ body.m-page--boxed {
 
 .m-page--wide .m-header,
 .m-page--fluid .m-header {
-  background-color: #ffffff; }
-
-.m-page--boxed .m-header .m-header-head {
   background-color: #ffffff; }
 
 @media (min-width: 1241px) {

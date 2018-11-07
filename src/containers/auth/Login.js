@@ -5,7 +5,6 @@ import { login, setRedirectUrl } from '../../redux/auth/actions';
 import { selectLoginRequest } from '../../redux/auth/selectors';
 import { FormControlLabel, Button, CircularProgress, Checkbox } from '@material-ui/core';
 import { withRouter, NavLink } from 'react-router-dom';
-import background from '../../media/images/bg-3.jpg';
 
 const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
 
@@ -55,22 +54,21 @@ class Login extends Component {
     
     return (
       <div className="m-grid m-grid--hor m-grid--root m-page m--full-height">
-        <div className="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop justify-content-center m-login m-login--2 m-login-2--skin-2">
-          <div style={{backgroundImage: `url(${background})`}} className="m-grid__item m-grid__item--fluid d-flex justify-content-center m-login__wrapper">
-            <div className="m-content">
+        <div className="main-background m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop justify-content-center m-login">
+          <div className="m-login__wrapper">            
               <div className="m-login__container">
                 <div className="m-login__logo">
                   <a href={"/"}>
                     <img src={logoUrl} alt="GravityBrain"/>
                   </a>
                 </div>
-                <div className="m-login__signin">
+                <div>
                   <div className="m-login__head"> 
                     <h3 className="m-login__title">{t('signIn')}</h3> 
                   </div> 
-                  <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--info m-portlet--bordered-semi m--margin-top-20 m-portlet--full-height ">                    
+                  <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--info m-portlet--bordered-semi m--margin-top-20 m-portlet--full-height ">
                     <div className="m-portlet__body">
-                        <form className="m-form m--margin-top-30 m--margin-bottom-15" onSubmit={(e) => { this._login(e) }}>
+                        <form className="m-form m--margin-top-30 m--margin-bottom-15 m--margin-left-10 m--margin-right-10" onSubmit={(e) => { this._login(e) }}>
                           <div className="form-group m-form__group">
                             <input className="form-control m-input--pill" type="text" placeholder={t('username')} name="username" autoComplete="off" value={this.state.username} onChange={this._handleUsernameChange}/>
                               {(errors.errors !== undefined && errors.errors.username) && <div id="username-error" className="form-control-feedback  text-center error">{errors.errors.username[0]}</div>}
@@ -101,16 +99,15 @@ class Login extends Component {
                         </form>
                     </div>
                   </div>
-              <div className="m-login__account">
-                <span className="m-login__account-msg">
-                {t('doNotHaveAccountYet')}
-                </span>
-                <NavLink to="signUp" id="m_login_signup" className="m--margin-left-5 m-link m-link--light m-login__account-link">{t('signUp')}</NavLink>
-              </div>                  
+                <div className="m-login__account">
+                  <span className="m-login__account-msg">
+                  {t('doNotHaveAccountYet')}
+                  </span>
+                  <NavLink to="signUp" id="m_login_signup" className="m--margin-left-5 m-link m-link--light m-login__account-link">{t('signUp')}</NavLink>
+                </div>                  
                 </div>
               </div>              
-            </div>
-          </div>
+            </div>        
         </div>
       </div>);
   }
