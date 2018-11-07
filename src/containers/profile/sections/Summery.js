@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { randColorName } from "../../../helpers/colors";
 import { translate } from 'react-i18next';
+import { Typography } from '@material-ui/core';
 
 class Summery extends Component {
 
@@ -58,9 +59,9 @@ class Summery extends Component {
           </div>
         </div>
         <div className="m-portlet__body">         
-          <h3>{t('homerooms')}</h3>
+          <Typography variant="h6" color="inherit" >{t('homerooms')}</Typography>
           {this._renderData('homerooms')}
-          <h3>{t('classrooms')}</h3>
+          <Typography variant="h6" color="inherit" >{t('classrooms')}</Typography>
           {this._renderData('classrooms')}
         </div>
       </div>
