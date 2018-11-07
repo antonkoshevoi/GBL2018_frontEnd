@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,  
-  Icon,
-  Toolbar, Typography,
+  DialogContent, Icon,
+  Toolbar, Typography, Divider,
   Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
@@ -95,7 +94,7 @@ class CreateAdministrationModal extends Component {
     const errors = createRequest.get('errors');
 
     return (
-      <Modal bigger isOpen={isOpen} onClose={() => this._close()}>
+      <Modal middle={true} isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>            
               {loading ? (
@@ -113,17 +112,18 @@ class CreateAdministrationModal extends Component {
           <form id='create-administrator-form' onSubmit={(e) => { this._onSubmit(e) }}>
            <div className="row">
              <div className="col-md-6">
-                 <ImageCropper circularButton onCrop={(cropImg) => {this._setCroppedImage(cropImg)}} setFile={(img) => {this._setImage(img)}}/>
-             </div>
-             <div className="col-md-6">
                  <AdministrationForm
                      onChange={(adminUser) => { this._onChange(adminUser) }}
                      adminUser={this.state.adminUser}
                      errors={errors}/>
              </div>
+             <div className="col-md-6">
+                 <ImageCropper circularButton onCrop={(cropImg) => {this._setCroppedImage(cropImg)}} setFile={(img) => {this._setImage(img)}}/>
+             </div>
            </div>
           </form>
         </DialogContent>
+        <Divider className='full-width'/>
         <DialogActions>
           <Button
             type='submit'

@@ -19,13 +19,13 @@ class SchoolProfile extends Component {
         const success = this.props.schoolRequest.get('success');
 
         return (
-            <div className="row m--margin-top-20">
-                <div className="col-md-12 col-lg-9 m-auto">
+            <div className="row m--margin-15">
+                <div className="col-sm-12 col-md-12 col-lg-9 m-auto">
                     <div className="row">
-                        <div className="col-lg-4">
+                        <div className="col-12 col-sm-5 col-md-5 col-lg-4">
                             <SchoolInfo school={school}/>
                         </div>
-                        <div className="col-lg-8">
+                        <div className="col-12 col-sm-7 col-md-7 col-lg-8">
                             {success && <SchoolDetails school={school}/>}
                         </div>
                     </div>

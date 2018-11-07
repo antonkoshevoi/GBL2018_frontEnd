@@ -81,7 +81,7 @@ class SchoolDetails extends Component {
 
     return (
       <div>
-        <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
+        <div className="m-portlet m-portlet--head-solid-bg m-portlet--info m--margin-bottom-15">
           <div className="m-portlet__head">
             <div className="m-portlet__head-caption">
               {loading && <div className="m-portlet__head-title"><span className="m-portlet__head-icon"><CircularProgress style={{float: 'right'}} color="inherit"/></span></div>}

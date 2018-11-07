@@ -96,7 +96,7 @@ class EditTeacherModal extends Component {
     const errors = updateRequest.get('errors');
 
     return (
-      <Modal isOpen={isOpen} bigger onClose={() => this._close()}>
+      <Modal isOpen={isOpen} middle={true} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>
               {loading ? (
@@ -114,17 +114,17 @@ class EditTeacherModal extends Component {
           <form id='update-teacher-form' onSubmit={(e) => { this._onSubmit(e) }}>
               <div className="row">
                   <div className="col-md-6">
+                      <TeacherForm
+                          onChange={(teacher) => { this._onChange(teacher) }}
+                          teacher={this.state.teacher}
+                          errors={errors}/>
+                  </div>
+                  <div className="col-md-6">
                       <ImageCropper
                           circularButton
                           image={this.state.avatar || ''}
                           onCrop={(cropImg) => this._setCroppedImage(cropImg)}
                           setFile={(img) => this._setImage(img)}/>
-                  </div>
-                  <div className="col-md-6">
-                      <TeacherForm
-                          onChange={(teacher) => { this._onChange(teacher) }}
-                          teacher={this.state.teacher}
-                          errors={errors}/>
                   </div>
               </div>
           </form>

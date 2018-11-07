@@ -85,7 +85,7 @@ class InfoSection extends Component {
 
     return (
       <div className="row">
-        <div className="col-md-3">
+        <div className="col-sm-5 col-md-4 col-lg-3">
           <div className="imgBlock">
             {studentRequest.get('loading') ? <MyPreloader text="Loading..." color="primary"/> : 
             <div className="avatar m--margin-bottom-20">
@@ -93,74 +93,70 @@ class InfoSection extends Component {
             </div>}
           </div>
         </div>
-        <div className="col-md-9">
-          <div className="row">
-             <div className="col-lg-4 m--margin-bottom-20">           
-                <div className="m-portlet  m-portlet--head-solid-bg">
-                  <div className="m-portlet__head border-b-blue">
-                    <div className="m-portlet__head-caption">
-                      <div className="m-portlet__head-title">
-                        <span className="m-portlet__head-icon"><i className="display-5 la la-info"></i></span>              
-                        <h3 className="m-portlet__head-text">
-                          {t('about')}
-                        </h3>
-                      </div>
+         <div className="col-sm-7 col-md-8 col-lg-3 m--margin-bottom-20">           
+            <div className="m-portlet  m-portlet--head-solid-bg">
+              <div className="m-portlet__head border-b-blue">
+                <div className="m-portlet__head-caption">
+                  <div className="m-portlet__head-title">
+                    <span className="m-portlet__head-icon"><i className="display-5 la la-info"></i></span>              
+                    <h3 className="m-portlet__head-text">
+                      {t('about')}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div className='m-portlet__body position-relative'>
+                <HasRole roles={['Superadministrator', 'School', 'Teacher', 'Parents']}>
+                    <div style={{position:'absolute', right:10, top:-60}}>                      
+                        <IconButton color='primary' onClick={() => { this._openEditDialog() }}>                        
+                          <Icon className="material-icons">
+                            edit_icon
+                          </Icon>
+                        </IconButton>                      
                     </div>
-                  </div>
-                  <div className='m-portlet__body position-relative'>
-                    <HasRole roles={['Superadministrator', 'School', 'Teacher', 'Parents']}>
-                        <div style={{position:'absolute', right:10, top:-60}}>                      
-                            <IconButton color='primary' onClick={() => { this._openEditDialog() }}>                        
-                              <Icon className="material-icons">
-                                edit_icon
-                              </Icon>
-                            </IconButton>                      
-                        </div>
-                    </HasRole>
-                    <div className="table-responsive">
-                      <table className="table">
-                        <tbody>
-                        <tr>
-                          <th>{t('firstName')}</th>
-                          <td>{!student ? <CircularProgress color="primary"/> : student.firstName}</td>
-                        </tr>
-                        <tr>
-                          <th>{t('lastName')}</th>
-                          <td>{!student ? <CircularProgress color="primary"/> : student.lastName}</td>
-                        </tr>
-                        <tr>
-                          <th>{t('birthday')}</th>
-                          <td>{!student ? <CircularProgress color="primary"/> : (student.birthday || 'N / A')}</td>
-                        </tr>
-                        </tbody>
-                      </table>
-                    </div>          
-                  </div>
-               </div>      
-            </div>
-            <div className="col-lg-8 m--margin-bottom-20">
-              <Card title={t('myCourses')} icon="display-5 la la-sitemap">                
+                </HasRole>
                 <div className="table-responsive">
                   <table className="table">
-                    <thead>
-                    <tr>
-                      <th>{t('course')}</th>
-                      <th>{t('classroom')}</th>
-                      <th>{t('progress')}</th>
-                      <th>{t('performance')}</th>
-                    </tr>
-                    </thead>
                     <tbody>
-                    {loading && <tr>
-                      <td colSpan="3" className="text-center"><CircularProgress color="primary"/></td>
-                    </tr>}
-                    {!loading && this._renderCourseTable(data.data)}
+                    <tr>
+                      <th>{t('firstName')}</th>
+                      <td>{!student ? <CircularProgress color="primary"/> : student.firstName}</td>
+                    </tr>
+                    <tr>
+                      <th>{t('lastName')}</th>
+                      <td>{!student ? <CircularProgress color="primary"/> : student.lastName}</td>
+                    </tr>
+                    <tr>
+                      <th>{t('birthday')}</th>
+                      <td>{!student ? <CircularProgress color="primary"/> : (student.birthday || 'N / A')}</td>
+                    </tr>
                     </tbody>
                   </table>
-                </div>
-              </Card>
+                </div>          
+              </div>
+           </div>      
+        </div>
+        <div className="col-sm-12 col-lg-6 m--margin-bottom-20">
+          <Card title={t('myCourses')} icon="display-5 la la-sitemap">                
+            <div className="table-responsive">
+              <table className="table">
+                <thead>
+                <tr>
+                  <th>{t('course')}</th>
+                  <th>{t('classroom')}</th>
+                  <th>{t('progress')}</th>
+                  <th>{t('performance')}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {loading && <tr>
+                  <td colSpan="3" className="text-center"><CircularProgress color="primary"/></td>
+                </tr>}
+                {!loading && this._renderCourseTable(data.data)}
+                </tbody>
+              </table>
             </div>
-          </div>
+          </Card>
         </div>
         <EditStudentModal
           isOpen={this.state.editModalIsOpen}

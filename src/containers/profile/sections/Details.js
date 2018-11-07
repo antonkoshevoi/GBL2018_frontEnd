@@ -90,7 +90,7 @@ class Details extends Component {
     const errors = getUpdateRequest.get('errors');    
 
     return (      
-        <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
+        <div className="m-portlet m-portlet--head-solid-bg m-portlet--info m--margin-bottom-15">
           <div className="m-portlet__head">
             <div className="m-portlet__head-caption">
               <div className="m-portlet__head-title">

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
     AppBar, CircularProgress,    
     Icon,
-    Toolbar, Typography,
+    Toolbar, Typography, Divider,
     Button, DialogActions, DialogContent
 } from '@material-ui/core';
 import {connect} from 'react-redux';
@@ -36,7 +36,7 @@ class EditAdministrationModal extends Component {
         const record = this.props.getSingleRecordRequest.get('record');
         const nextRecord = nextProps.getSingleRecordRequest.get('record');
 
-        if (!record && nextRecord) {
+        if (!record && nextRecord) {                    
             this.setState({
                 id: nextRecord.get('id'),
                 adminUser: nextRecord.toJS(),
@@ -96,7 +96,7 @@ class EditAdministrationModal extends Component {
         const errors = updateRequest.get('errors');
 
         return (
-            <Modal isOpen={isOpen} bigger onClose={() => this._onClose()}>
+            <Modal isOpen={isOpen} middle={true} onClose={() => this._onClose()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>                        
                         {loading ? (
@@ -116,13 +116,6 @@ class EditAdministrationModal extends Component {
                     }}>
                         <div className="row">
                             <div className="col-md-6">
-                                <ImageCropper
-                                    circularButton
-                                    image={this.state.avatar || ''}
-                                    onCrop={(cropImg) => this._setCroppedImage(cropImg)}
-                                    setFile={(img) => this._setImage(img)}/>
-                            </div>
-                            <div className="col-md-6">
                                 <AdministrationForm
                                     onChange={(adminUser) => {
                                         this._onChange(adminUser)
@@ -130,9 +123,17 @@ class EditAdministrationModal extends Component {
                                     adminUser={this.state.adminUser}
                                     errors={errors}/>
                             </div>
+                            <div className="col-md-6">
+                                <ImageCropper
+                                    circularButton
+                                    image={this.state.avatar || ''}
+                                    onCrop={(cropImg) => this._setCroppedImage(cropImg)}
+                                    setFile={(img) => this._setImage(img)}/>
+                            </div>
                         </div>
                     </form>
                 </DialogContent>
+                <Divider className='full-width'/>
                 <DialogActions>
                     <Button
                         type='submit'

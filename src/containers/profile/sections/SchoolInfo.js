@@ -57,7 +57,7 @@ class SchoolInfo extends Component {
     const { school, t } = this.props;
 
     return (
-      <div className="m-portlet ">
+      <div className="m-portlet m--margin-bottom-15">
         <div className="m-portlet__body">
           <div className="m-card-profile">
             <div className="m-card-profile__details">

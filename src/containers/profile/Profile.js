@@ -16,31 +16,31 @@ class Profile extends Component {
         const user = userData.toJS();
 
         return (
-            <div >
+            <div className="m--margin-15">
                 <HasRole roles={['Student']}>
                     <Alerts />
                 </HasRole>
-                <div className="row m--margin-top-20">                        
+                <div className="row">                        
                     <HasRole roles={['Superadministrator', 'School', 'Parents']}>
-                        <div className="col-md-12 col-lg-9 m-auto">
+                        <div className="col-sm-12 col-md-12 col-lg-9 m-auto">
                             <div className="row">
-                                <div className="col-lg-4">
-                                    <Info user={user}/>
+                                <div className="col-sm-12 col-md-4 col-sm-12 col-lg-4">
+                                    <Info user={user} />
                                 </div>
-                                <div className="col-lg-8">
+                                <div className="col-sm-12 col-md-8 col-sm-12 col-lg-8">
                                     {getUserRequest.get('success') && <Details user={user} />}
                                 </div>
                             </div>
                         </div>
                     </HasRole>
                     <HasRole roles={['Student', 'Teacher']}>
-                        <div className="col-lg-3">
+                        <div className="col-sm-12 col-md-3 col-lg-3">
                             <Info user={user}/>
                         </div>
-                        <div className="col-lg-6">
+                        <div className="col-sm-12 col-md-5 col-lg-6">
                             {getUserRequest.get('success') && <Details user={user} />}
                         </div>        
-                        <div className="col-lg-3">
+                        <div className="col-sm-12 col-md-4 col-lg-3">
                             <Summery user={user} />
                         </div>        
                     </HasRole>                
