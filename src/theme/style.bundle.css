@@ -11096,43 +11096,6 @@ code {
     height: 0;
     overflow: hidden;
     margin: 30px -2.2rem; }
-  .m-portlet.m-portlet--creative {
-    padding-top: 3.5rem;
-    margin-top: 3.5rem; }
-    .m-portlet.m-portlet--creative.m-portlet--first {
-      margin-top: 1.375rem; }
-    .m-portlet.m-portlet--creative .m-portlet__head {
-      height: 2.75rem; }
-      .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption {
-        position: relative;
-        display: table-cell;
-        vertical-align: middle;
-        text-align: left; }
-        .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class^="la-"],
-        .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class*=" la-"] {
-          font-size: 1.3rem; }
-        .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class^="fa-"],
-        .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class*=" fa-"] {
-          font-size: 1.2rem; }
-        .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-text {
-          font-size: 1rem;
-          font-weight: 400;
-          font-family: Poppins; }
-          .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-text .m-portlet__head-desc {
-            font-size: 0.8rem;
-            font-weight: 300; }
-        .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label {
-          position: absolute;
-          top: -5.25rem;
-          left: 0;
-          font-size: 1.2rem;
-          font-weight: 500;
-          display: table;
-          padding: 0 1.75rem;
-          height: 3.5rem; }
-          .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label > span {
-            vertical-align: middle;
-            display: table-cell; }
 
 @media (min-width: 1241px) {
   .m-portlet.m-portlet--full-height {
@@ -11190,41 +11153,6 @@ body.m-portlet--fullscreen {
     border: 1px dashed #ebedf2; }
   .m-portlet .m-portlet__body-separator {
     border-bottom: 1px solid #f4f5f8; }
-  .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label {
-    -webkit-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.25) ;
-    -moz-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.25) ;
-    box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.25) ; }
-    .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label.m-portlet__head-label--brand {
-      background: #589ee4;
-      color: #ffffff; }
-    .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label.m-portlet__head-label--metal {
-      background: #c4c5d6;
-      color: #ffffff; }
-    .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label.m-portlet__head-label--light {
-      background: #ffffff;
-      color: #282a3c; }
-    .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label.m-portlet__head-label--accent {
-      background: #00c5dc;
-      color: #ffffff; }
-    .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label.m-portlet__head-label--focus {
-      background: #9816f4;
-      color: #ffffff; }
-    .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label.m-portlet__head-label--primary {
-      background: #5867dd;
-      color: #ffffff; }
-    .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label.m-portlet__head-label--success {
-      background: #34bfa3;
-      color: #ffffff; }
-    .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label.m-portlet__head-label--info {
-      background: #36a3f7;
-      color: #ffffff; }
-    .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label.m-portlet__head-label--warning {
-      background: #ffb822;
-      color: #111111; }
-    .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-label.m-portlet__head-label--danger {
-      background: #f4516c;
-      color: #ffffff; }
-
 
 .m-portlet.m-portlet--brand.m-portlet--head-solid-bg {
   background: #589ee4;
@@ -11290,18 +11218,6 @@ body.m-portlet--fullscreen {
 
 .m-portlet.m-portlet--border-bottom-brand {
   border-bottom: 3px solid #589ee4; }
-
-.m-portlet.m-portlet--border-bottom-metal {
-  border-bottom: 3px solid #c4c5d6; }
-
-.m-portlet.m-portlet--border-bottom-light {
-  border-bottom: 3px solid #ffffff; }
-
-.m-portlet.m-portlet--border-bottom-accent {
-  border-bottom: 3px solid #00c5dc; }
-
-.m-portlet.m-portlet--border-bottom-focus {
-  border-bottom: 3px solid #9816f4; }
 
 .m-portlet.m-portlet--border-bottom-primary {
   border-bottom: 3px solid #5867dd; }
@@ -11410,7 +11326,7 @@ body.m-portlet--fullscreen {
     font-size: 1rem;
     font-weight: 400;
     padding-bottom: 0.3rem;
-    padding-left: 5rem; }
+    padding-left: 2rem; }
     .m-timeline-2 .m-timeline-2__items .m-timeline-2__item .m-timeline-2__item-text.m-timeline-2__item-text--bold {
       font-size: 1.2rem;
       font-weight: 500;

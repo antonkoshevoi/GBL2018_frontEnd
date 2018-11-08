@@ -8,16 +8,16 @@ label.m--margin-bottom-10 {
     margin-top: 3px;
 }
 @media (max-width: 1240px) {
-    .col-form-label {
+    .signup-page .col-form-label {
         text-align: left;
     }
-    .form-group > div {
+    .signup-page .form-group > div {
         margin-bottom: 5px !important;
     }
-    .col-form-label {        
+    .signup-page .col-form-label {        
         margin-bottom: 0 !important;
     }
-    .form-group {
+    .signup-page .form-group {
         margin-bottom: 0 !important;
     }    
 }

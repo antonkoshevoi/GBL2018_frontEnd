@@ -5,6 +5,7 @@ import PortletWidgets from './ui/PortletWidgets';
 import PortletErrorsWidgets from './ui/PortletErrorsWidgets';
 import Loader from './layouts/Loader';
 import { translate } from 'react-i18next';
+import { Button } from '@material-ui/core';
 
 class CsvUploadSection extends Component {
     static propTypes = {        
@@ -15,18 +16,6 @@ class CsvUploadSection extends Component {
     state = {        
         file: undefined
     };
-
-    _selectSchool(event) {
-        this.setState({ school: event.target.value });
-    }
-
-    _handleSchoolChange(e) {
-        document.getElementById('file-input').value = '';
-
-        this.setState({            
-            file: undefined
-        });
-    }
 
     _handleFileChange(e) {            
 
@@ -74,14 +63,14 @@ class CsvUploadSection extends Component {
                         </div>
                     </div>
                     <div className="m-portlet__body">
-                        <div className="row" style={{ marginBottom: '30px' }}>
+                        <div className="row">
                             <div className="col-sm-12">
                                 <h6>{t('downloadCsvMessage')}</h6>
                                 <CSVLink
                                     headers={csvTemplateHeaders}
                                     data={csvTemplateData}
                                     filename={csvExampleName}
-                                    className="btn btn-success"
+                                    className="btn btn-success m--margin-top-15 m--margin-bottom-20"
                                 >
                                     {t('download')}
                                 </CSVLink>
@@ -90,14 +79,19 @@ class CsvUploadSection extends Component {
                         <div className="row" style={{ marginLeft: 0 }}>
                             <div className={`col-md-6 ${loading ? ' not-allowed' : ''}`}>
                                 <div className={`react-csv-input ${loading ? ' disabled' : 'fdsfsf'}`}>
-                                    <label>{t('selectCsvFile')}</label>
+                                    <label>{t('selectCsvFile')}</label>                                    
                                     <input
-                                        id="file-input"
-                                        className="csv-input"
+                                        accept="text/csv"        
+                                        id="file-input"        
                                         type="file"
-                                        accept="text/csv"
+                                        className="d-none"
                                         onChange={e => this._handleFileChange(e)}
                                     />
+                                    <label htmlFor="file-input">
+                                        <Button variant="contained" color="primary" component="span" className="btn btn-success m--margin-left-15">
+                                            {t('upload')}
+                                        </Button>
+                                   </label>                                    
                                 </div>
                             </div>
                         </div>

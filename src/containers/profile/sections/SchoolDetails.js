@@ -116,9 +116,7 @@ class SchoolDetails extends Component {
                       <span className="m-widget1__title m--font-brand">{school.schName || '-'}</span>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div className="m-widget1 m-widget1--paddingless">
+                </div>              
                 <div className="m-widget1__item">
                   <div className="row m-row--no-padding">
                     <div className="col">
@@ -129,8 +127,6 @@ class SchoolDetails extends Component {
                     </div>
                   </div>
                 </div>
-              </div>              
-              <div className="m-widget1 m-widget1--paddingless">
                 <div className="m-widget1__item">
                   <div className="row m-row--no-padding">
                     <div className="col">
@@ -141,8 +137,6 @@ class SchoolDetails extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="m-widget1 m-widget1--paddingless">
                 <div className="m-widget1__item">
                   <div className="row m-row--no-padding">
                     <div className="col">

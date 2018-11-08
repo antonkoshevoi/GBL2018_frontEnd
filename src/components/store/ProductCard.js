@@ -12,8 +12,7 @@ class ProductCard extends Component {
     const price = Number(product.get('price'));
     const discountPrice = Number(price - (price * product.get('discount') / 100));
 
-    let productThumb = product.get('thumbnail');
-    productThumb = productThumb.replace(/^http:\/\//i, 'https://');
+    let productThumb = product.get('thumbnail').replace(/^http:\/\//i, 'https://');
 
     return (
       <div className={`cardItem ${type === 'vertical' ? ' verticalCardItem' : ' horizontalCardItem'}`}>
@@ -32,7 +31,7 @@ class ProductCard extends Component {
             </Typography>
             {type === 'horizontal' &&
             <Typography className="cardDesc m--margin-top-5" component="p">
-              {(product.get('description').length > 77) ? product.get('description').substring(0, 77) + '...' : product.get('description')}
+              {product.get('description')}
             </Typography>
             }
             <div className="cardActions m--margin-top-15">

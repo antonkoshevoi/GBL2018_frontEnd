@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {randColorName} from '../../helpers/colors';
 
-
 class Insctruction extends Component {
     
     _renderInstructionList(data) {
@@ -20,7 +19,7 @@ class Insctruction extends Component {
                     </div>
                     {
                         item.subList !== undefined &&
-                        <div className="row m--padding-left-65">
+                        <div className="row m--padding-left-50">
                             <div className="col-xs-12">
                                 <div className="m-timeline-2 my-timeline">
                                     <div className="m-timeline-2__items  m--padding-top-5 m--padding-bottom-10">
@@ -53,16 +52,16 @@ class Insctruction extends Component {
     
     render() {
         return (
-            <div className="m-portlet m-portlet--creative m-portlet--first m-portlet--bordered-semi">
+            <div className="m-portlet m-portlet--brand  m-portlet--head-solid-bg m-portlet--bordered">
                 <div className="m-portlet__head">
                     <div className="m-portlet__head-caption">
                         <div className="m-portlet__head-title">
-                            <h2 className="m-portlet__head-label m-portlet__head-label--info">
-                                    <span style={{fontSize: "2rem"}}>?</span>
-                            </h2>
+                            <span className="m-portlet__head-icon">
+                                <i className="fa fa-question-circle-o" />
+                            </span>
+                            <h3 className="m-portlet__head-text">Instructions</h3>
                         </div>
                     </div>
-
                 </div>
                 <div className="m-portlet__body">
 
