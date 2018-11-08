@@ -2,14 +2,17 @@ import React, {Component} from 'react';
 import CsvUploadSection from "../../components/CsvUploadSection";
 import Insctruction from "../../components/ui/Insctruction";
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
 import { bulkUpload, resetBulkUploadRequest } from '../../redux/homerooms/actions';
-import { getSchools } from '../../redux/schools/actions';
 import { selectBulkUploadRequest } from '../../redux/homerooms/selectors';
-import { selectSchools } from '../../redux/schools/selectors';
 
 class HomeroomsBulkUpload extends Component {
 
-  state = {
+  constructor (props) {
+    super(props);
+    const { t } = this.props;
+    
+    this.state = {  
     csvExampleName: 'homerooms.csv',
     csvTemplateHeaders: [
         {label: 'name', key: 'name'},
@@ -26,59 +29,37 @@ class HomeroomsBulkUpload extends Component {
     ],
     instruction: [
       {
-        title: 'Select the School, to which the homeroom will be assigned, from the list',
-      },
-      {
-        title: 'Upload the csv file, with the following columns and separated by a comma \' , \'',
+        title: t('bulkAddInstructionCsv'),
         subList: [
-          {
-            title: 'name'
-          },
-          {
-            title: 'startDate'
-          },
-          {
-            title: 'endDate'
-          },
-          {
-            title: 'enrollmentStartDate'
-          },
-          {
-            title: 'enrollmentEndDate'
-          }
+          {title: 'name'},
+          {title: 'startDate'},
+          {title: 'endDate'},
+          {title: 'enrollmentStartDate'},
+          {title: 'enrollmentEndDate'}
         ]
       },
-      {
-        title: 'Dates are of the format YYYY-MM-DD',
-      },
-      {
-        title: 'Make sure that you place the column name headings in the first row',
-      },
-      {
-        title: 'Make sure that data is arranged in the order as the columns',
-      },
-      {
-        title: 'Do not leave any columns empty',
-      }
+      {title: t('bulkAddInstructionHeadings')},          
+      {title: t('bulkAddInstructionColumnsOrder')},
+      {title: t('bulkAddInstructionDates')},
+      {title: t('bulkAddInstructionHomeroomFields')}
     ]
   };
+  }
 
-  componentDidMount () {
-      this.props.getSchools();
+  componentDidMount () {      
       this.props.resetBulkUploadRequest();
   }
 
   render() {
-    const { schools, upload, bulkUploadRequest } = this.props;
+    const { upload, bulkUploadRequest } = this.props;
 
     return (
-      <div className="row">
+      <div className="row  m--margin-15">
         <div className="col-sm-6">
           <CsvUploadSection
             csvExampleName = {this.state.csvExampleName}
             csvTemplateHeaders = {this.state.csvTemplateHeaders}
-            csvTemplateData = {this.state.csvTemplateData}
-            schools={schools}
+            csvTemplateData = {this.state.csvTemplateData}            
             onUpload={upload}
             uploadRequest={bulkUploadRequest}
           />
@@ -92,12 +73,10 @@ class HomeroomsBulkUpload extends Component {
 }
 
 HomeroomsBulkUpload = connect(
-  (state) => ({
-    schools: selectSchools(state),
+  (state) => ({    
     bulkUploadRequest: selectBulkUploadRequest(state)
   }),
-  (dispatch) => ({
-    getSchools: () => { dispatch(getSchools()) },
+  (dispatch) => ({    
     resetBulkUploadRequest: () => { dispatch(resetBulkUploadRequest()) },
     upload: (file) => {
       dispatch(bulkUpload(file));
@@ -105,4 +84,4 @@ HomeroomsBulkUpload = connect(
   })
 )(HomeroomsBulkUpload);
 
-export default HomeroomsBulkUpload;
+export default translate('translations')(HomeroomsBulkUpload);

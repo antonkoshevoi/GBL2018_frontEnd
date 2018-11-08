@@ -122,15 +122,12 @@ class Details extends Component {
                             </div>
                           </div>
                           <div className="actionsBtn justify-content-end full-width align-items-end d-flex m--padding-right-20 align-self-end">
-                            <button className="btn m-btn btn-danger m-btn--icon no-border" onClick={() => {
-                              this._addToCart(record.get('id'))
-                            }}>
+                            <button className="btn m-btn btn-danger m-btn--icon no-border" onClick={() => { this._addToCart(record.get('id')) }}>
                               <span>
-                                {addToCartRequest.get('success') &&
-                                <i className="fa floating-basket fa-shopping-basket"></i>}
-                                <span className="discount"><span>${price.toFixed(2)}  </span></span>
+                                {addToCartRequest.get('success') && <i className="fa floating-basket fa-shopping-basket"></i>}
+                                {record.get('discount') > 0 && <span className="discount"><span>${price.toFixed(2)} </span></span>}
                                 <span>${discountPrice.toFixed(2)}</span>
-                                  <span className=".text-uppercase">{t('buy')}</span>
+                                  <span className="text-uppercase">{t('buy')}</span>
                               </span>
                             </button>
                           </div>

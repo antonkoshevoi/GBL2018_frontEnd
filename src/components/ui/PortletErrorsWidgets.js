@@ -6,20 +6,18 @@ export default class PortletErrorsWidgets extends React.Component {
         if (errorsList) {
             return errorsList.toJS().map((item, index) => {
                 return (
-                    <li key={index}>
-                        Error in line {item.line}
+                    <div key={index}>
+                        Error in line {item.line}:
                         {Object.keys(item.error).map((typeError, typeIndex) => (
-                            <span key={typeIndex}>
-                                {' '}
+                            <span key={typeIndex}>                                
                                 {item.error[typeError].map((message, i) => (
-                                    <span key={i}>
-                                        <br />
+                                    <span key={i}>                                        
                                         {message}
                                     </span>
                                 ))}
                             </span>
                         ))}
-                    </li>
+                    </div>
                 );
             });
         }
@@ -41,7 +39,7 @@ export default class PortletErrorsWidgets extends React.Component {
                 </div>
                 <div className="m-portlet__body  m-portlet__body--no-padding">
                     <div className="row m-row--no-padding m-row--col-separator-xl">
-                        <ul className="csv-upload-errors">{this._renderErrorItems(this.props.errors)}</ul>
+                        <div className="csv-upload-errors">{this._renderErrorItems(this.props.errors)}</div>
                     </div>
                 </div>
             </div>

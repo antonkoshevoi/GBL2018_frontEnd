@@ -43,26 +43,18 @@
     div.m-portlet .m-portlet__body {
         padding: 0.7rem;
     }
-
+/*
     .m-portlet.m-portlet--head-solid-bg .m-widget1 .m-widget1__item {
         padding: 0.2rem 0;
     }
-
+*/
     .small-card .m--padding-right-10, .small-card .m--padding-left-10 {
         padding: 2px !important;
         justify-content: space-between;
     }
 
-    div.m-widget1 .m-widget1__item .m-widget1__number {
-       font-size: 1rem;
-    }
-
-    .small-card .m-widget1__title {
-        font-size: 1rem;
-    }
-
-    .m-widget1 .m-widget1__item .m-widget1__title {
-        font-size: 1rem;
+    div.m-widget1 .m-widget1__item .m-widget1__number, .small-card .m-widget1__title, .m-widget1 .m-widget1__item .m-widget1__title {
+        font-size: 1.1rem;
     }
 
     .small-card-content .small-card {

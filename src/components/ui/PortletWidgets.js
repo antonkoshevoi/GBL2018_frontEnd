@@ -48,7 +48,7 @@ class PortletWidgets extends Component {
     render() {
 
         return (
-            <div className={"m-portlet m-portlet--head-solid-bg m-portlet--" + this.props.colorName}>
+            <div className={"m-portlet m-portlet--head-solid-bg m-portlet--bordered m-portlet--" + this.props.colorName}>
                 <div className={`m-portlet__head ${(this.props.title === undefined) ? 'm--hide' : ''}`}>
                     <div className="m-portlet__head-caption">
                         <div className="m-portlet__head-title"><span className="m-portlet__head-icon"><i

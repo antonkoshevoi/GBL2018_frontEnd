@@ -262,10 +262,6 @@ a.link-btn {
     left: 1.44rem;
 }
 
-.my-timeline.m-timeline-2 .m-timeline-2__items .m-timeline-2__item .m-timeline-2__item-text {
-    padding-left: 4rem;
-}
-
 .m-timeline-2.my-timeline {
     overflow: hidden;
     position: relative;
@@ -948,13 +944,17 @@ div#notFoundPage {
     margin-bottom: 5px;
 }
 
-.csv-upload-errors {
-    max-height: 600px;
-    overflow: scroll;
+.csv-upload-errors {   
     width: 100%;
-    overflow-x: hidden;
+    margin: 15px;
+    color: red;
+    list-style: none;
 }
-
+.csv-upload-errors div span {
+    font-size: 0.9rem;
+    margin-left: 10px;
+    display: block;
+}
 #m_aside_left {
     position: fixed;
 }
