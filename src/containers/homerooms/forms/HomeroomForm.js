@@ -169,7 +169,7 @@ class HomeroomForm extends Component {
 
     return (
       <div className='row'>
-        <Paper className='full-width' elevation='0'>
+        <Paper className='full-width' elevation={0}>
           <Tabs value={activeTab} onChange={this.handleChangeTab} centered>
             <Tab label={t('details')} />
             <Tab label={t('teachers')} />

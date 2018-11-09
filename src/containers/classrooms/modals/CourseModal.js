@@ -108,7 +108,7 @@ class CourseModal extends Component {
         }
         return (
           <Row key={i} index={i}>
-            <Td width='30px' first={true}>
+            <Td width='30px'>
               <FormControlLabel
                 value="male"
                 name="courseId"
@@ -154,16 +154,16 @@ class CourseModal extends Component {
         </AppBar>
 
         <DialogContent className="m--margin-top-25">          
-          <Filter
+          <Filter            
             onChange={(params) => this._setFilters(params)}
             isActive={isFiltered}
             isShow={filterShow}
           ></Filter>
-          <Paper className='full-width' elevation='0'>
+          <Paper className='full-width' elevation={0}>
             <Table>
               <Thead>
               <HeadRow>
-                <Th width="30px" first={true}></Th>
+                <Th width="30px"></Th>
                 <Th width="70px">{t('image')}</Th>
                 <Th width="100px">{t('courseTitle')}</Th>
                 <Th width="300px">{t('courseDescription')}</Th>

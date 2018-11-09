@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select, Typography } from '@material-ui/core';
 import { getSchoolTeachers } from '../../../redux/schools/actions';
-import { selectGetSchoolTeachersRequest, selectSchools } from '../../../redux/schools/selectors';
+import { selectGetSchoolTeachersRequest } from '../../../redux/schools/selectors';
 import MuiDatePicker from '../../../components/ui/MuiDatePicker';
 import { getDemoCourses } from '../../../redux/courses/actions';
 import {selectCoursesRequest} from '../../../redux/courses/selectors';
@@ -24,8 +24,7 @@ TabContainer.propTypes = {
 class DemoClassroomForm extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
-    classroom: PropTypes.object.isRequired,
-    schools: PropTypes.any,
+    classroom: PropTypes.object.isRequired,    
     errors: PropTypes.any
   };
 
@@ -38,10 +37,10 @@ class DemoClassroomForm extends Component {
   }
 
   componentDidMount() {
-    const { getSchoolTeachers, getCourses } = this.props;
+    const { getSchoolTeachers, getCourses, classroom } = this.props;
 
     getCourses();
-    getSchoolTeachers();
+    getSchoolTeachers((classroom ? {schoolId: classroom.schoolId} : {}));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -87,16 +86,6 @@ class DemoClassroomForm extends Component {
       ...this.props.classroom,
       [name]: value
     });
-  }
-
-  _renderSchools() {
-    const { schools } = this.props;
-
-    return schools.map((school, key) => (
-      <MenuItem key={key} value={ school.get('schId') }>
-        { school.get('schName') }
-      </MenuItem>
-    ));
   }
 
   _renderCourses() {
@@ -203,14 +192,13 @@ class DemoClassroomForm extends Component {
 }
 
 DemoClassroomForm = connect(
-  (state) => ({
-    schools: selectSchools(state),
+  (state) => ({    
     getCoursesRequest: selectCoursesRequest(state),
     getSchoolTeacherRequest: selectGetSchoolTeachersRequest(state),
   }),
   (dispatch) => ({
     getCourses: () => { dispatch(getDemoCourses()) },
-    getSchoolTeachers: () => { dispatch(getSchoolTeachers()) },
+    getSchoolTeachers: (params = {}) => { dispatch(getSchoolTeachers(params)) },
   })
 )(DemoClassroomForm);
 

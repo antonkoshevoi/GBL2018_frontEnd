@@ -24,10 +24,10 @@ class AdministrationForm extends Component {
   }
 
   componentDidMount() {
-    const { getRoles, getSchoolHomerooms } = this.props;
+    const { getRoles, getSchoolHomerooms, adminUser } = this.props;        
     
     getRoles();
-    getSchoolHomerooms();
+    getSchoolHomerooms((adminUser ? {schoolId: adminUser.schoolId} : {}));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -203,7 +203,7 @@ AdministrationForm = connect(
   }),
   (dispatch) => ({    
     getRoles: () => { dispatch(getRoles()) },
-    getSchoolHomerooms: () => { dispatch(getSchoolHomerooms()) }
+    getSchoolHomerooms: (params = {}) => { dispatch(getSchoolHomerooms(params)) }
   })
 )(AdministrationForm);
 

@@ -6,6 +6,7 @@ import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow }
 import Pagination from '../../../components/ui/Pagination';
 import { selectStudentsRequest } from "../../../redux/reports/dashboard/selectors";
 import { getStudents } from "../../../redux/reports/dashboard/actions";
+import SearchInput from "../../../components/ui/SearchInput";
 
 class Students extends Component {
   constructor(props) {
@@ -23,6 +24,18 @@ class Students extends Component {
     });    
   }
 
+  _search (value) {
+    let filters = {
+        ...this.state.filters,
+        filter: {composed: value}
+    };
+
+    this.setState({
+      page: 1,
+      filters
+    }, this._getRecords);
+  }
+  
   _getRecords () {
     const { page, perPage, filters } = this.state;
        
@@ -93,6 +106,14 @@ class Students extends Component {
 
     return (
         <div>
+            <div className="text-right m--margin-bottom-10">
+              <SearchInput
+                className="portlet-header-input"
+                id="search"
+                type='search'
+                placeholder={t('search')}
+                onChange={(e) => { this._search(e) }}/>
+            </div>
             <Table>
                 <Thead>
                     <HeadRow>                        

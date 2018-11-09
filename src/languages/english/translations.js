@@ -558,6 +558,7 @@ export default {
     unassignedCourses: 'Unassigned Courses',
     courseManagement: 'Course Management',
     upload: 'Upload',
+    invoice: 'Invoice',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

@@ -98,7 +98,7 @@ class Teachers extends Component {
         <Td width='132px'>{record.get('lastName')}</Td>
         <Td width='132px'>{record.get('email')}</Td>
         <HasRole roles={['Superadministrator']}>
-        <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
+        <Td width='132px'>{record.get('schoolName')}</Td>
         </HasRole>
         <Td width='100px' className="actions">
           <HasPermission permissions={[
