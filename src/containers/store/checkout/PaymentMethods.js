@@ -11,13 +11,10 @@ class PaymentMethods extends Component {
     const { methods } = this.props;
 
     return methods.map((method, key) => (
-      <div key={key} className='col-md-12 col-lg-6 col-xl-4' onClick={() => { method.onSelect() }}>
+      <div key={key} className='col-sm-12 col-md-6 col-lg-6 col-xl-4' onClick={() => { method.onSelect() }}>
         <div className='m-widget24 payments-widgets'>
           <div className='m-widget24__item '>
-            <h4 className='m-widget24__txitle'>
-              {method.title}
-            </h4>
-            <span className='m-widget24__sxtats m--font-brand'>
+            <span className='m--font-brand'>
               {method.loading ? (
                 <CircularProgress style={{
                   width: '80px',
@@ -32,6 +29,9 @@ class PaymentMethods extends Component {
                 </div>
               )}
             </span>
+            <h4 className="m--margin-left-20">
+              {method.title}
+            </h4>
           </div>
         </div>
       </div>
@@ -40,13 +40,9 @@ class PaymentMethods extends Component {
 
   render() {
     return (
-            <div>
-              <div className='m-portlet__body  m-portlet__body--no-padding'>
-                <div className='row m-row--no-padding'>
-                  { this._renderMethods() }
-                </div>
-              </div>
-            </div>
+        <div className='row m-row--no-padding'>
+            { this._renderMethods() }
+        </div>
     );
   }
 }

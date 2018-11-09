@@ -377,13 +377,9 @@ input[type=number]::-webkit-outer-spin-button {
     padding-bottom: .3rem;
 }
 
-.payments-widgets.m-widget24 {
-    margin-bottom: 0;
-}
-
 .payments-widgets .m-widget24__item {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: 10px;
     cursor: pointer;

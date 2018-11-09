@@ -105,7 +105,7 @@ class CreditCard extends Component {
                     </div>                    
                     <div className="form-group m-form__group row">
                       <label className="col-form-label col-lg-3 col-md-3 col-sm-12">{t('expDate')}</label>
-                      <div className="col-lg-5 col-md-5 col-sm-12">
+                      <div className="col-6 col-sm-7 col-lg-5 col-md-5">
                         <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
                           <FormControl>
                             <Select                      
@@ -119,7 +119,7 @@ class CreditCard extends Component {
                           {errors && errors.get('cardExpYear') && <FormHelperText error>{ errors.get('cardExpYear').get(0) }</FormHelperText>}
                         </FormControl>
                       </div>
-                      <div className="col-lg-3 col-md-3 col-sm-12">
+                      <div className="col-6 col-sm-5 col-lg-3 col-md-3">
                         <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
                           <FormControl>
                             <Select                      

@@ -38,8 +38,9 @@ class DemoClassroomForm extends Component {
 
   componentDidMount() {
     const { getSchoolTeachers, getCourses, classroom } = this.props;
-
-    getCourses();
+    if (!classroom.id) {
+        getCourses();
+    }
     getSchoolTeachers((classroom ? {schoolId: classroom.schoolId} : {}));
   }
 
@@ -124,44 +125,53 @@ class DemoClassroomForm extends Component {
               onChange={(e) => { this._handleInputChange(e) }}/>
               {errors && errors.get('crmName') && <FormHelperText error>{ errors.get('crmName').get(0) }</FormHelperText>}
           </FormControl>
-          <div aria-describedby='crmStartDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmStartDate-error' shrink={!!classroom.crmStartDate}>{t('startDate')}</InputLabel>            
+          <FormControl className='full-width form-inputs'>
             <MuiDatePicker
+              label={t('startDate')}
               name='crmStartDate'
               value={classroom.crmStartDate || null}
               onChange={(m) => { this._handleDateChange(m, 'crmStartDate') }}
             />            
             {errors && errors.get('crmStartDate') && <FormHelperText error>{ errors.get('crmStartDate').get(0) }</FormHelperText>}
-          </div>
-          <div aria-describedby='crmEndDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEndDate-error' shrink={!!classroom.crmEndDate}>{t('endDate')}</InputLabel>            
+          </FormControl>
+          <FormControl className='full-width form-inputs'>
             <MuiDatePicker
+              label={t('endDate')}
               name='crmEndDate'
               value={classroom.crmEndDate || null}
               onChange={(m) => { this._handleDateChange(m, 'crmEndDate') }}
             />            
             {errors && errors.get('crmEndDate') && <FormHelperText error>{ errors.get('crmEndDate').get(0) }</FormHelperText>}
-          </div>
-          <div aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEnrollmentStartDate-error' shrink={!!classroom.crmEnrollmentStartDate}>{t('enrollmentStartDate')}</InputLabel>            
+          </FormControl>
+          <FormControl className='full-width form-inputs'>         
             <MuiDatePicker
+              label={t('enrollmentStartDate')}
               name='crmEnrollmentStartDate'
               value={classroom.crmEnrollmentStartDate || null}
               onChange={(m) => { this._handleDateChange(m, 'crmEnrollmentStartDate') }}
             />            
             {errors && errors.get('crmEnrollmentStartDate') && <FormHelperText error>{ errors.get('crmEnrollmentStartDate').get(0) }</FormHelperText>}
-          </div>
-          <div aria-describedby='crmEnrollmentEndDate-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEnrollmentEndDate-error' shrink={!!classroom.crmEnrollmentEndDate}>{t('enrollmentEndDate')}</InputLabel>            
+          </FormControl>
+          <FormControl className='full-width form-inputs'>
             <MuiDatePicker
+              label={t('enrollmentEndDate')}
               name='crmEnrollmentEndDate'
               value={classroom.crmEnrollmentEndDate || null}
               onChange={(m) => { this._handleDateChange(m, 'crmEnrollmentEndDate') }}
             />            
             {errors && errors.get('crmEnrollmentEndDate') && <FormHelperText error>{ errors.get('crmEnrollmentEndDate').get(0) }</FormHelperText>}
-          </div>
-          <FormControl className='full-width form-inputs'>
+          </FormControl>
+          {classroom.id ? <FormControl className='full-width form-inputs'>
+              <InputLabel htmlFor='course'>{t('course')}</InputLabel>
+              <Input
+                name='course'
+                margin='dense'
+                fullWidth                
+                readOnly={true}                            
+                value={classroom.course.crsTitle || ''} />            
+            </FormControl> : <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>{t('course')}</InputLabel>
+            
             <Select
               primarytext={t('selectCourse')}
               name='crmCourse'
@@ -172,7 +182,7 @@ class DemoClassroomForm extends Component {
             </Select>
             {this.props.getCoursesRequest.get('success') && !this.state.courses.length && <p className='text-center m--margin-top-5 text-danger'>{t('noDemoCoursesFound')}</p>}
             {errors && errors.get('crmCourse') && <FormHelperText error>{ errors.get('crmCourse').get(0) }</FormHelperText>}
-          </FormControl>
+          </FormControl>}
           <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>{t('teacher')}</InputLabel>
             <Select
