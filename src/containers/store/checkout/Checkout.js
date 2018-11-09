@@ -4,7 +4,7 @@ import {translate} from 'react-i18next';
 import '../../../styles/store.css'
 import {selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest} from '../../../redux/store/selectors';
 import {calculateCartSum, getCartRecords} from '../../../redux/store/actions';
-import {withRouter} from 'react-router-dom';
+import {withRouter, NavLink} from 'react-router-dom';
 import {push} from 'react-router-redux';
 import {selectCreateCheckPaymentRequest, selectCreatePayPalPaymentRequest, selectPaymentMethod} from '../../../redux/payments/selectors';
 import {createCheckPayment, createPayPalPayment, setPayType} from '../../../redux/payments/actions';
@@ -33,6 +33,10 @@ class Checkout extends Component {
     if (step) {
       this.setState({stepIndex: +step});
     }
+  }
+  
+  componentDidMount() {
+      this.props.getCartRecords();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -157,84 +161,80 @@ class Checkout extends Component {
       t
     } = this.props;
     const loadingCarts = cartRecordsRequest.get('loading');
-    const successCarts = cartRecordsRequest.get('success');
-    const {classes} = this.props;
+    const successCarts = cartRecordsRequest.get('success');    
     const item = cartRecords.toJS().shift();
+    
+    const paymentMethods = [
+      {
+        title: t('payPal'),
+        img: payPalImg,                            
+        onSelect: this._processPayPal
+      },
+      {
+        title: t('creditCard'),
+        img: creditCardImg,
+        onSelect: this._processCreditCard,
+      },
+      {
+        title: t('check'),
+        img: checkImg,
+        loading: createCheckPaymentRequest.get('loading'),
+        onSelect: this._processCheck,
+      },
+      {
+        title: t('wireTransfer'),
+        img: checkImg,                            
+        onSelect: () => { this.handleNext() },
+      },
+      {
+        title: t('cog'),
+        img: checkImg,                            
+        onSelect: () => { this.handleNext() },
+      }
+    ];
+    
     return (      
         <div className='row d-flex justify-content-center m--margin-top-30'>
           <div className="col-12">                       
             <div className="m-portlet  m-portlet--head-solid-bg">
-                <div className='m-portlet__body position-relative'>               
-              <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
-                <Step>
-                  <StepLabel>{t('paymentsOptions')}</StepLabel>
-                </Step>
-                <Step>
-                  <StepLabel classes={{...classes}}>{t('shippingAndBilling')}</StepLabel>
-                </Step>
-                <Step>
-                  <StepLabel>{t('confirmation')}</StepLabel>
-                </Step>
-              </Stepper>
-              {[
-                (() => {
-                  return (
-                    //(temp) TODO need extract to component
+              <div className='m-portlet__body position-relative'>               
+                <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
+                  <Step>
+                    <StepLabel>{t('paymentsOptions')}</StepLabel>
+                  </Step>
+                  <Step>
+                    <StepLabel>{t('shippingAndBilling')}</StepLabel>
+                  </Step>
+                  <Step>
+                    <StepLabel>{t('confirmation')}</StepLabel>
+                  </Step>
+                </Stepper>
+                {[                
                     <div className="row d-flex justify-content-center">
                       <div className='col-10'>
                         {successCarts &&
-                        <div className="m-portlet__body">
-                          <div>
-                            {item && <span className="invoice-title">{t('yourInvoice', {invoiceNo: item.invoiceNo, invoiceAmount: ('$' + cartRecordsSum)})}</span>}
-                          </div>
-                        </div>
-                        }
-                        {loadingCarts && !successCarts &&
+                        <div className="m--margin-top-50 m--margin-bottom-50">                          
+                            {item ? 
+                                <span className="invoice-title">{t('yourInvoice', {invoiceNo: item.invoiceNo, invoiceAmount: ('$' + cartRecordsSum)})}</span>
+                            : 
+                            <div>        
+                                <p className="text-center">
+                                    <span className="invoice-title">{t('yourCartIsEmpty')}</span>
+                                </p>
+                                <p className="text-center m--margin-top-100 m--margin-bottom-100">
+                                    <NavLink to="/store" className="btn m-btm btn-primary">{t('continueShopping')}</NavLink>
+                                </p>
+                            </div>
+                            }                          
+                        </div>}
+                        
+                        {loadingCarts &&
                         <div className="row d-flex justify-content-center">
                           <CircularProgress color="primary" size={80}/>
-                        </div>}
-                        <br/>
-                        <PaymentMethods methods={[
-                          {
-                            title: t('payPal'),
-                            img: payPalImg,                            
-                            onSelect: this._processPayPal
-                          },
-                          {
-                            title: t('creditCard'),
-                            img: creditCardImg,
-                            onSelect: this._processCreditCard,
-                          },
-                          {
-                            title: t('check'),
-                            img: checkImg,
-                            loading: createCheckPaymentRequest.get('loading'),
-                            onSelect: this._processCheck,
-                          },
-                          {
-                            title: t('wireTransfer'),
-                            img: checkImg,                            
-                            onSelect: () => {
-                              this.handleNext();
-                            },
-                          },
-                          {
-                            title: t('cog'),
-                            img: checkImg,                            
-                            onSelect: () => {
-                              this.handleNext();
-                            },
-                          }
-                        ]}
-
-                        />
+                        </div>}                        
+                        {item && <PaymentMethods methods={paymentMethods} />}
                       </div>
-                    </div>
-                  )
-                })(),
-                
-                (() => {
-                  return (    
+                    </div>,    
                     <div className="row d-flex justify-content-center">
                         <div className='col-10'>                        
                         {showCreditCard ? 
@@ -242,24 +242,15 @@ class Checkout extends Component {
                             <ShippingAndBilling onDataSaved={this._stepBilling}/>
                         }                             
                         </div>
-                    </div>
-                  )
-                })(),
-                                                
-                <PaymentSuccessContainer/>
-
-              ][stepIndex]}
+                    </div>, 
+                    <PaymentSuccessContainer/>
+                ][stepIndex]}
               
-              {stepIndex !== 0 && stepIndex !== 2 &&
-              <div className="form-group">
-                <Button
-                  disabled={stepIndex === 0}
-                  onClick={this.handleBack}
-                >
-                  {t('back')}
-                </Button>
-              </div>
-              }            
+                {stepIndex !== 0 && stepIndex !== 2 &&
+                    <div className="form-group">
+                        <Button disabled={stepIndex === 0} onClick={this.handleBack} >{t('back')}</Button>
+                    </div>
+                }            
             </div>
           </div>
         </div>

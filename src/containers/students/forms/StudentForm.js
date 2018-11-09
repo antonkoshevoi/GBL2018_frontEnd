@@ -23,9 +23,9 @@ class StudentForm extends Component {
   }
 
   componentDidMount() {
-    const { getSchoolHomerooms } = this.props;
+    const { getSchoolHomerooms, student } = this.props;
     
-    getSchoolHomerooms();
+    getSchoolHomerooms((student ? {schoolId: student.schoolId} : {}));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -195,7 +195,7 @@ StudentForm = connect(
     getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state),
   }),
   (dispatch) => ({    
-    getSchoolHomerooms: () => { dispatch(getSchoolHomerooms()) }
+    getSchoolHomerooms: (params = {}) => { dispatch(getSchoolHomerooms(params)) }
   })
 )(StudentForm);
 

@@ -43,7 +43,7 @@ class PaymentSuccessContainer extends Component {
     const address = ['address_1', 'address_2', 'country', 'region', 'city', 'zip'];
     return address.map((item, index) =>
       (
-        <Typography key={index} variant="subheading" gutterBottom>
+        <Typography key={index} variant="body1" gutterBottom>
           {data.get(`${prefix}_${item}`)}
         </Typography>
       )

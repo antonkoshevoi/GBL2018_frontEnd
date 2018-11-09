@@ -197,7 +197,7 @@ export default {
     payPal: 'PayPal',
     creditCard: 'Credit Card',
     check: 'Check',
-    wireTransfer: 'WireTransfer(TT)',
+    wireTransfer: 'Wire Transfer',
     cog: 'COG',
     creditCardNumber: 'Credit Card Number',
     holderName: 'Holder Name',
@@ -558,6 +558,8 @@ export default {
     unassignedCourses: 'Unassigned Courses',
     courseManagement: 'Course Management',
     upload: 'Upload',
+    invoice: 'Invoice',
+    yourCartIsEmpty: 'Your shopping cart is empty...',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',
