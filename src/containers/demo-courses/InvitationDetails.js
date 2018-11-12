@@ -5,7 +5,7 @@ import { translate, Interpolate } from 'react-i18next';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
 import { selectGetSingleRecordRequest } from '../../redux/invitations/selectors';
 import { acceptInvitation, declineInvitation, getSingleRecord } from '../../redux/invitations/actions';
-import { Button, CircularProgress, Grid } from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import AuthorizeModal from './modals/AuthorizeModal';
 import { setCallback } from '../../redux/auth/actions';
 
@@ -96,33 +96,30 @@ class InvitationDetails extends Component {
       <div>
         <h3>{t('demoCourseInvitation')}</h3>
 
-        <Grid container spacing={24}>
+        <div className="row">
           {image && (
-            <Grid item sm={3} style={{
-              padding: 20,
-              textAlign: 'center'
-            }}>
+            <div className="col-sm-3 text-center m--padding-20">
               <img src={image} alt="Demo Course" />
-            </Grid>
+            </div>
           )}
-          <Grid item sm={image ? 9 : 12} style={{ padding: 20 }}>            
+          <div className={`m--padding-20 col-sm-${image ? 9 : 12}`}>            
             <p>
                 <Interpolate i18nKey="userInvitedYouToDemoCourse" sender={sender} course={course} />
             </p>            
             <br/>
             <h4>{t('description')}:</h4>
             <p>{ description }</p>
-          </Grid>
+          </div>
 
-          <Grid item sm={12} style={{ textAlign: 'center', marginBottom: 20 }}>
+          <div className="col-sm-12 text-center m--padding-20">
             <Button contained onClick={() => { this._accept() }} className='mt-btn mt-btn-success m--margin-left-30 m--margin-right-30'>
               {t('accept')}
             </Button>
             <Button contained onClick={() => { this._decline() }} className='mt-btn mt-btn-danger m--margin-left-30 m--margin-right-30'>
               {t('decline')}
             </Button>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
       </div>
     );
   }

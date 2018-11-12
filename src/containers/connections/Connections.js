@@ -183,7 +183,7 @@ class Connections extends Component {
                             <div className='row'>
                                 <div className='col-sm-12 m--align-right'>       
                                     <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
-                                        {t('sentRequest')} <Icon style={{marginLeft: '5px'}}>add</Icon>
+                                        {t('sentRequest')} <Icon className='m--margin-left-5'>add</Icon>
                                     </Button>                  
                                 </div>
                             </div>

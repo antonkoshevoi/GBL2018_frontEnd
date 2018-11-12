@@ -226,9 +226,7 @@ class Administration extends Component {
                     <MenuItem value={50}>50</MenuItem>
                     <MenuItem value={100}>100</MenuItem>
                   </Select>
-                  <HasPermission permissions={[
-                    '[Users][Administration][Create][SuperAdmin]'
-                  ]}>
+                  <HasPermission permissions={['[Users][Administration][Create][SuperAdmin]']}>
                     <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
                       {t('addNew')}
                       <Icon className="m--margin-left-5">add</Icon>

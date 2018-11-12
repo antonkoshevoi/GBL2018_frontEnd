@@ -163,8 +163,7 @@ class StudentForm extends Component {
           </FormControl>
           <FormControl className='full-width form-inputs'>            
             <MuiDatePicker
-              label={t('birthday')}
-              style={{width: '100%'}}
+              label={t('birthday')}              
               disableUnderline={true}
               value={student.birthday || null}
               onChange={(date) => { this._handleDateChange(date, 'birthday') }}/>

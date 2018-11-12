@@ -7,30 +7,13 @@ import {getRecords} from "../../../redux/store/actions";
 
 
 class SplashStore extends Component {
-  state = {
-    isFiltered: false
-  }
 
   componentDidMount() {
-    this._getRecords();
+        this.props.getRecords()
   }
-
-
-  _getRecords(params) {
-    this.props.getRecords(params);
-  }
-
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.location.key !== this.props.location.key) {
-      this.setState({isFiltered: false});
-      this._getRecords();
-    }
-  }
-
 
   render() {
-    const {t, records} = this.props;
+    const {t, records, getRecordsRequest} = this.props;
     return (
       <div className="splash-store">
         <div className="container">
@@ -39,12 +22,9 @@ class SplashStore extends Component {
               <h2>{t('store')}</h2>
               <img src={spacer} alt="---=== ===---" width="200"/>
             </header>
-            <ProductsSection categoryId={false}  all={true} products={records}/>
-
-
+            {getRecordsRequest.get('success') && <ProductsSection categoryId={false}  all={true} products={records}/> }
           </div>
         </div>
-
       </div>
     )
   }
@@ -57,7 +37,7 @@ SplashStore = connect(
   (dispatch) => ({
     getRecords: (params = {perPage: '50', filter: {category: 1}}) => {
       dispatch(getRecords(params))
-    },
+    }
   })
 )(SplashStore);
 export default SplashStore

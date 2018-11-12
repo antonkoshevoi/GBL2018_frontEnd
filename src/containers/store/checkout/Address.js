@@ -3,7 +3,6 @@ import '../../../styles/widgets.css';
 import PropTypes from 'prop-types';
 import {selectRecords} from "../../../redux/countries/selectors";
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
 import {FormControl, MenuItem, Select} from '@material-ui/core';
 import {translate} from 'react-i18next';
 
@@ -259,11 +258,10 @@ class Address extends Component {
 Address = connect(
   (state) => ({
     countries:  selectRecords(state)
-
   }),
   (dispatch) => ({
   }),
 )(Address);
 
-export default withRouter(translate('translations')(Address));
+export default translate('translations')(Address);
 

@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { FormControl, FormControlLabel, FormGroup, FormHelperText, Input, Checkbox, InputLabel, MenuItem, Select, Typography, Tab, Tabs, Paper, Grid } from '@material-ui/core';
+import { FormControl, FormControlLabel, FormHelperText, Input, Checkbox, InputLabel, MenuItem, Select, Typography, Tab, Tabs } from '@material-ui/core';
 import {getSchoolTeachers, getSchoolStudents} from "../../../redux/schools/actions";
 import {
     selectGetSchoolStudentsRequest, selectGetSchoolTeachersRequest    
 } from "../../../redux/schools/selectors";
 import MuiDatePicker from '../../../components/ui/MuiDatePicker';
+import ImageCropper from "../../../components/ui/ImageCropper";
 
 function TabContainer(props) {
   return (
@@ -34,7 +35,8 @@ class HomeroomForm extends Component {
       schoolTeachers: [],
       schoolStudents: [],
       activeTab: 0,
-      studentIds: []
+      studentIds: [],
+      avatar: null
     };
   }
 
@@ -52,9 +54,10 @@ class HomeroomForm extends Component {
       const studentIds = homeroom.students.map((student) => {
         return student.id.toString();
       });
-
+           
       this.setState({
         ...this.state,
+        avatar: homeroom.avatar,
         studentIds: studentIds
       });
     }
@@ -109,6 +112,17 @@ class HomeroomForm extends Component {
       [name]: value
     });
   }
+  
+  _setCroppedImage(img) {
+    this.props.onChange({
+      ...this.props.homeroom,
+      avatarCropped: img
+    });    
+  }
+
+  _setImage(img) {
+    this.setState({ avatar: img });
+  }  
 
   _handleStudentsCheckboxChange(event) {
     const { value } = event.target;
@@ -149,7 +163,7 @@ class HomeroomForm extends Component {
     }
 
     return schoolStudents.map((student, key) => (
-      <Grid item xs={4} key={key}>
+      <div className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3" key={key}>
         <FormControlLabel
           control={<Checkbox
             color="primary"
@@ -159,7 +173,7 @@ class HomeroomForm extends Component {
           />}
           label={student.name}
         />
-      </Grid>
+      </div>
     ))
   }
 
@@ -168,17 +182,16 @@ class HomeroomForm extends Component {
     const { activeTab } = this.state;
 
     return (
-      <div className='row'>
-        <Paper className='full-width' elevation={0}>
-          <Tabs value={activeTab} onChange={this.handleChangeTab} centered>
-            <Tab label={t('details')} />
-            <Tab label={t('teachers')} />
+        <div>
+          <Tabs value={activeTab} onChange={this.handleChangeTab}>
+            <Tab label={t('details')} />            
             <Tab label={t('students')} />
           </Tabs>
 
           {activeTab === 0 && <TabContainer>
-            <div className="col-sm-10 m-auto">
-            <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
+          <div className="row">
+            <div className="col-sm-12 col-md-7 col-xl-6 m-auto">
+            <FormControl className='full-width form-inputs'>
               <InputLabel htmlFor='name-error'>{t('name')}</InputLabel>
               <Input
                 name='name'
@@ -188,46 +201,6 @@ class HomeroomForm extends Component {
                 onChange={(e) => { this._handleInputChange(e) }}/>
                 {errors && errors.get('name') && <FormHelperText error>{ errors.get('name').get(0) }</FormHelperText>}
             </FormControl>
-            <div aria-describedby='name-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-              <InputLabel htmlFor='name-error' shrink={!!homeroom.startDate}>{t('startDate')}</InputLabel>              
-                <MuiDatePicker
-                  name='startDate'
-                  value={homeroom.startDate || null}
-                  onChange={(m) => { this._handleDateChange(m, 'startDate') }}
-                />              
-              {errors && errors.get('startDate') && <FormHelperText error>{ errors.get('startDate').get(0) }</FormHelperText>}
-            </div>
-            <div aria-describedby='name-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-              <InputLabel htmlFor='name-error' shrink={!!homeroom.endDate}>{t('endDate')}</InputLabel>              
-                <MuiDatePicker
-                  name='endDate'
-                  value={homeroom.endDate || null}
-                  onChange={(m) => { this._handleDateChange(m, 'endDate') }}
-                />              
-              {errors && errors.get('endDate') && <FormHelperText error>{ errors.get('endDate').get(0) }</FormHelperText>}
-            </div>
-            <div aria-describedby='name-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-              <InputLabel htmlFor='name-error' shrink={!!homeroom.enrollmentStartDate}>{t('enrollmentStartDate')}</InputLabel>             
-                <MuiDatePicker
-                  name='enrollmentStartDate'
-                  value={homeroom.enrollmentStartDate || null}
-                  onChange={(m) => { this._handleDateChange(m, 'enrollmentStartDate') }}
-                />              
-              {errors && errors.get('enrollmentStartDate') && <FormHelperText error>{ errors.get('enrollmentStartDate').get(0) }</FormHelperText>}
-            </div>
-            <div aria-describedby='name-error-text' className='full-width form-inputs d-inline-flex flex-column'>
-              <InputLabel htmlFor='name-error' shrink={!!homeroom.enrollmentEndDate}>{t('enrollmentEndDate')}</InputLabel>              
-                <MuiDatePicker
-                  name='enrollmentEndDate'
-                  value={homeroom.enrollmentEndDate || null}
-                  onChange={(m) => { this._handleDateChange(m, 'enrollmentEndDate') }}
-                />              
-              {errors && errors.get('enrollmentEndDate') && <FormHelperText error>{ errors.get('enrollmentEndDate').get(0) }</FormHelperText>}
-            </div>
-            </div>
-          </TabContainer>}
-          {activeTab === 1 && <TabContainer>
-            <div className="col-sm-8 m-auto">
             <FormControl className='full-width form-inputs'>
               <InputLabel htmlFor='name-error'>{t('teacher')}</InputLabel>
               <Select
@@ -238,17 +211,61 @@ class HomeroomForm extends Component {
                 <MenuItem value={null} primarytext=""/>
                 {this._renderTeachers()}
               </Select>
-                {errors && errors.get('teacherId') && <FormHelperText error>{ errors.get('teacherId').get(0) }</FormHelperText>}
+              {errors && errors.get('teacherId') && <FormHelperText error>{ errors.get('teacherId').get(0) }</FormHelperText>}
+            </FormControl>            
+            <FormControl className='full-width form-inputs'>
+                <MuiDatePicker
+                  label={t('startDate')}
+                  name='startDate'
+                  value={homeroom.startDate || null}
+                  onChange={(m) => { this._handleDateChange(m, 'startDate') }}
+                />              
+              {errors && errors.get('startDate') && <FormHelperText error>{ errors.get('startDate').get(0) }</FormHelperText>}
+            </FormControl>
+            <FormControl className='full-width form-inputs'>
+                <MuiDatePicker
+                  label={t('endDate')}
+                  name='endDate'
+                  value={homeroom.endDate || null}
+                  onChange={(m) => { this._handleDateChange(m, 'endDate') }}
+                />              
+              {errors && errors.get('endDate') && <FormHelperText error>{ errors.get('endDate').get(0) }</FormHelperText>}
+            </FormControl>
+            <FormControl className='full-width form-inputs'>          
+                <MuiDatePicker
+                  label={t('enrollmentStartDate')}
+                  name='enrollmentStartDate'
+                  value={homeroom.enrollmentStartDate || null}
+                  onChange={(m) => { this._handleDateChange(m, 'enrollmentStartDate') }}
+                />              
+              {errors && errors.get('enrollmentStartDate') && <FormHelperText error>{ errors.get('enrollmentStartDate').get(0) }</FormHelperText>}
+            </FormControl>
+            <FormControl className='full-width form-inputs'>
+                <MuiDatePicker
+                  label={t('enrollmentEndDate')}
+                  name='enrollmentEndDate'
+                  value={homeroom.enrollmentEndDate || null}
+                  onChange={(m) => { this._handleDateChange(m, 'enrollmentEndDate') }}
+                />              
+              {errors && errors.get('enrollmentEndDate') && <FormHelperText error>{ errors.get('enrollmentEndDate').get(0) }</FormHelperText>}
             </FormControl>
             </div>
+              <div className="col-sm-12 col-md-5">
+                <ImageCropper
+                  circularButton
+                  image={homeroom.avatar || ''}
+                  onCrop={(cropImg) => this._setCroppedImage(cropImg)}
+                  setFile={(img) => this._setImage(img)}
+                />
+              </div>
+              </div>
           </TabContainer>}
-          {activeTab === 2 && <TabContainer>
-            <FormGroup row>
+          {activeTab === 1 && <TabContainer>
+            <div className="row">
                 {this._renderStudents()}
-            </FormGroup>
-          </TabContainer>}
-        </Paper>
-      </div>
+            </div>
+          </TabContainer>}        
+        </div>
     );
   }
 }

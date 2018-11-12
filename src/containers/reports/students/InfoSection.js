@@ -3,7 +3,6 @@ import Card from "../../../components/ui/Card";
 import {MyPreloader} from '../../../components/ui/table';
 import {IconButton, CircularProgress, Icon} from '@material-ui/core';
 import {translate} from 'react-i18next';
-import {withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
 import {getSingleRecord} from '../../../redux/students/actions';
 import {selectGetSingleRecordRequest} from '../../../redux/students/selectors';
@@ -95,8 +94,17 @@ class InfoSection extends Component {
         </div>
          <div className="col-sm-7 col-md-8 col-lg-3 m--margin-bottom-20">           
             <div className="m-portlet  m-portlet--head-solid-bg">
-              <div className="m-portlet__head border-b-blue">
+              <div className="m-portlet__head border-b-blue m--padding-right-0">
                 <div className="m-portlet__head-caption">
+                    <HasRole roles={['Superadministrator', 'School', 'Teacher', 'Parents']}>
+                        <div className="pull-right m--margin-top-10 m--margin-right-10">                      
+                            <IconButton color='primary' onClick={() => { this._openEditDialog() }}>                        
+                              <Icon className="material-icons">
+                                edit_icon
+                              </Icon>
+                            </IconButton>                      
+                        </div>
+                    </HasRole>
                   <div className="m-portlet__head-title">
                     <span className="m-portlet__head-icon"><i className="display-5 la la-info"></i></span>              
                     <h3 className="m-portlet__head-text">
@@ -106,18 +114,13 @@ class InfoSection extends Component {
                 </div>
               </div>
               <div className='m-portlet__body position-relative'>
-                <HasRole roles={['Superadministrator', 'School', 'Teacher', 'Parents']}>
-                    <div style={{position:'absolute', right:10, top:-60}}>                      
-                        <IconButton color='primary' onClick={() => { this._openEditDialog() }}>                        
-                          <Icon className="material-icons">
-                            edit_icon
-                          </Icon>
-                        </IconButton>                      
-                    </div>
-                </HasRole>
                 <div className="table-responsive">
                   <table className="table">
                     <tbody>
+                    <tr>
+                      <th>{t('username')}</th>
+                      <td>{!student ? <CircularProgress color="primary"/> : (student.username)}</td>
+                    </tr>                    
                     <tr>
                       <th>{t('firstName')}</th>
                       <td>{!student ? <CircularProgress color="primary"/> : student.firstName}</td>
@@ -176,4 +179,4 @@ InfoSection = connect(
   })
 )(InfoSection);
 
-export default withRouter(translate('translations')(InfoSection));
+export default translate('translations')(InfoSection);

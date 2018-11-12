@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {withRouter} from "react-router";
 import {translate} from 'react-i18next';
 import Card from "../../components/ui/Card";
 import {EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/table";
@@ -144,4 +143,4 @@ AutoCreate = connect(
 )(AutoCreate);
 
 
-export default withRouter(translate('translations')(AutoCreate));
+export default translate('translations')(AutoCreate);

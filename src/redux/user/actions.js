@@ -10,6 +10,7 @@ export const UPDATE_FAIL = '[User] UPDATE_FAIL';
 export const CHANGE_PASSWORD = '[User] CHANGE_PASSWORD';
 export const CHANGE_PASSWORD_SUCCESS = '[User] CHANGE_PASSWORD_SUCCESS';
 export const CHANGE_PASSWORD_FAIL = '[User] CHANGE_PASSWORD_FAIL';
+export const RESET_CHANGE_PASSWORD_REQUEST = '[User] RESET_CHANGE_PASSWORD_REQUEST';
 
 export const CHANGE_IMAGE = '[User] CHANGE_IMAGE';
 export const CHANGE_IMAGE_SUCCESS = '[User] CHANGE_IMAGE_SUCCESS';
@@ -52,6 +53,12 @@ export function changePassword(data, params = {}) {
   return {
     types: [CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAIL],
     promise: (apiClient) => apiClient.post('user/password', data, params)
+  };
+}
+
+export function resetChangePasswordRequest() {
+  return {
+    type: RESET_CHANGE_PASSWORD_REQUEST    
   };
 }
 

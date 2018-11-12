@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
-import {withRouter} from "react-router-dom";
 import {getRecords} from "../../redux/transactions/actions";
 import {selectGetRecordsRequest, selectRecords} from "../../redux/transactions/selectors";
 import Card from "../../components/ui/Card";
@@ -141,7 +140,7 @@ Transactions = connect(
     })
 )(Transactions);
 
-export default withRouter(translate("translations")(Transactions));
+export default translate("translations")(Transactions);
 
 
 

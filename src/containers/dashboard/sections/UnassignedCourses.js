@@ -90,14 +90,20 @@ class UnassignedCourses extends Component {
     const {selectedItem, assignModalIsOpen, giftModalIsOpen} = this.state;
     const {t} = this.props;
     
+    const blockStyles = {
+        minHeight: 340,
+        overflowY: 'auto',
+        overflowX: 'hidden'
+    };
+    
     return (
             <div>
                 <div className='block-header border-b-blue'>
                     <h3 className='m-portlet__head-text'> {t('courseManagement')}</h3>
                 </div>              
                 <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
-                    <div className="m-portlet__body m--padding-top-10" style={{height: "100%"}}>
-                        <div style={{minHeight:340,overflowY:'auto',overflowX:'hidden'}}>
+                    <div className="m-portlet__body m--padding-top-10">
+                        <div style={blockStyles}>
                             <Table>
                                 <Thead>
                                 <HeadRow>

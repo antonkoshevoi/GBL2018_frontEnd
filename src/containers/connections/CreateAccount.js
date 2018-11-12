@@ -94,7 +94,7 @@ class CreateAccount extends Component {
                 <div className='signup-page'>
                   <div className='m-login__logo text-center m--margin-top-15'>
                     <a href='/'>
-                      <img alt="GravityBrain" style={{width: '270px', height: 'auto'}} src='//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg' />
+                      <img alt="GravityBrain" className='top-logo' src='//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg' />
                     </a>
                   </div>
                   <div className='m-signup col-lg-8 col-md-10 col-sm-12 m-auto'>

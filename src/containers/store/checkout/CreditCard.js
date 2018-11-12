@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
 import {translate} from 'react-i18next';
 import {Button,  FormControl, FormHelperText, MenuItem, Select} from '@material-ui/core';
 import {selectCreateCreditCardPaymentRequest} from '../../../redux/payments/selectors';
@@ -188,4 +187,4 @@ CreditCard = connect(
   })
 )(CreditCard);
 
-export default withRouter(translate('translations')(CreditCard));
+export default translate('translations')(CreditCard);

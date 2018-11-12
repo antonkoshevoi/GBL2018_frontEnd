@@ -4,7 +4,6 @@ import {translate} from 'react-i18next';
 import SplashHeader from './sections/SplashHeader'
 import SplashNavigation from './sections/SplashNavigation'
 import SplashFooter from './sections/SplashFooter'
-import {withRouter} from 'react-router-dom';
 import './splash.css';
 import 'react-sticky-header/styles.css';
 import StickyHeader from 'react-sticky-header';
@@ -49,4 +48,4 @@ class About extends Component {
     }
 };
 
-export default withRouter(translate('splashScreen')(About));
+export default translate('splashScreen')(About);

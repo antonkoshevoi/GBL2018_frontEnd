@@ -1,41 +1,26 @@
 import React, {Component} from 'react';
-import {Avatar, CircularProgress} from '@material-ui/core';
-import {NavLink} from "react-router-dom";
-import UnassignedCourses from "./sections/UnassignedCourses";
-import {connect} from "react-redux";
-import {translate} from 'react-i18next';
-
+import { Avatar, CircularProgress, withStyles } from '@material-ui/core';
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { translate } from 'react-i18next';
+import { push } from 'react-router-redux';
 import { selectStudentsRequest, selectStudentStatusRequest} from "../../redux/parents/selectors";
 import { getStudents, acceptStudentRequest, declineStudentRequest, resetStudentRequest} from "../../redux/parents/actions"; 
-
-import {getParentRecords} from "../../redux/store/actions";
+import { getParentRecords } from "../../redux/store/actions";
+import { selectRecords as storeItems }  from "../../redux/store/selectors";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
-import {push} from 'react-router-redux';
-import {withStyles} from '@material-ui/core/styles';
 import FeaturedItems from "./sections/FeaturedItems";
-import {selectRecords as storeItems}  from "../../redux/store/selectors";
+import UnassignedCourses from "./sections/UnassignedCourses";
 import QuickLink from "./sections/QuickLink";
 import ShoppingCart from "./sections/ShoppingCart";
 import Alerts from "./sections/Alerts";
 
 const styles = {
-  row: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
   avatar: {
-    margin: 10,
-  },
-  bigAvatar: {
     width: 80,
-    height: 80,
-    margin: 10,
-    border: 'solid 3px white'
-  },
-  name: {    
-    display: 'block',
-    marginTop: 15,
-    marginBottom:5
+    height: 80,    
+    border: 'solid 3px white',
+    margin: 10
   },
   profileBlock: {
     position:'relative',
@@ -43,6 +28,7 @@ const styles = {
     borderRadius: 5,
     margin: '3px 0',
     display: 'flex',
+    cursor: 'pointer'
   },
   btnGroup: {    
     position: 'absolute',
@@ -51,10 +37,15 @@ const styles = {
   },
   progress: {
     display: 'flex',
-    margin: '8px 5px',
+    margin: '8px 0',
     background: 'white',
     padding: 5,
-    borderRadius: 7,
+    borderRadius: 7
+  },
+  students: {    
+    minHeight:340, 
+    overflowY:'auto',
+    overflowX:'hidden'
   }
 };
 
@@ -115,7 +106,7 @@ class ParentDashboard extends Component {
             }
             
             return (
-              <div key={i} className={classes.profileBlock} onClick={() => { goTo(`/reports/students/${student.id}`); }} style={{cursor: 'pointer'}}>
+              <div key={i} className={classes.profileBlock} onClick={() => { goTo(`/reports/students/${student.id}`); }}>
                 <div className={classes.btnGroup}>
                   <div className="form-group-inline">
                     <div className="m--hidden-tablet-and-mobile m--hidden-desktop-lg m--visible-desktop-xl">
@@ -128,10 +119,10 @@ class ParentDashboard extends Component {
                 </div>
 
                 <div className="d-flex align-items-center">
-                  <Avatar alt={student.firstName} src={student.avatarSmall} className={classes.bigAvatar}/>
+                  <Avatar alt={student.firstName} src={student.avatarSmall} className={classes.avatar} />
                   <div className="info">
-                    <h5 className={classes.name}>{student.name}</h5>
-                    <span className={classes.username}>{student.username}</span>
+                    <h5 className="m--margin-top-15 m--bottom-top-5">{student.name}</h5>
+                    <span>{student.username}</span>
                     <div className={classes.progress}>
                       <div className="progress m-progress--sm" style={{minWidth: 80, marginRight:5}}>
                         <div title={t('completed')} className="progress-bar bg-success" role="progressbar" style={{width: student.completed + '%'}}></div>
@@ -175,10 +166,10 @@ class ParentDashboard extends Component {
                 </div>                
               </div>
               <div className="d-flex align-items-center">
-                <Avatar alt={request.student.name} src={request.student.avatarSmall} className={classes.bigAvatar} />
+                <Avatar alt={request.student.name} src={request.student.avatarSmall} className={classes.avatar} />
                 <div className="info">
-                  <h5 className={classes.name}>{request.student.name}</h5>
-                  <span className={classes.username}>{request.student.username}</span>
+                  <h5 className="m--margin-top-15 m--bottom-top-5">{request.student.name}</h5>
+                  <span>{request.student.username}</span>
                 </div>
               </div>
             </div>);
@@ -186,7 +177,7 @@ class ParentDashboard extends Component {
     }
       
     render() {    
-        const {storeItems, getStudents, studentsRequest, t} = this.props;
+        const {storeItems, getStudents, studentsRequest, classes, t} = this.props;
         const loading = studentsRequest.get('loading');
 
         return <div className="fadeInLeft animated m--margin-left-15 m--margin-right-15">
@@ -200,11 +191,11 @@ class ParentDashboard extends Component {
                     <h3 className='m-portlet__head-text'>{t('myLearners')}</h3>
                 </div>              
                 <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
-                  <div className="m-portlet__body m--padding-top-10" style={{height: "100%"}}>
-                    <div style={{maxHeight:340, minHeight:340, overflowY:'auto',overflowX:'hidden'}}>
+                  <div className="m-portlet__body m--padding-top-10">
+                    <div className={classes.students}>
                       {!loading && this._renderStudentRequests()}
                       {!loading && this._renderStudents()}
-                      {loading && <div style={{width: 100}} className="m-auto m--margin-top-50 m--margin-bottom-50"><CircularProgress /></div>}    
+                      {loading && <div className="m-auto m--margin-100 text-center"><CircularProgress /></div>}    
                     </div>
                   </div>
                 </div>
@@ -213,7 +204,7 @@ class ParentDashboard extends Component {
                   <UnassignedCourses/>
               </div>
               <div className="col-md-6 col-lg-4 col-xl-4">
-                  <ShoppingCart preview = {true}/>
+                  <ShoppingCart/>
               </div>
               <div className="col-sm-12 col-md-6 m--visible-tablet-and-mobile m--hidden-desktop-lg m--hidden-desktop-xl ">
                   <QuickLink />

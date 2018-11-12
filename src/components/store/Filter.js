@@ -1,26 +1,8 @@
 import React, {Component} from 'react';
-import {Button, IconButton, Input, InputAdornment, Menu, MenuItem, withStyles, Icon} from '@material-ui/core';
+import {Button, IconButton, Input, InputAdornment, Menu, MenuItem, Icon} from '@material-ui/core';
 import {translate} from 'react-i18next';
 import {NavLink, withRouter} from "react-router-dom";
-import red from "@material-ui/core/es/colors/red";
 import {buildSortersQuery} from "../../helpers/utils";
-
-const styles = {
-  root: {
-    display: 'flex'
-  },
-  popperClose: {
-    pointerEvents: 'none'
-  },
-  inputLabelFocused: {
-    color: red[500]
-  },
-  inputInkbar: {
-    '&:after': {
-      backgroundColor: red[500]
-    },
-  }
-};
 
 class Filter extends Component {
 
@@ -83,7 +65,6 @@ class Filter extends Component {
     if (!nextProps.isActive) {
       this._resetAll();
     }
-
     if (nextProps.location.hash == '' && nextProps.location.key !== this.props.location.key) {
       this._setCategoryFilter(nextProps.match.params.category);
     }
@@ -102,7 +83,7 @@ class Filter extends Component {
           params:{...this.state.params,
           orderBy:{}
         },
-          sorters:{}
+        sorters:{}
     })
   }
 
@@ -315,8 +296,8 @@ Filter.defaultProps = {
     subject: true,
     target: true,
     search: true,
-    newest: true,
-  },
+    newest: true
+  }
 }
 
-export default withRouter(withStyles(styles)(translate('translations')(Filter)));
+export default withRouter(translate('translations')(Filter));

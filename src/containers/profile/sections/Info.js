@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import {selectChangePasswordRequest, selectChangeImageRequest} from "../../../redux/user/selectors";
-import {changePassword, changeImage} from "../../../redux/user/actions";
-import { Dialog, CircularProgress} from '@material-ui/core';
+import {changePassword, changeImage, resetChangePasswordRequest} from "../../../redux/user/actions";
+import { Dialog, CircularProgress, Divider} from '@material-ui/core';
 import ImageCropper from "../../../components/ui/ImageCropper";
 import Card from "../../../components/ui/Card";
 import HasRole from "../../middlewares/HasRole";
-
+        
 class Info extends Component {
 
   static propTypes = {
@@ -17,10 +17,10 @@ class Info extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      changePasswordMode: false,
+    this.state = {      
       passwordFields: {},
       uploadModal:false,
+      passwordModal:false,
       croppedImage:null,
       image:null
     }
@@ -32,30 +32,25 @@ class Info extends Component {
   }
 
   _passwordChangedSuccess(nextProps) {
-    const prev = this.props.getChangePasswordRequest.get('success');
-    const next = nextProps.getChangePasswordRequest.get('success');
+    const prev = this.props.changePasswordRequest.get('success');
+    const next = nextProps.changePasswordRequest.get('success');
 
     if (!prev && next) {
       this.setState({
-        ...this.state,
-        changePasswordMode: false,
+        ...this.state,        
         passwordFields: {},
       });
     }
   }
   
   _imageChangedSuccess(nextProps) {
-    const prev = this.props.getChangeImageRequest.get('success');
-    const next = nextProps.getChangeImageRequest.get('success');
+    const prev = this.props.changeImageRequest.get('success');
+    const next = nextProps.changeImageRequest.get('success');
 
     if (!prev && next) {        
         this.props.user.avatar = this.state.croppedImage;
     }
-  }
-  
-  _handlePasswordModeSwitch(changePasswordMode) {
-    this.setState({ changePasswordMode });
-  }
+  }  
 
   _handlePasswordFieldChange(value, field) {
     this.setState({
@@ -88,6 +83,15 @@ class Info extends Component {
     this.setState({uploadModal:false})
   }
 
+  _openPasswordModal(){
+    this.setState({passwordModal:true})
+  }
+
+  _closePasswordModal(){
+    this.props.resetChangePasswordRequest();
+    this.setState({passwordModal:false})
+  }
+  
   _setCroppedImage(img){
     this.setState({croppedImage:img});
     this._closeUploadModal();
@@ -99,10 +103,9 @@ class Info extends Component {
   }
 
   render() {
-    const { user, t } = this.props;
-    const { changePasswordMode, passwordFields } = this.state;
-    const errors = this.props.getChangePasswordRequest.get('errors');
-    const loading = this.props.getChangeImageRequest.get('loading');
+    const { user, changePasswordRequest, changeImageRequest, t } = this.props;
+    const { passwordFields } = this.state;
+    const errors = changePasswordRequest.get('errors');    
 
     return (
       <div className="m-portlet m--margin-bottom-15">
@@ -117,74 +120,73 @@ class Info extends Component {
                 <img src={user.avatar} alt=""/>
               </div>
               <div className="text-center">
-                {loading ? (<CircularProgress color="primary"/>) : (<button disabled={loading} className="m-btn btn btn-info m--margin-10" onClick={()=>{this._openUploadModal()}}>{t('uploadAvatar')}</button>)}
+                {changeImageRequest.get('loading') ? (<CircularProgress color="primary"/>) : (<button className="m-btn btn btn-info m--margin-bottom-10" onClick={()=>{this._openUploadModal()}}>{t('uploadAvatar')}</button>)}
+                <HasRole roles={['Superadministrator','School','Teacher','Parents']}>
+                <Divider className="m--margin-top-10 m--margin-bottom-20" />
+                <button onClick={() => { this._openPasswordModal(true) }} className="m-btn btn btn-success m--margin-bottom-10">{t('changePassword')}</button>
+                </HasRole>
               </div>
             </div>
           </div>
-            <HasRole roles={['Superadministrator','Superintendent','Principal','Administrator','Teacher','Parents']}>
-            <div>
-              <div className="m-portlet__body-separator"></div>
-              <div className="text-center m--margin-top-15">
-                {!changePasswordMode && <button onClick={() => {
-                  this._handlePasswordModeSwitch(true)
-                }} className="m-btn btn btn-success">{t('changePassword')}</button>}
-              </div>
-              {changePasswordMode &&
-                <div className="m-widget1 m-widget1--paddingless">
-                  <h5 className='text-center'>{t('changePassword')}</h5>
-                  <form id='change-password-form' onSubmit={(e) => { this._changePassword(e) }}>
-                    <div className="m-widget1__item">
-                      <div className="form-group m-form__group ">
-                        <input
-                          type="password"
-                          placeholder={t('enterOldPassword')}
-                          name="oldPassword"
-                          onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'oldPassword')}}
-                          value={passwordFields.oldPassword || ''}
-                          className="form-control  m-input--air form-control-danger m-input"
-                          id="oldPassword"/>
-                        {errors && errors.get('oldPassword') && <div className="form-control-feedback text-center error">{errors.get('oldPassword').get(0)}</div>}
-                      </div>
-                      <div className="form-group m-form__group">
-                        <input
-                          type="password"
-                          placeholder={t('enterNewPassword')}
-                          name="newPassword"
-                          onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword')}}
-                          value={passwordFields.newPassword || ''}
-                          className="form-control  m-input--air form-control-danger m-input"
-                          id="newPassword"/>
-                        {errors && errors.get('newPassword') && <div className="form-control-feedback text-center error">{errors.get('newPassword').get(0)}</div>}
-                      </div>
-                      <div className="form-group m-form__group has-danger">
-                        <input
-                          type="password"
-                          placeholder={t('confirmPassword')}
-                          name="newPassword_confirmation"
-                          onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword_confirmation')}}
-                          value={passwordFields.newPassword_confirmation || ''}
-                          className="form-control  m-input--air form-control-danger m-input"
-                          id="confirmPassword"/>
-                        {errors && errors.get('newPassword_confirmation') && <div className="form-control-feedback text-center error">{errors.get('newPassword_confirmation').get(0)}</div>}
-                      </div>
-                    </div>
-                    <div className="text-center m--margin-top-15">
-                        <button className="m-btn btn btn-success m--margin-right-10 ">
-                            {t('change')}
-                        </button>
-                        <button onClick={() => {this._handlePasswordModeSwitch(false)}} className="m-btn btn btn-default">
-                            {t('cancel')}
-                        </button>
-                    </div>
-                  </form>
-                </div>}
-              </div>
-            </HasRole>
-          </div>
+        </div>
+          
+        <Dialog
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+              open={this.state.passwordModal}
+              onClose={() => this._closePasswordModal()}
+              PaperProps={{className: "margin-0"}}
+              maxWidth="xs"
+            >
+            <Card title={t('changePassword')} icon="fa fa-exclamation-triangle" style={{minWidth:'280px'}}>               
+                <div style={{minWidth: 250}} className="m--margin-top-20">
+                  <div className="form-group m-form__group">
+                    <input
+                      type="password"
+                      placeholder={t('enterOldPassword')}
+                      name="oldPassword"
+                      onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'oldPassword')}}
+                      value={passwordFields.oldPassword || ''}
+                      className="form-control  m-input--air form-control-danger m-input" />
+                    {errors && errors.get('oldPassword') && <div className="form-control-feedback text-center error">{errors.get('oldPassword').get(0)}</div>}
+                  </div>
+                  <div className="form-group m-form__group">
+                    <input
+                      type="password"
+                      placeholder={t('enterNewPassword')}
+                      name="newPassword"
+                      onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword')}}
+                      value={passwordFields.newPassword || ''}
+                      className="form-control  m-input--air form-control-danger m-input" />
+                    {errors && errors.get('newPassword') && <div className="form-control-feedback text-center error">{errors.get('newPassword').get(0)}</div>}
+                  </div>
+                  <div className="form-group m-form__group has-danger">
+                    <input
+                      type="password"
+                      placeholder={t('confirmPassword')}
+                      name="newPassword_confirmation"
+                      onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword_confirmation')}}
+                      value={passwordFields.newPassword_confirmation || ''}
+                      className="form-control  m-input--air form-control-danger m-input" />
+                    {errors && errors.get('newPassword_confirmation') && <div className="form-control-feedback text-center error">{errors.get('newPassword_confirmation').get(0)}</div>}
+                  </div>
+                  <div className="form-group text-right m--margin-top-20">
+                    <button onClick={(e) => { this._changePassword(e) }} className="m-btn btn btn-success m--margin-right-10 ">
+                        {t('change')}
+                    </button>
+                    <button onClick={() => {this._closePasswordModal()}} className="m-btn btn btn-default">
+                        {t('cancel')}
+                    </button>
+                  </div>
+                </div>                                   
+            </Card>            
+        </Dialog>
+        
         <Dialog
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          open={this.state.uploadModal}
+          open={this.state.uploadModal}          
+          PaperProps={{className: "margin-0"}}
           onClose={() => this._closeUploadModal()}
         >
          <Card title={t('uploadAvatar')} icon="fa fa-upload" style={{minWidth:'280px'}}>
@@ -198,11 +200,12 @@ class Info extends Component {
 
 Info = connect(
   (state) => ({
-    getChangePasswordRequest: selectChangePasswordRequest(state),
-    getChangeImageRequest: selectChangeImageRequest(state)    
+    changePasswordRequest: selectChangePasswordRequest(state),
+    changeImageRequest: selectChangeImageRequest(state)    
   }),
   (dispatch) => ({
     changePassword: (fields, params = {}) => { dispatch(changePassword(fields, params)) },
+    resetChangePasswordRequest: () => { dispatch(resetChangePasswordRequest()) },
     changeImage: (fields, params = {}) => { dispatch(changeImage(fields, params)) }    
   })
 )(Info);

@@ -232,21 +232,17 @@ class Teachers extends Component {
                     <MenuItem value={50}>50</MenuItem>
                     <MenuItem value={100}>100</MenuItem>
                   </Select>
-                  <HasPermission permissions={[
-                    '[Users][Teachers][Create][Any]'
-                  ]}>
-                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success' style={{marginRight:'7px'}}>
+                  <HasPermission permissions={['[Users][Teachers][Create][Any]']}>
+                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success m--margin-right-10'>
                       {t('addNew')}
-                      <Icon style={{marginLeft:'5px'}}>add</Icon>
+                      <Icon className="m--margin-left-5">add</Icon>
                     </Button>
                   </HasPermission>
-                  <HasPermission permissions={[
-                    '[Users][Teachers][Create][Bulk][Any]'
-                  ]}>
+                  <HasPermission permissions={['[Users][Teachers][Create][Bulk][Any]']}>
                     <NavLink className='link-btn' to='/teachers/csv'>
                       <Button variant="contained" className='btn-success mt-btn mt-btn-success'>
                         {t('bulkAddTeachers')}
-                        <Icon style={{marginLeft:'5px'}}>person</Icon>
+                        <Icon className="m--margin-left-5">person</Icon>
                       </Button>
                     </NavLink>
                   </HasPermission>

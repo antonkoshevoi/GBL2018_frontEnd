@@ -76,7 +76,7 @@ class CsvUploadSection extends Component {
                                 </CSVLink>
                             </div>
                         </div>
-                        <div className="row" style={{ marginLeft: 0 }}>
+                        <div className="row">
                             <div className={`col-md-6 ${loading ? ' not-allowed' : ''}`}>
                                 <div className={`react-csv-input ${loading ? ' disabled' : 'fdsfsf'}`}>
                                     <label>{t('selectCsvFile')}</label>                                    
