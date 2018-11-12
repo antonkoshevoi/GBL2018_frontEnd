@@ -98,7 +98,7 @@ class AssignStudentsModal extends Component {
     const errors = assignStudentsRequest.get('errors');
 
     return (
-      <Modal isOpen={isOpen} onClose={() => this._close()}>
+      <Modal bigger isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>            
               {loading ? (

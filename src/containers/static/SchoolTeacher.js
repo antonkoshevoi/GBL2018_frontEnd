@@ -4,7 +4,6 @@ import {translate} from 'react-i18next';
 import SplashHeader from './sections/SplashHeader'
 import SplashNavigation from './sections/SplashNavigation'
 import SplashFooter from './sections/SplashFooter'
-import {withRouter} from 'react-router-dom';
 import './splash.css';
 import 'react-sticky-header/styles.css';
 import StickyHeader from 'react-sticky-header';
@@ -13,8 +12,7 @@ const minHeight = window.document.documentElement.clientHeight - 225;
 
 const SchoolTeacher = (props) => {
   return (<div className="splash">
-    <StickyHeader
-      // This is the sticky part of the header.
+    <StickyHeader      
       header={
         <section>
           <SplashHeader {...props} />
@@ -32,4 +30,4 @@ const SchoolTeacher = (props) => {
   </div>)
 };
 
-export default withRouter(translate('splashScreen')(SchoolTeacher));
+export default translate('splashScreen')(SchoolTeacher);

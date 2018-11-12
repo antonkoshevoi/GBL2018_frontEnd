@@ -10,7 +10,7 @@ import HasRole from "../../middlewares/HasRole";
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{padding: 8 * 3}}>
+    <Typography component="div">
       {props.children}
     </Typography>
   );
@@ -95,7 +95,7 @@ class Details extends Component {
             <div className="m-portlet__head-caption">
               <div className="m-portlet__head-title">
                 <span className="m-portlet__head-icon">                  
-                    <i className="fa fa-id-card-o"></i>
+                    <i className="fa fa-id-card-o display-5"></i>
                 </span>
                 <h3 className="m-portlet__head-text">
                   {t('info')}
@@ -107,16 +107,16 @@ class Details extends Component {
                 <li className="m-portlet__nav-item">
                   {mode === 'overview' &&                  
                     <a title={t('edit')} onClick={() => { this._handleSwitchMode('edit') }} className=" pointer m-portlet__nav-link m-portlet__nav-link--icon">
-                      <i className="la la-edit"></i>
+                      <i className="la la-edit display-5"></i>
                     </a>                  
                   }
                 </li>
               </ul>
             </div>
           </div>
-          <div className="m-portlet__body m--padding-top-5" style={{height: "100%"}}>
+          <div className="m-portlet__body m--padding-top-5">
             {mode === 'overview' && <TabContainer>
-              <div className="m-widget1 m-widget1--paddingless">
+              <div className="m-widget1">
                 <div className="m-widget1__item">
                   <div className="row m-row--no-padding">
                     <div className="col">
@@ -211,7 +211,7 @@ class Details extends Component {
                       {errors && errors.get('lastName') && <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
                     </div>
                   </div>
-                  <HasRole roles={['Superadministrator','Superintendent','Principal','Administrator','Teacher','Parents']}>
+                  <HasRole roles={['Superadministrator','School','Teacher','Parents']}>
                   <div className="form-group m-form__group row">
                     <label className="col-form-label col-lg-3" htmlFor="email">{t('email')}</label>
                     <div className="col-lg-9">

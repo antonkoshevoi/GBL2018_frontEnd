@@ -131,7 +131,7 @@ class Students extends Component {
                 </Tbody>
             </Table>
             <div className="row">
-                <div className="col-sm-12 m--margin-top-40 text-right">
+                <div className="col-sm-12 m--margin-top-20 m--margin-bottom-40 text-right">
                     <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
                 </div>
             </div>

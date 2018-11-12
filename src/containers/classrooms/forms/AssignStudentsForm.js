@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Typography, Paper, Grid, FormHelperText, FormControlLabel, FormGroup, CircularProgress, Checkbox } from '@material-ui/core';
+import { Typography, FormHelperText, FormControlLabel, CircularProgress, Checkbox } from '@material-ui/core';
 import { getSchoolStudents } from "../../../redux/schools/actions";
 import { selectGetSchoolStudentsRequest } from "../../../redux/schools/selectors";
 
@@ -69,7 +69,7 @@ class AssignStudentsForm extends Component {
     }
 
     return schoolStudents.map((student, key) => (
-      <Grid item xs={4} key={key}>
+      <div key={key} className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
         <FormControlLabel
           control={<Checkbox
             color="primary"
@@ -79,7 +79,7 @@ class AssignStudentsForm extends Component {
           />}
           label={student.name}
         />
-      </Grid>
+      </div>
     ))
   }
 
@@ -89,14 +89,12 @@ class AssignStudentsForm extends Component {
     const studentsSuccess = this.props.getSchoolStudentsRequest.get('success');
 
     return (
-      <div className='row'>
-        <Paper className='full-width' elevation={0}>
+      <div>        
           {errors && errors.get('studentIds') && <FormHelperText error>{ errors.get('studentIds').get(0) }</FormHelperText>}
-          <FormGroup row style={{minWidth: '500px'}}>
-            {studentsLoading && !studentsSuccess && <div className="text-center" style={{width: '100%'}}><CircularProgress color="primary"/></div>}
+          {studentsLoading && !studentsSuccess && <div className="text-center m--margin-100"><CircularProgress color="primary"/></div>}
+          <div className="row">
             {!studentsLoading && studentsSuccess && this._renderStudents()}
-          </FormGroup>
-        </Paper>
+          </div>
       </div>
     );
   }

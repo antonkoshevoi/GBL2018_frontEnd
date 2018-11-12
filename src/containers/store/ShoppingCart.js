@@ -4,7 +4,7 @@ import {translate} from 'react-i18next';
 import OpenInvoicesTable from '../../components/store/OpenInvoicesTable';
 import { deleteFromCartRequest, selectAddToCartRequest, selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest } from '../../redux/store/selectors';
 import { calculateCartSum, deleteCartRecord, getCartRecords, setItemQuantity, updateShoppingCart } from '../../redux/store/actions';
-import {withRouter,NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Loader from '../../components/layouts/Loader';
 
 class ShoppingCart extends Component {
@@ -61,7 +61,7 @@ class ShoppingCart extends Component {
                         </div>
                     </div>
                 </div>
-              <div className="m-portlet__body dashboard-shopping-cart-body">
+              <div className="m-portlet__body">
                 {success &&
                 <div>
                     <OpenInvoicesTable                   
@@ -106,4 +106,4 @@ ShoppingCart = connect(
   })
 )(ShoppingCart);
 
-export default withRouter(translate('translations')(ShoppingCart));
+export default translate('translations')(ShoppingCart);

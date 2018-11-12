@@ -10,9 +10,7 @@ class Dashboard extends Component {
       <div>
           <HasRole roles={[
             'Superintendent',            
-            'Principal',
-            'Administrator',
-            'Superadministrator',
+            'School',
             'Teacher'
           ]}>
               <UserDashboard/>

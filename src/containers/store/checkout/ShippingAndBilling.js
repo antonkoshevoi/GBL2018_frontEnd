@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import '../../../styles/widgets.css';
 import {connect} from 'react-redux';
 import Address from "./Address";
-import {withRouter} from 'react-router-dom';
 import {translate} from 'react-i18next';
 import {FormControlLabel, Button, Checkbox, CircularProgress} from '@material-ui/core';
 import {setShippingAndBillingRequest} from "../../../redux/store/selectors";
@@ -181,4 +180,4 @@ ShippingAndBilling = connect(
   }),
 )(ShippingAndBilling);
 
-export default withRouter(translate('translations')(ShippingAndBilling));
+export default translate('translations')(ShippingAndBilling);

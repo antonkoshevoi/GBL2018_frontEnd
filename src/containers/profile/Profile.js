@@ -22,7 +22,7 @@ class Profile extends Component {
                 </HasRole>
                 <div className="row">                        
                     <HasRole roles={['Superadministrator', 'School', 'Parents']}>
-                        <div className="col-sm-12 col-md-12 col-lg-9 m-auto">
+                        <div className="col-sm-12 col-md-12 col-lg-11 col-xl-9 m-auto">
                             <div className="row">
                                 <div className="col-sm-12 col-md-4 col-sm-12 col-lg-4">
                                     <Info user={user} />

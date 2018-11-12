@@ -45,7 +45,7 @@ class Alerts extends Component {
         
         return (<div className="row m--margin-top-10">
             {alers.map((message, i) => {
-                return <div className="col-sm-12">
+                return <div key={i} className="col-sm-12">
                     <div className={`alert alert-warning m--margin-bottom-0 ${i ? 'm--margin-top-15' : ''}`} key={i}>
                         <button onClick={() => { this._markAsRead(message.get('id')) } } type="button" className="close pull-right no-padding" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

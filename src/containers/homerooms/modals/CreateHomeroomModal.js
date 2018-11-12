@@ -13,7 +13,6 @@ import { selectCreateRequest } from '../../../redux/homerooms/selectors';
 import { create, resetCreateRequest } from '../../../redux/homerooms/actions';
 import Modal from "../../../components/ui/Modal";
 import HomeroomForm from "../forms/HomeroomForm";
-import ImageCropper from "../../../components/ui/ImageCropper";
 
 class CreateHomeroomModal extends Component {
   static propTypes = {
@@ -60,21 +59,6 @@ class CreateHomeroomModal extends Component {
     );   
   };
 
-  _setCroppedImage(img) {
-    this.setState(
-      {
-        homeroom: {
-          ...this.state.homeroom,
-          avatarCropped: img
-        }
-      }
-    );
-  }
-
-  _setImage(img) {
-    this.setState({avatar: img});
-  }
-
   render() {
     const { isOpen, createRequest, t } = this.props;
     const loading = createRequest.get('loading');    
@@ -97,21 +81,10 @@ class CreateHomeroomModal extends Component {
 
         <DialogContent className="m--margin-top-25">
           <form id='create-homeroom-form' onSubmit={(e) => { this._onSubmit(e) }}>
-            <div className="row">
-              <div className="col-md-7">
-                <HomeroomForm
-                  onChange={(homeroom) => { this._onChange(homeroom) }}
-                  homeroom={this.state.homeroom}
-                  errors={errors}/>
-              </div>
-              <div className="col-md-5">
-                <ImageCropper
-                  circularButton
-                  onCrop={(cropImg) => this._setCroppedImage(cropImg)}
-                  setFile={(img) => this._setImage(img)}
-                />
-              </div>
-            </div>
+            <HomeroomForm
+              onChange={(homeroom) => { this._onChange(homeroom) }}
+              homeroom={this.state.homeroom}
+              errors={errors}/>
           </form>
         </DialogContent>
         <Divider className='full-width'/>

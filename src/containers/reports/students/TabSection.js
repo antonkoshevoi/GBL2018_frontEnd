@@ -123,7 +123,7 @@ class TabSection extends Component {
                 {this._renderTabs(data.data)}                  
             </div>
           </div>
-          <div className="m-portlet__body" style={{height: '100%'}}>
+          <div className="m-portlet__body">
             {this._renderTabContent(data.data)}
           </div>
         </div>         

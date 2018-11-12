@@ -47,9 +47,7 @@ export const Th = ({ width, classNames, name, onSort, dir = undefined, ...props}
     
   return (
     <th width={width} className={className} onClick={onSort && (() => { onSort(name) })}>
-      <span style={{width: `${width}`}}>
-        {props.children}
-      </span>
+      <span>{props.children}</span>
       {dir && (dir === 'asc' ? <i className="sort-arrow la la-angle-up"></i> : <i className="sort-arrow la la-angle-down"></i>)}
     </th>
   );
@@ -83,10 +81,10 @@ export const MessageRow = ({colSpan = 10, ...props}) => {
   );
 };
 
-export const TablePreloader = ({color, text, colSpan = 10, ...props}) => {
+export const TablePreloader = ({color, text, colSpan = 10}) => {
   return (
     <tr>
-      <td style={{minWidth: '300px'}} colSpan={colSpan}>
+      <td colSpan={colSpan}>
         <div className="table-message">
           <h2>{text} <CircularProgress color={color}/></h2>
         </div>
@@ -95,7 +93,7 @@ export const TablePreloader = ({color, text, colSpan = 10, ...props}) => {
   );
 };
 
-export const MyPreloader = ({color,text, ...props}) => {
+export const MyPreloader = ({color,text}) => {
     return (
         <div className="table-message">
             <h2>{text} <CircularProgress color={color}/></h2>

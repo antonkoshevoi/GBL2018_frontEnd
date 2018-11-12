@@ -3,8 +3,8 @@ import {
   AppBar, CircularProgress,
   DialogContent,
   FormControlLabel,
-  Icon, Checkbox, Grid,
-  Toolbar, Typography, FormGroup,
+  Icon, Checkbox,
+  Toolbar, Typography,
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
@@ -91,13 +91,13 @@ class AssignTeachersModal extends Component {
         const { teachers } = this.props;    
 
         if (!teachers.size) {
-            return <div>
+            return <div className="col-12">
                 <Typography variant="h4" gutterBottom>No Teachers...</Typography>
             </div>
         }
     
         return teachers.map((teacher, key) => (
-          <Grid item xs={4} key={key}>
+          <div className="col-12 col-sm-6 col-md-4" key={key}>
             <FormControlLabel
               control={<Checkbox
                 color="primary"
@@ -107,7 +107,7 @@ class AssignTeachersModal extends Component {
               />}
               label={teacher.get('name')}
             />
-          </Grid>
+          </div>
         ));
     }
   
@@ -133,10 +133,8 @@ class AssignTeachersModal extends Component {
                 </AppBar>
                 <DialogContent className="m--margin-top-25">                    
                     <form id='assign-teachers-form' onSubmit={(e) => { this._onSubmit(e) }}>
-                      <div className='row'>                                         
-                          <FormGroup row style={{minWidth: '500px'}}>                            
-                                {success ? this._renderTeachers() : <div className="text-center" style={{width: '100%'}}><CircularProgress color="primary"/></div>}
-                          </FormGroup>                        
+                      <div className='row'>                                                                                    
+                        {success ? this._renderTeachers() : <div className="col-12 text-center"><CircularProgress color="primary"/></div>}                                          
                       </div>
                     </form>
                 </DialogContent>

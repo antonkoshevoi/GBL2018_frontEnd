@@ -6,7 +6,6 @@ import SplashJumbotron from './sections/SplashJumbotron'
 import SplashStore from './sections/SplashStore'
 import SplashPlatform from './sections/SplashPlatform'
 import SplashFooter from './sections/SplashFooter'
-import {withRouter} from 'react-router-dom';
 import './splash.css';
 import 'react-sticky-header/styles.css';
 import StickyHeader from 'react-sticky-header';
@@ -32,4 +31,4 @@ const SplashContainer = props => {
   </div>)
 }
 
-export default withRouter(translate('splashScreen')(SplashContainer));
+export default translate('splashScreen')(SplashContainer);

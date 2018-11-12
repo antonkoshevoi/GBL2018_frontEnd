@@ -8,7 +8,7 @@ import {selectUpdateRequest} from "../../../redux/schools/selectors";
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{padding: 8 * 3}}>
+    <Typography component="div">
       {props.children}
     </Typography>
   );
@@ -84,10 +84,10 @@ class SchoolDetails extends Component {
         <div className="m-portlet m-portlet--head-solid-bg m-portlet--info m--margin-bottom-15">
           <div className="m-portlet__head">
             <div className="m-portlet__head-caption">
-              {loading && <div className="m-portlet__head-title"><span className="m-portlet__head-icon"><CircularProgress style={{float: 'right'}} color="inherit"/></span></div>}
+              {loading && <div className="m-portlet__head-title"><span className="m-portlet__head-icon"><CircularProgress color="inherit"/></span></div>}
               {!loading && <div className="m-portlet__head-title">
                 <span className="m-portlet__head-icon">                
-                    <i className="fa fa-id-card-o"></i>
+                    <i className="fa fa-id-card-o display-5"></i>
                 </span>
                 <h3 className="m-portlet__head-text">{t('info')}</h3>
               </div>}
@@ -97,16 +97,16 @@ class SchoolDetails extends Component {
                 <li className="m-portlet__nav-item">
                   {mode === 'overview' &&                  
                     <a title={t('edit')} onClick={() => { this._handleSwitchMode('edit') }} className=" pointer m-portlet__nav-link m-portlet__nav-link--icon">
-                        <i className="la la-edit"></i>
+                        <i className="la la-edit display-5"></i>
                     </a>                  
                   }
                 </li>
               </ul>
             </div>
           </div>
-          <div className="m-portlet__body m--padding-top-5" style={{height: "100%"}}>
+          <div className="m-portlet__body m--padding-top-5">
             {mode === 'overview' && <TabContainer>
-              <div className="m-widget1 m-widget1--paddingless">
+              <div className="m-widget1">
                 <div className="m-widget1__item">
                   <div className="row m-row--no-padding">
                     <div className="col">
@@ -151,10 +151,10 @@ class SchoolDetails extends Component {
             </TabContainer>}
             {mode === 'edit' && <TabContainer>
               <form id='update-school-form' onSubmit={(e) => { this._onSubmit(e) }}>
-                <div className="m-form">
+                <div className="m-form m--margin-top-25">
                   <div className="form-group m-form__group row">
                     <label className="col-form-label col-lg-3" htmlFor="schName">{t('name')}</label>
-                    <div className="col-lg-6">
+                    <div className="col-lg-9">
                       <input
                         type="text"
                         name="schName"
@@ -165,12 +165,9 @@ class SchoolDetails extends Component {
                       {errors && errors.get('schName') && <div className="form-control-feedback text-center error">{errors.get('schName').get(0)}</div>}
                     </div>
                   </div>
-                </div>
-                <div className="m-separator m-separator--dashed"></div>
-                <div className="m-form">
                   <div className="form-group m-form__group row">
                     <label className="col-form-label col-lg-3" htmlFor="billing">{t('billing')}</label>
-                    <div className="col-lg-6">
+                    <div className="col-lg-9">
                       <input
                         type="text"
                         name="billing"
@@ -181,12 +178,9 @@ class SchoolDetails extends Component {
                       {errors && errors.get('billing') && <div className="form-control-feedback text-center error">{errors.get('billing').get(0)}</div>}
                     </div>
                   </div>
-                </div>
-                <div className="m-separator m-separator--dashed"></div>
-                <div className="m-form">
                   <div className="form-group m-form__group row">
                     <label className="col-form-label col-lg-3" htmlFor="shippingAddress">{t('shippingAddress')}</label>
-                    <div className="col-lg-6">
+                    <div className="col-lg-9">
                       <input
                         type="text"
                         name="shippingAddress"

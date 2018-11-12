@@ -64,16 +64,7 @@ Modal = withStyles({
   middle: {
     maxHeight: '90vh',
     minWidth: '40%'
-  }  
-  // paperWidthXs: {
-  //   width: '80%'
-  // },
-  // paperWidthSm: {
-  //   width: '80%'
-  // },
-  // paperWidthMd: {
-  //   width: '80%'
-  // },
+  }
 })(Modal);
 
 export default Modal;

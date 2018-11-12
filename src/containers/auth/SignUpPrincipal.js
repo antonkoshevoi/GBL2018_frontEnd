@@ -132,7 +132,7 @@ class SignUpPrincipal extends Component {
             <div className="signup-page">
               <div className="text-center m--margin-top-15">
                 <a href="/">
-                   <img alt="GravityBrain" style={{width: '270px', height: 'auto'}} src={logoUrl} />
+                   <img alt="GravityBrain" className='top-logo' src={logoUrl} />
                 </a>
               </div>
               <div className="m-signup col-sm-6 m-auto">

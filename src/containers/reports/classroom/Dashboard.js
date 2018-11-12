@@ -56,7 +56,7 @@ class Dashboard extends Component {
                           className="fa fa-line-chart display-6"></i></span><h3 className="m-portlet__head-text">{t('students')}</h3></div>
                       </div>                
                     </div>
-                    <div className="m-portlet__body" style={{height: '100%'}}>
+                    <div className="m-portlet__body">
                         <Students filters={{ classroomId: classroomId }} />
                     </div>
                   </div>

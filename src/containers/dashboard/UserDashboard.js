@@ -4,7 +4,6 @@ import RosterStatistic from "../reports/widgets/RosterStatistic";
 import LineChart from "../reports/widgets/LineChart";
 import {connect} from "react-redux";
 import {translate} from "react-i18next";
-import {withRouter} from "react-router-dom";
 import {getRecords} from "../../redux/store/actions";
 import {selectRecords} from "../../redux/store/selectors";
 import {getCharts} from "../../redux/reports/dashboard/actions";
@@ -90,5 +89,4 @@ UserDashboard = connect(
   })
 )(UserDashboard);
 
-
-export default withRouter(translate("translations")(UserDashboard));
+export default translate("translations")(UserDashboard);

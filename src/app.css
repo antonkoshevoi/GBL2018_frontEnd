@@ -238,6 +238,11 @@ li > .small-avatar {
     background-size: cover;
 }
 
+.top-logo {
+    width: 270px;
+    height: auto;
+}
+
 .full-width {
     width: 100%;
 }
@@ -296,16 +301,6 @@ button [role="progressbar"] {
     right: 8px;
     top: 50%;
     transform: translateY(-50%);
-}
-
-div.myGridTileBar {
-    height: 80px;
-    background-color: rgba(0, 17, 0, 0.58);
-}
-
-div.gridProgressBar {
-    height: 6px;
-    border-radius: 6px;
 }
 
 table th.sort-table-head {
@@ -564,6 +559,15 @@ div.m-portlet {
     padding: 12% 10% 9% 5%;
 }
 
+.dashboard-shopping-cart-body {
+    min-height: 365px;
+}
+
+.passRateCard h1 {
+    font-size: 7rem;
+    color: #008000;
+}
+
 @media (min-width: 1240px) {
     .quick-card-title{
         margin-top: 15px;
@@ -670,17 +674,14 @@ div.pie-block > canvas {
 }
 
 div.m-portlet .m-portlet__head {
-    padding: 0 1.2rem;
-    min-height: 50px;    
+    padding: 0 1.2rem;    
 }
 
 div.m-portlet .m-portlet__body {
     padding: 1.2rem;
 }
 
-div.m-portlet__head-icon
-
-div[class^='col-'] {
+div.m-portlet__head-icon div[class^='col-'] {
     padding-right: 7px;
     padding-left: 7px;
     margin-bottom: 15px;

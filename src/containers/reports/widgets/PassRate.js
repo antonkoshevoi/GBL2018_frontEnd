@@ -15,7 +15,7 @@ class PassRate extends Component {
 
     return (
       <Card title={t('passRate')} icon="fa fa-file-text-o display-5" className='passRateCard'>
-        <h1  className="d-flex justify-content-center align-items-center absolute-center" style={{fontSize:'7rem',color:'rgb(0, 128, 0)'}}>
+        <h1  className="d-flex justify-content-center align-items-center absolute-center">
           {loading ? <CircularProgress color="primary"/> : ((data.passRate || 0) + '%')}          
         </h1>
       </Card>

@@ -1,7 +1,7 @@
 import {
   GET_USER, GET_USER_SUCCESS, GET_USER_FAIL, RESET_GET_USER_REQUEST,
   UPDATE, UPDATE_SUCCESS, UPDATE_FAIL,
-  CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAIL,
+  CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAIL, RESET_CHANGE_PASSWORD_REQUEST,
   CHANGE_IMAGE, CHANGE_IMAGE_SUCCESS, CHANGE_IMAGE_FAIL
 } from './actions';
 
@@ -155,6 +155,8 @@ export default function reducer (state = initialState, action) {
           .set('errorMessage', changePasswordError.message)
           .set('errors', changePasswordError.code === 422 ? Immutable.fromJS(changePasswordError.errors) : undefined)
         );
+    case RESET_CHANGE_PASSWORD_REQUEST:
+        return state.set('changePasswordRequest', initialState.get('changePasswordRequest'));
     /**
      * Change Image
      */

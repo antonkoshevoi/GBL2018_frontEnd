@@ -111,9 +111,9 @@ class Classrooms extends Component {
         <Td width='75px'>{record.get('studentsCount')}</Td>
         <Td width='75px'>{(record.get('isPublic') ? t('yes') : t('no'))}</Td>
         <Td width='75px'>            
-            <button title={t(record.get('paid') ? 'classroomPaid' : 'classroomNotPaid')} className={`btn m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ${record.get('paid') ? 'btn-success' : 'btn-danger '}`}>
-                <i className={`la ${record.get('paid') ? 'la-dollar' : 'la-exclamation-triangle'}`} style={{fontSize: '2rem'}}></i>
-            </button>             
+            <span title={t(record.get('paid') ? 'classroomPaid' : 'classroomNotPaid')} className={`${record.get('paid') ? 'text-success' : 'text-danger '}`}>
+                <i className={`display-5 la ${record.get('paid') ? 'la-dollar' : 'la-exclamation-triangle'}`}></i>
+            </span>             
         </Td>
         <Td width='100px'>{moment(record.get('crmEndDate')).format('ll')}</Td>
         <Td width='150px' className="actions">
