@@ -47,7 +47,7 @@ class Transactions extends Component {
                             </IconButton>
                         </Td>
                         <Td width='102px'><b><a className="g-blue" target="_blank" href={item.get('invoiceUrl')}>{item.get('invoiceNo')}</a></b></Td>
-                        <Td width='102px'><b className="g-blue">{item.get('total')}$</b></Td>
+                        <Td width='102px'>{item.get('total')}$</Td>
                         <Td width='100px'><span className='m-badge m-badge--brand m-badge--wide'>{t(item.get('paymentType'))}</span></Td>
                         <Td width='140px'>{moment(item.get('createdAt')).format('lll')}</Td>
                         <Td width='140px'>{item.get('authorizedAt') ? moment(item.get('authorizedAt')).format('lll') : (<i className="fa fa-close g-red"></i>)}</Td>
@@ -69,8 +69,7 @@ class Transactions extends Component {
                                 <Th width="80px">{t('thumbnail')}</Th>
                                 <Th width="180px">{t('title')}</Th>
                                 <Th width="100px">{t('quantity')}</Th>
-                                <Th width="150px">{t('price')}</Th>
-                                <Th width="150px">{t('actions')}</Th>
+                                <Th width="150px">{t('price')}</Th>                                
                             </HeadRow>
                         </Thead>
                         <Tbody >
@@ -92,8 +91,8 @@ class Transactions extends Component {
                         </div>
                     </Td>
                     <Td  width="180px"><NavLink to={`/store/details/${item.get('itemId')}`}>{item.get('title')}</NavLink></Td>
-                    <Td width='100px'><b className="g-blue">{item.get('quantity')}</b></Td>
-                    <Td width='150px'><b className="g-blue">{Number(item.get('totalPrice')).toFixed(2)} $</b></Td>                    
+                    <Td width='100px'>{item.get('quantity')}</Td>
+                    <Td width='150px'>{Number(item.get('totalPrice')).toFixed(2)} $</Td>                    
                 </Row>
             )
         })

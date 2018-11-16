@@ -134,7 +134,7 @@ class OpenInvoicesTable extends Component {
           {preview && <div>                          
               <div className="m--margin-top-5 m--margin-bottom-10">${parseFloat(item.storeItem.discountPrice).toFixed(2)}</div>              
               <div className="m--margin-top-5 m--margin-bottom-10">
-                {!item.isInvoice ? countInput : <span className="productLabel text-center">{item.count}</span>}                    
+                {!item.isInvoice ? countInput : <span className="productLabel">{item.count}</span>}                    
               </div>
               <Divider className="m--margin-bottom-10" />
             </div>}

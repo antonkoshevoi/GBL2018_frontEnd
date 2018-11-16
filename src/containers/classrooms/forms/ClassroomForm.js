@@ -145,7 +145,7 @@ class ClassroomForm extends Component {
     return (
       <div className='row'>
         <div className="col-sm-10 m-auto">
-          <FormControl aria-describedby='crmName-error-text' className='full-width form-inputs'>
+          <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='crmName'>{t('name')}</InputLabel>
             <Input
               name='crmName'
@@ -157,43 +157,43 @@ class ClassroomForm extends Component {
               }}/>
             {errors && errors.get('crmName') && <FormHelperText error>{errors.get('crmName').get(0)}</FormHelperText>}
           </FormControl>
-          <div className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmStartDate' shrink={!!classroom.crmStartDate}>{t('startDate')}</InputLabel>            
-              <MuiDatePicker
+          <FormControl className='full-width form-inputs'>
+            <MuiDatePicker
                 name='crmStartDate'
+                label={t('startDate')}
                 value={classroom.crmStartDate || null}
                 onChange={(m) => {
                   this._handleDateChange(m, 'crmStartDate')
                 }}
               />            
             {errors && errors.get('crmStartDate') && <FormHelperText error>{errors.get('crmStartDate').get(0)}</FormHelperText>}
-          </div>
-          <div className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEndDate' shrink={!!classroom.crmEndDate}>{t('endDate')}</InputLabel>            
-              <MuiDatePicker
+          </FormControl>
+          <FormControl className='full-width form-inputs'>
+            <MuiDatePicker
                 name='crmEndDate'
+                label={t('endDate')}
                 value={classroom.crmEndDate || null}
                 onChange={(m) => {
                   this._handleDateChange(m, 'crmEndDate')
                 }}
               />
             {errors && errors.get('crmEndDate') && <FormHelperText error>{errors.get('crmEndDate').get(0)}</FormHelperText>}
-          </div>
-          <div className='full-width form-inputs d-inline-flex flex-column'>
-            <InputLabel htmlFor='crmEnrollmentStartDate' shrink={!!classroom.crmEnrollmentStartDate}>{t('enrollmentStartDate')}</InputLabel>            
-              <MuiDatePicker
+          </FormControl>
+          <FormControl className='full-width form-inputs'>
+            <MuiDatePicker
                 name='crmEnrollmentStartDate'
+                label={t('enrollmentStartDate')}
                 value={classroom.crmEnrollmentStartDate || null}
                 onChange={(m) => {
                   this._handleDateChange(m, 'crmEnrollmentStartDate')
                 }}
               />            
             {errors && errors.get('crmEnrollmentStartDate') && <FormHelperText error>{errors.get('crmEnrollmentStartDate').get(0)}</FormHelperText>}
-          </div>
-          <div className='full-width form-inputs d-inline-flex flex-column'>
-              <InputLabel htmlFor='crmEnrollmentEndDate' shrink={!!classroom.crmEnrollmentEndDate}>{t('enrollmentEndDate')}</InputLabel>            
-              <MuiDatePicker
+          </FormControl>
+          <FormControl className='full-width form-inputs'>
+            <MuiDatePicker
                 name='crmEnrollmentEndDate'
+                label={t('enrollmentEndDate')}
                 value={classroom.crmEnrollmentEndDate || null}
                 onChange={(m) => {
                   this._handleDateChange(m, 'crmEnrollmentEndDate')
@@ -201,7 +201,7 @@ class ClassroomForm extends Component {
               />            
             {errors && errors.get('crmEnrollmentEndDate') &&
             <FormHelperText error>{errors.get('crmEnrollmentEndDate').get(0)}</FormHelperText>}
-          </div>
+          </FormControl>
           {!classroom.id &&
               <FormControl className='full-width form-inputs'>
                 <Button
