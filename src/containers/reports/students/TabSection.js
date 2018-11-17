@@ -45,7 +45,7 @@ class TabSection extends Component {
         return this._renderDetailedData(courses[0] || null);
     }
     return courses.map(function (item, i) {
-        if (classroom == item.classroomId) {
+        if (classroom === item.classroomId) {
             return (<LessonsTable studentId={studentId} classroomId={item.classroomId} key={i}></LessonsTable>)
         }
         return false;        

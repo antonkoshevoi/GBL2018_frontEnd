@@ -66,10 +66,17 @@ class Details extends Component {
     const {record, records, addToCartRequest, getSingleRecordRequest, getRecordsRequest, t} = this.props;
     const loadingSingle = getSingleRecordRequest.get('loading');
     const successSingle = getSingleRecordRequest.get('success');    
-    const successRecords = getRecordsRequest.get('success');
-    
+    const successRecords = getRecordsRequest.get('success');    
     const price         = successSingle ? Number(record.get('price')) : 0;
-    const discountPrice = Number(price - (price * record.get('discount') / 100));    
+    const discountPrice = Number(price - (price * record.get('discount') / 100));
+    const showFilters = {
+        sort: false,
+        all: true,
+        subject: true,
+        target: true,
+        search: false,
+        newest: true
+    };    
 
     const similarRecords = (successRecords && successSingle) ?
       records.filter((item) => {
@@ -81,7 +88,7 @@ class Details extends Component {
         {loadingSingle && <Loader/>}
         <div className="m-portlet__head m--margin-bottom-30">
           <div className="m-portlet__head-caption">
-            <Filter isActive={false} type="details"/>
+            <Filter isActive={false} type="details" onChange={() => { }} isShow={showFilters} />
           </div>
         </div>
         <div className="container" id="productDetails">

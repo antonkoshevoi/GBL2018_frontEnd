@@ -98,11 +98,10 @@ class LessonsTable extends Component {
         <table className="table table-bordered">
           <thead>
             <tr className="active">
-              <th style={{ minWidth: 50}}>{t('unit')}</th>
               <th className="text-center">{t('lessonInformation')}</th>
-              <th className="text-center">{t('lessonAttempt')}</th>              
-              <th className="text-center">{t('attemptDate')}</th>              
-              <th className="text-center">{t('score')} / {t('percent')}</th>              
+              <th className="text-center">{t('lessonAttempt')}</th>
+              <th className="text-center">{t('attemptDate')}</th>
+              <th className="text-center">{t('score')} / {t('percent')}</th>
               <th className='text-center'>{t('comments')}</th>
             </tr>
           </thead>
@@ -110,7 +109,14 @@ class LessonsTable extends Component {
           {data.map((unit, unitIndex) => {
               if (this.countNumberOfUnitAttempts(unit) > 0) {
                   reportIsEmpty = false;
-                  return this.renderLessonRow(unit, unitIndex);
+                  return [
+                      <tr key={unitIndex}>
+                        <td className="unit" colSpan={5} key={unit.unit_id + '-unitName'}>
+                            <b>{t('unit')} {unitIndex + 1}</b> {unit.unit_name}
+                        </td>
+                      </tr>,
+                      this.renderLessonRow(unit, unitIndex)
+                  ];
               }
               return '';
           })}
@@ -171,8 +177,7 @@ class LessonsTable extends Component {
   }
 
     renderLessonRow(unit, unitIndex) {
-        const { t } = this.props;
-        const unitRowSpan = this.countNumberOfUnitAttempts(unit);
+        const { t } = this.props;        
         
         return unit.lessons.map((lesson, lessonIndex) => {
             const lessonRowSpan = this.countNumberOfLessonAttempts(lesson);
@@ -193,14 +198,7 @@ class LessonsTable extends Component {
                 const attemptFinished = !!attempt.att_date;                
                 const passed = parseInt(attempt.scored_points, 10) >=  parseInt(lesson.pass_weight, 10);
                                          
-                return <tr key={lesson.lesson_id + '-' + attempt.attempt_no + '-lessonRow'}>
-                    {(lessonIndex === 0 && attemptIndex === 0) &&                    
-                        <td className="rotate" rowSpan={unitRowSpan} key={unit.unit_id + '-unitName'}>
-                            <div>
-                                <span><b>Unit {unitIndex + 1}</b> {unit.unit_name}</span>
-                            </div>
-                        </td>
-                    }                
+                return <tr key={lesson.lesson_id + '-' + attempt.attempt_no + '-lessonRow'}>              
                     {attemptIndex === 0 &&
                     <td style={{ maxWidth: 350}} className="text-center" rowSpan={lessonRowSpan}>
                         <p>                        
@@ -217,16 +215,16 @@ class LessonsTable extends Component {
                     <td className='text-center'>                            
                         {attemptFinished && moment(attempt.att_date).format('ll')}                            
                     </td>          
-                    {attemptFinished ? <td className={`attempt-${passed ? 'pass' : 'fail'} text-center`}>
-                        <div aria-haspopup="true" onMouseEnter={this._handleRatePopoverOpen} onMouseLeave={this._handleRatePopoverClose}>
+                    <td className={`${attemptFinished && (passed ? 'attempt-pass' : 'attempt-fail')} text-center`}>
+                        {attemptFinished && <div aria-haspopup="true" onMouseEnter={this._handleRatePopoverOpen} onMouseLeave={this._handleRatePopoverClose}>
                             <p>
                                 {attempt.scored_points + '/' + lesson.lesson_points}
                             </p>
                             <p>
                                 {(attempt.scored_points * 100 / lesson.lesson_points).toFixed(2) + '%'}    
                             </p>
-                        </div>
-                    </td> : <td>-</td>}
+                        </div>}
+                    </td>
                     <td className="text-left">
                         <span>{attemptFinished && Parser(attempt.comment)}</span>
                     </td>            

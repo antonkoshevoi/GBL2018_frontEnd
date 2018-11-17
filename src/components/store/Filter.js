@@ -24,7 +24,6 @@ class Filter extends Component {
     sorters: {}
   };
 
-
   componentDidMount(){
     const {type, match} = this.props;
     if (type === 'newest') {
@@ -34,38 +33,28 @@ class Filter extends Component {
   }
 
   _setCategoryFilter(category){
-    switch (category){
-      case 'courses':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '1'}}}, this._initFilter);
-        break;
-      case 'books':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '4'}}}, this._initFilter);
-        break;
-      case 'teaching_aids':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '3'}}}, this._initFilter);
-        break;
-      case 'stationary':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '6'}}}, this._initFilter);
-        break;
-      case 'student_rewards':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '5'}}}, this._initFilter);
-        break;
-      case 'tutoring_services':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '7'}}}, this._initFilter);
-        break;
-      case 'bundles':
-        this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category: '2'}}}, this._initFilter);
-        break;
-      default:
-        return;
-    }
+      const categories = {
+          courses: 1,
+          bundles: 2,
+          teaching_aids: 3,
+          books: 4,
+          student_rewards: 5,
+          stationary: 6,
+          tutoring_services: 7
+      };
+      
+      const categoryId = categories[category] || 0;
+        
+      if (categoryId > 0) {
+         this.setState({params: {...this.state.params, filter: {...this.state.params.filter, category:categoryId}}}, this._initFilter);
+      }
   }
 
   componentWillReceiveProps(nextProps){
     if (!nextProps.isActive) {
       this._resetAll();
     }
-    if (nextProps.location.hash == '' && nextProps.location.key !== this.props.location.key) {
+    if (nextProps.location.hash === '' && nextProps.location.key !== this.props.location.key) {
       this._setCategoryFilter(nextProps.match.params.category);
     }
   }
@@ -92,7 +81,6 @@ class Filter extends Component {
     this._resetSorters();
   }
 
-
   handleMenuClick = (event, menu) => {
     this.setState({[menu]: event.currentTarget});
   };
@@ -101,11 +89,9 @@ class Filter extends Component {
     this.setState({[menu]: null});
   };
 
-
   _searchBarChange = (e) => {
     this.setState({params: {...this.state.params, filter: {...this.state.params.filter, title: e.target.value}}});
   };
-
 
   _selectFilter = (type,value,e) => {
       const {title} = e.currentTarget;
@@ -114,12 +100,10 @@ class Filter extends Component {
       this.setState({params: {...this.state.params, filter: {...this.state.params.filter, [type]: value,}}}, this._initFilter);
   };
 
-
   _initFilter = () => {
     let {params} = this.state;
     this.props.onChange(params);
   };
-
 
   _selectSorter = (name) => {
     let sorters = {};
@@ -154,7 +138,6 @@ class Filter extends Component {
     }, this._initFilter);
   };
 
-
   render() {
     const {isActive, type, isShow, t} = this.props;
     const {categoryMenu, subjectMenu, sortMenu, sorters} = this.state;
@@ -168,9 +151,7 @@ class Filter extends Component {
                 <Button
                     aria-owns={categoryMenu ? 'category-menu' : null}
                     aria-haspopup="true"
-                    onClick={(e) => {
-                        this.handleMenuClick(e, 'categoryMenu')
-                    }}
+                    onClick={(e) => { this.handleMenuClick(e, 'categoryMenu') }}
                 >
                   <span> {this.state.active_target ? this.state.active_target : t('targetAge')}</span> <i className="m--margin-left-10 fa fa-chevron-down"></i>
                 </Button>
@@ -178,9 +159,7 @@ class Filter extends Component {
                     id="category-menu"
                     anchorEl={categoryMenu}
                     open={Boolean(categoryMenu)}
-                    onClose={(e) => {
-                        this.handleMenuClose(e, 'categoryMenu')
-                    }}
+                    onClose={(e) => { this.handleMenuClose(e, 'categoryMenu') }}
                 >
                   {this.state.active_target && 
                      <MenuItem onClick={(e) => {this.handleMenuClose(e, 'categoryMenu'); this._selectFilter('target', '', e)}}>{t('all')}</MenuItem>
@@ -203,9 +182,7 @@ class Filter extends Component {
                 <Button
                     aria-owns={subjectMenu ? 'subject-menu' : null}
                     aria-haspopup="true"
-                    onClick={(e) => {
-                        this.handleMenuClick(e, 'subjectMenu')
-                    }}
+                    onClick={(e) => { this.handleMenuClick(e, 'subjectMenu') }}
                 >
                   <span> {this.state.active_subject ? this.state.active_subject : t('subject')}</span> <i className="m--margin-left-10 fa fa-chevron-down"></i>
                 </Button>
@@ -213,9 +190,7 @@ class Filter extends Component {
                     id="subject-menu"
                     anchorEl={subjectMenu}
                     open={Boolean(subjectMenu)}
-                    onClose={(e) => {
-                        this.handleMenuClose(e, 'subjectMenu')
-                    }}
+                    onClose={(e) => { this.handleMenuClose(e, 'subjectMenu') }}
                 >
                 {this.state.active_subject &&
                   <MenuItem title={t('all')} onClick={(e) => { this.handleMenuClose(e, 'subjectMenu'); this._selectFilter('subject', '', e) }}>{t('all')}</MenuItem>}
@@ -230,13 +205,13 @@ class Filter extends Component {
             <div className="store-filter-divider"></div>
             <div className="filter-buttons">
                 { isShow.all &&
-                 <NavLink to="/store" className={(!isActive && type !== 'details') ? ' activeFilter' : ''}><Button>{t('all')}</Button></NavLink>
+                    <NavLink to="/store" className={(!isActive && type !== 'details') ? ' activeFilter' : ''}><Button>{t('all')}</Button></NavLink>
                 }
                 {isShow.newest &&
-                <NavLink to="/store/products/course/newest" className={(sorters.created == 'desc') ? ' activeFilter' : ''}><Button>{t('newest')}</Button></NavLink>
+                    <NavLink to="/store/products/course/newest" className={(sorters.created === 'desc') ? ' activeFilter' : ''}><Button>{t('newest')}</Button></NavLink>
                 }
             </div>
-          </div>
+          </div>          
           <div className="col-lg-6 col-md-6 col-sm-12 store-filter">                            
                 { isShow.sort &&              
                 <div className="filterMenu pull-right">
@@ -251,13 +226,11 @@ class Filter extends Component {
                     id="category-menu"
                     anchorEl={sortMenu}
                     open={Boolean(sortMenu)}
-                    onClose={(e) => {
-                      this.handleMenuClose(e, 'sortMenu')
-                    }}
+                    onClose={(e) => { this.handleMenuClose(e, 'sortMenu') }}
                   >
                     <MenuItem onClick={(e) => { this._selectSorter('price') }}>{t('price')}</MenuItem>
                     <MenuItem onClick={(e) => { this._selectSorter('created') }}>{t('date')}</MenuItem>
-                    <MenuItem onClick={(e) => { this._selectSorter('rating') }}>{t('rating')}</MenuItem>
+                    <MenuItem onClick={(e) => { this._selectSorter('title') }}>{t('title')}</MenuItem>
                   </Menu>
                 </div>              
                 }
@@ -265,16 +238,14 @@ class Filter extends Component {
                 <div className="filterMenu pull-right">
                     <Input
                       className="store-search m--margin-top-10 m--margin-right-10"
-                      id="search"
+                      id='search'
                       type='search'
                       onChange={(e) => this._searchBarChange(e)}
                       placeholder={t('search')}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton onClick={(e) => {this._initFilter(e)}}>
-                            <Icon className="material-icons">
-                              search_icon
-                            </Icon>
+                            <Icon className="material-icons">search_icon</Icon>
                           </IconButton>
                         </InputAdornment>
                       }

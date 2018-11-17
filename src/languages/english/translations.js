@@ -563,6 +563,9 @@ export default {
     due: 'Due',
     paid: 'Paid',
     filterTransactions: 'Filter Transactions',
+    storeSlider1: 'Save Big With course bundles',
+    storeSlider2: 'BZabc:Buy the entire series!',
+    storeSlider3: 'New Movies to Rent',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',
