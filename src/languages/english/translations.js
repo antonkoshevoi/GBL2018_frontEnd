@@ -560,6 +560,9 @@ export default {
     upload: 'Upload',
     invoice: 'Invoice',
     yourCartIsEmpty: 'Your shopping cart is empty...',
+    due: 'Due',
+    paid: 'Paid',
+    filterTransactions: 'Filter Transactions',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

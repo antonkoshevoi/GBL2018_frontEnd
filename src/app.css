@@ -117,6 +117,9 @@ textarea {
     padding-left: 0;
     padding-right: 0;
 }
+.sub-table .table thead tr.active th {
+    padding: 6px 10px;
+}
 
 .user-avatar {
     max-width: 100px;
@@ -1024,7 +1027,11 @@ div#notFoundPage {
     background-color: rgba(255, 0, 0, 0.4);
     color: white;
 }
-
+td.unit {   
+    background-color: #ffffff;
+    font-size: 1.4rem;
+    color: #337ab7;
+}
 td.rotate {
     white-space: nowrap;
     position: relative;
