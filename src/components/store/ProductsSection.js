@@ -36,7 +36,7 @@ class ProductsSection extends Component {
         let {products, title, type, all, categoryId} = this.props;
 
         if (categoryId) {
-            products = products.filter(item => item.get('category').get('id') == categoryId).slice(0, 9);
+            products = products.filter(item => item.get('category').get('id') === categoryId).slice(0, 9);
         }
 
         return (
@@ -48,8 +48,7 @@ class ProductsSection extends Component {
                                 <h3>{title}</h3>
                             </div>
                             <div className="col-md-6 text-right">
-                                {(!all && products.size >= 9) && <NavLink to={`/store/products/courses/${type}`} params={{type: 'sad'}}
-                                                                          className="btn m-btn no-border btn-sm btn-danger">More</NavLink>}
+                                {(!all && products.size >= 9) && <NavLink to={`/store/products/courses/${type}`} className="btn m-btn no-border btn-sm btn-danger">More</NavLink>}
                             </div>
                         </div>
                         <div className="row">
@@ -60,7 +59,6 @@ class ProductsSection extends Component {
             </section>
         );
     }
-
 
     render() {
         return this._renderView();

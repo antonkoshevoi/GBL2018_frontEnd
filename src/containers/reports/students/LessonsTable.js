@@ -268,5 +268,3 @@ LessonsTable = connect(
 )(LessonsTable);
 
 export default translate("translations")(withStyles(styles)(LessonsTable));
-    
-    

@@ -10,26 +10,7 @@ import {getRecords} from "../../redux/store/actions";
 import Loader from "../../components/layouts/Loader";
 import StoreSlider from "../../components/store/StoreSlider";
 
-const sliderData = [
-  {
-    image:'https://www.swinburne.edu.my/wp-content/uploads/2017/06/sa-short-courses.jpg',
-    title:'Save Big With course bundles',
-    desc:''
-  },
-  {
-    image:'https://conceptacademies.co.uk/wp-content/uploads/2014/10/6700226_m.jpg',
-    title:'BZabc:Buy the entire series!',
-    desc:''
-  },
-  {
-    image:'https://az616578.vo.msecnd.net/files/2017/02/26/636237341865706889-619832852_movies.jpg',
-    title:'New Movies to Rent',
-    desc:''
-  }
-]
-
 class Store extends Component {
-
 
   state = {
     isFiltered: false
@@ -75,6 +56,24 @@ class Store extends Component {
     const loading = getRecordsRequest.get('loading');
     const success = getRecordsRequest.get('success');
     const {isFiltered} = this.state;
+    
+    const sliderData = [
+      {
+        image:'https://www.swinburne.edu.my/wp-content/uploads/2017/06/sa-short-courses.jpg',
+        title: t('storeSlider1'),
+        desc:''
+      },
+      {
+        image:'https://conceptacademies.co.uk/wp-content/uploads/2014/10/6700226_m.jpg',
+        title: t('storeSlider2'),
+        desc:''
+      },
+      {
+        image:'https://az616578.vo.msecnd.net/files/2017/02/26/636237341865706889-619832852_movies.jpg',
+        title: t('storeSlider3'),
+        desc:''
+      }
+    ];    
 
     return (
       <div className="animated fadeInLeft">
@@ -124,9 +123,8 @@ Store = connect(
   (dispatch) => ({
     getRecords: (params = {perPage: '50'}) => {
       dispatch(getRecords(params))
-    },
+    }
   })
 )(Store);
-
 
 export default withRouter(translate("translations")(Store));

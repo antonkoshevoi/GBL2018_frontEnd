@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar, CircularProgress,
-  DialogContent,  
-  Icon,
+  DialogContent, Icon, Checkbox, FormControlLabel,
   Toolbar, Typography,
   Divider, Button, DialogActions
 } from '@material-ui/core';
@@ -31,7 +30,8 @@ class AssignStudentsModal extends Component {
     this.state = {
       id: null,
       schoolId: null,
-      studentIds: []
+      studentIds: [],
+      useCourseCredits: false
     };
   }
 
@@ -53,6 +53,7 @@ class AssignStudentsModal extends Component {
 
       this.setState({
         id: classroom.id,
+        classroom: classroom,
         schoolId: classroom.schoolId,
         studentIds: studentIds
       });
@@ -72,7 +73,8 @@ class AssignStudentsModal extends Component {
   _close () {
     this.setState({
       id: null,
-      studentIds: []
+      studentIds: [],
+      useCourseCredits: false
     });
     this.props.resetAssignStudentsRequest();
     this.props.onClose();
@@ -85,14 +87,21 @@ class AssignStudentsModal extends Component {
   _onSubmit (e) {
     e.preventDefault();
 
-    const { id, studentIds } = this.state;
+    const { id, studentIds, useCourseCredits } = this.state;
 
     this.props.assignStudents(id, {
-      studentIds: studentIds
+      studentIds: studentIds,
+      useCourseCredits: useCourseCredits      
     });   
   };
+  
+  _handleUseCourseCreditsChange(e) 
+  {
+      this.setState({useCourseCredits: e.target.checked});
+  }
 
   render() {
+    const { classroom, useCourseCredits } = this.state;
     const { isOpen, assignStudentsRequest, getRecordForAssignStudentsRequest, t } = this.props;
     const loading = assignStudentsRequest.get('loading') || getRecordForAssignStudentsRequest.get('loading');    
     const errors = assignStudentsRequest.get('errors');
@@ -114,6 +123,19 @@ class AssignStudentsModal extends Component {
 
         <DialogContent className="m--margin-top-25">          
           <form id='assign-students-form' onSubmit={(e) => { this._onSubmit(e) }}>
+            {(classroom && classroom.courseCredits > 0) && <div className="alert m-alert m-alert--default m--padding-bottom-0">
+                <p className="m--margin-bottom-0"><strong>{t('youHaveUnassignedCourseCredits', {count: classroom.courseCredits})}</strong></p>                    
+                <FormControlLabel
+                    className=""
+                    control={<Checkbox
+                      color="primary"
+                      checked={useCourseCredits}
+                      onChange={(e) => { this._handleUseCourseCreditsChange(e) }}
+                      value="1"
+                    />}
+                    label={t('assignAllowedCourseCreditsToSelectedStudents')}
+                />                
+            </div>}
             <AssignStudentsForm
               onChange={(studentIds) => { this._onChange(studentIds) }}
               studentIds={this.state.studentIds}

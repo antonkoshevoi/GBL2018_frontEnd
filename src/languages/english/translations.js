@@ -563,6 +563,11 @@ export default {
     due: 'Due',
     paid: 'Paid',
     filterTransactions: 'Filter Transactions',
+    storeSlider1: 'Save Big With course bundles',
+    storeSlider2: 'BZabc:Buy the entire series!',
+    storeSlider3: 'New Movies to Rent',
+    youHaveUnassignedCourseCredits: 'You have {{ count }} unassigned course credit(s)',
+    assignAllowedCourseCreditsToSelectedStudents: 'Assign allowed Course credits to classroom students',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

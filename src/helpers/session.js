@@ -33,7 +33,7 @@ export const saveUserDataSession = (data) => {
       expires: new Date(now * 1000 + (30 * 24 * 3600 * 1000))
   };
 
-  if (!userData || userData == undefined) {
+  if (!userData) {
       SessionStorage.set('userData', data,rememberOptions);
   }
 }
