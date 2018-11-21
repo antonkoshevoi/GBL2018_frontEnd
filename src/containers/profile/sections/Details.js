@@ -106,9 +106,9 @@ class Details extends Component {
               <ul className="m-portlet__nav">
                 <li className="m-portlet__nav-item">
                   {mode === 'overview' &&                  
-                    <a title={t('edit')} onClick={() => { this._handleSwitchMode('edit') }} className=" pointer m-portlet__nav-link m-portlet__nav-link--icon">
+                    <button title={t('edit')} onClick={() => { this._handleSwitchMode('edit') }} className="pointer m-portlet__nav-link m-portlet__nav-link--icon">
                       <i className="la la-edit display-5"></i>
-                    </a>                  
+                    </button>
                   }
                 </li>
               </ul>
@@ -265,8 +265,7 @@ class Details extends Component {
                         }}
                         style={{width: '100%'}}                        
                         value={user.birthday || ''}
-                        onChange={(date) => { this._handleDateChange(date, 'birthday') }}/>
-                                
+                        onChange={(date) => { this._handleDateChange(date, 'birthday') }}/>                                
                       {errors && errors.get('birthday') && <div className="form-control-feedback text-center error">{errors.get('birthday').get(0)}</div>}
                     </div>
                   </div>

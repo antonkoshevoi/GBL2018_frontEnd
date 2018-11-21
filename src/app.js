@@ -15,7 +15,7 @@ import createHistory from 'history/createBrowserHistory'
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
 import blue from '@material-ui/core/es/colors/blue';
-import MomentUtils from 'material-ui-pickers/utils/moment-utils';
+import MomentUtils from '@date-io/moment';
 
 import ApiClient from "./services/ApiClient";
 

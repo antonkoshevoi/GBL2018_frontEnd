@@ -75,8 +75,8 @@ class UserMenu extends Component {
                 </HasRole>              
                 <li className="m-nav__separator m-nav__separator--fit">
                 </li>
-                <li className="m-nav__item" onClick={logout}>
-                  <a className="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">{t('logout')}</a>
+                <li className="m-nav__item">
+                  <button onClick={logout} className="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">{t('logout')}</button>
                 </li>
               </ul>
             </div>

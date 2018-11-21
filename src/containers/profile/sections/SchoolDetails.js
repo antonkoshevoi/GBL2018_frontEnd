@@ -96,9 +96,9 @@ class SchoolDetails extends Component {
               <ul className="m-portlet__nav">
                 <li className="m-portlet__nav-item">
                   {mode === 'overview' &&                  
-                    <a title={t('edit')} onClick={() => { this._handleSwitchMode('edit') }} className=" pointer m-portlet__nav-link m-portlet__nav-link--icon">
+                    <button title={t('edit')} onClick={() => { this._handleSwitchMode('edit') }} className=" pointer m-portlet__nav-link m-portlet__nav-link--icon">
                         <i className="la la-edit display-5"></i>
-                    </a>                  
+                    </button>
                   }
                 </li>
               </ul>
