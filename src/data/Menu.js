@@ -6,7 +6,7 @@ export default  {
             title: 'dashboard',
             link: 'dashboard',
             icon: 'fa fa-dashboard',
-            colorName: 'home',
+            colorName: 'home'
         },
         {
             key: 'studentsAndStaff',
@@ -60,7 +60,7 @@ export default  {
             key: 'reports',
             title: 'reports',
             link: 'reports',
-            icon: 'fa  fa-line-chart ',
+            icon: 'fa fa-line-chart ',
             colorName: 'purple'
         },
         {
@@ -166,6 +166,6 @@ export default  {
             link: 'scap',
             icon: 'fa fa-id-card',
             colorName: 'purple'
-        }     
+        }
     ]
 }

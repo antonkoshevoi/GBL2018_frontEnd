@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import spacer from '../../../media/images/svg/bl-spacer.svg';
 import ProductsSection from "../../../components/store/ProductsSection";
@@ -6,10 +6,10 @@ import {selectGetRecordsRequest, selectRecords} from "../../../redux/store/selec
 import {getRecords} from "../../../redux/store/actions";
 
 
-class SplashStore extends Component {
+class SplashStore extends PureComponent {
 
   componentDidMount() {
-        this.props.getRecords()
+    this.props.getRecords()
   }
 
   render() {
@@ -29,6 +29,7 @@ class SplashStore extends Component {
     )
   }
 }
+
 SplashStore = connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),

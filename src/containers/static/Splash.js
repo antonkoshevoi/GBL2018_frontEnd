@@ -6,10 +6,9 @@ import SplashJumbotron from './sections/SplashJumbotron'
 import SplashStore from './sections/SplashStore'
 import SplashPlatform from './sections/SplashPlatform'
 import SplashFooter from './sections/SplashFooter'
-import './splash.css';
+import './sections/splash.css';
 import 'react-sticky-header/styles.css';
 import StickyHeader from 'react-sticky-header';
-
 
 const SplashContainer = props => {
   return (<div className="splash">

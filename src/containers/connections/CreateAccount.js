@@ -101,7 +101,7 @@ class CreateAccount extends Component {
                     <div className='m-signup__head'>
                         {getRecordRequest.get('success') && <h3 className='m-login__title text-center m--margin-top-30'>{t('acceptInviteAndCreateAccount', {user: getRecordRequest.get('record').get('fromUser')})}</h3>}
                     </div>
-                    <div className='m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--info m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height'>
+                    <div className='m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height'>
                       <div className='m-portlet__body'>
                             <div className='row'>
                               <div className='col-lg-7 col-md-6 col-sm-12 m-auto m--margin-top-40'>          

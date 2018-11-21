@@ -168,7 +168,7 @@ class SignUpParent extends Component {
                     <div className='m-signup__head'>
                       <h3 className='m-login__title text-center m--margin-top-30'>{t('Sign Up')}</h3>
                     </div>
-                    <div className='m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--info m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height'>
+                    <div className='m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height'>
                       <div className='m-portlet__body'>
                         <Stepper activeStep={activeStep} alternativeLabel className="g-stepper">
                           <Step>

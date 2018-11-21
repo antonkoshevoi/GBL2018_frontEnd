@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 const spacerUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/bl-spacer.70e5290c.svg';
 const circleBookUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/circle-books.a4c524f8.svg';
 const circleParentChildUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/circle-parent-child.ab68fd20.svg';
@@ -82,7 +82,7 @@ const flipperMap = [
     }
 ];
 
-class FlipperCards extends Component {
+class FlipperCards extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -141,7 +141,7 @@ class FlipperCards extends Component {
   }
 }
 
-class SplashPlatform extends Component {
+class SplashPlatform extends PureComponent {
   render() {
     const {t} = this.props;
     

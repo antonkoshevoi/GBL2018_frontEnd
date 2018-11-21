@@ -90,7 +90,7 @@ class Details extends Component {
     const errors = getUpdateRequest.get('errors');    
 
     return (      
-        <div className="m-portlet m-portlet--head-solid-bg m-portlet--info m--margin-bottom-15">
+        <div className="m-portlet m-portlet--head-solid-bg m-portlet--brand m--margin-bottom-15">
           <div className="m-portlet__head">
             <div className="m-portlet__head-caption">
               <div className="m-portlet__head-title">
@@ -181,7 +181,7 @@ class Details extends Component {
             </TabContainer>}
             {mode === 'edit' && <TabContainer>
               <form id='update-user-form' onSubmit={(e) => { this._onSubmit(e) }}>
-                <div className="alert m-alert m-alert--default">
+                <div className="alert m-alert m-alert--default m--margin-top-15">
                   <p className='margin-0'>{t('updateUserProfileNote')}</p>
                 </div>
                 <div className="m-form">

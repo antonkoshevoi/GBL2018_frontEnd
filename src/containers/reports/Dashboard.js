@@ -58,11 +58,11 @@ class Dashboard extends Component {
         <div className="row">
           <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div className="m--margin-top-25">
-              <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
-                <div className="m-portlet__head d-flex justify-content-between align-items-center">
-                    <div className="m-portlet__head-caption col-sm-4">
+              <div className="m-portlet m-portlet--head-solid-bg">
+                <div className="m-portlet__head d-flex justify-content-between align-items-center border-b-blue">
+                    <div className="m-portlet__head-caption">
                         <div className="m-portlet__head-title">                
-                            <Tabs value={this.state.tab} onChange={this.handleChange} scrollable={false}>
+                            <Tabs value={this.state.tab} onChange={this.handleChange} scrollable={false} indicatorColor="primary">
                                 <Tab className="tab-header-item" value="classRooms" label={t('classrooms')}/>
                                 <Tab className="tab-header-item" value="homeRooms" label={t('homerooms')}/>
                                 <Tab className="tab-header-item" value="students" label={t('students')}/>

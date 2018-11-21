@@ -46,7 +46,7 @@ class NewMessage extends Component {
         return (
             <div className="animated fadeInLeft">
                 { loading && <Loader/> }
-                <div className="m-portlet messages-portlet  m-portlet--info">
+                <div className="m-portlet messages-portlet">
                     <div className='m-portlet__head border-b-blue'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
