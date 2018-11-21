@@ -1,4 +1,7 @@
 export default {
+  about: 'About',
+  login: 'Login',
+  signup: 'Sign Up',
   headerJubtronTitle: 'Educational Tools and Products',
   headerListItems: {
     1: 'personalized, data-driven, interactive learning',
@@ -7,9 +10,9 @@ export default {
     4: 'reduced grading and administration for teachers and staff',
     5: 'publish, globalize, monetize',
   },
-  about: 'About',
   aboutContent: {
       image: '//d2cnhr6egzpvdl.cloudfront.net/image/splash-image1.3239d7be.png',
+      title: 'About Us',
       paragraphs: [
         {
             title: 'Paragraph #1',
@@ -21,6 +24,32 @@ export default {
         }
       ]
   },
+  parentStudentContent: {      
+      title: 'Parents & Students',
+      paragraphs: [
+        {
+            title: 'Paragraph #1',
+            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
+        },
+        {
+            title: 'Paragraph #2',
+            content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
+        }
+      ]
+  },
+  schoolTeacherContent: {
+      title: 'School Teacher',
+      paragraphs: [
+        {
+            title: 'Paragraph #1',
+            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
+        },
+        {
+            title: 'Paragraph #2',
+            content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
+        }
+      ]
+  },  
   store: 'Store',
   privacy: 'Privacy Policy',
   terms: 'Terms and Services',
@@ -122,7 +151,7 @@ export default {
             }
         ]
     },
-    privacyPolicy: {
+    privacyPolicyContent: {
         title: 'Gravity Brain Learning Privacy Policy',
         subTitle: 'Privacy Policy',
         paragraphs: [

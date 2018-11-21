@@ -139,7 +139,7 @@ class SignUpPrincipal extends Component {
                 <div className="m-signup__head">
                   <h3 className="m-login__title">{t('signUp')}</h3>
                 </div>
-                <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--info m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height ">
+                <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height ">
                   <div className="m-portlet__head">
                     <div className="m-portlet__head-caption">
                       <div className="m-portlet__head-title full-width">

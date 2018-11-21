@@ -1,4 +1,3 @@
-
 import messages from './messages';
 import languageSwitcher from './languageSwitcher';
 import splashScreen from './splashScreen';

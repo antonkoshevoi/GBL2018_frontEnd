@@ -22,7 +22,7 @@ class SignUpIndex extends Component {
                   <div className="m-login__head"> 
                     <h3 className="m-login__title">{t('signUp')}</h3> 
                   </div> 
-                  <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--info m-portlet--bordered-semi m--margin-top-20 m-portlet--full-height ">
+                  <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--bordered-semi m--margin-top-20 m-portlet--full-height ">
                     
                     <div className="m-portlet__body">
                       <h4 className="text-center m--margin-top-25">{t('selectYourAccountType')}</h4>

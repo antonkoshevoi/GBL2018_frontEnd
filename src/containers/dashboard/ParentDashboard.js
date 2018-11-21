@@ -190,7 +190,7 @@ class ParentDashboard extends Component {
                     </a> 
                     <h3 className='m-portlet__head-text'>{t('myLearners')}</h3>
                 </div>              
-                <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
+                <div className="m-portlet m-portlet--head-solid-bg">
                   <div className="m-portlet__body m--padding-top-10">
                     <div className={classes.students}>
                       {!loading && this._renderStudentRequests()}

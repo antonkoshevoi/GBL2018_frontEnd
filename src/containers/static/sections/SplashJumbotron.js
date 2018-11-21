@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {NavLink} from 'react-router-dom';
 
 const splashBannerImgUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/splash-image1.3239d7be.png';
 
-class SplashJumbotron extends Component {
+class SplashJumbotron extends PureComponent {
   render() {
-    const {t} = this.props
+    const {t} = this.props;
     return (
       <div className="splash-jumbotron">
         <div className="container">
@@ -22,12 +22,10 @@ class SplashJumbotron extends Component {
               <NavLink to="/something">{t('learnMore') } >> </NavLink>
             </div>
             <div className="col-md-6 m--hidden-mobile">
-              <img src={splashBannerImgUrl} alt="Splash Image1" className="splash-image" />
-
+              <img src={splashBannerImgUrl} alt={t('headerJubtronTitle')} className="splash-image" />
             </div>
           </div>
         </div>
-
       </div>
     )
   }

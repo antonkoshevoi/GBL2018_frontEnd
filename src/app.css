@@ -501,10 +501,6 @@ div.m-card-profile .m-card-profile__pic img {
     align-items: center;    
 }
 
-div.m-portlet.m-portlet--info.m-portlet--head-solid-bg .m-portlet__head {
-    background: #589ee4;
-}
-
 div.m-portlet, div.small-card-content {
     margin-bottom: 20px;
 }
@@ -839,10 +835,6 @@ address.signUpOptional {
     left: calc(-50% + 25px);
     width: calc(100% - 50px);
     right: auto;
-}
-
-.m-portlet--info .m-portlet__nav-item .fa {
-    color: #fff;
 }
 
 div#notFoundPage {

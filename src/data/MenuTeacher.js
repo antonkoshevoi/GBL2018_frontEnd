@@ -36,7 +36,7 @@ export default  {
         },
         {
             key: 'reports',
-            title: 'Reports',
+            title: 'reports',
             link: 'reports',
             icon: 'fa  fa-line-chart',
             colorName: 'purple',
@@ -72,7 +72,7 @@ export default  {
         },
         {
             key: 'store',
-            title: 'Store',
+            title: 'store',
             link: '/store',
             icon: 'fa fa-shopping-cart',
             colorName: 'green',
@@ -144,6 +144,6 @@ export default  {
             link: 'scap',
             icon: 'fa fa-id-card',
             colorName: 'purple'
-        }  
+        }
     ]
 }

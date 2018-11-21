@@ -110,12 +110,12 @@ class TabSection extends Component {
     return (
       <div className="row ">
         <div className="col-md-12">         
-        <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
-          <div className="m-portlet__head d-flex justify-content-between align-items-center">
-            <div className="m-portlet__head-caption col-sm-4">
+        <div className="m-portlet m-portlet--head-solid-bg">
+          <div className="m-portlet__head border-b-blue">
+            <div className="m-portlet__head-caption">
               <div className="m-portlet__head-title">
               <span className="m-portlet__head-icon">
-                <i className="fa fa-line-chart display-6"></i>
+                <i className="fa fa-line-chart  display-6 circle-background"></i>
               </span>
               <h3 className="m-portlet__head-text">{t('reports')}</h3></div>
             </div>

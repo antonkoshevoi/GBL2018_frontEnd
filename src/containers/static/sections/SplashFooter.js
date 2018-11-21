@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {NavLink} from 'react-router-dom';
 
-class SplashFooter extends Component {
+class SplashFooter extends PureComponent {
   render() {
     const {t} = this.props;
     return (

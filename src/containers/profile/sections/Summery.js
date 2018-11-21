@@ -45,7 +45,7 @@ class Summery extends Component {
     const { t } = this.props;
     
     return (
-      <div className="m-portlet m-portlet--head-solid-bg m-portlet--info">
+      <div className="m-portlet m-portlet--head-solid-bg m-portlet--brand">
         <div className="m-portlet__head">
           <div className="m-portlet__head-caption">
             <div className="m-portlet__head-title">

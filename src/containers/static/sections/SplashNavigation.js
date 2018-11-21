@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {NavLink} from 'react-router-dom';
 import LanguageSwitcher from "../../../components/ui/LanguageSwitcher";
 
-class SplashNavigation extends Component {
+class SplashNavigation extends PureComponent {
 
   burgerToggle () {
     let linksEl = document.querySelector('.narrow-links');
@@ -25,7 +25,7 @@ class SplashNavigation extends Component {
             <NavLink to={`/store`} className="btn no-border m-btn btn-sm ">{t('store')}</NavLink>
             <NavLink to={`/parents`} className="btn no-border m-btn btn-sm ">{t('studentAndParents.title')}</NavLink>
             <NavLink to={`/schools`} className="btn no-border m-btn btn-sm ">{t('schoolAndTeacher.title')}</NavLink>
-            <NavLink to={`//pubtool.gravitybrain.com/`} className="btn no-border m-btn btn-sm ">{t('publishers.title')}</NavLink>
+            <a href="https://pubtool.gravitybrain.com" className="btn no-border m-btn btn-sm ">{t('publishers.title')}</a>
             <div className="splash-navigation-tools">
               <LanguageSwitcher/>
             </div>
@@ -48,8 +48,7 @@ class SplashNavigation extends Component {
             <NavLink to={`/store`} className="btn no-border m-btn btn-sm ">{t('store')}</NavLink>
             <NavLink to={`/parents`} className="btn no-border m-btn btn-sm ">{t('studentAndParents.title')}</NavLink>
             <NavLink to={`/schools`} className="btn no-border m-btn btn-sm ">{t('schoolAndTeacher.title')}</NavLink>
-            <NavLink to={`//pubtool.gravitybrain.com/`} className="btn no-border m-btn btn-sm ">{t('publishers.title')}</NavLink>
-            
+            <NavLink to={`//pubtool.gravitybrain.com/`} className="btn no-border m-btn btn-sm ">{t('publishers.title')}</NavLink>           
           </div>
         </div>
       </nav>

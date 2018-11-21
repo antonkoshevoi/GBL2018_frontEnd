@@ -53,9 +53,7 @@ import AutoCreate from "../containers/classrooms/AutoCreate";
 import SplashContainer from "../containers/static/Splash";
 import PrivacyPolicy from "../containers/static/PrivacyPolicy";
 import About from "../containers/static/About";
-import Disclaimer from "../containers/static/Disclaimer";
 import ParentStudent from "../containers/static/ParentStudent";
-import Publisher from "../containers/static/Publisher";
 import SchoolTeacher from "../containers/static/SchoolTeacher";
 import TermsService from "../containers/static/TermsService";
 
@@ -82,10 +80,8 @@ import Gifts from '../containers/gifts/Gifts';
 export default () => (
   <AppContainer>
     <Switch>
-      <Route exact path='/about' name='splash' component={About} />
-      <Route exact path='/disclaimer' name='splash' component={Disclaimer} />
-      <Route exact path='/parents' name='splash' component={ParentStudent} />
-      <Route exact path='/publishers' name='splash' component={Publisher} />
+      <Route exact path='/about' name='splash' component={About} />      
+      <Route exact path='/parents' name='splash' component={ParentStudent} />      
       <Route exact path='/schools' name='splash' component={SchoolTeacher} />
       <Route exact path='/terms' name='splash' component={TermsService} />
       <Route exact path='/splash' name='splash' component={SplashContainer} />
