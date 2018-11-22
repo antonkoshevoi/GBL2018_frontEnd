@@ -93,10 +93,10 @@ class InvitationDetails extends Component {
             <p>{ invitation.getIn(['course', 'crsDescription']) }</p>
           </div>
           <div className="col-sm-12 text-center m--padding-20">
-            <Button variant="contained" onClick={() => { this._accept() }} className='mt-btn mt-btn-success m--margin-left-30 m--margin-right-30'>
+            <Button variant="contained" size="large" onClick={() => { this._accept() }} className='mt-btn mt-btn-success m--margin-10'>
               {t('accept')}
             </Button>
-            <Button variant="contained" onClick={() => { this._decline() }} className='mt-btn mt-btn-danger m--margin-left-30 m--margin-right-30'>
+            <Button variant="contained" size="large" onClick={() => { this._decline() }} className='mt-btn mt-btn-danger m--margin-10'>
               {t('decline')}
             </Button>
           </div>
@@ -116,7 +116,7 @@ class InvitationDetails extends Component {
             <div className="m-portlet m--margin-top-35">
               <div className="m-portlet__body">
                   <div className="m--padding-20">
-                      <h1>{t('demoCourseInvitation')}</h1>
+                      <h1 className="text-center m--padding-bottom-20">{t('demoCourseInvitation')}</h1>
                       {loading ? <h2 className='text-center'><CircularProgress/></h2> : this._renderInvitation(getRecordRequest.get('record')) }
                   </div>
               </div>

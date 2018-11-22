@@ -13,8 +13,6 @@ import { push } from 'react-router-redux';
 import { load } from '../../redux/app/actions';
 import './Signup.css'
 
-const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
-
 class SignUpParent extends Component {
 
     constructor(props) {
@@ -156,17 +154,10 @@ class SignUpParent extends Component {
         return (
           <form  onSubmit={(e) => { e.preventDefault(); this._next(); }}>
             {loading && <Loader/>}
-            <div className='main-background m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor m--full-height' style={{minHeight:'100vh'}}>
-              <div className='m-grid__item m-grid__item--fluid'>
                 <div className='signup-page'>
-                  <div className='text-center m--margin-top-15'>
-                    <a href='/'>
-                      <img alt="GravityBrain" className='top-logo' src={logoUrl} />
-                    </a>
-                  </div>
                   <div className='m-signup col-lg-8 col-md-10 col-sm-12 m-auto'>
                     <div className='m-signup__head'>
-                      <h3 className='m-login__title text-center m--margin-top-30'>{t('Sign Up')}</h3>
+                      <h3 className='m-login__title text-center m--margin-top-10'>{t('Sign Up')}</h3>
                     </div>
                     <div className='m-portlet m-portlet--brand m-portlet--borderedm-portlet m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height'>
                       <div className='m-portlet__body'>
@@ -224,8 +215,6 @@ class SignUpParent extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
           </form>
         );
     }

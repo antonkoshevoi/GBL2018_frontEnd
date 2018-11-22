@@ -217,7 +217,7 @@ class Subscribe extends Component {
             <div className='fadeInLeft  animated'>
                 <h1 className="text-center m--margin-top-25 g-metal">{t('subscriptions')}</h1>
                 {this.state.showBillingForm ? (
-                    <div className="col-sm-12 col-md-10 col-lg-9 col-xl-8 m-auto">
+                    <div className="col-sm-12 col-md-10 col-lg-9 col-xl-6 m-auto">
                         <div className='m-portlet m-portlet--head-solid-bg m--margin-top-30'>
                             <div className='m-portlet__body'>
                                 <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
