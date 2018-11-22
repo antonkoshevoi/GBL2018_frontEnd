@@ -12,8 +12,6 @@ import Loader from "../../components/layouts/Loader";
 import {selectRecords} from "../../redux/countries/selectors";
 import {getCountries} from "../../redux/countries/actions";
 
-const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
-
 class SignUpPrincipal extends Component {
 
   constructor(props) {
