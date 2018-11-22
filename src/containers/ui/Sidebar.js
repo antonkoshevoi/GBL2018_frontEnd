@@ -137,9 +137,9 @@ class Sidebar extends Component {
     
     return (
       <div className={'second_level ' + (activeMenu.key === menu.key ? 'activeSubMenu fadeInUp  animated' : '')} id={menu.key}>
-        <a href="" className="menu-back-arrow back" onMouseOver={() => { this._menuBackHover() }}>
+        <span className="back" onMouseOver={() => { this._menuBackHover() }}>
           <i className="la la-angle-left"></i>
-        </a>
+        </span>
         <div className="content" onClick={() => { this.props.mobileSidebar() }}>
           {this._renderGoogleSubMenus(menu.subMenu)}
         </div>
@@ -169,7 +169,7 @@ class Sidebar extends Component {
     const {headerPosition, activeMenuClass, mobileMenu} = this.state;
 
     return (      
-        <div id="m_aside_left" style={{marginTop:-headerPosition + mobileMenu}} className={`m-grid__item menu-active-${activeMenuClass.key}`}>
+        <div id="m_aside_left" style={{marginTop:-headerPosition + mobileMenu}} className={`m-menu-active-${activeMenuClass.key}`}>
           <div
             id="m_ver_menu"
             data-menu-vertical="true"

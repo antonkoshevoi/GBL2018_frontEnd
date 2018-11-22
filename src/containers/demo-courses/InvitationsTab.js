@@ -162,7 +162,7 @@ class InvitationsTab extends Component {
         <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>        
         <Td width='132px'>{moment(record.get('date')).format('ll')}</Td>
         <Td width='100px' className="actions">
-          <a title="View Invitation" href={uri('invitations/details/' + record.get('id') + '/' + record.get('securityHash'))} className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill" target="_blank">
+          <a title={t('viewInvitation')} rel="noopener noreferrer" href={uri(`invitations/details/${record.get('id')}/${record.get('securityHash')}`)} className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill" target="_blank">
              <i className='la la-search'></i>
           </a>
           <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>

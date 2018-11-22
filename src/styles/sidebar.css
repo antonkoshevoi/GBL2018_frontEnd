@@ -201,6 +201,7 @@ nav.navigation .second_level > .back {
     vertical-align: middle;
     font-size: 13px;
     width: 5px;
+    cursor: pointer;
 }
 
 nav.navigation .second_level > .content {    

@@ -92,6 +92,8 @@ export default () => (
       <Route exact path='/signUp/parent' name='signUpParent' component={SignUpParent} />
       <Route exact path='/signUp/principal' name='signUpPrincipal' component={SignUpPrincipal} />
       
+      <Route exact layout={OnlyHeadLayout} path='/invitations/details/:id/:hash' name='InvitationDetails' component={InvitationDetails}/>
+      
       <Route exact layout={MainLayout} path='/store' name='Store' component={Store}/>
       <Route exact layout={MainLayout} path='/store/details/:id' name='Details' component={Details}/>
       <Route exact layout={MainLayout} path='/store/category/:category' name='Store' component={Products}/>
@@ -180,9 +182,7 @@ export default () => (
       <Route exact layout={MainLayout} path='/payments/success' component={PaymentSuccessContainer} />
       <Route exact layout={MainLayout} path='/payments/fail' render={(props) => <PaymentStatusContainer {...props} status="fail" /> } />
       <Route exact layout={MainLayout} path='/payments/pending' render={(props) => <PaymentStatusContainer {...props} status="pending" /> } />
-      <Route exact layout={MainLayout} path='/payments/canceled' render={(props) => <PaymentStatusContainer {...props} status="canceled" /> } />
-
-      <Route exact path='/invitations/details/:id/:hash' component={InvitationDetails}/>
+      <Route exact layout={MainLayout} path='/payments/canceled' render={(props) => <PaymentStatusContainer {...props} status="canceled" /> } />     
 
       <Route layout={MainLayout} component={NotFoundPage} />
     </Switch>

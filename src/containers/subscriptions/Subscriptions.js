@@ -69,7 +69,7 @@ class Subscriptions extends Component {
     const { t, getRecordsRequest } = this.props;       
 
     return (<div className="fadeInLeft animated">
-        <h1 className="text-center m--margin-top-25">{t('courseSubscriptionOptions')}</h1>
+        <h1 className="text-center m--margin-top-25 g-metal">{t('courseSubscriptionOptions')}</h1>
         <div className="row">
             <div className="subscriptions-block col-12">
                 <div className="row">

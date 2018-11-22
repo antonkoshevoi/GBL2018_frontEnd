@@ -26,8 +26,7 @@ const styles = {
     position:'relative',
     background: '#f4f3f8',
     borderRadius: 5,
-    margin: '3px 0',
-    display: 'flex',
+    marginBottom: '5px',    
     cursor: 'pointer'
   },
   btnGroup: {    
@@ -185,9 +184,9 @@ class ParentDashboard extends Component {
             <div className="row">
               <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <div className='block-header border-b-blue'>                                                      
-                    <a title={t('add')} onClick={() => { this._openCreateDialog() }} className="pull-right pointer m--margin-right-15">
+                    <button title={t('add')} onClick={() => { this._openCreateDialog(); }} className="btn m-btn m-btn--icon m-btn--icon-only pull-right bg-transparent m--margin-right-10">
                       <i className="display-5 fa fa-plus-circle"></i>
-                    </a> 
+                    </button> 
                     <h3 className='m-portlet__head-text'>{t('myLearners')}</h3>
                 </div>              
                 <div className="m-portlet m-portlet--head-solid-bg">

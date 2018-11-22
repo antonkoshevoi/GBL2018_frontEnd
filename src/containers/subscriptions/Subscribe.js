@@ -215,7 +215,7 @@ class Subscribe extends Component {
                 
         return (
             <div className='fadeInLeft  animated'>
-                <h1 className="text-center m--margin-top-25">{t('subscriptions')}</h1>
+                <h1 className="text-center m--margin-top-25 g-metal">{t('subscriptions')}</h1>
                 {this.state.showBillingForm ? (
                     <div className="col-sm-12 col-md-10 col-lg-9 col-xl-8 m-auto">
                         <div className='m-portlet m-portlet--head-solid-bg m--margin-top-30'>
@@ -229,7 +229,7 @@ class Subscribe extends Component {
                                         
                                         <CreditCardForm errors={errors} onChange={(form) => this._handleForm(form)} form={creditCard} />
                                         
-                                        <div className="col-sm-12 text-center">                                        
+                                        <div className="col-sm-12 text-center m--margin-top-35">                                        
                                             <button disabled={subscribeRequest.get('loading')} onClick={() => { this._submitCreditCardPayment() }} className="btn btn-info">{t('makePayment')}</button>
                                             <button disabled={subscribeRequest.get('loading')} onClick={() => { this._showBillingForm(false) }} className="btn btn-default m--margin-left-10">{t('back')}</button>                                                                  
                                         </div>
