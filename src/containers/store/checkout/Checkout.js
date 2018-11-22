@@ -195,7 +195,7 @@ class Checkout extends Component {
     
     return (      
         <div className='row d-flex justify-content-center m--margin-top-30'>
-          <div className="col-12">                       
+          <div className="col-12 col-sm-11 col-md-9 col-xl-8">                       
             <div className="m-portlet  m-portlet--head-solid-bg">
               <div className='m-portlet__body position-relative'>               
                 <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
@@ -236,7 +236,7 @@ class Checkout extends Component {
                       </div>
                     </div>,    
                     <div className="row d-flex justify-content-center">
-                        <div className='col-10'>                        
+                        <div className='col-12 col-sm-12 col-md-11'>                        
                         {showCreditCard ? 
                             <CreditCard onDataSaved={this._handleCreditCard} paymentAmount={cartRecordsSum} shippingAddressId={shippingAddressId} billingAddressId={billingAddressId}/> : 
                             <ShippingAndBilling onDataSaved={this._stepBilling}/>

@@ -53,8 +53,8 @@ class Login extends Component {
     const errors = loginRequest.get('errors');
     
     return (
-      <div className="m-grid m-grid--hor m-grid--root m-page m--full-height">
-        <div className="main-background m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop justify-content-center m-login">
+      <div className="m-page m--full-height">
+        <div className="main-background m-body justify-content-center m-login">
           <div className="m-login__wrapper">            
               <div className="m-login__container">
                 <div className="m-login__logo">

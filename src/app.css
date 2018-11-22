@@ -142,10 +142,14 @@ textarea {
     color: white;
 }
 
-.gravity-logo {
-    padding: 0 50px 0 0;
+.gravity-logo img {
+    width: 100%;
+    height: auto;
+    max-width: 220px;
 }
-
+.gravity-logo.logo-only img {
+    max-width: 300px;
+}
 .margin-0 {
     margin: 0 !important;
 }

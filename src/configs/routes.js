@@ -89,8 +89,8 @@ export default () => (
       <Route exact path='/login' name='login' component={Login} />
       <Route exact path='/restore-login' name='restore-login' component={RestoreLogin} />
       <Route exact path='/signUp' name='signUp' component={SignUpIndex} />
-      <Route exact path='/signUp/parent' name='signUpParent' component={SignUpParent} />
-      <Route exact path='/signUp/principal' name='signUpPrincipal' component={SignUpPrincipal} />
+      <Route exact layout={OnlyHeadLayout} path='/signUp/parent' name='signUpParent' component={SignUpParent} />
+      <Route exact layout={OnlyHeadLayout} path='/signUp/principal' name='signUpPrincipal' component={SignUpPrincipal} />
       
       <Route exact layout={OnlyHeadLayout} path='/invitations/details/:id/:hash' name='InvitationDetails' component={InvitationDetails}/>
       
@@ -103,7 +103,7 @@ export default () => (
       
       <Route exact layout={MainLayout} path='/students/accept/:id/:hash' name='Accept student request' component={AcceptStudent}/>
       <Route exact layout={MainLayout} path='/connections/accept/:id/:hash' name='Accept connection request' component={AcceptConnection}/>
-      <Route exact path='/create-account/:id/:hash' name='Accept connection request' component={CreateAccount}/>      
+      <Route exact layout={OnlyHeadLayout} path='/create-account/:id/:hash' name='Accept connection request' component={CreateAccount}/>      
 
       <Route exact path='/' render={() => (
         <Redirect to='/splash'/>

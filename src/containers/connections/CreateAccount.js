@@ -89,115 +89,106 @@ class CreateAccount extends Component {
     
         return <div>
             {loading && <Loader/>}
-            <div className='main-background m-grid__item animate fadeInLeftBig m-grid__item--fluid m-grid m-grid--hor m--full-height' id='m_login' style={{minHeight:'100vh'}}>
-              <div className='m-grid__item m-grid__item--fluid'>
-                <div className='signup-page'>
-                  <div className='m-login__logo text-center m--margin-top-15'>
-                    <a href='/'>
-                      <img alt="GravityBrain" className='top-logo' src='//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg' />
-                    </a>
-                  </div>
-                  <div className='m-signup col-lg-8 col-md-10 col-sm-12 m-auto'>
-                    <div className='m-signup__head'>
-                        {getRecordRequest.get('success') && <h3 className='m-login__title text-center m--margin-top-30'>{t('acceptInviteAndCreateAccount', {user: getRecordRequest.get('record').get('fromUser')})}</h3>}
-                    </div>
-                    <div className='m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height'>
-                      <div className='m-portlet__body'>
-                            <div className='row'>
-                              <div className='col-lg-7 col-md-6 col-sm-12 m-auto m--margin-top-40'>          
-                                  <legend className='m--margin-bottom-10'>{t('required')}</legend>
-                                  <div className='m-form__section m-form__section--first'>
-                                    <div className="form-group m-form__group row">
-                                      <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('email')} </label>
-                                      <div className="col-lg-8 col-md-12 col-sm-12">
-                                        <input
-                                          value={form.email || ''}
-                                          name='email'
-                                          readOnly={true}
-                                          type='email'
-                                          className='form-control m-input m-input--air '
-                                          placeholder=''/>
-                                        <div className='form-control-feedback'>
-                                          {errors && errors.get('email') &&
-                                          <div className="form-control-feedback text-center error">{errors.get('email').get(0)}</div>}
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div className="form-group m-form__group row">
-                                      <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('password')} </label>
-                                      <div className="col-lg-8 col-md-12 col-sm-12">
-                                        <input
-                                          value={form.password || ''}
-                                          name='password'
-                                          onChange={(e) => { this._handleInputChange(e) }}
-                                          type='password'
-                                          className='form-control m-input m-input--air '
-                                          placeholder=''/>
-                                        <div className='form-control-feedback'>
-                                          {errors && errors.get('password') &&
-                                          <div className="form-control-feedback text-center error">{errors.get('password').get(0)}</div>}
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <legend className='m--margin-bottom-10 m--margin-top-10'>{t('optional')}</legend>
-
-                                  <div className='m-form__section m-form__section--first'>
-                                    <div className="form-group m-form__group row">
-                                      <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('firstName')}</label>
-                                      <div className="col-lg-8 col-md-12 col-sm-12">
-                                        <input
-                                          value={form.firstName || ''}
-                                          name='firstName'
-                                          onChange={(e) => { this._handleInputChange(e) }}
-                                          type='text'
-                                          className='form-control m-input m-input--air '
-                                          placeholder=''/>
-                                        <div className='form-control-feedback'>
-                                          {errors && errors.get('firstName') &&
-                                          <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div className="form-group m-form__group row">
-                                      <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('lastName')} </label>
-                                      <div className="col-lg-8 col-md-12 col-sm-12">
-                                        <input
-                                          value={form.lastName || ''}
-                                          name='lastName'
-                                          onChange={(e) => { this._handleInputChange(e) }}
-                                          type='text'
-                                          className='form-control m-input m-input--air '
-                                          placeholder=''/>
-                                        <div className='form-control-feedback'>
-                                          {errors && errors.get('lastName') &&
-                                          <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>         
-                              </div>                    
-                            </div>                       
-                        <Divider className='m--margin-top-25'/>
-                        <div className='row'>
-                          <div className='col-sm-12 text-right m--padding-top-20 text-center'>
-                            <button onClick={() => { this._createAccount() }} disabled={loading} className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>
-                                {t('createAccount')}
-                            </button>                                      
+            <div className='signup-page'>
+              <div className='m-signup col-lg-8 col-md-10 col-sm-12 m-auto'>
+                <div className='m-signup__head'>
+                    {getRecordRequest.get('success') && <h3 className='m-login__title text-center m--margin-top-30'>{t('acceptInviteAndCreateAccount', {user: getRecordRequest.get('record').get('fromUser')})}</h3>}
+                </div>
+                <div className='m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height'>
+                  <div className='m-portlet__body'>
+                    <div className='row'>
+                      <div className='col-lg-7 col-md-6 col-sm-12 m-auto m--margin-top-40'>          
+                          <legend className='m--margin-bottom-10'>{t('required')}</legend>
+                          <div className='m-form__section m-form__section--first'>
+                            <div className="form-group m-form__group row">
+                              <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('email')} </label>
+                              <div className="col-lg-8 col-md-12 col-sm-12">
+                                <input
+                                  value={form.email || ''}
+                                  name='email'
+                                  readOnly={true}
+                                  type='email'
+                                  className='form-control m-input m-input--air '
+                                  placeholder=''/>
+                                <div className='form-control-feedback'>
+                                  {errors && errors.get('email') &&
+                                  <div className="form-control-feedback text-center error">{errors.get('email').get(0)}</div>}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="form-group m-form__group row">
+                              <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('password')} </label>
+                              <div className="col-lg-8 col-md-12 col-sm-12">
+                                <input
+                                  value={form.password || ''}
+                                  name='password'
+                                  onChange={(e) => { this._handleInputChange(e) }}
+                                  type='password'
+                                  className='form-control m-input m-input--air '
+                                  placeholder=''/>
+                                <div className='form-control-feedback'>
+                                  {errors && errors.get('password') &&
+                                  <div className="form-control-feedback text-center error">{errors.get('password').get(0)}</div>}
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div className='alert m-alert m-alert--default m--margin-top-25'>
-                          <p className='text-center margin-0'>
-                            <Interpolate i18nKey="alreadyHaveAccountMessage" loginLink={loginBtn} />
-                          </p>                              
-                        </div>
-                      </div>
-                    </div>
+                          <legend className='m--margin-bottom-10 m--margin-top-10'>{t('optional')}</legend>
+
+                          <div className='m-form__section m-form__section--first'>
+                            <div className="form-group m-form__group row">
+                              <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('firstName')}</label>
+                              <div className="col-lg-8 col-md-12 col-sm-12">
+                                <input
+                                  value={form.firstName || ''}
+                                  name='firstName'
+                                  onChange={(e) => { this._handleInputChange(e) }}
+                                  type='text'
+                                  className='form-control m-input m-input--air '
+                                  placeholder=''/>
+                                <div className='form-control-feedback'>
+                                  {errors && errors.get('firstName') &&
+                                  <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="form-group m-form__group row">
+                              <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('lastName')} </label>
+                              <div className="col-lg-8 col-md-12 col-sm-12">
+                                <input
+                                  value={form.lastName || ''}
+                                  name='lastName'
+                                  onChange={(e) => { this._handleInputChange(e) }}
+                                  type='text'
+                                  className='form-control m-input m-input--air '
+                                  placeholder=''/>
+                                <div className='form-control-feedback'>
+                                  {errors && errors.get('lastName') &&
+                                  <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
+                                </div>
+                              </div>
+                            </div>
+                          </div>         
+                      </div>                    
+                    </div>                       
+                <Divider className='m--margin-top-25'/>
+                <div className='row'>
+                  <div className='col-sm-12 text-right m--padding-top-20 text-center'>
+                    <button onClick={() => { this._createAccount() }} disabled={loading} className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>
+                        {t('createAccount')}
+                    </button>                                      
                   </div>
+                </div>
+                <div className='alert m-alert m-alert--default m--margin-top-25'>
+                  <p className='text-center margin-0'>
+                    <Interpolate i18nKey="alreadyHaveAccountMessage" loginLink={loginBtn} />
+                  </p>                              
                 </div>
               </div>
             </div>
-          </div>;
+          </div>
+        </div>
+      </div>;
     }
 }
 
