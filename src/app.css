@@ -96,7 +96,7 @@ textarea {
 .border-b-blue {
     border-bottom: #4fa1ea solid 2px !important;
 }
-.border-b-blue a, .border-b-blue a i {
+.border-b-blue a, .border-b-blue i.fa {
     color: #4fa1ea;
 }
 
@@ -785,11 +785,11 @@ div.m-stack.m-stack--desktop.m-stack--ver > .m-stack__item.m-stack__item--fluid 
     left: 0;
 }
 
-a.m-nav__link .m-nav__link-icon {
+.m-nav__link .m-nav__link-icon {
     position: relative;
 }
 
-a.m-nav__link .m-nav__link-icon .g-badge {
+.m-nav__link .m-nav__link-icon .g-badge {
     position: absolute;
     top: 6px;
     right: -2px;

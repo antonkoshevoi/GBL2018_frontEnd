@@ -73,7 +73,7 @@ class Transactions extends Component {
                             <i className={`fa fa-arrow-${( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) ? 'down' : 'right'}`}></i>
                         </IconButton>
                     </Td>
-                    <Td width='102px'><a className="g-blue" target="_blank" href={item.get('invoiceUrl')}>{item.get('invoiceNo')}</a></Td>
+                    <Td width='102px'><a rel="noopener noreferrer" className="g-blue" target="_blank" href={item.get('invoiceUrl')}>{item.get('invoiceNo')}</a></Td>
                     <Td width='102px'>{item.get('total')}$</Td>
                     <Td width='100px'>{t(item.get('paymentType'))}</Td>
                     <Td width='140px'>

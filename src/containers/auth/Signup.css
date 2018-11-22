@@ -7,6 +7,9 @@ label.m--margin-bottom-10 {
 .form-control-feedback.error {
     margin-top: 3px;
 }
+.m-portlet--brand .m-portlet__head-tools .m-nav__link {
+  color: #fff;
+}
 @media (max-width: 1240px) {
     .signup-page .col-form-label {
         text-align: left;

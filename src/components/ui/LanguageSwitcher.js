@@ -70,10 +70,10 @@ class LanguageSwitcher extends Component {
     }
 
     render() {
-        const  langs  = this.props.i18n.store.data;
+        const langs  = this.props.i18n.store.data;
 
         return ([
-                <a key={0} className="m-nav__link m-dropdown__toggle pointer"
+                <button key={0} className="m-nav__link m-dropdown__toggle pointer"
                     aria-owns={this.state.anchorEl ? 'simple-menu' : null}
                     aria-haspopup="true"
                     onClick={this._openLanguageMenu}
@@ -81,7 +81,7 @@ class LanguageSwitcher extends Component {
                     <span className="m-nav__link-icon">
                         <i className="m--icon-font-size-lg2 fa fa-globe m--margin-right-5 d-md-inline"></i>
                     </span>
-                </a>,
+                </button>,
                 <Menu
                     key={1}
                     id="simple-menu"

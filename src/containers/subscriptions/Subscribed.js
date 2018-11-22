@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
-import {withRouter} from 'react-router-dom';
+import {withRouter, NavLink} from 'react-router-dom';
 import {getInvoice} from '../../redux/subscriptions/actions';
 import {selectGetInvoiceRequest} from '../../redux/subscriptions/selectors';
-import {push} from 'react-router-redux';
 import Loader from "../../components/layouts/Loader";
 
 class Subscribed extends Component {
@@ -20,11 +19,11 @@ class Subscribed extends Component {
     }
   
   render() {
-    const {invoiceRequest, goTo, t} = this.props;
+    const {invoiceRequest, t} = this.props;
     const invoice = invoiceRequest.get('record');    
     return (
-        <div className='fadeInLeft  animated'>
-            <h1 className="text-center m--margin-top-25">{t('youBoughtSubscription')}</h1>                
+        <div className='fadeInLeft animated'>
+            <h1 className="text-center m--margin-top-25 g-metal">{t('youBoughtSubscription')}</h1>                
             <div className="col-sm-12 col-md-10 col-lg-9 col-xl-8 m-auto">
                 <div className='m-portlet m-portlet--head-solid-bg m--margin-top-30'>
                     <div className='m-portlet__body'>
@@ -55,8 +54,8 @@ class Subscribed extends Component {
                                             }
                                         </p>                                            
                                         <p className="text-center">
-                                            <a className="btn btn-success" href={invoice.get('invoiceUrl')} target="_blank">{t('downloadPdf')}</a>                                                
-                                            <a className="btn btn-success m--margin-left-10" href="" onClick={() => { goTo("/my-subscriptions") }} >{t('viewMySubscriptions')}</a>
+                                            <a className="btn btn-success" href={invoice.get('invoiceUrl')} target="_blank" rel="noopener noreferrer">{t('downloadPdf')}</a>                                                
+                                            <NavLink className="btn btn-success m--margin-left-10" to="/my-subscriptions">{t('viewMySubscriptions')}</NavLink>
                                         </p>
                                     </div>
                                 }                                   
@@ -75,8 +74,7 @@ Subscribed = connect(
     invoiceRequest: selectGetInvoiceRequest(state)
   }),
   (dispatch) => ({
-    getInvoice: (id) => dispatch(getInvoice(id)),
-    goTo: (url) => {dispatch(push(url))}
+    getInvoice: (id) => dispatch(getInvoice(id))    
   })
 )(Subscribed);
 

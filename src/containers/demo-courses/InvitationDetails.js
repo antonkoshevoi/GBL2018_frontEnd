@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MainLayout from '../layouts/MainLayout';
 import { connect } from 'react-redux';
 import { translate, Interpolate } from 'react-i18next';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
@@ -52,109 +51,79 @@ class InvitationDetails extends Component {
     const hash = match.params.hash;
     declineInvitation(id, hash);
   }
+  
+  _errorMessage(message) {
+      return <h2 className="m--margin-top-100 m--margin-bottom-100 text-center">{message}</h2>;
+  }
 
-  _renderInvitation () {
-    const { getRecordRequest, t } =  this.props;
-    const loading = getRecordRequest.get('loading');
-    const record = getRecordRequest.get('record');
-    const image = record.getIn(['course', 'image']);    
-    const description = record.getIn(['course', 'crsDescription']);
+  _renderInvitation (invitation) {
+    const { t } =  this.props;
+        
+    const image = invitation.getIn(['course', 'image']);
 
-    if (record.get('isExpired')) {
-      return (
-        <div>
-          <h3>{t('demoCourseInvitation')}</h3>
-          <h2 className="m--margin-top-100 m--margin-bottom-100">{t('invitationExpired')}</h2>
-        </div>
-      );
+    if (invitation.get('isExpired')) {
+        return this._errorMessage(t('invitationExpired'));
     }
     
-    if (record.get('isAccepted')) {
-      return (
-        <div>
-          <h3>{t('demoCourseInvitation')}</h3>
-          <h2 className="m--margin-top-100 m--margin-bottom-100">{t('invitationAccepted')}</h2>
-        </div>
-      );
+    if (invitation.get('isAccepted')) {
+        return this._errorMessage(t('invitationAccepted'));
     }
 
-    if (record.get('isDeclined')) {
-      return (
-        <div>
-          <h3>{t('demoCourseInvitation')}</h3>
-          <h2 className="m--margin-top-100 m--margin-bottom-100">{t('invitationDeclined')}</h2>
-        </div>
-      );
+    if (invitation.get('isDeclined')) {
+        return this._errorMessage(t('invitationDeclined'));
     }
     
-    const sender = <h4>{record.getIn(['sender', 'name'])}</h4>;
-    const course = <h2>{record.getIn(['course', 'crsTitle'])}</h2>;
-
-    return loading ? (
-      <h2 className='text-center'><CircularProgress color='accent'/></h2>
-    ) : (
-      <div>
-        <h3>{t('demoCourseInvitation')}</h3>
-
+    const sender = <h4>{invitation.getIn(['sender', 'name'])}</h4>;
+    const course = <h2>{invitation.getIn(['course', 'crsTitle'])}</h2>;
+    const imageStyle = {width: '100%', maxWidth: 210};
+    
+    return (
         <div className="row">
           {image && (
             <div className="col-sm-3 text-center m--padding-20">
-              <img src={image} alt="Demo Course" />
+              <img style={imageStyle} src={image} alt="Demo Course" />
             </div>
           )}
-          <div className={`m--padding-20 col-sm-${image ? 9 : 12}`}>            
-            <p>
+          <div className={`m--padding-20 col-12 col-sm-${image ? 9 : 12}`}>            
+            <div>
                 <Interpolate i18nKey="userInvitedYouToDemoCourse" sender={sender} course={course} />
-            </p>            
+            </div>            
             <br/>
             <h4>{t('description')}:</h4>
-            <p>{ description }</p>
+            <p>{ invitation.getIn(['course', 'crsDescription']) }</p>
           </div>
-
           <div className="col-sm-12 text-center m--padding-20">
-            <Button contained onClick={() => { this._accept() }} className='mt-btn mt-btn-success m--margin-left-30 m--margin-right-30'>
+            <Button variant="contained" onClick={() => { this._accept() }} className='mt-btn mt-btn-success m--margin-left-30 m--margin-right-30'>
               {t('accept')}
             </Button>
-            <Button contained onClick={() => { this._decline() }} className='mt-btn mt-btn-danger m--margin-left-30 m--margin-right-30'>
+            <Button variant="contained" onClick={() => { this._decline() }} className='mt-btn mt-btn-danger m--margin-left-30 m--margin-right-30'>
               {t('decline')}
             </Button>
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  _renderWrapperBox () {
-
-    return (
-      <div className="row">
-        <div className="col-md-10 col-lg-8 col-xl-6 m-auto">
-          <div className="m-portlet m--margin-top-35">
-            <div className="m-portlet__body">
-              { this._renderInvitation() }
-            </div>
-          </div>
-        </div>
-      </div>
+        </div>      
     );
   }
 
   render () {
-    const { isLoggedIn } =  this.props;
-    const { authModalOpen } =  this.state;
-
-    if (isLoggedIn) {
-      return (
-        <MainLayout>
-          { this._renderWrapperBox() }
-        </MainLayout>
-      );
-    }
-
+    const { isLoggedIn, getRecordRequest, t } = this.props;
+    const { authModalOpen } =  this.state;    
+    const loading = getRecordRequest.get('loading');
+    
     return (
-      <div>
-        { this._renderWrapperBox() }
-        <AuthorizeModal isOpen={authModalOpen} onClose={() => { this._closeAuthModal() }}/>
+      <div className="m--margin-left-15 m--margin-right-15">
+        <div className="row">
+          <div className="col-sm-12 col-md-10 col-lg-8 col-xl-7 m-auto">
+            <div className="m-portlet m--margin-top-35">
+              <div className="m-portlet__body">
+                  <div className="m--padding-20">
+                      <h1>{t('demoCourseInvitation')}</h1>
+                      {loading ? <h2 className='text-center'><CircularProgress/></h2> : this._renderInvitation(getRecordRequest.get('record')) }
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        { !isLoggedIn && <AuthorizeModal isOpen={authModalOpen} onClose={() => { this._closeAuthModal() }}/> }
       </div>
     );
   }
