@@ -56,6 +56,7 @@ import About from "../containers/static/About";
 import ParentStudent from "../containers/static/ParentStudent";
 import SchoolTeacher from "../containers/static/SchoolTeacher";
 import TermsService from "../containers/static/TermsService";
+import Gift from "../containers/static/Gift";
 
 import Scap from "../containers/scap/Scap";
 import BuildTemplate from "../containers/scap/BuildTemplate";
@@ -89,6 +90,7 @@ export default () => (
       <Route exact path='/login' name='login' component={Login} />
       <Route exact path='/restore-login' name='restore-login' component={RestoreLogin} />
       <Route exact path='/signUp' name='signUp' component={SignUpIndex} />
+      <Route exact path='/gift' name='Gift' component={Gift} />
       <Route exact layout={OnlyHeadLayout} path='/signUp/parent' name='signUpParent' component={SignUpParent} />
       <Route exact layout={OnlyHeadLayout} path='/signUp/principal' name='signUpPrincipal' component={SignUpPrincipal} />
       

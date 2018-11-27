@@ -25,7 +25,12 @@ export const GIFT = '[Gifts] GIFT';
 export const GIFT_COURSE_SUCCESS = '[Gifts] GIFT_COURSE_SUCCESS';
 export const GIFT_SUBSCRIPTION_SUCCESS = '[Gifts] GIFT_SUBSCRIPTION_SUCCESS';
 export const GIFT_FAIL = '[Gifts] GIFT_FAIL';
-export const RESET_GIFT_REQUST = '[Gifts] RESET_GIFT_REQUST';
+export const RESET_GIFT_REQUEST = '[Gifts] RESET_GIFT_REQUEST';
+
+export const PUBLIC_GIFT = '[Gifts] PUBLIC_GIFT';
+export const PUBLIC_GIFT_SUCCESS = '[Gifts] PUBLIC_GIFT_SUCCESS';
+export const PUBLIC_GIFT_FAIL = '[Gifts] PUBLIC_GIFT_FAIL';
+export const RESET_PUBLIC_GIFT_REQUEST = '[Gifts] RESET_PUBLIC_GIFT_REQUEST';
 
 export function getRecords(params = {}) {
   return {
@@ -57,9 +62,22 @@ export function giftSubscription(params = {}) {
   };
 }
 
+export function giftPublic(params = {}) {  
+  return {
+    types: [PUBLIC_GIFT, PUBLIC_GIFT_SUCCESS, PUBLIC_GIFT_FAIL],
+    promise: (apiClient) => apiClient.post('gifts/public', params)
+  };
+}
+
 export function resetGiftRequest() {
   return {
-    type: RESET_GIFT_REQUST
+    type: RESET_GIFT_REQUEST
+  };
+}
+
+export function resetPublicGiftRequest() {
+  return {
+    type: RESET_PUBLIC_GIFT_REQUEST
   };
 }
 

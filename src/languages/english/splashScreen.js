@@ -2,6 +2,7 @@ export default {
   about: 'About',
   login: 'Login',
   signup: 'Sign Up',
+  sendGift: 'Send a Gift',
   headerJubtronTitle: 'Educational Tools and Products',
   headerListItems: {
     1: 'personalized, data-driven, interactive learning',
