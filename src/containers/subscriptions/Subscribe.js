@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {translate, Interpolate} from 'react-i18next';
-import {Checkbox} from '@material-ui/core';
+import {translate} from 'react-i18next';
 import {push} from 'react-router-redux';
 import {selectGetRecordsRequest, selectSubscribeRequest} from '../../redux/subscriptions/selectors';
 import {getRecords, subscribe, resetSubscribeRequest, resetGetUserRecordsRequest} from '../../redux/subscriptions/actions';
 import CreditCardForm from "./forms/CreditCardForm";
+import SubscriptionsForm from "./forms/SubscriptionsForm";
 import Loader from "../../components/layouts/Loader";
-
-import './Subscriptions.css'
 
 class Subscribe extends Component {
 
@@ -25,8 +23,8 @@ class Subscribe extends Component {
 
     componentDidMount() {        
         const {getRecords} = this.props;
-        
-        this._setSubscriptionId(this.props.match.params.id);
+                
+        this.setState({subscriptionId: Number(this.props.match.params.id)});
         
         getRecords();
     }
@@ -49,11 +47,6 @@ class Subscribe extends Component {
             
             this.props.goTo(`/subscribed/${userSubscriptionId}`);
         }
-    }    
-
-    _setSubscriptionId(subscriptionId)
-    {
-        this.setState({subscriptionId: Number(subscriptionId)});        
     }
 
     _getSelectedPlan() {
@@ -73,7 +66,12 @@ class Subscribe extends Component {
             );
         }                
     }
-
+   
+    _handleSelectPlan(data) {
+        this.setState(data);
+        this._showBillingForm(true);
+    }
+    
     _handleInputChange(event) {
         const { name, value } = event.target;
 
@@ -98,7 +96,7 @@ class Subscribe extends Component {
         });
     }    
   
-    _submitCreditCardPayment = () => {
+    _submitCreditCardPayment() {
         this.props.subscribe({
             ...this.state.creditCard,
             period: this.state.period,
@@ -112,119 +110,24 @@ class Subscribe extends Component {
         });        
     }
     
-    _renderSelected() {
-                
-        const {getRecordsRequest, t} = this.props;
-         
-        return getRecordsRequest.get('records').map((record, key) => {
-            
-            if (Number(record.get('id')) !== this.state.subscriptionId) {
-                return '';
-            }
-                                                        
-            const courses = <span style={{fontWeight: 500}}>{record ? record.get('allowedCourses') : '0'}</span>;       
-
-            return (
-                <div className="subscription-item-block m--margin-top-30" style={{maxWidth: '420px', margin: '0 auto'}}>
-                    <div className={`subscription-item item-${key}`}>
-                        <div className="subscription-header"><h1>{record.get('title')}</h1></div>
-                        <div className="subscription-content">
-                            <div className="subscription-prices m--padding-left-5 m--padding-right-5">
-                                <div className="row">                                                                        
-                                    <div className={`col-6 m--padding-0 text-center ${this.state.period === 'month' ? 'selected' : ''}`}>                           
-                                        <span className="price">
-                                        <Checkbox
-                                            checked={this.state.period === 'month'}
-                                            onChange={ (e) => {this._handlePeriodChange(e) }}
-                                            value="month"
-                                            color="primary"
-                                            style={{marginLeft: '-18px', width: '40px'}}
-                                            />
-                                            ${record.get('priceMonthly')}
-                                        </span> {t('perMonth')}
-                                    </div>
-                                    <div className={`col-6 m--padding-0 text-center ${this.state.period === 'year' ? 'selected' : ''}`}>
-                                        <span className="price">
-                                            <Checkbox
-                                                checked={this.state.period === 'year'}
-                                                onChange={ (e) => {this._handlePeriodChange(e) }}
-                                                value="year"
-                                                color="primary"
-                                                style={{marginLeft: '-18px', width: '40px'}}
-                                                />                                
-                                            ${record.get('priceYearly')}
-                                        </span> {t('perYear')}
-                                    </div>            
-                                </div>
-                            </div>
-                            <div className="subscription-description">
-                                <div className="subscription-limits">
-                                    <Interpolate i18nKey="courseAtTime" number={courses} />
-                                    <br />                            
-                                    <Interpolate i18nKey={record.get('allowedCourses') > 1 ? 'courseAnyCoursesSwitchAnyTime' : 'courseAnyCourseSwitchAnyTime'} number={courses} />
-                                    <br />                            
-                                    <Interpolate i18nKey="usersMax" number={courses} />
-                                </div>            
-                                <div className="subscription-bonuses text-left">
-                                    <span>{t('annualBonus')}:</span>
-                                    <span className="bonus">{record.get('bonuses')}</span>
-                                </div>
-                                <p className="text-center margin-bottom-0">
-                                    <button onClick={() => { this._showBillingForm(true) }} className="btn btn-info">{t('continue')}</button>
-                                </p>                                
-                            </div>
-                        </div>
-                    </div>  
-                </div>
-            );
-        });        
-    }
-    
-    _renderSubscriptions() {
-        
-        const {getRecordsRequest, t} = this.props;
-        return getRecordsRequest.get('records').map((record, key) => {
-            
-            if (Number(record.get('id')) === this.state.subscriptionId) {
-                return '';
-            }
-                        
-            return (        
-                <div className="subscription-item-block col-sm-12 col-md-6 col-lg-6 col-xl-6 m--margin-top-25">
-                    <div className={`subscription-item item-${key}`} onClick={() => { this._setSubscriptionId(record.get('id')) }}>                        
-                        <div className="subscription-header"><h1>{record.get('title')}</h1></div>
-                        <div className="subscription-content">
-                            <div className="subscription-prices">
-                                <div className="row">
-                                    <div className="selected col-6"><span className="price">${record.get('priceMonthly')}</span> {t('perMonth')}</div>
-                                    <div className="col-6 text-right m--margin-top-10"><span className="price">${record.get('priceYearly')}</span> {t('perYear')}</div>            
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-                </div>
-            );
-        });        
-    }
-
     render() {        
         
         const {subscribeRequest, getRecordsRequest, t} = this.props;
-        const {creditCard} = this.state;
-        const errors = subscribeRequest.get('errors');
+        const {creditCard}  = this.state;
+        const errors        = subscribeRequest.get('errors');
+        const loading       = subscribeRequest.get('loading') || getRecordsRequest.get('loading')
                 
         return (
             <div className='fadeInLeft  animated'>
                 <h1 className="text-center m--margin-top-25 g-metal">{t('subscriptions')}</h1>
-                {this.state.showBillingForm ? (
+                {loading && <Loader />}
+                {this.state.showBillingForm ?
                     <div className="col-sm-12 col-md-10 col-lg-9 col-xl-6 m-auto">
                         <div className='m-portlet m-portlet--head-solid-bg m--margin-top-30'>
                             <div className='m-portlet__body'>
                                 <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
                                     <h2 className='m--margin-bottom-40 m--margin-left-20'>{t('creditCard')}</h2>                    
-                                    <div className='row align-items-center'>
-                                        {subscribeRequest.get('loading') && <Loader/>}
-                                        
+                                    <div className='row align-items-center'>                                                                                
                                         {this._getSelectedPlan()}
                                         
                                         <CreditCardForm errors={errors} onChange={(form) => this._handleForm(form)} form={creditCard} />
@@ -238,20 +141,13 @@ class Subscribe extends Component {
                             </div>
                         </div>
                     </div>
-                ) : (
-                <div className="row">
-                    <div className="col-lg-12">                        
-                        {getRecordsRequest.get('success') ? this._renderSelected() : <Loader/>}
-                    </div>
-                    {getRecordsRequest.get('success') && <div className="col-sm-12">
-                        <h1 className="text-center m--margin-top-25">{t('switchPlan')}</h1>
-                        <div className="switch-subscriptions-block">
-                            <div className="row">
-                                {this._renderSubscriptions()}
-                            </div>
-                        </div>
-                    </div>}
-                </div>)}      
+                :                
+                    <SubscriptionsForm 
+                        subscriptionId={this.state.subscriptionId} 
+                        period={this.state.period} 
+                        subscriptions={getRecordsRequest.get('records')}
+                        onSelect={(data) => this._handleSelectPlan(data)}/>
+                }      
             </div>        
         );
     }

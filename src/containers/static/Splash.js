@@ -1,33 +1,16 @@
 import React from 'react';
 import {translate} from 'react-i18next';
-import SplashHeader from './sections/SplashHeader'
-import SplashNavigation from './sections/SplashNavigation'
+import SplashWrapper from './sections/SplashWrapper'
 import SplashJumbotron from './sections/SplashJumbotron'
 import SplashStore from './sections/SplashStore'
 import SplashPlatform from './sections/SplashPlatform'
-import SplashFooter from './sections/SplashFooter'
-import './sections/splash.css';
-import 'react-sticky-header/styles.css';
-import StickyHeader from 'react-sticky-header';
 
 const SplashContainer = props => {
-  return (<div className="splash">
-    <StickyHeader      
-      header={
-        <section className="section-header">
-          <SplashHeader {...props} />
-          <SplashNavigation {...props} />
-        </section>
-      }
-    >
-      <section>
+  return (<SplashWrapper>
         <SplashJumbotron {...props} />
         <SplashPlatform {...props} />
-        <SplashStore {...props} />
-        <SplashFooter {...props} />
-      </section>
-    </StickyHeader>
-  </div>)
+        <SplashStore {...props} />        
+    </SplashWrapper>);
 }
 
 export default translate('splashScreen')(SplashContainer);

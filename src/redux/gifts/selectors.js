@@ -20,6 +20,11 @@ export const selectGiftRequest = createSelector(
   (subState) => subState.get('giftRequest')
 );
 
+export const selectPublicGiftRequest = createSelector(
+  selectGiftsDomain,
+  (subState) => subState.get('publicGiftRequest')
+);
+
 export const selectDeleteRequest = createSelector(
   selectGiftsDomain,
   (subState) => subState.get('deleteRequest')

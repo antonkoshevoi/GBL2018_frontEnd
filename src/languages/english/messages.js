@@ -4,6 +4,7 @@ export default {
     401: 'Unauthorized',
     403: 'You do not have the right permissions',
     404: 'Record is not found',
+    405: 'Bad Request. Action is not allowed...',
     422: 'Unprocessable data',
     409: 'Bad Request',
     500: 'Server error. Please try again later',

@@ -569,6 +569,11 @@ export default {
     youHaveUnassignedCourseCredits: 'You have {{ count }} unassigned course credit(s)',
     assignAllowedCourseCreditsToSelectedStudents: 'Assign allowed Course credits to classroom students',
     viewInvitation: 'View Invitation',
+    sendGift: 'Send a Gift',
+    yourName: 'Your Name',
+    yourEmail: 'Your Email',
+    recipientName: 'Recipient Name',
+    recipientEmail: 'Recipient Email',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

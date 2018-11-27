@@ -75,7 +75,7 @@ class CreditCardForm extends Component {
                     <div className="form-group m-form__group row">
                       <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('cardType')}</label> 
                       <div className="col-lg-5 col-md-8 col-sm-12">
-                        <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>                          
+                        <FormControl className='full-width form-inputs'>                          
                             <Select                      
                               name="cardType"
                               value={form.cardType || ''}
@@ -94,7 +94,7 @@ class CreditCardForm extends Component {
                     <div className="form-group m-form__group row">
                       <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('expDate')}</label>
                       <div className="col-lg-5 col-md-5 col-sm-6 col-6">
-                        <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>                          
+                        <FormControl className='full-width form-inputs'>                          
                             <Select                      
                               name="cardExpYear"
                               value={form.cardExpYear || ''}
@@ -106,7 +106,7 @@ class CreditCardForm extends Component {
                         </FormControl>
                       </div>
                       <div className="col-md-3 col-lg-3 col-sm-6 col-6">
-                        <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>                          
+                        <FormControl className='full-width form-inputs'>                          
                             <Select                      
                               name="cardExpMonth"
                               value={form.cardExpMonth || ''}
