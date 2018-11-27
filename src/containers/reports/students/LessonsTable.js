@@ -63,14 +63,14 @@ class LessonsTable extends Component {
 
     if (!success && nextSuccess) {
         let data = nextProps.getReportRequest.get('data').toJS();
-        let courseTemplate = localStorage.getItem(data.course_template);
+        let courseTemplate = localStorage.getItem(data.courseTemplate);
         let tableData;
         
         if (!courseTemplate) {
-            apiClient.getJson(data.course_template).then((json) => {
+            apiClient.getJson(data.courseTemplate).then((json) => {
             courseTemplate = json;
             
-            localStorage.setItem(data.course_template, JSON.stringify(courseTemplate));
+            localStorage.setItem(data.courseTemplate, JSON.stringify(courseTemplate));
             tableData = formTableData(data, courseTemplate);
             this.setState({data: tableData});
         });
@@ -181,7 +181,7 @@ class LessonsTable extends Component {
                 return (false);
             }
                 
-            let completed  = lesson.attempts.filter(item => (!!item.att_date)).length;            
+            let completed  = lesson.attempts.filter(item => (!!item.attDate)).length;            
             let badgeClass = 'm-badge--metal';
             
             if (completed > 0) {
@@ -190,10 +190,10 @@ class LessonsTable extends Component {
             
             return lesson.attempts.map((attempt, attemptIndex) => {
                 
-                const attemptFinished = !!attempt.att_date;                
-                const passed = parseInt(attempt.scored_points, 10) >=  parseInt(lesson.pass_weight, 10);
+                const attemptFinished = !!attempt.attDate;                
+                const passed = parseInt(attempt.scoredPoints, 10) >=  parseInt(lesson.pass_weight, 10);
                                          
-                return <tr key={lesson.lesson_id + '-' + attempt.attempt_no + '-lessonRow'}>
+                return <tr key={lesson.lesson_id + '-' + attempt.attemptNo + '-lessonRow'}>
                     {(lessonIndex === 0 && attemptIndex === 0) &&                    
                         <td className="rotate" rowSpan={unitRowSpan} key={unit.unit_id + '-unitName'}>
                             <div>
@@ -212,18 +212,18 @@ class LessonsTable extends Component {
                         <div>{lesson.lesson_description}</div>
                     </td>}
                     <td className='text-center'>
-                        <span>{attempt.attempt_no}</span>
+                        <span>{attempt.attemptNo}</span>
                     </td>
                     <td className='text-center'>                            
-                        {attemptFinished && moment(attempt.att_date).format('ll')}                            
+                        {attemptFinished && moment(attempt.attDate).format('ll')}                            
                     </td>          
                     {attemptFinished ? <td className={`attempt-${passed ? 'pass' : 'fail'} text-center`}>
                         <div aria-haspopup="true" onMouseEnter={this._handleRatePopoverOpen} onMouseLeave={this._handleRatePopoverClose}>
                             <p>
-                                {attempt.scored_points + '/' + lesson.lesson_points}
+                                {attempt.scoredPoints + '/' + lesson.lesson_points}
                             </p>
                             <p>
-                                {(attempt.scored_points * 100 / lesson.lesson_points).toFixed(2) + '%'}    
+                                {(attempt.scoredPoints * 100 / lesson.lesson_points).toFixed(2) + '%'}    
                             </p>
                         </div>
                     </td> : <td>-</td>}
