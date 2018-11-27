@@ -60,7 +60,7 @@ class SubscriptionsForm extends Component {
     _renderSelected() {
                 
         const {subscriptions, t} = this.props;
-         
+        const styles = {maxWidth: '420px', margin: '0 auto'};
         return subscriptions.map((record, key) => {
             
             if (Number(record.get('id')) !== this.state.subscriptionId) {
@@ -70,7 +70,7 @@ class SubscriptionsForm extends Component {
             const courses = <span style={{fontWeight: 500}}>{record ? record.get('allowedCourses') : '0'}</span>;       
 
             return (
-                <div className="subscription-item-block m--margin-top-30" style={{maxWidth: '420px', margin: '0 auto'}}>
+                <div key={key} className="subscription-item-block m--margin-top-30" style={styles}>
                     <div className={`subscription-item item-${key}`}>
                         <div className="subscription-header"><h1>{record.get('title')}</h1></div>
                         <div className="subscription-content">
@@ -135,7 +135,7 @@ class SubscriptionsForm extends Component {
             }
                         
             return (        
-                <div className="subscription-item-block col-sm-12 col-md-6 col-lg-6 col-xl-6 m--margin-top-25">
+                <div key={key} className="subscription-item-block col-sm-12 col-md-6 col-lg-6 col-xl-6 m--margin-top-25">
                     <div className={`subscription-item item-${key}`} onClick={() => { this._setSubscriptionId(record.get('id')) }}>                        
                         <div className="subscription-header"><h1>{record.get('title')}</h1></div>
                         <div className="subscription-content">
@@ -162,7 +162,7 @@ class SubscriptionsForm extends Component {
                 
         return (
             <div>
-                <div>                        
+                <div className="col-sm-12">
                     {this._renderSelected()}
                 </div>
                 <div className="col-sm-12">

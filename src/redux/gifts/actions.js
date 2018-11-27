@@ -65,7 +65,7 @@ export function giftSubscription(params = {}) {
 export function giftPublic(params = {}) {  
   return {
     types: [PUBLIC_GIFT, PUBLIC_GIFT_SUCCESS, PUBLIC_GIFT_FAIL],
-    promise: (apiClient) => apiClient.post('gift/public', params)
+    promise: (apiClient) => apiClient.post('gifts/public', params)
   };
 }
 
