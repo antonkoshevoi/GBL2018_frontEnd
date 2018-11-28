@@ -55,7 +55,7 @@ class InfoSection extends Component {
     return courses.map(function (item, i) {
       return (
         <tr key={i}>
-          <td className="align-middle">{item.course.crsTitle}</td>
+          <td className="align-middle">{item.courseName}</td>
           <td className="align-middle">{item.classroomName}</td>
           <td className="align-middle">
             <div className="progress m-progress--sm">
