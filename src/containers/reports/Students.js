@@ -18,10 +18,10 @@ class Students extends Component {
 
   render() {
     const {t, getReportRequest} = this.props;
-    const data = getReportRequest.toJS();    
+    const data = getReportRequest.get('data').toJS();    
     
     const { id } = this.props.match.params;
-       
+            
     return (      
         <div className="fadeInLeft animated m--margin-left-15 m--margin-right-15">
             <div>

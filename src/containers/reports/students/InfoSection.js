@@ -77,7 +77,7 @@ class InfoSection extends Component {
   render() {               
     const {studentRequest, data, t} = this.props;
 
-    const loading       = data.loading;
+    const loading       = !data.length;
     const student       = this.state.student;
 
     const defaultAvatar = '//s3.amazonaws.com/37assets/svn/765-default-avatar.png';
@@ -155,7 +155,7 @@ class InfoSection extends Component {
                 {loading && <tr>
                   <td colSpan="3" className="text-center"><CircularProgress color="primary"/></td>
                 </tr>}
-                {!loading && this._renderCourseTable(data.data)}
+                {!loading && this._renderCourseTable(data)}
                 </tbody>
               </table>
             </div>
