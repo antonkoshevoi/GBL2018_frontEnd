@@ -29,19 +29,21 @@ class TabSection extends Component {
         return (
           <Select value={this.state.classroom} onChange={(e) => { this.handleChange(e) }} name='classroom' id='classroom'>            
             {courses.map(function (item, i) {
-                return <MenuItem key={i} value={item.classroomId}>{item.classroomName}: {item.course.crsTitle}</MenuItem>
+                return <MenuItem key={i} value={item.classroomId}>{item.classroomName}: {item.courseName}</MenuItem>
             })}
           </Select>);
   }
 
-  _renderContent() {
+  _renderContent(courses) {
     const {classroom} = this.state;
     const {studentId} = this.props;
         
-    if (classroom) {
-        return (<LessonsTable studentId={studentId} classroomId={classroom}></LessonsTable>)
-    }
-    return '';           
+    return courses.map(function (item, i) {
+        if (classroom === item.classroomId) {
+            return (<LessonsTable studentId={studentId} classroomId={item.classroomId} key={i}></LessonsTable>)
+        }
+        return false;
+    });
   }
 
   render() {    
@@ -63,7 +65,7 @@ class TabSection extends Component {
             </div>
           </div>
           <div className="m-portlet__body">
-            {data.length && this._renderContent()}
+            {data.length && this._renderContent(data)}
           </div>
         </div>         
         </div>
