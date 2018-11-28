@@ -35,9 +35,7 @@ class Gift extends Component {
         const success = this.props.giftRequest.get('success');
         const nextSuccess = nextProps.giftRequest.get('success');
 
-        if (!success && nextSuccess) {      
-            const userSubscriptionId = nextProps.giftRequest.get('userSubscriptionId');
-            
+        if (!success && nextSuccess) {
             this.props.resetGiftRequest();            
             
             this._setStep(3);

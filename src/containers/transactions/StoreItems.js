@@ -6,17 +6,16 @@ import {selectGetRecordsRequest} from "../../redux/transactions/selectors";
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/table";
 import {IconButton, MenuItem, Select, FormHelperText} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
-import Card from "../../components/ui/Card";
 import Pagination from '../../components/ui/Pagination';
 import moment from 'moment/moment';
 
-class Transactions extends Component {
+class StoreItems extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             page: props.recordsRequest.get('pagination').get('page'),
-            perPage: props.recordsRequest.get('pagination').get('perPage'),
+            perPage: props.recordsRequest.get('pagination').get('perPage'),            
             filter: 0
         }
     }
@@ -26,8 +25,7 @@ class Transactions extends Component {
     }
 
     _getTransactions(){
-        const { page, perPage, filter } = this.state;
-        
+        const { page, perPage, filter } = this.state;        
         this.props.getRecords({page, perPage, filter: {status: filter}});
     }
     
@@ -51,8 +49,13 @@ class Transactions extends Component {
         const { value } = e.target;  
         
         this.setState({filter: value}, this._getTransactions);
-    }    
+    } 
 
+    _recordNumber(key) {
+        const { page, perPage } = this.state;
+        return (key + 1 + ((page - 1) * perPage));
+    }
+    
     _renderTransactions() {
         const {recordsRequest, t} = this.props;
         const loading = recordsRequest.get('loading');
@@ -68,18 +71,20 @@ class Transactions extends Component {
             let badgeClass = item.get('status') !== 'due' ? item.get('status') === 'paid' ? 'm-badge--info' : 'm-badge--danger' : '';
             return ([
                 <Row index={i} key={i}>
-                    <Td  width='20px'>
-                        <IconButton color="primary" onClick={()=> {this._toggleSubTable(`sub_${i}`)}}>
+                    <Td width='40px'>{this._recordNumber(i)}</Td> 
+                    <Td>
+                        <a rel="noopener noreferrer" className="g-blue" target="_blank" href={item.get('invoiceUrl')}>{item.get('invoiceNo')}</a>               
+                    </Td>
+                    <Td>
+                        {item.get('items').size}
+                        <IconButton className="m--margin-left-15" color="primary" onClick={()=> {this._toggleSubTable(`sub_${i}`)}}>
                             <i className={`fa fa-arrow-${( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) ? 'down' : 'right'}`}></i>
-                        </IconButton>
-                    </Td>
-                    <Td width='102px'><a rel="noopener noreferrer" className="g-blue" target="_blank" href={item.get('invoiceUrl')}>{item.get('invoiceNo')}</a></Td>
-                    <Td width='102px'>{item.get('total')}$</Td>
-                    <Td width='100px'>{t(item.get('paymentType'))}</Td>
-                    <Td width='140px'>
-                        <span className={`m-badge m-badge--wide ${badgeClass}`}>{t(item.get('status'))}</span>
-                    </Td>
-                    <Td width='140px'>{moment(item.get('createdAt')).format('lll')}</Td>
+                        </IconButton>                        
+                    </Td>                    
+                    <Td>{t(item.get('paymentType'))}</Td>
+                    <Td><span className={`m-badge m-badge--wide ${badgeClass}`}>{t(item.get('status'))}</span></Td>
+                    <Td>{item.get('total')}$</Td>
+                    <Td>{moment(item.get('createdAt')).format('lll')}</Td>
                 </Row>,
                 ( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) && this._renderTransactionItemsBlock(item.get('items'))
             ])
@@ -131,15 +136,13 @@ class Transactions extends Component {
         const {perPage, page} = this.state;
         const loading = recordsRequest.get('loading');
         const totalPages = recordsRequest.get('pagination').get('totalPages');
-         
+        
         return (
-            <div className="transactionsList">
-                <Card title={t('transactions')} icon="la la-money">
-                    <div className='m--margin-top-10 m--margin-bottom-30'>
-                      <div className='row'>
-                        <div className='col-sm-6 m--align-right'>
-                          <Select
-                            className="pull-left table-select"
+            <div>
+                <div className='row'>
+                    <div className='col-sm-6 m--align-right'>
+                        <Select
+                            className="pull-left table-select m--margin-top-5"
                             value={perPage}
                             onChange={(e) => { this._selectPerPage(e.target.value) }}>
                             <MenuItem value={5}>5</MenuItem>
@@ -147,59 +150,58 @@ class Transactions extends Component {
                             <MenuItem value={25}>25</MenuItem>
                             <MenuItem value={50}>50</MenuItem>
                             <MenuItem value={100}>100</MenuItem>
-                          </Select>
+                        </Select>
+                    </div>
+                    <div className="col-sm-6">
+                        <div className="pull-right table-filter">
+                            <Select className='full-width' value={this.state.filter} onChange={(e) => { this._handleFilter(e) }} name="filter">                        
+                                <MenuItem value={0}>{t('all')}</MenuItem>
+                                <MenuItem value="paid">{t('paid')}</MenuItem>
+                                <MenuItem value="due">{t('due')}</MenuItem>
+                                <MenuItem value="declined">{t('declined')}</MenuItem>
+                            </Select>
+                            <FormHelperText>{t('filterTransactions')}</FormHelperText>
                         </div>
-                        <div className="col-sm-6">
-                            <div  className="pull-right full-width" style={{maxWidth: 300}}>
-                                <Select className='full-width' value={this.state.filter} onChange={(e) => { this._handleFilter(e) }} name="filter">                        
-                                    <MenuItem value={0}>{t('all')}</MenuItem>
-                                    <MenuItem value="paid">{t('paid')}</MenuItem>
-                                    <MenuItem value="due">{t('due')}</MenuItem>
-                                    <MenuItem value="declined">{t('declined')}</MenuItem>
-                                </Select>
-                                <FormHelperText>{t('filterTransactions')}</FormHelperText>
-                            </div>
-                        </div>                        
-                      </div>
-                    </div>                
-                    <Table >
-                        <Thead>
-                            <HeadRow>
-                                <Th width='20px'></Th>
-                                <Th width='102px'>{t('invoice')}</Th>
-                                <Th name='total' width='102px'>{t('total')}</Th>
-                                <Th name='type' width='100px'>{t('type')}</Th>
-                                <Th name='status' width='140px'>{t('status')}</Th>                                
-                                <Th name='created' width='140px'>{t('date')}</Th>
-                            </HeadRow>
-                        </Thead>
-                        <Tbody>
+                    </div>                        
+                </div>
+                <Table>
+                    <Thead>
+                        <HeadRow>
+                            <Th>#</Th>
+                            <Th>{t('invoice')}</Th>
+                            <Th>{t('items')}</Th>
+                            <Th>{t('type')}</Th>
+                            <Th>{t('status')}</Th>                                
+                            <Th>{t('total')}</Th>
+                            <Th>{t('date')}</Th>                                    
+                        </HeadRow>
+                    </Thead>
+                    <Tbody>
                         {this._renderTransactions()}
                         {loading && <TablePreloader text="Loading..." color="primary"/>}
-                        </Tbody>
-                    </Table>
-                    <div className="row">
-                      <div className="col-sm-12 m--margin-top-40 text-right">
+                    </Tbody>
+                </Table>
+                <div className="row">
+                    <div className="col-sm-12 m--margin-top-40 text-right">
                         <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
-                      </div>
-                    </div>                    
-                </Card>
+                    </div>
+                </div>
             </div>
         );
     }    
 }
 
 
-Transactions = connect(
+StoreItems = connect(
     (state) => ({
         recordsRequest: selectGetRecordsRequest(state)
     }),
     (dispatch) => ({
         getRecords: (params = {}) => { dispatch(getRecords(params)) }
     })
-)(Transactions);
+)(StoreItems);
 
-export default translate("translations")(Transactions);
+export default translate("translations")(StoreItems);
 
 
 

@@ -574,6 +574,9 @@ export default {
     yourEmail: 'Your Email',
     recipientName: 'Recipient Name',
     recipientEmail: 'Recipient Email',
+    storePayments: 'Store Payments',
+    items: 'Items',
+    period: 'Period',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

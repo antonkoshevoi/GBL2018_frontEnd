@@ -24,11 +24,6 @@ export default  {
                     key: 'buySubscription',
                     title: 'buySubscription',
                     link: 'subscriptions'
-                },
-                {
-                    key: 'subscriptionPayments',
-                    title: 'subscriptionPayments',
-                    link: 'subscriptions/payments'
                 }
             ]
         },

@@ -34,7 +34,7 @@ class Subscribe extends Component {
         const nextSuccess = nextProps.subscribeRequest.get('success');
 
         if (!success && nextSuccess) {      
-            const userSubscriptionId = nextProps.subscribeRequest.get('userSubscriptionId');
+            const subscriptionPaymentId = nextProps.subscribeRequest.get('subscriptionPaymentId');
             
             this.props.resetSubscribeRequest();
             this.props.resetGetUserRecordsRequest();
@@ -45,7 +45,7 @@ class Subscribe extends Component {
                 creditCard: {}
             });
             
-            this.props.goTo(`/subscribed/${userSubscriptionId}`);
+            this.props.goTo(`/subscribed/${subscriptionPaymentId}`);
         }
     }
 
