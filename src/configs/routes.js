@@ -34,14 +34,13 @@ import PayPalReturnContainer from '../containers/store/payments/PayPalReturnCont
 import PaymentSuccessContainer from '../containers/store/payments/PaymentSuccessContainer';
 import PaymentStatusContainer from '../containers/store/payments/PaymentStatusContainer';
 import RestoreLogin from "../containers/auth/RestoreLogin";
-import Transactions from "../containers/store/Transactions";
 import UnassignedCredits from "../containers/unassigned-credits/UnassignedCredits";
+import Transactions from "../containers/transactions/Transactions";
 
 import Subscriptions from "../containers/subscriptions/Subscriptions";
 import MySubscriptions from "../containers/subscriptions/MySubscriptions";
 import Subscribe from "../containers/subscriptions/Subscribe";
 import Subscribed from "../containers/subscriptions/Subscribed";
-import Payments from "../containers/subscriptions/Payments";
 
 import ReportsDashboard from "../containers/reports/Dashboard";
 import ClassRoomReportDashboard from "../containers/reports/classroom/Dashboard";
@@ -141,7 +140,6 @@ export default () => (
       <AuthenticatedRoute exact layout={OnlyHeadLayout} roles={['Parents']} path='/subscriptions' name='Subscriptions' component={Subscriptions} />
       <AuthenticatedRoute exact layout={OnlyHeadLayout} roles={['Parents']} path='/subscribe/:id' name='Subscribe' component={Subscribe} />
       <AuthenticatedRoute exact layout={OnlyHeadLayout} roles={['Parents']} path='/subscribed/:id' name='Subscribed' component={Subscribed} />
-      <AuthenticatedRoute exact layout={MainLayout}     roles={['Parents']} path='/subscriptions/payments' name='Payments' component={Payments} />      
 
       {/*Reports*/}
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/reports' component={ReportsDashboard}/>

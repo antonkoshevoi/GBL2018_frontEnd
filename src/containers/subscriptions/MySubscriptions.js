@@ -200,17 +200,15 @@ class MySubscriptions extends Component {
                             </h3>
                         </div>
                     </div>
-                    <div className="m-portlet__head-tools text-left">
-                    <div  className="pull-right full-width" style={{maxWidth: 300}}>
+                </div>
+                <div className='m-portlet__body'>
+                    <div  className="pull-right table-filter">
                         <Select className='full-width' value={this.state.filter} onChange={(e) => { this._handleFilter(e) }} name="filter">                        
                             <MenuItem value="active">{t('activeSubscriptions')}</MenuItem>
                             <MenuItem value="expired">{t('expiredSubscriptions')}</MenuItem>
                         </Select>
                         <FormHelperText>{t('filterSubscriptions')}</FormHelperText>
                     </div>
-                    </div>
-                </div>
-                <div className='m-portlet__body'>
                     <Table >
                         <Thead>
                             <HeadRow>                                 

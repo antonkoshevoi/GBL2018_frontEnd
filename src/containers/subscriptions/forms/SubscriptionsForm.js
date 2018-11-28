@@ -67,7 +67,7 @@ class SubscriptionsForm extends Component {
                 return '';
             }
                                                         
-            const courses = <span style={{fontWeight: 500}}>{record ? record.get('allowedCourses') : '0'}</span>;       
+            const courses = <span className="m--font-bolder">{record ? record.get('allowedCourses') : '0'}</span>;       
 
             return (
                 <div key={key} className="subscription-item-block m--margin-top-30" style={styles}>

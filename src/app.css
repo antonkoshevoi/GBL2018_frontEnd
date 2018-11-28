@@ -1351,6 +1351,12 @@ td.rotate div span {
 .sortable-questions label {
     cursor: move;
 }
+.table-filter {
+    max-width: 350px;
+    width: 100%;
+    margin-top: -5px;
+    margin-bottom: 15px;
+}
 @media (min-width: 1240px) {
     .m--visible-desktop-lg {
         display: block !important; }

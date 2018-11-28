@@ -49,7 +49,7 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorMessage: null,       
     errors: {},
-    userSubscriptionId: null
+    subscriptionPaymentId: null
   },
   getInvoiceRequest: {
     loading: false,
@@ -200,7 +200,7 @@ export default function reducer (state = initialState, action) {
           .set('loading', true)
           .remove('success')
           .remove('fail')
-          .remove('userSubscriptionId')
+          .remove('subscriptionPaymentId')
         );
     case SUBSCRIBE_SUCCESS:
       return state
@@ -208,7 +208,7 @@ export default function reducer (state = initialState, action) {
           .set('loading', false)
           .set('fail', false)
           .set('success', true)
-          .set('userSubscriptionId', action.result.data.userSubscriptionId)
+          .set('subscriptionPaymentId', action.result.data.subscriptionPaymentId)
         );
     case SUBSCRIBE_FAIL:
       const data = action.error.response.data;
@@ -219,7 +219,7 @@ export default function reducer (state = initialState, action) {
           .set('loading', false)
           .set('fail', true)
           .set('errors', (errors.size ? errors : Immutable.fromJS(data)))
-          .remove('userSubscriptionId')
+          .remove('subscriptionPaymentId')
         );
     case RESET_SUBSCRIBE_REQUEST:
       return state.set('subscribeRequest', initialState.get('subscribeRequest'));
