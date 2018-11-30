@@ -7,6 +7,10 @@ export const GET_REPORT_DETAILS_SUCCESS = '[Reports][Student] GET_REPORT_DETAILS
 export const GET_REPORT_DETAILS_FAIL = '[Reports][Student] GET_REPORT_DETAILS_FAIL';
 export const RESET_GET_REPORT_DETAILS = '[Reports][Student] RESET_GET_REPORT_DETAILS';
 
+export const GET_ATTEMPTS = '[Reports][Student] GET_ATTEMPTS';
+export const GET_ATTEMPTS_SUCCESS = '[Reports][Student] GET_ATTEMPTS_SUCCESS';
+export const GET_ATTEMPTS_FAIL = '[Reports][Student] GET_ATTEMPTS_FAIL';
+
 /**
  * Get Student report
  *
@@ -35,8 +39,16 @@ export function getReportDetails(studentId, classroomId) {
     };
 }
 
+export function getAttempts(studentId, params = {}) {
+    return {
+        types: [GET_ATTEMPTS, GET_ATTEMPTS_SUCCESS, GET_ATTEMPTS_FAIL],
+        promise: (apiClient) => apiClient.get(`reports/attempts/${studentId}`, params)
+    };
+}
+
 export function resetGetReportDetails () {
   return {
     type: RESET_GET_REPORT_DETAILS
   }
 }
+

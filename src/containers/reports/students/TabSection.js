@@ -1,53 +1,62 @@
 import React, {Component} from 'react';
 import {Select, MenuItem} from '@material-ui/core';
 import LessonsTable from './LessonsTable';
+import AttemptsTable from './AttemptsTable';
 import {translate} from 'react-i18next';
 
 class TabSection extends Component {
 
   constructor(props) {
     super(props);
-              
     this.state = {
-      classroom: ''
+      classroom: 'details'
     }
   }
-
-  componentWillReceiveProps(nextProps) {    
-    if (!this.props.data.length && nextProps.data.length) {
-        this.setState({classroom: nextProps.data[0].classroomId});
-    }
-  }
-
+ 
   handleChange (event) {
       const { value } = event.target;
   
       this.setState({classroom: value});
   };
 
-  _renderSelect(courses) {        
-        return (
-          <Select value={this.state.classroom} onChange={(e) => { this.handleChange(e) }} name='classroom' id='classroom'>            
+  _renderClassRooms(courses) {
+        const {t} = this.props;
+
+        return <div>          
+          <Select
+            value={this.state.classroom}
+            onChange={(e) => { this.handleChange(e) }}            
+            name='classroom'
+            id='classroom'            
+          >
+            <MenuItem key={-1} value="details">{t('detailedData')}</MenuItem>
             {courses.map(function (item, i) {
                 return <MenuItem key={i} value={item.classroomId}>{item.classroomName}: {item.courseName}</MenuItem>
             })}
-          </Select>);
+          </Select>
+        </div>    
   }
 
-  _renderContent(courses) {
+  _renderReportDetails(courses) {
     const {classroom} = this.state;
     const {studentId} = this.props;
-        
+    
+    if (classroom === 'details') {
+        return <AttemptsTable studentId={studentId} />;
+    }
+    
     return courses.map(function (item, i) {
         if (classroom === item.classroomId) {
             return (<LessonsTable studentId={studentId} classroomId={item.classroomId} key={i}></LessonsTable>)
         }
-        return false;
-    });
+        return false;        
+    });    
   }
 
-  render() {    
-    const {data, t} = this.props;
+  render() {
+    
+    const {t, data}    = this.props;
+
     return (
       <div className="row ">
         <div className="col-md-12">         
@@ -61,11 +70,11 @@ class TabSection extends Component {
               <h3 className="m-portlet__head-text">{t('reports')}</h3></div>
             </div>
             <div className="m-portlet__head-tools col-sm-8">
-                {data.length && this._renderSelect(data)}                  
+                {data && this._renderClassRooms(data)}                  
             </div>
           </div>
           <div className="m-portlet__body">
-            {data.length && this._renderContent(data)}
+            {this._renderReportDetails(data)}
           </div>
         </div>         
         </div>
