@@ -556,7 +556,7 @@ export default {
     lessonInformation: 'Lesson Information',
     perfomance: 'Perfomance',
     unassignedCourses: 'Unassigned Courses',
-    courseManagement: 'Course Management',
+    manageCourses: 'Manage Courses',
     upload: 'Upload',
     invoice: 'Invoice',
     yourCartIsEmpty: 'Your shopping cart is empty...',
@@ -577,6 +577,8 @@ export default {
     storePayments: 'Store Payments',
     items: 'Items',
     period: 'Period',
+    manage: 'Manage',
+    manageSubscriptions: 'Manage Subscriptions',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import '../../../styles/widgets.css';
 import {connect} from 'react-redux';
 import Address from "./Address";
 import {translate} from 'react-i18next';

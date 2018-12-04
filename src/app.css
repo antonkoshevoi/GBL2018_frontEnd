@@ -565,7 +565,9 @@ div.m-portlet {
 .dashboard-shopping-cart-body {
     min-height: 365px;
 }
-
+.dashboard div.m-portlet .m-portlet__body {
+    padding: 0.8rem;
+}
 .passRateCard h1 {
     font-size: 7rem;
     color: #008000;

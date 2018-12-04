@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../styles/widgets.css';
 
 export default class PortletErrorsWidgets extends React.Component {
     _renderErrorItems(errorsList) {

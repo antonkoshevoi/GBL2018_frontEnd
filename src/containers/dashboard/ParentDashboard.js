@@ -11,6 +11,7 @@ import { selectRecords as storeItems }  from "../../redux/store/selectors";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
 import FeaturedItems from "./sections/FeaturedItems";
 import UnassignedCourses from "./sections/UnassignedCourses";
+import Subscriptions from "./sections/Subscriptions";
 import QuickLink from "./sections/QuickLink";
 import ShoppingCart from "./sections/ShoppingCart";
 import Alerts from "./sections/Alerts";
@@ -200,18 +201,18 @@ class ParentDashboard extends Component {
                 </div>
               </div>
               <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                  <Subscriptions/>
+              </div>              
+              <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                   <UnassignedCourses/>
               </div>
-              <div className="col-md-6 col-lg-4 col-xl-4">
+              <div className="col-md-6 col-lg-6 col-xl-4">
                   <ShoppingCart/>
               </div>
-              <div className="col-sm-12 col-md-6 m--visible-tablet-and-mobile m--hidden-desktop-lg m--hidden-desktop-xl ">
-                  <QuickLink />
-              </div>
-              <div className="col-md-12 col-lg-8 col-xl-8">
+              <div className="col-md-12 col-lg-6 col-xl-8">
                   <FeaturedItems data={storeItems}/>
               </div>
-              <div className="col-lg-4 col-xl-4 m--hidden-tablet-and-mobile m--visible-desktop-lg m--visible-desktop-xl">
+              <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <QuickLink />
               </div>         
             </div>

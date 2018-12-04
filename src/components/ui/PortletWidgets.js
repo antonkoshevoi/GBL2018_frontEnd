@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import '../../styles/widgets.css';
-
 
 class PortletWidgets extends Component {
-
 
     _isFloatNumber(n) {
         return Number(n) === n && n % 1 !== 0;
@@ -19,27 +16,15 @@ class PortletWidgets extends Component {
         }
         return this.props.data.map(function (item, i) {
             return (
-                <div className={`col-md-12 col-lg-6 col-xl-${fieldsCount}`} key={i}
-                     style={(basisPercent !== 0 ? {flexBasis: basisPercent} : {})}>
-                    <div className="m-widget24">
-                        <div className="m-widget24__item">
-                            <h4 className="m-widget24__title">
-                                {item.title}
-                            </h4><br/>
-                            <span className="m-widget24__desc">
-                                {item.desc}
-                                    </span>
-                            <br/>
-                            <small className="m-widget24__desc second_desc">
-                                {item.secondDesc}
-                            </small>
-                            <span className="m-widget24__stats m--font-brand">
-                                      <i className={`${(item.icon !== undefined) ? item.icon : (item.value !== undefined) ? 'widget_value' : ''}  m--font-${item.colorName}`}>
-                                          {(item.value !== undefined) ? item.value : ''}
-                                      </i>
-                            </span>
-                        </div>
-                    </div>
+                <div className={`col-md-12 col-lg-6 col-xl-${fieldsCount}`} key={i} style={(basisPercent !== 0 ? {flexBasis: basisPercent} : {})}> 
+                    <span className="pull-right m--margin-10 m--margin-right-30">
+                        <span className={`display-3 m--font-${item.colorName}`}>
+                            {item.value || '-'}
+                        </span>
+                    </span>
+                    <h5 className="pull-left m--margin-10">
+                        {item.title}
+                    </h5>
                 </div>
             )
         })

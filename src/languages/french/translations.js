@@ -556,7 +556,7 @@ export default {
     lessonInformation: 'FR Lesson Information',
     perfomance: 'FR Perfomance',
     unassignedCourses: 'FR Unassigned Courses',
-    courseManagement: 'FR Course Management',
+    manageCourses: 'Manage Courses',
     upload: 'FR Upload',
     invoice: 'FR Invoice',
     yourCartIsEmpty: 'FR Your shopping cart is empty...',

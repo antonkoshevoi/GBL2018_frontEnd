@@ -99,7 +99,7 @@ class UnassignedCourses extends Component {
     return (
             <div>
                 <div className='block-header border-b-blue'>
-                    <h3 className='m-portlet__head-text'> {t('courseManagement')}</h3>
+                    <h3 className='m-portlet__head-text'> {t('manageCourses')}</h3>
                 </div>              
                 <div className="m-portlet m-portlet--head-solid-bg">
                     <div className="m-portlet__body m--padding-top-10">

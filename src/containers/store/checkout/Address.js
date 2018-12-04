@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import '../../../styles/widgets.css';
 import PropTypes from 'prop-types';
 import {selectRecords} from "../../../redux/countries/selectors";
 import {connect} from 'react-redux';

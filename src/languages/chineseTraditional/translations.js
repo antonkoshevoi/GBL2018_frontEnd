@@ -556,7 +556,7 @@ export default {
     lessonInformation: 'CT Lesson Information',
     perfomance: 'CT Perfomance',
     unassignedCourses: 'CT Unassigned Courses',
-    courseManagement: 'CT Course Management',
+    manageCourses: 'Manage Courses',
     upload: 'CT Upload',
     invoice: 'CT Invoice',
     yourCartIsEmpty: 'CT Your shopping cart is empty...',
