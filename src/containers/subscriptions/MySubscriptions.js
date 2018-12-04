@@ -3,7 +3,7 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnSubscribeRequest } from '../../redux/subscriptions/selectors';
-import { getUserRecords, unSubscribe, resetUnSubscribeRequest } from '../../redux/subscriptions/actions';
+import { getUserRecords, resetGetUserRecordsRequest, unSubscribe, resetUnSubscribeRequest } from '../../redux/subscriptions/actions';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from "../../components/ui/table";
 import { Select, MenuItem, FormHelperText } from '@material-ui/core';
 import Loader from "../../components/layouts/Loader";
@@ -25,14 +25,14 @@ class MySubscriptions extends Component {
             studentsModalIsOpen: false,
             filter: 'active'
         }
-    }
+    }    
     
     componentDidMount () {
         this._getSubscriptions();
     }
     
     componentWillReceiveProps (nextProps) {
-        const { getUserRecords, resetUnSubscribeRequest } = this.props;
+        const { getUserRecords, resetUnSubscribeRequest, goTo } = this.props;
              
         if (!this.props.unSubscribeStudentRequest.get('success') && nextProps.unSubscribeStudentRequest.get('success')) {
             getUserRecords();
@@ -41,6 +41,12 @@ class MySubscriptions extends Component {
         if (!this.props.unSubscribeRequest.get('success') && nextProps.unSubscribeRequest.get('success')) {
             resetUnSubscribeRequest();
             getUserRecords();
+        }
+        
+        if (!this.props.subscriptionsRequest.get('success') && nextProps.subscriptionsRequest.get('success')) {
+            if (nextProps.subscriptionsRequest.get('records').size === 0) {    
+                goTo('/subscriptions');
+            }
         }        
     }    
 
@@ -176,14 +182,8 @@ class MySubscriptions extends Component {
     }
     
     render() {
-        const {subscriptionsRequest, unSubscribeRequest, goTo, t} = this.props;
+        const {subscriptionsRequest, unSubscribeRequest, t} = this.props;
         const {filter, assignModalIsOpen, studentsModalIsOpen, giftModalIsOpen, selectedSubscription} = this.state;
-        const loading = subscriptionsRequest.get('loading');
-           
-        if (subscriptionsRequest.get('success') && subscriptionsRequest.get('records').size === 0) {
-            goTo('/subscriptions');
-            return <Loader/>;
-        }
         
         return (                
         <div className='fadeInLeft  animated learning-areas'>
@@ -224,7 +224,7 @@ class MySubscriptions extends Component {
                             </HeadRow>
                         </Thead>
                         <Tbody>                            
-                            { loading ? <TablePreloader text="Loading..." color="primary"/> : this._renderSubscriptions() }
+                            { subscriptionsRequest.get('loading') ? <TablePreloader text="Loading..." color="primary"/> : this._renderSubscriptions() }
                         </Tbody>
                     </Table>                
                 </div>
@@ -259,6 +259,7 @@ MySubscriptions = connect(
   }),
   (dispatch) => ({
     getUserRecords: (params = {}) => { dispatch(getUserRecords(params)) },
+    resetUserRecordsRequest: (params = {}) => { dispatch(resetGetUserRecordsRequest(params)) },
     unSubscribe: (id, params = {}) => { dispatch(unSubscribe(id, params)) },
     resetUnSubscribeRequest: (params = {}) => { dispatch(resetUnSubscribeRequest(params)) },    
     goTo: (url) => {dispatch(push(url))}

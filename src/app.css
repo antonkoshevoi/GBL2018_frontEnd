@@ -335,13 +335,9 @@ table th .sort-arrow {
     align-items: center;
     min-height: 300px;
 }
-
 .table-message h2 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    text-align: center;
 }
-
 .table-message [role="progressbar"] {
     margin-left: 29px;
 }
@@ -567,6 +563,9 @@ div.m-portlet {
 }
 .dashboard div.m-portlet .m-portlet__body {
     padding: 0.8rem;
+}
+.dashboard .table-message {
+    min-height: 250px;
 }
 .passRateCard h1 {
     font-size: 7rem;

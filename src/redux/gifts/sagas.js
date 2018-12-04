@@ -3,9 +3,12 @@ import { all } from 'redux-saga/effects';
 import {
     GET_RECORDS_FAIL,
     GET_RECORD_FAIL,
-    GIFT_COURSE_SUCCESS,
-    GIFT_SUBSCRIPTION_SUCCESS,
+    GIFT_SUCCESS,
     GIFT_FAIL,
+    GIFT_SUBSCRIPTION_SUCCESS,
+    GIFT_SUBSCRIPTION_FAIL,
+    PUBLIC_GIFT_SUCCESS, 
+    PUBLIC_GIFT_FAIL,
     DELETE_SUCCESS,
     DELETE_FAIL,    
     ACCEPT_SUCCESS,
@@ -19,8 +22,9 @@ import i18n from '../../configs/i18n';
 
 const giftsSagas = all([
   yieldSuccessToasts({
-    [GIFT_COURSE_SUCCESS]: i18n.t('messages:courseCreditDonated'),
+    [GIFT_SUCCESS]: i18n.t('messages:courseCreditDonated'),
     [GIFT_SUBSCRIPTION_SUCCESS]: i18n.t('messages:subscriptionDonated'),
+    [PUBLIC_GIFT_SUCCESS]: i18n.t('messages:subscriptionDonated'),
     [DELETE_SUCCESS]: i18n.t('messages:giftDeleted'),
     [DECLINE_SUCCESS]: i18n.t('messages:giftDeclined'),
     [ACCEPT_SUCCESS]: i18n.t('messages:giftAccepted')
@@ -29,6 +33,8 @@ const giftsSagas = all([
     GET_RECORDS_FAIL,
     GET_RECORD_FAIL,
     GIFT_FAIL,
+    GIFT_SUBSCRIPTION_FAIL,
+    PUBLIC_GIFT_FAIL,
     DELETE_FAIL,
     ACCEPT_FAIL,
     DECLINE_FAIL
