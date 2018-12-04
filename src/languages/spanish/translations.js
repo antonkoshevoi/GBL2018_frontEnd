@@ -556,7 +556,7 @@ export default {
     lessonInformation: 'ES Lesson Information',
     perfomance: 'ES Perfomance',
     unassignedCourses: 'ES Unassigned Courses',
-    courseManagement: 'ES Course Management',
+    manageCourses: 'Manage Courses',    
     upload: 'ES Upload',
     invoice: 'ES Invoice',
     yourCartIsEmpty: 'ES Your shopping cart is empty...',

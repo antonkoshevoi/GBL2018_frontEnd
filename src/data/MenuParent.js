@@ -17,12 +17,12 @@ export default  {
             subMenu: [
                 {
                     key: 'mySubscriptions',
-                    title: 'mySubscriptions',
+                    title: 'manage',
                     link: 'my-subscriptions'
                 },
                 {
                     key: 'buySubscription',
-                    title: 'buySubscription',
+                    title: 'buy',
                     link: 'subscriptions'
                 }
             ]

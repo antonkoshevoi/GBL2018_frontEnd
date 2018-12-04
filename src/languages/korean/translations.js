@@ -556,7 +556,7 @@ export default {
     lessonInformation: 'KR Lesson Information',
     perfomance: 'KR Perfomance',
     unassignedCourses: 'KR Unassigned Courses',
-    courseManagement: 'KR Course Management',
+    manageCourses: 'Manage Courses',
     upload: 'KR Upload',
     invoice: 'KR Invoice',
     yourCartIsEmpty: 'KR Your shopping cart is empty...',

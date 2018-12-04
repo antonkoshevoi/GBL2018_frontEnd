@@ -556,7 +556,7 @@ export default {
     lessonInformation: 'DE Lesson Information',
     perfomance: 'DE Perfomance',
     unassignedCourses: 'DE Unassigned Courses',
-    courseManagement: 'DE Course Management',
+    manageCourses: 'Manage Courses',
     upload: 'DE Upload',
     invoice: 'DE Invoice',
     yourCartIsEmpty: 'DE Your shopping cart is empty...',

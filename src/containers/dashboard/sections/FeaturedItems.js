@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import '../../../styles/widgets.css';
 import {translate} from "react-i18next";
 import ProductCard from "../../../components/store/ProductCard";
 

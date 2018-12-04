@@ -13,10 +13,6 @@
         min-width: 10px;
     }
 
-    .fa.widget-icon {
-        font-size: 55px;
-    }
-
     .m-widget1__number > img {
         width: 55px;
     }
@@ -43,11 +39,7 @@
     div.m-portlet .m-portlet__body {
         padding: 0.7rem;
     }
-/*
-    .m-portlet.m-portlet--head-solid-bg .m-widget1 .m-widget1__item {
-        padding: 0.2rem 0;
-    }
-*/
+
     .small-card .m--padding-right-10, .small-card .m--padding-left-10 {
         padding: 2px !important;
         justify-content: space-between;
@@ -60,10 +52,6 @@
     .small-card-content .small-card {
         padding: 0;
         line-height: 1;
-    }
-
-    .fa.widget-icon {
-        font-size: 25px;
     }
 
     .m-widget1__number > img {
