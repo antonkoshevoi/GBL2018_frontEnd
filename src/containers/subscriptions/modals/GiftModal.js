@@ -9,8 +9,8 @@ import {
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { translate, Interpolate } from 'react-i18next';
-import { selectGiftRequest } from "../../../redux/gifts/selectors";
-import { giftSubscription, resetGiftRequest } from "../../../redux/gifts/actions";
+import { selectSubscriptionRequest } from "../../../redux/gifts/selectors";
+import { giftSubscription, resetGiftSubscriptionRequest } from "../../../redux/gifts/actions";
 import Modal from '../../../components/ui/Modal';
 import GiftForm from '../forms/GiftForm';
 
@@ -132,11 +132,11 @@ class GiftModal extends Component {
 
 GiftModal = connect(
   (state) => ({
-    giftRequest: selectGiftRequest(state)
+    giftRequest: selectSubscriptionRequest(state)
   }),
   (dispatch) => ({
     giftSubscription: (form) => { dispatch(giftSubscription(form)) },
-    resetGiftRequest: () => { dispatch(resetGiftRequest()) }
+    resetGiftRequest: () => { dispatch(resetGiftSubscriptionRequest()) }
   })
 )(GiftModal);
   

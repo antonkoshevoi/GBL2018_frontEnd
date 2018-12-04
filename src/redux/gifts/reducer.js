@@ -1,7 +1,8 @@
 import {
     GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL,
     GET_RECORD, GET_RECORD_SUCCESS, GET_RECORD_FAIL, RESET_GET_RECORD_REQUEST,
-    GIFT, GIFT_COURSE_SUCCESS, GIFT_SUBSCRIPTION_SUCCESS, GIFT_FAIL, RESET_GIFT_REQUEST, 
+    GIFT, GIFT_SUCCESS, GIFT_FAIL, RESET_GIFT_REQUEST,
+    GIFT_SUBSCRIPTION, GIFT_SUBSCRIPTION_SUCCESS, GIFT_SUBSCRIPTION_FAIL, RESET_GIFT_SUBSCRIPTION_REQUEST,
     PUBLIC_GIFT, PUBLIC_GIFT_SUCCESS, PUBLIC_GIFT_FAIL, RESET_PUBLIC_GIFT_REQUEST, 
     DELETE, DELETE_SUCCESS, DELETE_FAIL, RESET_DELETE_REQUEST,
     ACCEPT, ACCEPT_SUCCESS, ACCEPT_FAIL, 
@@ -29,6 +30,12 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorResponse: null
   },
+  giftSubscriptionRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null
+  },  
   publicGiftRequest: {
     loading: false,
     success: false,
@@ -94,13 +101,24 @@ export default function reducer(state = initialState, action) {
      */    
     case GIFT:
         return state.set('giftRequest', initialState.get('giftRequest').set('loading', true));
-    case GIFT_COURSE_SUCCESS:
-    case GIFT_SUBSCRIPTION_SUCCESS:
+    case GIFT_SUCCESS:    
         return state.set('giftRequest', initialState.get('giftRequest').set('success', true));
     case GIFT_FAIL:
         return state.set('giftRequest', initialState.get('giftRequest').set('fail', true).set('errors', Immutable.fromJS(action.error.response.data.errors)));
     case RESET_GIFT_REQUEST:
         return state.set('giftRequest', initialState.get('giftRequest'));
+        
+    /**
+     * Gift
+     */    
+    case GIFT_SUBSCRIPTION:
+        return state.set('giftSubscriptionRequest', initialState.get('giftSubscriptionRequest').set('loading', true));    
+    case GIFT_SUBSCRIPTION_SUCCESS:
+        return state.set('giftSubscriptionRequest', initialState.get('giftSubscriptionRequest').set('success', true));
+    case GIFT_SUBSCRIPTION_FAIL:
+        return state.set('giftSubscriptionRequest', initialState.get('giftSubscriptionRequest').set('fail', true).set('errors', Immutable.fromJS(action.error.response.data.errors)));
+    case RESET_GIFT_SUBSCRIPTION_REQUEST:
+        return state.set('giftSubscriptionRequest', initialState.get('giftSubscriptionRequest'));        
                     
     /**
      * Public Gift

@@ -47,7 +47,7 @@ class UnassignedCourses extends Component {
     }
   
     _handleAssigned() {      
-        const { getRecords } = this.props;
+        const { getRecords } = this.props;        
         getRecords();
     }
   

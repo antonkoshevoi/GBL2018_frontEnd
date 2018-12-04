@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
+import {NavLink} from "react-router-dom";
 import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnSubscribeRequest } from '../../../redux/subscriptions/selectors';
-import { getUserRecords, unSubscribe, resetUnSubscribeRequest } from '../../../redux/subscriptions/actions';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from "../../../components/ui/table";
+import { getUserRecords, resetGetUserRecordsRequest, unSubscribe, resetUnSubscribeRequest } from '../../../redux/subscriptions/actions';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from "../../../components/ui/table";
 import DeleteButton from "../../../components/ui/DeleteButton";
 import ConfirmButton from "../../../components/ui/ConfirmButton";
 import AssignStudentModal from "../../subscriptions/modals/AssignStudentModal";
@@ -26,6 +27,10 @@ class Subscriptions extends Component {
     componentDidMount () {
         this._getSubscriptions();
     }
+    
+    componentWillUnmount() {        
+        this.props.resetUserRecordsRequest();
+    }  
     
     componentWillReceiveProps (nextProps) {            
         if (!this.props.unSubscribeStudentRequest.get('success') && nextProps.unSubscribeStudentRequest.get('success')) {
@@ -112,7 +117,16 @@ class Subscriptions extends Component {
         
         if (!subscriptions.length) {
             return (
-                <MessageRow>{t('subscriptionsNotFound')}</MessageRow>
+                <tr>
+                  <td colSpan={4}>
+                    <div className="table-message">
+                        <div>
+                            <h2>{t('subscriptionsNotFound')}</h2>
+                            <div className="text-center"><NavLink className="btn m--margin-top-15 m-btn btn-info" to="/subscriptions">{t('buySubscription')}</NavLink></div>
+                        </div>
+                    </div>
+                  </td>
+                </tr>                
             );
         }
 
@@ -219,6 +233,7 @@ Subscriptions = connect(
   (dispatch) => ({
     getUserRecords: (params = {}) => { dispatch(getUserRecords(params)) },
     unSubscribe: (id, params = {}) => { dispatch(unSubscribe(id, params)) },
+    resetUserRecordsRequest: (params = {}) => { dispatch(resetGetUserRecordsRequest(params)) },
     resetUnSubscribeRequest: (params = {}) => { dispatch(resetUnSubscribeRequest(params)) }    
   })
 )(Subscriptions);

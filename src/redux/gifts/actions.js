@@ -22,10 +22,14 @@ export const DECLINE_FAIL = '[Gifts] DECLINE_FAIL';
 export const RESET_CHANGE_STATUS_REQUEST = '[Gifts] RESET_CHANGE_STATUS_REQUEST';
 
 export const GIFT = '[Gifts] GIFT';
-export const GIFT_COURSE_SUCCESS = '[Gifts] GIFT_COURSE_SUCCESS';
-export const GIFT_SUBSCRIPTION_SUCCESS = '[Gifts] GIFT_SUBSCRIPTION_SUCCESS';
+export const GIFT_SUCCESS = '[Gifts] GIFT_SUCCESS';
 export const GIFT_FAIL = '[Gifts] GIFT_FAIL';
 export const RESET_GIFT_REQUEST = '[Gifts] RESET_GIFT_REQUEST';
+
+export const GIFT_SUBSCRIPTION = '[Gifts] GIFT_SUBSCRIPTION';
+export const GIFT_SUBSCRIPTION_SUCCESS = '[Gifts] GIFT_SUBSCRIPTION_SUCCESS';
+export const GIFT_SUBSCRIPTION_FAIL = '[Gifts] GIFT_SUBSCRIPTION_FAIL';
+export const RESET_GIFT_SUBSCRIPTION_REQUEST = '[Gifts] RESET_GIFT_SUBSCRIPTION_REQUEST';
 
 export const PUBLIC_GIFT = '[Gifts] PUBLIC_GIFT';
 export const PUBLIC_GIFT_SUCCESS = '[Gifts] PUBLIC_GIFT_SUCCESS';
@@ -49,7 +53,7 @@ export function getRecord(id) {
 export function giftCourseCredit(params = {}) {
   params.type = 'course';
   return {
-    types: [GIFT, GIFT_COURSE_SUCCESS, GIFT_FAIL],
+    types: [GIFT, GIFT_SUCCESS, GIFT_FAIL],
     promise: (apiClient) => apiClient.post('gifts', params)
   };
 }
@@ -57,7 +61,7 @@ export function giftCourseCredit(params = {}) {
 export function giftSubscription(params = {}) {
   params.type = 'subscription';
   return {
-    types: [GIFT, GIFT_SUBSCRIPTION_SUCCESS, GIFT_FAIL],
+    types: [GIFT_SUBSCRIPTION, GIFT_SUBSCRIPTION_SUCCESS, GIFT_SUBSCRIPTION_FAIL],
     promise: (apiClient) => apiClient.post('gifts', params)
   };
 }
@@ -74,6 +78,13 @@ export function resetGiftRequest() {
     type: RESET_GIFT_REQUEST
   };
 }
+
+export function resetGiftSubscriptionRequest() {
+  return {
+    type: RESET_GIFT_SUBSCRIPTION_REQUEST
+  };
+}
+
 
 export function resetPublicGiftRequest() {
   return {
