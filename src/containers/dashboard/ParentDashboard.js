@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import { Avatar, CircularProgress, withStyles } from '@material-ui/core';
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { translate } from 'react-i18next';
 import { push } from 'react-router-redux';
-import { selectStudentsRequest, selectStudentStatusRequest} from "../../redux/parents/selectors";
-import { getStudents, acceptStudentRequest, declineStudentRequest, resetStudentRequest} from "../../redux/parents/actions"; 
+import { selectStudentsRequest, selectStudentStatusRequest } from "../../redux/parents/selectors";
+import { getStudents, acceptStudentRequest, declineStudentRequest, resetStudentRequest } from "../../redux/parents/actions";
+import { selectDeleteRequest } from "../../redux/students/selectors";
+import { deleteRecord, resetDeleteRecordRequest } from "../../redux/students/actions"; 
 import { getParentRecords } from "../../redux/store/actions";
 import { selectRecords as storeItems }  from "../../redux/store/selectors";
+import DeleteButton from "../../components/ui/DeleteButton";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
 import FeaturedItems from "./sections/FeaturedItems";
 import UnassignedCourses from "./sections/UnassignedCourses";
@@ -21,14 +23,14 @@ const styles = {
     width: 80,
     height: 80,    
     border: 'solid 3px white',
-    margin: 10
+    margin: 10    
   },
   profileBlock: {
     position:'relative',
     background: '#f4f3f8',
     borderRadius: 5,
-    marginBottom: '5px',    
-    cursor: 'pointer'
+    marginBottom: '5px'   
+    
   },
   btnGroup: {    
     position: 'absolute',
@@ -64,12 +66,17 @@ class ParentDashboard extends Component {
     }
   
     componentWillReceiveProps(nextProps) {        
-        const {getStudents, studentStatusRequest, resetStudentRequest} = this.props;
+        const {getStudents, studentStatusRequest, resetStudentRequest, deleteStudentRequest, resetDeleteStudentRequest} = this.props;
         
         if (!studentStatusRequest.get('success') && nextProps.studentStatusRequest.get('success')) {            
             getStudents();
             resetStudentRequest();
-        }     
+        }
+
+        if (!deleteStudentRequest.get('success') && nextProps.deleteStudentRequest.get('success')) {
+            getStudents();
+            resetDeleteStudentRequest();
+        }
     }  
 
     _openCreateDialog = () => {
@@ -87,6 +94,10 @@ class ParentDashboard extends Component {
     _declineRequest(id) {            
         this.props.declineStudentRequest(id);
     };
+    
+    _deleteStudent(id) {
+        this.props.deleteStudent(id);
+    }
   
     _renderStudents() {
         const {studentsRequest, goTo, classes, t} = this.props;
@@ -98,7 +109,7 @@ class ParentDashboard extends Component {
             </div>
         }
 
-        return requests.map(function (request, i) {
+        return requests.map((request, i) => {
             let student = request.student;
 
             if (!request.accepted) {
@@ -106,19 +117,22 @@ class ParentDashboard extends Component {
             }
             
             return (
-              <div key={i} className={classes.profileBlock} onClick={() => { goTo(`/reports/students/${student.id}`); }}>
+              <div key={i} className={classes.profileBlock} >
                 <div className={classes.btnGroup}>
                   <div className="form-group-inline">
-                    <div className="m--hidden-tablet-and-mobile m--hidden-desktop-lg m--visible-desktop-xl">
-                        <NavLink to="/profile" className="btn m-btm btn-info smaller-padding pull-right"><i className="la la-th"></i> {t('reports')}</NavLink>
-                    </div>
-                    <div className="m--visible-tablet-and-mobile m--visible-desktop-lg m--hidden-desktop-xl">
-                        <NavLink to="/profile" title={t('reportProfile')} className="btn m-btm btn-info pull-right m-btn--icon m-btn--icon-only  m-btn--pill"><i className="la la-search"></i></NavLink>                                       
-                    </div>
+                    <button title={t('decline')} onClick={() => { goTo(`/reports/students/${student.id}`) }} className='btn btn-info m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill'>
+                        <i className='la la-search'></i>
+                    </button>
+                    <DeleteButton 
+                        onClick={() => { this._deleteStudent(student.id) }}
+                        title={t('deleteLearnerConfirmation')}
+                        icon="la la-close"
+                        className="btn btn-danger m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill"
+                    />
                   </div>
                 </div>
 
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center pointer" onClick={() => { goTo(`/reports/students/${student.id}`); }} >
                   <Avatar alt={student.firstName} src={student.avatarSmall} className={classes.avatar} />
                   <div className="info">
                     <h5 className="m--margin-top-15 m--bottom-top-5">{student.name}</h5>
@@ -228,7 +242,8 @@ ParentDashboard = connect(
     (state) => ({        
         storeItems: storeItems(state),
         studentsRequest: selectStudentsRequest(state),
-        studentStatusRequest: selectStudentStatusRequest(state)
+        studentStatusRequest: selectStudentStatusRequest(state),
+        deleteStudentRequest: selectDeleteRequest(state)
     }),
     (dispatch) => ({        
         goTo: (url) => { dispatch(push(url)) },
@@ -236,7 +251,10 @@ ParentDashboard = connect(
         getStudents: () => {dispatch(getStudents())},        
         acceptStudentRequest: (id) => {dispatch(acceptStudentRequest(id))},
         declineStudentRequest: (id) => {dispatch(declineStudentRequest(id))},
-        resetStudentRequest: () => {dispatch(resetStudentRequest())}    
+        resetStudentRequest: () => {dispatch(resetStudentRequest())},
+        
+        deleteStudent: (id) => {dispatch(deleteRecord(id))},
+        resetDeleteStudentRequest: () => {dispatch(resetDeleteRecordRequest())},
     })
 )(ParentDashboard);
 

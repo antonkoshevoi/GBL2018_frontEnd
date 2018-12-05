@@ -3,7 +3,7 @@ import {
   RESET_CREATE_REQUEST, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
   GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS,
   RESET_BULK_UPLOAD_REQUEST, BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS,
-  DELETE, DELETE_SUCCESS, DELETE_FAIL
+  DELETE, DELETE_SUCCESS, DELETE_FAIL, RESET_DELETE_FAIL_REQUEST
 } from './actions';
 import Immutable from 'immutable';
 
@@ -254,6 +254,8 @@ export default function reducer (state = initialState, action) {
           .set('errorMessage', deleteError.message)
           .set('errors', deleteError.code === 422 ? Immutable.fromJS(deleteError.errors) : undefined)
         );
+    case RESET_DELETE_FAIL_REQUEST:
+      return state.set('deleteRequest', initialState.get('deleteRequest'));
     /**
      * Bulk upload
      */

@@ -126,7 +126,7 @@ class SignUpPrincipal extends Component {
       <div>
         {loading && <Loader />}
         <div className="signup-page">
-          <div className="m-signup col-sm-6 m-auto">
+          <div className="m-signup col-sm-12 col-md-10 col-lg-8 col-xl-6 m-auto">
             <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height ">
               <div className="m-portlet__head">
                 <div className="m-portlet__head-caption">
