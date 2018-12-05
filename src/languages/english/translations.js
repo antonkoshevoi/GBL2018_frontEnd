@@ -579,6 +579,7 @@ export default {
     period: 'Period',
     manage: 'Manage',
     manageSubscriptions: 'Manage Subscriptions',
+    deleteLearnerConfirmation: 'Are you sure want to remove this learner?',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',
