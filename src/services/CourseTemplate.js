@@ -78,50 +78,41 @@ export default function formTableData(serverData, jsonTemplateData) {
   function switchQuestionType(questionTemplate, questionType, mistakeDetails) {
     // This code is adaptation of BE php code located in /API/Users/Transformers/StudentReportTransformer.php,
     // function transformMetadata
+    if (!mistakeDetails || !questionTemplate) {
+        return '';
+    }
+    
+    const description  = questionTemplate.description   || '';
+    const questionMeta = questionTemplate.question_meta || [];
+    
     switch (questionType) {
-      case '10': {
-        const description = questionTemplate.description || '';
+      case '10': {                      
         const correctIndex = mistakeDetails[0];
-        const correctAnswer = (questionTemplate && questionTemplate.question_meta &&
-          questionTemplate.question_meta[correctIndex] && questionTemplate.question_meta[correctIndex][0]
-          && questionTemplate.question_meta[correctIndex][0].hidden_answer) || '';
+        const correctAnswer = (questionMeta[correctIndex] && questionMeta[correctIndex][0] && questionMeta[correctIndex][0].hidden_answer) || '';
         const chosenIndex = +mistakeDetails[1];
-        const chosenAnswer = (questionTemplate && questionTemplate.question_meta &&
-          questionTemplate.question_meta[chosenIndex] && questionTemplate.question_meta[chosenIndex][0]
-          && questionTemplate.question_meta[chosenIndex][0].hidden_answer) || '';
+        const chosenAnswer = (questionMeta[chosenIndex] && questionMeta[chosenIndex][0] && questionMeta[chosenIndex][0].hidden_answer) || '';
         return formAnswer(description, correctAnswer, chosenAnswer);
       }
-      case '11': {
-        const description = questionTemplate.description || '';
-        const correctAnswer = (questionTemplate && questionTemplate.question_meta &&
-          questionTemplate.question_meta.correctAnswer && questionTemplate.question_meta.correctAnswer.label) || '';
+      case '11': {        
+        const correctAnswer = (questionMeta.correctAnswer && questionMeta.correctAnswer.label) || '';
         const chosenIndex = +mistakeDetails[0];
-        const chosenAnswer = (questionTemplate && questionTemplate.question_meta &&
-          questionTemplate.question_meta.incorrectAnswers && questionTemplate.question_meta.incorrectAnswers[chosenIndex]) || '';
+        const chosenAnswer = (questionMeta.incorrectAnswers && questionMeta.incorrectAnswers[chosenIndex]) || '';
         return formAnswer(description, correctAnswer, chosenAnswer);
       }
       case '12': {
-        const description = questionTemplate.description || '';
-        const correctAnswer = (questionTemplate && questionTemplate.question_meta &&
-          questionTemplate.question_meta.correctAnswer) || '';
+        const correctAnswer = (questionMeta.correctAnswer) || '';
         const chosenIndex = +mistakeDetails[0];
-        const chosenAnswer = (questionTemplate && questionTemplate.question_meta &&
-          questionTemplate.question_meta.incorrectAnswers && questionTemplate.question_meta.incorrectAnswers[chosenIndex]) || '';
+        const chosenAnswer = (questionMeta.incorrectAnswers && questionMeta.incorrectAnswers[chosenIndex]) || '';
         return formAnswer(description, correctAnswer, chosenAnswer);
       }
       case '13': {
-        const description = questionTemplate.description || '';
-        const correctAnswer = (questionTemplate && questionTemplate.question_meta &&
-          questionTemplate.question_meta.correctAnswer && questionTemplate.question_meta.correctAnswer.label) || '';
+        const correctAnswer = (questionMeta.correctAnswer && questionMeta.correctAnswer.label) || '';
         const chosenIndex = +mistakeDetails[0];
-        const chosenAnswer = (questionTemplate && questionTemplate.question_meta &&
-          questionTemplate.question_meta.incorrectAnswers && questionTemplate.question_meta.incorrectAnswers[chosenIndex]).label || '';
+        const chosenAnswer = (questionMeta.incorrectAnswers && questionMeta.incorrectAnswers[chosenIndex]).label || '';
         return formAnswer(description, correctAnswer, chosenAnswer);
       }
       case '20': {
-        const description = questionTemplate.description || '';
-        const correctAnswer = (questionTemplate && questionTemplate.question_meta &&
-          questionTemplate.question_meta.text_answer) || '';
+        const correctAnswer = (questionMeta.text_answer) || '';
         let chosenAnswer = '';
         if (typeof mistakeDetails === 'string') {
           chosenAnswer = mistakeDetails;
@@ -132,10 +123,8 @@ export default function formTableData(serverData, jsonTemplateData) {
         }
         return formAnswer(description, correctAnswer, chosenAnswer);
       }
-      case '21': {
-        const description = questionTemplate.description || '';
-        const correctAnswer = (questionTemplate && questionTemplate.question_meta &&
-          questionTemplate.question_meta.text_answer) || '';
+      case '21': {        
+        const correctAnswer = (questionMeta.text_answer) || '';
         let chosenAnswer = '';
         if (typeof mistakeDetails === 'string') {
           chosenAnswer = mistakeDetails;
@@ -147,79 +136,53 @@ export default function formTableData(serverData, jsonTemplateData) {
         }
         return formAnswer(description, correctAnswer, chosenAnswer);
       }
-      case '30': {
-        const description = questionTemplate.description || '';
-        const correctAnswer = (questionTemplate && questionTemplate.question_meta &&
-          questionTemplate.question_meta.text_answer) || '';
-        const chosenAnswer = mistakeDetails[0];
+      case '30': {        
+        const correctAnswer = (questionMeta.text_answer) || '';
+        const chosenAnswer  = mistakeDetails[0];
         return formAnswer(description, correctAnswer, chosenAnswer);
       }
       case '40': {
-        const description = questionTemplate.description || '';
-        const dragWord = (questionTemplate && questionTemplate.question_meta && questionTemplate.question_meta.dragWord) || '';
-        const correctAnswer = (questionTemplate && questionTemplate.question_meta && questionTemplate.question_meta.correctAnswer && questionTemplate.question_meta.correctAnswer.replace('___', dragWord) ) || '';
-        const chosenAnswer = (questionTemplate && questionTemplate.question_meta && questionTemplate.question_meta.incorrectAnswer && questionTemplate.question_meta.incorrectAnswer.replace('___', dragWord) ) || '';
+        const dragWord = (questionMeta.dragWord) || '';
+        const correctAnswer = (questionMeta.correctAnswer && questionMeta.correctAnswer.replace('___', dragWord) ) || '';
+        const chosenAnswer = (questionMeta.incorrectAnswer && questionMeta.incorrectAnswer.replace('___', dragWord) ) || '';
         return formAnswer(description, correctAnswer, chosenAnswer);
       }
       case '50': {
-        const description = questionTemplate.description || '';
-        let sentence = description;
-        mistakeDetails.forEach((chosenIndex, index) => {
-          const correctAnswer = (questionTemplate && questionTemplate.question_meta && questionTemplate.question_meta[chosenIndex] && questionTemplate.question_meta[chosenIndex][0] && questionTemplate.question_meta[chosenIndex][0].label) || '';
-          const chosenAnswer = (questionTemplate && questionTemplate.question_meta && questionTemplate.question_meta[chosenIndex[index + 1]] && questionTemplate.question_meta[chosenIndex[index + 1]][0] && questionTemplate.question_meta[chosenIndex[index + 1]][0].label) || '';
-          sentence += ' A: <font color="Green">' + correctAnswer + '</font> SA: <font color="red"> ' + chosenAnswer + '</font> <br/>';
-        });
-        return sentence;
+        let correctIndex = mistakeDetails[0];
+        let chosenIndex = mistakeDetails[1];
+        const correctAnswer = (questionMeta[correctIndex] && questionMeta[correctIndex][0] && questionMeta[correctIndex][0].label) || '';
+        const chosenAnswer = (questionMeta[chosenIndex] && questionMeta[chosenIndex][0] && questionMeta[chosenIndex][0].label) || '';
+        return formAnswer(description, correctAnswer, chosenAnswer);
       }
       case '60': {
-        const description = questionTemplate.description || '';
         let chosenAnswer = '';
-        if (!mistakeDetails) {
-          break;
-        }
         mistakeDetails.forEach((mistakeDetail, index) => {
           chosenAnswer += 'Stroke ' + (index + 1) + '; '
         });
-
         return formMistakes(description, chosenAnswer);
       }
       case '61': {
-        const description = questionTemplate.description || '';
         let chosenAnswer = '';
-        if (!mistakeDetails) {
-          break;
-        }
         mistakeDetails.forEach((mistakeDetail) => {
           const mistakeIndex = +mistakeDetail;
           chosenAnswer += 'Letter ' + (mistakeIndex + 1) + '; '
         });
-
         return formMistakes(description, chosenAnswer);
       }
       case '70': {
-        const description = questionTemplate.description || '';
         let chosenAnswer = '';
-        if (!mistakeDetails) {
-          break;
-        }
         mistakeDetails.forEach((mistakeDetail) => {
           const mistakeIndex = +mistakeDetail;
           chosenAnswer += 'Stroke ' + (mistakeIndex + 1) + '; '
         });
-
         return formMistakes(description, chosenAnswer);
       }
-      case '71': {
-        const description = questionTemplate.description || '';
+      case '71': {        
         let chosenAnswer = '';
-        if (!mistakeDetails) {
-          break;
-        }
         mistakeDetails.forEach((mistakeDetail) => {
           const mistakeIndex = +mistakeDetail;
           chosenAnswer += 'Stroke ' + (mistakeIndex + 1) + '; '
         });
-
         return formMistakes(description, chosenAnswer);
       }
       default: {
@@ -236,7 +199,7 @@ export default function formTableData(serverData, jsonTemplateData) {
     if (!correctAnswer || (typeof correctAnswer === "undefined")) {
         correctAnswer = 'no answer';
     }    
-    return '<span>Q: ' + description + ' A: <font color="Green">' + correctAnswer + '</font> SA: <font color="red"> ' + chosenAnswer + '</font></span> <br/>';
+    return '<span>Q: ' + description + ' A: <font color="green">' + correctAnswer + '</font> SA: <font color="red"> ' + chosenAnswer + '</font></span> <br/>';
   }
 
   function formMistakes(description, chosenAnswer) {
