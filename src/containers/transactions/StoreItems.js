@@ -83,7 +83,7 @@ class StoreItems extends Component {
                     </Td>                    
                     <Td>{t(item.get('paymentType'))}</Td>
                     <Td><span className={`m-badge m-badge--wide ${badgeClass}`}>{t(item.get('status'))}</span></Td>
-                    <Td>{item.get('total')}$</Td>
+                    <Td>${item.get('total')}</Td>
                     <Td>{moment(item.get('createdAt')).format('lll')}</Td>
                 </Row>,
                 ( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) && this._renderTransactionItemsBlock(item.get('items'))
@@ -125,7 +125,7 @@ class StoreItems extends Component {
                     </Td>
                     <Td  width="180px"><NavLink className="g-blue" to={`/store/details/${item.get('itemId')}`}>{item.get('title')}</NavLink></Td>
                     <Td width='100px'>{item.get('quantity')}</Td>
-                    <Td width='150px'>{Number(item.get('totalPrice')).toFixed(2)} $</Td>                    
+                    <Td width='150px'>${Number(item.get('totalPrice')).toFixed(2)}</Td>                    
                 </Row>
             )
         })
