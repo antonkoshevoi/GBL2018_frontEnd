@@ -42,7 +42,7 @@ class SubscriptionPayments extends Component {
                 <Td>{record.get('transactionCode')}</Td>
                 <Td>{record.get('subscription')} {t('subscription')}</Td>        
                 <Td>{t(record.get('period'))}</Td>
-                <Td>{record.get('total')}$</Td>
+                <Td>${record.get('total')}</Td>
                 <Td>{moment(record.get('createdAt')).format('lll')}</Td>
             </Row>
         ));

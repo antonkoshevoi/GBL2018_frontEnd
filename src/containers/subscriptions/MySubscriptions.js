@@ -146,7 +146,7 @@ class MySubscriptions extends Component {
             return (
                 <Row index={i} key={i}>                     
                     <Td width='120px'>{item.title}</Td>
-                    <Td width='120px'><strong className="g-blue">{item.price}$</strong> / {t(item.period)}</Td>
+                    <Td width='120px'><strong className="g-blue">${item.price}</strong> / {t(item.period)}</Td>
                     <Td width='120px'>{item.allowedCourses}</Td>
                     <Td width='120px'>
                         <span className="m--margin-right-15">{item.assignedCourses}</span>
