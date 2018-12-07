@@ -93,8 +93,17 @@ class LessonsTable extends Component {
     
     let reportIsEmpty = true;
 
+    data.map((unit, unitIndex) => {
+        if (this.countNumberOfUnitAttempts(unit) > 0) {
+            reportIsEmpty = false;                  
+        }              
+    });
+      
     return (
       <div className="table-responsive">
+        {!reportIsEmpty && <div className="m--margin-bottom-15">
+            <a className="btn btn-success" target="_blank" rel="noopener noreferrer" href={getReportRequest.get('data').get('pdfUrl')}><span className='la la-file-pdf-o'></span> {t('downloadReportInPdf')}</a>
+         </div>}
         <table className="table table-bordered">
           <thead>
             <tr className="active">
@@ -107,18 +116,16 @@ class LessonsTable extends Component {
             </tr>
           </thead>
           <tbody>
-          {data.map((unit, unitIndex) => {
-              if (this.countNumberOfUnitAttempts(unit) > 0) {
-                  reportIsEmpty = false;
+          {reportIsEmpty ? <tr>
+                <td colSpan="6" className='text-center'>
+                    <div className="table-message"><h2>{t('noData')}</h2></div>
+                </td>
+            </tr> : data.map((unit, unitIndex) => {
+              if (this.countNumberOfUnitAttempts(unit) > 0) {                  
                   return this.renderLessonRow(unit, unitIndex);
               }
               return '';
           })}
-          {reportIsEmpty && <tr>
-                <td colSpan="6" className='text-center'>
-                    <div className="table-message"><h2>{t('noData')}</h2></div>
-                </td>
-            </tr>}
           </tbody>
         </table>       
 
@@ -165,7 +172,10 @@ class LessonsTable extends Component {
                     <span className="m-badge m-badge--brand m-badge--wide m-badge--danger m--margin-right-10"></span> {t('fail')} 
                 </p>            
             </div>
-        </Popover>        
+        </Popover>
+        {!reportIsEmpty && <div className="m--margin-top-15 m--margin-bottom-15">
+            <a className="btn btn-success" target="_blank" rel="noopener noreferrer" href={getReportRequest.get('data').get('pdfUrl')}><span className='la la-file-pdf-o'></span> {t('downloadReportInPdf')}</a>
+         </div>}        
       </div>
     )
   }
