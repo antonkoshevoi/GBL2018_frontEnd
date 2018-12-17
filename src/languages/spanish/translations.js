@@ -569,6 +569,7 @@ export default {
     storeSlider3: 'ES New Movies to Rent',
     youHaveUnassignedCourseCredits: 'ES You have {{ count }} unassigned course credit(s)',
     assignAllowedCourseCreditsToSelectedStudents: 'ES Assign allowed Course credits to classroom students',
+    enrollments: 'Enrollments',
     recipientsGroups: {        
         roleIds: 'ES Entire School',
         classroomIds: 'ES Classroom Users',

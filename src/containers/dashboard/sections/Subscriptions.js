@@ -141,8 +141,8 @@ class Subscriptions extends Component {
                         <strong className="g-blue">${item.price}</strong> / {t(item.period)}
                     </Td>      
                     <Td width='120px'>
-                        <span className="m--margin-right-15">{item.assignedCourses} / {(item.allowedCourses * item.allowedStudents)} {item.allowedStudents > 1 && <span>({item.allowedCourses} x {item.allowedStudents})</span>} </span>
-                        { (item.assignedCourses > 0 && isOwner) && <button className='btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-top-5' onClick={ ()=> {this._showStudentsModal(item) }}>
+                        <span className="m--margin-right-15">{item.assignedCourses} / {(item.allowedCourses * item.allowedStudents)} </span>
+                        { (item.assignedCourses > 0 && isOwner) && <button className='btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={ ()=> {this._showStudentsModal(item) }}>
                             <i className="la la-search"></i>
                         </button> }                                               
                     </Td>                    
@@ -190,7 +190,7 @@ class Subscriptions extends Component {
                                 <Thead>
                                     <HeadRow>                                 
                                         <Th width='120px'>{t('title')}</Th>                                        
-                                        <Th width='120px'>{t('courses')}</Th>                                        
+                                        <Th width='120px'>{t('enrollments')}</Th>                                        
                                         <Th width='120px'>{t('expirationDate')}</Th>                                                                        
                                         <Th width='150px'>{t('actions')}</Th>
                                     </HeadRow>
