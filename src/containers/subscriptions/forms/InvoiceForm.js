@@ -32,7 +32,7 @@ class InvoiceForm extends Component {
                                     <label>{t('price')}:</label> <strong>${invoice.get('price')} / {t(invoice.get('period'))}</strong>
                                 </div>
                                 <div>
-                                    <label>{t('allowedCourses')}:</label> <strong>{invoice.get('allowedCourses')}</strong>
+                                    <label>{t('allowedCourses')}:</label> <strong>{invoice.get('allowedCourses')} x {invoice.get('allowedStudents')}</strong>
                                 </div>
                                 {(invoice.get('period') === 'year') && 
                                     <div>

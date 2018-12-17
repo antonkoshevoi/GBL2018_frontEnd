@@ -67,7 +67,8 @@ class SubscriptionsForm extends Component {
                 return '';
             }
                                                         
-            const courses = <span className="m--font-bolder">{record ? record.get('allowedCourses') : '0'}</span>;       
+            const courses = <span className="m--font-bolder">{record ? record.get('allowedCourses') : '0'}</span>;
+            const students = <span className="m--font-bolder">{record ? record.get('allowedStudents') : '0'}</span>;
 
             return (
                 <div key={key} className="subscription-item-block m--margin-top-30" style={styles}>
@@ -108,7 +109,7 @@ class SubscriptionsForm extends Component {
                                     <br />                            
                                     <Interpolate i18nKey={record.get('allowedCourses') > 1 ? 'courseAnyCoursesSwitchAnyTime' : 'courseAnyCourseSwitchAnyTime'} number={courses} />
                                     <br />                            
-                                    <Interpolate i18nKey="usersMax" number={courses} />
+                                    <Interpolate i18nKey={record.get('allowedStudents') > 1 ? 'usersMax' : 'userMax'} number={students} />
                                 </div>            
                                 <div className="subscription-bonuses text-left">
                                     <span>{t('annualBonus')}:</span>

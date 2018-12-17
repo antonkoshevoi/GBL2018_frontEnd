@@ -32,6 +32,7 @@ class Subscriptions extends Component {
     
     return getRecordsRequest.get('records').map((record, key) => {
         const courses = <span className="m--font-bolder">{record.get('allowedCourses')}</span>;
+        const students = <span className="m--font-bolder">{record.get('allowedStudents')}</span>;
         return (        
         <div key={key} className="subscription-item-block col-sm-12 col-md-4 col-lg-4 col-xl-4 m--margin-top-35">
             <div className={`subscription-item item-${key}`}>
@@ -46,10 +47,10 @@ class Subscriptions extends Component {
                     <div className="subscription-description">
                         <div className="subscription-limits">
                             <Interpolate i18nKey="courseAtTime" number={courses} />
-                            <br />                            
+                            <br />
                             <Interpolate i18nKey={record.get('allowedCourses') > 1 ? 'courseAnyCoursesSwitchAnyTime' : 'courseAnyCourseSwitchAnyTime'} number={courses} />
-                            <br />                            
-                            <Interpolate i18nKey="usersMax" number={courses} />
+                            <br />
+                            <Interpolate i18nKey={record.get('allowedStudents') > 1 ? 'usersMax' : 'userMax'} number={students} />
                         </div>            
                         <div className="subscription-bonuses text-left">
                             <span>{t('annualBonus')}:</span>
