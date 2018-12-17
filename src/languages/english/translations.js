@@ -582,6 +582,7 @@ export default {
     manageSubscriptions: 'Manage Subscriptions',
     deleteLearnerConfirmation: 'Are you sure want to remove this learner?',
     downloadReportInPdf: 'Download Report In PDF',
+    enrollments: 'Enrollments',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',
