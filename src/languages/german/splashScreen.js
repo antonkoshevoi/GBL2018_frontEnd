@@ -16,6 +16,8 @@ export default {
     methods: 'Methods',
     quickstart: 'Quickstart',
     ourMethod: 'The BZabc Method',
+    parentsStudents: 'Students  & Parents',
+    schoolsTeachers: 'Schools & Teachers',
     practicalSkillDevelopment: 'Practical Skill Development',
     practicalSkillDevelopmentDescription: 'Listening. Speaking. Reading. Writing. BZabc helps students internalize these essential skills, by utilizing encourage in participation in a variety of activities.',
     consistency: 'Consistency',
@@ -33,52 +35,126 @@ export default {
     personalGuidanceDescription: 'The BZabc App utilizes student performance to guide them throughout their courses. Cloud-based data tracking and processing means wherever and whenever they learn, students are on the right page.',   
     trackingReporting: 'Tracking / Reporting',   
     trackingReportingDescription: 'Student performance is tracked on our system. Scores and error report data are available in real time to parents. This enables parents to see when kids worked and any challenges they may have enountered.',                                                      
-  aboutContent: {
-      image: '//d2cnhr6egzpvdl.cloudfront.net/image/splash-image1.3239d7be.png',
-      title: 'About Us',
-      paragraphs: [
-        {
-            title: 'Paragraph #1',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
-        },
-        {
-            title: 'Paragraph #2',
-            content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
-        }
-      ]
-  },
-  parentStudentContent: {      
-      title: 'Parents & Students',
-      paragraphs: [
-        {
-            title: 'Paragraph #1',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
-        },
-        {
-            title: 'Paragraph #2',
-            content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
-        }
-      ]
-  },
-  schoolTeacherContent: {
-      title: 'School Teacher',
-      paragraphs: [
-        {
-            title: 'Paragraph #1',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
-        },
-        {
-            title: 'Paragraph #2',
-            content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
-        }
-      ]
-  },  
-  store: 'Store',
-  privacy: 'Privacy Policy',
-  terms: 'Terms and Services',
-  learningPlatform: 'Learning Platform',
-  learnMore: 'Learn more',
-  termsAndConditions: {
+    store: 'Store',
+    privacy: 'Privacy Policy',
+    terms: 'Terms and Services',
+    learningPlatform: 'Learning Platform',
+    learnMore: 'Learn more',    
+    methodologyContent: {        
+        title: 'BZabc Methodology',
+        paragraphs: [
+          {
+              title: 'Practical Skill Development',
+              subTitle: 'What\'s Wrong With the Way We Teach Language?',
+              content: `There are a number of problems in the way that we teach right now specifically in the way that we both teach and learn language. Language cannot be acquired through memorizing word lists or grammar points or otherwise trying to achieve our goals through brute force study tactics. Indeed, using traditional study methods to try to foster language skills creates a great deal of frustration boredom, and out-right anger among young children
+                        So let's start with a clean slate. What we’re trying to do is to acquire all language skills: listening, speaking, reading, and writing. The first step is that we need to recognize is how we actually learn language.`
+          },
+          {
+              subTitle: 'How Babies learn Language (Dr. Patricia Kuhl)',
+              content: `Think of babies how does learn? They start by listening. With listening comes comprehension. Then after time baby start trying to say the words practice say the word over and over and over again. Babies are very very good language learners because your pathways in their brains are completely open and they can lay down language patterns or easily. As we get older it gets harder to lay down those pathways.  After age seven there's a steady decline in our ability to acquire language easily and naturally .  Though it becomes harder to learn, it doesn't change the way we learn, only that it takes a conscious effort and much more time.  It takes training.
+                When children or adults learn a language, we first need to listen - with comprehension in order to  understand what we're learning. It’s not helpful to start with numerous learning targets or long complex sentence sentences or paragraphs. We need to start with a very simple material and limited learning targets. We need to engage with that material and work on many levels to forge those neural pathways. Once we started this place of listening and comprehending very simple actions very simple concrete nouns then we can move on to more and more complex language structures building on that which we’ve already started.
+                As we build our language structure our language skills increase we learn new nouns with her sentence patterns of our target language we start start to listen, speak, read and write with more and more fluency. After we have achieved some degree of speaking ability we made then start the process of learning writing. I believe that some writing at an early age is good, as long as comprehension listening and speaking skills precede the attempt at writing skills`
+          },
+          {
+              title: 'Continuity: Daily Practice',
+              subTitle: 'Developing Skills versus Memorizing',
+              content: `Earlier I mention developing skills versus memorizing. Is a very this is a very important starting point. A memory is a noun. Like brick of knowledge.  A skill on the other hand is dynamic you can do things with a skill. It can be improved. You can improvise and create with a skill. A skill takes much longer to develop because it involves so many different parts of the brain and body.
+                Let’s consider for a moment learning how to throw a ball. This is a very complex psycho-p bhysio ability. For young children that I’ve never thrown up all it takes a lot of trial and error it takes persistence it takes practice it takes repetition. It involves many different muscle groups it involves a brain it involves balance.
+                The same is true for learning to play in a musical instrument such as the piano. .It is one thing to recognize and follow along with Beethoven’s sonata Pathétique, however is a very different thing to be able to perform sonata Pathétique. In order to perform such a difficult piece of music the performer would need to practice for many years not just technique but also develop musical ideas and there are many other works before approaching this one.
+                Learning language is no different. We need to start developing skills very simple and a small number of skills that one time we need to first understand what we’re trying to achieve. We need to understand the complex relationship between the symbol.`
+          },
+          {
+              title: 'Total Physical Response',
+              subTitle: 'a Concept by Dr. James Asher',
+              content: `The written word, and what that written word represents which is either an object or action. Furthermore, we  need to associate the sound with either the object or the written word or the object part of me though the action have the written word and the sound that is made. Finally we need to vocalize the words making sense of what we’re saying and connecting it in our brains to objects or actions to symbols such as words of characters there by developing a complete language skill set rather than little bits and pieces here and there. What we do this then we can start to build our language skills were building with understanding of this illuminates the frustration that many of us felt when we were kids and many of her children and students feel as learners of us language learners in there and their struggles in their process of acquiring the language.
+                As a teacher how do you elicit a response from a child and in sure that they developed that specific language skill when their sitting in a desk and writing. you can’t. It’s really not possible. Believe me I’ve tried. Many of us in the language teaching profession came to recognize naturally that the traditional method of this sitting in a desk and memorizing words through through writing practice is completely ineffective. A complete waste of time.
+                Dr. James Asher developed a technique or recognize perhaps a technique that humans use naturally called total physical response or TPR. This technique is used extensively in our program BZabc. What it in tails is the idea that students learn with their entire bodies not just listing not just speaking not just writing but actually moving and doing things making actions with their hands with their eyes their facial expressions with their feet and thereby really developing a complete language skill set and and many different muscle memory is to really create a solid and concrete language skill acquisition. The word inculcate is used to describe this that is to have a scale developed and a very deep multi dimensional level.
+                IN BZabc we do a great deal of echo practice so for example the teacher says jump and all the students not only say jump they actually jump. so one of our Raps is called sit stand jump clap. That is exactly what the children. Many children by playing along can learn these words in a very short amount of time.`
+          },
+          {
+              title: 'Using Courses for Continuity and Consistency',              
+              content: `While we have some problems with the traditional learning methods one good thing about these matters is that they use courses. Now of course means a path is away for the children for a child or an adult to get from A to B learning path. It’s very important to have a learning path to have a limited number of learning targets in a given period of time so as not to overwhelm the learners.
+                BZabc courses children will be expected to learn something like 12 to 14 small learning skills per week and they will be practising these new skills as well as older skills from previous weeks. The idea is by the end of the course that the children have acquired all the required skills in the course not some of the skills but all of the skills.
+                Teachers or parents can bring other elements into just learning environment in order to enhance the learning process, but the children are not required to go from app to app or from one system or book to another in order to do their daily practice. 
+                BZabc has all of the elements are right at the children’s fingertips, provided to them at the right moment for their own personal learning needs. And I was a language teacher for many years young Asian kids have to learn English I learn English language during that time I set a lot of my time actually writing songs.`
+          },
+          {
+              title: 'Consistency with Blended Learning',              
+              content: `As such all of our material works together. For example in book one there are 50 lessons in the book.For every lesson in the book there’s a corresponding lesson in the application. Whenever a new skill is taught there’s a learning movie for every lesson there’s also a quiz.
+                With our product children to first watch and learning movie to help them comprehend their learning targets for a given day. We encourage children to follow along to sing or clap as mentioned before we use a great deal of echo. Each presentation movie is followed by a quiz which helps to foster both short and long term memory development . We have a number of question types such as multiple choice dragon drop fill in the blank letter trays which enable children to practice different skill sets as their learning their new words or phrases. As children are required to go through the same lessons over a number of days with shoes when they go to their workbook and actually do the written exercises. The important thing is when they go to do their exercises they have a good understanding of what their task is in the book.
+                So at the end of every learning session children have participated in the learning process by watching clapping singing along with the movie presentation they’ve gone through the quiz at the end of the movie presentation and they may have gone through They’re written exercises in the book. 
+                So we have a physical response with the actions and singing, we have an auto response listening and speaking, and we have a written response with the workbook exercises. And this is how our company provides true blended learning for children to enable development of a complete language skill set.`
+          },
+          {
+              title: 'Data Driven Personal Guidance for Both Short and Long Term Development Strategy',              
+              content: `Almost 15 years ago,  I first first mapped out a data driven system which would enable children to develop skills in a more efficient manner. It’s clear that people need to practice in order to get better and that there needs to be a course that they follow they learn a little bit at a time. We made this the example of sports and music. Well the same is true for learning a language the problem is how do you ensure that the children are first of all learning all of the skills that they need to learn and that they learn them in a timely fashion.
+                This is why we developed the auto guide system. Each child must have their own account this is essential for the auto guide to work. What happens is children go through lessons and do their exercises at the end of of that lesson the system and will decide how many reviews that child must do in the future. What’s the child has successfully completed the quiz over a number of days the system will no longer ask that child to perform that quiz.
+                The techniques that we use are those described in the literature of clinical psychology as spaced repetition and performance practice.`
+          }
+        ]        
+    },
+    techSpecsContent: {
+        title: 'BZabc Methodology',
+        paragraphs: [
+          {
+              title: 'For All Platforms',              
+              content: `The BZabc Kids App (Learners App)  is built in Adobe AIR, which still provides a great deal of flexibility in terms of multi-platform extensibility: including interactivity, video presentation, and a variety of other useful  tools suitable for use with eLearning. It has been deployed to Android, iOS,  Windows 7 / 10 and MAC. Please note that students must login with their own credentials in this App.
+                The BZabc Parents App is available only on iOS and Android.  Parents and Schools have separate Admin panels available through the all major browsers.`
+          },          
+          {
+              title: 'Blended Learning',              
+              content: `In order to achieve the multi-platform learning experience, the BZabc Kids App connects to the physical workbook via QR Code.  In addition each presentation movie and loading window shows students where to go within the Workbook, so that students know precisely where the materials are connected and may participate or follow along if they so choose.
+                We believe it is important that students leverage all learning materials on all platforms in order to develop a well-rounded skills set.`
+          },
+          {
+              title: 'Personal Guidance: Data-Driven Review',              
+              content: `With BZabc, kids are guided through all lessons over day, weeks and months of any given course.  This ensures that all kids learn ALL the material, that they develop all target language skills.  BZabc also has a Navigation menu should student decided to do extra review, rewatch videos, or have a look at forthcoming material. 
+                The BZabc Kids App is server-connected.  It stores student's responses and utilizes this data to determine the appropriate order of lessons for each given learning session.  
+                Each and every lesson must be successfully passed a number of times over a period of days or weeks.  This ensure that students develop long-term memory and a deep skillset.`
+          },          
+        ]
+    },
+    aboutContent: {
+        image: '//d2cnhr6egzpvdl.cloudfront.net/image/splash-image1.3239d7be.png',
+        title: 'About Us',
+        paragraphs: [
+          {
+              title: 'Paragraph #1',
+              content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
+          },
+          {
+              title: 'Paragraph #2',
+              content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
+          }
+        ]
+    },
+    parentsStudentsContent: {      
+        title: 'Students  & Parents',
+        paragraphs: [
+          {
+              title: 'Paragraph #1',
+              content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
+          },
+          {
+              title: 'Paragraph #2',
+              content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
+          }
+        ]
+    },
+    schoolsTeachersContent: {
+        title: 'Schools & Teachers',
+        paragraphs: [
+          {
+              title: 'Paragraph #1',
+              content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
+          },
+          {
+              title: 'Paragraph #2',
+              content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
+          }
+        ]
+    },  
+    termsAndConditions: {
         title: 'Terms and Conditions',
         paragraphs: [
             {

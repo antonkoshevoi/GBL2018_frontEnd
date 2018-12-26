@@ -18,7 +18,7 @@ class SplashHeader extends PureComponent {
                 <div className="links text-right">
                   <NavLink to={`/login`} className="btn-login"><i></i>{t('login')}</NavLink>
                   <NavLink to={`/signup`} className="btn-signup"><i></i>{t('signup')}</NavLink>
-                  <NavLink to={`/gift`} className="btn-gift"><i class="fa fa-gift"></i>{t('sendGift')}</NavLink>
+                  <NavLink to={`/gift`} className="btn-gift"><i className="fa fa-gift"></i>{t('sendGift')}</NavLink>
                 </div>
               </div>
             </div>
