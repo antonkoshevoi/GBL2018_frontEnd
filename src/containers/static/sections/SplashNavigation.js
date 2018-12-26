@@ -33,8 +33,9 @@ class SplashNavigation extends PureComponent {
           <div className="nav-narrow-collapse-container">
             <i className="fa fa-bars fa-2x" onClick={this.burgerToggle}></i>
             <div className="links text-right">
-              <NavLink to={`/login`} className="btn no-border m-btn btn-sm ">{t('login')}</NavLink>
-              <NavLink to={`/signup`} className="btn btn-bordered m-btn btn-sm signup">{t('signUp')}</NavLink>
+              <NavLink to={`/login`} className="btn m-btn btn-sm ">{t('login')}</NavLink>
+              <NavLink to={`/signup`} className="btn m-btn btn-sm signup">{t('signUp')}</NavLink>
+              <NavLink to={`/gift`} className="btn m-btn btn-sm signup">{t('sendGift')}</NavLink>
             </div>
           </div>
           <div className="splash-navigation-tools">

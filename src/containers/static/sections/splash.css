@@ -1,7 +1,6 @@
 :root {
     --splash-header-bg: #3d6b99;
-    --splash-navbar-bg: #1b3f5e;
-    --splash-light-blue: #5ba6f1;
+    --splash-navbar-bg: #1b3f5e;    
     --splash-dark-text: #1b3f5e;
 }
 .splash-section {
@@ -37,31 +36,7 @@
     background-repeat: no-repeat;    
     padding: 10px 15px 10px 45px;
 }
-.splash-navigation .container > a:hover.students-parents {
-    background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_parents-icon-white.png);
-}
-.splash-navigation .container > a:hover.schools-teachers {
-    background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_school-icon-white.png);
-}
-.splash-navigation .container > a.students-parents {
-    background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_parents-icon-blue.png);
-}
-.splash-navigation .container > a.schools-teachers {
-    background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_school-icon-blue.png);
-}
-.splash-navigation .container > a {
-    padding: 0;
-    height: 36px;    
-    display: inline-block;
-    background-repeat: no-repeat;
-    padding: 2px 5px 2px 45px;
-    font-size: 20px;
-    margin: 0 50px;
-    color: #589ee4;
-}
-.splash-navigation .container > a:hover {
-    color: #ffffff;
-}
+
 .main-banner {
     background-color: #589ee4;    
     padding: 20px 0 30px 0;
@@ -281,7 +256,7 @@ nav .nav-narrow {
 .nav-narrow .nav-narrow-collapse-container {
     display: flex;
     justify-content: space-between;
-    margin-right: 60px;
+    margin-right: 50px;
 }
 
 .splash-navigation {
@@ -401,6 +376,33 @@ nav .nav-narrow {
     nav .nav-narrow {
         display: none;
     }
+    .splash-navigation .container > a {
+        padding: 0;
+        background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/bzabc_icons.png);
+        background-repeat: no-repeat;     
+        height: 36px;    
+        display: inline-block;
+        background-repeat: no-repeat;
+        padding: 2px 5px 2px 45px;
+        font-size: 20px;
+        margin: 0 50px;
+        color: #589ee4;
+    }
+    .splash-navigation .container > a:hover {
+        color: #ffffff;
+    }
+    .splash-navigation .container > a:hover.students-parents {
+        background-position: 0 -36px;
+    }
+    .splash-navigation .container > a:hover.schools-teachers {
+        background-position: 0 -108px;
+    }
+    .splash-navigation .container > a.students-parents {
+        background-position: 0 0;
+    }
+    .splash-navigation .container > a.schools-teachers {
+        background-position: 0 -72px;
+    }
 }
 
 @media (min-width: 1440px) {
@@ -477,11 +479,15 @@ nav .nav-narrow {
     }
     section.methods .method h2 {
         font-size: 24px;
-    }     
+    }
+    .splash-navigation .container > a {
+        font-size: 16px;
+        padding-top: 5px;
+    }
 }
 
 @media (max-width: 768px) {
-    .splash-header .links {
+    .splash-header .links, .about-us-header {
         display: none;
     }
     .splash-header .logo {
@@ -493,5 +499,16 @@ nav .nav-narrow {
     h1.section-head {
         font-size: 28px;
         padding: 5px;
-    }    
+    }
+    .splash-navigation .btn {
+        font-size: 16px;
+    }
+    .nav-narrow .splash-navigation-tools {    
+        top: 16px;
+    }
+}
+@media (max-width: 420px) {
+    .splash-navigation .btn {
+        font-size: 14px;
+    }
 }
