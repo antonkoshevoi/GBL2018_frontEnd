@@ -22,9 +22,10 @@ class SplashContent extends PureComponent {
     }    
         
     return paragraphs.map((record, key) => (           
-      <div>
-        <h5>{record.title}</h5>
-        <p>{record.content.split('\n').map(line => <p>{line}</p>)}</p>
+      <div key={key}>
+        {record.title && <h4 className='m--margin-top-15 m--margin-bottom-15'>{record.title}</h4>}
+        {record.subTitle && <h5 className='m--margin-bottom-15'>{record.subTitle}</h5>}
+        <p>{record.content.split('\n').map((line, lKey) => <p key={lKey}>{line}</p>)}</p>
       </div>));
   }
 
@@ -35,7 +36,7 @@ class SplashContent extends PureComponent {
         <SplashWrapper className="splash-container">           
             <div>
                 <h1 className="m--margin-bottom-25">{t(section + '.title')}</h1>
-                { (t(section + '.subTitle') !== section + '.subTitle') && <h2 className="m--margin-bottom-25">{t(section + '.subTitle')}</h2> }
+                { (t(section + '.subTitle') !== section + '.subTitle') && <h2 className="m--margin-bottom-25">{t(section + '.subTitle')}</h2> }                
                 { (t(section + '.image') !== (section + '.image')) && <p><img className="img-thumbnail" alt="About Us" src={t(section + '.image')} /></p> }
                 { this._renderContent(section) }
             </div>            

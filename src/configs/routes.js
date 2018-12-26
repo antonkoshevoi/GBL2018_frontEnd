@@ -80,6 +80,9 @@ export default () => (
       <Route exact path='/parents' render={(props) => <Content {...props} page="parentsStudentsContent" /> }  />
       <Route exact path='/schools' render={(props) => <Content {...props} page="schoolsTeachersContent" /> }  />
       <Route exact path='/terms' render={(props) => <Content {...props} page="termsAndConditions" /> }  />
+      <Route exact path='/methodology' render={(props) => <Content {...props} page="methodologyContent" /> }  />
+      <Route exact path='/tech-specs' render={(props) => <Content {...props} page="techSpecsContent" /> }  />
+      
       <Route exact path='/privacy-policy.html' render={(props) => <Content {...props} page="privacyPolicyContent" /> }  />
       <Route exact path='/' name='splash' component={SplashContainer} />                 
       <Route exact path='/splash' name='splash' component={SplashContainer} />

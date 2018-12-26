@@ -9,13 +9,13 @@ class SplashFooter extends PureComponent {
             <div className="splash-footer">
                 <div className="container footer-container links">
                     <div className="row">
-                        <div class="col4 col-sm-4 text-center">
+                        <div className="col4 col-sm-4 text-center">
                             <NavLink to={`/privacy-policy.html`} className="btn no-border m-btn btn-sm ">{t('privacy')}</NavLink>
                         </div>
-                        <div class="col4 col-sm-4 text-center">
+                        <div className="col4 col-sm-4 text-center">
                             <a href="https://pubtool.gravitybrain.com" className="btn no-border m-btn btn-lg">{t('publishers')}</a>
                         </div>
-                        <div class="col4 col-sm-4 text-center">
+                        <div className="col4 col-sm-4 text-center">
                             <NavLink to={`/terms`} className="btn no-border m-btn btn-sm ">{t('terms')}</NavLink>
                         </div>
                     </div>

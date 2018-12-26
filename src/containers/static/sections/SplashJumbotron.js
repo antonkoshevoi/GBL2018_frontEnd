@@ -7,11 +7,11 @@ class SplashJumbotron extends PureComponent {
     return (              
         <div className="clearfix">
             <div className="m--hidden-mobile main-banner">
-                <div class="container">
+                <div className="container">
                     <h1>{t('giveGiftOfLearning')}</h1>
                     <h2>{t('professionallyDesignedCourses')}</h2>
                     <h3>{t('justForKids')}</h3>
-                    <div class='main-image'>
+                    <div className='main-image'>
                         <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc-top-image-big.png" />
                         <div className="bookstore">                               
                             <NavLink to={`/store`} className="btn btn-warning btn-store">{t('bookstore')}</NavLink>
@@ -24,7 +24,7 @@ class SplashJumbotron extends PureComponent {
                 </div>
             </div>
             <div className="about-us-header">
-                <div class="container">{t('aboutUsNote')}</div>
+                <div className="container">{t('aboutUsNote')}</div>
             </div>
         </div>             
     )
