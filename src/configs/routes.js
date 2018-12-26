@@ -50,11 +50,7 @@ import ShoppingCart from "../containers/store/ShoppingCart";
 import OnlyHeadLayout from "../containers/layouts/OnlyHeadLayout";
 import AutoCreate from "../containers/classrooms/AutoCreate";
 import SplashContainer from "../containers/static/Splash";
-import PrivacyPolicy from "../containers/static/PrivacyPolicy";
-import About from "../containers/static/About";
-import ParentStudent from "../containers/static/ParentStudent";
-import SchoolTeacher from "../containers/static/SchoolTeacher";
-import TermsService from "../containers/static/TermsService";
+import Content from "../containers/static/Content";
 import Gift from "../containers/static/Gift";
 
 import Scap from "../containers/scap/Scap";
@@ -79,13 +75,14 @@ import Gifts from '../containers/gifts/Gifts';
 
 export default () => (
   <AppContainer>
-    <Switch>
-      <Route exact path='/about' name='splash' component={About} />      
-      <Route exact path='/parents' name='splash' component={ParentStudent} />      
-      <Route exact path='/schools' name='splash' component={SchoolTeacher} />
-      <Route exact path='/terms' name='splash' component={TermsService} />
+    <Switch>      
+      <Route exact path='/about' render={(props) => <Content {...props} page="aboutContent" /> }  />
+      <Route exact path='/parents' render={(props) => <Content {...props} page="parentsStudentsContent" /> }  />
+      <Route exact path='/schools' render={(props) => <Content {...props} page="schoolsTeachersContent" /> }  />
+      <Route exact path='/terms' render={(props) => <Content {...props} page="termsAndConditions" /> }  />
+      <Route exact path='/privacy-policy.html' render={(props) => <Content {...props} page="privacyPolicyContent" /> }  />
+      <Route exact path='/' name='splash' component={SplashContainer} />                 
       <Route exact path='/splash' name='splash' component={SplashContainer} />
-      <Route exact path='/privacy-policy.html' name='login' component={PrivacyPolicy} />
       <Route exact path='/login' name='login' component={Login} />
       <Route exact path='/restore-login' name='restore-login' component={RestoreLogin} />
       <Route exact path='/signUp' name='signUp' component={SignUpIndex} />

@@ -1,93 +1,86 @@
 export default {
-  about: 'About',
-  login: 'Login',
-  signup: 'Sign Up',
-  headerJubtronTitle: 'Educational Tools and Products',
-  headerListItems: {
-    1: 'personalized, data-driven, interactive learning',
-    2: 'vastly improved outcomes',
-    3: 'real-time, detailed insights',
-    4: 'reduced grading and administration for teachers and staff',
-    5: 'publish, globalize, monetize',
-  },
-  aboutContent: {
-      image: '//d2cnhr6egzpvdl.cloudfront.net/image/splash-image1.3239d7be.png',
-      title: 'About Us',
-      paragraphs: [
-        {
-            title: 'Paragraph #1',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
-        },
-        {
-            title: 'Paragraph #2',
-            content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
-        }
-      ]
-  },
-  parentStudentContent: {      
-      title: 'Parents & Students',
-      paragraphs: [
-        {
-            title: 'Paragraph #1',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
-        },
-        {
-            title: 'Paragraph #2',
-            content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
-        }
-      ]
-  },
-  schoolTeacherContent: {
-      title: 'School Teacher',
-      paragraphs: [
-        {
-            title: 'Paragraph #1',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
-        },
-        {
-            title: 'Paragraph #2',
-            content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
-        }
-      ]
-  },  
-  store: 'Store',
-  privacy: 'Privacy Policy',
-  terms: 'Terms and Services',
-  learningPlatform: 'Learning Platform',
-  learnMore: 'Learn more',
-  schoolAndTeacher: {
-    title: 'SCHOOLS & TEACHERS',
-    principals: 'Principals & Admins',
-    principalsOpt1:'quickly organize people and groups',
-    principalsOpt2:'overview or drill-down on school performance',
-    principalsOpt3: 'communicate with groups or individuals',
-
-    teacher: 'Teachers',
-    teacherOpt1: 'reduce grading and admin time',
-    teacherOpt2: 'glean deep understanding of challenges',
-  },
-  publishers: {
-    title: 'PUBLISHERS',
-    publishers: 'publishers',
-    publishersOpt1: 'enhance existing courses & textbooks',
-    publishersOpt2: 'control and manage content',
-    publishersOpt3: 'low entry cost with high-end result',
-    authors: 'Authors',
-    authorsOpt1: 'distribute your children\'s books',
-    authorsOpt2: 'access markets not available to you now',
-  },
-
-  studentAndParents: {
-    title: 'STUDENTS & PARENTS',
-    kids: 'Kids:',
-    kidsOpt1: 'personalized, data-driven, interactive learning',
-    kidsOpt2: 'great fun, easy buy-in',
-    kidsOpt3: 'vastly improved outcomes',
-    parent: 'Parents',
-    parentOpt1: 'real-time, detailed insights',
-    parentOpt2: 'easy-to-use admin tools',
-  },
-  termsAndConditions: {
+    about: 'About',
+    login: 'Login',
+    signup: 'Sign Up',
+    sendGift: 'Send a Gift',
+    subscription: 'Subscription',
+    subscriptionStartingFrom: 'Starting at $8.99/month',
+    bookstore: 'Bookstore',  
+    giveGiftOfLearning: 'Give the Gift of Learning',  
+    professionallyDesignedCourses: 'Professionally designed Language Courses',
+    justForKids: 'Just for kids!',
+    aboutUsNote: 'BZabc is produced by Gravity Brain Learning inc, a private Canadian corporation, dedicated to improving the learning outcomes for children in language and math training utilizing modern technology to leverage, not replace, traditional materials and methods.',
+    welcomeToWebsite: 'Welcome to BZabc', 
+    overview: 'Overview',
+    usingOurProduct: 'Using BZabc',
+    methods: 'Methods',
+    quickstart: 'Quickstart',
+    ourMethod: 'The BZabc Method',
+    parentsStudents: 'Students  & Parents',
+    schoolsTeachers: 'Schools & Teachers',
+    practicalSkillDevelopment: 'Practical Skill Development',
+    practicalSkillDevelopmentDescription: 'Listening. Speaking. Reading. Writing. BZabc helps students internalize these essential skills, by utilizing encourage in participation in a variety of activities.',
+    consistency: 'Consistency',
+    consistencyDescription: 'Materials are connected between software, content and workbooks, providing consistency throughout the learning process. A truly blended, connected learning environment.',
+    totalPhysicalResponse: 'Total Physical Response',
+    totalPhysicalResponseDescription: 'At home or in class, exciting content encourages participation on many levels. Clear attainable learning goals are highly rewarding, keeping students engaged and motivated.',
+    dailyPractice: 'Continuity: Daily Practice',
+    dailyPracticeDescription: 'The BZabc Kids App is easy to use and guides young learners in all activities, both digital and written, throughout their entire course. Days, weeks, and months.',
+    techSpecs: 'Tech Specs', 
+    forAllPlatforms: 'For All Platforms',
+    forAllPlatformsDescription: 'The BZabc Kids App is available on both Android and iOS. It will also be available on desktops in January 2019. Our Parents App is also available on all platforms.',
+    blendedLearning: 'Blended Learning',
+    blendedLearningDescription: 'Materials are connected between software, content and workbooks, providing continuity and consistency throughout the learning process.',         
+    personalGuidance: 'Personal Guidance',
+    personalGuidanceDescription: 'The BZabc App utilizes student performance to guide them throughout their courses. Cloud-based data tracking and processing means wherever and whenever they learn, students are on the right page.',   
+    trackingReporting: 'Tracking / Reporting',   
+    trackingReportingDescription: 'Student performance is tracked on our system. Scores and error report data are available in real time to parents. This enables parents to see when kids worked and any challenges they may have enountered.',                                                      
+    store: 'Store',
+    privacy: 'Privacy Policy',
+    terms: 'Terms and Services',
+    learningPlatform: 'Learning Platform',
+    learnMore: 'Learn more',    
+    aboutContent: {
+        image: '//d2cnhr6egzpvdl.cloudfront.net/image/splash-image1.3239d7be.png',
+        title: 'About Us',
+        paragraphs: [
+          {
+              title: 'Paragraph #1',
+              content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
+          },
+          {
+              title: 'Paragraph #2',
+              content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
+          }
+        ]
+    },
+    parentsStudentsContent: {      
+        title: 'Students  & Parents',
+        paragraphs: [
+          {
+              title: 'Paragraph #1',
+              content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
+          },
+          {
+              title: 'Paragraph #2',
+              content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
+          }
+        ]
+    },
+    schoolsTeachersContent: {
+        title: 'Schools & Teachers',
+        paragraphs: [
+          {
+              title: 'Paragraph #1',
+              content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at.'
+          },
+          {
+              title: 'Paragraph #2',
+              content: 'Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam.'
+          }
+        ]
+    },  
+    termsAndConditions: {
         title: 'Terms and Conditions',
         paragraphs: [
             {

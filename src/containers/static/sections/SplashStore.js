@@ -1,10 +1,8 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import spacer from '../../../media/images/svg/bl-spacer.svg';
 import ProductsSection from "../../../components/store/ProductsSection";
 import {selectGetRecordsRequest, selectRecords} from "../../../redux/store/selectors";
 import {getRecords} from "../../../redux/store/actions";
-
 
 class SplashStore extends PureComponent {
 
@@ -19,8 +17,7 @@ class SplashStore extends PureComponent {
         <div className="container">
           <div className="row clearfix">
             <header className="header-break container text-center">
-              <h2>{t('store')}</h2>
-              <img src={spacer} alt="---=== ===---" width="200"/>
+              <h2>{t('bookstore')}</h2>              
             </header>
             {getRecordsRequest.get('success') && <ProductsSection categoryId={false}  all={true} products={records}/> }
           </div>
