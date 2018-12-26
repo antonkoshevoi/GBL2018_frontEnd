@@ -1,8 +1,7 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+//import {NavLink} from 'react-router-dom';
 import {translate} from 'react-i18next';
 import SplashWrapper from './sections/SplashWrapper';
-import SplashJumbotron from './sections/SplashJumbotron';
 import SplashStore from './sections/SplashStore';
 
 const SplashContainer = props => {
