@@ -21,11 +21,9 @@ class SplashNavigation extends PureComponent {
       <nav>
         <div className="splash-navigation nav-wide">
           <div className="container text-center clearfix wide-div">
-            <NavLink to={`/about`} className="btn no-border m-btn btn-sm ">{t('about')}</NavLink>
-            <NavLink to={`/store`} className="btn no-border m-btn btn-sm ">{t('store')}</NavLink>
-            <NavLink to={`/parents`} className="btn no-border m-btn btn-sm ">{t('studentAndParents.title')}</NavLink>
-            <NavLink to={`/schools`} className="btn no-border m-btn btn-sm ">{t('schoolAndTeacher.title')}</NavLink>
-            <a href="https://pubtool.gravitybrain.com" className="btn no-border m-btn btn-sm ">{t('publishers.title')}</a>
+            <NavLink to={`/parents`} className="btn no-border m-btn btn-sm students-parents">{t('parentsStudents')}</NavLink>
+            <NavLink to={`/schools`} className="btn no-border m-btn btn-sm schools-teachers">{t('schoolsTeachers')}</NavLink>
+            
             <div className="splash-navigation-tools">
               <LanguageSwitcher/>
             </div>
@@ -35,8 +33,8 @@ class SplashNavigation extends PureComponent {
           <div className="nav-narrow-collapse-container">
             <i className="fa fa-bars fa-2x" onClick={this.burgerToggle}></i>
             <div className="links text-right">
-              <NavLink to={`/login`} className="btn no-border m-btn btn-sm ">Login</NavLink>
-              <NavLink to={`/signup`} className="btn btn-bordered m-btn btn-sm signup">Sign up</NavLink>
+              <NavLink to={`/login`} className="btn no-border m-btn btn-sm ">{t('login')}</NavLink>
+              <NavLink to={`/signup`} className="btn btn-bordered m-btn btn-sm signup">{t('signUp')}</NavLink>
             </div>
           </div>
           <div className="splash-navigation-tools">
@@ -46,9 +44,9 @@ class SplashNavigation extends PureComponent {
           <div className="container text-center clearfix narrow-links">
             <NavLink to={`/about`} className="btn no-border m-btn btn-sm ">{t('about')}</NavLink>
             <NavLink to={`/store`} className="btn no-border m-btn btn-sm ">{t('store')}</NavLink>
-            <NavLink to={`/parents`} className="btn no-border m-btn btn-sm ">{t('studentAndParents.title')}</NavLink>
-            <NavLink to={`/schools`} className="btn no-border m-btn btn-sm ">{t('schoolAndTeacher.title')}</NavLink>
-            <NavLink to={`//pubtool.gravitybrain.com/`} className="btn no-border m-btn btn-sm ">{t('publishers.title')}</NavLink>           
+            <NavLink to={`/parents`} className="btn no-border m-btn btn-sm ">{t('parentsStudents')}</NavLink>
+            <NavLink to={`/schools`} className="btn no-border m-btn btn-sm ">{t('schoolsTeachers')}</NavLink>
+            <NavLink to={`//pubtool.gravitybrain.com/`} className="btn no-border m-btn btn-sm ">{t('publishers')}</NavLink>           
           </div>
         </div>
       </nav>
