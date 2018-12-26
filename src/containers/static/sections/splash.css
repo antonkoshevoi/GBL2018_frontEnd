@@ -37,16 +37,16 @@
     background-repeat: no-repeat;    
     padding: 10px 15px 10px 45px;
 }
-.splash-navigation .container > a.students-parents {
+.splash-navigation .container > a:hover.students-parents {
     background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_parents-icon-white.png);
 }
-.splash-navigation .container > a.schools-teachers {
+.splash-navigation .container > a:hover.schools-teachers {
     background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_school-icon-white.png);
 }
-.splash-navigation .container > a:hover.students-parents {
+.splash-navigation .container > a.students-parents {
     background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_parents-icon-blue.png);
 }
-.splash-navigation .container > a:hover.schools-teachers {
+.splash-navigation .container > a.schools-teachers {
     background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_school-icon-blue.png);
 }
 .splash-navigation .container > a {
@@ -57,9 +57,10 @@
     padding: 2px 5px 2px 45px;
     font-size: 20px;
     margin: 0 50px;
+    color: #589ee4;
 }
 .splash-navigation .container > a:hover {
-    color: #589ee4;
+    color: #ffffff;
 }
 .main-banner {
     background-color: #589ee4;    
