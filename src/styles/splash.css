@@ -40,7 +40,6 @@
     background-repeat: no-repeat;    
     padding: 10px 15px 10px 45px;
 }
-
 .main-banner {
     background-color: #589ee4;    
     padding: 20px 0 30px 0;
@@ -128,9 +127,12 @@ section.welcome h5 {
     font-size: 24px;
     margin: 20px 0;
 }
-section.welcome button, section.welcome button:hover {
+section.welcome .btn-link, section.welcome .btn-link:hover, section.welcome .btn-link:focus {
     color: #1b3f5f;
     cursor: pointer;
+}
+section.welcome .btn-link:hover, section.welcome .btn-link:focus {
+    text-decoration: underline;
 }
 section.welcome .image img {
    width: 100%;
@@ -343,6 +345,19 @@ nav .nav-narrow {
     border-radius: 15px;
     padding: 20px;
 }
+.slick-initialized .slick-slide {
+    visibility: hidden;
+}
+.slick-initialized .slick-slide.slick-active {
+    visibility: visible;
+}
+.slick-initialized .slick-slide .cardItem  {
+    margin: 0 auto;
+}
+.slick-center .cardItem {
+    min-width: 150px;
+    max-width: 208px;    
+}
 /* Responsive Handling */
 
 @media (min-width: 768px) and (max-width: 1239.98px) {
@@ -494,5 +509,5 @@ nav .nav-narrow {
 @media (max-width: 420px) {
     .splash-navigation .btn {
         font-size: 14px;
-    }
+    }   
 }
