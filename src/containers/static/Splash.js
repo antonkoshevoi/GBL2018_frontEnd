@@ -1,8 +1,8 @@
 import React from 'react';
-//import {NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {translate} from 'react-i18next';
 import SplashWrapper from './sections/SplashWrapper';
-import SplashStore from './sections/SplashStore';
+import SplashSlider from './sections/SplashSlider';
 
 const SplashContainer = props => {
     const { t } = props;
@@ -36,7 +36,7 @@ const SplashContainer = props => {
                             <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/video_image-using.png" alt="Overview"/>
                         </div>
                         <h5 className="text-center">
-                            <button className="btn-link">{t('methods')}</button>
+                            <NavLink to="methodology" className="btn-link">{t('methods')}</NavLink>
                         </h5>
                     </div>
                     <div className="col-sm-6 col-md-3">
@@ -163,7 +163,7 @@ const SplashContainer = props => {
                     </div>                    
                 </div>                
             </section>                        
-            <SplashStore {...props} />                                  
+            <SplashSlider {...props} />                                  
         </div>
                 
     </SplashWrapper>);

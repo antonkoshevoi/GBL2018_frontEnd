@@ -40,6 +40,7 @@ export default {
     terms: 'Terms and Services',
     learningPlatform: 'Learning Platform',
     learnMore: 'Learn more',    
+    productsNotFound: 'Products Not Found...',
     methodologyContent: {        
         title: 'BZabc Methodology',
         paragraphs: [
