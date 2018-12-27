@@ -74,15 +74,16 @@
 .main-banner .bookstore .btn, .main-banner .subscriptions .btn {
     width: 100%;
     font-size: 36px;
-    border-radius: 15px;
+    border-radius: 10px;
+    padding: 15px 0;
 }
 .main-banner .bookstore {    
-    left: 5%;
-    width: 21%;
+    left: 5.9%;
+    width: 20.5%;
 }
 .main-banner .subscriptions {    
-    left: 76.5%;
-    width: 21%;
+    left: 76.3%;
+    width: 20.5%;
     font-size: 18px;
 }
 .main-banner {
@@ -424,7 +425,8 @@ nav .nav-narrow {
     }
     .main-banner .bookstore .btn, .main-banner .subscriptions .btn {    
         font-size: 28px;
-        border-radius: 12px;
+        border-radius: 9px;
+        padding: 12px 0;
     }
     .main-banner .subscriptions {
         font-size: 16px;
@@ -446,7 +448,8 @@ nav .nav-narrow {
 
 @media (max-width: 1024px) {
     .main-banner .bookstore .btn, .main-banner .subscriptions .btn  {
-        font-size: 18px;
+        font-size: 20px;
+        padding: 10px 0;
     }
     .main-banner .subscriptions div {
         white-space: nowrap;
