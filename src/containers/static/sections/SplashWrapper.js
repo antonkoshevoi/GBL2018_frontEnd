@@ -3,7 +3,7 @@ import {translate} from 'react-i18next';
 import SplashHeader from './SplashHeader'
 import SplashFooter from './SplashFooter'
 import SplashJumbotron from './SplashJumbotron'
-import './splash.css';
+import '../../../styles/splash.css';
 
 const SplashWrapper = props => {
   const minHeight = window.document.documentElement.clientHeight - 273;
