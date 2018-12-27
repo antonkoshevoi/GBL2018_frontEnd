@@ -7,6 +7,10 @@
     background-color: #e1e8ef;
     background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_tile.png);
 }
+.splash-section > .container {
+    background-color: #e1e8ef;
+    padding-bottom: 60px;
+}
 .splash-header .links a.btn-login {
     background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/bzabc_login-shape.png);
 }
@@ -146,6 +150,10 @@ section.methods .method h2, section.tech-specs .tech-spec h2 {
     white-space: nowrap;
     padding: 20px 0;
 }
+.row.methods-row, .row.tech-specs-row {
+    margin-left: -17px;
+    margin-right: -17px;
+}
 section.methods .method h2 a, section.tech-specs .tech-spec h2 a {
     color: #1b3f5f;
 }
@@ -171,36 +179,30 @@ section.methods .method .method-description, section.tech-specs .tech-spec .tech
     width: 190px;
     height: auto;
 }
-
 .splash .section-header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 116px;
 }
-
 .splash .splash-header {
     background-color: var(--splash-header-bg);
     display: flex;
     flex: 1 1;
     min-height: 64px;
 }
-
 .splash .splash-header .links {
     flex: 1;
 }
-
 .splash-header a:hover {
     outline: 0;
     color: #ffffff;
     text-shadow: 0 0 1px white;
 }
-
 .splash-footer {
     background-color: #fff;
     padding: 20px;
 }
-
 .splash-footer .btn {
     background: transparent;
     color: var(--splash-dark-text);
@@ -214,15 +216,12 @@ section.methods .method .method-description, section.tech-specs .tech-spec .tech
     display: flex;
     align-items: center;
 }
-
 .section-header nav {
     overflow: hidden;
 }
-
 nav .nav-wide {
     display: none;
 }
-
 nav .nav-narrow {
     display: flex;
     flex-direction: column;
@@ -230,7 +229,6 @@ nav .nav-narrow {
     padding: 10px;
     background-color: var(--splash-header-bg);
 }
-
 .nav-narrow i {
     float: left;
     cursor: pointer;
@@ -238,13 +236,11 @@ nav .nav-narrow {
     font-size: 2.5em;
     margin-left: 15px;
 }
-
 .nav-narrow .narrow-links {
     display: none;
     margin: 15px;
     padding: 0px;
 }
-
 .nav-narrow .narrow-links a {
     text-decoration: none;
     display: block;
@@ -252,13 +248,11 @@ nav .nav-narrow {
     clear: left;
     padding: 0.5em 0;
 }
-
 .nav-narrow .nav-narrow-collapse-container {
     display: flex;
     justify-content: space-between;
     margin-right: 50px;
 }
-
 .splash-navigation {
     background-color: var(--splash-navbar-bg);
     color: #fff;
@@ -267,23 +261,19 @@ nav .nav-narrow {
     font-size: 1em;
     min-height: 35px;
 }
-
 .splash-navigation .container {
     position: relative;
 }
-
 .splash-navigation .btn {
     color: #fff;
     text-transform: uppercase;
     font-size: 1em;
 }
-
 .splash-navigation a:hover {
     outline: 0;
     color: #ffffff;
     text-shadow: 0 0 1px white;
 }
-
 .splash-navigation-tools {
     position: absolute;
     right: 15px;
@@ -292,35 +282,29 @@ nav .nav-narrow {
 .splash-navigation-tools button {
     color: #fff;
 }
-
 .nav-narrow .splash-navigation-tools {
     right: 20px;
     top: 12px;
 }
-
 .header-break {
     margin-top: 0;
     margin-bottom: 30px;
 }
-
 .ReactStickyHeader_root {
     height: 116px;
 }
-
-.ReactStickyHeader_foreground,
-.ReactStickyHeader_background-bg {
+.ReactStickyHeader_foreground, .ReactStickyHeader_background-bg {
     display: none;
 }
-
 .splash-store {
     margin-top: 60px;
 }
-
-.splash-footer {
-    margin-top: 60px;
+.splash-footer {    
     background-color: #262525;
 }
-
+.splash-container .splash-footer {
+    margin-top: 60px;
+}
 .splash-footer .footer-container {
     display: flex;
     justify-content: space-between;
@@ -328,13 +312,11 @@ nav .nav-narrow {
 .splash-footer .footer-container .row {
     width: 100%;
 }
-
 .splash-footer a:hover {
     outline: 0;
     color: #ffffff;
     text-shadow: 0 0 1px white;
 }
-
 .splash-footer .links .btn {
     font-weight: normal;
 }
@@ -354,7 +336,6 @@ nav .nav-narrow {
     color: #1b3f5f;
     font-size: 60px;
 }
-
 .splash-store .productSection {
     background-color: #ffffff;
     width: 100%;
@@ -407,7 +388,7 @@ nav .nav-narrow {
 
 @media (min-width: 1440px) {
     .container {
-        max-width: 1350px;
+        max-width: 1430px;
     }
 }
 

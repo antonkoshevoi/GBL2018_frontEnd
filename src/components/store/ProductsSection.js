@@ -39,23 +39,25 @@ class ProductsSection extends Component {
             products = products.filter(item => item.get('category').get('id') === categoryId).slice(0, 9);
         }
 
+        if (products.size === 0) {
+            return '';
+        }
+
         return (
-            <section className="productSection">
-                <div className={'row ' + (products.size === 0 && 'm--hide')}>
-                    <div className="container" style={{minWidth:products.size === 0 ? '50%' : 0}}>
-                        <div className="row sectionTopBar">
-                            <div className="col-md-6">
-                                <h3>{title}</h3>
-                            </div>
-                            <div className="col-md-6 text-right">
-                                {(!all && products.size >= 9) && <NavLink to={`/store/products/courses/${type}`} className="btn m-btn no-border btn-sm btn-danger">More</NavLink>}
-                            </div>
-                        </div>
-                        <div className="row">
-                            {this._renderProducts(products)}
-                        </div>
+            <section className="productSection">                
+                <div className="container">
+                    {(title || (!all && products.size >= 9)) && <div className="row sectionTopBar">
+                        {title && <div className="col-md-6">
+                            <h3>{title}</h3>
+                        </div>}
+                        {(!all && products.size >= 9) && <div className="col-md-6 text-right">
+                            <NavLink to={`/store/products/courses/${type}`} className="btn m-btn no-border btn-sm btn-danger">More</NavLink>
+                        </div>}
+                    </div>}
+                    <div className="row">
+                        {this._renderProducts(products)}
                     </div>
-                </div>
+                </div>                
             </section>
         );
     }

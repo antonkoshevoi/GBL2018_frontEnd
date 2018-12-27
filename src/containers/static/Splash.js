@@ -55,7 +55,7 @@ const SplashContainer = props => {
                         <h1 className="section-head">{t('ourMethod')}</h1>
                     </div>
                 </div>                
-                <div className="row">
+                <div className="row methods-row">
                     <div className="col-sm-12 col-md-6">
                         <div className="method">
                             <h2>
@@ -116,7 +116,7 @@ const SplashContainer = props => {
                         <h1 className="section-head">{t('techSpecs')}</h1>
                     </div>
                 </div>
-                <div className="row">
+                <div className="row tech-specs-row">
                     <div className="col-sm-12 col-md-6">
                         <div className="tech-spec">
                             <h2>{t('forAllPlatforms')}</h2>

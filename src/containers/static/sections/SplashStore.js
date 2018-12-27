@@ -13,15 +13,11 @@ class SplashStore extends PureComponent {
   render() {
     const {t, records, getRecordsRequest} = this.props;
     return (
-      <div className="splash-store">
-        <div className="container">
-          <div className="row clearfix">
-            <header className="header-break container text-center">
-              <h2>{t('bookstore')}</h2>              
-            </header>
-            {getRecordsRequest.get('success') && <ProductsSection categoryId={false}  all={true} products={records}/> }
-          </div>
-        </div>
+      <div className="splash-store">                 
+        <header className="header-break container text-center">
+          <h2>{t('bookstore')}</h2>              
+        </header>
+        {getRecordsRequest.get('success') && <ProductsSection categoryId={false}  all={true} products={records}/> }                 
       </div>
     )
   }
