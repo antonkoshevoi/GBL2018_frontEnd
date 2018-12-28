@@ -25,7 +25,7 @@ class SplashContent extends PureComponent {
       <div key={key}>
         {record.title && <h4 className='m--margin-top-15 m--margin-bottom-15'>{record.title}</h4>}
         {record.subTitle && <h5 className='m--margin-bottom-15'>{record.subTitle}</h5>}
-        <p>{record.content.split('\n').map((line, lKey) => <p key={lKey}>{line}</p>)}</p>
+        {record.content.split('\n').map((line, lKey) => <p key={lKey}>{line}</p>)}
       </div>));
   }
 
