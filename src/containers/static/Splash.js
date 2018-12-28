@@ -6,6 +6,7 @@ import SplashSlider from './sections/SplashSlider';
 
 const SplashContainer = props => {
     const { t } = props;
+    
     return (<SplashWrapper showJumbotron>        
         <div>
             <section className="welcome">                

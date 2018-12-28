@@ -18,7 +18,7 @@ class AuthenticatedRoute extends Component {
     }
 
     render() {
-        const {isLoggedIn, roles, component, exact, path, name, layout} = this.props;       
+        const {isLoggedIn, roles, component, exact, path, title, layout} = this.props;       
 
         if (!isLoggedIn) {
             return this.redirect();
@@ -26,11 +26,11 @@ class AuthenticatedRoute extends Component {
 
         if (roles) {
             return <HasRole roles={roles} onFail={( <Route layout={layout} component={NotFoundPage} /> )} >
-                <Route layout={layout} path={path} exact={exact} component={component} name={name} />
+                <Route layout={layout} path={path} exact={exact} component={component} title={title} />
             </HasRole>;
         }
 
-        return <Route layout={layout} path={path} exact={exact} component={component} name={name} />;
+        return <Route layout={layout} path={path} exact={exact} component={component} title={title} />;
     }
 }
 

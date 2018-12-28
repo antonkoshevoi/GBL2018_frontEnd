@@ -385,13 +385,13 @@ nav .nav-narrow {
         margin: 0 50px;
         color: #589ee4;
     }
-    .splash-navigation .container > a:hover {
+    .splash-navigation .container > a:hover, .splash-navigation .container > a.active {
         color: #ffffff;
     }
-    .splash-navigation .container > a:hover.students-parents {
+    .splash-navigation .container > a:hover.students-parents, .splash-navigation .container > a.students-parents.active {
         background-position: 0 -36px;
     }
-    .splash-navigation .container > a:hover.schools-teachers {
+    .splash-navigation .container > a:hover.schools-teachers, .splash-navigation .container > a.schools-teachers.active {
         background-position: 0 -108px;
     }
     .splash-navigation .container > a.students-parents {

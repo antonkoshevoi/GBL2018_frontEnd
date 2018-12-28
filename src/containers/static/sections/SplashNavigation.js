@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {NavLink} from 'react-router-dom';
+import {withRouter, NavLink} from 'react-router-dom';
 import LanguageSwitcher from "../../../components/ui/LanguageSwitcher";
 
 class SplashNavigation extends PureComponent {
@@ -15,14 +15,16 @@ class SplashNavigation extends PureComponent {
   }
 
   render() {
-    const {t} = this.props;
+    const {t, location} = this.props;
 
+    const page = location.pathname.replace('/', '') || 'parents';       
+    
     return (
       <nav>
         <div className="splash-navigation nav-wide">
           <div className="container text-center clearfix wide-div">
-            <NavLink to={`/parents`} className="btn no-border m-btn btn-sm students-parents">{t('parentsStudents')}</NavLink>
-            <NavLink to={`/schools`} className="btn no-border m-btn btn-sm schools-teachers">{t('schoolsTeachers')}</NavLink>
+            <NavLink to={`/parents`} className={`btn no-border m-btn btn-sm students-parents ${(page === 'parents') ? 'active' : ''}`}>{t('parentsStudents')}</NavLink>
+            <NavLink to={`/schools`} className={`btn no-border m-btn btn-sm schools-teachers ${(page === 'schools') ? 'active' : ''}`}>{t('schoolsTeachers')}</NavLink>
             
             <div className="splash-navigation-tools">
               <LanguageSwitcher/>
@@ -55,4 +57,4 @@ class SplashNavigation extends PureComponent {
   }
 }
 
-export default SplashNavigation
+export default withRouter(SplashNavigation);
