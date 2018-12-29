@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
+import Logo from '../ui/Logo';
 import { login, setRedirectUrl } from '../../redux/auth/actions';
 import { selectLoginRequest } from '../../redux/auth/selectors';
 import { FormControlLabel, Button, CircularProgress, Checkbox } from '@material-ui/core';
 import { withRouter, NavLink } from 'react-router-dom';
-
-const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
 
 class Login extends Component {
 
@@ -57,11 +56,7 @@ class Login extends Component {
         <div className="main-background m-body justify-content-center m-login">
           <div className="m-login__wrapper">            
               <div className="m-login__container">
-                <div className="m-login__logo">
-                  <a href={"/"}>
-                    <img src={logoUrl} alt="GravityBrain"/>
-                  </a>
-                </div>
+                <Logo />
                 <div>
                   <div className="m-login__head"> 
                     <h3 className="m-login__title">{t('signIn')}</h3> 

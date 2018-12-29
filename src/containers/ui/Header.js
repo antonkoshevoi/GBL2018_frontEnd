@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {translate} from 'react-i18next';
 import {connect} from 'react-redux';
 import {logout} from '../../redux/auth/actions';
-import {NavLink} from "react-router-dom";
 import {Icon, IconButton} from '@material-ui/core';
 import {selectGetUserRequest, selectUserData} from "../../redux/user/selectors";
 import UserMenu from "./UserMenu";
@@ -10,8 +9,7 @@ import Messages from "./Messages";
 import ShoppingCart from "./ShoppingCart";
 import HasRole from "../middlewares/HasRole";
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
-
-const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
+import Logo from "./Logo";
 
 class Header extends Component {
 
@@ -61,11 +59,7 @@ class Header extends Component {
           <div className="m-stack m-stack--ver m-stack--desktop">
             <div className={`m-stack__item m-brand gravity-logo ${hideMenu ? 'logo-only' : ''}`}>
               <div className="m-stack m-stack--ver m-stack--general">
-                <div className="m-stack__item m-stack__item--middle m-brand__logo text-center">
-                  <NavLink to="/dashboard" className="m--margin-left-5">
-                      <img alt="GravityBrain" src={logoUrl}/>
-                  </NavLink>
-                </div>
+                <Logo className="m-stack__item m-stack__item--middle m-brand__logo text-center" />
               </div>
             </div>
             {(auth.get('isLoggedIn') && userRequest.get('success') && !hideMenu) &&
