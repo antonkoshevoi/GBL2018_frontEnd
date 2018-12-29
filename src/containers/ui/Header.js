@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {translate} from 'react-i18next';
 import {connect} from 'react-redux';
 import {logout} from '../../redux/auth/actions';
-import {NavLink} from "react-router-dom";
 import {Icon, IconButton} from '@material-ui/core';
 import {selectGetUserRequest, selectUserData} from "../../redux/user/selectors";
 import UserMenu from "./UserMenu";
@@ -11,8 +10,6 @@ import ShoppingCart from "./ShoppingCart";
 import HasRole from "../middlewares/HasRole";
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
 import Logo from "./Logo";
-
-const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
 
 class Header extends Component {
 
