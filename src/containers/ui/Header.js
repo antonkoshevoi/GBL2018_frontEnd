@@ -76,7 +76,7 @@ class Header extends Component {
 
                   <ul className="m-topbar__nav m-nav m-nav--inline">
                     <Messages activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
-                    <HasRole roles={['Superadministrator','Superintendent','Principal','Administrator','Teacher','Parents']}>
+                    <HasRole roles={['Superadministrator','School','Teacher','Parents']}>
                         <ShoppingCart />
                     </HasRole>
                     <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width">
