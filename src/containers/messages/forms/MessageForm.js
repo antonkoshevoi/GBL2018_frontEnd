@@ -244,7 +244,7 @@ class MessageForm extends Component {
                                     <MenuItem value="adminId">{t('schoolManagement')}</MenuItem>
                                 </Select>
                             </HasRole>
-                            <HasRole roles={['Superadministrator', 'Superintendent', 'Principal', 'Administrator']}>
+                            <HasRole roles={['Superadministrator', 'School']}>
                                 <Select
                                     value={this.state.recipient || ''}
                                     onChange={(e) => { this._handleChange(e) }}
@@ -261,7 +261,7 @@ class MessageForm extends Component {
                             {errors && errors.get('recipients') && <FormHelperText error>{errors.get('recipients').get(0)}</FormHelperText>}
                         </FormControl>
                     </div>
-                    <HasRole roles={['Superadministrator', 'Superintendent', 'Principal', 'Administrator', 'Teacher']}>
+                    <HasRole roles={['Superadministrator', 'School', 'Teacher']}>
                     <div className="col-sm-6 col-md-5 col-lg-4">
                         <FormControl className='full-width form-inputs'>
                             <InputLabel htmlFor='type'>{t('type')}</InputLabel>
