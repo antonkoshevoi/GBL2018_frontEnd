@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {translate, Interpolate} from 'react-i18next';
 import {NavLink} from "react-router-dom";
-
-const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
+import Logo from '../ui/Logo';
 
 class SignUpIndex extends Component {
   render() {      
@@ -13,11 +12,7 @@ class SignUpIndex extends Component {
         <div className="main-background m-body justify-content-center m-login">
           <div className="m-login__wrapper">           
               <div className="m-login__container">
-                <div className="m-login__logo">
-                  <a href={"/"}>
-                    <img src={logoUrl} alt="GravityBrain"/>
-                  </a>
-                </div>
+                <Logo />
                 <div>
                   <div className="m-login__head"> 
                     <h3 className="m-login__title">{t('signUp')}</h3> 

@@ -10,6 +10,7 @@ import Messages from "./Messages";
 import ShoppingCart from "./ShoppingCart";
 import HasRole from "../middlewares/HasRole";
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
+import Logo from "./Logo";
 
 const logoUrl = '//d2cnhr6egzpvdl.cloudfront.net/image/gravitybrain-logo.svg';
 
@@ -61,11 +62,7 @@ class Header extends Component {
           <div className="m-stack m-stack--ver m-stack--desktop">
             <div className={`m-stack__item m-brand gravity-logo ${hideMenu ? 'logo-only' : ''}`}>
               <div className="m-stack m-stack--ver m-stack--general">
-                <div className="m-stack__item m-stack__item--middle m-brand__logo text-center">
-                  <NavLink to="/dashboard" className="m--margin-left-5">
-                      <img alt="GravityBrain" src={logoUrl}/>
-                  </NavLink>
-                </div>
+                <Logo className="m-stack__item m-stack__item--middle m-brand__logo text-center" />
               </div>
             </div>
             {(auth.get('isLoggedIn') && userRequest.get('success') && !hideMenu) &&
