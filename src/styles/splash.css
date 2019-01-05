@@ -57,11 +57,10 @@
     font-size: 24px;
 }
 .main-banner h3 {
-    font-weight: bold;
-    font-style: italic;
     font-size: 20px;
     margin-bottom: -10px;
     text-transform: uppercase;
+    font-family: "Luckiest Guy"
 }
 .main-banner img {
     max-width: 100%;    
@@ -106,12 +105,47 @@
     background-color: #fff;
     padding-top: 20px;
 }
-.about-us-header {
+.app-download {
     background-color: #3c6b99;
     color: #ffffff;
     text-align: center;
-    padding: 35px 50px;
+    padding: 25px 0 20px 0;
     font-size: 18px;
+}
+.app-download .container {
+    max-width: 1230px;
+    padding-left: 40px;
+}
+.app-download h3 {
+    font-family: "Luckiest Guy";
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+.app-download .description {
+    font-size: 20px;
+    font-weight: 500;
+}
+.app-download .description a {
+    color: #599ee3 !important;
+}
+.applications > div {
+    display: inline-block;
+    padding-left: 40px;
+    text-align: center;
+}
+.applications > div p {
+    font-size: 16px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+    margin-top: 2px;
+}
+.about-us-note {
+    text-align: center;
+    color: #1c4062;
+    font-size: 20px;
+    margin: 0 50px 30px;
 }
 h1.section-head {
     background-color: #1b3f5f;
@@ -136,6 +170,8 @@ section.welcome .btn-link:hover, section.welcome .btn-link:focus {
 }
 section.welcome .image img {
    width: 100%;
+   border: 1px solid #3c6b99;
+   border-radius: 19px;
 }
 section.methods h1 {
     margin-top: 30px;
@@ -435,7 +471,7 @@ nav .nav-narrow {
     .main-banner h2 {
         font-size: 18px;
     }
-    .about-us-header {
+    .app-download {
         font-size: 14px;
     }
     .main-banner .bookstore .btn, .main-banner .subscriptions .btn {    
@@ -470,9 +506,7 @@ nav .nav-narrow {
         white-space: nowrap;
         font-size: 14px;
     }
-    .about-us-header {
-        padding: 10px;
-    }    
+   
     section.methods .method h2, section.tech-specs .tech-spec h2 {
         font-size: 30px;
     }
@@ -483,10 +517,23 @@ nav .nav-narrow {
         font-size: 16px;
         padding-top: 5px;
     }
+    .applications {
+        padding-top: 15px;
+    }
+    .app-download {
+        padding: 15px;
+    }    
+    .app-download h3 {
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+    .app-download .description {
+        font-size: 18px;
+    }    
 }
 
 @media (max-width: 768px) {
-    .splash-header .links, .about-us-header {
+    .splash-header .links, .app-download {
         display: none;
     }
     .splash-header .logo {

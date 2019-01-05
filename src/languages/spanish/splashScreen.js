@@ -39,7 +39,13 @@ export default {
     privacy: 'Privacy Policy',
     terms: 'Terms and Services',
     learningPlatform: 'Learning Platform',
-    learnMore: 'Learn more',    
+    learnMore: 'Learn more',
+    productsNotFound: 'Products Not Found...',
+    appDownloadCenter:  'App Download Center',
+    appDownloadCenterDescription: 'Learners and their parents must first register, subscribe, and enroll online or through the BZabc Parents App.',
+    more: 'more...',
+    parentsApp: 'BZabc Parents',
+    kidsApp: 'BZabc Kids',    
     methodologyContent: {        
         title: 'BZabc Methodology',
         paragraphs: [

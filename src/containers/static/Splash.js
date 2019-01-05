@@ -16,6 +16,7 @@ const SplashContainer = props => {
                     </div>
                 </div>                
                 <div className="row">
+                    <div className="col12"><p className="about-us-note">{t('aboutUsNote')}</p></div>
                     <div className="col-sm-6 col-md-3">
                         <div className="image">
                             <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/video_image-about.png" alt="Overview"/>

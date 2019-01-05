@@ -9,7 +9,7 @@ class SplashContent extends PureComponent {
   }
   
   componentWillReceiveProps(nextProps) {
-      if (this.props.section != nextProps.section) {
+      if (this.props.section !== nextProps.section) {
           window.scrollTo(0, 0);
       }
   }

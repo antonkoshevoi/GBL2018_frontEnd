@@ -23,8 +23,31 @@ class SplashJumbotron extends PureComponent {
                     </div>
                 </div>
             </div>
-            <div className="about-us-header">
-                <div className="container">{t('aboutUsNote')}</div>
+            <div className="app-download">
+                <div className="container">
+                    <div className="row">
+                        <div className="col6 col-sm-7 text-left">
+                            <h3>{t('appDownloadCenter')}</h3>
+                            <div className="description">
+                                {t('appDownloadCenterDescription')}
+                                &nbsp;
+                                <a href="/">{t('more')}</a>
+                            </div>
+                        </div>
+                        <div className="col6 col-sm-5 text-right">
+                            <div class="applications">
+                                <div>
+                                    <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/bzabc_kids_icon_88px.png" alt="BZabc Kids" />
+                                    <p>{t('kidsApp')}</p>
+                                </div>
+                                <div>
+                                    <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/bzabc_parents_icon_88px.png" alt="BZabc Parents" />
+                                    <p>{t('parentsApp')}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )
