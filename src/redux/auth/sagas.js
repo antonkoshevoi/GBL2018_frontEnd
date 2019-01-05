@@ -31,11 +31,10 @@ function* afterLoginWasRestored (action) {
 
 function* afterLogoutSuccess (action) {
   yield put(resetGetUserRequest());
-  yield put(push('/dashboard'));
+  yield put(push('/'));
 }
 
-const authSagas = all([
-  // takeLatest(INITIAL_LOGIN_SUCCESS, afterInitialLoginSuccess),
+const authSagas = all([  
   takeLatest(LOGIN_SUCCESS_REMEMBER, afterLoginSuccess),
   takeLatest(RESTORE_LOGIN, afterLoginWasRestored),
   takeLatest(LOGIN_SUCCESS, afterLoginSuccess),
