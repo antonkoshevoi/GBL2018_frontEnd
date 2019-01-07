@@ -88,6 +88,12 @@
     color: #fff;
     text-align: center;
 }
+.main-banner .button-box {
+    display: flex; 
+    height: 100%;
+    align-items: center;
+    text-align: center;
+}
 .btn-store {
     background-color: #dfa343;
     border-color: #765a28 !important;
@@ -290,7 +296,7 @@ nav .nav-narrow {
 .nav-narrow .nav-narrow-collapse-container {
     display: flex;
     justify-content: space-between;
-    margin-right: 50px;
+    margin-right: 0;
 }
 .splash-navigation {
     background-color: var(--splash-navbar-bg);
@@ -401,14 +407,21 @@ nav .nav-narrow {
         max-width: 991px;
     }
 }
-
+@media (min-width: 769px) {
+    .m--hidden-desktop.main-banner {
+        display: none;
+    }
+    .splash-header .splash-navigation-tools {
+        display: none;
+    }
+}
 @media (min-width: 768px) {
     nav .nav-wide {
         display: block;
     }
     nav .nav-narrow {
         display: none;
-    }
+    }  
     .splash-navigation .container > a {
         padding: 0;
         background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/bzabc_icons.png);
@@ -435,7 +448,7 @@ nav .nav-narrow {
     }
     .splash-navigation .container > a.schools-teachers {
         background-position: 0 -72px;
-    }
+    }    
 }
 
 @media (min-width: 1440px) {
@@ -533,7 +546,7 @@ nav .nav-narrow {
 }
 
 @media (max-width: 768px) {
-    .splash-header .links, .app-download {
+    .splash-header .links {
         display: none;
     }
     .splash-header .logo {
@@ -549,12 +562,90 @@ nav .nav-narrow {
     .splash-navigation .btn {
         font-size: 16px;
     }
-    .nav-narrow .splash-navigation-tools {    
-        top: 16px;
+    .splash-navigation-tools {    
+        top: 15px;
+    }
+    .main-banner {
+        padding: 30px 0 15px 0;
+    }
+    .main-banner h1 {
+        margin: 10px -16px 0;
+        font-size: 34px;
+    }
+    .main-banner h2 {
+        margin: 0 -16px 3px;
+        font-size: 20px;
+    }
+    .main-banner h3 {
+        font-size: 24px;
+        margin: 0 -16px 20px;
+    }
+    .main-banner .btn-store, .main-banner .btn-subscriptions {
+        width: 90%;
+        font-size: 20px;
+        border-radius: 10px;
+        max-width: 190px;
+        padding: 14px 0;
+    }
+    .main-banner .col-6 img {
+        height: 90%;        
+        max-height: 120px;
+        margin: 0 auto;
+    }
+    .about-us-note {
+        margin: 0 0 30px;
+        font-size: 14px;
+    }
+    .m--hidden-desktop.main-banner {
+        display: block;
+    }
+    .app-download h3 {
+        font-size: 32px;
+    }
+    .app-download .container {
+        padding: 0 20px;
+    }
+    .app-download .description {
+        font-size: 16px;
+    }
+    .applications {
+        text-align: center;
+    }
+    .applications > div {
+        padding: 0 8%;
     }
 }
-@media (max-width: 420px) {
+@media (max-width: 430px) {
     .splash-navigation .btn {
         font-size: 14px;
-    }   
+    }
+    .main-banner h1 {        
+        font-size: 32px;
+    }
+    .main-banner h2 {        
+        font-size: 18px;
+    }
+    .app-download h3 {
+        font-size: 22px;
+    }
+    .app-download .container {
+        padding: 0;
+    }
+    .app-download .description {
+        font-size: 14px;
+    } 
+}
+@media (max-width: 360px) {
+    .main-banner h1 {        
+        font-size: 28px;
+    }
+    .main-banner h2 {        
+        font-size: 16px;
+    }
+    .main-banner h3 {
+       font-size: 18px;
+    }
+    .main-banner .btn-store, .main-banner .btn-subscriptions { 
+        padding: 10px 0;
+    }    
 }

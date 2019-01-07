@@ -2,19 +2,23 @@ import React, {PureComponent} from 'react';
 import {NavLink} from 'react-router-dom';
 import StickyHeader from 'react-sticky-header';
 import SplashNavigation from './SplashNavigation'
+import CldImage from '../../../components/ui/CldImage';
+import LanguageSwitcher from "../../../components/ui/LanguageSwitcher";
 import 'react-sticky-header/styles.css';
 
 class SplashHeader extends PureComponent {
     render() {
-        const {t}       = this.props;
-        const logoUrl   = '//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_logo_top.png';
+        const {t} = this.props;        
 
         const headerSection = (<section className="section-header">
             <div className="splash-header">
               <div className="container clearfix">
                 <div className="logo">
-                  <NavLink to={`/`} className="btn no-border m-btn btn-sm "><img className="img-logo" src={logoUrl} alt="GravityBrain" /></NavLink>
+                  <NavLink to={`/`} className="btn no-border m-btn btn-sm "><CldImage className="img-logo" src="BZabc_logo_top.png" alt="GravityBrain" /></NavLink>
                 </div>
+                <div className="splash-navigation-tools">
+                  <LanguageSwitcher/>
+                </div>                
                 <div className="links text-right">
                   <NavLink to={`/login`} className="btn-login"><i></i>{t('login')}</NavLink>
                   <NavLink to={`/signup`} className="btn-signup"><i></i>{t('signup')}</NavLink>

@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom';
 import {translate} from 'react-i18next';
 import SplashWrapper from './sections/SplashWrapper';
 import SplashSlider from './sections/SplashSlider';
+import CldImage from '../../components/ui/CldImage';
 
 const SplashContainer = props => {
     const { t } = props;
@@ -19,7 +20,7 @@ const SplashContainer = props => {
                     <div className="col12"><p className="about-us-note">{t('aboutUsNote')}</p></div>
                     <div className="col-sm-6 col-md-3">
                         <div className="image">
-                            <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/video_image-about.png" alt="Overview"/>
+                            <CldImage src="video_image-about.png" alt="About Us" />
                         </div>
                         <h5 className="text-center">
                             <button className="btn-link">{t('overview')}</button>
@@ -27,7 +28,7 @@ const SplashContainer = props => {
                     </div>
                     <div className="col-sm-6 col-md-3">
                         <div className="image">
-                            <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/video_image-method.png" alt="Overview"/>
+                            <CldImage src="video_image-method.png" alt="Overview"/>
                         </div>
                         <h5 className="text-center">
                             <button className="btn-link">{t('usingOurProduct')}</button>   
@@ -35,7 +36,7 @@ const SplashContainer = props => {
                     </div>
                     <div className="col-sm-6 col-md-3">
                         <div className="image">
-                            <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/video_image-using.png" alt="Overview"/>
+                            <CldImage src="video_image-using.png" alt="Overview"/>
                         </div>
                         <h5 className="text-center">
                             <NavLink to="methodology" className="btn-link">{t('methods')}</NavLink>
@@ -43,7 +44,7 @@ const SplashContainer = props => {
                     </div>
                     <div className="col-sm-6 col-md-3">
                         <div className="image">
-                            <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/video_image-quickstart.png" alt="Overview"/>
+                            <CldImage src="video_image-quickstart.png" alt="Overview"/>
                         </div>
                         <h5 className="text-center">
                             <button className="btn-link">{t('quickstart')}</button>
@@ -64,7 +65,7 @@ const SplashContainer = props => {
                                 {t('practicalSkillDevelopment')}
                             </h2>
                             <div className="image">
-                                <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_method_1.png" alt="practicalSkillDevelopment"/>
+                                <CldImage src="BZabc_method_1.png" alt="practicalSkillDevelopment"/>
                             </div>
                             <div className="method-description pre-line">
                             {t('practicalSkillDevelopmentDescription')}
@@ -77,7 +78,7 @@ const SplashContainer = props => {
                                 {t('consistency')}
                             </h2>
                             <div className="image">
-                                <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_method_2.png" alt="consistency"/>
+                                <CldImage src="BZabc_method_2.png" alt="consistency"/>
                             </div>
                             <div className="method-description pre-line">
                                 {t('consistencyDescription')}
@@ -90,7 +91,7 @@ const SplashContainer = props => {
                                 {t('totalPhysicalResponse')}
                             </h2>
                             <div className="image">
-                                <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_method_3.png" alt="totalPhysicalResponse"/>
+                                <CldImage src="BZabc_method_3.png" alt="totalPhysicalResponse"/>
                             </div>
                             <div className="method-description pre-line">
                             {t('totalPhysicalResponseDescription')}
@@ -103,7 +104,7 @@ const SplashContainer = props => {
                                 {t('dailyPractice')}
                             </h2>
                             <div className="image">
-                                <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_method_4.png" alt="dailyPractice"/>
+                                <CldImage src="BZabc_method_4.png" alt="dailyPractice"/>
                             </div>
                             <div className="method-description pre-line">
                             {t('dailyPracticeDescription')}
@@ -123,7 +124,7 @@ const SplashContainer = props => {
                         <div className="tech-spec">
                             <h2>{t('forAllPlatforms')}</h2>
                             <div className="imFor All Platfoage text-center">
-                                <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc-tech-specs-platforms.png" alt="forAllPlatforms"/>
+                                <CldImage src="BZabc-tech-specs-platforms.png" alt="forAllPlatforms"/>
                             </div>
                             <div className="tech-spec-description pre-line">
                                 {t('forAllPlatformsDescription')}
@@ -134,7 +135,7 @@ const SplashContainer = props => {
                         <div className="tech-spec">
                             <h2>{t('blendedLearning')}</h2>
                             <div className="image text-center">
-                                <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_techspecs_blended.png" alt="blendedLearning"/>
+                                <CldImage src="BZabc_techspecs_blended.png" alt="blendedLearning"/>
                             </div>
                             <div className="tech-spec-description pre-line">
                                 {t('blendedLearningDescription')}
@@ -145,7 +146,7 @@ const SplashContainer = props => {
                         <div className="tech-spec">
                             <h2>{t('personalGuidance')}</h2>
                             <div className="image text-center">
-                                <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_techspecs_guidance.png" alt="personalGuidance"/>
+                                <CldImage src="BZabc_techspecs_guidance.png" alt="personalGuidance"/>
                             </div>
                             <div className="tech-spec-description pre-line">
                                 {t('personalGuidanceDescription')}
@@ -156,7 +157,7 @@ const SplashContainer = props => {
                         <div className="tech-spec">
                             <h2>{t('trackingReporting')}</h2>
                             <div className="image text-center">
-                                <img src="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc_techspecs_tracking.png" alt="trackingReporting"/>
+                                <CldImage src="BZabc_techspecs_tracking.png" alt="trackingReporting"/>
                             </div>
                             <div className="tech-spec-description pre-line">
                                 {t('trackingReportingDescription')}
@@ -166,8 +167,7 @@ const SplashContainer = props => {
                 </div>                
             </section>                        
             <SplashSlider {...props} />                                  
-        </div>
-                
+        </div>                
     </SplashWrapper>);
 }
 
