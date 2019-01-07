@@ -20,7 +20,8 @@ const SplashContainer = props => {
                     <div className="col12"><p className="about-us-note">{t('aboutUsNote')}</p></div>
                     <div className="col-sm-6 col-md-3">
                         <div className="image">
-                            <CldImage src="video_image-about.png" alt="About Us" />
+                            <CldImage src="video_image-about.png" alt={t('overview')} />
+                            <a href=""><CldImage src="BZabc-video_button.svg" alt={t('overview')} /></a>
                         </div>
                         <h5 className="text-center">
                             <button className="btn-link">{t('overview')}</button>
@@ -28,7 +29,8 @@ const SplashContainer = props => {
                     </div>
                     <div className="col-sm-6 col-md-3">
                         <div className="image">
-                            <CldImage src="video_image-method.png" alt="Overview"/>
+                            <CldImage src="video_image-method.png" alt={t('usingOurProduct')}/>
+                            <a href=""><CldImage src="BZabc-video_button.svg" alt={t('usingOurProduct')} /></a>
                         </div>
                         <h5 className="text-center">
                             <button className="btn-link">{t('usingOurProduct')}</button>   
@@ -36,7 +38,8 @@ const SplashContainer = props => {
                     </div>
                     <div className="col-sm-6 col-md-3">
                         <div className="image">
-                            <CldImage src="video_image-using.png" alt="Overview"/>
+                            <CldImage src="video_image-using.png" alt={t('methods')}/>
+                            <a href=""><CldImage src="BZabc-video_button.svg" alt={t('methods')} /></a>
                         </div>
                         <h5 className="text-center">
                             <NavLink to="methodology" className="btn-link">{t('methods')}</NavLink>
@@ -44,7 +47,8 @@ const SplashContainer = props => {
                     </div>
                     <div className="col-sm-6 col-md-3">
                         <div className="image">
-                            <CldImage src="video_image-quickstart.png" alt="Overview"/>
+                            <CldImage src="video_image-quickstart.png" alt={t('quickstart')}/>
+                            <a href=""><CldImage src="BZabc-video_button.svg" alt={t('quickstart')} /></a>
                         </div>
                         <h5 className="text-center">
                             <button className="btn-link">{t('quickstart')}</button>
@@ -65,7 +69,8 @@ const SplashContainer = props => {
                                 {t('practicalSkillDevelopment')}
                             </h2>
                             <div className="image">
-                                <CldImage src="BZabc_method_1.png" alt="practicalSkillDevelopment"/>
+                                <CldImage src="BZabc_method_1.png" alt={t('practicalSkillDevelopment')} />
+                                <a href=""><CldImage src="bzabc_document-button.svg" alt={t('practicalSkillDevelopment')} /></a>
                             </div>
                             <div className="method-description pre-line">
                             {t('practicalSkillDevelopmentDescription')}
@@ -78,7 +83,8 @@ const SplashContainer = props => {
                                 {t('consistency')}
                             </h2>
                             <div className="image">
-                                <CldImage src="BZabc_method_2.png" alt="consistency"/>
+                                <CldImage src="BZabc_method_2.png" alt={t('consistency')} />
+                                <a href=""><CldImage src="bzabc_document-button.svg" alt={t('consistency')} /></a>
                             </div>
                             <div className="method-description pre-line">
                                 {t('consistencyDescription')}
@@ -91,7 +97,8 @@ const SplashContainer = props => {
                                 {t('totalPhysicalResponse')}
                             </h2>
                             <div className="image">
-                                <CldImage src="BZabc_method_3.png" alt="totalPhysicalResponse"/>
+                                <CldImage src="BZabc_method_3.png" alt={t('totalPhysicalResponse')} />
+                                <a href=""><CldImage src="bzabc_document-button.svg" alt={t('totalPhysicalResponse')} /></a>
                             </div>
                             <div className="method-description pre-line">
                             {t('totalPhysicalResponseDescription')}
@@ -104,7 +111,8 @@ const SplashContainer = props => {
                                 {t('dailyPractice')}
                             </h2>
                             <div className="image">
-                                <CldImage src="BZabc_method_4.png" alt="dailyPractice"/>
+                                <CldImage src="BZabc_method_4.png" alt={t('dailyPractice')}/>
+                                <a href=""><CldImage src="bzabc_document-button.svg" alt={t('dailyPractice')} /></a>
                             </div>
                             <div className="method-description pre-line">
                             {t('dailyPracticeDescription')}
