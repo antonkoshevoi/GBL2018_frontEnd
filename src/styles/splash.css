@@ -694,6 +694,9 @@ nav .nav-narrow {
     .splash-container .splash-footer {
         margin-top: 0;
     }
+    .splash-section > .container, .splash-container > .container {        
+        padding-bottom: 150px;
+    }    
     .splash-footer .btn {
         margin: 0;
         padding: 5px 0;

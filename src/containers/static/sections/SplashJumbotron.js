@@ -4,8 +4,6 @@ import CldImage from '../../../components/ui/CldImage';
 
 class SplashJumbotron extends PureComponent {
     
-
-  
     render() {
         const {t} = this.props;
         return (
