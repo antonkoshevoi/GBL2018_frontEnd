@@ -37,7 +37,7 @@ export default {
     trackingReportingDescription: 'Student performance is tracked on our system. Scores and error report data are available in real time to parents. This enables parents to see when kids worked and any challenges they may have enountered.',                                                      
     store: 'Store',
     privacy: 'Privacy Policy',
-    terms: 'Terms and Services',
+    terms: 'Terms of Service',
     learningPlatform: 'Learning Platform',
     learnMore: 'Learn more',
     productsNotFound: 'Products Not Found...',

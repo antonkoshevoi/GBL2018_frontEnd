@@ -3,6 +3,9 @@ import {NavLink} from 'react-router-dom';
 import CldImage from '../../../components/ui/CldImage';
 
 class SplashJumbotron extends PureComponent {
+    
+
+  
     render() {
         const {t} = this.props;
         return (
@@ -24,7 +27,7 @@ class SplashJumbotron extends PureComponent {
                         </div>
                     </div>
                 </div>
-                <div className="m--hidden-desktop main-banner">
+                <div className="m--hidden-desktop main-banner" id="main-banner">
                     <div className="container">
                         <h1>{t('giveGiftOfLearning')}</h1>
                         <h2>{t('professionallyDesignedCourses')}</h2>

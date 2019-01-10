@@ -14,7 +14,7 @@ class SplashHeader extends PureComponent {
             <div className="splash-header">
               <div className="container clearfix">
                 <div className="logo">
-                  <NavLink to={`/`} className="btn no-border m-btn btn-sm "><CldImage className="img-logo" src="BZabc_logo_top.png" alt="GravityBrain" /></NavLink>
+                  <NavLink to={`/`}><CldImage className="img-logo" src="BZabc_logo_top.png" alt="GravityBrain" /></NavLink>
                 </div>
                 <div className="splash-navigation-tools">
                   <LanguageSwitcher/>
