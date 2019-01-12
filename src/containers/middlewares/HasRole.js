@@ -31,6 +31,7 @@ class HasRole extends Component {
         if (roles.indexOf(role.get('name')) > -1) {
             hasRole = true;
         }
+        return null; 
     });
 
     return hasRole ? this.props.children : (onFail || null);

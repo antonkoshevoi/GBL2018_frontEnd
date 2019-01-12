@@ -20,15 +20,15 @@ class SplashFooter extends PureComponent {
     }  
 
     setHeaderPosition(){    
-                
-        let footerHeight = document.getElementById('footer').clientHeight;
-        let headerHeight = ((document.getElementById('main-banner') && document.getElementById('main-banner').clientHeight) || 0) + footerHeight;
+        let footer = document.getElementById('footer');
+        let header = document.getElementById('main-banner');
         let position = this.state.footerPosition;
-                
-        console.log(window.scrollY - headerHeight);        
-        console.log(footerHeight);
         
-        position = window.scrollY - headerHeight;
+        if (!footer || !header) {
+            return false;
+        }
+                
+        position = window.scrollY - (header.clientHeight + footer.clientHeight);
         
         if (position > 0) {
             position = 0;
@@ -53,15 +53,15 @@ class SplashFooter extends PureComponent {
                 </div>
                 <div className="splash-footer">   
                     <div className="container footer-container links">
-                        <div className="row">
-                            <div className="col-3 col-sm-4">
+                        <div className="d-flex justify-content-around w-100">
+                            <div className="align-self-center">
                                 <NavLink to={`/`}><CldImage className="img-logo" src="BZabc_logo_top.png" alt="GravityBrain" /></NavLink>
                             </div>                        
-                            <div className="col-4 col-sm-4 text-center">
-                                <NavLink to={`/privacy-policy.html`} className="btn no-border">{t('privacy')}</NavLink>
+                            <div className="align-self-center text-center">
+                                <NavLink to={`/privacy-policy.html`} className="btn no-border p-0 m-0">{t('privacy')}</NavLink>
                             </div> 
-                            <div className="col-5 col-sm-4 text-center">
-                                <NavLink to={`/terms`} className="btn no-border">{t('terms')}</NavLink>
+                            <div className="align-self-center text-center">
+                                <NavLink to={`/terms`} className="btn no-border p-0 m-0">{t('terms')}</NavLink>
                             </div>
                         </div>
                     </div>
