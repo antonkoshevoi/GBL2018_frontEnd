@@ -204,15 +204,15 @@ class LineChart extends Component {
       let endDate;
       let okLabel;
       if (this.state.selectorActive === 1) {
-        endDate = moment(this.state.chosenDate).add('weeks', 1).add('days', -1).format('MMMM Do');
+        endDate = moment(this.state.chosenDate).add(1, 'weeks').add('days', -1).format('MMMM Do');
         maxInputDate = moment().endOf('week').format('YYYY-MM-DD');
         okLabel = t('selectWeek');
       } else if (this.state.selectorActive === 2) {
-        endDate = moment(this.state.chosenDate).add('months', 1).add('days', -1).format('MMMM Do');
+        endDate = moment(this.state.chosenDate).add(1, 'months').add('days', -1).format('MMMM Do');
         maxInputDate = moment().endOf('month').format('YYYY-MM-DD');
         okLabel = t('selectMonth');
       } else if (this.state.selectorActive === 3) {
-        endDate = moment(this.state.chosenDate).add('years', 1).add('days', -1).format('MMMM Do');
+        endDate = moment(this.state.chosenDate).add(1, 'years').add('days', -1).format('MMMM Do');
         maxInputDate = moment().endOf('year').format('YYYY-MM-DD');
         okLabel = t('selectYear');
       }
@@ -285,13 +285,13 @@ class LineChart extends Component {
     let date;
     const selector = this.state.selectorActive;
     if (selector === 0) {
-      date = moment(this.state.chosenDate).add('days', -1);
+      date = moment(this.state.chosenDate).add(-1, 'days');
     } else if (selector === 1) {
-      date = moment(this.state.chosenDate).add('weeks', -1);
+      date = moment(this.state.chosenDate).add(-1, 'weeks');
     } else if (selector === 2) {
-      date = moment(this.state.chosenDate).add('months', -1);
+      date = moment(this.state.chosenDate).add(-1, 'months');
     } else if (selector === 3) {
-      date = moment(this.state.chosenDate).add('years', -1);
+      date = moment(this.state.chosenDate).add(-1, 'years');
     }
     this.changeStartDate(date);
   };
@@ -303,13 +303,13 @@ class LineChart extends Component {
     let date;
     const selector = this.state.selectorActive;
     if (selector === 0) {
-      date = moment(this.state.chosenDate).add('days', 1);
+      date = moment(this.state.chosenDate).add(1, 'days');
     } else if (selector === 1) {
-      date = moment(this.state.chosenDate).add('weeks', 1).startOf('week');
+      date = moment(this.state.chosenDate).add(1, 'weeks').startOf('week');
     } else if (selector === 2) {
-      date = moment(this.state.chosenDate).add('months', 1).startOf('month');
+      date = moment(this.state.chosenDate).add(1, 'months').startOf('month');
     } else if (selector === 3) {
-      date = moment(this.state.chosenDate).add('years', 1).startOf('years');
+      date = moment(this.state.chosenDate).add(1, 'years').startOf('years');
     }
     this.changeStartDate(date);
   };
