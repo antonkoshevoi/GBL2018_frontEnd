@@ -1358,6 +1358,10 @@ td.rotate div span {
     margin-top: -5px;
     margin-bottom: 15px;
 }
+.m-brand__logo img {
+    max-width: 165px;
+    margin-top: 3px;
+}
 @media (min-width: 1240px) {
     .m--visible-desktop-lg {
         display: block !important; }

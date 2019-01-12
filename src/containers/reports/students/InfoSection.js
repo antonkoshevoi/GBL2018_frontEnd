@@ -97,12 +97,10 @@ class InfoSection extends Component {
               <div className="m-portlet__head border-b-blue m--padding-right-0">
                 <div className="m-portlet__head-caption">
                     <HasRole roles={['Superadministrator', 'School', 'Teacher', 'Parents']}>
-                        <div className="pull-right m--margin-top-10 m--margin-right-10">                      
+                        <div className="pull-right m--margin-top-10 m--margin-right-10">
                             <IconButton color='primary' onClick={() => { this._openEditDialog() }}>                        
-                              <Icon className="material-icons">
-                                edit_icon
-                              </Icon>
-                            </IconButton>                      
+                              <i className="la  la-pencil display-6"></i>
+                            </IconButton>                              
                         </div>
                     </HasRole>
                   <div className="m-portlet__head-title">
