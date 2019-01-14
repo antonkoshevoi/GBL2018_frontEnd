@@ -59,7 +59,7 @@ class Header extends Component {
           <div className="m-stack m-stack--ver m-stack--desktop">
             <div className={`m-stack__item m-brand gravity-logo ${hideMenu ? 'logo-only' : ''}`}>
               <div className="m-stack m-stack--ver m-stack--general">
-                <Logo className="m-stack__item m-stack__item--middle m-brand__logo text-center" />
+                <Logo isLoggedIn={auth.get('isLoggedIn')} className="m-stack__item m-stack__item--middle m-brand__logo text-center" />
               </div>
             </div>
             {(auth.get('isLoggedIn') && userRequest.get('success') && !hideMenu) &&
