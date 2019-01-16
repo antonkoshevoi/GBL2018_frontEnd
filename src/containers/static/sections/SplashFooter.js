@@ -41,7 +41,7 @@ class SplashFooter extends PureComponent {
         
         return (
             <div id="footer" style={{bottom: this.state.footerPosition}}>
-                <div class="footer-links">
+                <div className="footer-links">
                     <div className="row">
                         <div className="col-6 col-sm-6 text-center">                    
                             <NavLink to={`/gift`} className="btn btn-warning btn-subscriptions">{t('subscription')}</NavLink>                    

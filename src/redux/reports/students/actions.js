@@ -42,7 +42,7 @@ export function getReportDetails(studentId, classroomId) {
 export function getAttempts(studentId, params = {}) {
     return {
         types: [GET_ATTEMPTS, GET_ATTEMPTS_SUCCESS, GET_ATTEMPTS_FAIL],
-        promise: (apiClient) => apiClient.get(`reports/attempts/${studentId}`, params)
+        promise: (apiClient) => apiClient.get(`reports/attempts-all/${studentId}`, params)
     };
 }
 
