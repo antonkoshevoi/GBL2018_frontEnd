@@ -77,8 +77,7 @@ class AttemptsTable extends Component {
                       <Th width='200px'>{t('unitLesson')}</Th>
                       <Th width='50px'>{t('score')}</Th>
                       <Th width='50px'>{t('percent')}</Th>
-                      <Th width='50px'>{t('passFail')}</Th>
-                      <Th width='50px'>{t('passesAttempts')}</Th>
+                      <Th width='50px'>{t('passFail')}</Th>                      
                     </HeadRow>
                 </Thead>
                 <Tbody>                
@@ -96,8 +95,7 @@ class AttemptsTable extends Component {
                             <span className={`m-badge m-badge--brand m-badge--wide ${attempt.pass ? 'm-badge--success' : 'm-badge--danger'}`}>
                               {attempt.pass ? t('pass') : t('fail')}
                             </span>
-                          </Td>
-                          <Td width='50px'>{attempt.passes} / {attempt.attempts} </Td>
+                          </Td>                         
                         </Row>)
                     })}
                 </Tbody>
