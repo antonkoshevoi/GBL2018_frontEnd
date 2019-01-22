@@ -190,8 +190,8 @@ class OpenInvoicesTable extends Component {
               <HeadRow>
                 {!preview && <Th width='10px'>#</Th>}
                 <Th name='product' width='400px'>{t('product')}</Th>
-                {!preview && <Th name='quantity' width='132px' classNames="text-center">{t('classroom')}</Th>}                
-                {!preview && <Th name='quantity' width='132px' classNames="text-center">{t('quantity')}</Th>}  
+                {!preview && <Th name='quantity' width='132px' className="text-center">{t('classroom')}</Th>}                
+                {!preview && <Th name='quantity' width='132px' className="text-center">{t('quantity')}</Th>}  
                 {!preview && <Th name='price' width='100px'>{t('price')}</Th>}  
                 <Th name='actions' width='100px'>{t('total')}</Th>
               </HeadRow>

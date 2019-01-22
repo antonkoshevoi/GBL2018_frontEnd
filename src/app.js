@@ -43,7 +43,8 @@ class App extends Component {
             },
             MuiTab: {
                 label: {
-                    fontSize: '1rem'
+                    fontSize: '1rem',
+                    color: '#575962'
                 }
             }
         }

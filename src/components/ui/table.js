@@ -14,7 +14,7 @@ export const Table = ({ className, ...props}) => {
 
 export const Thead = (props) => {
   return (
-    <thead>{props.children}</thead>
+    <thead {...props}>{props.children}</thead>
   );
 };
 
@@ -32,14 +32,14 @@ export const Row = ({ index, ...props}) => {
 
 export const HeadRow = (props) => {
   return (
-    <tr className="active">{props.children}</tr>
+    <tr className={`active ${props.className || ''}`}>{props.children}</tr>
   );
 };
 
 
-export const Th = ({ width, classNames, name, onSort, dir = undefined, ...props}) => {
+export const Th = ({ width, className, name, onSort, dir = undefined, ...props}) => {
   
-  let className = classNames || 'table-head';
+  className = className || 'table-head';
   
   if (onSort) {
       className = 'sort-table-head ' + className;
@@ -55,9 +55,9 @@ export const Th = ({ width, classNames, name, onSort, dir = undefined, ...props}
 
 export const Td = (props) => {
   return (
-  <td {...props}>    
-    {props.children}    
-  </td>
+    <td {...props}>    
+      {props.children}    
+    </td>
   );
 };
 
