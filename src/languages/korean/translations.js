@@ -570,6 +570,8 @@ export default {
     youHaveUnassignedCourseCredits: 'KR You have {{ count }} unassigned course credit(s)',
     assignAllowedCourseCreditsToSelectedStudents: 'KR Assign allowed Course credits to classroom students',
     enrollments: 'Enrollments',
+    autoRenewal: 'Auto Renewal',
+    showDetails: 'Show Details',    
     recipientsGroups: {        
         roleIds: 'KR Entire School',
         classroomIds: 'KR Classroom Users',

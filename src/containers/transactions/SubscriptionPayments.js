@@ -35,15 +35,52 @@ class SubscriptionPayments extends Component {
             );
         }
         return paymentsRequest.get('records').map((record, key) => (
-            <Row index={key} key={key}>
-                <Td>{this._recordNumber(key)}</Td>
-                <Td><a className="g-blue" href={record.get('invoiceUrl')}>{record.get('number')}</a></Td>
-                <Td><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('type'))}</span></Td>                
-                <Td>{record.get('transactionCode')}</Td>
-                <Td>{record.get('subscription')} {t('subscription')}</Td>        
-                <Td>{t(record.get('period'))}</Td>
-                <Td>${record.get('total')}</Td>
-                <Td>{moment(record.get('createdAt')).format('lll')}</Td>
+            <Row className="Row" key={key}>
+                <Td>                                
+                    <div className="d-md-none text-left">
+                        <div className="row mb-1">
+                            <div className="col-5"><span className="text-muted">{t('invoice')}:</span></div>
+                            <div className="col-7"><strong><a className="g-blue" href={record.get('invoiceUrl')}>{record.get('number')}</a></strong></div>
+                        </div>
+                        <div className="row mb-1">
+                            <div className="col-5"><span className="text-muted">{t('type')}:</span></div>
+                            <div className="col-7"><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('type'))}</span></div>
+                        </div>
+                        <div className="row mb-1">
+                            <div className="col-5"><span className="text-muted">{t('transactionCode')}:</span></div>
+                            <div className="col-7">{record.get('transactionCode')}</div>
+                        </div>
+                        <div className="row mb-1">
+                            <div className="col-5"><span className="text-muted">{t('subscription')}:</span></div>
+                            <div className="col-7">{record.get('subscription')} {t('subscription')}</div>
+                        </div>
+                        <div className="row mb-1">
+                            <div className="col-5"><span className="text-muted">{t('period')}:</span></div>
+                            <div className="col-7">{t(record.get('period'))}</div>
+                        </div>
+                        <div className="row mb-1">
+                            <div className="col-5"><span className="text-muted">{t('total')}:</span></div>
+                            <div className="col-7"><strong>${record.get('total')}</strong></div>
+                        </div>
+                        <div className="row mb-1">
+                            <div className="col-5"><span className="text-muted">{t('autoRenewal')}:</span></div>
+                            <div className="col-7">{t(record.get('autoRenewal') ? 'yes' : 'no')}</div>
+                        </div>
+                        <div className="row mb-1">
+                            <div className="col-5"><span className="text-muted">{t('date')}:</span></div>
+                            <div className="col-7">{moment(record.get('createdAt')).format('lll')}</div>
+                        </div>                        
+                    </div>
+                    <div className="d-none d-md-block">{this._recordNumber(key)} d-md-block</div>
+                </Td>
+                <Td className="d-none d-md-table-cell"><a className="g-blue" href={record.get('invoiceUrl')}>{record.get('number')}</a></Td>
+                <Td className="d-none d-md-table-cell"><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('type'))}</span></Td>                
+                <Td className="d-none d-md-table-cell">{record.get('transactionCode')}</Td>
+                <Td className="d-none d-md-table-cell">{record.get('subscription')} {t('subscription')}</Td>        
+                <Td className="d-none d-md-table-cell">{t(record.get('period'))}</Td>
+                <Td className="d-none d-md-table-cell">${record.get('total')}</Td>
+                <Td className="d-none d-md-table-cell">{t(record.get('autoRenewal') ? 'yes' : 'no')}</Td>
+                <Td className="d-none d-md-table-cell">{moment(record.get('createdAt')).format('lll')}</Td>
             </Row>
         ));
     }
@@ -94,7 +131,7 @@ class SubscriptionPayments extends Component {
                 </div>
                 <Table>
                     <Thead>
-                        <HeadRow>
+                        <HeadRow className="d-none d-md-table-row">
                             <Th>#</Th>
                             <Th>{t('invoice')}</Th>
                             <Th>{t('type')}</Th>
@@ -102,6 +139,7 @@ class SubscriptionPayments extends Component {
                             <Th>{t('subscription')}</Th>
                             <Th>{t('period')}</Th>
                             <Th>{t('total')}</Th>
+                            <Th>{t('autoRenewal')}</Th>                            
                             <Th>{t('date')}</Th>                  
                         </HeadRow>
                     </Thead>

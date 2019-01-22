@@ -34,7 +34,7 @@ class Transactions extends Component {
                                 value={currentTab} 
                                 onChange={(event, value) => { this._setCurrentTab(value) }}
                                 indicatorColor="primary"
-                                textColor="default" >
+                                textColor="primary" >
                                   <Tab value="storeItems" label={t('storePayments')} />
                                   <Tab value="subscriptions" label={t('subscriptionPayments')} />
                             </Tabs>  

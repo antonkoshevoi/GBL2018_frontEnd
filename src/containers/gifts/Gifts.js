@@ -166,7 +166,7 @@ class Gifts extends Component {
                                 value={currentTab} 
                                 onChange={(event, value) => { this._setCurrentTab(value) }}
                                 indicatorColor="primary"
-                                textColor="default" >
+                                textColor="primary" >
                                   <Tab value="received" label={t('received')} />
                                   <Tab value="sent" label={t('sent')} />
                             </Tabs>  

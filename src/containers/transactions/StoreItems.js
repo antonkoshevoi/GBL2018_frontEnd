@@ -71,20 +71,49 @@ class StoreItems extends Component {
             let badgeClass = item.get('status') !== 'due' ? item.get('status') === 'paid' ? 'm-badge--info' : 'm-badge--danger' : '';
             return ([
                 <Row index={i} key={i}>
-                    <Td width='40px'>{this._recordNumber(i)}</Td> 
+                    <Td width='40px' className="d-none d-md-table-cell">{this._recordNumber(i)}</Td> 
                     <Td>
-                        <a rel="noopener noreferrer" className="g-blue" target="_blank" href={item.get('invoiceUrl')}>{item.get('invoiceNo')}</a>               
+                        <div className="d-md-none text-left">
+                            <div className="row mb-1">
+                                <div className="col-5"><span className="text-muted">{t('invoice')}:</span></div>
+                                <div className="col-7"><strong><a rel="noopener noreferrer" className="g-blue" target="_blank" href={item.get('invoiceUrl')}>{item.get('invoiceNo')}</a></strong></div>
+                            </div>
+                            <div className="row mb-1">
+                                <div className="col-5"><span className="text-muted">{t('type')}:</span></div>
+                                <div className="col-7">{t(item.get('paymentType'))}</div>
+                            </div>
+                            <div className="row mb-1">
+                                <div className="col-5"><span className="text-muted">{t('total')}:</span></div>
+                                <div className="col-7"><strong>${item.get('total')}</strong></div>
+                            </div>
+                            <div className="row mb-1">
+                                <div className="col-5"><span className="text-muted">{t('date')}:</span></div>
+                                <div className="col-7">{moment(item.get('createdAt')).format('lll')}</div>
+                            </div>                            
+                            <div className="row mb-1">
+                                <div className="col-5"><span className="text-muted">{t('items')}:</span></div>
+                                <div className="col-7">
+                                    <span className="m--margin-right-10">{item.get('items').size}</span>
+                                    (<button className="g-blue btn-link" href="" color="primary" onClick={()=> {this._toggleSubTable(`sub_${i}`)}}>
+                                        {t('showDetails')}
+                                    </button>)
+                                </div>
+                            </div>
+                        </div>
+                        <div className="d-none d-md-block">
+                            <a rel="noopener noreferrer" className="g-blue" target="_blank" href={item.get('invoiceUrl')}>{item.get('invoiceNo')}</a>
+                        </div>
                     </Td>
-                    <Td>
+                    <Td className="d-none d-md-table-cell">
                         {item.get('items').size}
                         <IconButton className="m--margin-left-15" color="primary" onClick={()=> {this._toggleSubTable(`sub_${i}`)}}>
                             <i className={`fa fa-arrow-${( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) ? 'down' : 'right'}`}></i>
                         </IconButton>                        
                     </Td>                    
-                    <Td>{t(item.get('paymentType'))}</Td>
-                    <Td><span className={`m-badge m-badge--wide ${badgeClass}`}>{t(item.get('status'))}</span></Td>
-                    <Td>${item.get('total')}</Td>
-                    <Td>{moment(item.get('createdAt')).format('lll')}</Td>
+                    <Td className="d-none d-md-table-cell">{t(item.get('paymentType'))}</Td>
+                    <Td className="d-none d-md-table-cell"><span className={`m-badge m-badge--wide ${badgeClass}`}>{t(item.get('status'))}</span></Td>
+                    <Td className="d-none d-md-table-cell">${item.get('total')}</Td>
+                    <Td className="d-none d-md-table-cell">{moment(item.get('createdAt')).format('lll')}</Td>
                 </Row>,
                 ( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) && this._renderTransactionItemsBlock(item.get('items'))
             ])
@@ -140,9 +169,9 @@ class StoreItems extends Component {
         return (
             <div>
                 <div className='row'>
-                    <div className='col-sm-6 m--align-right'>
+                    <div className='col-6 col-sm-6 m--align-right'>
                         <Select
-                            className="pull-left table-select m--margin-top-5"
+                            className="pull-left table-select"
                             value={perPage}
                             onChange={(e) => { this._selectPerPage(e.target.value) }}>
                             <MenuItem value={5}>5</MenuItem>
@@ -152,7 +181,7 @@ class StoreItems extends Component {
                             <MenuItem value={100}>100</MenuItem>
                         </Select>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-6 col-sm-6">
                         <div className="pull-right table-filter">
                             <Select className='full-width' value={this.state.filter} onChange={(e) => { this._handleFilter(e) }} name="filter">                        
                                 <MenuItem value={0}>{t('all')}</MenuItem>
@@ -166,7 +195,7 @@ class StoreItems extends Component {
                 </div>
                 <Table>
                     <Thead>
-                        <HeadRow>
+                        <HeadRow className="d-none d-md-table-row">
                             <Th>#</Th>
                             <Th>{t('invoice')}</Th>
                             <Th>{t('items')}</Th>

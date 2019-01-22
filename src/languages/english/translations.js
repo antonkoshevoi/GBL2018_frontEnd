@@ -583,6 +583,8 @@ export default {
     deleteLearnerConfirmation: 'Are you sure want to remove this learner?',
     downloadReportInPdf: 'Download Report In PDF',
     enrollments: 'Enrollments',
+    autoRenewal: 'Auto Renewal',
+    showDetails: 'Show Details',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',
