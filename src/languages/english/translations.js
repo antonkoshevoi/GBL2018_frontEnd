@@ -591,6 +591,7 @@ export default {
     selectStudents: 'Select Students',
     messageGroupsNotFound: 'No groups found...',
     newGroup: 'New Group',
+    updateGroup: 'Update Group',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',
