@@ -585,6 +585,12 @@ export default {
     enrollments: 'Enrollments',
     autoRenewal: 'Auto Renewal',
     showDetails: 'Show Details',
+    groups: 'Groups',
+    recipientGroups: 'Recipients Groups',
+    userRolesInGroups: 'User Roles In Groups',
+    selectStudents: 'Select Students',
+    messageGroupsNotFound: 'No groups found...',
+    newGroup: 'New Group',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

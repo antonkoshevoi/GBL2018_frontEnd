@@ -44,3 +44,28 @@ export const selectGetUnreadMessagesRequest = createSelector(
   selectMessagesDomain,
   (subState) => subState.get('getUnreadMessagesRequest')
 );
+
+export const selectGetGroupRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('getGroupRequest')
+);
+
+export const selectGetGroupsRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('getGroupsRequest')
+);
+
+export const selectCreateGroupRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('createGroupRequest')
+);
+
+export const selectUpdateGroupRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('updateGroupRequest')
+);
+
+export const selectDeleteGroupRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('deleteGroupRequest')
+);
