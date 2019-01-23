@@ -63,5 +63,8 @@ export default {
     unassignedCredits: 'Unassigned Credits',
     transactions: 'Transactions',
     myConnections: 'MY Connections',
-    myGifts: 'My Gifts'
+    myGifts: 'My Gifts',
+    messageGroups: 'Messages - Groups',
+    newMessageGroup: 'Messages - New Group',
+    editMessageGroup: 'Messages - Update Group'
 }
