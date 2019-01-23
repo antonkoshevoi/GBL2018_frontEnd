@@ -101,7 +101,7 @@ class MessageGroups extends Component {
         return (
             <div className='fadeInLeft  animated'>               
                 <div className='m-portlet m-portlet--head-solid-bg'>
-                    <div className='m-portlet__head border-b-darkblue'>
+                    <div className='m-portlet__head border-b-blue'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
                                 <span className='m-portlet__head-icon'><i className='fa fa-group'></i></span>

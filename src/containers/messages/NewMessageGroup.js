@@ -46,9 +46,9 @@ class NewMessageGroup extends Component {
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
                                 <span className='m-portlet__head-icon'>
-                                    <i className='la la-comments-o'></i>
+                                    <i className='fa fa-group'></i>
                                 </span>
-                                <h3 className='m-portlet__head-text'>{t('messageGroup')}</h3>
+                                <h3 className='m-portlet__head-text'>{t('newGroup')}</h3>
                             </div>
                         </div>
                     </div>          
