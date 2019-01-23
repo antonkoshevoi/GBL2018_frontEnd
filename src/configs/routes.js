@@ -66,6 +66,9 @@ import DraftMessages from '../containers/messages/DraftMessages';
 import NewMessage from '../containers/messages/NewMessage';
 import EditMessage from '../containers/messages/EditMessage';
 import ViewMessage from '../containers/messages/ViewMessage';
+import MessageGroups from '../containers/messages/MessageGroups';
+import NewMessageGroup from '../containers/messages/NewMessageGroup';
+import EditMessageGroup from '../containers/messages/EditMessageGroup';
 
 import AcceptStudent from '../containers/parents/AcceptStudent';
 import AcceptConnection from '../containers/connections/AcceptConnection';
@@ -114,6 +117,9 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/view/:id' title='viewMessage' component={ViewMessage} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/new' title='newMessage' component={NewMessage} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/draft/:id' title='editDraft' component={EditMessage} />
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/messages/groups' title='messageGroups' component={MessageGroups} />
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/messages/groups/new' title='newMessageGroup' component={NewMessageGroup} />
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/messages/groups/:id' title='editMessageGroup' component={EditMessageGroup} />
       
       <AuthenticatedRoute exact layout={MainLayout} path='/dashboard' title='dashboard' component={Dashboard}/>
       

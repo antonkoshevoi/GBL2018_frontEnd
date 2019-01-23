@@ -53,7 +53,7 @@ class NewMessage extends Component {
                                 <span className='m-portlet__head-icon'>
                                     <i className='la la-comments-o'></i>
                                 </span>
-                                <h3 className='m-portlet__head-text'>{t('Message')}</h3>
+                                <h3 className='m-portlet__head-text'>{t('message')}</h3>
                             </div>
                         </div>
                     </div>          

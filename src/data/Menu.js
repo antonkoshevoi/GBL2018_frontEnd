@@ -89,6 +89,11 @@ export default  {
                     key: 'drafts',
                     title: 'drafts',
                     link: 'messages/drafts'
+                },
+                {
+                    key: 'groups',
+                    title: 'groups',
+                    link: 'messages/groups'
                 }
             ]
         },

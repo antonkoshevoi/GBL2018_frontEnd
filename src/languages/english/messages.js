@@ -54,5 +54,8 @@ export default {
   connectionRequestIsDeleted: 'Connection request is deleted',
   giftDeleted: 'Gift successfully deleted',
   giftDeclined: 'Gift is declined',
-  giftAccepted: 'Gift is accepted'
+  giftAccepted: 'Gift is accepted',
+  messageGroupCreated: 'Group is created',
+  messageGroupUpdated: 'Group is updated',
+  messageGroupDeleted: 'Group is deleted'
 }
