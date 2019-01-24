@@ -287,7 +287,7 @@ export default {
     rememberMe: 'KR Remember me',
     doNotHaveAccountYet: 'KR Don\'t have an account yet?',
     request: 'KR Request',
-    forgottenPassword: 'KR Forgotten Password',
+    forgotPassword: 'KR Forgot Password',
     enterEmailToResetPassword: 'KR Enter your email to reset your password',
     continueShopping: 'KR Continue shopping',
     shippingAndTax: 'KR Shipping & Tax',

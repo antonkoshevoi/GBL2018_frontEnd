@@ -66,5 +66,7 @@ export default {
     myGifts: 'My Gifts',
     messageGroups: 'Messages - Groups',
     newMessageGroup: 'Messages - New Group',
-    editMessageGroup: 'Messages - Update Group'
+    editMessageGroup: 'Messages - Update Group',
+    restorePassword: 'Restore Password',
+    resetPassword: 'Reset Password'    
 }

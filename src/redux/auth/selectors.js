@@ -13,6 +13,22 @@ export const selectLoginRequest = createSelector(
   (subState) => subState.get('loginRequest')
 );
 
+export const selectResetPasswordRequest = createSelector(
+  selectAuthDomain,
+  (subState) => subState.get('resetPasswordRequest')
+);
+
+
+export const selectResetPasswordUserRequest = createSelector(
+  selectAuthDomain,
+  (subState) => subState.get('resetPasswordUserRequest')
+);
+
+export const selectUpdatePasswordRequest = createSelector(
+  selectAuthDomain,
+  (subState) => subState.get('updatePasswordRequest')
+);
+
 export const selectRedirectAfterLogin = createSelector(
   selectAuthDomain,
   (subState) => subState.get('redirectAfterLogin')

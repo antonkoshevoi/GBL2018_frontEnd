@@ -19,6 +19,19 @@ export const LOGOUT_FAIL = '[Auth] LOGOUT_FAIL';
 export const SET_REDIRECT_URL = '[Auth] SET_REDIRECT_URL';
 export const SET_CALLBACK = '[Auth] SET_CALLBACK';
 
+export const RESET_PASSWORD = '[Auth] RESET_PASSWORD';
+export const RESET_PASSWORD_SUCCESS = '[Auth] RESET_PASSWORD_SUCCESS';
+export const RESET_PASSWORD_FAIL = '[Auth] RESET_PASSWORD_FAIL';
+
+export const GET_RESET_PASSWORD_USER = '[Auth] GET_RESET_PASSWORD_USER';
+export const GET_RESET_PASSWORD_USER_SUCCESS = '[Auth] GET_RESET_PASSWORD_USER_SUCCESS';
+export const GET_RESET_PASSWORD_USER_FAIL = '[Auth] GET_RESET_PASSWORD_USER_FAIL';
+
+export const UPDATE_PASSWORD = '[Auth] UPDATE_PASSWORD';
+export const UPDATE_PASSWORD_SUCCESS = '[Auth] UPDATE_PASSWORD_SUCCESS';
+export const UPDATE_PASSWORD_FAIL = '[Auth] UPDATE_PASSWORD_FAIL';
+export const RESET_UPDATE_PASSWORD_REQUEST = '[Auth] RESET_UPDATE_PASSWORD_REQUEST';
+
 /**
  * Login
  */
@@ -34,6 +47,44 @@ export function login(username, password, remember) {
     })
   }
 }
+
+export function resetPassword(username) {
+  return {
+    types: [RESET_PASSWORD, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAIL],
+    promise: (apiClient) => apiClient.post('auth/reset-password', {
+      username: username
+    }, {}, {
+      'Authorization': null
+    })
+  }
+}
+
+export function getResetPasswordUser(id, hash) {
+  return {
+    types: [GET_RESET_PASSWORD_USER, GET_RESET_PASSWORD_USER_SUCCESS, GET_RESET_PASSWORD_USER_FAIL],
+    promise: (apiClient) => apiClient.get(`auth/reset-password/${id}/${hash}`, {}, {}, {
+      'Authorization': null
+    })
+  }
+}
+
+export function updatePassword(data = {}) {
+  return {
+    types: [UPDATE_PASSWORD, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL],
+    promise: (apiClient) => apiClient.post(`auth/update-password`, data, {}, {
+      'Authorization': null
+    })
+  }
+}
+
+export function resetUpdatePasswordRequest() {
+  return {
+    type: RESET_UPDATE_PASSWORD_REQUEST
+  };
+}
+
+
+
 export function restoreLogin () {
   return {
     type: RESTORE_LOGIN

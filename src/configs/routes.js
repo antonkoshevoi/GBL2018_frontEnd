@@ -5,8 +5,11 @@ import AppContainer from '../containers/AppContainer';
 import AuthenticatedRoute from '../containers/routing/AuthenticatedRoute';
 import MainLayout from '../containers/layouts/MainLayout';
 
-import Dashboard from '../containers/Dashboard';
 import Login from '../containers/auth/Login';
+import RestorePassword from '../containers/auth/RestorePassword';
+import ResetPassword from '../containers/auth/ResetPassword';
+
+import Dashboard from '../containers/Dashboard';
 import Students from '../containers/students/Students';
 import Teachers from "../containers/teachers/Teachers";
 import Parents from "../containers/parents/Parents";
@@ -92,6 +95,9 @@ export default () => (
       <Route exact path='/splash' title="parents" component={SplashContainer} />
       <Route exact path='/login' title="login" component={Login} />
       <Route exact path='/restore-login' title='restoreLogin' component={RestoreLogin} />
+      <Route exact path='/restore-password' title='restorePassword' component={RestorePassword} />
+      <Route exact path='/reset-password/:id/:hash' title='resetPassword' component={ResetPassword} />
+      
       <Route exact path='/signUp' title='signUp' component={SignUpIndex} />
       <Route exact path='/gift' title='sentGift' component={Gift} />
       <Route exact layout={OnlyHeadLayout} path='/signUp/parent' title='signUpParent' component={SignUpParent} />

@@ -287,7 +287,7 @@ export default {
     rememberMe: 'ES Remember me',
     doNotHaveAccountYet: 'ES Don\'t have an account yet?',
     request: 'ES Request',
-    forgottenPassword: 'ES Forgotten Password',
+    forgotPassword: 'ES Forgot Password',
     enterEmailToResetPassword: 'ES Enter your email to reset your password',
     continueShopping: 'ES Continue shopping',
     shippingAndTax: 'ES Shipping & Tax',
