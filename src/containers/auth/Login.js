@@ -99,6 +99,9 @@ class Login extends Component {
                   {t('doNotHaveAccountYet')}
                   </span>
                   <NavLink to="signUp" id="m_login_signup" className="m--margin-left-5 m-link m-link--light m-login__account-link">{t('signUp')}</NavLink>
+                  <div className='m--margin-top-10'>
+                    <NavLink to="restore-password" className="m-link m-link--light m-login__account-link">{t('forgotPassword')}?</NavLink>
+                  </div>
                 </div>                  
                 </div>
               </div>              

@@ -287,7 +287,7 @@ export default {
     rememberMe: 'CT Remember me',
     doNotHaveAccountYet: 'CT Don\'t have an account yet?',
     request: 'CT Request',
-    forgottenPassword: 'CT Forgotten Password',
+    forgotPassword: 'CT Forgot Password',
     enterEmailToResetPassword: 'CT Enter your email to reset your password',
     continueShopping: 'CT Continue shopping',
     shippingAndTax: 'CT Shipping & Tax',

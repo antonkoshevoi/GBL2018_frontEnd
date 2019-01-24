@@ -287,7 +287,7 @@ export default {
     rememberMe: 'Remember me',
     doNotHaveAccountYet: 'Don\'t have an account yet?',
     request: 'Request',
-    forgottenPassword: 'Forgotten Password',
+    forgotPassword: 'Forgot Password',
     enterEmailToResetPassword: 'Enter your email to reset your password',
     continueShopping: 'Continue shopping',
     shippingAndTax: 'Shipping & Tax',
@@ -592,6 +592,9 @@ export default {
     messageGroupsNotFound: 'No groups found...',
     newGroup: 'New Group',
     updateGroup: 'Update Group',
+    passwordResetMessage: 'The restore password link has been send to your email',
+    setNewPassword: 'Set New Password',
+    usernameOrEmail: 'Username Or Email',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

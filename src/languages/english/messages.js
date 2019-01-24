@@ -57,5 +57,6 @@ export default {
   giftAccepted: 'Gift is accepted',
   messageGroupCreated: 'Group is created',
   messageGroupUpdated: 'Group is updated',
-  messageGroupDeleted: 'Group is deleted'
+  messageGroupDeleted: 'Group is deleted',
+  passwordUpdatedLoginPlease: 'Your password has been updated, try to login please.'
 }

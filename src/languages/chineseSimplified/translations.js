@@ -287,7 +287,7 @@ export default {
     rememberMe: 'CS Remember me',
     doNotHaveAccountYet: 'CS Don\'t have an account yet?',
     request: 'CS Request',
-    forgottenPassword: 'CS Forgotten Password',
+    forgotPassword: 'CS Forgot Password',
     enterEmailToResetPassword: 'CS Enter your email to reset your password',
     continueShopping: 'CS Continue shopping',
     shippingAndTax: 'CS Shipping & Tax',
