@@ -571,16 +571,5 @@ export default {
     assignAllowedCourseCreditsToSelectedStudents: 'ES Assign allowed Course credits to classroom students',
     enrollments: 'Enrollments',
     autoRenewal: 'Auto Renewal',
-    showDetails: 'Show Details',    
-    recipientsGroups: {        
-        roleIds: 'ES Entire School',
-        classroomIds: 'ES Classroom Users',
-        homeroomIds: 'ES Homeroom Users',
-        teachers: 'ES School Teachers',
-        students: 'ES School Students',
-        teacher: 'ES Teacher',
-        teacherId: 'ES Teacher',
-        userId: 'ES Connections',
-        adminId: 'ES School Management'
-    }
+    showDetails: 'Show Details'
 }

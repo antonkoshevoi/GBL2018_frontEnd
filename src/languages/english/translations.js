@@ -595,16 +595,5 @@ export default {
     passwordResetMessage: 'The restore password link has been send to your email',
     setNewPassword: 'Set New Password',
     usernameOrEmail: 'Username Or Email',
-    expires: 'Expires',
-    recipientsGroups: {        
-        roleIds: 'Entire School',
-        classroomIds: 'Classroom Users',
-        homeroomIds: 'Homeroom Users',
-        teachers: 'School Teachers',
-        students: 'School Students',
-        teacher: 'Teacher',
-        teacherId: 'Teacher',
-        userId: 'Connections',
-        adminId: 'School Management'
-    }
+    expires: 'Expires'
 }

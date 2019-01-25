@@ -571,16 +571,5 @@ export default {
     assignAllowedCourseCreditsToSelectedStudents: 'KR Assign allowed Course credits to classroom students',
     enrollments: 'Enrollments',
     autoRenewal: 'Auto Renewal',
-    showDetails: 'Show Details',    
-    recipientsGroups: {        
-        roleIds: 'KR Entire School',
-        classroomIds: 'KR Classroom Users',
-        homeroomIds: 'KR Homeroom Users',
-        teachers: 'KR School Teachers',
-        students: 'KR School Students',
-        teacher: 'KR Teacher',
-        teacherId: 'KR Teacher',
-        userId: 'KR Connections',
-        adminId: 'KR School Management'
-    }
+    showDetails: 'Show Details'
 }
