@@ -595,6 +595,7 @@ export default {
     passwordResetMessage: 'The restore password link has been send to your email',
     setNewPassword: 'Set New Password',
     usernameOrEmail: 'Username Or Email',
+    expires: 'Expires',
     recipientsGroups: {        
         roleIds: 'Entire School',
         classroomIds: 'Classroom Users',

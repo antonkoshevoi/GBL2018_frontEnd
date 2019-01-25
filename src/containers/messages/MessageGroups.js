@@ -8,7 +8,6 @@ import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow }
 import { NavLink } from "react-router-dom";
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
-import HasPermission from "../middlewares/HasPermission";
 import moment from 'moment/moment';
 
 class MessageGroups extends Component {
@@ -126,7 +125,7 @@ class MessageGroups extends Component {
                                     <NavLink to="/messages/groups/new">
                                         <Button color='primary' className='mt-btn mt-btn-success'>
                                           {t('newGroup')}
-                                          <Icon className="m--margin-left-10">add</Icon>
+                                          <Icon className="m--margin-left-5">add</Icon>
                                         </Button>
                                     </NavLink>                                    
                                 </div>

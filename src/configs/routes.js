@@ -117,12 +117,12 @@ export default () => (
       <Route exact layout={OnlyHeadLayout} path='/create-account/:id/:hash' title='createAccount' component={CreateAccount}/>      
       
       {/*Messages*/}
-      <AuthenticatedRoute exact layout={MainLayout} path='/messages/drafts' title='draftMessages' component={DraftMessages} />
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/messages/drafts' title='draftMessages' component={DraftMessages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/sent' title='sentMessages' component={SentMessages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages' title='inboxMessages' component={InboxMessages} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/view/:id' title='viewMessage' component={ViewMessage} />
-      <AuthenticatedRoute exact layout={MainLayout} path='/messages/new' title='newMessage' component={NewMessage} />
-      <AuthenticatedRoute exact layout={MainLayout} path='/messages/draft/:id' title='editDraft' component={EditMessage} />
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/messages/new' title='newMessage' component={NewMessage} />
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/messages/draft/:id' title='editDraft' component={EditMessage} />
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/messages/groups' title='messageGroups' component={MessageGroups} />
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/messages/groups/new' title='newMessageGroup' component={NewMessageGroup} />
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/messages/groups/:id' title='editMessageGroup' component={EditMessageGroup} />

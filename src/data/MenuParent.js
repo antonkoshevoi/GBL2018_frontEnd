@@ -87,16 +87,6 @@ export default  {
                     key: 'sent',
                     title: 'sent',
                     link: 'messages/sent'
-                },
-                {
-                    key: 'compose',
-                    title: 'compose',
-                    link: 'messages/new'
-                },
-                {
-                    key: 'drafts',
-                    title: 'drafts',
-                    link: 'messages/drafts'
                 }
             ]
         },
