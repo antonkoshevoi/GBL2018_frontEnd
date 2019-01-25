@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { Select, MenuItem, InputLabel, Input, TextField, FormControl, FormHelperText, FormControlLabel, Checkbox } from '@material-ui/core';
+import { Select, MenuItem, InputLabel, Input, FormControl, FormHelperText, FormControlLabel, Checkbox } from '@material-ui/core';
 import { selectGetSchoolHomeroomsRequest, selectGetSchoolClassroomsRequest, selectGetSchoolTeachersRequest, selectGetSchoolStudentsRequest, selectGetSchoolAdminsRequest } from '../../../redux/schools/selectors';
 import { getSchoolHomerooms, getSchoolClassrooms, getSchoolTeachers, getSchoolStudents, getSchoolAdmins} from '../../../redux/schools/actions';
-import { getUsers } from "../../../redux/connections/actions";
 import { selectGetUserRequest, selectUserData } from "../../../redux/user/selectors";
-import { selectGetUsersRequest} from "../../../redux/connections/selectors";
 import Loader from '../../../components/layouts/Loader';
 import HasRole from "../../middlewares/HasRole";
 
@@ -177,7 +175,7 @@ class GroupForm extends Component {
     render() {
         const {homeroomsRequest, classroomsRequest, teachersRequest, studentsRequest, adminsRequest, errors, t} = this.props;
         const {recipient, rolesInGroup} = this.state;
-        const loading = homeroomsRequest.get('loading') || classroomsRequest.get('loading') || teachersRequest.get('loading') || studentsRequest.get('loading');
+        const loading = homeroomsRequest.get('loading') || classroomsRequest.get('loading') || adminsRequest.get('loading') || teachersRequest.get('loading') || studentsRequest.get('loading');
         
         return (
             <div>

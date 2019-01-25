@@ -54,6 +54,7 @@ class NewMessage extends Component {
                 type: data.type,
                 message: data.body,
                 subject: data.subject,
+                expired: data.expired,
                 [data.recipients]: data.recipientsIds
             }
         });                

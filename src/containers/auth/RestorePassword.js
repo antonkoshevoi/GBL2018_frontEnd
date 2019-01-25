@@ -3,7 +3,7 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { resetPassword } from '../../redux/auth/actions';
 import { selectResetPasswordRequest } from '../../redux/auth/selectors';
-import {FormControlLabel, Button, CircularProgress} from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import Logo from '../ui/Logo';

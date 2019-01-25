@@ -8,7 +8,7 @@ import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow }
 import { NavLink } from "react-router-dom";
 import Pagination from '../../components/ui/Pagination';
 import ViewMessageModal from './modals/ViewMessageModal';
-import HasPermission from "../middlewares/HasPermission";
+import HasRole from "../middlewares/HasRole";
 import moment from "moment/moment";
 
 class SentMessages extends Component {
@@ -73,7 +73,7 @@ class SentMessages extends Component {
                 <Td width='130px'>
                     <span className={`m-badge m-badge--brand m-badge--wide ${(record.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(record.get('type'))}</span>
                 </Td>
-                <Td width='100px'>{record.get('isPrivate') ? record.get('recipients') : t('recipientsGroups.' + record.get('recipients'))}</Td>
+                <Td width='100px'>{record.get('recipients')}</Td>
                 <Td width='100px'>{moment(record.get('sent')).format('lll')}</Td>
                 <Td width='100px' className="actions">
                     <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showMessageModal(record) }}>
@@ -127,14 +127,14 @@ class SentMessages extends Component {
                                         <MenuItem value={50}>50</MenuItem>
                                         <MenuItem value={100}>100</MenuItem>
                                     </Select>
-                                    <HasPermission permissions={['[Messages][Create]']}>
+                                    <HasRole roles={['Superadministrator', 'School', 'Teacher']}>
                                         <NavLink to="/messages/new">
                                             <Button color='primary' className='mt-btn mt-btn-success'>
                                               {t('newMessage')}
                                               <Icon className="m--margin-left-10">send</Icon>
                                             </Button>
                                         </NavLink>
-                                    </HasPermission>
+                                    </HasRole>
                                 </div>
                             </div>
                         </div>
