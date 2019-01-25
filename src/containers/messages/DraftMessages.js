@@ -85,7 +85,7 @@ class DraftMessages extends Component {
                 <Td width='130px'>
                     {record.get('type') ? <span className={`m-badge m-badge--brand m-badge--wide ${(record.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(record.get('type'))}</span> : '-'}
                 </Td>
-                <Td width='100px'>{record.get('recipients') ? t('recipientsGroups.' + record.get('recipients')) : '-'}</Td>
+                <Td width='100px'>{record.get('recipients') || '-'}</Td>
                 <Td width='100px'>{moment(record.get('created')).format('lll')}</Td>
                 <Td width='150px' className="actions">
                     <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showMessageModal(record) }}>
