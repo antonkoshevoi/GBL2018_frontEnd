@@ -16,8 +16,7 @@ class MessageForm extends Component {
     getInitialState() {
         return {                       
             group: null,
-            message: null,
-            expired: null
+            message: null
         };
     }
     
@@ -35,15 +34,11 @@ class MessageForm extends Component {
         const { value, name } = event.target;
         
         this.setState({[name]: value});                       
-    }
-    
-    _handleDateChange(m, dateField) {
-        this.setState({[dateField]: m});
-    }    
+    } 
     
     _sendMessage() {
         const {onSubmit} = this.props;
-        const {message, type, group, expired } = this.state;
+        const {message, group } = this.state;
         
         onSubmit({            
             message:    message,            

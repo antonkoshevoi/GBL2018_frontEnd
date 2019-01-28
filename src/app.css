@@ -1218,6 +1218,16 @@ td.rotate div span {
     background-color: #558436;
     border-color: #558436;
 }
+.m-portlet__head-icon.violet i {
+    color: #7900C7 ;
+}
+.btn.violet {
+    background-color: #7900C7;
+    border-color: #7900C7;
+}
+.border-b-violet {
+    border-bottom: #7900C7 solid 2px !important;
+}
 @media (min-width: 1240px) {
     .margin-bottom-zero {
         margin-bottom: 0 !important;

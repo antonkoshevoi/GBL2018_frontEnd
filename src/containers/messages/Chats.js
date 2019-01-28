@@ -3,7 +3,7 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetRecordsRequest, selectDeleteRecordRequest } from '../../redux/messages/selectors';
 import { getMessages, deleteMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
-import { MenuItem, Select, Button, Icon } from '@material-ui/core';
+import { MenuItem, Select } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { NavLink } from "react-router-dom";
 import Pagination from '../../components/ui/Pagination';
@@ -68,13 +68,13 @@ class Chats extends Component {
         return records.map((record, key) => (
             <Row index={key} key={key}>
                 <Td width='40px'>{this._recordNumber(key)}</Td>
-                <Td width='150px'>
-                    {record.get('body')}
+                <Td width='250px'>
+                    <div className='pre-line'>{record.get('body')}</div>
                 </Td>
-                <Td width='100px'>{record.get('user') ? record.get('user').get('name') : ''}</Td>
-                <Td width='100px'>{record.get('isMine') ? record.get('recipients') : t('me')}</Td>
-                <Td width='100px'>{moment(record.get('sent')).format('lll')}</Td>
-                <Td width='100px' className="actions">
+                <Td>{record.get('user') ? record.get('user').get('name') : ''}</Td>
+                <Td>{record.get('isMine') ? record.get('recipients') : t('me')}</Td>
+                <Td>{moment(record.get('sent')).format('lll')}</Td>
+                <Td className="actions">
                     <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' to={`/messages/view/${record.get('id')}`}>
                         <i className='la la-search'></i>
                     </NavLink>
@@ -106,10 +106,10 @@ class Chats extends Component {
         return (
             <div className='fadeInLeft  animated'>               
                 <div className='m-portlet m-portlet--head-solid-bg'>
-                    <div className='m-portlet__head border-b-darkblue'>
+                    <div className='m-portlet__head border-b-violet'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
-                                <span className='m-portlet__head-icon'><i className='la la-comment-o'></i></span>
+                                <span className='m-portlet__head-icon violet'><i className='la la-comment-o'></i></span>
                                 <h3 className='m-portlet__head-text'>{t('messages')}</h3>
                             </div>
                         </div>         
@@ -130,10 +130,10 @@ class Chats extends Component {
                                     </Select>
                                     <HasRole roles={['Superadministrator', 'School', 'Teacher']}>
                                         <NavLink to="/messages/new">
-                                            <Button color='primary' className='mt-btn mt-btn-success'>
+                                            <button className='btn btn-success violet'>
                                               {t('newMessage')}
-                                              <Icon className="m--margin-left-10">send</Icon>
-                                            </Button>
+                                              <span className='icon m--margin-left-10'><i className='fa fa-send'></i></span>                                             
+                                            </button>
                                         </NavLink>
                                     </HasRole>
                                 </div>
@@ -143,11 +143,11 @@ class Chats extends Component {
                             <Thead>
                             <HeadRow>
                                 <Th width='40px'>#</Th>
-                                <Th width='150px'>{t('message')}</Th>                                
-                                <Th width='100px'>{t('from')}</Th>
-                                <Th width='100px'>{t('to')}</Th>
-                                <Th width='100px'>{t('sentDate')}</Th>                                
-                                <Th width='100px'>{t('actions')}</Th>
+                                <Th width='50%'>{t('message')}</Th>                                
+                                <Th>{t('from')}</Th>
+                                <Th>{t('to')}</Th>
+                                <Th>{t('sentDate')}</Th>                                
+                                <Th>{t('actions')}</Th>
                             </HeadRow>
                             </Thead>
 
