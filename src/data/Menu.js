@@ -71,29 +71,39 @@ export default  {
             colorName: 'blue',
             subMenu: [
                 {
-                    key: 'inbox',
-                    title: 'inbox',
-                    link: 'messages'
+                    key: 'alerts',
+                    title: 'alerts',
+                    link: 'messages/alerts',
+                    icon: 'la la-warning',
+                    colorName: 'red'
                 },
                 {
-                    key: 'sent',
-                    title: 'sent',
-                    link: 'messages/sent'
+                    key: 'announcements',
+                    title: 'announcements',
+                    link: 'messages/announcements',
+                    icon: 'la la-bullhorn',
+                    colorName: 'blue'
                 },
                 {
-                    key: 'compose',
-                    title: 'compose',
-                    link: 'messages/new'
+                    key: 'assignments',
+                    title: 'assignments',
+                    link: 'messages/assignments',
+                    icon: 'la la-pencil',
+                    colorName: 'green'
                 },
                 {
-                    key: 'drafts',
-                    title: 'drafts',
-                    link: 'messages/drafts'
+                    key: 'chats',
+                    title: 'chats',
+                    link: 'messages/chats',
+                    icon: 'fa fa-weixin',
+                    colorName: 'violet'
                 },
                 {
                     key: 'groups',
                     title: 'groups',
-                    link: 'messages/groups'
+                    link: 'messages/groups',
+                    icon: 'fa fa-users',
+                    colorName: 'grey'
                 }
             ]
         },

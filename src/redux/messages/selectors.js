@@ -15,24 +15,19 @@ export const selectReplyMessageRequest = createSelector(
   (subState) => subState.get('replyMessageRequest')
 );
 
+export const selectUpdateMessageRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('updateMessageRequest')
+);
+
 export const selectGetRecordRequest = createSelector(
   selectMessagesDomain,
   (subState) => subState.get('getRecordRequest')
 );
 
-export const selectGetInboxRecordsRequest = createSelector(
+export const selectGetRecordsRequest = createSelector(
   selectMessagesDomain,
-  (subState) => subState.get('getInboxRecordsRequest')
-);
-
-export const selectGetDraftRecordsRequest = createSelector(
-  selectMessagesDomain,
-  (subState) => subState.get('getDraftRecordsRequest')
-);
-
-export const selectGetSentRecordsRequest = createSelector(
-  selectMessagesDomain,
-  (subState) => subState.get('getSentRecordsRequest')
+  (subState) => subState.get('getRecordsRequest')
 );
 
 export const selectDeleteRecordRequest = createSelector(

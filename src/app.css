@@ -82,7 +82,7 @@ textarea {
 }
 
 .border-b-green {
-    border-bottom: #7bc848 solid 2px !important;
+    border-bottom: #558436 solid 2px !important;
 }
 
 .border-b-red {
@@ -1191,7 +1191,33 @@ td.rotate div span {
     font-family: Roboto  !important;
     color: #575962;
 }
-
+.messages > div.row {
+    border-radius: 10px;
+    background-color: #F1F2F7;
+    margin: 10px -7px;
+    padding: 15px 0;
+}
+.m-portlet__head-icon.red i {
+    color: #CE342C;
+}
+.btn.red {
+    background-color: #CE342C;
+    border-color: #CE342C;
+}
+.m-portlet__head-icon.blue i {
+    color: #4FA1EA;
+}
+.btn.blue {
+    border-color: #4FA1EA;
+    background-color: #4FA1EA;
+}
+.m-portlet__head-icon.green i {
+    color: #558436 ;
+}
+.btn.green {
+    background-color: #558436;
+    border-color: #558436;
+}
 @media (min-width: 1240px) {
     .margin-bottom-zero {
         margin-bottom: 0 !important;

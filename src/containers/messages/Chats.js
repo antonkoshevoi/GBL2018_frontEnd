@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetInboxRecordsRequest, selectDeleteRecordRequest } from '../../redux/messages/selectors';
-import { getInboxMessages, deleteMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
+import { selectGetRecordsRequest, selectDeleteRecordRequest } from '../../redux/messages/selectors';
+import { getMessages, deleteMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
 import { MenuItem, Select, Button, Icon } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { NavLink } from "react-router-dom";
@@ -11,7 +11,7 @@ import DeleteButton from '../../components/ui/DeleteButton';
 import HasRole from "../middlewares/HasRole";
 import moment from 'moment/moment';
 
-class InboxMessages extends Component {
+class Chats extends Component {
 
     constructor(props) {
         super(props);        
@@ -22,8 +22,7 @@ class InboxMessages extends Component {
     }
 
     componentWillMount() {
-        const {getRecords} = this.props;        
-        getRecords();
+        this._getRecords();
     }
    
     componentWillReceiveProps(nextProps) {
@@ -39,7 +38,9 @@ class InboxMessages extends Component {
         const { page, perPage} = this.state;
 
         this.props.getRecords({
-            page, perPage
+            page, perPage, filter: {
+                type: 'mail'
+            }
         });
     }
     
@@ -68,14 +69,10 @@ class InboxMessages extends Component {
             <Row index={key} key={key}>
                 <Td width='40px'>{this._recordNumber(key)}</Td>
                 <Td width='150px'>
-                    {!record.get('isRead') && <span className="m-badge m-badge--brand m-badge--wide m-badge--warning">!</span>}
-                    
-                    <NavLink className="m--margin-left-5 g-blue" to={`/messages/view/${record.get('id')}`}>{record.get('subject')}</NavLink>
-                </Td>
-                <Td width='130px'>
-                    <span className={`m-badge m-badge--brand m-badge--wide ${(record.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(record.get('type'))}</span>
+                    {record.get('body')}
                 </Td>
                 <Td width='100px'>{record.get('user') ? record.get('user').get('name') : ''}</Td>
+                <Td width='100px'>{record.get('isMine') ? record.get('recipients') : t('me')}</Td>
                 <Td width='100px'>{moment(record.get('sent')).format('lll')}</Td>
                 <Td width='100px' className="actions">
                     <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' to={`/messages/view/${record.get('id')}`}>
@@ -113,7 +110,7 @@ class InboxMessages extends Component {
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
                                 <span className='m-portlet__head-icon'><i className='la la-comment-o'></i></span>
-                                <h3 className='m-portlet__head-text'>{t('inboxMessages')}</h3>
+                                <h3 className='m-portlet__head-text'>{t('messages')}</h3>
                             </div>
                         </div>         
                     </div>
@@ -146,9 +143,9 @@ class InboxMessages extends Component {
                             <Thead>
                             <HeadRow>
                                 <Th width='40px'>#</Th>
-                                <Th width='150px'>{t('subject')}</Th>
-                                <Th width='130px'>{t('type')}</Th>
+                                <Th width='150px'>{t('message')}</Th>                                
                                 <Th width='100px'>{t('from')}</Th>
+                                <Th width='100px'>{t('to')}</Th>
                                 <Th width='100px'>{t('sentDate')}</Th>                                
                                 <Th width='100px'>{t('actions')}</Th>
                             </HeadRow>
@@ -172,14 +169,14 @@ class InboxMessages extends Component {
     }
 }
 
-InboxMessages = connect(
+Chats = connect(
     (state) => ({
-        getRecordsRequest: selectGetInboxRecordsRequest(state),
+        getRecordsRequest: selectGetRecordsRequest(state),
         deleteRecordRequest: selectDeleteRecordRequest(state)
     }),
     (dispatch) => ({
         getRecords: (params = {}) => {
-            dispatch(getInboxMessages(params));
+            dispatch(getMessages(params));
         },
         deleteMessage: (id) => {
             dispatch(deleteMessage(id));
@@ -188,6 +185,6 @@ InboxMessages = connect(
             dispatch(resetDeleteMessageRequest());
         }
     })
-)(InboxMessages);
+)(Chats);
 
-export default translate('translations')(InboxMessages);
+export default translate('translations')(Chats);

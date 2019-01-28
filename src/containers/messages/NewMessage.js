@@ -8,35 +8,24 @@ import MessageForm from "./forms/MessageForm"
 import Loader from '../../components/layouts/Loader';
 
 class NewMessage extends Component {
-    
-    constructor(props) {
-        super(props);
-        
-        this.state = {
-            isDraft: false
-        };
-    }
-    
+   
     componentWillReceiveProps(nextProps) {
        
         const {sendMessageRequest} = this.props;
         
         if (!sendMessageRequest.get('success') && nextProps.sendMessageRequest.get('success')) {
-            this._goBack(this.state.isDraft ? '/messages/drafts' : '/messages/sent');
+            this._goBack();
         }         
     }
     
-    _goBack(page = '/messages') {
+    _goBack() {
         this.props.resetSendMessageRequest();
-        this.props.goTo(page);
+        this.props.goTo('/messages/chats');
     }
     
     _save(data) {
-        this.setState({
-            isDraft: (data.isDraft || false)
-        });
         this.props.sendMessage(data);
-    }    
+    }   
     
     render() {
         const {sendMessageRequest, t} = this.props;
@@ -53,12 +42,12 @@ class NewMessage extends Component {
                                 <span className='m-portlet__head-icon'>
                                     <i className='la la-comments-o'></i>
                                 </span>
-                                <h3 className='m-portlet__head-text'>{t('message')}</h3>
+                                <h3 className='m-portlet__head-text'>{t('newMessage')}</h3>
                             </div>
                         </div>
                     </div>          
                     <div className="m-portlet__body">
-                        <MessageForm errors={errors} onSubmit={(data) => { this._save(data) }} onCancel={() => { this._goBack() }} />
+                        <MessageForm formData={this.state} errors={errors} onSubmit={(data) => { this._save(data) }} onCancel={() => { this._goBack() }} />
                     </div>
                 </div>               
             </div>

@@ -99,6 +99,10 @@ class ViewMessage extends Component {
                                 <h5 className="m--margin-bottom-20">{data.get('subject')} <span className={`m-badge m-badge--brand m-badge--wide ${(data.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(data.get('type'))}</span></h5>
                                 <p>{t('date')}: <strong>{moment(data.get('sent')).format('lll')}</strong></p>
                                 <p>{t('from')}: <strong>{data.get('user').get('name')}</strong></p>
+                                {data.get('isMine') ?
+                                <p>{t('to')}: <strong>{data.get('recipients')}</strong></p>
+                                :
+                                <p>{t('to')}: <strong>{t('me')}</strong></p>}
                                 <Divider className="m--margin-top-20 m--margin-bottom-30" /> 
                                 <p className="pre-line" style={{minHeight: 300}}>{data.get('body')}</p>                                                         
                                 <Divider className="m--margin-top-30 m--margin-bottom-30" /> 
@@ -107,7 +111,7 @@ class ViewMessage extends Component {
                         <div className="row">
                             <div className="col-sm-12 text-center">
                                 <HasPermission permissions={['[Messages][Reply]']}>
-                                    { (data.get('type') === 'mail') && <button onClick={() => { this._showReplyModal() }} disabled={loading} className="m--margin-right-10 btn btn-success" >{t('reply')}</button> }
+                                    { (data.get('type') === 'mail' && !data.get('isMine')) && <button onClick={() => { this._showReplyModal() }} disabled={loading} className="m--margin-right-10 btn btn-success" >{t('reply')}</button> }
                                 </HasPermission>
                                 <HasPermission permissions={['[Messages][Delete]']}>
                                     <DeleteButton                    
