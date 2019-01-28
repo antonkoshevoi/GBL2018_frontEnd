@@ -68,13 +68,13 @@ class Chats extends Component {
         return records.map((record, key) => (
             <Row index={key} key={key}>
                 <Td width='40px'>{this._recordNumber(key)}</Td>
-                <Td width='150px'>
-                    {record.get('body')}
+                <Td width='250px'>
+                    <div className='pre-line'>{record.get('body')}</div>
                 </Td>
-                <Td width='100px'>{record.get('user') ? record.get('user').get('name') : ''}</Td>
-                <Td width='100px'>{record.get('isMine') ? record.get('recipients') : t('me')}</Td>
-                <Td width='100px'>{moment(record.get('sent')).format('lll')}</Td>
-                <Td width='100px' className="actions">
+                <Td>{record.get('user') ? record.get('user').get('name') : ''}</Td>
+                <Td>{record.get('isMine') ? record.get('recipients') : t('me')}</Td>
+                <Td>{moment(record.get('sent')).format('lll')}</Td>
+                <Td className="actions">
                     <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' to={`/messages/view/${record.get('id')}`}>
                         <i className='la la-search'></i>
                     </NavLink>
@@ -143,11 +143,11 @@ class Chats extends Component {
                             <Thead>
                             <HeadRow>
                                 <Th width='40px'>#</Th>
-                                <Th width='150px'>{t('message')}</Th>                                
-                                <Th width='100px'>{t('from')}</Th>
-                                <Th width='100px'>{t('to')}</Th>
-                                <Th width='100px'>{t('sentDate')}</Th>                                
-                                <Th width='100px'>{t('actions')}</Th>
+                                <Th width='50%'>{t('message')}</Th>                                
+                                <Th>{t('from')}</Th>
+                                <Th>{t('to')}</Th>
+                                <Th>{t('sentDate')}</Th>                                
+                                <Th>{t('actions')}</Th>
                             </HeadRow>
                             </Thead>
 
