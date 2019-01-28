@@ -106,10 +106,10 @@ class Chats extends Component {
         return (
             <div className='fadeInLeft  animated'>               
                 <div className='m-portlet m-portlet--head-solid-bg'>
-                    <div className='m-portlet__head border-b-darkblue'>
+                    <div className='m-portlet__head border-b-violet'>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
-                                <span className='m-portlet__head-icon'><i className='la la-comment-o'></i></span>
+                                <span className='m-portlet__head-icon violet'><i className='la la-comment-o'></i></span>
                                 <h3 className='m-portlet__head-text'>{t('messages')}</h3>
                             </div>
                         </div>         
@@ -130,10 +130,10 @@ class Chats extends Component {
                                     </Select>
                                     <HasRole roles={['Superadministrator', 'School', 'Teacher']}>
                                         <NavLink to="/messages/new">
-                                            <Button color='primary' className='mt-btn mt-btn-success'>
+                                            <button className='btn btn-success violet'>
                                               {t('newMessage')}
-                                              <Icon className="m--margin-left-10">send</Icon>
-                                            </Button>
+                                              <span className='icon m--margin-left-10'><i className='fa fa-send'></i></span>                                             
+                                            </button>
                                         </NavLink>
                                     </HasRole>
                                 </div>
