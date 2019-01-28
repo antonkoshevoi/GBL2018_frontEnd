@@ -3,7 +3,7 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetRecordsRequest, selectDeleteRecordRequest } from '../../redux/messages/selectors';
 import { getMessages, deleteMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
-import { MenuItem, Select, Button, Icon } from '@material-ui/core';
+import { MenuItem, Select } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { NavLink } from "react-router-dom";
 import Pagination from '../../components/ui/Pagination';
