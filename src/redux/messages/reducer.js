@@ -1,13 +1,10 @@
 import {
     GET_MESSAGE, GET_MESSAGE_SUCCESS, GET_MESSAGE_FAIL, RESET_GET_MESSAGE_REQUEST,
-    GET_DRAFT_MESSAGE, GET_DRAFT_MESSAGE_SUCCESS, GET_DRAFT_MESSAGE_FAIL,
+    GET_MESSAGES, GET_MESSAGES_SUCCESS, GET_MESSAGES_FAIL,  
     SEND_MESSAGE, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAIL, RESET_SEND_MESSAGE_REQUEST,
+    UPDATE_MESSAGE, UPDATE_MESSAGE_SUCCESS, UPDATE_MESSAGE_FAIL, RESET_UPDATE_MESSAGE_REQUEST,
     REPLY_MESSAGE, REPLY_MESSAGE_SUCCESS, REPLY_MESSAGE_FAIL, RESET_REPLY_MESSAGE_REQUEST,
-    GET_SENT_MESSAGES, GET_SENT_MESSAGES_SUCCESS, GET_SENT_MESSAGES_FAIL,
-    GET_DRAFT_MESSAGES, GET_DRAFT_MESSAGES_SUCCESS, GET_DRAFT_MESSAGES_FAIL,
-    GET_INBOX_MESSAGES, GET_INBOX_MESSAGES_SUCCESS, GET_INBOX_MESSAGES_FAIL,
-    DELETE_MESSAGE, DELETE_MESSAGE_SUCCESS, DELETE_MESSAGE_FAIL, RESET_DELETE_MESSAGE_REQUEST,
-    DELETE_DRAFT_MESSAGE, DELETE_DRAFT_MESSAGE_SUCCESS, DELETE_DRAFT_MESSAGE_FAIL,
+    DELETE_MESSAGE, DELETE_MESSAGE_SUCCESS, DELETE_MESSAGE_FAIL, RESET_DELETE_MESSAGE_REQUEST,   
     GET_UNREAD_MESSAGES, GET_UNREAD_MESSAGES_SUCCESS, GET_UNREAD_MESSAGES_FAIL,
     VIEW_MESSAGE, VIEW_MESSAGE_SUCCESS, VIEW_MESSAGE_FAIL,    
     GET_GROUPS, GET_GROUPS_SUCCESS, GET_GROUPS_FAIL,
@@ -30,8 +27,14 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errors: []
+  },
+  updateMessageRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errors: []
   },  
-  getInboxRecordsRequest: {    
+  getRecordsRequest: {    
     loading: false,
     success: false,
     fail: false,
@@ -42,31 +45,7 @@ const initialState = Immutable.fromJS({
       total: 0,
       totalPages: 1
     } 
-  },
-  getSentRecordsRequest: {    
-    loading: false,
-    success: false,
-    fail: false,
-    records: Immutable.List(),
-    pagination: {
-      page: 1,
-      perPage: 25,
-      total: 0,
-      totalPages: 1
-    } 
-  },
-  getDraftRecordsRequest: {    
-    loading: false,
-    success: false,
-    fail: false,
-    records: Immutable.List(),
-    pagination: {
-      page: 1,
-      perPage: 25,
-      total: 0,
-      totalPages: 1
-    } 
-  }, 
+  },  
   getUnreadMessagesRequest: {
     loading: false,
     success: false,
@@ -145,6 +124,22 @@ export default function reducer (state = initialState, action) {
         );
     case RESET_SEND_MESSAGE_REQUEST:
         return state.set('sendMessageRequest', initialState.get('sendMessageRequest'));
+        
+    case UPDATE_MESSAGE:
+        return state.set('updateMessageRequest', initialState.get('updateMessageRequest').set('loading', true));
+    case UPDATE_MESSAGE_SUCCESS:
+        return state.set('updateMessageRequest', initialState.get('updateMessageRequest').set('success', true));        
+    case UPDATE_MESSAGE_FAIL:        
+      return state
+        .set('updateMessageRequest', state.get('updateMessageRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('errorCode', action.error.response.data.code)
+          .set('errorMessage', action.error.response.data.message)
+          .set('errors', action.error.response.data.code === 422 ? Immutable.fromJS(action.error.response.data.errors) : undefined)
+        );
+    case RESET_UPDATE_MESSAGE_REQUEST:
+        return state.set('updateMessageRequest', initialState.get('updateMessageRequest'));        
     
     case REPLY_MESSAGE:
         return state.set('replyMessageRequest', initialState.get('replyMessageRequest').set('loading', true));
@@ -162,14 +157,11 @@ export default function reducer (state = initialState, action) {
     case RESET_REPLY_MESSAGE_REQUEST:
         return state.set('replyMessageRequest', initialState.get('replyMessageRequest'));        
         
-    case DELETE_MESSAGE:
-    case DELETE_DRAFT_MESSAGE:
+    case DELETE_MESSAGE:    
         return state.set('deleteRecordRequest', initialState.get('deleteRecordRequest').set('loading', true));
-    case DELETE_MESSAGE_SUCCESS:
-    case DELETE_DRAFT_MESSAGE_SUCCESS:
+    case DELETE_MESSAGE_SUCCESS:    
         return state.set('deleteRecordRequest', initialState.get('deleteRecordRequest').set('success', true));
-    case DELETE_MESSAGE_FAIL:
-    case DELETE_DRAFT_MESSAGE_FAIL:
+    case DELETE_MESSAGE_FAIL:    
       return state
         .set('deleteRecordRequest', state.get('deleteRecordRequest')
           .set('loading', false)
@@ -182,12 +174,10 @@ export default function reducer (state = initialState, action) {
         return state.set('deleteRecordRequest', initialState.get('deleteRecordRequest'));        
 
     case GET_MESSAGE:
-    case VIEW_MESSAGE:
-    case GET_DRAFT_MESSAGE:
+    case VIEW_MESSAGE:    
         return state.set('getRecordRequest', initialState.get('getRecordRequest').set('loading', true));
     case GET_MESSAGE_SUCCESS:
-    case VIEW_MESSAGE_SUCCESS:
-    case GET_DRAFT_MESSAGE_SUCCESS:
+    case VIEW_MESSAGE_SUCCESS:    
         return state
         .set('getRecordRequest', state.get('getRecordRequest')
           .set('success', true)
@@ -195,41 +185,20 @@ export default function reducer (state = initialState, action) {
           .set('record', Immutable.fromJS(action.result.data))
         );
     case GET_MESSAGE_FAIL:
-    case VIEW_MESSAGE_FAIL:
-    case GET_DRAFT_MESSAGE_FAIL:
+    case VIEW_MESSAGE_FAIL:    
         return state.set('getRecordRequest', initialState.get('getRecordRequest').set('fail', true));
     case RESET_GET_MESSAGE_REQUEST:        
-        return state.set('getRecordRequest', initialState.get('getRecordRequest'));
+        return state.set('getRecordRequest', initialState.get('getRecordRequest'));       
         
-    case GET_INBOX_MESSAGES:
-        return state.set('getInboxRecordsRequest', initialState.get('getInboxRecordsRequest').set('loading', true));
-    case GET_INBOX_MESSAGES_SUCCESS:
-        return state.set('getInboxRecordsRequest', initialState.get('getInboxRecordsRequest')
-                .set('success', true)
-                .set('pagination', Immutable.fromJS(action.result.meta.pagination))
-                .set('records', Immutable.fromJS(action.result.data)));        
-    case GET_INBOX_MESSAGES_FAIL:
-        return state.set('getInboxRecordsRequest', initialState.get('getInboxRecordsRequest').set('fail', true));
-        
-    case GET_SENT_MESSAGES:
-        return state.set('getSentRecordsRequest', initialState.get('getSentRecordsRequest').set('loading', true));
-    case GET_SENT_MESSAGES_SUCCESS:
-        return state.set('getSentRecordsRequest', initialState.get('getSentRecordsRequest')
-                .set('success', true)
-                .set('pagination', Immutable.fromJS(action.result.meta.pagination))
-                .set('records', Immutable.fromJS(action.result.data)));        
-    case GET_SENT_MESSAGES_FAIL:
-        return state.set('getSentRecordsRequest', initialState.get('getSentRecordsRequest').set('fail', true));
-        
-    case GET_DRAFT_MESSAGES:    
-        return state.set('getDraftRecordsRequest', initialState.get('getDraftRecordsRequest').set('loading', true));    
-    case GET_DRAFT_MESSAGES_SUCCESS:    
-        return state.set('getDraftRecordsRequest', initialState.get('getDraftRecordsRequest')
+    case GET_MESSAGES:    
+        return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('loading', true));    
+    case GET_MESSAGES_SUCCESS:    
+        return state.set('getRecordsRequest', initialState.get('getRecordsRequest')
                 .set('success', true)
                 .set('pagination', Immutable.fromJS(action.result.meta.pagination))
                 .set('records', Immutable.fromJS(action.result.data)));           
-    case GET_DRAFT_MESSAGES_FAIL:   
-        return state.set('getDraftRecordsRequest', initialState.get('getDraftRecordsRequest').set('fail', true));
+    case GET_MESSAGES_FAIL:   
+        return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('fail', true));    
     
     case GET_UNREAD_MESSAGES:    
         return state.set('getUnreadMessagesRequest', initialState.get('getUnreadMessagesRequest').set('loading', true));

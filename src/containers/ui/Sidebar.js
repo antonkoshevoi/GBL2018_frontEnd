@@ -124,7 +124,8 @@ class Sidebar extends Component {
     return subMenus.map(function (menu, i) {
       return (
         <div key={i}>
-          <NavLink activeClassName={'active'} to={`/${menu.link}`} key={i}>
+          <NavLink className={menu.colorName || 'default'} activeClassName='active' to={`/${menu.link}`} key={i}>
+            {menu.icon && <span className="icon"><i className={menu.icon}></i></span>}
             <span className="content"> {t(menu.title) }</span>
           </NavLink >
         </div>

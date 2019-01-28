@@ -68,5 +68,9 @@ export default {
     newMessageGroup: 'Messages - New Group',
     editMessageGroup: 'Messages - Update Group',
     restorePassword: 'Restore Password',
-    resetPassword: 'Reset Password'    
+    resetPassword: 'Reset Password',
+    alerts: 'Alerts',
+    announcements: 'Announcements',
+    assignments: 'Assignments',
+    chats: 'Chats'    
 }

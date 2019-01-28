@@ -38,6 +38,7 @@ class Alerts extends Component {
     
     render() {
         const { alers } = this.state;
+        const { t } = this.props;
         
         if (!alers.size) {
             return '';
@@ -50,7 +51,7 @@ class Alerts extends Component {
                         <button onClick={() => { this._markAsRead(message.get('id')) } } type="button" className="close pull-right no-padding" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 className="alert-heading">{message.get('subject')}</h4>
+                        <h4 className="alert-heading">{t(message.get('type'))}</h4>
                         <p>{message.get('body')}</p>
                     </div>
                 </div>;

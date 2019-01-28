@@ -60,6 +60,7 @@ class Messages extends Component {
     }
           
   _renderMessages () {
+    const { t } = this.props;      
     return this.state.messages.map((message, key) => (
       <div key={key} className='m-widget1__item'>
         <div className='row m-row--no-padding align-items-center'>
@@ -71,7 +72,7 @@ class Messages extends Component {
           <div className='col'>
             <NavLink to={`/messages/view/${message.get('id')}`}>
                 <h3 className='m-widget1__title'>{ message.get('user').get('username') }</h3>
-                <span className='m-widget1__desc'>{ message.get('subject') }</span>
+                <span className='m-widget1__desc'>{ t(message.get('type')) }</span>
             </NavLink>
           </div>
         </div>

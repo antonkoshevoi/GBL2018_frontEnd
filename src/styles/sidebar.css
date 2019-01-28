@@ -31,11 +31,43 @@ nav.navigation > .menuItem > a, nav.navigation .second_level a{
     position: relative;
     transition: all .5s;
 }
-
-nav.navigation .second_level a.active {
-    background-color: #0000000d;
+nav.navigation .second_level a span.icon i {
+    margin-right: 5px;    
 }
-
+nav.navigation .second_level a span.icon i.la {
+    font-size: 24px;
+    font-weight: 500;
+}
+nav.navigation .second_level a span.icon i.fa {
+    font-size: 20px;
+}
+nav.navigation .second_level a.red, nav.navigation .second_level a.red.active, nav.navigation .second_level a.red.active:hover {
+    background-color: #CE342C !important;
+    color: #ffffff;
+}
+nav.navigation .second_level a.blue, nav.navigation .second_level a.blue.active, nav.navigation .second_level a.blue.active:hover {
+    background-color: #4FA1EA !important;
+    color: #ffffff;
+}
+nav.navigation .second_level a.green, nav.navigation .second_level a.green.active, nav.navigation .second_level a.green.active:hover {
+    background-color: #558436 !important;
+    color: #ffffff;
+}
+nav.navigation .second_level a.grey, nav.navigation .second_level a.grey.active, nav.navigation .second_level a.grey.active:hover {
+    background-color: #B1C0BD !important;
+    color: #ffffff;
+}
+nav.navigation .second_level a.violet, nav.navigation .second_level a.violet.active, nav.navigation .second_level a.violet.active:hover {
+    background-color: #7900C7 !important;
+    color: #ffffff;
+}
+.second_level a.red:hover, .second_level a.blue:hover, .second_level a.green:hover, .second_level a.grey:hover, .second_level a.violet:hover {        
+    -webkit-filter: grayscale(25%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(25%);    
+}
+nav.navigation .second_level a.active {
+    background-color: #E9E9E9;
+}
 nav.navigation > .menuItem > a > .icon {
     display: table-cell;
     vertical-align: middle;

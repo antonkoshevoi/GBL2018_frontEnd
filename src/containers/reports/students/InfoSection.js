@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Card from "../../../components/ui/Card";
-import {MyPreloader} from '../../../components/ui/table';
+import {Preloader} from '../../../components/ui/Preloader';
 import {IconButton, CircularProgress} from '@material-ui/core';
 import {translate} from 'react-i18next';
 import {connect} from "react-redux";
@@ -86,7 +86,7 @@ class InfoSection extends Component {
       <div className="row">
         <div className="col-sm-5 col-md-4 col-lg-3">
           <div className="imgBlock">
-            {studentRequest.get('loading') ? <MyPreloader text="Loading..." color="primary"/> : 
+            {studentRequest.get('loading') ? <Preloader text={t('loading')} color="primary"/> : 
             <div className="avatar m--margin-bottom-20">
               {student && <img src={(student.avatar || defaultAvatar)} alt="" className="" />}
             </div>}
