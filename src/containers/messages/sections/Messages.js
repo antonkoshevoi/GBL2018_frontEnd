@@ -97,7 +97,7 @@ class Messages extends Component {
     _showEditMessageModal(record) {
         this.setState({
             showEditMessageModal: true,
-            message: record.toJS()
+            message: record
         });
     }
     
