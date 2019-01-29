@@ -209,8 +209,10 @@ class Messages extends Component {
                             <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
                         </div>
                     </div>
-                    <NewMessageModal type={type} title={t(`new${typeTitle}`)} icon={icon} isOpen={showNewMessageModal} onClose={() => this._closeNewMessageModal()} onSuccess={() => this._getRecords()} />                
-                    <EditMessageModal type={type} title={t(`edit${typeTitle}`)} icon={icon} message={message}  isOpen={showEditMessageModal} onClose={() => this._closeEditMessageModal()} onSuccess={() => this._getRecords()} />
+                    <HasRole roles={['Superadministrator', 'School', 'Teacher']}>
+                        <NewMessageModal type={type} title={t(`new${typeTitle}`)} icon={icon} isOpen={showNewMessageModal} onClose={() => this._closeNewMessageModal()} onSuccess={() => this._getRecords()} />                
+                        <EditMessageModal type={type} title={t(`edit${typeTitle}`)} icon={icon} message={message}  isOpen={showEditMessageModal} onClose={() => this._closeEditMessageModal()} onSuccess={() => this._getRecords()} />
+                    </HasRole>        
                 </div>
             </div>
         );
