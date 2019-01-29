@@ -608,5 +608,5 @@ export default {
     editAnnouncement: 'Edit Announcement',
     editAssignment: 'Edit Assignment',    
     loading: 'Loading...',
-    me: 'Me'
+    me: 'Me'    
 }

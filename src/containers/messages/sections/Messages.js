@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetRecordsRequest, selectDeleteRecordRequest } from '../../../redux/messages/selectors';
-import { getMessages, deleteMessage, resetDeleteMessageRequest } from '../../../redux/messages/actions';
+import { selectGetRecordsRequest, selectDeleteRecordRequest, selectReadMessageRequest } from '../../../redux/messages/selectors';
+import { getMessages, readMessage, deleteMessage, resetDeleteMessageRequest } from '../../../redux/messages/actions';
 import { Avatar } from '@material-ui/core';
 import { Preloader } from '../../../components/ui/Preloader';
 import Pagination from '../../../components/ui/Pagination';
@@ -16,7 +16,8 @@ class Messages extends Component {
 
     constructor(props) {
         super(props);        
-        this.state = {            
+        this.state = {
+            records: [],
             showNewMessageModal: false,
             showEditMessageModal: false,
             message: null,
@@ -24,6 +25,15 @@ class Messages extends Component {
             perPage: props.getRecordsRequest.get('pagination').get('perPage')
         }
     }
+    
+    componentDidMount() {
+        this.interval = setInterval(() => this._readMessages(), 15000);
+    }    
+
+    componentWillUnmount() {
+        this._readMessages();    
+        clearInterval(this.interval);
+    }    
 
     componentWillMount() {
         const {getRecords} = this.props;        
@@ -35,13 +45,42 @@ class Messages extends Component {
     }
    
     componentWillReceiveProps(nextProps) {
-        const {deleteRecordRequest, resetDeleteMessageRequest} = this.props;
+        const {deleteRecordRequest, getRecordsRequest, readMessageRequest, resetDeleteMessageRequest} = this.props;
 
+        if (!getRecordsRequest.get('success') && nextProps.getRecordsRequest.get('success')) {            
+            this.setState({
+                records: nextProps.getRecordsRequest.get('records').toJS()
+            });
+        }
+        
         if (!deleteRecordRequest.get('success') && nextProps.deleteRecordRequest.get('success')) {
             resetDeleteMessageRequest();
             this._getRecords();
-        }             
+        }
+        
+        if (!readMessageRequest.get('success') && nextProps.readMessageRequest.get('success')) {            
+            this.setState({records: this.state.records.map((item) => {
+                item.isRead = true;
+                return item;
+            })});
+        }                
     }   
+    
+    _readMessages() {
+        let ids = [];
+        
+        this.state.records.map((item) => {
+            if (!item.isRead) {
+                ids.push(item.id);
+            }            
+            return item.id;
+        });
+        
+        if (ids.length > 0) {
+            this.props.readMessage({ids: ids});
+        }        
+        clearInterval(this.interval);
+    }
     
     _showNewMessageModal() {
         this.setState({
@@ -87,7 +126,7 @@ class Messages extends Component {
     _renderRecords() {
         const {t} = this.props;
         const loading = this.props.getRecordsRequest.get('loading');
-        const records = this.props.getRecordsRequest.get('records');                               
+        const records = this.state.records;
         
         if (!loading && records.size === 0) {
             return (
@@ -96,33 +135,33 @@ class Messages extends Component {
         }
 
         return records.map((record, key) => (
-            <div className='row d-flex align-items-center' index={key} key={key}>
+            <div className={`row d-flex align-items-center ${record.isRead ? 'message-read' : 'message-new'}`} index={key} key={key}>
                 <div className='col-2 col-sm-3 col-lg-2 text-center'>
                     <div className='d-flex align-items-center justify-content-around'>
                         <div>
-                            <Avatar style={{width:100, height:100}} src={record.get('user').get('avatarSmall')}/>
+                            <Avatar style={{width:100, height:100}} src={record.user.avatarSmall}/>
                         </div>
                         <div className='text-center'>
-                            <p>{t(record.get('user').get('school'))} {t(record.get('user').get('role'))}</p>
-                            <p className='text-muted mb-0'><b>{record.get('user').get('name')}</b></p>
+                            <p>{t(record.user.school)} {t(record.user.role)}</p>
+                            <p className='text-muted mb-0'><b>{record.user.name}</b></p>
                         </div>
                     </div>
                 </div>
                 <div className='col-6 col-sm-6 col-lg-7 text-left'>                    
-                    <div className='pre-line'>{record.get('body')}</div>
+                    <div className='pre-line'>{record.body}</div>
                 </div>
                 <div className='col-1 col-sm-3 text-center'>
-                    <p>{moment(record.get('sent')).format('lll')}</p>
-                    {record.get('isMine') && 
-                        <p>{t('recipients')}: <i>{record.get('recipients')}</i></p>
+                    <p>{moment(record.sent).format('lll')}</p>
+                    {record.isMine && 
+                        <p>{t('recipients')}: <i>{record.recipients}</i></p>
                     }
                     <p>
-                        {record.get('isMine') &&
+                        {record.isMine &&
                             <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showEditMessageModal(record) }}>
                                 <i className='la la-pencil'></i>
                             </button>        
                         }
-                        <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>                    
+                        <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.id) }}/>                    
                     </p>
                 </div>
             </div>
@@ -181,11 +220,15 @@ class Messages extends Component {
 Messages = connect(
     (state) => ({
         getRecordsRequest: selectGetRecordsRequest(state),
-        deleteRecordRequest: selectDeleteRecordRequest(state)        
+        deleteRecordRequest: selectDeleteRecordRequest(state),
+        readMessageRequest: selectReadMessageRequest(state)
     }),
     (dispatch) => ({
         getRecords: (params = {}) => {
             dispatch(getMessages(params));
+        },
+        readMessage: (id) => {
+            dispatch(readMessage(id));
         },
         deleteMessage: (id) => {
             dispatch(deleteMessage(id));

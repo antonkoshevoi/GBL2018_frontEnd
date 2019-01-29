@@ -12,6 +12,10 @@ export const VIEW_MESSAGE = '[Messages] VIEW_MESSAGE';
 export const VIEW_MESSAGE_SUCCESS = '[Messages] VIEW_MESSAGE_SUCCESS';
 export const VIEW_MESSAGE_FAIL = '[Messages] VIEW_MESSAGE_FAIL';
 
+export const READ_MESSAGE = '[Messages] READ_MESSAGE';
+export const READ_MESSAGE_SUCCESS = '[Messages] READ_MESSAGE_SUCCESS';
+export const READ_MESSAGE_FAIL = '[Messages] READ_MESSAGE_FAIL';
+
 export const SEND_MESSAGE = '[Messages] SEND_MESSAGE';
 export const SEND_MESSAGE_SUCCESS = '[Messages] SEND_MESSAGE_SUCCESS';
 export const SEND_MESSAGE_FAIL = '[Messages] SEND_MESSAGE_FAIL';
@@ -97,6 +101,13 @@ export function resetReplyMessageRequest() {
     return {
         type: RESET_REPLY_MESSAGE_REQUEST
     };
+}
+
+export function readMessage(params = {}) {
+  return {    
+    types: [READ_MESSAGE, READ_MESSAGE_SUCCESS, READ_MESSAGE_FAIL],
+    promise: (apiClient) => apiClient.post(`messages/read`, params)
+  };
 }
 
 export function getMessage(id) {

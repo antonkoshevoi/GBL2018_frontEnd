@@ -15,6 +15,11 @@ export const selectReplyMessageRequest = createSelector(
   (subState) => subState.get('replyMessageRequest')
 );
 
+export const selectReadMessageRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('readMessageRequest')
+);
+
 export const selectUpdateMessageRequest = createSelector(
   selectMessagesDomain,
   (subState) => subState.get('updateMessageRequest')

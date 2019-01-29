@@ -42,7 +42,7 @@ class MessageForm extends Component {
         
         onSubmit({            
             message:    message,            
-            type:       'mail',
+            type:       'chat',
             group:      group            
         });  
     }    

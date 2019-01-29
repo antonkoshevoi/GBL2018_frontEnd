@@ -52,7 +52,7 @@ class Alerts extends Component {
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <h4 className="alert-heading">{t(message.get('type'))}</h4>
-                        <p>{message.get('body')}</p>
+                        <p className='mb-0 mt-2 pre-line'>{message.get('body')}</p>
                     </div>
                 </div>;
             })}

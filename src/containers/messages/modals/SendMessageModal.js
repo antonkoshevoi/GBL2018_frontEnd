@@ -58,9 +58,9 @@ class SendMessageModal extends Component {
         const { message, userId } = this.state;
 
         this.props.sendMessage({            
-            message:        message,
-            type:           'mail',            
-            userId:         userId
+            message:    message,
+            type:       'chat',            
+            userId:     userId
         });
     };
   

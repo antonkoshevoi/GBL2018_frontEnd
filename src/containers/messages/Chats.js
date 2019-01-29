@@ -39,7 +39,7 @@ class Chats extends Component {
 
         this.props.getRecords({
             page, perPage, filter: {
-                type: 'mail'
+                type: 'chat'
             }
         });
     }
