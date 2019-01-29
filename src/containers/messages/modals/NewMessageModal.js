@@ -67,7 +67,7 @@ class NewMessageModal extends Component {
             group: group,      
             message: message,
             expired: expired,
-            type: type || 'email'
+            type: type || 'chat'
         });
     };
   

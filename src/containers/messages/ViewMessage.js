@@ -111,7 +111,7 @@ class ViewMessage extends Component {
                         <div className="row">
                             <div className="col-sm-12 text-center">
                                 <HasPermission permissions={['[Messages][Reply]']}>
-                                    { (data.get('type') === 'mail' && !data.get('isMine')) && <button onClick={() => { this._showReplyModal() }} disabled={loading} className="m--margin-right-10 btn btn-success" >{t('reply')}</button> }
+                                    { (data.get('type') === 'chat' && !data.get('isMine')) && <button onClick={() => { this._showReplyModal() }} disabled={loading} className="m--margin-right-10 btn btn-success" >{t('reply')}</button> }
                                 </HasPermission>
                                 <HasPermission permissions={['[Messages][Delete]']}>
                                     <DeleteButton                    

@@ -1197,6 +1197,9 @@ td.rotate div span {
     margin: 10px -7px;
     padding: 15px 0;
 }
+.messages > div.row.message-new {
+    background-color: #E0FCFF;
+}
 .m-portlet__head-icon.red i {
     color: #CE342C;
 }
