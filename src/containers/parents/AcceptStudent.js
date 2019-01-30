@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { push } from 'react-router-redux';
-import { selectStudentStatusRequest } from "../../redux/parents/selectors";
-import { acceptStudentRequestPublic, acceptStudentRequest, resetStudentRequest } from "../../redux/parents/actions"; 
+import { selectStudentStatusRequest } from "../../redux/student-parents/selectors";
+import { acceptStudentRequestPublic, acceptStudentRequest, resetStudentRequest } from "../../redux/student-parents/actions"; 
 import { load } from '../../redux/app/actions';
 import Loader from '../../components/layouts/Loader';
 

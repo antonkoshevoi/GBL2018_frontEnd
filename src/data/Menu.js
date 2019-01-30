@@ -29,6 +29,11 @@ export default  {
                     key: 'students',
                     title: 'students',
                     link: 'students/list'
+                },
+                {
+                    key: 'parents',
+                    title: 'parents',
+                    link: 'parents/list'
                 }
             ]
         },

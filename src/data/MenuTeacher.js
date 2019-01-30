@@ -9,11 +9,23 @@ export default  {
             colorName: 'home',
         },
         {
-            key: 'students',
-            title: 'students',
-            link: 'students/list',
+            key: 'studentsAndParents',
+            title: 'studentsAndParents',
+            link: 'dashboard',
             icon: 'fa fa-group',
-            colorName: 'orange'
+            colorName: 'orange',
+            subMenu: [
+                {
+                    key: 'students',
+                    title: 'students',
+                    link: 'students/list'
+                },
+                {
+                    key: 'parents',
+                    title: 'parents',
+                    link: 'parents/list'
+                }
+            ]
         },
         {
             key: 'learningAreas',

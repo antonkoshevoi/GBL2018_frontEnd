@@ -608,5 +608,11 @@ export default {
     editAnnouncement: 'Edit Announcement',
     editAssignment: 'Edit Assignment',    
     loading: 'Loading...',
-    me: 'Me'    
+    me: 'Me',
+    parents: 'Parents',
+    addNewParent: 'Add New Parent',
+    updateParent: 'Update Parent',
+    createParent: 'Create Parent',
+    editParent: 'Edit Parent',
+    parentsNotFound: 'Parents Not Found...'
 }

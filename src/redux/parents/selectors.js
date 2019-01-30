@@ -9,50 +9,56 @@ export const selectParentsDomain = (state) => state.parents;
  * Get Records Request
  */
 export const selectGetRecordsRequest = createSelector(
-  selectParentsDomain,
+    selectParentsDomain,
   (subState) => subState.get('getRecordsRequest')
 );
-
 /**
  * Get Single Request
  */
-export const selectGetRecordRequest = createSelector(
-  selectParentsDomain,
-  (subState) => subState.get('getRecordRequest')
+export const selectGetSingleRecordRequest = createSelector(
+    selectParentsDomain,
+  (subState) => subState.get('getSingleRecordRequest')
+);
+/**
+ * Records
+ */
+export const selectRecords = createSelector(
+    selectParentsDomain,
+  (subState) => subState.get('records')
+);
+/**
+ * Pagiantion
+ */
+export const selectPagination = createSelector(
+    selectParentsDomain,
+  (subState) => subState.get('pagination')
 );
 
 /**
- * Get student requests request
+ * Create
  */
-export const selectStudentsRequest = createSelector(
+export const selectCreateRequest = createSelector(
+    selectParentsDomain,
+  (subState) => subState.get('createRequest')
+);
+/**
+ * Update
+ */
+export const selectUpdateRequest = createSelector(
+    selectParentsDomain,
+  (subState) => subState.get('updateRequest')
+);
+/**
+ * Delete
+ */
+export const selectDeleteRequest = createSelector(
+  selectParentsDomain,
+  (subState) => subState.get('deleteRequest')
+);
+/**
+ * Delete
+ */
+export const selectGetStudentsRequest = createSelector(
   selectParentsDomain,
   (subState) => subState.get('getStudentsRequest')
 );
-
-
-/**
- * Get update student status request
- */
-export const selectStudentStatusRequest = createSelector(
-  selectParentsDomain,
-  (subState) => subState.get('studentStatusRequest')
-);
-
-/**
- * Get sent student request
- */
-export const selectSentStudentRequest = createSelector(
-  selectParentsDomain,
-  (subState) => subState.get('sentStudentRequest')
-);
-
-/**
- * Create parent
- */
-export const selectCreateRequest = createSelector(
-  selectParentsDomain,
-  (subState) => subState.get('createRequest')
-);
-
-
-

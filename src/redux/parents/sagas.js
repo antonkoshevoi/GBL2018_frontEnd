@@ -1,46 +1,25 @@
-import { all, put, takeLatest } from 'redux-saga/effects';
-
+import { all } from 'redux-saga/effects';
 import {
-    GET_RECORDS_FAIL, 
-    GET_RECORD_FAIL,
-    CREATE_SUCCESS, CREATE_FAIL, 
-    GET_STUDENTS_FAIL,
-    GET_STUDENT_REQUESTS_FAIL, 
-    ACCEPT_STUDENT_SUCCESS, ACCEPT_STUDENT_FAIL,
-    ACCEPT_STUDENT_PUBLIC_SUCCESS, ACCEPT_STUDENT_PUBLIC_FAIL,
-    DECLINE_STUDENT_SUCCESS, DECLINE_STUDENT_FAIL, 
-    DELETE_STUDENT_REQUST_SUCCESS, DELETE_STUDENT_REQUST_FAIL, 
-    SENT_STUDENT_REQUEST_SUCCESS, SENT_STUDENT_REQUEST_FAIL    
+  CREATE_FAIL, CREATE_SUCCESS, GET_RECORDS_FAIL,
+  GET_SINGLE_RECORD_FAIL, UPDATE_FAIL, GET_STUDENTS_FAIL,
+  UPDATE_SUCCESS, DELETE_FAIL, DELETE_SUCCESS
 } from './actions';
 import { yieldErrorToasts, yieldSuccessToasts } from '../../helpers/utils';
 import i18n from '../../configs/i18n';
-import { restoreLogin } from '../auth/actions';
 
-function* onSuccess (action) {    
-    yield put(restoreLogin());
-}
-
-const parentsSagas = all([ 
-  takeLatest(ACCEPT_STUDENT_PUBLIC_SUCCESS, onSuccess),
+const parentsSagas = all([
   yieldSuccessToasts({
-    [CREATE_SUCCESS]: i18n.t('messages:parentAccountCreated'),            
-    [SENT_STUDENT_REQUEST_SUCCESS]: i18n.t('messages:requestHasBeenSent'),    
-    [ACCEPT_STUDENT_SUCCESS]: i18n.t('messages:studentRequestIsAccepted'),
-    [ACCEPT_STUDENT_PUBLIC_SUCCESS]: i18n.t('messages:studentRequestIsAccepted'),
-    [DECLINE_STUDENT_SUCCESS]: i18n.t('messages:studentRequestIsDeclined'),
-    [DELETE_STUDENT_REQUST_SUCCESS]: i18n.t('messages:studentRequestIsDeleted'),
+    [CREATE_SUCCESS]: i18n.t('messages:created'),
+    [UPDATE_SUCCESS]: i18n.t('messages:updated'),
+    [DELETE_SUCCESS]: i18n.t('messages:deleted')    
   }),
   yieldErrorToasts([
-    GET_RECORDS_FAIL, 
-    GET_RECORD_FAIL,
-    CREATE_FAIL, 
-    GET_STUDENTS_FAIL,
-    GET_STUDENT_REQUESTS_FAIL, 
-    ACCEPT_STUDENT_FAIL,
-    DECLINE_STUDENT_FAIL, 
-    DELETE_STUDENT_REQUST_FAIL, 
-    SENT_STUDENT_REQUEST_FAIL,
-    ACCEPT_STUDENT_PUBLIC_FAIL
+    GET_RECORDS_FAIL,
+    GET_SINGLE_RECORD_FAIL,
+    CREATE_FAIL,
+    UPDATE_FAIL,
+    DELETE_FAIL,
+    GET_STUDENTS_FAIL
   ])
 ]);
 

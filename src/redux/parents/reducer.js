@@ -1,41 +1,35 @@
 import {
-    GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, 
-    GET_RECORD, GET_RECORD_SUCCESS, GET_RECORD_FAIL, RESET_GET_RECORD_REQUEST,
-    CREATE, CREATE_SUCCESS, CREATE_FAIL, RESET_CREATE_REQUEST, 
-    GET_STUDENTS, GET_STUDENTS_SUCCESS, GET_STUDENTS_FAIL,
-    GET_STUDENT_REQUESTS, GET_STUDENT_REQUESTS_SUCCESS, GET_STUDENT_REQUESTS_FAIL, 
-    ACCEPT_STUDENT, ACCEPT_STUDENT_SUCCESS, ACCEPT_STUDENT_FAIL,
-    ACCEPT_STUDENT_PUBLIC, ACCEPT_STUDENT_PUBLIC_SUCCESS, ACCEPT_STUDENT_PUBLIC_FAIL,
-    DECLINE_STUDENT, DECLINE_STUDENT_SUCCESS, DECLINE_STUDENT_FAIL, 
-    DELETE_STUDENT_REQUST, DELETE_STUDENT_REQUST_SUCCESS, DELETE_STUDENT_REQUST_FAIL, 
-    SENT_STUDENT_REQUEST, SENT_STUDENT_REQUEST_SUCCESS, SENT_STUDENT_REQUEST_FAIL, 
-    RESET_SENT_STUDENT_REQUEST, RESET_STUDENT_REQUEST
+  GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL, 
+  CREATE, CREATE_SUCCESS, CREATE_FAIL,
+  GET_STUDENTS, GET_STUDENTS_SUCCESS, GET_STUDENTS_FAIL,
+  RESET_CREATE_REQUEST, GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL,
+  GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST, 
+  UPDATE, UPDATE_FAIL, RESET_UPDATE_REQUEST, UPDATE_SUCCESS,
+  DELETE, DELETE_SUCCESS, DELETE_FAIL,
 } from './actions';
 import Immutable from 'immutable';
-import { saveSession } from '../../helpers/session';
 
 const initialState = Immutable.fromJS({
   getRecordsRequest: {
     loading: false,
     success: false,
     fail: false,
-    errorResponse: null,
-    records: {}
-  },
-  getRecordRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errorResponse: null,
-    record: {}
+    errorResponse: null
   },
   getStudentsRequest: {
     loading: false,
     success: false,
     fail: false,
     errorResponse: null,
-    records: {}
-  }, 
+    records: Immutable.List()
+  },  
+  getSingleRecordRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null,
+    record: {}
+  },
   createRequest: {
     loading: false,
     success: false,
@@ -44,21 +38,28 @@ const initialState = Immutable.fromJS({
     errorCode: null,
     errors: {}
   },
-  studentStatusRequest: {
+  updateRequest: {
     loading: false,
     success: false,
     fail: false,
     errorMessage: null,
     errorCode: null,
-    errors: {}    
+    errors: {}
   },
-  sentStudentRequest: {
+  deleteRequest: {
     loading: false,
     success: false,
     fail: false,
     errorMessage: null,
     errorCode: null,
-    errors: {}    
+    errors: {}
+  },
+  records: Immutable.List(),
+  pagination: {
+    page: 1,
+    perPage: 25,
+    total: 0,
+    totalPages: 1
   }
 });
 
@@ -68,104 +69,121 @@ export default function reducer (state = initialState, action) {
      * Get records
      */
     case GET_RECORDS:
-      return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('loading', true).set('records', Immutable.List()));
+      return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('loading', true));
     case GET_RECORDS_SUCCESS:
       return state
-        .set('getRecordsRequest', state.get('getRecordsRequest')
-          .set('success', true)
-          .set('records', Immutable.fromJS(action.result.data))
-          .remove('loading')
-        );
+        .set('getRecordsRequest', initialState.get('getRecordsRequest').set('success', true))
+        .set('records', Immutable.fromJS(action.result.data))
+        .set('pagination', Immutable.fromJS(action.result.meta.pagination));
     case GET_RECORDS_FAIL:
       return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('fail', true));
 
-    /**
-     * Get student requests
-     */
-    case GET_STUDENTS: 
-    case GET_STUDENT_REQUESTS:
-      return state
-        .set('getStudentsRequest', initialState.get('getStudentsRequest').set('loading', true).set('records', Immutable.List()));
+    case GET_STUDENTS:
+      return state.set('getStudentsRequest', initialState.get('getStudentsRequest').set('loading', true));
     case GET_STUDENTS_SUCCESS:
-    case GET_STUDENT_REQUESTS_SUCCESS:
-      return state
-        .set('getStudentsRequest', initialState.get('getStudentsRequest').set('success', true).set('records', Immutable.fromJS(action.result.data)));
+      return state.set('getStudentsRequest', initialState.get('getStudentsRequest')
+              .set('success', true)
+              .set('records', Immutable.fromJS(action.result.data)));      
     case GET_STUDENTS_FAIL:
-    case GET_STUDENT_REQUESTS_FAIL:
       return state.set('getStudentsRequest', initialState.get('getStudentsRequest').set('fail', true));
 
     /**
      * Get single record
      */
-    case GET_RECORD:
-      return state.set('getRecordRequest', initialState.get('getRecordRequest').set('loading', true));
-    case GET_RECORD_SUCCESS:
-      return state
-        .set('getRecordRequest', initialState.get('getRecordRequest').set('success', true).set('record', Immutable.fromJS(action.result.data)));
-    case GET_RECORD_FAIL:
-      return state.set('getRecordRequest', initialState.get('getRecordRequest').set('fail', true));
-    case RESET_GET_RECORD_REQUEST:
-      return state.set('getRecordRequest', initialState.get('getRecordRequest'));
-
-    /**
-     * Link to parent
-     */ 
-    case SENT_STUDENT_REQUEST:
-      return state.set('sentStudentRequest', initialState.get('sentStudentRequest').set('loading', true));  
-    case SENT_STUDENT_REQUEST_SUCCESS:        
-       return state.set('sentStudentRequest', initialState.get('sentStudentRequest').set('success', true));       
-    case SENT_STUDENT_REQUEST_FAIL:
-      return state.set('sentStudentRequest', initialState.get('sentStudentRequest')
-              .set('fail', true)
-              .set('errorCode', action.error.response.data.code)
-              .set('errorMessage', action.error.response.data.message)
-              .set('errors', action.error.response.data.errors ? Immutable.fromJS(action.error.response.data.errors) : undefined));
-    case RESET_SENT_STUDENT_REQUEST:
-      return state.set('sentStudentRequest', initialState.get('sentStudentRequest'));
-  
-    /**
-     * Link to parent
-     */
-    case ACCEPT_STUDENT:
-    case ACCEPT_STUDENT_PUBLIC:
-    case DECLINE_STUDENT:
-    case DELETE_STUDENT_REQUST:        
-      return state.set('studentStatusRequest', initialState.get('studentStatusRequest').set('loading', true));
-
-    case ACCEPT_STUDENT_SUCCESS:
-    case DECLINE_STUDENT_SUCCESS:
-    case DELETE_STUDENT_REQUST_SUCCESS:
-       return state.set('studentStatusRequest', initialState.get('studentStatusRequest').set('success', true));
-    case ACCEPT_STUDENT_FAIL:
-    case ACCEPT_STUDENT_PUBLIC_FAIL:
-    case DECLINE_STUDENT_FAIL:        
-    case DELETE_STUDENT_REQUST_FAIL:         
-      return state.set('studentStatusRequest', initialState.get('studentStatusRequest').set('fail', true));
-    case RESET_STUDENT_REQUEST:
-      return state.set('studentStatusRequest', initialState.get('studentStatusRequest'));
-  
-    case ACCEPT_STUDENT_PUBLIC_SUCCESS:        
-        saveSession(action.result.data);
-        return state.set('studentStatusRequest', initialState.get('studentStatusRequest').set('success', true));
+    case GET_SINGLE_RECORD:
+      return state.set('getSingleRecordRequest', initialState.get('getSingleRecordRequest').set('loading', true));
+    case GET_SINGLE_RECORD_SUCCESS:
+      return state.set('getSingleRecordRequest', initialState.get('getSingleRecordRequest')
+            .set('success', true)
+            .set('record', Immutable.fromJS(action.result.data)));
+    case GET_SINGLE_RECORD_FAIL:
+      return state.set('getSingleRecordRequest', initialState.get('getSingleRecordRequest').set('fail', true));
+    case RESET_GET_SINGLE_RECORD_REQUEST:
+      return state.set('getSingleRecordRequest', initialState.get('getSingleRecordRequest'));
     /**
      * Create
      */
     case CREATE:
       return state.set('createRequest', initialState.get('createRequest').set('loading', true));
     case CREATE_SUCCESS:
-      return state.set('createRequest', initialState.get('createRequest').set('success', true));
-    case CREATE_FAIL:      
+      const total = state.get('pagination').get('total') + 1;
+      const page = state.get('pagination').get('page');
+      const perPage = state.get('pagination').get('perPage');
+      let totalPages = state.get('pagination').get('totalPages');
+
+      if (total > totalPages * perPage) {
+        totalPages += 1;
+      }
+
+      let newState = state
+        .set('createRequest', state.get('createRequest')
+          .set('success', true).set('loading', false)
+        ).set('pagination', state.get('pagination')
+          .set('totalPages', totalPages).set('total', total)
+        );
+
+      if (page === totalPages) {
+        return newState.set('records', state.get('records').push(Immutable.fromJS(action.result.data)));
+      }
+      
+      return newState.set('pagination', state.get('pagination').set('page', totalPages));
+    case CREATE_FAIL:
+      const data = action.error.response.data;
       return state
         .set('createRequest', state.get('createRequest')
           .set('loading', false)
           .set('fail', true)
-          .set('errorCode', action.error.response.data.code)
-          .set('errorMessage', action.error.response.data.message)
-          .set('errors', action.error.response.data.errors ? Immutable.fromJS(action.error.response.data.errors) : undefined)
+          .set('errorCode', data.code)
+          .set('errorMessage', data.message)
+          .set('errors', data.code === 422 ? Immutable.fromJS(data.errors) : undefined)
         );
     case RESET_CREATE_REQUEST:
       return state.set('createRequest', initialState.get('createRequest'));
-
+    /**
+     * Update
+     */
+    case UPDATE:
+      return state.set('updateRequest', initialState.get('updateRequest').set('loading', true));
+    case UPDATE_SUCCESS:
+      let updatedRecords = state.get('records').map(record => {
+        if(record.get('id') === action.result.data.id) {
+          return Immutable.fromJS(action.result.data);
+        }
+        return record;
+      });
+      return state
+        .set('updateRequest', state.get('updateRequest')
+          .set('loading', false)
+          .set('success', true)
+        ).set('records', updatedRecords);
+    case UPDATE_FAIL:
+      const errorData = action.error.response.data;
+      return state
+        .set('updateRequest', state.get('updateRequest')
+          .set('loading', false)
+          .set('fail', true)
+          .set('errorCode', errorData.code)
+          .set('errorMessage', errorData.message)
+          .set('errors', errorData.code === 422 ? Immutable.fromJS(errorData.errors) : undefined)
+        );
+    case RESET_UPDATE_REQUEST:
+      return state.set('updateRequest', initialState.get('updateRequest'));
+    /**
+     * Delete
+     */
+    case DELETE:
+      return state.set('deleteRequest', initialState.get('deleteRequest').set('loading', true));
+    case DELETE_SUCCESS:
+      return state.set('deleteRequest', initialState.get('deleteRequest').set('success', true));
+    case DELETE_FAIL:      
+      return state
+        .set('deleteRequest', initialState.get('deleteRequest')          
+          .set('fail', true)
+          .set('errorCode', action.error.response.data.code)
+          .set('errorMessage', action.error.response.data.message)
+          .set('errors', Immutable.fromJS(action.error.response.data.errors || []))
+        );
+  
     /**
      * default
      */
