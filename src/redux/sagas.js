@@ -14,7 +14,7 @@ import invitationsSagas from './invitations/sagas';
 import schoolSagas from './schools/sagas';
 import subscriptionSagas from './subscriptions/sagas';
 import scapSagas from './scap/sagas';
-import parentsSagas from './parents/sagas';
+import studentParentsSagas from './student-parents/sagas';
 import connectionsSagas from './connections/sagas';
 import courseCreditsSagas from './course-credits/sagas';
 import giftsSagas from './gifts/sagas';
@@ -36,7 +36,7 @@ function* rootSaga () {
     schoolSagas,
     subscriptionSagas,
     scapSagas,
-    parentsSagas,
+    studentParentsSagas,
     connectionsSagas,
     courseCreditsSagas,
     giftsSagas

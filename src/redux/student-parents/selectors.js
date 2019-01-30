@@ -3,13 +3,13 @@ import { createSelector } from 'reselect';
 /**
  * Select domain
  */
-export const selectParentsDomain = (state) => state.parents;
+export const selectStudentParentsDomain = (state) => state.studentParents;
 
 /**
  * Get Records Request
  */
 export const selectGetRecordsRequest = createSelector(
-  selectParentsDomain,
+  selectStudentParentsDomain,
   (subState) => subState.get('getRecordsRequest')
 );
 
@@ -17,7 +17,7 @@ export const selectGetRecordsRequest = createSelector(
  * Get Single Request
  */
 export const selectGetRecordRequest = createSelector(
-  selectParentsDomain,
+  selectStudentParentsDomain,
   (subState) => subState.get('getRecordRequest')
 );
 
@@ -25,7 +25,7 @@ export const selectGetRecordRequest = createSelector(
  * Get student requests request
  */
 export const selectStudentsRequest = createSelector(
-  selectParentsDomain,
+  selectStudentParentsDomain,
   (subState) => subState.get('getStudentsRequest')
 );
 
@@ -34,7 +34,7 @@ export const selectStudentsRequest = createSelector(
  * Get update student status request
  */
 export const selectStudentStatusRequest = createSelector(
-  selectParentsDomain,
+  selectStudentParentsDomain,
   (subState) => subState.get('studentStatusRequest')
 );
 
@@ -42,7 +42,7 @@ export const selectStudentStatusRequest = createSelector(
  * Get sent student request
  */
 export const selectSentStudentRequest = createSelector(
-  selectParentsDomain,
+  selectStudentParentsDomain,
   (subState) => subState.get('sentStudentRequest')
 );
 
@@ -50,7 +50,7 @@ export const selectSentStudentRequest = createSelector(
  * Create parent
  */
 export const selectCreateRequest = createSelector(
-  selectParentsDomain,
+  selectStudentParentsDomain,
   (subState) => subState.get('createRequest')
 );
 

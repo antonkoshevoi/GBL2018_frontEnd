@@ -21,7 +21,7 @@ import countriesReducer from './countries/reducer';
 import coursesReducer from './courses/reducer';
 import subscriptionsReducer from './subscriptions/reducer';
 import scapReducer from './scap/reducer';
-import parentsReducer from './parents/reducer';
+import studentParentsReducer from './student-parents/reducer';
 import connectionsReducer from './connections/reducer';
 import courseCreditsReducer from './course-credits/reducer';
 import giftsReducer from './gifts/reducer';
@@ -33,7 +33,7 @@ export default {
   signup: signupReducer,  
   students: studentsReducer,
   teachers: teachersReducer,
-  parents: parentsReducer,
+  studentParents: studentParentsReducer,
   administration: administrationReducer,
   homerooms: homeroomsReducer,
   classrooms: classroomsReducer,

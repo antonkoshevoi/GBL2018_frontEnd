@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import {
   AppBar, CircularProgress, DialogContent, Icon, Toolbar, Typography, Divider
 } from '@material-ui/core';
-import { sentStudentRequest, resetSentStudentRequest, create, resetCreateRequest } from "../../../redux/parents/actions";
-import { selectSentStudentRequest, selectCreateRequest } from "../../../redux/parents/selectors";
+import { sentStudentRequest, resetSentStudentRequest, create, resetCreateRequest } from "../../../redux/student-parents/actions";
+import { selectSentStudentRequest, selectCreateRequest } from "../../../redux/student-parents/selectors";
 import Modal from "../../../components/ui/Modal";
 
 class AddParentModal extends Component {

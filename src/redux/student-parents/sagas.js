@@ -20,7 +20,7 @@ function* onSuccess (action) {
     yield put(restoreLogin());
 }
 
-const parentsSagas = all([ 
+const studentParentsSagas = all([ 
   takeLatest(ACCEPT_STUDENT_PUBLIC_SUCCESS, onSuccess),
   yieldSuccessToasts({
     [CREATE_SUCCESS]: i18n.t('messages:parentAccountCreated'),            
@@ -44,4 +44,4 @@ const parentsSagas = all([
   ])
 ]);
 
-export default parentsSagas;
+export default studentParentsSagas;
