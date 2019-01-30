@@ -4,6 +4,7 @@ import authSagas from './auth/sagas';
 import signupSagas from './signup/sagas';
 import studentsSagas from './students/sagas';
 import teachersSagas from './teachers/sagas';
+import parentsSagas from './parents/sagas';
 import administrationSagas from './administration/sagas';
 import homeroomsSagas from './homerooms/sagas';
 import classroomsSagas from './classrooms/sagas';
@@ -27,6 +28,7 @@ function* rootSaga () {
     studentsSagas,
     teachersSagas,
     administrationSagas,
+    parentsSagas,
     homeroomsSagas,
     classroomsSagas,    
     messagesSagas,

@@ -13,6 +13,7 @@ import Dashboard from '../containers/Dashboard';
 import Students from '../containers/students/Students';
 import Teachers from "../containers/teachers/Teachers";
 import Parents from "../containers/parents/Parents";
+import StudentParents from "../containers/parents/StudentParents";
 import TeachersBulkUpload from '../containers/teachers/TeachersBulkUpload';
 import Administration from "../containers/administration/Administration";
 import Homerooms from "../containers/homerooms/Homerooms";
@@ -140,6 +141,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School']} path='/teachers/list' title='teachers' component={Teachers} />
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School']} path='/teachers/csv' title='teachersCsv' component={TeachersBulkUpload}/>
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School']} path='/administration/list' title='administrations' component={Administration} />
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/parents/list' title='parents' component={Parents} />
             
       {/*Learning areas*/}
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/homerooms/list' title='homerooms' component={Homerooms} />
@@ -177,7 +179,7 @@ export default () => (
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' title='myProfile' component={Profile} />
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School']} path='/school-profile' title='schoolProfile' component={SchoolProfile} />
-      <AuthenticatedRoute exact layout={MainLayout} roles={['Student']} path='/my-parents' title='myParents' component={Parents} />
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Student']} path='/my-parents' title='myParents' component={StudentParents} />
       
       {/*Open Invoices*/}
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/accounts/invoices' title='openInvoices' component={ShoppingCart}/>

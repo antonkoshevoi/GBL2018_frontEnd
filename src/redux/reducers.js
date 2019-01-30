@@ -4,6 +4,7 @@ import userReducer from './user/reducer';
 import signupReducer from './signup/reducer';
 import studentsReducer from './students/reducer';
 import teachersReducer from './teachers/reducer';
+import parentsReducer from './parents/reducer';
 import administrationReducer from './administration/reducer';
 import homeroomsReducer from './homerooms/reducer';
 import classroomsReducer from './classrooms/reducer';
@@ -33,6 +34,7 @@ export default {
   signup: signupReducer,  
   students: studentsReducer,
   teachers: teachersReducer,
+  parents: parentsReducer,
   studentParents: studentParentsReducer,
   administration: administrationReducer,
   homerooms: homeroomsReducer,
