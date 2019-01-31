@@ -23,9 +23,7 @@ class Messages extends Component {
         if (userData.get('newMessagesCount')) {          
             this.setState({                
                 counts: userData.get('newMessagesCount')
-            });
-            
-            console.log(userData.get('newMessagesCount'));
+            });                        
         }
         this.interval = setInterval(() => this.tick(), 1000);
     }

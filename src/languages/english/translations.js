@@ -613,6 +613,5 @@ export default {
     addNewParent: 'Add New Parent',
     updateParent: 'Update Parent',
     createParent: 'Create Parent',
-    editParent: 'Edit Parent',
-    parentsNotFound: 'Parents Not Found...'
+    editParent: 'Edit Parent'    
 }

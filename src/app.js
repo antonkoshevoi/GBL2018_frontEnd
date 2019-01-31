@@ -28,6 +28,8 @@ class App extends Component {
 
   render() {
       
+    console.log('NODE_ENV: ' + process.env.NODE_ENV);
+      
     const theme = createMuiTheme({
         palette: {
             primary: blue
