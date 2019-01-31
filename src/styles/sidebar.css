@@ -40,6 +40,7 @@ nav.navigation .second_level a span.icon i.la {
 }
 nav.navigation .second_level a span.icon i.fa {
     font-size: 20px;
+    margin: 3px 0;
 }
 nav.navigation .second_level a.red, nav.navigation .second_level a.red.active, nav.navigation .second_level a.red.active:hover {
     background-color: #CE342C !important;

@@ -23,9 +23,7 @@ class Messages extends Component {
         if (userData.get('newMessagesCount')) {          
             this.setState({                
                 counts: userData.get('newMessagesCount')
-            });
-            
-            console.log(userData.get('newMessagesCount'));
+            });                        
         }
         this.interval = setInterval(() => this.tick(), 1000);
     }
@@ -76,9 +74,9 @@ class Messages extends Component {
   }
 
   render() {
-    const { activeMenu, t } = this.props;        
-    
+    const { activeMenu , t } = this.props;           
     let total = 0;
+    
     this.state.counts.map((item) => {    
         total = total + item.get('count');
         return total;
@@ -93,7 +91,7 @@ class Messages extends Component {
                 </span>
             </button>
             {activeMenu === 'messages' && 
-            <div className="m-dropdown__wrapper" onMouseLeave={() => {this.props.switchMenu(null)}} style={{display: 'block'}}>
+            <div className="m-dropdown__wrapper messages" onMouseLeave={() => {this.props.switchMenu(null)}} style={{display: 'block'}}>
                 <span className="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style={{right:'89.5px', color:'white'}}></span>
                 <span className="m-dropdown__arrow m-dropdown__arrow--center"></span>
                 <div className="m-dropdown__inner">

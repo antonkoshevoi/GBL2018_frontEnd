@@ -1194,7 +1194,7 @@ td.rotate div span {
 .messages > div.row {
     border-radius: 10px;
     background-color: #F1F2F7;
-    margin: 10px -7px;
+    margin: 10px 0;
     padding: 15px 0;
 }
 .messages > div.row.message-new {

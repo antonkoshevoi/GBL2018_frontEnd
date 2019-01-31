@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
+import OnVisible from 'react-on-visible';
 import { selectGetRecordsRequest, selectDeleteRecordRequest, selectReadMessageRequest } from '../../../redux/messages/selectors';
 import { getMessages, readMessage, deleteMessage, resetDeleteMessageRequest } from '../../../redux/messages/actions';
 import { Avatar } from '@material-ui/core';
@@ -18,6 +19,7 @@ class Messages extends Component {
         super(props);        
         this.state = {
             records: [],
+            readIds: [],
             showNewMessageModal: false,
             showEditMessageModal: false,
             message: null,
@@ -27,11 +29,14 @@ class Messages extends Component {
     }
     
     componentDidMount() {
-        this.interval = setInterval(() => this._readMessages(), 15000);
+        this.interval = setInterval(() => this._readMessages(), 10000);
     }    
 
     componentWillUnmount() {
-        this._readMessages();    
+        const { readIds } = this.state;
+        if (readIds.length) {
+            this.props.readMessage({ids: readIds});
+        }               
         clearInterval(this.interval);
     }    
 
@@ -56,30 +61,31 @@ class Messages extends Component {
         if (!deleteRecordRequest.get('success') && nextProps.deleteRecordRequest.get('success')) {
             resetDeleteMessageRequest();
             this._getRecords();
-        }
-        
-        if (!readMessageRequest.get('success') && nextProps.readMessageRequest.get('success')) {            
-            this.setState({records: this.state.records.map((item) => {
-                item.isRead = true;
-                return item;
-            })});
         }                
     }   
     
+    _readMessage(record) {
+        if (record.isRead) {
+            return false;
+        }    
+        let { readIds } = this.state;       
+        readIds.push(record.id);        
+        console.log(readIds);        
+        this.setState({readIds: readIds});
+    }
+    
     _readMessages() {
-        let ids = [];
-        
-        this.state.records.map((item) => {
-            if (!item.isRead) {
-                ids.push(item.id);
-            }            
-            return item.id;
-        });
-        
-        if (ids.length > 0) {
-            this.props.readMessage({ids: ids});
-        }        
-        clearInterval(this.interval);
+        let { readIds } = this.state;                
+        if (readIds.length) {
+            this.setState({readIds: []});            
+            this.setState({records: this.state.records.map((item) => {
+                if (readIds.indexOf(item.id) !== -1) {                
+                    item.isRead = true;
+                }
+                return item;
+            })});        
+            this.props.readMessage({ids: readIds});
+        }
     }
     
     _showNewMessageModal() {
@@ -134,28 +140,30 @@ class Messages extends Component {
             );
         }
 
-        return records.map((record, key) => (
-            <div className={`row d-flex align-items-center ${record.isRead ? 'message-read' : 'message-new'}`} index={key} key={key}>
-                <div className='col-2 col-sm-3 col-lg-2 text-center'>
-                    <div className='d-flex align-items-center justify-content-around'>
-                        <div>
-                            <Avatar style={{width:100, height:100}} src={record.user.avatarSmall}/>
+        return records.map((record, key) => (            
+            <OnVisible onChange={() => {this._readMessage(record)}} className={`row d-flex align-items-center ${record.isRead ? 'message-read' : 'message-new'}`} index={key} key={key}>
+                <div className='col-12 col-sm-4 col-md-3 col-lg-2 text-center'>
+                    <div className='message-owner d-flex align-items-center justify-content-around'>
+                        <div className='mr-sm-2'>
+                            <img className='rounded-circle' src={record.user.avatarSmall} alt={record.user.name}/>
                         </div>
                         <div className='text-center'>
-                            <p>{t(record.user.school)} {t(record.user.role)}</p>
-                            <p className='text-muted mb-0'><b>{record.user.name}</b></p>
+                            <p className='my-1 my-sm-2'>{t(record.user.school)} {t(record.user.role)}</p>
+                            <p className='text-muted my-1 my-sm-2'><b>{record.user.name}</b></p>
+                            <p className='d-sm-none my-1'>{moment(record.sent).format('lll')}</p>
+                            {record.isMine && <p className='d-sm-none my-1'>{t('recipients')}: <i>{record.recipients}</i></p>}                            
                         </div>
                     </div>
                 </div>
-                <div className='col-6 col-sm-6 col-lg-7 text-left'>                    
-                    <div className='pre-line'>{record.body}</div>
+                <div className='col-9 col-sm-5 col-md-6 col-lg-7 text-left'>                    
+                    <div className='pre-line my-2 my-sm-0'>{record.body}</div>
                 </div>
-                <div className='col-1 col-sm-3 text-center'>
-                    <p>{moment(record.sent).format('lll')}</p>
+                <div className='col-3 col-sm-3 text-center'>
+                    <p className='d-none my-2 d-sm-block'>{moment(record.sent).format('lll')}</p>
                     {record.isMine && 
-                        <p>{t('recipients')}: <i>{record.recipients}</i></p>
+                        <p className='d-none my-2 d-sm-block'>{t('recipients')}: <i>{record.recipients}</i></p>
                     }
-                    <p>
+                    <p className='my-2'>
                         {record.isMine &&
                             <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showEditMessageModal(record) }}>
                                 <i className='la la-pencil'></i>
@@ -164,7 +172,7 @@ class Messages extends Component {
                         <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.id) }}/>                    
                     </p>
                 </div>
-            </div>
+            </OnVisible>            
         ));
     }
     
