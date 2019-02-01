@@ -9,7 +9,6 @@ ReactDOM.render((<App />), document.getElementById('root'));
 
 unregister();
 
-//Check the hover capability
 const canHover = !(matchMedia('(hover: none)').matches);
 if(canHover) {
   document.body.classList.add('can-hover');
