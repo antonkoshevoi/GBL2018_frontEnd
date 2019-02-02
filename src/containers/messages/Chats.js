@@ -70,7 +70,7 @@ class Chats extends Component {
                 <Td width='40px'>{this._recordNumber(key)}</Td>
                 <Td width='250px'>
                     <div className='pre-line'>
-                        {(!record.get('isMine') && record.get('isRead')) && <span className='m-badge m-badge--brand m-badge--wide m-badge--warning mr-2'>! </span>}
+                        {(!record.get('isMine') && !record.get('isRead')) && <span className='m-badge m-badge--brand m-badge--wide m-badge--warning mr-2'>! </span>}
                         {record.get('body')}
                     </div>
                 </Td>

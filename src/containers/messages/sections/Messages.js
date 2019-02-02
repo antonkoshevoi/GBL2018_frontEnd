@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import OnVisible from 'react-on-visible';
-import { selectGetRecordsRequest, selectDeleteRecordRequest, selectReadMessageRequest } from '../../../redux/messages/selectors';
-import { getMessages, getUnreadMessages, readMessage, deleteMessage, resetDeleteMessageRequest } from '../../../redux/messages/actions';
+import { selectGetRecordsRequest, selectDeleteRecordRequest } from '../../../redux/messages/selectors';
+import { getMessages, readMessages, deleteMessage, resetDeleteMessageRequest } from '../../../redux/messages/actions';
 import { Preloader } from '../../../components/ui/Preloader';
 import Pagination from '../../../components/ui/Pagination';
 import DeleteButton from '../../../components/ui/DeleteButton';
@@ -34,7 +34,7 @@ class Messages extends Component {
     componentWillUnmount() {
         const { readIds } = this.state;
         if (readIds.length) {
-            this.props.readMessage({ids: readIds});
+            this.props.readMessages({ids: readIds});
         }               
         clearInterval(this.interval);
     }    
@@ -49,7 +49,7 @@ class Messages extends Component {
     }
    
     componentWillReceiveProps(nextProps) {
-        const {deleteRecordRequest, getRecordsRequest, readMessageRequest, resetDeleteMessageRequest, getUnreadMessages} = this.props;
+        const {deleteRecordRequest, getRecordsRequest, resetDeleteMessageRequest} = this.props;
 
         if (!getRecordsRequest.get('success') && nextProps.getRecordsRequest.get('success')) {            
             this.setState({
@@ -60,12 +60,7 @@ class Messages extends Component {
         if (!deleteRecordRequest.get('success') && nextProps.deleteRecordRequest.get('success')) {
             resetDeleteMessageRequest();
             this._getRecords();
-        }
-        
-        
-        if (!readMessageRequest.get('success') && nextProps.readMessageRequest.get('success')) {            
-            getUnreadMessages();
-        }         
+        }        
     }   
     
     _readMessage(record) {
@@ -88,7 +83,7 @@ class Messages extends Component {
                 }
                 return item;
             })});        
-            this.props.readMessage({ids: readIds});
+            this.props.readMessages({ids: readIds});
         }
     }
     
@@ -234,18 +229,14 @@ class Messages extends Component {
 Messages = connect(
     (state) => ({
         getRecordsRequest: selectGetRecordsRequest(state),
-        deleteRecordRequest: selectDeleteRecordRequest(state),
-        readMessageRequest: selectReadMessageRequest(state)
+        deleteRecordRequest: selectDeleteRecordRequest(state)
     }),
     (dispatch) => ({
         getRecords: (params = {}) => {
             dispatch(getMessages(params));
         },
-        getUnreadMessages: (params = {}) => {
-            dispatch(getUnreadMessages(params));
-        },
-        readMessage: (id) => {
-            dispatch(readMessage(id));
+        readMessages: (id) => {
+            dispatch(readMessages(id));
         },
         deleteMessage: (id) => {
             dispatch(deleteMessage(id));
