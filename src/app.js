@@ -7,16 +7,13 @@ import './styles/responsive.css';
 
 import {Provider} from 'react-redux';
 import {Router} from "react-router";
-
 import Routes from './configs/routes';
 import configureStore from './redux/store';
 import createHistory from 'history/createBrowserHistory'
-
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
 import blue from '@material-ui/core/es/colors/blue';
 import MomentUtils from '@date-io/moment';
-
 import ApiClient from "./services/ApiClient";
 
 const history   = createHistory();
