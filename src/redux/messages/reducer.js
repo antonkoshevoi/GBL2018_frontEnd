@@ -2,7 +2,7 @@ import {
     GET_MESSAGE, GET_MESSAGE_SUCCESS, GET_MESSAGE_FAIL, RESET_GET_MESSAGE_REQUEST,
     GET_MESSAGES, GET_MESSAGES_SUCCESS, GET_MESSAGES_FAIL,  
     SEND_MESSAGE, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAIL, RESET_SEND_MESSAGE_REQUEST,
-    READ_MESSAGE, READ_MESSAGE_SUCCESS, READ_MESSAGE_FAIL,
+    READ_MESSAGES, READ_MESSAGES_SUCCESS, READ_MESSAGES_FAIL,
     UPDATE_MESSAGE, UPDATE_MESSAGE_SUCCESS, UPDATE_MESSAGE_FAIL, RESET_UPDATE_MESSAGE_REQUEST,
     REPLY_MESSAGE, REPLY_MESSAGE_SUCCESS, REPLY_MESSAGE_FAIL, RESET_REPLY_MESSAGE_REQUEST,
     DELETE_MESSAGE, DELETE_MESSAGE_SUCCESS, DELETE_MESSAGE_FAIL, RESET_DELETE_MESSAGE_REQUEST,   
@@ -35,12 +35,6 @@ const initialState = Immutable.fromJS({
     fail: false,
     errors: []
   },
-  readMessageRequest: {
-    loading: false,
-    success: false,
-    fail: false,
-    errors: []
-  },   
   getRecordsRequest: {    
     loading: false,
     success: false,
@@ -207,21 +201,17 @@ export default function reducer (state = initialState, action) {
     case GET_MESSAGES_FAIL:   
         return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('fail', true));    
     
+    case READ_MESSAGES:        
     case GET_UNREAD_MESSAGES:    
         return state.set('getUnreadMessagesRequest', initialState.get('getUnreadMessagesRequest').set('loading', true));
+    case READ_MESSAGES_SUCCESS:        
     case GET_UNREAD_MESSAGES_SUCCESS:    
         return state.set('getUnreadMessagesRequest', initialState.get('getUnreadMessagesRequest')
                 .set('success', true)                
-                .set('records', Immutable.fromJS(action.result.data)));        
+                .set('records', Immutable.fromJS(action.result.data)));
+    case READ_MESSAGES_FAIL:        
     case GET_UNREAD_MESSAGES_FAIL:    
-        return state.set('getUnreadMessagesRequest', initialState.get('getUnreadMessagesRequest').set('fail', true));
-        
-    case READ_MESSAGE:    
-        return state.set('readMessageRequest', initialState.get('readMessageRequest').set('loading', true));
-    case READ_MESSAGE_SUCCESS:    
-        return state.set('readMessageRequest', initialState.get('readMessageRequest').set('success', true))
-    case READ_MESSAGE_FAIL:    
-        return state.set('readMessageRequest', initialState.get('readMessageRequest').set('fail', true));        
+        return state.set('getUnreadMessagesRequest', initialState.get('getUnreadMessagesRequest').set('fail', true));            
     
     /**
      * Get single group
