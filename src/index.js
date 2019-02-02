@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './app';
 
-import unregister from './registerServiceWorker';
+import register from './registerServiceWorker';
     
 ReactDOM.render((<App />), document.getElementById('root'));
 
-unregister();
+register();
 
 const canHover = !(matchMedia('(hover: none)').matches);
 

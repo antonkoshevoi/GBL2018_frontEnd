@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import OnVisible from 'react-on-visible';
-import { selectGetRecordsRequest, selectDeleteRecordRequest, selectReadMessageRequest } from '../../../redux/messages/selectors';
+import { selectGetRecordsRequest, selectDeleteRecordRequest } from '../../../redux/messages/selectors';
 import { getMessages, readMessage, deleteMessage, resetDeleteMessageRequest } from '../../../redux/messages/actions';
-import { Avatar } from '@material-ui/core';
 import { Preloader } from '../../../components/ui/Preloader';
 import Pagination from '../../../components/ui/Pagination';
 import DeleteButton from '../../../components/ui/DeleteButton';
@@ -50,7 +49,7 @@ class Messages extends Component {
     }
    
     componentWillReceiveProps(nextProps) {
-        const {deleteRecordRequest, getRecordsRequest, readMessageRequest, resetDeleteMessageRequest} = this.props;
+        const {deleteRecordRequest, getRecordsRequest, resetDeleteMessageRequest} = this.props;
 
         if (!getRecordsRequest.get('success') && nextProps.getRecordsRequest.get('success')) {            
             this.setState({
@@ -230,8 +229,7 @@ class Messages extends Component {
 Messages = connect(
     (state) => ({
         getRecordsRequest: selectGetRecordsRequest(state),
-        deleteRecordRequest: selectDeleteRecordRequest(state),
-        readMessageRequest: selectReadMessageRequest(state)
+        deleteRecordRequest: selectDeleteRecordRequest(state)        
     }),
     (dispatch) => ({
         getRecords: (params = {}) => {
