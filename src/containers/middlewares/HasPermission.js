@@ -14,10 +14,11 @@ class HasPermission extends Component {
     let hasPermission = false;
 
     userPermissions.map(userPermission => {
-      permissions.map(permission => {
+      return permissions.map(permission => {
         if (userPermission.has(permission)) {
           hasPermission = true;
         }
+        return hasPermission;
       })
     });
 

@@ -69,7 +69,10 @@ class Chats extends Component {
             <Row index={key} key={key}>
                 <Td width='40px'>{this._recordNumber(key)}</Td>
                 <Td width='250px'>
-                    <div className='pre-line'>{record.get('body')}</div>
+                    <div className='pre-line'>
+                        {(!record.get('isMine') && record.get('isRead')) && <span className='m-badge m-badge--brand m-badge--wide m-badge--warning mr-2'>! </span>}
+                        {record.get('body')}
+                    </div>
                 </Td>
                 <Td>{record.get('user') ? record.get('user').get('name') : ''}</Td>
                 <Td>{record.get('isMine') ? record.get('recipients') : t('me')}</Td>
