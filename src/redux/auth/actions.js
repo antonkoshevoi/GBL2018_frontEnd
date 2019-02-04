@@ -41,7 +41,7 @@ export function login(username, password, remember) {
   return {
     types: types,
     promise: (apiClient) => apiClient.post('session', {
-      username, password
+      username, password, remember
     }, {}, {
       'Authorization': null
     })

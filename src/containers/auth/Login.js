@@ -76,9 +76,9 @@ class Login extends Component {
                             <div className="col m--align-left">
                               <FormControlLabel
                                 control={<Checkbox
+                                  value={1}
                                   checked={this.state.remember}
                                   onChange={this._handleRememberChange}
-                                  value={''}
                                 />}
                                 label={t('rememberMe')}
                               />
