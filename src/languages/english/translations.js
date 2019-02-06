@@ -613,5 +613,9 @@ export default {
     addNewParent: 'Add New Parent',
     updateParent: 'Update Parent',
     createParent: 'Create Parent',
-    editParent: 'Edit Parent'    
+    editParent: 'Edit Parent',
+    chatName: 'Chat Name',
+    newChat: 'New Chat',
+    participants: 'Participants',
+    visibleForParticipants: 'Visible for participants'
 }

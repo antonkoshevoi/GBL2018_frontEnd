@@ -97,7 +97,7 @@ class ViewMessage extends Component {
                         <div className="row">
                             <div className="col-sm-12">
                                 <h5 className="m--margin-bottom-20">{data.get('subject')} <span className={`m-badge m-badge--brand m-badge--wide ${(data.get('type') === 'alert' ? 'm-badge--warning' : '')}`}>{t(data.get('type'))}</span></h5>
-                                <p>{t('date')}: <strong>{moment(data.get('sent')).format('lll')}</strong></p>
+                                <p>{t('date')}: <strong>{moment(data.get('created')).format('lll')}</strong></p>
                                 <p>{t('from')}: <strong>{data.get('user').get('name')}</strong></p>
                                 {data.get('isMine') ?
                                 <p>{t('to')}: <strong>{data.get('recipients')}</strong></p>

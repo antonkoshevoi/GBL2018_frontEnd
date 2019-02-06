@@ -47,7 +47,7 @@ class ViewMessageModal extends Component {
                     <div className="row">
                         <div className="col-sm-12">
                             <h5 className="m--margin-bottom-20">{message.subject} { message.type && <span className={`m-badge m-badge--brand m-badge--wide ${(message.type === 'alert' ? 'm-badge--warning' : '')}`}>{t(message.type)}</span> }</h5>
-                            <p>{t('date')}: <strong>{moment(message.sent || message.created).format('lll')}</strong></p>
+                            <p>{t('date')}: <strong>{moment(message.created).format('lll')}</strong></p>
                             {message.recipients &&
                                 <p>{t('to')}: <strong>{message.recipients}</strong></p>
                             }

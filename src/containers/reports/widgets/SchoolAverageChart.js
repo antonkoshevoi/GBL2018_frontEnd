@@ -104,10 +104,10 @@ class SchoolAverageChart extends Component {
         <div className="small-card">
           {loading && <div className="text-center col-md-12"><CircularProgress color="primary"/></div>}
           {!loading && data && <div className="row">
-            <div className="col-md-5 pie-block school-average-margins">
+            <div className="col-md-5 pie-block">
               <Pie data={performanceChartData} options={this.options} width={100} height={100}/>
             </div>
-            <div className="col-md-7  pie-block school-average-margins">
+            <div className="col-md-7  pie-block">
               <div
                 className="m-stack m--padding-left-20 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
                 <h5>{t('schoolAverage')}</h5>
@@ -120,10 +120,10 @@ class SchoolAverageChart extends Component {
         <div className="small-card">
           {loading && <div className="text-center col-md-12"><CircularProgress color="primary"/></div>}
           {!loading && data && <div className="row">
-            <div className="col-md-5 pie-block school-average-margins">
+            <div className="col-md-5 pie-block">
               <Pie data={progressChartData} options={this.options} width={100} height={100}/>
             </div>
-            <div className="col-md-7 pie-block school-average-margins">
+            <div className="col-md-7 pie-block">
               <div
                 className="m-stack m--padding-left-20  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
                 <h5>{t('schoolAverage')}</h5>

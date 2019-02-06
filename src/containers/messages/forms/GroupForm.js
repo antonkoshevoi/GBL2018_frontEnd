@@ -194,7 +194,7 @@ class GroupForm extends Component {
                         {errors && errors.get('name') && <FormHelperText error>{errors.get('name').get(0)}</FormHelperText>}
                       </FormControl>
                   </div>        
-                </div>                
+                </div>
                 <div className="row">
                     <div className="col-sm-6 col-md-5 col-lg-4">
                         <FormControl className='full-width form-inputs'>

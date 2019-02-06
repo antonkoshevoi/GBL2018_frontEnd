@@ -28,7 +28,7 @@ class CardChart extends Component {
           </div>
         </div>
         <div
-          className="no-padding-top m-portlet__body position-relative" style={{height: '100%'}}>
+          className="pt-0 m-portlet__body position-relative" style={{height: '100%'}}>
           {children}
         </div>
       </div>

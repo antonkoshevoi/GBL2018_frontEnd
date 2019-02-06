@@ -8,6 +8,14 @@ export const GET_MESSAGES = '[Messages] GET_MESSAGES';
 export const GET_MESSAGES_SUCCESS = '[Messages] GET_MESSAGES_SUCCESS';
 export const GET_MESSAGES_FAIL = '[Messages] GET_MESSAGES_FAIL';
 
+export const GET_CHATS = '[Messages] GET_CHATS';
+export const GET_CHATS_SUCCESS = '[Messages] GET_CHATS_SUCCESS';
+export const GET_CHATS_FAIL = '[Messages] GET_CHATS_FAIL';
+
+export const GET_CHAT_MESSAGES = '[Messages] GET_CHAT_MESSAGES';
+export const GET_CHAT_MESSAGES_SUCCESS = '[Messages] GET_CHAT_MESSAGES_SUCCESS';
+export const GET_CHAT_MESSAGES_FAIL = '[Messages] GET_CHAT_MESSAGES_FAIL';
+
 export const VIEW_MESSAGE = '[Messages] VIEW_MESSAGE';
 export const VIEW_MESSAGE_SUCCESS = '[Messages] VIEW_MESSAGE_SUCCESS';
 export const VIEW_MESSAGE_FAIL = '[Messages] VIEW_MESSAGE_FAIL';
@@ -63,6 +71,17 @@ export const DELETE_GROUP = '[Messages] DELETE_GROUP';
 export const DELETE_GROUP_SUCCESS = '[Messages] DELETE_GROUP_SUCCESS';
 export const DELETE_GROUP_FAIL = '[Messages] DELETE_GROUP_FAIL';
 export const RESET_DELETE_GROUP_REQUEST = '[Messages] RESET_DELETE_GROUP_REQUEST';
+
+export const NEW_MESSAGE_RECEIVED = '[Messages] NEW_MESSAGE_RECEIVED';
+export const SUBSCRIBE = '[Messages] SUBSCRIBE';
+export const SUBSCRIBE_FAIL = '[Messages] SUBSCRIBE_FAIL';
+
+export function subscribe (userId) {
+  console.log(SUBSCRIBE);
+  return {
+    type: SUBSCRIBE, userId
+  }
+}
 
 export function sendMessage(params = {}) {
   return {    
@@ -127,6 +146,21 @@ export function getMessages(params = {}) {
   return {    
     types: [GET_MESSAGES, GET_MESSAGES_SUCCESS, GET_MESSAGES_FAIL],
     promise: (apiClient) => apiClient.get(`messages/all`, params)
+  };
+}
+
+export function getChats(params = {}) {
+  return {    
+    types: [GET_CHATS, GET_CHATS_SUCCESS, GET_CHATS_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/chats`, params)
+  };
+}
+
+export function getChatMessages(id, params = {}) {
+  return {
+    chatId: id,
+    types: [GET_CHAT_MESSAGES, GET_CHAT_MESSAGES_SUCCESS, GET_CHAT_MESSAGES_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/chat/${id}`, params)
   };
 }
 

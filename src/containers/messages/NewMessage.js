@@ -42,7 +42,7 @@ class NewMessage extends Component {
                                 <span className='m-portlet__head-icon'>
                                     <i className='la la-comments-o'></i>
                                 </span>
-                                <h3 className='m-portlet__head-text'>{t('newMessage')}</h3>
+                                <h3 className='m-portlet__head-text'>{t('newChat')}</h3>
                             </div>
                         </div>
                     </div>          

@@ -71,6 +71,7 @@ import NewMessageGroup from '../containers/messages/NewMessageGroup';
 import EditMessageGroup from '../containers/messages/EditMessageGroup';
 
 import Chats from '../containers/messages/Chats';
+import ViewChat from '../containers/messages/ViewChat';
 import Alerts from '../containers/messages/Alerts';
 import Announcements from '../containers/messages/Announcements';
 import Assignments from '../containers/messages/Assignments';
@@ -125,6 +126,7 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/assignments' title='assignments' component={Assignments} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/chats' title='chats' component={Chats} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages' title='chats' component={Chats} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/messages/chat/:id' title='chat' component={ViewChat} />
      
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/view/:id' title='viewMessage' component={ViewMessage} />
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/messages/new' title='newMessage' component={NewMessage} />

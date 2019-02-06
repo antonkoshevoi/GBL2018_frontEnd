@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { Select, MenuItem, InputLabel, TextField, FormControl, FormHelperText } from '@material-ui/core';
+import { Select, MenuItem, InputLabel, TextField, Input, FormControl, FormHelperText } from '@material-ui/core';
 import { selectGetGroupsRequest } from '../../../redux/messages/selectors';
 import { getGroups } from '../../../redux/messages/actions';
 import Loader from '../../../components/layouts/Loader';
@@ -16,6 +16,7 @@ class MessageForm extends Component {
     getInitialState() {
         return {                       
             group: null,
+            subject: null,
             message: null
         };
     }
@@ -38,10 +39,11 @@ class MessageForm extends Component {
     
     _sendMessage() {
         const {onSubmit} = this.props;
-        const {message, group } = this.state;
+        const {message, subject, group } = this.state;
         
         onSubmit({            
-            message:    message,            
+            message:    message,
+            subject:    subject,
             type:       'chat',
             group:      group            
         });  
@@ -57,11 +59,26 @@ class MessageForm extends Component {
         
         return (
             <div>
-                { loading && <Loader/> }                
+                { loading && <Loader/> }
+                <div className='row'>
+                  <div className='col-sm-6 col-md-5 col-lg-4'>
+                      <FormControl className='full-width form-inputs'>
+                      <InputLabel htmlFor='title-error'>{t('chatName')} <span className='small'>({t('visibleForParticipants')})</span></InputLabel>
+                        <Input
+                          name='subject'
+                          fullWidth
+                          value={this.state.subject || ''}
+                          onChange={(e) => {
+                            this._handleChange(e)
+                          }}/>
+                        {errors && errors.get('name') && <FormHelperText error>{errors.get('subject').get(0)}</FormHelperText>}
+                      </FormControl>
+                  </div>        
+                </div>                
                 <div className="row">
                     <div className="col-sm-6 col-md-5 col-lg-4">
                         <FormControl className='full-width form-inputs'>
-                            <InputLabel htmlFor='recipients'>{t('recipients')}</InputLabel>                            
+                            <InputLabel htmlFor='recipients'>{t('participants')}</InputLabel>                            
                             <Select
                                 value={this.state.group || ''}
                                 onChange={(e) => { this._handleChange(e) }}

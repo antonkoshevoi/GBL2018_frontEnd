@@ -59,7 +59,7 @@ class ShoppingCart extends Component {
                     <h3 className='m-portlet__head-text'>{t('shoppingCart')}</h3>
                 </div>          
                 <div className="m-portlet m-portlet--full-heigh">
-                    <div className="m-portlet__body dashboard-shopping-cart-body zoom-preview">
+                    <div className="m-portlet__body dashboard-shopping-cart-body">
                     {cartRecordsRequest.get('loading') ? <CircularProgress className="m--margin-70"/> : 
                         <div>                            
                             <OpenInvoicesTable

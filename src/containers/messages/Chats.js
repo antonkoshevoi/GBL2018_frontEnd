@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetRecordsRequest, selectDeleteRecordRequest } from '../../redux/messages/selectors';
-import { getMessages, deleteMessage, resetDeleteMessageRequest } from '../../redux/messages/actions';
-import { MenuItem, Select } from '@material-ui/core';
+import { selectGetChatsRequest } from '../../redux/messages/selectors';
+import { getChats } from '../../redux/messages/actions';
+
+import { CircularProgress } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { NavLink } from "react-router-dom";
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
 import HasRole from "../middlewares/HasRole";
+import Chat from "./sections/Chat";
 import moment from 'moment/moment';
 
 class Chats extends Component {
@@ -26,13 +28,8 @@ class Chats extends Component {
     }
    
     componentWillReceiveProps(nextProps) {
-        const {deleteRecordRequest, resetDeleteMessageRequest} = this.props;
-
-        if (!deleteRecordRequest.get('success') && nextProps.deleteRecordRequest.get('success')) {
-            resetDeleteMessageRequest();
-            this._getRecords();
-        }        
-    }   
+       
+    }        
     
     _getRecords() {
         const { page, perPage} = this.state;
@@ -43,65 +40,44 @@ class Chats extends Component {
             }
         });
     }
-    
-    _deleteRecord(id) {
-        const {deleteMessage} = this.props;
-        deleteMessage(id);        
-    }
-      
+         
     _recordNumber(key) {
         const { page, perPage } = this.state;
         return (key + 1 + ((page - 1) * perPage));
-    }    
+    }
+    
+    _viewChat(id) {        
+        this.setState({selectedChat: id});
+    }
     
     _renderRecords() {
-        const {t} = this.props;
-        const loading = this.props.getRecordsRequest.get('loading');
-        const records = this.props.getRecordsRequest.get('records');                               
+        const {t} = this.props;        
+        const records = this.props.getRecordsRequest.get('records');
         
-        if (!loading && records.size === 0) {
+        let selectedChat = this.state.selectedChat;
+        
+        return records.map((record, key) => {
+            if (!selectedChat) {
+                selectedChat = record.get('id');
+                this.setState({selectedChat: selectedChat});
+            }            
             return (
-                <MessageRow>{t('messagesNotFound')}</MessageRow>
-            );
-        }
-
-        return records.map((record, key) => (
-            <Row index={key} key={key}>
-                <Td width='40px'>{this._recordNumber(key)}</Td>
-                <Td width='250px'>
-                    <div className='pre-line'>
-                        {(!record.get('isMine') && !record.get('isRead')) && <span className='m-badge m-badge--brand m-badge--wide m-badge--warning mr-2'>! </span>}
-                        {record.get('body')}
+                <div className={`chat ${record.get('id') === selectedChat ? 'current' : ''}`} onClick={() => this._viewChat(record.get('id')) }>                
+                    <div>
+                        <div className='pre-line'>
+                            <span className='chat-name'>{record.get('subject') || record.get('recipients')}</span>
+                            {record.get('hasNewMessages') && <span className='m-badge m-badge--brand m-badge--wide m-badge--warning mr-2'>! </span>}
+                        </div>
                     </div>
-                </Td>
-                <Td>{record.get('user') ? record.get('user').get('name') : ''}</Td>
-                <Td>{record.get('isMine') ? record.get('recipients') : t('me')}</Td>
-                <Td>{moment(record.get('sent')).format('lll')}</Td>
-                <Td className="actions">
-                    <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' to={`/messages/view/${record.get('id')}`}>
-                        <i className='la la-search'></i>
-                    </NavLink>
-                    <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>                    
-                </Td>
-            </Row>
-        ));
-    }
-
-    _selectPerPage(perPage) {
-        const total      = this.props.getRecordsRequest.get('pagination').get('total');
-        const totalPages = Math.ceil(total / perPage);
-        const page       = Math.min(this.state.page, totalPages);
-
-        this.setState({perPage, page}, this._getRecords);
+                    <div>{record.get('user').get('name')}</div>
+                    <div>{moment(record.get('created')).format('lll')}</div>
+                </div>
+            )
+        });                
     }
     
-    _goToPage(page) {
-        this.setState({page}, this._getRecords);
-    }
-
     render() {
-        const {getRecordsRequest, t} = this.props;
-        const {page, perPage} = this.state;
+        const {getRecordsRequest, t} = this.props;        
         const loading = getRecordsRequest.get('loading');
         const success = getRecordsRequest.get('success');
         const totalPages = getRecordsRequest.get('pagination').get('totalPages');
@@ -111,61 +87,38 @@ class Chats extends Component {
                 <div className='m-portlet m-portlet--head-solid-bg'>
                     <div className='m-portlet__head border-b-violet'>
                         <div className='m-portlet__head-caption'>
-                            <div className='m-portlet__head-title'>
-                                <span className='m-portlet__head-icon violet'><i className='la la-comment-o'></i></span>
-                                <h3 className='m-portlet__head-text'>{t('messages')}</h3>
-                            </div>
-                        </div>         
-                    </div>
-                    <div className='m-portlet__body'>
-                        <div className='m--margin-top-10 m--margin-bottom-30'>
-                            <div className='row'>               
-                                <div className='col-sm-12 m--align-right'>
-                                    <Select
-                                        className="pull-left table-select"
-                                        value={perPage}
-                                        onChange={(e) => { this._selectPerPage(e.target.value) }}>
-                                        <MenuItem value={5}>5</MenuItem>
-                                        <MenuItem value={10}>10</MenuItem>
-                                        <MenuItem value={25}>25</MenuItem>
-                                        <MenuItem value={50}>50</MenuItem>
-                                        <MenuItem value={100}>100</MenuItem>
-                                    </Select>
+                            <div class="m-portlet__head-title d-flex flex-row justify-content-between align-items-center">
+                                <div>
+                                    <span className='m-portlet__head-icon violet'><i className='fa fa-weixin'></i></span>
+                                    <h3 class="m-portlet__head-text">{t('chats')}</h3>
+                                </div>
+                                <div class="m-portlet__head-text">
                                     <HasRole roles={['Superadministrator', 'School', 'Teacher']}>
                                         <NavLink to="/messages/new">
-                                            <button className='btn btn-success violet'>
-                                              {t('newMessage')}
+                                            <button className='pull-right btn btn-success violet'>
+                                              {t('newChat')}
                                               <span className='icon m--margin-left-10'><i className='fa fa-send'></i></span>                                             
                                             </button>
                                         </NavLink>
-                                    </HasRole>
+                                    </HasRole>                                
                                 </div>
                             </div>
-                        </div>
-                        <Table>
-                            <Thead>
-                            <HeadRow>
-                                <Th width='40px'>#</Th>
-                                <Th width='50%'>{t('message')}</Th>                                
-                                <Th>{t('from')}</Th>
-                                <Th>{t('to')}</Th>
-                                <Th>{t('sentDate')}</Th>                                
-                                <Th>{t('actions')}</Th>
-                            </HeadRow>
-                            </Thead>
-
-                            <Tbody>
-                                {loading && <TablePreloader text="Loading..." color="primary"/> }
-                                {success && this._renderRecords() }
-                            </Tbody>
-                        </Table>
-
-                        <div className="row">
-                            <div className="col-sm-12 m--margin-top-40 text-right">
-                                <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
-                            </div>
-                        </div>
+                        </div>         
                     </div>
+                    <div>                           
+                        <div>                
+                            <div className='row d-flex'>
+                                <div className='col-3 pr-0 chats-box'>
+                                    <div className='chats'>
+                                        {success && this._renderRecords() }
+                                    </div>
+                                </div>
+                                <div className='col-9 pl-0'>
+                                    {this.state.selectedChat && <Chat chatId={this.state.selectedChat} />}
+                                </div>                        
+                            </div>
+                        </div>  
+                    </div>  
                 </div>          
             </div>
         );
@@ -174,18 +127,11 @@ class Chats extends Component {
 
 Chats = connect(
     (state) => ({
-        getRecordsRequest: selectGetRecordsRequest(state),
-        deleteRecordRequest: selectDeleteRecordRequest(state)
+        getRecordsRequest: selectGetChatsRequest(state),        
     }),
     (dispatch) => ({
         getRecords: (params = {}) => {
-            dispatch(getMessages(params));
-        },
-        deleteMessage: (id) => {
-            dispatch(deleteMessage(id));
-        },
-        resetDeleteMessageRequest: () => {
-            dispatch(resetDeleteMessageRequest());
+            dispatch(getChats(params));
         }
     })
 )(Chats);
