@@ -14,7 +14,7 @@ class Chats extends Component {
 
     constructor(props) {
         super(props);        
-        this.state = {}
+        this.state = {};
     }
 
     componentWillMount() {
@@ -22,23 +22,17 @@ class Chats extends Component {
     }
    
     componentWillReceiveProps(nextProps) {
-        if (!this.props.getRecordsRequest.get('success') && nextProps.getRecordsRequest.get('success')) {
+        if (!this.props.getRecordsRequest.get('records').size && nextProps.getRecordsRequest.get('records').size) {
             let records = nextProps.getRecordsRequest.get('records');
-            if (records.size) {
-                this.setState({
-                    selectedChat: records.get(0).get('id')
-                });
+            
+            if (records.size && !this.state.selectedChat) {
+                this._viewChat(records.get(0).get('id'));
             }
         }
     }        
     
     _getRecords() {
         this.props.getRecords();
-    }
-         
-    _recordNumber(key) {
-        const { page, perPage } = this.state;
-        return (key + 1 + ((page - 1) * perPage));
     }
     
     _viewChat(id) {        
@@ -99,8 +93,7 @@ class Chats extends Component {
     render() {
         const {getRecordsRequest, t} = this.props;        
         const loading = getRecordsRequest.get('loading');
-        const success = getRecordsRequest.get('success');
-        const records = getRecordsRequest.get('records');        
+        const success = getRecordsRequest.get('success');        
 
         return (
             <div className='fadeInLeft h-100'> 

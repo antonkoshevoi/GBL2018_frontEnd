@@ -130,24 +130,36 @@ export default function reducer (state = initialState, action) {
   switch(action.type) {
 
     case NEW_MESSAGE_RECEIVED:
-        let chatId = Number(action.message.chatId);
+        let chatId       = Number(action.message.chatId);
+        let chatsRecords = [];
         
-        console.log('Reducer: New message');
+        if (!chatId) {
+            console.log('Reducer: New chat');
+            
+            chatsRecords = state.get('getChatsRequest').get('records').toJS();            
+            chatsRecords.unshift(action.message);            
+            return state.set('getChatsRequest', state.get('getChatsRequest').set('records', Immutable.fromJS(chatsRecords)));            
+        }
+        
         if (action.message && Number(state.get('getChatMessagesRequest').get('chatId')) === chatId) {
+            console.log('Reducer: New message in active chat');
+            
             let messages = state.get('getChatMessagesRequest').get('records').toJS();            
             messages.push(action.message);
             return state.set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(messages)));                        
         }
+
+        console.log('Reducer: New message in unactive');
         
-        let chatsRecords = state.get('getChatsRequest').get('records').toJS().map(record => {            
+        chatsRecords = state.get('getChatsRequest').get('records').toJS().map(record => {            
             if (record.id === chatId) {
                 record.newMessages ++;                
             }
             return record;
         });
-            
-        return state.set('getChatMessagesRequest', state.get('getChatMessagesRequest'))
-                    .set('getChatsRequest', state.get('getChatsRequest').set('records', Immutable.fromJS(chatsRecords)));
+
+        return state.set('getChatsRequest', state.get('getChatsRequest').set('records', Immutable.fromJS(chatsRecords)));
+
     /**
      *  send message
      */
