@@ -307,5 +307,12 @@ nav.navigation.hovered  > .menuItem > a.swapped  {
     }
     nav.navigation > .menuItem > a > .icon {
         width: 45px;
-    }     
+    }
+    nav.navigation .second_level > .back {
+        padding: 0 3px;
+    }    
+}
+
+@media (max-width: 1440px) {
+
 }

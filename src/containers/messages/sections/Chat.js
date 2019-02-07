@@ -3,9 +3,7 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetChatMessagesRequest, selectReplyMessageRequest } from '../../../redux/messages/selectors';
 import { getChatMessages, replyMessage } from '../../../redux/messages/actions';
-
-import { CircularProgress, Divider, TextField, FormControl, FormHelperText, InputLabel } from '@material-ui/core';
-
+import { Avatar, TextField, FormControl } from '@material-ui/core';
 import Loader from '../../../components/layouts/Loader';
 import moment from 'moment/moment';
 
@@ -54,28 +52,30 @@ class Chat extends Component {
     }
     
     _renderRecords() {
-        const {t} = this.props;
-        const loading = this.props.getRecordsRequest.get('loading');
+        const {t} = this.props;        
         const records = this.props.getRecordsRequest.get('records');
 
         return records.map((record, key) => (
             <div className={`message-box my-2 ${record.get('isMine') ? 'sent' : 'inbox'}`}  index={key} key={key}>
-                <div className='text-muted'>
-                    {record.get('isMine') ? t('me') : record.get('user').get('name')}, {moment(record.get('created')).format('lll')}
-                </div>
-                <div className='message-content'>
-                    <div className='pre-line'>                    
-                        {record.get('body')}
-                    </div>                
+                {!record.get('isMine') && <div className='d-inline-block mr-3'>
+                    <Avatar src={record.get('user').get('avatarSmall')} className='border' />
+                </div>}
+                <div className='d-inline-block'>
+                    <div className='text-muted'>
+                        {record.get('isMine') ? t('me') : record.get('user').get('name')}, {moment(record.get('created')).format('lll')}
+                    </div>
+                    <div className='message-content mt-1'>
+                        <div className='pre-line'>                    
+                            {record.get('body')}
+                        </div>                
+                    </div>
                 </div>
             </div>
         ));        
     }
 
-    _scrollToBottom = () => {
-        console.log('_scrollToBottom');    
-        console.log(this.messages);
-        this.messages.scrollIntoView({ behavior: "smooth" });
+    _scrollToBottom = () => {       
+        this.messages.scrollTop = this.messages.scrollHeight;
     }
 
     componentDidMount() {
@@ -93,10 +93,10 @@ class Chat extends Component {
         const success = getRecordsRequest.get('success');        
 
         return (
-            <div className='px-3 py-3'>
+            <div className='px-3'>
+                {loading && <Loader /> }
                 <div className="chat-messages" ref={(el) => { this.messages = el; }}>
-                    <div className='mr-2'>
-                        {loading && <Loader /> }
+                    <div className='mx-2'>
                         {success && this._renderRecords() }
                     </div>
                 </div>
@@ -110,7 +110,7 @@ class Chat extends Component {
                                 fullWidth
                                 margin="normal"
                                 variant="outlined"                                          
-                                rows="3"                                  
+                                rows="2"                                  
                                 value={message || ''}                                                       
                                 onChange={(e) => {
                                     this._handleChange(e)
@@ -119,7 +119,7 @@ class Chat extends Component {
                         </FormControl>
                     </div>
                     <div className='form-group'>
-                        <button disabled={replyMessageRequest.get('loading')} className='mt-btn-success btn btn-success mt-btn' onClick={ () => {this._send() }} >
+                        <button disabled={replyMessageRequest.get('loading') || !message} className='mt-btn-success btn btn-success mt-btn' onClick={ () => {this._send() }} >
                           {t('sendMessage')}
                         </button>                            
                     </div>

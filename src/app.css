@@ -1129,8 +1129,7 @@ td.rotate div span {
 }
 .chats-box {
     background-color: #E6E6E6;
-    border-right: #7900C7 solid 2px !important;
-    /*min-height: 86vh;*/
+    border-right: #7900C7 solid 2px !important;    
 }
 
 .chats-box .chat.current {
@@ -1147,9 +1146,11 @@ td.rotate div span {
     font-weight: 500;
 }
 .chat-messages {
-    overflow-y: scroll !important;
+    overflow-y: auto !important;
     overflow: hidden;
-    max-height: 500px;   
+    max-height: 550px;
+    min-height: 500px;
+    
 }
 .message-box.sent {
     text-align: right;

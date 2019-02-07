@@ -7,30 +7,19 @@ export default function messagesMiddleware() {
 
             const {type, userId, ...rest} = action;
 
-            console.log('messagesMiddleware userId: ' + userId);
-            console.log('messagesMiddleware type: ' + type);
-            if (type !== SUBSCRIBE) {
-                console.log('messagesMiddleware next');
+            if (type !== SUBSCRIBE) {               
                 return next(action);
-            } else {
-                console.log('messagesMiddleware SUBSCRIBE!');
             }
             
-            if (!userId) {
-                console.log('messagesMiddleware SUBSCRIBE_FAIL');
+            if (!userId) {                
                 return next({...rest, type: SUBSCRIBE_FAIL});
             }            
 
             LiveService.messages(userId, message => {
                 console.log('messagesMiddleware NEW_MESSAGE_RECEIVED');
-                console.log('userId: ' + userId);
-                console.log(message);
+                console.log('userId: ' + userId);                
                 dispatch({type: NEW_MESSAGE_RECEIVED, message})
             });
-            /*
-             LiveService.threads(userId, thread => {
-             dispatch({type: NEW_THREAD_CREATED, thread})
-             });*/
         };
     };
 }

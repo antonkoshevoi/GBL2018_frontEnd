@@ -130,15 +130,24 @@ export default function reducer (state = initialState, action) {
   switch(action.type) {
 
     case NEW_MESSAGE_RECEIVED:
-        if (action.message && Number(state.get('getChatMessagesRequest').get('chatId')) === Number(action.message.chatId)) {
+        let chatId = Number(action.message.chatId);
+        
+        console.log('Reducer: New message');
+        if (action.message && Number(state.get('getChatMessagesRequest').get('chatId')) === chatId) {
             let messages = state.get('getChatMessagesRequest').get('records').toJS();            
-            messages.push(action.message);         
+            messages.push(action.message);
+            return state.set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(messages)));                        
+        }
+        
+        let chatsRecords = state.get('getChatsRequest').get('records').toJS().map(record => {            
+            if (record.id === chatId) {
+                record.newMessages ++;                
+            }
+            return record;
+        });
             
-            console.log('Reducer: Added new message');
-            
-            return state.set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(messages)));            
-        }       
-        return state.set('getChatMessagesRequest', state.get('getChatMessagesRequest'));
+        return state.set('getChatMessagesRequest', state.get('getChatMessagesRequest'))
+                    .set('getChatsRequest', state.get('getChatsRequest').set('records', Immutable.fromJS(chatsRecords)));
     /**
      *  send message
      */
@@ -251,11 +260,22 @@ export default function reducer (state = initialState, action) {
     case GET_CHAT_MESSAGES:    
         return state.set('getChatMessagesRequest', initialState.get('getChatMessagesRequest').set('loading', true));    
     case GET_CHAT_MESSAGES_SUCCESS:
+        
+        let records = state.get('getChatsRequest').get('records').toJS().map(record => {            
+            if (record.id === action.chatId) {
+                record.newMessages = 0;                
+            }
+            return record;
+        });
+                                                                                                                                
         action.result.data.reverse();
-        return state.set('getChatMessagesRequest', initialState.get('getChatMessagesRequest')
+                                                                                                                                
+        return state.set('getChatsRequest', state.get('getChatsRequest').set('records',  Immutable.fromJS(records)))
+                .set('getChatMessagesRequest', initialState.get('getChatMessagesRequest')
                 .set('success', true)
                 .set('chatId', action.chatId)                
-                .set('records', Immutable.fromJS(action.result.data)));           
+                .set('records', Immutable.fromJS(action.result.data)));    
+    
     case GET_CHAT_MESSAGES_FAIL:   
         return state.set('getChatMessagesRequest', initialState.get('getChatMessagesRequest').set('fail', true));            
     

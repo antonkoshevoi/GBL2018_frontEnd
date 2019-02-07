@@ -3,13 +3,10 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetChatsRequest } from '../../redux/messages/selectors';
 import { getChats } from '../../redux/messages/actions';
-
-import { CircularProgress } from '@material-ui/core';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
+import { Avatar } from '@material-ui/core';
 import { NavLink } from "react-router-dom";
-import Pagination from '../../components/ui/Pagination';
-import DeleteButton from '../../components/ui/DeleteButton';
 import HasRole from "../middlewares/HasRole";
+import Loader from '../../components/layouts/Loader';
 import Chat from "./sections/Chat";
 import moment from 'moment/moment';
 
@@ -17,10 +14,7 @@ class Chats extends Component {
 
     constructor(props) {
         super(props);        
-        this.state = {
-            page: props.getRecordsRequest.get('pagination').get('page'),
-            perPage: props.getRecordsRequest.get('pagination').get('perPage')
-        }
+        this.state = {}
     }
 
     componentWillMount() {
@@ -28,17 +22,18 @@ class Chats extends Component {
     }
    
     componentWillReceiveProps(nextProps) {
-       
+        if (!this.props.getRecordsRequest.get('success') && nextProps.getRecordsRequest.get('success')) {
+            let records = nextProps.getRecordsRequest.get('records');
+            if (records.size) {
+                this.setState({
+                    selectedChat: records.get(0).get('id')
+                });
+            }
+        }
     }        
     
     _getRecords() {
-        const { page, perPage} = this.state;
-
-        this.props.getRecords({
-            page, perPage, filter: {
-                type: 'chat'
-            }
-        });
+        this.props.getRecords();
     }
          
     _recordNumber(key) {
@@ -50,49 +45,75 @@ class Chats extends Component {
         this.setState({selectedChat: id});
     }
     
-    _renderRecords() {
-        const {t} = this.props;        
-        const records = this.props.getRecordsRequest.get('records');
-        
-        let selectedChat = this.state.selectedChat;
+    _renderRecords() {        
+        const records = this.props.getRecordsRequest.get('records');        
+        const selectedChat = this.state.selectedChat;        
         
         return records.map((record, key) => {
-            if (!selectedChat) {
-                selectedChat = record.get('id');
-                this.setState({selectedChat: selectedChat});
-            }            
             return (
-                <div className={`chat ${record.get('id') === selectedChat ? 'current' : ''}`} onClick={() => this._viewChat(record.get('id')) }>                
-                    <div>
-                        <div className='pre-line'>
-                            <span className='chat-name'>{record.get('subject') || record.get('recipients')}</span>
-                            {record.get('hasNewMessages') && <span className='m-badge m-badge--brand m-badge--wide m-badge--warning mr-2'>! </span>}
+                <div key={key} className={`chat ${record.get('id') === selectedChat ? 'current' : ''}`} onClick={() => this._viewChat(record.get('id')) }>
+                    <div className='d-flex'>
+                        <div className='align-self-center d-inline-block mr-3'>
+                            <Avatar src={record.get('user').get('avatarSmall')} className='border' />
+                        </div>
+                        <div className='d-inline-block'>
+                            <div>
+                                <span className='chat-name'>{record.get('subject') || record.get('recipients')}</span>
+                                {record.get('newMessages') > 0 && <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
+                            </div>                        
+                            <div>{record.get('user').get('name')}</div>
+                            <div>{moment(record.get('created')).format('lll')}</div>
                         </div>
                     </div>
-                    <div>{record.get('user').get('name')}</div>
-                    <div>{moment(record.get('created')).format('lll')}</div>
                 </div>
-            )
-        });                
+            );    
+        });
+    }
+    
+    _renderChats() {
+        const selectedChat = this.state.selectedChat;
+        const {getRecordsRequest, t} = this.props;        
+        
+        if (!getRecordsRequest.get('records').size) {
+            return <div className='m-portlet__body'>
+                <h2 className='text-center my-5'>{t('messagesNotFound')}</h2>
+            </div>;
+        }
+        
+        return (
+            <div className='h-100 d-flex align-items-stretch'>
+                <div className='row w-100'>
+                    <div className='col-3 pr-0 chats-box'>
+                        <div className='chats'>
+                            {this._renderRecords()}
+                        </div>
+                    </div>
+                    <div className='col-9 pl-0'>
+                        {selectedChat && <Chat chatId={this.state.selectedChat} />}
+                    </div>                        
+                </div>                
+            </div>
+        );
     }
     
     render() {
         const {getRecordsRequest, t} = this.props;        
         const loading = getRecordsRequest.get('loading');
         const success = getRecordsRequest.get('success');
-        const totalPages = getRecordsRequest.get('pagination').get('totalPages');
+        const records = getRecordsRequest.get('records');        
 
         return (
-            <div className='fadeInLeft  animated'>               
-                <div className='m-portlet m-portlet--head-solid-bg'>
+            <div className='fadeInLeft h-100'> 
+                {loading && <Loader />}                
+                <div className='m-portlet m-portlet--head-solid-bg h-100'>
                     <div className='m-portlet__head border-b-violet'>
                         <div className='m-portlet__head-caption'>
-                            <div class="m-portlet__head-title d-flex flex-row justify-content-between align-items-center">
+                            <div className="m-portlet__head-title d-flex flex-row justify-content-between align-items-center">
                                 <div>
                                     <span className='m-portlet__head-icon violet'><i className='fa fa-weixin'></i></span>
-                                    <h3 class="m-portlet__head-text">{t('chats')}</h3>
+                                    <h3 className="m-portlet__head-text">{t('chats')}</h3>
                                 </div>
-                                <div class="m-portlet__head-text">
+                                <div className="m-portlet__head-text">
                                     <HasRole roles={['Superadministrator', 'School', 'Teacher']}>
                                         <NavLink to="/messages/new">
                                             <button className='pull-right btn btn-success violet'>
@@ -104,22 +125,9 @@ class Chats extends Component {
                                 </div>
                             </div>
                         </div>         
-                    </div>
-                    <div>                           
-                        <div>                
-                            <div className='row d-flex'>
-                                <div className='col-3 pr-0 chats-box'>
-                                    <div className='chats'>
-                                        {success && this._renderRecords() }
-                                    </div>
-                                </div>
-                                <div className='col-9 pl-0'>
-                                    {this.state.selectedChat && <Chat chatId={this.state.selectedChat} />}
-                                </div>                        
-                            </div>
-                        </div>  
-                    </div>  
-                </div>          
+                    </div>                    
+                    {success && this._renderChats()}                    
+                </div>
             </div>
         );
     }

@@ -68,7 +68,7 @@ class MainLayout extends Component {
                         </HasRole>
                     </div>}
                     <div className={`m-wrapper h-100 ${hideSidebar ? 'margin-0' : ''}`}>               
-                        <div className="m-content">
+                        <div className="m-content h-100">
                             {this.props.children}
                         </div>
                     </div>

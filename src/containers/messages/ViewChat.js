@@ -1,17 +1,6 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
-
-import {
-  CircularProgress, Typography,
-  Divider, TextField, FormControl, FormHelperText,
-  InputLabel
-} from '@material-ui/core';
-
-import { NavLink } from "react-router-dom";
-import Loader from '../../components/layouts/Loader';
-import HasRole from "../middlewares/HasRole";
 import Chat from "./sections/Chat";
-import moment from 'moment/moment';
 
 class ViewChat extends Component {
 
