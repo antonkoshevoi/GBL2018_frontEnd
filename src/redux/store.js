@@ -5,6 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 import reducers from './reducers';
 import rootSaga from './sagas';
 import clientMiddleware from './middlewares/clientMiddleware';
+import messagesMiddleware from './messages/middleware';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
 export default (history, apiClient) => {
@@ -16,7 +17,8 @@ export default (history, apiClient) => {
     }),
     composeWithDevTools(
       applyMiddleware(
-        clientMiddleware(apiClient),        
+        clientMiddleware(apiClient),
+        messagesMiddleware(),
         routerMiddleware(history),
         sagaMiddleware
       )

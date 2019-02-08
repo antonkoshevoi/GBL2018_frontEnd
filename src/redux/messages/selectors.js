@@ -30,6 +30,16 @@ export const selectGetRecordsRequest = createSelector(
   (subState) => subState.get('getRecordsRequest')
 );
 
+export const selectGetChatsRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('getChatsRequest')
+);
+
+export const selectGetChatMessagesRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('getChatMessagesRequest')
+);
+
 export const selectDeleteRecordRequest = createSelector(
   selectMessagesDomain,
   (subState) => subState.get('deleteRecordRequest')

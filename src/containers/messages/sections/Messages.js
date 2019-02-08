@@ -69,7 +69,7 @@ class Messages extends Component {
         }    
         let { readIds } = this.state;       
         readIds.push(record.id);        
-        console.log(readIds);        
+        console.log(readIds);
         this.setState({readIds: readIds});
     }
     
@@ -133,7 +133,7 @@ class Messages extends Component {
         const loading = this.props.getRecordsRequest.get('loading');
         const records = this.state.records;
         
-        if (!loading && records.size === 0) {
+        if (!loading && records.length === 0) {
             return (
                 <h2 className='text-center my-5'>{t('messagesNotFound')}</h2>
             );
@@ -149,7 +149,7 @@ class Messages extends Component {
                         <div className='text-center'>
                             <p className='my-1 my-sm-2'>{t(record.user.school)} {t(record.user.role)}</p>
                             <p className='text-muted my-1 my-sm-2'><b>{record.user.name}</b></p>
-                            <p className='d-sm-none my-1'>{moment(record.sent).format('lll')}</p>
+                            <p className='d-sm-none my-1'>{moment(record.created).format('lll')}</p>
                             {record.isMine && <p className='d-sm-none my-1'>{t('recipients')}: <i>{record.recipients}</i></p>}                            
                         </div>
                     </div>
@@ -158,7 +158,7 @@ class Messages extends Component {
                     <div className='pre-line my-2 my-sm-0'>{record.body}</div>
                 </div>
                 <div className='col-3 col-sm-3 text-center'>
-                    <p className='d-none my-2 d-sm-block'>{moment(record.sent).format('lll')}</p>
+                    <p className='d-none my-2 d-sm-block'>{moment(record.created).format('lll')}</p>
                     {record.isMine && 
                         <p className='d-none my-2 d-sm-block'>{t('recipients')}: <i>{record.recipients}</i></p>
                     }

@@ -371,10 +371,6 @@ table th .sort-arrow {
     border-color: #36a3f7;
 }
 
-.digits-error {
-    color: #f4516c;
-}
-
 .upload-btn-wrapper {
     position: relative;
     overflow: hidden;
@@ -546,18 +542,6 @@ div.m-portlet {
     margin-bottom: 0;
 }
 
-.quick-card-title{
-    margin-top: 0px;
-}
-.quick-card-item {
-    margin-top: 15px!important;
-}
-
-.quick-card-item img{
-    width: 80%;
-    padding: 12% 10% 9% 5%;
-}
-
 .dashboard-shopping-cart-body {
     min-height: 365px;
 }
@@ -570,26 +554,6 @@ div.m-portlet {
 .passRateCard h1 {
     font-size: 7rem;
     color: #008000;
-}
-
-@media (min-width: 1240px) {
-    .quick-card-title{
-        margin-top: 15px;
-    }
-
-    .quick-card-item img{
-        width: 100%;
-        padding: 19% 10% 11% 5%;
-        max-width: 119px;
-    }
-}
-
-
-.single-card img {
-    height: 120px;
-    width: 120px !important;
-    padding: 6px;
-
 }
 
 .small-card-content {
@@ -649,12 +613,6 @@ div.m-portlet {
 .m-widget1__item .progress {
     width: 100%;
     height: 7px;
-}
-
-.task-info {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
 }
 
 .flex-1 {
@@ -723,8 +681,7 @@ div.row-15{
 .m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i:not(.la-globe) {
     font-size: 1.4rem;
     line-height: 35px;
-    border-radius: 50%;
-    /*box-shadow: 0 2px 5px #80808036;*/
+    border-radius: 50%;   
     width: 35px;
     height: 35px;
 }
@@ -966,46 +923,6 @@ div#notFoundPage {
     will-change: auto;
 }
 
-@media (min-width: 1864px) {
-    .quick-link-card {
-        padding-bottom: 9px !important;
-    }
-}
-
-@media (min-width: 1367px) {
-    .quick-link-text {
-        margin-top: 15px !important;
-    }
-}
-
-@media (min-width: 1366px) and (max-width: 1680px) {
-    .quick-link-card {
-        padding-bottom: 5px !important;
-    }
-}
-
-@media (min-width: 1240px) and (max-width: 1367px) {
-    .quick-link-image img {
-        width: 100%;
-        height: auto;
-    }
-
-    .quick-link-card {
-        padding-bottom: 0 !important;
-    }
-
-    .quick-link-image {
-        margin-top: 10px !important;
-        margin-bottom: 10px !important;
-        max-width: 40%;
-    }
-
-    .quick-link-text {
-        max-width: 60%;
-        flex: 0 0 60%;
-        margin-top: 10px;
-    }
-}
 .table thead tr.active th {
     background-color: #F4F3F8;
     vertical-align: middle;    
@@ -1014,12 +931,10 @@ div#notFoundPage {
     padding: 16px 10px;
     color: #575962;
 }
-
 .attempt-pass {
     background-color: #34bfa3;
     color: white;
 }
-
 .attempt-fail {
     background-color: rgba(255, 0, 0, 0.4);
     color: white;
@@ -1054,21 +969,6 @@ td.rotate div span {
     font-size: 26px;
     color: #ffffff;
     transform: rotate(270deg);
-}
-
-.unit-table .m-badge.m-badge--brand.m-badge--wide {    
-    color: white !important;
-    font-weight: bold;
-    height: 25px;
-}
-
-.unit-table .comment-cell {
-    min-width: 450px;
-    width: 99% !important;
-}
-
-.text-align-left span {
-    text-align: left!important;
 }
 
 .date-group-selector {
@@ -1108,10 +1008,6 @@ td.rotate div span {
 
 .date-group-selector .date-group.date-selector-active:after {
     width: 100%;
-}
-
-.no-padding-top {
-    padding-top: 0 !important;
 }
 
 .date-selector {
@@ -1231,37 +1127,43 @@ td.rotate div span {
 .border-b-violet {
     border-bottom: #7900C7 solid 2px !important;
 }
-@media (min-width: 1240px) {
-    .margin-bottom-zero {
-        margin-bottom: 0 !important;
-    }
-    .school-average-margins {
-        margin-top: 7px !important;
-        margin-bottom: 7px !important;
-    }
+.chats-box {
+    background-color: #E6E6E6;
+    border-right: #7900C7 solid 2px !important;    
+}
 
-    .quick-link-image {
-        margin-top: 15px;
-    }
-
-    .quick-link-description {
-        display: flex;
-        flex-direction: column;
-        max-width: 55%;
-    }
-
-    .quick-link-description h5, .quick-link-description h3 {
-        margin: 0;
-    }
-
-    .account-header-border {
-        border-bottom-width: 2px !important;
-        padding: 0 0 3px 0 !important ;
-        min-height: 0 !important;
-        margin: 15px 4px 10px 2px !important;
-        width: 99% !important;
-        border-color: #467822 !important;
-    }
+.chats-box .chat.current {
+    background-color: #FFABFF;
+}
+.chats > div {
+    padding: 10px;
+    color: #808080;
+    border-bottom: #7900C7 solid 1px !important;
+    cursor: pointer;
+}
+.chats .chat-name {
+    color: #000;
+    font-weight: 500;
+}
+.chat-messages {
+    overflow-y: auto !important;
+    overflow: hidden;
+    max-height: 550px;
+    min-height: 500px;
+    
+}
+.message-box.sent {
+    text-align: right;
+}
+.message-content {
+    background-color: #e9ecef;
+    border-radius: 15px;
+    padding: 10px;
+    display: inline-block;
+    color: #040404;
+}
+.message-box.sent .message-content {
+    background-color: #FFABFF;
 }
 
 @media (max-width: 1240px) {
@@ -1325,39 +1227,28 @@ td.rotate div span {
         margin-left: 0 !important;
     }
 }
-
 .quick-link .quick-link-title {
     display: block;
     color: #575962;
 }
-
 .quick-link .quick-link-title span {
     font-size: 1.5vw;
     font-weight: 600;
 }
-
 .quick-link .quick-link-title h5 {
     font-size: 1vw;
     margin: 0;
 }
-
 .quick-link-download {
     color: #00bc5e !important;
 }
-
 .quick-link-film {
     color: #f2af16 !important;
 }
-
-.zoom-preview {
-    zoom: 0.4;
-}
-
 .store-container {
     white-space: nowrap;
     overflow-x: auto;
 }
-
 .store-featured {    
     white-space: pre-wrap;   
     zoom: 0.8;
@@ -1365,14 +1256,12 @@ td.rotate div span {
 .store-featured .verticalCardItem.cardItem{
     max-width: 150px;
 }
-
 .store-featured .empty-stars:before {
     letter-spacing: -1px;
 }
 .store-featured .full-stars:before {
     letter-spacing: 0;
 }
-
 .store-featured-title {
     font-size: 20px;
     font-weight: 600;
