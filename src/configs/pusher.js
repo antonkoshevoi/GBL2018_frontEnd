@@ -2,7 +2,7 @@ import Pusher from 'pusher-js';
 import { env } from '../configs/.env';
 import SessionStorage from '../services/SessionStorage';
 
-Pusher.logToConsole = env.DEBUG;
+Pusher.logToConsole = true;//env.DEBUG;
 
 export default class PusherService {
         
