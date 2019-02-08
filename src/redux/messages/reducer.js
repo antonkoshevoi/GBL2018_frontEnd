@@ -126,19 +126,31 @@ const initialState = Immutable.fromJS({
   },    
 });
 
+function updateUnread(state, number = 1) {
+    let unreadMessages  = state.get('getUnreadMessagesRequest').get('records').toJS();    
+    unreadMessages = unreadMessages.map(record => {            
+        if (record.type === 'chats') {
+            record.count = record.count + number;
+        }
+        return record;
+    });
+    return Immutable.fromJS(unreadMessages);
+}
+
 export default function reducer (state = initialState, action) {
   switch(action.type) {
 
     case NEW_MESSAGE_RECEIVED:
-        let chatId       = Number(action.message.chatId);
-        let chatsRecords = [];
+        let chatId          = Number(action.message.chatId);
+        let chatsRecords    = state.get('getChatsRequest').get('records').toJS();
         
         if (!chatId) {
             console.log('Reducer: New chat');
-            
-            chatsRecords = state.get('getChatsRequest').get('records').toJS();            
-            chatsRecords.unshift(action.message);            
-            return state.set('getChatsRequest', state.get('getChatsRequest').set('records', Immutable.fromJS(chatsRecords)));            
+                        
+            chatsRecords.unshift(action.message);
+                                   
+            return state.set('getChatsRequest', state.get('getChatsRequest').set('records', Immutable.fromJS(chatsRecords)))
+                .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state)));            
         }
         
         if (action.message && Number(state.get('getChatMessagesRequest').get('chatId')) === chatId) {
@@ -151,14 +163,15 @@ export default function reducer (state = initialState, action) {
 
         console.log('Reducer: New message in unactive');
         
-        chatsRecords = state.get('getChatsRequest').get('records').toJS().map(record => {            
+        chatsRecords = chatsRecords.map(record => {            
             if (record.id === chatId) {
-                record.newMessages ++;                
+                record.newMessages ++;
             }
             return record;
         });
-
-        return state.set('getChatsRequest', state.get('getChatsRequest').set('records', Immutable.fromJS(chatsRecords)));
+            
+        return state.set('getChatsRequest', state.get('getChatsRequest').set('records', Immutable.fromJS(chatsRecords)))
+            .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state)));
 
     /**
      *  send message
@@ -272,17 +285,19 @@ export default function reducer (state = initialState, action) {
     case GET_CHAT_MESSAGES:    
         return state.set('getChatMessagesRequest', initialState.get('getChatMessagesRequest').set('loading', true));    
     case GET_CHAT_MESSAGES_SUCCESS:
-        
+        let readMessages = 0;
         let records = state.get('getChatsRequest').get('records').toJS().map(record => {            
             if (record.id === action.chatId) {
+                readMessages = record.newMessages;
                 record.newMessages = 0;                
             }
             return record;
-        });
+        });            
                                                                                                                                 
         action.result.data.reverse();
                                                                                                                                 
         return state.set('getChatsRequest', state.get('getChatsRequest').set('records',  Immutable.fromJS(records)))
+                .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state, - readMessages)))
                 .set('getChatMessagesRequest', initialState.get('getChatMessagesRequest')
                 .set('success', true)
                 .set('chatId', action.chatId)                
@@ -293,15 +308,17 @@ export default function reducer (state = initialState, action) {
     
     case READ_MESSAGES:        
     case GET_UNREAD_MESSAGES:    
-        return state.set('getUnreadMessagesRequest', initialState.get('getUnreadMessagesRequest').set('loading', true));
+        return state.set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('loading', true).set('fail', false));
     case READ_MESSAGES_SUCCESS:        
     case GET_UNREAD_MESSAGES_SUCCESS:    
-        return state.set('getUnreadMessagesRequest', initialState.get('getUnreadMessagesRequest')
+        return state.set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest')
+                .set('loading', false)
+                .set('fail', false)
                 .set('success', true)                
                 .set('records', Immutable.fromJS(action.result.data)));
     case READ_MESSAGES_FAIL:        
     case GET_UNREAD_MESSAGES_FAIL:    
-        return state.set('getUnreadMessagesRequest', initialState.get('getUnreadMessagesRequest').set('fail', true));            
+        return state.set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('loading', false).set('success', false).set('fail', true));            
     
     /**
      * Get single group

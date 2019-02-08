@@ -19,25 +19,10 @@ class Messages extends Component {
     }
           
     componentDidMount() {
-        const {userData} = this.props;
-        if (userData.get('newMessagesCount')) {          
-            this.setState({                
-                counts: userData.get('newMessagesCount')
-            });                        
-        }
+        this.props.getMessages();
         this.interval = setInterval(() => this.tick(), 1000);
     }
-    
-    componentWillReceiveProps(nextProps) {
-        const {unreadMessagesRequest} = this.props;
-
-        if (!unreadMessagesRequest.get('success') && nextProps.unreadMessagesRequest.get('success')) {                        
-            this.setState({             
-                counts: nextProps.unreadMessagesRequest.get('records')                
-            });
-        }        
-    }
-    
+       
     tick() {
         this.setState((prevState) => {
             let seconds = prevState.seconds;
@@ -56,8 +41,8 @@ class Messages extends Component {
     }
           
   _renderMessages () {
-    const { t } = this.props;      
-    return this.state.counts.map((item, key) => (
+    const { t, unreadMessagesRequest } = this.props;      
+    return unreadMessagesRequest.get('records').map((item, key) => (
         <div key={key} className='mt-3'>
             <h6 className='my-0'>{t(item.get('type'))}
                 {item.get('count') ?
@@ -74,13 +59,15 @@ class Messages extends Component {
   }
 
   render() {
-    const { activeMenu , t } = this.props;           
-    let total = 0;
+    const { activeMenu , unreadMessagesRequest, t } = this.props;           
+    let total = 0;    
     
-    this.state.counts.map((item) => {    
-        total = total + item.get('count');
-        return total;
-    });        
+    if (unreadMessagesRequest.get('success')) {
+        unreadMessagesRequest.get('records').map((item) => {    
+            total = total + item.get('count');
+            return total;
+        });
+    }     
     
     return (
         <li className="m-nav__item m-topbar__Tasks m-topbar__Tasks--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width" data-dropdown-toggle="click" data-dropdown-persistent="true">
