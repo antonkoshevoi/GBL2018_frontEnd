@@ -1,4 +1,5 @@
 import { NEW_MESSAGE_RECEIVED, SUBSCRIBE, SUBSCRIBE_FAIL } from './actions';
+import { LOGOUT_SUCCESS } from '../auth/actions';
 import LiveService from '../../services/LiveService';
 
 export default function messagesMiddleware() {
@@ -7,7 +8,11 @@ export default function messagesMiddleware() {
 
             const {type, userId, ...rest} = action;
 
-            if (type !== SUBSCRIBE) {               
+            if (type !== SUBSCRIBE) {
+                if (type === LOGOUT_SUCCESS) {
+                    console.log('messagesMiddleware LOGOUT_SUCCESS');
+                    LiveService.disconnect();
+                }
                 return next(action);
             }
             
