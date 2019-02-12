@@ -2,11 +2,12 @@ import {
     GET_MESSAGE, GET_MESSAGE_SUCCESS, GET_MESSAGE_FAIL, RESET_GET_MESSAGE_REQUEST,
     GET_MESSAGES, GET_MESSAGES_SUCCESS, GET_MESSAGES_FAIL,
     GET_CHATS, GET_CHATS_SUCCESS, GET_CHATS_FAIL,
+    GET_GROUP_CHATS, GET_GROUP_CHATS_SUCCESS, GET_GROUP_CHATS_FAIL,
     GET_CHAT_MESSAGES, GET_CHAT_MESSAGES_SUCCESS, GET_CHAT_MESSAGES_FAIL,
     SEND_MESSAGE, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAIL, RESET_SEND_MESSAGE_REQUEST,
+    SEND_CHAT_MESSAGE, SEND_CHAT_MESSAGE_SUCCESS, SEND_CHAT_MESSAGE_FAIL, RESET_SEND_CHAT_MESSAGE_REQUEST,
     READ_MESSAGES, READ_MESSAGES_SUCCESS, READ_MESSAGES_FAIL,
-    UPDATE_MESSAGE, UPDATE_MESSAGE_SUCCESS, UPDATE_MESSAGE_FAIL, RESET_UPDATE_MESSAGE_REQUEST,
-    REPLY_MESSAGE, REPLY_MESSAGE_SUCCESS, REPLY_MESSAGE_FAIL, RESET_REPLY_MESSAGE_REQUEST,
+    UPDATE_MESSAGE, UPDATE_MESSAGE_SUCCESS, UPDATE_MESSAGE_FAIL, RESET_UPDATE_MESSAGE_REQUEST,    
     DELETE_MESSAGE, DELETE_MESSAGE_SUCCESS, DELETE_MESSAGE_FAIL, RESET_DELETE_MESSAGE_REQUEST,   
     GET_UNREAD_MESSAGES, GET_UNREAD_MESSAGES_SUCCESS, GET_UNREAD_MESSAGES_FAIL,
     VIEW_MESSAGE, VIEW_MESSAGE_SUCCESS, VIEW_MESSAGE_FAIL,    
@@ -54,14 +55,14 @@ const initialState = Immutable.fromJS({
     loading: false,
     success: false,
     fail: false,
-    records: Immutable.List(),
-    pagination: {
-      page: 1,
-      perPage: 50,
-      total: 0,
-      totalPages: 1
-    } 
+    records: Immutable.List()
   },
+  getGroupChatsRequest: {    
+    loading: false,
+    success: false,
+    fail: false,
+    records: Immutable.List()
+  },  
   getChatMessagesRequest: {    
     loading: false,
     success: false,
@@ -141,19 +142,20 @@ export default function reducer (state = initialState, action) {
   switch(action.type) {
 
     case NEW_MESSAGE_RECEIVED:
-        let chatId          = Number(action.message.chatId);
-        let chatsRecords    = state.get('getChatsRequest').get('records').toJS();
+        let chatId          = action.message.chatId;
+        let recordsKey      = action.message.isPrivate ? 'getChatsRequest' : 'getGroupChatsRequest';
+        let chatsRecords    = state.get(recordsKey).get('records').toJS();
         
-        if (!chatId) {
-            console.log('Reducer: New chat');
-                        
+        console.log('Reducer: chatId = ' + chatId);
+        
+        if (action.message.newChat) {
+            console.log('Reducer: New chat');                        
             chatsRecords.unshift(action.message);
-                                   
-            return state.set('getChatsRequest', state.get('getChatsRequest').set('records', Immutable.fromJS(chatsRecords)))
+            return state.set(recordsKey, state.get(recordsKey).set('records', Immutable.fromJS(chatsRecords)))
                 .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state)));            
         }
         
-        if (action.message && Number(state.get('getChatMessagesRequest').get('chatId')) === chatId) {
+        if (action.message && state.get('getChatMessagesRequest').get('chatId') === chatId) {
             console.log('Reducer: New message in active chat');
             
             let messages = state.get('getChatMessagesRequest').get('records').toJS();            
@@ -164,23 +166,34 @@ export default function reducer (state = initialState, action) {
         console.log('Reducer: New message in unactive');
         
         chatsRecords = chatsRecords.map(record => {            
-            if (record.id === chatId) {
+            console.log('Reducer: record.chatId = ' + record.chatId);
+            if (record.chatId === chatId) {
                 record.newMessages ++;
             }
             return record;
         });
             
-        return state.set('getChatsRequest', state.get('getChatsRequest').set('records', Immutable.fromJS(chatsRecords)))
+        return state.set(recordsKey, state.get(recordsKey).set('records', Immutable.fromJS(chatsRecords)))
             .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state)));
 
     /**
      *  send message
      */
     case SEND_MESSAGE:
+    case SEND_CHAT_MESSAGE:
         return state.set('sendMessageRequest', initialState.get('sendMessageRequest').set('loading', true));
     case SEND_MESSAGE_SUCCESS:
         return state.set('sendMessageRequest', initialState.get('sendMessageRequest').set('success', true));
-    case SEND_MESSAGE_FAIL:        
+    case SEND_CHAT_MESSAGE_SUCCESS:   
+        let messages = state.get('getChatMessagesRequest').get('records').toJS();
+        
+        messages.push(action.result.data);
+        
+        return state
+                .set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(messages)))
+                .set('sendMessageRequest', initialState.get('sendMessageRequest').set('success', true));    
+    case SEND_MESSAGE_FAIL:
+    case SEND_CHAT_MESSAGE_FAIL:        
       return state
         .set('sendMessageRequest', state.get('sendMessageRequest')
           .set('loading', false)
@@ -190,6 +203,7 @@ export default function reducer (state = initialState, action) {
           .set('errors', action.error.response.data.code === 422 ? Immutable.fromJS(action.error.response.data.errors) : undefined)
         );
     case RESET_SEND_MESSAGE_REQUEST:
+    case RESET_SEND_CHAT_MESSAGE_REQUEST:
         return state.set('sendMessageRequest', initialState.get('sendMessageRequest'));
         
     case UPDATE_MESSAGE:
@@ -207,27 +221,6 @@ export default function reducer (state = initialState, action) {
         );
     case RESET_UPDATE_MESSAGE_REQUEST:
         return state.set('updateMessageRequest', initialState.get('updateMessageRequest'));        
-    
-    case REPLY_MESSAGE:
-        return state.set('replyMessageRequest', initialState.get('replyMessageRequest').set('loading', true));
-    case REPLY_MESSAGE_SUCCESS:
-        let messages = state.get('getChatMessagesRequest').get('records').toJS();                       
-        messages.push(action.result.data);
-        
-        return state
-                .set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(messages)))
-                .set('replyMessageRequest', initialState.get('replyMessageRequest').set('success', true));
-    case REPLY_MESSAGE_FAIL:        
-      return state
-        .set('replyMessageRequest', state.get('replyMessageRequest')
-          .set('loading', false)
-          .set('fail', true)
-          .set('errorCode', action.error.response.data.code)
-          .set('errorMessage', action.error.response.data.message)
-          .set('errors', action.error.response.data.code === 422 ? Immutable.fromJS(action.error.response.data.errors) : undefined)
-        );
-    case RESET_REPLY_MESSAGE_REQUEST:
-        return state.set('replyMessageRequest', initialState.get('replyMessageRequest'));        
         
     case DELETE_MESSAGE:    
         return state.set('deleteRecordRequest', initialState.get('deleteRecordRequest').set('loading', true));
@@ -282,12 +275,23 @@ export default function reducer (state = initialState, action) {
     case GET_CHATS_FAIL:   
         return state.set('getChatsRequest', initialState.get('getChatsRequest').set('fail', true));
         
+    case GET_GROUP_CHATS:    
+        return state.set('getGroupChatsRequest', initialState.get('getGroupChatsRequest').set('loading', true));    
+    case GET_GROUP_CHATS_SUCCESS:    
+        return state.set('getGroupChatsRequest', initialState.get('getGroupChatsRequest')
+                .set('success', true)
+                .set('pagination', Immutable.fromJS(action.result.meta.pagination))
+                .set('records', Immutable.fromJS(action.result.data)));           
+    case GET_GROUP_CHATS_FAIL:   
+        return state.set('getGroupChatsRequest', initialState.get('getGroupChatsRequest').set('fail', true));
+    
     case GET_CHAT_MESSAGES:    
         return state.set('getChatMessagesRequest', initialState.get('getChatMessagesRequest').set('loading', true));    
     case GET_CHAT_MESSAGES_SUCCESS:
         let readMessages = 0;
-        let records = state.get('getChatsRequest').get('records').toJS().map(record => {            
-            if (record.id === action.chatId) {
+        let chatKey      = (action.chatId.indexOf('private') > -1) ? 'getChatsRequest' : 'getGroupChatsRequest';
+        let records = state.get(chatKey).get('records').toJS().map(record => {            
+            if (record.chatId === action.chatId) {
                 readMessages = record.newMessages;
                 record.newMessages = 0;                
             }
@@ -296,7 +300,7 @@ export default function reducer (state = initialState, action) {
                                                                                                                                 
         action.result.data.reverse();
                                                                                                                                 
-        return state.set('getChatsRequest', state.get('getChatsRequest').set('records',  Immutable.fromJS(records)))
+        return state.set(chatKey, state.get(chatKey).set('records',  Immutable.fromJS(records)))
                 .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state, - readMessages)))
                 .set('getChatMessagesRequest', initialState.get('getChatMessagesRequest')
                 .set('success', true)
