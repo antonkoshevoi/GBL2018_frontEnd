@@ -1,7 +1,7 @@
 import {
     GET_MESSAGE, GET_MESSAGE_SUCCESS, GET_MESSAGE_FAIL, RESET_GET_MESSAGE_REQUEST,
     GET_MESSAGES, GET_MESSAGES_SUCCESS, GET_MESSAGES_FAIL,
-    GET_CHATS, GET_CHATS_SUCCESS, GET_CHATS_FAIL,
+    GET_PRIVATE_CHATS, GET_PRIVATE_CHATS_SUCCESS, GET_PRIVATE_CHATS_FAIL,
     GET_GROUP_CHATS, GET_GROUP_CHATS_SUCCESS, GET_GROUP_CHATS_FAIL,
     GET_CHAT_MESSAGES, GET_CHAT_MESSAGES_SUCCESS, GET_CHAT_MESSAGES_FAIL,
     SEND_MESSAGE, SEND_MESSAGE_SUCCESS, SEND_MESSAGE_FAIL, RESET_SEND_MESSAGE_REQUEST,
@@ -51,7 +51,7 @@ const initialState = Immutable.fromJS({
       totalPages: 1
     } 
   },
-  getChatsRequest: {    
+  getPrivateChatsRequest: {    
     loading: false,
     success: false,
     fail: false,
@@ -143,7 +143,7 @@ export default function reducer (state = initialState, action) {
 
     case NEW_MESSAGE_RECEIVED:
         let chatId          = action.message.chatId;
-        let recordsKey      = action.message.isPrivate ? 'getChatsRequest' : 'getGroupChatsRequest';
+        let recordsKey      = action.message.isPrivate ? 'getPrivateChatsRequest' : 'getGroupChatsRequest';
         let chatsRecords    = state.get(recordsKey).get('records').toJS();
         
         console.log('Reducer: chatId = ' + chatId);
@@ -265,15 +265,15 @@ export default function reducer (state = initialState, action) {
     case GET_MESSAGES_FAIL:   
         return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('fail', true));
         
-    case GET_CHATS:    
-        return state.set('getChatsRequest', initialState.get('getChatsRequest').set('loading', true));    
-    case GET_CHATS_SUCCESS:    
-        return state.set('getChatsRequest', initialState.get('getChatsRequest')
+    case GET_PRIVATE_CHATS:    
+        return state.set('getPrivateChatsRequest', initialState.get('getPrivateChatsRequest').set('loading', true));    
+    case GET_PRIVATE_CHATS_SUCCESS:    
+        return state.set('getPrivateChatsRequest', initialState.get('getPrivateChatsRequest')
                 .set('success', true)
                 .set('pagination', Immutable.fromJS(action.result.meta.pagination))
                 .set('records', Immutable.fromJS(action.result.data)));           
-    case GET_CHATS_FAIL:   
-        return state.set('getChatsRequest', initialState.get('getChatsRequest').set('fail', true));
+    case GET_PRIVATE_CHATS_FAIL:   
+        return state.set('getPrivateChatsRequest', initialState.get('getPrivateChatsRequest').set('fail', true));
         
     case GET_GROUP_CHATS:    
         return state.set('getGroupChatsRequest', initialState.get('getGroupChatsRequest').set('loading', true));    
@@ -289,7 +289,7 @@ export default function reducer (state = initialState, action) {
         return state.set('getChatMessagesRequest', initialState.get('getChatMessagesRequest').set('loading', true));    
     case GET_CHAT_MESSAGES_SUCCESS:
         let readMessages = 0;
-        let chatKey      = (action.chatId.indexOf('private') > -1) ? 'getChatsRequest' : 'getGroupChatsRequest';
+        let chatKey      = (action.chatId.indexOf('private') > -1) ? 'getPrivateChatsRequest' : 'getGroupChatsRequest';
         let records = state.get(chatKey).get('records').toJS().map(record => {            
             if (record.chatId === action.chatId) {
                 readMessages = record.newMessages;

@@ -25,9 +25,9 @@ export const selectGetRecordsRequest = createSelector(
   (subState) => subState.get('getRecordsRequest')
 );
 
-export const selectGetChatsRequest = createSelector(
+export const selectGetPrivateChatsRequest = createSelector(
   selectMessagesDomain,
-  (subState) => subState.get('getChatsRequest')
+  (subState) => subState.get('getPrivateChatsRequest')
 );
 
 export const selectGetGroupChatsRequest = createSelector(

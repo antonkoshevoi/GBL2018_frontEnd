@@ -1135,6 +1135,11 @@ td.rotate div span {
 .chats-box .chat.current {
     background-color: #FFABFF;
 }
+.chats {
+    overflow-y: auto !important;
+    overflow: hidden;
+    max-height: calc(100vh - 185px);
+}
 .chats > div {
     padding: 10px;
     color: #808080;

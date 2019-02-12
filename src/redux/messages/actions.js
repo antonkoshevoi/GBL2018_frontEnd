@@ -8,9 +8,9 @@ export const GET_MESSAGES = '[Messages] GET_MESSAGES';
 export const GET_MESSAGES_SUCCESS = '[Messages] GET_MESSAGES_SUCCESS';
 export const GET_MESSAGES_FAIL = '[Messages] GET_MESSAGES_FAIL';
 
-export const GET_CHATS = '[Messages] GET_CHATS';
-export const GET_CHATS_SUCCESS = '[Messages] GET_CHATS_SUCCESS';
-export const GET_CHATS_FAIL = '[Messages] GET_CHATS_FAIL';
+export const GET_PRIVATE_CHATS = '[Messages] GET_PRIVATE_CHATS';
+export const GET_PRIVATE_CHATS_SUCCESS = '[Messages] GET_PRIVATE_CHATS_SUCCESS';
+export const GET_PRIVATE_CHATS_FAIL = '[Messages] GET_PRIVATE_CHATS_FAIL';
 
 export const GET_GROUP_CHATS = '[Messages] GET_GROUP_CHATS';
 export const GET_GROUP_CHATS_SUCCESS = '[Messages] GET_GROUP_CHATS_SUCCESS';
@@ -148,10 +148,10 @@ export function getMessages(params = {}) {
   };
 }
 
-export function getChats(params = {}) {
+export function getPrivateChats(params = {}) {
   return {    
-    types: [GET_CHATS, GET_CHATS_SUCCESS, GET_CHATS_FAIL],
-    promise: (apiClient) => apiClient.get(`messages/chats`, params)
+    types: [GET_PRIVATE_CHATS, GET_PRIVATE_CHATS_SUCCESS, GET_PRIVATE_CHATS_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/private-chats`, params)
   };
 }
 

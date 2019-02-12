@@ -617,5 +617,7 @@ export default {
     chatName: 'Chat Name',
     newChat: 'New Chat',
     participants: 'Participants',
-    visibleForParticipants: 'Visible for participants'
+    visibleForParticipants: 'Visible for participants',
+    groupChatsNotFound: 'Group chats are not found...',
+    privateChatsNotFound: 'Private chats are not found...'
 }
