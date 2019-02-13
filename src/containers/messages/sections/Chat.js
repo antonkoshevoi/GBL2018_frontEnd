@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetChatMessagesRequest, selectReplyMessageRequest } from '../../../redux/messages/selectors';
-import { getChatMessages, replyMessage } from '../../../redux/messages/actions';
-import { Avatar, TextField, FormControl } from '@material-ui/core';
+import { selectGetChatMessagesRequest, selectSendMessageRequest } from '../../../redux/messages/selectors';
+import { getChatMessages, sendChatMessage } from '../../../redux/messages/actions';
+import { CircularProgress, Avatar, TextField, FormControl } from '@material-ui/core';
 import Loader from '../../../components/layouts/Loader';
 import moment from 'moment/moment';
 
@@ -12,31 +12,35 @@ class Chat extends Component {
     constructor(props) {
         super(props);
                 
+        console.log('Chat: ' + this.props.chatId);
         this.state = {
-            message: '',
-            chatId: this.props.chatId
+            message:    '',
+            chatId:     this.props.chatId
         }
     }
 
     componentWillMount() {
-        if (this.state.chatId) {
-            this._getRecords(this.state.chatId);
+        if (this.props.chatId) {
+            this._getRecords(this.props.chatId);
         }
     }
    
     componentWillReceiveProps(nextProps) {        
-        if (nextProps.chatId !== this.props.chatId) {
-            this.setState({chatId: nextProps.chatId});            
+        if (nextProps.chatId !== this.props.chatId) {                                        
             this._getRecords(nextProps.chatId);
-        }
+        }           
         
-        if (!this.props.replyMessageRequest.get('success') && nextProps.replyMessageRequest.get('success')) {
+        if (!this.props.sendMessageRequest.get('success') && nextProps.sendMessageRequest.get('success')) {
             this.setState({message: ''});
         }     
     }
     
     _getRecords(chatId) {
-        this.props.getRecords(chatId);
+        this.setState({
+            chatId: chatId            
+        });
+
+        this.props.getChatMessages(chatId);
     }
     
     _handleChange(event) {
@@ -45,15 +49,23 @@ class Chat extends Component {
     }
     
     _send() {
-        const { chatId, message} = this.state;    
-        this.props.replyMessage(chatId, {
-            message
+        const { message, chatId} = this.state;
+        
+        console.log('send message to chat = ' + chatId);
+        
+        this.props.sendMessage({                       
+            chatId:     chatId,
+            message:    message
         });
     }
     
     _renderRecords() {
         const {t} = this.props;        
         const records = this.props.getRecordsRequest.get('records');
+        
+        if (!records.size) {
+            return <div><h3 className='text-center my-5'>{t('messagesNotFound')}</h3></div>;
+        }
 
         return records.map((record, key) => (
             <div className={`message-box my-2 ${record.get('isMine') ? 'sent' : 'inbox'}`}  index={key} key={key}>
@@ -73,6 +85,15 @@ class Chat extends Component {
             </div>
         ));        
     }
+    
+    _handleKeyPress(e) {
+        if (e.shiftKey) {
+            return;
+        }        
+        if (e.key === 'Enter') {
+            this._send();
+        }
+    }
 
     _scrollToBottom = () => {       
         this.messages.scrollTop = this.messages.scrollHeight;
@@ -87,20 +108,21 @@ class Chat extends Component {
     }
 
     render() {
-        const {getRecordsRequest, replyMessageRequest, t} = this.props;
+        const {getRecordsRequest, sendMessageRequest, t} = this.props;
         const {message} = this.state;
         const loading = getRecordsRequest.get('loading');
         const success = getRecordsRequest.get('success');        
 
         return (
-            <div className='px-3'>
+            <div class='h-100 px-3'>
                 {loading && <Loader /> }
                 <div className="chat-messages" ref={(el) => { this.messages = el; }}>
                     <div className='mx-2'>
                         {success && this._renderRecords() }
+                        {sendMessageRequest.get('loading') && <CircularProgress className="float-right my-2 mx-2" />}
                     </div>
                 </div>
-                <div className='new-message'>
+                <div className='px-3 new-message'>
                     <div className='form-group'>
                         <FormControl className='full-width'>
                             <TextField                                                                                    
@@ -110,18 +132,17 @@ class Chat extends Component {
                                 fullWidth
                                 margin="normal"
                                 variant="outlined"                                          
-                                rows="2"                                  
-                                value={message || ''}                                                       
+                                rows="2"
+                                disabled={sendMessageRequest.get('loading')}
+                                value={message || ''}
+                                onKeyPress={(e) => {
+                                    this._handleKeyPress(e)
+                                }}
                                 onChange={(e) => {
                                     this._handleChange(e)
                                 }}                      
                             />                                    
                         </FormControl>
-                    </div>
-                    <div className='form-group'>
-                        <button disabled={replyMessageRequest.get('loading') || !message} className='mt-btn-success btn btn-success mt-btn' onClick={ () => {this._send() }} >
-                          {t('sendMessage')}
-                        </button>                            
                     </div>
                 </div>
             </div>
@@ -132,14 +153,14 @@ class Chat extends Component {
 Chat = connect(
     (state) => ({
         getRecordsRequest: selectGetChatMessagesRequest(state),
-        replyMessageRequest: selectReplyMessageRequest(state)
+        sendMessageRequest: selectSendMessageRequest(state)
     }),
     (dispatch) => ({
-        getRecords: (id, params = {}) => {
+        getChatMessages: (id, params = {}) => {
             dispatch(getChatMessages(id, params));
         },
-        replyMessage: (id, params = {}) => {
-            dispatch(replyMessage(id, params));
+        sendMessage: (id, params = {}) => {
+            dispatch(sendChatMessage(id, params));
         }
     })
 )(Chat);

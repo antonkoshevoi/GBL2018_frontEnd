@@ -5,7 +5,6 @@ import { selectGetUnreadMessagesRequest } from '../../redux/messages/selectors';
 import { getUnreadMessages } from '../../redux/messages/actions';
 import { selectUserData } from "../../redux/user/selectors";
 import { NavLink } from "react-router-dom";
-import HasRole from "../middlewares/HasRole";
 
 class Messages extends Component {
 
@@ -102,13 +101,6 @@ class Messages extends Component {
                                 </div> :
                                 <h4 className="text-center m--padding-top-20 m--padding-bottom-10">{t('youHaveNoNewMessages')}</h4>
                               }
-                              <div className="text-right m--margin-top-15">
-                                <HasRole roles={['Superadministrator', 'School', 'Teacher']}>
-                                  <NavLink to="/messages/new" className="m--margin-right-15 btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
-                                    <span className="m-nav__link-text">{t('newMessage')}</span>
-                                  </NavLink>
-                                </HasRole>
-                              </div>
                             </div>
                         </div>
                     </div>

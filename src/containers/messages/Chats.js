@@ -1,58 +1,103 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetChatsRequest } from '../../redux/messages/selectors';
-import { getChats } from '../../redux/messages/actions';
-import { Avatar } from '@material-ui/core';
-import { NavLink } from "react-router-dom";
-import HasRole from "../middlewares/HasRole";
+import { selectGetPrivateChatsRequest, selectGetGroupChatsRequest } from '../../redux/messages/selectors';
+import { getPrivateChats, getGroupChats } from '../../redux/messages/actions';
+import { Avatar, CircularProgress } from '@material-ui/core';
 import Loader from '../../components/layouts/Loader';
 import Chat from "./sections/Chat";
 import moment from 'moment/moment';
 
 class Chats extends Component {
 
+    chatsContainer = React.createRef();
+
     constructor(props) {
         super(props);        
-        this.state = {};
+        this.state = {
+            chatId: null,
+            type: 'group'
+        };
     }
 
     componentWillMount() {
         this._getRecords();
     }
-   
+    
+    updateDimensions() {
+        let wh = window.innerWidth;
+        if (this.chatsContainer) {
+           console.log(this.chatsContainer.clientHeight);
+        }
+    }    
+    
+    componentDidMount() {
+        window.addEventListener("resize", () => this.updateDimensions());
+    }
+    
+    componentWillUnmount() {
+        window.removeEventListener("resize", () => this.updateDimensions());
+    }
+           
     componentWillReceiveProps(nextProps) {
-        if (!this.props.getRecordsRequest.get('records').size && nextProps.getRecordsRequest.get('records').size) {
-            let records = nextProps.getRecordsRequest.get('records');
-            
-            if (records.size && !this.state.selectedChat) {
-                this._viewChat(records.get(0).get('id'));
+        const { groupChatsRequest, privateChatsRequest} = this.props;        
+        
+        if (!groupChatsRequest.get('records').size && nextProps.groupChatsRequest.get('records').size) {
+            if (!this.state.chatId) {                
+                this._viewChat(nextProps.groupChatsRequest.get('records').get(0).get('chatId'));
             }
         }
+        if (!privateChatsRequest.get('records').size && nextProps.privateChatsRequest.get('records').size) {
+            if (!this.state.chatId) {                
+                this._viewChat(nextProps.privateChatsRequest.get('records').get(0).get('chatId'));
+            }
+        }        
     }        
     
-    _getRecords() {
-        this.props.getRecords();
+    _getRecords(type = 'group') {
+        if (type === 'group') {
+            this.props.getGroupChats();
+        } else {
+            this.props.getPrivateChats();
+        }
+    }    
+    
+    _viewChat(id) {
+        console.log('viewChat: ' + id);
+        this.setState({chatId: id});
     }
     
-    _viewChat(id) {        
-        this.setState({selectedChat: id});
-    }
-    
-    _renderRecords() {        
-        const records = this.props.getRecordsRequest.get('records');        
-        const selectedChat = this.state.selectedChat;        
+    _setType(type) {
+        this.setState({
+            type: type, 
+            chatId: null
+        });
         
-        return records.map((record, key) => {
+        this._getRecords(type);
+    }
+    
+    _renderGroups() {        
+        const { groupChatsRequest, t} = this.props;        
+        const {chatId} = this.state;
+        
+        if (groupChatsRequest.get('loading')) {            
+            return <div class="m--margin-100"><CircularProgress /></div>;
+        }
+        
+        if (!groupChatsRequest.get('records').size) {
+            return <h2 className='text-center m--margin-bottom-100 m--margin-top-100'>{t('groupChatsNotFound')}</h2>;
+        }         
+        
+        return groupChatsRequest.get('records').map((record, key) => {
             return (
-                <div key={key} className={`chat ${record.get('id') === selectedChat ? 'current' : ''}`} onClick={() => this._viewChat(record.get('id')) }>
+                <div key={key} className={`chat ${record.get('chatId') === chatId ? 'current' : ''}`} onClick={() => this._viewChat(record.get('chatId')) }>
                     <div className='d-flex'>
                         <div className='align-self-center d-inline-block mr-3'>
                             <Avatar src={record.get('user').get('avatarSmall')} className='border' />
                         </div>
                         <div className='d-inline-block'>
                             <div>
-                                <span className='chat-name'>{record.get('subject') || record.get('recipients')}</span>
+                                <span className='chat-name'>{record.get('name')}</span>
                                 {record.get('newMessages') > 0 && <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
                             </div>                        
                             <div>{record.get('user').get('name')}</div>
@@ -64,26 +109,61 @@ class Chats extends Component {
         });
     }
     
-    _renderChats() {
-        const selectedChat = this.state.selectedChat;
-        const {getRecordsRequest, t} = this.props;        
+    _renderContacts() {        
+        const {privateChatsRequest, t} = this.props;       
+        const {chatId} = this.state;
         
-        if (!getRecordsRequest.get('records').size) {
-            return <div className='m-portlet__body'>
-                <h2 className='text-center my-5'>{t('messagesNotFound')}</h2>
-            </div>;
+        if (privateChatsRequest.get('loading')) {            
+            return <div class="m--margin-100"><CircularProgress /></div>;
         }
         
-        return (
-            <div className='h-100 d-flex align-items-stretch'>
-                <div className='row w-100'>
-                    <div className='col-3 pr-0 chats-box'>
-                        <div className='chats'>
-                            {this._renderRecords()}
+        if (!privateChatsRequest.get('records').size) {
+            return <h2 className='text-center m--margin-bottom-100 m--margin-top-100'>{t('privateChatsNotFound')}</h2>;
+        }  
+        
+        return privateChatsRequest.get('records').map((record, key) => {
+            return (
+                <div key={key} className={`chat ${record.get('chatId') === chatId ? 'current' : ''}`} onClick={() => this._viewChat(record.get('chatId')) }>
+                    <div className='d-flex'>
+                        <div className='align-self-center d-inline-block mr-3'>
+                            <Avatar src={record.get('user').get('avatarSmall')} className='border' />
+                        </div>
+                        <div className='d-inline-block'>
+                            <div>
+                                <span className='chat-name'>{record.get('name')}</span>
+                                {record.get('newMessages') > 0 && <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
+                            </div>
+                            <div>{t(record.get('user').get('role'))}</div>
                         </div>
                     </div>
-                    <div className='col-9 pl-0'>
-                        {selectedChat && <Chat chatId={this.state.selectedChat} />}
+                </div>
+            );    
+        });
+    }
+    
+    _renderChats() {
+        const {chatId, type} = this.state;        
+        
+        return (
+            <div className='d-flex align-items-stretch' ref={this._element}>
+                <div className='row w-100 chats-container' ref={(node) => this.chatsContainer = node}>
+                    <div className='col-5 col-md-4 col-lg-3 pr-0 chats-box'>
+                        <div className="chat-types">
+                            <div class="w-100 btn-group btn-group-toggle" data-toggle="buttons">
+                                <button class={`w-50 btn btn-secondary ${type == 'group' ? 'active' : ''}`} onClick={() => this._setType('group')}>
+                                    <i class="display-5 fa fa-users"></i>
+                                </button>
+                                <button class={`w-50 btn btn-secondary ${type == 'private' ? 'active' : ''}`} onClick={() => this._setType('private')}>
+                                    <i class="display-5 fa fa-user"></i>
+                                </button>   
+                            </div>
+                        </div>
+                        <div className='chats'>
+                            {type === 'group' ? this._renderGroups() : this._renderContacts()}
+                        </div>
+                    </div>
+                    <div className='col-7 col-md-8 col-lg-9 pl-0'>
+                        {chatId && <Chat chatId={chatId} />}
                     </div>                        
                 </div>                
             </div>
@@ -91,35 +171,22 @@ class Chats extends Component {
     }
     
     render() {
-        const {getRecordsRequest, t} = this.props;        
-        const loading = getRecordsRequest.get('loading');
-        const success = getRecordsRequest.get('success');        
-
+        const {t} = this.props;
         return (
-            <div className='fadeInLeft h-100'> 
-                {loading && <Loader />}                
-                <div className='m-portlet m-portlet--head-solid-bg h-100'>
-                    <div className='m-portlet__head border-b-violet'>
+            <div className='fadeInLeft'>
+      
+                        <div className='m-portlet m-portlet--head-solid-bg'>
+                    <div className={`m-portlet__head border-b-violet`}>
                         <div className='m-portlet__head-caption'>
-                            <div className="m-portlet__head-title d-flex flex-row justify-content-between align-items-center">
-                                <div>
-                                    <span className='m-portlet__head-icon violet'><i className='fa fa-weixin'></i></span>
-                                    <h3 className="m-portlet__head-text">{t('chats')}</h3>
-                                </div>
-                                <div className="m-portlet__head-text">
-                                    <HasRole roles={['Superadministrator', 'School', 'Teacher']}>
-                                        <NavLink to="/messages/new">
-                                            <button className='pull-right btn btn-success violet'>
-                                              {t('newChat')}
-                                              <span className='icon m--margin-left-10'><i className='fa fa-send'></i></span>                                             
-                                            </button>
-                                        </NavLink>
-                                    </HasRole>                                
-                                </div>
+                            <div className='m-portlet__head-title'>
+                                <span className={`m-portlet__head-icon violet`}><i className='fa fa-weixin'></i></span>
+                                <h3 className='m-portlet__head-text'>{t('chats')}</h3>
                             </div>
                         </div>         
-                    </div>                    
-                    {success && this._renderChats()}                    
+                    </div>             
+                    <div>                    
+                        {this._renderChats()}
+                    </div>
                 </div>
             </div>
         );
@@ -128,12 +195,16 @@ class Chats extends Component {
 
 Chats = connect(
     (state) => ({
-        getRecordsRequest: selectGetChatsRequest(state),        
+        groupChatsRequest: selectGetGroupChatsRequest(state),
+        privateChatsRequest: selectGetPrivateChatsRequest(state)
     }),
     (dispatch) => ({
-        getRecords: (params = {}) => {
-            dispatch(getChats(params));
-        }
+        getGroupChats: (params = {}) => {
+            dispatch(getGroupChats(params));
+        },
+        getPrivateChats: (params = {}) => {
+            dispatch(getPrivateChats(params));
+        }        
     })
 )(Chats);
 

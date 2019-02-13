@@ -9,7 +9,6 @@ import Loader from "../../components/layouts/Loader";
 import NotFoundPage from '../errors/404';
 import moment from "moment/moment";
 import DeleteButton from '../../components/ui/DeleteButton';
-import ReplyMessageModal from './modals/ReplyMessageModal';
 import HasPermission from "../middlewares/HasPermission";
 
 class ViewMessage extends Component {
@@ -110,9 +109,6 @@ class ViewMessage extends Component {
                         </div>
                         <div className="row">
                             <div className="col-sm-12 text-center">
-                                <HasPermission permissions={['[Messages][Reply]']}>
-                                    { (data.get('type') === 'chat' && !data.get('isMine')) && <button onClick={() => { this._showReplyModal() }} disabled={loading} className="m--margin-right-10 btn btn-success" >{t('reply')}</button> }
-                                </HasPermission>
                                 <HasPermission permissions={['[Messages][Delete]']}>
                                     <DeleteButton                    
                                         onClick={() => { this._deleteRecord(data.get('id')) }}                                                                  
@@ -125,8 +121,7 @@ class ViewMessage extends Component {
                             </div>
                         </div>
                     </div>}
-                </div>
-                <ReplyMessageModal message={data.toJS()} onClose={() => { this._closeReplyModal() }} isOpen={this.state.showReplyModal} />
+                </div>                
             </div>
         );
     }

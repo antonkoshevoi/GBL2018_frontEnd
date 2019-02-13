@@ -10,11 +10,6 @@ export const selectSendMessageRequest = createSelector(
   (subState) => subState.get('sendMessageRequest')
 );
 
-export const selectReplyMessageRequest = createSelector(
-  selectMessagesDomain,
-  (subState) => subState.get('replyMessageRequest')
-);
-
 export const selectUpdateMessageRequest = createSelector(
   selectMessagesDomain,
   (subState) => subState.get('updateMessageRequest')
@@ -30,9 +25,14 @@ export const selectGetRecordsRequest = createSelector(
   (subState) => subState.get('getRecordsRequest')
 );
 
-export const selectGetChatsRequest = createSelector(
+export const selectGetPrivateChatsRequest = createSelector(
   selectMessagesDomain,
-  (subState) => subState.get('getChatsRequest')
+  (subState) => subState.get('getPrivateChatsRequest')
+);
+
+export const selectGetGroupChatsRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('getGroupChatsRequest')
 );
 
 export const selectGetChatMessagesRequest = createSelector(

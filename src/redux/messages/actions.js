@@ -8,9 +8,13 @@ export const GET_MESSAGES = '[Messages] GET_MESSAGES';
 export const GET_MESSAGES_SUCCESS = '[Messages] GET_MESSAGES_SUCCESS';
 export const GET_MESSAGES_FAIL = '[Messages] GET_MESSAGES_FAIL';
 
-export const GET_CHATS = '[Messages] GET_CHATS';
-export const GET_CHATS_SUCCESS = '[Messages] GET_CHATS_SUCCESS';
-export const GET_CHATS_FAIL = '[Messages] GET_CHATS_FAIL';
+export const GET_PRIVATE_CHATS = '[Messages] GET_PRIVATE_CHATS';
+export const GET_PRIVATE_CHATS_SUCCESS = '[Messages] GET_PRIVATE_CHATS_SUCCESS';
+export const GET_PRIVATE_CHATS_FAIL = '[Messages] GET_PRIVATE_CHATS_FAIL';
+
+export const GET_GROUP_CHATS = '[Messages] GET_GROUP_CHATS';
+export const GET_GROUP_CHATS_SUCCESS = '[Messages] GET_GROUP_CHATS_SUCCESS';
+export const GET_GROUP_CHATS_FAIL = '[Messages] GET_GROUP_CHATS_FAIL';
 
 export const GET_CHAT_MESSAGES = '[Messages] GET_CHAT_MESSAGES';
 export const GET_CHAT_MESSAGES_SUCCESS = '[Messages] GET_CHAT_MESSAGES_SUCCESS';
@@ -29,15 +33,15 @@ export const SEND_MESSAGE_SUCCESS = '[Messages] SEND_MESSAGE_SUCCESS';
 export const SEND_MESSAGE_FAIL = '[Messages] SEND_MESSAGE_FAIL';
 export const RESET_SEND_MESSAGE_REQUEST = '[Messages] RESET_SEND_MESSAGE_REQUEST';
 
+export const SEND_CHAT_MESSAGE = '[Messages] SEND_CHAT_MESSAGE';
+export const SEND_CHAT_MESSAGE_SUCCESS = '[Messages] SEND_CHAT_MESSAGE_SUCCESS';
+export const SEND_CHAT_MESSAGE_FAIL = '[Messages] SEND_CHAT_MESSAGE_FAIL';
+export const RESET_SEND_CHAT_MESSAGE_REQUEST = '[Messages] RESET_SEND_CHAT_MESSAGE_REQUEST';
+
 export const UPDATE_MESSAGE = '[Messages] UPDATE_MESSAGE';
 export const UPDATE_MESSAGE_SUCCESS = '[Messages] UPDATE_MESSAGE_SUCCESS';
 export const UPDATE_MESSAGE_FAIL = '[Messages] UPDATE_MESSAGE_FAIL';
 export const RESET_UPDATE_MESSAGE_REQUEST = '[Messages] RESET_UPDATE_MESSAGE_REQUEST';
-
-export const REPLY_MESSAGE = '[Messages] REPLY_MESSAGE';
-export const REPLY_MESSAGE_SUCCESS = '[Messages] REPLY_MESSAGE_SUCCESS';
-export const REPLY_MESSAGE_FAIL = '[Messages] REPLY_MESSAGE_FAIL';
-export const RESET_REPLY_MESSAGE_REQUEST = '[Messages] RESET_REPLY_MESSAGE_REQUEST';
 
 export const GET_UNREAD_MESSAGES = '[Messages] GET_UNREAD_MESSAGES';
 export const GET_UNREAD_MESSAGES_SUCCESS = '[Messages] GET_UNREAD_MESSAGES_SUCCESS';
@@ -90,6 +94,14 @@ export function sendMessage(params = {}) {
   };
 }
 
+export function sendChatMessage(params = {}) {
+  params.type = 'chat';
+  return {    
+    types: [SEND_CHAT_MESSAGE, SEND_CHAT_MESSAGE_SUCCESS, SEND_CHAT_MESSAGE_FAIL],
+    promise: (apiClient) => apiClient.post(`messages/send-chat-message`, params)
+  };
+}
+
 export function resetSendMessageRequest() {
     return {
         type: RESET_SEND_MESSAGE_REQUEST
@@ -106,19 +118,6 @@ export function updateMessage(id, params = {}) {
 export function resetUpdateMessageRequest() {
     return {
         type: RESET_UPDATE_MESSAGE_REQUEST
-    };
-}
-
-export function replyMessage(id, params = {}) {
-  return {    
-    types: [REPLY_MESSAGE, REPLY_MESSAGE_SUCCESS, REPLY_MESSAGE_FAIL],
-    promise: (apiClient) => apiClient.post(`messages/reply/${id}`, params)
-  };
-}
-
-export function resetReplyMessageRequest() {
-    return {
-        type: RESET_REPLY_MESSAGE_REQUEST
     };
 }
 
@@ -149,15 +148,22 @@ export function getMessages(params = {}) {
   };
 }
 
-export function getChats(params = {}) {
+export function getPrivateChats(params = {}) {
   return {    
-    types: [GET_CHATS, GET_CHATS_SUCCESS, GET_CHATS_FAIL],
-    promise: (apiClient) => apiClient.get(`messages/chats`, params)
+    types: [GET_PRIVATE_CHATS, GET_PRIVATE_CHATS_SUCCESS, GET_PRIVATE_CHATS_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/private-chats`, params)
+  };
+}
+
+export function getGroupChats(params = {}) {
+  return {    
+    types: [GET_GROUP_CHATS, GET_GROUP_CHATS_SUCCESS, GET_GROUP_CHATS_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/group-chats`, params)
   };
 }
 
 export function getChatMessages(id, params = {}) {
-  return {
+  return {  
     chatId: id,
     types: [GET_CHAT_MESSAGES, GET_CHAT_MESSAGES_SUCCESS, GET_CHAT_MESSAGES_FAIL],
     promise: (apiClient) => apiClient.get(`messages/chat/${id}`, params)
