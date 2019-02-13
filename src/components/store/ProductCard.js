@@ -34,15 +34,13 @@ class ProductCard extends Component {
               {product.get('description')}
             </Typography>
             }
-            <div className="cardActions m--margin-top-15">
-              <NavLink to={`/store/details/${product.get('id')}`}>
-                <StarRating score={product.get('score')}/>
-              </NavLink>
+            <div className="cardActions m--margin-top-15">              
+              <StarRating score={product.get('score')}/>              
               <div className="productPrice">
-                  {product.get('discount') > 0 && <span className="discount"><span>${price.toFixed(2)}</span></span> }
+                  {product.get('discount') > 0 && <span className="discount"><span>${price.toFixed(2)} {product.get('currency')}</span></span> }
                   <br/>
                   <div className="price">
-                    ${discountPrice.toFixed(2)}
+                    ${discountPrice.toFixed(2)} {product.get('currency')}
                   </div>
               </div>
             </div>

@@ -27,20 +27,15 @@ class Chat extends Component {
         }
     }
    
-    componentWillReceiveProps(nextProps) {        
-        if (nextProps.chatId !== this.props.chatId) {                                        
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.chatId !== this.props.chatId) {
             this._getRecords(nextProps.chatId);
-        }           
-        
-        if (!this.props.sendMessageRequest.get('success') && nextProps.sendMessageRequest.get('success')) {            
-            this.textField.focus();
-            this.textField.click();            
-        }     
+        }
     }
     
     _getRecords(chatId) {
         this.setState({
-            chatId: chatId            
+            chatId: chatId
         });
         this.props.getChatMessages(chatId);
     }
@@ -55,7 +50,7 @@ class Chat extends Component {
         
         this.setState({message: ''});
         
-        this.props.sendMessage({                       
+        this.props.sendMessage({
             chatId:     chatId,
             message:    message
         });
@@ -128,16 +123,15 @@ class Chat extends Component {
                 <div className='px-3 new-message'>
                     <div className='form-group'>
                         <FormControl className='full-width'>
-                            <TextField                                                                                    
+                            <TextField
                                 multiline
-                                name="message"                                        
-                                placeholder={t('message')}          
+                                name="message"
+                                placeholder={t('message')}
                                 fullWidth
                                 margin="normal"
-                                variant="outlined"                                          
+                                variant="outlined"
                                 rows="2"
                                 autoFocus
-                                inputRef={(el) => { this.textField = el; }} 
                                 readOnly={sendMessageRequest.get('loading')}
                                 value={message || ''}
                                 onKeyPress={(e) => {
@@ -145,8 +139,8 @@ class Chat extends Component {
                                 }}
                                 onChange={(e) => {
                                     this._handleChange(e)
-                                }}                      
-                            />                                    
+                                }}
+                            />
                         </FormControl>
                     </div>
                 </div>

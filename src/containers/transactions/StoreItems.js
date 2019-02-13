@@ -84,7 +84,7 @@ class StoreItems extends Component {
                             </div>
                             <div className="row mb-1">
                                 <div className="col-5"><span className="text-muted">{t('total')}:</span></div>
-                                <div className="col-7"><strong>${item.get('total')}</strong></div>
+                                <div className="col-7"><strong>${item.get('total')} {item.get('currency')}</strong></div>
                             </div>
                             <div className="row mb-1">
                                 <div className="col-5"><span className="text-muted">{t('date')}:</span></div>
@@ -112,7 +112,7 @@ class StoreItems extends Component {
                     </Td>                    
                     <Td className="d-none d-md-table-cell">{t(item.get('paymentType'))}</Td>
                     <Td className="d-none d-md-table-cell"><span className={`m-badge m-badge--wide ${badgeClass}`}>{t(item.get('status'))}</span></Td>
-                    <Td className="d-none d-md-table-cell">${item.get('total')}</Td>
+                    <Td className="d-none d-md-table-cell">${item.get('total')} {item.get('currency')}</Td>
                     <Td className="d-none d-md-table-cell">{moment(item.get('createdAt')).format('lll')}</Td>
                 </Row>,
                 ( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) && this._renderTransactionItemsBlock(item.get('items'))
@@ -154,7 +154,7 @@ class StoreItems extends Component {
                     </Td>
                     <Td  width="180px"><NavLink className="g-blue" to={`/store/details/${item.get('itemId')}`}>{item.get('title')}</NavLink></Td>
                     <Td width='100px'>{item.get('quantity')}</Td>
-                    <Td width='150px'>${Number(item.get('totalPrice')).toFixed(2)}</Td>                    
+                    <Td width='150px'>${Number(item.get('totalPrice')).toFixed(2)} {item.get('currency')}</Td>                    
                 </Row>
             )
         })

@@ -58,5 +58,6 @@ export default {
   messageGroupCreated: 'Group is created',
   messageGroupUpdated: 'Group is updated',
   messageGroupDeleted: 'Group is deleted',
-  passwordUpdatedLoginPlease: 'Your password has been updated, try to login please.'
+  passwordUpdatedLoginPlease: 'Your password has been updated, try to login please.',
+  messageUpdated: 'Message successfully updated'
 }

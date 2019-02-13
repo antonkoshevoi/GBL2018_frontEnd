@@ -215,7 +215,7 @@ class Checkout extends Component {
                         {successCarts &&
                         <div className="m--margin-top-50 m--margin-bottom-50">                          
                             {item ? 
-                                <span className="invoice-title">{t('yourInvoice', {invoiceNo: item.invoiceNo, invoiceAmount: ('$' + cartRecordsSum)})}</span>
+                                <span className="invoice-title">{t('yourInvoice', {invoiceNo: item.invoiceNo, invoiceAmount: ('$' + cartRecordsSum + ' ' + item.storeItem.currency)})}</span>
                             : 
                             <div>        
                                 <p className="text-center">
