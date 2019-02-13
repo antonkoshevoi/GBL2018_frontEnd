@@ -67,8 +67,8 @@ class MainLayout extends Component {
                           <Sidebar mobileSidebar={() => {this.openMobileSidebar()}} structure={MenuStudent}/>
                         </HasRole>
                     </div>}
-                    <div className={`m-wrapper h-100 ${hideSidebar ? 'margin-0' : ''}`}>               
-                        <div className="m-content h-100">
+                    <div className={`m-wrapper ${hideSidebar ? 'margin-0' : ''}`}>               
+                        <div className="m-content">
                             {this.props.children}
                         </div>
                     </div>

@@ -1138,9 +1138,16 @@ td.rotate div span {
 .chats {
     overflow-y: auto !important;
     overflow: hidden;
-    max-height: calc(100vh - 185px);
+    max-height: calc(100vh - 188px);
+    height: calc(100vh - 188px);
 }
-.chats > div {
+.chat-messages {
+    overflow-y: auto !important;
+    overflow: hidden;
+    max-height: calc(100vh - 188px);
+    height: calc(100vh - 259px);        
+}
+.chats > div.chat {
     padding: 10px;
     color: #808080;
     border-bottom: #7900C7 solid 1px !important;
@@ -1150,13 +1157,14 @@ td.rotate div span {
     color: #000;
     font-weight: 500;
 }
-.chat-messages {
-    overflow-y: auto !important;
-    overflow: hidden;
-    max-height: 550px;
-    min-height: 500px;
-    
+.chats-container, .chat-types {
+    border-bottom: #7900C7 solid 1px !important;
 }
+.chat-types button {
+    border-radius: 0;
+}
+
+
 .message-box.sent {
     text-align: right;
 }
@@ -1231,6 +1239,14 @@ td.rotate div span {
     .m-wrapper {
         margin-left: 0 !important;
     }
+    
+    .chats {
+        max-height: calc(100vh - 230px);
+    }
+    .chat-messages {
+        max-height: calc(100vh - 165px);
+        height: calc(100vh - 165px);        
+    }    
 }
 .quick-link .quick-link-title {
     display: block;

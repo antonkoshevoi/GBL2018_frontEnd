@@ -10,6 +10,8 @@ import moment from 'moment/moment';
 
 class Chats extends Component {
 
+    chatsContainer = React.createRef();
+
     constructor(props) {
         super(props);        
         this.state = {
@@ -21,7 +23,22 @@ class Chats extends Component {
     componentWillMount() {
         this._getRecords();
     }
-   
+    
+    updateDimensions() {
+        let wh = window.innerWidth;
+        if (this.chatsContainer) {
+           console.log(this.chatsContainer.clientHeight);
+        }
+    }    
+    
+    componentDidMount() {
+        window.addEventListener("resize", () => this.updateDimensions());
+    }
+    
+    componentWillUnmount() {
+        window.removeEventListener("resize", () => this.updateDimensions());
+    }
+           
     componentWillReceiveProps(nextProps) {
         const { groupChatsRequest, privateChatsRequest} = this.props;        
         
@@ -64,7 +81,7 @@ class Chats extends Component {
         const {chatId} = this.state;
         
         if (groupChatsRequest.get('loading')) {            
-            return <div class="my-2"><CircularProgress /></div>;
+            return <div class="m--margin-100"><CircularProgress /></div>;
         }
         
         if (!groupChatsRequest.get('records').size) {
@@ -97,7 +114,7 @@ class Chats extends Component {
         const {chatId} = this.state;
         
         if (privateChatsRequest.get('loading')) {            
-            return <div class="my-2"><CircularProgress /></div>;
+            return <div class="m--margin-100"><CircularProgress /></div>;
         }
         
         if (!privateChatsRequest.get('records').size) {
@@ -128,9 +145,9 @@ class Chats extends Component {
         const {chatId, type} = this.state;        
         
         return (
-            <div className='h-100 d-flex align-items-stretch'>
-                <div className='row w-100'>
-                    <div className='col-3 pr-0 chats-box'>
+            <div className='d-flex align-items-stretch' ref={this._element}>
+                <div className='row w-100 chats-container' ref={(node) => this.chatsContainer = node}>
+                    <div className='col-5 col-md-4 col-lg-3 pr-0 chats-box'>
                         <div className="chat-types">
                             <div class="w-100 btn-group btn-group-toggle" data-toggle="buttons">
                                 <button class={`w-50 btn btn-secondary ${type == 'group' ? 'active' : ''}`} onClick={() => this._setType('group')}>
@@ -145,7 +162,7 @@ class Chats extends Component {
                             {type === 'group' ? this._renderGroups() : this._renderContacts()}
                         </div>
                     </div>
-                    <div className='col-9 pl-0'>
+                    <div className='col-7 col-md-8 col-lg-9 pl-0'>
                         {chatId && <Chat chatId={chatId} />}
                     </div>                        
                 </div>                
@@ -156,8 +173,9 @@ class Chats extends Component {
     render() {
         const {t} = this.props;
         return (
-            <div className='fadeInLeft h-100'>
-                <div className='m-portlet m-portlet--head-solid-bg h-100'>
+            <div className='fadeInLeft'>
+      
+                        <div className='m-portlet m-portlet--head-solid-bg'>
                     <div className={`m-portlet__head border-b-violet`}>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>
@@ -165,8 +183,10 @@ class Chats extends Component {
                                 <h3 className='m-portlet__head-text'>{t('chats')}</h3>
                             </div>
                         </div>         
-                    </div>                                 
-                    {this._renderChats()}                    
+                    </div>             
+                    <div>                    
+                        {this._renderChats()}
+                    </div>
                 </div>
             </div>
         );
