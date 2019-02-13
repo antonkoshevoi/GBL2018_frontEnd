@@ -1271,8 +1271,10 @@ td.rotate div span {
     overflow-x: auto;
 }
 .store-featured {    
-    white-space: pre-wrap;   
-    zoom: 0.8;
+    white-space: pre-wrap;       
+}
+.store-featured .cardActions .ratings {
+    display: none;
 }
 .store-featured .verticalCardItem.cardItem{
     max-width: 150px;

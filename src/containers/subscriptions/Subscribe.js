@@ -61,7 +61,7 @@ class Subscribe extends Component {
         
             return (
                 <div className="col-sm-12 text-center">                                                                                    
-                    <p className="display-6">{t('yourPlan')}: <strong className="g-blue">${price}</strong> / {t(this.state.period)}</p>     
+                    <p className="display-6">{t('yourPlan')}: <strong className="g-blue">${price} {subscription.get('currency')}</strong> / {t(this.state.period)}</p>     
                 </div>
             );
         }                

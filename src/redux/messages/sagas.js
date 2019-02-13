@@ -18,7 +18,11 @@ import {
     GET_GROUP_FAIL,
     CREATE_GROUP_FAIL,
     UPDATE_GROUP_FAIL,
-    DELETE_GROUP_FAIL
+    DELETE_GROUP_FAIL,
+    GET_PRIVATE_CHATS_FAIL,
+    GET_GROUP_CHATS_FAIL,
+    GET_CHAT_MESSAGES_FAIL,
+    SEND_CHAT_MESSAGE_FAIL
 } from './actions';
 
 import { yieldErrorToasts, yieldSuccessToasts } from '../../helpers/utils';
@@ -44,7 +48,11 @@ const messagesSagas = all([
         GET_GROUP_FAIL, 
         CREATE_GROUP_FAIL,
         UPDATE_GROUP_FAIL,
-        DELETE_GROUP_FAIL
+        DELETE_GROUP_FAIL,
+        GET_PRIVATE_CHATS_FAIL,
+        GET_GROUP_CHATS_FAIL,
+        GET_CHAT_MESSAGES_FAIL,
+        SEND_CHAT_MESSAGE_FAIL        
     ])
 ]);
 

@@ -21,7 +21,7 @@ class InvoiceForm extends Component {
                     {invoice &&
                         <div className="col-sm-12">
                             <p className="text-center invoice-title">
-                                {t('yourInvoice', {invoiceNo: invoice.get('subscriptionNo'), invoiceAmount: ('$' + invoice.get('price'))})}.
+                                {t('yourInvoice', {invoiceNo: invoice.get('subscriptionNo'), invoiceAmount: ('$' + invoice.get('price') + ' ' + invoice.get('currency'))})}.
                             </p>
                             <p>
                                 <h3>{t('subscriptionDetails')}</h3>
@@ -29,7 +29,7 @@ class InvoiceForm extends Component {
                                     <label>{t('name')}:</label> <strong>{invoice.get('title')}</strong>
                                 </div>
                                 <div>
-                                    <label>{t('price')}:</label> <strong>${invoice.get('price')} / {t(invoice.get('period'))}</strong>
+                                    <label>{t('price')}:</label> <strong>${invoice.get('price')} {invoice.get('currency')} / {t(invoice.get('period'))}</strong>
                                 </div>
                                 <div>
                                     <label>{t('allowedCourses')}:</label> <strong>{invoice.get('allowedCourses')} x {invoice.get('allowedStudents')}</strong>

@@ -40,8 +40,8 @@ class Subscriptions extends Component {
                 <div className="subscription-content">
                     <div className="subscription-prices">
                         <div className="row">
-                            <div className="selected col-6"><span className="price">${record.get('priceMonthly')}</span> {t('perMonth')}</div>
-                            <div className="col-6 text-right m--margin-top-20"><span className="price">${record.get('priceYearly')}</span> {t('perYear')}</div>            
+                            <div className="selected col-8 pr-0"><span className="price">${record.get('priceMonthly')} <span className="small">{record.get('currency')}</span></span> {t('perMonth')}</div>
+                            <div className="col-4 pl-0 text-right m--margin-top-20"><span className="price">${record.get('priceYearly')}</span> {t('perYear')}</div>            
                         </div>
                     </div>
                     <div className="subscription-description">

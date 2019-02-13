@@ -120,26 +120,25 @@ class OpenInvoicesTable extends Component {
           <Td width='100px'>
             <span className="productPrice productLabel">
               {item.storeItem.discount > 0 &&
-             <span>${parseFloat(item.storeItem.price).toFixed(2)}
+             <div>${parseFloat(item.storeItem.price).toFixed(2)} {item.storeItem.currency}
                 <span className="discount"></span>
-             </span>
-              }
-              <br/>
+             </div>
+              }              
               <div className="price productLabel">
-                ${parseFloat(item.storeItem.discountPrice).toFixed(2)}
+                ${parseFloat(item.storeItem.discountPrice).toFixed(2)} {item.storeItem.currency}
               </div>
             </span>
           </Td>}
           <Td width='100px'>
           {preview && <div>                          
-              <div className="m--margin-top-5 m--margin-bottom-10">${parseFloat(item.storeItem.discountPrice).toFixed(2)}</div>              
+              <div className="m--margin-top-5 m--margin-bottom-10">${parseFloat(item.storeItem.discountPrice).toFixed(2)} {item.storeItem.currency}</div>              
               <div className="m--margin-top-5 m--margin-bottom-10">
                 {!item.isInvoice ? countInput : <span className="productLabel">{item.count}</span>}                    
               </div>
               <Divider className="m--margin-bottom-10" />
             </div>}
             <span className="productPrice productLabel">
-              {'$' + parseFloat(item.storeItem.discountPrice * item.count).toFixed(2)}
+              {'$' + parseFloat(item.storeItem.discountPrice * item.count).toFixed(2)} {item.storeItem.currency}
             </span>
           </Td>
         </Row>
@@ -147,8 +146,11 @@ class OpenInvoicesTable extends Component {
     });
   }
 
-  _renderTotalRow(sum,count) {
+  _renderTotalRow(sum, data) {
     const {t} = this.props;
+    const count = data.length;
+    const item =  data[0];
+    
     return (
         <div className="row text-right m--margin-top-15 m--margin-bottom-10">
             <div className="col-sm-7 text-left">
@@ -157,7 +159,7 @@ class OpenInvoicesTable extends Component {
             <div className="col-sm-5 text-right">
                 <div className="m--margin-right-15">
                     <span>{t('total')}</span><br/>
-                    <span className="productPrice"> {'$' + parseFloat(sum).toFixed(2)}</span>
+                    <span className="productPrice"> {'$' + parseFloat(sum).toFixed(2)} {item.storeItem.currency}</span>
                 </div>
             </div>
         </div>            
@@ -201,9 +203,7 @@ class OpenInvoicesTable extends Component {
               </Tbody>
             </Table>
             <Divider />
-            {this._renderTaxRow(0)}
-            <Divider />
-            {this._renderTotalRow(sum,data.length)}
+            {this._renderTotalRow(sum, data)}
           </div>
           :
           this._getEmptyMessage()

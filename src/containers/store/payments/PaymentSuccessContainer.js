@@ -78,7 +78,7 @@ class PaymentSuccessContainer extends Component {
             </span>
         </div>
         <span className="m-widget4__ext">
-            <span className="m-widget4__number m--font-danger">${item.get('total_price')}</span>
+            <span className="text-nowrap m-widget4__number m--font-danger">${item.get('total_price')} {item.get('currency')}</span>
           </span>
       </div>
     ));
@@ -94,7 +94,7 @@ class PaymentSuccessContainer extends Component {
           {invoice &&
             <div>
                 <span className="invoice-title">
-                    {t('yourInvoice', {invoiceNo: invoice.get('invoice_no'), invoiceAmount: ('$' + invoice.get('total'))})}.
+                    {t('yourInvoice', {invoiceNo: invoice.get('invoice_no'), invoiceAmount: ('$' + invoice.get('total') + ' ' + invoice.get('currency'))})}.
                 </span>                
                 <p className="text-center m--margin-15">
                     <a rel="noopener noreferrer" className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
@@ -152,7 +152,7 @@ class PaymentSuccessContainer extends Component {
                             <div>
                               <span className="invoice-title">{t('orderDetails')}</span>
                             </div>
-                            <div className="m-widget4 col-md-7 m-auto">
+                            <div className="m-widget4 col-12 col-sm-12 col-md-10 col-lg-7 m-auto">
                                 {this._renderItems(invoice)}
                             </div>        
                         </div>
