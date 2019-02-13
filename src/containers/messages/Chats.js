@@ -4,13 +4,10 @@ import { connect } from 'react-redux';
 import { selectGetPrivateChatsRequest, selectGetGroupChatsRequest } from '../../redux/messages/selectors';
 import { getPrivateChats, getGroupChats } from '../../redux/messages/actions';
 import { Avatar, CircularProgress } from '@material-ui/core';
-import Loader from '../../components/layouts/Loader';
 import Chat from "./sections/Chat";
 import moment from 'moment/moment';
 
 class Chats extends Component {
-
-    chatsContainer = React.createRef();
 
     constructor(props) {
         super(props);        
@@ -23,22 +20,7 @@ class Chats extends Component {
     componentWillMount() {
         this._getRecords();
     }
-    
-    updateDimensions() {
-        let wh = window.innerWidth;
-        if (this.chatsContainer) {
-           console.log(this.chatsContainer.clientHeight);
-        }
-    }    
-    
-    componentDidMount() {
-        window.addEventListener("resize", () => this.updateDimensions());
-    }
-    
-    componentWillUnmount() {
-        window.removeEventListener("resize", () => this.updateDimensions());
-    }
-           
+               
     componentWillReceiveProps(nextProps) {
         const { groupChatsRequest, privateChatsRequest} = this.props;        
         
@@ -81,7 +63,7 @@ class Chats extends Component {
         const {chatId} = this.state;
         
         if (groupChatsRequest.get('loading')) {            
-            return <div class="m--margin-100"><CircularProgress /></div>;
+            return <div className="m--margin-100"><CircularProgress /></div>;
         }
         
         if (!groupChatsRequest.get('records').size) {
@@ -114,7 +96,7 @@ class Chats extends Component {
         const {chatId} = this.state;
         
         if (privateChatsRequest.get('loading')) {            
-            return <div class="m--margin-100"><CircularProgress /></div>;
+            return <div className="m--margin-100"><CircularProgress /></div>;
         }
         
         if (!privateChatsRequest.get('records').size) {
@@ -145,16 +127,16 @@ class Chats extends Component {
         const {chatId, type} = this.state;        
         
         return (
-            <div className='d-flex align-items-stretch' ref={this._element}>
+            <div className='d-flex align-items-stretch'>
                 <div className='row w-100 chats-container' ref={(node) => this.chatsContainer = node}>
                     <div className='col-5 col-md-4 col-lg-3 pr-0 chats-box'>
                         <div className="chat-types">
-                            <div class="w-100 btn-group btn-group-toggle" data-toggle="buttons">
-                                <button class={`w-50 btn btn-secondary ${type == 'group' ? 'active' : ''}`} onClick={() => this._setType('group')}>
-                                    <i class="display-5 fa fa-users"></i>
+                            <div className="w-100 btn-group btn-group-toggle" data-toggle="buttons">
+                                <button className={`w-50 btn btn-secondary ${type === 'group' ? 'active' : ''}`} onClick={() => this._setType('group')}>
+                                    <i className="display-5 fa fa-users"></i>
                                 </button>
-                                <button class={`w-50 btn btn-secondary ${type == 'private' ? 'active' : ''}`} onClick={() => this._setType('private')}>
-                                    <i class="display-5 fa fa-user"></i>
+                                <button className={`w-50 btn btn-secondary ${type === 'private' ? 'active' : ''}`} onClick={() => this._setType('private')}>
+                                    <i className="display-5 fa fa-user"></i>
                                 </button>   
                             </div>
                         </div>
@@ -173,9 +155,8 @@ class Chats extends Component {
     render() {
         const {t} = this.props;
         return (
-            <div className='fadeInLeft'>
-      
-                        <div className='m-portlet m-portlet--head-solid-bg'>
+            <div className='fadeInLeft'>     
+                <div className='m-portlet m-portlet--head-solid-bg'>
                     <div className={`m-portlet__head border-b-violet`}>
                         <div className='m-portlet__head-caption'>
                             <div className='m-portlet__head-title'>

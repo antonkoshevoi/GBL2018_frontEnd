@@ -9,6 +9,8 @@ import moment from 'moment/moment';
 
 class Chat extends Component {
        
+    textField = React.createRef();
+       
     constructor(props) {
         super(props);
                 
@@ -30,8 +32,9 @@ class Chat extends Component {
             this._getRecords(nextProps.chatId);
         }           
         
-        if (!this.props.sendMessageRequest.get('success') && nextProps.sendMessageRequest.get('success')) {
-            this.setState({message: ''});
+        if (!this.props.sendMessageRequest.get('success') && nextProps.sendMessageRequest.get('success')) {            
+            this.textField.focus();
+            this.textField.click();            
         }     
     }
     
@@ -39,7 +42,6 @@ class Chat extends Component {
         this.setState({
             chatId: chatId            
         });
-
         this.props.getChatMessages(chatId);
     }
     
@@ -51,7 +53,7 @@ class Chat extends Component {
     _send() {
         const { message, chatId} = this.state;
         
-        console.log('send message to chat = ' + chatId);
+        this.setState({message: ''});
         
         this.props.sendMessage({                       
             chatId:     chatId,
@@ -92,6 +94,7 @@ class Chat extends Component {
         }        
         if (e.key === 'Enter') {
             this._send();
+            e.preventDefault();
         }
     }
 
@@ -114,7 +117,7 @@ class Chat extends Component {
         const success = getRecordsRequest.get('success');        
 
         return (
-            <div class='h-100 px-3'>
+            <div className='h-100 px-3'>
                 {loading && <Loader /> }
                 <div className="chat-messages" ref={(el) => { this.messages = el; }}>
                     <div className='mx-2'>
@@ -133,7 +136,9 @@ class Chat extends Component {
                                 margin="normal"
                                 variant="outlined"                                          
                                 rows="2"
-                                disabled={sendMessageRequest.get('loading')}
+                                autoFocus
+                                inputRef={(el) => { this.textField = el; }} 
+                                readOnly={sendMessageRequest.get('loading')}
                                 value={message || ''}
                                 onKeyPress={(e) => {
                                     this._handleKeyPress(e)
