@@ -619,5 +619,7 @@ export default {
     participants: 'Participants',
     visibleForParticipants: 'Visible for participants',
     groupChatsNotFound: 'Group chats are not found...',
-    privateChatsNotFound: 'Private chats are not found...'
+    privateChatsNotFound: 'Private chats are not found...',
+    searchGroups: 'Search Groups',
+    searchUsers: 'Search Users'
 }

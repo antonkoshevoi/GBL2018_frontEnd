@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { selectGetPrivateChatsRequest, selectGetGroupChatsRequest } from '../../redux/messages/selectors';
 import { getPrivateChats, getGroupChats } from '../../redux/messages/actions';
 import { Avatar, CircularProgress } from '@material-ui/core';
+import { debounce } from '../../helpers/utils';
 import Chat from "./sections/Chat";
 import moment from 'moment/moment';
 
@@ -13,7 +14,8 @@ class Chats extends Component {
         super(props);        
         this.state = {
             chatId: null,
-            type: 'group'
+            type: 'group',
+            filter: ''
         };
     }
 
@@ -36,11 +38,11 @@ class Chats extends Component {
         }        
     }        
     
-    _getRecords(type = 'group') {
+    _getRecords(type = 'group', params = {}) {
         if (type === 'group') {
-            this.props.getGroupChats();
+            this.props.getGroupChats(params);
         } else {
-            this.props.getPrivateChats();
+            this.props.getPrivateChats(params);
         }
     }    
     
@@ -55,8 +57,25 @@ class Chats extends Component {
             chatId: null
         });
         
-        this._getRecords(type);
-    }
+        this._getRecords(type, {
+                perPage: 1000,
+                filter: {
+                  composed: this.state.filter
+              }
+        });
+    }    
+    
+    _onChangeFilter(value) {
+        const { onChange } = this.props;
+
+        this.setState({ filter: value }, debounce(() => {
+          this._getRecords(this.state.type, {
+              filter: {
+                  composed: value
+              }
+          });
+        }, 1000));
+    }    
     
     _renderGroups() {        
         const { groupChatsRequest, t} = this.props;        
@@ -83,7 +102,7 @@ class Chats extends Component {
                                 {record.get('newMessages') > 0 && <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
                             </div>                        
                             <div>{record.get('user').get('name')}</div>
-                            <div>{moment(record.get('created')).format('lll')}</div>
+                            {record.get('lastActivity') && <div className="text-muted">{moment(record.get('lastActivity')).format('lll')}</div>}
                         </div>
                     </div>
                 </div>
@@ -116,6 +135,7 @@ class Chats extends Component {
                                 {record.get('newMessages') > 0 && <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
                             </div>
                             <div>{t(record.get('user').get('role'))}</div>
+                            {record.get('lastActivity') && <div className="text-muted">{moment(record.get('lastActivity')).format('lll')}</div>}
                         </div>
                     </div>
                 </div>
@@ -124,7 +144,8 @@ class Chats extends Component {
     }
     
     _renderChats() {
-        const {chatId, type} = this.state;        
+        const {chatId, type, filter} = this.state;
+        const {t} = this.props;        
         
         return (
             <div className='d-flex align-items-stretch'>
@@ -139,6 +160,14 @@ class Chats extends Component {
                                     <i className="display-5 fa fa-user"></i>
                                 </button>   
                             </div>
+                        </div>
+                        <div className="search-chats">
+                            <input 
+                                onChange={(e) => { this._onChangeFilter(e.target.value) }} 
+                                placeholder={t(type === 'group' ? 'searchGroups' : 'searchUsers')} 
+                                className="form-control m-input--air form-control-success m-input"
+                                value={filter}
+                                type="text" />
                         </div>
                         <div className='chats'>
                             {type === 'group' ? this._renderGroups() : this._renderContacts()}

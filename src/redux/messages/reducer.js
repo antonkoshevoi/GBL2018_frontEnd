@@ -145,35 +145,30 @@ export default function reducer (state = initialState, action) {
         let chatId          = action.message.chatId;
         let recordsKey      = action.message.isPrivate ? 'getPrivateChatsRequest' : 'getGroupChatsRequest';
         let chatsRecords    = state.get(recordsKey).get('records').toJS();
+        let chatMessages    = state.get('getChatMessagesRequest').get('records').toJS();
         
-        console.log('Reducer: chatId = ' + chatId);
+        console.log('Reducer - New Message: chatId = ' + chatId);
         
         if (action.message.newChat) {
-            console.log('Reducer: New chat');                        
             chatsRecords.unshift(action.message);
-            return state.set(recordsKey, state.get(recordsKey).set('records', Immutable.fromJS(chatsRecords)))
-                .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state)));            
-        }
-        
-        if (action.message && state.get('getChatMessagesRequest').get('chatId') === chatId) {
-            console.log('Reducer: New message in active chat');
-            
-            let messages = state.get('getChatMessagesRequest').get('records').toJS();            
-            messages.push(action.message);
-            return state.set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(messages)));                        
+        } else {
+            chatsRecords = chatsRecords.map(record => {
+                if (record.chatId === chatId) {
+                    if (state.get('getChatMessagesRequest').get('chatId') === chatId) {
+                        chatMessages.push(action.message);
+                    } else {
+                        record.newMessages ++;
+                    }
+                    record.lastActivity = action.message.created;
+                }
+                return record;
+            });
         }
 
-        console.log('Reducer: New message in unactive');
-        
-        chatsRecords = chatsRecords.map(record => {            
-            console.log('Reducer: record.chatId = ' + record.chatId);
-            if (record.chatId === chatId) {
-                record.newMessages ++;
-            }
-            return record;
-        });
-            
-        return state.set(recordsKey, state.get(recordsKey).set('records', Immutable.fromJS(chatsRecords)))
+        return state.set(recordsKey, state.get(recordsKey).set('records', Immutable.fromJS(chatsRecords).sort(
+                (a, b) => (a.get('lastActivity') < b.get('lastActivity'))
+            )))
+            .set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(chatMessages)))
             .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state)));
 
     /**
@@ -264,14 +259,15 @@ export default function reducer (state = initialState, action) {
                 .set('records', Immutable.fromJS(action.result.data)));           
     case GET_MESSAGES_FAIL:   
         return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('fail', true));
-        
+                    
     case GET_PRIVATE_CHATS:    
         return state.set('getPrivateChatsRequest', initialState.get('getPrivateChatsRequest').set('loading', true));    
     case GET_PRIVATE_CHATS_SUCCESS:    
         return state.set('getPrivateChatsRequest', initialState.get('getPrivateChatsRequest')
-                .set('success', true)
-                .set('pagination', Immutable.fromJS(action.result.meta.pagination))
-                .set('records', Immutable.fromJS(action.result.data)));           
+                .set('success', true)                
+                .set('records', Immutable.fromJS(action.result.data).sort(
+                    (a, b) => (a.get('lastActivity') < b.get('lastActivity'))
+                )));           
     case GET_PRIVATE_CHATS_FAIL:   
         return state.set('getPrivateChatsRequest', initialState.get('getPrivateChatsRequest').set('fail', true));
         
@@ -279,9 +275,10 @@ export default function reducer (state = initialState, action) {
         return state.set('getGroupChatsRequest', initialState.get('getGroupChatsRequest').set('loading', true));    
     case GET_GROUP_CHATS_SUCCESS:    
         return state.set('getGroupChatsRequest', initialState.get('getGroupChatsRequest')
-                .set('success', true)
-                .set('pagination', Immutable.fromJS(action.result.meta.pagination))
-                .set('records', Immutable.fromJS(action.result.data)));           
+                .set('success', true)                
+                .set('records', Immutable.fromJS(action.result.data).sort(
+                    (a, b) => (a.get('lastActivity') < b.get('lastActivity'))
+                )));           
     case GET_GROUP_CHATS_FAIL:   
         return state.set('getGroupChatsRequest', initialState.get('getGroupChatsRequest').set('fail', true));
     
