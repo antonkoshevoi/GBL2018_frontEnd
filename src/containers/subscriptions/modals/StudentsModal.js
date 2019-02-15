@@ -66,6 +66,7 @@ class StudentsModal extends Component {
             return <Row index={i} key={i}>                     
                 <Td width='120px'>{item.get('studentFirstName')} {item.get('studentLastName')}</Td>                        
                 <Td width='120px'>{item.get('courseTitle')}</Td>    
+                <Td width='120px'>{item.get('classroomName')}</Td>
                 <Td width='120px'>{moment(item.get('createdAt')).format('ll')}</Td>                                                
                 <Td width='120px' name='actions'>
                     <DeleteButton title={t('areYouSureWantToCancelThisCourse')} onClick={() => { this._unsubscribeStudent(item.get('id')) }}/>                                                
@@ -98,6 +99,7 @@ class StudentsModal extends Component {
                     <HeadRow>                                 
                         <Th width='120px' name='student'>{t('student')}</Th>
                         <Th width='120px' name='course'>{t('course')}</Th>
+                        <Th width='120px' name='course'>{t('classroom')}</Th>
                         <Th width='120px' name='assignDate'>{t('assignDate')}</Th>
                         <Th width='120px' name='actions'>{t('actions')}</Th>
                     </HeadRow>

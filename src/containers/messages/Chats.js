@@ -66,8 +66,6 @@ class Chats extends Component {
     }    
     
     _onChangeFilter(value) {
-        const { onChange } = this.props;
-
         this.setState({ filter: value }, debounce(() => {
           this._getRecords(this.state.type, {
               filter: {
