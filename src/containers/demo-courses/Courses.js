@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import {Tab, Tabs} from '@material-ui/core';
-import {connect} from "react-redux";
 import {translate} from "react-i18next";
-import {getRecords} from "../../redux/students/actions";
-import {selectGetRecordsRequest, selectPagination, selectRecords} from "../../redux/students/selectors";
 import InvitationsTab from './InvitationsTab';
 import DemoCoursesTab from './DemoCoursesTab';
 import SearchInput from '../../components/ui/SearchInput';
@@ -15,10 +12,7 @@ class Courses extends Component {
       demoCoursesSearch: '',
       invitationSearch: '',
       dialogIsOpen: false,
-      activeTab: '1',
-      sorters: {},
-      page: props.pagination.get('page'),
-      perPage: props.pagination.get('perPage')
+      activeTab: '1'
     }
   }
 
@@ -28,15 +22,15 @@ class Courses extends Component {
 
   _handleSearch (value) {
     if (this.state.activeTab === '1') {
-    this.setState({
-      demoCoursesSearch: value
-    })
+        this.setState({
+          demoCoursesSearch: value
+        })
     }
 
     if (this.state.activeTab === '2') {
-    this.setState({
-      invitationSearch: value
-    })
+        this.setState({
+          invitationSearch: value
+        })
     }
   }
 
@@ -49,9 +43,7 @@ class Courses extends Component {
         <div className='m-portlet m-portlet--head-solid-bg'>
           <div className='m-portlet__head border-b-red'>
             <div className="m-portlet__head-tools">
-              <Tabs                
-                value={this.state.activeTab}
-                onChange={this.handleChange}>
+              <Tabs value={this.state.activeTab} onChange={this.handleChange}>
                 <Tab value="1" label={t('courses')} />
                 <Tab value="2" label={t('invitations')} />
               </Tabs>
@@ -72,17 +64,5 @@ class Courses extends Component {
     );
   }
 }
-
-Courses = connect(
-  (state) => ({
-    getRecordsRequest: selectGetRecordsRequest(state),
-    pagination: selectPagination(state),
-    records: selectRecords(state),
-  }),
-  (dispatch) => ({
-    getRecords: (params = {}) => { dispatch(getRecords(params)) }
-  })
-)(Courses);
-
 
 export default translate('translations')(Courses);
