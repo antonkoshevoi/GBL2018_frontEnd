@@ -621,5 +621,6 @@ export default {
     groupChatsNotFound: 'Group chats are not found...',
     privateChatsNotFound: 'Private chats are not found...',
     searchGroups: 'Search Groups',
-    searchUsers: 'Search Users'
+    searchUsers: 'Search Users',
+    youNotHaveStudents: 'You don\'t have any students. Please use "My Learners" tool on the dashboard to register new students.'
 }
