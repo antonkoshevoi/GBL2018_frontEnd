@@ -112,7 +112,7 @@ class Chat extends Component {
         const success = getRecordsRequest.get('success');        
 
         return (
-            <div className='h-100 px-3'>
+            <div className='h-100 px-sm-3'>
                 {loading && <Loader /> }
                 <div className="chat-messages" ref={(el) => { this.messages = el; }}>
                     <div className='mx-2'>
@@ -120,8 +120,8 @@ class Chat extends Component {
                         {sendMessageRequest.get('loading') && <CircularProgress className="float-right my-2 mx-2" />}
                     </div>
                 </div>
-                <div className='px-3 new-message'>
-                    <div className='form-group'>
+                <div className='px-sm-3 new-message'>
+                    <div className='form-group mx-2'>
                         <FormControl className='full-width'>
                             <TextField
                                 multiline
