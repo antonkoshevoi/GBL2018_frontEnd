@@ -194,7 +194,7 @@ class Chats extends Component {
                             {type === 'group' ? this._renderGroups() : this._renderContacts()}
                         </div>
                     </div>
-                    <div className='col-7 col-md-8 col-lg-9 pl-0'>
+                    <div className='col-7 col-md-8 col-lg-9 px-0'>
                         {chatId && <Chat chatId={chatId} />}
                     </div>                        
                 </div>                

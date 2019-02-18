@@ -45,7 +45,7 @@ class Messages extends Component {
         <div key={key} className='mt-3'>
             <h6 className='my-0'>{t(item.get('type'))}
                 {item.get('count') ?
-                    <NavLink className='ml-2' to={`/messages/${item.get('type')}`}>
+                    <NavLink className='ml-2' to={`/messages/${item.get('type')}`} onClick={() => {this.props.switchMenu(null)}}>
                         <span className='m-badge m-badge--brand m-badge--wide'>{item.get('count')}</span>
                     </NavLink>
                 : 
