@@ -1163,6 +1163,9 @@ td.rotate div span {
 .chat-types button {
     border-radius: 0;
 }
+.chat-types .m-badge {
+    margin-top: -10px !important;
+}
 .search-chats {
     padding: 7px 10px;
 }

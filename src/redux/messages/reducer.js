@@ -127,11 +127,16 @@ const initialState = Immutable.fromJS({
   },    
 });
 
-function updateUnread(state, number = 1) {
+function updateUnread(state, number = 1, isPrivate = false) {
     let unreadMessages  = state.get('getUnreadMessagesRequest').get('records').toJS();    
     unreadMessages = unreadMessages.map(record => {            
         if (record.type === 'chats') {
             record.count = record.count + number;
+            if (isPrivate) {
+                record.countPrivate = record.countPrivate + number;
+            } else {
+                record.countGroup = record.countGroup + number;
+            }
         }
         return record;
     });
@@ -169,7 +174,7 @@ export default function reducer (state = initialState, action) {
                 (a, b) => (a.get('lastActivity') < b.get('lastActivity'))
             )))
             .set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(chatMessages)))
-            .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state)));
+            .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state, 1, action.message.isPrivate)));
 
     /**
      *  send message
@@ -286,7 +291,8 @@ export default function reducer (state = initialState, action) {
         return state.set('getChatMessagesRequest', initialState.get('getChatMessagesRequest').set('loading', true));    
     case GET_CHAT_MESSAGES_SUCCESS:
         let readMessages = 0;
-        let chatKey      = (action.chatId.indexOf('private') > -1) ? 'getPrivateChatsRequest' : 'getGroupChatsRequest';
+        let isPrivate    = (action.chatId.indexOf('private') > -1);
+        let chatKey      = isPrivate ? 'getPrivateChatsRequest' : 'getGroupChatsRequest';
         let records = state.get(chatKey).get('records').toJS().map(record => {            
             if (record.chatId === action.chatId) {
                 readMessages = record.newMessages;
@@ -298,7 +304,7 @@ export default function reducer (state = initialState, action) {
         action.result.data.reverse();
                                                                                                                                 
         return state.set(chatKey, state.get(chatKey).set('records',  Immutable.fromJS(records)))
-                .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state, - readMessages)))
+                .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state, - readMessages, isPrivate)))
                 .set('getChatMessagesRequest', initialState.get('getChatMessagesRequest')
                 .set('success', true)
                 .set('chatId', action.chatId)                

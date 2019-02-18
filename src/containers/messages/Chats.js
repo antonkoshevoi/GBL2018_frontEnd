@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetPrivateChatsRequest, selectGetGroupChatsRequest } from '../../redux/messages/selectors';
+import { selectGetPrivateChatsRequest, selectGetGroupChatsRequest, selectGetUnreadMessagesRequest } from '../../redux/messages/selectors';
 import { getPrivateChats, getGroupChats } from '../../redux/messages/actions';
 import { Avatar, CircularProgress } from '@material-ui/core';
 import { debounce } from '../../helpers/utils';
@@ -108,6 +108,23 @@ class Chats extends Component {
         });
     }
     
+    _unreadCount(type) {
+        const { unreadMessagesRequest } = this.props;
+    
+        if (unreadMessagesRequest.get('success')) {
+            const records = unreadMessagesRequest.get('records');
+
+            const item = records.find((item) => {        
+                return item.get('type') === 'chats';
+            });
+            if (item) {
+                return item.get(type);
+            }
+            return 0;
+        }
+        return  0;
+    }
+    
     _renderContacts() {        
         const {privateChatsRequest, t} = this.props;       
         const {chatId} = this.state;
@@ -144,6 +161,8 @@ class Chats extends Component {
     _renderChats() {
         const {chatId, type, filter} = this.state;
         const {t} = this.props;        
+        const unreadGroups = this._unreadCount('countGroup');
+        const unreadPrivate = this._unreadCount('countPrivate');
         
         return (
             <div className='d-flex align-items-stretch'>
@@ -152,10 +171,14 @@ class Chats extends Component {
                         <div className="chat-types">
                             <div className="w-100 btn-group btn-group-toggle" data-toggle="buttons">
                                 <button className={`w-50 btn btn-secondary ${type === 'group' ? 'active' : ''}`} onClick={() => this._setType('group')}>
-                                    <i className="display-5 fa fa-users"></i>
+                                    <i className="display-5 fa fa-users"></i> {(type !== 'group' && unreadGroups > 0)  &&
+                                        <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-1'>{unreadGroups}</span>
+                                    }
                                 </button>
                                 <button className={`w-50 btn btn-secondary ${type === 'private' ? 'active' : ''}`} onClick={() => this._setType('private')}>
-                                    <i className="display-5 fa fa-user"></i>
+                                    <i className="display-5 fa fa-user"></i> {(type !== 'private' && unreadPrivate > 0) &&
+                                        <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-1'>{unreadPrivate}</span>
+                                    }
                                 </button>   
                             </div>
                         </div>
@@ -204,7 +227,8 @@ class Chats extends Component {
 Chats = connect(
     (state) => ({
         groupChatsRequest: selectGetGroupChatsRequest(state),
-        privateChatsRequest: selectGetPrivateChatsRequest(state)
+        privateChatsRequest: selectGetPrivateChatsRequest(state),
+        unreadMessagesRequest: selectGetUnreadMessagesRequest(state)
     }),
     (dispatch) => ({
         getGroupChats: (params = {}) => {
