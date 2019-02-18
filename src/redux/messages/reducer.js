@@ -151,11 +151,12 @@ export default function reducer (state = initialState, action) {
         let recordsKey      = action.message.isPrivate ? 'getPrivateChatsRequest' : 'getGroupChatsRequest';
         let chatsRecords    = state.get(recordsKey).get('records').toJS();
         let chatMessages    = state.get('getChatMessagesRequest').get('records').toJS();
-        
+        let newMessage      = 0;
         console.log('Reducer - New Message: chatId = ' + chatId);
         
         if (action.message.newChat) {
             chatsRecords.unshift(action.message);
+            newMessage ++;
         } else {
             chatsRecords = chatsRecords.map(record => {
                 if (record.chatId === chatId) {
@@ -163,6 +164,7 @@ export default function reducer (state = initialState, action) {
                         chatMessages.push(action.message);
                     } else {
                         record.newMessages ++;
+                        newMessage ++;
                     }
                     record.lastActivity = action.message.created;
                 }
@@ -174,7 +176,7 @@ export default function reducer (state = initialState, action) {
                 (a, b) => (a.get('lastActivity') < b.get('lastActivity'))
             )))
             .set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(chatMessages)))
-            .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state, 1, action.message.isPrivate)));
+            .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state, newMessage, action.message.isPrivate)));
 
     /**
      *  send message
