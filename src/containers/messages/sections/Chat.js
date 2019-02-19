@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetChatMessagesRequest, selectSendMessageRequest } from '../../../redux/messages/selectors';
+import { selectGetChatMessagesRequest, selectSendMessageRequest, selectDeleteRecordRequest } from '../../../redux/messages/selectors';
 import { getChatMessages, sendChatMessage, deleteChatMessage } from '../../../redux/messages/actions';
 import { CircularProgress, Avatar, TextField, FormControl } from '@material-ui/core';
 import Loader from '../../../components/layouts/Loader';
@@ -59,8 +59,9 @@ class Chat extends Component {
     }
     
     _renderRecords() {
-        const {t} = this.props;        
-        const records = this.props.getRecordsRequest.get('records');
+        const {t, deleteRecordRequest, getRecordsRequest} = this.props;        
+        const records = getRecordsRequest.get('records');
+        const styles = {right: '0px', top: '25%'};
         
         if (!records.size) {
             return <div><h3 className='text-center my-5'>{t('messagesNotFound')}</h3></div>;
@@ -76,13 +77,15 @@ class Chat extends Component {
                         {record.get('isMine') ? t('me') : record.get('userName')}, {moment(record.get('created')).format('lll')}
                     </div>
                     <div className='message-content mt-1'>
-                        <div className={`pre-line ${record.get('removed') && 'text-muted'}`}>                    
+                        <div className={`pre-line ${record.get('removed') ? 'text-muted' : ''}`}>                    
                             {record.get('removed') ? t('messageRemoved') : record.get('body')}
                         </div>                
                     </div>
-                {record.get('isMine') && <div className='d-inline-block mr-3'>
-                    <button onClick={() => this._delete(record.get('id'))} className="btn m-btn btn-sm m-btn--icon m-btn--icon-only btn-link m--margin-left-5"><i className="text-danger fa fa-times"></i></button>
-                </div>}
+                    {record.get('isMine') && <div className='d-inline-block'>                     
+                        <button disabled={deleteRecordRequest.get('loading')} onClick={() => this._delete(record.get('id'))} className="btn m-btn btn-sm m-btn--icon m-btn--icon-only btn-link m--margin-left-5">                            
+                            {(deleteRecordRequest.get('loading') && deleteRecordRequest.get('id') === record.get('id')) ? <CircularProgress style={styles} size={20} /> : <i className="text-danger fa fa-times"></i>}
+                        </button>
+                    </div>}
                 </div>
             </div>
         ));        
@@ -106,8 +109,15 @@ class Chat extends Component {
         this._scrollToBottom();
     }
 
-    componentDidUpdate() {        
-        this._scrollToBottom();
+    componentDidUpdate(prevProps, prevState) {
+        const {sendMessageRequest, getRecordsRequest} = this.props;
+    
+        const size      = getRecordsRequest.get('records').size;
+        const prevSize  = prevProps.getRecordsRequest.get('records').size;
+        
+        if (size > prevSize || sendMessageRequest.get('loading')) {    
+            this._scrollToBottom();
+        }
     }
 
     render() {
@@ -157,7 +167,8 @@ class Chat extends Component {
 Chat = connect(
     (state) => ({
         getRecordsRequest: selectGetChatMessagesRequest(state),
-        sendMessageRequest: selectSendMessageRequest(state)
+        sendMessageRequest: selectSendMessageRequest(state),
+        deleteRecordRequest: selectDeleteRecordRequest(state)
     }),
     (dispatch) => ({
         getChatMessages: (id, params = {}) => {
