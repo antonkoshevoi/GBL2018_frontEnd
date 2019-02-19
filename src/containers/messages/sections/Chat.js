@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetChatMessagesRequest, selectSendMessageRequest } from '../../../redux/messages/selectors';
-import { getChatMessages, sendChatMessage } from '../../../redux/messages/actions';
+import { selectGetChatMessagesRequest, selectSendMessageRequest, selectDeleteRecordRequest } from '../../../redux/messages/selectors';
+import { getChatMessages, sendChatMessage, deleteChatMessage } from '../../../redux/messages/actions';
 import { CircularProgress, Avatar, TextField, FormControl } from '@material-ui/core';
 import Loader from '../../../components/layouts/Loader';
 import moment from 'moment/moment';
 
 class Chat extends Component {
-       
-    textField = React.createRef();
        
     constructor(props) {
         super(props);
@@ -45,6 +43,10 @@ class Chat extends Component {
         this.setState({[name]: value});
     }
     
+    _delete(id) {
+        this.props.deleteMessage(id);
+    }
+    
     _send() {
         const { message, chatId} = this.state;
         
@@ -57,8 +59,9 @@ class Chat extends Component {
     }
     
     _renderRecords() {
-        const {t} = this.props;        
-        const records = this.props.getRecordsRequest.get('records');
+        const {t, deleteRecordRequest, getRecordsRequest} = this.props;        
+        const records = getRecordsRequest.get('records');
+        const styles = {right: '0px', top: '25%'};
         
         if (!records.size) {
             return <div><h3 className='text-center my-5'>{t('messagesNotFound')}</h3></div>;
@@ -67,22 +70,27 @@ class Chat extends Component {
         return records.map((record, key) => (
             <div className={`message-box my-2 ${record.get('isMine') ? 'sent' : 'inbox'}`}  index={key} key={key}>
                 {!record.get('isMine') && <div className='d-inline-block mr-3'>
-                    <Avatar src={record.get('user').get('avatarSmall')} className='border' />
+                    <Avatar src={record.get('userAvatar')} className='border' />
                 </div>}
                 <div className='d-inline-block'>
                     <div className='text-muted'>
-                        {record.get('isMine') ? t('me') : record.get('user').get('name')}, {moment(record.get('created')).format('lll')}
+                        {record.get('isMine') ? t('me') : record.get('userName')}, {moment(record.get('created')).format('lll')}
                     </div>
                     <div className='message-content mt-1'>
-                        <div className='pre-line'>                    
-                            {record.get('body')}
+                        <div className={`pre-line ${record.get('removed') ? 'text-muted' : ''}`}>                    
+                            {record.get('removed') ? t('messageRemoved') : record.get('body')}
                         </div>                
                     </div>
+                    {record.get('isMine') && <div className='d-inline-block'>                     
+                        <button disabled={deleteRecordRequest.get('loading')} onClick={() => this._delete(record.get('id'))} className="btn m-btn btn-sm m-btn--icon m-btn--icon-only btn-link m--margin-left-5">                            
+                            {(deleteRecordRequest.get('loading') && deleteRecordRequest.get('id') === record.get('id')) ? <CircularProgress style={styles} size={20} /> : <i className="text-danger fa fa-times"></i>}
+                        </button>
+                    </div>}
                 </div>
             </div>
         ));        
     }
-    
+   
     _handleKeyPress(e) {
         if (e.shiftKey) {
             return;
@@ -101,8 +109,15 @@ class Chat extends Component {
         this._scrollToBottom();
     }
 
-    componentDidUpdate() {
-        this._scrollToBottom();
+    componentDidUpdate(prevProps, prevState) {
+        const {sendMessageRequest, getRecordsRequest} = this.props;
+    
+        const size      = getRecordsRequest.get('records').size;
+        const prevSize  = prevProps.getRecordsRequest.get('records').size;
+        
+        if (size > prevSize || sendMessageRequest.get('loading')) {    
+            this._scrollToBottom();
+        }
     }
 
     render() {
@@ -152,7 +167,8 @@ class Chat extends Component {
 Chat = connect(
     (state) => ({
         getRecordsRequest: selectGetChatMessagesRequest(state),
-        sendMessageRequest: selectSendMessageRequest(state)
+        sendMessageRequest: selectSendMessageRequest(state),
+        deleteRecordRequest: selectDeleteRecordRequest(state)
     }),
     (dispatch) => ({
         getChatMessages: (id, params = {}) => {
@@ -160,6 +176,9 @@ Chat = connect(
         },
         sendMessage: (id, params = {}) => {
             dispatch(sendChatMessage(id, params));
+        },
+        deleteMessage: (id) => {
+            dispatch(deleteChatMessage(id));                    
         }
     })
 )(Chat);

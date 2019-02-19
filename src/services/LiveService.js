@@ -13,11 +13,13 @@ export default class LiveService {
      }
      */
 
-    static messages(userId, callback) {
+    static messages(userId, newMessageCallback, removeMessageCallback) {
         const channel = PusherService.connect().subscribe(`private-user.messenger.${userId}`);
-        channel.bind('message.created', callback);
+        
+        channel.bind('message.created', newMessageCallback);
+        channel.bind('message.removed', removeMessageCallback);
     }
-
+    
     static disconnect() {
        PusherService.reset();
     }

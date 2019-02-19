@@ -52,6 +52,10 @@ export const DELETE_MESSAGE_SUCCESS = '[Messages] DELETE_MESSAGE_SUCCESS';
 export const DELETE_MESSAGE_FAIL = '[Messages] DELETE_MESSAGE_FAIL';
 export const RESET_DELETE_MESSAGE_REQUEST = '[Messages] RESET_DELETE_MESSAGE_REQUEST';
 
+export const DELETE_CHAT_MESSAGE = '[Messages] DELETE_CHAT_MESSAGE';
+export const DELETE_CHAT_MESSAGE_SUCCESS = '[Messages] DELETE_CHAT_MESSAGE_SUCCESS';
+export const DELETE_CHAT_MESSAGE_FAIL = '[Messages] DELETE_CHAT_MESSAGE_FAIL';
+
 export const GET_GROUPS = '[Messages] GET_GROUPS';
 export const GET_GROUPS_SUCCESS = '[Messages] GET_GROUPS_SUCCESS';
 export const GET_GROUPS_FAIL = '[Messages] GET_GROUPS_FAIL';
@@ -77,6 +81,7 @@ export const DELETE_GROUP_FAIL = '[Messages] DELETE_GROUP_FAIL';
 export const RESET_DELETE_GROUP_REQUEST = '[Messages] RESET_DELETE_GROUP_REQUEST';
 
 export const NEW_MESSAGE_RECEIVED = '[Messages] NEW_MESSAGE_RECEIVED';
+export const MESSAGE_REMOVED = '[Messages] MESSAGE_REMOVED';
 export const SUBSCRIBE = '[Messages] SUBSCRIBE';
 export const SUBSCRIBE_FAIL = '[Messages] SUBSCRIBE_FAIL';
 
@@ -192,6 +197,20 @@ export function deleteMessage(id) {
 }
 
 export function resetDeleteMessageRequest() {
+    return {
+        type: RESET_DELETE_MESSAGE_REQUEST
+    };
+}
+
+export function deleteChatMessage(id) {
+  return {
+    messageId: id,
+    types: [DELETE_CHAT_MESSAGE, DELETE_CHAT_MESSAGE_SUCCESS, DELETE_CHAT_MESSAGE_FAIL],
+    promise: (apiClient) => apiClient.get(`messages/delete/${id}`)
+  };
+}
+
+export function resetDeleteChatMessageRequest() {
     return {
         type: RESET_DELETE_MESSAGE_REQUEST
     };
