@@ -1,4 +1,4 @@
-import { NEW_MESSAGE_RECEIVED, SUBSCRIBE, SUBSCRIBE_FAIL } from './actions';
+import { NEW_MESSAGE_RECEIVED, MESSAGE_REMOVED, SUBSCRIBE, SUBSCRIBE_FAIL } from './actions';
 import { LOGOUT_SUCCESS } from '../auth/actions';
 import LiveService from '../../services/LiveService';
 
@@ -20,10 +20,12 @@ export default function messagesMiddleware() {
                 return next({...rest, type: SUBSCRIBE_FAIL});
             }            
 
-            LiveService.messages(userId, message => {
+            LiveService.messages(userId, (message) => {
                 console.log('messagesMiddleware NEW_MESSAGE_RECEIVED');
-                console.log('userId: ' + userId);                
                 dispatch({type: NEW_MESSAGE_RECEIVED, message})
+            }, (message) => {
+                console.log('messagesMiddleware MESSAGE_REMOVED');
+                dispatch({type: MESSAGE_REMOVED, message})
             });
         };
     };

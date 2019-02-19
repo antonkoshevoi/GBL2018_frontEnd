@@ -9,6 +9,7 @@ import {
     READ_MESSAGES, READ_MESSAGES_SUCCESS, READ_MESSAGES_FAIL,
     UPDATE_MESSAGE, UPDATE_MESSAGE_SUCCESS, UPDATE_MESSAGE_FAIL, RESET_UPDATE_MESSAGE_REQUEST,    
     DELETE_MESSAGE, DELETE_MESSAGE_SUCCESS, DELETE_MESSAGE_FAIL, RESET_DELETE_MESSAGE_REQUEST,   
+    DELETE_CHAT_MESSAGE, DELETE_CHAT_MESSAGE_SUCCESS, DELETE_CHAT_MESSAGE_FAIL,
     GET_UNREAD_MESSAGES, GET_UNREAD_MESSAGES_SUCCESS, GET_UNREAD_MESSAGES_FAIL,
     VIEW_MESSAGE, VIEW_MESSAGE_SUCCESS, VIEW_MESSAGE_FAIL,    
     GET_GROUPS, GET_GROUPS_SUCCESS, GET_GROUPS_FAIL,
@@ -16,7 +17,7 @@ import {
     CREATE_GROUP, CREATE_GROUP_SUCCESS, CREATE_GROUP_FAIL, RESET_CREATE_GROUP_REQUEST,
     UPDATE_GROUP, UPDATE_GROUP_SUCCESS, UPDATE_GROUP_FAIL, RESET_UPDATE_GROUP_REQUEST,
     DELETE_GROUP, DELETE_GROUP_SUCCESS, DELETE_GROUP_FAIL, RESET_DELETE_GROUP_REQUEST,
-    NEW_MESSAGE_RECEIVED
+    NEW_MESSAGE_RECEIVED, MESSAGE_REMOVED
 } from './actions';
 import Immutable from 'immutable';
 
@@ -146,7 +147,7 @@ function updateUnread(state, number = 1, isPrivate = false) {
 export default function reducer (state = initialState, action) {
   switch(action.type) {
 
-    case NEW_MESSAGE_RECEIVED:
+    case NEW_MESSAGE_RECEIVED: {
         let chatId          = action.message.chatId;
         let recordsKey      = action.message.isPrivate ? 'getPrivateChatsRequest' : 'getGroupChatsRequest';
         let chatsRecords    = state.get(recordsKey).get('records').toJS();
@@ -155,7 +156,9 @@ export default function reducer (state = initialState, action) {
         console.log('Reducer - New Message: chatId = ' + chatId);
         
         if (action.message.newChat) {
-            chatsRecords.unshift(action.message);
+            if (chatId !== state.get('getChatMessagesRequest').get('chatId')) {
+                chatsRecords.unshift(action.message);
+            }
             newMessage ++;
         } else {
             chatsRecords = chatsRecords.map(record => {
@@ -177,7 +180,22 @@ export default function reducer (state = initialState, action) {
             )))
             .set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(chatMessages)))
             .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state, newMessage, action.message.isPrivate)));
-
+    }
+    
+    case MESSAGE_REMOVED: {        
+        if (state.get('getChatMessagesRequest').get('chatId') === action.message.chatId) {
+            let chatMessages  = state.get('getChatMessagesRequest').get('records').toJS();            
+            
+            chatMessages = chatMessages.map(record => {
+                if (record.id === action.message.id) {
+                    record.removed = true;
+                }
+                return record;
+            });            
+            return state.set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(chatMessages)));            
+        }
+        return state;
+    }
     /**
      *  send message
      */
@@ -224,11 +242,20 @@ export default function reducer (state = initialState, action) {
     case RESET_UPDATE_MESSAGE_REQUEST:
         return state.set('updateMessageRequest', initialState.get('updateMessageRequest'));        
         
+    case DELETE_CHAT_MESSAGE: {               
+        let messages = state.get('getChatMessagesRequest').get('records').filter(function(item) {                
+            return item.get('id') !== action.messageId;
+        });
+        return state.set('deleteRecordRequest', initialState.get('deleteRecordRequest').set('loading', true))
+                    .set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', messages));
+    }
     case DELETE_MESSAGE:    
-        return state.set('deleteRecordRequest', initialState.get('deleteRecordRequest').set('loading', true));
-    case DELETE_MESSAGE_SUCCESS:    
-        return state.set('deleteRecordRequest', initialState.get('deleteRecordRequest').set('success', true));
-    case DELETE_MESSAGE_FAIL:    
+        return state.set('deleteRecordRequest', initialState.get('deleteRecordRequest').set('loading', true));    
+    case DELETE_MESSAGE_SUCCESS:
+    case DELETE_CHAT_MESSAGE_SUCCESS:
+        return state.set('deleteRecordRequest', initialState.get('deleteRecordRequest').set('success', true));    
+    case DELETE_MESSAGE_FAIL:
+    case DELETE_CHAT_MESSAGE_FAIL:
       return state
         .set('deleteRecordRequest', state.get('deleteRecordRequest')
           .set('loading', false)
