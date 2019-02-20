@@ -7,6 +7,10 @@ import { CircularProgress, Avatar, TextField, FormControl } from '@material-ui/c
 import Loader from '../../../components/layouts/Loader';
 import moment from 'moment/moment';
 
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
 class Chat extends Component {
        
     constructor(props) {
@@ -14,8 +18,9 @@ class Chat extends Component {
                 
         console.log('Chat: ' + this.props.chatId);
         this.state = {
-            message:    '',
-            chatId:     this.props.chatId
+            message:        '',
+            chatId:         this.props.chatId,
+            actionsAnchor:  null
         }
     }
 
@@ -29,6 +34,9 @@ class Chat extends Component {
         if (nextProps.chatId !== this.props.chatId) {
             this._getRecords(nextProps.chatId);
         }
+        if (nextProps.deleteRecordRequest.get('success') && !this.props.deleteRecordRequest.get('success')) {
+            this._handleActionsClose();
+        }        
     }
     
     _getRecords(chatId) {
@@ -58,15 +66,28 @@ class Chat extends Component {
         });
     }
     
+    _edit(id, text) {
+        
+    }
+
+    _handleActionsClick(event) {
+        this.setState({ actionsAnchor: event.currentTarget });
+    };
+
+    _handleActionsClose = () => {
+        this.setState({ actionsAnchor: null });
+    };    
+    
     _renderRecords() {
         const {t, deleteRecordRequest, getRecordsRequest} = this.props;        
+        const { actionsAnchor } = this.state;
         const records = getRecordsRequest.get('records');
-        const styles = {right: '0px', top: '25%'};
+        const actionsIsOpen = Boolean(actionsAnchor);        
         
         if (!records.size) {
             return <div><h3 className='text-center my-5'>{t('messagesNotFound')}</h3></div>;
         }
-
+        
         return records.map((record, key) => (
             <div className={`message-box my-2 ${record.get('isMine') ? 'sent' : 'inbox'}`}  index={key} key={key}>
                 {!record.get('isMine') && <div className='d-inline-block mr-3'>
@@ -81,15 +102,27 @@ class Chat extends Component {
                             {record.get('removed') ? t('messageRemoved') : record.get('body')}
                         </div>                
                     </div>
-                    {record.get('isMine') && <div className='d-inline-block'>                     
-                        <button disabled={deleteRecordRequest.get('loading')} onClick={() => this._delete(record.get('id'))} className="btn m-btn btn-sm m-btn--icon m-btn--icon-only btn-link m--margin-left-5">                            
-                            {(deleteRecordRequest.get('loading') && deleteRecordRequest.get('id') === record.get('id')) ? <CircularProgress style={styles} size={20} /> : <i className="text-danger fa fa-times"></i>}
-                        </button>
-                    </div>}
+                    {record.get('isMine') && <div className='d-inline-block'> 
+                        <div className="ml-1">
+                            <IconButton aria-label="More" aria-owns={actionsIsOpen ? 'actions-menu' : undefined} aria-haspopup="true" onClick={(e) => this._handleActionsClick(e)}>
+                                <i className="fa fa-ellipsis-h"></i>
+                            </IconButton>
+                            <Menu id="actions-menu" anchorEl={actionsAnchor} open={actionsIsOpen} onClose={() => this._handleActionsClose()}>          
+                                <MenuItem onClick={() => this._edit(record.get('id'), record.get('body'))}>
+                                    <i className="fa fa-pencil"></i>
+                                    <span className="ml-2">{t('edit')}</span>
+                                </MenuItem>          
+                                <MenuItem disabled={deleteRecordRequest.get('loading')} onClick={() => this._delete(record.get('id'))}>
+                                    {deleteRecordRequest.get('loading') ? <CircularProgress size={20} /> : <i className="fa fa-times"></i>}
+                                    <span className="ml-2">{t('delete')}</span>
+                                </MenuItem>
+                            </Menu>
+                        </div>                    
+                    </div>}             
                 </div>
             </div>
         ));        
-    }
+    }    
    
     _handleKeyPress(e) {
         if (e.shiftKey) {
@@ -125,7 +158,16 @@ class Chat extends Component {
         const {message} = this.state;
         const loading = getRecordsRequest.get('loading');
         const success = getRecordsRequest.get('success');        
-
+    /*                        
+                        <button disabled={deleteRecordRequest.get('loading')}  className="btn m-btn btn-sm m-btn--icon m-btn--icon-only btn-link m--margin-left-5">                            
+                            {(deleteRecordRequest.get('loading') && deleteRecordRequest.get('id') === record.get('id')) ? <CircularProgress style={styles} size={20} /> : <i className="text-danger fa fa-times"></i>}
+                        </button>
+                        <button disabled={deleteRecordRequest.get('loading')} onClick={() => this._delete(record.get('id'))} className="btn m-btn btn-sm m-btn--icon m-btn--icon-only btn-link">                            
+                            {(deleteRecordRequest.get('loading') && deleteRecordRequest.get('id') === record.get('id')) ? <CircularProgress style={styles} size={20} /> : <i className="text-danger fa fa-times"></i>}
+                        </button>                        
+                    </div>}
+                            
+        */
         return (
             <div className='h-100 px-sm-3'>
                 {loading && <Loader /> }
