@@ -8,8 +8,9 @@ import {
     VIEW_MESSAGE_FAIL,
     SEND_MESSAGE_SUCCESS,
     UPDATE_MESSAGE_SUCCESS,
+    UPDATE_CHAT_MESSAGE_SUCCESS,
     DELETE_MESSAGE_SUCCESS,
-    DELETE_CHAT_MESSAGE_FAIL,
+    DELETE_CHAT_MESSAGE_SUCCESS,
     
     CREATE_GROUP_SUCCESS, 
     UPDATE_GROUP_SUCCESS, 
@@ -24,7 +25,8 @@ import {
     GET_GROUP_CHATS_FAIL,
     GET_CHAT_MESSAGES_FAIL,
     SEND_CHAT_MESSAGE_FAIL,
-    DELETE_CHAT_MESSAGE_SUCCESS
+    UPDATE_CHAT_MESSAGE_FAIL,
+    DELETE_CHAT_MESSAGE_FAIL
 } from './actions';
 
 import { yieldErrorToasts, yieldSuccessToasts } from '../../helpers/utils';
@@ -38,11 +40,13 @@ const messagesSagas = all([
         [CREATE_GROUP_SUCCESS]: i18n.t('messages:messageGroupCreated'),
         [UPDATE_GROUP_SUCCESS]: i18n.t('messages:messageGroupUpdated'),
         [DELETE_GROUP_SUCCESS]: i18n.t('messages:messageGroupDeleted'),
-        [UPDATE_MESSAGE_SUCCESS]: i18n.t('messages:messageUpdated')
+        [UPDATE_MESSAGE_SUCCESS]: i18n.t('messages:messageUpdated'),
+        [UPDATE_CHAT_MESSAGE_SUCCESS]: i18n.t('messages:messageUpdated')
     }),
     yieldErrorToasts([
         SEND_MESSAGE_FAIL,
         UPDATE_MESSAGE_FAIL,
+        UPDATE_CHAT_MESSAGE_FAIL,
         GET_MESSAGE_FAIL,
         GET_UNREAD_MESSAGES_FAIL,
         DELETE_MESSAGE_FAIL,
@@ -56,7 +60,7 @@ const messagesSagas = all([
         GET_PRIVATE_CHATS_FAIL,
         GET_GROUP_CHATS_FAIL,
         GET_CHAT_MESSAGES_FAIL,
-        SEND_CHAT_MESSAGE_FAIL        
+        SEND_CHAT_MESSAGE_FAIL
     ])
 ]);
 

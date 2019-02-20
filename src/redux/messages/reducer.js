@@ -8,6 +8,7 @@ import {
     SEND_CHAT_MESSAGE, SEND_CHAT_MESSAGE_SUCCESS, SEND_CHAT_MESSAGE_FAIL, RESET_SEND_CHAT_MESSAGE_REQUEST,
     READ_MESSAGES, READ_MESSAGES_SUCCESS, READ_MESSAGES_FAIL,
     UPDATE_MESSAGE, UPDATE_MESSAGE_SUCCESS, UPDATE_MESSAGE_FAIL, RESET_UPDATE_MESSAGE_REQUEST,    
+    UPDATE_CHAT_MESSAGE, UPDATE_CHAT_MESSAGE_SUCCESS, UPDATE_CHAT_MESSAGE_FAIL,    
     DELETE_MESSAGE, DELETE_MESSAGE_SUCCESS, DELETE_MESSAGE_FAIL, RESET_DELETE_MESSAGE_REQUEST,   
     DELETE_CHAT_MESSAGE, DELETE_CHAT_MESSAGE_SUCCESS, DELETE_CHAT_MESSAGE_FAIL,
     GET_UNREAD_MESSAGES, GET_UNREAD_MESSAGES_SUCCESS, GET_UNREAD_MESSAGES_FAIL,
@@ -205,14 +206,12 @@ export default function reducer (state = initialState, action) {
         return state.set('sendMessageRequest', initialState.get('sendMessageRequest').set('loading', true));
     case SEND_MESSAGE_SUCCESS:
         return state.set('sendMessageRequest', initialState.get('sendMessageRequest').set('success', true));
-    case SEND_CHAT_MESSAGE_SUCCESS:   
-        let messages = state.get('getChatMessagesRequest').get('records').toJS();
-        
+    case SEND_CHAT_MESSAGE_SUCCESS: {  
+        let messages = state.get('getChatMessagesRequest').get('records').toJS();        
         messages.push(action.result.data);
-        
-        return state
-                .set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(messages)))
+        return state.set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(messages)))
                 .set('sendMessageRequest', initialState.get('sendMessageRequest').set('success', true));    
+    }
     case SEND_MESSAGE_FAIL:
     case SEND_CHAT_MESSAGE_FAIL:        
       return state
@@ -228,10 +227,22 @@ export default function reducer (state = initialState, action) {
         return state.set('sendMessageRequest', initialState.get('sendMessageRequest'));
         
     case UPDATE_MESSAGE:
+    case UPDATE_CHAT_MESSAGE:    
         return state.set('updateMessageRequest', initialState.get('updateMessageRequest').set('loading', true));
     case UPDATE_MESSAGE_SUCCESS:
         return state.set('updateMessageRequest', initialState.get('updateMessageRequest').set('success', true));        
+    case UPDATE_CHAT_MESSAGE_SUCCESS: {
+        let messages = state.get('getChatMessagesRequest').get('records').map(function(item) {                
+            if (item.get('id') === action.result.data.id) {
+                return Immutable.fromJS(action.result.data);
+            }
+            return item;
+        });        
+        return state.set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', messages))
+                .set('updateMessageRequest', initialState.get('updateMessageRequest').set('success', true));
+    }
     case UPDATE_MESSAGE_FAIL:        
+    case UPDATE_CHAT_MESSAGE_FAIL:        
       return state
         .set('updateMessageRequest', state.get('updateMessageRequest')
           .set('loading', false)

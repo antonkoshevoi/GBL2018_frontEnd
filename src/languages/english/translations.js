@@ -623,5 +623,6 @@ export default {
     searchGroups: 'Search Groups',
     searchUsers: 'Search Users',
     youNotHaveStudents: 'You don\'t have any students. Please use "My Learners" tool on the dashboard to register new students.',
-    messageRemoved: 'Removed by sender...'
+    messageRemoved: 'Removed by sender...',
+    editMessage: 'Edit Message:'
 }
