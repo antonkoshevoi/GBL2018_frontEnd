@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetChatMessagesRequest, selectSendMessageRequest, selectDeleteRecordRequest } from '../../../redux/messages/selectors';
-import { getChatMessages, sendChatMessage, deleteChatMessage } from '../../../redux/messages/actions';
+import { selectGetChatMessagesRequest, selectSendMessageRequest, selectUpdateMessageRequest, selectDeleteRecordRequest } from '../../../redux/messages/selectors';
+import { getChatMessages, sendChatMessage, updateChatMessage, deleteChatMessage } from '../../../redux/messages/actions';
 import { CircularProgress, Avatar, TextField, FormControl } from '@material-ui/core';
 import Loader from '../../../components/layouts/Loader';
 import moment from 'moment/moment';
@@ -18,7 +18,9 @@ class Chat extends Component {
                 
         console.log('Chat: ' + this.props.chatId);
         this.state = {
-            message:        '',
+            message:        {},        
+            messageId:      null,
+            messageText:    '',
             chatId:         this.props.chatId,
             actionsAnchor:  null
         }
@@ -51,31 +53,56 @@ class Chat extends Component {
         this.setState({[name]: value});
     }
     
-    _delete(id) {
-        this.props.deleteMessage(id);
+    _delete() {
+        const { message } = this.state;
+        if (message) {
+            this.props.deleteMessage(message.id);
+        }
     }
     
     _send() {
-        const { message, chatId} = this.state;
+        const { chatId, messageId, messageText} = this.state;
         
-        this.setState({message: ''});
-        
-        this.props.sendMessage({
-            chatId:     chatId,
-            message:    message
+        this.setState({
+            messageId:   null,
+            messageText: '',
+            message:     {}
         });
+        
+        if (messageId) {
+            this.props.updateMessage(messageId, {                
+                message:    messageText
+            });
+        } else {
+            this.props.sendMessage({
+                chatId:     chatId,
+                message:    messageText
+            });            
+        }
     }
     
-    _edit(id, text) {
-        
+    _edit() {
+        const {message} = this.state;
+        this.setState({
+            messageId:      message.id   || null,
+            messageText:    message.body || null
+        });
+        this._handleActionsClose();
     }
 
-    _handleActionsClick(event) {
-        this.setState({ actionsAnchor: event.currentTarget });
+    _handleActionsClick(event, message) {
+        this.setState({ 
+            actionsAnchor: event.currentTarget,
+            message: message.toJS()
+        });
+        console.log(message.toJS());
     };
 
     _handleActionsClose = () => {
-        this.setState({ actionsAnchor: null });
+        this.setState({ 
+            actionsAnchor: null,
+            message: {}
+        });
     };    
     
     _renderRecords() {
@@ -87,41 +114,42 @@ class Chat extends Component {
         if (!records.size) {
             return <div><h3 className='text-center my-5'>{t('messagesNotFound')}</h3></div>;
         }
-        
-        return records.map((record, key) => (
-            <div className={`message-box my-2 ${record.get('isMine') ? 'sent' : 'inbox'}`}  index={key} key={key}>
-                {!record.get('isMine') && <div className='d-inline-block mr-3'>
-                    <Avatar src={record.get('userAvatar')} className='border' />
-                </div>}
-                <div className='d-inline-block'>
-                    <div className='text-muted'>
-                        {record.get('isMine') ? t('me') : record.get('userName')}, {moment(record.get('created')).format('lll')}
+        return (<div>
+            {records.map((record, key) => (
+                <div className={`message-box my-2 ${record.get('isMine') ? 'sent' : 'inbox'}`}  index={key} key={key}>
+                    {!record.get('isMine') && <div className='d-inline-block mr-3'>
+                        <Avatar src={record.get('userAvatar')} className='border' />
+                    </div>}
+                    <div className='d-inline-block'>
+                        <div className='text-muted'>
+                            {record.get('isMine') ? t('me') : record.get('userName')}, {moment(record.get('created')).format('lll')}
+                        </div>
+                        <div className='message-content mt-1'>
+                            <div className={`pre-line ${record.get('removed') ? 'text-muted' : ''}`}>                    
+                                {record.get('removed') ? t('messageRemoved') : record.get('body')}                                
+                            </div>                
+                        </div>
+                        {record.get('isMine') && <div className='d-inline-block'> 
+                            <div className="ml-1">
+                                <IconButton aria-label="More" aria-owns={actionsIsOpen ? 'actions-menu' : undefined} aria-haspopup="true" onClick={(e) => this._handleActionsClick(e, record)}>
+                                    <i className="fa fa-ellipsis-h"></i>
+                                </IconButton>
+                            </div>                    
+                        </div>}             
                     </div>
-                    <div className='message-content mt-1'>
-                        <div className={`pre-line ${record.get('removed') ? 'text-muted' : ''}`}>                    
-                            {record.get('removed') ? t('messageRemoved') : record.get('body')}
-                        </div>                
-                    </div>
-                    {record.get('isMine') && <div className='d-inline-block'> 
-                        <div className="ml-1">
-                            <IconButton aria-label="More" aria-owns={actionsIsOpen ? 'actions-menu' : undefined} aria-haspopup="true" onClick={(e) => this._handleActionsClick(e)}>
-                                <i className="fa fa-ellipsis-h"></i>
-                            </IconButton>
-                            <Menu id="actions-menu" anchorEl={actionsAnchor} open={actionsIsOpen} onClose={() => this._handleActionsClose()}>          
-                                <MenuItem onClick={() => this._edit(record.get('id'), record.get('body'))}>
-                                    <i className="fa fa-pencil"></i>
-                                    <span className="ml-2">{t('edit')}</span>
-                                </MenuItem>          
-                                <MenuItem disabled={deleteRecordRequest.get('loading')} onClick={() => this._delete(record.get('id'))}>
-                                    {deleteRecordRequest.get('loading') ? <CircularProgress size={20} /> : <i className="fa fa-times"></i>}
-                                    <span className="ml-2">{t('delete')}</span>
-                                </MenuItem>
-                            </Menu>
-                        </div>                    
-                    </div>}             
                 </div>
-            </div>
-        ));        
+            ))}
+            <Menu id="actions-menu" anchorEl={actionsAnchor} open={actionsIsOpen} onClose={() => this._handleActionsClose()}>          
+                <MenuItem onClick={() => this._edit()}>
+                    <i className="fa fa-pencil"></i>
+                    <span className="ml-2">{t('edit')}</span>
+                </MenuItem>          
+                <MenuItem disabled={deleteRecordRequest.get('loading')} onClick={() => this._delete()}>
+                    {deleteRecordRequest.get('loading') ? <CircularProgress size={20} /> : <i className="fa fa-times"></i>}
+                    <span className="ml-2">{t('delete')}</span>
+                </MenuItem>
+            </Menu>
+        </div>);
     }    
    
     _handleKeyPress(e) {
@@ -154,20 +182,11 @@ class Chat extends Component {
     }
 
     render() {
-        const {getRecordsRequest, sendMessageRequest, t} = this.props;
-        const {message} = this.state;
+        const {getRecordsRequest, sendMessageRequest, updateMessageRequest, t} = this.props;
+        const {messageText, messageId} = this.state;
         const loading = getRecordsRequest.get('loading');
         const success = getRecordsRequest.get('success');        
-    /*                        
-                        <button disabled={deleteRecordRequest.get('loading')}  className="btn m-btn btn-sm m-btn--icon m-btn--icon-only btn-link m--margin-left-5">                            
-                            {(deleteRecordRequest.get('loading') && deleteRecordRequest.get('id') === record.get('id')) ? <CircularProgress style={styles} size={20} /> : <i className="text-danger fa fa-times"></i>}
-                        </button>
-                        <button disabled={deleteRecordRequest.get('loading')} onClick={() => this._delete(record.get('id'))} className="btn m-btn btn-sm m-btn--icon m-btn--icon-only btn-link">                            
-                            {(deleteRecordRequest.get('loading') && deleteRecordRequest.get('id') === record.get('id')) ? <CircularProgress style={styles} size={20} /> : <i className="text-danger fa fa-times"></i>}
-                        </button>                        
-                    </div>}
-                            
-        */
+
         return (
             <div className='h-100 px-sm-3'>
                 {loading && <Loader /> }
@@ -178,19 +197,21 @@ class Chat extends Component {
                     </div>
                 </div>
                 <div className='px-sm-3 new-message'>
-                    <div className='form-group mx-2'>
+                    <div className='form-group mx-2 mb-0'>
                         <FormControl className='full-width'>
+                            {messageId && <div><i className="fa fa-pencil"></i> {t('editMessage')}</div>}
                             <TextField
                                 multiline
-                                name="message"
+                                name="messageText"
                                 placeholder={t('message')}
+                                className={messageId ? 'mt-1' : 'mt-3'}
                                 fullWidth
                                 margin="normal"
                                 variant="outlined"
                                 rows="2"
                                 autoFocus
-                                readOnly={sendMessageRequest.get('loading')}
-                                value={message || ''}
+                                readOnly={sendMessageRequest.get('loading') || updateMessageRequest.get('loading')}
+                                value={messageText || ''}
                                 onKeyPress={(e) => {
                                     this._handleKeyPress(e)
                                 }}
@@ -210,6 +231,7 @@ Chat = connect(
     (state) => ({
         getRecordsRequest: selectGetChatMessagesRequest(state),
         sendMessageRequest: selectSendMessageRequest(state),
+        updateMessageRequest: selectUpdateMessageRequest(state),
         deleteRecordRequest: selectDeleteRecordRequest(state)
     }),
     (dispatch) => ({
@@ -219,6 +241,9 @@ Chat = connect(
         sendMessage: (params = {}) => {
             dispatch(sendChatMessage(params));
         },
+        updateMessage: (id, params = {}) => {
+            dispatch(updateChatMessage(id, params));
+        },        
         deleteMessage: (id) => {
             dispatch(deleteChatMessage(id));                    
         }

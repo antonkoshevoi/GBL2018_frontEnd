@@ -1138,8 +1138,8 @@ td.rotate div span {
 .chats {
     overflow-y: auto !important;
     overflow: hidden;
-    max-height: calc(100vh - 188px);
-    height: calc(100vh - 188px);
+    max-height: calc(100vh - 233px);
+    height: calc(100vh - 233px);
 }
 .chat-messages {
     overflow-y: auto !important;

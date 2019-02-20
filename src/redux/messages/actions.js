@@ -43,6 +43,10 @@ export const UPDATE_MESSAGE_SUCCESS = '[Messages] UPDATE_MESSAGE_SUCCESS';
 export const UPDATE_MESSAGE_FAIL = '[Messages] UPDATE_MESSAGE_FAIL';
 export const RESET_UPDATE_MESSAGE_REQUEST = '[Messages] RESET_UPDATE_MESSAGE_REQUEST';
 
+export const UPDATE_CHAT_MESSAGE = '[Messages] UPDATE_CHAT_MESSAGE';
+export const UPDATE_CHAT_MESSAGE_SUCCESS = '[Messages] UPDATE_CHAT_MESSAGE_SUCCESS';
+export const UPDATE_CHAT_MESSAGE_FAIL = '[Messages] UPDATE_CHAT_MESSAGE_FAIL';
+
 export const GET_UNREAD_MESSAGES = '[Messages] GET_UNREAD_MESSAGES';
 export const GET_UNREAD_MESSAGES_SUCCESS = '[Messages] GET_UNREAD_MESSAGES_SUCCESS';
 export const GET_UNREAD_MESSAGES_FAIL = '[Messages] GET_UNREAD_MESSAGES_FAIL';
@@ -116,6 +120,14 @@ export function resetSendMessageRequest() {
 export function updateMessage(id, params = {}) {
   return {    
     types: [UPDATE_MESSAGE, UPDATE_MESSAGE_SUCCESS, UPDATE_MESSAGE_FAIL],
+    promise: (apiClient) => apiClient.post(`messages/update/${id}`, params)
+  };
+}
+
+export function updateChatMessage(id, params = {}) {
+  return {
+    messageId: id,
+    types: [UPDATE_CHAT_MESSAGE, UPDATE_CHAT_MESSAGE_SUCCESS, UPDATE_CHAT_MESSAGE_FAIL],
     promise: (apiClient) => apiClient.post(`messages/update/${id}`, params)
   };
 }
