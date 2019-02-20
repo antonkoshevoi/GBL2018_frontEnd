@@ -92,14 +92,14 @@ class Chats extends Component {
                 <div key={key} className={`chat ${record.get('chatId') === chatId ? 'current' : ''}`} onClick={() => this._viewChat(record.get('chatId')) }>
                     <div className='d-flex'>
                         <div className='align-self-center d-inline-block mr-3'>
-                            <Avatar src={record.get('user').get('avatarSmall')} className='border' />
+                            <Avatar src={record.get('userAvatar')} className='border' />
                         </div>
                         <div className='d-inline-block'>
                             <div>
                                 <span className='chat-name'>{record.get('name')}</span>
                                 {record.get('newMessages') > 0 && <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
                             </div>                        
-                            <div>{record.get('user').get('name')}</div>
+                            <div>{record.get('userName')}</div>
                             {record.get('lastActivity') && <div className="text-muted">{moment(record.get('lastActivity')).format('lll')}</div>}
                         </div>
                     </div>
@@ -142,14 +142,14 @@ class Chats extends Component {
                 <div key={key} className={`chat ${record.get('chatId') === chatId ? 'current' : ''}`} onClick={() => this._viewChat(record.get('chatId')) }>
                     <div className='d-flex'>
                         <div className='align-self-center d-inline-block mr-3'>
-                            <Avatar src={record.get('user').get('avatarSmall')} className='border' />
+                            <Avatar src={record.get('userAvatar')} className='border' />
                         </div>
                         <div className='d-inline-block'>
                             <div>
-                                <span className='chat-name'>{record.get('name')}</span>
+                                <span className='chat-name'>{record.get('userName')}</span>
                                 {record.get('newMessages') > 0 && <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
                             </div>
-                            <div>{t(record.get('user').get('role'))}</div>
+                            <div>{t(record.get('userRole'))}</div>
                             {record.get('lastActivity') && <div className="text-muted">{moment(record.get('lastActivity')).format('lll')}</div>}
                         </div>
                     </div>

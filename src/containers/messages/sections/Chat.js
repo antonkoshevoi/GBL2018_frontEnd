@@ -174,8 +174,8 @@ Chat = connect(
         getChatMessages: (id, params = {}) => {
             dispatch(getChatMessages(id, params));
         },
-        sendMessage: (id, params = {}) => {
-            dispatch(sendChatMessage(id, params));
+        sendMessage: (params = {}) => {
+            dispatch(sendChatMessage(params));
         },
         deleteMessage: (id) => {
             dispatch(deleteChatMessage(id));                    

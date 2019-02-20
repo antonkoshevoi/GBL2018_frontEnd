@@ -64,17 +64,14 @@ import FillTemplate from "../containers/scap/FillTemplate";
 import EditAnswers from "../containers/scap/EditAnswers";
 import ScapResults from "../containers/scap/ScapResults";
 
-import ViewMessage from '../containers/messages/ViewMessage';
 import MessageGroups from '../containers/messages/MessageGroups';
 import NewMessageGroup from '../containers/messages/NewMessageGroup';
 import EditMessageGroup from '../containers/messages/EditMessageGroup';
 
 import Chats from '../containers/messages/Chats';
-import ViewChat from '../containers/messages/ViewChat';
 import Alerts from '../containers/messages/Alerts';
 import Announcements from '../containers/messages/Announcements';
 import Assignments from '../containers/messages/Assignments';
-
 
 import AcceptStudent from '../containers/parents/AcceptStudent';
 import AcceptConnection from '../containers/connections/AcceptConnection';
@@ -124,10 +121,8 @@ export default () => (
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/announcements' title='announcements' component={Announcements} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/assignments' title='assignments' component={Assignments} />
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/chats' title='chats' component={Chats} />
-      <AuthenticatedRoute exact layout={MainLayout} path='/messages' title='chats' component={Chats} />
-      <AuthenticatedRoute exact layout={MainLayout} path='/messages/chat/:id' title='chat' component={ViewChat} />
-     
-      <AuthenticatedRoute exact layout={MainLayout} path='/messages/view/:id' title='viewMessage' component={ViewMessage} />
+      <AuthenticatedRoute exact layout={MainLayout} path='/messages' title='chats' component={Chats} />      
+           
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/messages/groups' title='messageGroups' component={MessageGroups} />
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/messages/groups/new' title='newMessageGroup' component={NewMessageGroup} />
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/messages/groups/:id' title='editMessageGroup' component={EditMessageGroup} />
