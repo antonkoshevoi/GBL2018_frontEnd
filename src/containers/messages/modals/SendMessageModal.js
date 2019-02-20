@@ -7,17 +7,16 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Modal from "../../../components/ui/Modal";
 import { selectSendMessageRequest } from '../../../redux/messages/selectors';
-import { sendMessage, resetSendMessageRequest } from '../../../redux/messages/actions';
+import { sendChatMessage, resetSendMessageRequest } from '../../../redux/messages/actions';
 
 class SendMessageModal extends Component {
 
     constructor (props) {
         super(props);
-        this.state = {           
-            subject:        null,
+        this.state = {                       
             message:        null,
             recipientName:  null,
-            userId:         null            
+            userId:         null
         };
     }
        
@@ -58,9 +57,8 @@ class SendMessageModal extends Component {
         const { message, userId } = this.state;
 
         this.props.sendMessage({            
-            message:    message,
-            type:       'chat',            
-            userId:     userId
+            message:    message,            
+            chatId:     `private-${userId}`
         });
     };
   
@@ -135,10 +133,10 @@ class SendMessageModal extends Component {
 
 SendMessageModal = connect(
     (state) => ({
-        sendMessageRequest: selectSendMessageRequest(state),
+        sendMessageRequest: selectSendMessageRequest(state)
     }),
     (dispatch) => ({
-        sendMessage: (params = {}) => { dispatch(sendMessage(params)) },
+        sendMessage: (params = {}) => { dispatch(sendChatMessage(params)) },
         resetSendMessageRequest: () => { dispatch(resetSendMessageRequest()) }  
     })
 )(SendMessageModal);

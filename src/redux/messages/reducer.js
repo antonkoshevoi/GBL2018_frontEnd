@@ -178,11 +178,9 @@ export default function reducer (state = initialState, action) {
             });
         }
 
-        return state.set(recordsKey, state.get(recordsKey).set('records', Immutable.fromJS(chatsRecords).sort(
-                (a, b) => (a.get('lastActivity') < b.get('lastActivity'))
-            )))
-            .set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(chatMessages)))
-            .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state, newMessage, action.message.isPrivate)));
+        return state.set('getChatMessagesRequest', state.get('getChatMessagesRequest').set('records', Immutable.fromJS(chatMessages)))
+            .set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('records', updateUnread(state, newMessage, action.message.isPrivate)))
+            .set(recordsKey, state.get(recordsKey).set('records', Immutable.fromJS(chatsRecords).sortBy((item) => item.get('lastActivity')).reverse()));
     }
     
     case MESSAGE_REMOVED: {        
@@ -303,9 +301,7 @@ export default function reducer (state = initialState, action) {
     case GET_PRIVATE_CHATS_SUCCESS:    
         return state.set('getPrivateChatsRequest', initialState.get('getPrivateChatsRequest')
                 .set('success', true)                
-                .set('records', Immutable.fromJS(action.result.data).sort(
-                    (a, b) => (a.get('lastActivity') < b.get('lastActivity'))
-                )));           
+                .set('records', Immutable.fromJS(action.result.data).sortBy((item) => item.get('lastActivity')).reverse()));           
     case GET_PRIVATE_CHATS_FAIL:   
         return state.set('getPrivateChatsRequest', initialState.get('getPrivateChatsRequest').set('fail', true));
         
@@ -314,9 +310,7 @@ export default function reducer (state = initialState, action) {
     case GET_GROUP_CHATS_SUCCESS:    
         return state.set('getGroupChatsRequest', initialState.get('getGroupChatsRequest')
                 .set('success', true)                
-                .set('records', Immutable.fromJS(action.result.data).sort(
-                    (a, b) => (a.get('lastActivity') < b.get('lastActivity'))
-                )));           
+                .set('records', Immutable.fromJS(action.result.data).sortBy((item) => item.get('lastActivity')).reverse()));           
     case GET_GROUP_CHATS_FAIL:   
         return state.set('getGroupChatsRequest', initialState.get('getGroupChatsRequest').set('fail', true));
     
