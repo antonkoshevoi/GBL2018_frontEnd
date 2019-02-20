@@ -7,6 +7,7 @@ export default {
     405: 'Bad Request. Action is not allowed...',
     422: 'Unprocessable data',
     409: 'Bad Request',
+    429: 'Too Many Attempts. Please try later...',
     500: 'Server error. Please try again later',
     canceled: 'Request has been cancelled',
     unknown: 'Unknown error. Please try again later'
