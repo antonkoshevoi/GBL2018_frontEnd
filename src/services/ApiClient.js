@@ -9,7 +9,13 @@ export default class ApiClient {
 
   constructor() {
     const token = SessionStorage.get('token');
+    const currentLanguage = localStorage.getItem('language');
+    
     let headers = {};
+    
+    if (currentLanguage) {
+        headers['Content-Language'] = currentLanguage;
+    }    
 
     if (token) {
       headers['Authorization'] = 'Bearer ' + token;
@@ -25,8 +31,12 @@ export default class ApiClient {
 
   getRuntimeConfigs() {
     const token = SessionStorage.get('token');
+    const currentLanguage = localStorage.getItem('language');
     let headers = {};
 
+    if (currentLanguage) {
+        headers['Content-Language'] = currentLanguage;
+    }
     if (token) {
       headers['Authorization'] = 'Bearer ' + token;
     }

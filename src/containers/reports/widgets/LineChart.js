@@ -109,7 +109,7 @@ class LineChart extends Component {
   getChartData = (selector, date) => {    
     const params = {
       'period': this.getStringPeriodFromNumber(selector),
-      'date-from': date,
+      'date': date,
       'offset': this.clientTimeOffset
     };
             

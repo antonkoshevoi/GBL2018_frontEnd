@@ -4,6 +4,6 @@ export default {
     es: 'Español',
     fr: 'Français',
     kr: '한국어',
-    ch_1: '汉语',
-    ch_2: '漢語',
+    zh_hans: '汉语',
+    zh_hant: '漢語',
 }

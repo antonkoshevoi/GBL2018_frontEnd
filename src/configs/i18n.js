@@ -19,10 +19,10 @@ i18n
         en: {
           ...english
         },
-        ch_1: {
+        zh_hans: {
             ...chineseSimplified
         },
-        ch_2: {
+        zh_hant: {
            ...chineseTraditional
         },
         kr: {
