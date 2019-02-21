@@ -5,16 +5,16 @@ import en_flag from '../../media/images/flags/gb.png';
 import es_flag from '../../media/images/flags/es.png';
 import fr_flag from '../../media/images/flags/fr.png';
 import kr_flag from '../../media/images/flags/kr.png';
-import ch_1_flag from '../../media/images/flags/cn.png';
-import ch_2_flag from '../../media/images/flags/cn.png';
+import zh_hans_flag from '../../media/images/flags/cn.png';
+import zh_hant_flag from '../../media/images/flags/cn.png';
 
 const languages = [
     {code:'en', img:en_flag},
     {code:'es', img:es_flag},
     {code:'fr', img:fr_flag},
     {code:'kr', img:kr_flag},
-    {code:'ch_1', img:ch_1_flag},
-    {code:'ch_2', img:ch_2_flag},
+    {code:'zh_hans', img:zh_hans_flag},
+    {code:'zh_hant', img:zh_hant_flag}
    ];
 
 
@@ -48,11 +48,10 @@ class LanguageSwitcher extends Component {
     };
 
 
-    _switchLanguage = (lang_code) => {
+    _switchLanguage = (langCode) => {
         const { i18n } = this.props;
-        i18n.changeLanguage(lang_code);
-                
-        localStorage.setItem('language', lang_code);
+        i18n.changeLanguage(langCode);
+        localStorage.setItem('language', langCode);
         this.setState({ anchorEl: null });                
     };
 
