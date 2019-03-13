@@ -5,7 +5,7 @@
 }
 .switch-subscriptions-block {
     margin: 0 auto;
-    max-width: 600px;
+    max-width: 700px;
 }
 .switch-subscriptions-block .subscription-item-block {
     cursor: pointer;
@@ -64,6 +64,8 @@
 .subscription-prices .price {
     color: #181003;
     display: block;
+    line-height: 0.8;
+    margin-bottom: 0.5rem;
 }
 .subscription-prices .selected {
     font-size: 1.3rem;
@@ -77,6 +79,9 @@
 }
 .subscription-prices .price {
     font-size: 1.5rem;
+}
+.subscription-prices .small {
+    font-size: 70%;
 }
 .subscription-item-block .subscription-item.item-1 .subscription-header h1 {
     background-color: #4F81BE;
@@ -106,4 +111,20 @@
     -webkit-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08) ;
     -moz-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08) ;
     box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08) ;
+}
+
+@media (max-width: 767px) {
+    .subscription-prices {        
+        padding: 15px 15px;            
+    }
+    .subscription-prices .selected .price {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .subscription-prices .price .small {
+        display: block;
+        margin-top: -5px;
+    }
 }
