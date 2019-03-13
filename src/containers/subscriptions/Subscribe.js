@@ -118,7 +118,7 @@ class Subscribe extends Component {
         const loading       = subscribeRequest.get('loading') || getRecordsRequest.get('loading')
                 
         return (
-            <div className='fadeInLeft  animated'>
+            <div className='container'>
                 <h1 className="text-center m--margin-top-50 g-metal">{t('subscriptions')}</h1>
                 {loading && <Loader />}
                 {this.state.showBillingForm ?
