@@ -162,7 +162,7 @@ class SubscriptionsForm extends Component {
         }
                 
         return (
-            <div>
+            <div class="row">
                 <div className="col-sm-12">
                     {this._renderSelected()}
                 </div>

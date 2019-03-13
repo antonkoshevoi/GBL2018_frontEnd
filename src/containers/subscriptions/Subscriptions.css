@@ -64,7 +64,7 @@
 .subscription-prices .price {
     color: #181003;
     display: block;
-    line-height: 0.8;
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
 }
 .subscription-prices .selected {
@@ -77,8 +77,8 @@
 .subscription-prices {
     font-size: 1rem;
 }
-.subscription-prices .price {
-    font-size: 1.5rem;
+.subscriptions-block .subscription-prices .price {
+    line-height: 0.8;
 }
 .subscription-prices .small {
     font-size: 70%;
@@ -123,7 +123,7 @@
 }
 
 @media (max-width: 360px) {
-    .subscription-prices .price .small {
+    .subscribe .subscription-content .subscription-prices .price .small, .gifts .subscription-content .subscription-prices .price .small  {
         display: block;
         margin-top: -5px;
     }
