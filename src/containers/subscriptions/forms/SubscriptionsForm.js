@@ -60,7 +60,7 @@ class SubscriptionsForm extends Component {
     _renderSelected() {
                 
         const {subscriptions, t} = this.props;
-        const styles = {maxWidth: '420px', margin: '0 auto'};
+        const styles = {maxWidth: '450px', margin: '0 auto'};
         return subscriptions.map((record, key) => {
             
             if (Number(record.get('id')) !== this.state.subscriptionId) {
@@ -86,7 +86,7 @@ class SubscriptionsForm extends Component {
                                             color="primary"
                                             style={{marginLeft: '-18px', width: '40px'}}
                                             />
-                                            ${record.get('priceMonthly')}
+                                            ${record.get('priceMonthly')} <span className="small">{record.get('currency')}</span>
                                         </span> {t('perMonth')}
                                     </div>
                                     <div className={`col-6 m--padding-0 text-center ${this.state.period === 'year' ? 'selected' : ''}`}>
@@ -98,7 +98,7 @@ class SubscriptionsForm extends Component {
                                                 color="primary"
                                                 style={{marginLeft: '-18px', width: '40px'}}
                                                 />                                
-                                            ${record.get('priceYearly')}
+                                            ${record.get('priceYearly')} <span className="small">{record.get('currency')}</span>
                                         </span> {t('perYear')}
                                     </div>            
                                 </div>
@@ -136,14 +136,14 @@ class SubscriptionsForm extends Component {
             }
                         
             return (        
-                <div key={key} className="subscription-item-block col-sm-12 col-md-6 col-lg-6 col-xl-6 m--margin-top-25">
+                <div key={key} className="subscription-item-block col-sm-12 col-md-6 m--margin-top-25">
                     <div className={`subscription-item item-${key}`} onClick={() => { this._setSubscriptionId(record.get('id')) }}>                        
                         <div className="subscription-header"><h1>{record.get('title')}</h1></div>
                         <div className="subscription-content">
                             <div className="subscription-prices">
                                 <div className="row">
-                                    <div className="selected col-6"><span className="price">${record.get('priceMonthly')}</span> {t('perMonth')}</div>
-                                    <div className="col-6 text-right m--margin-top-10"><span className="price">${record.get('priceYearly')}</span> {t('perYear')}</div>            
+                                    <div className="selected col-7"><span className="price">${record.get('priceMonthly')} <span className="small">{record.get('currency')}</span></span> {t('perMonth')}</div>
+                                    <div className="col-5 text-right m--margin-top-10"><span className="price">${record.get('priceYearly')} <span className="small">{record.get('currency')}</span></span> {t('perYear')}</div>            
                                 </div>
                             </div>
                         </div>

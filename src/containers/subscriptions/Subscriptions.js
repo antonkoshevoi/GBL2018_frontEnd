@@ -40,8 +40,8 @@ class Subscriptions extends Component {
                 <div className="subscription-content">
                     <div className="subscription-prices">
                         <div className="row">
-                            <div className="selected col-8 pr-0"><span className="price">${record.get('priceMonthly')} <span className="small">{record.get('currency')}</span></span> {t('perMonth')}</div>
-                            <div className="col-4 pl-0 text-right m--margin-top-20"><span className="price">${record.get('priceYearly')}</span> {t('perYear')}</div>            
+                            <div className="selected col-6 col-sm-7 px-0 align-self-center"><span className="price">${record.get('priceMonthly')} <span className="small">{record.get('currency')}</span></span> <span className="text-muted">{t('perMonth')}</span></div>
+                            <div className="col-6 col-sm-5 px-0 text-right align-self-center"><span className="price">${record.get('priceYearly')} <span className="small">{record.get('currency')}</span></span> <span className="text-muted">{t('perYear')}</span></div>            
                         </div>
                     </div>
                     <div className="subscription-description">
@@ -71,8 +71,8 @@ class Subscriptions extends Component {
 
     return (<div className="fadeInLeft animated">
         <h1 className="text-center m--margin-top-50 g-metal">{t('courseSubscriptionOptions')}</h1>
-        <div className="row">
-            <div className="subscriptions-block col-12">
+        <div className="px-3">
+            <div className="subscriptions-block">
                 <div className="row">
                     {getRecordsRequest.get('success') ? this._renderRecords() : <Loader />}
                 </div>
