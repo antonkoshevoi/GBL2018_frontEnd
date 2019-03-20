@@ -120,7 +120,7 @@ class ParentDashboard extends Component {
               <div key={i} className={classes.profileBlock} >
                 <div className={classes.btnGroup}>
                   <div className="form-group-inline">
-                    <button title={t('decline')} onClick={() => { goTo(`/reports/students/${student.id}`) }} className='btn btn-info m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill'>
+                    <button title={t('reports')} onClick={() => { goTo(`/reports/students/${student.id}`) }} className='btn btn-info m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill'>
                         <i className='la la-search'></i>
                     </button>
                     <DeleteButton 
