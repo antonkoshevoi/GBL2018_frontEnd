@@ -114,28 +114,27 @@ class ShippingAndBilling extends Component {
 
           <form action="">
             <div className="row">
-              <div className="col-12">
-                <div className="d-flex justify-content-center">
+              <div className="order-2 order-md-1 offset-md-6 col-md-6 col-sm-12">                
                   <FormControlLabel
-                    label={t('sameShippingInformation')}
+                    label={t('sameBillingInformation')}
                     control={
                       <Checkbox
+                        color="primary"
                         checked={sameShipping}
                         onChange={this._handleSameShipping}
                       />
-                    }                    
+                    }
                   />
-                </div>
               </div>
-              <div className="col-md-6 col-sm-12">
+              <div className="order-1 order-md-2 col-md-6 col-sm-12">
                 <Address
                   title={t('billing')}
                   onChange={(form) => this._handleForm(form, 'billingAddress')}
                   name={'billingAddress'}
                   errors={errors}
-                  form={billingAddress}/>                
+                  form={billingAddress}/>
               </div>
-              <div className="col-md-6 col-sm-12"> 
+              <div className="order-3 order-md-3 col-md-6 col-sm-12"> 
                 <Address
                   title={t('shipping')}
                   onChange={(form) => this._handleForm(form, 'shippingAddress')}
