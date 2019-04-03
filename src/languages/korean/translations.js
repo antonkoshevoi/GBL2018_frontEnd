@@ -210,7 +210,7 @@ export default {
     expDate: 'KR Exp. Date (YYYY/MM)',
     cvvCode: 'KR CVV Code',
     makePayment: 'KR Make Payment',
-    sameShippingInformation: 'KR same shipping information',
+    sameBillingInformation: 'KR same billing information',
     shipping: 'KR Shipping',
     nextStep: 'KR Next Step',
     interactPayment: 'KR Interact payment',

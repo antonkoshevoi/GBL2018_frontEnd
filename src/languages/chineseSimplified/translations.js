@@ -210,7 +210,7 @@ export default {
     expDate: 'CS Exp. Date (YYYY/MM)',
     cvvCode: 'CS CVV Code',
     makePayment: 'CS Make Payment',
-    sameShippingInformation: 'CS same shipping information',
+    sameBillingInformation: 'CS same billing information',
     shipping: 'CS Shipping',
     nextStep: 'CS Next Step',
     interactPayment: 'CS Interact payment',

@@ -210,7 +210,7 @@ export default {
     expDate: 'DE Exp. Date (YYYY/MM)',
     cvvCode: 'DE CVV Code',
     makePayment: 'DE Make Payment',
-    sameShippingInformation: 'DE same shipping information',
+    sameBillingInformation: 'DE same billing information',
     shipping: 'DE Shipping',
     nextStep: 'DE Next Step',
     interactPayment: 'DE Interact payment',
