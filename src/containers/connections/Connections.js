@@ -133,9 +133,9 @@ class Connections extends Component {
                         </button>                             
                     }
                     {record.get('isCreatedByMe') ?
-                        <DeleteButton title={t('areYouSure')} onClick={() => { this._delete(record.get('connectionId')) }} />
+                        <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._delete(record.get('connectionId')) }} />
                     :                            
-                        <DeleteButton title={t('areYouSureWantToDeclineThisRequest')} onClick={() => { this._decline(record.get('connectionId')) }} />                            
+                        <DeleteButton btnName={t('delete')} title={t('areYouSureWantToDeclineThisRequest')} onClick={() => { this._decline(record.get('connectionId')) }} />                            
                     }
                 </Td>
             </Row>

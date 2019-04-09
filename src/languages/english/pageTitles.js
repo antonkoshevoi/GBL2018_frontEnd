@@ -72,5 +72,5 @@ export default {
     alerts: 'Alerts',
     announcements: 'Announcements',
     assignments: 'Assignments',
-    chats: 'Chats'    
+    chats: 'Chats'
 }

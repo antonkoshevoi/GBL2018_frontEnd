@@ -118,16 +118,16 @@ class Classrooms extends Component {
         <Td width='100px'>{moment(record.get('crmEndDate')).format('ll')}</Td>
         <Td width='150px' className="actions">
           <HasPermission permissions={['[ClassRooms][Update][Any]']}>
-            <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
+            <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
           </HasPermission>
           <HasPermission permissions={['[ClassRooms][Update][Schedule]']}>
-            <EditButton onClick={() => { goTo(`/classrooms/schedule/${record.get('id')}`); }} id={record.get('id')}/>
+            <EditButton btnName={t('edit')} onClick={() => { goTo(`/classrooms/schedule/${record.get('id')}`); }} id={record.get('id')}/>
           </HasPermission>          
           <HasPermission permissions={['[ClassRooms][Assign][Student]']}>
             <AssignButton onClick={() => { this._assignStudent(record.get('id')) }}/>
           </HasPermission>
           <HasPermission permissions={['[ClassRooms][Delete][Any]']}>
-            <DeleteButton title={t('areYouSureWantToArchiveClassroom')} icon="la la-archive" onClick={() => { this._deleteRecord(record.get('id')) }}/>
+            <DeleteButton btnName={t('delete')} title={t('areYouSureWantToArchiveClassroom')} icon="la la-archive" onClick={() => { this._deleteRecord(record.get('id')) }}/>
           </HasPermission>
         </Td>
       </Row>

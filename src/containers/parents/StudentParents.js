@@ -89,7 +89,7 @@ class StudentParents extends Component {
                     <button onClick={() => { this._openViewDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
                         <i className='la la-search'></i>
                     </button>
-                    <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('requestId')) }}/>
+                    <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('requestId')) }}/>
                 </Td>
             </Row>
         ));

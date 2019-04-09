@@ -109,10 +109,10 @@ class Students extends Component {
             </button>
           </NavLink>
           <HasPermission permissions={['[Users][Students][Update][Any]']}>
-            <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
+            <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
           </HasPermission>
           <HasPermission permissions={['[Users][Students][Delete][Any]']}>
-            <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
+            <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
           </HasPermission>
         </Td>
       </Row>

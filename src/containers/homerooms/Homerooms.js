@@ -83,10 +83,10 @@ class Homerooms extends Component {
         <HasPermission permissions={['[HomeRooms][Update][Any]', 'HomeRooms][Delete][Any']}>
         <Td width='100px' className="actions">
           <HasPermission permissions={['[HomeRooms][Update][Any]']}>
-            <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
+            <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
           </HasPermission>
           <HasPermission permissions={['[HomeRooms][Delete][Any]']}>
-            <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
+            <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
           </HasPermission>
         </Td>
         </HasPermission>

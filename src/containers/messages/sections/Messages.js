@@ -164,11 +164,11 @@ class Messages extends Component {
                     }
                     <p className='my-2'>
                         {record.isMine &&
-                            <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showEditMessageModal(record) }}>
+                            <button title={t('edit')} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showEditMessageModal(record) }}>
                                 <i className='la la-pencil'></i>
                             </button>        
                         }
-                        <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.id) }}/>                    
+                        <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.id) }}/>                    
                     </p>
                 </div>
             </OnVisible>            

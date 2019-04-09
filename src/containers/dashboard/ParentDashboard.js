@@ -125,6 +125,7 @@ class ParentDashboard extends Component {
                     </button>
                     <DeleteButton 
                         onClick={() => { this._deleteStudent(student.id) }}
+                        btnName={t('delete')}
                         title={t('deleteLearnerConfirmation')}
                         icon="la la-close"
                         className="btn btn-danger m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill"
