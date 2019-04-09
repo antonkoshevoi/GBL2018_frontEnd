@@ -128,8 +128,8 @@ class SchoolScap extends Component {
                 </Td>
                 <Td width='132px'>{record.get('createdAt')}</Td>
                 <Td width='132px' className="actions">                    
-                    <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('id')} />
-                    <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }} />                        
+                    <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={record.get('id')} />
+                    <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }} />                        
                 </Td>
             </Row>
         ));

@@ -69,7 +69,7 @@ class StudentsModal extends Component {
                 <Td width='120px'>{item.get('classroomName')}</Td>
                 <Td width='120px'>{moment(item.get('createdAt')).format('ll')}</Td>                                                
                 <Td width='120px' name='actions'>
-                    <DeleteButton title={t('areYouSureWantToCancelThisCourse')} onClick={() => { this._unsubscribeStudent(item.get('id')) }}/>                                                
+                    <DeleteButton btnName={t('delete')} title={t('areYouSureWantToCancelThisCourse')} onClick={() => { this._unsubscribeStudent(item.get('id')) }}/>                                                
                 </Td>
             </Row>
         });

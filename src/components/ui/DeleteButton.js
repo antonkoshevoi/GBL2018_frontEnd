@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { translate } from 'react-i18next';
 
 class DeleteButton extends Component {
 
@@ -45,7 +45,7 @@ class DeleteButton extends Component {
   };
 
   render() {
-    const {className, title, icon, btnName, confirmOnly} = this.props;
+    const {className, title, icon, btnName, confirmOnly, t} = this.props;
     const {opened} = this.state;
     
     return (
@@ -58,8 +58,8 @@ class DeleteButton extends Component {
         >
           <DialogTitle className="text-center" id="alert-dialog-title" style={{minWidth: 300}}>{title}</DialogTitle>
           <div className="text-center m--margin-bottom-20 m--margin-top-10">
-            <button onClick={() => { this._onConfirm() }} className="btn-success m-btn btn m--margin-right-10">Ok</button>
-            {!confirmOnly && <button onClick={() => { this._onCancel() }} className="btn-default m-btn btn btn">Cancel</button>}
+            <button onClick={() => { this._onConfirm() }} className="btn-success m-btn btn m--margin-right-10">{t('ok')}</button>
+            {!confirmOnly && <button onClick={() => { this._onCancel() }} className="btn-default m-btn btn btn">{t('cancel')}</button>}
           </div>
         </Dialog>
       </span>
@@ -67,4 +67,4 @@ class DeleteButton extends Component {
   }
 };
 
-export default DeleteButton;
+export default translate('translations')(DeleteButton);

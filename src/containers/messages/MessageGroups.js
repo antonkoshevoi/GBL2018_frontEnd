@@ -72,7 +72,7 @@ class MessageGroups extends Component {
                     <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' to={`/messages/groups/${record.get('id')}`}>
                         <i className='la la-edit'></i>
                     </NavLink>                    
-                    <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>                    
+                    <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>                    
                 </Td>
             </Row>
         ));

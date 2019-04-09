@@ -194,8 +194,8 @@ class DemoCoursesTab extends Component {
         <Td width='100px'>{record.get('studentsCount')}</Td>
         <Td width='100px'>{moment(record.get('crmEndDate')).format('ll')}</Td>
         <Td width='100px' className="actions">
-          <EditButton onClick={(id) => { this._editRecord(id) }} id={ record.get('id') }/>
-          <DeleteButton title={t('areYouSureWantToArchiveClassroom')} icon="la la-archive" onClick={() => { this._deleteRecord(record.get('id')) }}/>
+          <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={ record.get('id') }/>
+          <DeleteButton btnName={t('delete')} title={t('areYouSureWantToArchiveClassroom')} icon="la la-archive" onClick={() => { this._deleteRecord(record.get('id')) }}/>
         </Td>
       </Row>
     ));

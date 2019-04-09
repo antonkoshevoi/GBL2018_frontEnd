@@ -1,57 +1,64 @@
 export default {
-  errors: {
-    400: 'Bad Request',
-    401: 'Unauthorized',
-    403: 'You do not have the right permissions',
-    404: 'Record is not found',
-    422: 'Unprocessable data',
-    409: 'Bad Request',
-    500: 'Server error. Please try again later',
-    canceled: 'Request has been cancelled',
-    unknown: 'Unknown error. Please try again later'
-  },
-
-  created: 'Record successfully crated',
-  updated: 'Record successfully updated',
-  uploaded: 'File succesfully uploaded',
-  deleted: 'Record succesfully removed',
-  profileUpdated: 'Profile succesfully updated',
-  passwordChanged: 'Password changed succesfully',
-  store: {
-      cartAdded: 'Product Added to Cart'
-  },
-  classrooms: {
-    assigned: {
-      students: 'Students successfully changed for classroom',
-      demoStudent: 'Student successfully enrolled to demo classroom'
+    errors: {
+        400: 'Error en la Solicitud',
+        401: 'No Autorizado',
+        403: 'No tienes los permisos adecuados',
+        404: 'No se encontró el registro',
+        405: 'Error en la Solicitud. Acción no Permitida...',
+        422: 'Datos no procesables',
+        409: 'Error en la Solicitud',
+        429: 'Demasiados Intentos. Por favor intenta más tarde...',
+        500: 'Error del servidor. Por favor intenta más tarde',
+        canceled: 'La solicitud ha sido cancelada',
+        unknown: 'Error desconocido. Por favor intenta más tarde'
     },
-    scheduleUpdated: 'Classroom schedule has been updated'
-  },
-  courseRequired: 'You should select course',
-  loginOrCreateAccount: 'Please login or create new account to buy any products...',
-  studentSubscribedToCourse: 'Student successfully enrolled to the course',
-  studentUnsubscribedFromCourse: 'Student successfully unsubscribed from the course',
-  subscriptionCancelled: 'Subscription successfully cancelled',
-  subscriptionDonated: 'Thank you! Subscription successfully donated to your friend.',
-  courseCreditDonated: 'Thank you! Course credit successfully donated to your friend.',
-  scapTemplateCreated: 'S-Cap template successfully created',
-  scapTemplateUpdated: 'S-Cap template successfully updated',
-  scapTemplateTeachersAssigned: 'S-Cap template is shared to selected teachers',
-  scapScoresAdded: 'S-Cap scores added',
-  scapScoresUpdated: 'S-Cap scores updated',
-  courseCreditAssigned: 'Student successfully enrolled to the course',
-  messageIsSent: 'Message sent succesfully',
-  messageDeleted: 'Message succesfully removed',
-  requestHasBeenSent: 'Request to parent account successfully sent',
-  parentAccountCreated: 'Parent account successfully created',
-  studentRequestIsAccepted: 'Request successfully accepted',
-  studentRequestIsDeclined: 'Request successfully declined',
-  studentRequestIsDeleted: 'Request successfully deleted',
-  connectionRequestHasBeenSent: 'Connection request has been sent',
-  connectionRequestIsAccepted: 'Connection request is accepted!',
-  connectionRequestIsDeclined: 'Connection request is declined',
-  connectionRequestIsDeleted: 'Connection request is deleted',
-  giftDeleted: 'Gift successfully deleted',
-  giftDeclined: 'Gift is declined',
-  giftAccepted: 'Gift is accepted'
+
+    created: 'Registro creado con éxito',
+    updated: 'Registro actualizado con éxito',
+    uploaded: 'Archivo subido con éxito',
+    deleted: 'Registro eliminado con éxito',
+    profileUpdated: 'Perfil actualizado con éxito',
+    passwordChanged: 'Contraseña cambiada con éxito',
+    store: {
+        cartAdded: 'Producto Agregado al Carrito'
+    },
+    classrooms: {
+        assigned: {
+            students: 'Estudiantes Cambiados Correctamente al Aula',
+            demoStudent: 'Estudiante Inscrito Correctamente al Aula de Demostración'
+        },
+        scheduleUpdated: 'El calendario del aula ha sido actualizado'
+    },
+    courseRequired: 'Por favor selecciona un curso',
+    loginOrCreateAccount: 'Por favor inicia sesión o crea una nueva cuenta para comprar productos...',
+    studentSubscribedToCourse: 'Estudiante inscrito exitosamente en el curso',
+    studentUnsubscribedFromCourse: 'Estudiante retirado exitosamente del curso',
+    subscriptionCancelled: 'Suscripción cancelada exitosamente',
+    subscriptionDonated: '¡Gracias! Suscripción donada con éxito a tu amigo.',
+    courseCreditDonated: '¡Gracias! El crédito del curso ha sido exitosamente donado a tu amigo.',
+    scapTemplateCreated: 'Plantilla S-Cap creada con éxito',
+    scapTemplateUpdated: 'Plantilla S-Cap actualizada con éxito',
+    scapTemplateTeachersAssigned: 'La plantilla S-Cap está compartida con los profesores seleccionados',
+    scapScoresAdded: 'Puntuaciones de S-Cap añadidas',
+    scapScoresUpdated: 'Puntuaciones de S-Cap actualizadas',
+    courseCreditAssigned: 'Estudiante inscrito exitosamente en el curso.',
+    messageIsSent: 'Mensaje enviado con éxito',
+    messageDeleted: 'Mensaje eliminado con éxito',
+    requestHasBeenSent: 'Solicitud a la cuenta del padre enviada con éxito',
+    parentAccountCreated: 'Cuenta del padre creada exitosamente',
+    studentRequestIsAccepted: 'Solicitud aceptada exitosamente',
+    studentRequestIsDeclined: 'Solicitud rechazada exitosamente',
+    studentRequestIsDeleted: 'Solicitud eliminada exitosamente',
+    connectionRequestHasBeenSent: 'Se ha enviado la solicitud de conexión',
+    connectionRequestIsAccepted: '¡La solicitud de conexión ha sido aceptada!',
+    connectionRequestIsDeclined: 'La solicitud de conexión ha sido rechazada',
+    connectionRequestIsDeleted: 'La solicitud de conexión ha sido eliminada',
+    giftDeleted: 'Regalo eliminado con éxito',
+    giftDeclined: 'Regalo rechazado',
+    giftAccepted: 'Regalo aceptado',
+    messageGroupCreated: 'El grupo fue creado',
+    messageGroupUpdated: 'El grupo fue actualizado',
+    messageGroupDeleted: 'El grupo fue eliminado',
+    passwordUpdatedLoginPlease: 'Tu contraseña ha sido actualizada, por favor intenta iniciar sesión',
+    messageUpdated: 'Mensaje actualizado correctamente'
 }

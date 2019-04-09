@@ -165,7 +165,7 @@ class InvitationsTab extends Component {
           <a title={t('viewInvitation')} rel="noopener noreferrer" href={uri(`invitations/details/${record.get('id')}/${record.get('securityHash')}`)} className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill" target="_blank">
              <i className='la la-search'></i>
           </a>
-          <DeleteButton title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
+          <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
         </Td>
       </Row>
     ));

@@ -81,7 +81,7 @@ class AutoCreate extends Component {
           <HasPermission permissions={[
             '[ClassRooms][Update][Any]'
           ]}>
-            <EditButton onClick={(id) => { this._editRecord(id) }} id={record.get('crsId')}/>
+            <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={record.get('crsId')}/>
           </HasPermission>
         </Td>
       </Row>

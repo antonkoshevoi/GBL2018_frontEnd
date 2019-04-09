@@ -111,13 +111,13 @@ class Gifts extends Component {
                 <Td width='132px'>{moment(record.get('createdAt')).format('lll')}</Td>
                 <Td width='150px' className='actions'>
                     {(currentTab === 'sent') &&
-                        <div>{record.get('accepted') ? <span className="m--margin-left-10">-</span> : <DeleteButton title={t('areYouSure')} onClick={() => { this._delete(record.get('id')) }} />}</div>
+                        <div>{record.get('accepted') ? <span className="m--margin-left-10">-</span> : <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._delete(record.get('id')) }} />}</div>
                     }
                     {(currentTab === 'received') && <div> 
                         {record.get('waiting') && <button title={t('accept')} onClick={() => { this._accept(record.get('id')) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
                             <i className='la la-check'></i>
                         </button>}
-                        {!record.get('declined') && <DeleteButton title={t('areYouSureWantToDeclineThisGift')} onClick={() => { this._decline(record.get('id')) }} />}
+                        {!record.get('declined') && <DeleteButton btnName={t('delete')} title={t('areYouSureWantToDeclineThisGift')} onClick={() => { this._decline(record.get('id')) }} />}
                     </div>}
                 </Td>
             </Row>);
