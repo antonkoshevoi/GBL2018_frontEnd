@@ -73,11 +73,11 @@ class UnassignedCourses extends Component {
                 {record.get('isGift') ?  
                     <ConfirmButton icon='la la-gift' className='btn-success margin-0' confirmOnly={true} title={t('giftCourseFrom', {user: record.get('userName')}) } />
                 :
-                    <button className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._openGiftDialog(record) }} >
+                    <button title={t('giftCourseCredit')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._openGiftDialog(record) }} >
                         <i className='la la-gift'></i>
                     </button>
                 }          
-                <button className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { this._openAssignDialog(record) }} >
+                <button title={t('assignStudent')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { this._openAssignDialog(record) }} >
                     <i className='la la-user-plus'></i>
                 </button>
               </Td>

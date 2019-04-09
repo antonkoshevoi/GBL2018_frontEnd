@@ -181,7 +181,7 @@ class Parents extends Component {
         <Td width='132px'>{record.get('email')}</Td>        
         <Td width='132px'>{record.get('students')}
             {record.get('students') > 0 &&
-                <button className='ml-3 btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showStudents(record.get('id')) }} >
+                <button title={t('students')} className='ml-3 btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showStudents(record.get('id')) }} >
                     <i className='la la-search'></i>
                 </button>
             }

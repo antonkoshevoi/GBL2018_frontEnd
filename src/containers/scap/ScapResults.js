@@ -6,19 +6,9 @@ import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { selectGetResultRecordsRequest } from '../../redux/scap/selectors';
 import { getResultsRecords } from '../../redux/scap/actions';
+import moment from 'moment/moment';
 import Pagination from '../../components/ui/Pagination';
 import ResultsModal from "./modals/ResultsModal"
-
-const ResultsButton = ({ id, onClick}) => {
-  return (
-    <button
-      className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15'
-      onClick={onClick && (() => { onClick(id) })}      
-    >
-      <i className='la la-search'></i>
-    </button>
-  );
-};
 
 class ScapResults extends Component {
     constructor(props) {
@@ -89,9 +79,11 @@ class ScapResults extends Component {
                 <Td width='132px'>{record.get('teacher')}</Td>                                
                 <Td width='132px'>{record.get('homeroom')}</Td>
                 <Td width='132px'>{record.get('student')}</Td>
-                <Td width='132px'>{record.get('createdAt')}</Td>
-                <Td width='132px'>                    
-                    <ResultsButton onClick={() => { this._showResultsModal(record) }} id={record.get('id')} />                                     
+                <Td width='132px'>{moment(record.get('createdAt')).format('ll')}</Td>
+                <Td width='132px'>
+                    <button title={t('showDetails')} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15' onClick={() => { this._showResultsModal(record) }} id={record.get('id')} >
+                        <i className='la la-search'></i>
+                    </button>                                
                 </Td>
             </Row>
         ));

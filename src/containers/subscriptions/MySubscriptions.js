@@ -150,7 +150,7 @@ class MySubscriptions extends Component {
                     <Td width='120px'>{item.allowedCourses} x {item.allowedStudents}</Td>
                     <Td width='120px'>
                         <span className="m--margin-right-15">{item.assignedCourses}</span>
-                        { (item.assignedCourses > 0 && isOwner) && <button className='btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={ ()=> {this._showStudentsModal(item) }}>
+                        { (item.assignedCourses > 0 && isOwner) && <button title={t('assignedStudents')} className='btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={ ()=> {this._showStudentsModal(item) }}>
                             <i className="la la-search"></i>
                         </button> }                                               
                     </Td>
@@ -164,11 +164,11 @@ class MySubscriptions extends Component {
                     <Td width='150px' className='actions'>                        
                         <div>
                             {(!item.assignedCourses && isMine) && 
-                            <button className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { this._showGiftModal(item) }} >
+                            <button title={t('giftSubscription')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { this._showGiftModal(item) }} >
                               <i className='la la-gift'></i>
                             </button>}                    
                             {(canAssign && isOwner) && 
-                            <button className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { this._showAssignModal(item) }} >
+                            <button title={t('assignStudent')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { this._showAssignModal(item) }} >
                               <i className='la la-user-plus'></i>
                             </button>}
                             {(!item.isGift && !item.isMobile) && <DeleteButton btnName={t('delete')} title={t('areYouSureWantToCancelSubscription')} onClick={() => { this._cancelSubscription(item.id) }}/>}

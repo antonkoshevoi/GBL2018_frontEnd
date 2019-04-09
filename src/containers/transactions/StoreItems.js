@@ -106,7 +106,7 @@ class StoreItems extends Component {
                     </Td>
                     <Td className="d-none d-md-table-cell">
                         {item.get('items').size}
-                        <IconButton className="m--margin-left-15" color="primary" onClick={()=> {this._toggleSubTable(`sub_${i}`)}}>
+                        <IconButton title={t('showDetails')} className="m--margin-left-15" color="primary" onClick={()=> {this._toggleSubTable(`sub_${i}`)}}>
                             <i className={`fa fa-arrow-${( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) ? 'down' : 'right'}`}></i>
                         </IconButton>                        
                     </Td>                    

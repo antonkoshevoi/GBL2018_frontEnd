@@ -118,7 +118,7 @@ class Students extends Component {
                                             </HasRole>
                                             <HasRole roles={['Parents']}>
                                                 {(userData.get('id') === student.ownerId) && <div className="pull-right m--margin-top-10 m--margin-right-10">
-                                                    <IconButton color='primary' onClick={() => {this._openEditDialog() }}>                        
+                                                    <IconButton title={t('edit')} color='primary' onClick={() => {this._openEditDialog() }}>                        
                                                         <i className="la  la-pencil display-6"></i>
                                                     </IconButton>                              
                                                 </div>}

@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow } from '../../components/ui/table';
 import { selectGetRecordsRequest, selectDeleteRequest } from '../../redux/scap/selectors';
 import { getRecords, deleteRecord } from '../../redux/scap/actions';
+import moment from 'moment/moment';
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from "../../components/ui/DeleteButton";
 import AssignTeachersModal from "./modals/AssignTeachersModal"
@@ -126,7 +127,7 @@ class SchoolScap extends Component {
                     {record.get('completed')}
                     {(record.get('completed') > 0) && <ResultsButton onClick={() => { this._showResults(record) }} t={t} />}
                 </Td>
-                <Td width='132px'>{record.get('createdAt')}</Td>
+                <Td width='132px'>{moment(record.get('createdAt')).format('ll')}</Td>
                 <Td width='132px' className="actions">                    
                     <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={record.get('id')} />
                     <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }} />                        
