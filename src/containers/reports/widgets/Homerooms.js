@@ -61,7 +61,7 @@ class Homerooms extends Component {
         </Td>
         <Td width='100px'>            
             <NavLink to={`/reports/homerooms/${record.get('id')}`}>
-                <button className="btn m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill btn-success">
+                <button title={t('showDetails')} className="btn m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill btn-success">
                     <i className="la la-search"></i>
                 </button>
             </NavLink>

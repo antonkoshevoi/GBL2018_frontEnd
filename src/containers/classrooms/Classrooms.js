@@ -21,9 +21,10 @@ import HasRole from "../middlewares/HasRole";
 import AssignStudentsModal from "./modals/AssignStudentsModal";
 import moment from 'moment/moment';
 
-const AssignButton = ({ id, onClick}) => {
+const AssignButton = ({ id, onClick, btnName}) => {
   return (
     <button
+      title={btnName}
       className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5'
       onClick={onClick && (() => { onClick(id) })}      
     >
@@ -124,7 +125,7 @@ class Classrooms extends Component {
             <EditButton btnName={t('edit')} onClick={() => { goTo(`/classrooms/schedule/${record.get('id')}`); }} id={record.get('id')}/>
           </HasPermission>          
           <HasPermission permissions={['[ClassRooms][Assign][Student]']}>
-            <AssignButton onClick={() => { this._assignStudent(record.get('id')) }}/>
+            <AssignButton btnName={t('assignStudents')} onClick={() => { this._assignStudent(record.get('id')) }}/>
           </HasPermission>
           <HasPermission permissions={['[ClassRooms][Delete][Any]']}>
             <DeleteButton btnName={t('delete')} title={t('areYouSureWantToArchiveClassroom')} icon="la la-archive" onClick={() => { this._deleteRecord(record.get('id')) }}/>

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { selectGetRecordsRequest } from '../../redux/scap/selectors';
 import { getAssignedRecords } from '../../redux/scap/actions';
+import moment from 'moment/moment';
 import Pagination from '../../components/ui/Pagination';
 import TeacherResultsModal from './modals/TeacherResultsModal';
 
@@ -84,7 +85,7 @@ class TeacherScap extends Component {
                     {record.get('completed')}
                     {(record.get('completed') > 0) && <ResultsButton onClick={() => { this._showResultsModal(record) }} t={t} />}
                 </Td>
-                <Td width='132px'>{record.get('createdAt')}</Td>
+                <Td width='132px'>{moment(record.get('createdAt')).format('ll')}</Td>
                 <Td width='132px'>
                     <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo('scap/fill/' + record.get('id')) }}>
                         <i className='la la-plus'></i>
