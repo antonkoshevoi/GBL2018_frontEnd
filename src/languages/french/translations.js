@@ -626,5 +626,6 @@ export default {
     messageRemoved: 'Supprimé par l\'expéditeur ...',
     editMessage: 'Modifier le message ',
     ok: 'Ok',
-    viewReport: 'Rapports'    
+    viewReport: 'Rapports',
+    skip: 'Passer'
 }

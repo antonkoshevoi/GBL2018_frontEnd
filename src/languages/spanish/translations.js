@@ -626,5 +626,6 @@ export default {
     messageRemoved: 'Eliminado por el remitente...',
     editMessage: 'Editar Mensaje',
     ok: 'Ok',
-    viewReport: 'Informes'    
+    viewReport: 'Informes',
+    skip: 'Omitir'
 }
