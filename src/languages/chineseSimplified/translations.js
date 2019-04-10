@@ -626,5 +626,6 @@ export default {
     messageRemoved: '已被发件人删除...',
     editMessage: '编辑讯息',
     ok: 'Ok',
-    viewReport: '成绩报告'
+    viewReport: '成绩报告',
+    skip: '跳跃'
 }

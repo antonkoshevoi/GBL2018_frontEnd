@@ -65,7 +65,7 @@ export default {
     next: '다음',
     back: '뒤로 가기',
     goToDashboard: '대시보드로 가기',
-    alreadyHaveAccountMessage: '이미 계정이 있다면, {[loginLink]}로 세션을 시작하세요.',
+    alreadyHaveAccountMessage: '이미 계정이 있다면, {{loginLink}}로 세션을 시작하세요.',
     noStoreItems: '상점에서 존재하지 않습니다.',
     store: '상점',
     image: '이미지',
@@ -626,5 +626,6 @@ export default {
     messageRemoved: '보낸 사람이 삭제하였습니다',
     editMessage: '메시지 편집',
     ok: 'Ok',
-    viewReport: '보고서'    
+    viewReport: '보고서',
+    skip: '건너 뛰기'
 }

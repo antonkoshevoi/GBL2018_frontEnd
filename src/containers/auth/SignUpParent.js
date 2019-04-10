@@ -149,7 +149,7 @@ class SignUpParent extends Component {
         const loading = this.props.validateRequest.get('loading') || this.props.signUpRequest.get('loading');
         const step1Errors = this.props.validateRequest.get('errors');
         const step2Errors = this.props.signUpRequest.getIn(['errors', 'step2']);
-        const loginBtn =  <NavLink to='/login'><strong>Login</strong></NavLink>;
+        const loginBtn =  <NavLink to='/login'><strong>{t('login')}</strong></NavLink>;
 
         return (
           <form  onSubmit={(e) => { e.preventDefault(); this._next(); }}>
@@ -157,19 +157,19 @@ class SignUpParent extends Component {
                 <div className='signup-page'>
                   <div className='m-signup col-lg-8 col-md-10 col-sm-12 m-auto'>
                     <div className='m-signup__head'>
-                      <h3 className='m-login__title text-center m--margin-top-50'>{t('Sign Up')}</h3>
+                      <h3 className='m-login__title text-center m--margin-top-50'>{t('signUp')}</h3>
                     </div>
                     <div className='m-portlet m-portlet--brand m-portlet--borderedm-portlet m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height'>
                       <div className='m-portlet__body'>
                         <Stepper activeStep={activeStep} alternativeLabel className="g-stepper">
                           <Step>
-                            <StepLabel>{t('Parent Profile')}</StepLabel>
+                            <StepLabel>{t('parentProfile')}</StepLabel>
                           </Step>
                           <Step>
-                            <StepLabel>{t('Child Profil')}e</StepLabel>
+                            <StepLabel>{t('childProfile')}</StepLabel>
                           </Step>
                           <Step>
-                            <StepLabel>{t('Confirmation')}</StepLabel>
+                            <StepLabel>{t('confirmation')}</StepLabel>
                           </Step>
                         </Stepper>
                         <div>
