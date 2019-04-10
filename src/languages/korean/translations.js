@@ -350,7 +350,7 @@ export default {
     compose: '쓰기',
     drafts: '임시 보관함',
     chat: '대화',
-    teachingAids: '',
+    teachingAids: 'Teaching Aids',
     studentRewards: '포상',
     tutoringServices: '개인 교습',
     accounts: '계정',
