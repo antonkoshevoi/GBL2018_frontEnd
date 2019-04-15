@@ -319,7 +319,7 @@ class Classrooms extends Component {
 
               <Tbody>
                 {loading &&
-                  <TablePreloader text="Loading..." color="primary"/>
+                  <TablePreloader text={t('loading')} />
                 }
                 { this._renderRecords() }
               </Tbody>

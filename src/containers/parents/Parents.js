@@ -268,7 +268,7 @@ class Parents extends Component {
 
                     <Tbody>
                       {getRecordsRequest.get('loading') &&
-                        <TablePreloader text="Loading..." color="primary"/>
+                        <TablePreloader text={t('loading')} />
                       }
                       { this._renderRecords() }
                     </Tbody>

@@ -173,7 +173,7 @@ class CourseModal extends Component {
               </Thead>
               <Tbody>
               {storeRecordsLoading &&
-              <TablePreloader text="Loading..." color="primary"/>
+              <TablePreloader text={t('loading')} />
               }
               {!storeRecordsLoading && this._renderStoreItems()}
               </Tbody>

@@ -627,5 +627,6 @@ export default {
     editMessage: '编辑讯息',
     ok: 'Ok',
     viewReport: '成绩报告',
-    skip: '跳跃'
+    skip: '跳跃',
+    received: 'Received'
 }

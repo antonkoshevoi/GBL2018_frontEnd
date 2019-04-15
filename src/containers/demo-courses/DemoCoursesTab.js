@@ -274,7 +274,7 @@ class DemoCoursesTab extends Component {
             </Thead>
 
             <Tbody>
-            {loading && <TablePreloader text='Loading...' color='primary'/>}
+            {loading && <TablePreloader text={t('loading')} color='primary'/>}
             { this._renderRecords() }
             </Tbody>
           </Table>

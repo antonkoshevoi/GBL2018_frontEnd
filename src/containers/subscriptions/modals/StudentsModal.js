@@ -105,7 +105,7 @@ class StudentsModal extends Component {
                     </HeadRow>
                 </Thead>
                 <Tbody>                    
-                    { !studentsRecordsRequest.get('success') ? <TablePreloader text="Loading..." color="primary"/> : this._renderStudents() }
+                    { !studentsRecordsRequest.get('success') ? <TablePreloader text={t('loading')} /> : this._renderStudents() }
                 </Tbody>
             </Table>                            
         </DialogContent>

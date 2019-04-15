@@ -627,5 +627,6 @@ export default {
     editMessage: 'Modifier le message ',
     ok: 'Ok',
     viewReport: 'Rapports',
-    skip: 'Passer'
+    skip: 'Passer',
+    received: 'Received'
 }

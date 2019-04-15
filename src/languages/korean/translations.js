@@ -627,5 +627,6 @@ export default {
     editMessage: '메시지 편집',
     ok: 'Ok',
     viewReport: '보고서',
-    skip: '건너 뛰기'
+    skip: '건너 뛰기',
+    received: 'Received'
 }

@@ -207,7 +207,7 @@ class StoreItems extends Component {
                     </Thead>
                     <Tbody>
                         {this._renderTransactions()}
-                        {loading && <TablePreloader text="Loading..." color="primary"/>}
+                        {loading && <TablePreloader text={t('loading')} />}
                     </Tbody>
                 </Table>
                 <div className="row">

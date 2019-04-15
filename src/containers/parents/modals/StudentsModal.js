@@ -79,7 +79,7 @@ class StudentsModal extends Component {
                             </HeadRow>
                         </Thead>
                         <Tbody>
-                            {loading ? <TablePreloader text="Loading..." color="primary"/> : this._renderStudents()}
+                            {loading ? <TablePreloader text={t('loading')} /> : this._renderStudents()}
                         </Tbody>
                     </Table>
                 </DialogContent>

@@ -137,7 +137,7 @@ class TeacherResultsModal extends Component {
                             </HeadRow>
                             </Thead>
                             <Tbody>
-                                {loading && <TablePreloader text="Loading..." color="primary"/> }
+                                {loading && <TablePreloader text={t('loading')} /> }
                                 { this._renderRecords() }
                             </Tbody>
                         </Table>                        

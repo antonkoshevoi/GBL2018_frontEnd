@@ -144,7 +144,7 @@ class SubscriptionPayments extends Component {
                         </HeadRow>
                     </Thead>
                     <Tbody>
-                      {paymentsRequest.get('loading') && <TablePreloader text="Loading..." color="primary"/>}
+                      {paymentsRequest.get('loading') && <TablePreloader text={t('loading')} />}
                       {paymentsRequest.get('success') && this._renderRecords()}
                     </Tbody>
                 </Table>
