@@ -224,7 +224,7 @@ class MySubscriptions extends Component {
                             </HeadRow>
                         </Thead>
                         <Tbody>                            
-                            { subscriptionsRequest.get('loading') ? <TablePreloader text="Loading..." color="primary"/> : this._renderSubscriptions() }
+                            { subscriptionsRequest.get('loading') ? <TablePreloader text={t('loading')} /> : this._renderSubscriptions() }
                         </Tbody>
                     </Table>                
                 </div>

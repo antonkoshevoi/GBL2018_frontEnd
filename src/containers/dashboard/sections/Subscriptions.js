@@ -196,7 +196,7 @@ class Subscriptions extends Component {
                                     </HeadRow>
                                 </Thead>
                                 <Tbody>                            
-                                    { loading ? <TablePreloader text="Loading..." color="primary"/> : this._renderSubscriptions() }
+                                    { loading ? <TablePreloader text={t('loading')} /> : this._renderSubscriptions() }
                                 </Tbody>
                             </Table>                
                         </div>

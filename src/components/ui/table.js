@@ -86,7 +86,7 @@ export const TablePreloader = ({color, text, colSpan = 10}) => {
     <tr>
       <td colSpan={colSpan}>
         <div className="table-message">
-          <h2>{text} <CircularProgress color={color}/></h2>
+          <h2>{text} <CircularProgress color={color || 'primary'}/></h2>
         </div>
       </td>
     </tr>

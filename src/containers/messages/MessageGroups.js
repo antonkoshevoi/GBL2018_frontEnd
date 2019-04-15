@@ -142,7 +142,7 @@ class MessageGroups extends Component {
                             </Thead>
 
                             <Tbody>
-                                {loading && <TablePreloader text="Loading..." color="primary"/> }
+                                {loading && <TablePreloader text={t('loading')} /> }
                                 {success && this._renderRecords() }
                             </Tbody>
                         </Table>

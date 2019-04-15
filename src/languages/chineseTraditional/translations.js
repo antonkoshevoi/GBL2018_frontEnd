@@ -627,5 +627,6 @@ export default {
     editMessage: '編輯訊息',
     ok: 'Ok',
     viewReport: '成績報告',
-    skip: '跳躍'
+    skip: '跳躍',
+    received: 'Received'
 }
