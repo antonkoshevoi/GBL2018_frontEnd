@@ -136,18 +136,18 @@ class Subscriptions extends Component {
             let canAssign = (item.allowedCourses - item.assignedCourses) > 0;
             return (
                 <Row index={i} key={i}>                     
-                    <Td width='120px'>
-                        <div>{item.title}</div>
+                    <Td>
+                        <div>{t(item.title)}</div>
                         <strong className="g-blue">${item.price} {item.currency}</strong> / {t(item.period)}
                     </Td>      
-                    <Td width='120px'>
+                    <Td>
                         <span className="m--margin-right-15">{item.assignedCourses} / {(item.allowedCourses * item.allowedStudents)} </span>
                         { (item.assignedCourses > 0 && isOwner) && <button title={t('assignedStudents')} className='btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={ ()=> {this._showStudentsModal(item) }}>
                             <i className="la la-search"></i>
                         </button> }                                               
                     </Td>                    
-                    <Td width='120px'>{item.expiredAt ? <Date time={item.expiredAt} /> : '-'}</Td>                      
-                    <Td width='150px' className='actions'>                        
+                    <Td>{item.expiredAt ? <Date time={item.expiredAt} /> : '-'}</Td>                      
+                    <Td className='actions'>                        
                         <div>
                             {(!item.assignedCourses && isMine) && 
                             <button title={t('giftSubscription')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { this._showGiftModal(item) }} >
@@ -189,10 +189,10 @@ class Subscriptions extends Component {
                             <Table >
                                 <Thead>
                                     <HeadRow>                                 
-                                        <Th width='120px'>{t('title')}</Th>                                        
-                                        <Th width='120px'>{t('enrollments')}</Th>                                        
-                                        <Th width='120px'>{t('expirationDate')}</Th>                                                                        
-                                        <Th width='150px'>{t('actions')}</Th>
+                                        <Th>{t('title')}</Th>                                        
+                                        <Th>{t('enrollments')}</Th>                                        
+                                        <Th>{t('expirationDate')}</Th>                                                                        
+                                        <Th>{t('actions')}</Th>
                                     </HeadRow>
                                 </Thead>
                                 <Tbody>                            

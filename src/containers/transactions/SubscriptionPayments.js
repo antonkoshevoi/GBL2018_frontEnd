@@ -52,7 +52,7 @@ class SubscriptionPayments extends Component {
                         </div>
                         <div className="row mb-1">
                             <div className="col-5"><span className="text-muted">{t('subscription')}:</span></div>
-                            <div className="col-7">{record.get('subscription')} {t('subscription')}</div>
+                            <div className="col-7">{t(record.get('subscription'))} {t('subscription')}</div>
                         </div>
                         <div className="row mb-1">
                             <div className="col-5"><span className="text-muted">{t('period')}:</span></div>
@@ -76,7 +76,7 @@ class SubscriptionPayments extends Component {
                 <Td className="d-none d-md-table-cell"><a className="g-blue" href={record.get('invoiceUrl')}>{record.get('number')}</a></Td>
                 <Td className="d-none d-md-table-cell"><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('type'))}</span></Td>                
                 <Td className="d-none d-md-table-cell">{record.get('transactionCode')}</Td>
-                <Td className="d-none d-md-table-cell">{record.get('subscription')} {t('subscription')}</Td>        
+                <Td className="d-none d-md-table-cell">{t(record.get('subscription'))} {t('subscription')}</Td>        
                 <Td className="d-none d-md-table-cell">{t(record.get('period'))}</Td>
                 <Td className="d-none d-md-table-cell">${record.get('total')} {record.get('currency')}</Td>
                 <Td className="d-none d-md-table-cell">{t(record.get('autoRenewal') ? 'yes' : 'no')}</Td>

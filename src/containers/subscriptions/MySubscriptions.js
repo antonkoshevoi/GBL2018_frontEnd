@@ -145,7 +145,7 @@ class MySubscriptions extends Component {
             let canAssign = (item.allowedCourses - item.assignedCourses) > 0;
             return (
                 <Row index={i} key={i}>                     
-                    <Td>{item.title}</Td>
+                    <Td>{t(item.title)}</Td>
                     <Td><strong className="g-blue">${item.price} {item.currency}</strong> / {t(item.period)}</Td>
                     <Td>{item.allowedCourses} x {item.allowedStudents}</Td>
                     <Td>

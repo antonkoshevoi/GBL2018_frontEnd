@@ -73,7 +73,7 @@ class SubscriptionsForm extends Component {
             return (
                 <div key={key} className="subscription-item-block m--margin-top-30" style={styles}>
                     <div className={`subscription-item item-${key}`}>
-                        <div className="subscription-header"><h1>{record.get('title')}</h1></div>
+                        <div className="subscription-header"><h1>{t(record.get('title'))}</h1></div>
                         <div className="subscription-content">
                             <div className="subscription-prices m--padding-left-5 m--padding-right-5">
                                 <div className="row">                                                                        
@@ -113,7 +113,7 @@ class SubscriptionsForm extends Component {
                                 </div>            
                                 <div className="subscription-bonuses text-left">
                                     <span>{t('annualBonus')}:</span>
-                                    <span className="bonus">{record.get('bonuses')}</span>
+                                    <span className="bonus">{t('freeWorkbook', {number: record.get('allowedStudents')})}</span>
                                 </div>
                                 <p className="text-center margin-bottom-0">
                                     <button onClick={() => { this._handleSelectPlan() }} className="btn btn-info">{t('continue')}</button>
@@ -138,7 +138,7 @@ class SubscriptionsForm extends Component {
             return (        
                 <div key={key} className="subscription-item-block col-sm-12 col-md-6 m--margin-top-25">
                     <div className={`subscription-item item-${key}`} onClick={() => { this._setSubscriptionId(record.get('id')) }}>                        
-                        <div className="subscription-header"><h1>{record.get('title')}</h1></div>
+                        <div className="subscription-header"><h1>{t(record.get('title'))}</h1></div>
                         <div className="subscription-content">
                             <div className="subscription-prices">
                                 <div className="row">

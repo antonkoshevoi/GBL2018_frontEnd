@@ -63,13 +63,13 @@ class UnassignedCourses extends Component {
 
         return records.map((record, i) => (      
             <Row index={i} key={i}>
-              <Td width="70px" className='m--padding-left-0 m--padding-right-0'>               
+              <Td className='m--padding-left-0 m--padding-right-0'>               
                   <img alt={record.get('item').get('title')} src={record.get('item').get('thumbnail')} width={70}/>                
               </Td>
-              <Td width='140px'>{record.get('item').get('title')}
+              <Td>{record.get('item').get('title')}
               </Td>
-              <Td width='50px'>{record.get('quantity')}</Td>
-              <Td width='100px' className="actions">
+              <Td>{record.get('quantity')}</Td>
+              <Td className="actions">
                 {record.get('isGift') ?  
                     <ConfirmButton icon='la la-gift' className='btn-success margin-0' confirmOnly={true} title={t('giftCourseFrom', {user: record.get('userName')}) } />
                 :
@@ -107,10 +107,10 @@ class UnassignedCourses extends Component {
                             <Table>
                                 <Thead>
                                 <HeadRow>
-                                    <Th width='70px'>{t('image')}</Th>
-                                    <Th width='140px'>{t('course')}</Th>
-                                    <Th width='50px'>{t('count')}</Th>
-                                    <Th width='100px'>{t('actions')}</Th>
+                                    <Th>{t('image')}</Th>
+                                    <Th>{t('course')}</Th>
+                                    <Th>{t('count')}</Th>
+                                    <Th>{t('actions')}</Th>
                                 </HeadRow>
                                 </Thead>
                                 <Tbody>
