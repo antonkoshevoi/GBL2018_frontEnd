@@ -628,5 +628,9 @@ export default {
     ok: 'Ok',
     viewReport: '成绩报告',
     skip: '跳跃',
-    received: 'Received'
+    received: 'Received',
+    Basic: 'Básica',
+    Multi: 'Multi',
+    Family: 'Familiar',
+    freeWorkbook: '{{number}} libro de texto gratuito'
 }

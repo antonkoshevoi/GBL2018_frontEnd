@@ -1,18 +1,13 @@
 import React, {Component} from 'react';
-import {
-  AppBar,
-  DialogContent,  
-  Icon,
-  Toolbar, Typography  
-} from '@material-ui/core';
-import moment from 'moment/moment';
+import { AppBar, DialogContent, Icon, Toolbar, Typography } from '@material-ui/core';
+import { Date } from "../../../components/ui/DateTime";
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import Modal from "../../../components/ui/Modal";
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../../components/ui/table';
 import { getResultsRecords, resetGetResultsRecordsRequest } from "../../../redux/scap/actions";
 import { selectGetResultRecordsRequest } from "../../../redux/scap/selectors";
+import Modal from "../../../components/ui/Modal";
 import Pagination from '../../../components/ui/Pagination';
 import ResultsModal from "./ResultsModal"
 
@@ -85,12 +80,12 @@ class TeacherResultsModal extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td width='60px'>{this._recordNumber(key)}</Td>
-                <Td width='132px'>{record.get('homeroom')}</Td>
-                <Td width='132px'>{record.get('student')}</Td>
-                <Td width='132px'><span className={`m-badge m-badge--brand m-badge--wide ${(record.get('status') === 'completed' ? 'm-badge--success' : '')}`}>{t(record.get('status'))}</span></Td>
-                <Td width='132px'>{moment(record.get('createdAt')).format('ll')}</Td>
-                <Td width='100px' className="actions">
+                <Td>{this._recordNumber(key)}</Td>
+                <Td>{record.get('homeroom')}</Td>
+                <Td>{record.get('student')}</Td>
+                <Td><span className={`m-badge m-badge--brand m-badge--wide ${(record.get('status') === 'completed' ? 'm-badge--success' : '')}`}>{t(record.get('status'))}</span></Td>
+                <Td><Date time={record.get('createdAt')} /></Td>
+                <Td className="actions">
                     {record.get('status') !== 'completed' &&
                         <button title={t('edit')} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo(`scap/edit-answers/${record.get('id')}`) }}>
                             <i className='la la-pencil'></i>
@@ -128,12 +123,12 @@ class TeacherResultsModal extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>
-                                <Th width='60px'>#</Th>
-                                <Th width='132px'>{t('homeroom')}</Th>                                
-                                <Th width='132px'>{t('student')}</Th>
-                                <Th width='132px'>{t('status')}</Th>
-                                <Th width='132px'>{t('created')}</Th>
-                                <Th width='100px'>{t('actions')}</Th>
+                                <Th>#</Th>
+                                <Th>{t('homeroom')}</Th>                                
+                                <Th>{t('student')}</Th>
+                                <Th>{t('status')}</Th>
+                                <Th>{t('created')}</Th>
+                                <Th>{t('actions')}</Th>
                             </HeadRow>
                             </Thead>
                             <Tbody>

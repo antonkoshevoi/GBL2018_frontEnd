@@ -3,13 +3,13 @@ import {translate} from 'react-i18next';
 import {connect} from 'react-redux';
 import Parser from 'html-react-parser';
 import Popover from '@material-ui/core/Popover';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import ApiClient from '../../../services/ApiClient';
 import formTableData from '../../../services/CourseTemplate';
 import {selectStudentReportDetailsRequest} from "../../../redux/reports/students/selectors";
 import {getReportDetails, resetGetReportDetails} from "../../../redux/reports/students/actions";
+import {Date} from "../../../components/ui/DateTime";
 import Loader from "../../../components/layouts/Loader";
-import moment from "moment/moment";
 const apiClient = new ApiClient();
 
 const styles = theme => ({
@@ -226,7 +226,7 @@ class LessonsTable extends Component {
                         <span>{attempt.attemptNo}</span>
                     </td>
                     <td className='text-center'>                            
-                        {attemptFinished && moment(attempt.attDate).format('ll')}                            
+                        {attemptFinished && <Date time={attempt.attDate} />}                            
                     </td>          
                     {attemptFinished ? <td className={`attempt-${passed ? 'pass' : 'fail'} text-center`}>
                         <div aria-haspopup="true" onMouseEnter={this._handleRatePopoverOpen} onMouseLeave={this._handleRatePopoverClose}>

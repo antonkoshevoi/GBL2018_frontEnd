@@ -628,5 +628,9 @@ export default {
     ok: 'Ok',
     viewReport: 'View Report',
     skip: 'Skip',
-    received: 'Received'
+    received: 'Received',
+    Basic: 'Basic',
+    Multi: 'Multi',
+    Family: 'Family',
+    freeWorkbook: '{{number}} free workbook'  
 }

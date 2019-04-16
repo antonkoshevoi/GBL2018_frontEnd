@@ -6,19 +6,16 @@ import { uri } from '../../helpers/uri';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { getRecords, deleteRecord } from '../../redux/invitations/actions';
-import {
-  selectDeleteRecordRequest, selectGetRecordsRequest, selectPagination,
-  selectRecords
-} from '../../redux/invitations/selectors';
+import { selectDeleteRecordRequest, selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/invitations/selectors';
 import { buildSortersQuery } from '../../helpers/utils';
+import { Date } from "../../components/ui/DateTime";
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
 import SendInvitationModal from './modals/SendInvitationModal';
-import moment from 'moment/moment';
 
 class InvitationsTab extends Component {
   static propTypes = {
-    keyword: PropTypes.string,
+    keyword: PropTypes.string
   };
 
   static defaultProps = {
@@ -103,11 +100,6 @@ class InvitationsTab extends Component {
     }
   }
 
-  /**
-   *
-   * @param name
-   * @private
-   */
   _sort (name) {
     let sorters = {};
 
@@ -120,28 +112,14 @@ class InvitationsTab extends Component {
     this.setState({ sorters }, this._getRecords);
   }
 
-  /**
-   *
-   * @param perPage
-   * @private
-   */
   _selectPerPage (perPage) {
     this.setState({ perPage }, this._getRecords)
   }
 
-  /**
-   *
-   * @param page
-   * @private
-   */
   _goToPage (page) {
     this.setState({ page }, this._getRecords)
   }
 
-  /**
-   *
-   * @private
-   */
   _renderRecords () {
     const { records, getRecordsRequest, t } = this.props;
     const loading = getRecordsRequest.get('loading');
@@ -154,14 +132,12 @@ class InvitationsTab extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td width='180px'>{record.get('email')}</Td>
-        <Td width='132px'>{record.get('name')}</Td>
-        <Td width='80px'>
-          { this._renderStatus(record) }
-        </Td>
-        <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>        
-        <Td width='132px'>{moment(record.get('date')).format('ll')}</Td>
-        <Td width='100px' className="actions">
+        <Td>{record.get('email')}</Td>
+        <Td>{record.get('name')}</Td>
+        <Td>{ this._renderStatus(record) }</Td>
+        <Td>{record.getIn(['course', 'crsTitle'])}</Td>        
+        <Td><Date time={record.get('date')} /></Td>
+        <Td className="actions">
           <a title={t('viewInvitation')} rel="noopener noreferrer" href={uri(`invitations/details/${record.get('id')}/${record.get('securityHash')}`)} className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill" target="_blank">
              <i className='la la-search'></i>
           </a>
@@ -228,12 +204,12 @@ class InvitationsTab extends Component {
           <Table>
             <Thead>
             <HeadRow>
-              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' first={true} width='180px'>{t('email')}</Th>
-              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
-              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['status']} name='status' width='80px'>{t('status')}</Th>
-              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>{t('course')}</Th>
-              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['date']} name='date' width='132px'>{t('date')}</Th>
-              <Th width='100px'>{t('actions')}</Th>
+              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' first={true}>{t('email')}</Th>
+              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name'>{t('name')}</Th>
+              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['status']} name='status'>{t('status')}</Th>
+              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course'>{t('course')}</Th>
+              <Th onSort={ (name) => { this._sort(name) }} dir={sorters['date']} name='date'>{t('date')}</Th>
+              <Th>{t('actions')}</Th>
             </HeadRow>
             </Thead>
 

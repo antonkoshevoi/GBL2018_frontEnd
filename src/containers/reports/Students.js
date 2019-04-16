@@ -9,11 +9,11 @@ import {getReport} from "../../redux/reports/students/actions";
 import {getSingleRecord} from '../../redux/students/actions';
 import {selectUserData} from "../../redux/user/selectors";
 import {Preloader} from '../../components/ui/Preloader';
+import {Date} from "../../components/ui/DateTime";
 import Card from "../../components/ui/Card";
 import EditStudentModal from "../students/modals/EditStudentModal";
 import TabSection from "./students/TabSection";
 import HasRole from "../middlewares/HasRole";
-import moment from 'moment/moment';
 
 class Students extends Component {
 
@@ -150,7 +150,7 @@ class Students extends Component {
                                                 </tr>
                                                 <tr>
                                                     <th>{t('birthday')}</th>
-                                                    <td>{studentRequest.get('loading') ? <CircularProgress color="primary"/> : (moment(student.birthday).format('ll') || 'N / A')}</td>
+                                                    <td>{studentRequest.get('loading') ? <CircularProgress color="primary"/> : (student.birthday ? <Date time={student.birthday} /> : '-')}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

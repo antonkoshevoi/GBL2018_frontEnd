@@ -6,9 +6,9 @@ import { getGroups, deleteGroup, resetDeleteGroupRequest } from '../../redux/mes
 import { MenuItem, Select, Button, Icon } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { NavLink } from "react-router-dom";
+import { DateTime } from "../../components/ui/DateTime";
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
-import moment from 'moment/moment';
 
 class MessageGroups extends Component {
 
@@ -63,12 +63,12 @@ class MessageGroups extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td width='40px'>{this._recordNumber(key)}</Td>
-                <Td width='200px'>
+                <Td>{this._recordNumber(key)}</Td>
+                <Td>
                     <NavLink className="m--margin-left-5 g-blue" to={`/messages/groups/${record.get('id')}`}>{record.get('name')}</NavLink>
                 </Td>                
-                <Td width='100px'>{moment(record.get('created')).format('lll')}</Td>
-                <Td width='100px' className="actions">
+                <Td><DateTime time={record.get('created')} /></Td>
+                <Td className="actions">
                     <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' to={`/messages/groups/${record.get('id')}`}>
                         <i className='la la-edit'></i>
                     </NavLink>                    
@@ -134,10 +134,10 @@ class MessageGroups extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>
-                                <Th width='40px'>#</Th>
-                                <Th width='150px'>{t('name')}</Th>                                                         
-                                <Th width='100px'>{t('created')}</Th>                                
-                                <Th width='100px'>{t('actions')}</Th>
+                                <Th>#</Th>
+                                <Th>{t('name')}</Th>                                                         
+                                <Th>{t('created')}</Th>                                
+                                <Th>{t('actions')}</Th>
                             </HeadRow>
                             </Thead>
 

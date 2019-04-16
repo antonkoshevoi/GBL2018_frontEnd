@@ -174,12 +174,12 @@ class Parents extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td width='60px'>{this._recordNumber(key)}</Td>
-        <Td width='132px'>{record.get('username')}</Td>
-        <Td width='132px'>{record.get('firstName')}</Td>
-        <Td width='132px'>{record.get('lastName')}</Td>
-        <Td width='132px'>{record.get('email')}</Td>        
-        <Td width='132px'>{record.get('students')}
+        <Td>{this._recordNumber(key)}</Td>
+        <Td>{record.get('username')}</Td>
+        <Td>{record.get('firstName')}</Td>
+        <Td>{record.get('lastName')}</Td>
+        <Td>{record.get('email')}</Td>        
+        <Td>{record.get('students')}
             {record.get('students') > 0 &&
                 <button title={t('students')} className='ml-3 btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showStudents(record.get('id')) }} >
                     <i className='la la-search'></i>
@@ -187,9 +187,9 @@ class Parents extends Component {
             }
         </Td>   
         <HasRole roles={['Superadministrator']}>
-            <Td width='132px'>{record.get('schoolName')}</Td>
+            <Td>{record.get('schoolName')}</Td>
         </HasRole>
-        <Td width='150px' className="actions">
+        <Td className="actions">
           <HasPermission permissions={['[Users][Parents][Update]']}>
             <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
           </HasPermission>
@@ -253,16 +253,16 @@ class Parents extends Component {
                   <Table>
                     <Thead>
                       <HeadRow>
-                        <Th width='60px'>#</Th>
-                        <Th onSort={ (name) => { this._sort(name) }} dir={sorters['username']} name='username' width='132px'>{t('username')}</Th>
-                        <Th onSort={ (name) => { this._sort(name) }} dir={sorters['firstName']} name='firstName' width='132px'>{t('firstName')}</Th>
-                        <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName' width='132px'>{t('lastName')}</Th>
-                        <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' width='132px'>{t('email')}</Th>                  
-                        <Th width='132px'>{t('students')}</Th>          
+                        <Th>#</Th>
+                        <Th onSort={ (name) => { this._sort(name) }} dir={sorters['username']} name='username'>{t('username')}</Th>
+                        <Th onSort={ (name) => { this._sort(name) }} dir={sorters['firstName']} name='firstName'>{t('firstName')}</Th>
+                        <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName'>{t('lastName')}</Th>
+                        <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email'>{t('email')}</Th>                  
+                        <Th>{t('students')}</Th>          
                         <HasRole roles={['Superadministrator']}>
-                        <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                        <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school'>{t('school')}</Th>
                         </HasRole>
-                        <Th width='150px' className='actios'>{t('actions')}</Th>
+                        <Th className='actios'>{t('actions')}</Th>
                       </HeadRow>
                     </Thead>
 

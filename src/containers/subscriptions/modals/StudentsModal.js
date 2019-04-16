@@ -1,18 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {
-  AppBar, CircularProgress,
-  DialogContent,  
-  Icon, Toolbar, Typography
-} from '@material-ui/core';
+import { AppBar, CircularProgress, DialogContent, Icon, Toolbar, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { selectGetStudentsRecordsRequest, selectUnSubscribeStudentRequest } from "../../../redux/subscriptions/selectors";
 import { getStudentsRecords, unSubscribeStudent, resetUnSubscribeStudentRequest } from "../../../redux/subscriptions/actions";
-import Modal from '../../../components/ui/Modal';
+import { Date } from "../../../components/ui/DateTime";
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../../components/ui/table";
+import Modal from '../../../components/ui/Modal';
 import DeleteButton from "../../../components/ui/DeleteButton";
-import moment from 'moment/moment';
 
 class StudentsModal extends Component {
 
@@ -64,11 +60,11 @@ class StudentsModal extends Component {
 
         return studentsRecordsRequest.get('records').map((item, i) => {    
             return <Row index={i} key={i}>                     
-                <Td width='120px'>{item.get('studentFirstName')} {item.get('studentLastName')}</Td>                        
-                <Td width='120px'>{item.get('courseTitle')}</Td>    
-                <Td width='120px'>{item.get('classroomName')}</Td>
-                <Td width='120px'>{moment(item.get('createdAt')).format('ll')}</Td>                                                
-                <Td width='120px' name='actions'>
+                <Td>{item.get('studentFirstName')} {item.get('studentLastName')}</Td>                        
+                <Td>{item.get('courseTitle')}</Td>    
+                <Td>{item.get('classroomName')}</Td>
+                <Td><Date time={item.get('createdAt')} /></Td>                                                
+                <Td className='actions'>
                     <DeleteButton btnName={t('delete')} title={t('areYouSureWantToCancelThisCourse')} onClick={() => { this._unsubscribeStudent(item.get('id')) }}/>                                                
                 </Td>
             </Row>
@@ -97,11 +93,11 @@ class StudentsModal extends Component {
             <Table >
                 <Thead>
                     <HeadRow>                                 
-                        <Th width='120px' name='student'>{t('student')}</Th>
-                        <Th width='120px' name='course'>{t('course')}</Th>
-                        <Th width='120px' name='course'>{t('classroom')}</Th>
-                        <Th width='120px' name='assignDate'>{t('assignDate')}</Th>
-                        <Th width='120px' name='actions'>{t('actions')}</Th>
+                        <Th name='student'>{t('student')}</Th>
+                        <Th name='course'>{t('course')}</Th>
+                        <Th name='course'>{t('classroom')}</Th>
+                        <Th name='assignDate'>{t('assignDate')}</Th>
+                        <Th name='actions'>{t('actions')}</Th>
                     </HeadRow>
                 </Thead>
                 <Tbody>                    

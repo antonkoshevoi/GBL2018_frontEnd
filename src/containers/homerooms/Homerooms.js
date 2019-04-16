@@ -5,11 +5,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
-import {
-  selectDeleteRequest,
-  selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination,
-  selectRecords
-} from '../../redux/homerooms/selectors';
+import { selectDeleteRequest, selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords } from '../../redux/homerooms/selectors';
 import {deleteRecord, getRecords, getSingleRecord} from '../../redux/homerooms/actions';
 import Pagination from '../../components/ui/Pagination';
 import CreateHomeroomModal from './modals/CreateHomeroomModal';
@@ -73,22 +69,22 @@ class Homerooms extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td width='60px'>{this._recordNumber(key)}</Td>
-        <Td width='132px'>{record.get('name')}</Td>
+        <Td>{this._recordNumber(key)}</Td>
+        <Td>{record.get('name')}</Td>
         <HasRole roles={['Superadministrator']}>
-        <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
+            <Td>{record.getIn(['school', 'schName'])}</Td>
         </HasRole>
-        <Td width='132px'>{record.getIn(['teacher', 'name'])}</Td>
-        <Td width='132px'>{record.get('studentsCount')}</Td>
+        <Td>{record.getIn(['teacher', 'name'])}</Td>
+        <Td>{record.get('studentsCount')}</Td>
         <HasPermission permissions={['[HomeRooms][Update][Any]', 'HomeRooms][Delete][Any']}>
-        <Td width='100px' className="actions">
-          <HasPermission permissions={['[HomeRooms][Update][Any]']}>
-            <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
-          </HasPermission>
-          <HasPermission permissions={['[HomeRooms][Delete][Any]']}>
-            <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
-          </HasPermission>
-        </Td>
+            <Td className="actions">
+              <HasPermission permissions={['[HomeRooms][Update][Any]']}>
+                <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
+              </HasPermission>
+              <HasPermission permissions={['[HomeRooms][Delete][Any]']}>
+                <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
+              </HasPermission>
+            </Td>
         </HasPermission>
       </Row>
     ));
@@ -118,10 +114,6 @@ class Homerooms extends Component {
     }
   }
 
-  /**
-   *
-   * @private
-   */
   _getRecords () {
     const { sorters, filters, page, perPage } = this.state;
 
@@ -132,11 +124,6 @@ class Homerooms extends Component {
     });
   }
 
-  /**
-   *
-   * @param name
-   * @private
-   */
   _sort (name) {
     let sorters = {};
 
@@ -149,11 +136,6 @@ class Homerooms extends Component {
     this.setState({ sorters }, this._getRecords);
   }
 
-  /**
-   *
-   * @param value
-   * @private
-   */
   _search(value) {
     let filters = {
       composed: value
@@ -258,19 +240,18 @@ class Homerooms extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th width='60px'>#</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
+                  <Th>#</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name'>{t('name')}</Th>
                   <HasRole roles={['Superadministrator']}>
-                    <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                    <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school'>{t('school')}</Th>
                   </HasRole>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>{t('teacher')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='132px'>{t('studentsCount')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher'>{t('teacher')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount'>{t('studentsCount')}</Th>
                   <HasPermission permissions={['[HomeRooms][Update][Any]', 'HomeRooms][Delete][Any']}>
-                    <Th width='100px'>{t('actions')}</Th>
+                    <Th>{t('actions')}</Th>
                   </HasPermission>
                 </HeadRow>
               </Thead>
-
               <Tbody>
                 {loading &&
                   <TablePreloader text={t('loading')} />

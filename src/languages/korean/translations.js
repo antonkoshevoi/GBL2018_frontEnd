@@ -628,5 +628,9 @@ export default {
     ok: 'Ok',
     viewReport: '보고서',
     skip: '건너 뛰기',
-    received: 'Received'
+    received: 'Received',
+    Basic: 'Basic',
+    Multi: 'Multi',
+    Family: 'Family',
+    freeWorkbook: '{{number}} free workbook'     
 }

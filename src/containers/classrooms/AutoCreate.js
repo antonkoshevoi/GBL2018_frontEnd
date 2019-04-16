@@ -71,16 +71,14 @@ class AutoCreate extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td width='100px'>{key + 1}</Td>
-        <Td width='132px'>{record.get('crsTitle')}</Td>
-        <Td width='132px'>{record.getIn(['publisher','name'])}</Td>
-        <Td width='132px'>{t(record.getIn(['autoCreateTask', 'frequency']))}</Td>
-        <Td width='132px'>{record.getIn(['autoCreateTask', 'rollOver'])}</Td>
-        <Td width='132px'>{record.getIn(['autoCreateTask', 'maxStudent'])}</Td>
-        <Td width='150px' className="actions">
-          <HasPermission permissions={[
-            '[ClassRooms][Update][Any]'
-          ]}>
+        <Td>{key + 1}</Td>
+        <Td>{record.get('crsTitle')}</Td>
+        <Td>{record.getIn(['publisher','name'])}</Td>
+        <Td>{t(record.getIn(['autoCreateTask', 'frequency']))}</Td>
+        <Td>{record.getIn(['autoCreateTask', 'rollOver'])}</Td>
+        <Td>{record.getIn(['autoCreateTask', 'maxStudent'])}</Td>
+        <Td className="actions">
+          <HasPermission permissions={['[ClassRooms][Update][Any]']}>
             <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={record.get('crsId')}/>
           </HasPermission>
         </Td>
@@ -97,16 +95,15 @@ class AutoCreate extends Component {
           <Table>
             <Thead>
             <HeadRow>
-              <Th width='100px'>#</Th>
-              <Th name='name' width='132px'>{t('courseName')} </Th>
-              <Th name='publisher' width='132px'>{t('publisher')}</Th>
-              <Th name='frequency' width='132px'>{t('frequency')}</Th>
-              <Th name='rollover' width='132px'>{t('rolloverDayTime')}</Th>
-              <Th name='max' width='132px'>{t('maxStudents')}</Th>
-              <Th name='action' width='150px'>{t('createNow')}</Th>
+              <Th>#</Th>
+              <Th name='name'>{t('courseName')} </Th>
+              <Th name='publisher'>{t('publisher')}</Th>
+              <Th name='frequency'>{t('frequency')}</Th>
+              <Th name='rollover'>{t('rolloverDayTime')}</Th>
+              <Th name='max'>{t('maxStudents')}</Th>
+              <Th name='action'>{t('createNow')}</Th>
             </HeadRow>
             </Thead>
-
             <Tbody>
             {loading &&
             <TablePreloader text={t('loading')} />

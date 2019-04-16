@@ -4,11 +4,9 @@ import { EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, 
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import {
-  selectDeleteRequest, selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination,
-  selectRecords
-} from '../../redux/classrooms/selectors';
+import { selectDeleteRequest, selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords } from '../../redux/classrooms/selectors';
 import { buildSortersQuery } from '../../helpers/utils';
+import { Date } from "../../components/ui/DateTime";
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
 import { getDemoClassrooms, deleteRecord, getSingleRecord } from '../../redux/classrooms/actions';
@@ -16,7 +14,6 @@ import CreateDemoClassroomModal from './modals/CreateDemoClassroomModal';
 import EditDemoClassroomModal from './modals/EditDemoClassroomModal';
 import AssignStudentModal from './modals/AssignStudentModal';
 import HasRole from "../middlewares/HasRole";
-import moment from 'moment/moment';
 
 class DemoCoursesTab extends Component {
   static propTypes = {
@@ -87,10 +84,6 @@ class DemoCoursesTab extends Component {
     });
   }  
 
-  /**
-   *
-   * @private
-   */
   _getRecords () {
     const { filters, sorters, page, perPage } = this.state;
 
@@ -132,11 +125,6 @@ class DemoCoursesTab extends Component {
     }
   }
 
-  /**
-   *
-   * @param name
-   * @private
-   */
   _sort (name) {
     let sorters = {};
 
@@ -149,20 +137,10 @@ class DemoCoursesTab extends Component {
     this.setState({ sorters }, this._getRecords);
   }
 
-  /**
-   *
-   * @param perPage
-   * @private
-   */
   _selectPerPage (perPage) {
     this.setState({ perPage }, this._getRecords)
   }
 
-  /**
-   *
-   * @param page
-   * @private
-   */
   _goToPage (page) {
     this.setState({ page }, this._getRecords)
   }
@@ -184,16 +162,16 @@ class DemoCoursesTab extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td width='60px'>{this._recordNumber(key)}</Td>
-        <Td width='132px'>{record.get('crmName')}</Td>
+        <Td>{this._recordNumber(key)}</Td>
+        <Td>{record.get('crmName')}</Td>
         <HasRole roles={['Superadministrator']}>
-            <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
+            <Td>{record.getIn(['school', 'schName'])}</Td>
         </HasRole>
-        <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
-        <Td width='132px'>{record.getIn(['teacher', 'name'])}</Td>
-        <Td width='100px'>{record.get('studentsCount')}</Td>
-        <Td width='100px'>{moment(record.get('crmEndDate')).format('ll')}</Td>
-        <Td width='100px' className="actions">
+        <Td>{record.getIn(['course', 'crsTitle'])}</Td>
+        <Td>{record.getIn(['teacher', 'name'])}</Td>
+        <Td>{record.get('studentsCount')}</Td>
+        <Td><Date time={record.get('crmEndDate')} /></Td>
+        <Td className="actions">
           <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={ record.get('id') }/>
           <DeleteButton btnName={t('delete')} title={t('areYouSureWantToArchiveClassroom')} icon="la la-archive" onClick={() => { this._deleteRecord(record.get('id')) }}/>
         </Td>
@@ -260,16 +238,16 @@ class DemoCoursesTab extends Component {
           <Table>
             <Thead>
               <HeadRow>
-                <Th width='60px'>#</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
+                <Th>#</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name'>{t('name')}</Th>
                 <HasRole roles={['Superadministrator']}>
-                    <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                    <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school'>{t('school')}</Th>
                 </HasRole>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>{t('course')}</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>{t('teacher')}</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount' width='100px'>{t('students')}</Th>
-                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['endDate']} name='endDate' width='100px'>{t('endDate')}</Th>
-                <Th width='100px'>{t('actions')}</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course'>{t('course')}</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher'>{t('teacher')}</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount'>{t('students')}</Th>
+                <Th onSort={ (name) => { this._sort(name) }} dir={sorters['endDate']} name='endDate'>{t('endDate')}</Th>
+                <Th>{t('actions')}</Th>
               </HeadRow>
             </Thead>
 

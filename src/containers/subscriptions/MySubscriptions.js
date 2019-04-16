@@ -6,13 +6,13 @@ import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnS
 import { getUserRecords, resetGetUserRecordsRequest, unSubscribe, resetUnSubscribeRequest } from '../../redux/subscriptions/actions';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from "../../components/ui/table";
 import { Select, MenuItem, FormHelperText } from '@material-ui/core';
+import { Date } from "../../components/ui/DateTime";
 import Loader from "../../components/layouts/Loader";
 import DeleteButton from "../../components/ui/DeleteButton";
 import ConfirmButton from "../../components/ui/ConfirmButton";
 import AssignStudentModal from "./modals/AssignStudentModal";
 import StudentsModal from "./modals/StudentsModal";
 import GiftModal from "./modals/GiftModal";
-import moment from 'moment/moment';
 
 class MySubscriptions extends Component {
 
@@ -145,23 +145,23 @@ class MySubscriptions extends Component {
             let canAssign = (item.allowedCourses - item.assignedCourses) > 0;
             return (
                 <Row index={i} key={i}>                     
-                    <Td width='120px'>{item.title}</Td>
-                    <Td width='120px'><strong className="g-blue">${item.price} {item.currency}</strong> / {t(item.period)}</Td>
-                    <Td width='120px'>{item.allowedCourses} x {item.allowedStudents}</Td>
-                    <Td width='120px'>
+                    <Td>{t(item.title)}</Td>
+                    <Td><strong className="g-blue">${item.price} {item.currency}</strong> / {t(item.period)}</Td>
+                    <Td>{item.allowedCourses} x {item.allowedStudents}</Td>
+                    <Td>
                         <span className="m--margin-right-15">{item.assignedCourses}</span>
                         { (item.assignedCourses > 0 && isOwner) && <button title={t('assignedStudents')} className='btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={ ()=> {this._showStudentsModal(item) }}>
                             <i className="la la-search"></i>
                         </button> }                                               
                     </Td>
-                    <Td width='150px'>
+                    <Td>
                         {item.isGift ? t('giftForYou') : (isOwner ? t('self') : item.ownerName)}
                         {item.isGift && <ConfirmButton icon='la la-gift' className='btn-success m--margin-left-15' confirmOnly={true} title={t('giftFrom', {user: item.userName}) } /> }
                     </Td>
-                    <Td width='120px'>{moment(item.createdAt).format('ll')}</Td>
-                    <Td width='120px'>{item.expiredAt ? moment(item.expiredAt).format('ll') : '-'}</Td>  
+                    <Td><Date time={item.createdAt} /></Td>
+                    <Td>{item.expiredAt ? <Date time={item.expiredAt} /> : '-'}</Td>  
                     {(filter !== 'expired') &&
-                    <Td width='150px' className='actions'>                        
+                    <Td className='actions'>                        
                         <div>
                             {(!item.assignedCourses && isMine) && 
                             <button title={t('giftSubscription')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { this._showGiftModal(item) }} >
@@ -212,15 +212,15 @@ class MySubscriptions extends Component {
                     <Table >
                         <Thead>
                             <HeadRow>                                 
-                                <Th width='120px'>{t('title')}</Th>
-                                <Th width='120px'>{t('price')}</Th>
-                                <Th width='120px'>{t('allowedCourses')}</Th>
-                                <Th width='120px'>{t('assignedCourses')}</Th>
-                                <Th width='150px'>{t('purchasedFor')}</Th>                                
-                                <Th width='120px'>{t('created')}</Th>
-                                <Th width='120px'>{t('expirationDate')}</Th>                                
+                                <Th>{t('title')}</Th>
+                                <Th>{t('price')}</Th>
+                                <Th>{t('allowedCourses')}</Th>
+                                <Th>{t('assignedCourses')}</Th>
+                                <Th>{t('purchasedFor')}</Th>                                
+                                <Th>{t('created')}</Th>
+                                <Th>{t('expirationDate')}</Th>                                
                                 {(filter !== 'expired') &&
-                                <Th width='150px'>{t('actions')}</Th>}
+                                <Th>{t('actions')}</Th>}
                             </HeadRow>
                         </Thead>
                         <Tbody>                            

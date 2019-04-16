@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { selectGetResultRecordsRequest } from '../../redux/scap/selectors';
 import { getResultsRecords } from '../../redux/scap/actions';
-import moment from 'moment/moment';
+import { Date } from "../../components/ui/DateTime";
 import Pagination from '../../components/ui/Pagination';
 import ResultsModal from "./modals/ResultsModal"
 
@@ -75,12 +75,12 @@ class ScapResults extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td width='60px'>{this._recordNumber(key)}</Td>                
-                <Td width='132px'>{record.get('teacher')}</Td>                                
-                <Td width='132px'>{record.get('homeroom')}</Td>
-                <Td width='132px'>{record.get('student')}</Td>
-                <Td width='132px'>{moment(record.get('createdAt')).format('ll')}</Td>
-                <Td width='132px'>
+                <Td>{this._recordNumber(key)}</Td>                
+                <Td>{record.get('teacher')}</Td>                                
+                <Td>{record.get('homeroom')}</Td>
+                <Td>{record.get('student')}</Td>
+                <Td><Date time={record.get('createdAt')} /></Td>
+                <Td>
                     <button title={t('showDetails')} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15' onClick={() => { this._showResultsModal(record) }} id={record.get('id')} >
                         <i className='la la-search'></i>
                     </button>                                
@@ -142,12 +142,12 @@ class ScapResults extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>
-                                <Th width='60px'>#</Th>
-                                <Th width='132px'>{t('teacher')}</Th>
-                                <Th width='132px'>{t('homeroom')}</Th>                                
-                                <Th width='132px'>{t('student')}</Th>
-                                <Th width='132px'>{t('created')}</Th>
-                                <Th width='132px'>{t('actions')}</Th>
+                                <Th>#</Th>
+                                <Th>{t('teacher')}</Th>
+                                <Th>{t('homeroom')}</Th>                                
+                                <Th>{t('student')}</Th>
+                                <Th>{t('created')}</Th>
+                                <Th>{t('actions')}</Th>
                             </HeadRow>
                             </Thead>
 

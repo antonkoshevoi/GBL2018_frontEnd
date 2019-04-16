@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { selectGetRecordsRequest } from '../../redux/scap/selectors';
 import { getAssignedRecords } from '../../redux/scap/actions';
-import moment from 'moment/moment';
+import { Date } from "../../components/ui/DateTime";
 import Pagination from '../../components/ui/Pagination';
 import TeacherResultsModal from './modals/TeacherResultsModal';
 
@@ -78,15 +78,15 @@ class TeacherScap extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td width='60px'>{this._recordNumber(key)}</Td>
-                <Td width='132px'>{record.get('title')}</Td>
-                <Td width='100px'>{record.get('questions')}</Td>
-                <Td width='100px'>
+                <Td>{this._recordNumber(key)}</Td>
+                <Td>{record.get('title')}</Td>
+                <Td>{record.get('questions')}</Td>
+                <Td>
                     {record.get('completed')}
                     {(record.get('completed') > 0) && <ResultsButton onClick={() => { this._showResultsModal(record) }} t={t} />}
                 </Td>
-                <Td width='132px'>{moment(record.get('createdAt')).format('ll')}</Td>
-                <Td width='132px'>
+                <Td><Date time={record.get('createdAt')} /></Td>
+                <Td>
                     <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo('scap/fill/' + record.get('id')) }}>
                         <i className='la la-plus'></i>
                     </button>                
@@ -144,12 +144,12 @@ class TeacherScap extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>
-                                <Th width='60px'>#</Th>
-                                <Th width='132px'>{t('title')}</Th>
-                                <Th width='100px'>{t('questions')}</Th>                                
-                                <Th width='100px'>{t('completed')}</Th>
-                                <Th width='132px'>{t('created')}</Th>
-                                <Th width='132px'>{t('actions')}</Th>
+                                <Th>#</Th>
+                                <Th>{t('title')}</Th>
+                                <Th>{t('questions')}</Th>                                
+                                <Th>{t('completed')}</Th>
+                                <Th>{t('created')}</Th>
+                                <Th>{t('actions')}</Th>
                             </HeadRow>
                             </Thead>
 

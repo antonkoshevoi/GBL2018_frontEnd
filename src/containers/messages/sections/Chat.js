@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { selectGetChatMessagesRequest, selectSendMessageRequest, selectUpdateMessageRequest, selectDeleteRecordRequest } from '../../../redux/messages/selectors';
 import { getChatMessages, sendChatMessage, updateChatMessage, deleteChatMessage } from '../../../redux/messages/actions';
 import { CircularProgress, Avatar, TextField, FormControl } from '@material-ui/core';
+import { DateTime } from "../../../components/ui/DateTime";
 import Loader from '../../../components/layouts/Loader';
-import moment from 'moment/moment';
-
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -122,7 +121,7 @@ class Chat extends Component {
                     </div>}
                     <div className='d-inline-block'>
                         <div className='text-muted'>
-                            {record.get('isMine') ? t('me') : record.get('userName')}, {moment(record.get('created')).format('lll')}
+                            {record.get('isMine') ? t('me') : record.get('userName')}, <DateTime time={record.get('created')} />
                         </div>
                         <div className='message-content mt-1'>
                             <div className={`pre-line ${record.get('removed') ? 'text-muted' : ''}`}>                    

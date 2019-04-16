@@ -36,7 +36,7 @@ class Subscriptions extends Component {
         return (        
         <div key={key} className="subscription-item-block col-sm-12 col-md-4 col-lg-4 col-xl-4 m--margin-top-35">
             <div className={`subscription-item item-${key}`}>
-                <div className="subscription-header"><h1>{record.get('title')}</h1></div>
+                <div className="subscription-header"><h1>{t(record.get('title'))}</h1></div>
                 <div className="subscription-content">
                     <div className="subscription-prices">
                         <div className="row">
@@ -54,7 +54,7 @@ class Subscriptions extends Component {
                         </div>            
                         <div className="subscription-bonuses text-left">
                             <span>{t('annualBonus')}:</span>
-                            <span className="bonus">{record.get('bonuses')}</span>
+                            <span className="bonus">{t('freeWorkbook', {number: record.get('allowedStudents')})}</span>
                         </div>
                         <p className="text-center">
                             <button onClick={() => { goTo(`/subscribe/${record.get('id')}`); }} className="btn btn-info">{t('getThis')}</button>

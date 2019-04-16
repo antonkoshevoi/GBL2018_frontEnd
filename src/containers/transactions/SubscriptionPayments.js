@@ -3,10 +3,10 @@ import { translate } from 'react-i18next';
 import { MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
+import { DateTime } from "../../components/ui/DateTime";
 import { selectPagination, selectGetPaymentsRequest } from '../../redux/subscriptions/selectors';
 import { getPayments } from '../../redux/subscriptions/actions';
 import Pagination from '../../components/ui/Pagination';
-import moment from 'moment/moment';
 
 class SubscriptionPayments extends Component {
     constructor(props) {
@@ -52,7 +52,7 @@ class SubscriptionPayments extends Component {
                         </div>
                         <div className="row mb-1">
                             <div className="col-5"><span className="text-muted">{t('subscription')}:</span></div>
-                            <div className="col-7">{record.get('subscription')} {t('subscription')}</div>
+                            <div className="col-7">{t(record.get('subscription'))} {t('subscription')}</div>
                         </div>
                         <div className="row mb-1">
                             <div className="col-5"><span className="text-muted">{t('period')}:</span></div>
@@ -68,7 +68,7 @@ class SubscriptionPayments extends Component {
                         </div>
                         <div className="row mb-1">
                             <div className="col-5"><span className="text-muted">{t('date')}:</span></div>
-                            <div className="col-7">{moment(record.get('createdAt')).format('lll')}</div>
+                            <div className="col-7"><DateTime time={record.get('createdAt')} /></div>
                         </div>                        
                     </div>
                     <div className="d-none d-md-block">{this._recordNumber(key)} d-md-block</div>
@@ -76,11 +76,11 @@ class SubscriptionPayments extends Component {
                 <Td className="d-none d-md-table-cell"><a className="g-blue" href={record.get('invoiceUrl')}>{record.get('number')}</a></Td>
                 <Td className="d-none d-md-table-cell"><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('type'))}</span></Td>                
                 <Td className="d-none d-md-table-cell">{record.get('transactionCode')}</Td>
-                <Td className="d-none d-md-table-cell">{record.get('subscription')} {t('subscription')}</Td>        
+                <Td className="d-none d-md-table-cell">{t(record.get('subscription'))} {t('subscription')}</Td>        
                 <Td className="d-none d-md-table-cell">{t(record.get('period'))}</Td>
                 <Td className="d-none d-md-table-cell">${record.get('total')} {record.get('currency')}</Td>
                 <Td className="d-none d-md-table-cell">{t(record.get('autoRenewal') ? 'yes' : 'no')}</Td>
-                <Td className="d-none d-md-table-cell">{moment(record.get('createdAt')).format('lll')}</Td>
+                <Td className="d-none d-md-table-cell"><DateTime time={record.get('createdAt')} /></Td>
             </Row>
         ));
     }

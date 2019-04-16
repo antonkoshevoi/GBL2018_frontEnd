@@ -113,12 +113,12 @@ class Connections extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td width='80px'><div className="user-avatar"><img width="100%" src={record.get('avatarSmall')} alt={record.get('name')} /></div></Td>
-                <Td width='132px'>{record.get('name') || '-'}</Td>
-                <Td width='132px'>{record.get('username') || '-'}</Td>
-                <Td width='150px'>{record.get('email') || '-'}</Td>
-                <Td width='132px'>{this._getStatus(record)}</Td>
-                <Td width='150px' className='actions'>
+                <Td><div className="user-avatar"><img width="100%" src={record.get('avatarSmall')} alt={record.get('name')} /></div></Td>
+                <Td>{record.get('name') || '-'}</Td>
+                <Td className="d-none d-sm-table-cell">{record.get('username') || '-'}</Td>
+                <Td>{record.get('email') || '-'}</Td>
+                <Td>{this._getStatus(record)}</Td>
+                <Td className='actions'>
                     <button title={t('connectionDetails')}  onClick={() => { this._openViewDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
                         <i className='la la-search'></i>
                     </button>
@@ -191,12 +191,12 @@ class Connections extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>                          
-                                <Th width='80px'>&nbsp;</Th>
-                                <Th width='132px'>{t('name')}</Th>
-                                <Th width='132px'>{t('username')}</Th>                                
-                                <Th width='150px'>{t('email')}</Th>                                
-                                <Th width='132px'>{t('status')}</Th>
-                                <Th width='150px'>{t('actions')}</Th>
+                                <Th>&nbsp;</Th>
+                                <Th>{t('name')}</Th>
+                                <Th className="d-none d-sm-table-cell">{t('username')}</Th>                                
+                                <Th>{t('email')}</Th>                                
+                                <Th>{t('status')}</Th>
+                                <Th>{t('actions')}</Th>
                             </HeadRow>
                             </Thead>
                             <Tbody>
