@@ -5,12 +5,12 @@ import {NavLink} from "react-router-dom";
 import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnSubscribeRequest } from '../../../redux/subscriptions/selectors';
 import { getUserRecords, resetGetUserRecordsRequest, unSubscribe, resetUnSubscribeRequest } from '../../../redux/subscriptions/actions';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from "../../../components/ui/table";
+import { Date } from "../../../components/ui/DateTime";
 import DeleteButton from "../../../components/ui/DeleteButton";
 import ConfirmButton from "../../../components/ui/ConfirmButton";
 import AssignStudentModal from "../../subscriptions/modals/AssignStudentModal";
 import StudentsModal from "../../subscriptions/modals/StudentsModal";
 import GiftModal from "../../subscriptions/modals/GiftModal";
-import moment from 'moment/moment';
 
 class Subscriptions extends Component {
 
@@ -146,7 +146,7 @@ class Subscriptions extends Component {
                             <i className="la la-search"></i>
                         </button> }                                               
                     </Td>                    
-                    <Td width='120px'>{item.expiredAt ? moment(item.expiredAt).format('ll') : '-'}</Td>                      
+                    <Td width='120px'>{item.expiredAt ? <Date time={item.expiredAt} /> : '-'}</Td>                      
                     <Td width='150px' className='actions'>                        
                         <div>
                             {(!item.assignedCourses && isMine) && 

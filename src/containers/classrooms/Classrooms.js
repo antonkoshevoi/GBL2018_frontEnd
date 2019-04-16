@@ -3,14 +3,11 @@ import { translate } from 'react-i18next';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow} from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
-import {
-  selectDeleteRequest, selectGetRecordForAssignStudentsRequest,
-  selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination,
-  selectRecords
-} from '../../redux/classrooms/selectors';
-import {deleteRecord, getRecordForAssignStudents, getRecords, getSingleRecord} from '../../redux/classrooms/actions';
+import { Date } from "../../components/ui/DateTime";
+import { selectDeleteRequest, selectGetRecordForAssignStudentsRequest, selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords } from '../../redux/classrooms/selectors';
+import { deleteRecord, getRecordForAssignStudents, getRecords, getSingleRecord } from '../../redux/classrooms/actions';
 import Pagination from '../../components/ui/Pagination';
 import CreateClassroomModal from './modals/CreateClassroomModal';
 import EditClassroomModal from "./modals/EditClassroomModal";
@@ -19,7 +16,6 @@ import DeleteButton from "../../components/ui/DeleteButton";
 import HasPermission from "../middlewares/HasPermission";
 import HasRole from "../middlewares/HasRole";
 import AssignStudentsModal from "./modals/AssignStudentsModal";
-import moment from 'moment/moment';
 
 const AssignButton = ({ id, onClick, btnName}) => {
   return (
@@ -100,24 +96,24 @@ class Classrooms extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td width='60px'>{this._recordNumber(key)}</Td>
-        <Td width='132px'>
+        <Td>{this._recordNumber(key)}</Td>
+        <Td>
             {record.get('crmName')}
         </Td>
         <HasRole roles={['Superadministrator']}>
-            <Td width='132px'>{record.getIn(['school', 'schName'])}</Td>
+            <Td>{record.getIn(['school', 'schName'])}</Td>
         </HasRole>
-        <Td width='132px'>{record.getIn(['course', 'crsTitle'])}</Td>
-        <Td width='132px'>{record.getIn(['teacher', 'name'])}</Td>
-        <Td width='75px'>{record.get('studentsCount')}</Td>
-        <Td width='75px'>{(record.get('isPublic') ? t('yes') : t('no'))}</Td>
-        <Td width='75px'>            
+        <Td>{record.getIn(['course', 'crsTitle'])}</Td>
+        <Td>{record.getIn(['teacher', 'name'])}</Td>
+        <Td>{record.get('studentsCount')}</Td>
+        <Td>{(record.get('isPublic') ? t('yes') : t('no'))}</Td>
+        <Td>            
             <span title={t(record.get('paid') ? 'classroomPaid' : 'classroomNotPaid')} className={`${record.get('paid') ? 'text-success' : 'text-danger '}`}>
                 <i className={`display-5 la ${record.get('paid') ? 'la-dollar' : 'la-exclamation-triangle'}`}></i>
             </span>             
         </Td>
-        <Td width='100px'>{moment(record.get('crmEndDate')).format('ll')}</Td>
-        <Td width='150px' className="actions">
+        <Td><Date time={record.get('crmEndDate')} /></Td>
+        <Td className="actions">
           <HasPermission permissions={['[ClassRooms][Update][Any]']}>
             <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={record.get('id')}/>
           </HasPermission>

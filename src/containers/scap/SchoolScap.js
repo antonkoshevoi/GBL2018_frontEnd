@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow } from '../../components/ui/table';
 import { selectGetRecordsRequest, selectDeleteRequest } from '../../redux/scap/selectors';
 import { getRecords, deleteRecord } from '../../redux/scap/actions';
-import moment from 'moment/moment';
+import { Date } from "../../components/ui/DateTime";
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from "../../components/ui/DeleteButton";
 import AssignTeachersModal from "./modals/AssignTeachersModal"
@@ -119,16 +119,16 @@ class SchoolScap extends Component {
 
         return records.map((record, key) => (
             <Row index={key} key={key}>
-                <Td width='60px'>{this._recordNumber(key)}</Td>
-                <Td width='132px'>{record.get('title')}</Td>
-                <Td width='100px'>{record.get('questions')}</Td>                                
-                <Td width='100px'>{record.get('teachers')} <AssignButton onClick={() => { this._showAssignModal(record) }} t={t} /></Td>
-                <Td width='100px'>
+                <Td>{this._recordNumber(key)}</Td>
+                <Td>{record.get('title')}</Td>
+                <Td>{record.get('questions')}</Td>                                
+                <Td>{record.get('teachers')} <AssignButton onClick={() => { this._showAssignModal(record) }} t={t} /></Td>
+                <Td>
                     {record.get('completed')}
                     {(record.get('completed') > 0) && <ResultsButton onClick={() => { this._showResults(record) }} t={t} />}
                 </Td>
-                <Td width='132px'>{moment(record.get('createdAt')).format('ll')}</Td>
-                <Td width='132px' className="actions">                    
+                <Td><Date time={record.get('createdAt')} /></Td>
+                <Td className="actions">                    
                     <EditButton btnName={t('edit')} onClick={(id) => { this._editRecord(id) }} id={record.get('id')} />
                     <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }} />                        
                 </Td>
@@ -191,13 +191,13 @@ class SchoolScap extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>
-                                <Th width='60px'>#</Th>
-                                <Th width='132px'>{t('title')}</Th>
-                                <Th width='100px'>{t('questions')}</Th>
-                                <Th width='100px'>{t('teachers')}</Th>
-                                <Th width='100px'>{t('completed')}</Th>
-                                <Th width='132px'>{t('created')}</Th>
-                                <Th width='132px'>{t('actions')}</Th>
+                                <Th>#</Th>
+                                <Th>{t('title')}</Th>
+                                <Th>{t('questions')}</Th>
+                                <Th>{t('teachers')}</Th>
+                                <Th>{t('completed')}</Th>
+                                <Th>{t('created')}</Th>
+                                <Th>{t('actions')}</Th>
                             </HeadRow>
                             </Thead>
 

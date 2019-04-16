@@ -41,10 +41,10 @@ class StudentsModal extends Component {
         
         return this.state.students.map((record, key) => (
             <Row index={key} key={key}>
-                <Td width='80px'><Avatar src={record.avatarSmall} alt={record.name} /></Td>
-                <Td width='132px'>{record.name}</Td>                
-                <Td width='132px'>{record.username || '-'}</Td>
-                <Td width='132px'>{record.email || '-'}</Td>                                        
+                <Td><Avatar src={record.avatarSmall} alt={record.name} /></Td>
+                <Td>{record.name}</Td>                
+                <Td>{record.username || '-'}</Td>
+                <Td>{record.email || '-'}</Td>                                        
             </Row>
         ));        
     }
@@ -72,10 +72,10 @@ class StudentsModal extends Component {
                     <Table>
                         <Thead>
                             <HeadRow>                          
-                                <Th width='80px'>{t('image')}</Th>
-                                <Th width='132px'>{t('name')}</Th>
-                                <Th width='132px'>{t('username')}</Th>                                
-                                <Th width='132px'>{t('email')}</Th>
+                                <Th>{t('image')}</Th>
+                                <Th>{t('name')}</Th>
+                                <Th>{t('username')}</Th>                                
+                                <Th>{t('email')}</Th>
                             </HeadRow>
                         </Thead>
                         <Tbody>

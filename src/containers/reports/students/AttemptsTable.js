@@ -4,9 +4,9 @@ import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../components/ui/
 import {selectAttemptsRequest} from "../../../redux/reports/students/selectors";
 import {getAttempts} from "../../../redux/reports/students/actions";
 import {translate} from 'react-i18next';
+import {DateTime} from "../../../components/ui/DateTime";
 import Pagination from '../../../components/ui/Pagination';
 import Loader from "../../../components/layouts/Loader";
-import moment from "moment/moment";
 
 class AttemptsTable extends Component {
 
@@ -85,7 +85,7 @@ class AttemptsTable extends Component {
                       return (
                         <Row index={i} key={i}>
                           <Td width='20px'>{this._recordNumber(i)}</Td>
-                          <Td width='150px'>{moment(attempt.attDate).format('lll')}</Td>
+                          <Td width='150px'><DateTime time={attempt.attDate} /></Td>
                           <Td width='150px'>{attempt.classroomName}</Td>
                           <Td width='150px'>{attempt.courseName}</Td>
                           <Td width='200px'>{attempt.unit || '-'} / {attempt.lesson || '-'}</Td>

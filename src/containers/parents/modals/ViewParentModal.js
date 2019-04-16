@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { translate } from 'react-i18next';
 import { AppBar, DialogContent, Icon, Toolbar, Typography } from '@material-ui/core';
-import moment from 'moment/moment';
+import { DateTime } from "../../../components/ui/DateTime";
 import Modal from "../../../components/ui/Modal";
 
 function TabContainer(props) {
@@ -121,7 +121,7 @@ class ViewParentModal extends Component {
                                     <h3 className="m-widget1__title">{t('requestSentDate')}</h3>
                                 </div>
                                 <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{moment(parent.sentAt).format('lll')}</span>
+                                    <span className="m-widget1__title m--font-brand"><DateTime time={parent.sentAt} /></span>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@ class ViewParentModal extends Component {
                                     <h3 className="m-widget1__title">{t('declinedAt')}</h3>
                                 </div>
                                 <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{moment(parent.updatedAt).format('lll')}</span>
+                                    <span className="m-widget1__title m--font-brand"><DateTime time={parent.updatedAt} /></span>
                                 </div>
                             </div>
                         </div>}

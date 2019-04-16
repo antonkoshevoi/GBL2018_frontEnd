@@ -6,8 +6,8 @@ import {selectGetRecordsRequest} from "../../redux/transactions/selectors";
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/table";
 import {IconButton, MenuItem, Select, FormHelperText} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
+import {DateTime} from "../../components/ui/DateTime";
 import Pagination from '../../components/ui/Pagination';
-import moment from 'moment/moment';
 
 class StoreItems extends Component {
 
@@ -71,7 +71,7 @@ class StoreItems extends Component {
             let badgeClass = item.get('status') !== 'due' ? item.get('status') === 'paid' ? 'm-badge--info' : 'm-badge--danger' : '';
             return ([
                 <Row index={i} key={i}>
-                    <Td width='40px' className="d-none d-md-table-cell">{this._recordNumber(i)}</Td> 
+                    <Td className="d-none d-md-table-cell">{this._recordNumber(i)}</Td> 
                     <Td>
                         <div className="d-md-none text-left">
                             <div className="row mb-1">
@@ -88,7 +88,7 @@ class StoreItems extends Component {
                             </div>
                             <div className="row mb-1">
                                 <div className="col-5"><span className="text-muted">{t('date')}:</span></div>
-                                <div className="col-7">{moment(item.get('createdAt')).format('lll')}</div>
+                                <div className="col-7"><DateTime time={item.get('createdAt')} /></div>
                             </div>                            
                             <div className="row mb-1">
                                 <div className="col-5"><span className="text-muted">{t('items')}:</span></div>
@@ -113,7 +113,7 @@ class StoreItems extends Component {
                     <Td className="d-none d-md-table-cell">{t(item.get('paymentType'))}</Td>
                     <Td className="d-none d-md-table-cell"><span className={`m-badge m-badge--wide ${badgeClass}`}>{t(item.get('status'))}</span></Td>
                     <Td className="d-none d-md-table-cell">${item.get('total')} {item.get('currency')}</Td>
-                    <Td className="d-none d-md-table-cell">{moment(item.get('createdAt')).format('lll')}</Td>
+                    <Td className="d-none d-md-table-cell"><DateTime time={item.get('createdAt')} /></Td>
                 </Row>,
                 ( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) && this._renderTransactionItemsBlock(item.get('items'))
             ])
@@ -128,10 +128,10 @@ class StoreItems extends Component {
                     <Table className="table-bordered m--margin-bottom-0">
                         <Thead >
                             <HeadRow>
-                                <Th width="80px">{t('thumbnail')}</Th>
-                                <Th width="180px">{t('title')}</Th>
-                                <Th width="100px">{t('quantity')}</Th>
-                                <Th width="150px">{t('price')}</Th>                                
+                                <Th>{t('thumbnail')}</Th>
+                                <Th>{t('title')}</Th>
+                                <Th>{t('quantity')}</Th>
+                                <Th>{t('price')}</Th>                                
                             </HeadRow>
                         </Thead>
                         <Tbody >
@@ -147,14 +147,14 @@ class StoreItems extends Component {
         return data.map((item,i) => {
             return (
                 <Row key={i} index={i}>
-                    <Td width="80px">                    
+                    <Td>                    
                         <div >
                             {item.get('thumbnail') ? <img src={item.get('thumbnail')} width={70} alt={item.get('title')}/> : '-'}
                         </div>
                     </Td>
-                    <Td  width="180px"><NavLink className="g-blue" to={`/store/details/${item.get('itemId')}`}>{item.get('title')}</NavLink></Td>
-                    <Td width='100px'>{item.get('quantity')}</Td>
-                    <Td width='150px'>${Number(item.get('totalPrice')).toFixed(2)} {item.get('currency')}</Td>                    
+                    <Td><NavLink className="g-blue" to={`/store/details/${item.get('itemId')}`}>{item.get('title')}</NavLink></Td>
+                    <Td>{item.get('quantity')}</Td>
+                    <Td>${Number(item.get('totalPrice')).toFixed(2)} {item.get('currency')}</Td>                    
                 </Row>
             )
         })

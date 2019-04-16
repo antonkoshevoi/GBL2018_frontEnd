@@ -108,7 +108,7 @@ class CourseModal extends Component {
         }
         return (
           <Row key={i} index={i}>
-            <Td width='30px'>
+            <Td>
               <FormControlLabel
                 value="male"
                 name="courseId"
@@ -118,15 +118,15 @@ class CourseModal extends Component {
                   this._onChange(storeCourse)
                 }}/>
             </Td>
-            <Td width='70px'>
+            <Td>
               <div>
                 <img src={storeCourse.get('thumbnail')} width={70} alt={storeCourse.get('title')}/>
               </div>
             </Td>
-            <Td width='100px'><strong>{storeCourse.get('title')}</strong></Td>
-            <Td width='300px'>{storeCourse.get('description')}</Td>
-            <Td width='100px'><strong>{storeCourse.get('price')}</strong></Td>
-            <Td width='100px'><strong>{storeCourse.get('credit') ? storeCourse.get('credit') : '-'}</strong></Td>
+            <Td><strong>{storeCourse.get('title')}</strong></Td>
+            <Td>{storeCourse.get('description')}</Td>
+            <Td><strong>{storeCourse.get('price')}</strong></Td>
+            <Td><strong>{storeCourse.get('credit') ? storeCourse.get('credit') : '-'}</strong></Td>
           </Row>
         )
       });
@@ -163,12 +163,12 @@ class CourseModal extends Component {
             <Table>
               <Thead>
               <HeadRow>
-                <Th width="30px"></Th>
-                <Th width="70px">{t('image')}</Th>
-                <Th width="100px">{t('courseTitle')}</Th>
-                <Th width="300px">{t('courseDescription')}</Th>
-                <Th width="100px">{t('priceEach')}</Th>
-                <Th width="100px">{t('unassignedCredits')}</Th>
+                <Th>&nbsp;</Th>
+                <Th>{t('image')}</Th>
+                <Th>{t('courseTitle')}</Th>
+                <Th>{t('courseDescription')}</Th>
+                <Th>{t('priceEach')}</Th>
+                <Th>{t('unassignedCredits')}</Th>
               </HeadRow>
               </Thead>
               <Tbody>

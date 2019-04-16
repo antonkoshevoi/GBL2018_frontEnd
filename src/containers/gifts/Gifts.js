@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { selectGetRecordsRequest, selectDeleteRequest, selectChangeStatusRequest } from '../../redux/gifts/selectors';
 import { getRecords, deleteRecord, accept, decline, resetDeleteRequest, resetChangeStatusRequest } from '../../redux/gifts/actions';
+import { DateTime } from "../../components/ui/DateTime";
 import DeleteButton from "../../components/ui/DeleteButton";
-import moment from 'moment/moment';
 
 class Gifts extends Component {
     constructor(props) {
@@ -101,15 +101,15 @@ class Gifts extends Component {
                
         return records.map((record, key) => {           
             return (<Row index={key} key={key}>
-                <Td width='132px'>
+                <Td>
                     {record.get('name')}
                     {record.get('quantity') > 1 && <span className="m--margin-left-10 m-badge m-badge--brand m-badge--wide m-badge--default"> x {record.get('quantity')}</span>}
                 </Td>
-                <Td width='132px'>{t(record.get('productType'))}</Td>                
-                <Td width='132px'>{(currentTab === 'sent') ? record.get('ownerName') : record.get('userName')}</Td>
-                <Td width='132px'>{this._getStatus(record)}</Td>
-                <Td width='132px'>{moment(record.get('createdAt')).format('lll')}</Td>
-                <Td width='150px' className='actions'>
+                <Td>{t(record.get('productType'))}</Td>                
+                <Td>{(currentTab === 'sent') ? record.get('ownerName') : record.get('userName')}</Td>
+                <Td>{this._getStatus(record)}</Td>
+                <Td><DateTime time={record.get('createdAt')} /></Td>
+                <Td className='actions'>
                     {(currentTab === 'sent') &&
                         <div>{record.get('accepted') ? <span className="m--margin-left-10">-</span> : <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._delete(record.get('id')) }} />}</div>
                     }
@@ -174,12 +174,12 @@ class Gifts extends Component {
                         <Table>
                             <Thead>
                             <HeadRow>                          
-                                <Th width='132px'>{t('product')}</Th>
-                                <Th width='132px'>{t('type')}</Th>
-                                <Th width='132px'>{t((currentTab === 'sent') ? 'receiver' : 'sender')}</Th>
-                                <Th width='132px'>{t('status')}</Th>
-                                <Th width='132px'>{t('date')}</Th>
-                                <Th width='150px'>{t('actions')}</Th>
+                                <Th>{t('product')}</Th>
+                                <Th>{t('type')}</Th>
+                                <Th>{t((currentTab === 'sent') ? 'receiver' : 'sender')}</Th>
+                                <Th>{t('status')}</Th>
+                                <Th>{t('date')}</Th>
+                                <Th>{t('actions')}</Th>
                             </HeadRow>
                             </Thead>
                             <Tbody>

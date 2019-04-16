@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
-import {
-  AppBar, DialogContent,  
-  Icon, Toolbar, Typography,
-  Divider, Button, DialogActions,  
-} from '@material-ui/core';
+import { AppBar, DialogContent, Icon, Toolbar, Typography, Divider, Button, DialogActions } from '@material-ui/core';
 import { translate } from 'react-i18next';
+import { DateTime } from "../../../components/ui/DateTime";
 import Modal from "../../../components/ui/Modal";
-import moment from "moment/moment";
 
 class ViewMessageModal extends Component {
 
@@ -47,7 +43,7 @@ class ViewMessageModal extends Component {
                     <div className="row">
                         <div className="col-sm-12">
                             <h5 className="m--margin-bottom-20">{message.subject} { message.type && <span className={`m-badge m-badge--brand m-badge--wide ${(message.type === 'alert' ? 'm-badge--warning' : '')}`}>{t(message.type)}</span> }</h5>
-                            <p>{t('date')}: <strong>{moment(message.created).format('lll')}</strong></p>
+                            <p>{t('date')}: <strong><DateTime time={message.created} /></strong></p>
                             {message.recipients &&
                                 <p>{t('to')}: <strong>{message.recipients}</strong></p>
                             }

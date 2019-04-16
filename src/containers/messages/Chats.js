@@ -5,8 +5,8 @@ import { selectGetPrivateChatsRequest, selectGetGroupChatsRequest, selectGetUnre
 import { getPrivateChats, getGroupChats } from '../../redux/messages/actions';
 import { Avatar, CircularProgress } from '@material-ui/core';
 import { debounce } from '../../helpers/utils';
+import { DateTime } from "../../components/ui/DateTime";
 import Chat from "./sections/Chat";
-import moment from 'moment/moment';
 
 class Chats extends Component {
 
@@ -100,7 +100,7 @@ class Chats extends Component {
                                 {record.get('newMessages') > 0 && <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
                             </div>                        
                             <div>{record.get('userName')}</div>
-                            {record.get('lastActivity') && <div className="text-muted">{moment(record.get('lastActivity')).format('lll')}</div>}
+                            {record.get('lastActivity') && <div className="text-muted"><DateTime time={record.get('lastActivity')} /></div>}
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@ class Chats extends Component {
                                 {record.get('newMessages') > 0 && <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
                             </div>
                             <div>{t(record.get('userRole'))}</div>
-                            {record.get('lastActivity') && <div className="text-muted">{moment(record.get('lastActivity')).format('lll')}</div>}
+                            {record.get('lastActivity') && <div className="text-muted"><DateTime time={record.get('lastActivity')} /></div>}
                         </div>
                     </div>
                 </div>

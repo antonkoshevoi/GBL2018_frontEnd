@@ -5,12 +5,12 @@ import OnVisible from 'react-on-visible';
 import { selectGetRecordsRequest, selectDeleteRecordRequest } from '../../../redux/messages/selectors';
 import { getMessages, readMessages, deleteMessage, resetDeleteMessageRequest } from '../../../redux/messages/actions';
 import { Preloader } from '../../../components/ui/Preloader';
+import { DateTime } from "../../../components/ui/DateTime";
 import Pagination from '../../../components/ui/Pagination';
 import DeleteButton from '../../../components/ui/DeleteButton';
 import HasRole from "../../middlewares/HasRole";
 import NewMessageModal from '../modals/NewMessageModal';
 import EditMessageModal from '../modals/EditMessageModal';
-import moment from 'moment/moment';
 
 class Messages extends Component {
 
@@ -149,7 +149,7 @@ class Messages extends Component {
                         <div className='text-center'>
                             <p className='my-1 my-sm-2'>{t(record.user.school)} {t(record.user.role)}</p>
                             <p className='text-muted my-1 my-sm-2'><b>{record.user.name}</b></p>
-                            <p className='d-sm-none my-1'>{moment(record.created).format('lll')}</p>
+                            <p className='d-sm-none my-1'><DateTime time={record.created} /></p>
                             {record.isMine && <p className='d-sm-none my-1'>{t('recipients')}: <i>{record.recipients}</i></p>}                            
                         </div>
                     </div>
@@ -158,7 +158,7 @@ class Messages extends Component {
                     <div className='pre-line my-2 my-sm-0'>{record.body}</div>
                 </div>
                 <div className='col-3 col-sm-3 text-center'>
-                    <p className='d-none my-2 d-sm-block'>{moment(record.created).format('lll')}</p>
+                    <p className='d-none my-2 d-sm-block'><DateTime time={record.created} /></p>
                     {record.isMine && 
                         <p className='d-none my-2 d-sm-block'>{t('recipients')}: <i>{record.recipients}</i></p>
                     }

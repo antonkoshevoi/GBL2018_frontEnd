@@ -5,11 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow } from '../../components/ui/table';
 import { buildSortersQuery } from '../../helpers/utils';
-import {
-  selectDeleteRequest,
-  selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination,
-  selectRecords
-} from '../../redux/teachers/selectors';
+import { selectDeleteRequest, selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords } from '../../redux/teachers/selectors';
 import {deleteRecord, getRecords, getSingleRecord} from '../../redux/teachers/actions';
 import Pagination from '../../components/ui/Pagination';
 import CreateTeacherModal from './modals/CreateTeacherModal';
@@ -92,15 +88,15 @@ class Teachers extends Component {
 
     return records.map((record, key) => (
       <Row index={key} key={key}>
-        <Td width='60px'>{this._recordNumber(key)}</Td>
-        <Td width='132px'>{record.get('username')}</Td>
-        <Td width='132px'>{record.get('firstName')}</Td>
-        <Td width='132px'>{record.get('lastName')}</Td>
-        <Td width='132px'>{record.get('email')}</Td>
+        <Td>{this._recordNumber(key)}</Td>
+        <Td>{record.get('username')}</Td>
+        <Td>{record.get('firstName')}</Td>
+        <Td>{record.get('lastName')}</Td>
+        <Td>{record.get('email')}</Td>
         <HasRole roles={['Superadministrator']}>
-        <Td width='132px'>{record.get('schoolName')}</Td>
+        <Td>{record.get('schoolName')}</Td>
         </HasRole>
-        <Td width='100px' className="actions">
+        <Td className="actions">
           <HasPermission permissions={[
             '[Users][Teachers][Update][Any]'
           ]}>
@@ -254,15 +250,15 @@ class Teachers extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th width='60px'>#</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['username']} name='username' width='132px'>{t('username')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['firstName']} name='firstName' width='132px'>{t('firstName')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName' width='132px'>{t('lastName')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email' width='132px'>{t('email')}</Th>
+                  <Th>#</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['username']} name='username'>{t('username')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['firstName']} name='firstName'>{t('firstName')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['lastName']} name='lastName'>{t('lastName')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['email']} name='email'>{t('email')}</Th>
                   <HasRole roles={['Superadministrator']}>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school'>{t('school')}</Th>
                   </HasRole>
-                  <Th width='100px'>{t('actions')}</Th>
+                  <Th>{t('actions')}</Th>
                 </HeadRow>
               </Thead>
 
