@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { selectGetRecordsRequest } from '../../redux/subscriptions/selectors';
 import { getRecords } from '../../redux/subscriptions/actions';
 import { push } from 'react-router-redux';
-import Loader from "../../components/layouts/Loader";
+import { Price } from '../../components/ui/Price';
+import Loader from '../../components/layouts/Loader';
 import './Subscriptions.css'
 
 class Subscriptions extends Component {
@@ -40,8 +41,8 @@ class Subscriptions extends Component {
                 <div className="subscription-content">
                     <div className="subscription-prices">
                         <div className="row">
-                            <div className="selected col-6 col-sm-7 px-0 align-self-center"><span className="price">${record.get('priceMonthly')} <span className="small">{record.get('currency')}</span></span> <span className="text-muted">{t('perMonth')}</span></div>
-                            <div className="col-6 col-sm-5 px-0 text-right align-self-center"><span className="price">${record.get('priceYearly')} <span className="small">{record.get('currency')}</span></span> <span className="text-muted">{t('perYear')}</span></div>            
+                            <div className="selected col-6 col-sm-7 px-0 align-self-center"><span className="price"><Price price={record.get('priceMonthly')} /> <span className="small">{record.get('currency')}</span></span> <span className="text-muted">{t('perMonth')}</span></div>
+                            <div className="col-6 col-sm-5 px-0 text-right align-self-center"><span className="price"><Price price={record.get('priceYearly')} /> <span className="small">{record.get('currency')}</span></span> <span className="text-muted">{t('perYear')}</span></div>            
                         </div>
                     </div>
                     <div className="subscription-description">

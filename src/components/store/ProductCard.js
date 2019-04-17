@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Card, CardContent, Typography} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
+import {Price} from "../ui/Price";
 import StarRating from "../ui/StarRating";
 import "../../styles/store.css"
 
@@ -37,10 +38,10 @@ class ProductCard extends Component {
             <div className="cardActions m--margin-top-15">              
               <StarRating score={product.get('score')}/>              
               <div className="productPrice">
-                  {product.get('discount') > 0 && <span className="discount"><span>${price.toFixed(2)} {product.get('currency')}</span></span> }
+                  {product.get('discount') > 0 && <span className="discount"><span><Price price={price} currency={product.get('currency')} /></span></span> }
                   <br/>
                   <div className="price">
-                    ${discountPrice.toFixed(2)} {product.get('currency')}
+                    <Price price={discountPrice} currency={product.get('currency')} />                    
                   </div>
               </div>
             </div>

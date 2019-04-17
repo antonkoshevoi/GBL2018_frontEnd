@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { translate, Interpolate } from 'react-i18next';
 import { selectSubscriptionRequest } from "../../../redux/gifts/selectors";
 import { giftSubscription, resetGiftSubscriptionRequest } from "../../../redux/gifts/actions";
+import { Price } from '../../../components/ui/Price';
 import Modal from '../../../components/ui/Modal';
 import GiftForm from '../forms/GiftForm';
 
@@ -99,7 +100,7 @@ class GiftModal extends Component {
                 <div className='col-sm-6 col-lg-5 m-auto'>
                     {subscription &&            
                     <div className="row m--margin-bottom-15" >
-                        <div className="col-sm-12"><h3 className="m--visible-desktop-inline">{t(subscription.title)}</h3> (<strong className="g-blue">{subscription.price}$</strong> / {t(subscription.period)})</div>                        
+                        <div className="col-sm-12"><h3 className="m--visible-desktop-inline">{t(subscription.title)}</h3> (<strong className="g-blue"><Price price={subscription.price} currency={subscription.currency} /></strong> / {t(subscription.period)})</div>                        
                         <div className="col-sm-12">
                             <Interpolate i18nKey="courseAtTime" number={subscription.allowedCourses} />                            
                             <br />                            

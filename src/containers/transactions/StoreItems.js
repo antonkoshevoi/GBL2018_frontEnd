@@ -6,6 +6,7 @@ import {selectGetRecordsRequest} from "../../redux/transactions/selectors";
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/table";
 import {IconButton, MenuItem, Select, FormHelperText} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
+import {Price} from "../../components/ui/Price";
 import {DateTime} from "../../components/ui/DateTime";
 import Pagination from '../../components/ui/Pagination';
 
@@ -112,7 +113,7 @@ class StoreItems extends Component {
                     </Td>                    
                     <Td className="d-none d-md-table-cell">{t(item.get('paymentType'))}</Td>
                     <Td className="d-none d-md-table-cell"><span className={`m-badge m-badge--wide ${badgeClass}`}>{t(item.get('status'))}</span></Td>
-                    <Td className="d-none d-md-table-cell">${item.get('total')} {item.get('currency')}</Td>
+                    <Td className="d-none d-md-table-cell"><Price price={item.get('total')} currency={item.get('currency')} /></Td>
                     <Td className="d-none d-md-table-cell"><DateTime time={item.get('createdAt')} /></Td>
                 </Row>,
                 ( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) && this._renderTransactionItemsBlock(item.get('items'))
@@ -154,7 +155,7 @@ class StoreItems extends Component {
                     </Td>
                     <Td><NavLink className="g-blue" to={`/store/details/${item.get('itemId')}`}>{item.get('title')}</NavLink></Td>
                     <Td>{item.get('quantity')}</Td>
-                    <Td>${Number(item.get('totalPrice')).toFixed(2)} {item.get('currency')}</Td>                    
+                    <Td><Price price={item.get('totalPrice')} currency={item.get('currency')} /></Td>                    
                 </Row>
             )
         })

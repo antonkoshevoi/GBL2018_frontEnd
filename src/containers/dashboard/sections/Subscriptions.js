@@ -6,6 +6,7 @@ import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnS
 import { getUserRecords, resetGetUserRecordsRequest, unSubscribe, resetUnSubscribeRequest } from '../../../redux/subscriptions/actions';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from "../../../components/ui/table";
 import { Date } from "../../../components/ui/DateTime";
+import { Price } from "../../../components/ui/Price";
 import DeleteButton from "../../../components/ui/DeleteButton";
 import ConfirmButton from "../../../components/ui/ConfirmButton";
 import AssignStudentModal from "../../subscriptions/modals/AssignStudentModal";
@@ -138,7 +139,7 @@ class Subscriptions extends Component {
                 <Row index={i} key={i}>                     
                     <Td>
                         <div>{t(item.title)}</div>
-                        <strong className="g-blue">${item.price} {item.currency}</strong> / {t(item.period)}
+                        <strong className="g-blue"><Price price={item.price} currency={item.currency} /></strong> / {t(item.period)}
                     </Td>      
                     <Td>
                         <span className="m--margin-right-15">{item.assignedCourses} / {(item.allowedCourses * item.allowedStudents)} </span>

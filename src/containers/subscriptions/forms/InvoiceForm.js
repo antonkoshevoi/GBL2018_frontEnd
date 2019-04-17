@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import {NavLink} from 'react-router-dom';
+import {Price} from '../../../components/ui/Price';
+import {renderToString} from 'react-dom/server'
 
 class InvoiceForm extends Component {
 
@@ -13,15 +15,17 @@ class InvoiceForm extends Component {
     }
   
     render() {
-        const invoice = this.state.invoice;
-        const {t, auth} = this.props;
+        const invoice       = this.state.invoice;
+        const {t, auth}     = this.props;
+        const price         = <Price price={invoice.get('price')} currency={invoice.get('currency')} />;
+        
         return (
             <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>                                
                 <div className='row align-items-center'>                                
                     {invoice &&
                         <div className="col-sm-12">
                             <p className="text-center invoice-title">
-                                {t('yourInvoice', {invoiceNo: invoice.get('subscriptionNo'), invoiceAmount: ('$' + invoice.get('price') + ' ' + invoice.get('currency'))})}.
+                                {t('yourInvoice', {invoiceNo: invoice.get('subscriptionNo'), invoiceAmount: renderToString(price)})}.
                             </p>
                             <p>
                                 <h3>{t('subscriptionDetails')}</h3>
@@ -29,7 +33,7 @@ class InvoiceForm extends Component {
                                     <label>{t('name')}:</label> <strong>{t(invoice.get('title'))}</strong>
                                 </div>
                                 <div>
-                                    <label>{t('price')}:</label> <strong>${invoice.get('price')} {invoice.get('currency')} / {t(invoice.get('period'))}</strong>
+                                    <label>{t('price')}:</label> <strong>{price} / {t(invoice.get('period'))}</strong>
                                 </div>
                                 <div>
                                     <label>{t('allowedCourses')}:</label> <strong>{invoice.get('allowedCourses')} x {invoice.get('allowedStudents')}</strong>

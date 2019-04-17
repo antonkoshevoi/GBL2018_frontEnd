@@ -6,6 +6,7 @@ import {selectGetRecordsRequest} from '../../redux/subscriptions/selectors';
 import {selectPublicGiftRequest} from '../../redux/gifts/selectors';
 import {getRecords} from '../../redux/subscriptions/actions';
 import {giftPublic, resetPublicGiftRequest} from '../../redux/gifts/actions';
+import {Price} from "../../components/ui/Price";
 import GiftForm from "./forms/GiftForm";
 import CreditCardForm from "../subscriptions/forms/CreditCardForm";
 import InvoiceForm from "../subscriptions/forms/InvoiceForm";
@@ -60,7 +61,7 @@ class Gift extends Component {
         
             return (
                 <div className="col-sm-12 text-center">                                                                                    
-                    <p className="display-6">{t('yourPlan')}: <strong>{subscription.get('title')}</strong> - <strong className="g-blue">${price} {subscription.get('currency')}</strong> / {t(this.state.period)}</p>     
+                    <p className="display-6">{t('yourPlan')}: <strong>{subscription.get('title')}</strong> - <strong className="g-blue"><Price price={price} currency={subscription.get('currency')} /></strong> / {t(this.state.period)}</p>     
                 </div>
             );
         }                
