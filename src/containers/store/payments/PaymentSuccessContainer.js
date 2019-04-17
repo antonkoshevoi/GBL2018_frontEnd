@@ -2,65 +2,32 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import '../../../styles/store.css'
-import {withRouter} from 'react-router-dom';
 import {getInvoice} from '../../../redux/payments/actions';
 import {invoiceRequest} from '../../../redux/payments/selectors';
-import {login, setRedirectUrl} from "../../../redux/auth/actions";
+import {Price} from '../../../components/ui/Price';
+import Loader from "../../../components/layouts/Loader";
+import {renderToString} from 'react-dom/server'
 import Typography from '@material-ui/core/Typography';
 
 class PaymentSuccessContainer extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      username: '',
-      password: '',
-      remember: false
-    };
+    this.state = {};
   }
 
-  componentDidMount() {
-    const {history} = this.props;
+  componentDidMount() {    
     this.props.getInvoice();
-
-    if (history.action !== "PUSH") {
-      history.push('/login')
-    }
   }
-
-  _handleUsernameChange = (event) => {
-    this.setState({username: event.target.value});
-  };
-  _handlePasswordChange = (event) => {
-    this.setState({password: event.target.value});
-  };
-  _handleRememberChange = (event) => {
-    this.setState({remember: !this.state.remember});
-  };
 
   _renderAddress(data, prefix) {   
     const address = ['address_1', 'address_2', 'country', 'region', 'city', 'zip'];
-    return address.map((item, index) =>
-      (
+    return address.map((item, index) => (
         <Typography key={index} variant="body1" gutterBottom>
           {data.get(`${prefix}_${item}`)}
         </Typography>
       )
     );
-  }
-  
-  _login() {
-    const {setRedirectUrl, login} = this.props;
-    const {username, password, remember} = this.state;
-    let pathname = '/';
-    try {
-      pathname = this.props.location.pathname;
-    } catch (e) {
-    }
-
-    setRedirectUrl(pathname);
-    login(username, password, remember);
   }
 
   _renderItems(invoice) {
@@ -78,7 +45,7 @@ class PaymentSuccessContainer extends Component {
             </span>
         </div>
         <span className="m-widget4__ext">
-            <span className="text-nowrap m-widget4__number m--font-danger">${item.get('total_price')} {item.get('currency')}</span>
+            <span className="text-nowrap m-widget4__number m--font-danger"><Price price={item.get('total_price')} currency={item.get('currency')} /></span>
           </span>
       </div>
     ));
@@ -86,15 +53,22 @@ class PaymentSuccessContainer extends Component {
   
   render() {
     const {invoiceRequest, t} = this.props;
-    const invoice = invoiceRequest.get('data');
-    const distributor = invoice ? invoice.get('distributor') : null;
+    
+    if (!invoiceRequest.get('success')) {
+        return <Loader />;
+    }
+    
+    const invoice       = invoiceRequest.get('data');
+    const distributor   = invoice.get('distributor');
+    const price         = <Price price={invoice.get('total')} currency={invoice.get('currency')} />;
+    
     return (
       <div className="row">
         <div className="col-md-10 m-auto">
           {invoice &&
             <div>
                 <span className="invoice-title">
-                    {t('yourInvoice', {invoiceNo: invoice.get('invoice_no'), invoiceAmount: ('$' + invoice.get('total') + ' ' + invoice.get('currency'))})}.
+                    {t('yourInvoice', {invoiceNo: invoice.get('invoice_no'), invoiceAmount: renderToString(price)})}.
                 </span>                
                 <p className="text-center m--margin-15">
                     <a rel="noopener noreferrer" className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
@@ -172,14 +146,8 @@ PaymentSuccessContainer = connect(
     invoiceRequest: invoiceRequest(state)
   }),
   (dispatch) => ({
-    login: (username, password, remember) => {
-      dispatch(login(username, password, remember));
-    },
-    setRedirectUrl: (uri) => {
-      dispatch(setRedirectUrl(uri));
-    },
     getInvoice: () => dispatch(getInvoice())
   })
 )(PaymentSuccessContainer);
 
-export default withRouter(translate('translations')(PaymentSuccessContainer));
+export default translate('translations')(PaymentSuccessContainer);

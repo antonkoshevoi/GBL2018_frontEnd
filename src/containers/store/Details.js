@@ -8,6 +8,7 @@ import Filter from "../../components/store/Filter";
 import Sidebar from "../../components/store/Sidebar";
 import StarRating from "../../components/ui/StarRating";
 import Loader from "../../components/layouts/Loader";
+import {Price} from "../../components/ui/Price";
 import {addToCarts, getRecords, getSingleRecord} from "../../redux/store/actions";
 import {selectAddToCartRequest, selectGetRecordsRequest, selectGetSingleRecord, selectGetSingleRecordRequest, selectRecords} from "../../redux/store/selectors";
 import {buildSortersQuery} from "../../helpers/utils";
@@ -129,11 +130,11 @@ class Details extends Component {
                             </div>
                           </div>
                           <div className="actionsBtn justify-content-end full-width align-items-center d-flex m--padding-right-20 align-self-center">
-                            <div className="m--padding-right-20">{record.get('discount') > 0 && <span className="position-relative discount"><span>${price.toFixed(2)} {record.get('currency')} </span></span>}</div>
+                            <div className="m--padding-right-20">{record.get('discount') > 0 && <span className="position-relative discount"><span><Price price={price} currency={record.get('currency')} /></span></span>}</div>
                             <button className="btn m-btn btn-danger m-btn--icon no-border" onClick={() => { this._addToCart(record.get('id')) }}>
                               <span>
                                 {addToCartRequest.get('success') && <i className="fa floating-basket fa-shopping-basket"></i>}
-                                <span>${discountPrice.toFixed(2)} {record.get('currency')}</span> <span className="text-uppercase">{t('buy')}</span>
+                                <span><Price price={discountPrice} currency={record.get('currency')} /></span> <span className="text-uppercase">{t('buy')}</span>
                               </span>
                             </button>
                           </div>

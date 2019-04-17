@@ -5,6 +5,7 @@ import {translate} from 'react-i18next';
 import {push} from 'react-router-redux';
 import {selectGetRecordsRequest, selectSubscribeRequest} from '../../redux/subscriptions/selectors';
 import {getRecords, subscribe, resetSubscribeRequest, resetGetUserRecordsRequest} from '../../redux/subscriptions/actions';
+import {Price} from '../../components/ui/Price';
 import CreditCardForm from "./forms/CreditCardForm";
 import SubscriptionsForm from "./forms/SubscriptionsForm";
 import Loader from "../../components/layouts/Loader";
@@ -61,7 +62,7 @@ class Subscribe extends Component {
         
             return (
                 <div className="col-sm-12 text-center">                                                                                    
-                    <p className="display-6">{t('yourPlan')}: <strong className="g-blue">${price} {subscription.get('currency')}</strong> / {t(this.state.period)}</p>     
+                    <p className="display-6">{t('yourPlan')}: <strong className="g-blue"><Price price={price} currency={subscription.get('currency')} /></strong> / {t(this.state.period)}</p>     
                 </div>
             );
         }                

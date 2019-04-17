@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from "../ui/table";
+import {Price} from "../ui/Price";
 import PropTypes from 'prop-types';
 import "../../styles/store.css"
 import {NavLink} from "react-router-dom";
@@ -120,25 +121,28 @@ class OpenInvoicesTable extends Component {
           <Td width='100px'>
             <span className="productPrice productLabel">
               {item.storeItem.discount > 0 &&
-             <div>${parseFloat(item.storeItem.price).toFixed(2)} {item.storeItem.currency}
+             <div>
+                <Price price={item.storeItem.price} currency={item.storeItem.currency} />
                 <span className="discount"></span>
              </div>
               }              
               <div className="price productLabel">
-                ${parseFloat(item.storeItem.discountPrice).toFixed(2)} {item.storeItem.currency}
+                <Price price={item.storeItem.discountPrice} currency={item.storeItem.currency} />                
               </div>
             </span>
           </Td>}
           <Td width='100px'>
           {preview && <div>                          
-              <div className="m--margin-top-5 m--margin-bottom-10">${parseFloat(item.storeItem.discountPrice).toFixed(2)} {item.storeItem.currency}</div>              
+              <div className="m--margin-top-5 m--margin-bottom-10">
+                <Price price={item.storeItem.discountPrice} currency={item.storeItem.currency} />              
+              </div>              
               <div className="m--margin-top-5 m--margin-bottom-10">
                 {!item.isInvoice ? countInput : <span className="productLabel">{item.count}</span>}                    
               </div>
               <Divider className="m--margin-bottom-10" />
             </div>}
             <span className="productPrice productLabel">
-              {'$' + parseFloat(item.storeItem.discountPrice * item.count).toFixed(2)} {item.storeItem.currency}
+                <Price price={(item.storeItem.discountPrice * item.count)} currency={item.storeItem.currency} />
             </span>
           </Td>
         </Row>
@@ -159,26 +163,13 @@ class OpenInvoicesTable extends Component {
             <div className="col-sm-5 text-right">
                 <div className="m--margin-right-15">
                     <span>{t('total')}</span><br/>
-                    <span className="productPrice"> {'$' + parseFloat(sum).toFixed(2)} {item.storeItem.currency}</span>
+                    <span className="productPrice">
+                       <Price price={sum} currency={item.storeItem.currency} />  
+                    </span>
                 </div>
             </div>
         </div>            
-    )
-  }
-  _renderTaxRow(tax = 0) {
-    const {t} = this.props;
-    return (        
-        <div className="row text-right m--margin-top-15 m--margin-bottom-10">
-            <div className="col-sm-7 text-left">              
-                <h4 className="m--margin-left-15">{t('shippingAndTax')}</h4>              
-            </div>
-            <div className="col-sm-5 text-right">              
-                <span className="productTaxPrice m--margin-right-15">
-                    {'$' + parseFloat(tax).toFixed(2)}
-                </span>              
-            </div>
-        </div>        
-    )
+    );
   }
 
   render() {

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {translate, Interpolate} from 'react-i18next';
 import {Checkbox} from '@material-ui/core';
+import {Price} from "../../../components/ui/Price";
 
 import '../Subscriptions.css'
 
@@ -86,7 +87,7 @@ class SubscriptionsForm extends Component {
                                             color="primary"
                                             style={{marginLeft: '-18px', width: '40px'}}
                                             />
-                                            ${record.get('priceMonthly')} <span className="small">{record.get('currency')}</span>
+                                            <Price price={record.get('priceMonthly')} /> <span className="small">{record.get('currency')}</span>
                                         </span> {t('perMonth')}
                                     </div>
                                     <div className={`col-6 m--padding-0 text-center ${this.state.period === 'year' ? 'selected' : ''}`}>
@@ -97,8 +98,8 @@ class SubscriptionsForm extends Component {
                                                 value="year"
                                                 color="primary"
                                                 style={{marginLeft: '-18px', width: '40px'}}
-                                                />                                
-                                            ${record.get('priceYearly')} <span className="small">{record.get('currency')}</span>
+                                                />
+                                            <Price price={record.get('priceYearly')} /> <span className="small">{record.get('currency')}</span>                                            
                                         </span> {t('perYear')}
                                     </div>            
                                 </div>
@@ -142,8 +143,8 @@ class SubscriptionsForm extends Component {
                         <div className="subscription-content">
                             <div className="subscription-prices">
                                 <div className="row">
-                                    <div className="selected col-7"><span className="price">${record.get('priceMonthly')} <span className="small">{record.get('currency')}</span></span> {t('perMonth')}</div>
-                                    <div className="col-5 text-right m--margin-top-10"><span className="price">${record.get('priceYearly')} <span className="small">{record.get('currency')}</span></span> {t('perYear')}</div>            
+                                    <div className="selected col-7"><span className="price"><Price price={record.get('priceMonthly')} /> <span className="small">{record.get('currency')}</span></span> {t('perMonth')}</div>
+                                    <div className="col-5 text-right m--margin-top-10"><span className="price"><Price price={record.get('priceYearly')} /> <span className="small">{record.get('currency')}</span></span> {t('perYear')}</div>            
                                 </div>
                             </div>
                         </div>
