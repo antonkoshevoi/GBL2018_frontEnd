@@ -625,12 +625,13 @@ export default {
     youNotHaveStudents: '你沒有學生。 請使用儀表板上的“我的學員”工具註冊新學生。',
     messageRemoved: '已被發件人刪除...',
     editMessage: '編輯訊息',
-    ok: 'Ok',
     viewReport: '成績報告',
-    skip: '跳躍',
-    received: 'Received',
-    Basic: 'Basic',
-    Multi: 'Multi',
-    Family: 'Family',
-    freeWorkbook: '{{number}} free workbook'     
+    ok: 'Ok',
+    skip: '略過',
+    received: '己收到訊息',
+    Basic: '一位學員',
+    Multi: '三位學員', 
+    Family: '家庭學習',  
+    freeWorkbook: '一本免費課本',    
+    freeWorkbooks: '{{number}} 免費課本'     
 }

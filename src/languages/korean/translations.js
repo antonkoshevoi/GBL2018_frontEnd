@@ -625,12 +625,13 @@ export default {
     youNotHaveStudents: '학생이 없습니다. "내 학생" 에서 새로운 학생을 대시보드에서 등록하세요.',
     messageRemoved: '보낸 사람이 삭제하였습니다',
     editMessage: '메시지 편집',
-    ok: 'Ok',
     viewReport: '보고서',
-    skip: '건너 뛰기',
-    received: 'Received',
-    Basic: 'Basic',
-    Multi: 'Multi',
-    Family: 'Family',
-    freeWorkbook: '{{number}} free workbook'     
+    ok: '확인',
+    skip: '건너뛰기',
+    received: '받았습니다',
+    Basic: '기본',
+    Multi: '멀티',
+    Family: '가족',
+    freeWorkbook: '무료 뭐크북 한권',
+    freeWorkbooks: '{{number}} 무료 워크북'    
 }

@@ -40,7 +40,7 @@ class InvoiceForm extends Component {
                                 </div>
                                 {(invoice.get('period') === 'year') && 
                                     <div>
-                                        <label>{t('annualBonus')}:</label> <strong>{t('freeWorkbook', {number: invoice.get('allowedStudents')})}</strong>
+                                        <label>{t('annualBonus')}:</label> <strong>{invoice.get('allowedStudents') > 1 ? t('freeWorkbooks', {number: invoice.get('allowedStudents')}) : t('freeWorkbook')}</strong>
                                     </div>
                                 }
                             </p>                                            

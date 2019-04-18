@@ -90,9 +90,6 @@ class GiftModal extends Component {
         </AppBar>
 
         <DialogContent className='m--margin-top-25' style={{minWidth: 400}}>
-            <div className="alert m-alert m-alert--default m--margin-bottom-15">
-                <p className="text-center margin-bottom-0">{t('giftNotification')}</p>
-            </div>
             {this.state.error &&            
                 <FormHelperText className="text-center m--margin-bottom-15" error variant="filled">{this.state.error}</FormHelperText>
             }             
