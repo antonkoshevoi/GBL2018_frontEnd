@@ -625,12 +625,13 @@ export default {
     youNotHaveStudents: 'Vous n’avez pas d’étudiants. Veuillez utiliser l\'outil "Mes apprenants" sur le tableau de bord pour inscrire de nouveaux étudiants.',
     messageRemoved: 'Supprimé par l\'expéditeur ...',
     editMessage: 'Modifier le message ',
-    ok: 'Ok',
     viewReport: 'Rapports',
+    ok: 'Ok',
     skip: 'Passer',
     received: 'Received',
     Basic: 'Basic',
     Multi: 'Multi',
     Family: 'Family',
-    freeWorkbook: '{{number}} free workbook'     
+    freeWorkbook: '1 free workbook',
+    freeWorkbooks: '{{number}} free workbooks'    
 }

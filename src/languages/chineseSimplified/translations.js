@@ -625,12 +625,13 @@ export default {
     youNotHaveStudents: '你没有学生。请使用仪表板上的“我的学员”工具注册新学生。',
     messageRemoved: '已被发件人删除...',
     editMessage: '编辑讯息',
-    ok: 'Ok',
     viewReport: '成绩报告',
-    skip: '跳跃',
-    received: 'Received',
-    Basic: 'Básica',
-    Multi: 'Multi',
-    Family: 'Familiar',
-    freeWorkbook: '{{number}} libro de texto gratuito'
+    ok: 'Ok',
+    skip: '略过',
+    received: '己收到讯息',
+    Basic: '一位学员',
+    Multi: '三位学员',
+    Family: '家庭学习',
+    freeWorkbook: '一本免费课本',
+    freeWorkbooks: '{{number}} 免费课本'
 }

@@ -114,7 +114,7 @@ class SubscriptionsForm extends Component {
                                 </div>            
                                 <div className="subscription-bonuses text-left">
                                     <span>{t('annualBonus')}:</span>
-                                    <span className="bonus">{t('freeWorkbook', {number: record.get('allowedStudents')})}</span>
+                                    <span className="bonus">{record.get('allowedStudents') > 1 ? t('freeWorkbooks', {number: record.get('allowedStudents')}) : t('freeWorkbook')}</span>
                                 </div>
                                 <p className="text-center margin-bottom-0">
                                     <button onClick={() => { this._handleSelectPlan() }} className="btn btn-info">{t('continue')}</button>

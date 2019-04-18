@@ -625,12 +625,13 @@ export default {
     youNotHaveStudents: 'No tienes ningún estudiante. Por favor utiliza la herramienta "Mis alumnos" en el tablero para registrar nuevos estudiantes.',
     messageRemoved: 'Eliminado por el remitente...',
     editMessage: 'Editar Mensaje',
-    ok: 'Ok',
     viewReport: 'Informes',
+    ok: 'Ok',
     skip: 'Omitir',
     received: 'Recibidos',
     Basic: 'Básica',
     Multi: 'Multi',
     Family: 'Familiar',
-    freeWorkbook: '{{number}} libro de texto gratuito'       
+    freeWorkbook: '1 libro de texto gratuito',
+    freeWorkbooks: '{{number}} libros de trabajo gratuitos'    
 }

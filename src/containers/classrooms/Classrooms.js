@@ -283,9 +283,7 @@ class Classrooms extends Component {
                     <MenuItem value={50}>50</MenuItem>
                     <MenuItem value={100}>100</MenuItem>
                   </Select>
-                  <HasPermission permissions={[
-                    '[ClassRooms][Create][Any]'
-                  ]}>
+                  <HasPermission permissions={['[ClassRooms][Create][Any]']}>
                     <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
                       {t('addNew')}
                       <Icon className="m--margin-left-5">add</Icon>
@@ -298,25 +296,23 @@ class Classrooms extends Component {
             <Table>
               <Thead>
                 <HeadRow>
-                  <Th width='60px'>#</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name' width='132px'>{t('name')}</Th>
+                  <Th>#</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['name']} name='name'>{t('name')}</Th>
                   <HasRole roles={['Superadministrator']}>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school' width='132px'>{t('school')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['school']} name='school'>{t('school')}</Th>
                   </HasRole>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course' width='132px'>{t('course')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher' width='132px'>{t('teacher')}</Th>
-                  <Th width='75px' onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount'>{t('students')}</Th>
-                  <Th width='75px'>{t('public')}</Th>
-                  <Th width='75px'>{t('status')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['endDate']} name='endDate' width='100px'>{t('endDate')}</Th>
-                  <Th width='150px'>{t('actions')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['course']} name='course'>{t('course')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['teacher']} name='teacher'>{t('teacher')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['studentsCount']} name='studentsCount'>{t('students')}</Th>
+                  <Th>{t('public')}</Th>
+                  <Th>{t('status')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['endDate']} name='endDate'>{t('endDate')}</Th>
+                  <Th>{t('actions')}</Th>
                 </HeadRow>
               </Thead>
 
               <Tbody>
-                {loading &&
-                  <TablePreloader text={t('loading')} />
-                }
+                { loading && <TablePreloader text={t('loading')} /> }
                 { this._renderRecords() }
               </Tbody>
             </Table>
