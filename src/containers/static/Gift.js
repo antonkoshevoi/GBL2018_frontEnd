@@ -60,8 +60,8 @@ class Gift extends Component {
             let price = (this.state.period === 'month' ? subscription.get('priceMonthly') : subscription.get('priceYearly'));
         
             return (
-                <div className="col-sm-12 text-center">                                                                                    
-                    <p className="display-6">{t('yourPlan')}: <strong>{subscription.get('title')}</strong> - <strong className="g-blue"><Price price={price} currency={subscription.get('currency')} /></strong> / {t(this.state.period)}</p>     
+                <div className="col-sm-12 text-center">
+                    <p className="display-6">{t('yourPlan')}: <strong>{t(subscription.get('title'))}</strong> - <strong className="g-blue"><Price price={price} currency={subscription.get('currency')} /></strong> / {t(this.state.period)}</p>     
                 </div>
             );
         }                
