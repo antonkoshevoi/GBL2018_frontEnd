@@ -12,9 +12,9 @@ class ShoppingCart extends Component {
                 <NavLink to='/store/shopping-cart' className='m-nav__link m-dropdown__toggle pointer' id='m_topbar_notification_icon'>
                     <span className='m-nav__link-icon'>
                         <i className="fa fa-shopping-cart PageHeader-icon"></i>
-                        {cartRecordsCount > 0 && <span className="g-badge badge-red">{cartRecordsCount}</span> }
                     </span>
                 </NavLink>
+                        {cartRecordsCount > 0 && <span className="g-badge badge-red">{cartRecordsCount}</span> }
             </li>
         );
     }

@@ -81,7 +81,7 @@ class ScapResults extends Component {
                 <Td>{record.get('student')}</Td>
                 <Td><Date time={record.get('createdAt')} /></Td>
                 <Td>
-                    <button title={t('showDetails')} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15' onClick={() => { this._showResultsModal(record) }} id={record.get('id')} >
+                    <button title={t('showDetails')} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showResultsModal(record) }} id={record.get('id')} >
                         <i className='la la-search'></i>
                     </button>                                
                 </Td>

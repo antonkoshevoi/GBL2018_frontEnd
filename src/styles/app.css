@@ -226,7 +226,7 @@ li > .small-avatar {
 }
 
 .main-background {
-    background-image: url(./media/images/bg-3.jpg);    
+    background-image: url(../media/images/bg-3.jpg);    
 }
 
 .loginWrapper {
@@ -241,7 +241,7 @@ li > .small-avatar {
 }
 
 .m-dropdown.m-dropdown--header-bg-fill .m-dropdown__header {
-    background-image: url(./media/images/menu_poster.jpg);
+    background-image: url(../media/images/menu_poster.jpg);
     background-size: cover;
 }
 
@@ -533,11 +533,6 @@ div.progress.m-progress--sm .progress-bar {
     background: transparent !important;
 }
 
-div.m-widget24 {
-    background: #fff;
-    margin-bottom: 15px;
-}
-
 div.m-portlet {
     margin-bottom: 0;
 }
@@ -747,14 +742,15 @@ div.m-stack.m-stack--desktop.m-stack--ver > .m-stack__item.m-stack__item--fluid 
     left: 0;
 }
 
-.m-nav__link .m-nav__link-icon {
+.m-nav__item  {
     position: relative;
 }
 
-.m-nav__link .m-nav__link-icon .g-badge {
+.m-nav__item  .g-badge {
     position: absolute;
-    top: 6px;
-    right: -2px;
+    top: 15px;
+    right: 10px;
+    z-index: 999;
 }
 
 .g-badge {

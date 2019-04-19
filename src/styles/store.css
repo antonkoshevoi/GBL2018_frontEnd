@@ -372,20 +372,16 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* CHECKOUT */
 
-.cartItems .m-widget4__item {
-    padding-top: .3rem;
-    padding-bottom: .3rem;
-}
-
-.payments-widgets .m-widget24__item {
+.payments-widgets .payment-item {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
     cursor: pointer;
+    margin-bottom: 15px;
 }
 
-.payments-widgets .m-widget24__item:hover {
+.payments-widgets .payment-item:hover {
     background: #f4f5f8;
 }
 

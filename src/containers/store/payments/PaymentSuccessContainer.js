@@ -34,19 +34,20 @@ class PaymentSuccessContainer extends Component {
     const {t} = this.props;
     const items = invoice.get('items');
     return items.map((item, key) => (
-      <div key={key} className="m-widget4__item">
-
-        <div className="m-widget4__info">
-            <span className="m-widget4__title">
-                {item.get('title')}
-            </span> <br/>
-            <span className="m-widget4__sub">
+      <div key={key} className="row">
+        <div className="col-6 text-center">
+            <div>
+                <strong>
+                    {item.get('title')}
+                </strong>
+            </div>
+            <span className="text-muted">
                 {item.get('quantity')} {t('items')}
             </span>
         </div>
-        <span className="m-widget4__ext">
-            <span className="text-nowrap m-widget4__number m--font-danger"><Price price={item.get('total_price')} currency={item.get('currency')} /></span>
-          </span>
+        <div className="col-6 text-center align-self-center">
+            <strong className="text-nowrap m--font-danger"><Price price={item.get('total_price')} currency={item.get('currency')} /></strong>
+        </div>
       </div>
     ));
   }
@@ -121,12 +122,12 @@ class PaymentSuccessContainer extends Component {
                       {this._renderAddress(invoice, 'shipping')}
                     </div>
                   </div>                            
-                    <div className="row">
+                    <div className="row my-2">
                         <div className="col-md-10 m-auto cartItems m--margin-15">
                             <div>
                               <span className="invoice-title">{t('orderDetails')}</span>
                             </div>
-                            <div className="m-widget4 col-12 col-sm-12 col-md-10 col-lg-7 m-auto">
+                            <div className="col-12 col-sm-12 col-md-10 col-lg-7 m-auto">
                                 {this._renderItems(invoice)}
                             </div>        
                         </div>
