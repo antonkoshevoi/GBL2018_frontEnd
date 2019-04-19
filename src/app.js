@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import './theme/vendor/vendors.bundle.css';
 import './theme/style.bundle.css';
-import './app.css';
+import './styles/app.css';
 import './styles/responsive.css';
 
 import {Provider} from 'react-redux';

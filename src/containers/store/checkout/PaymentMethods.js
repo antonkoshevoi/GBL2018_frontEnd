@@ -12,8 +12,8 @@ class PaymentMethods extends Component {
 
     return methods.map((method, key) => (
       <div key={key} className='col-sm-12 col-md-6 col-lg-6 col-xl-4' onClick={() => { method.onSelect() }}>
-        <div className='m-widget24 payments-widgets'>
-          <div className='m-widget24__item '>
+        <div className='payments-widgets'>
+          <div className='payment-item'>
             <span className='m--font-brand'>
               {method.loading ? (
                 <CircularProgress style={{
