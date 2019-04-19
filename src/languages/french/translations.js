@@ -627,11 +627,11 @@ export default {
     editMessage: 'Modifier le message ',
     viewReport: 'Rapports',
     ok: 'Ok',
-    skip: 'Passer',
-    received: 'Received',
-    Basic: 'Basic',
+    skip: 'Sauter',
+    received: 'Reçu',
+    Basic: 'De base',
     Multi: 'Multi',
-    Family: 'Family',
-    freeWorkbook: '1 free workbook',
-    freeWorkbooks: '{{number}} free workbooks'    
+    Family: 'Famille',
+    freeWorkbook: '1 manuel gratuit',
+    freeWorkbooks: '{{number}} manuels gratuits'
 }
