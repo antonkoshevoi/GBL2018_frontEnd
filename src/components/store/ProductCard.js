@@ -11,15 +11,13 @@ class ProductCard extends Component {
   _renderCard(type, product) {
     const category = product.get('category') ? product.get('category').get('title') : 'No Info...';
     const price = Number(product.get('price'));
-    const discountPrice = Number(price - (price * product.get('discount') / 100));
-
-    let productThumb = product.get('thumbnail').replace(/^http:\/\//i, 'https://');
+    const discountPrice = Number(price - (price * product.get('discount') / 100));   
 
     return (
       <div className={`cardItem ${type === 'vertical' ? ' verticalCardItem' : ' horizontalCardItem'}`}>
         <Card >
           <NavLink to={`/store/details/${product.get('id')}`} className="cardImage">
-            <img src={productThumb} className="full-width" alt="book"/>
+            <img src={product.get('thumbnail')} className="full-width" alt="book"/>
           </NavLink>
           <CardContent className="cardContent">
             <Typography className="cardTitle" variant="h2" component="h2">

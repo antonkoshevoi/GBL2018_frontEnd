@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {formChartOptions, formChartData} from '../../../data/Charts';
-import CardChart from '../../../components/ui/CardChart';
 import {Line} from 'react-chartjs-2';
 import ApiClient from '../../../services/ApiClient';
 import MuiDatePicker from '../../../components/ui/MuiDatePicker';
@@ -37,33 +36,50 @@ class LineChart extends Component {
   render() {
     const {t} = this.props;
     return (
-      <CardChart title={t('studentsOnline')} resetButtonHandle={this.handleResetDate} resetButtonLabel={t('reset')}>
-        <div className="date-group-selector">
-          <div className={`date-group` + (this.state.selectorActive === 0 ? ' date-selector-active' : '')}
-               onClick={() => {
-                 this.changeDateGroup(0)
-               }}>{t('oneDay')}
-          </div>
-          <div className={`date-group` + (this.state.selectorActive === 1 ? ' date-selector-active' : '')}
-               onClick={() => {
-                 this.changeDateGroup(1)
-               }}>{t('oneWeek')}
-          </div>
-          <div className={`date-group` + (this.state.selectorActive === 2 ? ' date-selector-active' : '')}
-               onClick={() => {
-                 this.changeDateGroup(2)
-               }}>{t('oneMonth')}
-          </div>
-          <div className={`date-group` + (this.state.selectorActive === 3 ? ' date-selector-active' : '')}
-               onClick={() => {
-                 this.changeDateGroup(3)
-               }}>{t('oneYear')}
+      <div className="d-flex flex-column m-portlet m-portlet--head-solid-bg mb-0 h-100">
+        <div className="m-portlet__head border-b-blue">
+          <div className="m-portlet__head-caption">
+            <div className="m-portlet__head-title online-users-chart-header">
+              <span className="m-portlet__head-icon"><i className="fa fa-line-chart display-6 square-background circle-background"></i></span>              
+              <h3 className="m-portlet__head-text">
+                {t('studentsOnline')}
+              </h3>
+              <div className="m-portlet__head-text">
+                <button type="button" className="btn btn-info btn-sm" onClick={this.handleResetDate}>
+                  {t('reset')}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        {this.generateDateSelector()}
-        {this.state.data && this.state.data.datasets &&
-        <Line data={this.state.data} options={this.state.options} width={500} height={300}/>}
-      </CardChart>
+        <div className="pt-0 h-100 m-portlet__body position-relative">            
+            <div className="date-group-selector">
+              <div className={`date-group` + (this.state.selectorActive === 0 ? ' date-selector-active' : '')}
+                   onClick={() => {
+                     this.changeDateGroup(0)
+                   }}>{t('oneDay')}
+              </div>
+              <div className={`date-group` + (this.state.selectorActive === 1 ? ' date-selector-active' : '')}
+                   onClick={() => {
+                     this.changeDateGroup(1)
+                   }}>{t('oneWeek')}
+              </div>
+              <div className={`date-group` + (this.state.selectorActive === 2 ? ' date-selector-active' : '')}
+                   onClick={() => {
+                     this.changeDateGroup(2)
+                   }}>{t('oneMonth')}
+              </div>
+              <div className={`date-group` + (this.state.selectorActive === 3 ? ' date-selector-active' : '')}
+                   onClick={() => {
+                     this.changeDateGroup(3)
+                   }}>{t('oneYear')}
+              </div>
+            </div>
+            {this.generateDateSelector()}
+            {this.state.data && this.state.data.datasets &&
+            <Line data={this.state.data} options={this.state.options} width={500} height={300}/>}            
+        </div>
+      </div>
     );
   }
 

@@ -9,7 +9,7 @@ import Login from '../containers/auth/Login';
 import RestorePassword from '../containers/auth/RestorePassword';
 import ResetPassword from '../containers/auth/ResetPassword';
 
-import Dashboard from '../containers/Dashboard';
+import Dashboard from '../containers/dashboard/Dashboard';
 import Students from '../containers/students/Students';
 import Teachers from "../containers/teachers/Teachers";
 import Parents from "../containers/parents/Parents";
