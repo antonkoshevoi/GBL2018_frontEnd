@@ -147,6 +147,9 @@
     font-weight: 500;
     margin-top: 2px;
 }
+.applications > div a {
+    color: #ffffff;
+}
 .about-us-note {
     text-align: center;
     color: #1c4062;

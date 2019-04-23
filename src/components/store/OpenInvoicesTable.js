@@ -87,7 +87,7 @@ class OpenInvoicesTable extends Component {
         <Row index={i} key={i}>
           {!preview && <Td width='10px'>{i + 1}</Td>}
           <Td width='400px'>
-                <div className="productInfo">
+            <div className="productInfo">
               <div className="user-avatar">
                 <img src={item.storeItem.thumbnail} className="img-responsive" alt=""/>
               </div>
@@ -104,7 +104,7 @@ class OpenInvoicesTable extends Component {
                   />
                 </div>
               </div>
-              </div>  
+            </div>  
           </Td>
           {!preview &&
           <Td width="132px">

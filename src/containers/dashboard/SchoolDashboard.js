@@ -13,7 +13,7 @@ import FeaturedItems from "./sections/FeaturedItems";
 import Alerts from "./sections/Alerts";
 import ShoppingCart from "./sections/ShoppingCart";
 
-class UserDashboard extends Component {
+class SchoolDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {}
@@ -73,8 +73,7 @@ class UserDashboard extends Component {
   }
 }
 
-
-UserDashboard = connect(
+SchoolDashboard = connect(
   (state) => ({    
     records: selectRecords(state),
     dataRequest: selectChartDatatRequest(state)
@@ -87,6 +86,6 @@ UserDashboard = connect(
       dispatch(getCharts(params))
     }    
   })
-)(UserDashboard);
+)(SchoolDashboard);
 
-export default translate("translations")(UserDashboard);
+export default translate("translations")(SchoolDashboard);

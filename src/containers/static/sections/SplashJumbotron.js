@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import {NavLink} from 'react-router-dom';
 import CldImage from '../../../components/ui/CldImage';
+import AppLink from '../../../components/ui/AppLink';
 
 class SplashJumbotron extends PureComponent {
     
@@ -66,12 +67,12 @@ class SplashJumbotron extends PureComponent {
                             <div className="col-12 col-sm-12 col-md-5 text-right">
                                 <div className="applications">
                                     <div>
-                                        <CldImage src="bzabc_kids_icon_88px.png" alt="BZabc Kids" />
-                                        <p>{t('kidsApp')}</p>
+                                        <AppLink type="students"><CldImage src="bzabc_kids_icon_88px.png" alt="BZabc Kids" /></AppLink>
+                                        <p><AppLink type="students">{t('kidsApp')}</AppLink></p>
                                     </div>
                                     <div>
-                                        <CldImage src="bzabc_parents_icon_88px.png" alt="BZabc Parents" />
-                                        <p>{t('parentsApp')}</p>
+                                        <AppLink type="parents"><CldImage src="bzabc_parents_icon_88px.png" alt="BZabc Parents" /></AppLink>
+                                        <p><AppLink type="parents">{t('parentsApp')}</AppLink></p>
                                     </div>
                                 </div>
                             </div>

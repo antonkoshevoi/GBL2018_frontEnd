@@ -9,40 +9,33 @@ class PaymentStatusContainer extends Component {
     {
         const { t } = this.props;
         return (
-            <div className="m-pricing-table-1 m-pricing-table-1--fixed payments-services-list">
-                <div className="m-pricing-table-1__items row">
-                    <div className="m-pricing-table-1__item col-lg-4">
-                        <div className="m-pricing-table-1__visual">
-                            <div className="m-pricing-table-1__hexagon1"></div>
-                            <div className="m-pricing-table-1__hexagon2"></div>
-                            <span className="m-pricing-table-1__icon m--font-brand"><i className="la la-money"></i></span>
+            <div className="payments-services-list m-5">
+                <div className="row">
+                    <div className="col-md-4 col-lg-4 text-center">
+                        <div className="my-5">      
+                            <span className="m--font-brand display-1"><i className="la la-money display-1"></i></span>
                         </div>
-                        <span className="m-pricing-table-1__price">{t('openInvoices')}</span>
-
-                        <div className="m-pricing-table-1__btn">
-                            <NavLink to="/accounts/invoices" ><button type="button" className="btn m-btn--pill  btn-brand m-btn--wide m-btn--uppercase m-btn--bolder m-btn--sm">{t('open')}</button></NavLink>
+                        <div className="display-5">{t('openInvoices')}</div>
+                        <div className="my-5">
+                            <NavLink to="/accounts/invoices" ><button type="button" className="btn m-btn--pill btn-brand m-btn--wide m-btn--uppercase m-btn--bolder m-btn--sm">{t('open')}</button></NavLink>
                         </div>
                     </div>
-                    <div className="m-pricing-table-1__item col-lg-4">
-                        <div className="m-pricing-table-1__visual">
-                            <div className="m-pricing-table-1__hexagon1"></div>
-                            <div className="m-pricing-table-1__hexagon2"></div>
-                            <span className="m-pricing-table-1__icon m--font-brand"><i className="fa fa-question-circle-o"></i></span>
+                    <div className="col-md-4 col-lg-4 text-center">
+                        <div className="my-5">           
+                            <span className="m--font-brand display-1"><i className="fa fa-question-circle-o display-1"></i></span>
                         </div>
-                        <span className="m-pricing-table-1__price">{t('unassignedCredits')}</span>
+                        <span className="display-5">{t('unassignedCredits')}</span>
 
-                        <div className="m-pricing-table-1__btn">
+                        <div className="my-5">
                             <NavLink to="/accounts/unassigned_credits" ><button type="button" className="btn m-btn--pill  btn-brand m-btn--wide m-btn--uppercase m-btn--bolder m-btn--sm">{t('open')}</button></NavLink>
                         </div>
                     </div>
-                    <div className="m-pricing-table-1__item col-lg-4">
-                        <div className="m-pricing-table-1__visual">
-                            <div className="m-pricing-table-1__hexagon1"></div>
-                            <div className="m-pricing-table-1__hexagon2"></div>
-                            <span className="m-pricing-table-1__icon m--font-brand"><i className="fa fa-history"></i></span>
+                    <div className="col-md-4 col-lg-4 text-center">
+                        <div className="my-5">            
+                            <span className="m--font-brand display-1"><i className="fa fa-history display-1"></i></span>
                         </div>
-                        <span className="m-pricing-table-1__price">{t('transactions')}</span>
-                        <div className="m-pricing-table-1__btn">
+                        <span className="display-5">{t('transactions')}</span>
+                        <div className="my-5">
                             <NavLink to="/accounts/transactions" ><button type="button" className="btn m-btn--pill  btn-brand m-btn--wide m-btn--uppercase m-btn--bolder m-btn--sm">{t('open')}</button></NavLink>
                         </div>
                     </div>
@@ -58,10 +51,7 @@ class PaymentStatusContainer extends Component {
         return (
           <div className="alert m-alert m-alert--default">
             <h3 className="display-4 text-center">
-              <i className={`la ${(status === 'pending') ? 'la-check-circle' : 'la-times'} align-middle m--margin-right-20`} style={{
-                color: (status === 'pending') ? '#FFD844' : '#D2322D',
-                fontSize: '100px'
-              }}/>
+              <i className={`display-2 la ${(status === 'pending') ? 'la-check-circle text-success' : 'la-times text-danger'} align-middle m--margin-right-20`} />
               {t(status + 'PaymentMessage')}
             </h3>
           </div>      
