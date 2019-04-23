@@ -24,11 +24,6 @@
     .cardItem .cardContent {
         padding: 5px;
     }
-
-    .shoppingCartPortlet {
-        flex-basis: 100%;
-        max-width: 100%;
-    }
 }
 
 
@@ -121,7 +116,7 @@
 
     .mobile-sidebar-out-toggle {
         display: inline-block !important;
-margin: 50px;        
+        margin: 50px;        
     }
 
     .small-card-content .small-card .row {

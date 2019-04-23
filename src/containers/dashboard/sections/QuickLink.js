@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {translate} from "react-i18next";
 import bz from '../../../media/images/bz.jpg'
 import teacher from '../../../media/images/teacher.jpg'
+import AppLink from '../../../components/ui/AppLink';
 
 class QuickLink extends Component {
 
@@ -15,7 +16,7 @@ class QuickLink extends Component {
                 <div className="small-card">
                     <div>
                         <span className="pull-left m--margin-10">
-                            <img src={bz} alt="" />
+                            <AppLink type="students"><img src={bz} alt="" /></AppLink>
                         </span>
                         <div className="pull-left m--align-right quick-link-title m--margin-left-20 m--margin-top-20">
                             <span className="pull-right m--margin-left-20">
@@ -23,7 +24,7 @@ class QuickLink extends Component {
                             </span>                  
                             <span className="pull-left m--margin-top-10">
                                 <h5 className="text-left">{t('studentApp')}</h5>
-                                <h3 className="text-left">{t('download')}</h3>
+                                <h3 className="text-left"><AppLink type="students">{t('download')}</AppLink></h3>
                             </span>
                         </div>                       
                     </div>            
@@ -38,8 +39,8 @@ class QuickLink extends Component {
                                 <i className="fa fa-film display-3 quick-link-film"></i>
                             </span>                  
                             <span className="pull-left m--margin-top-10">
-                                  <h5 className="text-left">{t('howTo')}</h5>
-                                    <h3 className="text-left">{t('movies')}</h3>
+                                <h5 className="text-left">{t('howTo')}</h5>
+                                <h3 className="text-left">{t('movies')}</h3>
                             </span>
                         </div>                       
                     </div>

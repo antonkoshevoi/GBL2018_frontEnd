@@ -368,10 +368,7 @@ input[type=number]::-webkit-outer-spin-button {
     background: transparent;
 }
 
-
-
 /* CHECKOUT */
-
 .payments-widgets .payment-item {
     display: flex;
     justify-content: flex-start;
@@ -384,23 +381,6 @@ input[type=number]::-webkit-outer-spin-button {
 .payments-widgets .payment-item:hover {
     background: #f4f5f8;
 }
-
-.m-pricing-table-1 .m-pricing-table-1__items .m-pricing-table-1__item .m-pricing-table-1__price {
-    font-size: 1.7rem;
-}
-
-.m-pricing-table-1 .m-pricing-table-1__items .m-pricing-table-1__item:nth-child(1) .m-pricing-table-1__price {
-    font-size: 1.7rem;
-    margin-top: 20rem;
-}
-
-.shoppingCartPortlet {
-    margin-top: 0px !important;
-}
-.shoppingCartPortlet .m-portlet__head{
-    border-bottom: #7bc848 solid 1px
-}
-
 
 @media (max-width: 567px) {
     .store-filter.right-block {
