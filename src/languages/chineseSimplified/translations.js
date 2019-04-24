@@ -1,4 +1,10 @@
-export default {
+export default {    
+    en: 'English',
+    es: 'Español',
+    fr: 'Français',
+    kr: '한국어',
+    zh_hans: '汉语',
+    zh_hant: '漢語',        
     myProfile: '个人档案',
     schoolProfile: '学校档案',
     logout: '登出',

@@ -1,22 +1,15 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
 import { ListItemText, Menu, MenuItem} from '@material-ui/core';
-import en_flag from '../../media/images/flags/gb.png';
-import es_flag from '../../media/images/flags/es.png';
-import fr_flag from '../../media/images/flags/fr.png';
-import kr_flag from '../../media/images/flags/kr.png';
-import zh_hans_flag from '../../media/images/flags/cn.png';
-import zh_hant_flag from '../../media/images/flags/cn.png';
 
 const languages = [
-    {code:'en', img:en_flag},
-    {code:'es', img:es_flag},
-    {code:'fr', img:fr_flag},
-    {code:'kr', img:kr_flag},
-    {code:'zh_hans', img:zh_hans_flag},
-    {code:'zh_hant', img:zh_hant_flag}
-   ];
-
+    'en',
+    'es',
+    'fr',
+    'kr',
+    'zh_hans',
+    'zh_hant'
+];
 
 class LanguageSwitcher extends Component {
     constructor(props) {
@@ -58,11 +51,10 @@ class LanguageSwitcher extends Component {
     _renderLangsMenu(langs) {
         const { t } = this.props;
         const _self = this;
-        return languages.map(function (item,i) {
-
+        return languages.map(function (item, i) {
             return (
-               <MenuItem key={i} onClick={() => {_self._switchLanguage(item.code)}}>
-                   <ListItemText   primary={t(item.code)} />
+               <MenuItem key={i} onClick={() => {_self._switchLanguage(item)}}>
+                   <ListItemText primary={t(item)} />
                </MenuItem>
            )
         })
@@ -94,4 +86,4 @@ class LanguageSwitcher extends Component {
     }
 }
 
-export default translate("languageSwitcher")(LanguageSwitcher);
+export default translate('translations')(LanguageSwitcher);
