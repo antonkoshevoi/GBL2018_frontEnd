@@ -1,10 +1,8 @@
 import React, {PureComponent} from 'react';
 import {NavLink} from 'react-router-dom';
-import StickyHeader from 'react-sticky-header';
 import SplashNavigation from './SplashNavigation'
 import CldImage from '../../../components/ui/CldImage';
 import LanguageSwitcher from "../../../components/ui/LanguageSwitcher";
-import 'react-sticky-header/styles.css';
 
 class SplashHeader extends PureComponent {
     render() {
@@ -29,7 +27,9 @@ class SplashHeader extends PureComponent {
             <SplashNavigation t={t} />
         </section>);
 
-        return <StickyHeader header={headerSection} />;
+        return <header class="sticky-header">
+            <div>{headerSection}</div>
+        </header>;
     }
 }
 

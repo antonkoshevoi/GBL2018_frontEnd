@@ -1,4 +1,10 @@
 export default {
+    en: 'English',
+    es: 'Español',
+    fr: 'Français',
+    kr: '한국어',
+    zh_hans: '汉语',
+    zh_hant: '漢語',        
     myProfile: 'Mi perfil',
     schoolProfile: 'Perfil de la Escuela',
     logout: 'Cerrar Sesión',
