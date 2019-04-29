@@ -23,7 +23,7 @@ const AppLink = (props) => {
     }
     
     return (
-        <a href={links[type][os]} target="_blank">{props.children}</a>
+        <a rel="noopener noreferrer" href={links[type][os]} target="_blank">{props.children}</a>
     );
 };
 

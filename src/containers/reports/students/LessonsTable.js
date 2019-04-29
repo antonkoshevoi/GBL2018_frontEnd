@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {translate} from 'react-i18next';
 import {connect} from 'react-redux';
-import Parser from 'html-react-parser';
 import Popover from '@material-ui/core/Popover';
 import {withStyles} from '@material-ui/core/styles';
 import ApiClient from '../../../services/ApiClient';
@@ -10,6 +9,7 @@ import {selectStudentReportDetailsRequest} from "../../../redux/reports/students
 import {getReportDetails, resetGetReportDetails} from "../../../redux/reports/students/actions";
 import {Date} from "../../../components/ui/DateTime";
 import Loader from "../../../components/layouts/Loader";
+
 const apiClient = new ApiClient();
 
 const styles = theme => ({
@@ -239,7 +239,7 @@ class LessonsTable extends Component {
                         </div>
                     </td> : <td>-</td>}
                     <td className="text-left">
-                        <span>{attemptFinished && Parser(attempt.comment)}</span>
+                        <span dangerouslySetInnerHTML={{__html: attempt.comment}}></span>
                     </td>            
                 </tr>
             });                                                  
