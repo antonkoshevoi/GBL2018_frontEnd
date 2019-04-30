@@ -2,11 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {translate} from 'react-i18next';
 import {push} from 'react-router-redux';
-import {Icon} from '@material-ui/core';
 import {withRouter} from "react-router-dom";
 import Filter from "../../components/store/Filter";
 import Sidebar from "../../components/store/Sidebar";
-import StarRating from "../../components/ui/StarRating";
 import Loader from "../../components/layouts/Loader";
 import {Price} from "../../components/ui/Price";
 import {addToCarts, getRecords, getSingleRecord} from "../../redux/store/actions";
@@ -112,20 +110,10 @@ class Details extends Component {
                               <div className="col-md-12">
                                 <h4 className="productTitle">{record.get('title')}</h4>
                               </div>
-                              <div className="col-md-12">
-                                <div className="row">
-                                  <div className="col-md-7">                                    
-                                    <p className="m--margin-bottom-5">{t('product')}: {record.get('category').get('title')}</p>
-                                    <p className="m--margin-bottom-5">{t('age')}: {record.get('target').get('title') ? record.get('target').get('title') : t('noInfo')}</p>
-                                    <p className="m--margin-bottom-5">{t('subject')}: {record.get('subject').get('title') ? record.get('subject').get('title') : t('noInfo')}</p>
-                                  </div>
-                                  <div className="col-md-5 text-right">
-                                    <div className="align-text-bottom">
-                                      <StarRating score={record.get('score') || 4}/>
-                                      <span className="m--margin-left-5">{record.get('count') || 54} <Icon style={{fontSize:17, color:'#737373', transform: 'translateY(3px)'}}>person</Icon></span>
-                                    </div>
-                                  </div>
-                                </div>
+                              <div className="col-md-12">                                               
+                                <p className="m--margin-bottom-5">{t('product')}: {record.get('category').get('title')}</p>
+                                <p className="m--margin-bottom-5">{t('age')}: {record.get('target').get('title') ? record.get('target').get('title') : t('noInfo')}</p>
+                                <p className="m--margin-bottom-5">{t('subject')}: {record.get('subject').get('title') ? record.get('subject').get('title') : t('noInfo')}</p>                
                               </div>
                             </div>
                           </div>

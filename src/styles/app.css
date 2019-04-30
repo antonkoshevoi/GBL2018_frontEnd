@@ -154,14 +154,6 @@ textarea {
     margin: 0 !important;
 }
 
-.margin-bottom-0 {
-    margin-bottom: 0 !important;
-}
-
-.margin-top-0 {
-    margin-top: 0 !important;
-}
-
 .no-padding {
     padding: 0 !important;
 }
@@ -586,14 +578,6 @@ div.m-portlet {
 
 .small-card .col {
     line-height: 1;
-}
-
-.small-card .widget-desc {
-    font-size: 0.8rem;
-}
-
-.small-card .m-widget1__title {
-    margin-bottom: 1px;
 }
 
 .fa.widget-icon {
@@ -1282,9 +1266,6 @@ td.rotate div span {
 }
 .store-featured .verticalCardItem.cardItem{
     max-width: 150px;
-}
-.store-featured .empty-stars:before {
-    letter-spacing: -1px;
 }
 .store-featured .full-stars:before {
     letter-spacing: 0;

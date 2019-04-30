@@ -20,6 +20,9 @@
 .empty-stars:before {
     -webkit-text-stroke: 1px #b1b1b1;
 }
+.store-featured .empty-stars:before {
+    letter-spacing: -1px;
+}
 .full-stars:before {
     -webkit-text-stroke: 1px #737373;
 }
@@ -29,5 +32,11 @@
 @-moz-document url-prefix() {
     .full-stars {
         color: #ECBE24;
+    }
+}
+
+@media (max-width: 1060px) {
+    .empty-stars:before, .full-stars:before {
+        font-size: 6pt;
     }
 }

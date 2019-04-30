@@ -40,7 +40,7 @@
         justify-content: space-between;
     }
 
-    div.m-widget1 .m-widget1__item .m-widget1__number, .small-card .m-widget1__title, .m-widget1 .m-widget1__item .m-widget1__title {
+    div.m-widget1 .m-widget1__item .m-widget1__number, .m-widget1 .m-widget1__item .m-widget1__title {
         font-size: 1.1rem;
     }
 
@@ -51,10 +51,6 @@
 
     .m-widget1__number > img {
         width: 25px;
-    }
-
-    .small-card .widget-desc {
-        font-size: 0.6rem;
     }
 
     .small-card .m-stack {
@@ -78,14 +74,12 @@
         font-size: 4rem !important;
     }
 
-
     div.cardContent {
         padding: 4px;
     }
 }
 
 /**********************************/
-
 
 @media (max-width: 1240px) {
 
@@ -108,7 +102,6 @@
     .m-brand__logo-wrapper {
         width: 150px;
     }
-
 
     .mobile-sidebar-toggle {
         display: block !important;
@@ -136,38 +129,15 @@
     div#notFoundPage {
         margin: -20px;
     }
-
 }
-
-
-@media (min-width: 1241px) {
-
-
-}
-
-/**********************************/
-
 
 @media (max-width: 1060px) {
     div.pie-block > canvas {
         margin: auto;
     }
-
-    .small-card .m-widget1__title {
-        font-size: .8rem;
-    }
-
-    .small-card .widget-desc {
-        font-size: .5rem;
-    }
-
-    .empty-stars:before, .full-stars:before {
-        font-size: 6pt;
-    }
 }
 
 /**********************************/
-
 
 @media (max-width: 767px) {
 
@@ -175,16 +145,8 @@
         font-size: 1.3rem;
     }
 
-    .small-card .m-widget1__title {
-        font-size: 1rem;
-    }
-
     #g-widgets .small-card > div > div:first-child {
         flex-basis: 30%;
-    }
-
-    .small-card .widget-desc {
-        font-size: .7rem;
     }
 
     .top-header.m-container.m-container--full-height {
