@@ -30,7 +30,7 @@ class Card extends Component {
             </div>
           </div>
         </div>
-        <div className='m-portlet__body position-relative' style={{height: '100%'}}>
+        <div className='m-portlet__body position-relative h-100'>
           {children}
         </div>
       </div>

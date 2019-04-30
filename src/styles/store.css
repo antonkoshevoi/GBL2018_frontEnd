@@ -124,7 +124,6 @@
     font-size: 0.9rem;
 }
 
-
 .discount::after {
     position: absolute;
     content: "";
@@ -133,7 +132,6 @@
     right: 0;
     border-top: 1px solid;
     border-color: inherit;
-
     -webkit-transform:rotate(-7deg);
     -moz-transform:rotate(-7deg);
     -ms-transform:rotate(-7deg);
@@ -223,10 +221,6 @@ button .discount > span {
     display: inline-block;
 }
 
-.store-filter .filter-buttons a.active {
-    /*border-bottom: 3px solid #D2322D;*/
-}
-
 .store-filter .filter-buttons a.activeFilter {
     border-bottom: 3px solid #D2322D;
 }
@@ -255,14 +249,6 @@ button .discount > span {
     .productSection .cardItem:nth-child(3) {
         display: none;
     }
-}
-
-/* =====================================
-            PRODUCT DETAILS
-========================================*/
-
-#product-details .productTitle {
-    font-weight: 400;
 }
 
 /* =====================================
@@ -311,8 +297,6 @@ button .discount > span {
     margin-left: 35px;
     color: #9a9c9e;
 }
-
-
 
 .shoppingCartTable .productQuantity {
     font-size: 1.2rem;

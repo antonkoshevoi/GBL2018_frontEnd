@@ -30,8 +30,8 @@ class SignUpIndex extends Component {
                           {t('principal')}
                         </NavLink>
                       </div>
-                      <div className="alert m-alert m-alert--default margin-bottom-0">
-                        <p className="text-center margin-bottom-0"><Interpolate i18nKey="alreadyHaveAccountMessage" loginLink={loginBtn} /></p>
+                      <div className="alert m-alert m-alert--default m--margin-bottom-0">
+                        <p className="text-center m--margin-bottom-0"><Interpolate i18nKey="alreadyHaveAccountMessage" loginLink={loginBtn} /></p>
                       </div>
                     </div>
                   </div>
