@@ -110,7 +110,7 @@ class CourseModal extends Component {
           <Row key={i} index={i}>
             <Td>
               <FormControlLabel
-                value="male"
+                value={storeCourse.get('courseId')}
                 name="courseId"
                 control={<Radio color="primary"/>}                
                 checked={storeCourse.get('courseId') === courseId}
