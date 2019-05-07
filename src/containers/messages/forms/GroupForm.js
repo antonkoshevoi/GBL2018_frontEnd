@@ -121,7 +121,7 @@ class GroupForm extends Component {
         }
         
         if (recipient === 'classroomIds' && classroomsRequest.get('success')) {
-            return this._renderRecipientCheckboxes('selectClassrooms', 'classroomIds', this._getOptions(classroomsRequest, 'crmId', 'crmName'));
+            return this._renderRecipientCheckboxes('selectClassrooms', 'classroomIds', this._getOptions(classroomsRequest));
         }        
                
         if (recipient === 'roleIds') {
