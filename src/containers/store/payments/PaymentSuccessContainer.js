@@ -59,50 +59,20 @@ class PaymentSuccessContainer extends Component {
         return <Loader />;
     }
     
-    const invoice       = invoiceRequest.get('data');
-    const distributor   = invoice.get('distributor');
-    const price         = <Price price={invoice.get('total')} currency={invoice.get('currency')} />;
+    const invoice = invoiceRequest.get('data');    
     
     return (
       <div className="row">
+        {invoice &&
         <div className="col-md-10 m-auto">
-          {invoice &&
             <div>
                 <span className="invoice-title">
-                    {t('yourInvoice', {invoiceNo: invoice.get('invoice_no'), invoiceAmount: renderToString(price)})}.
+                    {t('yourInvoice', {invoiceNo: invoice.get('invoice_no'), invoiceAmount: renderToString(<Price price={invoice.get('total')} currency={invoice.get('currency')} />)})}.
                 </span>                
                 <p className="text-center m--margin-15">
                     <a rel="noopener noreferrer" className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
                 </p>
             </div>
-          }
-        </div>
-        {distributor &&
-        <div className="col-md-10 m-auto">
-            <div className="row">
-              <div className="col-4">
-                {t('mailChequeTo')}:
-                <br/>
-                <span className="d-block">{distributor.get('company')}</span>
-                <span className="d-block">{distributor.get('address_1')}</span>
-                <span className="d-block">{distributor.get('city')}, {distributor.get('region')}, {distributor.get('country')}</span>
-              </div>
-              <div className="col-4">
-                {t('wireTransferTo')}:
-                <br/>
-                {distributor.get('bank_details')}
-              </div>
-              <div className="col-4">
-                {t('interactPayment')}
-                <span className="d-block">{t('emailToDistributor', {email: distributor.get('email')})}</span>
-                <span className="d-block">
-                </span>
-              </div>
-            </div>
-        </div>
-        }
-        {invoice &&
-          <div className="col-md-10 m-auto">
             <div className="m-portlet m-portlet--bordered-semi">
               <div className="m-portlet__body m--padding-top-25">
                 <div className="col-md-10 m-auto">
