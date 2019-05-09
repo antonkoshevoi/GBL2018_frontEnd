@@ -39,7 +39,7 @@ export default {
     classroomSchedule: 'Class Schedule',
     demoCourses: 'Demo Courses',
     classroomsAutoCreation: 'Class Auto Creation',
-    mySubscriptions: 'MySubscriptions',
+    mySubscriptions: 'My Subscriptions',
     subscriptions: 'Subscriptions',
     buySubscription: 'Buy Subscription',
     subscribed: 'Subscribed',
