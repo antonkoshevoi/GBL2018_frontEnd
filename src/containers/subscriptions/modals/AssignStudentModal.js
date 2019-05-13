@@ -128,7 +128,7 @@ class AssignStudentModal extends Component {
                       {errors && errors.get('studentId') && <FormHelperText error>{ errors.get('studentId').get(0) }</FormHelperText>}            
                     </FormControl>
                  </form> : 
-                <div class="alert alert-warning">{t('youNotHaveStudents')}</div>
+                <div className="alert alert-warning">{t('youNotHaveStudents')}</div>
                 }
             </div>
         ) : (

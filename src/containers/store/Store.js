@@ -8,7 +8,6 @@ import {selectGetRecordsRequest, selectRecords} from "../../redux/store/selector
 import {withRouter} from "react-router-dom";
 import {getRecords} from "../../redux/store/actions";
 import Loader from "../../components/layouts/Loader";
-import StoreSlider from "../../components/store/StoreSlider";
 
 class Store extends Component {
 
@@ -19,7 +18,6 @@ class Store extends Component {
   componentDidMount() {
     this._getRecords();
   }
-
 
   _getRecords(params) {
     this.props.getRecords(params);
@@ -55,25 +53,7 @@ class Store extends Component {
     const {records, getRecordsRequest, t} = this.props;
     const loading = getRecordsRequest.get('loading');
     const success = getRecordsRequest.get('success');
-    const {isFiltered} = this.state;
-    
-    const sliderData = [
-      {
-        image:'https://www.swinburne.edu.my/wp-content/uploads/2017/06/sa-short-courses.jpg',
-        title: t('storeSlider1'),
-        desc:''
-      },
-      {
-        image:'https://conceptacademies.co.uk/wp-content/uploads/2014/10/6700226_m.jpg',
-        title: t('storeSlider2'),
-        desc:''
-      },
-      {
-        image:'https://az616578.vo.msecnd.net/files/2017/02/26/636237341865706889-619832852_movies.jpg',
-        title: t('storeSlider3'),
-        desc:''
-      }
-    ];    
+    const {isFiltered} = this.state;      
 
     return (
       <div className="animated fadeInLeft">
@@ -89,11 +69,6 @@ class Store extends Component {
           </div>
           {(success && !isFiltered) &&
           <div id="store-body">
-            <div className="row">
-              <div className="col-md-12">
-                <StoreSlider data={sliderData}/>
-              </div>
-            </div>
             <ProductsSection categoryId={1} type={t('courses')} title={t('courses')} products={records}/>
             <ProductsSection categoryId={4} type={t('books')} title={t('books')} products={records}/>
             <ProductsSection categoryId={3} type={t('teachingAds')} title={t('teachingAds')} products={records}/>

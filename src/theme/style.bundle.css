@@ -8404,54 +8404,6 @@ b, strong {
     right: 0;
     height: 100%; }
 
-@media (min-width: 576px) {
-  .m-container:not(.m-container--fluid):not(.m-container--responsive) {
-    width: 576px; } }
-
-@media (min-width: 768px) {
-  .m-container:not(.m-container--fluid):not(.m-container--responsive) {
-    width: 720px; } }
-
-@media (min-width: 1240px) {
-  .m-container:not(.m-container--fluid):not(.m-container--responsive) {
-    width: 940px; } }
-
-@media (min-width: 1240px) {
-  .m-container:not(.m-container--fluid):not(.m-container--responsive) {
-    width: 1140px; } }
-
-@media (min-width: 1400px) {
-  .m-container:not(.m-container--fluid):not(.m-container--responsive) {
-    width: 1340px; } }
-
-@media (min-width: 1600px) {
-  .m-container:not(.m-container--fluid):not(.m-container--responsive) {
-    width: 1540px; } }
-
-@media (min-width: 576px) {
-  .m-container.m-container--responsive.m-container--sm {
-    width: 576px; } }
-
-@media (min-width: 768px) {
-  .m-container.m-container--responsive.m-container--md {
-    width: 720px; } }
-
-@media (min-width: 1240px) {
-  .m-container.m-container--responsive.m-container--lg {
-    width: 940px; } }
-
-@media (min-width: 1240px) {
-  .m-container.m-container--responsive.m-container--xl {
-    width: 1140px; } }
-
-@media (min-width: 1400px) {
-  .m-container.m-container--responsive.m-container--xxl {
-    width: 1340px; } }
-
-@media (min-width: 1600px) {
-  .m-container.m-container--responsive.m-container--xxxl {
-    width: 1540px; } }
-
 .m-stack {
   display: block;
   width: 100%;
@@ -11133,20 +11085,6 @@ body.m-portlet--fullscreen {
     .alert[data-notify] .progress .progress-bar {
       height: 0.5rem; }
 
-.toast .toast-close-button {
-  font-family: "LineAwesome";
-  text-decoration: inherit;
-  text-rendering: optimizeLegibility;
-  text-transform: none;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  outline: none !important;
-  font-size: 0; }
-  .toast .toast-close-button:before {
-    content: ""; }
-  .toast .toast-close-button:before {
-    font-size: 1.1rem; }
 
 .toast-success {
   background-color: #34bfa3;

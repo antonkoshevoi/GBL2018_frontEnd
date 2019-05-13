@@ -220,15 +220,15 @@ class LineChart extends Component {
       let endDate;
       let okLabel;
       if (this.state.selectorActive === 1) {
-        endDate = moment(this.state.chosenDate).add(1, 'weeks').add('days', -1).format('MMMM Do');
+        endDate = moment(this.state.chosenDate).add(1, 'weeks').add(-1, 'days').format('MMMM Do');
         maxInputDate = moment().endOf('week').format('YYYY-MM-DD');
         okLabel = t('selectWeek');
       } else if (this.state.selectorActive === 2) {
-        endDate = moment(this.state.chosenDate).add(1, 'months').add('days', -1).format('MMMM Do');
+        endDate = moment(this.state.chosenDate).add(1, 'months').add(-1, 'days').format('MMMM Do');
         maxInputDate = moment().endOf('month').format('YYYY-MM-DD');
         okLabel = t('selectMonth');
       } else if (this.state.selectorActive === 3) {
-        endDate = moment(this.state.chosenDate).add(1, 'years').add('days', -1).format('MMMM Do');
+        endDate = moment(this.state.chosenDate).add(1, 'years').add(-1, 'days').format('MMMM Do');
         maxInputDate = moment().endOf('year').format('YYYY-MM-DD');
         okLabel = t('selectYear');
       }
@@ -352,7 +352,7 @@ class LineChart extends Component {
     }
     const start = moment(selectedDate).startOf(period);
     const end = moment(selectedDate).endOf(period);
-    const dayIsBetween = date.isBetween(moment(start).add('day', -1), end);
+    const dayIsBetween = date.isBetween(moment(start).add(-1, 'day'), end);
     const isFirstDay = start.isSame(date, 'day');
     const isLastDay = end.isSame(date, 'day');
     const isDisabled = moment(this.state.maxInputDate).isBefore(date, 'day');
