@@ -189,7 +189,7 @@ class ClassroomSchedule extends Component {
                         {loaded ?                                  
                         <table className="table table-bordered">
                             <thead>
-                                <tr class="active">
+                                <tr className="active">
                                     <th>{t('unit')}</th>
                                     <th className="text-center">{t('lessonTitle')}</th>
                                     <th className="text-center">{t('lessonDescription')}</th>

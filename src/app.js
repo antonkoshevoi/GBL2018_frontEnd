@@ -9,17 +9,16 @@ import {Provider} from 'react-redux';
 import {Router} from "react-router";
 import Routes from './configs/routes';
 import configureStore from './redux/store';
-import createHistory from 'history/createBrowserHistory'
+import { createBrowserHistory } from 'history'
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
 import blue from '@material-ui/core/es/colors/blue';
 import MomentUtils from '@date-io/moment';
 import ApiClient from "./services/ApiClient";
 
-const history   = createHistory();
+const history   = createBrowserHistory();
 const apiClient = new ApiClient();
 const store     = configureStore(history, apiClient);
-
 
 class App extends Component {
 

@@ -267,7 +267,7 @@ export function generateChartTemplate(selector, startDate) {
   function fillDates(startDate, number, format) {
     const arr = [];
     for (let i = 0; i < number; i++) {
-      arr.push(moment(startDate).add('days', i).format(format));
+      arr.push(moment(startDate).add(i, 'days').format(format));
     }
     return arr;
   }

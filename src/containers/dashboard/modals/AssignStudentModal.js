@@ -129,7 +129,7 @@ class AssignStudentModal extends Component {
                                 </div>
                             </div> 
                         : 
-                            <div class="alert alert-warning">{t('youNotHaveStudents')}</div>
+                            <div className="alert alert-warning">{t('youNotHaveStudents')}</div>
                         }            
                         </FormGroup>
                     :
