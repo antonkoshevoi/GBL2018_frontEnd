@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {push} from 'react-router-redux';
 import {selectGetRecordsRequest} from '../../redux/subscriptions/selectors';
 import {selectPublicGiftRequest} from '../../redux/gifts/selectors';
@@ -168,4 +168,4 @@ Gift = connect(
     })
 )(Gift);
 
-export default translate('translations')(Gift);
+export default withTranslation('translations')(Gift);

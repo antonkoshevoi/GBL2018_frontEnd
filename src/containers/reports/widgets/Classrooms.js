@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../../components/ui/table';
@@ -124,4 +124,4 @@ Classrooms = connect(
   })
 )(Classrooms);
 
-export default translate('translations')(Classrooms);
+export default withTranslation('translations')(Classrooms);

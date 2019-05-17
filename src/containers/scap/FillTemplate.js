@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import {
@@ -306,4 +306,4 @@ FillTemplate = connect(
     })
 )(FillTemplate);
 
-export default translate('translations')(FillTemplate);
+export default withTranslation('translations')(FillTemplate);

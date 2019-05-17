@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
@@ -240,4 +240,4 @@ SchoolScap = connect(
     })
 )(SchoolScap);
 
-export default translate('translations')(SchoolScap);
+export default withTranslation('translations')(SchoolScap);

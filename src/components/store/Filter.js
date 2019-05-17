@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, IconButton, Input, InputAdornment, Menu, MenuItem, Icon} from '@material-ui/core';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {NavLink, withRouter} from "react-router-dom";
 import {buildSortersQuery} from "../../helpers/utils";
 
@@ -271,4 +271,4 @@ Filter.defaultProps = {
   }
 }
 
-export default withRouter(translate('translations')(Filter));
+export default withRouter(withTranslation('translations')(Filter));

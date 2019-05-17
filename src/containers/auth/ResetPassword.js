@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { getResetPasswordUser, updatePassword, resetUpdatePasswordRequest } from '../../redux/auth/actions';
 import { selectResetPasswordUserRequest, selectUpdatePasswordRequest} from '../../redux/auth/selectors';
@@ -138,4 +138,4 @@ ResetPassword = connect(
     })
 )(ResetPassword);
 
-export default withRouter(translate("translations")(ResetPassword));
+export default withRouter(withTranslation("translations")(ResetPassword));

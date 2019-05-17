@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {translate} from "react-i18next";
+import {withTranslation} from "react-i18next";
 import Card from "../../../components/ui/Card";
 import { CircularProgress } from '@material-ui/core';
 import {selectRosterStatisticRequest} from "../../../redux/reports/dashboard/selectors";
@@ -133,4 +133,4 @@ RosterStatistic = connect(
   })
 )(RosterStatistic);
 
-export default translate('translations')(RosterStatistic);
+export default withTranslation('translations')(RosterStatistic);

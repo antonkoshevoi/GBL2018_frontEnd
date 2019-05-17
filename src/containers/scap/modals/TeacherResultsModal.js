@@ -3,7 +3,7 @@ import { AppBar, DialogContent, Icon, Toolbar, Typography } from '@material-ui/c
 import { Date } from "../../../components/ui/DateTime";
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../../components/ui/table';
 import { getResultsRecords, resetGetResultsRecordsRequest } from "../../../redux/scap/actions";
 import { selectGetResultRecordsRequest } from "../../../redux/scap/selectors";
@@ -167,4 +167,4 @@ TeacherResultsModal = connect(
     })
 )(TeacherResultsModal);
 
-export default translate('translations')(TeacherResultsModal);
+export default withTranslation('translations')(TeacherResultsModal);

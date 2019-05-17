@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Pie} from "react-chartjs-2";
 import {CircularProgress} from '@material-ui/core';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 
 class SchoolAverageChart extends Component {
 
@@ -138,4 +138,4 @@ class SchoolAverageChart extends Component {
   }
 }
 
-export default translate('translations')(SchoolAverageChart);
+export default withTranslation('translations')(SchoolAverageChart);

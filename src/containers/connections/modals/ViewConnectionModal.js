@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { AppBar, DialogContent, Icon, Toolbar, Typography } from '@material-ui/core';
 import { DateTime } from "../../../components/ui/DateTime";
 import Modal from "../../../components/ui/Modal";
@@ -213,4 +213,4 @@ class ViewConnectionModal extends Component {
     }
 }
 
-export default translate('translations')(ViewConnectionModal);
+export default withTranslation('translations')(ViewConnectionModal);

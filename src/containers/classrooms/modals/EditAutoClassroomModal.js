@@ -7,7 +7,7 @@ import {
   Toolbar, Typography,
   Divider, Button, DialogActions, FormControl, InputLabel, Input, FormHelperText, Select, MenuItem
 } from '@material-ui/core';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {connect} from 'react-redux';
 import {
   selectGetSingleRecordRequest,
@@ -323,4 +323,4 @@ EditAutoClassroomModal = connect(
   })
 )(EditAutoClassroomModal);
 
-export default translate('translations')(EditAutoClassroomModal);
+export default withTranslation('translations')(EditAutoClassroomModal);

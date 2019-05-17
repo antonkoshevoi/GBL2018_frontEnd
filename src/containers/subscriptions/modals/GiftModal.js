@@ -8,7 +8,7 @@ import {
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate, Interpolate } from 'react-i18next';
+import { withTranslation, Trans } from 'react-i18next';
 import { selectSubscriptionRequest } from "../../../redux/gifts/selectors";
 import { giftSubscription, resetGiftSubscriptionRequest } from "../../../redux/gifts/actions";
 import { Price } from '../../../components/ui/Price';
@@ -99,9 +99,13 @@ class GiftModal extends Component {
                     <div className="row m--margin-bottom-15" >
                         <div className="col-sm-12"><h3 className="m--visible-desktop-inline">{t(subscription.title)}</h3> (<strong className="g-blue"><Price price={subscription.price} currency={subscription.currency} /></strong> / {t(subscription.period)})</div>                        
                         <div className="col-sm-12">
-                            <Interpolate i18nKey="courseAtTime" number={subscription.allowedCourses} />                            
-                            <br />                            
-                            <Interpolate i18nKey="usersMax" number={subscription.allowedCourses} />
+                            <Trans i18nKey="translations:courseAtTime">
+                                <span className="m--font-bolder">{{courses: subscription.allowedCourses}}</span>
+                            </Trans>
+                            <br />
+                            <Trans i18nKey={'translations:usersMax'}>
+                                <span className="m--font-bolder">{{students: subscription.allowedCourses}}</span>
+                            </Trans>
                         </div>
                     </div>}
                 </div>
@@ -138,4 +142,4 @@ GiftModal = connect(
   })
 )(GiftModal);
   
-export default translate('translations')(GiftModal);
+export default withTranslation('translations')(GiftModal);

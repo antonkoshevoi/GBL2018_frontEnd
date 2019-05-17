@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { MenuItem, Select, FormControl, FormHelperText, Input, InputLabel } from '@material-ui/core';
 import { getRoles } from '../../../redux/administration/actions';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { selectRoles } from '../../../redux/administration/selectors';
 import { selectGetSchoolHomeroomsRequest } from "../../../redux/schools/selectors";
 import { getSchoolHomerooms } from "../../../redux/schools/actions";
@@ -207,4 +207,4 @@ AdministrationForm = connect(
   })
 )(AdministrationForm);
 
-export default translate('translations')(AdministrationForm);
+export default withTranslation('translations')(AdministrationForm);

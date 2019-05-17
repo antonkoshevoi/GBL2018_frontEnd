@@ -7,7 +7,7 @@ import {
   Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { selectCreateRequest } from '../../../redux/administration/selectors';
 import { create, resetCreateRequest } from '../../../redux/administration/actions';
 import Modal from "../../../components/ui/Modal";
@@ -149,4 +149,4 @@ CreateAdministrationModal = connect(
   })
 )(CreateAdministrationModal);
 
-export default translate('translations')(CreateAdministrationModal);
+export default withTranslation('translations')(CreateAdministrationModal);

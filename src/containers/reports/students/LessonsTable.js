@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {connect} from 'react-redux';
 import Popover from '@material-ui/core/Popover';
 import {withStyles} from '@material-ui/core/styles';
@@ -278,4 +278,4 @@ LessonsTable = connect(
   })
 )(LessonsTable);
 
-export default translate("translations")(withStyles(styles)(LessonsTable));
+export default withTranslation("translations")(withStyles(styles)(LessonsTable));

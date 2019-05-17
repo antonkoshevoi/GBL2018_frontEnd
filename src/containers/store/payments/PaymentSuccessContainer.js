@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import '../../../styles/store.css'
 import {getInvoice} from '../../../redux/payments/actions';
 import {invoiceRequest} from '../../../redux/payments/selectors';
@@ -121,4 +121,4 @@ PaymentSuccessContainer = connect(
   })
 )(PaymentSuccessContainer);
 
-export default translate('translations')(PaymentSuccessContainer);
+export default withTranslation('translations')(PaymentSuccessContainer);

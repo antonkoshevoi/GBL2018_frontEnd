@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate, Interpolate} from 'react-i18next';
-import 'cropperjs/dist/cropper.css';
+import {withTranslation, Trans} from 'react-i18next';
 import Cropper from "react-cropper";
 import {NavLink} from "react-router-dom";
 import {Divider} from '@material-ui/core';
@@ -120,8 +119,7 @@ class SignUpPrincipal extends Component {
     const { form } = this.state;
     const { t } = this.props;
     const loading = this.props.signUpRequest.get('loading');
-    const errors = this.props.signUpRequest.get('errors');
-    const loginBtn = <NavLink to="/login"><strong>{t('login')}</strong></NavLink>;
+    const errors = this.props.signUpRequest.get('errors');    
     return (
       <div>
         {loading && <Loader />}
@@ -144,11 +142,10 @@ class SignUpPrincipal extends Component {
               </div>
               <form className="m-portlet__body" onSubmit={(e) => { e.preventDefault(); this._submit(); }}>
                 <div className="alert m-alert m-alert--default m--margin-top-15">
-                  <p className="text-center margin-0">
-                    <Interpolate i18nKey="alreadyHaveAccountMessage" loginLink={loginBtn} />
+                  <p className="text-center m-0">                
+                    <Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans>
                   </p>
                 </div>
-
                 <div className="row m--margin-top-40">
                   <div className="col-md-6">
                     <legend>{t('personalInformation')}</legend>
@@ -356,5 +353,5 @@ SignUpPrincipal = connect(
   })
 )(SignUpPrincipal);
 
-export default translate('translations')(SignUpPrincipal);
+export default withTranslation('translations')(SignUpPrincipal);
 

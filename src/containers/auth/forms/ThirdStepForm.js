@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {Divider} from '@material-ui/core';
 
 class ThirdStepForm extends Component {
@@ -55,5 +55,5 @@ class ThirdStepForm extends Component {
   }
 }
 
-export default translate("translations")(ThirdStepForm);
+export default withTranslation('translations')(ThirdStepForm);
 

@@ -9,7 +9,7 @@ import {
   FormHelperText,
   Divider, Button, DialogActions
 } from '@material-ui/core';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import Modal from '../../../components/ui/Modal';
 
 class QuestionModal extends Component {
@@ -114,4 +114,4 @@ class QuestionModal extends Component {
   }
 }
   
-export default translate('translations')(QuestionModal);
+export default withTranslation('translations')(QuestionModal);

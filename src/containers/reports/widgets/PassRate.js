@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Card from "../../../components/ui/Card";
 import {CircularProgress} from '@material-ui/core';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 
 class PassRate extends Component {
 
@@ -23,4 +23,4 @@ class PassRate extends Component {
   }
 }
 
-export default translate('translations')(PassRate);
+export default withTranslation('translations')(PassRate);

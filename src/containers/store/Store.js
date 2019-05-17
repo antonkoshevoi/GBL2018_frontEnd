@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import '../../styles/store.css'
 import Filter from "../../components/store/Filter";
 import ProductsSection from "../../components/store/ProductsSection";
@@ -102,4 +102,4 @@ Store = connect(
   })
 )(Store);
 
-export default withRouter(translate("translations")(Store));
+export default withRouter(withTranslation("translations")(Store));

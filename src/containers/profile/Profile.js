@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import Info from "./sections/Info";
 import Details from "./sections/Details";
@@ -56,4 +56,4 @@ Profile = connect(
     })
 )(Profile);
 
-export default translate('translations')(Profile);
+export default withTranslation('translations')(Profile);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { selectCreateGroupRequest } from '../../redux/messages/selectors';
@@ -72,4 +72,4 @@ NewMessageGroup = connect(
     })
 )(NewMessageGroup);
 
-export default translate('translations')(NewMessageGroup);
+export default withTranslation('translations')(NewMessageGroup);

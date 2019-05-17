@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Tab, Tabs} from '@material-ui/core';
-import {translate} from "react-i18next";
+import {withTranslation} from "react-i18next";
 import InvitationsTab from './InvitationsTab';
 import DemoCoursesTab from './DemoCoursesTab';
 import SearchInput from '../../components/ui/SearchInput';
@@ -65,4 +65,4 @@ class Courses extends Component {
   }
 }
 
-export default translate('translations')(Courses);
+export default withTranslation('translations')(Courses);

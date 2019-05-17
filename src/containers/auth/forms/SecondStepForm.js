@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import 'cropperjs/dist/cropper.css';
 import Cropper from 'react-cropper';
 
@@ -182,4 +182,4 @@ class SecondStepForm extends Component {
   }
 }
 
-export default translate('translations')(SecondStepForm);
+export default withTranslation('translations')(SecondStepForm);

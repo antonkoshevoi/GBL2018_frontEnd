@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetGroupsRequest, selectDeleteGroupRequest } from '../../redux/messages/selectors';
 import { getGroups, deleteGroup, resetDeleteGroupRequest } from '../../redux/messages/actions';
@@ -177,4 +177,4 @@ MessageGroups = connect(
     })
 )(MessageGroups);
 
-export default translate('translations')(MessageGroups);
+export default withTranslation('translations')(MessageGroups);

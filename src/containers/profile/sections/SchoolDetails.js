@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import {Typography, CircularProgress} from '@material-ui/core';
 import {update} from "../../../redux/schools/actions";
 import {selectUpdateRequest} from "../../../redux/schools/selectors";
@@ -215,4 +215,4 @@ SchoolDetails = connect(
   })
 )(SchoolDetails);
 
-export default translate('translations')(SchoolDetails);
+export default withTranslation('translations')(SchoolDetails);

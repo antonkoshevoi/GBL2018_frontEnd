@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {push} from 'react-router-redux';
 import {selectGetRecordsRequest, selectSubscribeRequest} from '../../redux/subscriptions/selectors';
 import {getRecords, subscribe, resetSubscribeRequest, resetGetUserRecordsRequest} from '../../redux/subscriptions/actions';
@@ -168,4 +168,4 @@ Subscribe = connect(
     })
 )(Subscribe);
 
-export default withRouter(translate('translations')(Subscribe));
+export default withRouter(withTranslation('translations')(Subscribe));

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 class DeleteButton extends Component {
 
@@ -67,4 +67,4 @@ class DeleteButton extends Component {
   }
 };
 
-export default translate('translations')(DeleteButton);
+export default withTranslation('translations')(DeleteButton);

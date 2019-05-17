@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Button, Icon } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
@@ -171,4 +171,4 @@ StudentParents = connect(
     })
 )(StudentParents);
 
-export default translate('translations')(StudentParents);
+export default withTranslation('translations')(StudentParents);

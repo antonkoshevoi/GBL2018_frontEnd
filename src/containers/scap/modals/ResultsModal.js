@@ -7,7 +7,7 @@ import {
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import Modal from "../../../components/ui/Modal";
 import { getResultsDetailsRecord, resetGetRecordRequest } from "../../../redux/scap/actions";
 import { selectGetRecordRequest } from "../../../redux/scap/selectors";
@@ -111,4 +111,4 @@ ResultsModal = connect(
     })
 )(ResultsModal);
 
-export default translate('translations')(ResultsModal);
+export default withTranslation('translations')(ResultsModal);

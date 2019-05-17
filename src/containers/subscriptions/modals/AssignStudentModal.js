@@ -9,7 +9,7 @@ import {
   FormControl, FormHelperText, InputLabel, MenuItem, Select
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { selectSubscribeStudentRequest } from "../../../redux/subscriptions/selectors";
 import { subscribeStudent, resetSubscribeStudentRequest } from "../../../redux/subscriptions/actions";
 import { selectGetParentRecordsRequest, selectRecords as selectStoreItems } from "../../../redux/store/selectors";
@@ -204,4 +204,4 @@ AssignStudentModal = connect(
   })
 )(AssignStudentModal);
   
-export default translate('translations')(AssignStudentModal);
+export default withTranslation('translations')(AssignStudentModal);

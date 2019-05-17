@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {connect} from 'react-redux';
 import {logout} from '../../redux/auth/actions';
 import {Icon, IconButton} from '@material-ui/core';
@@ -105,4 +105,4 @@ Header = connect(
   })
 )(Header);
 
-export default translate("translation")(Header);
+export default withTranslation("translation")(Header);

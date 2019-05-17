@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { FormControl, FormControlLabel, FormHelperText, Input, Checkbox, InputLabel, MenuItem, Select, Typography, Tab, Tabs } from '@material-ui/core';
 import {getSchoolTeachers, getSchoolStudents} from "../../../redux/schools/actions";
 import {
@@ -281,4 +281,4 @@ HomeroomForm = connect(
   })
 )(HomeroomForm);
 
-export default translate('translations')(HomeroomForm);
+export default withTranslation('translations')(HomeroomForm);

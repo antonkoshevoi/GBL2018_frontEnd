@@ -8,7 +8,7 @@ import {
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { selectCreateRequest } from '../../../redux/teachers/selectors';
 import { create, resetCreateRequest } from '../../../redux/teachers/actions';
 import Modal from '../../../components/ui/Modal';
@@ -150,4 +150,4 @@ CreateTeacherModal = connect(
   })
 )(CreateTeacherModal);
 
-export default translate('translations')(CreateTeacherModal);
+export default withTranslation('translations')(CreateTeacherModal);

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {Tab, Tabs} from '@material-ui/core';
 import Card from "../../components/ui/Card";
 import HasRole from "../middlewares/HasRole";
@@ -53,7 +53,7 @@ class Transactions extends Component {
     }    
 }
 
-export default translate("translations")(Transactions);
+export default withTranslation("translations")(Transactions);
 
 
 

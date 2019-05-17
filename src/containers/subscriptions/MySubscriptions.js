@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnSubscribeRequest } from '../../redux/subscriptions/selectors';
@@ -267,4 +267,4 @@ MySubscriptions = connect(
   })
 )(MySubscriptions);
 
-export default translate('translations')(MySubscriptions);
+export default withTranslation('translations')(MySubscriptions);

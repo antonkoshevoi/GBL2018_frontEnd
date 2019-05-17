@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
@@ -170,4 +170,4 @@ SubscriptionPayments = connect(
 )(SubscriptionPayments);
 
 
-export default translate('translations')(SubscriptionPayments);
+export default withTranslation('translations')(SubscriptionPayments);

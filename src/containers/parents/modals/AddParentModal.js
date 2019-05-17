@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import {
   AppBar, CircularProgress, DialogContent, Icon, Toolbar, Typography, Divider
@@ -221,4 +221,4 @@ AddParentModal = connect(
     })    
 )(AddParentModal);
 
-export default translate('translations')(AddParentModal);
+export default withTranslation('translations')(AddParentModal);

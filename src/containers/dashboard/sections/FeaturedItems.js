@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {translate} from "react-i18next";
+import {withTranslation} from "react-i18next";
 import ProductCard from "../../../components/store/ProductCard";
 
 class FeaturedItems extends Component {
@@ -61,4 +61,4 @@ class FeaturedItems extends Component {
     }
 }
 
-export default translate('translations')(FeaturedItems);
+export default withTranslation('translations')(FeaturedItems);

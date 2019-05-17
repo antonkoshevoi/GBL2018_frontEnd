@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {translate} from "react-i18next";
+import {withTranslation} from "react-i18next";
 import {NavLink} from "react-router-dom";
 import {connect} from "react-redux";
 import {selectUserData} from "../../redux/user/selectors";
@@ -111,4 +111,4 @@ UserMenu = connect(
   (dispatch) => ({})
 )(UserMenu);
 
-export default translate("translations")(UserMenu);
+export default withTranslation("translations")(UserMenu);

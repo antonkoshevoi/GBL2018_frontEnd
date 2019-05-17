@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Avatar, AppBar, CircularProgress, DialogContent, Icon, Toolbar, Typography, Divider, Button, DialogActions} from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../../components/ui/table';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {selectGetStudentsRequest} from '../../../redux/parents/selectors';
 import Modal from "../../../components/ui/Modal";
 
@@ -104,4 +104,4 @@ StudentsModal = connect(
     (dispatch) => ({})
 )(StudentsModal);
 
-export default translate('translations')(StudentsModal);
+export default withTranslation('translations')(StudentsModal);

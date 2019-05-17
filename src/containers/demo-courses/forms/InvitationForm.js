@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, FormHelperText, Input, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { getDemoClassrooms } from '../../../redux/classrooms/actions';
 import { selectGetRecordsRequest, selectRecords } from '../../../redux/classrooms/selectors';
 
@@ -118,4 +118,4 @@ InvitationForm = connect(
   })
 )(InvitationForm);
 
-export default translate('translations')(InvitationForm);
+export default withTranslation('translations')(InvitationForm);

@@ -4,7 +4,7 @@ import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow }
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { uri } from '../../helpers/uri';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { getRecords, deleteRecord } from '../../redux/invitations/actions';
 import { selectDeleteRecordRequest, selectGetRecordsRequest, selectPagination, selectRecords } from '../../redux/invitations/selectors';
 import { buildSortersQuery } from '../../helpers/utils';
@@ -247,4 +247,4 @@ InvitationsTab = connect(
   })
 )(InvitationsTab);
 
-export default translate('translations')(InvitationsTab);
+export default withTranslation('translations')(InvitationsTab);

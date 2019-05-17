@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Typography, Select, MenuItem } from '@material-ui/core';
 import MuiDatePicker from "../../../components/ui/MuiDatePicker";
 import { update } from "../../../redux/user/actions";
@@ -292,4 +292,4 @@ Details = connect(
   })
 )(Details);
 
-export default translate('translations')(Details);
+export default withTranslation('translations')(Details);

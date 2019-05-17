@@ -7,7 +7,7 @@ import {
     Button, DialogActions, DialogContent
 } from '@material-ui/core';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {selectGetSingleRecordRequest, selectUpdateRequest} from '../../../redux/administration/selectors';
 import {update, resetGetSingleRecordRequest, resetUpdateRequest} from '../../../redux/administration/actions';
 import Modal from "../../../components/ui/Modal";
@@ -167,4 +167,4 @@ EditAdministrationModal = connect(
     })
 )(EditAdministrationModal);
 
-export default translate('translations')(EditAdministrationModal);
+export default withTranslation('translations')(EditAdministrationModal);

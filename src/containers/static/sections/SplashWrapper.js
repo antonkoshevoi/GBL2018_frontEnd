@@ -1,5 +1,5 @@
 import React from 'react';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import SplashHeader from './SplashHeader'
 import SplashFooter from './SplashFooter'
 import SplashJumbotron from './SplashJumbotron'
@@ -18,4 +18,4 @@ const SplashWrapper = props => {
   </div>);
 }
 
-export default translate('splashScreen')(SplashWrapper);
+export default withTranslation('splashScreen')(SplashWrapper);

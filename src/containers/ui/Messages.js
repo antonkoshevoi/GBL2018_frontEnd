@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { selectGetUnreadMessagesRequest } from '../../redux/messages/selectors';
 import { getUnreadMessages } from '../../redux/messages/actions';
 import { selectUserData } from "../../redux/user/selectors";
@@ -121,4 +121,4 @@ Messages = connect(
     })
 )(Messages);
 
-export default translate('translations')(Messages);
+export default withTranslation('translations')(Messages);

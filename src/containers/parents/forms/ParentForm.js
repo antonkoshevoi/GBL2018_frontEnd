@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { MenuItem, Select, FormControl, FormHelperText, Input, InputLabel } from '@material-ui/core';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import MuiDatePicker from "../../../components/ui/MuiDatePicker";
 
 class ParentForm extends Component {
@@ -130,4 +130,4 @@ class ParentForm extends Component {
   }
 }
 
-export default translate('translations')(ParentForm);
+export default withTranslation('translations')(ParentForm);

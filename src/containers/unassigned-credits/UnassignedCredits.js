@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from '../../components/ui/table';
 import { connect } from 'react-redux';
 import {getRecords} from "../../redux/course-credits/actions";
@@ -109,4 +109,4 @@ UnassignedCredits = connect(
   })
 )(UnassignedCredits);
 
-export default translate('translations')(UnassignedCredits);
+export default withTranslation('translations')(UnassignedCredits);

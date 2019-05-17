@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {connect} from "react-redux";
 import LineChart from '../widgets/LineChart';
 import PassRate from '../widgets/PassRate';
@@ -81,4 +81,4 @@ Dashboard = connect(
   })
 )(Dashboard);
 
-export default translate('translations')(Dashboard);
+export default withTranslation('translations')(Dashboard);

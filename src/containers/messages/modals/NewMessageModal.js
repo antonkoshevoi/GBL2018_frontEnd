@@ -6,7 +6,7 @@ import {
 } from '@material-ui/core';
 import MuiDatePicker from '../../../components/ui/MuiDatePicker';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import Modal from "../../../components/ui/Modal";
 import { selectSendMessageRequest, selectGetGroupsRequest } from '../../../redux/messages/selectors';
 import { getGroups, sendMessage, resetSendMessageRequest } from '../../../redux/messages/actions';
@@ -174,4 +174,4 @@ NewMessageModal = connect(
     })
 )(NewMessageModal);
 
-export default translate('translations')(NewMessageModal);
+export default withTranslation('translations')(NewMessageModal);

@@ -4,7 +4,7 @@ import {
   Divider, DialogActions, TextField, FormControl, FormHelperText
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import Modal from "../../../components/ui/Modal";
 import { selectSendMessageRequest } from '../../../redux/messages/selectors';
 import { sendChatMessage, resetSendMessageRequest } from '../../../redux/messages/actions';
@@ -141,4 +141,4 @@ SendMessageModal = connect(
     })
 )(SendMessageModal);
 
-export default translate('translations')(SendMessageModal);
+export default withTranslation('translations')(SendMessageModal);

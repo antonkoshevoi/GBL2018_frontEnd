@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { MenuItem, Select, FormControl, FormHelperText, Input, InputLabel } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { selectGetSchoolHomeroomsRequest } from '../../../redux/schools/selectors';
 import { getSchoolHomerooms } from '../../../redux/schools/actions';
 import MuiDatePicker from "../../../components/ui/MuiDatePicker";
@@ -197,4 +197,4 @@ StudentForm = connect(
   })
 )(StudentForm);
 
-export default translate('translations')(StudentForm);
+export default withTranslation('translations')(StudentForm);

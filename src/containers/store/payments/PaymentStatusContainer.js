@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import '../../../styles/store.css'
 import { NavLink } from 'react-router-dom';
 
@@ -75,4 +75,4 @@ class PaymentStatusContainer extends Component {
     }
 }
 
-export default translate('translations')(PaymentStatusContainer);
+export default withTranslation('translations')(PaymentStatusContainer);

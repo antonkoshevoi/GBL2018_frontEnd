@@ -8,7 +8,7 @@ import {
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { selectGetSingleRecordRequest, selectUpdateRequest} from '../../../redux/homerooms/selectors';
 import { resetGetSingleRecordRequest, resetUpdateRequest, update } from '../../../redux/homerooms/actions';
 import Modal from "../../../components/ui/Modal";
@@ -130,4 +130,4 @@ EditHomeroomModal = connect(
   })
 )(EditHomeroomModal);
 
-export default translate('translations')(EditHomeroomModal);
+export default withTranslation('translations')(EditHomeroomModal);
