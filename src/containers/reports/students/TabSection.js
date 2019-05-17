@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Select, MenuItem} from '@material-ui/core';
 import LessonsTable from './LessonsTable';
 import AttemptsTable from './AttemptsTable';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 
 class TabSection extends Component {
 
@@ -83,4 +83,4 @@ class TabSection extends Component {
   }
 }
 
-export default translate('translations')(TabSection);
+export default withTranslation('translations')(TabSection);

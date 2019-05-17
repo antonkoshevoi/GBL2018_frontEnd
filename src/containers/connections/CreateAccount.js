@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import {translate, Interpolate} from 'react-i18next';
+import { withTranslation, Trans } from 'react-i18next';
 import { push } from 'react-router-redux';
-import {NavLink} from 'react-router-dom';
-import {Divider} from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
+import { Divider } from '@material-ui/core';
 import { selectChangeStatusRequest, selectGetRecordRequest } from "../../redux/connections/selectors";
 import { acceptAndCreate, getRecord, resetChangeStatusRequest } from "../../redux/connections/actions"; 
 import { load } from '../../redux/app/actions';
@@ -83,7 +83,6 @@ class CreateAccount extends Component {
         
         const {acceptRequest, getRecordRequest, t} = this.props;                 
         const loading = getRecordRequest.get('loading') || acceptRequest.get('loading');        
-        const loginBtn  =  <NavLink to='/login'><strong>Login</strong></NavLink>;        
         const errors    = acceptRequest.get('errors');
         const { form }  = this.state;        
     
@@ -181,7 +180,7 @@ class CreateAccount extends Component {
                 </div>
                 <div className='alert m-alert m-alert--default m--margin-top-25'>
                   <p className='text-center margin-0'>
-                    <Interpolate i18nKey="alreadyHaveAccountMessage" loginLink={loginBtn} />
+                    <Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans>
                   </p>                              
                 </div>
               </div>
@@ -207,4 +206,4 @@ CreateAccount = connect(
     })
 )(CreateAccount);
 
-export default translate('translations')(withRouter(CreateAccount));   
+export default withTranslation('translations')(withRouter(CreateAccount));   

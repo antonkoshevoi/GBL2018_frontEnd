@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import SplashWrapper from './SplashWrapper'
 
 class SplashContent extends PureComponent {
@@ -50,4 +50,4 @@ class SplashContent extends PureComponent {
     }
 };
 
-export default translate('splashScreen')(SplashContent);
+export default withTranslation('splashScreen')(SplashContent);

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { selectUpdateRequest} from "../../../redux/schools/selectors";
 import { update } from "../../../redux/schools/actions";
 import { Dialog } from '@material-ui/core';
@@ -99,4 +99,4 @@ SchoolInfo = connect(
   })
 )(SchoolInfo);
 
-export default translate('translations')(SchoolInfo);
+export default withTranslation('translations')(SchoolInfo);

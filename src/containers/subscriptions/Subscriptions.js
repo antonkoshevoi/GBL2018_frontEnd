@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate, Interpolate } from 'react-i18next';
+import { withTranslation, Trans } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetRecordsRequest } from '../../redux/subscriptions/selectors';
 import { getRecords } from '../../redux/subscriptions/actions';
@@ -32,8 +32,8 @@ class Subscriptions extends Component {
     }              
     
     return getRecordsRequest.get('records').map((record, key) => {
-        const courses = <span className="m--font-bolder">{record.get('allowedCourses')}</span>;
-        const students = <span className="m--font-bolder">{record.get('allowedStudents')}</span>;
+        const courses = record.get('allowedCourses');
+        const students = record.get('allowedStudents');        
         return (        
         <div key={key} className="subscription-item-block col-sm-12 col-md-4 col-lg-4 col-xl-4 m--margin-top-35">
             <div className={`subscription-item item-${key}`}>
@@ -47,11 +47,17 @@ class Subscriptions extends Component {
                     </div>
                     <div className="subscription-description">
                         <div className="subscription-limits">
-                            <Interpolate i18nKey="courseAtTime" number={courses} />
+                            <Trans i18nKey="translations:courseAtTime">
+                                <span className="m--font-bolder">{{courses}}</span>
+                            </Trans>
                             <br />
-                            <Interpolate i18nKey={record.get('allowedCourses') > 1 ? 'courseAnyCoursesSwitchAnyTime' : 'courseAnyCourseSwitchAnyTime'} number={courses} />
+                            <Trans i18nKey={record.get('allowedCourses') > 1 ? 'translations:courseAnyCoursesSwitchAnyTime' : 'translations:courseAnyCourseSwitchAnyTime'}>
+                                <span className="m--font-bolder">{{courses}}</span>
+                            </Trans>
                             <br />
-                            <Interpolate i18nKey={record.get('allowedStudents') > 1 ? 'usersMax' : 'userMax'} number={students} />
+                            <Trans i18nKey={record.get('allowedStudents') > 1 ? 'translations:usersMax' : 'translations:userMax'}>
+                                <span className="m--font-bolder">{{students}}</span>
+                            </Trans>
                         </div>            
                         <div className="subscription-bonuses text-left">
                             <span>{t('annualBonus')}:</span>
@@ -93,4 +99,4 @@ Subscriptions = connect(
   })
 )(Subscriptions);
 
-export default translate('translations')(Subscriptions);
+export default withTranslation('translations')(Subscriptions);

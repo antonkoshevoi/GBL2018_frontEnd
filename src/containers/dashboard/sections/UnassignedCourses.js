@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {HeadRow, Row, Table, Tbody, Td, Th, Thead, MessageRow} from "../../../components/ui/table";
 import {connect} from "react-redux";
-import {translate} from "react-i18next";
+import {withTranslation} from "react-i18next";
 import {getRecords} from "../../../redux/course-credits/actions";
 import {selectGetRecordsRequest} from "../../../redux/course-credits/selectors";
 import AssignStudentModal from "../modals/AssignStudentModal"
@@ -136,4 +136,4 @@ UnassignedCourses = connect(
   })
 )(UnassignedCourses);
 
-export default translate('translations')(UnassignedCourses);
+export default withTranslation('translations')(UnassignedCourses);

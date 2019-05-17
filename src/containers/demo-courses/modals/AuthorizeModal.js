@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import Modal from '../../../components/ui/Modal';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 class AuthorizeModal extends Component {
   static propTypes = {
@@ -64,4 +64,4 @@ AuthorizeModal = connect(
   })
 )(AuthorizeModal);
 
-export default translate('translations')(AuthorizeModal);
+export default withTranslation('translations')(AuthorizeModal);

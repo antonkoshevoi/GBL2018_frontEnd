@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { translate, Interpolate } from 'react-i18next';
+import { withTranslation, Trans } from 'react-i18next';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
 import { selectGetSingleRecordRequest } from '../../redux/invitations/selectors';
 import { acceptInvitation, declineInvitation, getSingleRecord } from '../../redux/invitations/actions';
@@ -73,8 +73,6 @@ class InvitationDetails extends Component {
         return this._errorMessage(t('invitationDeclined'));
     }
     
-    const sender = <h4>{invitation.getIn(['sender', 'name'])}</h4>;
-    const course = <h2>{invitation.getIn(['course', 'crsTitle'])}</h2>;
     const imageStyle = {width: '100%', maxWidth: 210};
     
     return (
@@ -86,7 +84,10 @@ class InvitationDetails extends Component {
           )}
           <div className={`m--padding-20 col-12 col-sm-${image ? 9 : 12}`}>            
             <div>
-                <Interpolate i18nKey="userInvitedYouToDemoCourse" sender={sender} course={course} />
+                <Trans i18nKey="translations:userInvitedYouToDemoCourse">
+                    <h4>{{sender: invitation.getIn(['sender', 'name'])}}</h4>
+                    <h2>{{course: invitation.getIn(['course', 'crsTitle'])}}</h2>
+                </Trans>
             </div>            
             <br/>
             <h4>{t('description')}:</h4>
@@ -142,4 +143,4 @@ InvitationDetails = connect(
   }),
 )(InvitationDetails);
 
-export default translate('translations')(InvitationDetails);
+export default withTranslation('translations')(InvitationDetails);

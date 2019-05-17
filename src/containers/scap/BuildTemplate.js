@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { push } from 'react-router-redux';
@@ -214,4 +214,4 @@ BuildTemplate = connect(
     })
 )(BuildTemplate);
 
-export default translate('translations')(BuildTemplate);
+export default withTranslation('translations')(BuildTemplate);

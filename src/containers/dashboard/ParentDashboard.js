@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Avatar, CircularProgress, withStyles } from '@material-ui/core';
 import { connect } from "react-redux";
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { push } from 'react-router-redux';
 import { selectStudentsRequest, selectStudentStatusRequest } from "../../redux/student-parents/selectors";
 import { getStudents, acceptStudentRequest, declineStudentRequest, resetStudentRequest } from "../../redux/student-parents/actions";
@@ -259,4 +259,4 @@ ParentDashboard = connect(
     })
 )(ParentDashboard);
 
-export default withStyles(styles)(translate('translations')(ParentDashboard));   
+export default withStyles(styles)(withTranslation('translations')(ParentDashboard));   

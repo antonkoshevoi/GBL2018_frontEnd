@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { Select, MenuItem, InputLabel, Input, FormControl, FormHelperText, FormControlLabel, Checkbox } from '@material-ui/core';
 import { selectGetSchoolHomeroomsRequest, selectGetSchoolClassroomsRequest, selectGetSchoolTeachersRequest, selectGetSchoolStudentsRequest, selectGetSchoolAdminsRequest } from '../../../redux/schools/selectors';
@@ -277,4 +277,4 @@ GroupForm = connect(
     })
 )(GroupForm);
 
-export default translate('translations')(GroupForm);
+export default withTranslation('translations')(GroupForm);

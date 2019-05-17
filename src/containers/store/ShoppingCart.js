@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import OpenInvoicesTable from '../../components/store/OpenInvoicesTable';
 import { deleteFromCartRequest, selectAddToCartRequest, selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest } from '../../redux/store/selectors';
 import { calculateCartSum, deleteCartRecord, getCartRecords, setItemQuantity, updateShoppingCart } from '../../redux/store/actions';
@@ -106,4 +106,4 @@ ShoppingCart = connect(
   })
 )(ShoppingCart);
 
-export default translate('translations')(ShoppingCart);
+export default withTranslation('translations')(ShoppingCart);

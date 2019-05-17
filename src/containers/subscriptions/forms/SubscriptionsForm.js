@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {translate, Interpolate} from 'react-i18next';
+import {withTranslation, Trans} from 'react-i18next';
 import {Checkbox} from '@material-ui/core';
 import {Price} from "../../../components/ui/Price";
 
@@ -68,8 +68,8 @@ class SubscriptionsForm extends Component {
                 return '';
             }
                                                         
-            const courses = <span className="m--font-bolder">{record ? record.get('allowedCourses') : '0'}</span>;
-            const students = <span className="m--font-bolder">{record ? record.get('allowedStudents') : '0'}</span>;
+            const courses = record ? record.get('allowedCourses') : '0';
+            const students = record ? record.get('allowedStudents') : '0';
 
             return (
                 <div key={key} className="subscription-item-block m--margin-top-30" style={styles}>
@@ -106,11 +106,17 @@ class SubscriptionsForm extends Component {
                             </div>
                             <div className="subscription-description">
                                 <div className="subscription-limits">
-                                    <Interpolate i18nKey="courseAtTime" number={courses} />
-                                    <br />                            
-                                    <Interpolate i18nKey={record.get('allowedCourses') > 1 ? 'courseAnyCoursesSwitchAnyTime' : 'courseAnyCourseSwitchAnyTime'} number={courses} />
-                                    <br />                            
-                                    <Interpolate i18nKey={record.get('allowedStudents') > 1 ? 'usersMax' : 'userMax'} number={students} />
+                                    <Trans i18nKey="translations:courseAtTime">
+                                        <span className="m--font-bolder">{{courses}}</span>
+                                    </Trans>
+                                    <br />
+                                    <Trans i18nKey={record.get('allowedCourses') > 1 ? 'translations:courseAnyCoursesSwitchAnyTime' : 'translations:courseAnyCourseSwitchAnyTime'}>
+                                        <span className="m--font-bolder">{{courses}}</span>
+                                    </Trans>
+                                    <br />
+                                    <Trans i18nKey={record.get('allowedStudents') > 1 ? 'translations:usersMax' : 'translations:userMax'}>
+                                        <span className="m--font-bolder">{{students}}</span>
+                                    </Trans>
                                 </div>            
                                 <div className="subscription-bonuses text-left">
                                     <span>{t('annualBonus')}:</span>
@@ -180,4 +186,4 @@ class SubscriptionsForm extends Component {
     }
 }
 
-export default translate('translations')(SubscriptionsForm);
+export default withTranslation('translations')(SubscriptionsForm);

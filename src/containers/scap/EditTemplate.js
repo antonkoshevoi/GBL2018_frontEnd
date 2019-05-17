@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import {
@@ -289,4 +289,4 @@ EditTemplate = connect(
     })
 )(EditTemplate);
 
-export default translate('translations')(EditTemplate);
+export default withTranslation('translations')(EditTemplate);

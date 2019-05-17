@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
@@ -363,4 +363,4 @@ Classrooms = connect(
 )(Classrooms);
 
 
-export default translate('translations')(Classrooms);
+export default withTranslation('translations')(Classrooms);

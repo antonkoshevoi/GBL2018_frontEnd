@@ -3,7 +3,7 @@ import SchoolAverageChart from "../reports/widgets/SchoolAverageChart";
 import RosterStatistic from "../reports/widgets/RosterStatistic";
 import LineChart from "../reports/widgets/LineChart";
 import {connect} from "react-redux";
-import {translate} from "react-i18next";
+import {withTranslation} from "react-i18next";
 import {getRecords} from "../../redux/store/actions";
 import {selectRecords} from "../../redux/store/selectors";
 import {getCharts} from "../../redux/reports/dashboard/actions";
@@ -88,4 +88,4 @@ SchoolDashboard = connect(
   })
 )(SchoolDashboard);
 
-export default translate("translations")(SchoolDashboard);
+export default withTranslation("translations")(SchoolDashboard);

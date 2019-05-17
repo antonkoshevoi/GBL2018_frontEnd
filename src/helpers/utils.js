@@ -61,37 +61,3 @@ export const debounce = (fn, delay) => {
     }, delay);
   };
 };
-
-
-/**
- *
- * @param paths, i
- * @returns 'path
- */
-export const  generateBreadcrumbLink = (paths,i) => {
-    let path = ""
-    for (let x = 1; x<=i; x++) {
-        path += '/' + paths[x];
-    }
-    return path;
-}
-
-/**
- *
- * @param paths, i
- * @returns 'path
- */
-export const  generateLinkId = (paths) => {
-    let path = ""
-    for (let x = 1; x<=paths.length-1; x++) {
-        path += paths[x] +  '_';
-    }
-    return path;
-}
-
-
-export const getUrlLastName = (url) => {
-  const paths = url.split('/');
-  return paths[paths.length-1];
-}
-

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {getRecords} from "../../redux/transactions/actions";
 import {selectGetRecordsRequest} from "../../redux/transactions/selectors";
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/table";
@@ -231,7 +231,7 @@ StoreItems = connect(
     })
 )(StoreItems);
 
-export default translate("translations")(StoreItems);
+export default withTranslation("translations")(StoreItems);
 
 
 

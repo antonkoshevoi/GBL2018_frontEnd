@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 import {withRouter} from "react-router";
 import '../../styles/sidebar.css';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import $ from "jquery"
 
 class Sidebar extends Component {
@@ -187,4 +187,4 @@ class Sidebar extends Component {
   }
 }
 
-export default withRouter(translate("translations")(Sidebar));
+export default withRouter(withTranslation("translations")(Sidebar));

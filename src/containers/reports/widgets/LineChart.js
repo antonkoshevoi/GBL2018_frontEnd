@@ -3,7 +3,7 @@ import {formChartOptions, formChartData} from '../../../data/Charts';
 import {Line} from 'react-chartjs-2';
 import ApiClient from '../../../services/ApiClient';
 import MuiDatePicker from '../../../components/ui/MuiDatePicker';
-import {translate} from "react-i18next";
+import {withTranslation} from "react-i18next";
 import moment from 'moment';
 import classNames from 'classnames';
 import {Icon, Button, IconButton, withStyles} from '@material-ui/core';
@@ -424,4 +424,4 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(translate('translations')(LineChart));
+export default withStyles(styles)(withTranslation('translations')(LineChart));

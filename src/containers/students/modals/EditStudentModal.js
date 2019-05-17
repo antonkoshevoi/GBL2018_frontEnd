@@ -9,7 +9,7 @@ import {
     DialogActions
 } from '@material-ui/core';
 import {connect} from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import {selectGetSingleRecordRequest, selectUpdateRequest} from '../../../redux/students/selectors';
 import {update, resetGetSingleRecordRequest, resetUpdateRequest} from '../../../redux/students/actions';
 import Modal from "../../../components/ui/Modal";
@@ -167,4 +167,4 @@ EditStudentModal = connect(
     })
 )(EditStudentModal);
 
-export default translate('translations')(EditStudentModal);
+export default withTranslation('translations')(EditStudentModal);

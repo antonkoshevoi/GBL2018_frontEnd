@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, CircularProgress, DialogContent, Icon, Toolbar, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { selectGetStudentsRecordsRequest, selectUnSubscribeStudentRequest } from "../../../redux/subscriptions/selectors";
 import { getStudentsRecords, unSubscribeStudent, resetUnSubscribeStudentRequest } from "../../../redux/subscriptions/actions";
 import { Date } from "../../../components/ui/DateTime";
@@ -122,4 +122,4 @@ StudentsModal = connect(
     })
 )(StudentsModal);
   
-export default translate('translations')(StudentsModal);
+export default withTranslation('translations')(StudentsModal);

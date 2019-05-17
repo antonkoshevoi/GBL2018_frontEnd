@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate, Interpolate} from 'react-i18next';
+import {withTranslation, Trans} from 'react-i18next';
 import {NavLink} from 'react-router-dom';
 import {Divider, Step, StepLabel, Stepper} from '@material-ui/core';
 import Loader from "../../components/layouts/Loader";
@@ -148,8 +148,7 @@ class SignUpParent extends Component {
 
         const loading = this.props.validateRequest.get('loading') || this.props.signUpRequest.get('loading');
         const step1Errors = this.props.validateRequest.get('errors');
-        const step2Errors = this.props.signUpRequest.getIn(['errors', 'step2']);
-        const loginBtn =  <NavLink to='/login'><strong>{t('login')}</strong></NavLink>;
+        const step2Errors = this.props.signUpRequest.getIn(['errors', 'step2']);        
 
         return (
           <form  onSubmit={(e) => { e.preventDefault(); this._next(); }}>
@@ -207,7 +206,7 @@ class SignUpParent extends Component {
                         {activeStep < 2 &&
                         <div className='alert m-alert m-alert--default m--margin-top-25'>
                           <p className='text-center margin-0'>
-                            <Interpolate i18nKey="alreadyHaveAccountMessage" loginLink={loginBtn} />
+                            <Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans>                            
                           </p>                              
                         </div>   
                         }
@@ -235,4 +234,4 @@ SignUpParent = connect(
     })
 )(SignUpParent);
 
-export default translate('translations')(SignUpParent);
+export default withTranslation('translations')(SignUpParent);

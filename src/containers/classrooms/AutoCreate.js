@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import Card from "../../components/ui/Card";
 import {EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/table";
 import {selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords} from "../../redux/classrooms/selectors";
@@ -140,4 +140,4 @@ AutoCreate = connect(
 )(AutoCreate);
 
 
-export default translate('translations')(AutoCreate);
+export default withTranslation('translations')(AutoCreate);

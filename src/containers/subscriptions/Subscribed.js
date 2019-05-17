@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {withRouter} from 'react-router-dom';
 import {getInvoice} from '../../redux/subscriptions/actions';
 import {selectGetInvoiceRequest} from '../../redux/subscriptions/selectors';
@@ -46,4 +46,4 @@ Subscribed = connect(
   })
 )(Subscribed);
 
-export default withRouter(translate('translations')(Subscribed));
+export default withRouter(withTranslation('translations')(Subscribed));

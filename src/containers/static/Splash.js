@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import SplashWrapper from './sections/SplashWrapper';
 import SplashSlider from './sections/SplashSlider';
 import CldImage from '../../components/ui/CldImage';
@@ -179,4 +179,4 @@ const SplashContainer = props => {
     </SplashWrapper>);
 }
 
-export default translate('splashScreen')(SplashContainer);
+export default withTranslation('splashScreen')(SplashContainer);

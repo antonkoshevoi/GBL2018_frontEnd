@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Button, Icon } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
@@ -229,4 +229,4 @@ Connections = connect(
     })
 )(Connections);
 
-export default translate('translations')(Connections);
+export default withTranslation('translations')(Connections);

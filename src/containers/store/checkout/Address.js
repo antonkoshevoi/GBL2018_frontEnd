@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {selectRecords} from "../../../redux/countries/selectors";
 import {connect} from 'react-redux';
 import {FormControl, MenuItem, Select} from '@material-ui/core';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 
 class Address extends Component {
 
@@ -262,5 +262,5 @@ Address = connect(
   }),
 )(Address);
 
-export default translate('translations')(Address);
+export default withTranslation('translations')(Address);
 

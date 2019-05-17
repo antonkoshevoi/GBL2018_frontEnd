@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { translate } from 'react-i18next';
-import 'cropperjs/dist/cropper.css';
+import { withTranslation } from 'react-i18next';
 import Cropper from "react-cropper";
 
 class ImageCropper extends Component {
@@ -233,4 +232,4 @@ ImageCropper.defaultProps = {
   saveButton: false
 };
 
-export default translate('translations')(ImageCropper);
+export default withTranslation('translations')(ImageCropper);

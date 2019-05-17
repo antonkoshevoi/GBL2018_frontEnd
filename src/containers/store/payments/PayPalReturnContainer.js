@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import '../../../styles/store.css'
 import { withRouter } from 'react-router-dom';
 import { push } from 'react-router-redux';
@@ -58,4 +58,4 @@ PayPalReturnContainer = connect(
   })
 )(PayPalReturnContainer);
 
-export default withRouter(translate('PayPalReturnContainer')(PayPalReturnContainer));
+export default withRouter(withTranslation('PayPalReturnContainer')(PayPalReturnContainer));

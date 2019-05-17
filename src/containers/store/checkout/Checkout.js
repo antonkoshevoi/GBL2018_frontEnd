@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import '../../../styles/store.css'
 import {selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest} from '../../../redux/store/selectors';
 import {calculateCartSum, getCartRecords} from '../../../redux/store/actions';
@@ -278,4 +278,4 @@ Checkout = connect(
   })
 )(Checkout);
 
-export default withRouter(translate('translations')(Checkout));
+export default withRouter(withTranslation('translations')(Checkout));

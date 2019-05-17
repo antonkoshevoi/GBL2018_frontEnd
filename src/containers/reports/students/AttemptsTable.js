@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../components/ui/table';
 import {selectAttemptsRequest} from "../../../redux/reports/students/selectors";
 import {getAttempts} from "../../../redux/reports/students/actions";
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {DateTime} from "../../../components/ui/DateTime";
 import Pagination from '../../../components/ui/Pagination';
 import Loader from "../../../components/layouts/Loader";
@@ -118,4 +118,4 @@ AttemptsTable = connect(
     })
 )(AttemptsTable);
 
-export default translate('translations')(AttemptsTable);
+export default withTranslation('translations')(AttemptsTable);

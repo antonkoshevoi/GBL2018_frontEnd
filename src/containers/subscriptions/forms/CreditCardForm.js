@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {FormControl, FormHelperText, MenuItem, Select} from '@material-ui/core';
 
 import '../Subscriptions.css'
@@ -149,4 +149,4 @@ class CreditCardForm extends Component {
     }
 }
 
-export default translate('translations')(CreditCardForm);
+export default withTranslation('translations')(CreditCardForm);

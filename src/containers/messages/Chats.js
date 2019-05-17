@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetPrivateChatsRequest, selectGetGroupChatsRequest, selectGetUnreadMessagesRequest } from '../../redux/messages/selectors';
 import { getPrivateChats, getGroupChats } from '../../redux/messages/actions';
@@ -240,4 +240,4 @@ Chats = connect(
     })
 )(Chats);
 
-export default translate('translations')(Chats);
+export default withTranslation('translations')(Chats);

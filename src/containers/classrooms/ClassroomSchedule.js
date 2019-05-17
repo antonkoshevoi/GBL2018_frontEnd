@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Button, Select, MenuItem, FormHelperText, Radio, FormControlLabel } from '@material-ui/core';
 import MuiDatePicker from '../../components/ui/MuiDatePicker';
 import Loader from '../../components/layouts/Loader';
@@ -223,4 +223,4 @@ ClassroomSchedule = connect(
     })
 )(ClassroomSchedule);
 
-export default translate('translations')(ClassroomSchedule);
+export default withTranslation('translations')(ClassroomSchedule);

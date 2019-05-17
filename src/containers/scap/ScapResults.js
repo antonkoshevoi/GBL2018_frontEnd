@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { push } from 'react-router-redux';
 import { Button, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
@@ -185,4 +185,4 @@ ScapResults = connect(
     })
 )(ScapResults);
 
-export default translate('translations')(ScapResults);
+export default withTranslation('translations')(ScapResults);

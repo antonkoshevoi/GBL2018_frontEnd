@@ -1,4 +1,4 @@
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
     
 const PageTitle = props => {    
 
@@ -13,4 +13,4 @@ const PageTitle = props => {
     return props.children ? props.children : null;
 }
 
-export default translate('pageTitles')(PageTitle);
+export default withTranslation('pageTitles')(PageTitle);

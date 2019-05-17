@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {push} from 'react-router-redux';
 import {withRouter} from "react-router-dom";
 import Filter from "../../components/store/Filter";
@@ -179,5 +179,5 @@ Details = connect(
 )(Details);
 
 
-export default withRouter(translate("translations")(Details));
+export default withRouter(withTranslation("translations")(Details));
 

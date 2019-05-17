@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { selectDeleteRequest, selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords } from '../../redux/classrooms/selectors';
 import { buildSortersQuery } from '../../helpers/utils';
 import { Date } from "../../components/ui/DateTime";
@@ -297,4 +297,4 @@ DemoCoursesTab = connect(
   })
 )(DemoCoursesTab);
 
-export default translate('translations')(DemoCoursesTab);
+export default withTranslation('translations')(DemoCoursesTab);

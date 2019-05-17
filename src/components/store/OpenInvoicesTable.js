@@ -6,7 +6,7 @@ import "../../styles/store.css"
 import {NavLink} from "react-router-dom";
 import DeleteButton from "../ui/DeleteButton";
 import {debounce} from "../../helpers/utils";
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {Divider} from '@material-ui/core';
 
 class OpenInvoicesTable extends Component {
@@ -204,4 +204,4 @@ class OpenInvoicesTable extends Component {
   }
 }
 
-export default translate('translations')(OpenInvoicesTable);
+export default withTranslation('translations')(OpenInvoicesTable);

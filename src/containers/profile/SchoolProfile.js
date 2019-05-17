@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectSchool } from "../../redux/schools/selectors";
 import { getSchool } from "../../redux/schools/actions";
@@ -44,4 +44,4 @@ SchoolProfile = connect(
     })
 )(SchoolProfile);
 
-export default translate('translations')(SchoolProfile);
+export default withTranslation('translations')(SchoolProfile);

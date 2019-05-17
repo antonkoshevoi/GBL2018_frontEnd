@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {translate} from "react-i18next";
+import {withTranslation} from "react-i18next";
 import {connect} from 'react-redux';
 import {selectGetUserRequest, selectUserData} from "../../../redux/user/selectors";
 import {viewMessage} from "../../../redux/messages/actions";
@@ -70,4 +70,4 @@ Alerts = connect(
   })
 )(Alerts);
 
-export default translate('translations')(Alerts);
+export default withTranslation('translations')(Alerts);

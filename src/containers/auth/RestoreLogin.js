@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { login, setRedirectUrl } from '../../redux/auth/actions';
 import { selectLoginRequest } from '../../redux/auth/selectors';
@@ -134,4 +134,4 @@ RestoreLogin = connect(
   })
 )(RestoreLogin);
 
-export default withRouter(translate("translations")(RestoreLogin));
+export default withRouter(withTranslation('translations')(RestoreLogin));

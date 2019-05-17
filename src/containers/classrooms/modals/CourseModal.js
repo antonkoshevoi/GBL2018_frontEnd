@@ -9,7 +9,7 @@ import {
   Paper, FormControlLabel, Radio
 } from '@material-ui/core';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import Modal from "../../../components/ui/Modal";
 import Filter from "../../../components/store/Filter";
 import {selectGetStoreRecordsRequest} from "../../../redux/courses/selectors";
@@ -210,4 +210,4 @@ CourseModal = connect(
   })
 )(CourseModal);
 
-export default translate('translations')(CourseModal);
+export default withTranslation('translations')(CourseModal);

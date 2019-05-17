@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { translate } from "react-i18next";
-import { ListItemText, Menu, MenuItem} from '@material-ui/core';
+import { withTranslation } from "react-i18next";
+import { Menu, MenuItem} from '@material-ui/core';
 
 const languages = [
     'en',
@@ -48,21 +48,15 @@ class LanguageSwitcher extends Component {
         this.setState({ anchorEl: null });                
     };
 
-    _renderLangsMenu(langs) {
+    _renderLangsMenu() {
         const { t } = this.props;
         const _self = this;
         return languages.map(function (item, i) {
-            return (
-               <MenuItem key={i} onClick={() => {_self._switchLanguage(item)}}>
-                   <ListItemText primary={t(item)} />
-               </MenuItem>
-           )
+            return  <MenuItem key={i} onClick={() => {_self._switchLanguage(item)}}>{t(item)}</MenuItem>;
         })
     }
 
-    render() {
-        const langs  = this.props.i18n.store.data;
-
+    render() {        
         return ([
                 <button key={0} className="m-nav__link m-dropdown__toggle pointer"
                     aria-owns={this.state.anchorEl ? 'simple-menu' : null}
@@ -80,10 +74,10 @@ class LanguageSwitcher extends Component {
                     open={Boolean(this.state.anchorEl)}
                     onClose={this._closeLanguageMenu}
                 >
-                    {this._renderLangsMenu(langs)}
+                    {this._renderLangsMenu()}
                 </Menu>
         ]);
     }
 }
 
-export default translate('translations')(LanguageSwitcher);
+export default withTranslation('translations')(LanguageSwitcher);

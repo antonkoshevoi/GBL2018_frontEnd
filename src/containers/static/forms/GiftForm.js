@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import { FormHelperText, Divider} from '@material-ui/core';
 
 class GiftForm extends Component {
@@ -122,4 +122,4 @@ class GiftForm extends Component {
     }
 }
 
-export default translate('translations')(GiftForm);
+export default withTranslation('translations')(GiftForm);

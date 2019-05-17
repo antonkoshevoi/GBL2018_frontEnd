@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { push } from 'react-router-redux';
 import { MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
@@ -187,4 +187,4 @@ TeacherScap = connect(
     })
 )(TeacherScap);
 
-export default translate('translations')(TeacherScap);
+export default withTranslation('translations')(TeacherScap);

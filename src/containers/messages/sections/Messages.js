@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import OnVisible from 'react-on-visible';
 import { selectGetRecordsRequest, selectDeleteRecordRequest } from '../../../redux/messages/selectors';
@@ -247,4 +247,4 @@ Messages = connect(
     })
 )(Messages);
 
-export default translate('translations')(Messages);
+export default withTranslation('translations')(Messages);

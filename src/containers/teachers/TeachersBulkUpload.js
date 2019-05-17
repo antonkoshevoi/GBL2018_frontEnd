@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import CsvUploadSection from "../../components/CsvUploadSection";
 import Insctruction from "../../components/ui/Insctruction";
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { bulkUpload, resetBulkUploadRequest } from '../../redux/teachers/actions';
 import { selectBulkUploadRequest } from '../../redux/teachers/selectors';
 
@@ -86,4 +86,4 @@ TeachersBulkUpload = connect(
   })
 )(TeachersBulkUpload);
 
-export default translate('translations')(TeachersBulkUpload);
+export default withTranslation('translations')(TeachersBulkUpload);

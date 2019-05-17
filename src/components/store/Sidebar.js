@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ProductCard from "./ProductCard";
 import {NavLink} from "react-router-dom";
-import {translate} from "react-i18next";
+import {withTranslation} from "react-i18next";
 
 class Sidebar extends Component {
 
@@ -48,4 +48,4 @@ Sidebar.propTypes = {
   title: PropTypes.string,
 };
 
-export default translate('translations')(Sidebar);
+export default withTranslation('translations')(Sidebar);

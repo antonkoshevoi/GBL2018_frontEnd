@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {AppBar, CircularProgress, DialogContent, Icon, Toolbar, Typography, Divider, Button, DialogActions} from '@material-ui/core';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {selectCreateRequest} from '../../../redux/parents/selectors';
 import {create, resetCreateRequest} from '../../../redux/parents/actions';
 import Modal from "../../../components/ui/Modal";
@@ -144,4 +144,4 @@ CreateParentModal = connect(
   })
 )(CreateParentModal);
 
-export default translate('translations')(CreateParentModal);
+export default withTranslation('translations')(CreateParentModal);

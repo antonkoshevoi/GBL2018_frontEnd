@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-import {translate, Interpolate} from 'react-i18next';
+import {withTranslation, Trans} from 'react-i18next';
 import {NavLink} from "react-router-dom";
 import Logo from '../ui/Logo';
 
 class SignUpIndex extends Component {
   render() {      
-    const { t } = this.props;
-    const loginBtn = <NavLink to="/login"><strong>{t('login')}</strong></NavLink>;
+    const { t } = this.props;    
     return (            
       <div className="m-page m--full-height">
         <div className="main-background m-body justify-content-center m-login">
@@ -31,7 +30,7 @@ class SignUpIndex extends Component {
                         </NavLink>
                       </div>
                       <div className="alert m-alert m-alert--default m--margin-bottom-0">
-                        <p className="text-center m--margin-bottom-0"><Interpolate i18nKey="alreadyHaveAccountMessage" loginLink={loginBtn} /></p>
+                        <p className="text-center m--margin-bottom-0"><Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans></p>
                       </div>
                     </div>
                   </div>
@@ -45,4 +44,4 @@ class SignUpIndex extends Component {
 
 SignUpIndex.propTypes = {};
 
-export default translate("translations")(SignUpIndex);
+export default withTranslation("translations")(SignUpIndex);

@@ -8,7 +8,7 @@ import {
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { selectGetSingleRecordRequest, selectUpdateRequest } from '../../../redux/classrooms/selectors';
 import { resetGetSingleRecordRequest, resetUpdateRequest, update } from '../../../redux/classrooms/actions';
 import Modal from "../../../components/ui/Modal";
@@ -159,4 +159,4 @@ EditClassroomModal = connect(
   })
 )(EditClassroomModal);
 
-export default translate('translations')(EditClassroomModal);
+export default withTranslation('translations')(EditClassroomModal);

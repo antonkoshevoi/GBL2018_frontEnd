@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -309,4 +309,4 @@ Students = connect(
   })
 )(Students);
 
-export default translate('translations')(Students);
+export default withTranslation('translations')(Students);

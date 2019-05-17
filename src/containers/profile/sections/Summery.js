@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { randColorName } from "../../../helpers/colors";
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Typography } from '@material-ui/core';
 
 class Summery extends Component {
@@ -69,4 +69,4 @@ class Summery extends Component {
   }
 }
 
-export default translate('translations')(Summery);
+export default withTranslation('translations')(Summery);

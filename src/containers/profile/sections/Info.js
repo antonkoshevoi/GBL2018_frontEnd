@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import {selectChangePasswordRequest, selectChangeImageRequest} from "../../../redux/user/selectors";
 import {changePassword, changeImage, resetChangePasswordRequest} from "../../../redux/user/actions";
@@ -210,4 +210,4 @@ Info = connect(
   })
 )(Info);
 
-export default translate('translations')(Info);
+export default withTranslation('translations')(Info);

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {NavLink} from 'react-router-dom';
 import {Price} from '../../../components/ui/Price';
 import {renderToString} from 'react-dom/server'
@@ -66,4 +66,4 @@ InvoiceForm = connect(
     () => ({})
 )(InvoiceForm);
 
-export default translate('translations')(InvoiceForm);
+export default withTranslation('translations')(InvoiceForm);

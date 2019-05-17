@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { getDemoClassrooms } from '../../../redux/classrooms/actions';
 import { selectRecords } from '../../../redux/classrooms/selectors';
 import { getSchoolStudents } from "../../../redux/schools/actions";
@@ -126,4 +126,4 @@ AssignStudentForm = connect(
   })
 )(AssignStudentForm);
 
-export default translate('translations')(AssignStudentForm);
+export default withTranslation('translations')(AssignStudentForm);

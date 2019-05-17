@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Address from "./Address";
-import {translate} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {FormControlLabel, Button, Checkbox, CircularProgress} from '@material-ui/core';
 import {setShippingAndBillingRequest} from "../../../redux/store/selectors";
 import {getShippingAndBilling, resetSetShippingAndBilling, setShippingAndBilling} from "../../../redux/store/actions";
@@ -178,4 +178,4 @@ ShippingAndBilling = connect(
   }),
 )(ShippingAndBilling);
 
-export default translate('translations')(ShippingAndBilling);
+export default withTranslation('translations')(ShippingAndBilling);

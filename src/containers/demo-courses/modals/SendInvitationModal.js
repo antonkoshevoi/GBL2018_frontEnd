@@ -8,7 +8,7 @@ import {
   Divider, Button, DialogActions
 } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { selectCreateRequest } from '../../../redux/invitations/selectors';
 import { create, resetCreateRequest } from '../../../redux/invitations/actions';
 import Modal from '../../../components/ui/Modal';
@@ -118,4 +118,4 @@ SendInvitationModal = connect(
   })
 )(SendInvitationModal);
 
-export default translate('translations')(SendInvitationModal);
+export default withTranslation('translations')(SendInvitationModal);

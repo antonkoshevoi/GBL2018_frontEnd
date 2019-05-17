@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {translate} from "react-i18next";
+import {withTranslation} from "react-i18next";
 import bz from '../../../media/images/bz.jpg'
 import teacher from '../../../media/images/teacher.jpg'
 import AppLink from '../../../components/ui/AppLink';
@@ -50,4 +50,4 @@ class QuickLink extends Component {
     }
 }
 
-export default translate('translations')(QuickLink);
+export default withTranslation('translations')(QuickLink);
