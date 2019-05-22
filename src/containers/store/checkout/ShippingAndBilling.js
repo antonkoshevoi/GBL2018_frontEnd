@@ -28,9 +28,16 @@ class ShippingAndBilling extends Component {
     const record = shippingAndBillingRequest.get('records');
     if (record && record.size){
       this.setState({
-        ...this.state,
-        ...record.toJS(),
+        ...this.state, ...record.toJS(),
       })
+    }
+    
+    if (!this.props.shippingAndBillingRequest.get('success') && shippingAndBillingRequest.get('success')) {
+        this.props.resetShippingAndBillingRequest();
+        this.props.onDataSaved({
+            billingAddressId: shippingAndBillingRequest.get('billingAddressId'),
+            shippingAddressId: shippingAndBillingRequest.get('shippingAddressId')
+        });
     }
   }
 
@@ -89,27 +96,15 @@ class ShippingAndBilling extends Component {
   }
 
   render() {
-    const {billingAddress, shippingAddress, sameShipping, successRequest} = this.state;
+    const {billingAddress, shippingAddress, sameShipping} = this.state;
     const {shippingAndBillingRequest, t} = this.props;
     const loading = shippingAndBillingRequest.get('loading');
     const success = shippingAndBillingRequest.get('success');
     const errors = shippingAndBillingRequest.get('errors');
 
-    if (success) {
-      this.setState({
-        ...this.state,
-        successRequest: success
-      });      
-      this.props.resetShippingAndBillingRequest();
-      this.props.onDataSaved({
-          billingAddressId: shippingAndBillingRequest.get('billingAddressId'),
-          shippingAddressId: shippingAndBillingRequest.get('shippingAddressId')
-      });
-    }
-
     return (
       <div>
-        {successRequest && this._renderSuccess()}
+        {success && this._renderSuccess()}
         {loading ? <div style={{width: '100%', height: '500px'}}><Loader/></div> :
 
           <form action="">
@@ -150,7 +145,7 @@ class ShippingAndBilling extends Component {
                 variant="contained"
                 color="primary"
                 className='mt-btn-success pull-right btn btn-success mt-btn'
-                disabled={successRequest}
+                disabled={loading}
                 onClick={this._submitShippingAndBilling}
               >
                 {t('nextStep')}
