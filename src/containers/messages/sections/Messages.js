@@ -147,7 +147,7 @@ class Messages extends Component {
                             <img className='rounded-circle' src={record.user.avatarSmall} alt={record.user.name}/>
                         </div>
                         <div className='text-center'>
-                            <p className='my-1 my-sm-2'>{t(record.user.school)} {t(record.user.role)}</p>
+                            <p className='my-1 my-sm-2'>{record.user.school} {t(record.user.role)}</p>
                             <p className='text-muted my-1 my-sm-2'><b>{record.user.name}</b></p>
                             <p className='d-sm-none my-1'><DateTime time={record.created} /></p>
                             {record.isMine && <p className='d-sm-none my-1'>{t('recipients')}: <i>{record.recipients}</i></p>}                            

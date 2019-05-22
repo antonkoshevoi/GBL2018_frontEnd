@@ -86,9 +86,7 @@ class NewMessageModal extends Component {
                         ) : (
                           <span className='icon m--margin-right-10'><i className={`display-5 ${icon}`}></i></span>
                         )}                      
-                        <Typography variant="h6" color="inherit" >
-                            {title}
-                        </Typography>
+                        <Typography variant="h6" color="inherit" >{title}</Typography>
                     </Toolbar>
                 </AppBar>
                 <DialogContent className="m--margin-top-25">                    
@@ -117,7 +115,7 @@ class NewMessageModal extends Component {
                                     <MuiDatePicker
                                         name='expired'
                                         label={t('expires')}
-                                        value={expired || ''}
+                                        value={expired || null}
                                         onChange={(m) => {
                                           this._handleDateChange(m, 'expired')
                                         }}
