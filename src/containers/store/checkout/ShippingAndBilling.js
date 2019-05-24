@@ -15,7 +15,8 @@ class ShippingAndBilling extends Component {
   state = {
     billingAddress: {},
     shippingAddress: {},
-    sameShipping: false
+    sameShipping: false,
+    addressesSaved: false
   };
 
   componentWillMount() {
@@ -26,6 +27,7 @@ class ShippingAndBilling extends Component {
   componentWillReceiveProps(nextProps){
     const {shippingAndBillingRequest} = nextProps;
     const record = shippingAndBillingRequest.get('records');
+    
     if (record && record.size){
       this.setState({
         ...this.state, ...record.toJS(),
@@ -34,6 +36,7 @@ class ShippingAndBilling extends Component {
     
     if (!this.props.shippingAndBillingRequest.get('success') && shippingAndBillingRequest.get('success')) {
         this.props.resetShippingAndBillingRequest();
+        this.setState({addressesSaved: true})
         this.props.onDataSaved({
             billingAddressId: shippingAndBillingRequest.get('billingAddressId'),
             shippingAddressId: shippingAndBillingRequest.get('shippingAddressId')
@@ -78,35 +81,29 @@ class ShippingAndBilling extends Component {
   _renderSuccess() {
     const {t} = this.props;
     return (
-      <div style={{width: '100%', height: '270px'}}>
+      <div>
+        <Loader/>
         <div className="alert m-alert m-alert--default">
           <h3 className="display-5 text-center">
-            <i className="la la-check-circle align-middle m--margin-right-20" style={{
-              color: '#7ac943',
-              fontSize: '100px'
-            }}/>
+            <i className="la la-check-circle align-middle m--margin-right-20 display-2 text-success"/>
             {t('yourShippingAndBillingInfoSaved')}. <br/> 
             {t('creatingRequest', {paymentType: this.props.payMethod})}
           </h3>
-        </div>
-        <div className="row d-flex justify-content-center">
-          <CircularProgress color="primary" size={80}/>
         </div>
       </div>)
   }
 
   render() {
-    const {billingAddress, shippingAddress, sameShipping} = this.state;
+    const {billingAddress, shippingAddress, sameShipping, addressesSaved} = this.state;
     const {shippingAndBillingRequest, t} = this.props;
-    const loading = shippingAndBillingRequest.get('loading');
-    const success = shippingAndBillingRequest.get('success');
+    
+    const loading = shippingAndBillingRequest.get('loading');    
     const errors = shippingAndBillingRequest.get('errors');
 
     return (
       <div>
-        {success && this._renderSuccess()}
-        {loading ? <div style={{width: '100%', height: '500px'}}><Loader/></div> :
-
+        {addressesSaved && this._renderSuccess()}
+        {loading && <Loader/>}    
           <form action="">
             <div className="row">
               <div className="order-2 order-md-1 offset-md-6 col-md-6 col-sm-12">                
@@ -152,7 +149,7 @@ class ShippingAndBilling extends Component {
               </Button>
             </div>
           </form>
-        }
+        
       </div>
     );
   }

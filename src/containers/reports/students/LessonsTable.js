@@ -208,7 +208,7 @@ class LessonsTable extends Component {
                     {(lessonIndex === 0 && attemptIndex === 0) &&                    
                         <td className="rotate" rowSpan={unitRowSpan} key={unit.unit_id + '-unitName'}>
                             <div>
-                                <span><b>Unit {unitIndex + 1}</b> {unit.unit_name}</span>
+                                <span><b>Unit {unitIndex + 1}</b></span>
                             </div>
                         </td>
                     }                
