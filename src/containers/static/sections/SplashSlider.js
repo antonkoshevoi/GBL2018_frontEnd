@@ -33,9 +33,26 @@ class SplashSlider extends PureComponent {
             className: "center",
             centerMode: true,
             infinite: true,
-            centerPadding: '0',
+            slidesToScroll: 5,            
             slidesToShow: 5,
             speed: 500,
+            adaptiveHeight: true,
+            swipeToSlide: true,
+            beforeChange: function () {
+                [...document.querySelectorAll('.slick-slide')].map((item, i) => {                     
+                     item.classList.remove('slick-slide-previous')
+                });
+            },            
+            afterChange: function () {
+                let current = document.querySelector('.slick-center.slick-current');   
+                current.previousSibling.classList.add('slick-slide-previous');
+                current.nextElementSibling.classList.add('slick-slide-previous');
+            },
+            onReInit: function () {
+                let current = document.querySelector('.slick-center.slick-current');
+                current.previousSibling.classList.add('slick-slide-previous');
+                current.nextElementSibling.classList.add('slick-slide-previous');
+            },
             responsive: [
                 {
                     breakpoint: 1024,
@@ -60,7 +77,7 @@ class SplashSlider extends PureComponent {
                 {this._renderSlideItems(records)}
             </Slider>
         );
-    }
+    }        
     
     render() {
         const {t, getRecordsRequest} = this.props;
