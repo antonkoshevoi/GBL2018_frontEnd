@@ -134,7 +134,7 @@ class Subscriptions extends Component {
         return subscriptions.map((item, i) => {            
             let isMine = (item.userId === item.ownerId);
             let isOwner = (isMine || item.isGift);
-            let canAssign = (item.allowedCourses - item.assignedCourses) > 0;
+            let canAssign = ((item.allowedCourses * item.allowedStudents) - item.assignedCourses) > 0;
             return (
                 <Row index={i} key={i}>                     
                     <Td>
@@ -152,11 +152,11 @@ class Subscriptions extends Component {
                         <div>
                             {(!item.assignedCourses && isMine) && 
                             <button title={t('giftSubscription')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { this._showGiftModal(item) }} >
-                              <i className='la la-gift'></i>
+                                <i className='la la-gift'></i>
                             </button>}                    
                             {(canAssign && isOwner) && 
                             <button title={t('assignStudent')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { this._showAssignModal(item) }} >
-                              <i className='la la-user-plus'></i>
+                                <i className='la la-user-plus'></i>
                             </button>}
                             {(!item.isGift && !item.isMobile) && <DeleteButton btnName={t('delete')} title={t('areYouSureWantToCancelSubscription')} onClick={() => { this._cancelSubscription(item.id) }}/>}
 

@@ -143,7 +143,7 @@ class MySubscriptions extends Component {
         return subscriptions.map((item, i) => {            
             let isMine = (item.userId === item.ownerId);
             let isOwner = (isMine || item.isGift);
-            let canAssign = (item.allowedCourses - item.assignedCourses) > 0;
+            let canAssign = ((item.allowedCourses * item.allowedStudents) - item.assignedCourses) > 0;
             return (
                 <Row index={i} key={i}>                     
                     <Td>{t(item.title)}</Td>
