@@ -198,7 +198,7 @@ export default {
     postalOrZipCode: '우편번호',
     telephone: '전화번호',
     paymentsOptions: '지불 방식',
-    yourInvoice: '{{invoiceAmount}}를 {{invoiceNo}}에 청구되었습니다.',
+    yourInvoice: '<1>{{invoiceAmount}}</1>를 <0>{{invoiceNo}}</0>에 청구되었습니다.',
     shippingAndBilling: '배송 및 비용 청구',
     payPal: 'PayPal',
     creditCard: '신용카드',

@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withTranslation} from 'react-i18next';
-import '../../../styles/store.css'
-import {selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest} from '../../../redux/store/selectors';
-import {calculateCartSum, getCartRecords} from '../../../redux/store/actions';
+import {withTranslation, Trans} from 'react-i18next';
+import '../../styles/store.css'
+import {selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest} from '../../redux/store/selectors';
+import {calculateCartSum, getCartRecords} from '../../redux/store/actions';
 import {withRouter, NavLink} from 'react-router-dom';
 import {push} from 'react-router-redux';
-import {selectCreateCheckPaymentRequest, selectCreatePayPalPaymentRequest, selectPaymentMethod} from '../../../redux/payments/selectors';
-import {createCheckPayment, createPayPalPayment, setPayType} from '../../../redux/payments/actions';
+import {selectCreateCheckPaymentRequest, selectCreatePayPalPaymentRequest, selectPaymentMethod} from '../../redux/payments/selectors';
+import {createCheckPayment, createPayPalPayment, setPayType} from '../../redux/payments/actions';
 import {Step, StepLabel, Stepper, Button, CircularProgress} from '@material-ui/core';
-import payPalImg from '../../../media/images/payments/paypal.png'
-import creditCardImg from '../../../media/images/payments/credit_card.png'
-import checkImg from '../../../media/images/payments/check.png'
-import ShippingAndBilling from "./ShippingAndBilling";
-import CreditCard from "./CreditCard";
-import PaymentMethods from './PaymentMethods';
-import PaymentSuccessContainer from "../payments/PaymentSuccessContainer";
+import payPalImg from '../../media/images/payments/paypal.png'
+import creditCardImg from '../../media/images/payments/credit_card.png'
+import checkImg from '../../media/images/payments/check.png'
+import ShippingAndBilling from "./checkout/ShippingAndBilling";
+import CreditCard from "./checkout/CreditCard";
+import PaymentMethods from './checkout/PaymentMethods';
+import PaymentSuccessContainer from "./payments/PaymentSuccessContainer";
 
 class Checkout extends Component {
 
@@ -194,7 +194,7 @@ class Checkout extends Component {
     ];
     
     return (      
-        <div className='row d-flex justify-content-center m--margin-top-30'>
+        <div className='row-14 d-flex justify-content-center m--margin-top-30'>
           <div className="col-12 col-sm-11 col-md-9 col-xl-8">                       
             <div className="m-portlet  m-portlet--head-solid-bg">
               <div className='m-portlet__body position-relative'>               
@@ -215,7 +215,12 @@ class Checkout extends Component {
                         {successCarts &&
                         <div className="m--margin-top-50 m--margin-bottom-50">                          
                             {item ? 
-                                <span className="invoice-title">{t('yourInvoice', {invoiceNo: item.invoiceNo, invoiceAmount: ('$' + cartRecordsSum + ' ' + item.storeItem.currency)})}</span>
+                                <span className="invoice-title">
+                                    <Trans i18nKey="translations:yourInvoice">
+                                        <span className="m--font-bolder">{{invoiceNo: item.invoiceNo}}</span>
+                                        <span className="m--font-bolder">{{invoiceAmount: ('$' + cartRecordsSum + ' ' + item.storeItem.currency)}}</span>
+                                    </Trans>
+                                </span>
                             : 
                             <div>        
                                 <p className="text-center">
