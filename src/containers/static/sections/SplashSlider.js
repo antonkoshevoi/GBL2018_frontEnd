@@ -40,7 +40,8 @@ class SplashSlider extends PureComponent {
             swipeToSlide: true,
             beforeChange: function () {
                 [...document.querySelectorAll('.slick-slide')].map((item, i) => {                     
-                     item.classList.remove('slick-slide-previous')
+                     item.classList.remove('slick-slide-previous');
+                     return true;
                 });
             },            
             afterChange: function () {

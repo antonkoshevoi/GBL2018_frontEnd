@@ -149,6 +149,18 @@ class LineChart extends Component {
           data: formChartData(response[0].data.history, selector, date),
           options: formChartOptions(response[0].data.maxCount, selector)
         });
+        
+        if (selector === 0) {
+            this.setState({maxInputDate: moment().format('YYYY-MM-DD')});
+        } else {
+            if (this.state.selectorActive === 1) {                            
+              this.setState({maxInputDate: moment().endOf('week').format('YYYY-MM-DD')});              
+            } else if (this.state.selectorActive === 2) {                            
+              this.setState({maxInputDate: moment().endOf('month').format('YYYY-MM-DD')});
+            } else if (this.state.selectorActive === 3) {
+              this.setState({maxInputDate: moment().endOf('year').format('YYYY-MM-DD')});
+            }            
+        }
       },
       (error) => {        
         this.setState({disabled: false});
@@ -172,11 +184,10 @@ class LineChart extends Component {
 
   generateDateSelector() {
     const currInputDate = this.state.chosenDate;
+    const maxInputDate = this.state.maxInputDate;
     const {t} = this.props;
-    let maxInputDate;
+    
     if (this.state.selectorActive === 0) {
-      maxInputDate = moment().format('YYYY-MM-DD');
-      this.state.maxInputDate = maxInputDate; // it has to be done like this, not with this.setState()!
       return (
         <div className="date-selector">
           <div className="calendar-management-block">
@@ -211,28 +222,22 @@ class LineChart extends Component {
                   ref={(node) => {
                     this.picker = node;
                   }}
-                  okLabel={t('selectDay')}
+                  okLabel={t('ok')}
                 />                         
           </div>
         </div>
       )
     } else {
-      let endDate;
-      let okLabel;
-      if (this.state.selectorActive === 1) {
-        endDate = moment(this.state.chosenDate).add(1, 'weeks').add(-1, 'days').format('MMMM Do');
-        maxInputDate = moment().endOf('week').format('YYYY-MM-DD');
-        okLabel = t('selectWeek');
-      } else if (this.state.selectorActive === 2) {
-        endDate = moment(this.state.chosenDate).add(1, 'months').add(-1, 'days').format('MMMM Do');
-        maxInputDate = moment().endOf('month').format('YYYY-MM-DD');
-        okLabel = t('selectMonth');
+      let endDate = moment(this.state.chosenDate).add(1, 'weeks').add(-1, 'days').format('MMMM Do');      
+      let views = ['year', 'month', 'day'];
+      
+      if (this.state.selectorActive === 2) {
+        endDate = moment(this.state.chosenDate).add(1, 'months').add(-1, 'days').format('MMMM Do');        
+        views = ['year', 'month'];
       } else if (this.state.selectorActive === 3) {
         endDate = moment(this.state.chosenDate).add(1, 'years').add(-1, 'days').format('MMMM Do');
-        maxInputDate = moment().endOf('year').format('YYYY-MM-DD');
-        okLabel = t('selectYear');
-      }
-      this.state.maxInputDate = maxInputDate;
+        views = ['year'];        
+      }      
       return (
         <div className="date-selector">
           <div className="calendar-management-block">
@@ -250,9 +255,7 @@ class LineChart extends Component {
             </div>
             <div className="arrow" onClick={this.toggleDateRight}>
               <IconButton>
-                <Icon className="material-icons">
-                  keyboard_arrow_right
-                </Icon>
+                <Icon className="material-icons">keyboard_arrow_right</Icon>
               </IconButton>
             </div>
           </div>
@@ -261,12 +264,13 @@ class LineChart extends Component {
                   label={t('chooseStartDate')}
                   ref={(node) => { this.picker = node; }}
                   value={this.state.chosenDate}
+                  views={views}
                   maxDate={maxInputDate}
                   onChange={(date) => { this.changeStartDate(moment(date)) }}
                   animateYearScrolling={false}
                   disabled={this.state.disabled}
                   renderDay={this.renderWrappedDay}
-                  okLabel={okLabel}
+                  okLabel={t('ok')}
                 />                          
           </div>
         </div>

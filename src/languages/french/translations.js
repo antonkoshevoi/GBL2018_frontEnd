@@ -198,7 +198,7 @@ export default {
     postalOrZipCode: 'Code postal',
     telephone: 'Téléphone',
     paymentsOptions: 'Options de paiement',
-    yourInvoice: 'Total {{invoiceAmount}} de votre facture {{invoiceNo}} ',
+    yourInvoice: 'Total <1>{{invoiceAmount}}</1> de votre facture <0>{{invoiceNo}}</0>',
     shippingAndBilling: 'Expédition et facturation',
     payPal: 'PayPal',
     creditCard: 'Carte de crédit',

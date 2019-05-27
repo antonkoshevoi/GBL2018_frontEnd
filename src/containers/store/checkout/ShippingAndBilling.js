@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Address from "./Address";
 import {withTranslation} from 'react-i18next';
-import {FormControlLabel, Button, Checkbox, CircularProgress} from '@material-ui/core';
+import {FormControlLabel, Button, Checkbox} from '@material-ui/core';
 import {setShippingAndBillingRequest} from "../../../redux/store/selectors";
 import {getShippingAndBilling, resetSetShippingAndBilling, setShippingAndBilling} from "../../../redux/store/actions";
 import Loader from "../../../components/layouts/Loader";

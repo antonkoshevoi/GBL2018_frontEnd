@@ -33,7 +33,7 @@ import StudentReports from "../containers/reports/Students";
 import Store from "../containers/store/Store";
 import Details from "../containers/store/Details";
 import Products from "../containers/store/Products";
-import Checkout from "../containers/store/checkout/Checkout";
+import Checkout from "../containers/store/Checkout";
 import PayPalReturnContainer from '../containers/store/payments/PayPalReturnContainer';
 import PaymentSuccessContainer from '../containers/store/payments/PaymentSuccessContainer';
 import PaymentStatusContainer from '../containers/store/payments/PaymentStatusContainer';

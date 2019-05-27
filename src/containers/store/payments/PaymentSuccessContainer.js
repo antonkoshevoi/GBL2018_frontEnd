@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withTranslation} from 'react-i18next';
+import {withTranslation, Trans} from 'react-i18next';
 import '../../../styles/store.css'
 import {getInvoice} from '../../../redux/payments/actions';
 import {invoiceRequest} from '../../../redux/payments/selectors';
@@ -67,7 +67,10 @@ class PaymentSuccessContainer extends Component {
         <div className="col-md-10 m-auto">
             <div>
                 <span className="invoice-title">
-                    {t('yourInvoice', {invoiceNo: invoice.get('invoice_no'), invoiceAmount: renderToString(<Price price={invoice.get('total')} currency={invoice.get('currency')} />)})}.
+                    <Trans i18nKey="translations:yourInvoice">
+                        <span className="m--font-bolder">{{invoiceNo: invoice.get('invoice_no')}}</span>
+                        <span className="m--font-bolder">{{invoiceAmount: renderToString(<Price price={invoice.get('total')} currency={invoice.get('currency')} />)}}</span>
+                    </Trans>
                 </span>                
                 <p className="text-center m--margin-15">
                     <a rel="noopener noreferrer" className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>

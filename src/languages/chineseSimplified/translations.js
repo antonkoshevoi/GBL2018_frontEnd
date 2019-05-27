@@ -198,7 +198,7 @@ export default {
     postalOrZipCode: '邮递区号',
     telephone: '电话',
     paymentsOptions: '付款方式',
-    yourInvoice: '订单编号{{invoiceNo}} 总金额 {{invoiceAmount}}',
+    yourInvoice: '订单编号<0>{{invoiceNo}}</0> 总金额 <1>{{invoiceAmount}}</1>',
     shippingAndBilling: '运送 和 帐单',
     payPal: 'PayPal',
     creditCard: '信用卡',
