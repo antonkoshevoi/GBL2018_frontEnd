@@ -27,27 +27,17 @@ export const getErrorMessage = (response) => {
 };
 
 export const yieldSuccessToasts = (messages) => {
-  return takeLatest(Object.keys(messages), function* (action) {    
-    debounce(() => toastr.success(
-      messages[action.type],
-      '',
-      {timeOut: 3000}
-    ), 0)();
-
+  return takeLatest(Object.keys(messages), function* (action) {
+    yield toastr.success(messages[action.type]);
   });
 };
 
 
 export const yieldErrorToasts = (types) => {
-  return takeLatest([...types], function* (action) {    
-    if(typeof action.error !== 'undefined') {
-      toastr.error(
+  return takeLatest([...types], function* (action) {
+      yield toastr.error(
         getErrorMessage(action.error.response)
-      );
-      if (action.error.response.status === 401) {
-
-      }
-    }
+      );    
   });
 };
 
