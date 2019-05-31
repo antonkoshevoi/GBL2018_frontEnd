@@ -639,5 +639,8 @@ export default {
     Multi: 'Multi',
     Family: 'Famille',
     freeWorkbook: '1 manuel gratuit',
-    freeWorkbooks: '{{number}} manuels gratuits'
+    freeWorkbooks: '{{number}} manuels gratuits',
+    subscriptionIsActive: 'Subscription is active. Next recurring payment will be charged at {{date}}.',
+    subscriptionWillBeClosed: 'Recurring payments are disabled. Subscription will be closed at {{date}}.',
+    subscriptionIsClosed: 'Subscription is expired and closed.'    
 }

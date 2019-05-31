@@ -639,5 +639,8 @@ export default {
     Multi: '三位学员',
     Family: '家庭学习',
     freeWorkbook: '一本免费课本',
-    freeWorkbooks: '{{number}} 免费课本'
+    freeWorkbooks: '{{number}} 免费课本',
+    subscriptionIsActive: 'Subscription is active. Next recurring payment will be charged at {{date}}.',
+    subscriptionWillBeClosed: 'Recurring payments are disabled. Subscription will be closed at {{date}}.',
+    subscriptionIsClosed: 'Subscription is expired and closed.'
 }

@@ -639,5 +639,8 @@ export default {
     Multi: '멀티',
     Family: '가족',
     freeWorkbook: '무료 뭐크북 한권',
-    freeWorkbooks: '{{number}} 무료 워크북'    
+    freeWorkbooks: '{{number}} 무료 워크북',
+    subscriptionIsActive: 'Subscription is active. Next recurring payment will be charged at {{date}}.',
+    subscriptionWillBeClosed: 'Recurring payments are disabled. Subscription will be closed at {{date}}.',
+    subscriptionIsClosed: 'Subscription is expired and closed.'    
 }
