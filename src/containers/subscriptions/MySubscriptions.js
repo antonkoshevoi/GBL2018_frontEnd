@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { renderToString } from 'react-dom/server'
 import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnSubscribeRequest } from '../../redux/subscriptions/selectors';
 import { getUserRecords, resetGetUserRecordsRequest, unSubscribe, resetUnSubscribeRequest } from '../../redux/subscriptions/actions';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from "../../components/ui/table";
@@ -120,6 +121,20 @@ class MySubscriptions extends Component {
         this.setState({filter: value});        
     }
 
+    _renderStatus(subscription) {
+        const {t} = this.props;
+        const buttonClasses = 'btn m-btn m-btn--icon m-btn--icon-only m-btn--pill ml-2';
+        const date = renderToString(<Date time={subscription.expiredAt} />);
+        
+        if (subscription.status === 1) {            
+            return <ConfirmButton icon='la la-check' className='btn-success' classNameDefault={buttonClasses} confirmOnly={true} title={t('subscriptionIsActive', {date}) } />;
+        }
+        if (subscription.status === 2) {            
+            return <ConfirmButton icon='la la-exclamation' className='btn-warning' classNameDefault={buttonClasses} confirmOnly={true} title={t('subscriptionWillBeClosed', {date}) } />;
+        }
+        return <ConfirmButton icon='la la-close' className='btn-danger' classNameDefault={buttonClasses} confirmOnly={true} title={t('subscriptionIsClosed') } />;
+    }
+
     _renderSubscriptions() {
         const { subscriptionsRequest, t} = this.props;
         const { filter } = this.state;        
@@ -160,7 +175,7 @@ class MySubscriptions extends Component {
                         {item.isGift && <ConfirmButton icon='la la-gift' className='btn-success m--margin-left-15' confirmOnly={true} title={t('giftFrom', {user: item.userName}) } /> }
                     </Td>
                     <Td><Date time={item.createdAt} /></Td>
-                    <Td>{item.expiredAt ? <Date time={item.expiredAt} /> : '-'}</Td>  
+                    <Td>{item.expiredAt ? <Date time={item.expiredAt} /> : '-'} {this._renderStatus(item)}</Td>  
                     {(filter !== 'expired') &&
                     <Td className='actions'>                        
                         <div>
@@ -172,7 +187,7 @@ class MySubscriptions extends Component {
                             <button title={t('assignStudent')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { this._showAssignModal(item) }} >
                               <i className='la la-user-plus'></i>
                             </button>}
-                            {(!item.isGift && !item.isMobile) && <DeleteButton btnName={t('delete')} title={t('areYouSureWantToCancelSubscription')} onClick={() => { this._cancelSubscription(item.id) }}/>}
+                            {(!item.isGift && !item.isMobile && item.status === 1) && <DeleteButton btnName={t('delete')} title={t('areYouSureWantToCancelSubscription')} onClick={() => { this._cancelSubscription(item.id) }}/>}
 
                             {(!item.isGift && item.isMobile) && <ConfirmButton btnName={t('delete')} className='btn-danger' confirmOnly={true} title={t('deleteMobileSubscription')} />}
                         </div>
