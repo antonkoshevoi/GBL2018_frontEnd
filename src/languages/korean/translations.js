@@ -400,7 +400,7 @@ export default {
     year: '년',
     courseSubscriptionOptions: '코스 구독 방식',
     subscriptionsNotFound: '구독을 찾을 수 없습니다...',
-    getThis: '',
+    getThis: '구매하기',
     mySubscriptions: '내 구독',
     allowedCourses: '선택할 수 있는 코스들',
     assignedCourses: '지정된 코스',
