@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
+import { withTranslation, Trans} from 'react-i18next';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { renderToString } from 'react-dom/server'
+import { NavLink } from 'react-router-dom';
 import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnSubscribeRequest } from '../../redux/subscriptions/selectors';
 import { getUserRecords, resetGetUserRecordsRequest, unSubscribe, resetUnSubscribeRequest } from '../../redux/subscriptions/actions';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from "../../components/ui/table";
@@ -218,12 +219,19 @@ class MySubscriptions extends Component {
                     </div>
                 </div>
                 <div className='m-portlet__body'>
-                    <div  className="pull-right table-filter">
-                        <Select className='full-width' value={this.state.filter} onChange={(e) => { this._handleFilter(e) }} name="filter">                        
-                            <MenuItem value="active">{t('activeSubscriptions')}</MenuItem>
-                            <MenuItem value="expired">{t('expiredSubscriptions')}</MenuItem>
-                        </Select>
-                        <FormHelperText>{t('filterSubscriptions')}</FormHelperText>
+                    <div className="d-flex justify-content-between align-items-center">
+                        <div className="flex-grow-1 text-center">
+                            { (subscriptionsRequest.get('success') && !subscriptionsRequest.get('records').size) && <p className="display-10 px-3 d-none d-sm-block">
+                                <Trans i18nKey="translations:keepLearning"><span></span><NavLink className="g-blue" to="/subscriptions"></NavLink>.</Trans>
+                            </p> }
+                        </div>
+                        <div className="table-filter">
+                            <Select className='full-width' value={this.state.filter} onChange={(e) => { this._handleFilter(e) }} name="filter">                        
+                                <MenuItem value="active">{t('activeSubscriptions')}</MenuItem>
+                                <MenuItem value="expired">{t('expiredSubscriptions')}</MenuItem>
+                            </Select>
+                            <FormHelperText>{t('filterSubscriptions')}</FormHelperText>
+                        </div>
                     </div>
                     <Table >
                         <Thead>

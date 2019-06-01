@@ -400,7 +400,7 @@ export default {
     year: '년',
     courseSubscriptionOptions: '코스 구독 방식',
     subscriptionsNotFound: '구독을 찾을 수 없습니다...',
-    getThis: '',
+    getThis: '구매하기',
     mySubscriptions: '내 구독',
     allowedCourses: '선택할 수 있는 코스들',
     assignedCourses: '지정된 코스',
@@ -642,5 +642,6 @@ export default {
     freeWorkbooks: '{{number}} 무료 워크북',
     subscriptionIsActive: 'Subscription is active. Next recurring payment will be charged at {{date}}.',
     subscriptionWillBeClosed: 'Recurring payments are disabled. Subscription will be closed at {{date}}.',
-    subscriptionIsClosed: 'Subscription is expired and closed.'    
+    subscriptionIsClosed: 'Subscription is expired and closed.',
+    keepLearning: 'Keep on learning with <0>BZabc</0>! <1>Click Here</1> to turn on recurring payments.'
 }
