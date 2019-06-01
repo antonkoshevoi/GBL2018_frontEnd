@@ -23,7 +23,9 @@ button, [role="button"], [type="button"], .btn {
 textarea {
     resize: none;
 }
-
+.flex-grow-1 {
+    flex-grow: 1;
+}
 .g-red {
     color: #D2322D !important;
 }

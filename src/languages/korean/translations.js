@@ -642,5 +642,6 @@ export default {
     freeWorkbooks: '{{number}} 무료 워크북',
     subscriptionIsActive: 'Subscription is active. Next recurring payment will be charged at {{date}}.',
     subscriptionWillBeClosed: 'Recurring payments are disabled. Subscription will be closed at {{date}}.',
-    subscriptionIsClosed: 'Subscription is expired and closed.'    
+    subscriptionIsClosed: 'Subscription is expired and closed.',
+    keepLearning: 'Keep on learning with <0>BZabc</0>! <1>Click Here</1> to turn on recurring payments.'
 }
