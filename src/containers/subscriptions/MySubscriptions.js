@@ -135,6 +135,26 @@ class MySubscriptions extends Component {
         }
         return <ConfirmButton icon='la la-close' className='btn-danger' classNameDefault={buttonClasses} confirmOnly={true} title={t('subscriptionIsClosed') } />;
     }
+    
+    _keepLearning() {
+        const { subscriptionsRequest, t} = this.props;
+        
+        if (!subscriptionsRequest.get('success')) {
+            return '';
+        }
+        
+        let hasActive = false;
+        
+        subscriptionsRequest.get('records').map((item, i) => {
+            if (item.get('status') === 1) {
+                hasActive = true;
+            }
+        });
+
+        return hasActive ? '' : (<p className="display-10 px-3 d-none d-sm-block">
+            <Trans i18nKey="translations:keepLearning"><span></span><NavLink className="g-blue" to="/subscriptions"></NavLink>.</Trans>
+        </p>);
+    }
 
     _renderSubscriptions() {
         const { subscriptionsRequest, t} = this.props;
@@ -221,9 +241,7 @@ class MySubscriptions extends Component {
                 <div className='m-portlet__body'>
                     <div className="d-flex justify-content-between align-items-center">
                         <div className="flex-grow-1 text-center">
-                            { (subscriptionsRequest.get('success') && !subscriptionsRequest.get('records').size) && <p className="display-10 px-3 d-none d-sm-block">
-                                <Trans i18nKey="translations:keepLearning"><span></span><NavLink className="g-blue" to="/subscriptions"></NavLink>.</Trans>
-                            </p> }
+                            {this._keepLearning()}
                         </div>
                         <div className="table-filter">
                             <Select className='full-width' value={this.state.filter} onChange={(e) => { this._handleFilter(e) }} name="filter">                        
