@@ -93,7 +93,7 @@ class ResetPassword extends Component {
                                             <div className="form-group m-form__group">
                                               <div className="d-flex align-items-center">
                                                 <Avatar src={userRequest.get('record').get('avatarSmall')}/>
-                                                <span className="m--margin-left-10">{userRequest.get('record').get('username')}</span>
+                                                <span className="m--margin-left-10">{userRequest.get('record').get('username') || userRequest.get('record').get('name') || userRequest.get('record').get('email')}</span>
                                               </div>                                                
                                             </div>
                                             <div className="form-group m-form__group m--margin-top-10 m--margin-bottom-10">

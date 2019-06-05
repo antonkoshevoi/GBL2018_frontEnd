@@ -52,37 +52,6 @@ export const selectGetCartRecordsRequest = createSelector(
     (subState) => subState.get('getCartRecordsRequest')
 );
 
-/**
- * Get Cart Records Request
- */
-export const selectGetCartInvoiceRecordsRequest = createSelector(
-  selectStoreDomain,
-  (subState) => subState.get('getCartInvoiceRecordsRequest')
-);
-
-/**
- * Get Cart Records
- */
-export const selectCartRecords = createSelector(
-    selectStoreDomain,
-    (subState) => subState.get('cartRecords')
-);
-/**
- * Get Cart Redirect
- */
-export const selectCardRedirect = createSelector(
-    selectStoreDomain,
-    (subState) => subState.get('addToCartRedirect')
-);
-
-/**
- * Get Cart Records Total
- */
-export const selectCartRecordsSum = createSelector(
-    selectStoreDomain,
-    (subState) => subState.get('totalSum')
-);
-
 export const selectCartRecordsCount = createSelector(
     selectStoreDomain,
     (subState) => subState.get('itemsCount')
