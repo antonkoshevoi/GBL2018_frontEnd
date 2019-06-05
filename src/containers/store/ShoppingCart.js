@@ -2,52 +2,23 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withTranslation} from 'react-i18next';
 import OpenInvoicesTable from '../../components/store/OpenInvoicesTable';
-import { deleteFromCartRequest, selectAddToCartRequest, selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest } from '../../redux/store/selectors';
-import { calculateCartSum, deleteCartRecord, getCartRecords, setItemQuantity, updateShoppingCart } from '../../redux/store/actions';
+import { deleteFromCartRequest, selectGetCartRecordsRequest } from '../../redux/store/selectors';
+import { deleteCartRecord, getCartRecords, setItemQuantity } from '../../redux/store/actions';
 import { NavLink } from 'react-router-dom';
 import Loader from '../../components/layouts/Loader';
 
 class ShoppingCart extends Component {
-  componentDidMount() {
-    const { records } = this.props;
-    this._getRecords();
-    this._calculateSum(records.toJS());
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.records.size !== this.props.records.size) {
-      this._updateData(nextProps.records);
-      this._calculateSum(nextProps.records.toJS());
-    }
-  }
-
-  _getRecords() {
+  componentDidMount() {    
     this.props.getRecords();
   }
 
-  _deleteRecordFromCart(id) {
-    this.props.deleteCartRecord(id);
-  }
-
-  _calculateSum(data){
-    this.props.calculateSum(data);
-  }
-
-  _updateData(data) {
-    this.props.updateData(data);
-    this._calculateSum(data);
-  }
-
   render() {
-    const {
-      records,
-      cartRecordsRequest,
-      cartRecordsSum ,
-      cartRequest,      
+    const {      
+      cartRecordsRequest,                
       deleteRequest,
       t
     } = this.props;
-    const loading = cartRecordsRequest.get('loading') || cartRequest.get('loading') || deleteRequest.get('loading');
+    const loading = cartRecordsRequest.get('loading') || deleteRequest.get('loading');
     const success = cartRecordsRequest.get('success');
     return (
       <div className='fadeInLeft animated'>
@@ -65,11 +36,10 @@ class ShoppingCart extends Component {
                 {success &&
                 <div>
                     <OpenInvoicesTable                   
-                      sum={cartRecordsSum}
-                      setQuantity={(data) => this.props.setQuantity(data)}
-                      onUpdate={(data,total) => {this._updateData(data,total)}}
-                      onDelete={(id) => {this._deleteRecordFromCart (id)}}
-                      data={records.toJS()}
+                      sum={cartRecordsRequest.get('totalPrice')}
+                      setQuantity={(data) => this.props.setQuantity(data)}                      
+                      onDelete={(id) => this.props.deleteCartRecord(id)}
+                      data={cartRecordsRequest.get('records').toJS()}
                     />
                    <div className="row">
                      <div className="col-md-12 text-right">
@@ -90,18 +60,12 @@ class ShoppingCart extends Component {
 
 ShoppingCart = connect(
   (state) => ({
-    cartRecordsRequest: selectGetCartRecordsRequest(state),
-    deleteFromCartRequest: deleteFromCartRequest(state),
-    cartRecordsSum: selectCartRecordsSum(state),
-    records: selectCartRecords(state),
-    cartRequest: selectAddToCartRequest(state),
+    cartRecordsRequest: selectGetCartRecordsRequest(state),    
     deleteRequest: deleteFromCartRequest(state),
   }),
   (dispatch) => ({
     getRecords: () => { dispatch(getCartRecords()) },
-    deleteCartRecord: (id) => { dispatch(deleteCartRecord(id)) },
-    calculateSum: (data) => { dispatch(calculateCartSum(data)) },
-    updateData: (data) => { dispatch(updateShoppingCart(data)) },
+    deleteCartRecord: (id) => { dispatch(deleteCartRecord(id)) },        
     setQuantity: (data) => { dispatch(setItemQuantity(data))  },
   })
 )(ShoppingCart);

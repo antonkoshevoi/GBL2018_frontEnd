@@ -15,10 +15,6 @@ export const GET_CART_RECORDS = '[Store] GET_CART_RECORDS';
 export const GET_CART_RECORDS_SUCCESS = '[Store] GET_CART_RECORDS_SUCCESS';
 export const GET_CART_RECORDS_FAIL = '[Store] GET_CART_RECORDS_FAIL';
 
-export const GET_CART_INVOICE_RECORDS = '[Store] GET_CART_INVOICE_RECORDS';
-export const GET_CART_INVOICE_RECORDS_SUCCESS = '[Store] GET_CART_INVOICE_RECORDS_SUCCESS';
-export const GET_CART_INVOICE_RECORDS_FAIL = '[Store] GET_CART_INVOICE_RECORDS_FAIL';
-
 export const DELETE_CART_RECORD = '[Store] DELETE_CART_RECORD';
 export const DELETE_CART_RECORD_SUCCESS = '[Store] DELETE_CART_RECORD_SUCCESS';
 export const DELETE_CART_RECORD_FAIL = '[Store] DELETE_CART_RECORD_FAIL';
@@ -27,8 +23,6 @@ export const ADD_TO_CART = '[Store] ADD_TO_CART';
 export const ADD_TO_CART_SUCCESS = '[Store] ADD_TO_CART_SUCCESS';
 export const ADD_TO_CART_FAIL = '[Store] ADD_TO_CART_FAIL';
 
-export const UPDATE_SHOPPING_CART = '[Store] UPDATE_SHOPPING_CART';
-export const CALCULATE_CART_SUM = '[Store] CALCULATE_CART_SUM';
 export const UPDATE_SHOPPING_CART_COUNT = '[Store] UPDATE_SHOPPING_CART_COUNT';
 
 export const UPDATE_ITEM_QUANTITY = '[Store] UPDATE_ITEM_QUANTITY';
@@ -61,9 +55,6 @@ export function getParentRecords(params = {}) {
   };
 }
 
-/**
- * Single
- */
 export function getSingleRecord(id, params = {}) {
   return {
     types: [GET_SINGLE_RECORD, GET_SINGLE_RECORD_SUCCESS, GET_SINGLE_RECORD_FAIL],
@@ -71,12 +62,6 @@ export function getSingleRecord(id, params = {}) {
   };
 }
 
-
-/**
- * Cart records
- * @param params
- * @returns {{types: [*,*,*], promise: (function(*))}}
- */
 export function getCartRecords(params = {}) {
   return {
     types: [GET_CART_RECORDS, GET_CART_RECORDS_SUCCESS, GET_CART_RECORDS_FAIL],
@@ -84,23 +69,6 @@ export function getCartRecords(params = {}) {
   };
 }
 
-/**
- * Cart records
- * @param params
- * @returns {{types: [*,*,*], promise: (function(*))}}
- */
-export function getCartInvoiceRecords(params = {}) {
-  return {
-    types: [GET_CART_INVOICE_RECORDS, GET_CART_INVOICE_RECORDS_SUCCESS, GET_CART_INVOICE_RECORDS_FAIL],
-    promise: (apiClient) => apiClient.get('store/shopping-card/invoices', params)
-  };
-}
-
-/**
- * Single cart record
- * @param params
- * @returns {{types: [*,*,*], promise: (function(*))}}CREATE
- */
 export function deleteCartRecord(id, params) {
   return {
     types: [DELETE_CART_RECORD, DELETE_CART_RECORD_SUCCESS, DELETE_CART_RECORD_FAIL],
@@ -108,34 +76,16 @@ export function deleteCartRecord(id, params) {
   };
 }
 
-/**
- * Add Product To Cart
- * @param params
- * @returns {{types: [*,*,*], promise: (function(*))}}
- */
-export function addToCarts(id, params = {}) {
+export function addToShoppingCart(id, params = {}) {
   return {
     types: [ADD_TO_CART, ADD_TO_CART_SUCCESS, ADD_TO_CART_FAIL],
     promise: (apiClient) => apiClient.post(`store/add-to-card/${id}`, params)
   };
 }
 
-/**
- *
- * @param data
- * @returns {{type: string, data: *}}
- */
-export function updateShoppingCart(data) {  
-  return {
-    type: UPDATE_SHOPPING_CART,
-    data
-  }
-}
-
 export function updateShoppingCartCount(count) {  
   return {
-    type: UPDATE_SHOPPING_CART_COUNT,
-    count
+    type: UPDATE_SHOPPING_CART_COUNT, count
   }
 }
 
@@ -144,23 +94,6 @@ export function setItemQuantity(data) {
     types: [UPDATE_ITEM_QUANTITY, UPDATE_ITEM_QUANTITY_SUCCESS, UPDATE_ITEM_QUANTITY_FAIL],
     promise: (apiClient) => apiClient.post(`store/items/${data.id}`, data)
   };
-}
-
-
-export function calculateCartSum(items = []) {
-
-  const total = items.reduce((total, item) => {
-        if (item.storeItem && !isNaN(item.storeItem.discountPrice)) {        
-            return total + (parseFloat(item.storeItem.discountPrice).toFixed(2) * item.count);
-        }
-        return total;
-  },0);
-
-  return {
-    type: CALCULATE_CART_SUM,
-    total
-  }
-
 }
 
 export function setShippingAndBilling(data) {

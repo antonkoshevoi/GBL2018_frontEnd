@@ -137,7 +137,7 @@ class MySubscriptions extends Component {
     }
     
     _keepLearning() {
-        const { subscriptionsRequest, t} = this.props;
+        const { subscriptionsRequest} = this.props;
         
         if (!subscriptionsRequest.get('success')) {
             return '';
@@ -149,6 +149,7 @@ class MySubscriptions extends Component {
             if (item.get('status') === 1) {
                 hasActive = true;
             }
+            return true;
         });
 
         return hasActive ? '' : (<p className="display-10 px-3 d-none d-sm-block">

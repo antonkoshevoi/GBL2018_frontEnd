@@ -7,7 +7,7 @@ import Filter from "../../components/store/Filter";
 import Sidebar from "../../components/store/Sidebar";
 import Loader from "../../components/layouts/Loader";
 import {Price} from "../../components/ui/Price";
-import {addToCarts, getRecords, getSingleRecord} from "../../redux/store/actions";
+import {addToShoppingCart, getRecords, getSingleRecord} from "../../redux/store/actions";
 import {selectAddToCartRequest, selectGetRecordsRequest, selectGetSingleRecord, selectGetSingleRecordRequest, selectRecords} from "../../redux/store/selectors";
 import {buildSortersQuery} from "../../helpers/utils";
 import toastr from 'toastr';
@@ -54,7 +54,7 @@ class Details extends Component {
     const {t, auth} = this.props;
 
     if (auth.get('isLoggedIn')) {
-        this.props.addToCarts(id);
+        this.props.addToShoppingCart(id);
     } else {
         toastr.success(t(`messages:loginOrCreateAccount`));
         this.props.goTo('/login');
@@ -171,8 +171,8 @@ Details = connect(
     getSingleRecord: (id, params = {}) => {
       dispatch(getSingleRecord(id, params))
     },
-    addToCarts: (id, params = {}) => {
-      dispatch(addToCarts(id, params))
+    addToShoppingCart: (id, params = {}) => {
+      dispatch(addToShoppingCart(id, params))
     },
     goTo: (url) => {dispatch(push(url))}
   })

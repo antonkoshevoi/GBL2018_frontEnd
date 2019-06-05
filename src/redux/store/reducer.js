@@ -1,24 +1,12 @@
 import {
-  GET_RECORDS,
-  GET_RECORDS_SUCCESS,
-  GET_RECORDS_FAIL,
-  GET_CART_RECORDS,
-  GET_CART_RECORDS_SUCCESS,
-  GET_CART_RECORDS_FAIL,
-  ADD_TO_CART,
-  ADD_TO_CART_FAIL,
-  ADD_TO_CART_SUCCESS,
-  DELETE_CART_RECORD,
-  DELETE_CART_RECORD_SUCCESS,
-  DELETE_CART_RECORD_FAIL,
-  GET_SINGLE_RECORD,
-  GET_SINGLE_RECORD_FAIL,
-  GET_SINGLE_RECORD_SUCCESS,
-  RESET_GET_SINGLE_RECORD_REQUEST,
-  UPDATE_SHOPPING_CART, CALCULATE_CART_SUM, UPDATE_SHOPPING_CART_COUNT,
-  GET_CART_INVOICE_RECORDS,
-  GET_CART_INVOICE_RECORDS_FAIL,
-  GET_CART_INVOICE_RECORDS_SUCCESS, SET_SHIPPING_BILLING_INFO, SET_SHIPPING_BILLING_INFO_SUCCESS,
+  GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL,
+  GET_CART_RECORDS, GET_CART_RECORDS_SUCCESS, GET_CART_RECORDS_FAIL,
+  ADD_TO_CART, ADD_TO_CART_FAIL, ADD_TO_CART_SUCCESS,
+  DELETE_CART_RECORD, DELETE_CART_RECORD_SUCCESS, DELETE_CART_RECORD_FAIL,
+  GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL, GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST,
+  UPDATE_SHOPPING_CART_COUNT,
+  UPDATE_ITEM_QUANTITY_SUCCESS,
+  SET_SHIPPING_BILLING_INFO, SET_SHIPPING_BILLING_INFO_SUCCESS,
   SET_SHIPPING_BILLING_INFO_FAIL, RESET_SET_SHIPPING_BILLING_INFO, GET_RECORDS_PARENT, GET_RECORDS_PARENT_FAIL,
   GET_RECORDS_PARENT_SUCCESS, GET_SHIPPING_BILLING_INFO, GET_SHIPPING_BILLING_INFO_FAIL,
   GET_SHIPPING_BILLING_INFO_SUCCESS, SAVE_CHECKOUT_INFO,
@@ -50,12 +38,10 @@ const initialState = Immutable.fromJS({
     loading: false,
     success: false,
     fail: false,
-    errorResponse: null
-  },
-  getCartInvoiceRecordsRequest: {
-    loading: false,
-    success: false,
-    fail: false,
+    records: Immutable.List(),
+    totalPrice: 0,
+    invoiceNo: '',
+    currency: '',
     errorResponse: null
   },
   addToCartRequest: {
@@ -64,7 +50,6 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorResponse: null
   },
-  addToCartRedirect: false,
   deleteFromCartRequest: {
     loading: false,
     success: false,
@@ -89,20 +74,30 @@ const initialState = Immutable.fromJS({
       perPage: 10,
       total: 0,
       totalPages: 1
-    },
+    }
   },
   pagination: {
     page: 1,
     perPage: 10,
     total: 0,
     totalPages: 1
-  },
-  cartRecords: [],
-  totalSum: 0,
+  }, 
   itemsCount: 0,
   records: [],
   singleRecord: {},
 });
+
+function updateCartState(state, data) {
+    return state.set('getCartRecordsRequest', 
+        state.get('getCartRecordsRequest')
+          .set('success', true)
+          .set('records', Immutable.fromJS(data.items))
+          .set('invoiceNo', data.invoiceNo)
+          .set('currency', data.currency)
+          .set('totalPrice', data.totalPrice)
+          .remove('loading')
+    ).set('itemsCount', Immutable.fromJS(data.items).size);            
+}
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -194,13 +189,9 @@ export default function reducer(state = initialState, action) {
           .remove('success')
           .remove('fail')
         ).set('cartRecord', Immutable.List());
+    case UPDATE_ITEM_QUANTITY_SUCCESS:
     case GET_CART_RECORDS_SUCCESS:
-      return state
-        .set('getCartRecordsRequest', state.get('getCartRecordsRequest')
-          .set('success', true)
-          .remove('loading')
-        ).set('cartRecords', Immutable.fromJS(action.result.data))
-         .set('itemsCount', Immutable.fromJS(action.result.data).size);
+      return updateCartState(state, action.result.data);
     case GET_CART_RECORDS_FAIL:
       return state
         .set('getCartRecordsRequest', state.get('getCartRecordsRequest')
@@ -208,28 +199,6 @@ export default function reducer(state = initialState, action) {
           .set('fail', true)
         );
 
-    /**
-     * Get cart records
-     */
-    case GET_CART_INVOICE_RECORDS:
-      return state
-        .set('getCartInvoiceRecordsRequest', state.get('getCartInvoiceRecordsRequest')
-          .set('loading', true)
-          .remove('success')
-          .remove('fail')
-        ).set('cartRecord', Immutable.List());
-    case GET_CART_INVOICE_RECORDS_SUCCESS:
-      return state
-        .set('getCartInvoiceRecordsRequest', state.get('getCartInvoiceRecordsRequest')
-          .set('success', true)
-          .remove('loading')
-        ).set('cartRecords', Immutable.fromJS(action.result.data));
-    case GET_CART_INVOICE_RECORDS_FAIL:
-      return state
-        .set('getCartInvoiceRecordsRequest', state.get('getCartInvoiceRecordsRequest')
-          .set('loading', false)
-          .set('fail', true)
-        );
     /**
      * Add cart record
      */
@@ -241,12 +210,8 @@ export default function reducer(state = initialState, action) {
           .remove('fail')
         );
     case ADD_TO_CART_SUCCESS:
-      return state
-        .set('addToCartRequest', state.get('addToCartRequest')
-          .set('success', true)
-          .remove('loading')
-        ).set('cartRecords', Immutable.fromJS(action.result.data))
-         .set('itemsCount', Immutable.fromJS(action.result.data).size);
+      return updateCartState(state, action.result.data)
+              .set('addToCartRequest', initialState.get('addToCartRequest').set('success', true));
     case ADD_TO_CART_FAIL:
       return state
         .set('addToCartRequest', state.get('addToCartRequest')
@@ -259,20 +224,6 @@ export default function reducer(state = initialState, action) {
         .set('itemsCount', Immutable.fromJS(action.count));
 
     /**
-     * update cart record
-     */
-    case UPDATE_SHOPPING_CART:
-      return state
-        .set('cartRecords', Immutable.fromJS(action.data));
-
-    /**
-     * calculate cart sum
-     */
-    case CALCULATE_CART_SUM:
-      return state
-        .set('totalSum', Immutable.fromJS(action.total));
-
-    /**
      * Delete
      */
     case DELETE_CART_RECORD:
@@ -283,12 +234,8 @@ export default function reducer(state = initialState, action) {
           .set('fail', false)
         );
     case DELETE_CART_RECORD_SUCCESS:
-      return state
-        .set('deleteFromCartRequest', state.get('deleteFromCartRequest')
-          .set('loading', false)
-          .set('success', true).set('cartRecords', Immutable.fromJS(action.result.data))
-        ).set('cartRecords', Immutable.fromJS(action.result.data))
-         .set('itemsCount', Immutable.fromJS(action.result.data).size);
+      return updateCartState(state, action.result.data)
+              .set('deleteFromCartRequest', initialState.get('deleteFromCartRequest').set('success', true));
     case DELETE_CART_RECORD_FAIL:
       return state
         .set('deleteFromCartRequest', state.get('deleteFromCartRequest')

@@ -25,17 +25,16 @@ class OpenInvoicesTable extends Component {
     total: 0
   };
 
-  componentWillMount() {
-    const {data} = this.props;
-    this.setState({total: this._getTotalSum(data)});
-  }
-
-  _updateData(data) {
-    const total = this._getTotalSum(data);
-    this.setState({data});
-    this.setState({total});
-    this.props.onUpdate(data, total)
-  }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.data.length !== this.props.data.length) {
+            const {data} = nextProps;     
+            this.setState({data});
+        }
+    }
+   
+    _updateData(data) {    
+        this.setState({data});  
+    }
 
   _removeItem(idx) {
     this.state.data.splice(idx, 1);
@@ -47,21 +46,8 @@ class OpenInvoicesTable extends Component {
     if (e.target.value < 1) return;
     data[idx]['count'] = e.target.value;
     this._updateData(data);
-    debounce(()=>this.props.setQuantity(data[idx]),1000)();
+    debounce(() => this.props.setQuantity(data[idx]),1000)();
   }
-
-  _getTotalSum(products) {
-    let total = 0;
-
-    for (let i = 0; i < products.length; i++) {
-      if (!products[i] || (!products[i].storeItem && products[i].storeItem !== 0) || isNaN(products[i].storeItem.price)) {
-        continue;
-      }
-      total += (Number(products[i].storeItem.price) * Number(products[i].count));
-    }
-    return total;
-  }
-
 
   _getEmptyMessage() {
     const {t} = this.props;
@@ -173,7 +159,8 @@ class OpenInvoicesTable extends Component {
   }
 
   render() {
-    const {data, sum, preview, t} = this.props;
+    const {sum, preview, t} = this.props;    
+    const {data} = this.state;
     return (
       <div>
         {data.length > 0 ?

@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withTranslation, Trans} from 'react-i18next';
 import '../../styles/store.css'
-import {selectCartRecords, selectCartRecordsSum, selectGetCartRecordsRequest} from '../../redux/store/selectors';
-import {calculateCartSum, getCartRecords} from '../../redux/store/actions';
+import {selectGetCartRecordsRequest} from '../../redux/store/selectors';
+import {getCartRecords} from '../../redux/store/actions';
 import {withRouter, NavLink} from 'react-router-dom';
 import {push} from 'react-router-redux';
 import {selectCreateCheckPaymentRequest, selectCreatePayPalPaymentRequest, selectPaymentMethod} from '../../redux/payments/selectors';
@@ -42,12 +42,7 @@ class Checkout extends Component {
   componentWillReceiveProps(nextProps) {
     this._handlePayPalPaymentCreated(nextProps);
     this._handleCheckPaymentCreated(nextProps);
-    this._handleCheckPaymentFailed(nextProps);
-    this._calculateSum(nextProps.cartRecords.toJS());
-  }
-
-  _calculateSum(data){
-      this.props.calculateSum(data);
+    this._handleCheckPaymentFailed(nextProps);  
   }
   
   _handleCreditCard = () => {      
@@ -153,16 +148,13 @@ class Checkout extends Component {
         shippingAddressId,
         billingAddressId
     } = this.state;
-    const {
-      cartRecords,
+    const {      
       cartRecordsRequest,      
-      createCheckPaymentRequest,
-      cartRecordsSum,
+      createCheckPaymentRequest,      
       t
     } = this.props;
     const loadingCarts = cartRecordsRequest.get('loading');
-    const successCarts = cartRecordsRequest.get('success');    
-    const item = cartRecords.toJS().shift();
+    const successCarts = cartRecordsRequest.get('success');        
     
     const paymentMethods = [
       {
@@ -212,38 +204,40 @@ class Checkout extends Component {
                 {[                
                     <div className="row d-flex justify-content-center">
                       <div className='col-10'>
-                        {successCarts &&
-                        <div className="m--margin-top-50 m--margin-bottom-50">                          
-                            {item ? 
-                                <span className="invoice-title">
-                                    <Trans i18nKey="translations:yourInvoice">
-                                        <span className="m--font-bolder">{{invoiceNo: item.invoiceNo}}</span>
-                                        <span className="m--font-bolder">{{invoiceAmount: ('$' + cartRecordsSum + ' ' + item.storeItem.currency)}}</span>
-                                    </Trans>
-                                </span>
+                        {successCarts &&                            
+                            <div className="m--margin-top-50 m--margin-bottom-50">                                                      
+                            {cartRecordsRequest.get('totalPrice') > 0 ?  
+                                <div>
+                                    <span className="invoice-title mb-5">
+                                        <Trans i18nKey="translations:yourInvoice">
+                                            <span className="m--font-bolder">{{invoiceNo: cartRecordsRequest.get('invoiceNo')}}</span>
+                                            <span className="m--font-bolder">{{invoiceAmount: ('$' + cartRecordsRequest.get('totalPrice').toFixed(2) + ' ' + cartRecordsRequest.get('currency'))}}</span>
+                                        </Trans>
+                                    </span>
+                                    <PaymentMethods methods={paymentMethods} />
+                                </div>
                             : 
-                            <div>        
-                                <p className="text-center">
-                                    <span className="invoice-title">{t('yourCartIsEmpty')}</span>
-                                </p>
-                                <p className="text-center m--margin-top-100 m--margin-bottom-100">
-                                    <NavLink to="/store" className="btn m-btm btn-primary">{t('continueShopping')}</NavLink>
-                                </p>
+                                <div>        
+                                    <p className="text-center">
+                                        <span className="invoice-title">{t('yourCartIsEmpty')}</span>
+                                    </p>
+                                    <p className="text-center m--margin-top-100 m--margin-bottom-100">
+                                        <NavLink to="/store" className="btn m-btm btn-primary">{t('continueShopping')}</NavLink>
+                                    </p>
+                                </div>
+                            }
                             </div>
-                            }                          
-                        </div>}
-                        
+                        }
                         {loadingCarts &&
                         <div className="row d-flex justify-content-center">
-                          <CircularProgress color="primary" size={80}/>
-                        </div>}                        
-                        {item && <PaymentMethods methods={paymentMethods} />}
+                            <CircularProgress color="primary" size={80}/>
+                        </div>}                                                
                       </div>
                     </div>,    
                     <div className="row d-flex justify-content-center">
                         <div className='col-12 col-sm-12 col-md-11'>                        
                         {showCreditCard ? 
-                            <CreditCard onDataSaved={this._handleCreditCard} paymentAmount={cartRecordsSum} shippingAddressId={shippingAddressId} billingAddressId={billingAddressId}/> : 
+                            <CreditCard onDataSaved={this._handleCreditCard} paymentAmount={cartRecordsRequest.get('totalPrice')} shippingAddressId={shippingAddressId} billingAddressId={billingAddressId}/> : 
                             <ShippingAndBilling onDataSaved={this._stepBilling}/>
                         }                             
                         </div>
@@ -266,16 +260,13 @@ class Checkout extends Component {
 
 Checkout = connect(
   (state) => ({
-    cartRecordsRequest: selectGetCartRecordsRequest(state),
-    cartRecords: selectCartRecords(state),
+    cartRecordsRequest: selectGetCartRecordsRequest(state),    
     createPayPalPaymentRequest: selectCreatePayPalPaymentRequest(state),
-    createCheckPaymentRequest: selectCreateCheckPaymentRequest(state),
-    cartRecordsSum: selectCartRecordsSum(state),
+    createCheckPaymentRequest: selectCreateCheckPaymentRequest(state),      
     payMethod: selectPaymentMethod(state)
   }),
   (dispatch) => ({
-    getCartRecords:     () => {dispatch(getCartRecords())},
-    calculateSum:       (data) => {dispatch(calculateCartSum(data))},
+    getCartRecords:     () => {dispatch(getCartRecords())},    
     createPayPalPayment:(data) => {dispatch(createPayPalPayment(data))},
     createCheckPayment: (data) => {dispatch(createCheckPayment(data))},    
     goToFailPage:       () => {dispatch(push('/payments/fail'))},
