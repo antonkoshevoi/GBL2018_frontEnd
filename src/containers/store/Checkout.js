@@ -12,9 +12,9 @@ import {Step, StepLabel, Stepper, Button, CircularProgress} from '@material-ui/c
 import payPalImg from '../../media/images/payments/paypal.png'
 import creditCardImg from '../../media/images/payments/credit_card.png'
 import checkImg from '../../media/images/payments/check.png'
-import ShippingAndBilling from "./checkout/ShippingAndBilling";
-import CreditCard from "./checkout/CreditCard";
-import PaymentMethods from './checkout/PaymentMethods';
+import ShippingAndBilling from "./sections/ShippingAndBilling";
+import CreditCard from "./sections/CreditCard";
+import PaymentMethods from './sections/PaymentMethods';
 import PaymentSuccessContainer from "./payments/PaymentSuccessContainer";
 
 class Checkout extends Component {
