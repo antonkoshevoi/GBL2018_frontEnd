@@ -50,6 +50,7 @@ export const UPDATE_CHAT_MESSAGE_FAIL = '[Messages] UPDATE_CHAT_MESSAGE_FAIL';
 export const GET_UNREAD_MESSAGES = '[Messages] GET_UNREAD_MESSAGES';
 export const GET_UNREAD_MESSAGES_SUCCESS = '[Messages] GET_UNREAD_MESSAGES_SUCCESS';
 export const GET_UNREAD_MESSAGES_FAIL = '[Messages] GET_UNREAD_MESSAGES_FAIL';
+export const UPDATE_UNREAD_MESSAGES = '[Messages] UPDATE_UNREAD_MESSAGES';
 
 export const DELETE_MESSAGE = '[Messages] DELETE_MESSAGE';
 export const DELETE_MESSAGE_SUCCESS = '[Messages] DELETE_MESSAGE_SUCCESS';
@@ -198,6 +199,12 @@ export function getUnreadMessages(params = {}) {
   return {    
     types: [GET_UNREAD_MESSAGES, GET_UNREAD_MESSAGES_SUCCESS, GET_UNREAD_MESSAGES_FAIL],
     promise: (apiClient) => apiClient.get(`messages/unread`, params)
+  };
+}
+
+export function updateUnreadMessages(data) {
+  return {    
+    type: UPDATE_UNREAD_MESSAGES, data
   };
 }
 

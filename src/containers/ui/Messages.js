@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { selectGetUnreadMessagesRequest } from '../../redux/messages/selectors';
 import { getUnreadMessages } from '../../redux/messages/actions';
-import { selectUserData } from "../../redux/user/selectors";
 import { NavLink } from "react-router-dom";
 
 class Messages extends Component {
@@ -18,9 +17,8 @@ class Messages extends Component {
     }
           
     componentDidMount() {
-        this.props.getMessages();
         this.interval = setInterval(() => this.tick(), 1000);
-    }
+    }        
        
     tick() {
         this.setState((prevState) => {
@@ -112,8 +110,7 @@ class Messages extends Component {
 }
 
 Messages = connect(
-    (state) => ({
-        userData: selectUserData(state),
+    (state) => ({        
         unreadMessagesRequest: selectGetUnreadMessagesRequest(state)
     }),
     (dispatch) => ({    

@@ -5,12 +5,14 @@ import {
   GET_USER_SUCCESS
 } from './actions';
 import { updateShoppingCartCount } from '../store/actions';
+import { updateUnreadMessages } from '../messages/actions';
 
 import { yieldErrorToasts, yieldSuccessToasts } from '../../helpers/utils';
 import i18n from '../../configs/i18n';
 
 function* yieldSuccessGetUser(action) {
     yield put(updateShoppingCartCount(action.result.data.cartItems));
+    yield put(updateUnreadMessages(action.result.data.newMessagesCount));    
 }
 
 const userSagas = all([

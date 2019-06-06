@@ -11,7 +11,7 @@ import {
     UPDATE_CHAT_MESSAGE, UPDATE_CHAT_MESSAGE_SUCCESS, UPDATE_CHAT_MESSAGE_FAIL,    
     DELETE_MESSAGE, DELETE_MESSAGE_SUCCESS, DELETE_MESSAGE_FAIL, RESET_DELETE_MESSAGE_REQUEST,   
     DELETE_CHAT_MESSAGE, DELETE_CHAT_MESSAGE_SUCCESS, DELETE_CHAT_MESSAGE_FAIL,
-    GET_UNREAD_MESSAGES, GET_UNREAD_MESSAGES_SUCCESS, GET_UNREAD_MESSAGES_FAIL,
+    GET_UNREAD_MESSAGES, GET_UNREAD_MESSAGES_SUCCESS, GET_UNREAD_MESSAGES_FAIL, UPDATE_UNREAD_MESSAGES,
     VIEW_MESSAGE, VIEW_MESSAGE_SUCCESS, VIEW_MESSAGE_FAIL,    
     GET_GROUPS, GET_GROUPS_SUCCESS, GET_GROUPS_FAIL,
     GET_GROUP, GET_GROUP_SUCCESS, GET_GROUP_FAIL, RESET_GET_GROUP_REQUEST,
@@ -361,6 +361,10 @@ export default function reducer (state = initialState, action) {
                 .set('fail', false)
                 .set('success', true)                
                 .set('records', Immutable.fromJS(action.result.data)));
+    case UPDATE_UNREAD_MESSAGES:
+        return state.set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest')
+                .set('success', true)                
+                .set('records', Immutable.fromJS(action.data)));    
     case READ_MESSAGES_FAIL:        
     case GET_UNREAD_MESSAGES_FAIL:    
         return state.set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('loading', false).set('success', false).set('fail', true));            
