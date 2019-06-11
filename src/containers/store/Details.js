@@ -10,7 +10,6 @@ import {Price} from "../../components/ui/Price";
 import {addToShoppingCart, getRecords, getSingleRecord} from "../../redux/store/actions";
 import {selectAddToCartRequest, selectGetRecordsRequest, selectGetSingleRecord, selectGetSingleRecordRequest, selectRecords} from "../../redux/store/selectors";
 import {buildSortersQuery} from "../../helpers/utils";
-import toastr from 'toastr';
 import "../../styles/store.css"
 
 class Details extends Component {
@@ -51,14 +50,7 @@ class Details extends Component {
   }
 
   _addToCart(id) {
-    const {t, auth} = this.props;
-
-    if (auth.get('isLoggedIn')) {
-        this.props.addToShoppingCart(id);
-    } else {
-        toastr.success(t(`messages:loginOrCreateAccount`));
-        this.props.goTo('/login');
-    }       
+    this.props.addToShoppingCart(id);
   }
 
   render() {
