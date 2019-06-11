@@ -42,7 +42,7 @@ export const destroySession = () => {
   const options = {
     path: '/'
   };
-
+  SessionStorage.remove('invoiceNo', options);
   SessionStorage.remove('token', options);
   SessionStorage.remove('tokenExpiresAt', options);
   SessionStorage.remove('refreshToken', options);
@@ -52,7 +52,7 @@ export const destroySession = () => {
 export const destroyTokenSession = () => {
     const options = {
         path: '/'
-    };
+    };    
     SessionStorage.remove('token', options);
     SessionStorage.remove('tokenExpiresAt', options);
     SessionStorage.remove('refreshToken', options);

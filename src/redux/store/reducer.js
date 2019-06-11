@@ -1,3 +1,5 @@
+import SessionStorage from '../../services/SessionStorage';
+
 import {
   GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL,
   GET_CART_RECORDS, GET_CART_RECORDS_SUCCESS, GET_CART_RECORDS_FAIL,
@@ -11,6 +13,7 @@ import {
   GET_RECORDS_PARENT_SUCCESS, GET_SHIPPING_BILLING_INFO, GET_SHIPPING_BILLING_INFO_FAIL,
   GET_SHIPPING_BILLING_INFO_SUCCESS, SAVE_CHECKOUT_INFO,
 } from './actions';
+
 import Immutable from 'immutable';
 
 const initialState = Immutable.fromJS({
@@ -82,12 +85,14 @@ const initialState = Immutable.fromJS({
     total: 0,
     totalPages: 1
   }, 
-  itemsCount: 0,
+  itemsCount: null,
   records: [],
   singleRecord: {},
 });
 
 function updateCartState(state, data) {
+    SessionStorage.set('invoiceNo', data.invoiceNo, {path: '/'});
+    
     return state.set('getCartRecordsRequest', 
         state.get('getCartRecordsRequest')
           .set('success', true)

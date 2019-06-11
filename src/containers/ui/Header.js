@@ -52,7 +52,7 @@ class Header extends Component {
     const {logout, hideMenu, hideSidebar, userRequest, auth} = this.props;    
     const {headerPosition} = this.state;
     const user = this.props.user.toJS();
-    
+    const isLoggedIn = auth.get('isLoggedIn') && userRequest.get('success');
     return (
       <header className="m-header " style={{top:-headerPosition}} ref="header" data-minimize-offset="200" data-minimize-mobile-offset="200">
         <div className="m-container general-header m-container--fluid m-container--full-height">
@@ -62,10 +62,10 @@ class Header extends Component {
                 <Logo isLoggedIn={auth.get('isLoggedIn')} className="m-stack__item m-stack__item--middle m-brand__logo text-center" />
               </div>
             </div>
-            {(auth.get('isLoggedIn') && userRequest.get('success') && !hideMenu) &&
+            {(!hideMenu) &&
             <div className="m-stack__item m-stack__item--fluid m-header-head d-flex" id="m_header_nav">
               <div className="d-flex justify-content-center headerSchoolName align-items-center flex-1 hidden-sm">
-                <h4 className="g-metal"> {user.school ? user.school.schName : ''} </h4>
+                {isLoggedIn && <h4 className="g-metal"> {user.school ? user.school.schName : ''} </h4>}
               </div>              
               <div id="m_header_topbar" className="m-topbar  m-stack m-stack--ver m-stack--general">
                 <div className="m-stack__item m-topbar__nav-wrapper">
@@ -75,14 +75,25 @@ class Header extends Component {
                   </IconButton>}
 
                   <ul className="m-topbar__nav m-nav m-nav--inline">
-                    <Messages activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>
+                    {isLoggedIn && <Messages activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus}/>}
                     <HasRole roles={['Superadministrator','School','Teacher','Parents']}>
                         <ShoppingCart />
                     </HasRole>
-                    <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width">
+                    {!isLoggedIn && <ShoppingCart />}
+                    <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img">
                         <LanguageSwitcher className="m-nav__link"/>
                     </li>
-                    <UserMenu activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus} logout={logout}/>
+                    {isLoggedIn ? 
+                        <UserMenu activeMenu={this.state.activePusherMenu} switchMenu={this._switchPushMenus} logout={logout}/> 
+                        : 
+                        <li className="m-nav__item m-topbar__notifications m-topbar__notifications--img border-0">
+                            <a href='/login' className='m-nav__link pointer' id='m_topbar_notification_icon'>
+                                <span className='m-nav__link-icon'>
+                                    <i className="fa fa-sign-in"></i>
+                                </span>
+                            </a>                   
+                        </li>                                
+                    }
                   </ul>
                 </div>
               </div>
