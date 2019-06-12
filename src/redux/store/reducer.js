@@ -7,11 +7,10 @@ import {
   DELETE_CART_RECORD, DELETE_CART_RECORD_SUCCESS, DELETE_CART_RECORD_FAIL,
   GET_SINGLE_RECORD, GET_SINGLE_RECORD_FAIL, GET_SINGLE_RECORD_SUCCESS, RESET_GET_SINGLE_RECORD_REQUEST,
   UPDATE_SHOPPING_CART_COUNT,
-  UPDATE_ITEM_QUANTITY_SUCCESS,
-  SET_SHIPPING_BILLING_INFO, SET_SHIPPING_BILLING_INFO_SUCCESS,
-  SET_SHIPPING_BILLING_INFO_FAIL, RESET_SET_SHIPPING_BILLING_INFO, GET_RECORDS_PARENT, GET_RECORDS_PARENT_FAIL,
-  GET_RECORDS_PARENT_SUCCESS, GET_SHIPPING_BILLING_INFO, GET_SHIPPING_BILLING_INFO_FAIL,
-  GET_SHIPPING_BILLING_INFO_SUCCESS, SAVE_CHECKOUT_INFO,
+  UPDATE_ITEM_QUANTITY_SUCCESS,  
+  GET_RECORDS_PARENT, GET_RECORDS_PARENT_FAIL, GET_RECORDS_PARENT_SUCCESS, 
+  GET_SHIPPING_BILLING_INFO, GET_SHIPPING_BILLING_INFO_FAIL, GET_SHIPPING_BILLING_INFO_SUCCESS,
+  VALIDATE_ADDRESS, VALIDATE_ADDRESS_SUCCESS, VALIDATE_ADDRESS_FAIL, RESET_VALIDATE_ADDRESS_REQUEST
 } from './actions';
 
 import Immutable from 'immutable';
@@ -64,20 +63,20 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errorResponse: null
-  },  
-  setShippingAndBilling: {
+  },
+ validateAddressRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null
+  },    
+  addressesRequest: {
     loading: false,
     success: false,
     fail: false,
     errorResponse: null,
     errors: [],
-    records: [],
-    pagination: {
-      page: 1,
-      perPage: 10,
-      total: 0,
-      totalPages: 1
-    }
+    records: []
   },
   pagination: {
     page: 1,
@@ -250,58 +249,49 @@ export default function reducer(state = initialState, action) {
 
     /*
     * Set/Get shipping and billing address
-    * */
-    case SET_SHIPPING_BILLING_INFO:
+    * */    
     case GET_SHIPPING_BILLING_INFO:
       return state
-        .set('setShippingAndBilling', state.get('setShippingAndBilling')
+        .set('addressesRequest', state.get('addressesRequest')
           .set('loading', true)
           .set('success', false)
           .set('fail', false)
           .set('errors', null));
-    case SET_SHIPPING_BILLING_INFO_SUCCESS:
-      return state
-        .set('setShippingAndBilling', state.get('setShippingAndBilling')
-          .set('loading', false)
-          .set('success', true)
-          .set('fail', false)
-          .set('errors', null)
-          .set('billingAddressId', action.result.data.billingAddressId)
-          .set('shippingAddressId', action.result.data.shippingAddressId)
-          .set('records', Immutable.fromJS(action.result.data))
-        );
     case GET_SHIPPING_BILLING_INFO_SUCCESS:
       return state
-        .set('setShippingAndBilling', state.get('setShippingAndBilling')
+        .set('addressesRequest', state.get('addressesRequest')
           .set('loading', false)
           .set('errors', null)
+          .set('success', true)
           .set('records', Immutable.fromJS(action.result.data))
         );
-
-    case SET_SHIPPING_BILLING_INFO_FAIL:
+    
     case GET_SHIPPING_BILLING_INFO_FAIL:
       const data = action.error.response.data;
       return state
-        .set('setShippingAndBilling', state.get('setShippingAndBilling')
+        .set('addressesRequest', state.get('addressesRequest')
           .set('loading', false)
           .set('success', false)
           .set('fail', true)
           .set('errors', Immutable.fromJS(data.errors))
         );
-    case SAVE_CHECKOUT_INFO:
-      return state
-        .set('setShippingAndBilling', state.get('setShippingAndBilling')
-          .set('records', Immutable.fromJS(action.data)));
 
-    case RESET_SET_SHIPPING_BILLING_INFO:
+    /**
+     * Validate address
+     */
+    case VALIDATE_ADDRESS:
+      return state.set('validateAddressRequest', initialState.get('validateAddressRequest').set('loading', true));
+    case VALIDATE_ADDRESS_SUCCESS:
+      return state.set('validateAddressRequest', initialState.get('validateAddressRequest').set('success', true));
+    case VALIDATE_ADDRESS_FAIL:      
       return state
-        .set('setShippingAndBilling', state.get('setShippingAndBilling')
-          .set('loading', false)
-          .set('success', false)
-          .set('fail', false)
-          .set('errors', null)
-          .remove('billingAddressId')
-          .remove('shippingAddressId'));
+        .set('validateAddressRequest', initialState.get('validateAddressRequest')          
+          .set('fail', true)
+          .set('errors', Immutable.fromJS(action.error.response.data.errors))
+        );
+    case RESET_VALIDATE_ADDRESS_REQUEST:
+      return state
+        .set('validateAddressRequest', initialState.get('validateAddressRequest'));
 
     /**
      * default

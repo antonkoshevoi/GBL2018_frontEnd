@@ -31,17 +31,14 @@ export const UPDATE_ITEM_QUANTITY = '[Store] UPDATE_ITEM_QUANTITY';
 export const UPDATE_ITEM_QUANTITY_SUCCESS = '[Store] UPDATE_ITEM_QUANTITY_SUCCESS';
 export const UPDATE_ITEM_QUANTITY_FAIL = '[Store] UPDATE_ITEM_QUANTITY_FAIL';
 
-export const SET_SHIPPING_BILLING_INFO = '[Store] SET_SHIPPING_BILLING_INFO';
-export const SET_SHIPPING_BILLING_INFO_SUCCESS = '[Store] SET_SHIPPING_BILLING_INFO_SUCCESS';
-export const SET_SHIPPING_BILLING_INFO_FAIL = '[Store] SET_SHIPPING_BILLING_INFO_FAIL';
+export const VALIDATE_ADDRESS = '[Store] VALIDATE_ADDRESS';
+export const VALIDATE_ADDRESS_SUCCESS = '[Store] VALIDATE_ADDRESS_SUCCESS';
+export const VALIDATE_ADDRESS_FAIL = '[Store] VALIDATE_ADDRESS_FAIL';
+export const RESET_VALIDATE_ADDRESS_REQUEST = '[Store] RESET_VALIDATE_ADDRESS_REQUEST';
 
 export const GET_SHIPPING_BILLING_INFO = '[Store] GET_SHIPPING_BILLING_INFO';
 export const GET_SHIPPING_BILLING_INFO_SUCCESS = '[Store] GET_SHIPPING_BILLING_INFO_SUCCESS';
 export const GET_SHIPPING_BILLING_INFO_FAIL = '[Store] GET_SHIPPING_BILLING_INFO_FAIL';
-
-export const RESET_SET_SHIPPING_BILLING_INFO = '[Store] RESET_SET_SHIPPING_BILLING_INFO';
-
-export const SAVE_CHECKOUT_INFO = '[Store] SAVE_CHECKOUT_INFO';
 
 export function getRecords(params = {}) {
   return {
@@ -102,31 +99,22 @@ export function setItemQuantity(data) {
   };
 }
 
-export function setShippingAndBilling(data) {
-  return {
-    types: [SET_SHIPPING_BILLING_INFO, SET_SHIPPING_BILLING_INFO_SUCCESS, SET_SHIPPING_BILLING_INFO_FAIL],
-    promise: (apiClient) => apiClient.post('checkout/address', data),
-    payload: data
-  };
-}
-
-export function setToStoreContact(data) {
-  return {
-    type: SAVE_CHECKOUT_INFO,
-    data
-  };
-}
-
-export function getShippingAndBilling(data) {
+export function getAddresses(data) {
   return {
     types: [GET_SHIPPING_BILLING_INFO, GET_SHIPPING_BILLING_INFO_SUCCESS, GET_SHIPPING_BILLING_INFO_FAIL],
-    promise: (apiClient) => apiClient.get('checkout/address', data)
+    promise: (apiClient) => apiClient.get('checkout/addresses', data)
   };
 }
 
-export function resetSetShippingAndBilling() {
+export function validateAddress(data) {
   return {
-    type: RESET_SET_SHIPPING_BILLING_INFO,
+    types: [VALIDATE_ADDRESS, VALIDATE_ADDRESS_SUCCESS, VALIDATE_ADDRESS_FAIL],
+    promise: (apiClient) => apiClient.post('checkout/validate-address', data)
   };
+}
 
+export function resetValidateAddressRequest() {
+  return {
+    type: RESET_VALIDATE_ADDRESS_REQUEST
+  };
 }

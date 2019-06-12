@@ -17,8 +17,6 @@ export const CREATE_CC_PAYMENT_SUCCESS = '[Payments] CREATE_CC_PAYMENT_SUCCESS';
 export const CREATE_CC_PAYMENT_FAIL = '[Payments] CREATE_CC_PAYMENT_FAIL';
 export const RESET_CC_PAYMENT = '[Payments] RESET_CC_PAYMENT';
 
-export const SET_PAY_TYPE = '[Payments] SET_PAY_TYPE';
-
 export const GET_INVOICE = '[Payments] GET_INVOICE';
 export const GET_INVOICE_SUCCESS = '[Payments] GET_INVOICE_SUCCESS';
 export const GET_INVOICE_FAIL = '[Payments] GET_INVOICE_FAIL';
@@ -63,13 +61,6 @@ export function createCheckPayment(data) {
   return {
     types: [CREATE_CHECK_PAYMENT, CREATE_CHECK_PAYMENT_SUCCESS, CREATE_CHECK_PAYMENT_FAIL],
     promise: (apiClient) => apiClient.post(`checkout/check/create`, data)
-  }
-}
-
-export function setPayType(data) {
-  return {
-    type: SET_PAY_TYPE,
-    data
   }
 }
 

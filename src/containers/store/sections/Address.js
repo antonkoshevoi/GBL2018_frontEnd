@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {selectRecords} from "../../../redux/countries/selectors";
 import {connect} from 'react-redux';
-import {FormControl, MenuItem, Select} from '@material-ui/core';
 import {withTranslation} from 'react-i18next';
+import {FormControl, MenuItem, Select} from '@material-ui/core';
+import {selectRecords, selectGetRecordsRequest} from "../../../redux/countries/selectors";
+import {getCountries} from "../../../redux/countries/actions";
 
 class Address extends Component {
 
@@ -16,6 +17,12 @@ class Address extends Component {
     form: {}
   };
 
+  componentWillMount() {
+    if (!this.props.countriesRequest.get('success')) {
+      this.props.countries();
+    }
+  }
+    
   componentDidMount() {
     const {form} = this.props;
     this.setState({
@@ -34,13 +41,25 @@ class Address extends Component {
       }
     },() => { this.props.onChange(this.state.form); });
   }
+  
+  _renderCountries() {
+    const { countriesList, countriesRequest } = this.props;
+    
+    if (!countriesRequest.get('success')) {
+        return '';
+    }        
+
+    return countriesList.toJS().map((item, index) => (
+        <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
+    ));
+  }  
 
   render() {
-    const {title,errors,name,disabled,form, countries, t} = this.props;
-    const countriesList = countries.toJS();
+    const {title, errors, disabled, form, t} = this.props;
+       
     return (
-         <div>
-            <div className='col-xs-12'>  
+         <div className="row">
+            <div className='col-12'>  
                 <input
                   value={form.id || ''}
                   name='id'
@@ -62,8 +81,8 @@ class Address extends Component {
                       className='form-control m-input m-input--air '
                       placeholder=''/>
                     <div className='form-control-feedback'>
-                      {errors && errors.get(`${name}.firstName`) &&
-                      <div className="form-control-feedback text-center error">{errors.get(`${name}.firstName`).get(0)}</div>}
+                      {errors && errors.get(`firstName`) &&
+                      <div className="form-control-feedback text-center error">{errors.get(`firstName`).get(0)}</div>}
                     </div>
                   </div>
                 </div>
@@ -82,8 +101,8 @@ class Address extends Component {
                       className='form-control m-input m-input--air '
                       placeholder=''/>
                     <div className='form-control-feedback'>
-                      {errors && errors.get(`${name}.lastName`) &&
-                      <div className="form-control-feedback text-center error">{errors.get(`${name}.lastName`).get(0)}</div>}
+                      {errors && errors.get(`lastName`) &&
+                      <div className="form-control-feedback text-center error">{errors.get(`lastName`).get(0)}</div>}
                     </div>
                   </div>
                 </div>
@@ -102,8 +121,8 @@ class Address extends Component {
                       className='form-control m-input m-input--air '
                       placeholder=''/>
                     <div className='form-control-feedback'>
-                      {errors && errors.get(`${name}.email`) &&
-                      <div className="form-control-feedback text-center error">{errors.get(`${name}.email`).get(0)}</div>}
+                      {errors && errors.get(`email`) &&
+                      <div className="form-control-feedback text-center error">{errors.get(`email`).get(0)}</div>}
                     </div>
                   </div>
                 </div>
@@ -123,14 +142,14 @@ class Address extends Component {
                       className='form-control m-input m-input--air '
                       placeholder=''/>
                     <div className='form-control-feedback'>
-                      {errors && errors.get(`${name}.telephone`) &&
-                      <div className="form-control-feedback text-center error">{errors.get(`${name}.telephone`).get(0)}</div>}
+                      {errors && errors.get(`telephone`) &&
+                      <div className="form-control-feedback text-center error">{errors.get(`telephone`).get(0)}</div>}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          <div className='col-xs-12'>
+          <div className='col-12'>
             <legend className='m--margin-bottom-10'>{t('contactAddress', {title: title})}</legend>
             <address className='m-form__section m-form__section--first signUpOptional'>
               <div className="form-group m-form__group row">
@@ -145,8 +164,8 @@ class Address extends Component {
                     className='form-control m-input m-input--air '
                   />
                   <div className='form-control-feedback'>
-                    {errors && errors.get(`${name}.addressLine1`) &&
-                    <div className="form-control-feedback text-center error">{errors.get(`${name}.addressLine1`).get(0)}</div>}
+                    {errors && errors.get(`addressLine1`) &&
+                    <div className="form-control-feedback text-center error">{errors.get(`addressLine1`).get(0)}</div>}
                   </div>
                 </div>
               </div>
@@ -164,8 +183,8 @@ class Address extends Component {
                     className='form-control m-input m-input--air '
                     placeholder=''/>
                   <div className='form-control-feedback'>
-                    {errors && errors.get(`${name}.addressLine2`) &&
-                    <div className="form-control-feedback text-center error">{errors.get(`${name}.addressLine2`).get(0)}</div>}
+                    {errors && errors.get(`addressLine2`) &&
+                    <div className="form-control-feedback text-center error">{errors.get(`addressLine2`).get(0)}</div>}
                   </div>
                 </div>
               </div>
@@ -183,8 +202,8 @@ class Address extends Component {
                     className='form-control m-input m-input--air '
                     placeholder=''/>
                   <div className='form-control-feedback'>
-                    {errors && errors.get(`${name}.city`) &&
-                    <div className="form-control-feedback text-center error">{errors.get(`${name}.city`).get(0)}</div>}
+                    {errors && errors.get(`city`) &&
+                    <div className="form-control-feedback text-center error">{errors.get(`city`).get(0)}</div>}
                   </div>
                 </div>
               </div>
@@ -202,8 +221,8 @@ class Address extends Component {
                     className='form-control m-input m-input--air '
                     placeholder=''/>
                   <div className='form-control-feedback'>
-                    {errors && errors.get(`${name}.region`) &&
-                    <div className="form-control-feedback text-center error">{errors.get(`${name}.region`).get(0)}</div>}
+                    {errors && errors.get(`region`) &&
+                    <div className="form-control-feedback text-center error">{errors.get(`region`).get(0)}</div>}
                   </div>
                 </div>
               </div>
@@ -221,8 +240,8 @@ class Address extends Component {
                     className='form-control m-input m-input--air '
                     placeholder=''/>
                   <div className='form-control-feedback'>
-                    {errors && errors.get(`${name}.zip`) &&
-                    <div className="form-control-feedback text-center error">{errors.get(`${name}.zip`).get(0)}</div>}
+                    {errors && errors.get(`zip`) &&
+                    <div className="form-control-feedback text-center error">{errors.get(`zip`).get(0)}</div>}
                   </div>
                 </div>
               </div>
@@ -237,12 +256,12 @@ class Address extends Component {
                         value={form.country || ''}
                         onChange={(e) => this._handleInputChange(e)}
                       >
-                        {countriesList.map((item,index) => <MenuItem key={index} value={item.id}>{item.name}</MenuItem>)}
+                        {this._renderCountries()}
                       </Select>
                     </FormControl>
                     <div className='form-control-feedback'>
-                      {errors && errors.get(`${name}.country`) &&
-                      <div className="form-control-feedback text-center error">{errors.get(`${name}.country`).get(0)}</div>}
+                      {errors && errors.get(`country`) &&
+                      <div className="form-control-feedback text-center error">{errors.get(`country`).get(0)}</div>}
                     </div>
                   </FormControl>
                 </div>
@@ -256,9 +275,11 @@ class Address extends Component {
 
 Address = connect(
   (state) => ({
-    countries:  selectRecords(state)
+        countriesList:  selectRecords(state),
+        countriesRequest:  selectGetRecordsRequest(state)
   }),
   (dispatch) => ({
+      countries: () => dispatch(getCountries())  
   }),
 )(Address);
 
