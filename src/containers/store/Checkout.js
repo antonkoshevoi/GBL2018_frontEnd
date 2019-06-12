@@ -72,7 +72,7 @@ class Checkout extends Component {
   
   _stepBilling(params = {}) {
     this.setState({
-        billingAddress: params.address,
+        billingAddress: params.billingAddress,
         paymentMethod: params.paymentMethod
     }, function () {        
         const data = {
@@ -205,9 +205,18 @@ class Checkout extends Component {
                                     <Shipping onDataSaved={(params) => this._stepShipping(params)} data={this.state.shippingAddress} />,                    
                                     <div>
                                         {showCreditCard ? 
-                                            <CreditCard onDataSaved={() => this._handleFinish()} goBack={() => this._handleBack()} paymentAmount={cartRecordsRequest.get('totalPrice')} shippingAddress={this.state.shippingAddress} billingAddress={this.state.billingAddress} /> 
+                                            <CreditCard 
+                                                onDataSaved={() => this._handleFinish()} 
+                                                goBack={() => this._handleBack()} 
+                                                paymentAmount={cartRecordsRequest.get('totalPrice')} 
+                                                shippingAddress={this.state.shippingAddress} 
+                                                billingAddress={this.state.billingAddress} /> 
                                             : 
-                                            <Billing onDataSaved={(params) => this._stepBilling(params)} goBack={() => this._handleBack()} data={this.state.billingAddress} />
+                                            <Billing 
+                                                onDataSaved={(params) => this._stepBilling(params)} 
+                                                goBack={() => this._handleBack()} 
+                                                shippingAddress={this.state.shippingAddress} 
+                                                billingAddress={this.state.billingAddress} />
                                         }                        
                                     </div>, 
                                     <PaymentSuccessContainer/>

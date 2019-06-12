@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Address from "./Address";
 import {withTranslation} from 'react-i18next';
-import {Button} from '@material-ui/core';
+import {Button, Checkbox, FormControlLabel} from '@material-ui/core';
 import {selectValidateAddressRequest} from "../../../redux/store/selectors";
 import {validateAddress} from "../../../redux/store/actions";
 import PaymentMethods from './PaymentMethods';
@@ -14,20 +14,25 @@ import checkImg from '../../../media/images/payments/check.png'
 class Billing extends Component {
 
     state = {
-        address: this.props.data,        
+        shippingAddress: this.props.shippingAddress,
+        billingAddress: this.props.billingAddress,
+        sameShipping: false,
         paymentMethod: null        
     };
     
     componentWillReceiveProps(nextProps){
         if (!this.props.validateAddressRequest.get('success') && nextProps.validateAddressRequest.get('success')) {            
-            this.props.onDataSaved(this.state);
+            this.props.onDataSaved({
+                billingAddress: this.state.billingAddress,
+                paymentMethod: this.state.paymentMethod     
+            });
         }
     }    
 
     _handleForm(form) {
         this.setState({
             ...this.state,
-            address: {
+            billingAddress: {
                 ...form
             }
         });
@@ -39,7 +44,7 @@ class Billing extends Component {
 
     _submit = () => {
         if (this.props.validateAddressRequest.get('success')) {
-            this.props.validateAddress(this.state.address);
+            this.props.validateAddress(this.state.billingAddress);
         }
     }
     
@@ -49,23 +54,50 @@ class Billing extends Component {
         });
     }
     
+    _handleSameShipping(event) {
+        const {checked} = event.target;
+        this.setState({
+            ...this.state,
+            sameShipping: checked
+        });
+        if (checked) {
+            this.setState({
+                billingAddress: this.state.shippingAddress
+            });            
+        }
+    }
+    
     _renderAddressForm() {
         
         const {validateAddressRequest, t} = this.props;
+        const {sameShipping} = this.state;        
 
         const loading   = validateAddressRequest.get('loading');
-        const errors    = validateAddressRequest.get('errors');    
+        const errors    = validateAddressRequest.get('errors');
         
         return <form action="">
             {loading && <Loader/>}    
             <div className="row">
-                <div className="col-12 col-sm-10 col-md-8 col-lg-6 m-auto"> 
+                <div className="col-12 col-sm-10 col-md-8 col-lg-6 m-auto">
+                    <div className="order-2 order-md-1 offset-md-6 col-md-6 col-sm-12">                
+                        <FormControlLabel
+                          label={t('sameBillingInformation')}
+                          control={
+                            <Checkbox
+                              color="primary"
+                              checked={sameShipping}
+                              onChange={(e) => this._handleSameShipping(e)}
+                            />
+                          }
+                        />
+                    </div>                
                     <Address
                         title={t('billing')}
                         onChange={(form) => this._handleForm(form)}
                         name='billingAddress'
+                        disabled={sameShipping}
                         errors={errors}
-                        form={this.state.address}                  
+                        form={this.state.billingAddress}                  
                     />
                 </div>
             </div>
