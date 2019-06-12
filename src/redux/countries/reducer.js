@@ -16,7 +16,7 @@ const initialState = Immutable.fromJS({
     total: 0,
     totalPages: 1
   },
-  records: [],
+  records: Immutable.List()
 });
 
 export default function reducer (state = initialState, action) {
@@ -44,7 +44,6 @@ export default function reducer (state = initialState, action) {
           .set('loading', false)
           .set('fail', true)
         );
-
 
     /**
      * default

@@ -33,15 +33,6 @@ export const selectCreateCheckPaymentRequest = createSelector(
   (subState) => subState.get('createCheckPaymentRequest')
 );
 
-
-/**
- * Pay method
- */
-export const selectPaymentMethod = createSelector(
-  selectStoreDomain,
-  (subState) => subState.get('payMethod')
-);
-
 /**
  * Invoice
  */

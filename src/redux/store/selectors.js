@@ -85,7 +85,15 @@ export const deleteFromCartRequest = createSelector(
 /**
  * Shipping and billing
  */
-export const setShippingAndBillingRequest = createSelector(
+export const selectAddressesRequest = createSelector(
   selectStoreDomain,
-  (subState) => subState.get('setShippingAndBilling')
+  (subState) => subState.get('addressesRequest')
+);
+
+/**
+ * Validate address
+ */
+export const selectValidateAddressRequest = createSelector(
+  selectStoreDomain,
+  (subState) => subState.get('validateAddressRequest')
 );

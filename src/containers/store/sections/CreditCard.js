@@ -13,13 +13,24 @@ class CreditCard extends Component {
                 
         this.state = {
             paymentAmount: props.paymentAmount,
-            billingAddressId: props.billingAddressId,
-            shippingAddressId: props.shippingAddressId
+            billingAddress: props.billingAddress,
+            shippingAddress: props.shippingAddress
         }
-    }  
+    }
+    
+    componentWillReceiveProps(nextProps){
+        if (!this.props.createCreditCardPaymentRequest.get('success') && nextProps.createCreditCardPaymentRequest.get('success')) {
+            this.props.resetCreditCardPayment();        
+            this.props.onDataSaved();
+        }
+    }
+    
+    _back() {
+        this.props.goBack();
+    }     
 
     _handleInputChange(event) {
-        const { name, value, } = event.target;
+        const { name, value } = event.target;
 
         this.setState({
             [name]: value
@@ -34,13 +45,8 @@ class CreditCard extends Component {
         const years = Array.from(Array(10), (_,x) => (new Date().getFullYear() + x));
         const {createCreditCardPaymentRequest, t} = this.props;
         const loading = createCreditCardPaymentRequest.get('loading');       
-        const errors = createCreditCardPaymentRequest.get('errors');
-        const success = createCreditCardPaymentRequest.get('success');
+        const errors = createCreditCardPaymentRequest.get('errors');        
 
-        if (success) {
-            this.props.resetCreditCardPayment();        
-            this.props.onDataSaved();
-        }
         return (
             <div className="row">
                 <div className="col-sm-12 col-md-10 col-lg-8 m-auto">
@@ -161,10 +167,16 @@ class CreditCard extends Component {
                       </div>
                     </div>                    
                     <div className="d-flex justify-content-center">
+                      <Button                                          
+                        variant="contained"
+                        onClick={() => this._back()}
+                        >
+                        {t('back')}
+                      </Button>                     
                       <Button
                         variant="contained"
                         color="primary"
-                        className='mt-btn-success pull-right btn btn-success mt-btn'
+                        className="ml-2"
                         disabled={loading}
                         onClick={(e) => { this._submitCreditCardPayment(e) }}
                       >

@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withTranslation, Trans} from 'react-i18next';
-import '../../../styles/store.css'
+import {withTranslation} from 'react-i18next';
+import {CircularProgress} from '@material-ui/core';
 import {getInvoice} from '../../../redux/payments/actions';
 import {invoiceRequest} from '../../../redux/payments/selectors';
 import {Price} from '../../../components/ui/Price';
 import Loader from "../../../components/layouts/Loader";
-import {renderToString} from 'react-dom/server'
 import Typography from '@material-ui/core/Typography';
 
 class PaymentSuccessContainer extends Component {
@@ -63,15 +62,9 @@ class PaymentSuccessContainer extends Component {
     
     return (
       <div className="row">
-        {invoice &&
+        {invoice ?
         <div className="col-md-10 m-auto">
             <div>
-                <span className="invoice-title">
-                    <Trans i18nKey="translations:yourInvoice">
-                        <span className="m--font-bolder">{{invoiceNo: invoice.get('invoice_no')}}</span>
-                        <span className="m--font-bolder">{{invoiceAmount: renderToString(<Price price={invoice.get('total')} currency={invoice.get('currency')} />)}}</span>
-                    </Trans>
-                </span>                
                 <p className="text-center m--margin-15">
                     <a rel="noopener noreferrer" className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
                 </p>
@@ -109,7 +102,10 @@ class PaymentSuccessContainer extends Component {
               </div>
             </div>
           </div>
-        }
+          :
+          <div className="d-flex justify-content-center m--margin-top-100 m--margin-bottom-100">
+            <CircularProgress color="primary" size={80}/>
+          </div>}
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { CircularProgress } from '@material-ui/core';
+import {withTranslation} from 'react-i18next';
+import {CircularProgress} from '@material-ui/core';
 
 class PaymentMethods extends Component {
   static propTypes = {
@@ -8,10 +9,10 @@ class PaymentMethods extends Component {
   };
 
   _renderMethods () {
-    const { methods } = this.props;
+    const { methods, onSelect, t } = this.props;
 
     return methods.map((method, key) => (
-      <div key={key} className='col-sm-12 col-md-6 col-lg-6 col-xl-4' onClick={() => { method.onSelect() }}>
+      <div key={key} className='col-sm-12 col-md-6 col-lg-6 col-xl-4' onClick={() => { onSelect(method.method) }}>
         <div className='payments-widgets'>
           <div className='payment-item'>
             <span className='m--font-brand'>
@@ -25,12 +26,12 @@ class PaymentMethods extends Component {
                 }}/>
               ) : (
                 <div className='paymentImg'>
-                  <img alt={method.title} src={method.img} width={80} className='img-responsive'/>
+                  <img alt={t(method.method)} src={method.img} width={80} className='img-responsive'/>
                 </div>
               )}
             </span>
             <h4 className="m--margin-left-20">
-              {method.title}
+              {t(method.method)}
             </h4>
           </div>
         </div>
@@ -47,4 +48,4 @@ class PaymentMethods extends Component {
   }
 }
 
-export default PaymentMethods;
+export default withTranslation('translations')(PaymentMethods);
