@@ -36,9 +36,7 @@ class PaymentSuccessContainer extends Component {
       <div key={key} className="row">
         <div className="col-6 text-center">
             <div>
-                <strong>
-                    {item.get('title')}
-                </strong>
+                <strong>{item.get('title')}</strong>
             </div>
             <span className="text-muted">
                 {item.get('quantity')} {t('items')}
@@ -65,11 +63,11 @@ class PaymentSuccessContainer extends Component {
         {invoice ?
         <div className="col-md-10 m-auto">
             <div>
-                <p className="text-center m--margin-15">
+                <p className="text-center m--margin-bottom-25">
                     <a rel="noopener noreferrer" className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
                 </p>
             </div>
-            <div className="m-portlet m-portlet--bordered-semi">
+            <div className="m-portlet m-portlet--bordered-semi mb-5">
               <div className="m-portlet__body m--padding-top-25">
                 <div className="col-md-10 m-auto">
                   <div className="row">
@@ -91,12 +89,21 @@ class PaymentSuccessContainer extends Component {
                     <div className="row my-2">
                         <div className="col-md-10 m-auto cartItems m--margin-15">
                             <div>
-                              <span className="invoice-title">{t('orderDetails')}</span>
+                                <span className="invoice-title mb-3">{t('orderDetails')}</span>
                             </div>
-                            <div className="col-12 col-sm-12 col-md-10 col-lg-7 m-auto">
+                            <div>
                                 {this._renderItems(invoice)}
+                                <hr />
+                                <div className="row">
+                                    <div className="col-6 text-center">
+                                        <strong>{t('Total')}</strong>
+                                    </div>
+                                    <div className="col-6 text-center align-self-center">
+                                        <strong className="text-nowrap m--font-danger"><Price price={invoice.get('total')} currency={invoice.get('currency')} /></strong>
+                                    </div>
+                                </div>                                 
                             </div>        
-                        </div>
+                        </div>                            
                     </div>
                  </div>             
               </div>

@@ -23,13 +23,19 @@ class Checkout extends Component {
     stepIndex: 0,
     paymentMethod: null,
     showCreditCard: false,
+    forceFinish: false,
     billingAddress: {},
     shippingAddress: {}
   };
 
   componentDidMount() {
-      this.props.getAddresses();
-      this.props.getCartRecords();
+      const {step} = this.props.match.params;
+      if (step === 'finish') {
+        this._handleFinish(true);
+      } else {     
+        this.props.getAddresses();
+        this.props.getCartRecords();
+      }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -39,10 +45,11 @@ class Checkout extends Component {
     this._handleAddresses(nextProps);
   }
   
-  _handleFinish() {
+  _handleFinish(force = false) {
     this.setState({
       ...this.state,
-      stepIndex: 2
+      stepIndex: 2,
+      forceFinish: force
     });    
   }   
   
@@ -148,30 +155,81 @@ class Checkout extends Component {
     if (!fail && nextFail) {
       this.props.goToFailPage();
     }
-  }  
-
-  render() {
-    let {
-        stepIndex,
-        showCreditCard
-    } = this.state;
+  }
+  
+  _renderCheckoutSteps(stepIndex)
+  {
+    const { showCreditCard } = this.state;
     
-    const {      
+    const {
       addressesRequest,
-      cartRecordsRequest,      
+      cartRecordsRequest,
       checkRequest,
       paypalRequest,
       t
     } = this.props;
     
     const loading        = cartRecordsRequest.get('loading') || addressesRequest.get('loading');
+    const success        = cartRecordsRequest.get('success') && addressesRequest.get('success');
     const paymentLoading = checkRequest.get('loading') || paypalRequest.get('loading');
-    const success        = cartRecordsRequest.get('success') && addressesRequest.get('success');        
-                
+    
     if (checkRequest.get('success')) {
         stepIndex = 2;
+    }    
+    
+    if (!success) {
+        return <div className="d-flex justify-content-center m--margin-top-100 m--margin-bottom-100">
+            <CircularProgress color="primary" size={80}/>
+        </div>;
     }
-            
+    
+    return <div className="m--margin-bottom-50">
+        {paymentLoading && this._renderPaymentRequest()}
+        {cartRecordsRequest.get('totalPrice') > 0 ?  
+            <div>
+                <span className="invoice-title mb-5">
+                    <Trans i18nKey="translations:yourInvoice">
+                        <span className="m--font-bolder">{{invoiceNo: cartRecordsRequest.get('invoiceNo')}}</span>
+                        <span className="m--font-bolder">{{invoiceAmount: ('$' + cartRecordsRequest.get('totalPrice').toFixed(2) + ' ' + cartRecordsRequest.get('currency'))}}</span>
+                    </Trans>
+                </span>
+                {[
+                    <Shipping onDataSaved={(params) => this._stepShipping(params)} data={this.state.shippingAddress} />,                    
+                    <div>
+                        {showCreditCard ? 
+                            <CreditCard 
+                                onDataSaved={() => this._handleFinish()} 
+                                goBack={() => this._handleBack()} 
+                                paymentAmount={cartRecordsRequest.get('totalPrice')} 
+                                shippingAddress={this.state.shippingAddress} 
+                                billingAddress={this.state.billingAddress} /> 
+                            : 
+                            <Billing 
+                                onDataSaved={(params) => this._stepBilling(params)} 
+                                goBack={() => this._handleBack()} 
+                                shippingAddress={this.state.shippingAddress} 
+                                billingAddress={this.state.billingAddress} />
+                        }
+                    </div>, 
+                    <PaymentSuccessContainer/>
+                ][stepIndex]}
+            </div>
+        : 
+            <div>
+                <p className="text-center">
+                    <span className="invoice-title">{t('yourCartIsEmpty')}</span>
+                </p>
+                <p className="text-center m--margin-top-100 m--margin-bottom-100">
+                    <NavLink to="/store" className="btn m-btm btn-primary">{t('continueShopping')}</NavLink>
+                </p>
+            </div>
+        }
+        </div>;
+  }
+
+  render() {
+    const { stepIndex, forceFinish } = this.state;
+    const { t } = this.props;
     return (      
         <div className='row-14 d-flex justify-content-center m--margin-top-30'>
           <div className="col-12 col-sm-11 col-md-9 col-xl-8">                       
@@ -188,56 +246,9 @@ class Checkout extends Component {
                     <StepLabel>{t('confirmation')}</StepLabel>
                   </Step>
                 </Stepper>
-                {paymentLoading && this._renderPaymentRequest()}
                 <div className="row d-flex justify-content-center">
                   <div className='col-10'>
-                    {success &&                            
-                        <div className="m--margin-bottom-50">                                                      
-                        {cartRecordsRequest.get('totalPrice') > 0 ?  
-                            <div>
-                                <span className="invoice-title mb-5">
-                                    <Trans i18nKey="translations:yourInvoice">
-                                        <span className="m--font-bolder">{{invoiceNo: cartRecordsRequest.get('invoiceNo')}}</span>
-                                        <span className="m--font-bolder">{{invoiceAmount: ('$' + cartRecordsRequest.get('totalPrice').toFixed(2) + ' ' + cartRecordsRequest.get('currency'))}}</span>
-                                    </Trans>
-                                </span>
-                                {[                
-                                    <Shipping onDataSaved={(params) => this._stepShipping(params)} data={this.state.shippingAddress} />,                    
-                                    <div>
-                                        {showCreditCard ? 
-                                            <CreditCard 
-                                                onDataSaved={() => this._handleFinish()} 
-                                                goBack={() => this._handleBack()} 
-                                                paymentAmount={cartRecordsRequest.get('totalPrice')} 
-                                                shippingAddress={this.state.shippingAddress} 
-                                                billingAddress={this.state.billingAddress} /> 
-                                            : 
-                                            <Billing 
-                                                onDataSaved={(params) => this._stepBilling(params)} 
-                                                goBack={() => this._handleBack()} 
-                                                shippingAddress={this.state.shippingAddress} 
-                                                billingAddress={this.state.billingAddress} />
-                                        }                        
-                                    </div>, 
-                                    <PaymentSuccessContainer/>
-                                ][stepIndex]}                                
-                            </div>
-                        : 
-                            <div>        
-                                <p className="text-center">
-                                    <span className="invoice-title">{t('yourCartIsEmpty')}</span>
-                                </p>
-                                <p className="text-center m--margin-top-100 m--margin-bottom-100">
-                                    <NavLink to="/store" className="btn m-btm btn-primary">{t('continueShopping')}</NavLink>
-                                </p>
-                            </div>
-                        }
-                        </div>
-                    }
-                    {loading &&
-                    <div className="d-flex justify-content-center m--margin-top-100 m--margin-bottom-100">
-                        <CircularProgress color="primary" size={80}/>
-                    </div>}                                                
+                    {forceFinish ? <PaymentSuccessContainer/> : this._renderCheckoutSteps(stepIndex)}
                   </div>
                 </div>
             </div>
