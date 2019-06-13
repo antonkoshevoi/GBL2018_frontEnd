@@ -53,7 +53,7 @@ PayPalReturnContainer = connect(
   }),
   (dispatch) => ({
     executePayPalPayment: (data) => { dispatch(executePayPalPayment(data)) },
-    goToSuccessPage: () => { dispatch(push('/shopping/checkout/2')) },
+    goToSuccessPage: () => { dispatch(push('/shopping/checkout/finish')) },
     goToFailPage: () => { dispatch(push('/payments/fail')) },
   })
 )(PayPalReturnContainer);

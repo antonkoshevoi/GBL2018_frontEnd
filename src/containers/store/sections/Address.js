@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {withTranslation} from 'react-i18next';
 import {FormControl, MenuItem, Select} from '@material-ui/core';
@@ -7,11 +6,6 @@ import {selectRecords, selectGetRecordsRequest} from "../../../redux/countries/s
 import {getCountries} from "../../../redux/countries/actions";
 
 class Address extends Component {
-
-  static propTypes = {
-    form: PropTypes.object.isRequired,   
-    onChange: PropTypes.func.isRequired
-  };
 
   state = {
     form: {}

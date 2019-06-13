@@ -1,4 +1,5 @@
 import { uri } from '../../helpers/uri';
+import SessionStorage from '../../services/SessionStorage';
 
 export const CREATE_PAYPAL_PAYMENT = '[Payments] CREATE_PAYPAL_PAYMENT';
 export const CREATE_PAYPAL_PAYMENT_SUCCESS = '[Payments] CREATE_PAYPAL_PAYMENT_SUCCESS';
@@ -22,6 +23,7 @@ export const GET_INVOICE_SUCCESS = '[Payments] GET_INVOICE_SUCCESS';
 export const GET_INVOICE_FAIL = '[Payments] GET_INVOICE_FAIL';
 
 export function createCreditCardPayment(data) {
+  data.invoiceNo = SessionStorage.get('invoiceNo', {path: '/'});
   return {
     types: [CREATE_CC_PAYMENT, CREATE_CC_PAYMENT_SUCCESS, CREATE_CC_PAYMENT_FAIL],
     promise: (apiClient) => apiClient.post('checkout/creditcard/create', data),
@@ -41,6 +43,7 @@ export function resetCreditCardPayment () {
 export function createPayPalPayment(data) {
   data.returnUrl = uri('payments/paypal/return');
   data.cancelUrl = uri('payments/canceled');
+  data.invoiceNo = SessionStorage.get('invoiceNo', {path: '/'});
   return {
     types: [CREATE_PAYPAL_PAYMENT, CREATE_PAYPAL_PAYMENT_SUCCESS, CREATE_PAYPAL_PAYMENT_FAIL],
     promise: (apiClient) => apiClient.post(`checkout/paypal/create`, data)
@@ -58,6 +61,7 @@ export function executePayPalPayment(data) {
  * Check
  */
 export function createCheckPayment(data) {
+  data.invoiceNo = SessionStorage.get('invoiceNo', {path: '/'});
   return {
     types: [CREATE_CHECK_PAYMENT, CREATE_CHECK_PAYMENT_SUCCESS, CREATE_CHECK_PAYMENT_FAIL],
     promise: (apiClient) => apiClient.post(`checkout/check/create`, data)
