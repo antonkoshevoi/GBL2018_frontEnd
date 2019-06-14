@@ -1,29 +1,13 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import {withTranslation} from 'react-i18next';
 import {Button,  FormControl, FormHelperText, MenuItem, Select} from '@material-ui/core';
-import {selectCreateCreditCardPaymentRequest} from '../../../redux/payments/selectors';
-import {createCreditCardPayment, resetCreditCardPayment} from '../../../redux/payments/actions';
-import Loader from "../../../components/layouts/Loader";
 
 class CreditCard extends Component {
 
     constructor(props) {
-        super(props);
-                
-        this.state = {
-            paymentAmount: props.paymentAmount,
-            billingAddress: props.billingAddress,
-            shippingAddress: props.shippingAddress
-        }
-    }
-    
-    componentWillReceiveProps(nextProps){
-        if (!this.props.createCreditCardPaymentRequest.get('success') && nextProps.createCreditCardPaymentRequest.get('success')) {
-            this.props.resetCreditCardPayment();        
-            this.props.onDataSaved();
-        }
-    }
+        super(props);                
+        this.state = {}
+    }    
     
     _back() {
         this.props.goBack();
@@ -38,19 +22,16 @@ class CreditCard extends Component {
     }
     
     _submitCreditCardPayment = () => {        
-        this.props.createCreditCardPayment(this.state);        
+        this.props.onDataSaved(this.state);
     };  
 
     render() {        
         const years = Array.from(Array(10), (_,x) => (new Date().getFullYear() + x));
-        const {createCreditCardPaymentRequest, t} = this.props;
-        const loading = createCreditCardPaymentRequest.get('loading');       
-        const errors = createCreditCardPaymentRequest.get('errors');        
-
+        const { errors, t} = this.props;
+                
         return (
             <div className="row">
-                <div className="col-sm-12 col-md-10 col-lg-8 m-auto">
-                    {loading && <Loader/>}
+                <div className="col-sm-12 col-md-10 col-lg-8 m-auto">                    
                     <legend className='m--margin-bottom-10'>{t('creditCard')}</legend>
                     <div className='m-form__section m-form__section--first'>
                       <div className="form-group m-form__group row">
@@ -176,8 +157,7 @@ class CreditCard extends Component {
                       <Button
                         variant="contained"
                         color="primary"
-                        className="ml-2"
-                        disabled={loading}
+                        className="ml-2"                        
                         onClick={(e) => { this._submitCreditCardPayment(e) }}
                       >
                         {t('makePayment')}
@@ -188,15 +168,5 @@ class CreditCard extends Component {
         );
     }
 }
-
-CreditCard = connect(
-  (state) => ({
-    createCreditCardPaymentRequest: selectCreateCreditCardPaymentRequest(state)    
-  }),
-  (dispatch) => ({
-    createCreditCardPayment: (data) => dispatch(createCreditCardPayment(data)),
-    resetCreditCardPayment: () => dispatch(resetCreditCardPayment())
-  })
-)(CreditCard);
 
 export default withTranslation('translations')(CreditCard);

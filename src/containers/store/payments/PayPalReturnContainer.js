@@ -29,7 +29,8 @@ class PayPalReturnContainer extends Component {
     const nextSuccess = nextProps.executePayPalPaymentRequest.get('success');
 
     if (!success && nextSuccess) {
-      this.props.goToSuccessPage();
+      const data = nextProps.executePayPalPaymentRequest.get('data').toJS();
+      this.props.goToSuccessPage(data.invoiceNo, data.hash);
     }
 
     const fail = this.props.executePayPalPaymentRequest.get('fail');
@@ -53,7 +54,7 @@ PayPalReturnContainer = connect(
   }),
   (dispatch) => ({
     executePayPalPayment: (data) => { dispatch(executePayPalPayment(data)) },
-    goToSuccessPage: () => { dispatch(push('/shopping/checkout/finish')) },
+    goToSuccessPage: (id, hash) => { dispatch(push(`/shopping/checkout/${id}/${hash}`)) },
     goToFailPage: () => { dispatch(push('/payments/fail')) },
   })
 )(PayPalReturnContainer);
