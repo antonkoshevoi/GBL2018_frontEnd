@@ -56,8 +56,7 @@ class Shipping extends Component {
                 <div className="d-flex justify-content-center">
                     <Button
                         variant="contained"
-                        color="primary"                        
-                        disabled={loading}
+                        color="primary"    
                         onClick={this._submit}
                         >
                         {t('nextStep')}

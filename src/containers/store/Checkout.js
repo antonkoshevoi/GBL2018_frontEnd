@@ -5,16 +5,16 @@ import {selectGetCartRecordsRequest} from '../../redux/store/selectors';
 import {getCartRecords} from '../../redux/store/actions';
 import {withRouter, NavLink} from 'react-router-dom';
 import {push} from 'react-router-redux';
-import {selectCreateCheckPaymentRequest, selectCreatePayPalPaymentRequest} from '../../redux/payments/selectors';
-import {createCheckPayment, createPayPalPayment} from '../../redux/payments/actions';
+import {selectCreateCheckPaymentRequest, selectCreatePayPalPaymentRequest, selectCreateCreditCardPaymentRequest} from '../../redux/payments/selectors';
+import {createCheckPayment, createPayPalPayment, createCreditCardPayment, resetCreditCardPayment} from '../../redux/payments/actions';
 import {selectAddressesRequest} from "../../redux/store/selectors";
 import {getAddresses} from "../../redux/store/actions";
 import {Step, StepLabel, Stepper, CircularProgress} from '@material-ui/core';
 import Shipping from "./sections/Shipping";
 import Billing from "./sections/Billing";
 import CreditCard from "./sections/CreditCard";
-import PaymentSuccessContainer from "./payments/PaymentSuccessContainer";
 import Loader from "../../components/layouts/Loader";
+
 import '../../styles/store.css'
 
 class Checkout extends Component {
@@ -22,36 +22,23 @@ class Checkout extends Component {
   state = {   
     stepIndex: 0,
     paymentMethod: null,
-    showCreditCard: false,
-    forceFinish: false,
+    showCreditCard: false,    
     billingAddress: {},
     shippingAddress: {}
   };
 
-  componentDidMount() {
-      const {step} = this.props.match.params;
-      if (step === 'finish') {
-        this._handleFinish(true);
-      } else {     
-        this.props.getAddresses();
-        this.props.getCartRecords();
-      }
+  componentDidMount() {            
+    this.props.getAddresses();
+    this.props.getCartRecords();     
   }
 
   componentWillReceiveProps(nextProps) {
     this._handlePayPalPaymentCreated(nextProps);
     this._handleCheckPaymentCreated(nextProps);
+    this._handleCCPaymentCreated(nextProps);
     this._handleCheckPaymentFailed(nextProps);  
     this._handleAddresses(nextProps);
-  }
-  
-  _handleFinish(force = false) {
-    this.setState({
-      ...this.state,
-      stepIndex: 2,
-      forceFinish: force
-    });    
-  }   
+  }  
   
   _handleAddresses(nextProps) {    
     const record = nextProps.addressesRequest.get('records');    
@@ -60,24 +47,17 @@ class Checkout extends Component {
         ...this.state, ...record.toJS(),
       })
     }  
-  }
+  } 
   
-  _renderPaymentRequest() {
-    const {t} = this.props;    
-    return (
-      <div>
-        <Loader/>
-        <div className="alert m-alert m-alert--default">
-          <h3 className="display-5 text-center">
-            <i className="la la-check-circle align-middle m--margin-right-20 display-2 text-success"/>
-            {t('yourShippingAndBillingInfoSaved')}. <br/> 
-            {t('creatingRequest', {paymentType: t(this.state.paymentMethod)})}
-          </h3>
-        </div>
-      </div>);
-  }  
+  _setShipping (params = {}) {
+    this.setState({
+      ...this.state,
+      stepIndex: 1,
+      shippingAddress: params
+    });
+  };
   
-  _stepBilling(params = {}) {
+  _setBilling(params = {}) {
     this.setState({
         billingAddress: params.billingAddress,
         paymentMethod: params.paymentMethod
@@ -105,14 +85,16 @@ class Checkout extends Component {
             return;
         }
     });
-  };    
-
-  _stepShipping (params = {}) {
-    this.setState({
-      ...this.state,
-      stepIndex: 1,
-      shippingAddress: params
-    });
+  };
+  
+  _makeCreditCardPayment(params = {}) {
+    const { cartRecordsRequest, createCreditCardPayment } = this.props;
+  
+    params.billingAddress   = this.state.billingAddress;
+    params.shippingAddress  = this.state.shippingAddress;
+    params.paymentAmount    = cartRecordsRequest.get('totalPrice');
+      
+    createCreditCardPayment(params);        
   };
  
   _handleBack() {
@@ -131,51 +113,49 @@ class Checkout extends Component {
   };
 
   _handlePayPalPaymentCreated(nextProps) {
-    const success = this.props.paypalRequest.get('success');
-    const nextSuccess = nextProps.paypalRequest.get('success');
-
-    if (!success && nextSuccess) {      
+    if (!this.props.paypalRequest.get('success') && nextProps.paypalRequest.get('success')) {      
       window.location = nextProps.paypalRequest.get('approvalUrl');
     }
   }
+  
+  _handleCCPaymentCreated(nextProps){
+    if (!this.props.creditCardRequest.get('success') && nextProps.creditCardRequest.get('success')) {
+      this.props.resetCreditCardPayment();
+      this._goToSuccessPage(nextProps.creditCardRequest.get('data').toJS());
+    }
+  }  
 
   _handleCheckPaymentCreated(nextProps) {
-    const success = this.props.checkRequest.get('success');
-    const nextSuccess = nextProps.checkRequest.get('success');    
-
-    if (!success && nextSuccess) {                
-        this._handleFinish();
+    if (!this.props.checkRequest.get('success') && nextProps.checkRequest.get('success')) {                
+      this._goToSuccessPage(nextProps.checkRequest.get('data').toJS());
     }
   }
 
   _handleCheckPaymentFailed(nextProps) {
-    const fail = this.props.checkRequest.get('fail');
-    const nextFail = nextProps.checkRequest.get('fail');
-
-    if (!fail && nextFail) {
+    if (!this.props.checkRequest.get('fail') && nextProps.checkRequest.get('fail')) {
       this.props.goToFailPage();
     }
   }
   
-  _renderCheckoutSteps(stepIndex)
-  {
+  _goToSuccessPage(data) {
+      const {invoiceNo, hash} = data;
+      this.props.goToSuccessPage(invoiceNo, hash);
+  }
+  
+  _renderCheckoutSteps(stepIndex) {
     const { showCreditCard } = this.state;
     
     const {
       addressesRequest,
       cartRecordsRequest,
       checkRequest,
+      creditCardRequest,
       paypalRequest,
       t
     } = this.props;
-    
-    const loading        = cartRecordsRequest.get('loading') || addressesRequest.get('loading');
-    const success        = cartRecordsRequest.get('success') && addressesRequest.get('success');
-    const paymentLoading = checkRequest.get('loading') || paypalRequest.get('loading');
-    
-    if (checkRequest.get('success')) {
-        stepIndex = 2;
-    }    
+        
+    const success = cartRecordsRequest.get('success') && addressesRequest.get('success');
+    const loading = checkRequest.get('loading') || paypalRequest.get('loading') || creditCardRequest.get('loading') || paypalRequest.get('success');    
     
     if (!success) {
         return <div className="d-flex justify-content-center m--margin-top-100 m--margin-bottom-100">
@@ -184,7 +164,7 @@ class Checkout extends Component {
     }
     
     return <div className="m--margin-bottom-50">
-        {paymentLoading && this._renderPaymentRequest()}
+        {loading && <Loader/>}
         {cartRecordsRequest.get('totalPrice') > 0 ?  
             <div>
                 <span className="invoice-title mb-5">
@@ -194,24 +174,21 @@ class Checkout extends Component {
                     </Trans>
                 </span>
                 {[
-                    <Shipping onDataSaved={(params) => this._stepShipping(params)} data={this.state.shippingAddress} />,                    
+                    <Shipping onDataSaved={(params) => this._setShipping(params)} data={this.state.shippingAddress} />,                    
                     <div>
                         {showCreditCard ? 
                             <CreditCard 
-                                onDataSaved={() => this._handleFinish()} 
+                                onDataSaved={(params) => this._makeCreditCardPayment(params)} 
                                 goBack={() => this._handleBack()} 
-                                paymentAmount={cartRecordsRequest.get('totalPrice')} 
-                                shippingAddress={this.state.shippingAddress} 
-                                billingAddress={this.state.billingAddress} /> 
+                                errors={creditCardRequest.get('errors')} /> 
                             : 
                             <Billing 
-                                onDataSaved={(params) => this._stepBilling(params)} 
+                                onDataSaved={(params) => this._setBilling(params)} 
                                 goBack={() => this._handleBack()} 
                                 shippingAddress={this.state.shippingAddress} 
                                 billingAddress={this.state.billingAddress} />
                         }
-                    </div>, 
-                    <PaymentSuccessContainer/>
+                    </div>
                 ][stepIndex]}
             </div>
         : 
@@ -226,9 +203,9 @@ class Checkout extends Component {
         }
         </div>;
   }
-
+  
   render() {
-    const { stepIndex, forceFinish } = this.state;
+    const { stepIndex } = this.state;
     const { t } = this.props;
     return (      
         <div className='row-14 d-flex justify-content-center m--margin-top-30'>
@@ -248,7 +225,7 @@ class Checkout extends Component {
                 </Stepper>
                 <div className="row d-flex justify-content-center">
                   <div className='col-10'>
-                    {forceFinish ? <PaymentSuccessContainer/> : this._renderCheckoutSteps(stepIndex)}
+                    {this._renderCheckoutSteps(stepIndex)}
                   </div>
                 </div>
             </div>
@@ -264,14 +241,18 @@ Checkout = connect(
     cartRecordsRequest: selectGetCartRecordsRequest(state),
     addressesRequest: selectAddressesRequest(state),
     paypalRequest: selectCreatePayPalPaymentRequest(state),
-    checkRequest: selectCreateCheckPaymentRequest(state)    
+    checkRequest: selectCreateCheckPaymentRequest(state),
+    creditCardRequest: selectCreateCreditCardPaymentRequest(state)    
   }),
   (dispatch) => ({
-    getCartRecords:         () => {dispatch(getCartRecords())},
-    getAddresses:           () => {dispatch(getAddresses())},
-    createPayPalPayment:    (data) => {dispatch(createPayPalPayment(data))},
-    createCheckPayment:     (data) => {dispatch(createCheckPayment(data))},    
-    goToFailPage:           () => {dispatch(push('/payments/fail'))}
+    getCartRecords:             () => {dispatch(getCartRecords())},
+    getAddresses:               () => {dispatch(getAddresses())},
+    createPayPalPayment:        (data) => {dispatch(createPayPalPayment(data))},
+    createCheckPayment:         (data) => {dispatch(createCheckPayment(data))},
+    createCreditCardPayment:    (data) => dispatch(createCreditCardPayment(data)),
+    resetCreditCardPayment:     () => dispatch(resetCreditCardPayment()),    
+    goToFailPage:               () => {dispatch(push('/payments/fail'))},
+    goToSuccessPage:            (id, hash) => { dispatch(push(`/shopping/checkout/${id}/${hash}`)) },
   })
 )(Checkout);
 

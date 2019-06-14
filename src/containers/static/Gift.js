@@ -140,8 +140,8 @@ class Gift extends Component {
                                 </div>
                                 <div className='row align-items-center'>
                                     <div className="col-sm-12 text-center m--margin-top-35">                                        
-                                        <button disabled={loading} onClick={() => { this._submitCreditCardPayment() }} className="btn btn-info">{t('makePayment')}</button>
-                                        <button disabled={loading} onClick={() => { this._setStep(1) }} className="btn btn-default m--margin-left-10">{t('back')}</button>                                                                  
+                                        <button disabled={loading} onClick={() => { this._setStep(1) }} className="btn btn-default">{t('back')}</button>                                                                  
+                                        <button disabled={loading} onClick={() => { this._submitCreditCardPayment() }} className="btn btn-info m--margin-left-10">{t('makePayment')}</button>
                                     </div>
                                 </div>
                             </div>

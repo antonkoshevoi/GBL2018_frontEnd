@@ -34,8 +34,8 @@ import Store from "../containers/store/Store";
 import Details from "../containers/store/Details";
 import Products from "../containers/store/Products";
 import Checkout from "../containers/store/Checkout";
+import Invoice from "../containers/store/Invoice";
 import PayPalReturnContainer from '../containers/store/payments/PayPalReturnContainer';
-import PaymentSuccessContainer from '../containers/store/payments/PaymentSuccessContainer';
 import PaymentStatusContainer from '../containers/store/payments/PaymentStatusContainer';
 import RestoreLogin from "../containers/auth/RestoreLogin";
 import UnassignedCredits from "../containers/unassigned-credits/UnassignedCredits";
@@ -168,7 +168,8 @@ export default () => (
 
       {/*Store*/}    
       <Route exact layout={MainLayout} path='/store/shopping-cart' title='shoppingCart' component={ShoppingCart}/>
-      <AuthenticatedRoute exact layout={OnlyHeadLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/shopping/checkout/:step?' title='checkout' component={Checkout}/>
+      <Route exact layout={OnlyHeadLayout} path='/shopping/checkout' title='checkout' component={Checkout}/>
+      <Route exact layout={OnlyHeadLayout} path='/shopping/checkout/:invoiceNo?/:hash?' title='checkout' component={Invoice}/>
             
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' title='myProfile' component={Profile} />
@@ -189,7 +190,6 @@ export default () => (
       
       {/*Payments*/}
       <Route exact path='/payments/paypal/return' component={PayPalReturnContainer} />
-      <Route exact layout={MainLayout} path='/payments/success' component={PaymentSuccessContainer} />
       <Route exact layout={MainLayout} path='/payments/fail' render={(props) => <PaymentStatusContainer {...props} status="fail" /> } />
       <Route exact layout={MainLayout} path='/payments/pending' render={(props) => <PaymentStatusContainer {...props} status="pending" /> } />
       <Route exact layout={MainLayout} path='/payments/canceled' render={(props) => <PaymentStatusContainer {...props} status="canceled" /> } />     

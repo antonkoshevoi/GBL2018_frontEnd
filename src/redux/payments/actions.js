@@ -71,10 +71,10 @@ export function createCheckPayment(data) {
 /**
  * Get invoice
  */
-export function getInvoice() {
+export function getInvoice(number, hash) {
   return {
     types: [GET_INVOICE, GET_INVOICE_SUCCESS, GET_INVOICE_FAIL],
-    promise: (apiClient) => apiClient.get(`checkout/invoice`, {})
+    promise: (apiClient) => apiClient.get(`checkout/invoice/${number}/${hash}`, {})
   }
 }
 

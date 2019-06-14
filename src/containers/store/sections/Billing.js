@@ -111,8 +111,7 @@ class Billing extends Component {
                 <Button
                     variant="contained"                    
                     color="primary"
-                    className="ml-2"
-                    disabled={loading}
+                    className="ml-2"                    
                     onClick={this._submit}
                     >
                     {t('nextStep')}

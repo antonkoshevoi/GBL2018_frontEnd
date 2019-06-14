@@ -11219,9 +11219,6 @@ body.m-portlet--fullscreen {
 .m-body .m-content {
   padding: 9px; }
 
-.m-body .m-wrapper {
-  overflow: hidden; }
-
 @media (min-width: 1241px) {
   .m-header--fixed .m-body {
     padding-top: 70px !important; } }

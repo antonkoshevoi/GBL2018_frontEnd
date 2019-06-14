@@ -17,17 +17,20 @@ const initialState = Immutable.fromJS({
   executePayPalPaymentRequest: {
     loading: false,
     success: false,
-    fail: false
+    fail: false,
+    data: {}
   },
   createCheckPaymentRequest: {
     loading: false,
     success: false,
-    fail: false
+    fail: false,
+    data: {}
   },
   createCreditCardPaymentRequest: {
     loading: false,
     success: false,
-    fail: false
+    fail: false,
+    data: {}
   },
   invoiceRequest: {
     loading: false,
@@ -52,6 +55,7 @@ export default function reducer(state = initialState, action) {
     case CREATE_CC_PAYMENT_SUCCESS:
       return state
         .set('createCreditCardPaymentRequest', state.get('createCreditCardPaymentRequest')
+          .set('data', Immutable.fromJS(action.result.data))
           .set('loading', false)
           .set('success', true)          
           .set('errors', null)
@@ -107,6 +111,7 @@ export default function reducer(state = initialState, action) {
     case EXECUTE_PAYPAL_PAYMENT_SUCCESS:
       return state
         .set('executePayPalPaymentRequest', state.get('executePayPalPaymentRequest')
+          .set('data', Immutable.fromJS(action.result.data))
           .set('success', true)
           .set('loading', false)
         );
@@ -126,9 +131,10 @@ export default function reducer(state = initialState, action) {
           .set('success', false)
           .set('fail', false)
         );
-    case CREATE_CHECK_PAYMENT_SUCCESS:
+    case CREATE_CHECK_PAYMENT_SUCCESS:        
       return state
         .set('createCheckPaymentRequest', state.get('createCheckPaymentRequest')
+          .set('data', Immutable.fromJS(action.result.data))
           .set('success', true)
           .set('loading', false)
         );
