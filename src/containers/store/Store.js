@@ -7,6 +7,7 @@ import ProductsSection from "../../components/store/ProductsSection";
 import {selectGetRecordsRequest, selectRecords} from "../../redux/store/selectors";
 import {withRouter} from "react-router-dom";
 import {getRecords} from "../../redux/store/actions";
+import DiscountCode from './sections/DiscountCode';
 import Loader from "../../components/layouts/Loader";
 
 class Store extends Component {
@@ -57,8 +58,8 @@ class Store extends Component {
 
     return (
       <div className="animated fadeInLeft">
-        {loading &&
-        <Loader/>}
+        <DiscountCode />
+        {loading && <Loader/>}
         <div className="m-portlet store-wrapper">
           <div className="m-portlet__head">
             <div className="m-portlet__head-caption">

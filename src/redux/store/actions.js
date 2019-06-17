@@ -40,6 +40,11 @@ export const GET_SHIPPING_BILLING_INFO = '[Store] GET_SHIPPING_BILLING_INFO';
 export const GET_SHIPPING_BILLING_INFO_SUCCESS = '[Store] GET_SHIPPING_BILLING_INFO_SUCCESS';
 export const GET_SHIPPING_BILLING_INFO_FAIL = '[Store] GET_SHIPPING_BILLING_INFO_FAIL';
 
+export const SET_DISCOUNT_CODE = '[Store] SET_DISCOUNT_CODE';
+export const SET_DISCOUNT_CODE_SUCCESS = '[Store] SET_DISCOUNT_CODE_SUCCESS';
+export const SET_DISCOUNT_CODE_FAIL = '[Store] SET_DISCOUNT_CODE_FAIL';
+export const RESET_DISCOUNT_CODE_REQUEST = '[Store] RESET_DISCOUNT_CODE_REQUEST';
+
 export function getRecords(params = {}) {
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
@@ -53,6 +58,21 @@ export function getParentRecords(params = {}) {
     promise: (apiClient) => apiClient.get('store/parent/items', params)
   };
 }
+
+export function setDiscountCode(params = {}) {
+  params.invoiceNo = SessionStorage.get('invoiceNo');
+  return {
+    types: [SET_DISCOUNT_CODE, SET_DISCOUNT_CODE_SUCCESS, SET_DISCOUNT_CODE_FAIL],
+    promise: (apiClient) => apiClient.post('store/set-discount-code', params)
+  };
+}
+
+export function resetDiscountCodeRequest() {
+  return {
+    type: RESET_DISCOUNT_CODE_REQUEST
+  };
+}
+
 
 export function getSingleRecord(id, params = {}) {
   return {
@@ -78,7 +98,8 @@ export function deleteCartRecord(id, params = {}) {
 }
 
 export function addToShoppingCart(id, params = {}) {
-  params.invoiceNo = SessionStorage.get('invoiceNo', {path: '/'});
+  params.invoiceNo    = SessionStorage.get('invoiceNo', {path: '/'});
+  params.discountCode = SessionStorage.get('discountCode', {path: '/'});
   return {
     types: [ADD_TO_CART, ADD_TO_CART_SUCCESS, ADD_TO_CART_FAIL],
     promise: (apiClient) => apiClient.post(`store/add-to-card/${id}`, params)

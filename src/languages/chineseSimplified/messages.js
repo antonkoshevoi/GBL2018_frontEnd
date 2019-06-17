@@ -19,7 +19,8 @@ export default {
     profileUpdated: '已成功更新档案',
     passwordChanged: '已成功更换密码',
     store: {
-        cartAdded: '产品已添加到购物车'
+        cartAdded: '产品已添加到购物车',
+        promocodeAccepted: 'Trank you, your promocode has been accepted!'
     },
     classrooms: {
         assigned: {

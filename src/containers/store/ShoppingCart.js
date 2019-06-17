@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
 import ShoppingCardItems from './sections/ShoppingCardItems';
+import DiscountCode from './sections/DiscountCode';
 
 class ShoppingCart extends Component {
 
@@ -8,6 +9,7 @@ class ShoppingCart extends Component {
         const {t} = this.props;
         return (
             <div className='fadeInLeft animated'>
+                <DiscountCode />
                 <div className="m-portlet m-portlet--full-height">                
                     <div className='m-portlet__head border-b-green'>
                         <div className='m-portlet__head-caption'>

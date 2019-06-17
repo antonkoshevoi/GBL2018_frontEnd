@@ -9,6 +9,7 @@ import Loader from "../../components/layouts/Loader";
 import {Price} from "../../components/ui/Price";
 import {addToShoppingCart, getRecords, getSingleRecord} from "../../redux/store/actions";
 import {selectAddToCartRequest, selectGetRecordsRequest, selectGetSingleRecord, selectGetSingleRecordRequest, selectRecords} from "../../redux/store/selectors";
+import DiscountCode from './sections/DiscountCode';
 import {buildSortersQuery} from "../../helpers/utils";
 import "../../styles/store.css"
 
@@ -76,6 +77,7 @@ class Details extends Component {
 
     return (
       <div className="m-portlet store-wrapper fadeInLeft animated">
+        <DiscountCode />
         {loadingSingle && <Loader/>}
         <div className="m-portlet__head m--margin-bottom-30">
           <div className="m-portlet__head-caption">
@@ -111,7 +113,7 @@ class Details extends Component {
                           </div>
                           <div className="actionsBtn justify-content-end full-width align-items-center d-flex m--padding-right-20 align-self-center">
                             <div className="m--padding-right-20">{record.get('discount') > 0 && <span className="position-relative discount"><span><Price price={price} currency={record.get('currency')} /></span></span>}</div>
-                            <button className="btn m-btn btn-danger m-btn--icon no-border" onClick={() => { this._addToCart(record.get('id')) }}>
+                            <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>
                               <span>
                                 {addToCartRequest.get('success') && <i className="fa floating-basket fa-shopping-basket"></i>}
                                 <span><Price price={discountPrice} currency={record.get('currency')} /></span> <span className="text-uppercase">{t('buy')}</span>

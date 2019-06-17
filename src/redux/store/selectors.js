@@ -97,3 +97,11 @@ export const selectValidateAddressRequest = createSelector(
   selectStoreDomain,
   (subState) => subState.get('validateAddressRequest')
 );
+
+/**
+ * Discount code
+ */
+export const selectDiscountCodeRequest = createSelector(
+  selectStoreDomain,
+  (subState) => subState.get('setDiscountCodeRequest')
+);

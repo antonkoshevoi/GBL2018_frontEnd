@@ -20,7 +20,8 @@ export default {
     profileUpdated: 'Perfil actualizado con éxito',
     passwordChanged: 'Contraseña cambiada con éxito',
     store: {
-        cartAdded: 'Producto Agregado al Carrito'
+        cartAdded: 'Producto Agregado al Carrito',
+        promocodeAccepted: 'Trank you, your promocode has been accepted!'
     },
     classrooms: {
         assigned: {

@@ -20,7 +20,8 @@ export default {
     profileUpdated: '已成功更新檔案',
     passwordChanged: '已成功更換密碼',
     store: {
-        cartAdded: '產品已添加到購物車'
+        cartAdded: '產品已添加到購物車',
+        promocodeAccepted: 'Trank you, your promocode has been accepted!'
     },
     classrooms: {
         assigned: {

@@ -10,7 +10,8 @@ import {
   UPDATE_ITEM_QUANTITY_SUCCESS,  
   GET_RECORDS_PARENT, GET_RECORDS_PARENT_FAIL, GET_RECORDS_PARENT_SUCCESS, 
   GET_SHIPPING_BILLING_INFO, GET_SHIPPING_BILLING_INFO_FAIL, GET_SHIPPING_BILLING_INFO_SUCCESS,
-  VALIDATE_ADDRESS, VALIDATE_ADDRESS_SUCCESS, VALIDATE_ADDRESS_FAIL, RESET_VALIDATE_ADDRESS_REQUEST
+  VALIDATE_ADDRESS, VALIDATE_ADDRESS_SUCCESS, VALIDATE_ADDRESS_FAIL, RESET_VALIDATE_ADDRESS_REQUEST,
+  SET_DISCOUNT_CODE, SET_DISCOUNT_CODE_SUCCESS, SET_DISCOUNT_CODE_FAIL, RESET_DISCOUNT_CODE_REQUEST
 } from './actions';
 
 import Immutable from 'immutable';
@@ -64,10 +65,17 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorResponse: null
   },
- validateAddressRequest: {
+  validateAddressRequest: {
     loading: false,
     success: false,
     fail: false,
+    errorResponse: null
+  },
+  setDiscountCodeRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    discountCode: null,
     errorResponse: null
   },    
   addressesRequest: {
@@ -90,8 +98,10 @@ const initialState = Immutable.fromJS({
 });
 
 function updateCartState(state, data) {
-    SessionStorage.set('invoiceNo', data.invoiceNo, {path: '/'});
-    
+    if (data.invoiceNo) {
+        SessionStorage.set('invoiceNo', data.invoiceNo, {path: '/'});
+    }
+        
     return state.set('getCartRecordsRequest', 
         state.get('getCartRecordsRequest')
           .set('success', true)
@@ -293,6 +303,21 @@ export default function reducer(state = initialState, action) {
       return state
         .set('validateAddressRequest', initialState.get('validateAddressRequest'));
 
+    case SET_DISCOUNT_CODE:
+      return state.set('setDiscountCodeRequest', initialState.get('setDiscountCodeRequest').set('loading', true));
+    case SET_DISCOUNT_CODE_SUCCESS:
+        console.log(action.result.data.discountCode);
+      SessionStorage.set('discountCode', action.result.data.discountCode, {path: '/'});
+      return updateCartState(state, action.result.data)
+              .set('setDiscountCodeRequest', initialState.get('setDiscountCodeRequest').set('success', true));
+    case SET_DISCOUNT_CODE_FAIL:      
+      return state
+        .set('setDiscountCodeRequest', initialState.get('setDiscountCodeRequest')          
+          .set('fail', true)
+          .set('errors', Immutable.fromJS(action.error.response.data.errors))
+        );
+    case RESET_DISCOUNT_CODE_REQUEST: 
+      return state.set('setDiscountCodeRequest', initialState.get('setDiscountCodeRequest'));
     /**
      * default
      */

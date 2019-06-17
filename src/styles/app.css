@@ -1300,6 +1300,16 @@ td.rotate div span {
     max-width: 165px;
     margin-top: 3px;
 }
+.promocode-block {
+    background-color: #f79226;
+    text-align: right;
+    font-size: 1.25rem;
+    color: #ffffff;
+}
+.promocode-block span {
+    cursor: pointer;
+}
+
 @media (min-width: 1240px) {
     .m--visible-desktop-lg {
         display: block !important; }
