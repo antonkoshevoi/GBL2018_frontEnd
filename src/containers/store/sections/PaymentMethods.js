@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {withTranslation} from 'react-i18next';
-import {CircularProgress} from '@material-ui/core';
 
 class PaymentMethods extends Component {
   static propTypes = {
