@@ -68,7 +68,7 @@ class Summary extends Component {
                             <strong>{t('discount')}</strong>
                         </div>
                         <div className="col-4 text-right">
-                            <strong className="text-nowrap m--font-danger"><Price price={data.discount} currency={data.currency} /></strong>
+                            <strong className="text-nowrap m--font-danger"><Price price={data.discountAmount} currency={data.currency} /></strong>
                         </div>
                     </div>
                     <div className="row my-2">
