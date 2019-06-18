@@ -20,7 +20,8 @@ export default {
     profileUpdated: '프로필이 업데이트 되었습니다',
     passwordChanged: '비밀번호를 변경하였습니다',
     store: {
-        cartAdded: '물품을 장바구니에 담았습니다'
+        cartAdded: '물품을 장바구니에 담았습니다',
+        promocodeAccepted: 'Trank you, your promocode has been accepted!'
     },
     classrooms: {
         assigned: {

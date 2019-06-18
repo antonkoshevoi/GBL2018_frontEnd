@@ -12,6 +12,7 @@ import {getAddresses} from "../../redux/store/actions";
 import {Step, StepLabel, Stepper, CircularProgress} from '@material-ui/core';
 import Shipping from "./sections/Shipping";
 import Billing from "./sections/Billing";
+import Summary from "./sections/Summary";
 import CreditCard from "./sections/CreditCard";
 import Loader from "../../components/layouts/Loader";
 
@@ -167,29 +168,36 @@ class Checkout extends Component {
         {loading && <Loader/>}
         {cartRecordsRequest.get('totalPrice') > 0 ?  
             <div>
-                <span className="invoice-title mb-5">
+                <div className="invoice-title mb-5 d-none b-sm-block">
                     <Trans i18nKey="translations:yourInvoice">
                         <span className="m--font-bolder">{{invoiceNo: cartRecordsRequest.get('invoiceNo')}}</span>
                         <span className="m--font-bolder">{{invoiceAmount: ('$' + cartRecordsRequest.get('totalPrice').toFixed(2) + ' ' + cartRecordsRequest.get('currency'))}}</span>
                     </Trans>
-                </span>
-                {[
-                    <Shipping onDataSaved={(params) => this._setShipping(params)} data={this.state.shippingAddress} />,                    
-                    <div>
-                        {showCreditCard ? 
-                            <CreditCard 
-                                onDataSaved={(params) => this._makeCreditCardPayment(params)} 
-                                goBack={() => this._handleBack()} 
-                                errors={creditCardRequest.get('errors')} /> 
-                            : 
-                            <Billing 
-                                onDataSaved={(params) => this._setBilling(params)} 
-                                goBack={() => this._handleBack()} 
-                                shippingAddress={this.state.shippingAddress} 
-                                billingAddress={this.state.billingAddress} />
-                        }
+                </div>
+                <div className="row">
+                    <div className="col-12 col-sm-6 col-md-7 col-xl-6 mx-auto order-1 order-sm-0">
+                    {[
+                        <Shipping onDataSaved={(params) => this._setShipping(params)} data={this.state.shippingAddress} />,                    
+                        <div>
+                            {showCreditCard ? 
+                                <CreditCard 
+                                    onDataSaved={(params) => this._makeCreditCardPayment(params)} 
+                                    goBack={() => this._handleBack()} 
+                                    errors={creditCardRequest.get('errors')} /> 
+                                : 
+                                <Billing 
+                                    onDataSaved={(params) => this._setBilling(params)} 
+                                    goBack={() => this._handleBack()} 
+                                    shippingAddress={this.state.shippingAddress} 
+                                    billingAddress={this.state.billingAddress} />
+                            }
+                        </div>
+                    ][stepIndex]}
                     </div>
-                ][stepIndex]}
+                    <div className="col-12 col-sm-6 col-md-5 order-0 order-sm-1">
+                        <Summary data={cartRecordsRequest.toJS()} />
+                    </div>
+                </div>
             </div>
         : 
             <div>
@@ -223,8 +231,8 @@ class Checkout extends Component {
                     <StepLabel>{t('confirmation')}</StepLabel>
                   </Step>
                 </Stepper>
-                <div className="row d-flex justify-content-center">
-                  <div className='col-10'>
+                <div className="row">
+                  <div className='col-12'>
                     {this._renderCheckoutSteps(stepIndex)}
                   </div>
                 </div>

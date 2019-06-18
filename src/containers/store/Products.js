@@ -49,9 +49,8 @@ class Products extends Component {
     const {isFiltered} = this.state;
 
     return (
-      <div className="animated fadeInLeft">
-        {loading &&
-        <Loader/>}
+      <div className="animated fadeInLeft">        
+        {loading && <Loader/>}
         <div className="m-portlet store-wrapper">
           <div className="m-portlet__head">
             <div className="m-portlet__head-caption">

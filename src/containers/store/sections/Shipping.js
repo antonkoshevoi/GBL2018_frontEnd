@@ -42,8 +42,7 @@ class Shipping extends Component {
         return (
             <form action="">
                 {loading && <Loader/>}    
-                <div className="row">
-                    <div className="col-12 col-sm-10 col-md-8 col-lg-6 m-auto"> 
+                <div className="text-center">
                         <Address
                             title={t('shipping')}
                             onChange={(form) => this._handleForm(form)}
@@ -51,9 +50,8 @@ class Shipping extends Component {
                             errors={errors}
                             form={this.state.address}                  
                         />
-                    </div>
                 </div>
-                <div className="d-flex justify-content-center">
+                <div className="text-center">
                     <Button
                         variant="contained"
                         color="primary"    

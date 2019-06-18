@@ -20,7 +20,8 @@ export default {
     profileUpdated: 'Profile succesfully updated',
     passwordChanged: 'Password changed succesfully',
     store: {
-        cartAdded: 'Product Added to Cart'
+        cartAdded: 'Product Added to Cart',
+        promocodeAccepted: 'Trank you, your promocode has been accepted!'
     },
     classrooms: {
         assigned: {

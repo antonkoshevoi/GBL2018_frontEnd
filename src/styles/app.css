@@ -26,6 +26,9 @@ textarea {
 .flex-grow-1 {
     flex-grow: 1;
 }
+.mx-auto {
+    margin: 0 auto !important;
+}
 .g-red {
     color: #D2322D !important;
 }
@@ -1300,6 +1303,13 @@ td.rotate div span {
     max-width: 165px;
     margin-top: 3px;
 }
+.promocode-block {        
+    font-size: 1.25rem;    
+}
+.promocode-block span {
+    cursor: pointer;
+}
+
 @media (min-width: 1240px) {
     .m--visible-desktop-lg {
         display: block !important; }

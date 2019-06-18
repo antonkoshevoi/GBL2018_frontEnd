@@ -63,8 +63,8 @@ class Address extends Component {
               <legend className='m--margin-bottom-10'>{t('contactInformation', {title: title})}</legend>
               <div className='m-form__section m-form__section--first'>
                 <div className="form-group m-form__group row">
-                  <label className="col-form-label col-lg-3 col-sm-12">{t('firstName')}</label>
-                  <div className="col-lg-9 col-md-9 col-sm-12">
+                  <label className="col-form-label col-lg-3 col-12">{t('firstName')}</label>
+                  <div className="col-lg-9 col-12">
                     <input
                       required
                       disabled={disabled}
@@ -83,8 +83,8 @@ class Address extends Component {
               </div>
               <div className='m-form__section m-form__section--first'>
                 <div className="form-group m-form__group row">
-                  <label className="col-form-label col-lg-3 col-sm-12">{t('lastName')}</label>
-                  <div className="col-lg-9 col-md-9 col-sm-12">
+                  <label className="col-form-label col-lg-3 col-12">{t('lastName')}</label>
+                  <div className="col-lg-9 col-12">
                     <input
                       required
                       disabled={disabled}
@@ -103,8 +103,8 @@ class Address extends Component {
               </div>
               <div className='m-form__section m-form__section--first'>
                 <div className="form-group m-form__group row">
-                  <label className="col-form-label col-lg-3 col-sm-12">{t('email')}</label>
-                  <div className="col-lg-9 col-md-9 col-sm-12">
+                  <label className="col-form-label col-lg-3 col-12">{t('email')}</label>
+                  <div className="col-lg-9 col-12">
                     <input
                       required
                       disabled={disabled}
@@ -112,7 +112,7 @@ class Address extends Component {
                       name='email'
                       onChange={(e) => {this._handleInputChange(e)}}
                       type='email'
-                      className='form-control m-input m-input--air '
+                      className='form-control m-input m-input--air'
                       placeholder=''/>
                     <div className='form-control-feedback'>
                       {errors && errors.get(`email`) &&
@@ -124,8 +124,8 @@ class Address extends Component {
 
               <div className='m-form__section m-form__section--first'>
                 <div className="form-group m-form__group row">
-                  <label className="col-form-label col-lg-3 col-sm-12">{t('telephone')}</label>
-                  <div className="col-lg-9 col-md-9 col-sm-12">
+                  <label className="col-form-label col-lg-3 col-12">{t('telephone')}</label>
+                  <div className="col-lg-9 col-12">
                     <input
                       required
                       disabled={disabled}
@@ -147,8 +147,8 @@ class Address extends Component {
             <legend className='m--margin-bottom-10'>{t('contactAddress', {title: title})}</legend>
             <address className='m-form__section m-form__section--first signUpOptional'>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">{t('addressLine1')}</label>
-                <div className="col-lg-8 col-md-9 col-sm-12">
+                <label className="col-form-label col-lg-3 col-12">{t('addressLine1')}</label>
+                <div className="col-lg-9 col-12">
                   <input
                     disabled={disabled}
                     value={form.addressLine1 || ''}
@@ -164,8 +164,8 @@ class Address extends Component {
                 </div>
               </div>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">{t('addressLine2')}</label>
-                <div className="col-lg-8 col-md-9 col-sm-12">
+                <label className="col-form-label col-lg-3 col-12">{t('addressLine2')}</label>
+                <div className="col-lg-9 col-12">
                   <input
                     disabled={disabled}
                     value={form.addressLine2 || ''}
@@ -183,8 +183,8 @@ class Address extends Component {
                 </div>
               </div>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">{t('city')}</label>
-                <div className="col-lg-8 col-md-9 col-sm-12">
+                <label className="col-form-label col-lg-3 col-12">{t('city')}</label>
+                <div className="col-lg-9 col-12">
                   <input
                     disabled={disabled}
                     value={form.city || ''}
@@ -202,8 +202,8 @@ class Address extends Component {
                 </div>
               </div>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">{t('stateOrProvince')}</label>
-                <div className="col-lg-8 col-md-9 col-sm-12">
+                <label className="col-form-label col-lg-3 col-12">{t('stateOrProvince')}</label>
+                <div className="col-lg-9 col-12">
                   <input
                     disabled={disabled}
                     value={form.region || ''}
@@ -221,8 +221,8 @@ class Address extends Component {
                 </div>
               </div>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">{t('postalOrZipCode')}</label>
-                <div className="col-lg-8 col-md-9 col-sm-12">
+                <label className="col-form-label col-lg-3 col-12">{t('postalOrZipCode')}</label>
+                <div className="col-lg-9 col-12">
                   <input
                     disabled={disabled}
                     value={form.zip || ''}
@@ -240,8 +240,8 @@ class Address extends Component {
                 </div>
               </div>
               <div className="form-group m-form__group row">
-                <label className="col-form-label col-lg-3 col-sm-12">{t('country')}</label>
-                <div className="col-lg-8 col-md-9 col-sm-12">
+                <label className="col-form-label col-lg-3 col-12">{t('country')}</label>
+                <div className="col-lg-9 col-12">
                   <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
                     <FormControl>
                       <Select

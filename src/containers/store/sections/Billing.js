@@ -43,9 +43,7 @@ class Billing extends Component {
     }    
 
     _submit = () => {
-        if (this.props.validateAddressRequest.get('success')) {
-            this.props.validateAddress(this.state.billingAddress);
-        }
+        this.props.validateAddress(this.state.billingAddress);
     }
     
     _setPaymentMethod(value) {
@@ -76,32 +74,30 @@ class Billing extends Component {
         const errors    = validateAddressRequest.get('errors');
         
         return <form action="">
-            {loading && <Loader/>}    
-            <div className="row">
-                <div className="col-12 col-sm-10 col-md-8 col-lg-6 m-auto">
-                    <div className="order-2 order-md-1 offset-md-6 col-md-6 col-sm-12">                
-                        <FormControlLabel
-                          label={t('sameBillingInformation')}
-                          control={
-                            <Checkbox
-                              color="primary"
-                              checked={sameShipping}
-                              onChange={(e) => this._handleSameShipping(e)}
-                            />
-                          }
+            {loading && <Loader/>}
+            <div>
+                <div className="d-flex justify-content-center">                
+                    <FormControlLabel
+                      label={t('sameBillingInformation')}
+                      control={
+                        <Checkbox
+                          color="primary"
+                          checked={sameShipping}
+                          onChange={(e) => this._handleSameShipping(e)}
                         />
-                    </div>                
-                    <Address
-                        title={t('billing')}
-                        onChange={(form) => this._handleForm(form)}
-                        name='billingAddress'
-                        disabled={sameShipping}
-                        errors={errors}
-                        form={this.state.billingAddress}                  
+                      }
                     />
-                </div>
-            </div>
-            <div className="d-flex justify-content-center">
+                </div>                
+                <Address
+                    title={t('billing')}
+                    onChange={(form) => this._handleForm(form)}
+                    name='billingAddress'
+                    disabled={sameShipping}
+                    errors={errors}
+                    form={this.state.billingAddress}                  
+                />
+            </div>            
+            <div className="text-center">
                 <Button                                          
                     variant="contained"
                     onClick={() => this._setPaymentMethod(null)}

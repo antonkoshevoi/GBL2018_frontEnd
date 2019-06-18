@@ -111,7 +111,7 @@ class Details extends Component {
                           </div>
                           <div className="actionsBtn justify-content-end full-width align-items-center d-flex m--padding-right-20 align-self-center">
                             <div className="m--padding-right-20">{record.get('discount') > 0 && <span className="position-relative discount"><span><Price price={price} currency={record.get('currency')} /></span></span>}</div>
-                            <button className="btn m-btn btn-danger m-btn--icon no-border" onClick={() => { this._addToCart(record.get('id')) }}>
+                            <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>
                               <span>
                                 {addToCartRequest.get('success') && <i className="fa floating-basket fa-shopping-basket"></i>}
                                 <span><Price price={discountPrice} currency={record.get('currency')} /></span> <span className="text-uppercase">{t('buy')}</span>

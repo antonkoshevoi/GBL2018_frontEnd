@@ -43,6 +43,7 @@ export const destroySession = () => {
     path: '/'
   };
   SessionStorage.remove('invoiceNo', options);
+  SessionStorage.remove('discountCode', options);
   SessionStorage.remove('token', options);
   SessionStorage.remove('tokenExpiresAt', options);
   SessionStorage.remove('refreshToken', options);
