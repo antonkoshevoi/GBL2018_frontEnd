@@ -20,7 +20,7 @@ class Summary extends Component {
             <div key={key} className="row">
                 <div className="col-8">
                     <div>
-                        <strong>{item.storeItem.title}</strong>
+                        <strong>{item.title}</strong>
                     </div>
                     <span className="text-muted">
                         {item.count} {t('items')}

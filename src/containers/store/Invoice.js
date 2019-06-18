@@ -94,7 +94,34 @@ class Invoice extends Component {
                         <div>
                             {this._renderItems(invoice)}
                             <hr />
-                            <div className="row">
+                            {invoice.get('discount') &&
+                            <div className="row my-2">
+                                <div className="col-6 text-center">
+                                    <strong>{t('subtotal')}</strong>
+                                </div>
+                                <div className="col-6 text-center align-self-center">
+                                    <strong className="text-nowrap m--font-danger"><Price price={invoice.get('sub_total')} currency={invoice.get('currency')} /></strong>
+                                </div>
+                            </div>}
+                            {invoice.get('discount_code') &&
+                            <div className="row my-2">
+                                <div className="col-6 text-center">
+                                    <strong>{t('promocode')}</strong>
+                                </div>
+                                <div className="col-6 text-center align-self-center">
+                                    <strong className="text-nowrap m--font-danger">{invoice.get('discount_code')}</strong>
+                                </div>
+                            </div>}
+                            {invoice.get('discount') &&
+                            <div className="row my-2">
+                                <div className="col-6 text-center">
+                                    <strong>{t('discount')}</strong>
+                                </div>
+                                <div className="col-6 text-center align-self-center">
+                                    <strong className="text-nowrap m--font-danger"><Price price={invoice.get('discount')} currency={invoice.get('currency')} /></strong>
+                                </div>
+                            </div>}
+                            <div className="row my-2">
                                 <div className="col-6 text-center">
                                     <strong>{t('Total')}</strong>
                                 </div>

@@ -57,14 +57,14 @@ class ShoppingCardItems extends Component {
         
         return <div className="productInfo">
             <div className="user-avatar">
-                <img src={item.storeItem.thumbnail} className="img-responsive" alt=""/>
+                <img src={item.thumbnail} className="img-responsive" alt=""/>
             </div>
             <div>
-                <NavLink to={`/store/details/${item.storeItem.id}`}><h5>{item.storeItem.title}</h5></NavLink>
-                <p>{preview ? (item.storeItem.description.substr(0, 50) + '...') : item.storeItem.description}</p>                
+                <NavLink to={`/store/details/${item.storeItemId}`}><h5>{item.title}</h5></NavLink>
+                <p>{preview ? (item.description.substr(0, 50) + '...') : item.description}</p>                
                 <DeleteButton
                     onClick={() => this._deleteItem(item.id)}
-                    title={t('deleteItemFromCartConfirmation', {item: item.storeItem.title})}
+                    title={t('deleteItemFromCartConfirmation', {item: item.title})}
                     icon={false}
                     btnName={t('delete')}
                     className="g-blue btn-link"
@@ -89,7 +89,7 @@ class ShoppingCardItems extends Component {
                 </Td>            
                 <Td>                                            
                     <div className="m--margin-top-5 m--margin-bottom-10">
-                        <Price price={item.storeItem.discountPrice} currency={item.storeItem.currency} />              
+                        <Price price={item.discountPrice} currency={item.currency} />              
                     </div>              
                     <div className="m--margin-top-5 m--margin-bottom-10">
                         {!item.isInvoice ? countInput : <span className="productLabel">{item.count}</span>}                    
@@ -113,20 +113,20 @@ class ShoppingCardItems extends Component {
                 </Td>
                 <Td width='100px'>
                     <div className="productPrice productLabel">
-                        {item.storeItem.discount > 0 &&
+                        {item.discount > 0 &&
                             <div>
-                                <Price price={item.storeItem.price} currency={item.storeItem.currency} />
+                                <Price price={item.price} currency={item.currency} />
                                 <span className="discount"></span>
                             </div>
                         }              
                         <div className="price productLabel">
-                            <Price price={item.storeItem.discountPrice} currency={item.storeItem.currency} />                
+                            <Price price={item.discountPrice} currency={item.currency} />                
                         </div>
                     </div>
                 </Td>
                 <Td width='100px'>
                     <span className="productPrice productLabel">
-                        <Price price={(item.storeItem.discountPrice * item.count)} currency={item.storeItem.currency} />
+                        <Price price={(item.discountPrice * item.count)} currency={item.currency} />
                     </span>
                 </Td>
             </Row>                                
@@ -224,7 +224,7 @@ ShoppingCardItems = connect(
   (dispatch) => ({
     getRecords: () => { dispatch(getCartRecords()) },
     deleteCartRecord: (id) => { dispatch(deleteCartRecord(id)) },        
-    setQuantity: (data) => { dispatch(setItemQuantity(data))  },
+    setQuantity: (data) => { dispatch(setItemQuantity(data)) }
   })
 )(ShoppingCardItems);
 
