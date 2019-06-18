@@ -16,6 +16,16 @@ class Address extends Component {
       this.props.countries();
     }
   }
+  
+    componentWillReceiveProps(nextProps){
+        if (nextProps.form) {
+            this.setState({
+                form: {
+                  ...nextProps.form
+                }
+            });
+        }
+    }    
     
   componentDidMount() {
     const {form} = this.props;

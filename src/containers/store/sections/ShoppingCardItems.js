@@ -142,6 +142,18 @@ class ShoppingCardItems extends Component {
                     <h4 className="m--margin-left-15">{t('itemsCount', {count: cartRecordsRequest.get('records').size})}</h4>
                 </div>
                 <div className="col-sm-5 text-right">
+                    {(cartRecordsRequest.get('discountAmount') > 0) && <div className="m--margin-right-15">
+                        <span>{t('subtotal')}</span><br/>
+                        <span className="display-6 text-dark">
+                            <Price price={cartRecordsRequest.get('subTotalPrice')} currency={cartRecordsRequest.get('currency')} />  
+                        </span>
+                    </div>}
+                    {(cartRecordsRequest.get('discountAmount') > 0) && <div className="m--margin-right-15">
+                        <span>{t('discount')}</span><br/>
+                        <span className="display-6 text-dark">
+                            <Price price={cartRecordsRequest.get('discountAmount')} currency={cartRecordsRequest.get('currency')} />  
+                        </span>
+                    </div>}
                     <div className="m--margin-right-15">
                         <span>{t('total')}</span><br/>
                         <span className="productPrice">
