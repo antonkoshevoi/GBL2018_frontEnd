@@ -7,7 +7,6 @@ import ProductsSection from "../../components/store/ProductsSection";
 import {selectGetRecordsRequest, selectRecords} from "../../redux/store/selectors";
 import {withRouter} from "react-router-dom";
 import {getRecords} from "../../redux/store/actions";
-import DiscountCode from './sections/DiscountCode';
 import Loader from "../../components/layouts/Loader";
 
 class Store extends Component {
@@ -42,7 +41,7 @@ class Store extends Component {
     return (
       <div className="notFountMessage">
         <div className="display-1 text-center">
-          <i className="la g-red	la-times-circle"></i>
+          <i className="la g-red la-times-circle"></i>
           <h1>{t('productsNotFound')}</h1>
         </div>
       </div>
@@ -57,8 +56,7 @@ class Store extends Component {
     const {isFiltered} = this.state;      
 
     return (
-      <div className="animated fadeInLeft">
-        <DiscountCode />
+      <div className="animated fadeInLeft">        
         {loading && <Loader/>}
         <div className="m-portlet store-wrapper">
           <div className="m-portlet__head">

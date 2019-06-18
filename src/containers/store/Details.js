@@ -9,7 +9,6 @@ import Loader from "../../components/layouts/Loader";
 import {Price} from "../../components/ui/Price";
 import {addToShoppingCart, getRecords, getSingleRecord} from "../../redux/store/actions";
 import {selectAddToCartRequest, selectGetRecordsRequest, selectGetSingleRecord, selectGetSingleRecordRequest, selectRecords} from "../../redux/store/selectors";
-import DiscountCode from './sections/DiscountCode';
 import {buildSortersQuery} from "../../helpers/utils";
 import "../../styles/store.css"
 
@@ -77,7 +76,6 @@ class Details extends Component {
 
     return (
       <div className="m-portlet store-wrapper fadeInLeft animated">
-        <DiscountCode />
         {loadingSingle && <Loader/>}
         <div className="m-portlet__head m--margin-bottom-30">
           <div className="m-portlet__head-caption">

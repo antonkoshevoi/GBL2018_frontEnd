@@ -7,7 +7,6 @@ import Filter from "../../components/store/Filter";
 import {withRouter} from "react-router-dom";
 import {getRecords} from "../../redux/store/actions";
 import {selectGetRecordsRequest, selectRecords} from "../../redux/store/selectors";
-import DiscountCode from './sections/DiscountCode';
 import Loader from "../../components/layouts/Loader";
 
 class Products extends Component {
@@ -50,8 +49,7 @@ class Products extends Component {
     const {isFiltered} = this.state;
 
     return (
-      <div className="animated fadeInLeft">
-        <DiscountCode />
+      <div className="animated fadeInLeft">        
         {loading && <Loader/>}
         <div className="m-portlet store-wrapper">
           <div className="m-portlet__head">

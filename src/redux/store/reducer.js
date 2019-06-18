@@ -43,8 +43,11 @@ const initialState = Immutable.fromJS({
     fail: false,
     records: Immutable.List(),
     totalPrice: 0,
+    subTotalPrice: 0,
+    discount: 0,
     invoiceNo: '',
     currency: '',
+    discountCode: null,
     errorResponse: null
   },
   addToCartRequest: {
@@ -109,6 +112,9 @@ function updateCartState(state, data) {
           .set('invoiceNo', data.invoiceNo)
           .set('currency', data.currency)
           .set('totalPrice', data.totalPrice)
+          .set('subTotalPrice', data.subTotalPrice)
+          .set('discountAmount', data.discount)
+          .set('discountCode', data.discountCode)
           .remove('loading')
     ).set('itemsCount', Immutable.fromJS(data.items).size);            
 }

@@ -117,8 +117,8 @@ class DiscountCode extends Component {
     render() {
         const {t} = this.props;
         
-        return <div className="py-2 pr-4 promocode-block">
-            <span onClick={() => this._openModal()}>{t('gotPromocode')}</span>
+        return <div className="py-2 promocode-block d-flex align-items-center">
+            <span className="fa fa-ticket display-5 mr-2"></span> <span onClick={() => this._openModal()}>{t('gotPromocode')}</span>
             {this._renderModal()}
         </div>;
     }

@@ -29,10 +29,9 @@ class CreditCard extends Component {
         const years = Array.from(Array(10), (_,x) => (new Date().getFullYear() + x));
         const { errors, t} = this.props;
                 
-        return (
-            <div className="row">
-                <div className="col-sm-12 col-md-10 col-lg-8 m-auto">                    
-                    <legend className='m--margin-bottom-10'>{t('creditCard')}</legend>
+        return (            
+                <div>                    
+                    <legend className='m--margin-bottom-10 text-center'>{t('creditCard')}</legend>
                     <div className='m-form__section m-form__section--first'>
                       <div className="form-group m-form__group row">
                         <label className="col-form-label col-md-3 col-lg-3 col-sm-12">{t('creditCardNumber')} </label>
@@ -163,8 +162,7 @@ class CreditCard extends Component {
                         {t('makePayment')}
                       </Button>
                     </div>  
-                </div>
-            </div>
+                </div>            
         );
     }
 }

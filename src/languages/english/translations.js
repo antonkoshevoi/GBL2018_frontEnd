@@ -647,5 +647,8 @@ export default {
     promocode: 'Promocode',
     enterPromocode: 'Enter your promocode here',
     gotPromocode: 'Got Promo code?',
-    apply: 'Apply'
+    apply: 'Apply',
+    subtotal: 'Subtotal',
+    discount: 'Discount',
+    paymentMethod: 'Payment Method'
 }
