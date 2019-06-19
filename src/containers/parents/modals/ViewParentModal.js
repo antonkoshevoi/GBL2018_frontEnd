@@ -23,16 +23,12 @@ class ViewParentModal extends Component {
         const {t} = this.props;                
         
         return (<div className="row">
-            <div className="col-lg-4">
-                <div className="m-card-profile">
-                    <div className="m-card-profile__pic">
-                        <div className="m-card-profile__pic-wrapper">
-                            <img src={parent.avatar} alt=""/>
-                        </div>
-                    </div>
+            <div className="col-lg-4 col-xl-5">                                     
+                <div className="m-4 m-xl-5 text-center">
+                  <img className="rounded-circle img-thumbnail" src={parent.avatar} alt=""/>
                 </div>          
             </div>
-            <div className="col-lg-6 m-auto">
+            <div className="col-lg-8 col-xl-7">
             {parent.accepted &&
                 <TabContainer>                    
                     <div className="m-widget1 m-widget1--paddingless">
@@ -175,7 +171,7 @@ class ViewParentModal extends Component {
     render() {
         const {t, data, isOpen} = this.props;        
         return (
-            <Modal bigger={true} isOpen={isOpen} onClose={() => this._close()}>
+            <Modal middle={true} isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>                             
                         <Icon className="m--margin-right-15">person</Icon>

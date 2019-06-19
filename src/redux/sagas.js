@@ -19,6 +19,7 @@ import studentParentsSagas from './student-parents/sagas';
 import connectionsSagas from './connections/sagas';
 import courseCreditsSagas from './course-credits/sagas';
 import giftsSagas from './gifts/sagas';
+import paymentsSagas from './payments/sagas';
 
 function* rootSaga () {
   yield all([
@@ -41,6 +42,7 @@ function* rootSaga () {
     studentParentsSagas,
     connectionsSagas,
     courseCreditsSagas,
+    paymentsSagas,
     giftsSagas
   ])
 }

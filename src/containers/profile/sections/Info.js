@@ -110,14 +110,14 @@ class Info extends Component {
     return (
       <div className="m-portlet m--margin-bottom-15">
         <div className="m-portlet__body">
-          <div className="m-card-profile">
-            <div className="m-card-profile__details">
-              <span className="m-card-profile__name">{user.name}</span>
-              <span className="m-card-profile__email">{user.username}</span>
+          <div>          
+            <div className="text-center my-4">
+              <h4 className="display-6">{user.name}</h4>
+              <div >{user.username}</div>
             </div>
-            <div className="m-card-profile__pic">
-              <div className="m-card-profile__pic-wrapper">
-                <img src={user.avatar} alt=""/>
+            <div className="text-center">
+              <div className="my-4">
+                <img className="rounded-circle img-thumbnail" src={user.avatar} alt=""/>
               </div>
               <div className="text-center">
                 {changeImageRequest.get('loading') ? (<CircularProgress color="primary"/>) : (<button className="m-btn btn btn-info m--margin-bottom-10" onClick={()=>{this._openUploadModal()}}>{t('uploadAvatar')}</button>)}
@@ -127,7 +127,7 @@ class Info extends Component {
                 </HasRole>
               </div>
             </div>
-          </div>
+          </div>         
         </div>
           
         <Dialog

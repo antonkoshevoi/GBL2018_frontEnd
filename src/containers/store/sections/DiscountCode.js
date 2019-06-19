@@ -18,9 +18,8 @@ class DiscountCode extends Component {
         super(props);
         this.state = {
             isOpen: false,
-            discountCode: SessionStorage.get('discountCode', {path: '/'})
-        }
-        console.log(SessionStorage.get('discountCode'));
+            discountCode: SessionStorage.get('discountCode')
+        }        
     }
     
     componentWillReceiveProps(nextProps) {

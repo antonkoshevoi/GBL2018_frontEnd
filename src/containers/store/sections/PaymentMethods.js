@@ -1,17 +1,30 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {withTranslation} from 'react-i18next';
+import payPalImg from '../../../media/images/payments/paypal.png'
+import creditCardImg from '../../../media/images/payments/credit_card.png'
+import checkImg from '../../../media/images/payments/check.png'
+
+const paymentMethods = [
+    {                
+        method: 'payPal',
+        img: payPalImg
+    },
+    {
+        method: 'creditCard',
+        img: creditCardImg
+    },
+    {                
+        method: 'check',
+        img: checkImg
+    }
+];
 
 class PaymentMethods extends Component {
-  static propTypes = {
-    methods: PropTypes.array.isRequired
-  };
-
   _renderMethods () {
-    const { methods, onSelect, t } = this.props;
+    const { onSelect, t } = this.props;
 
-    return methods.map((method, key) => (
-      <div key={key} className='col-sm-12 col-md-6 col-lg-6 col-xl-4 m-auto' onClick={() => { onSelect(method.method) }}>
+    return paymentMethods.map((method, key) => (
+      <div key={key} className='col-sm-12 col-md-6 col-lg-6 col-xl-6 m-auto' onClick={() => { onSelect(method.method) }}>
         <div className='payments-widgets'>
           <div className='payment-item'>
             <span>

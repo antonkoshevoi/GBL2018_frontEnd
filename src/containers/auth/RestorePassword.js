@@ -51,7 +51,7 @@ class RestorePassword extends Component {
                                 <div className="m-login__head"> 
                                     <h3 className="m-login__title">{t('forgotPassword')}</h3> 
                                 </div> 
-                                <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--bordered-semi m--margin-top-20 m-portlet--full-height ">
+                                <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m--margin-top-20 m-portlet--full-height ">
                                     <div className="m-portlet__body">
                                         <div className="m-form m--margin-top-30 m--margin-bottom-15 m--margin-left-10 m--margin-right-10">            
                                             {resetPasswordRequest.get('success') && <div className="alert alert-success">{t('passwordResetMessage')}</div>}

@@ -7,9 +7,6 @@ import {selectValidateAddressRequest} from "../../../redux/store/selectors";
 import {validateAddress} from "../../../redux/store/actions";
 import PaymentMethods from './PaymentMethods';
 import Loader from "../../../components/layouts/Loader";
-import payPalImg from '../../../media/images/payments/paypal.png'
-import creditCardImg from '../../../media/images/payments/credit_card.png'
-import checkImg from '../../../media/images/payments/check.png'
 
 class Billing extends Component {
 
@@ -120,32 +117,9 @@ class Billing extends Component {
         const {paymentMethod} = this.state;
         const {t} = this.props;
         
-        const paymentMethods = [
-            {                
-                method: 'payPal',
-                img: payPalImg
-            },
-            {
-                method: 'creditCard',
-                img: creditCardImg
-            },
-            {                
-                method: 'check',
-                img: checkImg
-            },
-            {                
-                method: 'wireTransfer',
-                img: checkImg
-            },
-            {                
-                method: 'cog',
-                img: checkImg
-            }
-        ];
-    
         if (!paymentMethod) {
             return <div>
-                <PaymentMethods onSelect={(value) => this._setPaymentMethod(value) } methods={paymentMethods} />
+                <PaymentMethods onSelect={(value) => this._setPaymentMethod(value) } />
                 <div className="text-center mt-5">
                     <Button                                          
                         variant="contained"

@@ -125,7 +125,7 @@ class SignUpPrincipal extends Component {
         {loading && <Loader />}
         <div className="signup-page">
           <div className="m-signup col-sm-12 col-md-10 col-lg-8 col-xl-6 m-auto">
-            <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--borderedm-portlet m-portlet--bordered-semi m--margin-top-40 m-portlet--full-height ">
+            <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m--margin-top-40 m-portlet--full-height ">
               <div className="m-portlet__head">
                 <div className="m-portlet__head-caption">
                   <div className="m-portlet__head-title full-width">
@@ -141,7 +141,7 @@ class SignUpPrincipal extends Component {
                 </div>
               </div>
               <form className="m-portlet__body" onSubmit={(e) => { e.preventDefault(); this._submit(); }}>
-                <div className="alert m-alert m-alert--default m--margin-top-15">
+                <div className="alert m-alert m-alert--default m--margin-top-5">
                   <p className="text-center m-0">                
                     <Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans>
                   </p>

@@ -473,10 +473,6 @@ table.m-middle-table td, table.m-middle-table th {
     vertical-align: middle;
 }
 
-div.m-card-profile .m-card-profile__pic img {
-    max-width: 100% !important;
-}
-
 .btn-icon {
     font-weight: 600;
     margin-left: 10px;
@@ -1337,21 +1333,6 @@ td.rotate div span {
         display: table-cell !important; }
     .m--hidden-desktop-xl {
         display: none !important; } }
-
-.m-card-user.m-card-user--skin .m-card-user__details .m-card-user__name {
-    color: #d9dae3; }
-
-.m-card-user.m-card-user--skin .m-card-user__details .m-card-user__email {
-    color: #bbbee6; }
-
-.m-card-user.m-card-user--skin .m-card-user__details .m-card-user__email:hover {
-    color: #b9bddd; }
-
-.m-card-user.m-card-user--skin .m-card-user__details .m-card-user__email:hover:after {
-    border-bottom: 1px solid #bbbee6;
-    opacity: 0.3 ;
-    filter: alpha(opacity=30) ; }
-
 
 @media (max-width: 1440px) {   
     .table thead tr.active th {
