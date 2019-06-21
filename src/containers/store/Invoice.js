@@ -46,7 +46,7 @@ class Invoice extends Component {
         </div>
         <div className="col-6 text-right align-self-center">
             <strong className="text-nowrap d-block"><Price price={item.get('total_price')} currency={item.get('currency')} /></strong>
-            {(item.get('affiliate_discount') > 0) && <span className="text-nowrap m--font-success d-block">- <Price price={item.get('affiliate_discount')} currency={item.get('affiliate_discount')} /></span>}
+            {(item.get('affiliate_discount') > 0) && <span className="text-nowrap m--font-success d-block">- <Price price={item.get('affiliate_discount')} currency={item.get('currency')} /></span>}
         </div>
       </div>
     ));
