@@ -35,8 +35,8 @@ class Invoice extends Component {
     const {t} = this.props;
     const items = invoice.get('items');
     return items.map((item, key) => (
-      <div key={key} className="row">
-        <div className="col-6 text-center">
+      <div key={key} className="row my-2">
+        <div className="col-6 text-left">
             <div>
                 <strong>{item.get('title')}</strong>
             </div>
@@ -44,8 +44,9 @@ class Invoice extends Component {
                 {item.get('quantity')} {t('items')}
             </span>
         </div>
-        <div className="col-6 text-center align-self-center">
-            <strong className="text-nowrap m--font-danger"><Price price={item.get('total_price')} currency={item.get('currency')} /></strong>
+        <div className="col-6 text-right align-self-center">
+            <strong className="text-nowrap d-block"><Price price={item.get('total_price')} currency={item.get('currency')} /></strong>
+            {(item.get('affiliate_discount') > 0) && <span className="text-nowrap m--font-success d-block">- <Price price={item.get('affiliate_discount')} currency={item.get('affiliate_discount')} /></span>}
         </div>
       </div>
     ));
@@ -56,84 +57,79 @@ class Invoice extends Component {
       const {t} = this.props;
   
       return <div className="col-md-10 m-auto">
-            <span className="invoice-title">
-                <Trans i18nKey="translations:yourInvoice">
-                    <span className="m--font-bolder">{{invoiceNo: invoice.get('invoice_no')}}</span>
-                    <span className="m--font-bolder">{{invoiceAmount: renderToString(<Price price={invoice.get('total')} currency={invoice.get('currency')} />)}}</span>
-                </Trans>
-            </span>        
+        <span className="invoice-title">
+            <Trans i18nKey="translations:yourInvoice">
+                <span className="m--font-bolder">{{invoiceNo: invoice.get('invoice_no')}}</span>
+                <span className="m--font-bolder">{{invoiceAmount: renderToString(<Price price={invoice.get('total')} currency={invoice.get('currency')} />)}}</span>
+            </Trans>
+        </span>
         <div>
             <p className="text-center m--margin-25">
                 <a rel="noopener noreferrer" className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
             </p>
         </div>
         <div className="m-portlet m-portlet--bordered-semi mb-5">
-          <div className="m-portlet__body m--padding-top-25">
-            <div className="col-md-10 m-auto">
-              <div className="row">
-                <div className="col-md-6">
-                  <div>
-                  </div>
-                  <h3 className="m-portlet__head-text">
-                    {t('billTo')}
-                  </h3>
-                  {this._renderAddress(invoice, 'billing')}
-                </div>
-                <div className="col-md-6">
-                  <h3 className="m-portlet__head-text">
-                    {t('shipTo')}
-                  </h3>
-                  {this._renderAddress(invoice, 'shipping')}
-                </div>
-              </div>                            
-                <div className="row my-2">
-                    <div className="col-md-10 m-auto cartItems m--margin-15">
-                        <div>
-                            <span className="invoice-title mb-3">{t('orderDetails')}</span>
+            <div className="m-portlet__body m--padding-top-25">
+                <div className="col-md-10 m-auto">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <h3 className="m-portlet__head-text">{t('billTo')}</h3>
+                            {this._renderAddress(invoice, 'billing')}
                         </div>
-                        <div>
-                            {this._renderItems(invoice)}
-                            <hr />
-                            {invoice.get('discount') &&
-                            <div className="row my-2">
-                                <div className="col-6 text-center">
-                                    <strong>{t('subtotal')}</strong>
+                        <div className="col-md-6">
+                            <h3 className="m-portlet__head-text">{t('shipTo')}</h3>
+                            {this._renderAddress(invoice, 'shipping')}
+                        </div>
+                    </div>
+                    <div className="row my-2">
+                        <div className="col-12">
+                            <div className="my-3">
+                                <span className="invoice-title">{t('orderDetails')}</span>
+                            </div>
+                            <div>
+                                <hr />
+                                {this._renderItems(invoice)}
+                                <hr />
+                                {invoice.get('discount') &&
+                                <div className="row my-2">
+                                    <div className="col-6">
+                                        <strong>{t('subtotal')}</strong>
+                                    </div>
+                                    <div className="col-6 text-right">
+                                        <strong className="text-nowrap"><Price price={invoice.get('sub_total')} currency={invoice.get('currency')} /></strong>
+                                    </div>
+                                </div>}
+                                {invoice.get('discount_code') &&
+                                <div className="row my-2">
+                                    <div className="col-6">
+                                        <strong>{t('promocode')}</strong>
+                                    </div>
+                                    <div className="col-6 text-right">
+                                        <strong className="text-nowrap">{invoice.get('discount_code')}</strong>
+                                    </div>
+                                </div>}
+                                {invoice.get('discount') &&
+                                <div className="row my-2">
+                                    <div className="col-6">
+                                        <strong>{t('discount')}</strong>
+                                    </div>
+                                    <div className="col-6 text-right">
+                                        <strong className="text-nowrap"><Price price={invoice.get('discount')} currency={invoice.get('currency')} /></strong>
+                                    </div>
+                                </div>}
+                                <div className="row my-2">
+                                    <div className="col-6">
+                                        <strong>{t('Total')}</strong>
+                                    </div>
+                                    <div className="col-6 text-right">
+                                        <strong className="text-nowrap"><Price price={invoice.get('total')} currency={invoice.get('currency')} /></strong>
+                                    </div>
                                 </div>
-                                <div className="col-6 text-center align-self-center">
-                                    <strong className="text-nowrap m--font-danger"><Price price={invoice.get('sub_total')} currency={invoice.get('currency')} /></strong>
-                                </div>
-                            </div>}
-                            {invoice.get('discount_code') &&
-                            <div className="row my-2">
-                                <div className="col-6 text-center">
-                                    <strong>{t('promocode')}</strong>
-                                </div>
-                                <div className="col-6 text-center align-self-center">
-                                    <strong className="text-nowrap m--font-danger">{invoice.get('discount_code')}</strong>
-                                </div>
-                            </div>}
-                            {invoice.get('discount') &&
-                            <div className="row my-2">
-                                <div className="col-6 text-center">
-                                    <strong>{t('discount')}</strong>
-                                </div>
-                                <div className="col-6 text-center align-self-center">
-                                    <strong className="text-nowrap m--font-danger"><Price price={invoice.get('discount')} currency={invoice.get('currency')} /></strong>
-                                </div>
-                            </div>}
-                            <div className="row my-2">
-                                <div className="col-6 text-center">
-                                    <strong>{t('Total')}</strong>
-                                </div>
-                                <div className="col-6 text-center align-self-center">
-                                    <strong className="text-nowrap m--font-danger"><Price price={invoice.get('total')} currency={invoice.get('currency')} /></strong>
-                                </div>
-                            </div>                                 
-                        </div>        
-                    </div>                            
+                            </div>
+                        </div>
+                    </div>
                 </div>
-             </div>             
-          </div>
+            </div>
         </div>
       </div>;
   }

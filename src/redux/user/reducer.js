@@ -13,7 +13,7 @@ import Immutable from 'immutable';
 import {saveUserDataSession} from "../../helpers/session";
 
 const initialState = Immutable.fromJS({
-  roles: [],
+  roles: Immutable.fromJS([{roleId: 0, name: 'Guest'}]),
   permissions: [],
   getUserRequest: {
     loading: false,
@@ -68,7 +68,8 @@ export default function reducer (state = initialState, action) {
         .set('permissions', Immutable.List())
         .set('roles', Immutable.List());
     case GET_USER_SUCCESS:
-        saveUserDataSession(action.result.data)
+        saveUserDataSession(action.result.data);
+                
       return state
         .set('getUserRequest', state.get('getUserRequest')
           .set('success', true)

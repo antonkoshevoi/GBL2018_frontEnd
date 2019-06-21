@@ -9996,197 +9996,6 @@ code {
       -moz-box-shadow: 0px 3px 20px 0px rgba(113, 106, 202, 0.17) !important;
       box-shadow: 0px 3px 20px 0px rgba(113, 106, 202, 0.17) !important; }
 
-.m-card-user {
-  padding: 5px 0;
-  margin: 0;
-  display: table;
-  table-layout: fixed; }
-  .m-card-user .m-card-user__pic {
-    display: table-cell;
-    text-align: right;
-    padding: 0 5px 0 0;
-    vertical-align: middle;
-    width: 70px; }
-    .m-card-user .m-card-user__pic img {
-      max-width: 70px !important;
-      margin: 0 !important;
-      -webkit-border-radius: 100%;
-      -moz-border-radius: 100%;
-      -ms-border-radius: 100%;
-      -o-border-radius: 100%;
-      border-radius: 100%; }
-    .m-card-user .m-card-user__pic .m-card-user__no-photo {
-      height: 70px;
-      width: 70px;
-      display: inline-block;
-      text-align: center;
-      position: relative;
-      display: -webkit-box;
-      /* OLD - iOS 6-, Safari 3.1-6 */
-      display: -moz-box;
-      /* OLD - Firefox 19- (buggy but mostly works) */
-      display: -ms-flexbox;
-      /* TWEENER - IE 10 */
-      display: -webkit-flex;
-      /* NEW - Chrome */
-      display: flex;
-      -webkit-justify-content: center;
-      -moz-justify-content: center;
-      -ms-justify-content: center;
-      justify-content: center;
-      -webkit-align-items: center;
-      -moz-align-items: center;
-      -ms-align-items: center;
-      align-items: center;
-      text-align: center;
-      vertical-align: middle;
-      -webkit-border-radius: 100%;
-      -moz-border-radius: 100%;
-      -ms-border-radius: 100%;
-      -o-border-radius: 100%;
-      border-radius: 100%; }
-      .m-card-user .m-card-user__pic .m-card-user__no-photo > span {
-        line-height: 0;
-        font-weight: 600;
-        font-size: 1.3rem;
-        text-transform: uppercase; }
-  .m-card-user .m-card-user__details {
-    display: table-cell;
-    width: 100%;
-    text-align: left;
-    vertical-align: middle;
-    padding: 0 0 0 15px; }
-    .m-card-user .m-card-user__details .m-card-user__name {
-      display: block;
-      padding: 0 0 0 0;
-      font-size: 1.3rem;
-      font-weight: 400;
-      line-height: 1; }
-    .m-card-user .m-card-user__details .m-card-user__email {
-      display: inline-block;
-      padding: 6px 0 0 0;
-      font-size: 1rem; }
-  .m-card-user.m-card-user--sm .m-card-user__pic {
-    width: 40px;
-    padding-right: 10px; }
-    .m-card-user.m-card-user--sm .m-card-user__pic img {
-      max-width: 40px !important; }
-    .m-card-user.m-card-user--sm .m-card-user__pic .m-card-user__no-photo {
-      width: 40px;
-      height: 40px; }
-  .m-card-user.m-card-user--sm .m-card-user__details {
-    padding: 6px 0 0 0; }
-    .m-card-user.m-card-user--sm .m-card-user__details .m-card-user__name {
-      font-size: 1rem;
-      line-height: 0.7; }
-    .m-card-user.m-card-user--sm .m-card-user__details .m-card-user__email {
-      padding: 4px 0 0 0;
-      font-size: 0.8rem; }
-
-.m-card-user .m-card-user__details .m-card-user__name {
-  color: #1b1c1e; }
-
-.m-card-user .m-card-user__details .m-card-user__email {
-  color: #7b7e8a; }
-  .m-card-user .m-card-user__details .m-card-user__email:hover {
-    color: #6f727d; }
-    .m-card-user .m-card-user__details .m-card-user__email:hover:after {
-      border-bottom: 1px solid #6f727d;
-      opacity: 0.3 ;
-      filter: alpha(opacity=30) ; }
-
-.m-card-profile {
-  padding: 5px 0;
-  margin: 0; }
-  .m-card-profile .m-card-profile__pic {
-    text-align: center;
-    padding: 0 5px 0 0;
-    text-align: center; }
-    .m-card-profile .m-card-profile__pic .m-card-profile__pic-wrapper {
-      padding: 8px;
-      display: inline-block;
-      margin: 2rem auto;
-      -webkit-border-radius: 100%;
-      -moz-border-radius: 100%;
-      -ms-border-radius: 100%;
-      -o-border-radius: 100%;
-      border-radius: 100%; }
-    .m-card-profile .m-card-profile__pic img {
-      text-align: center;
-      max-width: 130px !important;
-      margin: 0 auto !important;
-      -webkit-border-radius: 100%;
-      -moz-border-radius: 100%;
-      -ms-border-radius: 100%;
-      -o-border-radius: 100%;
-      border-radius: 100%; }
-    .m-card-profile .m-card-profile__pic .m-card-profile__no-photo {
-      height: 130px;
-      width: 130px;
-      display: inline-block;
-      text-align: center;
-      position: relative;
-      display: -webkit-box;
-      /* OLD - iOS 6-, Safari 3.1-6 */
-      display: -moz-box;
-      /* OLD - Firefox 19- (buggy but mostly works) */
-      display: -ms-flexbox;
-      /* TWEENER - IE 10 */
-      display: -webkit-flex;
-      /* NEW - Chrome */
-      display: flex;
-      -webkit-justify-content: center;
-      -moz-justify-content: center;
-      -ms-justify-content: center;
-      justify-content: center;
-      -webkit-align-items: center;
-      -moz-align-items: center;
-      -ms-align-items: center;
-      align-items: center;
-      text-align: center;
-      vertical-align: middle;
-      -webkit-border-radius: 100%;
-      -moz-border-radius: 100%;
-      -ms-border-radius: 100%;
-      -o-border-radius: 100%;
-      border-radius: 100%; }
-      .m-card-profile .m-card-profile__pic .m-card-profile__no-photo > span {
-        line-height: 0;
-        font-weight: 600;
-        font-size: 1.3rem;
-        text-transform: uppercase; }
-  .m-card-profile .m-card-profile__title {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 500; }
-  .m-card-profile .m-card-profile__details {
-    text-align: center;
-    padding: 0 0 0 0; }
-    .m-card-profile .m-card-profile__details .m-card-profile__name {
-      display: block;
-      padding: 0 0 0 0;
-      font-size: 1.5rem;
-      font-weight: 500; }
-    .m-card-profile .m-card-profile__details .m-card-profile__email {
-      display: inline-block;
-      padding: 6px 0 0 0;
-      font-size: 1rem; }
-
-.m-card-profile .m-card-profile__pic .m-card-profile__pic-wrapper {
-  border: 2px solid #f4f5f8; }
-
-.m-card-profile .m-card-profile__details .m-card-profile__name {
-  color: #1b1c1e; }
-
-.m-card-profile .m-card-profile__details .m-card-profile__email {
-  color: #7b7e8a; }
-  .m-card-profile .m-card-profile__details .m-card-profile__email:hover {
-    color: #6f727d; }
-    .m-card-profile .m-card-profile__details .m-card-profile__email:hover:after {
-      border-bottom: 1px solid #6f727d;
-      opacity: 0.3 ;
-      filter: alpha(opacity=30) ; }
-
 .m-portlet {
   margin-bottom: 2.2rem; }
   .m-portlet .m-portlet__head {
@@ -10323,8 +10132,6 @@ code {
   .m-portlet.m-portlet--widget-fit .m-portlet__head {
     position: relative;
     z-index: 1; }
-  .m-portlet.m-portlet--bordered-semi .m-portlet__body {
-    padding-top: 0.5rem; }
   .m-portlet .m-portlet__padding-x {
     padding: 0 2.2rem; }
   .m-portlet.m-portlet--last {
@@ -10357,8 +10164,6 @@ code {
     margin-bottom: -2.2rem; }
   .m-portlet .m-portlet-fit--top {
     margin-top: -7.3rem; }
-  .m-portlet.m-portlet--bordered-semi .m-portlet-fit--top {
-    margin-top: -5.6rem; }
   .m-portlet .m-portlet__body-separator {
     height: 0;
     overflow: hidden;
@@ -10414,8 +10219,6 @@ body.m-portlet--fullscreen {
       border: 0; }
   .m-portlet.m-portlet--bordered {
     border: 1px solid #ebedf2; }
-  .m-portlet.m-portlet--bordered-semi .m-portlet__head {
-    border: 0; }
   .m-portlet.ui-sortable-helper {
     border: 1px dashed #ebedf2; }
   .m-portlet .m-portlet__body-separator {

@@ -58,20 +58,19 @@ class SchoolInfo extends Component {
 
     return (
       <div className="m-portlet m--margin-bottom-15">
-        <div className="m-portlet__body">
-          <div className="m-card-profile">
-            <div className="m-card-profile__details">
-              <span className="m-card-profile__name">{school.schName}</span>
+        <div >
+          <div className="p-4 text-center">
+            <div className="mb-4">
+              <h4 className="display-6">{school.schName}</h4>
             </div>
-            <div className="m-card-profile__pic">
-              <div className="m-card-profile__pic-wrapper">
-                <img src={school.logo} alt=""/>
+            <div>
+              <div className="my-4">
+                <img className="rounded-circle img-thumbnail" src={school.logo} alt=""/>
               </div>
               <div className="text-center m--margin-bottom-20">
                 <button className="m-btn btn btn-info" onClick={()=>{this._openUploadModal()}}>{t('uploadLogo')}</button>
               </div>
             </div>
-
           </div>
         </div>
 

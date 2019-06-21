@@ -38,13 +38,15 @@ class UserMenu extends Component {
         <span className="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style={{right:'21px', color:'#385774'}}></span>
         <div className="m-dropdown__inner">
           <div className="m-dropdown__header user-menu-header">
-            <div className="m-card-user m-card-user--skin">
-              <div className="m-card-user__pic">
-                <img src={user.avatar} className="m--img-rounded m--marginless" alt=""/>
+            <div className="row">
+              <div className="col-4">
+                <img src={user.avatarSmall} className="m--img-rounded m--marginless w-100" alt=""/>
               </div>
-              <div className="m-card-user__details">
-                <span className="m-card-user__name m--font-weight-500">{user.firstName + ' ' +  user.lastName}</span>
-                <a href={`mailto:${user.email}`} className="m-card-user__email m--font-weight-300">{user.email}</a>
+              <div className="col-8 d-flex align-items-center">
+                <div>
+                    <p className="my-1 text-white">{user.firstName + ' ' +  user.lastName}</p>
+                    <p className="my-1"><a href={`mailto:${user.email}`} className="text-light">{user.email}</a></p>
+                </div>
               </div>
             </div>
           </div>

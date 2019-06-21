@@ -82,7 +82,7 @@ export function getSingleRecord(id, params = {}) {
 }
 
 export function getCartRecords(params = {}) {
-  params.invoiceNo = SessionStorage.get('invoiceNo', {path: '/'});
+  params.invoiceNo = SessionStorage.get('invoiceNo');
   return {
     types: [GET_CART_RECORDS, GET_CART_RECORDS_SUCCESS, GET_CART_RECORDS_FAIL],
     promise: (apiClient) => apiClient.get('store/shopping-card', params)
@@ -90,7 +90,7 @@ export function getCartRecords(params = {}) {
 }
 
 export function deleteCartRecord(id, params = {}) {
-  params.invoiceNo = SessionStorage.get('invoiceNo', {path: '/'});
+  params.invoiceNo = SessionStorage.get('invoiceNo');
   return {
     types: [DELETE_CART_RECORD, DELETE_CART_RECORD_SUCCESS, DELETE_CART_RECORD_FAIL],
     promise: (apiClient) => apiClient.post(`store/remove-from-card/${id}`, params)
@@ -98,8 +98,8 @@ export function deleteCartRecord(id, params = {}) {
 }
 
 export function addToShoppingCart(id, params = {}) {
-  params.invoiceNo    = SessionStorage.get('invoiceNo', {path: '/'});
-  params.discountCode = SessionStorage.get('discountCode', {path: '/'});
+  params.invoiceNo    = SessionStorage.get('invoiceNo');
+  params.discountCode = SessionStorage.get('discountCode');
   return {
     types: [ADD_TO_CART, ADD_TO_CART_SUCCESS, ADD_TO_CART_FAIL],
     promise: (apiClient) => apiClient.post(`store/add-to-card/${id}`, params)
@@ -113,7 +113,7 @@ export function updateShoppingCartCount(count) {
 }
 
 export function setItemQuantity(data) {
-  data.invoiceNo = SessionStorage.get('invoiceNo', {path: '/'});
+  data.invoiceNo = SessionStorage.get('invoiceNo');
   return {
     types: [UPDATE_ITEM_QUANTITY, UPDATE_ITEM_QUANTITY_SUCCESS, UPDATE_ITEM_QUANTITY_FAIL],
     promise: (apiClient) => apiClient.post(`store/items/${data.id}`, data)

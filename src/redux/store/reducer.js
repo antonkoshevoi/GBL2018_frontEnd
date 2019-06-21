@@ -263,9 +263,9 @@ export default function reducer(state = initialState, action) {
           .set('fail', true)
         );
 
-    /*
-    * Set/Get shipping and billing address
-    * */    
+    /**
+     * Set/Get shipping and billing address
+     */    
     case GET_SHIPPING_BILLING_INFO:
       return state
         .set('addressesRequest', state.get('addressesRequest')
@@ -280,16 +280,14 @@ export default function reducer(state = initialState, action) {
           .set('errors', null)
           .set('success', true)
           .set('records', Immutable.fromJS(action.result.data))
-        );
-    
-    case GET_SHIPPING_BILLING_INFO_FAIL:
-      const data = action.error.response.data;
+        );    
+    case GET_SHIPPING_BILLING_INFO_FAIL:      
       return state
         .set('addressesRequest', state.get('addressesRequest')
           .set('loading', false)
           .set('success', false)
           .set('fail', true)
-          .set('errors', Immutable.fromJS(data.errors))
+          .set('errors', Immutable.fromJS(action.error.response.data.errors))
         );
 
     /**
@@ -309,10 +307,12 @@ export default function reducer(state = initialState, action) {
       return state
         .set('validateAddressRequest', initialState.get('validateAddressRequest'));
 
+    /**
+     * Discount Codes
+     */
     case SET_DISCOUNT_CODE:
       return state.set('setDiscountCodeRequest', initialState.get('setDiscountCodeRequest').set('loading', true));
     case SET_DISCOUNT_CODE_SUCCESS:
-        console.log(action.result.data.discountCode);
       SessionStorage.set('discountCode', action.result.data.discountCode, {path: '/'});
       return updateCartState(state, action.result.data)
               .set('setDiscountCodeRequest', initialState.get('setDiscountCodeRequest').set('success', true));
@@ -324,6 +324,7 @@ export default function reducer(state = initialState, action) {
         );
     case RESET_DISCOUNT_CODE_REQUEST: 
       return state.set('setDiscountCodeRequest', initialState.get('setDiscountCodeRequest'));
+      
     /**
      * default
      */
