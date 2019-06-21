@@ -18,6 +18,7 @@ class DiscountCode extends Component {
         super(props);
         this.state = {
             isOpen: false,
+            type: (props.type || 'store'),
             discountCode: SessionStorage.get('discountCode')
         }        
     }
@@ -52,7 +53,8 @@ class DiscountCode extends Component {
         e.preventDefault();
         
         this.props.setDiscountCode({
-            discountCode: this.state.discountCode
+            type:           this.state.type,
+            discountCode:   this.state.discountCode
         });
     }
   
