@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
 import {Divider} from '@material-ui/core';
 import {Price} from '../../../components/ui/Price';
+import HasRole from "../../middlewares/HasRole";
 import DiscountCode from './DiscountCode';
 
 class Summary extends Component {
@@ -17,7 +18,7 @@ class Summary extends Component {
         const items = data.records;
         
         return items.map((item, key) => (
-            <div key={key} className="row">
+            <div key={key} className="row mb-2">
                 <div className="col-8">
                     <div>
                         <strong>{item.title}</strong>
@@ -27,7 +28,8 @@ class Summary extends Component {
                     </span>
                 </div>
                 <div className="col-4 text-right">
-                    <strong className="text-nowrap m--font-danger"><Price price={item.totalPrice} currency={item.currency} /></strong>
+                    <strong className="text-nowrap d-block"><Price price={item.totalPrice} currency={item.currency} /></strong>
+                    {(item.affiliateDiscount > 0) && <span className="text-nowrap m--font-success d-block">- <Price price={item.affiliateDiscount} currency={item.currency} /></span>}
                 </div>
             </div>
         ));
@@ -51,7 +53,7 @@ class Summary extends Component {
                             <strong>{t('subtotal')}</strong>
                         </div>
                         <div className="col-4 text-right">
-                            <strong className="text-nowrap m--font-danger"><Price price={data.subTotalPrice} currency={data.currency} /></strong>
+                            <strong className="text-nowrap"><Price price={data.subTotalPrice} currency={data.currency} /></strong>
                         </div>
                     </div>
                     {data.discountCode &&
@@ -60,7 +62,7 @@ class Summary extends Component {
                             <strong>{t('promocode')}</strong>
                         </div>
                         <div className="col-4 text-right">
-                            <strong className="text-nowrap m--font-danger">{data.discountCode}</strong>
+                            <strong className="text-nowrap m--font-success">{data.discountCode}</strong>
                         </div>
                     </div>}
                     <div className="row my-2">
@@ -68,7 +70,7 @@ class Summary extends Component {
                             <strong>{t('discount')}</strong>
                         </div>
                         <div className="col-4 text-right">
-                            <strong className="text-nowrap m--font-danger"><Price price={data.discountAmount} currency={data.currency} /></strong>
+                            <strong className="text-nowrap {(data.discountAmount > 0) && 'm--font-success'}"><Price price={data.discountAmount} currency={data.currency} /></strong>
                         </div>
                     </div>
                     <div className="row my-2">
@@ -76,11 +78,15 @@ class Summary extends Component {
                             <strong>{t('total')}</strong>
                         </div>
                         <div className="col-4 text-right">
-                            <strong className="text-nowrap m--font-danger"><Price price={data.totalPrice} currency={data.currency} /></strong>
+                            <strong className="text-nowrap"><Price price={data.totalPrice} currency={data.currency} /></strong>
                         </div>
-                    </div>            
-                    <Divider className="my-3"/>
-                    <DiscountCode />
+                    </div>
+                    <HasRole roles={['Parents', 'Guest']}>
+                        <div>
+                            <Divider className="my-3"/>
+                            <DiscountCode />
+                        </div>
+                    </HasRole>
                 </div>
             </div>
         </div>;
