@@ -4,11 +4,13 @@ import {withRouter} from 'react-router-dom';
 import {withTranslation} from 'react-i18next';
 import {push} from 'react-router-redux';
 import {selectGetRecordsRequest, selectSubscribeRequest} from '../../redux/subscriptions/selectors';
+import {selectDiscountCodeRequest} from "../../redux/store/selectors";
 import {getRecords, subscribe, resetSubscribeRequest, resetGetUserRecordsRequest} from '../../redux/subscriptions/actions';
 import {Price} from '../../components/ui/Price';
 import CreditCardForm from "./forms/CreditCardForm";
 import SubscriptionsForm from "./forms/SubscriptionsForm";
 import Loader from "../../components/layouts/Loader";
+import DiscountCode from '../store/sections/DiscountCode';
 
 class Subscribe extends Component {
 
@@ -30,7 +32,12 @@ class Subscribe extends Component {
         getRecords();
     }
     
-    componentWillReceiveProps(nextProps) {                
+    componentWillReceiveProps(nextProps) {
+        this._handleSubscribe(nextProps);
+        this._handleDiscountCode(nextProps);
+    }
+    
+    _handleSubscribe(nextProps) {
         const success = this.props.subscribeRequest.get('success');
         const nextSuccess = nextProps.subscribeRequest.get('success');
 
@@ -47,8 +54,14 @@ class Subscribe extends Component {
             });
             
             this.props.goTo(`/subscribed/${paymentId}`);
-        }
+        }        
     }
+    
+    _handleDiscountCode(nextProps) {
+        if (!this.props.discountCodeRequest.get('success') && nextProps.discountCodeRequest.get('success')) {
+            this.props.getRecords();            
+        }
+    }     
 
     _getSelectedPlan() {
         const {getRecordsRequest, t} = this.props;
@@ -59,10 +72,21 @@ class Subscribe extends Component {
         
         if (subscription) {
             let price = (this.state.period === 'month' ? subscription.get('priceMonthly') : subscription.get('priceYearly'));
+            let totalPrice = price;
+            let discount = 0;
+            
+            if (subscription.get('discount') > 0) {
+                discount    = (price / 100) * subscription.get('discount');
+                totalPrice  = price - discount;
+            }
         
             return (
-                <div className="col-sm-12 text-center">                                                                                    
-                    <p className="display-6">{t('yourPlan')}: <strong className="g-blue"><Price price={price} currency={subscription.get('currency')} /></strong> / {t(this.state.period)}</p>     
+                <div className="col-sm-12 text-center">
+                    {(subscription.get('discount') > 0) && <div>
+                        <p className="display-10">{t('price')}: <strong><Price price={price} currency={subscription.get('currency')} /></strong> / {t(this.state.period)}</p>                        
+                        <p className="display-10">{t('discount')}: <strong><Price price={discount} currency={subscription.get('currency')} /></strong></p>
+                    </div>}
+                    <p className="display-6">{t('yourPlan')}: <strong className="g-blue"><Price price={totalPrice} currency={subscription.get('currency')} /></strong> / {t(this.state.period)}</p>     
                 </div>
             );
         }                
@@ -130,7 +154,11 @@ class Subscribe extends Component {
                                     <h2 className='m--margin-bottom-40 m--margin-left-20'>{t('creditCard')}</h2>                    
                                     <div className='row align-items-center'>                                                                                
                                         {this._getSelectedPlan()}
-                                        
+                                        <div className="col-12">
+                                            <div className="d-flex justify-content-around mb-3">
+                                                <DiscountCode type="subscription" />
+                                            </div>
+                                        </div>
                                         <CreditCardForm errors={errors} onChange={(form) => this._handleForm(form)} form={creditCard} />
                                         
                                         <div className="col-sm-12 text-center m--margin-top-35">                                        
@@ -157,7 +185,8 @@ class Subscribe extends Component {
 Subscribe = connect(
     (state) => ({
         subscribeRequest:  selectSubscribeRequest(state),
-        getRecordsRequest: selectGetRecordsRequest(state)    
+        getRecordsRequest: selectGetRecordsRequest(state),
+        discountCodeRequest:  selectDiscountCodeRequest(state)
     }),
     (dispatch) => ({
         subscribe: (data) => dispatch(subscribe(data)),

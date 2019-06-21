@@ -72,7 +72,7 @@ class SubscriptionPayments extends Component {
                             <div className="col-7"><DateTime time={record.get('createdAt')} /></div>
                         </div>                        
                     </div>
-                    <div className="d-none d-md-block">{this._recordNumber(key)} d-md-block</div>
+                    <div className="d-none d-md-block">{this._recordNumber(key)}</div>
                 </Td>
                 <Td className="d-none d-md-table-cell"><a className="g-blue" href={record.get('invoiceUrl')}>{record.get('number')}</a></Td>
                 <Td className="d-none d-md-table-cell"><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('type'))}</span></Td>                

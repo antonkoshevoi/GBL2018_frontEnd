@@ -1,3 +1,5 @@
+import SessionStorage from '../../services/SessionStorage';
+
 export const GET_RECORDS = '[Subscription] GET_RECORDS';
 export const GET_RECORDS_SUCCESS = '[Subscription] GET_RECORDS_SUCCESS';
 export const GET_RECORDS_FAIL = '[Subscription] GET_RECORDS_FAIL';
@@ -45,6 +47,7 @@ export const GET_PAYMENTS_SUCCESS = '[Subscription] GET_PAYMENTS_SUCCESS';
 export const GET_PAYMENTS_FAIL = '[Subscription] GET_PAYMENTS_FAIL';
 
 export function getRecords(params = {}) {
+  params.discountCode = SessionStorage.get('discountCode');
   return {
     types: [GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL],
     promise: (apiClient) => apiClient.get('subscriptions', params)
@@ -52,6 +55,7 @@ export function getRecords(params = {}) {
 }
 
 export function getUserRecords(params = {}) {
+  params.discountCode = SessionStorage.get('discountCode');
   return {
     types: [GET_USER_RECORDS, GET_USER_RECORDS_SUCCESS, GET_USER_RECORDS_FAIL],
     promise: (apiClient) => apiClient.get('subscriptions/user', params)
@@ -78,6 +82,7 @@ export function resetGetRecordRequest () {
 }
 
 export function subscribe(params = {}) {
+  params.discountCode = SessionStorage.get('discountCode');
   return {
     types: [SUBSCRIBE, SUBSCRIBE_SUCCESS, SUBSCRIBE_FAIL],
     promise: (apiClient) => apiClient.post('subscriptions/subscribe', params)
