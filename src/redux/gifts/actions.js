@@ -1,3 +1,5 @@
+import SessionStorage from '../../services/SessionStorage';
+
 export const GET_RECORDS = '[Gifts] GET_RECORDS';
 export const GET_RECORDS_SUCCESS = '[Gifts] GET_RECORDS_SUCCESS';
 export const GET_RECORDS_FAIL = '[Gifts] GET_RECORDS_FAIL';
@@ -66,7 +68,8 @@ export function giftSubscription(params = {}) {
   };
 }
 
-export function giftPublic(params = {}) {  
+export function giftPublic(params = {}) {
+  params.discountCode = SessionStorage.get('discountCode');
   return {
     types: [PUBLIC_GIFT, PUBLIC_GIFT_SUCCESS, PUBLIC_GIFT_FAIL],
     promise: (apiClient) => apiClient.post('gifts/public', params)

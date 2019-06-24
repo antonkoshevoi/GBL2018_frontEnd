@@ -4,6 +4,7 @@ import {withTranslation} from 'react-i18next';
 import {push} from 'react-router-redux';
 import {selectGetRecordsRequest} from '../../redux/subscriptions/selectors';
 import {selectPublicGiftRequest} from '../../redux/gifts/selectors';
+import {selectDiscountCodeRequest} from '../../redux/store/selectors';
 import {getRecords} from '../../redux/subscriptions/actions';
 import {giftPublic, resetPublicGiftRequest} from '../../redux/gifts/actions';
 import {Price} from "../../components/ui/Price";
@@ -13,6 +14,7 @@ import InvoiceForm from "../subscriptions/forms/InvoiceForm";
 import SubscriptionsForm from '../subscriptions/forms/SubscriptionsForm'
 import Loader from "../../components/layouts/Loader";
 import SplashWrapper from './sections/SplashWrapper'
+import DiscountCode from '../store/sections/DiscountCode';
 
 class Gift extends Component {
 
@@ -47,7 +49,14 @@ class Gift extends Component {
                 billingData: {}
             });                        
         }
-    }    
+        this._handleDiscountCode(nextProps);
+    }   
+    
+    _handleDiscountCode(nextProps) {
+        if (!this.props.discountCodeRequest.get('success') && nextProps.discountCodeRequest.get('success')) {
+            this.props.getRecords();            
+        }
+    }     
 
     _getSelectedPlan() {
         const {getRecordsRequest, t} = this.props;
@@ -57,11 +66,25 @@ class Gift extends Component {
         });
         
         if (subscription) {
-            let price = (this.state.period === 'month' ? subscription.get('priceMonthly') : subscription.get('priceYearly'));
-        
+            let price = (this.state.period === 'month' ? subscription.get('priceMonthly') : subscription.get('priceYearly'));        
+            let totalPrice = price;
+            let discount = 0;
+            
+            if (subscription.get('discount') > 0) {
+                discount    = (price / 100) * subscription.get('discount');
+                totalPrice  = price - discount;
+            }
+            
             return (
                 <div className="col-sm-12 text-center">
-                    <p className="display-6">{t('yourPlan')}: <strong>{t(subscription.get('title'))}</strong> - <strong className="g-blue"><Price price={price} currency={subscription.get('currency')} /></strong> / {t(this.state.period)}</p>     
+                    {(subscription.get('discount') > 0) && <div>
+                        <p className="display-10">{t('price')}: <strong><Price price={price} currency={subscription.get('currency')} /></strong> / {t(this.state.period)}</p>                        
+                        <p className="display-10">{t('discount')}: <strong><Price price={discount} currency={subscription.get('currency')} /></strong></p>
+                    </div>}        
+                    <p className="display-6">{t('yourPlan')}: <strong>{t(subscription.get('title'))}</strong> - <strong className="g-blue"><Price price={totalPrice} currency={subscription.get('currency')} /></strong> / {t(this.state.period)}</p>     
+                    <div className="d-flex justify-content-around mb-3">
+                        <DiscountCode />
+                    </div>
                 </div>
             );
         }                
@@ -158,7 +181,8 @@ class Gift extends Component {
 Gift = connect(
     (state) => ({
         giftRequest:  selectPublicGiftRequest(state),
-        getRecordsRequest: selectGetRecordsRequest(state)    
+        getRecordsRequest: selectGetRecordsRequest(state),
+        discountCodeRequest:  selectDiscountCodeRequest(state)
     }),
     (dispatch) => ({
         giftPublic: (data) => dispatch(giftPublic(data)),
