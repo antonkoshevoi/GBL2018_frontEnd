@@ -456,6 +456,50 @@ nav .nav-narrow {
 .splash-footer .img-logo {
     width: 85px;
 }
+.gifts .subscriptions {
+    min-height: 450px;
+    background-image: url(../media/images/subscription-bg.png);
+    background-color: #f2a517;
+    background-position: center bottom;
+    background-repeat: no-repeat;    
+}
+
+.gifts .learners-1, .gifts .learners-3, .gifts .learners-5 {
+    background-position: center center;
+    background-repeat: no-repeat;      
+    min-height: 450px;
+}
+.gifts .subscriptions-list img {
+    max-width: 70%;
+}
+.gifts .subscriptions-list {
+    background-color: #d8dcdd;
+    padding: 50px 100px 50px 100px;
+    color: #08284c;
+}
+.gifts .subscriptions-list h3 {
+    font-size: 2rem;
+}
+.gifts .subscriptions-list .btn {
+    color: #08284c;
+    font-size: 1.5rem;
+    border-radius: 10px;
+}
+.gifts .splash-footer {
+    margin-top: 0;
+}
+.gifts .subscriptions > div {
+    color: #052648;
+    padding-bottom: 1rem;    
+}
+.gifts .subscriptions > div h3 {
+    font-size: 1.5rem;
+}
+.gifts .subscriptions > div p {
+    margin: 0.2rem 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
 /* Responsive Handling */
 
 @media (min-width: 768px) and (max-width: 1239.98px) {
@@ -507,7 +551,7 @@ nav .nav-narrow {
     }
     .footer-links {
         display: none;
-    }
+    }   
 }
 
 @media (min-width: 1440px) {
@@ -601,6 +645,9 @@ nav .nav-narrow {
     }
     .app-download .description {
         font-size: 18px;
+    }
+    .gifts .subscriptions-list {    
+        padding: 50px 0;    
     }    
 }
 
@@ -731,7 +778,12 @@ nav .nav-narrow {
     }
     .sticky-header {
         height: 100px;
-    }    
+    }
+    .gifts .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    } 
 }
 @media (max-width: 430px) {
     .splash-navigation .btn {
