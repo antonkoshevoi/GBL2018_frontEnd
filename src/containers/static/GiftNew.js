@@ -150,7 +150,7 @@ class GiftNew extends Component {
                                     </div>
                                     <div className="text-center">
                                         <button className="btn btn-warning m-2" onClick={() => this._handleSelectPlan(subscription.id, 'year')}><Price price={subscription.priceYearly} currency={subscription.currency} />/year</button>
-                                        <div className="text-right mt-2">(save 15% with annual)</div>
+                                        <div className="text-right">(save 15% with annual)</div>
                                     </div>
                                 </div>
                             </div>
