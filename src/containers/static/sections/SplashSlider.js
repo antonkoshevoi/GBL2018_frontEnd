@@ -46,13 +46,21 @@ class SplashSlider extends PureComponent {
             },            
             afterChange: function () {
                 let current = document.querySelector('.slick-center.slick-current');   
-                current.previousSibling.classList.add('slick-slide-previous');
-                current.nextElementSibling.classList.add('slick-slide-previous');
+                if (current.previousSibling) {
+                    current.previousSibling.classList.add('slick-slide-previous');
+                }
+                if (current.nextElementSibling) {
+                    current.nextElementSibling.classList.add('slick-slide-previous');
+                }
             },
             onReInit: function () {
                 let current = document.querySelector('.slick-center.slick-current');
-                current.previousSibling.classList.add('slick-slide-previous');
-                current.nextElementSibling.classList.add('slick-slide-previous');
+                if (current.previousSibling) {
+                    current.previousSibling.classList.add('slick-slide-previous');
+                }
+                if (current.nextElementSibling) {
+                    current.nextElementSibling.classList.add('slick-slide-previous');
+                }
             },
             responsive: [
                 {
