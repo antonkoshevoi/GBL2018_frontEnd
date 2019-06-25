@@ -463,19 +463,20 @@ nav .nav-narrow {
     background-position: center bottom;
     background-repeat: no-repeat;    
 }
-
-.gifts .learners-1, .gifts .learners-3, .gifts .learners-5 {
-    background-position: center center;
-    background-repeat: no-repeat;      
-    min-height: 450px;
+.gifts.splash-container .container.full-width {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0; 
+    padding-right: 0;
+    margin-bottom: -60px;
 }
 .gifts .subscriptions-list img {
     max-width: 70%;
 }
 .gifts .subscriptions-list {
-    background-color: #d8dcdd;
-    padding: 50px 100px 50px 100px;
+    background-color: #d8dcdd;    
     color: #08284c;
+    min-height: 500px;
 }
 .gifts .subscriptions-list h3 {
     font-size: 2rem;
@@ -484,9 +485,6 @@ nav .nav-narrow {
     color: #08284c;
     font-size: 1.5rem;
     border-radius: 10px;
-}
-.gifts .splash-footer {
-    margin-top: 0;
 }
 .gifts .subscriptions > div {
     color: #052648;

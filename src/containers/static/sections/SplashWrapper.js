@@ -11,8 +11,8 @@ const SplashWrapper = props => {
   return (<div className="splash">
       <SplashHeader {...props} />
       {props.showJumbotron && <SplashJumbotron {...props} />}
-      <section className={`${props.className || 'splash-section'}`}>
-          <div className="container" style={{minHeight: minHeight}}>{props.children}</div>
+      <section className={`${props.className || 'splash-section'} ${props.fullWidth && 'p-0'}`}>
+          <div className={`container ${props.fullWidth && 'full-width'}`} style={{minHeight: minHeight}}>{props.children}</div>
           <SplashFooter {...props} />
       </section>
   </div>);

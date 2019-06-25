@@ -650,5 +650,12 @@ export default {
     apply: 'Apply',
     subtotal: 'Subtotal',
     discount: 'Discount',
-    paymentMethod: 'Payment Method'
+    paymentMethod: 'Payment Method',
+    subscriptionPlansInclude: 'All Subscription Plans include',
+    accessToAllCourses: 'access to all BZabc Courses',
+    simultaneousCoursesPerLearner: '3 simultaneous courses per learner',
+    switchCoursesAnytime: 'freedom to switch courses anytime',
+    adminToolsAndReports: 'parental admin tools and reports',
+    saveWithAnnual: 'save 15% with annual',
+    learnerPlan: '{{learners}} Learner Plan'    
 }

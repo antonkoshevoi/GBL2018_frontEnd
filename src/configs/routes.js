@@ -56,7 +56,6 @@ import AutoCreate from "../containers/classrooms/AutoCreate";
 import SplashContainer from "../containers/static/Splash";
 import Content from "../containers/static/Content";
 import Gift from "../containers/static/Gift";
-import GiftNew from "../containers/static/GiftNew";
 
 import Scap from "../containers/scap/Scap";
 import BuildTemplate from "../containers/scap/BuildTemplate";
@@ -100,8 +99,7 @@ export default () => (
       <Route exact path='/reset-password/:id/:hash' title='resetPassword' component={ResetPassword} />
       
       <Route exact path='/signUp' title='signUp' component={SignUpIndex} />
-      <Route exact path='/gift' title='sentGift' component={Gift} />
-      <Route exact path='/gift-new' title='sentGift' component={GiftNew} />
+      <Route exact path='/gift' title='sentGift' component={Gift} />      
       <Route exact layout={OnlyHeadLayout} path='/signUp/parent' title='signUpParent' component={SignUpParent} />
       <Route exact layout={OnlyHeadLayout} path='/signUp/principal' title='signUpPrincipal' component={SignUpPrincipal} />
       
