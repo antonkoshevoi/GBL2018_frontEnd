@@ -129,6 +129,10 @@
     div#notFoundPage {
         margin: -20px;
     }
+    
+    .invoice-title{
+        font-size: 24px 
+    }
 }
 
 @media (max-width: 1060px) {

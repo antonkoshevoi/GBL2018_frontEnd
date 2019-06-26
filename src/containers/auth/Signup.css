@@ -1,9 +1,6 @@
 label.m--margin-bottom-10 {
     display:block;
 }
-.g-stepper + div {
-    margin-top: 40px;
-}
 .form-control-feedback.error {
     margin-top: 3px;
 }
@@ -26,10 +23,6 @@ label.m--margin-bottom-10 {
 }
 
 @media (max-width: 992px) {
-
-    .g-stepper + div {
-        margin-top: 10px !important;
-    }
     .download-button {
         text-align: center;
     }

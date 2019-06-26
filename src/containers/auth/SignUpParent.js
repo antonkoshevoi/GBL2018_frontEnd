@@ -151,8 +151,8 @@ class SignUpParent extends Component {
         const step2Errors = this.props.signUpRequest.getIn(['errors', 'step2']);        
 
         return (
-          <form  onSubmit={(e) => { e.preventDefault(); this._next(); }}>
-            {loading && <Loader/>}
+            <form  onSubmit={(e) => { e.preventDefault(); this._next(); }}>
+                {loading && <Loader/>}
                 <div className='signup-page'>
                   <div className='m-signup col-lg-8 col-md-10 col-sm-12 m-auto'>
                     <div className='m-signup__head'>
@@ -171,16 +171,14 @@ class SignUpParent extends Component {
                             <StepLabel>{t('confirmation')}</StepLabel>
                           </Step>
                         </Stepper>
-                        <div>
+                        <div className="mt-2 mt-md-5 mx-2">
                           {[
                             <FirstStepForm form={form.step1} errors={step1Errors} onChange={(form) => { this._registerStep1Changes(form) }}/>,
                             <SecondStepForm form={form.step2} errors={step2Errors} onChange={(form) => { this._registerStep2Changes(form) }}/>,
                             <ThirdStepForm form={form}/>
-                          ][activeStep]}
-                        </div>
-                        {activeStep < 2 && <Divider className='m--margin-top-25'/>}
-                        <div className='row'>
-                          <div className='col-sm-12 text-right m--padding-top-20 text-center'>
+                          ][activeStep]}                                                    
+                          {activeStep < 2 && <Divider className='m--margin-top-25'/>}                       
+                          <div className='text-right m--padding-top-20 text-center'>
                           {[
                             <button type='submit' disabled={loading} className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>
                                 {t('next')}
@@ -201,20 +199,19 @@ class SignUpParent extends Component {
                                 <button type='submit' className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>{t('goToDashboard')}</button>
                             </div>
                           ][activeStep]}                            
-                          </div>
+                          </div>                        
+                          {activeStep < 2 &&
+                          <div className='alert m-alert m-alert--default m--margin-top-25'>
+                            <p className='text-center margin-0'>
+                              <Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans>                            
+                            </p>                              
+                          </div>}
                         </div>
-                        {activeStep < 2 &&
-                        <div className='alert m-alert m-alert--default m--margin-top-25'>
-                          <p className='text-center margin-0'>
-                            <Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans>                            
-                          </p>                              
-                        </div>   
-                        }
                       </div>
                     </div>
                   </div>
                 </div>
-          </form>
+            </form>
         );
     }
 }
