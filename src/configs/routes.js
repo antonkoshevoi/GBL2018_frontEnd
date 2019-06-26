@@ -3,6 +3,7 @@ import {Switch} from 'react-router';
 
 import AppContainer from '../containers/AppContainer';
 import AuthenticatedRoute from '../containers/routing/AuthenticatedRoute';
+import Route from '../containers/routing/Route';
 
 import MainLayout from '../containers/layouts/MainLayout';
 import CheckoutLayout from '../containers/layouts/CheckoutLayout';
@@ -29,7 +30,6 @@ import SignUpIndex from '../containers/auth/SignUpIndex';
 import SignUpParent from '../containers/auth/SignUpParent';
 import SignUpPrincipal from '../containers/auth/SignUpPrincipal';
 import NotFoundPage from '../containers/errors/404';
-import Route from '../containers/routing/Route';
 import Profile from "../containers/profile/Profile";
 import SchoolProfile from "../containers/profile/SchoolProfile";
 import StudentReports from "../containers/reports/Students";
@@ -100,7 +100,7 @@ export default () => (
       <Route exact path='/reset-password/:id/:hash' title='resetPassword' component={ResetPassword} />
       
       <Route exact path='/signUp' title='signUp' component={SignUpIndex} />
-      <Route exact path='/gift' title='sentGift' component={Gift} />      
+      <Route exact layout={CheckoutLayout} path='/gift' title='sentGift' component={Gift} />      
       <Route exact layout={PublicLayout} path='/signUp/parent' title='signUpParent' component={SignUpParent} />
       <Route exact layout={PublicLayout} path='/signUp/principal' title='signUpPrincipal' component={SignUpPrincipal} />      
       <Route exact layout={PublicLayout} path='/invitations/details/:id/:hash' title='InvitationDetails' component={InvitationDetails}/>
@@ -167,8 +167,8 @@ export default () => (
 
       {/*Store*/}    
       <Route exact layout={MainLayout} path='/store/shopping-cart' title='shoppingCart' component={ShoppingCart}/>
-      <Route exact layout={PublicLayout} path='/shopping/checkout' title='checkout' component={Checkout}/>
-      <Route exact layout={PublicLayout} path='/shopping/checkout/:invoiceNo?/:hash?' title='checkout' component={Invoice}/>
+      <Route exact layout={CheckoutLayout} path='/shopping/checkout' title='checkout' component={Checkout}/>
+      <Route exact layout={CheckoutLayout} path='/shopping/checkout/:invoiceNo?/:hash?' title='checkout' component={Invoice}/>
             
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' title='myProfile' component={Profile} />

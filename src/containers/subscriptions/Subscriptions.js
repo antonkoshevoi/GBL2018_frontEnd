@@ -131,41 +131,48 @@ class Subscriptions extends Component {
         });        
     }
     
-    render() {        
+    _renderBillingForm() {
         
-        const {subscribeRequest, getRecordsRequest, t} = this.props;
+        const {subscribeRequest, t} = this.props;
         const {creditCard}  = this.state;
         const errors        = subscribeRequest.get('errors');
-        const loading       = subscribeRequest.get('loading') || getRecordsRequest.get('loading')
-                
-        return (
-            <div>
-                {loading && <Loader />}
-                {this.state.showBillingForm ?
-                    <div className="col-sm-12 col-md-10 col-lg-9 col-xl-6 m-auto">
-                        <h1 className="text-center m--margin-top-50 g-metal">{t('subscriptions')}</h1>
-                        <div className='m-portlet m-portlet--head-solid-bg my-5'>
-                            <div className='m-portlet__body'>
-                                <div className='m-form m-form--label-align-right mx-5 my-4'>
-                                    <h2 className='mb-3'>{t('creditCard')}</h2>                    
-                                    <div className='align-items-center'>                                                                                
-                                        {this._getSelectedPlan()}
-                                        
-                                        <div className="d-flex justify-content-around mb-3">
-                                            <DiscountCode type="subscription" />
-                                        </div>
-                                        
-                                        <CreditCardForm errors={errors} onChange={(form) => this._handleForm(form)} form={creditCard} />
-                                        
-                                        <div className="text-center my-3">                                        
-                                            <button disabled={subscribeRequest.get('loading')} onClick={() => { this._submitCreditCardPayment() }} className="btn btn-info">{t('makePayment')}</button>
-                                            <button disabled={subscribeRequest.get('loading')} onClick={() => { this._showBillingForm(false) }} className="btn btn-default m--margin-left-10">{t('back')}</button>                                                                  
-                                        </div>
-                                    </div>
-                                </div>
+        const loading       = subscribeRequest.get('loading');
+        
+        return <div className="col-sm-12 col-md-10 col-lg-9 col-xl-6 m-auto">
+            <h1 className="text-center m--margin-top-50 g-metal">{t('subscriptions')}</h1>
+            <div className='m-portlet m-portlet--head-solid-bg my-5'>
+                <div className='m-portlet__body'>
+                    <div className='m-form m-form--label-align-right mx-5 my-4'>
+                        <h2 className='mb-3'>{t('creditCard')}</h2>                    
+                        <div className='align-items-center'>                                                                                
+                            {this._getSelectedPlan()}
+
+                            <div className="d-flex justify-content-around mb-3">
+                                <DiscountCode type="subscription" />
+                            </div>
+
+                            <CreditCardForm errors={errors} onChange={(form) => this._handleForm(form)} form={creditCard} />
+
+                            <div className="text-center my-3">                                        
+                                <button disabled={loading} onClick={() => { this._submitCreditCardPayment() }} className="btn btn-info">{t('makePayment')}</button>
+                                <button disabled={loading} onClick={() => { this._showBillingForm(false) }} className="btn btn-default m--margin-left-10">{t('back')}</button>                                                                  
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>;
+    }
+    
+    render() {        
+        
+        const {subscribeRequest, getRecordsRequest} = this.props;        
+                
+        return (
+            <div>
+                {(subscribeRequest.get('loading') || getRecordsRequest.get('loading')) && <Loader />}
+                {this.state.showBillingForm ?
+                    this._renderBillingForm()
                 :                
                     <SubscriptionsForm
                         subscriptions={getRecordsRequest.get('records')}

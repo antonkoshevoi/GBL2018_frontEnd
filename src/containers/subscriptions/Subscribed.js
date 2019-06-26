@@ -24,8 +24,8 @@ class Subscribed extends Component {
     const invoice = invoiceRequest.get('record');    
     return (        
         <div className="col-sm-12 col-md-10 col-lg-9 col-xl-6 m-auto m-auto">
-            <h1 className="text-center m--margin-top-50 g-metal">{t('youBoughtSubscription')}</h1>                
-            <div className='m-portlet m-portlet--head-solid-bg m--margin-top-30'>
+            <h1 className="text-center my-5 g-metal">{t('youBoughtSubscription')}</h1>                
+            <div className='m-portlet m-portlet--head-solid-bg my-5'>
                 <div className='m-portlet__body'>
                     {invoiceRequest.get('loading') ? <Loader/> : <InvoiceForm data={invoice} />}                                    
                 </div>

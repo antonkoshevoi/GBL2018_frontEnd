@@ -56,7 +56,7 @@ class Invoice extends Component {
   {
       const {t} = this.props;
   
-      return <div className="col-md-10 m-auto">
+      return <div className="col-md-12 m-auto">
         <span className="invoice-title">
             <Trans i18nKey="translations:yourInvoice">
                 <span className="m--font-bolder">{{invoiceNo: invoice.get('invoice_no')}}</span>
@@ -68,67 +68,62 @@ class Invoice extends Component {
                 <a rel="noopener noreferrer" className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
             </p>
         </div>
-        <div className="m-portlet m-portlet--bordered-semi mb-5">
-            <div className="m-portlet__body m--padding-top-25">
-                <div className="col-md-10 m-auto">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <h3 className="m-portlet__head-text">{t('billTo')}</h3>
-                            {this._renderAddress(invoice, 'billing')}
-                        </div>
-                        <div className="col-md-6">
-                            <h3 className="m-portlet__head-text">{t('shipTo')}</h3>
-                            {this._renderAddress(invoice, 'shipping')}
-                        </div>
-                    </div>
-                    <div className="row my-2">
-                        <div className="col-12">
-                            <div className="my-3">
-                                <span className="invoice-title">{t('orderDetails')}</span>
-                            </div>
-                            <div>
-                                <hr />
-                                {this._renderItems(invoice)}
-                                <hr />
-                                {invoice.get('discount') &&
-                                <div className="row my-2">
-                                    <div className="col-6">
-                                        <strong>{t('subtotal')}</strong>
-                                    </div>
-                                    <div className="col-6 text-right">
-                                        <strong className="text-nowrap"><Price price={invoice.get('sub_total')} currency={invoice.get('currency')} /></strong>
-                                    </div>
-                                </div>}
-                                {invoice.get('discount_code') &&
-                                <div className="row my-2">
-                                    <div className="col-6">
-                                        <strong>{t('promocode')}</strong>
-                                    </div>
-                                    <div className="col-6 text-right">
-                                        <strong className="text-nowrap">{invoice.get('discount_code')}</strong>
-                                    </div>
-                                </div>}
-                                {invoice.get('discount') &&
-                                <div className="row my-2">
-                                    <div className="col-6">
-                                        <strong>{t('discount')}</strong>
-                                    </div>
-                                    <div className="col-6 text-right">
-                                        <strong className="text-nowrap"><Price price={invoice.get('discount')} currency={invoice.get('currency')} /></strong>
-                                    </div>
-                                </div>}
-                                <div className="row my-2">
-                                    <div className="col-6">
-                                        <strong>{t('Total')}</strong>
-                                    </div>
-                                    <div className="col-6 text-right">
-                                        <strong className="text-nowrap"><Price price={invoice.get('total')} currency={invoice.get('currency')} /></strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <hr />
+        <div className="row">
+            <div className="col-12 col-sm-6">
+                <h3 className="m-portlet__head-text">{t('billTo')}</h3>
+                {this._renderAddress(invoice, 'billing')}
+            </div>
+            <div className="col-12 col-sm-6">
+                <h3 className="m-portlet__head-text">{t('shipTo')}</h3>
+                {this._renderAddress(invoice, 'shipping')}
+            </div>
+        </div>
+        <div className="row my-2">
+            <div className="col-12">
+                <div className="my-3">
+                    <span className="invoice-title">{t('orderDetails')}</span>
                 </div>
+                <div>
+                    <hr />
+                    {this._renderItems(invoice)}
+                    <hr />
+                    {invoice.get('discount') &&
+                    <div className="row my-2">
+                        <div className="col-6">
+                            <strong>{t('subtotal')}</strong>
+                        </div>
+                        <div className="col-6 text-right">
+                            <strong className="text-nowrap"><Price price={invoice.get('sub_total')} currency={invoice.get('currency')} /></strong>
+                        </div>
+                    </div>}
+                    {invoice.get('discount_code') &&
+                    <div className="row my-2">
+                        <div className="col-6">
+                            <strong>{t('promocode')}</strong>
+                        </div>
+                        <div className="col-6 text-right">
+                            <strong className="text-nowrap">{invoice.get('discount_code')}</strong>
+                        </div>
+                    </div>}
+                    {invoice.get('discount') &&
+                    <div className="row my-2">
+                        <div className="col-6">
+                            <strong>{t('discount')}</strong>
+                        </div>
+                        <div className="col-6 text-right">
+                            <strong className="text-nowrap"><Price price={invoice.get('discount')} currency={invoice.get('currency')} /></strong>
+                        </div>
+                    </div>}
+                    <div className="row my-2">
+                        <div className="col-6">
+                            <strong>{t('Total')}</strong>
+                        </div>
+                        <div className="col-6 text-right">
+                            <strong className="text-nowrap"><Price price={invoice.get('total')} currency={invoice.get('currency')} /></strong>
+                        </div>
+                    </div>
+                </div>                        
             </div>
         </div>
       </div>;
@@ -144,32 +139,32 @@ class Invoice extends Component {
     const invoice = invoiceRequest.get('data');    
     
     return (      
-        <div className='row-14 d-flex justify-content-center m--margin-top-30'>
-          <div className="col-12 col-sm-11 col-md-9 col-xl-8">                       
-            <div className="m-portlet  m-portlet--head-solid-bg">
-              <div className='m-portlet__body position-relative'>               
-                <Stepper activeStep={3} alternativeLabel className="g-stepper">
-                  <Step>
-                    <StepLabel>{t('shipping')}</StepLabel>
-                  </Step>
-                  <Step>
-                    <StepLabel>{t('billing')}</StepLabel>
-                  </Step>
-                  <Step>
-                    <StepLabel>{t('confirmation')}</StepLabel>
-                  </Step>
-                </Stepper>
-                <div className="row d-flex justify-content-center">
-                  <div className='col-10'>
-                    {invoice ? this._renderInvoice(invoice) : <div className="d-flex justify-content-center m--margin-top-100 m--margin-bottom-100">
-                        <CircularProgress color="primary" size={80}/>
-                      </div>}
-                  </div>
+        <div className="container">
+            <div className="row">
+                <div className="col-12 col-md-12 col-lg-10 col-xl-9 m-auto">
+                    <div className="m-portlet m-portlet--head-solid-bg my-5">
+                        <div className='m-portlet__body position-relative'>               
+                            <Stepper activeStep={3} alternativeLabel className="g-stepper">
+                                <Step>
+                                    <StepLabel>{t('shipping')}</StepLabel>
+                                </Step>
+                                <Step>
+                                    <StepLabel>{t('billing')}</StepLabel>
+                                </Step>
+                                <Step>
+                                    <StepLabel>{t('confirmation')}</StepLabel>
+                                </Step>
+                            </Stepper>                          
+                            <div className='p-5'>
+                                {invoice ? this._renderInvoice(invoice) : <div className="d-flex justify-content-center m--margin-top-100 m--margin-bottom-100">
+                                  <CircularProgress color="primary" size={80}/>
+                                </div>}
+                            </div>                            
+                        </div>
+                    </div>
                 </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            </div>            
+        </div>      
     );
   }
 }

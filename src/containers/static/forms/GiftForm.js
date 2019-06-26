@@ -38,7 +38,7 @@ class GiftForm extends Component {
             <div className='m-form__section m-form__section--first'>
                 <div className="form-group m-form__group row">
                     <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('yourName')} </label>
-                    <div className="col-lg-4 col-md-4 col-sm-6">
+                    <div className="col-lg-4 col-md-4 col-6">
                       <input
                         required                    
                         value={form.firstName || ''}
@@ -49,7 +49,7 @@ class GiftForm extends Component {
                         placeholder={t('firstName')}/>
                         {errors && errors.get('firstName') && <FormHelperText error>{ errors.get('firstName').get(0) }</FormHelperText>}                          
                     </div>
-                    <div className="col-lg-4 col-md-4 col-sm-6">
+                    <div className="col-lg-4 col-md-4 col-6">
                       <input
                         required                    
                         value={form.lastName || ''}
@@ -78,7 +78,7 @@ class GiftForm extends Component {
                 <Divider className="m--margin-top-25 m--margin-bottom-25" />
                 <div className="form-group m-form__group row">
                     <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('recipientName')} </label>
-                    <div className="col-lg-4 col-md-4 col-sm-6">
+                    <div className="col-lg-4 col-md-4 col-6">
                       <input
                         required                    
                         value={form.recipientFirstName || ''}
@@ -89,7 +89,7 @@ class GiftForm extends Component {
                         placeholder={t('firstName')}/>
                         {errors && errors.get('recipientFirstName') && <FormHelperText error>{ errors.get('recipientFirstName').get(0) }</FormHelperText>}                          
                     </div>
-                    <div className="col-lg-4 col-md-4 col-sm-6">
+                    <div className="col-lg-4 col-md-4 col-6">
                       <input
                         required                    
                         value={form.recipientLastName || ''}

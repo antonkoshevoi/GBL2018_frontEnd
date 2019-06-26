@@ -9,22 +9,23 @@ import {selectDiscountCodeRequest} from '../../redux/store/selectors';
 import {giftPublic, resetPublicGiftRequest} from '../../redux/gifts/actions';
 import {Price} from "../../components/ui/Price";
 import GiftForm from "./forms/GiftForm";
+import DiscountCode from '../store/sections/DiscountCode';
 import CreditCardForm from "../subscriptions/forms/CreditCardForm";
 import SubscriptionsForm from "../subscriptions/forms/SubscriptionsForm";
 import InvoiceForm from "../subscriptions/forms/InvoiceForm";
 import Loader from '../../components/layouts/Loader';
-import SplashWrapper from './sections/SplashWrapper';
-import DiscountCode from '../store/sections/DiscountCode';
 
 const Portlet = (props) => {    
     const {t} = props;       
     return (
-        <div className="row">
-            <div className="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8 m-auto">
-                <h1 className="text-center m--margin-top-15 g-metal">{t('sendGift')}</h1>
-                <div className='m-portlet m-portlet--head-solid-bg m--margin-top-30'>
-                    <div className='m-portlet__body'>
-                        {props.children}
+        <div className="container">
+            <div className="row my-5">
+                <div className="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-8 m-auto">
+                    <h1 className="text-center m--margin-top-15 g-metal">{t('sendGift')}</h1>
+                    <div className='m-portlet m-portlet--head-solid-bg m--margin-top-30'>
+                        <div className='m-portlet__body'>
+                            {props.children}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -159,7 +160,7 @@ class Gift extends Component {
         const loading = giftRequest.get('loading') || getRecordsRequest.get('loading');
         
         return (
-            <SplashWrapper fullWidth={(step === 1)} className="gifts splash-container">                
+            <div>                
                 {loading && <Loader/>}
                 {step === 1 && <SubscriptionsForm
                     subscriptions={getRecordsRequest.get('records')}
@@ -167,18 +168,18 @@ class Gift extends Component {
                 }
                 {step === 2 &&
                     <Portlet {...this.props}>
-                        <div className='m-form m-form--label-align-right my-4 mx-5'>
+                        <div className='m-form m-form--label-align-right my-4 mx-2 mx-sm-5'>
                             {this._getSelectedPlan()}
-                            <h2 className='m--margin-20'>{t('personalInformation')}</h2>                    
+                            <h2 className='my-3'>{t('personalInformation')}</h2>                    
                             <div className='align-items-center'>
                                 <GiftForm errors={errors} onChange={(form) => this._handleForm(form)} form={billingData} />
                             </div>                                
-                            <h2 className='m--margin-20'>{t('creditCard')}</h2>                    
+                            <h2 className='my-3'>{t('creditCard')}</h2>                    
                             <div className='align-items-center'>
                                 <CreditCardForm errors={errors} onChange={(form) => this._handleForm(form)} form={billingData} />                                        
                             </div>
                             <div className='align-items-center'>
-                                <div className="col-sm-12 text-center m--margin-top-35">                                        
+                                <div className="col-sm-12 text-center mt-5">                                        
                                     <button disabled={loading} onClick={() => { this._setStep(1) }} className="btn btn-default">{t('back')}</button>                                                                  
                                     <button disabled={loading} onClick={() => { this._submitCreditCardPayment() }} className="btn btn-info m--margin-left-10">{t('makePayment')}</button>
                                 </div>
@@ -191,7 +192,7 @@ class Gift extends Component {
                         <InvoiceForm data={giftRequest.get('record')} />
                     </Portlet>                    
                 }                         
-            </SplashWrapper>
+            </div>
         );
     }
 }
