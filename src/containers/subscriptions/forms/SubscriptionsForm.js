@@ -1,187 +1,78 @@
 import React, {Component} from 'react';
-import {withTranslation, Trans} from 'react-i18next';
-import {Checkbox} from '@material-ui/core';
+import {withTranslation} from 'react-i18next';
 import {Price} from "../../../components/ui/Price";
 
-import '../Subscriptions.css'
+import learner1 from '../../../media/images/1-learner.png';
+import learner3 from '../../../media/images/3-learner.png';
+import learner4 from '../../../media/images/5-learner.png';
+
+import '../../../styles/subscriptions.css'
+
+const images = [
+    learner1, learner3, learner4
+];
 
 class SubscriptionsForm extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            subscriptions:  props.subscriptions,
-            subscriptionId: props.subscriptionId,            
-            period:         props.period
-        };
-    }
+        this.state = {};
+    }         
     
-    componentWillReceiveProps(nextProps) {                
-        if (this.props.subscriptionId !== nextProps.subscriptionId) {
-            this._setSubscriptionId(nextProps.subscriptionId);
-        }
-    }    
-
-    _setSubscriptionId(subscriptionId) {
-        this.setState({subscriptionId: Number(subscriptionId)});        
-    }
-
-    _getSelectedPlan() {
-        const {subscriptions, t} = this.props;
-        
-        const subscription = subscriptions.find((element) => {
-            return (Number(element.get('id')) === this.state.subscriptionId);
-        });
-        
-        if (subscription) {
-            let price = (this.state.period === 'month' ? subscription.get('priceMonthly') : subscription.get('priceYearly'));
-        
-            return (
-                <div className="col-sm-12 text-center">                                                                                    
-                    <p className="display-6">{t('yourPlan')}: <strong className="g-blue">${price}</strong> / {t(this.state.period)}</p>     
-                </div>
-            );
-        }                
-    }
-
-    _handlePeriodChange(event) {        
-        const { value } = event.target;
-        this.setState({
-            period: value
-        });
-    }   
-    
-    _handleSelectPlan() {
+    _handleSelectPlan(subscriptionId, period) {
         this.props.onSelect({
-            subscriptionId: this.state.subscriptionId,            
-            period:         this.state.period
+            subscriptionId: subscriptionId,            
+            period:         period
         });
     }
     
-    _renderSelected() {
-                
-        const {subscriptions, t} = this.props;
-        const styles = {maxWidth: '450px', margin: '0 auto'};
-        return subscriptions.map((record, key) => {
-            
-            if (Number(record.get('id')) !== this.state.subscriptionId) {
-                return '';
-            }
-                                                        
-            const courses = record ? record.get('allowedCourses') : '0';
-            const students = record ? record.get('allowedStudents') : '0';
-
-            return (
-                <div key={key} className="subscription-item-block m--margin-top-30" style={styles}>
-                    <div className={`subscription-item item-${key}`}>
-                        <div className="subscription-header"><h1>{t(record.get('title'))}</h1></div>
-                        <div className="subscription-content">
-                            <div className="subscription-prices m--padding-left-5 m--padding-right-5">
-                                <div className="row">                                                                        
-                                    <div className={`col-6 m--padding-0 text-center ${this.state.period === 'month' ? 'selected' : ''}`}>                           
-                                        <span className="price">
-                                        <Checkbox
-                                            checked={this.state.period === 'month'}
-                                            onChange={ (e) => {this._handlePeriodChange(e) }}
-                                            value="month"
-                                            color="primary"
-                                            style={{marginLeft: '-18px', width: '40px'}}
-                                            />
-                                            <Price price={record.get('priceMonthly')} /> <span className="small">{record.get('currency')}</span>
-                                        </span> {t('perMonth')}
-                                    </div>
-                                    <div className={`col-6 m--padding-0 text-center ${this.state.period === 'year' ? 'selected' : ''}`}>
-                                        <span className="price">
-                                            <Checkbox
-                                                checked={this.state.period === 'year'}
-                                                onChange={ (e) => {this._handlePeriodChange(e) }}
-                                                value="year"
-                                                color="primary"
-                                                style={{marginLeft: '-18px', width: '40px'}}
-                                                />
-                                            <Price price={record.get('priceYearly')} /> <span className="small">{record.get('currency')}</span>                                            
-                                        </span> {t('perYear')}
-                                    </div>            
-                                </div>
-                            </div>
-                            <div className="subscription-description">
-                                <div className="subscription-limits">
-                                    <Trans i18nKey="translations:courseAtTime">
-                                        <span className="m--font-bolder">{{courses}}</span>
-                                    </Trans>
-                                    <br />
-                                    <Trans i18nKey={record.get('allowedCourses') > 1 ? 'translations:courseAnyCoursesSwitchAnyTime' : 'translations:courseAnyCourseSwitchAnyTime'}>
-                                        <span className="m--font-bolder">{{courses}}</span>
-                                    </Trans>
-                                    <br />
-                                    <Trans i18nKey={record.get('allowedStudents') > 1 ? 'translations:usersMax' : 'translations:userMax'}>
-                                        <span className="m--font-bolder">{{students}}</span>
-                                    </Trans>
-                                </div>            
-                                <div className="subscription-bonuses text-left">
-                                    <span>{t('annualBonus')}:</span>
-                                    <span className="bonus">{record.get('allowedStudents') > 1 ? t('freeWorkbooks', {number: record.get('allowedStudents')}) : t('freeWorkbook')}</span>
-                                </div>
-                                <p className="text-center m--margin-bottom-0">
-                                    <button onClick={() => { this._handleSelectPlan() }} className="btn btn-info">{t('continue')}</button>
-                                </p>                                
-                            </div>
-                        </div>
-                    </div>  
-                </div>
-            );
-        });        
-    }
-    
-    _renderSubscriptions() {
-        
-        const {subscriptions, t} = this.props;
-        return subscriptions.map((record, key) => {
-            
-            if (Number(record.get('id')) === this.state.subscriptionId) {
-                return '';
-            }
-                        
-            return (        
-                <div key={key} className="subscription-item-block col-sm-12 col-md-6 m--margin-top-25">
-                    <div className={`subscription-item item-${key}`} onClick={() => { this._setSubscriptionId(record.get('id')) }}>                        
-                        <div className="subscription-header"><h1>{t(record.get('title'))}</h1></div>
-                        <div className="subscription-content">
-                            <div className="subscription-prices">
-                                <div className="row">
-                                    <div className="selected col-7"><span className="price"><Price price={record.get('priceMonthly')} /> <span className="small">{record.get('currency')}</span></span> {t('perMonth')}</div>
-                                    <div className="col-5 text-right m--margin-top-10"><span className="price"><Price price={record.get('priceYearly')} /> <span className="small">{record.get('currency')}</span></span> {t('perYear')}</div>            
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-                </div>
-            );
-        });        
-    }
-
     render() {        
         
-        const {t} = this.props;
+        const {t, subscriptions} = this.props;        
         
         if (!this.props.subscriptions.size) {
             return '';
         }
                 
         return (
-            <div className="row">
-                <div className="col-sm-12">
-                    {this._renderSelected()}
+            <div>
+                <div className="subscriptions-banner d-flex justify-content-center align-items-end">
+                    <div className="description">
+                        <h3>{t('subscriptionPlansInclude')}</h3>
+                        <p>* {t('accessToAllCourses')}</p>
+                        <p>* {t('simultaneousCoursesPerLearner')}</p>
+                        <p>* {t('switchCoursesAnytime')}</p>
+                        <p>* {t('adminToolsAndReports')}</p>
+                    </div>
                 </div>
-                <div className="col-sm-12">
-                    <h1 className="text-center m--margin-top-25 g-metal">{t('switchPlan')}</h1>
-                    <div className="switch-subscriptions-block">
+                <div className="subscriptions-list py-5">
+                    <div className="container">
                         <div className="row">
-                            {this._renderSubscriptions()}
+                            <div className="col-12 col-md-11 col-lg-10 col-xl-8 m-auto">
+                            { subscriptions.toJS().map((subscription, key) => (
+                                <div className="row mb-4" key={key}>
+                                    <div className="col-12 col-md-5 text-center d-md-flex align-items-center">
+                                        <div className="mb-3 mb-md-0"><img alt="" src={images[key] || images[0]} /></div>   
+                                    </div>
+                                    <div className="col-12 col-md-7">
+                                        <h3 className="text-center mb-4">{t('learnerPlan', {learners: subscription.allowedStudents})}</h3>
+                                        <div className="d-sm-flex justify-content-center">
+                                            <div className="text-center mx-2">
+                                                <button className="btn btn-warning m-2" onClick={() => this._handleSelectPlan(subscription.id, 'month')}><Price price={subscription.priceMonthly} currency={subscription.currency} />/{t('month')}</button>
+                                            </div>
+                                            <div className="text-center mx-2">
+                                                <button className="btn btn-warning m-2" onClick={() => this._handleSelectPlan(subscription.id, 'year')}><Price price={subscription.priceYearly} currency={subscription.currency} />/{t('year')}</button>
+                                                <div className="text-center">({t('saveWithAnnual')})</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
         );
     }
 }

@@ -167,8 +167,8 @@ class Checkout extends Component {
     return <div className="m--margin-bottom-50">
         {loading && <Loader/>}
         {cartRecordsRequest.get('totalPrice') > 0 ?  
-            <div>
-                <div className="invoice-title mb-5 d-none b-sm-block">
+            <div>            
+                <div className="invoice-title mb-5 d-none d-sm-block">
                     <Trans i18nKey="translations:yourInvoice">
                         <span className="m--font-bolder">{{invoiceNo: cartRecordsRequest.get('invoiceNo')}}</span>
                         <span className="m--font-bolder">{{invoiceAmount: ('$' + cartRecordsRequest.get('totalPrice').toFixed(2) + ' ' + cartRecordsRequest.get('currency'))}}</span>
@@ -215,31 +215,29 @@ class Checkout extends Component {
   render() {
     const { stepIndex } = this.state;
     const { t } = this.props;
-    return (      
-        <div className='row-14 d-flex justify-content-center m--margin-top-30'>
-          <div className="col-12 col-sm-11 col-md-9 col-xl-8">                       
+    return (
+        <div className="container p-5">
             <div className="m-portlet  m-portlet--head-solid-bg">
-              <div className='m-portlet__body position-relative'>               
-                <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
-                  <Step>
-                    <StepLabel>{t('shipping')}</StepLabel>
-                  </Step>
-                  <Step>
-                    <StepLabel>{t('billing')}</StepLabel>
-                  </Step>
-                  <Step>
-                    <StepLabel>{t('confirmation')}</StepLabel>
-                  </Step>
-                </Stepper>
-                <div className="row">
-                  <div className='col-12'>
-                    {this._renderCheckoutSteps(stepIndex)}
-                  </div>
+                <div className='m-portlet__body position-relative'>               
+                    <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
+                        <Step>
+                            <StepLabel>{t('shipping')}</StepLabel>
+                        </Step>
+                        <Step>
+                            <StepLabel>{t('billing')}</StepLabel>
+                        </Step>
+                        <Step>
+                            <StepLabel>{t('confirmation')}</StepLabel>
+                        </Step>
+                    </Stepper>
+                    <div className="row">
+                        <div className='col-12'>
+                            {this._renderCheckoutSteps(stepIndex)}
+                        </div>
+                    </div>
                 </div>
             </div>
-          </div>
         </div>
-      </div>
     );
   }
 }

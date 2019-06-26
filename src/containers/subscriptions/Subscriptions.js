@@ -1,102 +1,201 @@
-import React, { Component } from 'react';
-import { withTranslation, Trans } from 'react-i18next';
-import { connect } from 'react-redux';
-import { selectGetRecordsRequest } from '../../redux/subscriptions/selectors';
-import { getRecords } from '../../redux/subscriptions/actions';
-import { push } from 'react-router-redux';
-import { Price } from '../../components/ui/Price';
-import Loader from '../../components/layouts/Loader';
-import './Subscriptions.css'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {withTranslation} from 'react-i18next';
+import {push} from 'react-router-redux';
+import {selectGetRecordsRequest, selectSubscribeRequest} from '../../redux/subscriptions/selectors';
+import {selectDiscountCodeRequest} from "../../redux/store/selectors";
+import {getRecords, subscribe, resetSubscribeRequest, resetGetUserRecordsRequest} from '../../redux/subscriptions/actions';
+import {Price} from '../../components/ui/Price';
+import CreditCardForm from "./forms/CreditCardForm";
+import SubscriptionsForm from "./forms/SubscriptionsForm";
+import Loader from "../../components/layouts/Loader";
+import DiscountCode from '../store/sections/DiscountCode';
 
 class Subscriptions extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {}
-  }
 
-  componentDidMount () {
-    const { getRecords } = this.props;
-    getRecords();
-  }
-  
-  _renderRecords () {
-    const { getRecordsRequest, goTo, t } = this.props;
-    const loading = getRecordsRequest.get('loading');
+    constructor(props) {
+        super(props);
+        this.state = {           
+            creditCard: {},
+            subscriptionId: null,
+            period: 'month',
+            showBillingForm: false
+        };
+    }
 
-    if (!loading && getRecordsRequest.get('records').size === 0) {
-      return (
-            <div className="table-message">
-              <h2>{t('subscriptionsNotFound')}</h2>
-            </div>
-      );
-    }              
+    componentDidMount() {        
+        const {getRecords} = this.props;        
+        getRecords();
+    }
     
-    return getRecordsRequest.get('records').map((record, key) => {
-        const courses = record.get('allowedCourses');
-        const students = record.get('allowedStudents');        
-        return (        
-        <div key={key} className="subscription-item-block col-sm-12 col-md-4 col-lg-4 col-xl-4 m--margin-top-35">
-            <div className={`subscription-item item-${key}`}>
-                <div className="subscription-header"><h1>{t(record.get('title'))}</h1></div>
-                <div className="subscription-content">
-                    <div className="subscription-prices">
-                        <div className="row">
-                            <div className="selected col-6 col-sm-7 px-0 align-self-center"><span className="price"><Price price={record.get('priceMonthly')} /> <span className="small">{record.get('currency')}</span></span> <span className="text-muted">{t('perMonth')}</span></div>
-                            <div className="col-6 col-sm-5 px-0 text-right align-self-center"><span className="price"><Price price={record.get('priceYearly')} /> <span className="small">{record.get('currency')}</span></span> <span className="text-muted">{t('perYear')}</span></div>            
-                        </div>
-                    </div>
-                    <div className="subscription-description">
-                        <div className="subscription-limits">
-                            <Trans i18nKey="translations:courseAtTime">
-                                <span className="m--font-bolder">{{courses}}</span>
-                            </Trans>
-                            <br />
-                            <Trans i18nKey={record.get('allowedCourses') > 1 ? 'translations:courseAnyCoursesSwitchAnyTime' : 'translations:courseAnyCourseSwitchAnyTime'}>
-                                <span className="m--font-bolder">{{courses}}</span>
-                            </Trans>
-                            <br />
-                            <Trans i18nKey={record.get('allowedStudents') > 1 ? 'translations:usersMax' : 'translations:userMax'}>
-                                <span className="m--font-bolder">{{students}}</span>
-                            </Trans>
-                        </div>            
-                        <div className="subscription-bonuses text-left">
-                            <span>{t('annualBonus')}:</span>
-                            <span className="bonus">{record.get('allowedStudents') > 1 ? t('freeWorkbooks', {number: record.get('allowedStudents')}) : t('freeWorkbook')}</span>
-                        </div>
-                        <p className="text-center">
-                            <button onClick={() => { goTo(`/subscribe/${record.get('id')}`); }} className="btn btn-info">{t('getThis')}</button>
-                        </p>
-                    </div>
+    componentWillReceiveProps(nextProps) {
+        this._handleSubscribe(nextProps);
+        this._handleDiscountCode(nextProps);
+    }
+    
+    _handleSubscribe(nextProps) {
+        const success = this.props.subscribeRequest.get('success');
+        const nextSuccess = nextProps.subscribeRequest.get('success');
+
+        if (!success && nextSuccess) {      
+            const paymentId = nextProps.subscribeRequest.get('paymentId');
+            
+            this.props.resetSubscribeRequest();
+            this.props.resetGetUserRecordsRequest();
+            
+            this.setState({
+                showBillingForm: false,
+                subscriptionId: null,
+                creditCard: {}
+            });
+            
+            this.props.goTo(`/subscribed/${paymentId}`);
+        }        
+    }
+    
+    _handleDiscountCode(nextProps) {
+        if (!this.props.discountCodeRequest.get('success') && nextProps.discountCodeRequest.get('success')) {
+            this.props.getRecords();            
+        }
+    }     
+
+    _getSelectedPlan() {
+        const {getRecordsRequest, t} = this.props;
+        
+        const subscription = getRecordsRequest.get('records').find((element) => {
+            return (Number(element.get('id')) === this.state.subscriptionId);
+        });
+        
+        if (subscription) {
+            let price = (this.state.period === 'month' ? subscription.get('priceMonthly') : subscription.get('priceYearly'));
+            let totalPrice = price;
+            let discount = 0;
+            
+            if (subscription.get('discount') > 0) {
+                discount    = (price / 100) * subscription.get('discount');
+                totalPrice  = price - discount;
+            }
+        
+            return (
+                <div className="col-sm-12 text-center">
+                    {(subscription.get('discount') > 0) && <div>
+                        <p className="display-10">{t('price')}: <strong><Price price={price} currency={subscription.get('currency')} /></strong> / {t(this.state.period)}</p>                        
+                        <p className="display-10">{t('discount')}: <strong><Price price={discount} currency={subscription.get('currency')} /></strong></p>
+                    </div>}
+                    <p className="display-6">{t('yourPlan')}: <strong className="g-blue"><Price price={totalPrice} currency={subscription.get('currency')} /></strong> / {t(this.state.period)}</p>     
                 </div>
-            </div>  
-        </div>);
-    });
-  }
+            );
+        }                
+    }
+   
+    _handleSelectPlan(data) {
+        this.setState(data);
+        this._showBillingForm(true);
+    }
+    
+    _handleInputChange(event) {
+        const { name, value } = event.target;
 
-  render() {
-    const { t, getRecordsRequest } = this.props;       
+        this.setState({
+            [name]: value
+        });
+    }
 
-    return (<div className="fadeInLeft animated">
-        <h1 className="text-center m--margin-top-50 g-metal">{t('courseSubscriptionOptions')}</h1>
-        <div className="px-3">
-            <div className="subscriptions-block">
-                <div className="row">
-                    {getRecordsRequest.get('success') ? this._renderRecords() : <Loader />}
+    _handlePeriodChange(event) {        
+        const { value } = event.target;
+        this.setState({
+            period: value
+        });
+    }
+    
+    _handleForm(form) {      
+        this.setState({
+            ...this.state,
+            creditCard: {
+                ...form
+            }
+        });
+    }    
+  
+    _submitCreditCardPayment() {
+        this.props.subscribe({
+            ...this.state.creditCard,
+            period: this.state.period,
+            subscriptionId: this.state.subscriptionId
+        });        
+    };
+    
+    _showBillingForm(value) {
+        this.setState({
+            showBillingForm: value
+        });        
+    }
+    
+    _renderBillingForm() {
+        
+        const {subscribeRequest, t} = this.props;
+        const {creditCard}  = this.state;
+        const errors        = subscribeRequest.get('errors');
+        const loading       = subscribeRequest.get('loading');
+        
+        return <div className="col-sm-12 col-md-10 col-lg-9 col-xl-6 m-auto">
+            <h1 className="text-center m--margin-top-50 g-metal">{t('subscriptions')}</h1>
+            <div className='m-portlet m-portlet--head-solid-bg my-5'>
+                <div className='m-portlet__body'>
+                    <div className='m-form m-form--label-align-right mx-5 my-4'>
+                        <h2 className='mb-3'>{t('creditCard')}</h2>                    
+                        <div className='align-items-center'>                                                                                
+                            {this._getSelectedPlan()}
+
+                            <div className="d-flex justify-content-around mb-3">
+                                <DiscountCode type="subscription" />
+                            </div>
+
+                            <CreditCardForm errors={errors} onChange={(form) => this._handleForm(form)} form={creditCard} />
+
+                            <div className="text-center my-3">                                        
+                                <button disabled={loading} onClick={() => { this._submitCreditCardPayment() }} className="btn btn-info">{t('makePayment')}</button>
+                                <button disabled={loading} onClick={() => { this._showBillingForm(false) }} className="btn btn-default m--margin-left-10">{t('back')}</button>                                                                  
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>);
-  }
+        </div>;
+    }
+    
+    render() {        
+        
+        const {subscribeRequest, getRecordsRequest} = this.props;        
+                
+        return (
+            <div>
+                {(subscribeRequest.get('loading') || getRecordsRequest.get('loading')) && <Loader />}
+                {this.state.showBillingForm ?
+                    this._renderBillingForm()
+                :                
+                    <SubscriptionsForm
+                        subscriptions={getRecordsRequest.get('records')}
+                        onSelect={(data) => this._handleSelectPlan(data)}/>
+                }      
+            </div>        
+        );
+    }
 }
 
 Subscriptions = connect(
-  (state) => ({
-    getRecordsRequest: selectGetRecordsRequest(state)    
-  }),
-  (dispatch) => ({
-    getRecords: (params = {}) => { dispatch(getRecords(params)) },
-    goTo: (url) => {dispatch(push(url))}
-  })
+    (state) => ({
+        subscribeRequest:  selectSubscribeRequest(state),
+        getRecordsRequest: selectGetRecordsRequest(state),
+        discountCodeRequest:  selectDiscountCodeRequest(state)
+    }),
+    (dispatch) => ({
+        subscribe: (data) => dispatch(subscribe(data)),
+        resetSubscribeRequest: () => dispatch(resetSubscribeRequest()),
+        resetGetUserRecordsRequest: () => dispatch(resetGetUserRecordsRequest()),
+        getRecords: () => dispatch(getRecords()),
+        goTo: (url) => {dispatch(push(url))}
+    })
 )(Subscriptions);
 
 export default withTranslation('translations')(Subscriptions);

@@ -15,7 +15,13 @@
 ::-webkit-scrollbar-track {
     background-color: #ededed;
 }
-
+.m-page--fluid .m-header.checkout-header {
+    background-color: #1B3F5E;
+    height: 40px;
+}
+.m-header.checkout-header .m-nav__link-icon {
+    color: #fff;
+}
 button, [role="button"], [type="button"], .btn {
     outline: none !important;
 }
@@ -60,7 +66,9 @@ textarea {
 .m-o-hidden {
     overflow: hidden !important;
 }
-
+.content-wrapper {
+    margin-bottom: 30px;
+}
 .btn-outline-metal.btn-white {
     color: #fff;
     border-color: #fff;

@@ -20,18 +20,18 @@ class InvoiceForm extends Component {
         const {t, auth}     = this.props;
                
         return (
-            <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
+            <div className='m-form m-form--label-align-right mx-5 my-4'>
                 <div className='row align-items-center'>                                
                     {invoice &&
                         <div className="col-sm-12">
-                            <p className="text-center invoice-title">
+                            <p className="text-center invoice-title mb-4">
                                 <Trans i18nKey="translations:yourInvoice">
                                     <span className="m--font-bolder">{{invoiceNo: invoice.get('subscriptionNo')}}</span>
                                     <span className="m--font-bolder">{{invoiceAmount: renderToString(<Price price={invoice.get('price')} currency={invoice.get('currency')} />)}}</span>
                                 </Trans>
                             </p>
                             <div>
-                                <h3>{t('subscriptionDetails')}</h3>
+                                <h4 className="text-center">{t('subscriptionDetails')}</h4>
                                 <div className="my-3">
                                     <div>
                                         <label>{t('name')}:</label> <strong>{t(invoice.get('title'))}</strong>

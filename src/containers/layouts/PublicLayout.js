@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Header from '../ui/Header';
 import {withRouter} from "react-router-dom";
 
-class MainLayout extends Component {
+class PublicLayout extends Component {
 
   render() {
     const {pathname} = this.props.location;                
@@ -12,7 +12,7 @@ class MainLayout extends Component {
       <div className={`m-header--fixed m-header--fixed-mobile m-page m--full-height ${segments[0]}`} id={segments.join('_')}>
         <div className="m-body main-background justify-content-center">
           <Header hideMenu={true} mobileSidebar={ () => {} }/>
-          <div className="m--padding-bottom-30">            
+          <div className="content-wrapper">            
               {this.props.children}            
           </div>
         </div>
@@ -21,4 +21,4 @@ class MainLayout extends Component {
   }
 }
 
-export default withRouter(MainLayout);
+export default withRouter(PublicLayout);

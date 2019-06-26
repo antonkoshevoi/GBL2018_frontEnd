@@ -456,47 +456,12 @@ nav .nav-narrow {
 .splash-footer .img-logo {
     width: 85px;
 }
-.gifts .subscriptions {
-    min-height: 450px;
-    background-image: url(../media/images/subscription-bg.png);
-    background-color: #f2a517;
-    background-position: center bottom;
-    background-repeat: no-repeat;    
-}
 .gifts.splash-container .container.full-width {
     width: 100%;
     max-width: 100%;
     padding-left: 0; 
     padding-right: 0;
     margin-bottom: -60px;
-}
-.gifts .subscriptions-list img {
-    max-width: 70%;
-}
-.gifts .subscriptions-list {
-    background-color: #d8dcdd;    
-    color: #08284c;
-    min-height: 500px;
-}
-.gifts .subscriptions-list h3 {
-    font-size: 2rem;
-}
-.gifts .subscriptions-list .btn {
-    color: #08284c;
-    font-size: 1.5rem;
-    border-radius: 10px;
-}
-.gifts .subscriptions > div {
-    color: #052648;
-    padding-bottom: 1rem;    
-}
-.gifts .subscriptions > div h3 {
-    font-size: 1.5rem;
-}
-.gifts .subscriptions > div p {
-    margin: 0.2rem 0;
-    font-size: 1.25rem;
-    font-weight: 500;
 }
 /* Responsive Handling */
 
