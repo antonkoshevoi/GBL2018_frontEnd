@@ -10,18 +10,11 @@ import {giftPublic, resetPublicGiftRequest} from '../../redux/gifts/actions';
 import {Price} from "../../components/ui/Price";
 import GiftForm from "./forms/GiftForm";
 import CreditCardForm from "../subscriptions/forms/CreditCardForm";
+import SubscriptionsForm from "../subscriptions/forms/SubscriptionsForm";
 import InvoiceForm from "../subscriptions/forms/InvoiceForm";
 import Loader from '../../components/layouts/Loader';
 import SplashWrapper from './sections/SplashWrapper';
 import DiscountCode from '../store/sections/DiscountCode';
-
-import learner1 from '../../media/images/1-learner.png';
-import learner3 from '../../media/images/3-learner.png';
-import learner4 from '../../media/images/5-learner.png';
-
-const images = [
-    learner1, learner3, learner4
-];
 
 const Portlet = (props) => {    
     const {t} = props;       
@@ -114,11 +107,8 @@ class Gift extends Component {
         }                
     }
     
-    _handleSelectPlan(id, period) {
-        this.setState({
-            subscriptionId: id,
-            period: period
-        });
+    _handleSelectPlan(data) {
+        this.setState(data);
         this._setStep(2);
     }
 
@@ -159,49 +149,7 @@ class Gift extends Component {
         this.setState({
             step: value
         });
-    }
-    
-    _renderSubscriptions() {
-        const {getRecordsRequest, t} = this.props;
-        return <div>
-            <div className="subscriptions d-flex justify-content-center align-items-end">
-                <div>
-                    <h3>{t('subscriptionPlansInclude')}</h3>
-                    <p>* {t('accessToAllCourses')}</p>
-                    <p>* {t('simultaneousCoursesPerLearner')}</p>
-                    <p>* {t('switchCoursesAnytime')}</p>
-                    <p>* {t('adminToolsAndReports')}</p>
-                </div>
-            </div>
-            <div className="subscriptions-list py-5">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12 col-md-11 col-lg-10 col-xl-8 m-auto">
-                        { getRecordsRequest.get('records').toJS().map((subscription, key) => (
-                            <div className="row mb-4" key={key}>
-                                <div className="col-12 col-md-5 text-center d-md-flex align-items-center">
-                                    <div className="mb-3 mb-md-0"><img alt="" src={images[key] || images[0]} /></div>   
-                                </div>
-                                <div className="col-12 col-md-7">
-                                    <h3 className="text-center mb-4">{t('learnerPlan', {learners: subscription.allowedStudents})}</h3>
-                                    <div className="d-sm-flex justify-content-center">
-                                        <div className="text-center mx-2">
-                                            <button className="btn btn-warning m-2" onClick={() => this._handleSelectPlan(subscription.id, 'month')}><Price price={subscription.priceMonthly} currency={subscription.currency} />/{t('month')}</button>
-                                        </div>
-                                        <div className="text-center mx-2">
-                                            <button className="btn btn-warning m-2" onClick={() => this._handleSelectPlan(subscription.id, 'year')}><Price price={subscription.priceYearly} currency={subscription.currency} />/{t('year')}</button>
-                                            <div className="text-center">({t('saveWithAnnual')})</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>;
-    }
+    }    
     
     render() {        
         
@@ -213,20 +161,23 @@ class Gift extends Component {
         return (
             <SplashWrapper fullWidth={(step === 1)} className="gifts splash-container">                
                 {loading && <Loader/>}
-                {step === 1 && this._renderSubscriptions()}
+                {step === 1 && <SubscriptionsForm
+                    subscriptions={getRecordsRequest.get('records')}
+                    onSelect={(data) => this._handleSelectPlan(data)} />
+                }
                 {step === 2 &&
                     <Portlet {...this.props}>
-                        <div className='m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30'>
+                        <div className='m-form m-form--label-align-right my-4 mx-5'>
                             {this._getSelectedPlan()}
                             <h2 className='m--margin-20'>{t('personalInformation')}</h2>                    
-                            <div className='row align-items-center'>
+                            <div className='align-items-center'>
                                 <GiftForm errors={errors} onChange={(form) => this._handleForm(form)} form={billingData} />
                             </div>                                
                             <h2 className='m--margin-20'>{t('creditCard')}</h2>                    
-                            <div className='row align-items-center'>
+                            <div className='align-items-center'>
                                 <CreditCardForm errors={errors} onChange={(form) => this._handleForm(form)} form={billingData} />                                        
                             </div>
-                            <div className='row align-items-center'>
+                            <div className='align-items-center'>
                                 <div className="col-sm-12 text-center m--margin-top-35">                                        
                                     <button disabled={loading} onClick={() => { this._setStep(1) }} className="btn btn-default">{t('back')}</button>                                                                  
                                     <button disabled={loading} onClick={() => { this._submitCreditCardPayment() }} className="btn btn-info m--margin-left-10">{t('makePayment')}</button>

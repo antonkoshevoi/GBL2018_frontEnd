@@ -3,7 +3,10 @@ import {Switch} from 'react-router';
 
 import AppContainer from '../containers/AppContainer';
 import AuthenticatedRoute from '../containers/routing/AuthenticatedRoute';
+
 import MainLayout from '../containers/layouts/MainLayout';
+import CheckoutLayout from '../containers/layouts/CheckoutLayout';
+import PublicLayout from "../containers/layouts/PublicLayout";
 
 import Login from '../containers/auth/Login';
 import RestorePassword from '../containers/auth/RestorePassword';
@@ -43,7 +46,6 @@ import Transactions from "../containers/transactions/Transactions";
 
 import Subscriptions from "../containers/subscriptions/Subscriptions";
 import MySubscriptions from "../containers/subscriptions/MySubscriptions";
-import Subscribe from "../containers/subscriptions/Subscribe";
 import Subscribed from "../containers/subscriptions/Subscribed";
 
 import ReportsDashboard from "../containers/reports/Dashboard";
@@ -51,7 +53,6 @@ import ClassRoomReportDashboard from "../containers/reports/classroom/Dashboard"
 import HomeRoomReportDashboard from "../containers/reports/homeroom/Dashboard";
 import InvitationDetails from '../containers/demo-courses/InvitationDetails';
 import ShoppingCart from "../containers/store/ShoppingCart";
-import OnlyHeadLayout from "../containers/layouts/OnlyHeadLayout";
 import AutoCreate from "../containers/classrooms/AutoCreate";
 import SplashContainer from "../containers/static/Splash";
 import Content from "../containers/static/Content";
@@ -100,10 +101,9 @@ export default () => (
       
       <Route exact path='/signUp' title='signUp' component={SignUpIndex} />
       <Route exact path='/gift' title='sentGift' component={Gift} />      
-      <Route exact layout={OnlyHeadLayout} path='/signUp/parent' title='signUpParent' component={SignUpParent} />
-      <Route exact layout={OnlyHeadLayout} path='/signUp/principal' title='signUpPrincipal' component={SignUpPrincipal} />
-      
-      <Route exact layout={OnlyHeadLayout} path='/invitations/details/:id/:hash' title='InvitationDetails' component={InvitationDetails}/>
+      <Route exact layout={PublicLayout} path='/signUp/parent' title='signUpParent' component={SignUpParent} />
+      <Route exact layout={PublicLayout} path='/signUp/principal' title='signUpPrincipal' component={SignUpPrincipal} />      
+      <Route exact layout={PublicLayout} path='/invitations/details/:id/:hash' title='InvitationDetails' component={InvitationDetails}/>
       
       <Route exact layout={MainLayout} path='/store' title='store' component={Store}/>
       <Route exact layout={MainLayout} path='/store/details/:id' title='storeDetails' component={Details}/>
@@ -114,7 +114,7 @@ export default () => (
       
       <Route exact layout={MainLayout} path='/students/accept/:id/:hash' title='acceptStudentRequest' component={AcceptStudent}/>
       <Route exact layout={MainLayout} path='/connections/accept/:id/:hash' title='acceptConnectionRequest' component={AcceptConnection}/>
-      <Route exact layout={OnlyHeadLayout} path='/create-account/:id/:hash' title='createAccount' component={CreateAccount}/>      
+      <Route exact layout={PublicLayout} path='/create-account/:id/:hash' title='createAccount' component={CreateAccount}/>      
       
       {/*Messages*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/messages/alerts' title='alerts' component={Alerts} />
@@ -147,9 +147,8 @@ export default () => (
       
       {/*Subscriptions*/}
       <AuthenticatedRoute exact layout={MainLayout}     roles={['Parents']} path='/my-subscriptions' title='mySubscriptions' component={MySubscriptions} />
-      <AuthenticatedRoute exact layout={OnlyHeadLayout} roles={['Parents']} path='/subscriptions' title='subscriptions' component={Subscriptions} />
-      <AuthenticatedRoute exact layout={OnlyHeadLayout} roles={['Parents']} path='/subscribe/:id' title='buySubscription' component={Subscribe} />
-      <AuthenticatedRoute exact layout={OnlyHeadLayout} roles={['Parents']} path='/subscribed/:id' title='subscribed' component={Subscribed} />
+      <AuthenticatedRoute exact layout={CheckoutLayout} roles={['Parents']} path='/subscriptions' title='subscriptions' component={Subscriptions} />      
+      <AuthenticatedRoute exact layout={CheckoutLayout} roles={['Parents']} path='/subscribed/:id' title='subscribed' component={Subscribed} />
 
       {/*Reports*/}
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher']} path='/reports' title='reports' component={ReportsDashboard}/>
@@ -168,8 +167,8 @@ export default () => (
 
       {/*Store*/}    
       <Route exact layout={MainLayout} path='/store/shopping-cart' title='shoppingCart' component={ShoppingCart}/>
-      <Route exact layout={OnlyHeadLayout} path='/shopping/checkout' title='checkout' component={Checkout}/>
-      <Route exact layout={OnlyHeadLayout} path='/shopping/checkout/:invoiceNo?/:hash?' title='checkout' component={Invoice}/>
+      <Route exact layout={PublicLayout} path='/shopping/checkout' title='checkout' component={Checkout}/>
+      <Route exact layout={PublicLayout} path='/shopping/checkout/:invoiceNo?/:hash?' title='checkout' component={Invoice}/>
             
       {/*User*/}
       <AuthenticatedRoute exact layout={MainLayout} path='/profile' title='myProfile' component={Profile} />

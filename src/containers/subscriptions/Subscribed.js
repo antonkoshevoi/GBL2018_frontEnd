@@ -22,17 +22,15 @@ class Subscribed extends Component {
   render() {
     const {invoiceRequest, t} = this.props;
     const invoice = invoiceRequest.get('record');    
-    return (
-        <div className='fadeInLeft animated'>
+    return (        
+        <div className="col-sm-12 col-md-10 col-lg-9 col-xl-6 m-auto m-auto">
             <h1 className="text-center m--margin-top-50 g-metal">{t('youBoughtSubscription')}</h1>                
-            <div className="col-sm-12 col-md-10 col-lg-9 col-xl-8 m-auto">
-                <div className='m-portlet m-portlet--head-solid-bg m--margin-top-30'>
-                    <div className='m-portlet__body'>
-                        {invoiceRequest.get('loading') ? <Loader/> : <InvoiceForm data={invoice} />}                                    
-                    </div>
+            <div className='m-portlet m-portlet--head-solid-bg m--margin-top-30'>
+                <div className='m-portlet__body'>
+                    {invoiceRequest.get('loading') ? <Loader/> : <InvoiceForm data={invoice} />}                                    
                 </div>
             </div>
-        </div>
+        </div>       
     );
   }
 }

@@ -1,0 +1,35 @@
+.subscriptions-banner {
+    min-height: 450px;
+    background-image: url(../media/images/subscription-bg.png);
+    background-color: #f2a517;
+    background-position: center bottom;
+    background-repeat: no-repeat;    
+}
+.subscriptions-banner > .description {
+    color: #052648;
+    padding-bottom: 1rem;    
+}
+.subscriptions-banner > .description h3 {
+    font-size: 1.5rem;
+}
+.subscriptions-banner > .description p {
+    margin: 0.2rem 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+.subscriptions-list img {
+    max-width: 70%;
+}
+.subscriptions-list {
+    background-color: #d8dcdd;    
+    color: #08284c;
+    min-height: 500px;
+}
+subscriptions-list h3 {
+    font-size: 2rem;
+}
+.subscriptions-list .btn {
+    color: #fff;
+    font-size: 1.6rem;
+    border-radius: 10px;
+}
