@@ -6,23 +6,25 @@
     background-repeat: no-repeat;    
 }
 .subscriptions-banner > .description {
-    color: #052648;
+    color: #1B3F5E;
     padding-bottom: 1rem;    
 }
 .subscriptions-banner > .description h3 {
     font-size: 1.5rem;
+    color: #1B3F5E;
 }
 .subscriptions-banner > .description p {
     margin: 0.2rem 0;
     font-size: 1.25rem;
     font-weight: 500;
+    color: #1B3F5E;
 }
 .subscriptions-list img {
     max-width: 70%;
 }
 .subscriptions-list {
     background-color: #d8dcdd;    
-    color: #08284c;
+    color: #1B3F5E;
     min-height: 500px;
 }
 subscriptions-list h3 {
@@ -32,4 +34,5 @@ subscriptions-list h3 {
     color: #fff;
     font-size: 1.6rem;
     border-radius: 10px;
+    color: #1B3F5E;
 }

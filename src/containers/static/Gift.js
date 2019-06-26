@@ -13,6 +13,7 @@ import DiscountCode from '../store/sections/DiscountCode';
 import CreditCardForm from "../subscriptions/forms/CreditCardForm";
 import SubscriptionsForm from "../subscriptions/forms/SubscriptionsForm";
 import InvoiceForm from "../subscriptions/forms/InvoiceForm";
+import SplashFooter from "./sections/SplashFooter"
 import Loader from '../../components/layouts/Loader';
 
 const Portlet = (props) => {    
@@ -191,7 +192,8 @@ class Gift extends Component {
                     <Portlet {...this.props}>                        
                         <InvoiceForm data={giftRequest.get('record')} />
                     </Portlet>                    
-                }                         
+                }
+                <SplashFooter {...this.props} />
             </div>
         );
     }

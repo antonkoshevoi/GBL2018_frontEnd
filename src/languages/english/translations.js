@@ -657,5 +657,7 @@ export default {
     switchCoursesAnytime: 'freedom to switch courses anytime',
     adminToolsAndReports: 'parental admin tools and reports',
     saveWithAnnual: 'save 15% with annual',
-    learnerPlan: '{{learners}} Learner Plan'    
+    learnerPlan: '{{learners}} Learner Plan',
+    privacy: 'Privacy Policy',
+    terms: 'Terms of Service',
 }

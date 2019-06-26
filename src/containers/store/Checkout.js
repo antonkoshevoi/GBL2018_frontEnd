@@ -168,7 +168,7 @@ class Checkout extends Component {
         {loading && <Loader/>}
         {cartRecordsRequest.get('totalPrice') > 0 ?  
             <div>            
-                <div className="invoice-title mb-5 d-none d-sm-block">
+                <div className="invoice-title my-3 my-lg-5 d-none d-sm-block">
                     <Trans i18nKey="translations:yourInvoice">
                         <span className="m--font-bolder">{{invoiceNo: cartRecordsRequest.get('invoiceNo')}}</span>
                         <span className="m--font-bolder">{{invoiceAmount: ('$' + cartRecordsRequest.get('totalPrice').toFixed(2) + ' ' + cartRecordsRequest.get('currency'))}}</span>
