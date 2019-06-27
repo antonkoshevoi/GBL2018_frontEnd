@@ -145,14 +145,9 @@ export default  {
                     link: 'store/category/student_rewards'
                 },
                 {
-                    key: 'tutoring_services',
-                    title: 'tutoringServices',
-                    link: 'store/category/tutoring_services'
-                },
-                {
-                    key: 'bundles',
+                    key: 'printables',
                     title: 'bundles',
-                    link: 'store/category/bundles'
+                    link: 'store/category/printables'
                 }
             ]
         },

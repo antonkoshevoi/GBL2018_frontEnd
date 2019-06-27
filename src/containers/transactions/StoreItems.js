@@ -153,7 +153,10 @@ class StoreItems extends Component {
                             {item.get('thumbnail') ? <img src={item.get('thumbnail')} width={70} alt={item.get('title')}/> : '-'}
                         </div>
                     </Td>
-                    <Td><NavLink className="g-blue" to={`/store/details/${item.get('itemId')}`}>{item.get('title')}</NavLink></Td>
+                    <Td>
+                        <NavLink className="g-blue" to={`/store/details/${item.get('itemId')}`}>{item.get('title')}</NavLink>
+                        {(item.get('downloadUrl') && item.get('isDigitalOnly')) && <a className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15" href={item.get('downloadUrl')}><i class="fa fa-download" aria-hidden="true"></i></a>}
+                    </Td>
                     <Td>{item.get('quantity')}</Td>
                     <Td><Price price={item.get('totalPrice')} currency={item.get('currency')} /></Td>                    
                 </Row>
