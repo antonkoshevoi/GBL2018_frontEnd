@@ -655,5 +655,6 @@ export default {
     saveWithAnnual: 'save 15% with annual',
     learnerPlan: '{{learners}} Learner Plan',
     privacy: 'Privacy Policy',
-    terms: 'Terms of Service',    
+    terms: 'Terms of Service',
+    printables: 'Printables'
 }

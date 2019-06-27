@@ -40,7 +40,7 @@ class Filter extends Component {
           books: 4,
           student_rewards: 5,
           stationary: 6,
-          tutoring_services: 7
+          printables: 7
       };
       
       const categoryId = categories[category] || 0;

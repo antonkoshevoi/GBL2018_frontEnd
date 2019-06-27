@@ -229,7 +229,17 @@
     .message-owner {
         border-bottom: 1px solid #ddd;
         padding-bottom: 0.8rem;
-    }    
+    }
+    .subscriptions-banner {
+        background-size: 110%;
+        min-height: 270px !important;
+    }
+    .subscriptions-banner > .description h3 {
+        font-size: 1.25rem;
+    }
+    .subscriptions-banner > .description p {
+        font-size: 1rem;
+    }
 }
 @media (max-width: 350px) {
     .m-dropdown.m-dropdown--mobile-full-width.m-dropdown--align-center > .m-dropdown__wrapper.messages {        
