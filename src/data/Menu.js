@@ -146,7 +146,7 @@ export default  {
                 },
                 {
                     key: 'printables',
-                    title: 'bundles',
+                    title: 'printables',
                     link: 'store/category/printables'
                 }
             ]
