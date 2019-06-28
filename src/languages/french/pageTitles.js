@@ -72,5 +72,6 @@ export default {
     alerts: 'Alertes',
     announcements: 'Annonces',
     assignments: 'Devoirs',
-    chats: 'Chats '
+    chats: 'Chats',
+    myDownloads: 'My Downloads'
 }

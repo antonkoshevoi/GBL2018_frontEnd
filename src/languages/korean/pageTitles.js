@@ -72,5 +72,6 @@ export default {
     alerts: '알림',
     announcements: '공지',
     assignments: '과제',
-    chats: '대화하기'
+    chats: '대화하기',
+    myDownloads: 'My Downloads'
 }

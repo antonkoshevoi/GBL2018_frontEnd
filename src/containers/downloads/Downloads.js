@@ -37,10 +37,15 @@ class Downloads extends Component {
         return records.map((item, i) => {            
             return ([
                 <Row index={i} key={i}>
-                    <Td>{this._recordNumber(i)}</Td> 
+                    <Td className="d-none d-md-table-cell">{this._recordNumber(i)}</Td> 
                     <Td>
-                        <div>{item.get('title')}</div>
-                        <div className="text-muted">{item.get('description')}</div>                        
+                        <div className="d-flex align-items-center">
+                            {item.get('thumbnail') ? <img src={item.get('thumbnail')} width={90} alt={item.get('title')}/> : '-'}
+                            <div className="ml-2 text-center flex-grow-1">
+                                <p><strong>{item.get('title')}</strong></p>
+                                <p className="text-muted">{item.get('description')}</p>                        
+                            </div>
+                        </div>
                     </Td>
                     <Td className="d-none d-md-table-cell"><span className="g-blue"><Price price={item.get('totalPrice')} currency={item.get('currency')} /></span></Td>
                     <Td className="d-none d-md-table-cell"><DateTime time={item.get('createdAt')} /></Td>
@@ -63,8 +68,8 @@ class Downloads extends Component {
                     <Table>
                         <Thead>
                             <HeadRow>
-                                <Th>#</Th>
-                                <Th>{t('name')}</Th>                                
+                                <Th className="d-none d-md-table-cell">#</Th>                                
+                                <Th>{t('product')}</Th>                                
                                 <Th className="d-none d-md-table-cell">{t('price')}</Th>                                
                                 <Th className="d-none d-md-table-cell">{t('date')}</Th>
                                 <Th>{t('actions')}</Th>                                    

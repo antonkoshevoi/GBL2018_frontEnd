@@ -72,5 +72,6 @@ export default {
     alerts: '警讯',
     announcements: '公告',
     assignments: '指派课业',
-    chats: '聊天'
+    chats: '聊天',
+    myDownloads: 'My Downloads'
 }

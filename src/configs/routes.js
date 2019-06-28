@@ -181,7 +181,7 @@ export default () => (
       {/*Unassigned Credits*/}
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/accounts/unassigned_credits' title='unassignedCredits' component={UnassignedCredits} />
       <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/accounts/transactions' title='transactions' component={Transactions} />
-      <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/downloads' title='downloads' component={Downloads} />
+      <AuthenticatedRoute exact layout={MainLayout} roles={['Superadministrator', 'School', 'Teacher', 'Parents']} path='/downloads' title='myDownloads' component={Downloads} />
 
       {/*Connections*/}
       <AuthenticatedRoute exact layout={MainLayout} roles={['Parents']} path='/connections' title='myConnections' component={Connections} />
