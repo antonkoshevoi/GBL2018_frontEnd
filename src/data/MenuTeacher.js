@@ -137,6 +137,13 @@ export default  {
             ]
         },
         {
+            key: 'downloads',
+            title: 'myDownloads',
+            link: 'downloads',
+            icon: 'fa fa-download',
+            colorName: 'violet'
+        },        
+        {
             key: 'accounts',
             title: 'accounts',
             link: 'accounts',

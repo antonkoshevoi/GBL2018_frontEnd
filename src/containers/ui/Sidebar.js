@@ -134,8 +134,7 @@ class Sidebar extends Component {
   }
 
   _renderGoogleSubMenuContent(menu) {
-    const activeMenu = this.state.activeMenu;
-    
+    const activeMenu = this.state.activeMenu;    
     return (
       <div className={'second_level ' + (activeMenu.key === menu.key ? 'activeSubMenu fadeInUp  animated' : '')} id={menu.key}>
         <span className="back" onMouseOver={() => { this._menuBackHover() }}>

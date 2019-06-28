@@ -12,3 +12,11 @@ export const selectGetRecordsRequest = createSelector(
   selectStoreDomain,
   (subState) => subState.get('getRecordsRequest')
 );
+
+/**
+ * Get Downloads Request
+ */
+export const selectGetDownloadsRequest = createSelector(
+  selectStoreDomain,
+  (subState) => subState.get('getDownloadsRequest')
+);

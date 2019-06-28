@@ -1,6 +1,8 @@
 import {
-    GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL
+    GET_RECORDS, GET_RECORDS_SUCCESS, GET_RECORDS_FAIL,
+    GET_DOWNLOADS, GET_DOWNLOADS_SUCCESS, GET_DOWNLOADS_FAIL
 } from './actions';
+
 import Immutable from 'immutable';
 
 const initialState = Immutable.fromJS({
@@ -9,14 +11,21 @@ const initialState = Immutable.fromJS({
         success: false,
         fail: false,
         errorResponse: null,
-        records: [],
+        records: Immutable.List(),
         pagination: {
             page: 1,
             perPage: 25,
             total: 0,
             totalPages: 1
         }    
-    }
+    },
+    getDownloadsRequest: {
+        loading: false,
+        success: false,
+        fail: false,
+        errorResponse: null,
+        records: Immutable.List()
+    }    
 });
 
 export default function reducer (state = initialState, action) {
@@ -37,7 +46,20 @@ export default function reducer (state = initialState, action) {
         case GET_RECORDS_FAIL:
             return state.set('getRecordsRequest', initialState.get('getRecordsRequest').set('fail', true));
 
-
+        /**
+         * Get downloads
+         */
+        case GET_DOWNLOADS:
+            return state.set('getDownloadsRequest', initialState.get('getDownloadsRequest').set('loading', true));
+        case GET_DOWNLOADS_SUCCESS:
+            return state
+                .set('getDownloadsRequest', initialState.get('getDownloadsRequest')
+                  .set('success', true)                  
+                  .set('records', Immutable.fromJS(action.result.data))
+                );
+        case GET_DOWNLOADS_FAIL:
+            return state.set('getDownloadsRequest', initialState.get('getDownloadsRequest').set('fail', true));
+            
         /**
          * default
          */

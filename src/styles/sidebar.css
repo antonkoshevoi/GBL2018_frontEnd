@@ -96,117 +96,67 @@ nav.navigation > .menuItem > a.active {
     position: absolute;
 }
 
- nav.navigation > .menuItem > a.home .icon {
-    background: #385774;
+nav.navigation > .menuItem > a .icon,
+nav.navigation > .menuItem > a:hover > .content, 
+nav.navigation > .menuItem > a.hover > .content,
+nav.navigation > .menuItem > a.active > .content {    
     color: white;
 }
 
-nav.navigation > .menuItem > a.home.active,  nav.navigation > .menuItem > a.home:hover .content {
-    background: #385774;
-    color: white;
-}
-
-
-.menuItem > a.home + .second_level.activeSubMenu .content > a.active {
-    color: #385774;
-    font-weight: 500;
-}
-
-nav.navigation > .menuItem > a.home.active > .content {
+nav.navigation > .menuItem > a.home .icon,
+nav.navigation > .menuItem > a.home:hover > .content, 
+nav.navigation > .menuItem > a.home.hover > .content,
+nav.navigation > .menuItem > a.home.active > .content {    
     background: #385774;
 }
 
-nav.navigation > .menuItem > a.green .icon{
-    background: #7bc848;
-    color: white;
+nav.navigation > .menuItem > a.green .icon,
+nav.navigation > .menuItem > a.green:hover > .content, 
+nav.navigation > .menuItem > a.green.active > .content, 
+nav.navigation > .menuItem > a.green.hover > .content {
+    background: #7bc848;    
 }
 
-nav.navigation > .menuItem > a.green:hover > .content, nav.navigation > .menuItem > a.green.active > .content, nav.navigation > .menuItem > a.green.hover > .content {
-    background: #7bc848;
-    color: white;
+nav.navigation > .menuItem > a.red .icon, 
+nav.navigation > .menuItem > a.red:hover > .content, 
+nav.navigation > .menuItem > a.red.active > .content, 
+nav.navigation > .menuItem > a.red.hover > .content {
+    background: #ce342c;    
 }
 
-
-.menuItem > a.green + .second_level.activeSubMenu .content > a.active {
-    color: #7bc848;
-    font-weight: 500;
+nav.navigation > .menuItem > a.orange .icon, 
+nav.navigation > .menuItem > a.orange:hover > .content, 
+nav.navigation > .menuItem > a.orange.active > .content , 
+nav.navigation > .menuItem > a.orange.hover > .content {
+    background: #f8912a;    
 }
 
-nav.navigation > .menuItem > a.red .icon{
-    background: #ce342c;
-    color: white;
+nav.navigation > .menuItem > a.blue .icon, 
+nav.navigation > .menuItem > a.blue:hover > .content, 
+nav.navigation > .menuItem > a.blue.active > .content, 
+nav.navigation > .menuItem > a.blue.hover > .content{
+    background: #385774;    
 }
 
-nav.navigation > .menuItem > a.red:hover > .content, nav.navigation > .menuItem >  a.red.active > .content, nav.navigation > .menuItem > a.red.hover > .content {
-    background: #ce342c;
-    color: white;
+nav.navigation > .menuItem > a.purple .icon, 
+nav.navigation > .menuItem > a.purple:hover > .content, 
+nav.navigation > .menuItem > a.purple.active > .content, 
+nav.navigation > .menuItem > a.purple.hover > .content  {
+    background: #4fa1ea;    
 }
 
-.menuItem > a.red + .second_level.activeSubMenu .content > a.active {
-    color: #ce342c;
-    font-weight: 500;
+nav.navigation > .menuItem > a.grey .icon, 
+nav.navigation > .menuItem > a.grey:hover > .content, 
+nav.navigation > .menuItem > a.grey.active > .content, 
+nav.navigation > .menuItem > a.grey.hover > .content {
+    background: #558436;    
 }
 
-nav.navigation > .menuItem > a.orange .icon{
-    background: #f8912a;
-    color: white;
-}
-
-nav.navigation > .menuItem > a.orange:hover > .content, nav.navigation > .menuItem > a.orange.active > .content , nav.navigation > .menuItem > a.orange.hover > .content {
-    background: #f8912a;
-    color: white;
-}
-
-.menuItem > a.orange + .second_level.activeSubMenu .content > a.active {
-    color: #f8912a;
-    font-weight: 500;
-}
-
-nav.navigation > .menuItem > a.blue .icon{
-    background: #385774;
-    text-align: center;
-    color: white;
-}
-
-nav.navigation > .menuItem > a.blue:hover > .content, nav.navigation > .menuItem > a.blue.active > .content, nav.navigation > .menuItem > a.blue.hover > .content{
-    background: #385774;
-    color: white;
-}
-
-.menuItem > a.blue + .second_level.activeSubMenu .content > a.active {
-    color: #385774;
-    font-weight: 500;
-}
-
-nav.navigation > .menuItem > a.purple .icon{
-    background: #4fa1ea;
-    color: white;
-}
-
-nav.navigation > .menuItem > a.purple:hover > .content, nav.navigation > .menuItem > a.purple.active > .content, nav.navigation > .menuItem > a.purple.hover > .content  {
-    background: #4fa1ea;
-    color: white;
-}
-
-.menuItem > a.purple + .second_level.activeSubMenu .content > a.active {
-    color: #4fa1ea;
-    font-weight: 500;
-}
-
-nav.navigation > .menuItem > a.grey .icon{
-    background: #558436;
-    color: white;
-    text-align: center;
-}
-
-nav.navigation > .menuItem > a.grey:hover > .content, nav.navigation > .menuItem > a.grey.active > .content, nav.navigation > .menuItem > a.grey.hover > .content {
-    background: #558436;
-    color: white;
-}
-
-.menuItem > a.grey + .second_level.activeSubMenu .content > a.active {
-    color: #558436;
-    font-weight: 500;
+nav.navigation > .menuItem > a.violet .icon,
+nav.navigation > .menuItem > a.violet:hover > .content, 
+nav.navigation > .menuItem > a.violet.active > .content, 
+nav.navigation > .menuItem > a.violet.hover > .content {
+    background: #7900C7;    
 }
 
 nav.navigation .second_level {
