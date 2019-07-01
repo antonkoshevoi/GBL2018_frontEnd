@@ -52,14 +52,46 @@ class Details extends Component {
   _addToCart(id) {
     this.props.addToShoppingCart(id);
   }
+  
+  _renderPrices() {
+        const {record, t} = this.props;        
+
+        if (record.get('digitalItemId')) {
+            return <div className='d-flex justify-content-end pr-4'>
+                <div>
+                    <p className='mb-2 d-flex justify-content-between align-items-center'>
+                        <span>{t('printable')}</span> <i class="fa fa-download display-6" aria-hidden="true"></i>
+                    </p>
+                    <button className="btn btn-primary" onClick={() => { this._addToCart(record.get('digitalItemId')) }}>
+                        <Price price={record.get('digitalItem').get('discountPrice')} currency={record.get('currency')} />
+                    </button>
+                </div>
+                <div className='ml-5'>
+                    <p className='mb-2 d-flex justify-content-between align-items-centern'>
+                        <span>{t('physical')}</span> 
+                        <i class="fa fa-truck display-6" aria-hidden="true"></i>
+                    </p>
+                    <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>                                            
+                        <Price price={record.get('discountPrice')} currency={record.get('currency')} />                    
+                    </button>
+                </div>
+            </div>;
+        }
+        
+        return <div className="actionsBtn justify-content-end full-width align-items-center d-flex m--padding-right-20 align-self-center">
+            <div className="m--padding-right-20">{record.get('discount') > 0 && <span className="position-relative discount"><span><Price price={record.get('price')} currency={record.get('currency')} /></span></span>}</div>
+                <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>                                            
+                    <Price price={record.get('discountPrice')} currency={record.get('currency')} />
+                </button>
+            </div>;     
+  }
 
   render() {
     const {record, records, addToCartRequest, getSingleRecordRequest, getRecordsRequest, t} = this.props;
-    const loadingSingle = getSingleRecordRequest.get('loading');
-    const successSingle = getSingleRecordRequest.get('success');    
-    const successRecords = getRecordsRequest.get('success');    
-    const price         = successSingle ? Number(record.get('price')) : 0;
-    const discountPrice = Number(price - (price * record.get('discount') / 100));
+    const loading           = getSingleRecordRequest.get('loading') || addToCartRequest.get('loading');
+    const successSingle     = getSingleRecordRequest.get('success');    
+    const successRecords    = getRecordsRequest.get('success');
+    
     const showFilters = {
         sort: false,
         all: true,
@@ -76,7 +108,7 @@ class Details extends Component {
 
     return (
       <div className="m-portlet store-wrapper fadeInLeft animated">
-        {loadingSingle && <Loader/>}
+        {loading && <Loader/>}
         <div className="m-portlet__head m--margin-bottom-30">
           <div className="m-portlet__head-caption">
             <Filter isActive={false} type="details" onChange={() => { }} isShow={showFilters} />
@@ -109,17 +141,8 @@ class Details extends Component {
                               </div>
                             </div>
                           </div>
-                          <div className="actionsBtn justify-content-end full-width align-items-center d-flex m--padding-right-20 align-self-center">
-                            <div className="m--padding-right-20">{record.get('discount') > 0 && <span className="position-relative discount"><span><Price price={price} currency={record.get('currency')} /></span></span>}</div>
-                            <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>
-                              <span>
-                                {addToCartRequest.get('success') && <i className="fa floating-basket fa-shopping-basket"></i>}
-                                <span><Price price={discountPrice} currency={record.get('currency')} /></span> <span className="text-uppercase">{t('buy')}</span>
-                              </span>
-                            </button>
-                          </div>
+                          {successSingle && this._renderPrices()}
                         </div>
-
                       </div>
                       {record.get('videoLink') &&
                       <div className="col-md-12 m--margin-top-15">
