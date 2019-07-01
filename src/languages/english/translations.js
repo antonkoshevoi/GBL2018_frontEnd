@@ -662,5 +662,7 @@ export default {
     terms: 'Terms of Service',
     printables: 'Printables',
     myDownloads: 'My Downloads',
-    noDownloads: 'No Products to Download...'
+    noDownloads: 'No Products to Download...',
+    physical: 'Physical',
+    printable: 'Printable'
 }

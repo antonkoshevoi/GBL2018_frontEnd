@@ -656,5 +656,7 @@ export default {
     learnerPlan: '{{learners}} Learner Plan',
     privacy: 'Privacy Policy',
     terms: 'Terms of Service',
-    printables: 'Printables'
+    printables: 'Printables',
+    physical: 'Physical',
+    printable: 'Printable'
 }
