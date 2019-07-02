@@ -16,7 +16,7 @@ class Shipping extends Component {
     componentWillReceiveProps(nextProps){
         if (!this.props.validateAddressRequest.get('success') && nextProps.validateAddressRequest.get('success')) {
             this.props.onDataSaved(this.state.address);
-            this.props.onDataSaved(this.state.address);
+            this.props.resetValidateAddressRequest();
         }
     }    
 

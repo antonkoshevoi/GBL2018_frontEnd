@@ -5,8 +5,8 @@ import {selectGetCartRecordsRequest} from '../../redux/store/selectors';
 import {getCartRecords} from '../../redux/store/actions';
 import {withRouter, NavLink} from 'react-router-dom';
 import {push} from 'react-router-redux';
-import {selectCreateCheckPaymentRequest, selectCreatePayPalPaymentRequest, selectCreateCreditCardPaymentRequest} from '../../redux/payments/selectors';
-import {createCheckPayment, createPayPalPayment, createCreditCardPayment, resetCreditCardPayment} from '../../redux/payments/actions';
+import {selectCreateCheckPaymentRequest, selectCreatePayPalPaymentRequest, selectCreateCreditCardPaymentRequest, selectCreateFreeCheckoutRequest} from '../../redux/payments/selectors';
+import {createCheckPayment, createFreeCheckout, createPayPalPayment, createCreditCardPayment, resetCreditCardPayment} from '../../redux/payments/actions';
 import {selectAddressesRequest} from "../../redux/store/selectors";
 import {getAddresses} from "../../redux/store/actions";
 import {Step, StepLabel, Stepper, CircularProgress} from '@material-ui/core';
@@ -35,6 +35,7 @@ class Checkout extends Component {
 
   componentWillReceiveProps(nextProps) {
     this._handlePayPalPaymentCreated(nextProps);
+    this._handleFreeCheckout(nextProps);
     this._handleCheckPaymentCreated(nextProps);
     this._handleCCPaymentCreated(nextProps);
     this._handleCheckPaymentFailed(nextProps);  
@@ -50,12 +51,21 @@ class Checkout extends Component {
     }  
   } 
   
-  _setShipping (params = {}) {
-    this.setState({
-      ...this.state,
-      stepIndex: 1,
+  _setShipping (params = {}) {        
+    let newState = {
+      ...this.state,      
       shippingAddress: params
-    });
+    }
+    if (this.props.cartRecordsRequest.get('totalPrice') === 0) {
+        this.setState(newState, () => {
+            this.props.createFreeCheckout({
+                shippingAddress: this.state.shippingAddress
+            });
+        });
+    } else {
+        this.setState(newState);
+        newState.stepIndex = 1;
+    }
   };
   
   _setBilling(params = {}) {
@@ -131,6 +141,12 @@ class Checkout extends Component {
       this._goToSuccessPage(nextProps.checkRequest.get('data').toJS());
     }
   }
+  
+  _handleFreeCheckout(nextProps) {
+    if (!this.props.freeCheckoutRequest.get('success') && nextProps.freeCheckoutRequest.get('success')) {                
+      this._goToSuccessPage(nextProps.freeCheckoutRequest.get('data').toJS());
+    }
+  }
 
   _handleCheckPaymentFailed(nextProps) {
     if (!this.props.checkRequest.get('fail') && nextProps.checkRequest.get('fail')) {
@@ -151,12 +167,18 @@ class Checkout extends Component {
       cartRecordsRequest,
       checkRequest,
       creditCardRequest,
+      freeCheckoutRequest,
       paypalRequest,
       t
     } = this.props;
         
     const success = cartRecordsRequest.get('success') && addressesRequest.get('success');
-    const loading = checkRequest.get('loading') || paypalRequest.get('loading') || creditCardRequest.get('loading') || paypalRequest.get('success');    
+    const loading = checkRequest.get('loading') 
+            || paypalRequest.get('loading') 
+            || creditCardRequest.get('loading') 
+            || freeCheckoutRequest.get('loading') 
+            || freeCheckoutRequest.get('success') 
+            || paypalRequest.get('success');    
     
     if (!success) {
         return <div className="d-flex justify-content-center m--margin-top-100 m--margin-bottom-100">
@@ -166,7 +188,7 @@ class Checkout extends Component {
     
     return <div className="m--margin-bottom-50">
         {loading && <Loader/>}
-        {cartRecordsRequest.get('totalPrice') > 0 ?  
+        {cartRecordsRequest.get('records').size > 0 ?  
             <div>            
                 <div className="invoice-title my-3 my-lg-5 d-none d-sm-block">
                     <Trans i18nKey="translations:yourInvoice">
@@ -248,6 +270,7 @@ Checkout = connect(
     addressesRequest: selectAddressesRequest(state),
     paypalRequest: selectCreatePayPalPaymentRequest(state),
     checkRequest: selectCreateCheckPaymentRequest(state),
+    freeCheckoutRequest: selectCreateFreeCheckoutRequest(state),
     creditCardRequest: selectCreateCreditCardPaymentRequest(state)    
   }),
   (dispatch) => ({
@@ -256,6 +279,7 @@ Checkout = connect(
     createPayPalPayment:        (data) => {dispatch(createPayPalPayment(data))},
     createCheckPayment:         (data) => {dispatch(createCheckPayment(data))},
     createCreditCardPayment:    (data) => dispatch(createCreditCardPayment(data)),
+    createFreeCheckout:         (data) => dispatch(createFreeCheckout(data)),
     resetCreditCardPayment:     () => dispatch(resetCreditCardPayment()),    
     goToFailPage:               () => {dispatch(push('/payments/fail'))},
     goToSuccessPage:            (id, hash) => { dispatch(push(`/shopping/checkout/${id}/${hash}`)) },

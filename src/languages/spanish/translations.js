@@ -658,5 +658,6 @@ export default {
     terms: 'Terms of Service',
     printables: 'Printables',
     physical: 'Physical',
-    printable: 'Printable'
+    printable: 'Printable',
+    freeProduct: 'FREE!'
 }

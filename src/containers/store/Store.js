@@ -73,7 +73,7 @@ class Store extends Component {
             <ProductsSection categoryId={3} type={t('teachingAds')} title={t('teachingAds')} products={records}/>
             <ProductsSection categoryId={6} type={t('stationary')} title={t('stationary')} products={records}/>
             <ProductsSection categoryId={5} type={t('studentReward')} title={t('studentReward')} products={records}/>
-            <ProductsSection categoryId={7} type={t('tutoringService')} title={t('tutoringService')} products={records}/>
+            <ProductsSection categoryId={7} type={t('printables')} title={t('printables')} products={records}/>
             <ProductsSection categoryId={2} type={t('bundles')} title={t('bundles')} products={records}/>
           </div>
           }
