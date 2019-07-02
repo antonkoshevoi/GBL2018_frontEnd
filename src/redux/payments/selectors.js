@@ -34,6 +34,14 @@ export const selectCreateCheckPaymentRequest = createSelector(
 );
 
 /**
+ * Free
+ */
+export const selectCreateFreeCheckoutRequest = createSelector(
+  selectStoreDomain,
+  (subState) => subState.get('createFreeCheckoutRequest')
+);
+
+/**
  * Invoice
  */
 export const invoiceRequest = createSelector(

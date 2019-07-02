@@ -3,6 +3,7 @@ import {
   CREATE_CHECK_PAYMENT, CREATE_CHECK_PAYMENT_FAIL, CREATE_CHECK_PAYMENT_SUCCESS,
   CREATE_PAYPAL_PAYMENT, CREATE_PAYPAL_PAYMENT_FAIL, CREATE_PAYPAL_PAYMENT_SUCCESS,
   CREATE_CC_PAYMENT, CREATE_CC_PAYMENT_SUCCESS, CREATE_CC_PAYMENT_FAIL, RESET_CC_PAYMENT,
+  CREATE_FREE_CHECKOUT, CREATE_FREE_CHECKOUT_SUCCESS, CREATE_FREE_CHECKOUT_FAIL,
   EXECUTE_PAYPAL_PAYMENT, EXECUTE_PAYPAL_PAYMENT_FAIL, EXECUTE_PAYPAL_PAYMENT_SUCCESS, GET_INVOICE, GET_INVOICE_FAIL,
   GET_INVOICE_SUCCESS    
 } from './actions';
@@ -20,6 +21,12 @@ const initialState = Immutable.fromJS({
     fail: false,
     data: {}
   },
+  createFreeCheckoutRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    data: {}
+  },  
   createCheckPaymentRequest: {
     loading: false,
     success: false,
@@ -98,6 +105,19 @@ export default function reducer(state = initialState, action) {
           .set('loading', false)
           .set('fail', true)
         );
+
+    /**
+     * Create free checkout
+     */
+    case CREATE_FREE_CHECKOUT:
+      return state.set('createFreeCheckoutRequest', initialState.get('createFreeCheckoutRequest').set('loading', true));
+    case CREATE_FREE_CHECKOUT_SUCCESS:
+      return state.set('createFreeCheckoutRequest', initialState.get('createFreeCheckoutRequest')
+              .set('data', Immutable.fromJS(action.result.data))
+              .set('success', true));
+    case CREATE_FREE_CHECKOUT_FAIL:
+      return state.set('createFreeCheckoutRequest', initialState.get('createFreeCheckoutRequest').set('fail', true));
+
     /**
      * Execute paypal payment
      */

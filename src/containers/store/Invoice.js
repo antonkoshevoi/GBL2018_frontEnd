@@ -71,13 +71,14 @@ class Invoice extends Component {
         <hr />
         <div className="row">
             <div className="col-12 col-sm-6">
-                <h3 className="m-portlet__head-text">{t('billTo')}</h3>
-                {this._renderAddress(invoice, 'billing')}
-            </div>
-            <div className="col-12 col-sm-6">
                 <h3 className="m-portlet__head-text">{t('shipTo')}</h3>
                 {this._renderAddress(invoice, 'shipping')}
             </div>
+            {(invoice.get('total') > 0) &&
+            <div className="col-12 col-sm-6">
+                <h3 className="m-portlet__head-text">{t('billTo')}</h3>
+                {this._renderAddress(invoice, 'billing')}
+            </div>}
         </div>
         <div className="row my-2">
             <div className="col-12">

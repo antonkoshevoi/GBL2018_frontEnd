@@ -664,5 +664,6 @@ export default {
     myDownloads: 'My Downloads',
     noDownloads: 'No Products to Download...',
     physical: 'Physical',
-    printable: 'Printable'
+    printable: 'Printable',
+    freeProduct: 'FREE!'
 }

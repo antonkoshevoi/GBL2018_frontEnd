@@ -18,9 +18,24 @@ export const CREATE_CC_PAYMENT_SUCCESS = '[Payments] CREATE_CC_PAYMENT_SUCCESS';
 export const CREATE_CC_PAYMENT_FAIL = '[Payments] CREATE_CC_PAYMENT_FAIL';
 export const RESET_CC_PAYMENT = '[Payments] RESET_CC_PAYMENT';
 
+export const CREATE_FREE_CHECKOUT = '[Payments] CREATE_FREE_CHECKOUT';
+export const CREATE_FREE_CHECKOUT_SUCCESS = '[Payments] CREATE_FREE_CHECKOUT_SUCCESS';
+export const CREATE_FREE_CHECKOUT_FAIL = '[Payments] CREATE_FREE_CHECKOUT_FAIL';
+
 export const GET_INVOICE = '[Payments] GET_INVOICE';
 export const GET_INVOICE_SUCCESS = '[Payments] GET_INVOICE_SUCCESS';
 export const GET_INVOICE_FAIL = '[Payments] GET_INVOICE_FAIL';
+
+
+export function createFreeCheckout(data) {
+  data.invoiceNo = SessionStorage.get('invoiceNo');
+  return {
+    types: [CREATE_FREE_CHECKOUT, CREATE_FREE_CHECKOUT_SUCCESS, CREATE_FREE_CHECKOUT_FAIL],
+    promise: (apiClient) => apiClient.post('checkout/free/create', data),
+    payload: data
+  };
+}
+
 
 export function createCreditCardPayment(data) {
   data.invoiceNo = SessionStorage.get('invoiceNo');

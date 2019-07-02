@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {withTranslation} from 'react-i18next';
 import {Card, CardContent, Typography} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
 import {Price} from "../ui/Price";
@@ -8,9 +9,8 @@ import "../../styles/store.css"
 class ProductCard extends Component {
 
   _renderCard(type, product) {
-    const category = product.get('category') ? product.get('category').get('title') : 'No Info...';
-    const price = Number(product.get('price'));
-    const discountPrice = Number(price - (price * product.get('discount') / 100));   
+    const category = product.get('category') ? product.get('category').get('title') : 'No Info...';    
+    const {t} = this.props;
 
     return (
       <div className={`cardItem ${type === 'vertical' ? ' verticalCardItem' : ' horizontalCardItem'}`}>
@@ -34,10 +34,12 @@ class ProductCard extends Component {
             }
             <div className="cardActions m--margin-top-15">
               <div className="productPrice">
-                  {product.get('discount') > 0 && <span className="discount"><span><Price price={price} currency={product.get('currency')} /></span></span> }
+                  {product.get('discount') > 0 && <span className="discount"><span><Price price={product.get('price')} currency={product.get('currency')} /></span></span> }
                   <br/>
-                  <div className="price">
-                    <Price price={discountPrice} currency={product.get('currency')} />                    
+                  <div className="price">                    
+                    <Price price={product.get('discountPrice')} currency={product.get('currency')} />                    
+                            
+                    {!(product.get('price') > 0) && <strong> - {t('freeProduct')}</strong>}
                   </div>
               </div>
             </div>
@@ -66,4 +68,4 @@ ProductCard.defaultProps = {
   type: 'vertical'
 }
 
-export default ProductCard;
+export default withTranslation('translations')(ProductCard);

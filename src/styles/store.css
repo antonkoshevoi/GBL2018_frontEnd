@@ -105,8 +105,7 @@
 }
 
 .cardItem .productPrice {
-    float: right;
-    color: #D2322D;
+    float: right;    
     font-weight: 500;
     margin-top: -15px;
     text-align: right;
@@ -114,12 +113,12 @@
 }
 
 .cardItem .productPrice .discount {
-    color: #771f1e;
+    color: #000000;
     position: relative;
     font-size: 0.9rem;
 }
 .cardItem .productPrice .price {
-    color: #771f1e;
+    color: #299781;
     position: relative;
     font-size: 0.9rem;
 }
@@ -142,7 +141,7 @@ td .productPrice {
     width: 100px;
 }
 .cardItem .productPrice .discount > span {
-    color: #525672;
+    color: #525672;    
 }
 
 button .discount {
