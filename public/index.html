@@ -28,6 +28,40 @@
         });
     </script>
 
+    <script type="text/javascript">
+        
+        function getBrowser() {
+            let ua = navigator.userAgent, tem, M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+            if (/trident/i.test(M[1])) {
+                tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+                return { name: 'IE', version: (tem[1] || '') };
+            }
+            if (M[1] === 'Chrome') {
+                tem = ua.match(/\bOPR\/(\d+)/)
+                if (tem != null) { return { name: 'Opera', version: tem[1] }; }
+            }
+            if (window.navigator.userAgent.indexOf("Edge") > -1) {
+                tem = ua.match(/\Edge\/(\d+)/)
+                if (tem != null) { return { name: 'Edge', version: tem[1] }; }      
+            }
+            M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+            if ((tem = ua.match(/version\/(\d+)/i)) != null) { 
+                M.splice(1, 1, tem[1]); 
+            }
+            return {
+                name: M[0],
+                version: +M[1]
+            };
+        }    
+        function isSupported() {
+            let browser = getBrowser();
+            if ((browser.name === 'MSIE' || browser.name === 'IE')) {
+                document.location.href = 'https://browser-update.org/update-browser.html';
+            }
+        }
+        isSupported();
+        
+    </script>  
 
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/bzfavicon.png">
@@ -46,7 +80,8 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <div id="root"></div>
+    <div id="root">    
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -57,5 +92,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+  
   </body>
 </html>
