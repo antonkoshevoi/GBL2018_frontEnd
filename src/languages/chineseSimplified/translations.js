@@ -661,5 +661,6 @@ export default {
     noDownloads: 'No Products to Download...',
     physical: 'Physical',
     printable: 'Printable',
-    freeProduct: 'FREE!'
+    freeProduct: 'FREE!',
+    math: 'Math'
 }

@@ -34,13 +34,12 @@ class Filter extends Component {
 
   _setCategoryFilter(category){
       const categories = {
-          courses: 1,
-          bundles: 2,
-          teaching_aids: 3,
           books: 4,
+          printables: 7,
+          teaching_aids: 3,
           student_rewards: 5,
           stationary: 6,
-          printables: 7
+          courses: 1
       };
       
       const categoryId = categories[category] || 0;
@@ -199,6 +198,7 @@ class Filter extends Component {
                   <MenuItem title={t('safety')} onClick={(e) => { this.handleMenuClose(e, 'subjectMenu'); this._selectFilter('subject', 3, e) }}>{t('safety')}</MenuItem>
                   <MenuItem title={t('fineArts')} onClick={(e) => { this.handleMenuClose(e, 'subjectMenu'); this._selectFilter('subject', 4, e) }}>{t('fineArts')}</MenuItem>
                   <MenuItem title={t('flex')} onClick={(e) => { this.handleMenuClose(e, 'subjectMenu'); this._selectFilter('subject', 5, e) }}>{t('flex')}</MenuItem>
+                  <MenuItem title={t('math')} onClick={(e) => { this.handleMenuClose(e, 'subjectMenu'); this._selectFilter('subject', 6, e) }}>{t('math')}</MenuItem>
                 </Menu>
               </div>
               }

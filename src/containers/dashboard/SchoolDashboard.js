@@ -35,38 +35,29 @@ class SchoolDashboard extends Component {
       <div className="fadeInLeft animated m--margin-left-15 m--margin-right-15">
         <Alerts />
         <div className="row">
-            <div className="col-sm-12 col-md-12 col-lg-9 col-xl-9">
-                <div className="row">
-                    <div className="col-sm-12">
-                        <div className='block-header border-b-blue'>
-                            <h3 className='m-portlet__head-text'>{t('reportsSnapshot')}</h3>
-                        </div>
-                    </div>
-                    <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4 m--margin-bottom-10">
-                      <RosterStatistic/>
-                    </div>
-                    <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4 m--margin-bottom-10">
-                      <LineChart type='school'/>
-                    </div>
-                    <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4 m--margin-bottom-10">                  
-                      <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
-                    </div>
-                    <div className="col-sm-12 col-md-6 m--margin-bottom-10 m--visible-tablet-and-mobile m--hidden-desktop-lg m--hidden-desktop-xl">
-                        <QuickLink />
-                    </div>                    
+            <div className="col-sm-12">
+                <div className='block-header border-b-blue'>
+                    <h3 className='m-portlet__head-text'>{t('reportsSnapshot')}</h3>
                 </div>
             </div>
-            <div className="col-lg-3 col-xl-3 m--margin-bottom-10 m--hidden-tablet-and-mobile m--visible-desktop-lg m--visible-desktop-xl">
+            <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4 m--margin-bottom-10">
+              <RosterStatistic/>
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4 m--margin-bottom-10">
+              <LineChart type='school'/>
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4 m--margin-bottom-10">                  
+              <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
+            </div>
+            <div className="col-12 col-md-6 col-lg-6 col-xl-4">
+              <ShoppingCart preview={true}/>
+            </div>
+            <div className="col-12 col-md-6 col-lg-6 col-xl-4">
                 <QuickLink />
             </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6 col-lg-7">
-            <FeaturedItems data={records}/>
-          </div>
-          <div className="col-md-6 col-lg-5">
-            <ShoppingCart preview = {true}/>
-          </div>
+            <div className="col-12">
+              <FeaturedItems data={records}/>
+            </div>
         </div>
       </div>
     )

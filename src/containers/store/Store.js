@@ -68,13 +68,12 @@ class Store extends Component {
           </div>
           {(success && !isFiltered) &&
           <div id="store-body">
-            <ProductsSection categoryId={1} type={t('courses')} title={t('courses')} products={records}/>
             <ProductsSection categoryId={4} type={t('books')} title={t('books')} products={records}/>
-            <ProductsSection categoryId={3} type={t('teachingAds')} title={t('teachingAds')} products={records}/>
+            <ProductsSection categoryId={7} type={t('printables')} title={t('printables')} products={records}/>            
             <ProductsSection categoryId={6} type={t('stationary')} title={t('stationary')} products={records}/>
+            <ProductsSection categoryId={3} type={t('teachingAds')} title={t('teachingAds')} products={records}/>
             <ProductsSection categoryId={5} type={t('studentReward')} title={t('studentReward')} products={records}/>
-            <ProductsSection categoryId={7} type={t('printables')} title={t('printables')} products={records}/>
-            <ProductsSection categoryId={2} type={t('bundles')} title={t('bundles')} products={records}/>
+            <ProductsSection categoryId={1} type={t('courses')} title={t('courses')} products={records}/>
           </div>
           }
           {isFiltered &&

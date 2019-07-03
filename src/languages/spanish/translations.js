@@ -659,5 +659,6 @@ export default {
     printables: 'Printables',
     physical: 'Physical',
     printable: 'Printable',
-    freeProduct: 'FREE!'
+    freeProduct: 'FREE!',
+    math: 'Math'
 }
