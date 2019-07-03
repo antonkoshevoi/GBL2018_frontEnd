@@ -7,7 +7,7 @@ import { selectStudentsRequest, selectStudentStatusRequest } from "../../redux/s
 import { getStudents, acceptStudentRequest, declineStudentRequest, resetStudentRequest } from "../../redux/student-parents/actions";
 import { selectDeleteRequest } from "../../redux/students/selectors";
 import { deleteRecord, resetDeleteRecordRequest } from "../../redux/students/actions"; 
-import { getParentRecords } from "../../redux/store/actions";
+import { getRecords } from "../../redux/store/actions";
 import { selectRecords as storeItems }  from "../../redux/store/selectors";
 import DeleteButton from "../../components/ui/DeleteButton";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
@@ -198,7 +198,7 @@ class ParentDashboard extends Component {
         return <div className="fadeInLeft animated m--margin-left-15 m--margin-right-15">
             <Alerts />
             <div className="row">
-              <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <div className='block-header border-b-blue'>                                                      
                     <button title={t('add')} onClick={() => { this._openCreateDialog(); }} className="btn m-btn m-btn--icon m-btn--icon-only pull-right bg-transparent m--margin-right-10">
                       <i className="display-5 fa fa-plus-circle"></i>
@@ -215,21 +215,21 @@ class ParentDashboard extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-4">
                   <Subscriptions/>
               </div>              
-              <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-4">
                   <UnassignedCourses/>
               </div>
-              <div className="col-md-6 col-lg-6 col-xl-4">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-4">
                   <ShoppingCart/>
               </div>
-              <div className="col-md-12 col-lg-6 col-xl-8">
-                  <FeaturedItems data={storeItems}/>
-              </div>
-              <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+              <div className="col-12 col-md-6 col-lg-6 col-xl-4">
                 <QuickLink />
               </div>         
+              <div className="col-12">
+                  <FeaturedItems data={storeItems}/>
+              </div>
             </div>
             <CreateStudentModal
             isOpen={this.state.createModalIsOpen}
@@ -246,14 +246,13 @@ ParentDashboard = connect(
         studentStatusRequest: selectStudentStatusRequest(state),
         deleteStudentRequest: selectDeleteRequest(state)
     }),
-    (dispatch) => ({        
+    (dispatch) => ({
         goTo: (url) => { dispatch(push(url)) },
-        getCartItems: (params = {type: 'recent'}) => { dispatch(getParentRecords(params)) },
+        getCartItems: (params) => { dispatch(getRecords(params)) },
         getStudents: () => {dispatch(getStudents())},        
         acceptStudentRequest: (id) => {dispatch(acceptStudentRequest(id))},
         declineStudentRequest: (id) => {dispatch(declineStudentRequest(id))},
-        resetStudentRequest: () => {dispatch(resetStudentRequest())},
-        
+        resetStudentRequest: () => {dispatch(resetStudentRequest())},        
         deleteStudent: (id) => {dispatch(deleteRecord(id))},
         resetDeleteStudentRequest: () => {dispatch(resetDeleteRecordRequest())},
     })

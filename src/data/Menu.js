@@ -120,19 +120,14 @@ export default  {
             colorName: 'green',
             subMenu: [
                 {
-                    key: 'courses',
-                    title: 'courses',
-                    link: 'store/category/courses'
-                },
-                {
                     key: 'books',
                     title: 'books',
                     link: 'store/category/books'
                 },
                 {
-                    key: 'teaching_aids',
-                    title: 'teachingAids',
-                    link: 'store/category/teaching_aids'
+                    key: 'printables',
+                    title: 'printables',
+                    link: 'store/category/printables'
                 },
                 {
                     key: 'stationary',
@@ -140,14 +135,19 @@ export default  {
                     link: 'store/category/stationary'
                 },
                 {
+                    key: 'teaching_aids',
+                    title: 'teachingAids',
+                    link: 'store/category/teaching_aids'
+                },
+                {
                     key: 'student_rewards',
                     title: 'studentRewards',
                     link: 'store/category/student_rewards'
                 },
                 {
-                    key: 'printables',
-                    title: 'printables',
-                    link: 'store/category/printables'
+                    key: 'courses',
+                    title: 'courses',
+                    link: 'store/category/courses'
                 }
             ]
         },
