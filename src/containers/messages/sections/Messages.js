@@ -25,10 +25,6 @@ class Messages extends Component {
             page: props.getRecordsRequest.get('pagination').get('page'),
             perPage: props.getRecordsRequest.get('pagination').get('perPage')
         }
-    }
-    
-    componentDidMount() {
-        this.interval = setInterval(() => this._readMessages(), 10000);
     }    
 
     componentWillUnmount() {
@@ -39,8 +35,11 @@ class Messages extends Component {
         clearInterval(this.interval);
     }    
 
-    componentWillMount() {
-        const {getRecords} = this.props;        
+    componentDidMount() {
+        const {getRecords} = this.props;
+        
+        this.interval = setInterval(() => this._readMessages(), 10000);
+        
         getRecords({
             filter: {
                 type: this.props.type

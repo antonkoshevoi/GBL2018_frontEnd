@@ -21,17 +21,22 @@ class LanguageSwitcher extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const currentLanguage = localStorage.getItem('language');        
         if (currentLanguage) {
             this._switchLanguage(currentLanguage)
         }
     }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({ language: nextProps.i18n.language });
+    
+    static getDerivedStateFromProps(props, state) {
+        if (props.i18n.language !== state.language) {
+            return {
+                language: props.i18n.language
+            };
+        }
+        return null;
     }
-
+    
     _openLanguageMenu = event => {
         this.setState({ anchorEl: event.currentTarget });
     };
@@ -39,7 +44,6 @@ class LanguageSwitcher extends Component {
     _closeLanguageMenu = event => {        
         this.setState({ anchorEl: null });
     };
-
 
     _switchLanguage = (langCode) => {
         const { i18n } = this.props;
@@ -57,7 +61,7 @@ class LanguageSwitcher extends Component {
     }
 
     render() {        
-        return ([
+        return (<>
                 <button key={0} className="m-nav__link m-dropdown__toggle pointer"
                     aria-owns={this.state.anchorEl ? 'simple-menu' : null}
                     aria-haspopup="true"
@@ -66,7 +70,7 @@ class LanguageSwitcher extends Component {
                     <span className="m-nav__link-icon">
                         <i className="m--icon-font-size-lg2 fa fa-globe d-md-inline"></i>
                     </span>
-                </button>,
+                </button>
                 <Menu
                     key={1}
                     id="simple-menu"
@@ -76,7 +80,7 @@ class LanguageSwitcher extends Component {
                 >
                     {this._renderLangsMenu()}
                 </Menu>
-        ]);
+        </>);
     }
 }
 

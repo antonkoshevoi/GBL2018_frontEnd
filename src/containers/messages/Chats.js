@@ -19,7 +19,7 @@ class Chats extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this._getRecords();
     }
                

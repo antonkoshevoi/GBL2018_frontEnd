@@ -18,7 +18,7 @@ class RestorePassword extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const {goTo, auth} = this.props;
 
         if (auth.get('isLoggedIn')) {

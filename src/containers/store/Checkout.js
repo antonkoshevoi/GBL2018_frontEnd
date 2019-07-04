@@ -28,12 +28,13 @@ class Checkout extends Component {
     shippingAddress: {}
   };
 
-  componentDidMount() {            
+  componentDidMount() {
     this.props.getAddresses();
     this.props.getCartRecords();     
   }
 
   componentWillReceiveProps(nextProps) {
+    this._handleGetShoppingCart(nextProps);
     this._handlePayPalPaymentCreated(nextProps);
     this._handleFreeCheckout(nextProps);
     this._handleCheckPaymentCreated(nextProps);
@@ -123,6 +124,14 @@ class Checkout extends Component {
     });
   };
 
+  _handleGetShoppingCart(nextProps) {
+    if (!this.props.cartRecordsRequest.get('success') && nextProps.cartRecordsRequest.get('success')) {      
+      if (nextProps.cartRecordsRequest.get('isDigital') && this.props.auth.get('isLoggedIn')) {
+          this.setState({stepIndex: 1});
+      }
+    }
+  }
+  
   _handlePayPalPaymentCreated(nextProps) {
     if (!this.props.paypalRequest.get('success') && nextProps.paypalRequest.get('success')) {      
       window.location = nextProps.paypalRequest.get('approvalUrl');
@@ -266,6 +275,7 @@ class Checkout extends Component {
 
 Checkout = connect(
   (state) => ({
+    auth: state.auth,
     cartRecordsRequest: selectGetCartRecordsRequest(state),
     addressesRequest: selectAddressesRequest(state),
     paypalRequest: selectCreatePayPalPaymentRequest(state),

@@ -8,10 +8,12 @@ import {getCountries} from "../../../redux/countries/actions";
 class Address extends Component {
 
   state = {
-    form: {}
+    form: {
+        ...this.props.form
+    }
   };
 
-  componentWillMount() {
+  componentDidMount() {
     if (!this.props.countriesRequest.get('success')) {
       this.props.countries();
     }
@@ -25,16 +27,7 @@ class Address extends Component {
                 }
             });
         }
-    }    
-    
-  componentDidMount() {
-    const {form} = this.props;
-    this.setState({
-      form: {
-        ...form
-      }
-    })
-  }
+    }
 
   _handleInputChange(event) {
     const { name, value } = event.target;
@@ -278,13 +271,13 @@ class Address extends Component {
 }
 
 Address = connect(
-  (state) => ({
+    (state) => ({
         countriesList:  selectRecords(state),
         countriesRequest:  selectGetRecordsRequest(state)
-  }),
-  (dispatch) => ({
-      countries: () => dispatch(getCountries())  
-  }),
+    }),
+    (dispatch) => ({
+        countries: () => dispatch(getCountries())  
+    }),
 )(Address);
 
 export default withTranslation('translations')(Address);
