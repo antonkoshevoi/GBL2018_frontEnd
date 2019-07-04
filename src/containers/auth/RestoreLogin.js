@@ -19,7 +19,7 @@ class RestoreLogin extends Component {
     };
   }
 
-  componentWillMount(){
+  componentDidMount(){
       const {history, auth} = this.props;
      
       if (!auth.get('restoreLoginUser') || auth.get('restoreLoginUser').size === 0) {

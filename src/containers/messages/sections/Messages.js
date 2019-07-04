@@ -39,7 +39,7 @@ class Messages extends Component {
         clearInterval(this.interval);
     }    
 
-    componentWillMount() {
+    componentDidMount() {
         const {getRecords} = this.props;        
         getRecords({
             filter: {

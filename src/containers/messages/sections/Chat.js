@@ -25,10 +25,11 @@ class Chat extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         if (this.props.chatId) {
             this._getRecords(this.props.chatId);
         }
+        this._scrollToBottom();
     }
    
     componentWillReceiveProps(nextProps) {
@@ -163,10 +164,6 @@ class Chat extends Component {
 
     _scrollToBottom = () => {       
         this.messages.scrollTop = this.messages.scrollHeight;
-    }
-
-    componentDidMount() {
-        this._scrollToBottom();
     }
 
     componentDidUpdate(prevProps, prevState) {

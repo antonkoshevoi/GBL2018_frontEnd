@@ -20,7 +20,7 @@ class MessageGroups extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.getRecords();
     }
    
