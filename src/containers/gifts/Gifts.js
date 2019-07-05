@@ -103,7 +103,7 @@ class Gifts extends Component {
             return (<Row index={key} key={key}>
                 <Td>
                     {record.get('name')}
-                    {record.get('quantity') > 1 && <span className="m--margin-left-10 m-badge m-badge--brand m-badge--wide m-badge--default"> x {record.get('quantity')}</span>}
+                    {(record.get('quantity') > 1) && <span className="ml-3 m-badge m-badge--brand m-badge--wide"> x {record.get('quantity')}</span>}
                 </Td>
                 <Td>{t(record.get('productType'))}</Td>                
                 <Td>{(currentTab === 'sent') ? record.get('ownerName') : record.get('userName')}</Td>
@@ -111,10 +111,10 @@ class Gifts extends Component {
                 <Td><DateTime time={record.get('createdAt')} /></Td>
                 <Td className='actions'>
                     {(currentTab === 'sent') &&
-                        <div>{record.get('accepted') ? <span className="m--margin-left-10">-</span> : <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._delete(record.get('id')) }} />}</div>
+                        <div>{record.get('accepted') ? <span className="ml-3">-</span> : <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._delete(record.get('id')) }} />}</div>
                     }
                     {(currentTab === 'received') && <div> 
-                        {record.get('waiting') && <button title={t('accept')} onClick={() => { this._accept(record.get('id')) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
+                        {record.get('waiting') && <button title={t('accept')} onClick={() => { this._accept(record.get('id')) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--custom m-btn--pill'>
                             <i className='la la-check'></i>
                         </button>}
                         {!record.get('declined') && <DeleteButton btnName={t('delete')} title={t('areYouSureWantToDeclineThisGift')} onClick={() => { this._decline(record.get('id')) }} />}
@@ -161,7 +161,7 @@ class Gifts extends Component {
                         </div>
                     </div>
                     <div className='m-portlet__body'>
-                        <div className='m-form m-form--label-align-left m--margin-bottom-15'>
+                        <div className='m-form m-form--label-align-left mb-3'>
                             <Tabs                             
                                 value={currentTab} 
                                 onChange={(event, value) => { this._setCurrentTab(value) }}

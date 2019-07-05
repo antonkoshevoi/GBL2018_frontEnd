@@ -210,13 +210,13 @@ class ClassroomForm extends Component {
                   }}
                   type='button'
                   form='create-classroom-form'                  
-                  className='mt-btn-success m--margin-top-10 pull-right btn btn-success mt-btn'
+                  className='mt-btn-success mt-3 pull-right btn btn-success mt-btn'
                   color='primary'>
                   {t('chooseCourse')}
                 </Button>
                 {!course && errors && errors.get('crmCourse') && <FormHelperText error>{errors.get('crmCourse').get(0)}</FormHelperText>}
                 {course &&
-                    <div className="row m--margin-top-15">
+                    <div className="row mt-3">
                         <div className="col-4">
                           <img src={course.get('thumbnail')} width={70} alt={course.get('title')}/>
                         </div>

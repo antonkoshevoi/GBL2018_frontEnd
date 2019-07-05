@@ -86,7 +86,7 @@ class StudentParents extends Component {
                 <Td>{record.get('email') || '-'}</Td>
                 <Td>{this._getStatus(record)}</Td>
                 <Td className='actions'>                    
-                    <button onClick={() => { this._openViewDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
+                    <button onClick={() => { this._openViewDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--custom m-btn--pill'>
                         <i className='la la-search'></i>
                     </button>
                     <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('requestId')) }}/>
@@ -126,11 +126,11 @@ class StudentParents extends Component {
                         </div>
                     </div>
                     <div className='m-portlet__body'>
-                        <div className='m--margin-top-10 m--margin-bottom-30'>
+                        <div className='mt-3 mb-4'>
                             <div className='row'>
-                                <div className='col-sm-12 m--align-right margin-0'>       
+                                <div className='col-sm-12 m--align-right m-0'>       
                                     <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
-                                        {t('addNew')} <Icon className="m--margin-left-5">add</Icon>
+                                        {t('addNew')} <Icon className="ml-2">add</Icon>
                                     </Button>                  
                                 </div>
                             </div>

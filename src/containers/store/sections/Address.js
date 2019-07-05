@@ -63,8 +63,8 @@ class Address extends Component {
                   onChange={(e) => {this._handleInputChange(e)}}
                   type='hidden'
                   />
-              <legend className='m--margin-bottom-10'>{t('contactInformation', {title: title})}</legend>
-              <div className='m-form__section m-form__section--first'>
+              <legend className='mb-3'>{t('contactInformation', {title: title})}</legend>
+              <div className='m-form__section'>
                 <div className="form-group m-form__group row">
                   <label className="col-form-label col-lg-3 col-12">{t('firstName')}</label>
                   <div className="col-lg-9 col-12">
@@ -83,8 +83,6 @@ class Address extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className='m-form__section m-form__section--first'>
                 <div className="form-group m-form__group row">
                   <label className="col-form-label col-lg-3 col-12">{t('lastName')}</label>
                   <div className="col-lg-9 col-12">
@@ -103,8 +101,6 @@ class Address extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className='m-form__section m-form__section--first'>
                 <div className="form-group m-form__group row">
                   <label className="col-form-label col-lg-3 col-12">{t('email')}</label>
                   <div className="col-lg-9 col-12">
@@ -123,9 +119,6 @@ class Address extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className='m-form__section m-form__section--first'>
                 <div className="form-group m-form__group row">
                   <label className="col-form-label col-lg-3 col-12">{t('telephone')}</label>
                   <div className="col-lg-9 col-12">
@@ -147,8 +140,8 @@ class Address extends Component {
               </div>
             </div>
           <div className='col-12'>
-            <legend className='m--margin-bottom-10'>{t('contactAddress', {title: title})}</legend>
-            <address className='m-form__section m-form__section--first signUpOptional'>
+            <legend className='mb-3'>{t('contactAddress', {title: title})}</legend>
+            <address className='m-form__section signUpOptional'>
               <div className="form-group m-form__group row">
                 <label className="col-form-label col-lg-3 col-12">{t('addressLine1')}</label>
                 <div className="col-lg-9 col-12">

@@ -9,20 +9,20 @@ class Insctruction extends Component {
         return data.map(function (item,i) {
             return (
                 <div key={i}>
-                    <div  className="m-timeline-2__item m--margin-bottom-30">
-                        <div className="m-timeline-2__item-cricle">
+                    <div  className="m-timeline-2__item mb-4">
+                        <div className="m-timeline-2__item-cricle pr-2">
                             <i className={`fa fa-genderless m--font-${randColorName()}`}></i>
                         </div>
-                        <div className="m-timeline-2__item-text  m--padding-top-5">
+                        <div className="m-timeline-2__item-text pl-4 py-1">
                              {item.title}
                         </div>
                     </div>
                     {
                         item.subList !== undefined &&
-                        <div className="row m--padding-left-50">
+                        <div className="row pl-5">
                             <div className="col-xs-12">
                                 <div className="m-timeline-2 my-timeline">
-                                    <div className="m-timeline-2__items  m--padding-top-5 m--padding-bottom-10">
+                                    <div className="m-timeline-2__items py-3">
                                         {_self._renderInstructionItemList(item.subList)}
                                     </div>
                                 </div>
@@ -38,11 +38,11 @@ class Insctruction extends Component {
     _renderInstructionItemList(list) {
         return list.map(function (item,i) {
            return (
-               <div key={i} className="m-timeline-2__item m--margin-bottom-10">
-                   <div className="m-timeline-2__item-cricle">
+               <div key={i} className="m-timeline-2__item mb-3">
+                   <div className="m-timeline-2__item-cricle pr-2">
                        <i className={`fa fa-genderless m--font-${randColorName()}`}></i>
                    </div>
-                   <div className="m-timeline-2__item-text  m--padding-top-5">
+                   <div className="m-timeline-2__item-text pl-4 py-1">
                        {item.title}
                    </div>
                </div>
@@ -66,7 +66,7 @@ class Insctruction extends Component {
                 <div className="m-portlet__body">
 
                     <div className="m-timeline-2 my-timeline">
-                        <div className="m-timeline-2__items  m--padding-top-5 m--padding-bottom-10">
+                        <div className="m-timeline-2__items p-0 py-3">
                             {this._renderInstructionList(this.props.data)}
                     </div>
                  </div>                        

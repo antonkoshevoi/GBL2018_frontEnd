@@ -114,11 +114,11 @@ class SubscriptionPayments extends Component {
 
         return (
             <div>
-                <div className='m--margin-top-10 m--margin-bottom-30'>
+                <div className='mt-3 mb-4'>
                     <div className='row'>
                         <div className='col-sm-12 m--align-right'>
                             <Select
-                                className="pull-left table-select m--margin-top-5"
+                                className="pull-left table-select mt-2"
                                 value={perPage}
                                 onChange={(e) => { this._selectPerPage(e.target.value) }}>                        
                                 <MenuItem value={5}>5</MenuItem>
@@ -150,7 +150,7 @@ class SubscriptionPayments extends Component {
                     </Tbody>
                 </Table>
                 <div className="row">
-                    <div className="col-sm-12 m--margin-top-40 text-right">
+                    <div className="col-sm-12 mt-5 text-right">
                       <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
                     </div>
                 </div>

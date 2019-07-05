@@ -43,7 +43,7 @@ class StoreSlider extends Component {
       }]
     };
     return (
-      <div className="storeSlider m--margin-bottom-30">
+      <div className="storeSlider mb-4">
         <Slider {...settings}>
           {this._renderSlideItems()}
         </Slider>

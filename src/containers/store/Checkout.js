@@ -190,12 +190,12 @@ class Checkout extends Component {
             || paypalRequest.get('success');    
     
     if (!success) {
-        return <div className="d-flex justify-content-center m--margin-top-100 m--margin-bottom-100">
+        return <div className="d-flex justify-content-center m-5 p-5">
             <CircularProgress color="primary" size={80}/>
         </div>;
     }
     
-    return <div className="m--margin-bottom-50">
+    return <div className="mb-5">
         {loading && <Loader/>}
         {cartRecordsRequest.get('records').size > 0 ?  
             <div>            
@@ -235,8 +235,8 @@ class Checkout extends Component {
                 <p className="text-center">
                     <span className="invoice-title">{t('yourCartIsEmpty')}</span>
                 </p>
-                <p className="text-center m--margin-top-100 m--margin-bottom-100">
-                    <NavLink to="/store" className="btn m-btm btn-primary">{t('continueShopping')}</NavLink>
+                <p className="text-center m-5">
+                    <NavLink to="/store" className="btn m-btm btn-primary m-5">{t('continueShopping')}</NavLink>
                 </p>
             </div>
         }

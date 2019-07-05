@@ -73,8 +73,8 @@ class SecondStepForm extends Component {
     return (
       <div className='row'>
         <div className='col-lg-7 col-md-6 col-sm-12'>
-            <legend className='m--margin-bottom-10'>{t('required')}</legend>
-            <div className='m-form__section m-form__section--first'>
+            <legend className='mb-3'>{t('required')}</legend>
+            <div className='m-form__section'>
               <div className="form-group m-form__group row">
                 <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('username')}</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
@@ -105,9 +105,9 @@ class SecondStepForm extends Component {
               </div>
             </div>
             
-            <legend className='m--margin-bottom-10 m--margin-top-10'>{t('optional')}</legend>
+            <legend className='mb-3 mt-3'>{t('optional')}</legend>
 
-            <div className='m-form__section m-form__section--first'>
+            <div className='m-form__section'>
               <div className="form-group m-form__group row">
                 <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('firstName')}</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
@@ -139,7 +139,7 @@ class SecondStepForm extends Component {
            </div>
         </div>
         <div className='col-lg-5 col-md-6 col-sm-12 text-center'>
-          <legend className='m--margin-bottom-10'>{t('profilePicUpload')}</legend>
+          <legend className='mb-3'>{t('profilePicUpload')}</legend>
 
           <div className='CropperBlock text-center'>
             <div className='upload-btn-wrapper '>
@@ -166,7 +166,7 @@ class SecondStepForm extends Component {
             {form.avatarCropped &&
             <button
               type="button"
-              className='btn m-btn--air btn-success m--margin-top-15'
+              className='btn m-btn--air btn-success mt-3'
               onClick={() => { this._handleImageCrop() }}
             >
               {t('cropImage')} <span className='la la-crop'></span>

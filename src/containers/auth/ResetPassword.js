@@ -86,17 +86,17 @@ class ResetPassword extends Component {
                                 <div className="m-login__head"> 
                                     <h3 className="m-login__title">{t('setNewPassword')}</h3> 
                                 </div> 
-                                <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m--margin-top-20 m-portlet--full-height ">
+                                <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg mt-4 m-portlet--full-height ">
                                     <div className="m-portlet__body">
                                         {userRequest.get('success') &&
-                                        <div className="m-form m--margin-top-30 m--margin-bottom-15 m--margin-left-10 m--margin-right-10">
+                                        <div className="m-form mt-4 mb-3 mx-3">
                                             <div className="form-group m-form__group">
                                               <div className="d-flex align-items-center">
                                                 <Avatar src={userRequest.get('record').get('avatarSmall')}/>
-                                                <span className="m--margin-left-10">{userRequest.get('record').get('username') || userRequest.get('record').get('name') || userRequest.get('record').get('email')}</span>
+                                                <span className="ml-3">{userRequest.get('record').get('username') || userRequest.get('record').get('name') || userRequest.get('record').get('email')}</span>
                                               </div>                                                
                                             </div>
-                                            <div className="form-group m-form__group m--margin-top-10 m--margin-bottom-10">
+                                            <div className="form-group m-form__group mt-3 mb-3">
                                                 <input className="form-control m-input--pill" type="password"
                                                        placeholder={t('password')} name="password" value={this.state.password}
                                                        onChange={this._handlePasswordChange}/>
@@ -114,7 +114,7 @@ class ResetPassword extends Component {
                             </div>
                             <div className="m-login__account">
                                 <span className="m-login__account-msg">{t('logInDifferentUser')}</span>
-                                <NavLink to="/login" id="m_login_signup" className="m--margin-left-5 m-link m-link--light m-login__account-link">{t('logIn')}</NavLink>
+                                <NavLink to="/login" id="m_login_signup" className="ml-2 m-link m-link--light m-login__account-link">{t('logIn')}</NavLink>
                             </div>
                         </div>
                     </div>

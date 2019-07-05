@@ -57,7 +57,7 @@ class SchoolInfo extends Component {
     const { school, t } = this.props;
 
     return (
-      <div className="m-portlet m--margin-bottom-15">
+      <div className="m-portlet mb-3">
         <div >
           <div className="p-4 text-center">
             <div className="mb-4">
@@ -67,7 +67,7 @@ class SchoolInfo extends Component {
               <div className="my-4">
                 <img className="rounded-circle img-thumbnail" src={school.logo} alt=""/>
               </div>
-              <div className="text-center m--margin-bottom-20">
+              <div className="text-center mb-4">
                 <button className="m-btn btn btn-info" onClick={()=>{this._openUploadModal()}}>{t('uploadLogo')}</button>
               </div>
             </div>

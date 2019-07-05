@@ -28,11 +28,11 @@ class ProductCard extends Component {
               { category }
             </Typography>
             {type === 'horizontal' &&
-            <Typography className="cardDesc m--margin-top-5" component="p">
+            <Typography className="cardDesc mt-2" component="p">
               {product.get('description')}
             </Typography>
             }
-            <div className="cardActions m--margin-top-15">
+            <div className="cardActions mt-3">
               <div className="productPrice">
                   {product.get('discount') > 0 && <span className="discount"><span><Price price={product.get('price')} currency={product.get('currency')} /></span></span> }
                   <br/>

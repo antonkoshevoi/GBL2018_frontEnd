@@ -139,7 +139,7 @@ class Subscriptions extends Component {
         const loading       = subscribeRequest.get('loading');
         
         return <div className="col-sm-12 col-md-10 col-lg-9 col-xl-6 m-auto">
-            <h1 className="text-center m--margin-top-50 g-metal">{t('subscriptions')}</h1>
+            <h1 className="text-center mt-5 g-metal">{t('subscriptions')}</h1>
             <div className='m-portlet m-portlet--head-solid-bg my-5'>
                 <div className='m-portlet__body'>
                     <div className='m-form m-form--label-align-right mx-5 my-4'>
@@ -155,7 +155,7 @@ class Subscriptions extends Component {
 
                             <div className="text-center my-3">                                        
                                 <button disabled={loading} onClick={() => { this._submitCreditCardPayment() }} className="btn btn-info">{t('makePayment')}</button>
-                                <button disabled={loading} onClick={() => { this._showBillingForm(false) }} className="btn btn-default m--margin-left-10">{t('back')}</button>                                                                  
+                                <button disabled={loading} onClick={() => { this._showBillingForm(false) }} className="btn btn-default ml-3">{t('back')}</button>                                                                  
                             </div>
                         </div>
                     </div>

@@ -17,7 +17,7 @@ class DeleteButton extends Component {
   };
 
   static defaultProps = {
-    className: "btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5",
+    className: "btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-2",
     btnName: 'Delete',
     title: 'Are you sure?',
     icon: 'la la-remove',
@@ -57,8 +57,8 @@ class DeleteButton extends Component {
           aria-labelledby="alert-dialog-title"
         >
           <DialogTitle className="text-center" id="alert-dialog-title" style={{minWidth: 300}}>{title}</DialogTitle>
-          <div className="text-center m--margin-bottom-20 m--margin-top-10">
-            <button onClick={() => { this._onConfirm() }} className="btn-success m-btn btn m--margin-right-10">{t('ok')}</button>
+          <div className="text-center mb-4 mt-3">
+            <button onClick={() => { this._onConfirm() }} className="btn-success m-btn btn mr-3">{t('ok')}</button>
             {!confirmOnly && <button onClick={() => { this._onCancel() }} className="btn-default m-btn btn btn">{t('cancel')}</button>}
           </div>
         </Dialog>

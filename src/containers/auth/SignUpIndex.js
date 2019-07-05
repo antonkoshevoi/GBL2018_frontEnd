@@ -16,21 +16,21 @@ class SignUpIndex extends Component {
                   <div className="m-login__head"> 
                     <h3 className="m-login__title">{t('signUp')}</h3> 
                   </div> 
-                  <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m--margin-top-20 m-portlet--full-height ">
+                  <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg mt-4 m-portlet--full-height ">
                     
                     <div className="m-portlet__body">
-                      <h4 className="text-center m--margin-top-25">{t('selectYourAccountType')}</h4>
+                      <h4 className="text-center mt-4">{t('selectYourAccountType')}</h4>
 
-                      <div className="signup-btns flex-column d-flex flex m--margin-top-15 m--margin-bottom-15">
-                        <NavLink to="/signUp/parent" activeClassName="link-active" className="btn m-btn--pill m--margin-top-15 m--margin-bottom-25 btn-lg m-btn btn-primary">
+                      <div className="signup-btns flex-column d-flex flex mt-3 mb-3">
+                        <NavLink to="/signUp/parent" activeClassName="link-active" className="btn m-btn--pill mt-3 mb-4 btn-lg m-btn btn-primary">
                           {t('parent')}
                         </NavLink>
-                        <NavLink to="/signUp/principal" activeClassName="link-active" className="btn m-btn--pill m--margin-bottom-15 btn-lg m-btn btn-success">
+                        <NavLink to="/signUp/principal" activeClassName="link-active" className="btn m-btn--pill mb-3 btn-lg m-btn btn-success">
                           {t('principal')}
                         </NavLink>
                       </div>
-                      <div className="alert m-alert m-alert--default m--margin-bottom-0">
-                        <p className="text-center m--margin-bottom-0"><Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans></p>
+                      <div className="alert m-alert m-alert--default mb-0">
+                        <p className="text-center mb-0"><Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans></p>
                       </div>
                     </div>
                   </div>

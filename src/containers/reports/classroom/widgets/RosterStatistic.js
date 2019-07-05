@@ -35,8 +35,8 @@ class RosterStatistic extends Component {
         className="profile-card"
         iconBackground="circle-background"
         icon="fa fa-institution display-6">
-        <div className="m-widget1 m-widget1--paddingless">
-          <div className="m-widget1 m-widget1--paddingless">
+        <div className="m-widget1 p-0">
+          <div className="m-widget1 p-0">
             <div className="m-widget1__item">
               <div className="row m-row--no-padding align-items-center">
                 <div className="col">

@@ -59,7 +59,7 @@ class StudentsBulkUpload extends Component {
   render() {
     const { upload, bulkUploadRequest } = this.props;
     return (
-      <div className="row m--margin-15">
+      <div className="row m-3">
         <div className="col-sm-6">
           <CsvUploadSection
             csvExampleName = {this.state.csvExampleName}

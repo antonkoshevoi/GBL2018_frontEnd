@@ -63,7 +63,7 @@ class UnassignedCourses extends Component {
 
         return records.map((record, i) => (      
             <Row index={i} key={i}>
-              <Td className='m--padding-left-0 m--padding-right-0'>               
+              <Td className='px-0'>               
                   <img alt={record.get('item').get('title')} src={record.get('item').get('thumbnail')} width={70}/>                
               </Td>
               <Td>{record.get('item').get('title')}
@@ -71,13 +71,13 @@ class UnassignedCourses extends Component {
               <Td>{record.get('quantity')}</Td>
               <Td className="actions">
                 {record.get('isGift') ?  
-                    <ConfirmButton icon='la la-gift' className='btn-success margin-0' confirmOnly={true} title={t('giftCourseFrom', {user: record.get('userName')}) } />
+                    <ConfirmButton icon='la la-gift' className='btn-success m-0' confirmOnly={true} title={t('giftCourseFrom', {user: record.get('userName')}) } />
                 :
                     <button title={t('giftCourseCredit')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._openGiftDialog(record) }} >
                         <i className='la la-gift'></i>
                     </button>
                 }          
-                <button title={t('assignStudent')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5' onClick={() => { this._openAssignDialog(record) }} >
+                <button title={t('assignStudent')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-2' onClick={() => { this._openAssignDialog(record) }} >
                     <i className='la la-user-plus'></i>
                 </button>
               </Td>
@@ -102,7 +102,7 @@ class UnassignedCourses extends Component {
                     <h3 className='m-portlet__head-text'> {t('manageCourses')}</h3>
                 </div>              
                 <div className="m-portlet m-portlet--head-solid-bg">
-                    <div className="m-portlet__body m--padding-top-10">
+                    <div className="m-portlet__body pt-3">
                         <div style={blockStyles}>
                             <Table>
                                 <Thead>

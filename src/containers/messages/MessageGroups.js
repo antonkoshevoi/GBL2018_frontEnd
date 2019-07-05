@@ -65,7 +65,7 @@ class MessageGroups extends Component {
             <Row index={key} key={key}>
                 <Td>{this._recordNumber(key)}</Td>
                 <Td>
-                    <NavLink className="m--margin-left-5 g-blue" to={`/messages/groups/${record.get('id')}`}>{record.get('name')}</NavLink>
+                    <NavLink className="ml-2 g-blue" to={`/messages/groups/${record.get('id')}`}>{record.get('name')}</NavLink>
                 </Td>                
                 <Td><DateTime time={record.get('created')} /></Td>
                 <Td className="actions">
@@ -109,7 +109,7 @@ class MessageGroups extends Component {
                         </div>         
                     </div>
                     <div className='m-portlet__body'>
-                        <div className='m--margin-top-10 m--margin-bottom-30'>
+                        <div className='mt-3 mb-4'>
                             <div className='row'>               
                                 <div className='col-sm-12 m--align-right'>
                                     <Select
@@ -125,7 +125,7 @@ class MessageGroups extends Component {
                                     <NavLink to="/messages/groups/new">
                                         <Button color='primary' className='mt-btn mt-btn-success'>
                                           {t('newGroup')}
-                                          <Icon className="m--margin-left-5">add</Icon>
+                                          <Icon className="ml-2">add</Icon>
                                         </Button>
                                     </NavLink>                                    
                                 </div>
@@ -148,7 +148,7 @@ class MessageGroups extends Component {
                         </Table>
 
                         <div className="row">
-                            <div className="col-sm-12 m--margin-top-40 text-right">
+                            <div className="col-sm-12 mt-5 text-right">
                                 <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
                             </div>
                         </div>

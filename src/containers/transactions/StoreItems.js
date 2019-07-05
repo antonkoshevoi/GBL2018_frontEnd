@@ -94,7 +94,7 @@ class StoreItems extends Component {
                             <div className="row mb-1">
                                 <div className="col-5"><span className="text-muted">{t('items')}:</span></div>
                                 <div className="col-7">
-                                    <span className="m--margin-right-10">{item.get('items').size}</span>
+                                    <span className="mr-3">{item.get('items').size}</span>
                                     (<button className="g-blue btn-link" href="" color="primary" onClick={()=> {this._toggleSubTable(`sub_${i}`)}}>
                                         {t('showDetails')}
                                     </button>)
@@ -107,7 +107,7 @@ class StoreItems extends Component {
                     </Td>
                     <Td className="d-none d-md-table-cell">
                         {item.get('items').size}
-                        <IconButton title={t('showDetails')} className="m--margin-left-15" color="primary" onClick={()=> {this._toggleSubTable(`sub_${i}`)}}>
+                        <IconButton title={t('showDetails')} className="ml-3" color="primary" onClick={()=> {this._toggleSubTable(`sub_${i}`)}}>
                             <i className={`fa fa-arrow-${( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) ? 'down' : 'right'}`}></i>
                         </IconButton>                        
                     </Td>                    
@@ -125,8 +125,8 @@ class StoreItems extends Component {
         const {t} = this.props;
         return (
             <tr key="block" className="animated fadeInDown sub-table">
-                <td colSpan="9" className="no-padding">
-                    <Table className="table-bordered m--margin-bottom-0">
+                <td colSpan="9" className="p-0">
+                    <Table className="table-bordered mb-0">
                         <Thead >
                             <HeadRow>
                                 <Th>{t('thumbnail')}</Th>
@@ -155,7 +155,7 @@ class StoreItems extends Component {
                     </Td>
                     <Td>
                         <NavLink className="g-blue" to={`/store/details/${item.get('itemId')}`}>{item.get('title')}</NavLink>
-                        {(item.get('downloadUrl') && item.get('isDigitalOnly')) && <a className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15" href={item.get('downloadUrl')}>
+                        {(item.get('downloadUrl') && item.get('isDigitalOnly')) && <a className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-3" href={item.get('downloadUrl')}>
                             <i class="fa fa-download" aria-hidden="true"></i>
                         </a>}
                     </Td>
@@ -217,7 +217,7 @@ class StoreItems extends Component {
                     </Tbody>
                 </Table>
                 <div className="row">
-                    <div className="col-sm-12 m--margin-top-40 text-right">
+                    <div className="col-sm-12 mt-5 text-right">
                         <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
                     </div>
                 </div>

@@ -181,7 +181,7 @@ class InvitationsTab extends Component {
 
     return (      
         <div className='m-portlet__body'>
-          <div className='m--margin-top-10 m--margin-bottom-30'>
+          <div className='mt-3 mb-4'>
             <div className='row'>
               <div className='col-sm-12 m--align-right'>
                 <Select
@@ -196,7 +196,7 @@ class InvitationsTab extends Component {
                 </Select>
                 <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
                   {t('sendNewInvitation')}
-                  <Icon className="m--margin-left-5">send</Icon>
+                  <Icon className="ml-2">send</Icon>
                 </Button>
               </div>
             </div>

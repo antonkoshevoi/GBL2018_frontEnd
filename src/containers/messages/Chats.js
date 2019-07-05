@@ -80,11 +80,11 @@ class Chats extends Component {
         const {chatId} = this.state;
         
         if (groupChatsRequest.get('loading')) {            
-            return <div className="m--margin-100"><CircularProgress /></div>;
+            return <div className="m-5 text-center"><CircularProgress /></div>;
         }
         
         if (!groupChatsRequest.get('records').size) {
-            return <h2 className='text-center m--margin-bottom-100 m--margin-top-100'>{t('groupChatsNotFound')}</h2>;
+            return <h2 className='text-center my-5'>{t('groupChatsNotFound')}</h2>;
         }         
         
         return groupChatsRequest.get('records').map((record, key) => {
@@ -97,7 +97,7 @@ class Chats extends Component {
                         <div className='d-inline-block'>
                             <div>
                                 <span className='chat-name'>{record.get('name')}</span>
-                                {record.get('newMessages') > 0 && <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
+                                {record.get('newMessages') > 0 && <span className='m-badge m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
                             </div>                        
                             <div>{record.get('userName')}</div>
                             {record.get('lastActivity') && <div className="text-muted"><DateTime time={record.get('lastActivity')} /></div>}
@@ -130,11 +130,11 @@ class Chats extends Component {
         const {chatId} = this.state;
         
         if (privateChatsRequest.get('loading')) {            
-            return <div className="m--margin-100"><CircularProgress /></div>;
+            return <div className="m-5 text-center"><CircularProgress /></div>;
         }
         
         if (!privateChatsRequest.get('records').size) {
-            return <h2 className='text-center m--margin-bottom-100 m--margin-top-100'>{t('privateChatsNotFound')}</h2>;
+            return <h2 className='text-center my-5'>{t('privateChatsNotFound')}</h2>;
         }  
         
         return privateChatsRequest.get('records').map((record, key) => {
@@ -147,7 +147,7 @@ class Chats extends Component {
                         <div className='d-inline-block'>
                             <div>
                                 <span className='chat-name'>{record.get('userName')}</span>
-                                {record.get('newMessages') > 0 && <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
+                                {record.get('newMessages') > 0 && <span className='m-badge m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
                             </div>
                             <div>{t(record.get('userRole'))}</div>
                             {record.get('lastActivity') && <div className="text-muted"><DateTime time={record.get('lastActivity')} /></div>}

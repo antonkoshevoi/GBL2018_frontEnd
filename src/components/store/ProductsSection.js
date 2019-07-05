@@ -27,7 +27,7 @@ class ProductsSection extends Component {
     _renderEmptyMsg() {
         return (
             <div className='text-center'>
-                <h5 className='m--margin-left-15'> Products Not Found... </h5>
+                <h5 className='ml-3'> Products Not Found... </h5>
             </div>
         )
     }

@@ -12,7 +12,7 @@ import ImageCropper from "../../../components/ui/ImageCropper";
 
 function TabContainer(props) {
   return (
-    <Typography component="div" className="m--margin-top-35">
+    <Typography component="div" className="mt-4">
       {props.children}
     </Typography>
   );

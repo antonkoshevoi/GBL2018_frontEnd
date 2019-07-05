@@ -61,17 +61,17 @@ class ResultsModal extends Component {
             <Modal isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>
-                      <Icon className="m--margin-right-15">poll</Icon>
+                      <Icon className="mr-3">poll</Icon>
                       <Typography variant="h6" color="inherit" >
                             {t('sCapResults')}
                       </Typography>
                     </Toolbar>
                 </AppBar>
-                <DialogContent className="m--margin-top-25">                    
+                <DialogContent className="mt-4">                    
                     <div className="scap-answers">                        
                         { loading && <CircularProgress color="inherit"/> }
                         { success && <div>
-                            <h5 className="m--margin-bottom-10">{t('summary')}</h5>
+                            <h5 className="mb-3">{t('summary')}</h5>
                             <div className="row">        
                                 <div className="col-sm-12"><label>{t('sCap')}:</label> {data.survey}</div>
                                 <div className="col-sm-12"><label>{t('teacher')}:</label> {data.teacher}</div>
@@ -79,7 +79,7 @@ class ResultsModal extends Component {
                                 <div className="col-sm-12"><label>{t('homeroom')}:</label> {data.homeroom}</div>
                             </div>
                             <Divider className='full-width'/>
-                            <h5 className="m--margin-top-10 m--margin-bottom-10">{t('results')}</h5>
+                            <h5 className="mt-3 mb-3">{t('results')}</h5>
                             {this._renderRecords(data.answers)}
                         </div>}
                     </div>

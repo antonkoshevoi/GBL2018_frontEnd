@@ -163,49 +163,49 @@ class ImageCropper extends Component {
           ready={() => { this._handleImageCrop(); }}
           guides={false}/>
         {file &&
-        <div className="text-center m--margin-10">
+        <div className="text-center m-2">
           <button type="button"
-            className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+            className="btn btn-outline-info m-2 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
             onMouseDown={() => { this._reverseImage('vertical') }}>
             <i className="fa fa-arrows-v"></i>
           </button>
           <button type="button"
-            className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+            className="btn btn-outline-info m-2 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
             onMouseDown={() => {
               this._reverseImage('horizontal')
             }}>
             <i className="fa fa-arrows-h"></i>
           </button>
           <button type="button"
-            className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+            className="btn btn-outline-info m-2 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
             onMouseDown={() => { this._zoomIn() }}>
             <i className="fa fa-search-plus"></i>
           </button>
           <button type="button"
-            className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+            className="btn btn-outline-info m-2 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
             onMouseDown={() => { this._zoomOut() }}>
             <i className="fa fa-search-minus"></i>
           </button>
           <button type="button"
-            className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+            className="btn btn-outline-info m-2 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
             onMouseDown={() => { this._rotateImage(-5) }}>
             <i className="fa fa-rotate-left"></i>
           </button>
           <button type="button"
-            className="btn btn-outline-info m--margin-5 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
+            className="btn btn-outline-info m-2 m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m-btn--air"
             onMouseDown={() => { this._rotateImage(5) }}>
             <i className="fa fa-rotate-right"></i>
           </button>
           <br/>
           <span
-            className='btn pointer m-btn m--margin-5 m-btn--pill m-btn--air btn-success'
+            className='btn pointer m-btn m-2 m-btn--pill m-btn--air btn-success'
             ref={cropButton => this.cropButton = cropButton}
             onClick={() => { this._handleImageCrop() }}
           >
             {t('crop')} <span className='la la-crop'></span>
           </span>
           {(saveButton && croppedFile) && (
-          <span className='btn pointer m-btn m--margin-5 m-btn--pill m-btn--air btn-primary' onClick={() => { this._saveImages() }} >
+          <span className='btn pointer m-btn m-2 m-btn--pill m-btn--air btn-primary' onClick={() => { this._saveImages() }} >
             {t('save')} <span className='la la-save'></span>
           </span>              
           )}          

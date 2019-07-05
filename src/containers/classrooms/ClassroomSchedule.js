@@ -117,9 +117,9 @@ class ClassroomSchedule extends Component {
                         </div>
                     </div>
                     <div className='m-portlet__body'>
-                        <div className='m-form m-form--label-align-left m--margin-top-20 m--margin-bottom-30'>
+                        <div className='m-form m-form--label-align-left mt-4 mb-4'>
                             <div className="row">                                       
-                                <label className="col-lg-1 col-md-3 col-sm-4 m--margin-top-15">{t('scheduleBy')}:</label>
+                                <label className="col-lg-1 col-md-3 col-sm-4 mt-3">{t('scheduleBy')}:</label>
                                 <div className="col-lg-4 col-md-5 col-sm-6">
                                     <div>
                                         <FormControlLabel 
@@ -135,7 +135,7 @@ class ClassroomSchedule extends Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <label className="col-lg-1 col-md-3 col-sm-4 m--margin-top-10">{t('frequency')}:</label>
+                                <label className="col-lg-1 col-md-3 col-sm-4 mt-3">{t('frequency')}:</label>
                                 <div className="col-lg-4 col-md-5 col-sm-6">
                                     <div>
                                     <Select
@@ -168,8 +168,8 @@ class ClassroomSchedule extends Component {
                                   {errors && errors.get('weeks') && <FormHelperText error>{errors.get('weeks').get(0)}</FormHelperText>}
                                 </div>                                            
                             </div>
-                            <div className="row m--margin-top-15">
-                                <label className="col-lg-1 col-md-3 col-sm-4 m--margin-top-10" htmlFor="startDate">{t('startDate')}:</label>
+                            <div className="row mt-3">
+                                <label className="col-lg-1 col-md-3 col-sm-4 mt-3" htmlFor="startDate">{t('startDate')}:</label>
                                 <div className="col-lg-4 col-md-5 col-sm-6">
                                     <div>
                                         <MuiDatePicker
@@ -177,7 +177,7 @@ class ClassroomSchedule extends Component {
                                             value={this.state.startDate || null}
                                             onChange={(e) => { this._handleDateChange(e, 'startDate') }}
                                         />
-                                        <Button disabled={disabled} variant="contained" color='primary' onClick={() => { this._saveSchedule() }} className='mt-btn mt-btn-success m--margin-left-15'>Execute</Button>
+                                        <Button disabled={disabled} variant="contained" color='primary' onClick={() => { this._saveSchedule() }} className='mt-btn mt-btn-success ml-3'>Execute</Button>
                                     </div>
                                     {errors && errors.get('startDate') && <FormHelperText error>{errors.get('startDate').get(0)}</FormHelperText>}                                    
                                 </div>                       

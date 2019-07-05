@@ -6,7 +6,7 @@ import {getInvoice} from '../../redux/payments/actions';
 import {invoiceRequest} from '../../redux/payments/selectors';
 import {Price} from '../../components/ui/Price';
 import Loader from "../../components/layouts/Loader";
-import {Step, StepLabel, Stepper, Typography, CircularProgress} from '@material-ui/core';
+import {Step, StepLabel, Stepper, Typography} from '@material-ui/core';
 import {renderToString} from 'react-dom/server'
 
 class Invoice extends Component {
@@ -64,7 +64,7 @@ class Invoice extends Component {
             </Trans>
         </span>
         <div>
-            <p className="text-center m--margin-25">
+            <p className="text-center m-4">
                 <a rel="noopener noreferrer" className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
             </p>
         </div>
@@ -157,9 +157,7 @@ class Invoice extends Component {
                                 </Step>
                             </Stepper>                          
                             <div className='p-5'>
-                                {invoice ? this._renderInvoice(invoice) : <div className="d-flex justify-content-center m--margin-top-100 m--margin-bottom-100">
-                                  <CircularProgress color="primary" size={80}/>
-                                </div>}
+                                {this._renderInvoice(invoice)}
                             </div>                            
                         </div>
                     </div>

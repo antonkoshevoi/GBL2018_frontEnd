@@ -199,10 +199,10 @@ class Messages extends Component {
                 </div>                                                                     
                 <div className='m-portlet__body'>
                     <HasRole roles={['Superadministrator', 'School', 'Teacher']}>
-                        <div className='m--margin-top-5 m--margin-bottom-20 text-right'>                                                         
+                        <div className='mt-2 mb-4 text-right'>                                                         
                             <button className={`btn btn-info ${color}`} onClick={() => this._showNewMessageModal() }>
                                {t(`new${typeTitle}`)}
-                               <span className='icon m--margin-left-10'><i className={icon}></i></span>
+                               <span className='icon ml-3'><i className={icon}></i></span>
                             </button>                                    
                         </div>                    
                     </HasRole>                
@@ -211,7 +211,7 @@ class Messages extends Component {
                         {success && this._renderRecords() }
                     </div>
                     <div className="row">
-                        <div className="col-sm-12 m--margin-top-40 text-right">
+                        <div className="col-sm-12 mt-5 text-right">
                             <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
                         </div>
                     </div>

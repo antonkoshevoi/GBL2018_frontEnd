@@ -70,14 +70,14 @@ class QuestionModal extends Component {
       <Modal minWidth="250" isOpen={isOpen} onClose={() => this._close()}>
         <AppBar position='static' color='primary' className='dialogAppBar'>
           <Toolbar>
-            <Icon className="m--margin-right-15">add_circle</Icon>                          
+            <Icon className="mr-3">add_circle</Icon>                          
             <Typography variant="h6" color='inherit'>
                 {t('addNewQuestion')}
             </Typography>
           </Toolbar>
         </AppBar>
 
-        <DialogContent className='m--margin-top-25'>
+        <DialogContent className='mt-4'>
           <form id='create-student-form' onSubmit={(e) => { this._onSubmit(e) }}>
             <div className='row'>
               <div className='col-sm-12 m-auto'>

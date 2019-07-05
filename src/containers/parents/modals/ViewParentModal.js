@@ -31,7 +31,7 @@ class ViewParentModal extends Component {
             <div className="col-lg-8 col-xl-7">
             {parent.accepted &&
                 <TabContainer>                    
-                    <div className="m-widget1 m-widget1--paddingless">
+                    <div className="m-widget1 p-0">
                         <div className="m-widget1__item">
                             <div className="row m-row--no-padding">
                                 <div className="col">
@@ -106,11 +106,11 @@ class ViewParentModal extends Component {
                 </TabContainer>}   
                 {!parent.accepted && <TabContainer>
                     <div className={`alert alert-${(parent.declined ? 'danger' : 'success')}`}>
-                        <p className='margin-0'>
+                        <p className='m-0'>
                             {t(parent.declined ? 'parentDeclinedYourRequest' : 'youSentRequestToParent')}                                
                         </p>
                     </div>
-                    <div className="m-widget1 m-widget1--paddingless">
+                    <div className="m-widget1 p-0">
                         <div className="m-widget1__item">
                             <div className="row m-row--no-padding">
                                 <div className="col">
@@ -174,13 +174,13 @@ class ViewParentModal extends Component {
             <Modal middle={true} isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>                             
-                        <Icon className="m--margin-right-15">person</Icon>
+                        <Icon className="mr-3">person</Icon>
                         <Typography variant="h6" color="inherit" >
                             {t('parentProfile')}
                         </Typography>                        
                     </Toolbar>
                 </AppBar>
-                <DialogContent className="m--margin-top-25">
+                <DialogContent className="mt-4">
                     { data && this._renderRequestForm(data) }
                 </DialogContent>
             </Modal>

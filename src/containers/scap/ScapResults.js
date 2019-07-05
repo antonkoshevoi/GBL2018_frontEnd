@@ -119,7 +119,7 @@ class ScapResults extends Component {
                         </div>         
                     </div>
                     <div className='m-portlet__body'>
-                        <div className='m--margin-top-10 m--margin-bottom-30'>
+                        <div className='mt-3 mb-4'>
                             <div className='row'>               
                                 <div className='col-sm-12 m--align-right'>
                                     <Select
@@ -132,8 +132,8 @@ class ScapResults extends Component {
                                         <MenuItem value={50}>50</MenuItem>
                                         <MenuItem value={100}>100</MenuItem>
                                     </Select>
-                                    <Button onClick={() => { this._goBack() }} variant="contained" color='primary' className='mt-btn mt-btn-success m--margin-right-5'>
-                                        <i className='la la-mail-reply m--margin-right-10'></i>
+                                    <Button onClick={() => { this._goBack() }} variant="contained" color='primary' className='mt-btn mt-btn-success mr-2'>
+                                        <i className='la la-mail-reply mr-3'></i>
                                         {t('back')}                                        
                                     </Button>                                    
                                 </div>
@@ -158,7 +158,7 @@ class ScapResults extends Component {
                         </Table>
 
                         <div className="row">
-                            <div className="col-sm-12 m--margin-top-40 text-right">
+                            <div className="col-sm-12 mt-5 text-right">
                                 <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
                             </div>
                         </div>

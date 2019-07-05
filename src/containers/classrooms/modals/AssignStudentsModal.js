@@ -111,9 +111,9 @@ class AssignStudentsModal extends Component {
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>            
               {loading ? (
-                <CircularProgress className="m--margin-right-15" color="inherit"/>
+                <CircularProgress className="mr-3" color="inherit"/>
               ) : (
-                <Icon className="m--margin-right-15" >person</Icon>
+                <Icon className="mr-3" >person</Icon>
               )}            
             <Typography variant="h6" color="inherit" >
               {t('assignStudents')}
@@ -121,10 +121,10 @@ class AssignStudentsModal extends Component {
           </Toolbar>
         </AppBar>
 
-        <DialogContent className="m--margin-top-25">          
+        <DialogContent className="mt-4">          
           <form id='assign-students-form' onSubmit={(e) => { this._onSubmit(e) }}>
-            {(classroom && classroom.courseCredits > 0) && <div className="alert m-alert m-alert--default m--padding-bottom-0">
-                <p className="m--margin-bottom-0"><strong>{t('youHaveUnassignedCourseCredits', {count: classroom.courseCredits})}</strong></p>                    
+            {(classroom && classroom.courseCredits > 0) && <div className="alert m-alert m-alert--default pb-0">
+                <p className="mb-0"><strong>{t('youHaveUnassignedCourseCredits', {count: classroom.courseCredits})}</strong></p>                    
                 <FormControlLabel
                     className=""
                     control={<Checkbox

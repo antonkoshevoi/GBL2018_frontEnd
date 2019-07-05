@@ -70,7 +70,7 @@ class Header extends Component {
               <div id="m_header_topbar" className="m-topbar  m-stack m-stack--ver m-stack--general">
                 <div className="m-stack__item m-topbar__nav-wrapper">
                   {!hideSidebar &&
-                  <IconButton color='primary' className="m--hide mobile-sidebar-out-toggle m--margin-top-5" onClick={() => { this.props.mobileSidebar() }}>
+                  <IconButton color='primary' className="m--hide mobile-sidebar-out-toggle mt-2" onClick={() => { this.props.mobileSidebar() }}>
                     <Icon fontSize="large">menu</Icon>
                   </IconButton>}
 

@@ -15,7 +15,7 @@ import AssignTeachersModal from "./modals/AssignTeachersModal"
 const AssignButton = ({ onClick, t}) => {    
     return (
     <button
-      className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15'
+      className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-3'
       onClick={() => { onClick() }}
       title={t('shareScapToTeachers')}
     >
@@ -27,7 +27,7 @@ const AssignButton = ({ onClick, t}) => {
 const ResultsButton = ({ onClick, t}) => {    
   return (
     <button
-      className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15'
+      className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-3'
       onClick={() => { onClick() }} 
       title={t('viewScapResults')}
     >
@@ -166,7 +166,7 @@ class SchoolScap extends Component {
                         </div>         
                     </div>
                     <div className='m-portlet__body'>
-                        <div className='m--margin-top-10 m--margin-bottom-30'>
+                        <div className='mt-3 mb-4'>
                             <div className='row'>               
                                 <div className='col-sm-12 m--align-right'>
                                     <Select
@@ -180,9 +180,9 @@ class SchoolScap extends Component {
                                         <MenuItem value={100}>100</MenuItem>
                                     </Select>
                                     <NavLink to="/scap/build" className="link-btn">
-                                        <Button variant="contained" color='primary' className='mt-btn mt-btn-success m--margin-right-5'>
+                                        <Button variant="contained" color='primary' className='mt-btn mt-btn-success mr-2'>
                                             {t('addNew')}
-                                            <Icon className="m--margin-left-5">add</Icon>
+                                            <Icon className="ml-2">add</Icon>
                                         </Button>
                                     </NavLink>                                    
                                 </div>
@@ -208,7 +208,7 @@ class SchoolScap extends Component {
                         </Table>
 
                         <div className="row">
-                            <div className="col-sm-12 m--margin-top-40 text-right">
+                            <div className="col-sm-12 mt-5 text-right">
                                 <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
                             </div>
                         </div>

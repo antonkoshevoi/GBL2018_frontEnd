@@ -207,7 +207,7 @@ class Homerooms extends Component {
             </div>
           </div>
           <div className='m-portlet__body'>
-            <div className='m--margin-top-10 m--margin-bottom-30'>
+            <div className='mt-3 mb-4'>
               <div className='row'>
                 <div className='col-sm-12 m--align-right'>
                   <Select
@@ -221,16 +221,16 @@ class Homerooms extends Component {
                     <MenuItem value={100}>100</MenuItem>
                   </Select>
                   <HasPermission permissions={['[HomeRooms][Create][Any]']}>
-                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success m--margin-right-10'>
+                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success mr-3'>
                       {t('addNew')}
-                      <Icon className="m--margin-left-5">add</Icon>
+                      <Icon className="ml-2">add</Icon>
                     </Button>
                   </HasPermission>
                   <HasPermission permissions={['[HomeRooms][Create][Bulk][Any]']}>
                     <NavLink className='link-btn' to='/homerooms/csv'>
                       <Button variant="contained" className='btn-success mt-btn mt-btn-success'>
                         {t('bulkAddHomerooms')}
-                        <Icon className="m--margin-left-5">person</Icon>
+                        <Icon className="ml-2">person</Icon>
                       </Button>
                     </NavLink>
                   </HasPermission>
@@ -261,7 +261,7 @@ class Homerooms extends Component {
             </Table>
 
             <div className="row">
-              <div className="col-sm-12 m--margin-top-40 text-right">
+              <div className="col-sm-12 mt-5 text-right">
                 <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
               </div>
             </div>

@@ -34,8 +34,8 @@ class RosterStatistic extends Component {
         title={success ? data.homeroom.name : ''}
         className="profile-card"
         avatar={success ? data.homeroom.avatar : ''}>
-        <div className="m-widget1 m-widget1--paddingless">
-          <div className="m-widget1 m-widget1--paddingless">
+        <div className="m-widget1 p-0">
+          <div className="m-widget1 p-0">
             <div className="m-widget1__item">
               <div className="row m-row--no-padding align-items-center">
                 <div className="col">

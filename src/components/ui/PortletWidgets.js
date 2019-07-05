@@ -17,12 +17,12 @@ class PortletWidgets extends Component {
         return this.props.data.map(function (item, i) {
             return (
                 <div className={`col-md-12 col-lg-6 col-xl-${fieldsCount}`} key={i} style={(basisPercent !== 0 ? {flexBasis: basisPercent} : {})}> 
-                    <span className="pull-right m--margin-10 m--margin-right-30">
+                    <span className="pull-right m-2 mr-4">
                         <span className={`display-3 m--font-${item.colorName}`}>
                             {item.value || '-'}
                         </span>
                     </span>
-                    <h5 className="pull-left m--margin-10">
+                    <h5 className="pull-left m-2">
                         {item.title}
                     </h5>
                 </div>

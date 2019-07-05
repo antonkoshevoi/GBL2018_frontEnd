@@ -50,8 +50,8 @@ class PaymentStatusContainer extends Component {
       
         return (
           <div className="alert m-alert m-alert--default">
-            <h3 className="display-4 text-center">
-              <i className={`display-2 la ${(status === 'pending') ? 'la-check-circle text-success' : 'la-times text-danger'} align-middle m--margin-right-20`} />
+            <h3 className="display-4 text-center m-0">
+              <i className={`display-2 la ${(status === 'pending') ? 'la-check-circle text-success' : 'la-times text-danger'} align-middle mr-4`} />
               {t(status + 'PaymentMessage')}
             </h3>
           </div>      
@@ -63,7 +63,7 @@ class PaymentStatusContainer extends Component {
         return (
             <div className="row">
                 <div className="col-md-10 m-auto">
-                  <div className="m-portlet m--margin-top-35">
+                  <div className="m-portlet mt-4">
                     <div className="m-portlet__body">
                       { this._renderMessage() }     
                       { this._renderServices() }

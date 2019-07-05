@@ -70,7 +70,7 @@ class CsvUploadSection extends Component {
                                     headers={csvTemplateHeaders}
                                     data={csvTemplateData}
                                     filename={csvExampleName}
-                                    className="btn btn-success m--margin-top-15 m--margin-bottom-20"
+                                    className="btn btn-success mt-3 mb-4"
                                 >
                                     {t('download')}
                                 </CSVLink>
@@ -88,7 +88,7 @@ class CsvUploadSection extends Component {
                                         onChange={e => this._handleFileChange(e)}
                                     />
                                     <label htmlFor="file-input">
-                                        <Button variant="contained" color="primary" component="span" className="btn btn-success m--margin-left-15">
+                                        <Button variant="contained" color="primary" component="span" className="btn btn-success ml-3">
                                             {t('upload')}
                                         </Button>
                                    </label>                                    
@@ -99,7 +99,7 @@ class CsvUploadSection extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-12 m--margin-top-10">
+                    <div className="col-md-12 mt-3">
                         {success && (
                             <PortletWidgets
                                 data={[

@@ -25,7 +25,7 @@ class SplashSlider extends PureComponent {
         
         if (records.size === 0 ) {
             return <div className='text-center'>
-                <h4 className='m--margin-60'>{t('productsNotFound')}</h4>
+                <h4 className='m-5'>{t('productsNotFound')}</h4>
             </div>;
         }
     
@@ -92,9 +92,9 @@ class SplashSlider extends PureComponent {
         const {t, getRecordsRequest} = this.props;
         return (
             <div className="splash-store">                
-                <h2 className="text-center m--margin-bottom-25">{t('bookstore')}</h2>
+                <h2 className="text-center mb-4">{t('bookstore')}</h2>
                 <section className="productSection">     
-                    <div className="storeSlider m--margin-30">
+                    <div className="storeSlider m-4">
                         {getRecordsRequest.get('success') && this._renderSlider() }
                     </div>                
                 </section>

@@ -68,13 +68,13 @@ class AddConnectionModal extends Component {
             <Modal middle={true} isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>                             
-                        {loading ? <CircularProgress className="m--margin-right-15" color="inherit"/> : <Icon className="m--margin-right-15">person</Icon>}                
+                        {loading ? <CircularProgress className="mr-3" color="inherit"/> : <Icon className="mr-3">person</Icon>}                
                         <Typography variant="h6" color="inherit" >
                             {t('connectionRequest')}
                         </Typography>                        
                     </Toolbar>
                 </AppBar>
-                <DialogContent className="m--margin-top-25">
+                <DialogContent className="mt-4">
                     <div className='m-auto' id="form-dialog-title">                
                         <div className="m-form">
                         <h5>{t('inviteAlreadyRegisteredUser')}</h5>   
@@ -94,14 +94,14 @@ class AddConnectionModal extends Component {
                                         type="button"                                                
                                         value={t('invite')}
                                         onClick={() => { this._invite() }}
-                                        className="btn btn-success m--margin-right-10"
+                                        className="btn btn-success mr-3"
                                         disabled={loading} />
                                 </div>
                             </div>
                         </div>
-                        <Divider className="m--margin-top-20 m--margin-bottom-20" />
+                        <Divider className="mt-4 mb-4" />
                         <h5>{t('inviteNewUser')}</h5>
-                        <div className="m-form m--margin-top-20">
+                        <div className="m-form mt-4">
                             <div className="form-group m-form__group row">
                                 <label className="col-form-label col-lg-4" htmlFor="email">{t('email')} <span className="text-danger">*</span></label>
                                 <div className="col-lg-6">
@@ -143,12 +143,12 @@ class AddConnectionModal extends Component {
                             </div>
                             <div className="form-group m-form__group row">
                                 <div className="col-lg-12">
-                                    <div className="text-center m--margin-top-25">
+                                    <div className="text-center mt-4">
                                         <input
                                             type="button"                                                
                                             value={t('sentRequest')}
                                             onClick={() => { this._create() }}
-                                            className="btn btn-success m--margin-right-10"
+                                            className="btn btn-success mr-3"
                                             disabled={loading} />
                                         <input
                                             type="button"                                                

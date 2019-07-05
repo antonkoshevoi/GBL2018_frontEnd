@@ -53,7 +53,7 @@ class InvitationDetails extends Component {
   }
   
   _errorMessage(message) {
-      return <h2 className="m--margin-top-100 m--margin-bottom-100 text-center">{message}</h2>;
+      return <h2 className="my-5 py-5 text-center">{message}</h2>;
   }
 
   _renderInvitation (invitation) {
@@ -78,26 +78,25 @@ class InvitationDetails extends Component {
     return (
         <div className="row">
           {image && (
-            <div className="col-sm-3 text-center m--padding-20">
+            <div className="col-sm-3 text-center p-4">
               <img style={imageStyle} src={image} alt="Demo Course" />
             </div>
           )}
-          <div className={`m--padding-20 col-12 col-sm-${image ? 9 : 12}`}>            
+          <div className={`p-4 col-12 col-sm-${image ? 9 : 12}`}>            
             <div>
                 <Trans i18nKey="translations:userInvitedYouToDemoCourse">
                     <h4>{{sender: invitation.getIn(['sender', 'name'])}}</h4>
-                    <h2>{{course: invitation.getIn(['course', 'crsTitle'])}}</h2>
+                    <h2 className="my-3">{{course: invitation.getIn(['course', 'crsTitle'])}}</h2>
                 </Trans>
-            </div>            
-            <br/>
-            <h4>{t('description')}:</h4>
+            </div>
+            <h4 className="mt-4 mb-2">{t('description')}:</h4>
             <p>{ invitation.getIn(['course', 'crsDescription']) }</p>
           </div>
-          <div className="col-sm-12 text-center m--padding-20">
-            <Button variant="contained" size="large" onClick={() => { this._accept() }} className='mt-btn mt-btn-success m--margin-10'>
+          <div className="col-sm-12 text-center p-4">
+            <Button variant="contained" size="large" onClick={() => { this._accept() }} className='mt-btn mt-btn-success m-2'>
               {t('accept')}
             </Button>
-            <Button variant="contained" size="large" onClick={() => { this._decline() }} className='mt-btn mt-btn-danger m--margin-10'>
+            <Button variant="contained" size="large" onClick={() => { this._decline() }} className='mt-btn mt-btn-danger m-2'>
               {t('decline')}
             </Button>
           </div>
@@ -111,14 +110,14 @@ class InvitationDetails extends Component {
     const loading = getRecordRequest.get('loading');
     
     return (
-      <div className="m--margin-left-15 m--margin-right-15">
+      <div className="ml-3 mr-3">
         <div className="row">
           <div className="col-sm-12 col-md-10 col-lg-8 col-xl-7 m-auto">
-            <div className="m-portlet m--margin-top-35">
+            <div className="m-portlet mt-4">
               <div className="m-portlet__body">
-                  <div className="m--padding-20">
-                      <h1 className="text-center m--padding-bottom-20">{t('demoCourseInvitation')}</h1>
-                      {loading ? <h2 className='text-center'><CircularProgress/></h2> : this._renderInvitation(getRecordRequest.get('record')) }
+                  <div className="p-4">
+                      <h1 className="text-center pb-2">{t('demoCourseInvitation')}</h1>
+                      {loading ? <div className="text-center m-5"><CircularProgress size={60} /></div> : this._renderInvitation(getRecordRequest.get('record')) }
                   </div>
               </div>
             </div>

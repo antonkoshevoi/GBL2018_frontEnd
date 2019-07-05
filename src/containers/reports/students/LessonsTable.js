@@ -102,7 +102,7 @@ class LessonsTable extends Component {
       
     return (
       <div className="table-responsive">
-        {!reportIsEmpty && <div className="m--margin-bottom-15">
+        {!reportIsEmpty && <div className="mb-3">
             <a className="btn btn-success" target="_blank" rel="noopener noreferrer" href={getReportRequest.get('data').get('pdfUrl')}><span className='la la-file-pdf-o'></span> {t('downloadReportInPdf')}</a>
          </div>}
         <table className="table table-bordered">
@@ -140,16 +140,16 @@ class LessonsTable extends Component {
             transformOrigin={{ vertical: 'center', horizontal: 'left' }}
             onClose={this._handleStatusPopoverClose}
             disableRestoreFocus >
-            <div className="m--margin-right-10 m--margin-left-10">
+            <div className="mr-3 ml-3">
                 <h6>{t('status')}</h6>
                 <p className="text-capitalize">
-                    <span className="m-badge m-badge--brand m-badge--wide m-badge--metal m--margin-right-10"></span> {t('notStarted')}
+                    <span className="m-badge m-badge--wide m-badge--metal mr-3"></span> {t('notStarted')}
                 </p>
                 <p className="text-capitalize">
-                    <span className="m-badge m-badge--brand m-badge--wide m-badge--warning m--margin-right-10"></span> {t('inProgress')} 
+                    <span className="m-badge m-badge--wide m-badge--warning mr-3"></span> {t('inProgress')} 
                 </p>
-                <p className="text-capitalize margin-0">
-                    <span className="m-badge m-badge--brand m-badge--wide m-badge--success m--margin-right-10"></span> {t('completed')}
+                <p className="text-capitalize m-0">
+                    <span className="m-badge m-badge--wide m-badge--success mr-3"></span> {t('completed')}
                 </p>            
             </div>
         </Popover>
@@ -164,17 +164,17 @@ class LessonsTable extends Component {
             transformOrigin={{ vertical: 'center', horizontal: 'left' }}
             onClose={this._handleRatePopoverClose}
             disableRestoreFocus >
-            <div className="m--margin-right-10 m--margin-left-10">
+            <div className="mr-3 ml-3">
                 <h6>{t('perfomance')}</h6>
                 <p className="text-capitalize">
-                    <span className="m-badge m-badge--brand m-badge--wide m-badge--success m--margin-right-10"></span> {t('pass')}
+                    <span className="m-badge m-badge--brand m-badge--wide m-badge--success mr-3"></span> {t('pass')}
                 </p>
-                <p className="text-capitalize margin-0">
-                    <span className="m-badge m-badge--brand m-badge--wide m-badge--danger m--margin-right-10"></span> {t('fail')} 
+                <p className="text-capitalize m-0">
+                    <span className="m-badge m-badge--brand m-badge--wide m-badge--danger mr-3"></span> {t('fail')} 
                 </p>            
             </div>
         </Popover>
-        {!reportIsEmpty && <div className="m--margin-top-15 m--margin-bottom-15">
+        {!reportIsEmpty && <div className="mt-3 mb-3">
             <a className="btn btn-success" target="_blank" rel="noopener noreferrer" href={getReportRequest.get('data').get('pdfUrl')}><span className='la la-file-pdf-o'></span> {t('downloadReportInPdf')}</a>
          </div>}        
       </div>
@@ -215,7 +215,7 @@ class LessonsTable extends Component {
                     {attemptIndex === 0 &&
                     <td style={{ maxWidth: 350}} className="text-center" rowSpan={lessonRowSpan}>
                         <p>                        
-                            <span aria-haspopup="true" onMouseEnter={this._handleStatusPopoverOpen} onMouseLeave={this._handleStatusPopoverClose} className={`m-badge m-badge--brand m-badge--wide ${badgeClass}`}>
+                            <span aria-haspopup="true" onMouseEnter={this._handleStatusPopoverOpen} onMouseLeave={this._handleStatusPopoverClose} className={`m-badge m-badge--wide ${badgeClass}`}>
                                 <strong>{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</strong>
                             </span>                        
                         </p>

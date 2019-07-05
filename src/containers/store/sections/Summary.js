@@ -38,14 +38,14 @@ class Summary extends Component {
     render() {
         const {data, t} = this.props;
         return <div className="ml-md-4 mb-5">
-            <legend className='m--margin-bottom-10 text-center'>{t('summary')}</legend>
+            <legend className='mb-3 text-center'>{t('summary')}</legend>
             <div className="card">
                 <div className="card-body">                    
                     <div className="my-2 text-center d-sm-none">
                         <h4>{t('invoice')} #{data.invoiceNo}</h4>
                         <Divider className="my-3"/>
                     </div>                                        
-                    <legend className='m--margin-bottom-10 text-center'>{t('items')}</legend>
+                    <legend className='mb-3 text-center'>{t('items')}</legend>
                     {this._renderItems()}
                     <Divider className="my-3"/>
                     <div className="row my-2">

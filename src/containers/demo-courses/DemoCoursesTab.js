@@ -211,7 +211,7 @@ class DemoCoursesTab extends Component {
 
     return (
         <div className='m-portlet__body'>
-          <div className='m--margin-top-10 m--margin-bottom-30'>
+          <div className='mt-3 mb-4'>
             <div className='row'>
               <div className='col-sm-12 m--align-right'>
                 <Select
@@ -224,13 +224,13 @@ class DemoCoursesTab extends Component {
                   <MenuItem value={50}>50</MenuItem>
                   <MenuItem value={100}>100</MenuItem>
                 </Select>
-                <Button variant="contained" color='primary' onClick={() => { this._openAssignDialog() }} className='mt-btn mt-btn-success m--margin-right-10'>
+                <Button variant="contained" color='primary' onClick={() => { this._openAssignDialog() }} className='mt-btn mt-btn-success mr-3'>
                   {t('assignStudent')}
-                  <Icon className="m--margin-left-5">persone</Icon>
+                  <Icon className="ml-2">persone</Icon>
                 </Button>                 
                 <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
                   {t('addNew')}
-                  <Icon className="m--margin-left-5">add</Icon>
+                  <Icon className="ml-2">add</Icon>
                 </Button>
               </div>
             </div>

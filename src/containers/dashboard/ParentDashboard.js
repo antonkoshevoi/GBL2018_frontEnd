@@ -105,7 +105,7 @@ class ParentDashboard extends Component {
 
         if (!requests.length) {
             return <div className="display-1">
-                <h2 className="text-center m--margin-top-75 m--margin-bottom-75">{t('studentsNotFound')}</h2>
+                <h2 className="text-center my-5">{t('studentsNotFound')}</h2>
             </div>
         }
 
@@ -120,7 +120,7 @@ class ParentDashboard extends Component {
               <div key={i} className={classes.profileBlock} >
                 <div className={classes.btnGroup}>
                   <div className="form-group-inline">
-                    <button title={t('reports')} onClick={() => { goTo(`/reports/students/${student.id}`) }} className='btn btn-info m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill'>
+                    <button title={t('reports')} onClick={() => { goTo(`/reports/students/${student.id}`) }} className='btn btn-info m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--pill'>
                         <i className='la la-search'></i>
                     </button>
                     <DeleteButton 
@@ -128,7 +128,7 @@ class ParentDashboard extends Component {
                         btnName={t('delete')}
                         title={t('deleteLearnerConfirmation')}
                         icon="la la-close"
-                        className="btn btn-danger m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill"
+                        className="btn btn-danger m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--pill"
                     />
                   </div>
                 </div>
@@ -136,7 +136,7 @@ class ParentDashboard extends Component {
                 <div className="d-flex align-items-center pointer" onClick={() => { goTo(`/reports/students/${student.id}`); }} >
                   <Avatar alt={student.firstName} src={student.avatarSmall} className={classes.avatar} />
                   <div className="info">
-                    <h5 className="m--margin-top-15 m--bottom-top-5">{student.name}</h5>
+                    <h5 className="mt-3">{student.name}</h5>
                     <span>{student.username}</span>
                     <div className={classes.progress}>
                       <div className="progress m-progress--sm" style={{minWidth: 80, marginRight:5}}>
@@ -172,10 +172,10 @@ class ParentDashboard extends Component {
             <div key={i} className={classes.profileBlock} style={{background: '#D3A9A9'}}>
               <div className={classes.btnGroup}>
                 <div className="form-group-inline">
-                    <button title={t('accept')} disabled={loading} onClick={() => { this._acceptRequest(request.id) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill'>
+                    <button title={t('accept')} disabled={loading} onClick={() => { this._acceptRequest(request.id) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--pill'>
                         <i className='la la-check'></i>
                     </button> 
-                    <button title={t('decline')} disabled={loading} onClick={() => { this._declineRequest(request.id) }} className='btn btn-danger m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--pill'>
+                    <button title={t('decline')} disabled={loading} onClick={() => { this._declineRequest(request.id) }} className='btn btn-danger m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--pill'>
                         <i className='la la-close'></i>
                     </button>
                 </div>
@@ -183,7 +183,7 @@ class ParentDashboard extends Component {
               <div className="d-flex align-items-center">
                 <Avatar alt={request.student.name} src={request.student.avatarSmall} className={classes.avatar} />
                 <div className="info">
-                  <h5 className="m--margin-top-15 m--bottom-top-5">{request.student.name}</h5>
+                  <h5 className="mt-3">{request.student.name}</h5>
                   <span>{request.student.username}</span>
                 </div>
               </div>
@@ -195,22 +195,22 @@ class ParentDashboard extends Component {
         const {storeItems, getStudents, studentsRequest, classes, t} = this.props;
         const loading = studentsRequest.get('loading');
 
-        return <div className="fadeInLeft animated m--margin-left-15 m--margin-right-15">
+        return <div className="fadeInLeft animated ml-3 mr-3">
             <Alerts />
             <div className="row">
               <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <div className='block-header border-b-blue'>                                                      
-                    <button title={t('add')} onClick={() => { this._openCreateDialog(); }} className="btn m-btn m-btn--icon m-btn--icon-only pull-right bg-transparent m--margin-right-10">
+                    <button title={t('add')} onClick={() => { this._openCreateDialog(); }} className="btn m-btn m-btn--icon m-btn--icon-only pull-right bg-transparent mr-3">
                       <i className="display-5 fa fa-plus-circle"></i>
                     </button> 
                     <h3 className='m-portlet__head-text'>{t('myLearners')}</h3>
                 </div>              
                 <div className="m-portlet m-portlet--head-solid-bg">
-                  <div className="m-portlet__body m--padding-top-10">
+                  <div className="m-portlet__body pt-3">
                     <div className={classes.students}>
                       {!loading && this._renderStudentRequests()}
                       {!loading && this._renderStudents()}
-                      {loading && <div className="m-auto m--margin-100 text-center"><CircularProgress /></div>}    
+                      {loading && <div className="m-5 text-center"><CircularProgress /></div>}    
                     </div>
                   </div>
                 </div>

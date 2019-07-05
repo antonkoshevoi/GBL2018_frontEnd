@@ -31,7 +31,7 @@ class PaymentMethods extends Component {
                 <div className='paymentImg'>
                   <img alt={t(method.method)} src={method.img} width={80} className='img-responsive'/>
                 </div>             
-                <h4 className="m--margin-top-10">
+                <h4 className="mt-3">
                   {t(method.method)}
                 </h4>
             </span>
@@ -46,7 +46,7 @@ class PaymentMethods extends Component {
   
     return (
         <div className="text-center">
-            <legend className='m--margin-bottom-15'>{t('paymentMethod')}</legend>
+            <legend className='mb-3'>{t('paymentMethod')}</legend>
             <div className='row m-row--no-padding'>
             { this._renderMethods() }
             </div>

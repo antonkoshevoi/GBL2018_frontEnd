@@ -67,9 +67,9 @@ class InvoiceForm extends Component {
                             <div className="text-center">
                                 <a className="btn btn-success" href={invoice.get('invoiceUrl')} target="_blank" rel="noopener noreferrer">{t('downloadPdf')}</a>
                                 {auth.get('isLoggedIn') ?
-                                    <NavLink className="btn btn-success m--margin-left-10" to="/my-subscriptions">{t('viewMySubscriptions')}</NavLink>
+                                    <NavLink className="btn btn-success ml-3" to="/my-subscriptions">{t('viewMySubscriptions')}</NavLink>
                                     :
-                                    <NavLink className="btn btn-success m--margin-left-10" to="/login">{t('login')}</NavLink>
+                                    <NavLink className="btn btn-success ml-3" to="/login">{t('login')}</NavLink>
                                 }
                             </div>
                         </div>

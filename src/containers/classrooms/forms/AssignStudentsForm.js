@@ -91,7 +91,7 @@ class AssignStudentsForm extends Component {
     return (
       <div>        
           {errors && errors.get('studentIds') && <FormHelperText error>{ errors.get('studentIds').get(0) }</FormHelperText>}
-          {studentsLoading && !studentsSuccess && <div className="text-center m--margin-100"><CircularProgress color="primary"/></div>}
+          {studentsLoading && !studentsSuccess && <div className="text-center m-5 p-5"><CircularProgress color="primary" size={80}/></div>}
           <div className="row">
             {!studentsLoading && studentsSuccess && this._renderStudents()}
           </div>
