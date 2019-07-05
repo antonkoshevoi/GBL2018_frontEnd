@@ -11,12 +11,12 @@ class Summery extends Component {
     
     if (!data || !data.length) {
       return <div className="m-timeline-2 my-timeline">
-        <div className="m-timeline-2__items  m--padding-top-5 m--padding-bottom-10">
-          <div className="m-timeline-2__item m--margin-bottom-10">
-            <div className="m-timeline-2__item-cricle">
+        <div className="m-timeline-2__items py-2">
+          <div className="m-timeline-2__item mb-3">
+            <div className="m-timeline-2__item-cricle pr-2">
               <i className={`fa fa-genderless m--font-${randColorName()}`}></i>
             </div>
-            <div className="m-timeline-2__item-text  m--padding-top-5">              
+            <div className="m-timeline-2__item-text pl-4 py-1">              
               {t(name + 'NotFound')}
             </div>
           </div>
@@ -26,12 +26,12 @@ class Summery extends Component {
     return (
       data.map((item, key) => {
         return <div className="m-timeline-2 my-timeline" key={key}>
-          <div className="m-timeline-2__items  m--padding-top-5 m--padding-bottom-10">
-            <div className="m-timeline-2__item m--margin-bottom-10">
-              <div className="m-timeline-2__item-cricle">
+          <div className="m-timeline-2__items py-2">
+            <div className="m-timeline-2__item mb-3">
+              <div className="m-timeline-2__item-cricle pr-2">
                 <i className={`fa fa-genderless m--font-${randColorName()}`}></i>
               </div>
-              <div className="m-timeline-2__item-text  m--padding-top-5">
+              <div className="m-timeline-2__item-text pl-4 py-1">
                 {item.name}
               </div>
             </div>

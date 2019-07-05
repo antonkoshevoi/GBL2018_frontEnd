@@ -28,27 +28,27 @@ class Dashboard extends Component {
     const {t, dataRequest } = this.props;        
 
     return (
-      <div className="fadeInLeft animated m--margin-left-15 m--margin-right-15">
+      <div className="fadeInLeft animated ml-3 mr-3">
           <div className="row">
             <div className="col-sm-12">
                 <div className='block-header border-b-blue'>
                     <h3 className='m-portlet__head-text'>{t('reportsSnapshot')}</h3>
                 </div>
             </div>           
-            <div className="col-sm-12 col-md-6 col-lg-3 m--margin-bottom-10">
+            <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
               <RosterStatistic classroomId={classroomId}/>
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-3 m--margin-bottom-10">
+            <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
               <SchoolAverageChart loading={dataRequest.get('loading')} data={dataRequest.get('data').toJS()} />
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-3 m--margin-bottom-10">
+            <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
               <PassRate loading={dataRequest.get('loading')}  data={dataRequest.get('data').toJS()} />
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-3 m--margin-bottom-10">
+            <div className="col-sm-12 col-md-6 col-lg-3 mb-3">
               <LineChart type='classroom' id={classroomId}/>
             </div>    
             <div className="col-md-12">
-                <div className="m--margin-top-25">
+                <div className="mt-4">
                   <div className="m-portlet m-portlet--head-solid-bg">
                     <div className="m-portlet__head border-b-blue">
                       <div className="m-portlet__head-caption">

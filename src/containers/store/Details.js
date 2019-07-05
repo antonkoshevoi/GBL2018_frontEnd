@@ -78,8 +78,8 @@ class Details extends Component {
             </div>;
         }
         
-        return <div className="actionsBtn justify-content-end full-width align-items-center d-flex m--padding-right-20 align-self-center">
-            <div className="m--padding-right-20">{record.get('discount') > 0 && <span className="position-relative discount"><span><Price price={record.get('price')} currency={record.get('currency')} /></span></span>}</div>
+        return <div className="actionsBtn justify-content-end full-width align-items-center d-flex pr-4 align-self-center">
+            <div className="pr-3">{record.get('discount') > 0 && <span className="position-relative discount"><span><Price price={record.get('price')} currency={record.get('currency')} /></span></span>}</div>
                 <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>                                            
                     <Price price={record.get('discountPrice')} currency={record.get('currency')} />
                 </button>
@@ -109,7 +109,7 @@ class Details extends Component {
     return (
       <div className="m-portlet store-wrapper fadeInLeft animated">
         {loading && <Loader/>}
-        <div className="m-portlet__head m--margin-bottom-30">
+        <div className="m-portlet__head mb-4">
           <div className="m-portlet__head-caption">
             <Filter isActive={false} type="details" onChange={() => { }} isShow={showFilters} />
           </div>
@@ -123,45 +123,40 @@ class Details extends Component {
                   <div className="headerBlock">
                     <div className="row">
                       <div className="col-md-4">
-                        <div className="productImage m--margin-10">
+                        <div className="productImage m-2">
                           <img src={record.get('thumbnail')} className="full-width" alt="product"/>
                         </div>
                       </div>
                       <div className="col-md-8">
                         <div className="d-flex flex-column m--full-height justify-content-between">
-                          <div className="productInfo full-width m--padding-20">
+                          <div className="productInfo full-width p-3">
                             <div className="row">
                               <div className="col-md-12">
                                 <h4 className="productTitle">{record.get('title')}</h4>
                               </div>
                               <div className="col-md-12">                                               
-                                <p className="m--margin-bottom-5">{t('product')}: {record.get('category').get('title')}</p>
-                                <p className="m--margin-bottom-5">{t('age')}: {record.get('target').get('title') ? record.get('target').get('title') : t('noInfo')}</p>
-                                <p className="m--margin-bottom-5">{t('subject')}: {record.get('subject').get('title') ? record.get('subject').get('title') : t('noInfo')}</p>                
+                                <p className="mb-2">{t('product')}: {record.get('category').get('title')}</p>
+                                <p className="mb-2">{t('age')}: {record.get('target').get('title') ? record.get('target').get('title') : t('noInfo')}</p>
+                                <p className="mb-2">{t('subject')}: {record.get('subject').get('title') ? record.get('subject').get('title') : t('noInfo')}</p>                
                               </div>
                             </div>
                           </div>
                           {successSingle && this._renderPrices()}
                         </div>
                       </div>
-                      {record.get('videoLink') &&
-                      <div className="col-md-12 m--margin-top-15">
-                        <iframe title={record.get('title')} className="full-width mainVideo" width={640} height={360} src={record.get('videoLink')}></iframe>
-                      </div>}
                     </div>
                   </div>
-                  <div className='m-separator m-separator--dashed m-separator--'></div>
-                  <div className="DescBlock m--padding-20">
+                  <div className='m-separator'></div>
+                  <div className="DescBlock px-4">
                     <p>{record.get('description')}</p>
                   </div>
-                  <div className='m-separator m-separator--dashed'></div>
+                  <div className='m-separator'></div>
                 </div>
               </div>
               }
             </div>
             <div className="col-lg-4">
-              {successSingle &&
-              <Sidebar data={similarRecords} title={t('similar')} dataType="similar"/>}
+              {successSingle && <Sidebar data={similarRecords} title={t('similar')} />}
             </div>
           </div>
         </div>

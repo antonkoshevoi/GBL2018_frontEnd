@@ -180,7 +180,7 @@ class DemoClassroomForm extends Component {
               <MenuItem value={null} primarytext=''/>
               {this._renderCourses()}
             </Select>
-            {this.props.getCoursesRequest.get('success') && !this.state.courses.length && <p className='text-center m--margin-top-5 text-danger'>{t('noDemoCoursesFound')}</p>}
+            {this.props.getCoursesRequest.get('success') && !this.state.courses.length && <p className='text-center mt-2 text-danger'>{t('noDemoCoursesFound')}</p>}
             {errors && errors.get('crmCourse') && <FormHelperText error>{ errors.get('crmCourse').get(0) }</FormHelperText>}
           </FormControl>}
           <FormControl className='full-width form-inputs'>

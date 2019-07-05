@@ -106,7 +106,7 @@ class Students extends Component {
 
     return (
         <div>
-            <div className="text-right m--margin-bottom-10">
+            <div className="text-right mb-3">
               <SearchInput
                 className="portlet-header-input"
                 id="search"
@@ -131,7 +131,7 @@ class Students extends Component {
                 </Tbody>
             </Table>
             <div className="row">
-                <div className="col-sm-12 m--margin-top-20 m--margin-bottom-40 text-right">
+                <div className="col-sm-12 mt-4 mb-5 text-right">
                     <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
                 </div>
             </div>

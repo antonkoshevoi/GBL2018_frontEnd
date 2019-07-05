@@ -125,7 +125,7 @@ class SignUpPrincipal extends Component {
         {loading && <Loader />}
         <div className="signup-page">
           <div className="m-signup col-sm-12 col-md-10 col-lg-8 col-xl-6 m-auto">
-            <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg m--margin-top-40 m-portlet--full-height ">
+            <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg mt-5 m-portlet--full-height ">
               <div className="m-portlet__head">
                 <div className="m-portlet__head-caption">
                   <div className="m-portlet__head-title full-width">
@@ -141,15 +141,15 @@ class SignUpPrincipal extends Component {
                 </div>
               </div>
               <form className="m-portlet__body" onSubmit={(e) => { e.preventDefault(); this._submit(); }}>
-                <div className="alert m-alert m-alert--default m--margin-top-5">
+                <div className="alert m-alert m-alert--default mt-2">
                   <p className="text-center m-0">                
                     <Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans>
                   </p>
                 </div>
-                <div className="row m--margin-top-40">
+                <div className="row mt-5">
                   <div className="col-md-6">
                     <legend>{t('personalInformation')}</legend>
-                      <div className="m-form__section m-form__section--first">
+                      <div className="m-form__section">
                         <div className="form-group m-form__group">
                           <div>
                             <input
@@ -162,9 +162,7 @@ class SignUpPrincipal extends Component {
                           </div>
                           {errors && errors.get('firstName') &&
                             <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
-                        </div>
-                      </div>
-                      <div className="m-form__section m-form__section--first">
+                        </div>      
                         <div className="form-group m-form__group">
                           <div>
                             <input
@@ -177,9 +175,7 @@ class SignUpPrincipal extends Component {
                           </div>
                           {errors && errors.get('lastName') &&
                             <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
-                        </div>
-                      </div>
-                      <div className="m-form__section m-form__section--first">
+                        </div>      
                         <div className="form-group m-form__group">
                           <div>
                             <input
@@ -193,8 +189,6 @@ class SignUpPrincipal extends Component {
                           {errors && errors.get('email') &&
                             <div className="form-control-feedback text-center error">{errors.get('email').get(0)}</div>}
                         </div>
-                      </div>
-                      <div className="m-form__section m-form__section--first">
                         <div className="form-group m-form__group">
                           <div className="">
                             <input
@@ -208,8 +202,6 @@ class SignUpPrincipal extends Component {
                           {errors && errors.get('username') &&
                             <div className="form-control-feedback text-center error">{errors.get('username').get(0)}</div>}
                         </div>
-                      </div>
-                      <div className="m-form__section m-form__section--first">
                         <div className="form-group m-form__group">
                           <div className="">
                             <input
@@ -223,8 +215,6 @@ class SignUpPrincipal extends Component {
                           {errors && errors.get('password') &&
                             <div className="form-control-feedback text-center error">{errors.get('password').get(0)}</div>}
                         </div>
-                      </div>
-                      <div className="m-form__section m-form__section--first">
                         <div className="form-group m-form__group">
                           <div className="">
                             <input
@@ -240,7 +230,7 @@ class SignUpPrincipal extends Component {
                     </div>
                   <div className="col-md-6">
                     <legend>{t('schoolInformation')}</legend>
-                    <div className="m-form__section m-form__section--first">
+                    <div className="m-form__section">
                       <div className="form-group m-form__group">
                         <div>
                           <input
@@ -301,11 +291,11 @@ class SignUpPrincipal extends Component {
                         aspectRatio={1 / 1}
                         guides={false}/>
                       {form.schoolLogo &&
-                      <div className="text-center m--margin-10">
+                      <div className="text-center m-2">
                         <input type="range" min="0.1" max="1" step="0.05"  value={this.state.zoom}  onChange={ (value)=>this._zoom(value)}></input>
                         <br/>
                         <span
-                          className='btn pointer m-btn m--margin-5 m-btn--pill m-btn--air btn-success'
+                          className='btn pointer m-btn m-2 m-btn--pill m-btn--air btn-success'
                           onClick={() => { this._handleImageCrop() }}
                          >
                           Crop <span className='la la-crop'></span>
@@ -320,14 +310,14 @@ class SignUpPrincipal extends Component {
                   </div>
                 </div>
 
-                <Divider className="m--margin-top-25"/>
+                <Divider className="mt-4"/>
 
                 <div className="row">
-                  <div className="col-sm-12 text-right m--padding-top-20">
+                  <div className="col-sm-12 text-right pt-4">
                     <button
                       type='submit'
                       disabled={loading}                          
-                      className='m-btn m-btn--air m--margin-5 btn btn-info'>
+                      className='m-btn m-btn--air m-2 btn btn-info'>
                       {t('next')}
                     </button>
                   </div>

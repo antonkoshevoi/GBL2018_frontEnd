@@ -119,16 +119,16 @@ class Connections extends Component {
                 <Td>{record.get('email') || '-'}</Td>
                 <Td>{this._getStatus(record)}</Td>
                 <Td className='actions'>
-                    <button title={t('connectionDetails')}  onClick={() => { this._openViewDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
+                    <button title={t('connectionDetails')}  onClick={() => { this._openViewDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--custom m-btn--pill'>
                         <i className='la la-search'></i>
                     </button>
                     {record.get('accepted') && 
-                        <button title={t('sendMessage')} onClick={() => { this._openMessageDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
+                        <button title={t('sendMessage')} onClick={() => { this._openMessageDialog(record) }} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--custom m-btn--pill'>
                             <i className='la la-envelope'></i>
                         </button>
                     }
                     {record.get('waiting') && 
-                        <button title={t('accept')} onClick={() => { this._accept(record.get('connectionId')) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only m--margin-left-5 m-btn--custom m-btn--pill'>
+                        <button title={t('accept')} onClick={() => { this._accept(record.get('connectionId')) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--custom m-btn--pill'>
                             <i className='la la-check'></i>
                         </button>                             
                     }
@@ -179,11 +179,11 @@ class Connections extends Component {
                         </div>
                     </div>
                     <div className='m-portlet__body'>
-                        <div className='m--margin-top-10 m--margin-bottom-30'>
+                        <div className='mt-3 mb-4'>
                             <div className='row'>
                                 <div className='col-sm-12 m--align-right'>       
                                     <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
-                                        {t('sentRequest')} <Icon className='m--margin-left-5'>add</Icon>
+                                        {t('sentRequest')} <Icon className='ml-2'>add</Icon>
                                     </Button>                  
                                 </div>
                             </div>

@@ -35,7 +35,7 @@ class GiftForm extends Component {
         const {form} = this.state;
         
         return (          
-            <div className='m-form__section m-form__section--first'>
+            <div className='m-form__section'>
                 <div className="form-group m-form__group row">
                     <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('yourName')} </label>
                     <div className="col-lg-4 col-md-4 col-6">
@@ -75,7 +75,7 @@ class GiftForm extends Component {
                         {errors && errors.get('email') && <FormHelperText error>{ errors.get('email').get(0) }</FormHelperText>}                          
                     </div>
                 </div>
-                <Divider className="m--margin-top-25 m--margin-bottom-25" />
+                <Divider className="mt-4 mb-4" />
                 <div className="form-group m-form__group row">
                     <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('recipientName')} </label>
                     <div className="col-lg-4 col-md-4 col-6">
@@ -110,7 +110,7 @@ class GiftForm extends Component {
                         name='recipientEmail'
                         onChange={(e) => { this._handleInputChange(e) }}
                         type='text'
-                        className='form-control m-input m-input--air '
+                        className='form-control m-input m-input--air'
                         placeholder=''/>
                         {errors && errors.get('recipientEmail') && <FormHelperText error>{ errors.get('recipientEmail').get(0) }</FormHelperText>}                          
                     </div>

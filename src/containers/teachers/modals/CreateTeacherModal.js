@@ -99,9 +99,9 @@ class CreateTeacherModal extends Component {
         <AppBar position='static' color='primary' className='dialogAppBar'>
           <Toolbar>            
               {loading ? (
-                <CircularProgress className="m--margin-right-15" color='inherit'/>
+                <CircularProgress className="mr-3" color='inherit'/>
               ) : (
-                <Icon className="m--margin-right-15">person</Icon>
+                <Icon className="mr-3">person</Icon>
               )}            
             <Typography variant="h6" color='inherit' >
               {t('createTeacher')}
@@ -109,7 +109,7 @@ class CreateTeacherModal extends Component {
           </Toolbar>
         </AppBar>
 
-        <DialogContent className='m--margin-top-25'>
+        <DialogContent className='mt-4'>
           <form id='create-teacher-form' onSubmit={(e) => { this._onSubmit(e) }}>
              <div className="row">
                <div className="col-md-6">

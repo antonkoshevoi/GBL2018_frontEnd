@@ -54,7 +54,7 @@ class SchoolAverageChart extends Component {
   _renderPieChartLabels(labels) {
     return labels.map(function (item, i) {
       return (
-        <div key={i} className="m-stack__item m--margin-bottom-5 m-stack__item--center m-stack__item--middle">
+        <div key={i} className="chart-item mb-1">
           <span className="m-badge m-badge--success" style={{marginRight: '8px', backgroundColor: item.color}}></span>
           <span>{item.value + '%  '}</span>
           <span style={{whiteSpace: 'pre'}}>{item.label}</span>
@@ -107,9 +107,9 @@ class SchoolAverageChart extends Component {
             <div className="col-md-5 pie-block">
               <Pie data={performanceChartData} options={this.options} width={100} height={100}/>
             </div>
-            <div className="col-md-7  pie-block">
+            <div className="col-md-7 pie-block">
               <div
-                className="m-stack m--padding-left-20 d-flex flex-column justify-content-center  m-stack--ver m-stack--table">
+                className="pl-3 d-flex flex-column justify-content-center">
                 <h5>{t('schoolAverage')}</h5>
                 <legend>{t('performance')}</legend>
                 {this._renderPieChartLabels(performance)}
@@ -125,7 +125,7 @@ class SchoolAverageChart extends Component {
             </div>
             <div className="col-md-7 pie-block">
               <div
-                className="m-stack m--padding-left-20  d-flex flex-column justify-content-center   m-stack--ver m-stack--table">
+                className="pl-3 d-flex flex-column justify-content-center">
                 <h5>{t('schoolAverage')}</h5>
                 <legend>{t('progress')}</legend>                
                 {this._renderPieChartLabels(progress)}

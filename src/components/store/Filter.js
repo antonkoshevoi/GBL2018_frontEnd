@@ -152,7 +152,7 @@ class Filter extends Component {
                     aria-haspopup="true"
                     onClick={(e) => { this.handleMenuClick(e, 'categoryMenu') }}
                 >
-                  <span> {this.state.active_target ? this.state.active_target : t('targetAge')}</span> <i className="m--margin-left-10 fa fa-chevron-down"></i>
+                  <span> {this.state.active_target ? this.state.active_target : t('targetAge')}</span> <i className="ml-3 fa fa-chevron-down"></i>
                 </Button>
                 <Menu
                     id="category-menu"
@@ -183,7 +183,7 @@ class Filter extends Component {
                     aria-haspopup="true"
                     onClick={(e) => { this.handleMenuClick(e, 'subjectMenu') }}
                 >
-                  <span> {this.state.active_subject ? this.state.active_subject : t('subject')}</span> <i className="m--margin-left-10 fa fa-chevron-down"></i>
+                  <span> {this.state.active_subject ? this.state.active_subject : t('subject')}</span> <i className="ml-3 fa fa-chevron-down"></i>
                 </Button>
                 <Menu
                     id="subject-menu"
@@ -220,7 +220,7 @@ class Filter extends Component {
                     aria-haspopup="true"
                     onClick={(e) => { this.handleMenuClick(e, 'sortMenu') }}
                   >
-                    {t('sortBy')}: <i className="m--margin-left-10 fa fa-sort-amount-desc"></i>
+                    {t('sortBy')}: <i className="ml-3 fa fa-sort-amount-desc"></i>
                   </Button>
                   <Menu
                     id="category-menu"
@@ -237,7 +237,7 @@ class Filter extends Component {
                 { isShow.search &&
                 <div className="filterMenu pull-right">
                     <Input
-                      className="store-search m--margin-top-10 m--margin-right-10"
+                      className="store-search mt-3 mr-3"
                       id='search'
                       type='search'
                       onChange={(e) => this._searchBarChange(e)}

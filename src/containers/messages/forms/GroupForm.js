@@ -157,18 +157,18 @@ class GroupForm extends Component {
         return <div className="row">
             <div className="col-sm-12">{t(title)}</div>
             {options.map((option, key) => (
-                <div key={key} className="col-sm-4 col-lg-3 margin-0">
+                <div key={key} className="col-sm-4 col-lg-3 m-0">
                       <FormControlLabel
                         control={<Checkbox color="primary" checked={selected.indexOf(option.id.toString()) > -1} name={name} onChange={ (e) => {this._handleCheckboxChange(e) }} value={option.id.toString()} />}
                         label={option.name} />                            
                 </div>
             ))}
-            <div className="col-sm-4 col-lg-3 margin-0">
+            <div className="col-sm-4 col-lg-3 m-0">
                 <FormControlLabel
                   control={<Checkbox color="primary" name={name} checked={(selected.length === options.length)} onChange={ (e) => {this._handleSelectAllChange(e, options.map(option => option.id.toString())) }} value="1" />}
                   label={t('selectAll')} />                            
             </div>
-            {errors && errors.get('ids') && <div className="col-sm-12"><FormHelperText error className="m--margin-top-0 m--margin-bottom-15">{errors.get('ids').get(0)}</FormHelperText></div>}
+            {errors && errors.get('ids') && <div className="col-sm-12"><FormHelperText error className="mt-0 mb-3">{errors.get('ids').get(0)}</FormHelperText></div>}
         </div>;       
     }
     
@@ -248,7 +248,7 @@ class GroupForm extends Component {
                 <div className='row'>
                     <div className='col-sm-12 col-md-12 text-center'>                        
 
-                        <button onClick={() => { this._save() }} disabled={loading} className="btn btn-success  m--margin-right-10" >{t('save')}</button>
+                        <button onClick={() => { this._save() }} disabled={loading} className="btn btn-success  mr-3" >{t('save')}</button>
                             
                         <button onClick={() => { this._goBack() }} disabled={loading} className="btn btn-default" >{t('back')}</button>
                     </div>

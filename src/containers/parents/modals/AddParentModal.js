@@ -74,7 +74,7 @@ class AddParentModal extends Component {
         
         return (             
             <div className='m-auto' style={{maxWidth: 900}}>
-                <h5 className="m--margin-bottom-20">{t('linkToParent')}</h5>
+                <h5 className="mb-4">{t('linkToParent')}</h5>
                 <div className="m-form">
                     <div className="form-group m-form__group row">
                         <label className="col-form-label col-lg-3" htmlFor="parentUsername">{t('enterParentUsernameOrEmail')}</label>
@@ -99,9 +99,9 @@ class AddParentModal extends Component {
                         </div>                    
                     </div>
                 </div>
-                <Divider className="m--margin-top-20 m--margin-bottom-20" />
+                <Divider className="mt-4 mb-4" />
                 <h5>{t('createParentAccount')}</h5>
-                <div className="m-form m--margin-top-20">
+                <div className="m-form mt-4">
                     <div className="form-group m-form__group row">
                         <label className="col-form-label col-lg-3" htmlFor="email">{t('email')} <span className="text-danger">*</span></label>
                         <div className="col-lg-6">
@@ -173,7 +173,7 @@ class AddParentModal extends Component {
                                 type="button"                                                
                                 value={t('register')}
                                 onClick={() => { this._createParent() }}
-                                className="btn btn-success m--margin-right-10"
+                                className="btn btn-success mr-3"
                                 disabled={loading} />
                             <input
                                 type="button"                                                
@@ -194,13 +194,13 @@ class AddParentModal extends Component {
             <Modal bigger={true} isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>                             
-                        {loading ? <CircularProgress className="m--margin-right-15" color="inherit"/> : <Icon className="m--margin-right-15">person</Icon>}                
+                        {loading ? <CircularProgress className="mr-3" color="inherit"/> : <Icon className="mr-3">person</Icon>}                
                         <Typography variant="h6" color="inherit" >
                             {t('addParent')}
                         </Typography>                        
                     </Toolbar>
                 </AppBar>
-                <DialogContent className="m--margin-top-25">
+                <DialogContent className="mt-4">
                     { this._renderRequestForm() }
                 </DialogContent>
             </Modal>

@@ -45,7 +45,7 @@ class ViewConnectionModal extends Component {
             <div className="col-lg-8 col-xl-7">
             {user.accepted &&
                 <TabContainer>                    
-                    <div className="m-widget1 m-widget1--paddingless">
+                    <div className="m-widget1 p-0">
                         <div className="m-widget1__item">
                             <div className="row m-row--no-padding">
                                 <div className="col">
@@ -120,11 +120,11 @@ class ViewConnectionModal extends Component {
                 </TabContainer>}   
                 {!user.accepted && <TabContainer>
                     <div className={`alert alert-${(user.declined ? 'danger' : 'success')}`}>
-                        <p className='margin-0'>
+                        <p className='m-0'>
                             {t(user.declined ? 'connectionRequestDeclined' : (user.waiting ? 'connectionRequestWaitingForYourApproval' : 'connectionRequestSent'))}
                         </p>
                     </div>
-                    <div className="m-widget1 m-widget1--paddingless">
+                    <div className="m-widget1 p-0">
                         <div className="m-widget1__item">
                             <div className="row m-row--no-padding">
                                 <div className="col">
@@ -180,7 +180,7 @@ class ViewConnectionModal extends Component {
                         <div className="m-widget1__item">
                             <div className="row m-row--no-padding">             
                                 <div className="col text-center">
-                                    <button disabled={loading} className="btn m-btm btn-success m--margin-right-5" onClick={() => { this._accept(user.connectionId) }}>{t('accept')}</button>                                    
+                                    <button disabled={loading} className="btn m-btm btn-success mr-2" onClick={() => { this._accept(user.connectionId) }}>{t('accept')}</button>                                    
                                     <button disabled={loading} className="btn m-btm btn-danger" onClick={() => { this._decline(user.connectionId) }}>{t('decline')}</button>
                                 </div>
                             </div>
@@ -197,13 +197,13 @@ class ViewConnectionModal extends Component {
             <Modal middle={true} isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>                             
-                        <Icon className="m--margin-right-15">person</Icon>
+                        <Icon className="mr-3">person</Icon>
                         <Typography variant="h6" color="inherit" >
                             {t('connectionDetails')}
                         </Typography>                        
                     </Toolbar>
                 </AppBar>
-                <DialogContent className="m--margin-top-25">
+                <DialogContent className="mt-4">
                     { data && this._renderRequestForm(data) }
                 </DialogContent>
             </Modal>

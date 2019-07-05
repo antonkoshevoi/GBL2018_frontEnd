@@ -28,7 +28,7 @@ class AuthorizeModal extends Component {
           </Toolbar>
         </AppBar>
 
-        <DialogContent className='m--margin-top-25'>          
+        <DialogContent className='mt-4'>          
            <p>{t('joinDemoLoginMessage')}</p>
            <p>{t('joinDemoCorseIsFreeMessage')}</p>          
         </DialogContent>
@@ -38,7 +38,7 @@ class AuthorizeModal extends Component {
             onClick={() => { toLogin() }}
             type='button'
             form='create-student-form'            
-            className='m--margin-10 pull-right mt-btn mt-btn-success'
+            className='m-2 pull-right mt-btn mt-btn-success'
             color='primary'>
             {t('login')}
           </Button>
@@ -46,7 +46,7 @@ class AuthorizeModal extends Component {
             onClick={() => { toRegistration() }}
             type='button'
             form='create-student-form'            
-            className='m--margin-10 pull-right mt-btn mt-btn-success'
+            className='m-2 pull-right mt-btn mt-btn-success'
             color='primary'>
             {t('register')}
           </Button>

@@ -59,7 +59,7 @@ class GiftForm extends Component {
       <div className='row'>
         <div className='col-sm-12 col-lg-12 m-auto'>
         {(usersRequest.get('success')) ? ((usersRequest.get('records').size > 0) &&
-            <div className='m--margin-bottom-25'>
+            <div className='mb-4'>
                 <Typography variant="h6">{t('selectFromMyConnections')} </Typography>
                 <FormControl className='full-width form-inputs'>
                   <InputLabel htmlFor='userId'>{t('giftToPersone')}</InputLabel>                 

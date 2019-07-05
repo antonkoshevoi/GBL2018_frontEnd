@@ -74,14 +74,14 @@ class EditMessageModal extends Component {
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>                      
                         {loading ? (
-                          <CircularProgress className="m--margin-right-15" color="inherit"/>
+                          <CircularProgress className="mr-3" color="inherit"/>
                         ) : (
-                          <span className='icon m--margin-right-10'><i className={`display-5 ${icon}`}></i></span>
+                          <span className='icon mr-3'><i className={`display-5 ${icon}`}></i></span>
                         )}                      
                         <Typography variant="h6" color="inherit" >{title}</Typography>
                     </Toolbar>
                 </AppBar>
-                <DialogContent className="m--margin-top-25">                    
+                <DialogContent className="mt-4">                    
                     <form id='assign-teachers-form' onSubmit={(e) => { this._onSubmit(e) }}>
                         <div className='row'>                                                             
                             <div className='col-sm-6 col-md-6 col-lg-6'>

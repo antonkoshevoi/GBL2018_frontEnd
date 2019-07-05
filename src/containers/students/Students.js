@@ -100,7 +100,7 @@ class Students extends Component {
         </HasRole>
         <Td className="actions">
           <NavLink className='link-btn' to={`/reports/students/${record.get('id')}`}>
-            <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-right-5' title={t('viewReport')}>
+            <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill mr-2' title={t('viewReport')}>
               <i className='la la-bar-chart'></i>
             </button>
           </NavLink>
@@ -219,7 +219,7 @@ class Students extends Component {
             </div>
           </div>
           <div className='m-portlet__body'>
-            <div className='m--margin-top-10 m--margin-bottom-30'>
+            <div className='mt-3 mb-4'>
               <div className='row'>
                 <div className='col-sm-12 m--align-right'>
                   <Select
@@ -233,16 +233,16 @@ class Students extends Component {
                     <MenuItem value={100}>100</MenuItem>
                   </Select>
                   <HasPermission permissions={['[Users][Students][Create][Any]']}>
-                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success m--margin-right-10'>
+                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success mr-3'>
                       {t('addNew')}
-                      <Icon className="m--margin-left-5">add</Icon>
+                      <Icon className="ml-2">add</Icon>
                     </Button>
                   </HasPermission>
                   <HasPermission permissions={['[Users][Students][Create][Bulk][Any]']}>
                     <NavLink className='link-btn' to='/students/csv'>
                     <Button variant="contained" className='btn-success mt-btn mt-btn-success'>
                       {t('bulkAddStudents')} 
-                      <Icon className="m--margin-left-5">person</Icon>
+                      <Icon className="ml-2">person</Icon>
                     </Button>
                     </NavLink>
                   </HasPermission>
@@ -273,7 +273,7 @@ class Students extends Component {
             </Table>
 
             <div className="row">
-              <div className="col-sm-12 m--margin-top-40 text-right">
+              <div className="col-sm-12 mt-5 text-right">
                 <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
               </div>
             </div>

@@ -21,7 +21,7 @@ class SplashJumbotron extends PureComponent {
                             </div>
                             <div className="subscriptions">
                                 <NavLink to={`/gift`} className="btn btn-warning btn-subscriptions">{t('subscription')}</NavLink>
-                                <div className="m--margin-top-10">{t('subscriptionStartingFrom')}</div>
+                                <div className="mt-3">{t('subscriptionStartingFrom')}</div>
                             </div> 
                         </div>
                     </div>

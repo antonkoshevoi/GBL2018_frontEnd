@@ -79,9 +79,9 @@ class GiftModal extends Component {
         <AppBar position='static' color='primary' className='dialogAppBar'>
           <Toolbar>            
             {loading ? (
-              <CircularProgress className="m--margin-right-15" color='inherit'/>
+              <CircularProgress className="mr-3" color='inherit'/>
             ) : (
-              <Icon className="m--margin-right-15">card_giftcard</Icon>
+              <Icon className="mr-3">card_giftcard</Icon>
             )}            
             <Typography variant="h6" color='inherit'>
               {t('giftSubscription')}
@@ -89,14 +89,14 @@ class GiftModal extends Component {
           </Toolbar>
         </AppBar>
 
-        <DialogContent className='m--margin-top-25' style={{minWidth: 400}}>
+        <DialogContent className='mt-4' style={{minWidth: 400}}>
             {this.state.error &&            
-                <FormHelperText className="text-center m--margin-bottom-15" error variant="filled">{this.state.error}</FormHelperText>
+                <FormHelperText className="text-center mb-3" error variant="filled">{this.state.error}</FormHelperText>
             }             
             <div className="row">
                 <div className='col-sm-6 col-lg-5 m-auto'>
                     {subscription &&            
-                    <div className="row m--margin-bottom-15" >
+                    <div className="row mb-3" >
                         <div className="col-sm-12"><h3 className="m--visible-desktop-inline">{t(subscription.title)}</h3> (<strong className="g-blue"><Price price={subscription.price} currency={subscription.currency} /></strong> / {t(subscription.period)})</div>                        
                         <div className="col-sm-12">
                             <Trans i18nKey="translations:courseAtTime">

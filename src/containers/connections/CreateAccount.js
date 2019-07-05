@@ -91,14 +91,14 @@ class CreateAccount extends Component {
             <div className='signup-page'>
               <div className='m-signup col-lg-8 col-md-10 col-sm-12 m-auto'>
                 <div className='m-signup__head'>
-                    {getRecordRequest.get('success') && <h3 className='m-login__title text-center m--margin-top-30'>{t('acceptInviteAndCreateAccount', {user: getRecordRequest.get('record').get('fromUser')})}</h3>}
+                    {getRecordRequest.get('success') && <h3 className='m-login__title text-center mt-4'>{t('acceptInviteAndCreateAccount', {user: getRecordRequest.get('record').get('fromUser')})}</h3>}
                 </div>
-                <div className='m-portlet m-portlet--brand m-portlet--head-solid-bg m--margin-top-40 m-portlet--full-height'>
+                <div className='m-portlet m-portlet--brand m-portlet--head-solid-bg mt-5 m-portlet--full-height'>
                   <div className='m-portlet__body'>
                     <div className='row'>
-                      <div className='col-lg-7 col-md-6 col-sm-12 m-auto m--margin-top-40'>          
-                          <legend className='m--margin-bottom-10'>{t('required')}</legend>
-                          <div className='m-form__section m-form__section--first'>
+                      <div className='col-lg-7 col-md-6 col-sm-12 m-auto mt-5'>          
+                          <legend className='mb-3'>{t('required')}</legend>
+                          <div className='m-form__section'>
                             <div className="form-group m-form__group row">
                               <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('email')} </label>
                               <div className="col-lg-8 col-md-12 col-sm-12">
@@ -132,9 +132,9 @@ class CreateAccount extends Component {
                               </div>
                             </div>
                           </div>
-                          <legend className='m--margin-bottom-10 m--margin-top-10'>{t('optional')}</legend>
+                          <legend className='mb-3 mt-3'>{t('optional')}</legend>
 
-                          <div className='m-form__section m-form__section--first'>
+                          <div className='m-form__section'>
                             <div className="form-group m-form__group row">
                               <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('firstName')}</label>
                               <div className="col-lg-8 col-md-12 col-sm-12">
@@ -170,16 +170,16 @@ class CreateAccount extends Component {
                           </div>         
                       </div>                    
                     </div>                       
-                <Divider className='m--margin-top-25'/>
+                <Divider className='mt-4'/>
                 <div className='row'>
-                  <div className='col-sm-12 text-right m--padding-top-20 text-center'>
-                    <button onClick={() => { this._createAccount() }} disabled={loading} className='m-btn m-btn--air m--margin-5 btn btn-info text-uppercase'>
+                  <div className='col-sm-12 pt-4 text-center'>
+                    <button onClick={() => { this._createAccount() }} disabled={loading} className='m-btn m-btn--air m-2 btn btn-info text-uppercase'>
                         {t('createAccount')}
                     </button>                                      
                   </div>
                 </div>
-                <div className='alert m-alert m-alert--default m--margin-top-25'>
-                  <p className='text-center margin-0'>
+                <div className='alert m-alert m-alert--default mt-4'>
+                  <p className='text-center m-0'>
                     <Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans>
                   </p>                              
                 </div>

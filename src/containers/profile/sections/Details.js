@@ -90,7 +90,7 @@ class Details extends Component {
     const errors = getUpdateRequest.get('errors');    
 
     return (      
-        <div className="m-portlet m-portlet--head-solid-bg m-portlet--brand m--margin-bottom-15">
+        <div className="m-portlet m-portlet--head-solid-bg m-portlet--brand mb-3">
           <div className="m-portlet__head">
             <div className="m-portlet__head-caption">
               <div className="m-portlet__head-title">
@@ -114,7 +114,7 @@ class Details extends Component {
               </ul>
             </div>
           </div>
-          <div className="m-portlet__body m--padding-top-5">
+          <div className="m-portlet__body p-2">
             {mode === 'overview' && <TabContainer>
               <div className="m-widget1">
                 <div className="m-widget1__item">
@@ -181,8 +181,8 @@ class Details extends Component {
             </TabContainer>}
             {mode === 'edit' && <TabContainer>
               <form id='update-user-form' onSubmit={(e) => { this._onSubmit(e) }}>
-                <div className="alert m-alert m-alert--default m--margin-top-15">
-                  <p className='margin-0'>{t('updateUserProfileNote')}</p>
+                <div className="alert m-alert m-alert--default mt-3">
+                  <p className='m-0'>{t('updateUserProfileNote')}</p>
                 </div>
                 <div className="m-form">
                   <div className="form-group m-form__group row">
@@ -260,7 +260,7 @@ class Details extends Component {
                     <div className="col-lg-9">                            
                       <MuiDatePicker
                         InputProps={{
-                            className: "form-control m-input m-input--air m--padding-top-5 m--padding-bottom-0",
+                            className: "form-control m-input m-input--air px-2 py-1",
                             disableUnderline: true                    
                         }}
                         style={{width: '100%'}}                        
@@ -270,9 +270,9 @@ class Details extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="m-separator m-separator--dashed"></div>
+                <div className="m-separator"></div>
                 <div className="text-right">
-                  <button className="btn-success m-btn btn m--margin-right-10">{t('saveChanges')}</button>
+                  <button className="btn-success m-btn btn mr-3">{t('saveChanges')}</button>
                   <button className="btn-default m-btn btn" onClick={() => { this._handleSwitchMode('overview') }}>{t('cancel')}</button>
                 </div>
               </form>

@@ -13,7 +13,7 @@ import TeacherResultsModal from './modals/TeacherResultsModal';
 const ResultsButton = ({ onClick, t}) => {    
   return (
     <button
-      className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-15'
+      className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-3'
       onClick={() => { onClick() }} 
       title={t('viewScapResults')}
     >
@@ -125,7 +125,7 @@ class TeacherScap extends Component {
                         </div>         
                     </div>
                     <div className='m-portlet__body'>
-                        <div className='m--margin-top-10 m--margin-bottom-30'>
+                        <div className='mt-3 mb-4'>
                             <div className='row'>               
                                 <div className='col-sm-12 m--align-right'>
                                     <Select
@@ -160,7 +160,7 @@ class TeacherScap extends Component {
                         </Table>
 
                         <div className="row">
-                            <div className="col-sm-12 m--margin-top-40 text-right">
+                            <div className="col-sm-12 mt-5 text-right">
                                 <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
                             </div>
                         </div>

@@ -47,10 +47,10 @@ class Messages extends Component {
                         <span className='m-badge m-badge--brand m-badge--wide'>{item.get('count')}</span>
                     </NavLink>
                 : 
-                    <span className='ml-2 m-badge m-badge--brand m-badge--wide m-badge--metal'>0</span>
+                    <span className='ml-2 m-badge m-badge--wide m-badge--metal'>0</span>
                 }
             </h6>
-            <div className='my-3 m-separator m-separator--dashed'></div>
+            <div className='my-3 m-separator'></div>
         </div>
     ));
   }
@@ -82,7 +82,7 @@ class Messages extends Component {
                     <div className="m-dropdown__body">
                         <div className="m-dropdown__content">
                             <h5 className="g-metal">
-                                <i className="fa fa-envelope m--margin-right-5"></i> {t('messages')}
+                                <i className="fa fa-envelope mr-2"></i> {t('messages')}
                             </h5>
                             <div>
                               {(total > 0) ?
@@ -90,14 +90,14 @@ class Messages extends Component {
                                   <div className='m-dropdown__content'>
                                     <div className='tab-content'>
                                       <div className='tab-pane active show'>
-                                        <div className='m-widget1 m-widget1--paddingless'>
+                                        <div className='m-widget1 p-0'>
                                           { this._renderMessages() }
                                         </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div> :
-                                <h4 className="text-center m--padding-top-20 m--padding-bottom-10">{t('youHaveNoNewMessages')}</h4>
+                                <h4 className="text-center my-5">{t('youHaveNoNewMessages')}</h4>
                               }
                             </div>
                         </div>

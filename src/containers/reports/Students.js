@@ -57,7 +57,7 @@ class Students extends Component {
     _renderCourseTable(courses) {
         if (!courses.length) {
             return <tr>
-                <td colSpan='4'><h5 className='text-center m--margin-20'>{this.props.t('noData')}</h5></td>
+                <td colSpan='4'><h5 className='text-center m-4'>{this.props.t('noData')}</h5></td>
             </tr>;
         }
         return courses.map(function (item, i) {
@@ -88,7 +88,7 @@ class Students extends Component {
         const data = getReportRequest.get('data').toJS();
 
         return (
-            <div className="fadeInLeft animated m--margin-left-15 m--margin-right-15">
+            <div className="fadeInLeft animated ml-3 mr-3">
                 <div>
                     <div className='block-header border-b-blue'>
                         <h3 className='m-portlet__head-text'>{t('reportsSnapshot')}</h3>
@@ -99,25 +99,25 @@ class Students extends Component {
                         <div className="col-sm-5 col-md-4 col-lg-3">
                             <div className="imgBlock">
                                 {studentRequest.get('loading') ? <Preloader text={t('loading')} color="primary"/> :
-                                <div className="avatar m--margin-bottom-20">
+                                <div className="avatar mb-4">
                                     <img src={student.avatar} alt="" className="" />
                                 </div>}
                             </div>
                         </div>
-                        <div className="col-sm-7 col-md-8 col-lg-3 m--margin-bottom-20">           
+                        <div className="col-sm-7 col-md-8 col-lg-3 mb-4">           
                             <div className="m-portlet  m-portlet--head-solid-bg">
-                                <div className="m-portlet__head border-b-blue m--padding-right-0">
+                                <div className="m-portlet__head border-b-blue pr-0">
                                     <div className="m-portlet__head-caption">
                                         {student && <div>
                                             <HasRole roles={['Superadministrator', 'School', 'Teacher']}>
-                                                <div className="pull-right m--margin-top-10 m--margin-right-10">
+                                                <div className="pull-right mt-3 mr-3">
                                                     <IconButton color='primary' onClick={() => {this._openEditDialog()}}>                        
                                                         <i className="la  la-pencil display-6"></i>
                                                     </IconButton>                              
                                                 </div>
                                             </HasRole>
                                             <HasRole roles={['Parents']}>
-                                                {(userData.get('id') === student.ownerId) && <div className="pull-right m--margin-top-10 m--margin-right-10">
+                                                {(userData.get('id') === student.ownerId) && <div className="pull-right mt-3 mr-3">
                                                     <IconButton title={t('edit')} color='primary' onClick={() => {this._openEditDialog() }}>                        
                                                         <i className="la  la-pencil display-6"></i>
                                                     </IconButton>                              
@@ -158,7 +158,7 @@ class Students extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-sm-12 col-lg-6 m--margin-bottom-20">
+                        <div className="col-sm-12 col-lg-6 mb-4">
                             <Card title={t('myCourses')} icon="display-5 la la-sitemap">                
                             <div className="table-responsive">
                                 <table className="table">

@@ -16,11 +16,11 @@ class Profile extends Component {
         const user = userData.toJS();
 
         return (
-            <div className="m--margin-15">
+            <div className="m-3">
                 <HasRole roles={['Student']}>
                     <Alerts />
                 </HasRole>
-                <div className="row m--margin-top-15">
+                <div className="row mt-3">
                     <HasRole roles={['Superadministrator', 'School', 'Parents']}>
                         <div className="col-sm-12 col-md-12 col-lg-11 col-xl-9 m-auto">
                             <div className="row">

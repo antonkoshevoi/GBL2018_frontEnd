@@ -36,7 +36,7 @@ class CreditCardForm extends Component {
         const {form} = this.state;
         
         return (
-            <div className='m-form__section m-form__section--first'>
+            <div className='m-form__section'>
               <div className="form-group m-form__group row">
                 <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('creditCardNumber')} </label>
                 <div className="col-lg-8 col-md-8 col-sm-12">

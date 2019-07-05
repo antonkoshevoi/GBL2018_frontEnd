@@ -21,7 +21,7 @@ const AssignButton = ({ id, onClick, btnName}) => {
   return (
     <button
       title={btnName}
-      className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill m--margin-left-5'
+      className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-2'
       onClick={onClick && (() => { onClick(id) })}      
     >
       <i className='la la-user-plus'></i>
@@ -270,7 +270,7 @@ class Classrooms extends Component {
             </div>
           </div>
           <div className='m-portlet__body'>
-            <div className='m--margin-top-10 m--margin-bottom-30'>
+            <div className='mt-3 mb-4'>
               <div className='row'>
                 <div className='col-sm-12 m--align-right'>
                   <Select
@@ -286,7 +286,7 @@ class Classrooms extends Component {
                   <HasPermission permissions={['[ClassRooms][Create][Any]']}>
                     <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
                       {t('addNew')}
-                      <Icon className="m--margin-left-5">add</Icon>
+                      <Icon className="ml-2">add</Icon>
                     </Button>
                   </HasPermission>
                 </div>
@@ -318,7 +318,7 @@ class Classrooms extends Component {
             </Table>
 
             <div className="row">
-              <div className="col-sm-12 m--margin-top-40 text-right">
+              <div className="col-sm-12 mt-5 text-right">
                 <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
               </div>
             </div>

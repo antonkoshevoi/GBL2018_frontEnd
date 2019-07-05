@@ -143,9 +143,9 @@ class CourseModal extends Component {
         <AppBar position="static" color="primary" className="dialogAppBar">
           <Toolbar>            
               {storeRecordsLoading ? (
-                <CircularProgress  className="m--margin-right-15" color="inherit"/>
+                <CircularProgress  className="mr-3" color="inherit"/>
               ) : (
-                <Icon className="m--margin-right-15">person</Icon>
+                <Icon className="mr-3">person</Icon>
               )}            
             <Typography variant="h6" color="inherit">
               {t('chooseCourse')}
@@ -153,7 +153,7 @@ class CourseModal extends Component {
           </Toolbar>
         </AppBar>
 
-        <DialogContent className="m--margin-top-25">          
+        <DialogContent className="mt-4">          
           <Filter            
             onChange={(params) => this._setFilters(params)}
             isActive={isFiltered}

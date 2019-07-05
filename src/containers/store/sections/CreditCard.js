@@ -31,8 +31,8 @@ class CreditCard extends Component {
                 
         return (            
                 <div>                    
-                    <legend className='m--margin-bottom-10 text-center'>{t('creditCard')}</legend>
-                    <div className='m-form__section m-form__section--first'>
+                    <legend className='mb-3 text-center'>{t('creditCard')}</legend>
+                    <div className='m-form__section'>
                       <div className="form-group m-form__group row">
                         <label className="col-form-label col-md-3 col-lg-3 col-sm-12">{t('creditCardNumber')} </label>
                         <div className="col-lg-9 col-md-9 col-sm-12">
@@ -48,9 +48,7 @@ class CreditCard extends Component {
                           {errors && errors.get('cardNumber') && <FormHelperText error>{ errors.get('cardNumber').get(0) }</FormHelperText>}
                           {errors && errors.get('message') && <FormHelperText error>{ errors.get('message') }</FormHelperText>}
                         </div>
-                      </div>
-                    </div>
-                    <div className='m-form__section m-form__section--first'>
+                      </div>    
                       <div className="form-group m-form__group row">
                         <label className="col-form-label col-md-3 col-lg-3 col-sm-12">{t('holderName')}</label>
                         <div className="col-lg-9 col-md-9 col-sm-12">
@@ -65,8 +63,7 @@ class CreditCard extends Component {
                             
                           {errors && errors.get('cardHolder') && <FormHelperText error>{ errors.get('cardHolder').get(0) }</FormHelperText>}
                         </div>
-                      </div>
-                    </div>
+                      </div>                    
                     <div className="form-group m-form__group row">
                       <label className="col-form-label col-lg-3 col-md-3 col-sm-12">{t('cardType')}</label> 
                       <div className="col-lg-5 col-md-9 col-sm-12">
@@ -129,8 +126,7 @@ class CreditCard extends Component {
                           {errors && errors.get('cardExpMonth') && <FormHelperText error>{ errors.get('cardExpMonth').get(0) }</FormHelperText>}
                         </FormControl>
                       </div>                      
-                    </div>
-                    <div className='m-form__section m-form__section--first'>
+                    </div>                    
                       <div className="form-group m-form__group row">
                         <label className="col-form-label col-lg-3 col-md-3 col-sm-12">{t('cvvCode')} </label>
                         <div className="col-lg-5 col-md-6 col-sm-12">
@@ -146,7 +142,7 @@ class CreditCard extends Component {
                         </div>
                       </div>
                     </div>                    
-                    <div className="d-flex justify-content-center">
+                    <div className="my-4 text-center">
                       <Button                                          
                         variant="contained"
                         onClick={() => this._back()}

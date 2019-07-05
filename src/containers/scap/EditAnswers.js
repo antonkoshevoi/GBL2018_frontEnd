@@ -163,18 +163,18 @@ class EditAnswers extends Component {
                                 <p>{scap.homeroom}</p>                                 
                             </div>                              
                             <div className="col-sm-12">
-                                <h5 className="text-left m--margin-bottom-20">{t('questions')}</h5>
-                                {errors && errors.get('answers') && <FormHelperText error className="m--margin-bottom-15">{ errors.get('answers').get(0) }</FormHelperText>}
+                                <h5 className="text-left mb-4">{t('questions')}</h5>
+                                {errors && errors.get('answers') && <FormHelperText error className="mb-3">{ errors.get('answers').get(0) }</FormHelperText>}
                                 <div>{this._renderQuestions()}</div>                                
                             </div>
-                            <div className="col-sm-12 m--margin-top-40 text-center">
-                                <Button disabled={updateAnswersRequest.get('loading')} onClick={() => { this._saveAnswers(0) }} variant="contained" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
+                            <div className="col-sm-12 mt-5 text-center">
+                                <Button disabled={updateAnswersRequest.get('loading')} onClick={() => { this._saveAnswers(0) }} variant="contained" color='primary' className='mt-btn mt-btn-success mr-3'>
                                     {t('saveAndPublish')}
-                                    <Icon className="m--margin-left-5">check</Icon>
+                                    <Icon className="ml-2">check</Icon>
                                 </Button>
-                                <Button disabled={updateAnswersRequest.get('loading')} onClick={() => { this._saveAnswers(1) }} variant="contained" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
+                                <Button disabled={updateAnswersRequest.get('loading')} onClick={() => { this._saveAnswers(1) }} variant="contained" color='primary' className='mt-btn mt-btn-success mr-3'>
                                     {t('saveAsDraft')}
-                                    <Icon className="m--margin-left-5">check</Icon>
+                                    <Icon className="ml-2">check</Icon>
                                 </Button>                                 
                                 <Button disabled={updateAnswersRequest.get('loading')} onClick={() => { this._goBack() }} variant="contained" color='default' className='mt-btn mt-btn-cancel'>
                                     {t('cancel')}                                    

@@ -121,25 +121,25 @@ class GiftModal extends Component {
         <AppBar position='static' color='primary' className='dialogAppBar'>
           <Toolbar>            
               {loading ? (
-                <CircularProgress className="m--margin-right-15" color='inherit'/>
+                <CircularProgress className="mr-3" color='inherit'/>
               ) : (
-                <Icon className="m--margin-right-15">card_giftcard</Icon>
+                <Icon className="mr-3">card_giftcard</Icon>
               )}            
             <Typography variant="h6" color='inherit'>{t('giftCourseCredit')} </Typography>
           </Toolbar>
         </AppBar>
 
-        <DialogContent className='m--margin-top-25'>             
+        <DialogContent className='mt-4'>             
             {this.state.error &&            
-                <FormHelperText className="text-center m--margin-bottom-15" error variant="filled">{this.state.error}</FormHelperText>
+                <FormHelperText className="text-center mb-3" error variant="filled">{this.state.error}</FormHelperText>
             }            
             <div className='row m-auto' style={{maxWidth: 750}}>                 
-                <div className='col-sm-6 col-lg-5 m--margin-top-25'>
+                <div className='col-sm-6 col-lg-5 mt-4'>
                 {unassignedItem &&
-                    <div className="m--margin-top-25">
+                    <div className="mt-4">
                         <div className="text-center">
                             <img alt={unassignedItem.item.title} src={unassignedItem.item.thumbnail} width={70}/>
-                            <p className='m--margin-top-25'><strong>{unassignedItem.item.title}</strong></p>
+                            <p className='mt-4'><strong>{unassignedItem.item.title}</strong></p>
                         </div>        
                         {(unassignedItem.quantity > 1) && 
                         <FormControl className='full-width form-inputs'>
@@ -160,7 +160,7 @@ class GiftModal extends Component {
                 </div>
                 <div className='col-sm-6 col-lg-5 m-auto'>
                     {(connections.length > 0) &&
-                        <div className='m--margin-bottom-25'>
+                        <div className='mb-4'>
                             <Typography variant="h6">{t('selectFromMyConnections')} </Typography>
                             <FormControl className='full-width form-inputs'>
                                 <InputLabel htmlFor='userId'>{t('selectPersone')}</InputLabel>

@@ -204,6 +204,7 @@ button .discount > span {
 
 .horizontalCardItem .cardDesc {
     white-space: normal;
+    margin-top: 5px;
 }
 
 .sidebarTitle {

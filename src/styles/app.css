@@ -163,13 +163,6 @@ textarea {
 .gravity-logo.logo-only img {
     max-width: 190px;
 }
-.margin-0 {
-    margin: 0 !important;
-}
-
-.no-padding {
-    padding: 0 !important;
-}
 .row > div {
     padding-left: 7px;
     padding-right: 7px;

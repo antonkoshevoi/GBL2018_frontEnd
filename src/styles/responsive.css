@@ -1,13 +1,5 @@
 
 @media (max-width: 1600px) {
-    .small-card .m-stack {        
-        padding-left: 0;
-    }
-
-    .small-card .m-stack legend {
-        font-size: 1rem;
-    }
-
     .small-card .m-badge {
         min-height: 10px;
         min-width: 10px;
@@ -35,11 +27,6 @@
         padding: 0.7rem;
     }
 
-    .small-card .m--padding-right-10, .small-card .m--padding-left-10 {
-        padding: 2px !important;
-        justify-content: space-between;
-    }
-
     div.m-widget1 .m-widget1__item .m-widget1__number, .m-widget1 .m-widget1__item .m-widget1__title {
         font-size: 1.1rem;
     }
@@ -51,23 +38,6 @@
 
     .m-widget1__number > img {
         width: 25px;
-    }
-
-    .small-card .m-stack {
-        padding-left: 5px !important;       
-    }
-
-    .small-card .m-stack legend {
-        font-size: .7rem;
-    }
-
-    .small-card .m-stack h5 {
-        font-size: 0.8rem;
-    }
-
-    .small-card .m-stack div[class^='col-'] {
-        padding-right: 4px;
-        padding-left: 4px;
     }
 
     .passRateCard h1 {
@@ -116,14 +86,6 @@
         display: flex;
         flex-direction: row;
         flex-wrap: unset;
-    }
-
-    .small-card .m-stack h5 {
-        font-size: 1.2rem;
-    }
-
-    .small-card .m-stack legend {
-        font-size: 1rem;
     }
 
     div#notFoundPage {

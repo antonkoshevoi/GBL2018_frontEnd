@@ -69,9 +69,9 @@ class DiscountCode extends Component {
             <AppBar position="static" color="primary" className="dialogAppBar">
                 <Toolbar>                        
                     {loading ? (
-                        <CircularProgress className="m--margin-right-15" color="inherit"/>
+                        <CircularProgress className="mr-3" color="inherit"/>
                     ) : (
-                        <Icon className="m--margin-right-15">grade</Icon>
+                        <Icon className="mr-3">grade</Icon>
                     )}                        
                     <Typography variant="h6" color="inherit">
                         {t('enterPromocode')}
@@ -79,7 +79,7 @@ class DiscountCode extends Component {
                 </Toolbar>
             </AppBar>
 
-            <DialogContent className="m--margin-top-25">
+            <DialogContent className="mt-4">
                 <form id='update-administrator-form' onSubmit={(e) => {
                     this._onSubmit(e)
                 }}>

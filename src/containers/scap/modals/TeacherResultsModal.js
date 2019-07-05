@@ -83,7 +83,7 @@ class TeacherResultsModal extends Component {
                 <Td>{this._recordNumber(key)}</Td>
                 <Td>{record.get('homeroom')}</Td>
                 <Td>{record.get('student')}</Td>
-                <Td><span className={`m-badge m-badge--brand m-badge--wide ${(record.get('status') === 'completed' ? 'm-badge--success' : '')}`}>{t(record.get('status'))}</span></Td>
+                <Td><span className={`m-badge m-badge--wide ${(record.get('status') === 'completed' ? 'm-badge--success' : 'm-badge--brand')}`}>{t(record.get('status'))}</span></Td>
                 <Td><Date time={record.get('createdAt')} /></Td>
                 <Td className="actions">
                     {record.get('status') !== 'completed' &&
@@ -112,13 +112,13 @@ class TeacherResultsModal extends Component {
             <Modal isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>          
-                      <Icon className="m--margin-right-15">poll</Icon>                                             
+                      <Icon className="mr-3">poll</Icon>                                             
                       <Typography variant="h6" color="inherit" >
                             {t('sCapResults')}
                       </Typography>
                     </Toolbar>
                 </AppBar>
-                <DialogContent className="m--margin-top-25">                    
+                <DialogContent className="mt-4">                    
                     <div className="scap-answers">                        
                         <Table>
                             <Thead>
@@ -137,7 +137,7 @@ class TeacherResultsModal extends Component {
                             </Tbody>
                         </Table>                        
                         <div className="row">
-                            <div className="col-sm-12 m--margin-top-15 text-right">
+                            <div className="col-sm-12 mt-3 text-right">
                                 <Pagination page={page} totalPages={totalPages} onPageSelect={(page) => this._goToPage(page)}/>
                             </div>
                         </div>                        

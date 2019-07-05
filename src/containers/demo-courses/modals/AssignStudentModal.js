@@ -74,9 +74,9 @@ class AssignStudentModal extends Component {
         <AppBar position='static' color='primary' className='dialogAppBar'>
           <Toolbar>            
               {loading ? (
-                <CircularProgress className="m--margin-right-15" color='inherit'/>
+                <CircularProgress className="mr-3" color='inherit'/>
               ) : (
-                <Icon className="m--margin-right-15">persone</Icon>
+                <Icon className="mr-3">persone</Icon>
               )}            
             <Typography variant="h6" color='inherit'>
               {t('assignStudent')}
@@ -84,7 +84,7 @@ class AssignStudentModal extends Component {
           </Toolbar>
         </AppBar>
 
-        <DialogContent className='m--margin-top-25'>
+        <DialogContent className='mt-4'>
           <form id='create-student-form' onSubmit={(e) => { this._onSubmit(e) }}>            
             <AssignStudentForm
               onChange={(e) => { this._onChange(e) }}

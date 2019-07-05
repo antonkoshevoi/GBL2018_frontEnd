@@ -77,8 +77,8 @@ class FirstStepForm extends Component {
     return (
       <div className='row'>
         <div className='col-lg-7 col-md-6 col-sm-12'>          
-            <legend className='m--margin-bottom-10'>{t('required')}</legend>
-            <div className='m-form__section m-form__section--first'>
+            <legend className='mb-3'>{t('required')}</legend>
+            <div className='m-form__section'>
               <div className="form-group m-form__group row">
                 <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('email')} </label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
@@ -112,9 +112,9 @@ class FirstStepForm extends Component {
                 </div>
               </div>
             </div>
-            <legend className='m--margin-bottom-10 m--margin-top-10'>{t('optional')}</legend>
+            <legend className='mb-3 mt-3'>{t('optional')}</legend>
 
-            <div className='m-form__section m-form__section--first'>
+            <div className='m-form__section'>
               <div className="form-group m-form__group row">
                 <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('firstName')}</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
@@ -152,7 +152,7 @@ class FirstStepForm extends Component {
 
         <div className='col-lg-5 col-md-6 col-sm-12'>
           <div className='row text-center'>
-            <legend className='m--margin-bottom-10'>{t('profilePicUpload')}</legend>
+            <legend className='mb-3'>{t('profilePicUpload')}</legend>
             <div className='col-sm-12'>
               <div className='CropperBlock'>
                 <div className='upload-btn-wrapper '>
@@ -180,12 +180,12 @@ class FirstStepForm extends Component {
 
             <div className='col-sm-12'>
                 {form.avatarCropped &&
-                  <div className="text-center m--margin-10">
+                  <div className="text-center m-2">
                       <input type="range" min="0.1" max="1" step="0.05"  value={this.state.zoom}  onChange={ (value) => this._zoom(value)}></input>
                       <br/>                    
                       <button
                           type="button"
-                          className='btn m-btn--air btn-success m--margin-top-15'
+                          className='btn m-btn--air btn-success mt-3'
                           onClick={() => { this._handleImageCrop() }}
                           >
                           {t('cropImage')} <span className='la la-crop'></span>

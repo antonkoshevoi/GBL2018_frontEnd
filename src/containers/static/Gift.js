@@ -22,8 +22,8 @@ const Portlet = (props) => {
         <div className="container">
             <div className="row my-5">
                 <div className="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-8 m-auto">
-                    <h1 className="text-center m--margin-top-15 g-metal">{t('sendGift')}</h1>
-                    <div className='m-portlet m-portlet--head-solid-bg m--margin-top-30'>
+                    <h1 className="text-center mt-3 g-metal">{t('sendGift')}</h1>
+                    <div className='m-portlet m-portlet--head-solid-bg mt-4'>
                         <div className='m-portlet__body'>
                             {props.children}
                         </div>
@@ -182,7 +182,7 @@ class Gift extends Component {
                             <div className='align-items-center'>
                                 <div className="col-sm-12 text-center mt-5">                                        
                                     <button disabled={loading} onClick={() => { this._setStep(1) }} className="btn btn-default">{t('back')}</button>                                                                  
-                                    <button disabled={loading} onClick={() => { this._submitCreditCardPayment() }} className="btn btn-info m--margin-left-10">{t('makePayment')}</button>
+                                    <button disabled={loading} onClick={() => { this._submitCreditCardPayment() }} className="btn btn-info ml-3">{t('makePayment')}</button>
                                 </div>
                             </div>
                         </div>

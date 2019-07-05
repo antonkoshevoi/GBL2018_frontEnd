@@ -108,7 +108,7 @@ class Info extends Component {
     const errors = changePasswordRequest.get('errors');    
 
     return (
-      <div className="m-portlet m--margin-bottom-15">
+      <div className="m-portlet mb-3">
         <div className="m-portlet__body">
           <div>          
             <div className="text-center my-4">
@@ -120,10 +120,10 @@ class Info extends Component {
                 <img className="rounded-circle img-thumbnail" src={user.avatar} alt=""/>
               </div>
               <div className="text-center">
-                {changeImageRequest.get('loading') ? (<CircularProgress color="primary"/>) : (<button className="m-btn btn btn-info m--margin-bottom-10" onClick={()=>{this._openUploadModal()}}>{t('uploadAvatar')}</button>)}
+                {changeImageRequest.get('loading') ? (<CircularProgress color="primary"/>) : (<button className="m-btn btn btn-info mb-3" onClick={()=>{this._openUploadModal()}}>{t('uploadAvatar')}</button>)}
                 <HasRole roles={['Superadministrator','School','Teacher','Parents']}>
-                <Divider className="m--margin-top-10 m--margin-bottom-20" />
-                <button onClick={() => { this._openPasswordModal(true) }} className="m-btn btn btn-success m--margin-bottom-10">{t('changePassword')}</button>
+                <Divider className="mt-3 mb-4" />
+                <button onClick={() => { this._openPasswordModal(true) }} className="m-btn btn btn-success mb-3">{t('changePassword')}</button>
                 </HasRole>
               </div>
             </div>
@@ -135,11 +135,11 @@ class Info extends Component {
               aria-describedby="simple-modal-description"
               open={this.state.passwordModal}
               onClose={() => this._closePasswordModal()}
-              PaperProps={{className: "margin-0"}}
+              PaperProps={{className: "m-0"}}
               maxWidth="xs"
             >
             <Card title={t('changePassword')} icon="fa fa-exclamation-triangle" style={{minWidth:'280px'}}>               
-                <div style={{minWidth: 250}} className="m--margin-top-20">
+                <div style={{minWidth: 250}} className="mt-4">
                   <div className="form-group m-form__group">
                     <input
                       type="password"
@@ -170,8 +170,8 @@ class Info extends Component {
                       className="form-control  m-input--air form-control-danger m-input" />
                     {errors && errors.get('newPassword_confirmation') && <div className="form-control-feedback text-center error">{errors.get('newPassword_confirmation').get(0)}</div>}
                   </div>
-                  <div className="form-group text-right m--margin-top-20">
-                    <button onClick={(e) => { this._changePassword(e) }} className="m-btn btn btn-success m--margin-right-10 ">
+                  <div className="form-group text-right mt-4">
+                    <button onClick={(e) => { this._changePassword(e) }} className="m-btn btn btn-success mr-3 ">
                         {t('change')}
                     </button>
                     <button onClick={() => {this._closePasswordModal()}} className="m-btn btn btn-default">
@@ -186,7 +186,7 @@ class Info extends Component {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={this.state.uploadModal}          
-          PaperProps={{className: "margin-0"}}
+          PaperProps={{className: "m-0"}}
           onClose={() => this._closeUploadModal()}
         >
          <Card title={t('uploadAvatar')} icon="fa fa-upload" style={{minWidth:'280px'}}>

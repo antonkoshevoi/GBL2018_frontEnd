@@ -160,7 +160,7 @@ class BuildTemplate extends Component {
                               </div>                              
                         </div>
                         <div className="row">
-                            <div className="col-sm-12 m--margin-top-30 text-right">
+                            <div className="col-sm-12 mt-4 text-right">
                                 <h5 className="text-left">{t('questions')}</h5>
                                 <div className="sortable-questions">
                                     <ReactSortable                                        
@@ -172,19 +172,19 @@ class BuildTemplate extends Component {
                                         }}>
                                         {this._renderQuestions()}
                                     </ReactSortable>
-                                    {!questions.length && errors && errors.get('questions') && <p className="text-center m--margin-top-40 text-danger">{t('pleaseAddAnyQuestions')}</p>}
+                                    {!questions.length && errors && errors.get('questions') && <p className="text-center mt-5 text-danger">{t('pleaseAddAnyQuestions')}</p>}
                                 </div>
                             </div>
-                            <div className="col-sm-12 m--margin-top-40 text-left">
+                            <div className="col-sm-12 mt-5 text-left">
                                 <Button onClick={() => { this._showQuestionModal() }} variant="contained" color='primary' className='mt-btn mt-btn-success'>
-                                    <Icon className="m--margin-right-10">add</Icon>
+                                    <Icon className="mr-3">add</Icon>
                                     {t('addNewQuestion')}
                                 </Button>                              
                             </div>
-                            <div className="col-sm-12 m--margin-top-40 text-center">
-                                <Button disabled={createRequest.get('loading')} onClick={() => { this._saveTemplate() }} variant="contained" color='primary' className='mt-btn mt-btn-success m--margin-right-15'>
+                            <div className="col-sm-12 mt-5 text-center">
+                                <Button disabled={createRequest.get('loading')} onClick={() => { this._saveTemplate() }} variant="contained" color='primary' className='mt-btn mt-btn-success mr-3'>
                                     {t('saveTemplate')}
-                                    <Icon className="m--margin-left-5">check</Icon>
+                                    <Icon className="ml-2">check</Icon>
                                 </Button>
                                 <NavLink to="/scap" className="link-btn">
                                     <Button disabled={createRequest.get('loading')} variant="contained" color='default' className='mt-btn mt-btn-cancel'>

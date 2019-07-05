@@ -81,20 +81,20 @@ class ShoppingCardItems extends Component {
                 type='number'
                 onChange={(e) => this._changeItemCount(i, e)}
                 value={item.count}
-                className={`form-control productQuantity productLabel m-input m-input--solid ${preview ? 'margin-0' : ''}`} />;
+                className={`form-control productQuantity productLabel m-input m-input--solid ${preview ? 'm-0' : ''}`} />;
 
             return preview ? <Row index={i} key={i}>
                 <Td>
                     {this._itemInfo(item)}
                 </Td>            
                 <Td>                                            
-                    <div className="m--margin-top-5 m--margin-bottom-10">
+                    <div className="mt-2 mb-3">
                         <Price price={item.discountPrice} currency={item.currency} />              
                     </div>              
-                    <div className="m--margin-top-5 m--margin-bottom-10">
+                    <div className="mt-2 mb-3">
                         {!item.isInvoice ? countInput : <span className="productLabel">{item.count}</span>}                    
                     </div>
-                    <Divider className="m--margin-bottom-10" />                        
+                    <Divider className="mb-3" />                        
                 </Td>
             </Row> 
             : 
@@ -137,24 +137,24 @@ class ShoppingCardItems extends Component {
         const {t, cartRecordsRequest} = this.props;        
 
         return (
-            <div className="row text-right m--margin-top-15 m--margin-bottom-10">
+            <div className="row text-right mt-3 mb-3">
                 <div className="col-sm-7 text-left">
-                    <h4 className="m--margin-left-15">{t('itemsCount', {count: cartRecordsRequest.get('records').size})}</h4>
+                    <h4 className="ml-3">{t('itemsCount', {count: cartRecordsRequest.get('records').size})}</h4>
                 </div>
                 <div className="col-sm-5 text-right">
-                    {(cartRecordsRequest.get('discountAmount') > 0) && <div className="m--margin-right-15">
+                    {(cartRecordsRequest.get('discountAmount') > 0) && <div className="mr-3">
                         <span>{t('subtotal')}</span><br/>
                         <span className="display-6 text-dark">
                             <Price price={cartRecordsRequest.get('subTotalPrice')} currency={cartRecordsRequest.get('currency')} />  
                         </span>
                     </div>}
-                    {(cartRecordsRequest.get('discountAmount') > 0) && <div className="m--margin-right-15">
+                    {(cartRecordsRequest.get('discountAmount') > 0) && <div className="mr-3">
                         <span>{t('discount')}</span><br/>
                         <span className="display-6 text-dark">
                             <Price price={cartRecordsRequest.get('discountAmount')} currency={cartRecordsRequest.get('currency')} />  
                         </span>
                     </div>}
-                    <div className="m--margin-right-15">
+                    <div className="mr-3">
                         <span>{t('total')}</span><br/>
                         <span className="productPrice">
                             <Price price={cartRecordsRequest.get('totalPrice')} currency={cartRecordsRequest.get('currency')} />  
@@ -210,7 +210,7 @@ class ShoppingCardItems extends Component {
                         {this._renderTotalRow()}
                     </div>
                     :
-                    <div className="m--padding-50">
+                    <div className="m-5">
                         <h2 className="text-center">{t('noOpenInvoices')}</h2>
                     </div>
                 }
