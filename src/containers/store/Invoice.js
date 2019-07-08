@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withTranslation, Trans} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {withRouter} from 'react-router-dom';
 import {getInvoice} from '../../redux/payments/actions';
 import {invoiceRequest} from '../../redux/payments/selectors';
 import {Price} from '../../components/ui/Price';
 import Loader from "../../components/layouts/Loader";
-import {Step, StepLabel, Stepper, Typography} from '@material-ui/core';
-import {renderToString} from 'react-dom/server'
+import {Step, StepLabel, Stepper} from '@material-ui/core';
+import InvoiceNo from "./sections/InvoiceNo";
 
 class Invoice extends Component {
 
@@ -22,11 +22,9 @@ class Invoice extends Component {
   }
 
   _renderAddress(data, prefix) {   
-    const address = ['address_1', 'address_2', 'country', 'region', 'city', 'zip'];
+    const address = ['Address2', 'Address2', 'Country', 'Region', 'City', 'Zip'];
     return address.map((item, index) => (
-        <Typography key={index} variant="body1" gutterBottom>
-          {data.get(`${prefix}_${item}`)}
-        </Typography>
+        <p key={index} className="mb-1">{data.get(`${prefix}${item}`)}</p>
       )
     );
   }
@@ -40,13 +38,13 @@ class Invoice extends Component {
             <div>
                 <strong>{item.get('title')}</strong>
             </div>
-            <span className="text-muted">
+            <div className="text-muted">
                 {item.get('quantity')} {t('items')}
-            </span>
+            </div>
         </div>
         <div className="col-6 text-right align-self-center">
-            <strong className="text-nowrap d-block"><Price price={item.get('total_price')} currency={item.get('currency')} /></strong>
-            {(item.get('affiliate_discount') > 0) && <span className="text-nowrap m--font-success d-block">- <Price price={item.get('affiliate_discount')} currency={item.get('currency')} /></span>}
+            <strong className="text-nowrap d-block"><Price price={item.get('totalPrice')} currency={item.get('currency')} /></strong>
+            {(item.get('affiliate_discount') > 0) && <span className="text-nowrap m--font-success d-block">- <Price price={item.get('affiliateDiscount')} currency={item.get('currency')} /></span>}
         </div>
       </div>
     ));
@@ -58,14 +56,11 @@ class Invoice extends Component {
   
       return <div className="col-md-12 m-auto">
         <span className="invoice-title">
-            <Trans i18nKey="translations:yourInvoice">
-                <span className="m--font-bolder">{{invoiceNo: invoice.get('invoice_no')}}</span>
-                <span className="m--font-bolder">{{invoiceAmount: renderToString(<Price price={invoice.get('total')} currency={invoice.get('currency')} />)}}</span>
-            </Trans>
+            <InvoiceNo number={invoice.get('invoiceNo')} amount={invoice.get('total')} currency={invoice.get('currency')} />
         </span>
         <div>
             <p className="text-center m-4">
-                <a rel="noopener noreferrer" className="btn btn-success" href={invoice.get('pdf_url')} target="_blank">{t('downloadPdf')}</a>
+                <a rel="noopener noreferrer" className="btn btn-success" href={invoice.get('pdfUrl')} target="_blank">{t('downloadPdf')}</a>
             </p>
         </div>
         <hr />
@@ -95,7 +90,7 @@ class Invoice extends Component {
                             <strong>{t('subtotal')}</strong>
                         </div>
                         <div className="col-6 text-right">
-                            <strong className="text-nowrap"><Price price={invoice.get('sub_total')} currency={invoice.get('currency')} /></strong>
+                            <strong className="text-nowrap"><Price price={invoice.get('subTotal')} currency={invoice.get('currency')} /></strong>
                         </div>
                     </div>}
                     {invoice.get('discount_code') &&
@@ -104,7 +99,7 @@ class Invoice extends Component {
                             <strong>{t('promocode')}</strong>
                         </div>
                         <div className="col-6 text-right">
-                            <strong className="text-nowrap">{invoice.get('discount_code')}</strong>
+                            <strong className="text-nowrap">{invoice.get('discountCode')}</strong>
                         </div>
                     </div>}
                     {invoice.get('discount') &&

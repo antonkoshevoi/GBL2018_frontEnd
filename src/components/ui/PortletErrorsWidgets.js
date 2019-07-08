@@ -24,8 +24,8 @@ export default class PortletErrorsWidgets extends React.Component {
     render() {
         return (
             <div className="m-portlet m-portlet--brand  m-portlet--head-solid-bg m-portlet--bordered">
-                <div className={'m-portlet m-portlet--head-solid-bg m-portlet--brand'}>
-                    <div className={`m-portlet__head`}>
+                <div className="m-portlet m-portlet--head-solid-bg m-portlet--brand">
+                    <div className="m-portlet__head">
                         <div className="m-portlet__head-caption">
                             <div className="m-portlet__head-title">
                                 <span className="m-portlet__head-icon">

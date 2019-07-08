@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withTranslation, Trans} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {selectGetCartRecordsRequest} from '../../redux/store/selectors';
 import {getCartRecords} from '../../redux/store/actions';
 import {withRouter, NavLink} from 'react-router-dom';
@@ -14,9 +14,8 @@ import Shipping from "./sections/Shipping";
 import Billing from "./sections/Billing";
 import Summary from "./sections/Summary";
 import CreditCard from "./sections/CreditCard";
+import InvoiceNo from "./sections/InvoiceNo";
 import Loader from "../../components/layouts/Loader";
-
-import '../../styles/store.css'
 
 class Checkout extends Component {
 
@@ -199,12 +198,7 @@ class Checkout extends Component {
         {loading && <Loader/>}
         {cartRecordsRequest.get('records').size > 0 ?  
             <div>            
-                <div className="invoice-title my-3 my-lg-5 d-none d-sm-block">
-                    <Trans i18nKey="translations:yourInvoice">
-                        <span className="m--font-bolder">{{invoiceNo: cartRecordsRequest.get('invoiceNo')}}</span>
-                        <span className="m--font-bolder">{{invoiceAmount: ('$' + cartRecordsRequest.get('totalPrice').toFixed(2) + ' ' + cartRecordsRequest.get('currency'))}}</span>
-                    </Trans>
-                </div>
+                <InvoiceNo  number={cartRecordsRequest.get('invoiceNo')} amount={cartRecordsRequest.get('totalPrice')} currency={cartRecordsRequest.get('currency')} />
                 <div className="row">
                     <div className="col-12 col-sm-6 col-md-7 col-xl-6 mx-auto order-1 order-sm-0">
                     {[

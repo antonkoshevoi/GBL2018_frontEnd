@@ -166,7 +166,8 @@
 
 .textLoader{
     background-size: .2em 100%;
-    font: 8em/1 Open Sans, Impact;
+    font: 8em/1 Roboto;
+    font-weight: 700;
     text-transform: uppercase;
     top: 0;
     left: 0;
@@ -175,7 +176,6 @@
     bottom: 0;
     background-image: linear-gradient(0,#15869c,#11272d);
 }
-
 
 .textLoader svg {
     position: absolute;

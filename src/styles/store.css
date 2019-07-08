@@ -10,14 +10,6 @@
     border-bottom: #7bc848 solid 1px
 }
 
-.store .m-body div.m-content {
-    padding: 0;
-}
-
-.cart-items div.m-portlet .m-portlet__head {
-    background: #f9f9f9;
-}
-
 .store .store-filter-divider {
     width: 1px;
     height: 27px;
@@ -36,14 +28,6 @@
 .store .store-filter button, .store .filterMenu > button {
     height: 50px;    
     border-radius: 0;
-}
-
-.store-filter.right-block {
-    justify-content: flex-end;
-}
-
-.store-filter.right-block .row {
-    flex: 1;
 }
 
 .store .store-filter button .fa {
@@ -225,10 +209,6 @@ button .discount > span {
     border-bottom: 3px solid #D2322D;
 }
 
-.store-wrapper div[class^='col-'] {
-    margin-bottom: 0 !important;
-}
-
 @media (max-width: 600px) {
     .verticalCardItem.cardItem {
         max-width: 170px;
@@ -255,33 +235,10 @@ button .discount > span {
             SHOPPING CART
 ========================================*/
 
-.shoppingCartTable .productInfo {
-    display: table;
-}
-
-.shoppingCartTable .productInfo > div {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 15px 15px 15px 0;
-}
-
-.shoppingCartTable.preview .productInfo > div {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 0;
-}
-.shoppingCartTable.preview .productInfo .user-avatar {
-    padding-right: 10px;
-}
-.shoppingCartTable table th {
-    padding: 15px;
-}
-
 .shoppingCartTable .productPrice {
     font-size: 2.2rem;
     font-weight: 600;    
 }
-
 .shoppingCartTable .productQuantity {
     font-size: 1.2rem;
     padding: 7px;
@@ -307,12 +264,6 @@ button .discount > span {
     overflow: hidden;
     width: 50%;
 }
-.shoppingCartTable .productLink {
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0!important;
-    cursor: pointer;
-}
 
 .shoppingCartTable th {
     background: #7bc848!important;
@@ -322,10 +273,7 @@ button .discount > span {
     color: white;
 }
 .shoppingCartTable tbody tr  {
-    border-bottom: #f2f3f8 solid 2px;
- }
-.shoppingCartTable tbody tr:last-child  {
-    border-bottom: none!important;
+    border-bottom: #E0E0E0 solid 1px;
  }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -336,96 +284,17 @@ input[type=number]::-webkit-outer-spin-button {
     background: transparent;
 }
 
-/* CHECKOUT */
-.payments-widgets .payment-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    cursor: pointer;
-    margin-bottom: 15px;
-}
-
-.payments-widgets .payment-item:hover {
-    background: #f4f5f8;
-}
-
-@media (max-width: 567px) {
-    .store-filter.right-block {
-        justify-content: flex-start;
-    }
-
-    .store-filter.right-block .col-xs-6 {
-        flex: 1;
-    }
-}
-
-.floating-basket {
-    color: #e02426;
-    opacity: 0;
-    animation-name: floatingToRightTop;
-    animation-duration: 1s;
-    display: flex !important;
-    width: 0;
-    will-change: auto;
-    font-size: 2rem;
-}
-
-@keyframes floatingToRightTop {
-    from {
-        transform: translateX(0) translateY(0) scale(1);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(400px) translateY(-400px) scale(3);
-        opacity: 0;
-    }
-}
-
-.storeSlider .slick-slide {
-    position: relative;
-}
-
-.storeSlider .slick-slide .sliderItem img {
-    position: absolute;
-    width: 100%;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-}
-
-.storeSlider .slick-slide .sliderItem .slideTitle {
-    color: #fff;
-    font-weight: 900;
-    text-shadow: 0 2px 15px rgba(128, 128, 128, 0.76);
-}
-
-.sliderItem {
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 20px;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
 @media (min-width: 1848px) {
     .sectionTopBar{
         max-width: calc(178px * 9);
     }
 }
 
-
 @media (max-width: 1847px) {
     .sectionTopBar{
         max-width: calc(178px * 8);
     }
 }
-
 
 @media (max-width: 1684px) {
     .sectionTopBar{
@@ -457,20 +326,17 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 
-
 @media (max-width: 925px) {
     .sectionTopBar{
         max-width: calc(178px * 4);
     }
 }
 
-
 @media (max-width: 794px) {
     .sectionTopBar{
         max-width: calc(178px * 4);
     }
 }
-
 
 @media (max-width: 747px) {
     .sectionTopBar{
@@ -489,7 +355,6 @@ input[type=number]::-webkit-outer-spin-button {
         max-width: calc(140px * 3);
     }
 }
-
 
 @media (max-width: 485px) {
     .sectionTopBar{
