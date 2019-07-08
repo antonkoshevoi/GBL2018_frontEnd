@@ -72,7 +72,7 @@ class Details extends Component {
                         <i class="fa fa-truck display-6" aria-hidden="true"></i>
                     </p>
                     <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>                                            
-                        <Price price={record.get('discountPrice')} currency={record.get('currency')} />                    
+                        {(record.get('discountPrice') > 0) ? <Price price={record.get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
                     </button>
                 </div>
             </div>;
@@ -81,7 +81,7 @@ class Details extends Component {
         return <div className="actionsBtn justify-content-end full-width align-items-center d-flex pr-4 align-self-center">
             <div className="pr-3">{record.get('discount') > 0 && <span className="position-relative discount"><span><Price price={record.get('price')} currency={record.get('currency')} /></span></span>}</div>
                 <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>                                            
-                    <Price price={record.get('discountPrice')} currency={record.get('currency')} />
+                    {(record.get('discountPrice') > 0) ? <Price price={record.get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
                 </button>
             </div>;     
   }

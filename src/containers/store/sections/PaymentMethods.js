@@ -24,18 +24,16 @@ class PaymentMethods extends Component {
     const { onSelect, t } = this.props;
 
     return paymentMethods.map((method, key) => (
-      <div key={key} className='col-sm-12 col-md-6 col-lg-6 col-xl-6 m-auto' onClick={() => { onSelect(method.method) }}>
-        <div className='payments-widgets'>
-          <div className='payment-item'>
-            <span>
+      <div key={key} className='col-sm-12 col-md-6 col-lg-6 col-xl-6 m-auto' onClick={() => { onSelect(method.method) }}>        
+          <div className='payment-method d-flex justify-content-center pointer align-items-center p-3 mb-3'>
+            <div>
                 <div className='paymentImg'>
                   <img alt={t(method.method)} src={method.img} width={80} className='img-responsive'/>
                 </div>             
                 <h4 className="mt-3">
                   {t(method.method)}
                 </h4>
-            </span>
-          </div>
+            </div>          
         </div>
       </div>
     ));

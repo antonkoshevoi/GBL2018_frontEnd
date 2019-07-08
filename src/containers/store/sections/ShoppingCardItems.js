@@ -55,11 +55,11 @@ class ShoppingCardItems extends Component {
     _itemInfo(item) {
         const {t, preview} = this.props;
         
-        return <div className="productInfo">
+        return <div className="productInfo d-flex align-items-center">
             <div className="user-avatar">
                 <img src={item.thumbnail} className="img-responsive" alt=""/>
             </div>
-            <div>
+            <div className="pl-3">
                 <NavLink to={`/store/details/${item.storeItemId}`}><h5>{item.title}</h5></NavLink>
                 <p>{preview ? (item.description.substr(0, 50) + '...') : item.description}</p>                
                 <DeleteButton
@@ -88,13 +88,16 @@ class ShoppingCardItems extends Component {
                     {this._itemInfo(item)}
                 </Td>            
                 <Td>                                            
-                    <div className="mt-2 mb-3">
+                    <div className="my-2">
                         <Price price={item.discountPrice} currency={item.currency} />              
                     </div>              
-                    <div className="mt-2 mb-3">
+                    <div className="my-2">
                         {!item.isInvoice ? countInput : <span className="productLabel">{item.count}</span>}                    
                     </div>
-                    <Divider className="mb-3" />                        
+                    <Divider className="mb-2" />
+                    <div>
+                        <strong><Price price={(item.discountPrice * item.count)} currency={item.currency} /></strong>
+                    </div>                    
                 </Td>
             </Row> 
             : 
@@ -205,8 +208,7 @@ class ShoppingCardItems extends Component {
                             <Tbody>
                                 {this._renderRows(data, preview)}
                             </Tbody>
-                        </Table>
-                        <Divider />
+                        </Table>                        
                         {this._renderTotalRow()}
                     </div>
                     :

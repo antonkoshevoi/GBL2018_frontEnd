@@ -36,10 +36,8 @@ class ProductCard extends Component {
               <div className="productPrice">
                   {product.get('discount') > 0 && <span className="discount"><span><Price price={product.get('price')} currency={product.get('currency')} /></span></span> }
                   <br/>
-                  <div className="price">                    
-                    <Price price={product.get('discountPrice')} currency={product.get('currency')} />                    
-                            
-                    {!(product.get('price') > 0) && <strong> - {t('freeProduct')}</strong>}
+                  <div className="price">
+                    {(product.get('price') > 0) ? <Price price={product.get('discountPrice')} currency={product.get('currency')} /> : <strong>{t('freeProduct')}</strong>}
                   </div>
               </div>
             </div>
