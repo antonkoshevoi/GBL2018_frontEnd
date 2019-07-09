@@ -41,7 +41,7 @@ class Invoice extends Component {
                     {item.get('quantity')} {t('items')}
                 </div>
             </div>
-            {item.get('isDigitalOnly') &&
+            {(item.get('isDigitalOnly') && (invoice.get('authorizedAt') || item.get('isFree'))) &&
             <a title={t('downloadPdf')} rel="noopener noreferrer" className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill mx-3" href={item.get('downloadUrl')}>
                 <i className="fa fa-download text-white"></i>
             </a>}
