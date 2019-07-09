@@ -178,7 +178,7 @@ class ShoppingCardItems extends Component {
         
         if (!success) {
             return <Preloader text={t('loading')} />;
-        }
+        }        
     
         return (
             <div>    
@@ -215,13 +215,13 @@ class ShoppingCardItems extends Component {
                     <div className="m-5">
                         <h2 className="text-center">{t('noOpenInvoices')}</h2>
                     </div>
-                }
+                }                
                 {(data.length > 0 || !preview) &&
                 <div className="row">
                     <div className="col-md-12 text-right">
                         <div className="form-group-inline btn-group">
                             <NavLink to="/store" className="btn m-btm btn-primary">{t('continueShopping')}</NavLink>
-                            {data.length > 0 && <NavLink to="/shopping/checkout" className="btn m-btm btn-success">{t('checkout')}</NavLink>}
+                            {data.length > 0 && <NavLink to={`/shopping/${cartRecordsRequest.get('isDigital') ? 'download' : 'checkout'}`} className="btn m-btm btn-success">{t('checkout')}</NavLink>}
                         </div>
                     </div>
                 </div>}

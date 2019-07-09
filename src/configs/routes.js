@@ -37,6 +37,7 @@ import Store from "../containers/store/Store";
 import Details from "../containers/store/Details";
 import Products from "../containers/store/Products";
 import Checkout from "../containers/store/Checkout";
+import Download from "../containers/store/Download";
 import Invoice from "../containers/store/Invoice";
 import PayPalReturnContainer from '../containers/store/payments/PayPalReturnContainer';
 import PaymentStatusContainer from '../containers/store/payments/PaymentStatusContainer';
@@ -169,6 +170,7 @@ export default () => (
       {/*Store*/}    
       <Route exact layout={MainLayout} path='/store/shopping-cart' title='shoppingCart' component={ShoppingCart}/>
       <Route exact layout={CheckoutLayout} path='/shopping/checkout' title='checkout' component={Checkout}/>
+      <Route exact layout={CheckoutLayout} path='/shopping/download' title='checkout' component={Download}/>
       <Route exact layout={CheckoutLayout} path='/shopping/checkout/:invoiceNo?/:hash?' title='checkout' component={Invoice}/>
             
       {/*User*/}

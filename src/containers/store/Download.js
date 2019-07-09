@@ -3,21 +3,21 @@ import {connect} from 'react-redux';
 import {withTranslation} from 'react-i18next';
 import {selectGetCartRecordsRequest} from '../../redux/store/selectors';
 import {getCartRecords} from '../../redux/store/actions';
-import {withRouter, NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {push} from 'react-router-redux';
-import {selectCreateCheckPaymentRequest, selectCreatePayPalPaymentRequest, selectCreateCreditCardPaymentRequest} from '../../redux/payments/selectors';
-import {createCheckPayment, createPayPalPayment, createCreditCardPayment, resetCreditCardPayment} from '../../redux/payments/actions';
+import {selectCreateCheckPaymentRequest, selectCreatePayPalPaymentRequest, selectCreateCreditCardPaymentRequest, selectCreateFreeCheckoutRequest} from '../../redux/payments/selectors';
+import {createCheckPayment, createFreeCheckout, createPayPalPayment, createCreditCardPayment, resetCreditCardPayment} from '../../redux/payments/actions';
 import {selectAddressesRequest} from "../../redux/store/selectors";
 import {getAddresses} from "../../redux/store/actions";
 import {Step, StepLabel, Stepper, CircularProgress} from '@material-ui/core';
-import Shipping from "./sections/Shipping";
+import SignUp from "./sections/SignUp";
 import Billing from "./sections/Billing";
 import Summary from "./sections/Summary";
-import CreditCard from "./sections/CreditCard";
 import InvoiceNo from "./sections/InvoiceNo";
+import CreditCard from "./sections/CreditCard";
 import Loader from "../../components/layouts/Loader";
 
-class Checkout extends Component {
+class Download extends Component {
 
   state = {   
     stepIndex: 0,
@@ -29,18 +29,23 @@ class Checkout extends Component {
 
   componentDidMount() {
     this.props.getAddresses();
-    this.props.getCartRecords();     
+    this.props.getCartRecords();
+    
+    if (this.props.auth.get('isLoggedIn')) {
+        this._setSignUp();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    this._handleGetAddresses(nextProps);
+    this._handleAddresses(nextProps);
     this._handleGetShoppingCart(nextProps);
-    this._handlePayPalPayment(nextProps);    
+    this._handlePayPalPayment(nextProps);
+    this._handleFreeCheckout(nextProps);
     this._handleCheckPayment(nextProps);
     this._handleCreditCardPayment(nextProps);    
   }  
   
-  _handleGetAddresses(nextProps) {    
+  _handleAddresses(nextProps) {    
     const record = nextProps.addressesRequest.get('records');    
     if (record && record.size){
       this.setState({
@@ -49,14 +54,21 @@ class Checkout extends Component {
     }  
   } 
   
-  _setShipping (params = {}) {        
+  _setSignUp (params = {}) {        
     let newState = {
-      ...this.state,      
-      shippingAddress: params
+      ...this.state,
+      signUp: params
     }
-
-    this.setState(newState);
-    newState.stepIndex = 1;    
+    if (this.props.cartRecordsRequest.get('isFree')) {
+        this.setState(newState, () => {
+            this.props.createFreeCheckout({
+                signUp: this.state.signUp
+            });
+        });
+    } else {
+        this.setState(newState);
+        newState.stepIndex = 1;
+    }
   };
   
   _setBilling(params = {}) {
@@ -65,19 +77,17 @@ class Checkout extends Component {
         paymentMethod: params.paymentMethod
     }, function () {        
         const data = {
-            billingAddress: this.state.billingAddress,
-            shippingAddress: this.state.shippingAddress
-        }
+            signUp: this.state.signUp,
+            billingAddress: this.state.billingAddress
+        };
     
         switch (this.state.paymentMethod) {
           case 'check':
             this.props.createCheckPayment(data);
             break;
-
           case 'payPal':
             this.props.createPayPalPayment(data);
             break;
-
           case 'creditCard':
             this.setState({
               showCreditCard: true
@@ -92,8 +102,8 @@ class Checkout extends Component {
   _makeCreditCardPayment(params = {}) {
     const { cartRecordsRequest, createCreditCardPayment } = this.props;
   
+    params.signUp           = this.state.signUp;
     params.billingAddress   = this.state.billingAddress;
-    params.shippingAddress  = this.state.shippingAddress;
     params.paymentAmount    = cartRecordsRequest.get('totalPrice');
       
     createCreditCardPayment(params);        
@@ -116,8 +126,8 @@ class Checkout extends Component {
 
   _handleGetShoppingCart(nextProps) {
     if (!this.props.cartRecordsRequest.get('success') && nextProps.cartRecordsRequest.get('success')) {      
-      if (nextProps.cartRecordsRequest.get('isDigital')) {
-          this.props.goTo('/shopping/download');
+      if (!nextProps.cartRecordsRequest.get('isDigital')) {
+          this.props.goTo('/shopping/checkout');
       }
     }
   }
@@ -144,19 +154,27 @@ class Checkout extends Component {
     }    
   }
   
+  _handleFreeCheckout(nextProps) {
+    if (!this.props.freeCheckoutRequest.get('success') && nextProps.freeCheckoutRequest.get('success')) {                
+      this._goToSuccessPage(nextProps.freeCheckoutRequest.get('data').toJS());
+    }
+  }
+  
   _goToSuccessPage(data) {
-      const {invoiceNo, hash} = data;
+      const {invoiceNo, hash} = data;      
       this.props.goTo(`/shopping/checkout/${invoiceNo}/${hash}`);
   }
   
-  _renderCheckoutSteps(stepIndex) {
-    const { showCreditCard } = this.state;
+  _renderCheckoutSteps() {
+    const { showCreditCard, stepIndex} = this.state;
     
     const {
+      auth,
       addressesRequest,
       cartRecordsRequest,
       checkRequest,
-      creditCardRequest,      
+      creditCardRequest,
+      freeCheckoutRequest,
       paypalRequest,
       t
     } = this.props;
@@ -164,7 +182,9 @@ class Checkout extends Component {
     const success = cartRecordsRequest.get('success') && addressesRequest.get('success');
     const loading = checkRequest.get('loading') 
             || paypalRequest.get('loading') 
-            || creditCardRequest.get('loading')
+            || creditCardRequest.get('loading') 
+            || freeCheckoutRequest.get('loading') 
+            || freeCheckoutRequest.get('success') 
             || paypalRequest.get('success');    
     
     if (!success) {
@@ -173,70 +193,87 @@ class Checkout extends Component {
         </div>;
     }
     
+    if (!cartRecordsRequest.get('records').size) {
+        return <div className="mb-5">
+            <p className="text-center">
+                <span className="invoice-title">{t('yourCartIsEmpty')}</span>
+            </p>
+            <p className="text-center m-5">
+                <NavLink to="/store" className="btn m-btm btn-primary m-5">{t('continueShopping')}</NavLink>
+            </p>
+        </div>;        
+    }
+    
     return <div className="mb-5">
         {loading && <Loader/>}
-        {cartRecordsRequest.get('records').size > 0 ?  
-            <div>            
-                <InvoiceNo  number={cartRecordsRequest.get('invoiceNo')} amount={cartRecordsRequest.get('totalPrice')} currency={cartRecordsRequest.get('currency')} />
-                <div className="row">
-                    <div className="col-12 col-sm-6 col-md-7 col-xl-6 mx-auto order-1 order-sm-0">
-                    {[
-                        <Shipping onDataSaved={(params) => this._setShipping(params)} data={this.state.shippingAddress} />,                    
-                        <div>
-                            {showCreditCard ? 
-                                <CreditCard 
-                                    onDataSaved={(params) => this._makeCreditCardPayment(params)} 
-                                    goBack={() => this._handleBack()} 
-                                    errors={creditCardRequest.get('errors')} /> 
-                                : 
-                                <Billing 
-                                    onDataSaved={(params) => this._setBilling(params)} 
-                                    goBack={() => this._handleBack()} 
-                                    shippingAddress={this.state.shippingAddress} 
-                                    billingAddress={this.state.billingAddress} />
-                            }
-                        </div>
-                    ][stepIndex]}
-                    </div>
-                    <div className="col-12 col-sm-6 col-md-5 order-0 order-sm-1">
-                        <Summary data={cartRecordsRequest.toJS()} />
-                    </div>
+        <InvoiceNo number={cartRecordsRequest.get('invoiceNo')} amount={cartRecordsRequest.get('totalPrice')} currency={cartRecordsRequest.get('currency')} />
+        <div className="row">
+            <div className="col-12 col-sm-6 col-md-7 col-xl-6 mx-auto order-1 order-sm-0">
+            {stepIndex === 0 &&
+                <div>
+                    {auth.get('isLoggedIn') ? 
+                        <SignUp onDataSaved={(params) => this._setSignUp(params)} data={this.state.signUp} /> 
+                    : 
+                        <CircularProgress color="primary" size={80}/>
+                    }
                 </div>
+            }
+            {stepIndex === 1 &&
+                <div>
+                    {showCreditCard ? 
+                        <CreditCard 
+                            onDataSaved={(params) => this._makeCreditCardPayment(params)} 
+                            goBack={() => this._handleBack()} 
+                            errors={creditCardRequest.get('errors')} /> 
+                        : 
+                        <Billing 
+                            onDataSaved={(params) => this._setBilling(params)} 
+                            goBack={() => this._handleBack()} 
+                            shippingAddress={this.state.shippingAddress} 
+                            billingAddress={this.state.billingAddress} />
+                    }
+                </div>
+            }
             </div>
-        : 
-            <div>
-                <p className="text-center">
-                    <span className="invoice-title">{t('yourCartIsEmpty')}</span>
-                </p>
-                <p className="text-center m-5">
-                    <NavLink to="/store" className="btn m-btm btn-primary m-5">{t('continueShopping')}</NavLink>
-                </p>
+            <div className="col-12 col-sm-6 col-md-5 order-0 order-sm-1">
+                <Summary data={cartRecordsRequest.toJS()} />
             </div>
-        }
-        </div>;
+        </div>
+    </div>;
+  }
+  
+  _renderStepper()
+  {
+    const { t, cartRecordsRequest } = this.props;
+    const { stepIndex } = this.state;    
+    
+    if (!cartRecordsRequest.get('success')) {
+        return '';
+    }
+      
+    return <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
+        <Step>
+            <StepLabel>{t('signUp')}</StepLabel>
+        </Step>
+        {!cartRecordsRequest.get('isFree') &&
+        <Step>
+            <StepLabel>{t('billing')}</StepLabel>
+        </Step>}        
+        <Step>
+            <StepLabel>{t('download')}</StepLabel>
+        </Step>
+    </Stepper>;
   }
   
   render() {
-    const { stepIndex } = this.state;
-    const { t } = this.props;
     return (
         <div className="container p-5">
             <div className="m-portlet  m-portlet--head-solid-bg">
                 <div className='m-portlet__body position-relative'>               
-                    <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
-                        <Step>
-                            <StepLabel>{t('shipping')}</StepLabel>
-                        </Step>
-                        <Step>
-                            <StepLabel>{t('billing')}</StepLabel>
-                        </Step>
-                        <Step>
-                            <StepLabel>{t('confirmation')}</StepLabel>
-                        </Step>
-                    </Stepper>
+                    {this._renderStepper()}
                     <div className="row">
                         <div className='col-12'>
-                            {this._renderCheckoutSteps(stepIndex)}
+                            {this._renderCheckoutSteps()}
                         </div>
                     </div>
                 </div>
@@ -246,23 +283,26 @@ class Checkout extends Component {
   }
 }
 
-Checkout = connect(
-  (state) => ({    
+Download = connect(
+  (state) => ({
+    auth: state.auth,    
     cartRecordsRequest: selectGetCartRecordsRequest(state),
     addressesRequest: selectAddressesRequest(state),
     paypalRequest: selectCreatePayPalPaymentRequest(state),
     checkRequest: selectCreateCheckPaymentRequest(state),
+    freeCheckoutRequest: selectCreateFreeCheckoutRequest(state),
     creditCardRequest: selectCreateCreditCardPaymentRequest(state)    
   }),
   (dispatch) => ({
     getCartRecords:             () => {dispatch(getCartRecords())},
-    getAddresses:               () => {dispatch(getAddresses())},
+    getAddresses:               () => {dispatch(getAddresses())},    
     createPayPalPayment:        (data) => {dispatch(createPayPalPayment(data))},
     createCheckPayment:         (data) => {dispatch(createCheckPayment(data))},
     createCreditCardPayment:    (data) => dispatch(createCreditCardPayment(data)),
+    createFreeCheckout:         (data) => dispatch(createFreeCheckout(data)),
     resetCreditCardPayment:     () => dispatch(resetCreditCardPayment()),    
     goTo:                       (url) => {dispatch(push(url))}    
   })
-)(Checkout);
+)(Download);
 
-export default withRouter(withTranslation('translations')(Checkout));
+export default withTranslation('translations')(Download);
