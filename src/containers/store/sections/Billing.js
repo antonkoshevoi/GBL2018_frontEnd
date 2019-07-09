@@ -65,7 +65,7 @@ class Billing extends Component {
     _renderAddressForm() {
         
         const {validateAddressRequest, t} = this.props;
-        const {sameShipping} = this.state;        
+        const {sameShipping, shippingAddress} = this.state;        
 
         const loading   = validateAddressRequest.get('loading');
         const errors    = validateAddressRequest.get('errors');
@@ -73,6 +73,7 @@ class Billing extends Component {
         return <form action="">
             {loading && <Loader/>}
             <div>
+                {shippingAddress.email && 
                 <div className="d-flex justify-content-center">                
                     <FormControlLabel
                       label={t('sameBillingInformation')}
@@ -84,7 +85,7 @@ class Billing extends Component {
                         />
                       }
                     />
-                </div>                
+                </div>}
                 <Address
                     title={t('billing')}
                     onChange={(form) => this._handleForm(form)}

@@ -48,6 +48,7 @@ const initialState = Immutable.fromJS({
     invoiceNo: '',
     currency: '',
     isDigital: false,
+    isFree: false,
     discountCode: null,
     errorResponse: null
   },
@@ -98,7 +99,7 @@ const initialState = Immutable.fromJS({
   }, 
   itemsCount: null,
   records: [],
-  singleRecord: {},
+  singleRecord: {}
 });
 
 function updateCartState(state, data) {
@@ -116,6 +117,7 @@ function updateCartState(state, data) {
           .set('discountAmount', data.discount)
           .set('discountCode', data.discountCode)
           .set('isDigital', data.isDigital)
+          .set('isFree', data.isFree)
           .set('success', true)
           .remove('loading')
     ).set('itemsCount', Immutable.fromJS(data.items).size);            

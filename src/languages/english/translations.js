@@ -663,5 +663,6 @@ export default {
     physical: 'Physical',
     printable: 'Printable',
     freeProduct: 'FREE!',
-    math: 'Math'
+    math: 'Math',
+    gotAccount: 'Got an account?'
 }

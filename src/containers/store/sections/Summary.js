@@ -7,12 +7,6 @@ import DiscountCode from './DiscountCode';
 
 class Summary extends Component {
 
-    componentDidMount() {
-    }    
-
-    componentWillReceiveProps(nextProps) {
-    }
-
     _renderItems() {
         const {t, data} = this.props;
         const items = data.records;
@@ -28,7 +22,9 @@ class Summary extends Component {
                     </span>
                 </div>
                 <div className="col-4 text-right">
-                    <strong className="text-nowrap d-block"><Price price={item.totalPrice} currency={item.currency} /></strong>
+                    <strong className="text-nowrap d-block">
+                        {(item.totalPrice > 0) ? <Price price={item.totalPrice} currency={item.currency} /> : <span className="text-success">{t('freeProduct')}</span>}
+                    </strong>
                     {(item.affiliateDiscount > 0) && <span className="text-nowrap m--font-success d-block">- <Price price={item.affiliateDiscount} currency={item.currency} /></span>}
                 </div>
             </div>
@@ -48,6 +44,7 @@ class Summary extends Component {
                     <legend className='mb-3 text-center'>{t('items')}</legend>
                     {this._renderItems()}
                     <Divider className="my-3"/>
+                    {!data.isFree && 
                     <div className="row my-2">
                         <div className="col-8">
                             <strong>{t('subtotal')}</strong>
@@ -55,7 +52,7 @@ class Summary extends Component {
                         <div className="col-4 text-right">
                             <strong className="text-nowrap"><Price price={data.subTotalPrice} currency={data.currency} /></strong>
                         </div>
-                    </div>
+                    </div>}
                     {data.discountCode &&
                     <div className="row my-2">
                         <div className="col-8">
@@ -65,6 +62,7 @@ class Summary extends Component {
                             <strong className="text-nowrap m--font-success">{data.discountCode}</strong>
                         </div>
                     </div>}
+                    {!data.isFree && 
                     <div className="row my-2">
                         <div className="col-8">
                             <strong>{t('discount')}</strong>
@@ -72,13 +70,15 @@ class Summary extends Component {
                         <div className="col-4 text-right">
                             <strong className="text-nowrap {(data.discountAmount > 0) && 'm--font-success'}"><Price price={data.discountAmount} currency={data.currency} /></strong>
                         </div>
-                    </div>
+                    </div>}                    
                     <div className="row my-2">
                         <div className="col-8">
                             <strong>{t('total')}</strong>
                         </div>
                         <div className="col-4 text-right">
-                            <strong className="text-nowrap"><Price price={data.totalPrice} currency={data.currency} /></strong>
+                            <strong className="text-nowrap">
+                                {(data.totalPrice > 0) ? <Price price={data.totalPrice} currency={data.currency} /> : <span className="text-success">{t('freeProduct')}</span>}
+                            </strong>
                         </div>
                     </div>
                     <HasRole roles={['Parents', 'Guest']}>

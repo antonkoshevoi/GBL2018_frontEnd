@@ -17,7 +17,7 @@ class PortletWidgets extends Component {
         return this.props.data.map(function (item, i) {
             return (
                 <div className={`col-md-12 col-lg-6 col-xl-${fieldsCount}`} key={i} style={(basisPercent !== 0 ? {flexBasis: basisPercent} : {})}> 
-                    <span className="pull-right m-2 mr-4">
+                    <span className="pull-right m-3 mr-4">
                         <span className={`display-3 m--font-${item.colorName}`}>
                             {item.value || '-'}
                         </span>
