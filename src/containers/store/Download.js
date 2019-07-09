@@ -212,9 +212,9 @@ class Download extends Component {
             {stepIndex === 0 &&
                 <div>
                     {auth.get('isLoggedIn') ? 
-                        <SignUp onDataSaved={(params) => this._setSignUp(params)} data={this.state.signUp} /> 
+                        <CircularProgress color="primary" size={80} className="m-5" />
                     : 
-                        <CircularProgress color="primary" size={80}/>
+                        <SignUp onDataSaved={(params) => this._setSignUp(params)} data={this.state.signUp} /> 
                     }
                 </div>
             }
