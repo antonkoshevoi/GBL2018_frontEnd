@@ -206,8 +206,10 @@ class Download extends Component {
     
     return <div className="mb-5">
         {loading && <Loader/>}
-        <InvoiceNo number={cartRecordsRequest.get('invoiceNo')} amount={cartRecordsRequest.get('totalPrice')} currency={cartRecordsRequest.get('currency')} />
-        <div className="row">
+        {!cartRecordsRequest.get('isFree') &&
+            <InvoiceNo number={cartRecordsRequest.get('invoiceNo')} amount={cartRecordsRequest.get('totalPrice')} currency={cartRecordsRequest.get('currency')} />
+        }
+        <div className="row mt-3">
             <div className="col-12 col-sm-6 col-md-7 col-xl-6 mx-auto order-1 order-sm-0">
             {stepIndex === 0 &&
                 <div>
