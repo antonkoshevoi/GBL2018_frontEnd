@@ -7,6 +7,7 @@ import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} f
 import Card from "../../components/ui/Card";
 import {Price} from "../../components/ui/Price";
 import {DateTime} from "../../components/ui/DateTime";
+import ConfirmButton from "../../components/ui/ConfirmButton";
 
 class Downloads extends Component {
 
@@ -50,9 +51,12 @@ class Downloads extends Component {
                     <Td className="d-none d-md-table-cell"><span className="g-blue"><Price price={item.get('totalPrice')} currency={item.get('currency')} /></span></Td>
                     <Td className="d-none d-md-table-cell"><DateTime time={item.get('createdAt')} /></Td>
                     <Td>
+                        {item.get('isReady') ? 
                         <a title={t('downloadPdf')} rel="noopener noreferrer" className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill" href={item.get('downloadUrl')}>
                             <i className="fa fa-download text-white"></i>
-                        </a>                    
+                        </a> 
+                        :
+                        <ConfirmButton btnName={t('pendingPaymentMessage')} icon="fa fa-question text-white" className='btn-warning' confirmOnly={true} title={t('pendingPaymentMessage')} />}                                 
                     </Td>
                 </Row>              
             ])

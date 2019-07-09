@@ -116,12 +116,12 @@ class StoreItems extends Component {
                     <Td className="d-none d-md-table-cell"><Price price={item.get('total')} currency={item.get('currency')} /></Td>
                     <Td className="d-none d-md-table-cell"><DateTime time={item.get('createdAt')} /></Td>
                 </Row>,
-                ( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) && this._renderTransactionItemsBlock(item.get('items'))
+                ( this.state[`sub_${i}`] !== null && this.state[`sub_${i}`]) && this._renderTransactionItemsBlock(item)
             ])
         })
     }
 
-    _renderTransactionItemsBlock(data) {
+    _renderTransactionItemsBlock(transaction) {
         const {t} = this.props;
         return (
             <tr key="block" className="animated fadeInDown sub-table">
@@ -136,7 +136,7 @@ class StoreItems extends Component {
                             </HeadRow>
                         </Thead>
                         <Tbody >
-                            {this._renderTransactionItems(data)}
+                            {this._renderTransactionItems(transaction)}
                         </Tbody>
                     </Table>
                 </td>
@@ -144,8 +144,8 @@ class StoreItems extends Component {
         )
     }
 
-    _renderTransactionItems(data) {
-        return data.map((item,i) => {
+    _renderTransactionItems(transaction) {
+        return transaction.get('items').map((item,i) => {
             return (
                 <Row key={i} index={i}>
                     <Td>                    
@@ -155,7 +155,7 @@ class StoreItems extends Component {
                     </Td>
                     <Td>
                         <NavLink className="g-blue" to={`/store/details/${item.get('itemId')}`}>{item.get('title')}</NavLink>
-                        {(item.get('downloadUrl') && item.get('isDigitalOnly')) && <a className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-3" href={item.get('downloadUrl')}>
+                        {(item.get('downloadUrl') && (item.get('isFree') || transaction.get('isAuthorized'))) && <a className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-3" href={item.get('downloadUrl')}>
                             <i class="fa fa-download" aria-hidden="true"></i>
                         </a>}
                     </Td>

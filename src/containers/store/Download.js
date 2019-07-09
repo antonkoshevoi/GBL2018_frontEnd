@@ -228,8 +228,8 @@ class Download extends Component {
                         : 
                         <Billing 
                             onDataSaved={(params) => this._setBilling(params)} 
-                            goBack={() => this._handleBack()} 
-                            shippingAddress={this.state.shippingAddress} 
+                            goBack={() => this._handleBack()}
+                            shippingAddress={[]} 
                             billingAddress={this.state.billingAddress} />
                     }
                 </div>

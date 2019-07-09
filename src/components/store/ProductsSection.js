@@ -54,7 +54,7 @@ class ProductsSection extends Component {
                             <NavLink to={`/store/products/courses/${type}`} className="btn m-btn no-border btn-sm btn-danger">More</NavLink>
                         </div>}
                     </div>}
-                    <div className="row">
+                    <div className="row d-flex justify-content-around justify-content-sm-start">
                         {this._renderProducts(products)}
                     </div>
                 </div>                
