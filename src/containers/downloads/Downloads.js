@@ -3,22 +3,41 @@ import {connect} from 'react-redux';
 import {withTranslation} from 'react-i18next';
 import {getDownloadsRecords} from "../../redux/transactions/actions";
 import {selectGetDownloadsRequest} from "../../redux/transactions/selectors";
+import {getInvoice} from '../../redux/payments/actions';
+import {invoiceRequest} from '../../redux/payments/selectors';
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/table";
 import Card from "../../components/ui/Card";
 import {Price} from "../../components/ui/Price";
 import {DateTime} from "../../components/ui/DateTime";
 import ConfirmButton from "../../components/ui/ConfirmButton";
+import SessionStorage from '../../services/SessionStorage';
+import InvoiceModal from './modals/InvoiceModal';
 
 class Downloads extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            invoice: null
+        };
     }
     
     componentDidMount(){
         this.props.getRecords();
+        
+        if (SessionStorage.get('lastInvoiceNo')) {
+            this.props.getInvoice(SessionStorage.get('lastInvoiceNo'));
+        }
     }
+  
+    componentDidUpdate(prevProps) {               
+        if (this.props.invoiceRequest.get('success') && !prevProps.invoiceRequest.get('success')) {      
+            this.setState({
+                invoice: this.props.invoiceRequest.get('data')
+            });
+            SessionStorage.remove('lastInvoiceNo');
+        }  
+    } 
   
     _recordNumber(key) {        
         return (key + 1);
@@ -85,17 +104,19 @@ class Downloads extends Component {
                         </Tbody>
                     </Table>
                 </Card>
+                {this.state.invoice && <InvoiceModal isOpen={true} data={this.state.invoice} />}
             </div>
         );
     }    
 }
-
-
+  
 Downloads = connect(
     (state) => ({
-        recordsRequest: selectGetDownloadsRequest(state)
+        recordsRequest: selectGetDownloadsRequest(state),
+        invoiceRequest: invoiceRequest(state)
     }),
     (dispatch) => ({
+        getInvoice: (id) => dispatch(getInvoice(id, 'any')),
         getRecords: (params = {}) => { dispatch(getDownloadsRecords(params)) }
     })
 )(Downloads);

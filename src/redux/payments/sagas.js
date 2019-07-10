@@ -27,7 +27,8 @@ function* onSuccessPayment (action) {
         yield put(load());        
     }
     if (action.result.data.isDigital) {
-        SessionStorage.remove('invoiceNo', {path: '/'});
+        SessionStorage.remove('invoiceNo');
+        SessionStorage.set('lastInvoiceNo', action.result.data.invoiceNo);
                 
         yield toastr.success(i18n.t('messages:paymentMade'));        
   

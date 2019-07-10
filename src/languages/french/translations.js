@@ -660,5 +660,6 @@ export default {
     printable: 'Printable',
     freeProduct: 'FREE!',
     math: 'Math',
-    gotAccount: 'Got an account?'
+    gotAccount: 'Got an account?',
+    thankYou: 'Yhank You'
 }
