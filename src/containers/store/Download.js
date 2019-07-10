@@ -9,7 +9,7 @@ import {selectCreateCheckPaymentRequest, selectCreatePayPalPaymentRequest, selec
 import {createCheckPayment, createFreeCheckout, createPayPalPayment, createCreditCardPayment, resetCreditCardPayment} from '../../redux/payments/actions';
 import {selectAddressesRequest} from "../../redux/store/selectors";
 import {getAddresses} from "../../redux/store/actions";
-import {Step, StepLabel, Stepper, CircularProgress} from '@material-ui/core';
+import {Step, StepLabel, Stepper} from '@material-ui/core';
 import SignUp from "./sections/SignUp";
 import Billing from "./sections/Billing";
 import Summary from "./sections/Summary";
@@ -165,9 +165,9 @@ class Download extends Component {
             || freeCheckoutRequest.get('success') 
             || paypalRequest.get('success');    
     
-    if (!success) {
+    if (!success || (cartRecordsRequest.get('isFree') && auth.get('isLoggedIn'))) {
         return <div className="d-flex justify-content-center m-5 p-5">
-            <CircularProgress color="primary" size={80}/>
+            <Loader/>
         </div>;
     }
     
