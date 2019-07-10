@@ -10,8 +10,12 @@ import Card from "../../components/ui/Card";
 import {Price} from "../../components/ui/Price";
 import {DateTime} from "../../components/ui/DateTime";
 import ConfirmButton from "../../components/ui/ConfirmButton";
+import Sidebar from '../../components/store/Sidebar';
 import SessionStorage from '../../services/SessionStorage';
 import InvoiceModal from './modals/InvoiceModal';
+
+import {getRecords} from "../../redux/store/actions";
+import {selectGetRecordsRequest, selectRecords} from "../../redux/store/selectors";
 
 class Downloads extends Component {
 
@@ -23,8 +27,13 @@ class Downloads extends Component {
     }
     
     componentDidMount(){
-        this.props.getRecords();
-        
+        this.props.getDownloadsRecords();
+        this.props.getStoreRecords({
+            perPage: 10, 
+            orderBy: 'rand',
+            filter: {category: 1}
+        });
+                
         if (SessionStorage.get('lastInvoiceNo')) {
             this.props.getInvoice(SessionStorage.get('lastInvoiceNo'));
         }
@@ -86,38 +95,45 @@ class Downloads extends Component {
         const {recordsRequest, t} = this.props;       
         const loading = recordsRequest.get('loading');        
         
-        return (<div className="transactionsList">
-                <Card title={t('myDownloads')} icon="fa fa-download" colorBorder="violet">
-                    <Table>
-                        <Thead>
-                            <HeadRow>
-                                <Th className="d-none d-md-table-cell">#</Th>                                
-                                <Th>{t('product')}</Th>                                
-                                <Th className="d-none d-md-table-cell">{t('price')}</Th>                                
-                                <Th className="d-none d-md-table-cell">{t('date')}</Th>
-                                <Th>{t('actions')}</Th>                                    
-                            </HeadRow>
-                        </Thead>
-                        <Tbody>
-                            {this._renderTransactions()}
-                            {loading && <TablePreloader text={t('loading')} />}
-                        </Tbody>
-                    </Table>
-                </Card>
-                {this.state.invoice && <InvoiceModal isOpen={true} data={this.state.invoice} />}
+        return (
+            <Card title={t('myDownloads')} icon="fa fa-download" colorBorder="violet">
+                <div className="row">
+                    <div className="col-12 col-sm-7 col-md-8 col-lg-9">                
+                        <Table>
+                            <Thead>
+                                <HeadRow>
+                                    <Th className="d-none d-md-table-cell">#</Th>                                
+                                    <Th>{t('product')}</Th>                                
+                                    <Th className="d-none d-md-table-cell">{t('price')}</Th>                                
+                                    <Th className="d-none d-md-table-cell">{t('date')}</Th>
+                                    <Th>{t('actions')}</Th>                                    
+                                </HeadRow>
+                            </Thead>
+                            <Tbody>
+                                {this._renderTransactions()}
+                                {loading && <TablePreloader text={t('loading')} />}
+                            </Tbody>
+                        </Table>
+                    {this.state.invoice && <InvoiceModal isOpen={true} data={this.state.invoice} />}
+                </div>
+                <div className="col-12 col-sm-5 col-md-4 col-lg-3">
+                    <Sidebar data={this.props.storeRecords} title={t('similar')} />
+                </div>
             </div>
-        );
+        </Card>);
     }    
 }
   
 Downloads = connect(
     (state) => ({
         recordsRequest: selectGetDownloadsRequest(state),
-        invoiceRequest: invoiceRequest(state)
+        invoiceRequest: invoiceRequest(state),
+        storeRecords: selectRecords(state)
     }),
     (dispatch) => ({
         getInvoice: (id) => dispatch(getInvoice(id, 'any')),
-        getRecords: (params = {}) => { dispatch(getDownloadsRecords(params)) }
+        getStoreRecords: (params = {}) => dispatch(getRecords(params)),
+        getDownloadsRecords: (params = {}) => { dispatch(getDownloadsRecords(params)) }
     })
 )(Downloads);
 
