@@ -22,7 +22,7 @@ import i18n from '../../configs/i18n';
 
 function* onSuccessPayment () {
   yield put(() => {
-    SessionStorage.remove('discountCode', {path: '/'});
+    SessionStorage.remove('discountCode');
   });
 }
 

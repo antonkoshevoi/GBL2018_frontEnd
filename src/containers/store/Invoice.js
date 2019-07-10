@@ -176,7 +176,7 @@ class Invoice extends Component {
                     <div className="m-portlet m-portlet--head-solid-bg my-5">
                         <div className='m-portlet__body position-relative'>               
                             {this._renderStepper(invoice)}
-                            <div className='p-5'>
+                            <div className='m-5'>
                                 {this._renderInvoice(invoice)}
                             </div>                            
                         </div>

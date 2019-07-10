@@ -17,7 +17,7 @@ class PayPalReturnContainer extends Component {
           history.push('/login')
       }
       const parsed = queryString.parse(location.search);
-    executePayPalPayment(parsed);
+      executePayPalPayment(parsed);
   }
 
   componentWillReceiveProps (nextProps) {
@@ -29,15 +29,17 @@ class PayPalReturnContainer extends Component {
     const nextSuccess = nextProps.executePayPalPaymentRequest.get('success');
 
     if (!success && nextSuccess) {
-      const data = nextProps.executePayPalPaymentRequest.get('data').toJS();
-      this.props.goToSuccessPage(data.invoiceNo, data.hash);
+      const data = nextProps.executePayPalPaymentRequest.get('data').toJS();      
+      if (!data.isDigital) {
+        this.props.goTo(`/shopping/checkout/${data.invoiceNo}/${data.hash}`);
+      }      
     }
 
     const fail = this.props.executePayPalPaymentRequest.get('fail');
     const nextFail = nextProps.executePayPalPaymentRequest.get('fail');
 
     if (!fail && nextFail) {
-      this.props.goToFailPage();
+      this.props.goTo('/payments/fail');
     }
   }
 
@@ -54,8 +56,7 @@ PayPalReturnContainer = connect(
   }),
   (dispatch) => ({
     executePayPalPayment: (data) => { dispatch(executePayPalPayment(data)) },
-    goToSuccessPage: (id, hash) => { dispatch(push(`/shopping/checkout/${id}/${hash}`)) },
-    goToFailPage: () => { dispatch(push('/payments/fail')) },
+    goTo: (url) => { dispatch(push(url)) }  
   })
 )(PayPalReturnContainer);
 

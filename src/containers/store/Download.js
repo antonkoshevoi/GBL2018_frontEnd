@@ -13,7 +13,6 @@ import {Step, StepLabel, Stepper, CircularProgress} from '@material-ui/core';
 import SignUp from "./sections/SignUp";
 import Billing from "./sections/Billing";
 import Summary from "./sections/Summary";
-import InvoiceNo from "./sections/InvoiceNo";
 import CreditCard from "./sections/CreditCard";
 import Loader from "../../components/layouts/Loader";
 
@@ -39,10 +38,8 @@ class Download extends Component {
   componentWillReceiveProps(nextProps) {
     this._handleAddresses(nextProps);
     this._handleGetShoppingCart(nextProps);
-    this._handlePayPalPayment(nextProps);
-    this._handleFreeCheckout(nextProps);
-    this._handleCheckPayment(nextProps);
-    this._handleCreditCardPayment(nextProps);    
+    this._handlePayPalPayment(nextProps);    
+    this._handleFailPayment(nextProps);    
   }  
   
   _handleAddresses(nextProps) {    
@@ -100,11 +97,10 @@ class Download extends Component {
   };
   
   _makeCreditCardPayment(params = {}) {
-    const { cartRecordsRequest, createCreditCardPayment } = this.props;
+    const { createCreditCardPayment } = this.props;
   
     params.signUp           = this.state.signUp;
     params.billingAddress   = this.state.billingAddress;
-    params.paymentAmount    = cartRecordsRequest.get('totalPrice');
       
     createCreditCardPayment(params);        
   };
@@ -136,34 +132,16 @@ class Download extends Component {
     if (!this.props.paypalRequest.get('success') && nextProps.paypalRequest.get('success')) {      
       window.location = nextProps.paypalRequest.get('approvalUrl');
     }
-  }
-  
-  _handleCreditCardPayment(nextProps){
-    if (!this.props.creditCardRequest.get('success') && nextProps.creditCardRequest.get('success')) {
-      this.props.resetCreditCardPayment();
-      this._goToSuccessPage(nextProps.creditCardRequest.get('data').toJS());
-    }
   }  
 
-  _handleCheckPayment(nextProps) {
-    if (!this.props.checkRequest.get('success') && nextProps.checkRequest.get('success')) {                
-      this._goToSuccessPage(nextProps.checkRequest.get('data').toJS());
-    }
-    if (!this.props.checkRequest.get('fail') && nextProps.checkRequest.get('fail')) {
+  _handleFailPayment(nextProps) {    
+    if ((!this.props.checkRequest.get('fail') && nextProps.checkRequest.get('fail')) 
+            || (!this.props.freeCheckoutRequest.get('fail') && nextProps.freeCheckoutRequest.get('fail'))
+                || (!this.props.creditCardRequest.get('fail') && nextProps.creditCardRequest.get('fail'))
+    ) {
       this.props.goTo('/payments/fail');
     }    
-  }
-  
-  _handleFreeCheckout(nextProps) {
-    if (!this.props.freeCheckoutRequest.get('success') && nextProps.freeCheckoutRequest.get('success')) {                
-      this._goToSuccessPage(nextProps.freeCheckoutRequest.get('data').toJS());
-    }
-  }
-  
-  _goToSuccessPage(data) {
-      const {invoiceNo, hash} = data;      
-      this.props.goTo(`/shopping/checkout/${invoiceNo}/${hash}`);
-  }
+  }  
   
   _renderCheckoutSteps() {
     const { showCreditCard, stepIndex} = this.state;
@@ -206,15 +184,12 @@ class Download extends Component {
     
     return <div className="mb-5">
         {loading && <Loader/>}
-        {!cartRecordsRequest.get('isFree') &&
-            <InvoiceNo number={cartRecordsRequest.get('invoiceNo')} amount={cartRecordsRequest.get('totalPrice')} currency={cartRecordsRequest.get('currency')} />
-        }
         <div className="row mt-3">
             <div className="col-12 col-sm-6 col-md-7 col-xl-6 mx-auto order-1 order-sm-0">
             {stepIndex === 0 &&
                 <div>
                     {auth.get('isLoggedIn') ? 
-                        <CircularProgress color="primary" size={80} className="m-5" />
+                        <Loader/>
                     : 
                         <SignUp onDataSaved={(params) => this._setSignUp(params)} data={this.state.signUp} /> 
                     }
@@ -295,14 +270,14 @@ Download = connect(
     freeCheckoutRequest: selectCreateFreeCheckoutRequest(state),
     creditCardRequest: selectCreateCreditCardPaymentRequest(state)    
   }),
-  (dispatch) => ({
+  (dispatch) => ({    
     getCartRecords:             () => {dispatch(getCartRecords())},
     getAddresses:               () => {dispatch(getAddresses())},    
     createPayPalPayment:        (data) => {dispatch(createPayPalPayment(data))},
     createCheckPayment:         (data) => {dispatch(createCheckPayment(data))},
     createCreditCardPayment:    (data) => dispatch(createCreditCardPayment(data)),
     createFreeCheckout:         (data) => dispatch(createFreeCheckout(data)),
-    resetCreditCardPayment:     () => dispatch(resetCreditCardPayment()),    
+    resetCreditCardPayment:     () => dispatch(resetCreditCardPayment()),
     goTo:                       (url) => {dispatch(push(url))}    
   })
 )(Download);

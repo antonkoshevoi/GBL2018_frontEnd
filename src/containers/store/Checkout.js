@@ -14,7 +14,6 @@ import Shipping from "./sections/Shipping";
 import Billing from "./sections/Billing";
 import Summary from "./sections/Summary";
 import CreditCard from "./sections/CreditCard";
-import InvoiceNo from "./sections/InvoiceNo";
 import Loader from "../../components/layouts/Loader";
 
 class Checkout extends Component {
@@ -90,11 +89,10 @@ class Checkout extends Component {
   };
   
   _makeCreditCardPayment(params = {}) {
-    const { cartRecordsRequest, createCreditCardPayment } = this.props;
+    const { createCreditCardPayment } = this.props;
   
     params.billingAddress   = this.state.billingAddress;
-    params.shippingAddress  = this.state.shippingAddress;
-    params.paymentAmount    = cartRecordsRequest.get('totalPrice');
+    params.shippingAddress  = this.state.shippingAddress;    
       
     createCreditCardPayment(params);        
   };
@@ -173,36 +171,33 @@ class Checkout extends Component {
         </div>;
     }
     
-    return <div className="mb-5">
+    return <div className="my-4">
         {loading && <Loader/>}
-        {cartRecordsRequest.get('records').size > 0 ?  
-            <div>            
-                <InvoiceNo  number={cartRecordsRequest.get('invoiceNo')} amount={cartRecordsRequest.get('totalPrice')} currency={cartRecordsRequest.get('currency')} />
-                <div className="row">
-                    <div className="col-12 col-sm-6 col-md-7 col-xl-6 mx-auto order-1 order-sm-0">
-                    {[
-                        <Shipping onDataSaved={(params) => this._setShipping(params)} data={this.state.shippingAddress} />,                    
-                        <div>
-                            {showCreditCard ? 
-                                <CreditCard 
-                                    onDataSaved={(params) => this._makeCreditCardPayment(params)} 
-                                    goBack={() => this._handleBack()} 
-                                    errors={creditCardRequest.get('errors')} /> 
-                                : 
-                                <Billing 
-                                    onDataSaved={(params) => this._setBilling(params)} 
-                                    goBack={() => this._handleBack()} 
-                                    shippingAddress={this.state.shippingAddress} 
-                                    billingAddress={this.state.billingAddress} />
-                            }
-                        </div>
-                    ][stepIndex]}
+        {cartRecordsRequest.get('records').size > 0 ?
+            <div className="row">
+                <div className="col-12 col-sm-6 col-md-7 col-xl-6 mx-auto order-1 order-sm-0">
+                {[
+                    <Shipping onDataSaved={(params) => this._setShipping(params)} data={this.state.shippingAddress} />,                    
+                    <div>
+                        {showCreditCard ? 
+                            <CreditCard 
+                                onDataSaved={(params) => this._makeCreditCardPayment(params)} 
+                                goBack={() => this._handleBack()} 
+                                errors={creditCardRequest.get('errors')} /> 
+                            : 
+                            <Billing 
+                                onDataSaved={(params) => this._setBilling(params)} 
+                                goBack={() => this._handleBack()} 
+                                shippingAddress={this.state.shippingAddress} 
+                                billingAddress={this.state.billingAddress} />
+                        }
                     </div>
-                    <div className="col-12 col-sm-6 col-md-5 order-0 order-sm-1">
-                        <Summary data={cartRecordsRequest.toJS()} />
-                    </div>
+                ][stepIndex]}
                 </div>
-            </div>
+                <div className="col-12 col-sm-6 col-md-5 order-0 order-sm-1">
+                    <Summary data={cartRecordsRequest.toJS()} />
+                </div>
+            </div>            
         : 
             <div>
                 <p className="text-center">

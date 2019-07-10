@@ -61,5 +61,6 @@ export default {
     messageGroupUpdated: 'El grupo fue actualizado',
     messageGroupDeleted: 'El grupo fue eliminado',
     passwordUpdatedLoginPlease: 'Tu contraseña ha sido actualizada, por favor intenta iniciar sesión',
-    messageUpdated: 'Mensaje actualizado correctamente'
+    messageUpdated: 'Mensaje actualizado correctamente',
+    paymentMade: 'Thank you! Your payment has been processed!'
 }

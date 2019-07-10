@@ -151,7 +151,7 @@ export default function reducer(state = initialState, action) {
           .set('success', false)
           .set('fail', false)
         );
-    case CREATE_CHECK_PAYMENT_SUCCESS:        
+    case CREATE_CHECK_PAYMENT_SUCCESS:
       return state
         .set('createCheckPaymentRequest', state.get('createCheckPaymentRequest')
           .set('data', Immutable.fromJS(action.result.data))

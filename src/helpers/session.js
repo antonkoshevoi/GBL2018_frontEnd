@@ -2,16 +2,14 @@ import SessionStorage from '../services/SessionStorage';
 
 
 export const saveSession = ({ token, expiresAt, refreshToken }, remember) => {
-  const options = {
-    path: '/',
+  const options = {    
     expires: new Date(expiresAt * 1000)
   };
 
   SessionStorage.set('token', token, options);
   SessionStorage.set('tokenExpiresAt', options.expires, options);
 
-  const rememberOptions = {
-      path: '/',
+  const rememberOptions = {      
       expires: new Date(expiresAt * 1000 + (30 * 24 * 3600 * 1000))
   };
 
@@ -22,14 +20,13 @@ export const saveSession = ({ token, expiresAt, refreshToken }, remember) => {
 
 
 export const saveUserDataSession = (data) => {
-    const now = new Date();
-    const time = now.getTime();
-    const expireTime = time + 1000*36000;
-    now.setTime(expireTime);
+  const now = new Date();
+  const time = now.getTime();
+  const expireTime = time + 1000*36000;
+  now.setTime(expireTime);
 
   const userData = SessionStorage.get('userData');
-    const rememberOptions = {
-      path: '/',
+    const rememberOptions = {      
       expires: new Date(now * 1000 + (30 * 24 * 3600 * 1000))
   };
 
@@ -39,22 +36,16 @@ export const saveUserDataSession = (data) => {
 }
 
 export const destroySession = () => {
-  const options = {
-    path: '/'
-  };
-  SessionStorage.remove('invoiceNo', options);
-  SessionStorage.remove('discountCode', options);
-  SessionStorage.remove('token', options);
-  SessionStorage.remove('tokenExpiresAt', options);
-  SessionStorage.remove('refreshToken', options);
-  SessionStorage.remove('userData',options);
+  SessionStorage.remove('invoiceNo');
+  SessionStorage.remove('discountCode');
+  SessionStorage.remove('token');
+  SessionStorage.remove('tokenExpiresAt');
+  SessionStorage.remove('refreshToken');
+  SessionStorage.remove('userData');
 };
 
 export const destroyTokenSession = () => {
-    const options = {
-        path: '/'
-    };    
-    SessionStorage.remove('token', options);
-    SessionStorage.remove('tokenExpiresAt', options);
-    SessionStorage.remove('refreshToken', options);
+    SessionStorage.remove('token');
+    SessionStorage.remove('tokenExpiresAt');
+    SessionStorage.remove('refreshToken');
 };

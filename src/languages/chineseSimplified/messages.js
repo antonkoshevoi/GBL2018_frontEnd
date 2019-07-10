@@ -60,5 +60,6 @@ export default {
     messageGroupUpdated: '群组已更新',
     messageGroupDeleted: '群组已删除',
     passwordUpdatedLoginPlease: '您的密码已更新，请尝试重新登录。',
-    messageUpdated: '已成功更新讯息'
+    messageUpdated: '已成功更新讯息',
+    paymentMade: 'Thank you! Your payment has been processed!'
 }
