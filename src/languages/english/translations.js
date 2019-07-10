@@ -665,5 +665,5 @@ export default {
     freeProduct: 'FREE!',
     math: 'Math',
     gotAccount: 'Got an account?',
-    thankYou: 'Yhank You'
+    thankYou: 'Thank You'
 }
