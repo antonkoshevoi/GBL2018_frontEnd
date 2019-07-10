@@ -61,5 +61,6 @@ export default {
     messageGroupUpdated: 'Le groupe est mis à jour',
     messageGroupDeleted: 'Le groupe est supprimé',
     passwordUpdatedLoginPlease: 'Votre mot de passe a été mis à jour, veuillez essayez de vous connecter.',
-    messageUpdated: 'Le message a été mis à jour avec succès '
+    messageUpdated: 'Le message a été mis à jour avec succès ',
+    paymentMade: 'Thank you! Your payment has been processed!'
 }

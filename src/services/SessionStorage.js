@@ -14,11 +14,13 @@ export default class SessionStorage {
   }
 
   static set(key, value, options = {}) {
+    options.path = '/';
     const instance = new SessionStorage();
     return instance.cookies.set(key, value, options);
   }
 
   static remove(key, options = {}) {
+    options.path = '/';
     const instance = new SessionStorage();
     return instance.cookies.remove(key, options);
   }

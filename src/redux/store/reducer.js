@@ -104,7 +104,7 @@ const initialState = Immutable.fromJS({
 
 function updateCartState(state, data) {
     if (data.invoiceNo) {
-        SessionStorage.set('invoiceNo', data.invoiceNo, {path: '/'});
+        SessionStorage.set('invoiceNo', data.invoiceNo);
     }
         
     return state.set('getCartRecordsRequest', 
@@ -317,7 +317,7 @@ export default function reducer(state = initialState, action) {
     case SET_DISCOUNT_CODE:
       return state.set('setDiscountCodeRequest', initialState.get('setDiscountCodeRequest').set('loading', true));
     case SET_DISCOUNT_CODE_SUCCESS:
-      SessionStorage.set('discountCode', action.result.data.discountCode, {path: '/'});
+      SessionStorage.set('discountCode', action.result.data.discountCode);
       return updateCartState(state, action.result.data)
               .set('setDiscountCodeRequest', initialState.get('setDiscountCodeRequest').set('success', true));
     case SET_DISCOUNT_CODE_FAIL:      
