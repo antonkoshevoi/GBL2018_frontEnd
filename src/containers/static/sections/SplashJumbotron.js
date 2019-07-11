@@ -9,7 +9,7 @@ class SplashJumbotron extends PureComponent {
         const {t} = this.props;
         return (
             <div className="clearfix">
-                <div className="m--hidden-mobile main-banner">
+                <div className="d-none d-md-block main-banner">
                     <div className="container">
                         <h1>{t('giveGiftOfLearning')}</h1>
                         <h2>{t('professionallyDesignedCourses')}</h2>
@@ -26,7 +26,7 @@ class SplashJumbotron extends PureComponent {
                         </div>
                     </div>
                 </div>
-                <div className="m--hidden-desktop main-banner" id="main-banner">
+                <div className="d-block d-md-none main-banner" id="main-banner">
                     <div className="container">
                         <h1>{t('giveGiftOfLearning')}</h1>
                         <h2>{t('professionallyDesignedCourses')}</h2>

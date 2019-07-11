@@ -78,7 +78,7 @@ class UserMenu extends Component {
                 <li className="m-nav__separator m-nav__separator--fit">
                 </li>
                 <li className="m-nav__item">
-                  <button onClick={logout} className="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">{t('logout')}</button>
+                  <button onClick={logout} className="btn m-btn--pill btn-secondary m-btn--custom text-info m-btn--bolder">{t('logout')}</button>
                 </li>
               </ul>
             </div>
@@ -97,7 +97,7 @@ class UserMenu extends Component {
       <li className="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width" data-dropdown-toggle="click">
         <button className="m-nav__link m-dropdown__toggle pointer"  onClick={() => {this.props.switchMenu('userMenu')}}>
             <span className="m-topbar__userpic">
-              <img src={user.avatar} className="m--img-rounded m-0 m--img-centered" alt=""/>
+              <img src={user.avatar} className="m--img-rounded m-0 text-center" alt=""/>
             </span>
         </button>
         { activeMenu === 'userMenu' && this._renderDropDownMenu() }

@@ -21,7 +21,7 @@ const AssignButton = ({ id, onClick, btnName}) => {
   return (
     <button
       title={btnName}
-      className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-2'
+      className='btn btn-warning m-btn--icon-only ml-2'
       onClick={onClick && (() => { onClick(id) })}      
     >
       <i className='la la-user-plus'></i>
@@ -272,7 +272,7 @@ class Classrooms extends Component {
           <div className='m-portlet__body'>
             <div className='mt-3 mb-4'>
               <div className='row'>
-                <div className='col-sm-12 m--align-right'>
+                <div className='col-sm-12 text-right'>
                   <Select
                     className="pull-left table-select"
                     value={perPage}

@@ -45,7 +45,7 @@ class SignUp extends Component {
                 {loading && <Loader />}
                 <legend className='mb-3 text-center'>{t('signUp')}</legend>
                 <div className='m-form__section'>
-                    <div className="form-group m-form__group row">
+                    <div className="form-group row">
                         <label className="col-form-label col-md-3 col-lg-3 col-sm-12">{t('email')} </label>
                         <div className="col-lg-9 col-md-9 col-sm-12">
                             <input
@@ -54,12 +54,12 @@ class SignUp extends Component {
                                 name='email'
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 type='text'
-                                className='form-control m-input m-input--air' />
+                                className='form-control m-input' />
 
                             {errors && errors.get('email') && <FormHelperText error>{ errors.get('email').get(0) }</FormHelperText>}                          
                         </div>
                     </div>    
-                  <div className="form-group m-form__group row">
+                  <div className="form-group row">
                         <label className="col-form-label col-md-3 col-lg-3 col-sm-12">{t('password')}</label>
                         <div className="col-lg-9 col-md-9 col-sm-12">
                             <input
@@ -68,7 +68,7 @@ class SignUp extends Component {
                                 name='password'
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 type='password'
-                                className='form-control m-input m-input--air' />
+                                className='form-control m-input' />
 
                             {errors && errors.get('password') && <FormHelperText error>{ errors.get('password').get(0) }</FormHelperText>}
                         </div>

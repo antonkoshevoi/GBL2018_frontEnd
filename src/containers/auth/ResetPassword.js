@@ -90,20 +90,20 @@ class ResetPassword extends Component {
                                     <div className="m-portlet__body">
                                         {userRequest.get('success') &&
                                         <div className="m-form mt-4 mb-3 mx-3">
-                                            <div className="form-group m-form__group">
+                                            <div className="form-group">
                                               <div className="d-flex align-items-center">
                                                 <Avatar src={userRequest.get('record').get('avatarSmall')}/>
                                                 <span className="ml-3">{userRequest.get('record').get('username') || userRequest.get('record').get('name') || userRequest.get('record').get('email')}</span>
                                               </div>                                                
                                             </div>
-                                            <div className="form-group m-form__group mt-3 mb-3">
+                                            <div className="form-group mt-3 mb-3">
                                                 <input className="form-control m-input--pill" type="password"
                                                        placeholder={t('password')} name="password" value={this.state.password}
                                                        onChange={this._handlePasswordChange}/>
                                                 {(errors && errors.get('password')) && <div className="form-control-feedback text-center error">{errors.get('password').get(0)}</div>}
                                             </div>
                                             <div className="text-center">
-                                                <Button variant="contained" color="primary" onClick={() => { this._savePassword() }} className="btn m-btn m-btn--pill m-btn--custom">
+                                                <Button variant="contained" color="primary" onClick={() => { this._savePassword() }} className="btn m-btn--pill m-btn--custom">
                                                     <span>{t('save')}</span>
                                                     {loading && <CircularProgress color="primary"/>}
                                                 </Button>
@@ -114,7 +114,7 @@ class ResetPassword extends Component {
                             </div>
                             <div className="m-login__account">
                                 <span className="m-login__account-msg">{t('logInDifferentUser')}</span>
-                                <NavLink to="/login" id="m_login_signup" className="ml-2 m-link m-link--light m-login__account-link">{t('logIn')}</NavLink>
+                                <NavLink to="/login" id="m_login_signup" className="ml-2 m-login__account-link">{t('logIn')}</NavLink>
                             </div>
                         </div>
                     </div>

@@ -68,7 +68,7 @@ class SchoolInfo extends Component {
                 <img className="rounded-circle img-thumbnail" src={school.logo} alt=""/>
               </div>
               <div className="text-center mb-4">
-                <button className="m-btn btn btn-info" onClick={()=>{this._openUploadModal()}}>{t('uploadLogo')}</button>
+                <button className="btn btn-info" onClick={()=>{this._openUploadModal()}}>{t('uploadLogo')}</button>
               </div>
             </div>
           </div>

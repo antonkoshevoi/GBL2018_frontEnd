@@ -471,9 +471,6 @@ nav .nav-narrow {
     }
 }
 @media (min-width: 769px) {
-    .m--hidden-desktop.main-banner {
-        display: none;
-    }
     .splash-header .splash-navigation-tools {
         display: none;
     }
@@ -668,9 +665,6 @@ nav .nav-narrow {
     .about-us-note {
         margin: 0 0 30px;
         font-size: 14px;
-    }
-    .m--hidden-desktop.main-banner {
-        display: block;
     }
     .app-download h3 {
         font-size: 32px;

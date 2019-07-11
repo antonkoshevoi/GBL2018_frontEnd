@@ -17,7 +17,7 @@ class DeleteButton extends Component {
   };
 
   static defaultProps = {
-    className: "btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-2",
+    className: "btn btn-danger m-btn--icon-only ml-2",
     btnName: 'Delete',
     title: 'Are you sure?',
     icon: 'la la-remove',
@@ -58,8 +58,8 @@ class DeleteButton extends Component {
         >
           <DialogTitle className="text-center" id="alert-dialog-title" style={{minWidth: 300}}>{title}</DialogTitle>
           <div className="text-center mb-4 mt-3">
-            <button onClick={() => { this._onConfirm() }} className="btn-success m-btn btn mr-3">{t('ok')}</button>
-            {!confirmOnly && <button onClick={() => { this._onCancel() }} className="btn-default m-btn btn btn">{t('cancel')}</button>}
+            <button onClick={() => { this._onConfirm() }} className="btn-success btn mr-3">{t('ok')}</button>
+            {!confirmOnly && <button onClick={() => { this._onCancel() }} className="btn-default btn btn">{t('cancel')}</button>}
           </div>
         </Dialog>
       </span>

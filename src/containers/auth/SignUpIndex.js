@@ -22,14 +22,14 @@ class SignUpIndex extends Component {
                       <h4 className="text-center mt-4">{t('selectYourAccountType')}</h4>
 
                       <div className="signup-btns flex-column d-flex flex mt-3 mb-3">
-                        <NavLink to="/signUp/parent" activeClassName="link-active" className="btn m-btn--pill mt-3 mb-4 btn-lg m-btn btn-primary">
+                        <NavLink to="/signUp/parent" activeClassName="link-active" className="btn m-btn--pill mt-3 mb-4 btn-lg btn-primary">
                           {t('parent')}
                         </NavLink>
-                        <NavLink to="/signUp/principal" activeClassName="link-active" className="btn m-btn--pill mb-3 btn-lg m-btn btn-success">
+                        <NavLink to="/signUp/principal" activeClassName="link-active" className="btn m-btn--pill mb-3 btn-lg btn-success">
                           {t('principal')}
                         </NavLink>
                       </div>
-                      <div className="alert m-alert m-alert--default mb-0">
+                      <div className="alert alert-secondary mb-0">
                         <p className="text-center mb-0"><Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans></p>
                       </div>
                     </div>

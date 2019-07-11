@@ -166,18 +166,18 @@ class Chats extends Component {
         
         return (
             <div className='d-flex align-items-stretch'>
-                <div className='row w-100 chats-container' ref={(node) => this.chatsContainer = node}>
-                    <div className='col-5 col-md-4 col-lg-3 pr-0 chats-box'>
+                <div className='row w-100 chats-container m-0' ref={(node) => this.chatsContainer = node}>
+                    <div className='col-5 col-md-4 col-lg-3 p-0 chats-box'>
                         <div className="chat-types">
                             <div className="w-100 btn-group btn-group-toggle" data-toggle="buttons">
                                 <button className={`w-50 btn btn-secondary ${type === 'group' ? 'active' : ''}`} onClick={() => this._setType('group')}>
                                     <i className="display-5 fa fa-users"></i> {(type !== 'group' && unreadGroups > 0)  &&
-                                        <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-1'>{unreadGroups}</span>
+                                        <span className='m-badge m-badge--wide m-badge--danger p-0 ml-1'>{unreadGroups}</span>
                                     }
                                 </button>
                                 <button className={`w-50 btn btn-secondary ${type === 'private' ? 'active' : ''}`} onClick={() => this._setType('private')}>
                                     <i className="display-5 fa fa-user"></i> {(type !== 'private' && unreadPrivate > 0) &&
-                                        <span className='m-badge m-badge--brand m-badge--wide m-badge--danger p-0 ml-1'>{unreadPrivate}</span>
+                                        <span className='m-badge m-badge--wide m-badge--danger p-0 ml-1'>{unreadPrivate}</span>
                                     }
                                 </button>   
                             </div>
@@ -186,7 +186,7 @@ class Chats extends Component {
                             <input 
                                 onChange={(e) => { this._onChangeFilter(e.target.value) }} 
                                 placeholder={t(type === 'group' ? 'searchGroups' : 'searchUsers')} 
-                                className="form-control m-input--air form-control-success m-input"
+                                className="form-control m-input"
                                 value={filter}
                                 type="text" />
                         </div>

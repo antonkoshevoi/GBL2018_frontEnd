@@ -65,7 +65,7 @@ class Address extends Component {
                   />
               <legend className='mb-3'>{t('contactInformation', {title: title})}</legend>
               <div className='m-form__section'>
-                <div className="form-group m-form__group row">
+                <div className="form-group row">
                   <label className="col-form-label col-lg-3 col-12">{t('firstName')}</label>
                   <div className="col-lg-9 col-12">
                     <input
@@ -75,7 +75,7 @@ class Address extends Component {
                       name='firstName'
                       onChange={(e) => {this._handleInputChange(e)}}
                       type='text'
-                      className='form-control m-input m-input--air '
+                      className='form-control m-input'
                       placeholder=''/>
                     <div className='form-control-feedback'>
                       {errors && errors.get(`firstName`) &&
@@ -83,7 +83,7 @@ class Address extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="form-group m-form__group row">
+                <div className="form-group row">
                   <label className="col-form-label col-lg-3 col-12">{t('lastName')}</label>
                   <div className="col-lg-9 col-12">
                     <input
@@ -93,7 +93,7 @@ class Address extends Component {
                       name='lastName'
                       onChange={(e) => {this._handleInputChange(e)}}
                       type='text'
-                      className='form-control m-input m-input--air '
+                      className='form-control m-input'
                       placeholder=''/>
                     <div className='form-control-feedback'>
                       {errors && errors.get(`lastName`) &&
@@ -101,7 +101,7 @@ class Address extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="form-group m-form__group row">
+                <div className="form-group row">
                   <label className="col-form-label col-lg-3 col-12">{t('email')}</label>
                   <div className="col-lg-9 col-12">
                     <input
@@ -111,7 +111,7 @@ class Address extends Component {
                       name='email'
                       onChange={(e) => {this._handleInputChange(e)}}
                       type='email'
-                      className='form-control m-input m-input--air'
+                      className='form-control m-input'
                       placeholder=''/>
                     <div className='form-control-feedback'>
                       {errors && errors.get(`email`) &&
@@ -119,7 +119,7 @@ class Address extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="form-group m-form__group row">
+                <div className="form-group row">
                   <label className="col-form-label col-lg-3 col-12">{t('telephone')}</label>
                   <div className="col-lg-9 col-12">
                     <input
@@ -129,7 +129,7 @@ class Address extends Component {
                       name='telephone'
                       onChange={(e) => {this._handleInputChange(e)}}
                       type='text'
-                      className='form-control m-input m-input--air '
+                      className='form-control m-input'
                       placeholder=''/>
                     <div className='form-control-feedback'>
                       {errors && errors.get(`telephone`) &&
@@ -142,7 +142,7 @@ class Address extends Component {
           <div className='col-12'>
             <legend className='mb-3'>{t('contactAddress', {title: title})}</legend>
             <address className='m-form__section signUpOptional'>
-              <div className="form-group m-form__group row">
+              <div className="form-group row">
                 <label className="col-form-label col-lg-3 col-12">{t('addressLine1')}</label>
                 <div className="col-lg-9 col-12">
                   <input
@@ -151,7 +151,7 @@ class Address extends Component {
                     name='addressLine1'
                     onChange={(e) => {this._handleInputChange(e)}}
                     type='text'
-                    className='form-control m-input m-input--air '
+                    className='form-control m-input'
                   />
                   <div className='form-control-feedback'>
                     {errors && errors.get(`addressLine1`) &&
@@ -159,7 +159,7 @@ class Address extends Component {
                   </div>
                 </div>
               </div>
-              <div className="form-group m-form__group row">
+              <div className="form-group row">
                 <label className="col-form-label col-lg-3 col-12">{t('addressLine2')}</label>
                 <div className="col-lg-9 col-12">
                   <input
@@ -170,7 +170,7 @@ class Address extends Component {
                       this._handleInputChange(e)
                     }}
                     type='text'
-                    className='form-control m-input m-input--air '
+                    className='form-control m-input'
                     placeholder=''/>
                   <div className='form-control-feedback'>
                     {errors && errors.get(`addressLine2`) &&
@@ -178,7 +178,7 @@ class Address extends Component {
                   </div>
                 </div>
               </div>
-              <div className="form-group m-form__group row">
+              <div className="form-group row">
                 <label className="col-form-label col-lg-3 col-12">{t('city')}</label>
                 <div className="col-lg-9 col-12">
                   <input
@@ -189,7 +189,7 @@ class Address extends Component {
                       this._handleInputChange(e)
                     }}
                     type='text'
-                    className='form-control m-input m-input--air '
+                    className='form-control m-input'
                     placeholder=''/>
                   <div className='form-control-feedback'>
                     {errors && errors.get(`city`) &&
@@ -197,7 +197,7 @@ class Address extends Component {
                   </div>
                 </div>
               </div>
-              <div className="form-group m-form__group row">
+              <div className="form-group row">
                 <label className="col-form-label col-lg-3 col-12">{t('stateOrProvince')}</label>
                 <div className="col-lg-9 col-12">
                   <input
@@ -208,7 +208,7 @@ class Address extends Component {
                       this._handleInputChange(e)
                     }}
                     type='text'
-                    className='form-control m-input m-input--air '
+                    className='form-control m-input'
                     placeholder=''/>
                   <div className='form-control-feedback'>
                     {errors && errors.get(`region`) &&
@@ -216,7 +216,7 @@ class Address extends Component {
                   </div>
                 </div>
               </div>
-              <div className="form-group m-form__group row">
+              <div className="form-group row">
                 <label className="col-form-label col-lg-3 col-12">{t('postalOrZipCode')}</label>
                 <div className="col-lg-9 col-12">
                   <input
@@ -227,7 +227,7 @@ class Address extends Component {
                       this._handleInputChange(e)
                     }}
                     type='text'
-                    className='form-control m-input m-input--air '
+                    className='form-control m-input'
                     placeholder=''/>
                   <div className='form-control-feedback'>
                     {errors && errors.get(`zip`) &&
@@ -235,7 +235,7 @@ class Address extends Component {
                   </div>
                 </div>
               </div>
-              <div className="form-group m-form__group row">
+              <div className="form-group row">
                 <label className="col-form-label col-lg-3 col-12">{t('country')}</label>
                 <div className="col-lg-9 col-12">
                   <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>

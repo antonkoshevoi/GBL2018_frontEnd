@@ -17,7 +17,7 @@ class ConfirmButton extends Component {
 
     static defaultProps = {
         className: "btn-info",
-        classNameDefault: "btn m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-2",
+        classNameDefault: "btn m-btn--icon-only ml-2",
         btnName: 'Delete',
         title: 'Are you sure?',
         icon: 'la la-remove',

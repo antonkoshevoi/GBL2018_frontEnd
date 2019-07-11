@@ -65,14 +65,14 @@ class RestoreLogin extends Component {
                   <div className="m-portlet m-portlet--brand m-portlet--head-solid-bg mt-4 m-portlet--full-height ">
                     <div className="m-portlet__body">
                         <div className="m-form mt-4 mb-3 mx-3">
-                        <div className="form-group m-form__group">
+                        <div className="form-group">
                           <div className="d-flex align-items-center">
                             <Avatar src={user.get('avatar') || 'https://bzabc.s3.ap-southeast-1.amazonaws.com/default-avatars/user-sm.png'}/>
                             <span className="ml-3">{user.get('username') || 'N/A'}</span>
                           </div>
                             {(errors.errors !== undefined && errors.errors.username) && <div id="username-error" className="form-control-feedback  text-center error">{errors.errors.username[0]}</div>}
                         </div>
-                        <div className="form-group m-form__group mt-3">
+                        <div className="form-group mt-3">
                           <input className="form-control m-input--pill" type="password"
                                  placeholder="Password" name="password" value={this.state.password}
                                  onChange={this._handlePasswordChange}/>
@@ -80,7 +80,7 @@ class RestoreLogin extends Component {
                                                                                              className="form-control-feedback  text-center error">{errors.errors.password[0]}</div>}
                         </div>
                         <div className="row">
-                          <div className="col m--align-left">
+                          <div className="col text-left">
                             <FormControlLabel
                                 control={<Checkbox
                                     color="primary"
@@ -96,7 +96,7 @@ class RestoreLogin extends Component {
                           <Button id="m_login_signin_submit" variant="contained" color="primary" onClick={() => {
                               this._login()
                           }}
-                                  className="btn  m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primary">
+                                  className="btn  m-btn--pill m-btn--custom m-btn--air  m-login__btn m-login__btn--primary">
                             <span>{t('signIn')}</span>
                               {loading &&
                               <CircularProgress color="primary"/>
@@ -111,7 +111,7 @@ class RestoreLogin extends Component {
                 <span className="m-login__account-msg">
                 {t('logInDifferentUser')}
                 </span>
-                <NavLink to="/login" id="m_login_signup" className="ml-2 m-link m-link--light m-login__account-link">{t('logIn')}</NavLink>
+                <NavLink to="/login" id="m_login_signup" className="ml-2 m-login__account-link">{t('logIn')}</NavLink>
               </div>
             </div>
           </div>

@@ -213,7 +213,7 @@ class DemoCoursesTab extends Component {
         <div className='m-portlet__body'>
           <div className='mt-3 mb-4'>
             <div className='row'>
-              <div className='col-sm-12 m--align-right'>
+              <div className='col-sm-12 text-right'>
                 <Select
                   className='pull-left table-select'
                   value={perPage}

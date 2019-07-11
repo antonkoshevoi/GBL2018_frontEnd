@@ -41,8 +41,8 @@ class RosterStatistic extends Component {
                 <div className="col">
                   <h3 className="m-widget1__title">{t('students')}</h3>
                 </div>
-                <div className="col m--align-right">
-                  <span className="m-widget1__number m--font-brand">
+                <div className="col text-right">
+                  <span className="m-widget1__number text-info">
                       { !success && <CircularProgress size={15} color="primary"/> }
                       { !loading && data.studentsCount }
                   </span>
@@ -54,8 +54,8 @@ class RosterStatistic extends Component {
                 <div className="col">
                   <h3 className="m-widget1__title">{t('teachers')}</h3>
                 </div>
-                <div className="col m--align-right">
-                  <span className="m-widget1__number m--font-brand">
+                <div className="col text-right">
+                  <span className="m-widget1__number text-info">
                       { !success && <CircularProgress size={15} color="primary"/> }
                       { !loading && data.teachersCount }
                   </span>

@@ -37,8 +37,8 @@ class ViewParentModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('firstName')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{parent.firstName || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{parent.firstName || '-'}</span>
                                 </div>
                             </div>
                         </div>
@@ -47,8 +47,8 @@ class ViewParentModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('lastName')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{parent.lastName || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{parent.lastName || '-'}</span>
                                 </div>
                             </div>
                         </div>
@@ -57,8 +57,8 @@ class ViewParentModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('email')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{parent.email || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{parent.email || '-'}</span>
                                 </div>
                             </div>
                         </div>
@@ -67,8 +67,8 @@ class ViewParentModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('username')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{parent.username || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{parent.username || '-'}</span>
                                 </div>
                             </div>
                         </div>                                
@@ -77,8 +77,8 @@ class ViewParentModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('phoneNumber')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{parent.phoneNumber || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{parent.phoneNumber || '-'}</span>
                                 </div>
                             </div>
                         </div>
@@ -87,8 +87,8 @@ class ViewParentModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('gender')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{parent.gender ? t(parent.gender) : '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{parent.gender ? t(parent.gender) : '-'}</span>
                                 </div>
                             </div>
                         </div>                 
@@ -97,8 +97,8 @@ class ViewParentModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('birthday')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{parent.birthday || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{parent.birthday || '-'}</span>
                                 </div>  
                             </div>
                         </div>
@@ -116,8 +116,8 @@ class ViewParentModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('requestSentDate')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand"><DateTime time={parent.sentAt} /></span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info"><DateTime time={parent.sentAt} /></span>
                                 </div>
                             </div>
                         </div>
@@ -127,8 +127,8 @@ class ViewParentModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('declinedAt')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand"><DateTime time={parent.updatedAt} /></span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info"><DateTime time={parent.updatedAt} /></span>
                                 </div>
                             </div>
                         </div>}
@@ -137,8 +137,8 @@ class ViewParentModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('name')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{parent.name || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{parent.name || '-'}</span>
                                 </div>
                             </div>
                         </div>
@@ -147,8 +147,8 @@ class ViewParentModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('username')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{parent.username || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{parent.username || '-'}</span>
                                 </div>
                             </div>
                         </div>                                
@@ -157,8 +157,8 @@ class ViewParentModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('email')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{parent.email || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{parent.email || '-'}</span>
                                 </div>
                             </div>
                         </div>

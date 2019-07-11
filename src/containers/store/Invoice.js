@@ -6,8 +6,8 @@ import {Step, StepLabel, Stepper} from '@material-ui/core';
 import {getInvoice} from '../../redux/payments/actions';
 import {invoiceRequest} from '../../redux/payments/selectors';
 import {Price} from '../../components/ui/Price';
+import {InvoiceNo} from "../../components/ui/InvoiceNo";
 import Loader from "../../components/layouts/Loader";
-import InvoiceNo from "./sections/InvoiceNo";
 
 class Invoice extends Component {
 
@@ -42,13 +42,13 @@ class Invoice extends Component {
                 </div>
             </div>
             {(item.get('isDigitalOnly') && (invoice.get('authorizedAt') || item.get('isFree'))) &&
-            <a title={t('downloadPdf')} rel="noopener noreferrer" className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill mx-3" href={item.get('downloadUrl')}>
+            <a title={t('downloadPdf')} rel="noopener noreferrer" className="btn btn-success m-btn--icon-only mx-3" href={item.get('downloadUrl')}>
                 <i className="fa fa-download text-white"></i>
             </a>}
         </div>
         <div className="col-6 text-right align-self-center">
             <strong className="text-nowrap d-block"><Price price={item.get('totalPrice')} currency={item.get('currency')} /></strong>
-            {(item.get('affiliate_discount') > 0) && <span className="text-nowrap m--font-success d-block">- <Price price={item.get('affiliateDiscount')} currency={item.get('currency')} /></span>}
+            {(item.get('affiliate_discount') > 0) && <span className="text-nowrap text-success d-block">- <Price price={item.get('affiliateDiscount')} currency={item.get('currency')} /></span>}
         </div>
       </div>
     ));

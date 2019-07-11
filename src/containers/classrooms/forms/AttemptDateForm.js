@@ -52,7 +52,7 @@ class AttemptDateForm extends Component {
         return (                
             <div className="text-center" id={'lesson-att-date-' + lesson.lessonId}>
                 <p className="attemp-date">{attDate}</p>                
-                <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={this.openPicker}>
+                <button className='btn btn-accent m-btn--icon-only' onClick={this.openPicker}>
                     <i className='la la-pencil'></i>
                 </button>                    
                 <div style={{'display': 'none'}}>   

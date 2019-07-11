@@ -2,19 +2,11 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { Typography, Select, MenuItem } from '@material-ui/core';
+import { Select, MenuItem } from '@material-ui/core';
 import MuiDatePicker from "../../../components/ui/MuiDatePicker";
 import { update } from "../../../redux/user/actions";
 import { selectUpdateRequest } from "../../../redux/user/selectors";
 import HasRole from "../../middlewares/HasRole";
-
-function TabContainer(props) {
-  return (
-    <Typography component="div">
-      {props.children}
-    </Typography>
-  );
-}
 
 class Details extends Component {
 
@@ -114,16 +106,16 @@ class Details extends Component {
               </ul>
             </div>
           </div>
-          <div className="m-portlet__body p-2">
-            {mode === 'overview' && <TabContainer>
+          <div className="m-portlet__body">
+            {mode === 'overview' && <div>
               <div className="m-widget1">
                 <div className="m-widget1__item">
                   <div className="row m-row--no-padding">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('firstName')}</h3>
                     </div>
-                    <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{user.firstName || '-'}</span>
+                    <div className="col text-right">
+                      <span className="m-widget1__title text-info">{user.firstName || '-'}</span>
                     </div>
                   </div>
                 </div>
@@ -132,8 +124,8 @@ class Details extends Component {
                     <div className="col">
                       <h3 className="m-widget1__title">{t('lastName')}</h3>
                     </div>
-                    <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{user.lastName || '-'}</span>
+                    <div className="col text-right">
+                      <span className="m-widget1__title text-info">{user.lastName || '-'}</span>
                     </div>
                   </div>
                 </div>
@@ -142,8 +134,8 @@ class Details extends Component {
                     <div className="col">
                       <h3 className="m-widget1__title">{t('email')}</h3>
                     </div>
-                    <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{user.email || '-'}</span>
+                    <div className="col text-right">
+                      <span className="m-widget1__title text-info">{user.email || '-'}</span>
                     </div>
                   </div>
                 </div>
@@ -152,8 +144,8 @@ class Details extends Component {
                     <div className="col">
                       <h3 className="m-widget1__title">{t('phoneNumber')}</h3>
                     </div>
-                    <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{user.phoneNumber || '-'}</span>
+                    <div className="col text-right">
+                      <span className="m-widget1__title text-info">{user.phoneNumber || '-'}</span>
                     </div>
                   </div>
                 </div>
@@ -162,8 +154,8 @@ class Details extends Component {
                     <div className="col">
                       <h3 className="m-widget1__title">{t('gender')}</h3>
                     </div>
-                    <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{user.gender ? t(user.gender) : '-'}</span>
+                    <div className="col text-right">
+                      <span className="m-widget1__title text-info">{user.gender ? t(user.gender) : '-'}</span>
                     </div>
                   </div>
                 </div>                 
@@ -172,20 +164,20 @@ class Details extends Component {
                     <div className="col">
                       <h3 className="m-widget1__title">{t('birthday')}</h3>
                     </div>
-                    <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{user.birthday || '-'}</span>
+                    <div className="col text-right">
+                      <span className="m-widget1__title text-info">{user.birthday || '-'}</span>
                     </div>  
                   </div>
                 </div>
               </div>
-            </TabContainer>}
-            {mode === 'edit' && <TabContainer>
-              <form id='update-user-form' onSubmit={(e) => { this._onSubmit(e) }}>
-                <div className="alert m-alert m-alert--default mt-3">
+            </div>}
+            {mode === 'edit' && <div>
+              <form id='update-user-form' className="m-4" onSubmit={(e) => { this._onSubmit(e) }}>
+                <div className="alert alert-secondary mt-0">
                   <p className='m-0'>{t('updateUserProfileNote')}</p>
                 </div>
                 <div className="m-form">
-                  <div className="form-group m-form__group row">
+                  <div className="form-group row">
                     <label className="col-form-label col-lg-3" htmlFor="firsName">{t('firstName')}</label>
                     <div className="col-lg-9">
                       <input
@@ -193,12 +185,12 @@ class Details extends Component {
                         name="firstName"
                         onChange={(e) => { this._handleInputChange(e) }}
                         value={user.firstName || ''}
-                        className="form-control m-input--air form-control-success m-input"
+                        className="form-control m-input"
                         id="firsName"/>
                       {errors && errors.get('firstName') && <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
                     </div>
                   </div>
-                  <div className="form-group m-form__group row">
+                  <div className="form-group row">
                     <label className="col-form-label col-lg-3" htmlFor="lastName">{t('lastName')}</label>
                     <div className="col-lg-9">
                       <input
@@ -206,13 +198,13 @@ class Details extends Component {
                         name="lastName"
                         onChange={(e) => { this._handleInputChange(e) }}
                         value={user.lastName || ''}
-                        className="form-control m-input--air form-control-success m-input"
+                        className="form-control m-input"
                         id="lastName"/>
                       {errors && errors.get('lastName') && <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
                     </div>
                   </div>
                   <HasRole roles={['Superadministrator','School','Teacher','Parents']}>
-                  <div className="form-group m-form__group row">
+                  <div className="form-group row">
                     <label className="col-form-label col-lg-3" htmlFor="email">{t('email')}</label>
                     <div className="col-lg-9">
                       <input
@@ -220,13 +212,13 @@ class Details extends Component {
                         name="email"
                         onChange={(e) => { this._handleInputChange(e) }}
                         value={user.email || ''}
-                        className="form-control m-input--air form-control-success m-input"
+                        className="form-control m-input"
                         id="email"/>
                       {errors && errors.get('email') && <div className="form-control-feedback text-center error">{errors.get('email').get(0)}</div>}
                     </div>
                   </div>
                   </HasRole>
-                  <div className="form-group m-form__group row">
+                  <div className="form-group row">
                     <label className="col-form-label col-lg-3" htmlFor="phone">{t('phoneNumber')}</label>
                     <div className="col-lg-9">
                       <input
@@ -234,18 +226,18 @@ class Details extends Component {
                         name="phoneNumber"
                         onChange={(e) => { this._handleInputChange(e) }}
                         value={user.phoneNumber || ''}
-                        className="form-control m-input--air form-control-success m-input"
+                        className="form-control m-input"
                         id="phone"/>
                       {errors && errors.get('phoneNumber') && <div className="form-control-feedback text-center error">{errors.get('phoneNumber').get(0)}</div>}
                     </div>
                   </div>
-                  <div className="form-group m-form__group row">
+                  <div className="form-group row">
                     <label className="col-form-label col-lg-3" htmlFor="gender">{t('gender')}</label>
                     <div className="col-lg-9">
                       <Select
                         id="gender"
                         name="gender"
-                        className="form-control m-input  m-input--air  main-select"
+                        className="form-control m-input   main-select"
                         style={{minWidth:'120px'}}
                         value={user.gender || 'female'}
                         onChange={(e) => { this._handleInputChange(e) }}>
@@ -255,16 +247,16 @@ class Details extends Component {
                       {errors && errors.get('gender') && <div className="form-control-feedback text-center error">{errors.get('gender').get(0)}</div>}
                     </div>
                   </div>
-                  <div className="form-group m-form__group row">
+                  <div className="form-group row">
                     <label className="col-form-label col-lg-3" htmlFor="phone">{t('birthday')}</label>
                     <div className="col-lg-9">                            
                       <MuiDatePicker
                         InputProps={{
-                            className: "form-control m-input m-input--air px-2 py-1",
+                            className: "form-control m-input px-2 py-1",
                             disableUnderline: true                    
                         }}
                         style={{width: '100%'}}                        
-                        value={user.birthday || ''}
+                        value={user.birthday || null}
                         onChange={(date) => { this._handleDateChange(date, 'birthday') }}/>                                
                       {errors && errors.get('birthday') && <div className="form-control-feedback text-center error">{errors.get('birthday').get(0)}</div>}
                     </div>
@@ -272,11 +264,11 @@ class Details extends Component {
                 </div>
                 <div className="m-separator"></div>
                 <div className="text-right">
-                  <button className="btn-success m-btn btn mr-3">{t('saveChanges')}</button>
-                  <button className="btn-default m-btn btn" onClick={() => { this._handleSwitchMode('overview') }}>{t('cancel')}</button>
+                  <button className="btn-success btn mr-3">{t('saveChanges')}</button>
+                  <button className="btn-default btn" onClick={() => { this._handleSwitchMode('overview') }}>{t('cancel')}</button>
                 </div>
               </form>
-            </TabContainer>}
+            </div>}
           </div>
         </div>
     );

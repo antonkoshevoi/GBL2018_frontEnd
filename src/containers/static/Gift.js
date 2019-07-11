@@ -169,7 +169,7 @@ class Gift extends Component {
                 }
                 {step === 2 &&
                     <Portlet {...this.props}>
-                        <div className='m-form m-form--label-align-right my-4 mx-2 mx-sm-5'>
+                        <div className='my-4 mx-2 mx-sm-5'>
                             {this._getSelectedPlan()}
                             <h2 className='my-3'>{t('personalInformation')}</h2>                    
                             <div className='align-items-center'>

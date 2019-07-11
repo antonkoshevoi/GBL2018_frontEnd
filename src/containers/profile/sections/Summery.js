@@ -10,13 +10,13 @@ class Summery extends Component {
     const { [name]: data } = this.props.user;
     
     if (!data || !data.length) {
-      return <div className="m-timeline-2 my-timeline">
-        <div className="m-timeline-2__items py-2">
-          <div className="m-timeline-2__item mb-3">
-            <div className="m-timeline-2__item-cricle pr-2">
-              <i className={`fa fa-genderless m--font-${randColorName()}`}></i>
+      return <div className="m-timeline my-timeline">
+        <div className="m-timeline__items py-2">
+          <div className="m-timeline__item mb-3">
+            <div className="m-timeline__item-cricle pr-2">
+              <i className={`fa fa-genderless text-${randColorName()}`}></i>
             </div>
-            <div className="m-timeline-2__item-text pl-4 py-1">              
+            <div className="m-timeline__item-text pl-4 py-1">              
               {t(name + 'NotFound')}
             </div>
           </div>
@@ -25,13 +25,13 @@ class Summery extends Component {
     }
     return (
       data.map((item, key) => {
-        return <div className="m-timeline-2 my-timeline" key={key}>
-          <div className="m-timeline-2__items py-2">
-            <div className="m-timeline-2__item mb-3">
-              <div className="m-timeline-2__item-cricle pr-2">
-                <i className={`fa fa-genderless m--font-${randColorName()}`}></i>
+        return <div className="m-timeline my-timeline" key={key}>
+          <div className="m-timeline__items py-2">
+            <div className="m-timeline__item mb-3">
+              <div className="m-timeline__item-cricle pr-2">
+                <i className={`fa fa-genderless text-${randColorName()}`}></i>
               </div>
-              <div className="m-timeline-2__item-text pl-4 py-1">
+              <div className="m-timeline__item-text pl-4 py-1">
                 {item.name}
               </div>
             </div>

@@ -14,11 +14,11 @@ class QuickLink extends Component {
                     <h3 className='m-portlet__head-text'>{t('quickLinks')}</h3>
                 </div>}
                 <div className="small-card">
-                    <div>
-                        <span className="pull-left m-2">
+                    <div className="d-flex justify-content-center align-items-center">
+                        <span className="m-3">
                             <AppLink type="students"><img src={bz} alt="" /></AppLink>
                         </span>
-                        <div className="pull-left m--align-right quick-link-title ml-4 mt-4">
+                        <div className="quick-link-title mx-1 mx-md-4">
                             <span className="pull-right ml-4">
                                 <i className="fa fa-download display-3 quick-link-download"></i>
                             </span>                  
@@ -30,11 +30,11 @@ class QuickLink extends Component {
                     </div>            
                 </div>
                 <div className="small-card">
-                    <div>
-                        <span className="pull-left m-2">
+                    <div className="d-flex justify-content-center align-items-center">
+                        <span className="m-3">
                             <img src={teacher} alt="" />
                         </span>
-                        <div className="pull-left m--align-right quick-link-title ml-4 mt-4">
+                        <div className="quick-link-title mx-1 mx-md-4">
                             <span className="pull-right ml-4">
                                 <i className="fa fa-film display-3 quick-link-film"></i>
                             </span>                  

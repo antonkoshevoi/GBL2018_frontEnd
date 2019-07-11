@@ -51,8 +51,8 @@ class ViewConnectionModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('firstName')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{user.firstName || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{user.firstName || '-'}</span>
                                 </div>
                             </div>
                         </div>
@@ -61,8 +61,8 @@ class ViewConnectionModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('lastName')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{user.lastName || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{user.lastName || '-'}</span>
                                 </div>
                             </div>
                         </div>
@@ -71,8 +71,8 @@ class ViewConnectionModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('email')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{user.email || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{user.email || '-'}</span>
                                 </div>
                             </div>
                         </div>
@@ -81,8 +81,8 @@ class ViewConnectionModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('username')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{user.username || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{user.username || '-'}</span>
                                 </div>
                             </div>
                         </div>                                
@@ -91,8 +91,8 @@ class ViewConnectionModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('phoneNumber')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{user.phoneNumber || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{user.phoneNumber || '-'}</span>
                                 </div>
                             </div>
                         </div>
@@ -101,8 +101,8 @@ class ViewConnectionModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('gender')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{user.gender ? t(user.gender) : '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{user.gender ? t(user.gender) : '-'}</span>
                                 </div>
                             </div>
                         </div>                 
@@ -111,8 +111,8 @@ class ViewConnectionModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('birthday')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{user.birthday || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{user.birthday || '-'}</span>
                                 </div>  
                             </div>
                         </div>
@@ -130,8 +130,8 @@ class ViewConnectionModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('requestSentDate')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand"><DateTime time={user.sentAt} /></span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info"><DateTime time={user.sentAt} /></span>
                                 </div>
                             </div>
                         </div>
@@ -141,8 +141,8 @@ class ViewConnectionModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('declinedAt')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand"><DateTime time={user.updatedAt} /></span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info"><DateTime time={user.updatedAt} /></span>
                                 </div>
                             </div>
                         </div>}
@@ -151,8 +151,8 @@ class ViewConnectionModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('name')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{user.name || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{user.name || '-'}</span>
                                 </div>
                             </div>
                         </div>
@@ -161,8 +161,8 @@ class ViewConnectionModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('username')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{user.username || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{user.username || '-'}</span>
                                 </div>
                             </div>
                         </div>                                
@@ -171,8 +171,8 @@ class ViewConnectionModal extends Component {
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('email')}</h3>
                                 </div>
-                                <div className="col m--align-right">
-                                    <span className="m-widget1__title m--font-brand">{user.email || '-'}</span>
+                                <div className="col text-right">
+                                    <span className="m-widget1__title text-info">{user.email || '-'}</span>
                                 </div>
                             </div>
                         </div>

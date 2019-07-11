@@ -75,7 +75,7 @@ class SecondStepForm extends Component {
         <div className='col-lg-7 col-md-6 col-sm-12'>
             <legend className='mb-3'>{t('required')}</legend>
             <div className='m-form__section'>
-              <div className="form-group m-form__group row">
+              <div className="form-group row">
                 <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('username')}</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
@@ -83,13 +83,13 @@ class SecondStepForm extends Component {
                     value={form.username || ''}
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air '
+                    className='form-control m-input'
                     placeholder=''/>
                   {errors && errors.get('username') &&
                   <div className="form-control-feedback text-center error">{errors.get('username').get(0)}</div>}
                 </div>
               </div>
-              <div className="form-group m-form__group row">
+              <div className="form-group row">
                 <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('password')}</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
@@ -97,7 +97,7 @@ class SecondStepForm extends Component {
                     value={form.password || ''}
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='password'
-                    className='form-control m-input m-input--air '
+                    className='form-control m-input'
                     placeholder=''/>
                   {errors && errors.get('password') &&
                   <div className="form-control-feedback text-center error">{errors.get('password').get(0)}</div>}
@@ -108,7 +108,7 @@ class SecondStepForm extends Component {
             <legend className='mb-3 mt-3'>{t('optional')}</legend>
 
             <div className='m-form__section'>
-              <div className="form-group m-form__group row">
+              <div className="form-group row">
                 <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('firstName')}</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
@@ -116,13 +116,13 @@ class SecondStepForm extends Component {
                     value={form.firstName || ''}
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air '
+                    className='form-control m-input'
                     placeholder=''/>
                   {errors && errors.get('firstName') &&
                   <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
                 </div>
               </div>
-              <div className="form-group m-form__group row">
+              <div className="form-group row">
                 <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('lastName')}</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
                   <input
@@ -130,7 +130,7 @@ class SecondStepForm extends Component {
                     value={form.lastName || ''}
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air '
+                    className='form-control m-input'
                     placeholder=''/>
                   {errors && errors.get('lastName') &&
                   <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}

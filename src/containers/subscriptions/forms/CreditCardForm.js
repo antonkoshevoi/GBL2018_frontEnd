@@ -37,7 +37,7 @@ class CreditCardForm extends Component {
         
         return (
             <div className='m-form__section'>
-              <div className="form-group m-form__group row">
+              <div className="form-group row">
                 <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('creditCardNumber')} </label>
                 <div className="col-lg-8 col-md-8 col-sm-12">
                   <input
@@ -46,7 +46,7 @@ class CreditCardForm extends Component {
                     name='cardNumber'
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air '
+                    className='form-control m-input'
                     placeholder=''/>
 
                   {errors && errors.get('cardNumber') && <FormHelperText error>{ errors.get('cardNumber').get(0) }</FormHelperText>}
@@ -54,7 +54,7 @@ class CreditCardForm extends Component {
                 </div>
               </div>
 
-              <div className="form-group m-form__group row">
+              <div className="form-group row">
                 <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('holderName')}</label>
                 <div className="col-lg-8 col-md-8 col-sm-12">
                   <input
@@ -63,13 +63,13 @@ class CreditCardForm extends Component {
                     name='cardHolder'
                     onChange={(e) => { this._handleInputChange(e) }}
                     type='text'
-                    className='form-control m-input m-input--air '
+                    className='form-control m-input'
                     placeholder=''/>
 
                   {errors && errors.get('cardHolder') && <FormHelperText error>{ errors.get('cardHolder').get(0) }</FormHelperText>}
                 </div>
               </div> 
-                <div className="form-group m-form__group row">
+                <div className="form-group row">
                   <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('cardType')}</label> 
                   <div className="col-lg-5 col-md-8 col-sm-12">
                     <FormControl className='full-width form-inputs'>                          
@@ -88,7 +88,7 @@ class CreditCardForm extends Component {
                     </FormControl>
                   </div>                      
                 </div>                    
-                <div className="form-group m-form__group row">
+                <div className="form-group row">
                   <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('expDate')}</label>
                   <div className="col-lg-5 col-md-5 col-sm-6 col-6">
                     <FormControl className='full-width form-inputs'>                          
@@ -126,7 +126,7 @@ class CreditCardForm extends Component {
                     </FormControl>
                   </div>                      
                 </div>                
-                <div className="form-group m-form__group row">
+                <div className="form-group row">
                   <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('cvvCode')} </label>
                   <div className="col-lg-5 col-md-5 col-sm-12">
                     <input
@@ -135,7 +135,7 @@ class CreditCardForm extends Component {
                       name='cardCvv2'
                       onChange={(e) => { this._handleInputChange(e) }}
                       type='text'
-                      className='form-control m-input m-input--air '
+                      className='form-control m-input'
                       placeholder=''/>
                     {errors && errors.get('cardCvv2') && <FormHelperText error>{ errors.get('cardCvv2').get(0) }</FormHelperText>}
                   </div>

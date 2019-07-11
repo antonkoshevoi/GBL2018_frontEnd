@@ -167,10 +167,10 @@ class LessonsTable extends Component {
             <div className="mr-3 ml-3">
                 <h6>{t('perfomance')}</h6>
                 <p className="text-capitalize">
-                    <span className="m-badge m-badge--brand m-badge--wide m-badge--success mr-3"></span> {t('pass')}
+                    <span className="m-badge m-badge--wide m-badge--success mr-3"></span> {t('pass')}
                 </p>
                 <p className="text-capitalize m-0">
-                    <span className="m-badge m-badge--brand m-badge--wide m-badge--danger mr-3"></span> {t('fail')} 
+                    <span className="m-badge m-badge--wide m-badge--danger mr-3"></span> {t('fail')} 
                 </p>            
             </div>
         </Popover>

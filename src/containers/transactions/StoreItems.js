@@ -155,7 +155,7 @@ class StoreItems extends Component {
                     </Td>
                     <Td>
                         <NavLink className="g-blue" to={`/store/details/${item.get('itemId')}`}>{item.get('title')}</NavLink>
-                        {(item.get('downloadUrl') && (item.get('isFree') || transaction.get('isAuthorized'))) && <a className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-3" href={item.get('downloadUrl')}>
+                        {(item.get('downloadUrl') && (item.get('isFree') || transaction.get('isAuthorized'))) && <a className="btn btn-success m-btn--icon-only ml-3" href={item.get('downloadUrl')}>
                             <i class="fa fa-download" aria-hidden="true"></i>
                         </a>}
                     </Td>
@@ -175,7 +175,7 @@ class StoreItems extends Component {
         return (
             <div>
                 <div className='row'>
-                    <div className='col-6 col-sm-6 m--align-right'>
+                    <div className='col-6 col-sm-6 text-right'>
                         <Select
                             className="pull-left table-select"
                             value={perPage}

@@ -36,7 +36,7 @@ class GiftForm extends Component {
         
         return (          
             <div className='m-form__section'>
-                <div className="form-group m-form__group row">
+                <div className="form-group row">
                     <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('yourName')} </label>
                     <div className="col-lg-4 col-md-4 col-6">
                       <input
@@ -45,7 +45,7 @@ class GiftForm extends Component {
                         name='firstName'
                         onChange={(e) => { this._handleInputChange(e) }}
                         type='text'
-                        className='form-control m-input m-input--air '
+                        className='form-control m-input'
                         placeholder={t('firstName')}/>
                         {errors && errors.get('firstName') && <FormHelperText error>{ errors.get('firstName').get(0) }</FormHelperText>}                          
                     </div>
@@ -56,12 +56,12 @@ class GiftForm extends Component {
                         name='lastName'
                         onChange={(e) => { this._handleInputChange(e) }}
                         type='text'
-                        className='form-control m-input m-input--air '
+                        className='form-control m-input'
                         placeholder={t('lastName')}/>
                         {errors && errors.get('lastName') && <FormHelperText error>{ errors.get('lastName').get(0) }</FormHelperText>}                          
                     </div>                        
                 </div>
-                <div className="form-group m-form__group row">
+                <div className="form-group row">
                     <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('yourEmail')} </label>
                     <div className="col-lg-8 col-md-8 col-sm-12">
                       <input
@@ -70,13 +70,13 @@ class GiftForm extends Component {
                         name='email'
                         onChange={(e) => { this._handleInputChange(e) }}
                         type='text'
-                        className='form-control m-input m-input--air '
+                        className='form-control m-input'
                         placeholder=''/>
                         {errors && errors.get('email') && <FormHelperText error>{ errors.get('email').get(0) }</FormHelperText>}                          
                     </div>
                 </div>
                 <Divider className="mt-4 mb-4" />
-                <div className="form-group m-form__group row">
+                <div className="form-group row">
                     <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('recipientName')} </label>
                     <div className="col-lg-4 col-md-4 col-6">
                       <input
@@ -85,7 +85,7 @@ class GiftForm extends Component {
                         name='recipientFirstName'
                         onChange={(e) => { this._handleInputChange(e) }}
                         type='text'
-                        className='form-control m-input m-input--air '
+                        className='form-control m-input'
                         placeholder={t('firstName')}/>
                         {errors && errors.get('recipientFirstName') && <FormHelperText error>{ errors.get('recipientFirstName').get(0) }</FormHelperText>}                          
                     </div>
@@ -96,12 +96,12 @@ class GiftForm extends Component {
                         name='recipientLastName'
                         onChange={(e) => { this._handleInputChange(e) }}
                         type='text'
-                        className='form-control m-input m-input--air '
+                        className='form-control m-input'
                         placeholder={t('lastName')}/>
                         {errors && errors.get('recipientLastName') && <FormHelperText error>{ errors.get('recipientLastName').get(0) }</FormHelperText>}                          
                     </div>                        
                 </div>
-                <div className="form-group m-form__group row">
+                <div className="form-group row">
                     <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('recipientEmail')} </label>
                     <div className="col-lg-8 col-md-8 col-sm-12">
                       <input
@@ -110,7 +110,7 @@ class GiftForm extends Component {
                         name='recipientEmail'
                         onChange={(e) => { this._handleInputChange(e) }}
                         type='text'
-                        className='form-control m-input m-input--air'
+                        className='form-control m-input'
                         placeholder=''/>
                         {errors && errors.get('recipientEmail') && <FormHelperText error>{ errors.get('recipientEmail').get(0) }</FormHelperText>}                          
                     </div>

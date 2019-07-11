@@ -13,7 +13,7 @@ import TeacherResultsModal from './modals/TeacherResultsModal';
 const ResultsButton = ({ onClick, t}) => {    
   return (
     <button
-      className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-3'
+      className='btn btn-accent m-btn--icon-only ml-3'
       onClick={() => { onClick() }} 
       title={t('viewScapResults')}
     >
@@ -87,7 +87,7 @@ class TeacherScap extends Component {
                 </Td>
                 <Td><Date time={record.get('createdAt')} /></Td>
                 <Td>
-                    <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo('scap/fill/' + record.get('id')) }}>
+                    <button className='btn btn-accent m-btn--icon-only' onClick={() => { goTo('scap/fill/' + record.get('id')) }}>
                         <i className='la la-plus'></i>
                     </button>                
                 </Td>
@@ -127,7 +127,7 @@ class TeacherScap extends Component {
                     <div className='m-portlet__body'>
                         <div className='mt-3 mb-4'>
                             <div className='row'>               
-                                <div className='col-sm-12 m--align-right'>
+                                <div className='col-sm-12 text-right'>
                                     <Select
                                         className="pull-left table-select"
                                         value={perPage}

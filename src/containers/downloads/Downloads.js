@@ -5,6 +5,8 @@ import {getDownloadsRecords} from "../../redux/transactions/actions";
 import {selectGetDownloadsRequest} from "../../redux/transactions/selectors";
 import {getInvoice} from '../../redux/payments/actions';
 import {invoiceRequest} from '../../redux/payments/selectors';
+import {getRecords} from "../../redux/store/actions";
+import {selectRecords} from "../../redux/store/selectors";
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/table";
 import Card from "../../components/ui/Card";
 import {Price} from "../../components/ui/Price";
@@ -13,9 +15,6 @@ import ConfirmButton from "../../components/ui/ConfirmButton";
 import Sidebar from '../../components/store/Sidebar';
 import SessionStorage from '../../services/SessionStorage';
 import InvoiceModal from './modals/InvoiceModal';
-
-import {getRecords} from "../../redux/store/actions";
-import {selectGetRecordsRequest, selectRecords} from "../../redux/store/selectors";
 
 class Downloads extends Component {
 
@@ -31,7 +30,7 @@ class Downloads extends Component {
         this.props.getStoreRecords({
             perPage: 10, 
             orderBy: 'rand',
-            filter: {category: 1}
+            filter: {similarDownloads: true}
         });
                 
         if (SessionStorage.get('lastInvoiceNo')) {
@@ -80,7 +79,7 @@ class Downloads extends Component {
                     <Td className="d-none d-md-table-cell"><DateTime time={item.get('createdAt')} /></Td>
                     <Td>
                         {item.get('isReady') ? 
-                        <a title={t('downloadPdf')} rel="noopener noreferrer" className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill" href={item.get('downloadUrl')}>
+                        <a title={t('downloadPdf')} rel="noopener noreferrer" className="btn btn-success m-btn--icon-only" href={item.get('downloadUrl')}>
                             <i className="fa fa-download text-white"></i>
                         </a> 
                         :
@@ -96,31 +95,34 @@ class Downloads extends Component {
         const loading = recordsRequest.get('loading');        
         
         return (
-            <Card title={t('myDownloads')} icon="fa fa-download" colorBorder="violet">
-                <div className="row">
-                    <div className="col-12 col-sm-7 col-md-8 col-lg-9">                
-                        <Table>
-                            <Thead>
-                                <HeadRow>
-                                    <Th className="d-none d-md-table-cell">#</Th>                                
-                                    <Th>{t('product')}</Th>                                
-                                    <Th className="d-none d-md-table-cell">{t('price')}</Th>                                
-                                    <Th className="d-none d-md-table-cell">{t('date')}</Th>
-                                    <Th>{t('actions')}</Th>                                    
-                                </HeadRow>
-                            </Thead>
-                            <Tbody>
-                                {this._renderTransactions()}
-                                {loading && <TablePreloader text={t('loading')} />}
-                            </Tbody>
-                        </Table>
-                    {this.state.invoice && <InvoiceModal isOpen={true} data={this.state.invoice} />}
+                <div className="row m-0">
+                    <div className="col-12 col-sm-7 col-md-8 col-lg-9 p-0">                
+                        <Card title={t('myDownloads')} icon="fa fa-download" colorBorder="violet">
+                            <Table>
+                                <Thead>
+                                    <HeadRow>
+                                        <Th className="d-none d-md-table-cell">#</Th>                                
+                                        <Th>{t('product')}</Th>                                
+                                        <Th className="d-none d-md-table-cell">{t('price')}</Th>                                
+                                        <Th className="d-none d-md-table-cell">{t('date')}</Th>
+                                        <Th>{t('actions')}</Th>                                    
+                                    </HeadRow>
+                                </Thead>
+                                <Tbody>
+                                    {this._renderTransactions()}
+                                    {loading && <TablePreloader text={t('loading')} />}
+                                </Tbody>
+                            </Table>
+                            {this.state.invoice && <InvoiceModal isOpen={true} data={this.state.invoice} />}
+                        </Card>
+                    </div>
+                    <div className="col-12 col-sm-5 col-md-4 col-lg-3 p-0">
+                        <Card title={t('similar')} icon="fa fa-download" colorBorder="green" style={{boxShadow: 'none'}}>
+                            <Sidebar data={this.props.storeRecords} />
+                        </Card>
+                    </div>
                 </div>
-                <div className="col-12 col-sm-5 col-md-4 col-lg-3">
-                    <Sidebar data={this.props.storeRecords} title={t('similar')} />
-                </div>
-            </div>
-        </Card>);
+        );
     }    
 }
   

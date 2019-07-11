@@ -24,24 +24,25 @@ class Subscribed extends Component {
     const invoice = invoiceRequest.get('record');    
     return (        
         <div className="col-sm-12 col-md-10 col-lg-9 col-xl-6 m-auto m-auto">
-            <h1 className="text-center my-5 g-metal">{t('youBoughtSubscription')}</h1>                
-            <div className='m-portlet m-portlet--head-solid-bg my-5'>
+            <h1 className="text-center my-5 g-metal">{t('youBoughtSubscription')}</h1>
+            {invoiceRequest.get('loading') && <Loader/>}
+            {invoiceRequest.get('success') && <div className='m-portlet m-portlet--head-solid-bg my-5'>
                 <div className='m-portlet__body'>
-                    {invoiceRequest.get('loading') ? <Loader/> : <InvoiceForm data={invoice} />}                                    
+                    <InvoiceForm data={invoice} />
                 </div>
-            </div>
+            </div>}
         </div>       
     );
   }
 }
 
 Subscribed = connect(
-  (state) => ({
-    invoiceRequest: selectGetInvoiceRequest(state)
-  }),
-  (dispatch) => ({
-    getInvoice: (id) => dispatch(getInvoice(id))    
-  })
+    (state) => ({
+        invoiceRequest: selectGetInvoiceRequest(state)
+    }),
+    (dispatch) => ({
+        getInvoice: (id) => dispatch(getInvoice(id))    
+    })
 )(Subscribed);
 
 export default withRouter(withTranslation('translations')(Subscribed));

@@ -100,7 +100,7 @@ class Students extends Component {
         </HasRole>
         <Td className="actions">
           <NavLink className='link-btn' to={`/reports/students/${record.get('id')}`}>
-            <button className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill mr-2' title={t('viewReport')}>
+            <button className='btn btn-accent m-btn--icon-only mr-2' title={t('viewReport')}>
               <i className='la la-bar-chart'></i>
             </button>
           </NavLink>
@@ -221,7 +221,7 @@ class Students extends Component {
           <div className='m-portlet__body'>
             <div className='mt-3 mb-4'>
               <div className='row'>
-                <div className='col-sm-12 m--align-right'>
+                <div className='col-sm-12 text-right'>
                   <Select
                     className="pull-left table-select"
                     value={perPage}

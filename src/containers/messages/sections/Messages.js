@@ -163,7 +163,7 @@ class Messages extends Component {
                     }
                     <p className='my-2'>
                         {record.isMine &&
-                            <button title={t('edit')} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showEditMessageModal(record) }}>
+                            <button title={t('edit')} className='btn btn-accent m-btn--icon-only' onClick={() => { this._showEditMessageModal(record) }}>
                                 <i className='la la-pencil'></i>
                             </button>        
                         }

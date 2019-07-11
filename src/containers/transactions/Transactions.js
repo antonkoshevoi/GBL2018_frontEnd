@@ -27,9 +27,9 @@ class Transactions extends Component {
         
         return (
             <div className="transactionsList">
-                <Card title={t('transactions')} icon="la la-money">
+                <Card title={t('transactions')} icon="la la-money" colorBorder="darkgreen">
                     <HasRole roles={['Parents']}>
-                        <div className='m-form m-form--label-align-left mb-3'>
+                        <div className='mb-3'>
                             <Tabs                             
                                 value={currentTab} 
                                 onChange={(event, value) => { this._setCurrentTab(value) }}

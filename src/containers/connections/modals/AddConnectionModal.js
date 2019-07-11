@@ -78,7 +78,7 @@ class AddConnectionModal extends Component {
                     <div className='m-auto' id="form-dialog-title">                
                         <div className="m-form">
                         <h5>{t('inviteAlreadyRegisteredUser')}</h5>   
-                            <div className="form-group m-form__group row">
+                            <div className="form-group row">
                                 <label className="col-form-label col-lg-4" htmlFor="username">{t('enterUsernameOrEmail')}</label>
                                 <div className="col-lg-6">
                                     <input
@@ -86,7 +86,7 @@ class AddConnectionModal extends Component {
                                         name="username"
                                         onChange={(e) => { this._handleInputChange(e) }}
                                         value={form.username || ''}
-                                        className="form-control m-input--air form-control-success m-input" />
+                                        className="form-control m-input" />
                                     {inviteErrors && inviteErrors.get('username') && <div className="form-control-feedback text-center error">{inviteErrors.get('username').get(0)}</div>}
                                 </div>
                                 <div className="col-lg-2">
@@ -102,7 +102,7 @@ class AddConnectionModal extends Component {
                         <Divider className="mt-4 mb-4" />
                         <h5>{t('inviteNewUser')}</h5>
                         <div className="m-form mt-4">
-                            <div className="form-group m-form__group row">
+                            <div className="form-group row">
                                 <label className="col-form-label col-lg-4" htmlFor="email">{t('email')} <span className="text-danger">*</span></label>
                                 <div className="col-lg-6">
                                     <input
@@ -110,12 +110,12 @@ class AddConnectionModal extends Component {
                                         name="email"
                                         onChange={(e) => { this._handleInputChange(e)}}
                                         value={form.email || ''}
-                                        className="form-control m-input--air form-control-success m-input"
+                                        className="form-control m-input"
                                         id="email"/>
                                     {createErrors && createErrors.get('email') && <div className="form-control-feedback text-center error">{createErrors.get('email').get(0)}</div>}
                                 </div>
                             </div>
-                            <div className="form-group m-form__group row">
+                            <div className="form-group row">
                                 <label className="col-form-label col-lg-4" htmlFor="firsName">{t('firstName')}</label>
                                 <div className="col-lg-6">
                                     <input
@@ -123,12 +123,12 @@ class AddConnectionModal extends Component {
                                         name="firstName"
                                         onChange={(e) => { this._handleInputChange(e) }}
                                         value={form.firstName || ''}
-                                        className="form-control m-input--air form-control-success m-input"
+                                        className="form-control m-input"
                                         id="firsName"/>
                                     {createErrors && createErrors.get('firstName') && <div className="form-control-feedback text-center error">{createErrors.get('firstName').get(0)}</div>}
                                 </div>
                             </div>
-                            <div className="form-group m-form__group row">
+                            <div className="form-group row">
                                 <label className="col-form-label col-lg-4" htmlFor="lastName">{t('lastName')}</label>
                                 <div className="col-lg-6">
                                     <input
@@ -136,12 +136,12 @@ class AddConnectionModal extends Component {
                                         name="lastName"
                                         onChange={(e) => { this._handleInputChange(e) }}
                                         value={form.lastName || ''}
-                                        className="form-control m-input--air form-control-success m-input"
+                                        className="form-control m-input"
                                         id="lastName"/>
                                     {createErrors && createErrors.get('lastName') && <div className="form-control-feedback text-center error">{createErrors.get('lastName').get(0)}</div>}
                                 </div>
                             </div>
-                            <div className="form-group m-form__group row">
+                            <div className="form-group row">
                                 <div className="col-lg-12">
                                     <div className="text-center mt-4">
                                         <input
