@@ -55,7 +55,8 @@ class SchoolAverageChart extends Component {
     return labels.map(function (item, i) {
       return (
         <div key={i} className="chart-item mb-1">
-          <span className="m-badge m-badge--success" style={{marginRight: '8px', backgroundColor: item.color}}></span>
+          <span className="badge badge-success d-inline-block" style={{marginRight: '8px', backgroundColor: item.color}}>
+              </span>
           <span>{item.value + '%  '}</span>
           <span style={{whiteSpace: 'pre'}}>{item.label}</span>
         </div>

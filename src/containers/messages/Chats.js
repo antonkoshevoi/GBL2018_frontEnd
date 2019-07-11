@@ -97,7 +97,7 @@ class Chats extends Component {
                         <div className='d-inline-block'>
                             <div>
                                 <span className='chat-name'>{record.get('name')}</span>
-                                {record.get('newMessages') > 0 && <span className='m-badge m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
+                                {record.get('newMessages') > 0 && <span className='badge badge-danger p-0 ml-2'>{record.get('newMessages')}</span>}
                             </div>                        
                             <div>{record.get('userName')}</div>
                             {record.get('lastActivity') && <div className="text-muted"><DateTime time={record.get('lastActivity')} /></div>}
@@ -147,7 +147,7 @@ class Chats extends Component {
                         <div className='d-inline-block'>
                             <div>
                                 <span className='chat-name'>{record.get('userName')}</span>
-                                {record.get('newMessages') > 0 && <span className='m-badge m-badge--wide m-badge--danger p-0 ml-2'>{record.get('newMessages')}</span>}
+                                {record.get('newMessages') > 0 && <span className='badge badge-danger p-0 ml-2'>{record.get('newMessages')}</span>}
                             </div>
                             <div>{t(record.get('userRole'))}</div>
                             {record.get('lastActivity') && <div className="text-muted"><DateTime time={record.get('lastActivity')} /></div>}
@@ -172,12 +172,12 @@ class Chats extends Component {
                             <div className="w-100 btn-group btn-group-toggle" data-toggle="buttons">
                                 <button className={`w-50 btn btn-secondary ${type === 'group' ? 'active' : ''}`} onClick={() => this._setType('group')}>
                                     <i className="display-5 fa fa-users"></i> {(type !== 'group' && unreadGroups > 0)  &&
-                                        <span className='m-badge m-badge--wide m-badge--danger p-0 ml-1'>{unreadGroups}</span>
+                                        <span className='badge badge-danger p-0 ml-1'>{unreadGroups}</span>
                                     }
                                 </button>
                                 <button className={`w-50 btn btn-secondary ${type === 'private' ? 'active' : ''}`} onClick={() => this._setType('private')}>
                                     <i className="display-5 fa fa-user"></i> {(type !== 'private' && unreadPrivate > 0) &&
-                                        <span className='m-badge m-badge--wide m-badge--danger p-0 ml-1'>{unreadPrivate}</span>
+                                        <span className='badge badge-danger p-0 ml-1'>{unreadPrivate}</span>
                                     }
                                 </button>   
                             </div>

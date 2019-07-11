@@ -150,15 +150,15 @@ class InvitationsTab extends Component {
     const { t } = this.props;
   
     if(record.get('isAccepted')) {
-      return <span className='m-badge m-badge--success m-badge--wide'>{t('accepted')}</span>;
+      return <span className='badge badge-success'>{t('accepted')}</span>;
     }
     if(record.get('isDeclined')) {
-      return <span className='m-badge m-badge--danger m-badge--wide'>{t('declined')}</span>;
+      return <span className='badge badge-danger'>{t('declined')}</span>;
     }
     if(record.get('isExpired')) {
-      return <span className='m-badge m-badge--warning m-badge--wide'>{t('expired')}</span>;
+      return <span className='badge badge-warning'>{t('expired')}</span>;
     }
-    return <span className='m-badge m-badge--brand m-badge--wide'>{t('pending')}</span>;
+    return <span className='badge badge-info'>{t('pending')}</span>;
   }
 
   /**

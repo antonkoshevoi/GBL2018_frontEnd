@@ -143,13 +143,13 @@ class LessonsTable extends Component {
             <div className="mr-3 ml-3">
                 <h6>{t('status')}</h6>
                 <p className="text-capitalize">
-                    <span className="m-badge m-badge--wide m-badge--metal mr-3"></span> {t('notStarted')}
+                    <span className="badge badge-secondary mr-3"></span> {t('notStarted')}
                 </p>
                 <p className="text-capitalize">
-                    <span className="m-badge m-badge--wide m-badge--warning mr-3"></span> {t('inProgress')} 
+                    <span className="badge badge-warning mr-3"></span> {t('inProgress')} 
                 </p>
                 <p className="text-capitalize m-0">
-                    <span className="m-badge m-badge--wide m-badge--success mr-3"></span> {t('completed')}
+                    <span className="badge badge-success mr-3"></span> {t('completed')}
                 </p>            
             </div>
         </Popover>
@@ -167,10 +167,10 @@ class LessonsTable extends Component {
             <div className="mr-3 ml-3">
                 <h6>{t('perfomance')}</h6>
                 <p className="text-capitalize">
-                    <span className="m-badge m-badge--wide m-badge--success mr-3"></span> {t('pass')}
+                    <span className="badge badge-success mr-3"></span> {t('pass')}
                 </p>
                 <p className="text-capitalize m-0">
-                    <span className="m-badge m-badge--wide m-badge--danger mr-3"></span> {t('fail')} 
+                    <span className="badge badge-danger mr-3"></span> {t('fail')} 
                 </p>            
             </div>
         </Popover>
@@ -193,10 +193,10 @@ class LessonsTable extends Component {
             }
                 
             let completed  = lesson.attempts.filter(item => (!!item.attDate)).length;            
-            let badgeClass = 'm-badge--metal';
+            let badgeClass = 'badge-secondary';
             
             if (completed > 0) {
-                badgeClass = completed === lesson.attempts.length ? 'm-badge--success' : 'm-badge--warning';
+                badgeClass = completed === lesson.attempts.length ? 'badge-success' : 'badge-warning';
             }
             
             return lesson.attempts.map((attempt, attemptIndex) => {
@@ -215,7 +215,7 @@ class LessonsTable extends Component {
                     {attemptIndex === 0 &&
                     <td style={{ maxWidth: 350}} className="text-center" rowSpan={lessonRowSpan}>
                         <p>                        
-                            <span aria-haspopup="true" onMouseEnter={this._handleStatusPopoverOpen} onMouseLeave={this._handleStatusPopoverClose} className={`m-badge m-badge--wide ${badgeClass}`}>
+                            <span aria-haspopup="true" onMouseEnter={this._handleStatusPopoverOpen} onMouseLeave={this._handleStatusPopoverClose} className={`badge ${badgeClass}`}>
                                 <strong>{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</strong>
                             </span>                        
                         </p>

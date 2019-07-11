@@ -11,7 +11,7 @@ class CheckoutLayout extends Component {
                         <div className="container h-100 d-flex align-items-center justify-content-between">
                             <a className="m-nav__link" href={this.props.auth.get('isLoggedIn') ? '/dashboard' : '/'}>
                                 <span className="m-nav__link-icon">
-                                    <i className="fa fa-home m--icon-font-size-lg2"></i>
+                                    <i className="fa fa-home display-7"></i>
                                 </span>
                             </a>                
                             <LanguageSwitcher />                                                

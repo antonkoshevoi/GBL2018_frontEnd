@@ -64,7 +64,7 @@ class Header extends Component {
             </div>
             {(!hideMenu) &&
             <div className="m-stack__item m-stack__item--fluid m-header-head d-flex" id="m_header_nav">
-              <div className="d-flex justify-content-center headerSchoolName align-items-center flex-1 hidden-sm">
+              <div className="d-none d-lg-flex justify-content-center align-items-center flex-1">
                 {isLoggedIn && <h4 className="g-metal"> {user.school ? user.school.schName : ''} </h4>}
               </div>              
               <div id="m_header_topbar" className="m-topbar  m-stack m-stack--ver m-stack--general">

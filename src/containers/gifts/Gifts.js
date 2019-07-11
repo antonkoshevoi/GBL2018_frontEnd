@@ -58,21 +58,21 @@ class Gifts extends Component {
     
     _getStatus(record) {        
         let status = 'pending';
-        let className = 'm-badge--default';
+        let className = 'badge-secondary';
         
         if (record.get('accepted')) {
             status = 'accepted';
-            className = 'm-badge--success';
+            className = 'badge-success';
         }
         if (record.get('declined')) {
             status = 'declined';
-            className = 'm-badge--danger';              
+            className = 'badge-danger';
         }
         if (record.get('waiting')) {
             status = 'waiting';
-            className = 'm-badge--warning';              
+            className = 'badge-warning';
         }        
-        return <span className={`m-badge m-badge--brand m-badge--wide ${className}`}>{this.props.t(status)}</span>;
+        return <span className={`badge ${className}`}>{this.props.t(status)}</span>;
     }
     
     _setCurrentTab(value) {
@@ -103,7 +103,7 @@ class Gifts extends Component {
             return (<Row index={key} key={key}>
                 <Td>
                     {record.get('name')}
-                    {(record.get('quantity') > 1) && <span className="ml-3 m-badge m-badge--brand m-badge--wide"> x {record.get('quantity')}</span>}
+                    {(record.get('quantity') > 1) && <span className="ml-3 badge badge-info"> x {record.get('quantity')}</span>}
                 </Td>
                 <Td>{t(record.get('productType'))}</Td>                
                 <Td>{(currentTab === 'sent') ? record.get('ownerName') : record.get('userName')}</Td>
