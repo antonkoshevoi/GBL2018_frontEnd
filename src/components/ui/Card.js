@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {Avatar} from '@material-ui/core';
 
 class Card extends Component {
 
   render() {
-    const {
-      avatar,
+    const {      
       className,
       title,
       icon,
@@ -18,11 +15,11 @@ class Card extends Component {
       <div style={{marginBottom: 0, height: '100%', display: 'flex', flexDirection: 'column', ...this.props.style}}
            className={(className || '') + ' m-portlet  m-portlet--head-solid-bg'}
       >
-        <div className={`m-portlet__head border-b-${colorBorder}`}>
+        <div className={`m-portlet__head border-b-${colorBorder || 'blue'}`}>
           <div className="m-portlet__head-caption">
             <div className="m-portlet__head-title">
               <span className="m-portlet__head-icon">
-                  {avatar && avatar !== '' ? <Avatar src={avatar}/> : <i className={`${icon} ${iconBackground}`}></i>}
+                  <i className={`${icon} ${iconBackground || ''}`}></i>
               </span>              
               <h3 className="m-portlet__head-text">
                 {title}
@@ -37,18 +34,5 @@ class Card extends Component {
     );
   }
 }
-
-Card.propTypes = {
-  title: PropTypes.string,
-  icon: PropTypes.string,  
-  colorBorder: PropTypes.string
-};
-
-Card.defaultProps = {  
-  colorBorder: 'blue',
-  header: true,
-  transparent: false,
-  iconBackground: ''
-};
 
 export default Card;

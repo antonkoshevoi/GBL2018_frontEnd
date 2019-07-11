@@ -92,7 +92,7 @@ class AttemptsTable extends Component {
                           <Td width='50px'>{attempt.scoredPoints} / {attempt.lessonPoints}</Td>
                           <Td width='50px'>{((attempt.scoredPoints / attempt.lessonPoints) * 100).toFixed(1).replace('.0', '')}</Td>
                           <Td width='50px'>
-                            <span className={`m-badge m-badge--brand m-badge--wide ${attempt.pass ? 'm-badge--success' : 'm-badge--danger'}`}>
+                            <span className={`badge badge-info ${attempt.pass ? 'badge-success' : 'badge-danger'}`}>
                               {attempt.pass ? t('pass') : t('fail')}
                             </span>
                           </Td>                         

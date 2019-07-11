@@ -92,7 +92,7 @@ class Administration extends Component {
         <Td>{record.get('firstName')}</Td>
         <Td>{record.get('lastName')}</Td>
         <Td>{record.get('email')}</Td>
-        <Td><span className='m-badge m-badge--brand m-badge--wide'>{t(record.getIn(['role', 'name']))}</span></Td>
+        <Td><span className='badge badge-info'>{t(record.getIn(['role', 'name']))}</span></Td>
         <HasRole roles={['Superadministrator']}>
         <Td>{record.get('schoolName')}</Td>
         </HasRole>

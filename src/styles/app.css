@@ -74,6 +74,19 @@ textarea {
     padding: 0 !important;
 }
 
+.display-5 {
+  font-size: 2rem !important;
+}
+.display-6 {
+  font-size: 1.5rem !important;
+}
+.display-7 {
+  font-size: 1.6rem !important;
+}
+.display-10 {
+  font-size: 1.25rem !important;
+}
+
 .App {
     text-align: center;
 }
@@ -665,11 +678,6 @@ div.m-stack.m-stack--desktop.m-stack--ver > .m-stack__item.m-stack__item--fluid 
     color: #fff;
 }
 
-.small-card .m-badge {
-    min-height: 15px;
-    min-width: 15px;
-}
-
 .popperDropMenu {
     z-index: 55;
 }
@@ -1111,7 +1119,7 @@ td.rotate div span {
 .chat-types button {
     border-radius: 0;
 }
-.chat-types .m-badge {
+.chat-types .badge {
     margin-top: -10px !important;
 }
 .search-chats {

@@ -85,21 +85,21 @@ class Connections extends Component {
     
     _getStatus(record) {        
         let status = 'pending';
-        let className = 'm-badge--default';
+        let className = 'badge-secondary';
         
         if (record.get('accepted')) {
             status = 'accepted';
-            className = 'm-badge--success';
+            className = 'badge-success';
         }
         if (record.get('declined')) {
             status = 'declined';
-            className = 'm-badge--danger';              
+            className = 'badge-danger';              
         }
         if (record.get('waiting')) {
             status = 'waiting';
-            className = 'm-badge--warning';              
+            className = 'badge-warning';              
         }        
-        return <span className={`m-badge m-badge--brand m-badge--wide ${className}`}>{this.props.t(status)}</span>;
+        return <span className={`badge ${className}`}>{this.props.t(status)}</span>;
     }
 
     _renderRecords() {

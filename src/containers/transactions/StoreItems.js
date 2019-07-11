@@ -69,7 +69,7 @@ class StoreItems extends Component {
         }
 
         return records.map((item, i) => {
-            let badgeClass = item.get('status') !== 'due' ? item.get('status') === 'paid' ? 'm-badge--info' : 'm-badge--danger' : '';
+            let badgeClass = item.get('status') !== 'due' ? item.get('status') === 'paid' ? 'badge-info' : 'badge-danger' : 'badge-secondary';
             return ([
                 <Row index={i} key={i}>
                     <Td className="d-none d-md-table-cell">{this._recordNumber(i)}</Td> 
@@ -112,7 +112,7 @@ class StoreItems extends Component {
                         </IconButton>                        
                     </Td>                    
                     <Td className="d-none d-md-table-cell">{t(item.get('paymentType'))}</Td>
-                    <Td className="d-none d-md-table-cell"><span className={`m-badge m-badge--wide ${badgeClass}`}>{t(item.get('status'))}</span></Td>
+                    <Td className="d-none d-md-table-cell"><span className={`badge ${badgeClass}`}>{t(item.get('status'))}</span></Td>
                     <Td className="d-none d-md-table-cell"><Price price={item.get('total')} currency={item.get('currency')} /></Td>
                     <Td className="d-none d-md-table-cell"><DateTime time={item.get('createdAt')} /></Td>
                 </Row>,

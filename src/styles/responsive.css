@@ -65,14 +65,6 @@
         top: 0 !important;
     }
 
-    .headerSchoolName {
-        display: none !important;
-    }
-
-    .m-brand__logo-wrapper {
-        width: 150px;
-    }
-
     .mobile-sidebar-toggle {
         display: block !important;
     }
@@ -110,21 +102,7 @@
     div.m-widget1 .m-widget1__item .m-widget1__number {
         font-size: 1.3rem;
     }
-
-    #g-widgets .small-card > div > div:first-child {
-        flex-basis: 30%;
-    }
-
-    .top-header.m-container.m-container--full-height {
-        display: block;
-        height: 35px;
-    }
-
-    .top-header .m-brand__logo-wrapper {
-        width: 150px;
-        display: inline-block;
-    }
-
+    
     .general-header {
         background: #fff;
     }

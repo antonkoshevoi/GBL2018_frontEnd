@@ -45,7 +45,7 @@ class SubscriptionPayments extends Component {
                         </div>
                         <div className="row mb-1">
                             <div className="col-5"><span className="text-muted">{t('type')}:</span></div>
-                            <div className="col-7"><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('type'))}</span></div>
+                            <div className="col-7"><span className='badge badge-info'>{t(record.get('type'))}</span></div>
                         </div>
                         <div className="row mb-1">
                             <div className="col-5"><span className="text-muted">{t('transactionCode')}:</span></div>
@@ -75,7 +75,7 @@ class SubscriptionPayments extends Component {
                     <div className="d-none d-md-block">{this._recordNumber(key)}</div>
                 </Td>
                 <Td className="d-none d-md-table-cell"><a className="g-blue" href={record.get('invoiceUrl')}>{record.get('number')}</a></Td>
-                <Td className="d-none d-md-table-cell"><span className='m-badge m-badge--brand m-badge--wide'>{t(record.get('type'))}</span></Td>                
+                <Td className="d-none d-md-table-cell"><span className='badge badge-info'>{t(record.get('type'))}</span></Td>                
                 <Td className="d-none d-md-table-cell">{record.get('transactionCode')}</Td>
                 <Td className="d-none d-md-table-cell">{t(record.get('subscription'))} {t('subscription')}</Td>        
                 <Td className="d-none d-md-table-cell">{t(record.get('period'))}</Td>

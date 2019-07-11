@@ -56,17 +56,17 @@ class StudentParents extends Component {
     
     _getStatus(record) {        
         let status = 'pending';
-        let className = 'm-badge--default';
+        let className = 'badge-secondary';
         
         if (record.get('accepted')) {
             status = 'accepted';
-            className = 'm-badge--success';
+            className = 'badge-success';
         }
         if (record.get('declined')) {
             status = 'declined';
-            className = 'm-badge--danger';              
+            className = 'badge-danger';              
         }
-        return <span className={`m-badge m-badge--brand m-badge--wide ${className}`}>{this.props.t(status)}</span>;
+        return <span className={`badge ${className}`}>{this.props.t(status)}</span>;
     }
 
     _renderRecords() {

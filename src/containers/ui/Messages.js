@@ -44,10 +44,10 @@ class Messages extends Component {
             <h6 className='my-0'>{t(item.get('type'))}
                 {item.get('count') ?
                     <NavLink className='ml-2' to={`/messages/${item.get('type')}`} onClick={() => {this.props.switchMenu(null)}}>
-                        <span className='m-badge m-badge--brand m-badge--wide'>{item.get('count')}</span>
+                        <span className='badge badge-info'>{item.get('count')}</span>
                     </NavLink>
                 : 
-                    <span className='ml-2 m-badge m-badge--wide m-badge--metal'>0</span>
+                    <span className='ml-2 badge badge-secondary'>0</span>
                 }
             </h6>
             <div className='my-3 m-separator'></div>

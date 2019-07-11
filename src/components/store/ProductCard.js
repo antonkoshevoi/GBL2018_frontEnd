@@ -32,7 +32,7 @@ class ProductCard extends Component {
               {product.get('description')}
             </Typography>
             }
-            <div className="cardActions mt-3">
+            <div className="cardActions">
               <div className="productPrice">
                   {product.get('discount') > 0 && <span className="discount"><span><Price price={product.get('price')} currency={product.get('currency')} /></span></span> }
                   <br/>

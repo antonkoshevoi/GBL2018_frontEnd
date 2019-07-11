@@ -149,8 +149,10 @@ button .discount > span {
     display: inline-block;
     vertical-align: top;
 }
-
-.horizontalCardItem {
+.horizontalCardItem > div {
+    min-height: 150px;    
+}
+.horizontalCardItem > div {
     position: relative;
 }
 
@@ -162,14 +164,15 @@ button .discount > span {
     padding-bottom: 0 !important;
     position: absolute;
     height: 100%;
-    padding: 10px;
+    padding: 3%;
 }
 
 .horizontalCardItem .cardActions{
-    bottom: 10px;
-    width: 88%;
+    bottom: 0;
+    width: 94%;
     position: absolute;
-    margin-bottom: 10px;
+    padding: 18px 0 8px 0;
+    background-color: #fff;
 }
 
 .verticalCardItem .cardContent {
@@ -179,6 +182,7 @@ button .discount > span {
 .horizontalCardItem .cardDesc {
     white-space: normal;
     margin-top: 5px;
+    max-height: 50%;
 }
 
 .sidebarTitle {

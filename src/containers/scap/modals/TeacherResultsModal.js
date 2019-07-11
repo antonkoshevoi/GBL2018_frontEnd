@@ -83,7 +83,7 @@ class TeacherResultsModal extends Component {
                 <Td>{this._recordNumber(key)}</Td>
                 <Td>{record.get('homeroom')}</Td>
                 <Td>{record.get('student')}</Td>
-                <Td><span className={`m-badge m-badge--wide ${(record.get('status') === 'completed' ? 'm-badge--success' : 'm-badge--brand')}`}>{t(record.get('status'))}</span></Td>
+                <Td><span className={`badge ${(record.get('status') === 'completed' ? 'badge-success' : 'badge-info')}`}>{t(record.get('status'))}</span></Td>
                 <Td><Date time={record.get('createdAt')} /></Td>
                 <Td className="actions">
                     {record.get('status') !== 'completed' &&

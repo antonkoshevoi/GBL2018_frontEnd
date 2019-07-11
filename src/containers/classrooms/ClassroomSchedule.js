@@ -83,7 +83,7 @@ class ClassroomSchedule extends Component {
                         <div><span><b>{t('unit')} {unitIndex + 1}</b> {unit.unitName}</span></div>
                     </td>}
                     <td width='350px'>
-                        <p className="text-center"><span className="m-badge m-badge--brand m-badge--wide">{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</span> </p>                        
+                        <p className="text-center"><span className="badge badge-info">{t('unit')} {unitIndex + 1}, {t('lesson')} {lessonIndex + 1}</span> </p>                        
                         <p className="text-center"><span>{lesson.lessonName}</span></p>
                     </td>
                     <td width='450px'><p className="text-center">{lesson.lessonDescription}</p></td>
