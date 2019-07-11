@@ -30,7 +30,7 @@ class Downloads extends Component {
         this.props.getStoreRecords({
             perPage: 10, 
             orderBy: 'rand',
-            filter: {category: 1}
+            filter: {similarDownloads: true}
         });
                 
         if (SessionStorage.get('lastInvoiceNo')) {
