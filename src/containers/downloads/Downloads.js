@@ -95,8 +95,8 @@ class Downloads extends Component {
         const loading = recordsRequest.get('loading');        
         
         return (
-                <div className="row">
-                    <div className="col-12 col-sm-7 col-md-8 col-lg-9">                
+                <div className="row m-0">
+                    <div className="col-12 col-sm-7 col-md-8 col-lg-9 p-0">                
                         <Card title={t('myDownloads')} icon="fa fa-download" colorBorder="violet">
                             <Table>
                                 <Thead>
@@ -116,8 +116,8 @@ class Downloads extends Component {
                             {this.state.invoice && <InvoiceModal isOpen={true} data={this.state.invoice} />}
                         </Card>
                     </div>
-                    <div className="col-12 col-sm-5 col-md-4 col-lg-3">
-                        <Card title={t('similar')} icon="fa fa-download" colorBorder="green">
+                    <div className="col-12 col-sm-5 col-md-4 col-lg-3 p-0">
+                        <Card title={t('similar')} icon="fa fa-download" colorBorder="green" style={{boxShadow: 'none'}}>
                             <Sidebar data={this.props.storeRecords} />
                         </Card>
                     </div>
