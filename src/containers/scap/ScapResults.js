@@ -81,7 +81,7 @@ class ScapResults extends Component {
                 <Td>{record.get('student')}</Td>
                 <Td><Date time={record.get('createdAt')} /></Td>
                 <Td>
-                    <button title={t('showDetails')} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showResultsModal(record) }} id={record.get('id')} >
+                    <button title={t('showDetails')} className='btn btn-accent m-btn--icon-only' onClick={() => { this._showResultsModal(record) }} id={record.get('id')} >
                         <i className='la la-search'></i>
                     </button>                                
                 </Td>
@@ -121,7 +121,7 @@ class ScapResults extends Component {
                     <div className='m-portlet__body'>
                         <div className='mt-3 mb-4'>
                             <div className='row'>               
-                                <div className='col-sm-12 m--align-right'>
+                                <div className='col-sm-12 text-right'>
                                     <Select
                                         className="pull-left table-select"
                                         value={perPage}

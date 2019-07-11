@@ -204,7 +204,7 @@ class Checkout extends Component {
                     <span className="invoice-title">{t('yourCartIsEmpty')}</span>
                 </p>
                 <p className="text-center m-5">
-                    <NavLink to="/store" className="btn m-btm btn-primary m-5">{t('continueShopping')}</NavLink>
+                    <NavLink to="/store" className="btn m-btm btn-info m-5">{t('continueShopping')}</NavLink>
                 </p>
             </div>
         }

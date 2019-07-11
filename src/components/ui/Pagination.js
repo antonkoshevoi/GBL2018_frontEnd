@@ -24,26 +24,26 @@ const Pagination = ({ page, totalPages, onPageSelect, dockLength }) => {
       <Button key={i}        
         variant="contained"
         onClick={() => onPageSelect(k) }
-        className={`m-btn btn  btn-info  m-btn--air radius-0 ${(page === k ? ' active' : ' ')}`}>{i}
+        className={`btn  btn-info rounded-0 ${(page === k ? ' active' : ' ')}`}>{i}
       </Button>
     );
     i++;
   }
 
   return (
-    <div className="m-btn-group m-btn-group--pill m-btn-group--air btn-group m-btn-group m-btn-group--pill btn-group-sm paggination-group">
+    <div className="btn-group btn-group-sm paggination-group">
       { showPrev &&
         <Button variant="contained"
           color='default'
           onClick={() => onPageSelect(1) }
-          className='m-btn btn btn-metal m-btn--air'><i className="la la-angle-double-left"></i>
+          className='btn btn-light'><i className="la la-angle-double-left"></i>
         </Button>
       }
       { showPrev &&
         <Button variant="contained"
           color='default'
           onClick={() => onPageSelect(page - 1) }
-          className='m-btn btn  btn-metal m-btn--air'><i className="la la-angle-left"></i>
+          className='btn btn-light'><i className="la la-angle-left"></i>
         </Button>
       }
       { pages }
@@ -51,14 +51,14 @@ const Pagination = ({ page, totalPages, onPageSelect, dockLength }) => {
         <Button variant="contained"
           color='default'
           onClick={() => onPageSelect(page + 1) }
-          className='m-btn btn  btn-metal m-btn--air'><i className="la la-angle-right"></i>
+          className='btn  btn-light'><i className="la la-angle-right"></i>
         </Button>
       }
       { showNext &&
         <Button variant="contained"
           color='default'
           onClick={() => onPageSelect(totalPages) }
-          className='m-btn btn btn-metal m-btn--air'><i className="la la-angle-double-right"></i>
+          className='btn btn-light'><i className="la la-angle-double-right"></i>
         </Button>
       }
     </div>

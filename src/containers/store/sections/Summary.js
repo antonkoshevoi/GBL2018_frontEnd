@@ -25,7 +25,7 @@ class Summary extends Component {
                     <strong className="text-nowrap d-block">
                         {(item.totalPrice > 0) ? <Price price={item.totalPrice} currency={item.currency} /> : <span className="text-success">{t('freeProduct')}</span>}
                     </strong>
-                    {(item.affiliateDiscount > 0) && <span className="text-nowrap m--font-success d-block">- <Price price={item.affiliateDiscount} currency={item.currency} /></span>}
+                    {(item.affiliateDiscount > 0) && <span className="text-nowrap text-success d-block">- <Price price={item.affiliateDiscount} currency={item.currency} /></span>}
                 </div>
             </div>
         ));
@@ -59,7 +59,7 @@ class Summary extends Component {
                             <strong>{t('promocode')}</strong>
                         </div>
                         <div className="col-4 text-right">
-                            <strong className="text-nowrap m--font-success">{data.discountCode}</strong>
+                            <strong className="text-nowrap text-success">{data.discountCode}</strong>
                         </div>
                     </div>}
                     {!data.isFree && 
@@ -68,7 +68,7 @@ class Summary extends Component {
                             <strong>{t('discount')}</strong>
                         </div>
                         <div className="col-4 text-right">
-                            <strong className="text-nowrap {(data.discountAmount > 0) && 'm--font-success'}"><Price price={data.discountAmount} currency={data.currency} /></strong>
+                            <strong className="text-nowrap {(data.discountAmount > 0) && 'text-success'}"><Price price={data.discountAmount} currency={data.currency} /></strong>
                         </div>
                     </div>}                    
                     <div className="row my-2">

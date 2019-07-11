@@ -87,12 +87,12 @@ class TeacherResultsModal extends Component {
                 <Td><Date time={record.get('createdAt')} /></Td>
                 <Td className="actions">
                     {record.get('status') !== 'completed' &&
-                        <button title={t('edit')} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { goTo(`scap/edit-answers/${record.get('id')}`) }}>
+                        <button title={t('edit')} className='btn btn-accent m-btn--icon-only' onClick={() => { goTo(`scap/edit-answers/${record.get('id')}`) }}>
                             <i className='la la-pencil'></i>
                         </button>                               
                     }
                     {record.get('status') === 'completed' &&
-                        <button title={t('showDetails')} className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showResultsModal(record) }}>
+                        <button title={t('showDetails')} className='btn btn-accent m-btn--icon-only' onClick={() => { this._showResultsModal(record) }}>
                             <i className='la la-search'></i>
                         </button>                               
                     }                            

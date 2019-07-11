@@ -178,30 +178,30 @@ class SignUpParent extends Component {
                             <ThirdStepForm form={form}/>
                           ][activeStep]}                                                    
                           {activeStep < 2 && <Divider className='mt-4'/>}                       
-                          <div className='pt-4 text-center'>
+                          <div className='my-4 text-center'>
                           {[
-                            <button type='submit' disabled={loading} className='m-btn m-btn--air m-2 btn btn-info text-uppercase'>
+                            <button type='submit' disabled={loading} className='m-btn--air m-2 btn btn-info text-uppercase'>
                                 {t('next')}
                             </button>,                          
                             <div>
-                                <button type='button' onClick={() => { this._back(); }} className='m-btn m-btn--air m-2 btn btn-default text-uppercase'>
+                                <button type='button' onClick={() => { this._back(); }} className='m-btn--air m-2 btn btn-default text-uppercase'>
                                     {t('back')}
                                 </button>
-                                <button type='button' onClick={() => { this._skip(); }} disabled={loading} className='m-btn m-btn--air m-2 btn btn-info text-uppercase'>
+                                <button type='button' onClick={() => { this._skip(); }} disabled={loading} className='m-btn--air m-2 btn btn-info text-uppercase'>
                                     {t('skip')}
                                 </button>
-                                <button type='submit' disabled={loading} className='m-btn m-btn--air m-2 btn btn-info text-uppercase'>
+                                <button type='submit' disabled={loading} className='m-btn--air m-2 btn btn-info text-uppercase'>
                                     {t('next')}
                                 </button>
                             </div>,
-                            <div>
+                            <div >
                                 <p className="display-10"><strong>{t('signUpCompletedMessage')}</strong></p>            
-                                <button type='submit' className='m-btn m-btn--air m-2 btn btn-info text-uppercase'>{t('goToDashboard')}</button>
+                                <button type='submit' className='m-btn--air m-2 btn btn-info text-uppercase'>{t('goToDashboard')}</button>
                             </div>
                           ][activeStep]}                            
                           </div>                        
                           {activeStep < 2 &&
-                          <div className='alert m-alert m-alert--default mt-4'>
+                          <div className='alert alert-secondary'>
                             <p className='text-center m-0'>
                               <Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans>                            
                             </p>                              

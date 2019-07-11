@@ -1,5 +1,5 @@
 
-const myThemeColors = ['success','warning','danger','primary','info','brand']
+const myThemeColors = ['success','warning','danger','primary','info', 'muted', 'dark']
 
 
 export function randColorName() {

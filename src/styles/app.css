@@ -69,14 +69,6 @@ textarea {
 .content-wrapper {
     margin-bottom: 30px;
 }
-.btn-outline-metal.btn-white {
-    color: #fff;
-    border-color: #fff;
-}
-
-.btn-outline-metal.btn-white:hover {
-    background-color: #0a8cf0;
-}
 
 .m-body .m-content {
     padding: 0 !important;
@@ -95,7 +87,7 @@ textarea {
 }
 
 .border-b-green {
-    border-bottom: #558436 solid 2px !important;
+    border-bottom: #7BC848 solid 2px !important;
 }
 
 .border-b-red {
@@ -242,16 +234,16 @@ a.link-btn {
     text-decoration: none !important;
 }
 
-.my-timeline.m-timeline-2 .m-timeline-2__items .m-timeline-2__item .m-timeline-2__item-cricle {
+.my-timeline.m-timeline .m-timeline__items .m-timeline__item .m-timeline__item-cricle {
     left: 1.44rem;
 }
 
-.m-timeline-2.my-timeline {
+.m-timeline.my-timeline {
     overflow: hidden;
     position: relative;
 }
 
-.m-timeline-2.my-timeline:before {
+.m-timeline.my-timeline:before {
     left: 2.25rem;
 }
 
@@ -338,7 +330,7 @@ table th .sort-arrow {
     color: #555;
 }
 
-.m-btn.btn.btn-info {
+.btn.btn-info {
     background-color: #36a3f7;
     border-color: #36a3f7;
 }
@@ -849,7 +841,7 @@ div#notFoundPage {
     box-shadow: 0 6px 18px #0000006e;
 }
 
-.MainModal .m-form .m-form__group {
+.MainModal .m-form .form-group {
     padding-top: 5px;
     padding-bottom: 5px;
 }
@@ -1280,34 +1272,6 @@ td.rotate div span {
 .promocode-block span {
     cursor: pointer;
 }
-
-@media (min-width: 1240px) {
-    .m--visible-desktop-lg {
-        display: block !important; }
-    .m--visible-desktop-lg-inline-block {
-        display: inline-block !important; }
-    .m--visible-desktop-lg-inline {
-        display: inline !important; }
-    .m--visible-desktop-lg-table {
-        display: table !important; }
-    .m--visible-desktop-lg-table-cell {
-        display: table-cell !important; }
-    .m--hidden-desktop-lg {
-        display: none !important; } }
-
-@media (min-width: 1440px) {
-    .m--visible-desktop-xl {
-        display: block !important; }
-    .m--visible-desktop-xl-inline-block {
-        display: inline-block !important; }
-    .m--visible-desktop-xl-inline {
-        display: inline !important; }
-    .m--visible-desktop-xl-table {
-        display: table !important; }
-    .m--visible-desktop-xl-table-cell {
-        display: table-cell !important; }
-    .m--hidden-desktop-xl {
-        display: none !important; } }
 
 @media (max-width: 1440px) {   
     .table thead tr.active th {

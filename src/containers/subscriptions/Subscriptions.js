@@ -142,9 +142,9 @@ class Subscriptions extends Component {
             <h1 className="text-center mt-5 g-metal">{t('subscriptions')}</h1>
             <div className='m-portlet m-portlet--head-solid-bg my-5'>
                 <div className='m-portlet__body'>
-                    <div className='m-form m-form--label-align-right mx-5 my-4'>
+                    <div className='mx-5 my-4'>
                         <h2 className='mb-3'>{t('creditCard')}</h2>                    
-                        <div className='align-items-center'>                                                                                
+                        <div>                                                                                
                             {this._getSelectedPlan()}
 
                             <div className="d-flex justify-content-around mb-3">

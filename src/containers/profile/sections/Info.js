@@ -120,10 +120,10 @@ class Info extends Component {
                 <img className="rounded-circle img-thumbnail" src={user.avatar} alt=""/>
               </div>
               <div className="text-center">
-                {changeImageRequest.get('loading') ? (<CircularProgress color="primary"/>) : (<button className="m-btn btn btn-info mb-3" onClick={()=>{this._openUploadModal()}}>{t('uploadAvatar')}</button>)}
+                {changeImageRequest.get('loading') ? (<CircularProgress color="primary"/>) : (<button className="btn btn-info mb-3" onClick={()=>{this._openUploadModal()}}>{t('uploadAvatar')}</button>)}
                 <HasRole roles={['Superadministrator','School','Teacher','Parents']}>
                 <Divider className="mt-3 mb-4" />
-                <button onClick={() => { this._openPasswordModal(true) }} className="m-btn btn btn-success mb-3">{t('changePassword')}</button>
+                <button onClick={() => { this._openPasswordModal(true) }} className="btn btn-success mb-3">{t('changePassword')}</button>
                 </HasRole>
               </div>
             </div>
@@ -140,41 +140,41 @@ class Info extends Component {
             >
             <Card title={t('changePassword')} icon="fa fa-exclamation-triangle" style={{minWidth:'280px'}}>               
                 <div style={{minWidth: 250}} className="mt-4">
-                  <div className="form-group m-form__group">
+                  <div className="form-group">
                     <input
                       type="password"
                       placeholder={t('enterOldPassword')}
                       name="oldPassword"
                       onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'oldPassword')}}
                       value={passwordFields.oldPassword || ''}
-                      className="form-control  m-input--air form-control-danger m-input" />
+                      className="form-control  m-input" />
                     {errors && errors.get('oldPassword') && <div className="form-control-feedback text-center error">{errors.get('oldPassword').get(0)}</div>}
                   </div>
-                  <div className="form-group m-form__group">
+                  <div className="form-group">
                     <input
                       type="password"
                       placeholder={t('enterNewPassword')}
                       name="newPassword"
                       onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword')}}
                       value={passwordFields.newPassword || ''}
-                      className="form-control  m-input--air form-control-danger m-input" />
+                      className="form-control m-input" />
                     {errors && errors.get('newPassword') && <div className="form-control-feedback text-center error">{errors.get('newPassword').get(0)}</div>}
                   </div>
-                  <div className="form-group m-form__group has-danger">
+                  <div className="form-group">
                     <input
                       type="password"
                       placeholder={t('confirmPassword')}
                       name="newPassword_confirmation"
                       onChange={(e) => {this._handlePasswordFieldChange(e.target.value, 'newPassword_confirmation')}}
                       value={passwordFields.newPassword_confirmation || ''}
-                      className="form-control  m-input--air form-control-danger m-input" />
+                      className="form-control m-input" />
                     {errors && errors.get('newPassword_confirmation') && <div className="form-control-feedback text-center error">{errors.get('newPassword_confirmation').get(0)}</div>}
                   </div>
                   <div className="form-group text-right mt-4">
-                    <button onClick={(e) => { this._changePassword(e) }} className="m-btn btn btn-success mr-3 ">
+                    <button onClick={(e) => { this._changePassword(e) }} className="btn btn-success mr-3" disabled={changePasswordRequest.get('loading')}>
                         {t('change')}
                     </button>
-                    <button onClick={() => {this._closePasswordModal()}} className="m-btn btn btn-default">
+                    <button onClick={() => {this._closePasswordModal()}} className="btn btn-default">
                         {t('cancel')}
                     </button>
                   </div>

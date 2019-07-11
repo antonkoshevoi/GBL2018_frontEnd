@@ -120,7 +120,7 @@ class ParentDashboard extends Component {
               <div key={i} className={classes.profileBlock} >
                 <div className={classes.btnGroup}>
                   <div className="form-group-inline">
-                    <button title={t('reports')} onClick={() => { goTo(`/reports/students/${student.id}`) }} className='btn btn-info m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--pill'>
+                    <button title={t('reports')} onClick={() => { goTo(`/reports/students/${student.id}`) }} className='btn btn-info m-btn--icon-only ml-2'>
                         <i className='la la-search'></i>
                     </button>
                     <DeleteButton 
@@ -128,7 +128,7 @@ class ParentDashboard extends Component {
                         btnName={t('delete')}
                         title={t('deleteLearnerConfirmation')}
                         icon="la la-close"
-                        className="btn btn-danger m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--pill"
+                        className="btn btn-danger m-btn--icon-only ml-2"
                     />
                   </div>
                 </div>
@@ -172,10 +172,10 @@ class ParentDashboard extends Component {
             <div key={i} className={classes.profileBlock} style={{background: '#D3A9A9'}}>
               <div className={classes.btnGroup}>
                 <div className="form-group-inline">
-                    <button title={t('accept')} disabled={loading} onClick={() => { this._acceptRequest(request.id) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--pill'>
+                    <button title={t('accept')} disabled={loading} onClick={() => { this._acceptRequest(request.id) }} className='btn btn-success m-btn--icon-only ml-2'>
                         <i className='la la-check'></i>
                     </button> 
-                    <button title={t('decline')} disabled={loading} onClick={() => { this._declineRequest(request.id) }} className='btn btn-danger m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--pill'>
+                    <button title={t('decline')} disabled={loading} onClick={() => { this._declineRequest(request.id) }} className='btn btn-danger m-btn--icon-only ml-2'>
                         <i className='la la-close'></i>
                     </button>
                 </div>
@@ -200,7 +200,7 @@ class ParentDashboard extends Component {
             <div className="row">
               <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <div className='block-header border-b-blue'>                                                      
-                    <button title={t('add')} onClick={() => { this._openCreateDialog(); }} className="btn m-btn m-btn--icon m-btn--icon-only pull-right bg-transparent mr-3">
+                    <button title={t('add')} onClick={() => { this._openCreateDialog(); }} className="btn m-btn--icon-only pull-right bg-transparent mr-3">
                       <i className="display-5 fa fa-plus-circle"></i>
                     </button> 
                     <h3 className='m-portlet__head-text'>{t('myLearners')}</h3>

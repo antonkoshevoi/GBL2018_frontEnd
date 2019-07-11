@@ -10,7 +10,7 @@ const Sidebar = (props) => {
     
     return (
         <div className="mb-5">
-            <h3 className="sidebarTitle px-1">{title}</h3>
+            {title && <h3 className="sidebarTitle px-1">{title}</h3>}
             <div>
             {data.map(function (item, i) {
                 return <ProductCard key={i} data={item} type="horizontal"/>

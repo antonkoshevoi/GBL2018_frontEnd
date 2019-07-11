@@ -114,7 +114,7 @@ class Gifts extends Component {
                         <div>{record.get('accepted') ? <span className="ml-3">-</span> : <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._delete(record.get('id')) }} />}</div>
                     }
                     {(currentTab === 'received') && <div> 
-                        {record.get('waiting') && <button title={t('accept')} onClick={() => { this._accept(record.get('id')) }} className='btn btn-success m-btn m-btn--icon m-btn--icon-only ml-2 m-btn--custom m-btn--pill'>
+                        {record.get('waiting') && <button title={t('accept')} onClick={() => { this._accept(record.get('id')) }} className='btn btn-success m-btn--icon-only ml-2'>
                             <i className='la la-check'></i>
                         </button>}
                         {!record.get('declined') && <DeleteButton btnName={t('delete')} title={t('areYouSureWantToDeclineThisGift')} onClick={() => { this._decline(record.get('id')) }} />}
@@ -161,7 +161,7 @@ class Gifts extends Component {
                         </div>
                     </div>
                     <div className='m-portlet__body'>
-                        <div className='m-form m-form--label-align-left mb-3'>
+                        <div className='mb-3'>
                             <Tabs                             
                                 value={currentTab} 
                                 onChange={(event, value) => { this._setCurrentTab(value) }}

@@ -124,7 +124,7 @@ class MySubscriptions extends Component {
 
     _renderStatus(subscription) {
         const {t} = this.props;
-        const buttonClasses = 'btn m-btn m-btn--icon m-btn--icon-only m-btn--pill ml-2';
+        const buttonClasses = 'btn m-btn--icon-only ml-2';
         const date = renderToString(<Date time={subscription.expiredAt} />);
         
         if (subscription.status === 1) {            
@@ -188,7 +188,7 @@ class MySubscriptions extends Component {
                     <Td>{item.allowedCourses} x {item.allowedStudents}</Td>
                     <Td>
                         <span className="mr-3">{item.assignedCourses}</span>
-                        { (item.assignedCourses > 0 && isOwner) && <button title={t('assignedStudents')} className='btn btn-info m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={ ()=> {this._showStudentsModal(item) }}>
+                        { (item.assignedCourses > 0 && isOwner) && <button title={t('assignedStudents')} className='btn btn-info m-btn--icon-only' onClick={ ()=> {this._showStudentsModal(item) }}>
                             <i className="la la-search"></i>
                         </button> }                                               
                     </Td>
@@ -202,11 +202,11 @@ class MySubscriptions extends Component {
                     <Td className='actions'>                        
                         <div>
                             {(!item.assignedCourses && isMine) && 
-                            <button title={t('giftSubscription')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-2' onClick={() => { this._showGiftModal(item) }} >
+                            <button title={t('giftSubscription')} className='btn btn-warning m-btn--icon-only ml-2' onClick={() => { this._showGiftModal(item) }} >
                               <i className='la la-gift'></i>
                             </button>}                    
                             {(canAssign && isOwner) && 
-                            <button title={t('assignStudent')} className='btn btn-warning m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill ml-2' onClick={() => { this._showAssignModal(item) }} >
+                            <button title={t('assignStudent')} className='btn btn-warning m-btn--icon-only ml-2' onClick={() => { this._showAssignModal(item) }} >
                               <i className='la la-user-plus'></i>
                             </button>}
                             {(!item.isGift && !item.isMobile && item.status === 1) && <DeleteButton btnName={t('delete')} title={t('areYouSureWantToCancelSubscription')} onClick={() => { this._cancelSubscription(item.id) }}/>}

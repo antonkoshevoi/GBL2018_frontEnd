@@ -99,7 +99,7 @@ class CreateAccount extends Component {
                       <div className='col-lg-7 col-md-6 col-sm-12 m-auto mt-5'>          
                           <legend className='mb-3'>{t('required')}</legend>
                           <div className='m-form__section'>
-                            <div className="form-group m-form__group row">
+                            <div className="form-group row">
                               <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('email')} </label>
                               <div className="col-lg-8 col-md-12 col-sm-12">
                                 <input
@@ -107,7 +107,7 @@ class CreateAccount extends Component {
                                   name='email'
                                   readOnly={true}
                                   type='email'
-                                  className='form-control m-input m-input--air '
+                                  className='form-control m-input'
                                   placeholder=''/>
                                 <div className='form-control-feedback'>
                                   {errors && errors.get('email') &&
@@ -115,7 +115,7 @@ class CreateAccount extends Component {
                                 </div>
                               </div>
                             </div>
-                            <div className="form-group m-form__group row">
+                            <div className="form-group row">
                               <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('password')} </label>
                               <div className="col-lg-8 col-md-12 col-sm-12">
                                 <input
@@ -123,7 +123,7 @@ class CreateAccount extends Component {
                                   name='password'
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type='password'
-                                  className='form-control m-input m-input--air '
+                                  className='form-control m-input'
                                   placeholder=''/>
                                 <div className='form-control-feedback'>
                                   {errors && errors.get('password') &&
@@ -135,7 +135,7 @@ class CreateAccount extends Component {
                           <legend className='mb-3 mt-3'>{t('optional')}</legend>
 
                           <div className='m-form__section'>
-                            <div className="form-group m-form__group row">
+                            <div className="form-group row">
                               <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('firstName')}</label>
                               <div className="col-lg-8 col-md-12 col-sm-12">
                                 <input
@@ -143,7 +143,7 @@ class CreateAccount extends Component {
                                   name='firstName'
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type='text'
-                                  className='form-control m-input m-input--air '
+                                  className='form-control m-input'
                                   placeholder=''/>
                                 <div className='form-control-feedback'>
                                   {errors && errors.get('firstName') &&
@@ -151,7 +151,7 @@ class CreateAccount extends Component {
                                 </div>
                               </div>
                             </div>
-                            <div className="form-group m-form__group row">
+                            <div className="form-group row">
                               <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('lastName')} </label>
                               <div className="col-lg-8 col-md-12 col-sm-12">
                                 <input
@@ -159,7 +159,7 @@ class CreateAccount extends Component {
                                   name='lastName'
                                   onChange={(e) => { this._handleInputChange(e) }}
                                   type='text'
-                                  className='form-control m-input m-input--air '
+                                  className='form-control m-input'
                                   placeholder=''/>
                                 <div className='form-control-feedback'>
                                   {errors && errors.get('lastName') &&
@@ -173,12 +173,12 @@ class CreateAccount extends Component {
                 <Divider className='mt-4'/>
                 <div className='row'>
                   <div className='col-sm-12 pt-4 text-center'>
-                    <button onClick={() => { this._createAccount() }} disabled={loading} className='m-btn m-btn--air m-2 btn btn-info text-uppercase'>
+                    <button onClick={() => { this._createAccount() }} disabled={loading} className='m-btn--air m-2 btn btn-info text-uppercase'>
                         {t('createAccount')}
                     </button>                                      
                   </div>
                 </div>
-                <div className='alert m-alert m-alert--default mt-4'>
+                <div className='alert alert-secondary mt-4'>
                   <p className='text-center m-0'>
                     <Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans>
                   </p>                              

@@ -97,14 +97,14 @@ class GiftModal extends Component {
                 <div className='col-sm-6 col-lg-5 m-auto'>
                     {subscription &&            
                     <div className="row mb-3" >
-                        <div className="col-sm-12"><h3 className="m--visible-desktop-inline">{t(subscription.title)}</h3> (<strong className="g-blue"><Price price={subscription.price} currency={subscription.currency} /></strong> / {t(subscription.period)})</div>                        
+                        <div className="col-sm-12"><h3>{t(subscription.title)}</h3> (<strong className="g-blue"><Price price={subscription.price} currency={subscription.currency} /></strong> / {t(subscription.period)})</div>                        
                         <div className="col-sm-12">
                             <Trans i18nKey="translations:courseAtTime">
-                                <span className="m--font-bolder">{{courses: subscription.allowedCourses}}</span>
+                                <span className="font-weight-bold">{{courses: subscription.allowedCourses}}</span>
                             </Trans>
                             <br />
                             <Trans i18nKey={'translations:usersMax'}>
-                                <span className="m--font-bolder">{{students: subscription.allowedCourses}}</span>
+                                <span className="font-weight-bold">{{students: subscription.allowedCourses}}</span>
                             </Trans>
                         </div>
                     </div>}

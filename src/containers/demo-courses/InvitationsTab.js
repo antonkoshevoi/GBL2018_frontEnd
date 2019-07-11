@@ -138,7 +138,7 @@ class InvitationsTab extends Component {
         <Td>{record.getIn(['course', 'crsTitle'])}</Td>        
         <Td><Date time={record.get('date')} /></Td>
         <Td className="actions">
-          <a title={t('viewInvitation')} rel="noopener noreferrer" href={uri(`invitations/details/${record.get('id')}/${record.get('securityHash')}`)} className="btn btn-success m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill" target="_blank">
+          <a title={t('viewInvitation')} rel="noopener noreferrer" href={uri(`invitations/details/${record.get('id')}/${record.get('securityHash')}`)} className="btn btn-success m-btn--icon-only" target="_blank">
              <i className='la la-search'></i>
           </a>
           <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>
@@ -183,7 +183,7 @@ class InvitationsTab extends Component {
         <div className='m-portlet__body'>
           <div className='mt-3 mb-4'>
             <div className='row'>
-              <div className='col-sm-12 m--align-right'>
+              <div className='col-sm-12 text-right'>
                 <Select
                   className='pull-left table-select'
                   value={perPage}

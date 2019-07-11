@@ -112,8 +112,8 @@ class SchoolDetails extends Component {
                     <div className="col">
                       <h3 className="m-widget1__title">{t('name')}</h3>
                     </div>
-                    <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{school.schName || '-'}</span>
+                    <div className="col text-right">
+                      <span className="m-widget1__title text-info">{school.schName || '-'}</span>
                     </div>
                   </div>
                 </div>              
@@ -122,8 +122,8 @@ class SchoolDetails extends Component {
                     <div className="col">
                       <h3 className="m-widget1__title">{t('code')}</h3>
                     </div>
-                    <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{school.schCode || '-'}</span>
+                    <div className="col text-right">
+                      <span className="m-widget1__title text-info">{school.schCode || '-'}</span>
                     </div>
                   </div>
                 </div>
@@ -132,8 +132,8 @@ class SchoolDetails extends Component {
                     <div className="col">
                       <h3 className="m-widget1__title">{t('billing')}</h3>
                     </div>
-                    <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{school.billing || '-'}</span>
+                    <div className="col text-right">
+                      <span className="m-widget1__title text-info">{school.billing || '-'}</span>
                     </div>
                   </div>
                 </div>
@@ -142,17 +142,17 @@ class SchoolDetails extends Component {
                     <div className="col">
                       <h3 className="m-widget1__title">{t('shippingAddress')}</h3>
                     </div>
-                    <div className="col m--align-right">
-                      <span className="m-widget1__title m--font-brand">{school.shippingAddress || '-'}</span>
+                    <div className="col text-right">
+                      <span className="m-widget1__title text-info">{school.shippingAddress || '-'}</span>
                     </div>
                   </div>
                 </div>
               </div>
             </TabContainer>}
             {mode === 'edit' && <TabContainer>
-              <form id='update-school-form' onSubmit={(e) => { this._onSubmit(e) }}>
+              <form id='update-school-form' className="m-4" onSubmit={(e) => { this._onSubmit(e) }}>
                 <div className="m-form mt-4">
-                  <div className="form-group m-form__group row">
+                  <div className="form-group row">
                     <label className="col-form-label col-lg-3" htmlFor="schName">{t('name')}</label>
                     <div className="col-lg-9">
                       <input
@@ -160,12 +160,12 @@ class SchoolDetails extends Component {
                         name="schName"
                         onChange={(e) => { this._handleInputChange(e) }}
                         value={school.schName || ''}
-                        className="form-control m-input--air form-control-success m-input"
+                        className="form-control m-input"
                         id="firsName"/>
                       {errors && errors.get('schName') && <div className="form-control-feedback text-center error">{errors.get('schName').get(0)}</div>}
                     </div>
                   </div>
-                  <div className="form-group m-form__group row">
+                  <div className="form-group row">
                     <label className="col-form-label col-lg-3" htmlFor="billing">{t('billing')}</label>
                     <div className="col-lg-9">
                       <input
@@ -173,12 +173,12 @@ class SchoolDetails extends Component {
                         name="billing"
                         onChange={(e) => { this._handleInputChange(e) }}
                         value={school.billing || ''}
-                        className="form-control m-input--air form-control-success m-input"
+                        className="form-control m-input"
                         id="firsName"/>
                       {errors && errors.get('billing') && <div className="form-control-feedback text-center error">{errors.get('billing').get(0)}</div>}
                     </div>
                   </div>
-                  <div className="form-group m-form__group row">
+                  <div className="form-group row">
                     <label className="col-form-label col-lg-3" htmlFor="shippingAddress">{t('shippingAddress')}</label>
                     <div className="col-lg-9">
                       <input
@@ -186,7 +186,7 @@ class SchoolDetails extends Component {
                         name="shippingAddress"
                         onChange={(e) => { this._handleInputChange(e) }}
                         value={school.shippingAddress || ''}
-                        className="form-control m-input--air form-control-success m-input"
+                        className="form-control m-input"
                         id="firsName"/>
                       {errors && errors.get('shippingAddress') && <div className="form-control-feedback text-center error">{errors.get('shippingAddress').get(0)}</div>}
                     </div>
@@ -194,8 +194,8 @@ class SchoolDetails extends Component {
                 </div>
                 <div className="m-separator"></div>
                 <div className="text-right">
-                  <button className="btn-success m-btn btn mr-3">{t('saveChanges')}</button>
-                  <button className="btn-default m-btn btn" onClick={() => { this._handleSwitchMode('overview') }} >{t('cancel')}</button>
+                  <button className="btn-success btn mr-3">{t('saveChanges')}</button>
+                  <button className="btn-default btn" onClick={() => { this._handleSwitchMode('overview') }} >{t('cancel')}</button>
                 </div>
               </form>
             </TabContainer>}

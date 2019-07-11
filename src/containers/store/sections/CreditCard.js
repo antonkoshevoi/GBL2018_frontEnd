@@ -33,7 +33,7 @@ class CreditCard extends Component {
                 <div>                    
                     <legend className='mb-3 text-center'>{t('creditCard')}</legend>
                     <div className='m-form__section'>
-                      <div className="form-group m-form__group row">
+                      <div className="form-group row">
                         <label className="col-form-label col-md-3 col-lg-3 col-sm-12">{t('creditCardNumber')} </label>
                         <div className="col-lg-9 col-md-9 col-sm-12">
                           <input
@@ -42,14 +42,14 @@ class CreditCard extends Component {
                             name='cardNumber'
                             onChange={(e) => { this._handleInputChange(e) }}
                             type='text'
-                            className='form-control m-input m-input--air '
+                            className='form-control m-input'
                             placeholder=''/>
                             
                           {errors && errors.get('cardNumber') && <FormHelperText error>{ errors.get('cardNumber').get(0) }</FormHelperText>}
                           {errors && errors.get('message') && <FormHelperText error>{ errors.get('message') }</FormHelperText>}
                         </div>
                       </div>    
-                      <div className="form-group m-form__group row">
+                      <div className="form-group row">
                         <label className="col-form-label col-md-3 col-lg-3 col-sm-12">{t('holderName')}</label>
                         <div className="col-lg-9 col-md-9 col-sm-12">
                           <input
@@ -58,13 +58,13 @@ class CreditCard extends Component {
                             name='cardHolder'
                             onChange={(e) => { this._handleInputChange(e) }}
                             type='text'
-                            className='form-control m-input m-input--air '
+                            className='form-control m-input'
                             placeholder=''/>
                             
                           {errors && errors.get('cardHolder') && <FormHelperText error>{ errors.get('cardHolder').get(0) }</FormHelperText>}
                         </div>
                       </div>                    
-                    <div className="form-group m-form__group row">
+                    <div className="form-group row">
                       <label className="col-form-label col-lg-3 col-md-3 col-sm-12">{t('cardType')}</label> 
                       <div className="col-lg-5 col-md-9 col-sm-12">
                         <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
@@ -85,7 +85,7 @@ class CreditCard extends Component {
                         </FormControl>
                       </div>                      
                     </div>                    
-                    <div className="form-group m-form__group row">
+                    <div className="form-group row">
                       <label className="col-form-label col-lg-3 col-md-3 col-sm-12">{t('expDate')}</label>
                       <div className="col-6 col-sm-7 col-lg-5 col-md-5">
                         <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
@@ -127,7 +127,7 @@ class CreditCard extends Component {
                         </FormControl>
                       </div>                      
                     </div>                    
-                      <div className="form-group m-form__group row">
+                      <div className="form-group row">
                         <label className="col-form-label col-lg-3 col-md-3 col-sm-12">{t('cvvCode')} </label>
                         <div className="col-lg-5 col-md-6 col-sm-12">
                           <input
@@ -136,7 +136,7 @@ class CreditCard extends Component {
                             name='cardCvv2'
                             onChange={(e) => { this._handleInputChange(e) }}
                             type='text'
-                            className='form-control m-input m-input--air '
+                            className='form-control m-input'
                             placeholder=''/>
                           {errors && errors.get('cardCvv2') && <FormHelperText error>{ errors.get('cardCvv2').get(0) }</FormHelperText>}
                         </div>

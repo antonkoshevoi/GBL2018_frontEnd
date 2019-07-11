@@ -141,7 +141,7 @@ class SignUpPrincipal extends Component {
                 </div>
               </div>
               <form className="m-portlet__body" onSubmit={(e) => { e.preventDefault(); this._submit(); }}>
-                <div className="alert m-alert m-alert--default mt-2">
+                <div className="alert alert-secondary mt-2">
                   <p className="text-center m-0">                
                     <Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans>
                   </p>
@@ -150,79 +150,79 @@ class SignUpPrincipal extends Component {
                   <div className="col-md-6">
                     <legend>{t('personalInformation')}</legend>
                       <div className="m-form__section">
-                        <div className="form-group m-form__group">
+                        <div className="form-group">
                           <div>
                             <input
                               name="firstName"
                               value={form.firstName}
                               onChange={(e) => { this._handleInputChange(e) }}
                               type="text"
-                              className="form-control m-input m-input--air"
+                              className="form-control m-input"
                               placeholder={t('firstName')} />
                           </div>
                           {errors && errors.get('firstName') &&
                             <div className="form-control-feedback text-center error">{errors.get('firstName').get(0)}</div>}
                         </div>      
-                        <div className="form-group m-form__group">
+                        <div className="form-group">
                           <div>
                             <input
                               name="lastName"
                               value={form.lastName}
                               onChange={(e) => { this._handleInputChange(e) }}
                               type="text"
-                              className="form-control m-input m-input--air "
+                              className="form-control m-input"
                               placeholder={t('lastName')}/>
                           </div>
                           {errors && errors.get('lastName') &&
                             <div className="form-control-feedback text-center error">{errors.get('lastName').get(0)}</div>}
                         </div>      
-                        <div className="form-group m-form__group">
+                        <div className="form-group">
                           <div>
                             <input
                               name="email"
                               value={form.email}
                               onChange={(e) => { this._handleInputChange(e) }}
                               type="text"
-                              className="form-control m-input m-input--air "
+                              className="form-control m-input"
                               placeholder={t('email')}/>
                           </div>
                           {errors && errors.get('email') &&
                             <div className="form-control-feedback text-center error">{errors.get('email').get(0)}</div>}
                         </div>
-                        <div className="form-group m-form__group">
+                        <div className="form-group">
                           <div className="">
                             <input
                               name="username"
                               value={form.username}
                               onChange={(e) => { this._handleInputChange(e) }}
                               type="text"
-                              className="form-control m-input m-input--air "
+                              className="form-control m-input"
                               placeholder={t('username')}/>
                           </div>
                           {errors && errors.get('username') &&
                             <div className="form-control-feedback text-center error">{errors.get('username').get(0)}</div>}
                         </div>
-                        <div className="form-group m-form__group">
+                        <div className="form-group">
                           <div className="">
                             <input
                               name="password"
                               value={form.password}
                               onChange={(e) => { this._handleInputChange(e) }}
                               type="password"
-                              className="form-control m-input m-input--air "
+                              className="form-control m-input"
                               placeholder={t('password')}/>
                           </div>
                           {errors && errors.get('password') &&
                             <div className="form-control-feedback text-center error">{errors.get('password').get(0)}</div>}
                         </div>
-                        <div className="form-group m-form__group">
+                        <div className="form-group">
                           <div className="">
                             <input
                               name="password_confirmation"
                               value={form.password_confirmation}
                               onChange={(e) => { this._handleInputChange(e) }}
                               type="password"
-                              className="form-control m-input m-input--air "
+                              className="form-control m-input"
                               placeholder={t('confirmPassword')}/>
                           </div>
                         </div>
@@ -231,39 +231,39 @@ class SignUpPrincipal extends Component {
                   <div className="col-md-6">
                     <legend>{t('schoolInformation')}</legend>
                     <div className="m-form__section">
-                      <div className="form-group m-form__group">
+                      <div className="form-group">
                         <div>
                           <input
                             name="schoolName"
                             value={form.schoolName}
                             onChange={(e) => { this._handleInputChange(e) }}
                             type="text"
-                            className="form-control m-input m-input--air "
+                            className="form-control m-input"
                             placeholder={t('schoolName')}/>
                         </div>
                         {errors && errors.get('schoolName') &&
                           <div className="form-control-feedback text-center error">{errors.get('schoolName').get(0)}</div>}
                       </div>
-                      <div className="form-group m-form__group">
+                      <div className="form-group">
                         <div>
                           <input
                             name="schoolCode"
                             value={form.schoolCode}
                             onChange={(e) => { this._handleInputChange(e) }}
                             type="text"
-                            className="form-control m-input m-input--air "
+                            className="form-control m-input"
                             placeholder={t('schoolCode')} />
                         </div>
                         {errors && errors.get('schoolCode') &&
                           <div className="form-control-feedback text-center error">{errors.get('schoolCode').get(0)}</div>}
                       </div>
-                      <div className="form-group m-form__group">
+                      <div className="form-group">
                         <div>
                           <select
                             name="schoolCountry"
                             value={form.schoolCountry}
                             onChange={(e) => { this._handleInputChange(e) }}
-                            className="form-control m-input m-input--air">
+                            className="form-control m-input">
                             <option>{t('selectCountry')}</option>
                             {this._renderCountries()}
                           </select>
@@ -295,7 +295,7 @@ class SignUpPrincipal extends Component {
                         <input type="range" min="0.1" max="1" step="0.05"  value={this.state.zoom}  onChange={ (value)=>this._zoom(value)}></input>
                         <br/>
                         <span
-                          className='btn pointer m-btn m-2 m-btn--pill m-btn--air btn-success'
+                          className='btn pointer m-2 m-btn--pill m-btn--air btn-success'
                           onClick={() => { this._handleImageCrop() }}
                          >
                           Crop <span className='la la-crop'></span>
@@ -317,7 +317,7 @@ class SignUpPrincipal extends Component {
                     <button
                       type='submit'
                       disabled={loading}                          
-                      className='m-btn m-btn--air m-2 btn btn-info'>
+                      className='m-btn--air m-2 btn btn-info'>
                       {t('next')}
                     </button>
                   </div>

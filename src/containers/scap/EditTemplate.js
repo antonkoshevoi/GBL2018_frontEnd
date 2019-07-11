@@ -168,7 +168,7 @@ class EditTemplate extends Component {
                     </FormControl>
                 </div>  
                 <div className="col-sm-2 text-left">
-                    <button className="btn m-btn m-btn--icon m-btn--icon-only bg-transparent" onClick={(e) => {e.preventDefault(); this._deleteQuestion(key) }}>
+                    <button className="btn m-btn--icon-only bg-transparent" onClick={(e) => {e.preventDefault(); this._deleteQuestion(key) }}>
                         <strong className='fa fa-times-circle text-danger display-6'></strong>
                     </button>
                 </div>

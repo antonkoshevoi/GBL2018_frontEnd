@@ -33,7 +33,7 @@ class ThirdStepForm extends Component {
         </div>
         {!form.step2.skip && 
         <div className="col-lg-6 col-md-6 col-sm-12">
-            <Divider className='mb-4 m--hidden-tablet m--hidden-desktop'/>
+            <Divider className='mb-4 d-md-none'/>
             <p className="text-center text-uppercase"><strong>{t('studentProfile')}</strong></p>
             <div className='row'>
                 {form.step2.avatarCropped && 

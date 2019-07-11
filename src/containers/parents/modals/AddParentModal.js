@@ -76,7 +76,7 @@ class AddParentModal extends Component {
             <div className='m-auto' style={{maxWidth: 900}}>
                 <h5 className="mb-4">{t('linkToParent')}</h5>
                 <div className="m-form">
-                    <div className="form-group m-form__group row">
+                    <div className="form-group row">
                         <label className="col-form-label col-lg-3" htmlFor="parentUsername">{t('enterParentUsernameOrEmail')}</label>
                         <div className="col-lg-6">
                             <input
@@ -84,7 +84,7 @@ class AddParentModal extends Component {
                                 name="parentUsername"
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 value={form.parentUsername || ''}
-                                className="form-control m-input--air form-control-success m-input"
+                                className="form-control m-input"
                                 id="firsName"/>
                             {errors && errors.get('parentUsername') && <div className="form-control-feedback text-center error">{errors.get('parentUsername').get(0)}</div>}
                         </div>
@@ -102,7 +102,7 @@ class AddParentModal extends Component {
                 <Divider className="mt-4 mb-4" />
                 <h5>{t('createParentAccount')}</h5>
                 <div className="m-form mt-4">
-                    <div className="form-group m-form__group row">
+                    <div className="form-group row">
                         <label className="col-form-label col-lg-3" htmlFor="email">{t('email')} <span className="text-danger">*</span></label>
                         <div className="col-lg-6">
                             <input
@@ -110,12 +110,12 @@ class AddParentModal extends Component {
                                 name="email"
                                 onChange={(e) => { this._handleInputChange(e)}}
                                 value={form.email || ''}
-                                className="form-control m-input--air form-control-success m-input"
+                                className="form-control m-input"
                                 id="email"/>
                             {formErrors && formErrors.get('email') && <div className="form-control-feedback text-center error">{formErrors.get('email').get(0)}</div>}
                         </div>
                     </div>  
-                    <div className="form-group m-form__group row">
+                    <div className="form-group row">
                         <label className="col-form-label col-lg-3" htmlFor="password">{t('password')} <span className="text-danger">*</span></label>
                         <div className="col-lg-6">
                             <input
@@ -123,12 +123,12 @@ class AddParentModal extends Component {
                                 name="password"
                                 onChange={(e) => { this._handleInputChange(e)}}
                                 value={form.password || ''}
-                                className="form-control m-input--air form-control-success m-input"
+                                className="form-control m-input"
                                 id="password"/>
                             {formErrors && formErrors.get('password') && <div className="form-control-feedback text-center error">{formErrors.get('password').get(0)}</div>}
                         </div>
                     </div>
-                    <div className="form-group m-form__group row">
+                    <div className="form-group row">
                         <label className="col-form-label col-lg-3" htmlFor="username">{t('username')}</label>
                         <div className="col-lg-6">
                             <input
@@ -136,12 +136,12 @@ class AddParentModal extends Component {
                                 name="username"
                                 onChange={(e) => { this._handleInputChange(e)}}
                                 value={form.username || ''}
-                                className="form-control m-input--air form-control-success m-input"
+                                className="form-control m-input"
                                 id="username"/>
                             {formErrors && formErrors.get('username') && <div className="form-control-feedback text-center error">{formErrors.get('username').get(0)}</div>}
                         </div>
                     </div>                                    
-                    <div className="form-group m-form__group row">
+                    <div className="form-group row">
                         <label className="col-form-label col-lg-3" htmlFor="firsName">{t('firstName')}</label>
                         <div className="col-lg-6">
                             <input
@@ -149,12 +149,12 @@ class AddParentModal extends Component {
                                 name="firstName"
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 value={form.firstName || ''}
-                                className="form-control m-input--air form-control-success m-input"
+                                className="form-control m-input"
                                 id="firsName"/>
                             {formErrors && formErrors.get('firstName') && <div className="form-control-feedback text-center error">{formErrors.get('firstName').get(0)}</div>}
                         </div>
                     </div>
-                    <div className="form-group m-form__group row">
+                    <div className="form-group row">
                         <label className="col-form-label col-lg-3" htmlFor="lastName">{t('lastName')}</label>
                         <div className="col-lg-6">
                             <input
@@ -162,12 +162,12 @@ class AddParentModal extends Component {
                                 name="lastName"
                                 onChange={(e) => { this._handleInputChange(e) }}
                                 value={form.lastName || ''}
-                                className="form-control m-input--air form-control-success m-input"
+                                className="form-control m-input"
                                 id="lastName"/>
                             {formErrors && formErrors.get('lastName') && <div className="form-control-feedback text-center error">{formErrors.get('lastName').get(0)}</div>}
                         </div>
                     </div>
-                    <div className="form-group m-form__group row">
+                    <div className="form-group row">
                         <div className="col-lg-12 text-center">
                             <input
                                 type="button"                                                

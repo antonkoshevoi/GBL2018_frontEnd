@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withTranslation, Trans} from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {NavLink} from 'react-router-dom';
-import {Price} from '../../../components/ui/Price';
-import {renderToString} from 'react-dom/server'
 import {Divider} from '@material-ui/core';
+import {Price} from '../../../components/ui/Price';
+import {InvoiceNo} from '../../../components/ui/InvoiceNo';
 
 class InvoiceForm extends Component {
 
@@ -20,16 +20,11 @@ class InvoiceForm extends Component {
         const {t, auth}     = this.props;
                
         return (
-            <div className='m-form m-form--label-align-right mx-5 my-4'>
-                <div className='row align-items-center'>                                
+            <div className='mx-5 my-4'>
+                <div className='row'>                                
                     {invoice &&
                         <div className="col-sm-12">
-                            <p className="text-center invoice-title mb-4">
-                                <Trans i18nKey="translations:yourInvoice">
-                                    <span className="m--font-bolder">{{invoiceNo: invoice.get('subscriptionNo')}}</span>
-                                    <span className="m--font-bolder">{{invoiceAmount: renderToString(<Price price={invoice.get('price')} currency={invoice.get('currency')} />)}}</span>
-                                </Trans>
-                            </p>
+                            <InvoiceNo number={invoice.get('subscriptionNo')} amount={invoice.get('price')} currency={invoice.get('currency')} />                                 
                             <div>
                                 <h4 className="text-center">{t('subscriptionDetails')}</h4>
                                 <div className="my-3">

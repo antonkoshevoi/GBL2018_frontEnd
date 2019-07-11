@@ -123,7 +123,7 @@ class AssignStudentsModal extends Component {
 
         <DialogContent className="mt-4">          
           <form id='assign-students-form' onSubmit={(e) => { this._onSubmit(e) }}>
-            {(classroom && classroom.courseCredits > 0) && <div className="alert m-alert m-alert--default pb-0">
+            {(classroom && classroom.courseCredits > 0) && <div className="alert alert-secondary pb-0">
                 <p className="mb-0"><strong>{t('youHaveUnassignedCourseCredits', {count: classroom.courseCredits})}</strong></p>                    
                 <FormControlLabel
                     className=""

@@ -55,14 +55,14 @@ class RestorePassword extends Component {
                                     <div className="m-portlet__body">
                                         <div className="m-form mt-4 mb-3 mx-3">            
                                             {resetPasswordRequest.get('success') && <div className="alert alert-success">{t('passwordResetMessage')}</div>}
-                                            <div className="form-group m-form__group mt-3 mb-3">
+                                            <div className="form-group mt-3 mb-3">
                                                 <input className="form-control m-input--pill" type="text"
                                                        placeholder={t('usernameOrEmail')} name="username" value={this.state.username}
                                                        onChange={this._handleUsernameChange}/>
                                                 {(errors && errors.get('username')) && <div className="form-control-feedback text-center error">{errors.get('username').get(0)}</div>}
                                             </div>   
                                             <div className="text-center">
-                                                <Button variant="contained" color="primary" onClick={() => { this._resetPassword() }} className="btn m-btn m-btn--pill m-btn--custom">
+                                                <Button variant="contained" color="primary" onClick={() => { this._resetPassword() }} className="btn m-btn--pill m-btn--custom">
                                                     <span>{t('request')}</span>
                                                     {loading && <CircularProgress color="primary"/>}
                                                 </Button>
@@ -73,7 +73,7 @@ class RestorePassword extends Component {
                             </div>
                             <div className="m-login__account">
                                 <span className="m-login__account-msg">{t('logInDifferentUser')}</span>
-                                <NavLink to="/login" id="m_login_signup" className="ml-2 m-link m-link--light m-login__account-link">{t('logIn')}</NavLink>
+                                <NavLink to="/login" id="m_login_signup" className="ml-2 m-login__account-link">{t('logIn')}</NavLink>
                             </div>
                         </div>
                     </div>

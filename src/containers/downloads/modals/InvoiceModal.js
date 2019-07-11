@@ -5,8 +5,8 @@ import {
   Icon, Toolbar, Typography  
 } from '@material-ui/core';
 import {withTranslation} from "react-i18next";
+import {InvoiceNo} from "../../../components/ui/InvoiceNo";
 import Modal from '../../../components/ui/Modal';
-import InvoiceNo from "../../store/sections/InvoiceNo";
 
 class InvoiceModal extends Component {
 

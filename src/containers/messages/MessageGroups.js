@@ -69,7 +69,7 @@ class MessageGroups extends Component {
                 </Td>                
                 <Td><DateTime time={record.get('created')} /></Td>
                 <Td className="actions">
-                    <NavLink className='btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' to={`/messages/groups/${record.get('id')}`}>
+                    <NavLink className='btn btn-accent m-btn--icon-only' to={`/messages/groups/${record.get('id')}`}>
                         <i className='la la-edit'></i>
                     </NavLink>                    
                     <DeleteButton btnName={t('delete')} title={t('areYouSure')} onClick={() => { this._deleteRecord(record.get('id')) }}/>                    
@@ -111,7 +111,7 @@ class MessageGroups extends Component {
                     <div className='m-portlet__body'>
                         <div className='mt-3 mb-4'>
                             <div className='row'>               
-                                <div className='col-sm-12 m--align-right'>
+                                <div className='col-sm-12 text-right'>
                                     <Select
                                         className="pull-left table-select"
                                         value={perPage}

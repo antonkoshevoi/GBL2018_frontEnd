@@ -181,7 +181,7 @@ class Parents extends Component {
         <Td>{record.get('email')}</Td>        
         <Td>{record.get('students')}
             {record.get('students') > 0 &&
-                <button title={t('students')} className='ml-3 btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill' onClick={() => { this._showStudents(record.get('id')) }} >
+                <button title={t('students')} className='ml-3 btn btn-accent m-btn--icon-only' onClick={() => { this._showStudents(record.get('id')) }} >
                     <i className='la la-search'></i>
                 </button>
             }
@@ -230,7 +230,7 @@ class Parents extends Component {
                 <div className='m-portlet__body'>
                   <div className='mt-3 mb-4'>
                     <div className='row'>
-                      <div className='col-sm-12 m--align-right'>
+                      <div className='col-sm-12 text-right'>
                         <Select
                           className="pull-left table-select"
                           value={perPage}
