@@ -34,8 +34,8 @@ class UserMenu extends Component {
         let user = userData.toJS();    
 
       return (
-        <div className="m-dropdown__wrapper animated mr-4" onMouseLeave={() => {this.props.switchMenu(null)}} style={{display:'block'}}>
-        <span className="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style={{right:'21px', color:'#385774'}}></span>
+        <div className="m-dropdown__wrapper animated d-block" onMouseLeave={() => {this.props.switchMenu(null)}}>
+        <span className="m-dropdown__arrow m-dropdown__arrow--right"></span>
         <div className="m-dropdown__inner">
           <div className="m-dropdown__header user-menu-header">
             <div className="row">
@@ -94,7 +94,7 @@ class UserMenu extends Component {
     let user = userData.toJS();
 
     return (
-      <li className="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width" data-dropdown-toggle="click">
+      <li className="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--align-right" data-dropdown-toggle="click">
         <button className="m-nav__link m-dropdown__toggle pointer"  onClick={() => {this.props.switchMenu('userMenu')}}>
             <span className="m-topbar__userpic">
               <img src={user.avatar} className="m--img-rounded m-0 text-center" alt=""/>

@@ -6316,9 +6316,6 @@ router-outlet {
   -o-border-radius: 50%;
   border-radius: 50%; }
 
-.m--icon-middle:before {
-  vertical-align: middle; }
-
 .m--hide {
   display: none !important; }
 

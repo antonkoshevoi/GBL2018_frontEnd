@@ -109,7 +109,7 @@ SplashSlider = connect(
     records: selectRecords(state),
   }),
   (dispatch) => ({
-    getRecords: (params = {perPage: '50', filter: {category: 1}}) => {
+    getRecords: (params = {perPage: '50', filter: {category: 7}}) => {
         dispatch(getRecords(params))
     }
   })
