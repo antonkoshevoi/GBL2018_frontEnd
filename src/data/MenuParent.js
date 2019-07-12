@@ -58,11 +58,6 @@ export default  {
                     key: 'student_rewards',
                     title: 'studentRewards',
                     link: 'store/category/student_rewards'
-                },
-                {
-                    key: 'courses',
-                    title: 'courses',
-                    link: 'store/category/courses'
                 }
             ]
         },

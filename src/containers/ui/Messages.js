@@ -67,7 +67,7 @@ class Messages extends Component {
     }     
     
     return (
-        <li className="m-nav__item m-topbar__Tasks m-topbar__Tasks--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width" data-dropdown-toggle="click" data-dropdown-persistent="true">
+        <li className="m-nav__item m-dropdown m-dropdown--arrow m-dropdown--align-center" data-dropdown-toggle="click" data-dropdown-persistent="true">
             {(total > 0) && <span className="g-badge badge-red">{total}</span> }
             <button className="m-nav__link m-dropdown__toggle pointer" id="m_topbar_notification_icon" onClick={() => {this.props.switchMenu('messages')}}>
                 <span className="m-nav__link-icon">
@@ -75,8 +75,7 @@ class Messages extends Component {
                 </span>
             </button>
             {activeMenu === 'messages' && 
-            <div className="m-dropdown__wrapper messages" onMouseLeave={() => {this.props.switchMenu(null)}} style={{display: 'block'}}>
-                <span className="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style={{right:'89.5px', color:'white'}}></span>
+            <div className="m-dropdown__wrapper messages d-block" onMouseLeave={() => {this.props.switchMenu(null)}}>
                 <span className="m-dropdown__arrow m-dropdown__arrow--center"></span>
                 <div className="m-dropdown__inner">
                     <div className="m-dropdown__body">

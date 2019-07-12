@@ -217,7 +217,7 @@ li > .small-avatar {
     height: 100vh;
 }
 
-.m-dropdown.m-dropdown--header-bg-fill .m-dropdown__header {
+.m-dropdown .user-menu-header.m-dropdown__header {
     background-image: url(../media/images/menu_poster.jpg);
     background-size: cover;
 }
@@ -644,10 +644,6 @@ div.row-15{
     border-radius: 50%;   
     width: 35px;
     height: 35px;
-}
-
-.m-dropdown.m-dropdown--align-center .m-dropdown__wrapper {
-    left: -50px !important;
 }
 
 div.m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-nav__link-icon > i:before {
