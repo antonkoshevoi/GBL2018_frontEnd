@@ -28,13 +28,15 @@ class SplashSlider extends PureComponent {
                 <h4 className='m-5'>{t('productsNotFound')}</h4>
             </div>;
         }
+        
+        const slides = records.size > 5 ? 5 : 3;
     
         const settings = {
             className: "center",
             centerMode: true,
             infinite: true,
-            slidesToScroll: 5,            
-            slidesToShow: 5,
+            slidesToScroll: slides,            
+            slidesToShow: slides,
             speed: 500,
             adaptiveHeight: true,
             swipeToSlide: true,
