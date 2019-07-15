@@ -15,7 +15,8 @@ import Billing from "./sections/Billing";
 import Summary from "./sections/Summary";
 import CreditCard from "./sections/CreditCard";
 import Loader from "../../components/layouts/Loader";
-
+import {Preloader} from "../../components/ui/Preloader";
+    
 class Download extends Component {
 
   state = {   
@@ -46,7 +47,7 @@ class Download extends Component {
     const record = nextProps.addressesRequest.get('records');    
     if (record && record.size){
       this.setState({
-        ...this.state, ...record.toJS(),
+        ...this.state, ...record.toJS()
       })
     }  
   } 
@@ -189,7 +190,7 @@ class Download extends Component {
             {stepIndex === 0 &&
                 <div>
                     {auth.get('isLoggedIn') ? 
-                        <Loader/>
+                        <Preloader text={t('pleaseWait')} />
                     : 
                         <SignUp onDataSaved={(params) => this._setSignUp(params)} data={this.state.signUp} /> 
                     }
@@ -221,10 +222,10 @@ class Download extends Component {
   
   _renderStepper()
   {
-    const { t, cartRecordsRequest } = this.props;
+    const { t, cartRecordsRequest, auth } = this.props;
     const { stepIndex } = this.state;    
     
-    if (!cartRecordsRequest.get('success')) {
+    if (!cartRecordsRequest.get('success') || (cartRecordsRequest.get('isFree') && auth.get('isLoggedIn'))) {
         return '';
     }
       

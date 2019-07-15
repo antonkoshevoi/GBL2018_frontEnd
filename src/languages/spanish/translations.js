@@ -659,5 +659,6 @@ export default {
     freeProduct: 'FREE!',
     math: 'Math',
     gotAccount: 'Got an account?',
-    thankYou: 'Thank You'
+    thankYou: 'Thank You',
+    pleaseWait: 'Please Wait...'
 }
