@@ -164,12 +164,10 @@ class Download extends Component {
             || creditCardRequest.get('loading') 
             || freeCheckoutRequest.get('loading') 
             || freeCheckoutRequest.get('success') 
-            || paypalRequest.get('success');    
+            || paypalRequest.get('success');
     
     if (!success || (cartRecordsRequest.get('isFree') && auth.get('isLoggedIn'))) {
-        return <div className="d-flex justify-content-center m-5 p-5">
-            <Loader/>
-        </div>;
+        return <Preloader text={t('pleaseWait')} />;
     }
     
     if (!cartRecordsRequest.get('records').size) {
@@ -190,7 +188,7 @@ class Download extends Component {
             {stepIndex === 0 &&
                 <div>
                     {auth.get('isLoggedIn') ? 
-                        <Preloader text={t('pleaseWait')} />
+                        <Loader/>
                     : 
                         <SignUp onDataSaved={(params) => this._setSignUp(params)} data={this.state.signUp} /> 
                     }
