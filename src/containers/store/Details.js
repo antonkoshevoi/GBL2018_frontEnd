@@ -10,11 +10,14 @@ import {Price} from "../../components/ui/Price";
 import {addToShoppingCart, getRecords, getSingleRecord} from "../../redux/store/actions";
 import {selectAddToCartRequest, selectGetRecordsRequest, selectGetSingleRecord, selectGetSingleRecordRequest, selectRecords} from "../../redux/store/selectors";
 import {buildSortersQuery} from "../../helpers/utils";
-import "../../styles/store.css"
+import Lightbox from 'lightbox-react';
+import 'lightbox-react/style.css';
 
 class Details extends Component {
 
   state = {
+    photoIndex: 0,
+    showLightbox: false,
     sorters: {
       created: 'desc'
     }
@@ -53,6 +56,13 @@ class Details extends Component {
     this.props.addToShoppingCart(id);
   }
   
+  _showLightbox(index) {
+    this.setState({
+      showLightbox: true,
+      photoIndex: index
+    });
+  }
+  
   _renderPrices() {
         const {record, t} = this.props;        
 
@@ -80,12 +90,43 @@ class Details extends Component {
         
         return <div className="actionsBtn justify-content-end full-width align-items-center d-flex pr-4 align-self-center">
             <div className="pr-3">{record.get('discount') > 0 && <span className="position-relative discount"><span><Price price={record.get('price')} currency={record.get('currency')} /></span></span>}</div>
-                <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>                                            
-                    {(record.get('discountPrice') > 0) ? <Price price={record.get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
-                </button>
-            </div>;     
+            <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>                                            
+                {(record.get('discountPrice') > 0) ? <Price price={record.get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
+            </button>
+        </div>;     
   }
 
+  _renderImages() {
+    const {record} = this.props;        
+    const {photoIndex, showLightbox} = this.state;
+    const images = record.get('images').toJS().map((item) => item.url);
+
+    return <div className="store-item-images">
+      {record.get('images').map((item, i) => {
+        if (i > 2) {
+            return '';
+        }
+        return <img className="m-1 store-item-image" key={i} onClick={() => this._showLightbox(i)} src={item.get('previewUrl')} alt="" />;
+      })}          
+      {showLightbox && <Lightbox
+        mainSrc={images[photoIndex]}
+        nextSrc={images[(photoIndex + 1) % images.length]}
+        prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+        onCloseRequest={() => this.setState({ showLightbox: false })}
+        onMovePrevRequest={() =>
+          this.setState({
+            photoIndex: (photoIndex + images.length - 1) % images.length,
+          })
+        }
+        onMoveNextRequest={() =>
+          this.setState({
+            photoIndex: (photoIndex + 1) % images.length,
+          })
+        }
+      />}
+    </div>;
+  }
+    
   render() {
     const {record, records, addToCartRequest, getSingleRecordRequest, getRecordsRequest, t} = this.props;
     const loading           = getSingleRecordRequest.get('loading') || addToCartRequest.get('loading');
@@ -141,7 +182,8 @@ class Details extends Component {
                               </div>
                             </div>
                           </div>
-                          {successSingle && this._renderPrices()}
+                          {(record.get('images').size > 0) && this._renderImages()}
+                          {this._renderPrices()}
                         </div>
                       </div>
                     </div>

@@ -10,6 +10,7 @@
     "history": "^4.9.0",
     "i18next": "^15.1.0",
     "immutable": "^3.8.2",
+    "lightbox-react": "^0.3.7",
     "material-ui-pickers": "^2.2.4",
     "moment": "^2.22.2",
     "pusher-js": "^4.4.0",

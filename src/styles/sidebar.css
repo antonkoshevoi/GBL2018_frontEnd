@@ -73,6 +73,7 @@ nav.navigation > .menuItem > a > .icon {
     display: table-cell;
     vertical-align: middle;
     width: 51px;
+    text-align: center;
 }
 
 nav.navigation > .menuItem > a > .icon > i {

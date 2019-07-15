@@ -277,7 +277,9 @@ input[type=number]::-webkit-outer-spin-button {
     display: block;
     background: transparent;
 }
-
+.store-item-image {
+    max-width: 120px;
+}
 @media (min-width: 1848px) {
     .sectionTopBar{
         max-width: calc(178px * 9);
