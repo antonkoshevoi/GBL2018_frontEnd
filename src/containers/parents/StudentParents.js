@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Button, Icon } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/Table';
 import { selectGetRecordsRequest, selectStudentStatusRequest } from '../../redux/student-parents/selectors';
 import { getRecords, deleteStudentRequest, resetStudentRequest } from '../../redux/student-parents/actions';
 import DeleteButton from "../../components/ui/DeleteButton";

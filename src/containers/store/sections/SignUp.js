@@ -5,7 +5,7 @@ import {withTranslation} from 'react-i18next';
 import {Button, FormHelperText} from '@material-ui/core';
 import {selectValidateRequest} from '../../../redux/signup/selectors';
 import {validate} from '../../../redux/signup/actions';
-import Loader from "../../../components/layouts/Loader";
+import {Loader} from "../../../components/ui/Loader";
 
 class SignUp extends Component {
 

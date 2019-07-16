@@ -51,7 +51,7 @@ class ProductsSection extends Component {
                             <h3>{title}</h3>
                         </div>}
                         {(!all && products.size >= 9) && <div className="col-md-6 text-right">
-                            <NavLink to={`/store/products/courses/${type}`} className="btn no-border btn-sm btn-danger">More</NavLink>
+                            <NavLink to={`/store/products/courses/${type}`} className="btn btn-sm btn-danger">More</NavLink>
                         </div>}
                     </div>}
                     <div className="row d-flex justify-content-around justify-content-sm-start">

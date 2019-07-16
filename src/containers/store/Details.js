@@ -5,7 +5,7 @@ import {push} from 'react-router-redux';
 import {withRouter} from "react-router-dom";
 import Filter from "../../components/store/Filter";
 import Sidebar from "../../components/store/Sidebar";
-import Loader from "../../components/layouts/Loader";
+import {Loader} from "../../components/ui/Loader";
 import {Price} from "../../components/ui/Price";
 import {addToShoppingCart, getRecords, getSingleRecord} from "../../redux/store/actions";
 import {selectAddToCartRequest, selectGetRecordsRequest, selectGetSingleRecord, selectGetSingleRecordRequest, selectRecords} from "../../redux/store/selectors";

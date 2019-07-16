@@ -7,7 +7,7 @@ import ProductsSection from "../../components/store/ProductsSection";
 import {selectGetRecordsRequest, selectRecords} from "../../redux/store/selectors";
 import {withRouter} from "react-router-dom";
 import {getRecords} from "../../redux/store/actions";
-import Loader from "../../components/layouts/Loader";
+import {Loader} from "../../components/ui/Loader";
 
 class Store extends Component {
 

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {withTranslation, Trans} from 'react-i18next';
 import {NavLink} from 'react-router-dom';
 import {Divider, Step, StepLabel, Stepper} from '@material-ui/core';
-import Loader from "../../components/layouts/Loader";
+import {Loader} from "../../components/ui/Loader";
 import FirstStepForm from './forms/FirstStepForm';
 import SecondStepForm from './forms/SecondStepForm';
 import ThirdStepForm from './forms/ThirdStepForm';

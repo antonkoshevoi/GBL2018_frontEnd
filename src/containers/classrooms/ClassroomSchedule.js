@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Button, Select, MenuItem, FormHelperText, Radio, FormControlLabel } from '@material-ui/core';
 import MuiDatePicker from '../../components/ui/MuiDatePicker';
-import Loader from '../../components/layouts/Loader';
+import {Loader} from '../../components/ui/Loader';
 import { connect } from 'react-redux';
 import { selectGetScheduleRequest, selectUpdateScheduleRequest } from '../../redux/classrooms/selectors';
 import { getSchedule , updateSchedule} from '../../redux/classrooms/actions';

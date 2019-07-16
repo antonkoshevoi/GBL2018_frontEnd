@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {withTranslation} from 'react-i18next';
 import {getRecords} from "../../redux/transactions/actions";
 import {selectGetRecordsRequest} from "../../redux/transactions/selectors";
-import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/table";
+import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/Table";
 import {MenuItem, Select, FormHelperText, AppBar, DialogContent, Toolbar, Typography} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
 import {Price} from "../../components/ui/Price";

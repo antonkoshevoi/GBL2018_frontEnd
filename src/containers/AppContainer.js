@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Loader from "../components/layouts/Loader";
+import {Loader} from "../components/ui/Loader";
 import { selectAppDomain } from '../redux/app/selectors';
 import { load } from '../redux/app/actions';
 

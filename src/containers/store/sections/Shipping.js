@@ -5,7 +5,7 @@ import {withTranslation} from 'react-i18next';
 import {Button} from '@material-ui/core';
 import {selectValidateAddressRequest} from "../../../redux/store/selectors";
 import {validateAddress, resetValidateAddressRequest} from "../../../redux/store/actions";
-import Loader from "../../../components/layouts/Loader";
+import {Loader} from "../../../components/ui/Loader";
 
 class Shipping extends Component {
 

@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import * as queryString from 'query-string';
 import { executePayPalPayment } from '../../../redux/payments/actions';
-import Loader from '../../../components/layouts/Loader';
+import {Loader} from '../../../components/ui/Loader';
 import { selectExecutePayPalPaymentRequest } from '../../../redux/payments/selectors';
 
 class PayPalReturnContainer extends Component {

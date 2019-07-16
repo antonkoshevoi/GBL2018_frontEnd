@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow } from '../../components/ui/Table';
 import { buildSortersQuery } from '../../helpers/utils';
 import { Date } from "../../components/ui/DateTime";
 import { selectDeleteRequest, selectGetRecordForAssignStudentsRequest, selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords } from '../../redux/classrooms/selectors';

@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import { selectStudentStatusRequest } from "../../redux/student-parents/selectors";
 import { acceptStudentRequestPublic, acceptStudentRequest, resetStudentRequest } from "../../redux/student-parents/actions"; 
 import { load } from '../../redux/app/actions';
-import Loader from '../../components/layouts/Loader';
+import {Loader} from '../../components/ui/Loader';
 
 class AcceptStudent extends Component {
 

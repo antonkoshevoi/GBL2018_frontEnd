@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/Table';
 import { DateTime } from "../../components/ui/DateTime";
 import { Price } from '../../components/ui/Price';
 import { selectPagination, selectGetPaymentsRequest } from '../../redux/subscriptions/selectors';

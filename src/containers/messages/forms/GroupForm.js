@@ -5,7 +5,7 @@ import { Select, MenuItem, InputLabel, Input, FormControl, FormHelperText, FormC
 import { selectGetSchoolHomeroomsRequest, selectGetSchoolClassroomsRequest, selectGetSchoolTeachersRequest, selectGetSchoolStudentsRequest, selectGetSchoolAdminsRequest } from '../../../redux/schools/selectors';
 import { getSchoolHomerooms, getSchoolClassrooms, getSchoolTeachers, getSchoolStudents, getSchoolAdmins} from '../../../redux/schools/actions';
 import { selectGetUserRequest, selectUserData } from "../../../redux/user/selectors";
-import Loader from '../../../components/layouts/Loader';
+import {Loader} from '../../../components/ui/Loader';
 import HasRole from "../../middlewares/HasRole";
 
 class GroupForm extends Component {

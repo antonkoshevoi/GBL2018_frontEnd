@@ -7,7 +7,7 @@ import {Divider} from '@material-ui/core';
 import { selectSignUpRequest } from '../../redux/signup/selectors';
 import { signUpPrincipal, resetSignUpRequest } from '../../redux/signup/actions';
 import LanguageSwitcher from "../../components/ui/LanguageSwitcher";
-import Loader from "../../components/layouts/Loader";
+import {Loader} from "../../components/ui/Loader";
 import {selectRecords} from "../../redux/countries/selectors";
 import {getCountries} from "../../redux/countries/actions";
 

@@ -7,7 +7,7 @@ import {getInvoice} from '../../redux/payments/actions';
 import {invoiceRequest} from '../../redux/payments/selectors';
 import {Price} from '../../components/ui/Price';
 import {InvoiceNo} from "../../components/ui/InvoiceNo";
-import Loader from "../../components/layouts/Loader";
+import {Loader} from "../../components/ui/Loader";
 
 class Invoice extends Component {
 

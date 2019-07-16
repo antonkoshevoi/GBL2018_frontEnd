@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {withTranslation} from 'react-i18next';
 import Card from "../../components/ui/Card";
-import {EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/table";
+import {EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/Table";
 import {selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords} from "../../redux/classrooms/selectors";
 import {getRecordsPublic, getSingleAutoClassRecord, resetUpdateAutoClass} from "../../redux/classrooms/actions";
 import HasPermission from "../middlewares/HasPermission";

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../components/ui/table';
+import {HeadRow, Row, Table, Tbody, Td, Th, Thead} from '../../../components/ui/Table';
 import {selectAttemptsRequest} from "../../../redux/reports/students/selectors";
 import {getAttempts} from "../../../redux/reports/students/actions";
 import {withTranslation} from 'react-i18next';
 import {DateTime} from "../../../components/ui/DateTime";
 import Pagination from '../../../components/ui/Pagination';
-import Loader from "../../../components/layouts/Loader";
+import {Loader} from "../../../components/ui/Loader";
 
 class AttemptsTable extends Component {
 

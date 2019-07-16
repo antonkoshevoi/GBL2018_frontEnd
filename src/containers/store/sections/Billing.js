@@ -1,20 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Address from "./Address";
 import {withTranslation} from 'react-i18next';
 import {Button, Checkbox, FormControlLabel} from '@material-ui/core';
 import {selectValidateAddressRequest} from "../../../redux/store/selectors";
 import {validateAddress} from "../../../redux/store/actions";
+import {Loader} from "../../../components/ui/Loader";
+import Address from "./Address";
 import PaymentMethods from './PaymentMethods';
-import Loader from "../../../components/layouts/Loader";
 
 class Billing extends Component {
 
     state = {
-        shippingAddress: this.props.shippingAddress,
-        billingAddress: this.props.billingAddress,
-        sameShipping: false,
-        paymentMethod: null        
+        shippingAddress:    this.props.shippingAddress || [],
+        billingAddress:     this.props.billingAddress || [],
+        contactsOnly:       this.props.contactsOnly || false,
+        sameShipping:       false,
+        paymentMethod:      null
     };
     
     componentWillReceiveProps(nextProps){
@@ -39,8 +40,11 @@ class Billing extends Component {
         this.props.goBack();
     }    
 
-    _submit = () => {
-        this.props.validateAddress(this.state.billingAddress);
+    _submit() {
+        this.props.validateAddress({
+            ...this.state.billingAddress,
+            contactsOnly: this.state.contactsOnly
+        });
     }
     
     _setPaymentMethod(value) {
@@ -90,6 +94,7 @@ class Billing extends Component {
                     title={t('billing')}
                     onChange={(form) => this._handleForm(form)}
                     name='billingAddress'
+                    contactsOnly={this.state.contactsOnly}
                     disabled={sameShipping}
                     errors={errors}
                     form={this.state.billingAddress}                  
@@ -106,7 +111,7 @@ class Billing extends Component {
                     variant="contained"                    
                     color="primary"
                     className="ml-2"                    
-                    onClick={this._submit}
+                    onClick={() => this._submit()}
                     >
                     {t('nextStep')}
                 </Button>

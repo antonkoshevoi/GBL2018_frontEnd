@@ -5,7 +5,7 @@ import { selectGetChatMessagesRequest, selectSendMessageRequest, selectUpdateMes
 import { getChatMessages, sendChatMessage, updateChatMessage, deleteChatMessage } from '../../../redux/messages/actions';
 import { CircularProgress, Avatar, TextField, FormControl } from '@material-ui/core';
 import { DateTime } from "../../../components/ui/DateTime";
-import Loader from '../../../components/layouts/Loader';
+import {Loader} from '../../../components/ui/Loader';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';

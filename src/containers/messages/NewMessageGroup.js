@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import { selectCreateGroupRequest } from '../../redux/messages/selectors';
 import { createGroup, resetCreateGroupRequest } from '../../redux/messages/actions';
 import GroupForm from "./forms/GroupForm"
-import Loader from '../../components/layouts/Loader';
+import {Loader} from '../../components/ui/Loader';
 
 class NewMessageGroup extends Component {
     

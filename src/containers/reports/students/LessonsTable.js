@@ -8,7 +8,7 @@ import formTableData from '../../../services/CourseTemplate';
 import {selectStudentReportDetailsRequest} from "../../../redux/reports/students/selectors";
 import {getReportDetails, resetGetReportDetails} from "../../../redux/reports/students/actions";
 import {Date} from "../../../components/ui/DateTime";
-import Loader from "../../../components/layouts/Loader";
+import {Loader} from "../../../components/ui/Loader";
 
 const apiClient = new ApiClient();
 

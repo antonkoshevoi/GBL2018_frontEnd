@@ -8,7 +8,7 @@ import { Divider } from '@material-ui/core';
 import { selectChangeStatusRequest, selectGetRecordRequest } from "../../redux/connections/selectors";
 import { acceptAndCreate, getRecord, resetChangeStatusRequest } from "../../redux/connections/actions"; 
 import { load } from '../../redux/app/actions';
-import Loader from '../../components/layouts/Loader';
+import {Loader} from '../../components/ui/Loader';
 
 class CreateAccount extends Component {
 

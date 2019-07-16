@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {NavLink} from "react-router-dom";
 import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnSubscribeRequest } from '../../../redux/subscriptions/selectors';
 import { getUserRecords, resetGetUserRecordsRequest, unSubscribe, resetUnSubscribeRequest } from '../../../redux/subscriptions/actions';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from "../../../components/ui/table";
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead } from "../../../components/ui/Table";
 import { Date } from "../../../components/ui/DateTime";
 import { Price } from "../../../components/ui/Price";
 import DeleteButton from "../../../components/ui/DeleteButton";

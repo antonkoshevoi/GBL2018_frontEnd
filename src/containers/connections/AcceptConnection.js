@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import { selectChangeStatusRequest } from "../../redux/connections/selectors";
 import { accept, acceptPublic, resetChangeStatusRequest } from "../../redux/connections/actions"; 
 import { load } from '../../redux/app/actions';
-import Loader from '../../components/layouts/Loader';
+import {Loader} from '../../components/ui/Loader';
 
 class AcceptConnection extends Component {
 

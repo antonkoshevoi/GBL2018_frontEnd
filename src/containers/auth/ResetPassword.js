@@ -8,7 +8,7 @@ import { push } from 'react-router-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import Logo from '../ui/Logo';
 import NotFoundPage from '../errors/404';
-import Loader from '../../components/layouts/Loader';
+import {Loader} from '../../components/ui/Loader';
 
 class ResetPassword extends Component {
 

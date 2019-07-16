@@ -277,6 +277,9 @@ input[type=number]::-webkit-outer-spin-button {
     display: block;
     background: transparent;
 }
+.store-item-images .store-item-image {
+    cursor: pointer;
+}
 .store-item-image {
     max-width: 120px;
 }

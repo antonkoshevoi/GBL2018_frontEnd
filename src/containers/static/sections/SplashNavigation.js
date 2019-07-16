@@ -23,8 +23,8 @@ class SplashNavigation extends PureComponent {
       <nav>
         <div className="splash-navigation nav-wide">
           <div className="container text-center clearfix wide-div">
-            <NavLink to={`/parents`} className={`btn no-border btn-sm students-parents ${(page === 'parents') ? 'active' : ''}`}>{t('parentsStudents')}</NavLink>
-            <NavLink to={`/schools`} className={`btn no-border btn-sm schools-teachers ${(page === 'schools') ? 'active' : ''}`}>{t('schoolsTeachers')}</NavLink>            
+            <NavLink to={`/parents`} className={`btn radius-0 btn-sm students-parents ${(page === 'parents') ? 'active' : ''}`}>{t('parentsStudents')}</NavLink>
+            <NavLink to={`/schools`} className={`btn radius-0 btn-sm schools-teachers ${(page === 'schools') ? 'active' : ''}`}>{t('schoolsTeachers')}</NavLink>            
             <div className="splash-navigation-tools">
               <LanguageSwitcher/>
             </div>
@@ -41,10 +41,10 @@ class SplashNavigation extends PureComponent {
           </div>
 
           <div className="container text-center clearfix narrow-links">
-            <NavLink to={`/about`} className="btn no-border btn-sm ">{t('about')}</NavLink>
-            <NavLink to={`/store`} className="btn no-border btn-sm ">{t('store')}</NavLink>
-            <NavLink to={`/parents`} className="btn no-border btn-sm ">{t('parentsStudents')}</NavLink>
-            <NavLink to={`/schools`} className="btn no-border btn-sm ">{t('schoolsTeachers')}</NavLink>            
+            <NavLink to={`/about`} className="btn radius-0 btn-sm ">{t('about')}</NavLink>
+            <NavLink to={`/store`} className="btn radius-0 btn-sm ">{t('store')}</NavLink>
+            <NavLink to={`/parents`} className="btn radius-0 btn-sm ">{t('parentsStudents')}</NavLink>
+            <NavLink to={`/schools`} className="btn radius-0 btn-sm ">{t('schoolsTeachers')}</NavLink>            
           </div>
         </div>
       </nav>
