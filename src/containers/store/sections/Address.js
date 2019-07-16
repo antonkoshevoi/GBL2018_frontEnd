@@ -239,8 +239,7 @@ class Address extends Component {
               <div className="form-group row">
                 <label className="col-form-label col-lg-3 col-12">{t('country')}</label>
                 <div className="col-lg-9 col-12">
-                  <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
-                    <FormControl>
+                  <FormControl className='full-width form-inputs'>                    
                       <Select
                         disabled={disabled}
                         name="country"
@@ -253,8 +252,7 @@ class Address extends Component {
                     <div className='form-control-feedback'>
                       {errors && errors.get(`country`) &&
                       <div className="form-control-feedback text-center error">{errors.get(`country`).get(0)}</div>}
-                    </div>
-                  </FormControl>
+                    </div>                 
                 </div>
               </div>
             </address>              

@@ -135,7 +135,7 @@ class EditTeacherModal extends Component {
             type='submit'
             form='update-teacher-form'
             disabled={loading}            
-            className='mt-btn-success pull-right btn btn-success mt-btn'
+            className='mt-btn-success mt-btn'
             color='primary'>
             {t('updateTeacher')}
           </Button>

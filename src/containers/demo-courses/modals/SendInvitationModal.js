@@ -98,7 +98,7 @@ class SendInvitationModal extends Component {
             type='submit'
             form='create-student-form'
             disabled={loading}            
-            className='mt-btn-success pull-right btn btn-success mt-btn'
+            className='mt-btn-success mt-btn'
             color='primary'>
             {t('sendInvitation')}
           </Button>

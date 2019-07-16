@@ -228,7 +228,7 @@ class Homerooms extends Component {
                   </HasPermission>
                   <HasPermission permissions={['[HomeRooms][Create][Bulk][Any]']}>
                     <NavLink className='link-btn' to='/homerooms/csv'>
-                      <Button variant="contained" className='btn-success mt-btn mt-btn-success'>
+                      <Button variant="contained" className='mt-btn mt-btn-success'>
                         {t('bulkAddHomerooms')}
                         <Icon className="ml-2">person</Icon>
                       </Button>

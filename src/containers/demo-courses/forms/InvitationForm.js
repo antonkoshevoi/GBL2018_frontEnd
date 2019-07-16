@@ -64,7 +64,7 @@ class InvitationForm extends Component {
             {errors && errors.get('classroomId') && <FormHelperText error>{ errors.get('classroomId').get(0) }</FormHelperText>}
           </FormControl>
 
-          <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
+          <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>{t('email')}</InputLabel>
             <Input
               fullWidth
@@ -76,7 +76,7 @@ class InvitationForm extends Component {
             {errors && errors.get('email') && <FormHelperText error>{ errors.get('email').get(0) }</FormHelperText>}
           </FormControl>
 
-          <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
+          <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>{t('name')}</InputLabel>
             <Input
               fullWidth
@@ -88,7 +88,7 @@ class InvitationForm extends Component {
             {errors && errors.get('name') && <FormHelperText error>{ errors.get('name').get(0) }</FormHelperText>}
           </FormControl>
 
-          <FormControl aria-describedby='name-error-text' className='full-width form-inputs'>
+          <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='name-error'>{t('message')}</InputLabel>
             <Input
               fullWidth

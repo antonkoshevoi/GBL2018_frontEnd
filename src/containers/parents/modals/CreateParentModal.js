@@ -119,7 +119,7 @@ class CreateParentModal extends Component {
             type='submit'
             form='create-parent-form'
             disabled={loading}            
-            className='mt-btn-success pull-right btn btn-success mt-btn'
+            className='mt-btn-success mt-btn'
             color='primary'>
             {t('addNewParent')}
           </Button>

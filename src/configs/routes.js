@@ -105,7 +105,7 @@ export default () => (
       <Route exact layout={CheckoutLayout} path='/gift' title='sentGift' component={Gift} />      
       <Route exact layout={PublicLayout} path='/signUp/parent' title='signUpParent' component={SignUpParent} />
       <Route exact layout={PublicLayout} path='/signUp/principal' title='signUpPrincipal' component={SignUpPrincipal} />      
-      <Route exact layout={PublicLayout} path='/invitations/details/:id/:hash' title='InvitationDetails' component={InvitationDetails}/>
+      <Route exact layout={PublicLayout} path='/invitations/details/:id/:hash' title='invitationDetails' component={InvitationDetails}/>
       
       <Route exact layout={MainLayout} path='/store' title='store' component={Store}/>
       <Route exact layout={MainLayout} path='/store/details/:id' title='storeDetails' component={Details}/>

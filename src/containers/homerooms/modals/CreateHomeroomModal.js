@@ -93,7 +93,7 @@ class CreateHomeroomModal extends Component {
             type='submit'
             form='create-homeroom-form'
             disabled={loading}            
-            className='mt-btn-success pull-right btn btn-success mt-btn'
+            className='mt-btn-success mt-btn'
             color='primary'>
             {t('addNewHomeroom')}
           </Button>

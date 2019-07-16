@@ -119,10 +119,10 @@ class SendMessageModal extends Component {
                 </DialogContent>
                 <Divider className='full-width'/>
                 <DialogActions>
-                    <button disabled={loading} className='mt-btn-success pull-right btn btn-success mt-btn' onClick={ (e) => {this._onSubmit(e) }} >
+                    <button disabled={loading} className='btn btn-success' onClick={ (e) => {this._onSubmit(e) }} >
                       {t('sendMessage')}
                     </button>
-                    <button className='pull-right btn btn-default' onClick={ (e) => {this._close() }}>
+                    <button className='btn btn-default' onClick={ (e) => {this._close() }}>
                       {t('cancel')}
                     </button>                    
                 </DialogActions>

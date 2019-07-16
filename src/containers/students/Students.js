@@ -240,7 +240,7 @@ class Students extends Component {
                   </HasPermission>
                   <HasPermission permissions={['[Users][Students][Create][Bulk][Any]']}>
                     <NavLink className='link-btn' to='/students/csv'>
-                    <Button variant="contained" className='btn-success mt-btn mt-btn-success'>
+                    <Button variant="contained" className='mt-btn mt-btn-success'>
                       {t('bulkAddStudents')} 
                       <Icon className="ml-2">person</Icon>
                     </Button>

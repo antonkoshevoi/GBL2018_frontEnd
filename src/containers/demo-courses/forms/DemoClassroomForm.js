@@ -115,7 +115,7 @@ class DemoClassroomForm extends Component {
     return (
       <div className='row'>
         <div className='col-sm-10 m-auto'>
-          <FormControl aria-describedby='crmName-error-text' className='full-width form-inputs'>
+          <FormControl className='full-width form-inputs'>
             <InputLabel htmlFor='crmName-error'>{t('name')}</InputLabel>
             <Input
               name='crmName'

@@ -77,7 +77,7 @@ class GiftForm extends Component {
             </div>) : (<div className="text-center" style={{width: '100%'}}><CircularProgress color="primary"/></div>)}
             <div>
                 <Typography variant="h6" color='inherit'>{t('inviteNewPersone')} </Typography>
-                <FormControl aria-describedby='crmName-error-text' className='full-width form-inputs'>
+                <FormControl className='full-width form-inputs'>
                   <InputLabel htmlFor='email'>{t('email')}</InputLabel>
                   <Input
                     name='email'              

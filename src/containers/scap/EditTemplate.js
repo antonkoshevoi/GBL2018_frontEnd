@@ -155,7 +155,7 @@ class EditTemplate extends Component {
         return questions.map((question, key) => (
             <div key={key} className="row" data-id={question.id}>
                 <div className="col-sm-10 col-md-10 col-lg-8">
-                    <FormControl aria-describedby='new-question-error-error-text' className='full-width form-inputs'>                      
+                    <FormControl className='full-width form-inputs'>                      
                         <TextField                          
                           label={`${t('question')} #${(key + 1)}`}
                           multiline
@@ -202,7 +202,7 @@ class EditTemplate extends Component {
                         <div className="row">
                             <div className="col-sm-12 col-md-6 col-lg-4">
                               <h5 className="text-left">{t('templateDetails')}</h5>
-                              <FormControl aria-describedby='title-error-text' className='full-width form-inputs'>
+                              <FormControl className='full-width form-inputs'>
                                 <InputLabel htmlFor='title-error'>{t('title')}</InputLabel>
                                 <Input
                                   name='title'
@@ -214,7 +214,7 @@ class EditTemplate extends Component {
                                   }}/>
                                 {errors && errors.get('title') && <FormHelperText error>{errors.get('title').get(0)}</FormHelperText>}
                               </FormControl>                    
-                              <FormControl aria-describedby='description-error-text' className='full-width form-inputs'>
+                              <FormControl className='full-width form-inputs'>
                                     <TextField
                                       id='description'                
                                       name='description'

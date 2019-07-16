@@ -87,10 +87,9 @@ class ResultsModal extends Component {
                 <Divider className='full-width'/>
                 <DialogActions>
                     <Button
-                      type='submit'
-                      form='assign-students-form'
+                      type='button'                      
                       disabled={loading}                      
-                      className='mt-btn-success pull-right btn btn-success mt-btn'
+                      className='mt-btn-success mt-btn'
                       onClick={ (e) => {this._close(e) }}
                       color='primary'>
                       {t('close')}

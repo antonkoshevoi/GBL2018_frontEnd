@@ -80,7 +80,7 @@ class DiscountCode extends Component {
             </AppBar>
 
             <DialogContent className="mt-4">
-                <form id='update-administrator-form' onSubmit={(e) => {
+                <form id='promocode-form' onSubmit={(e) => {
                     this._onSubmit(e)
                 }}>
                 <div className='row'>
@@ -105,9 +105,9 @@ class DiscountCode extends Component {
             <DialogActions>
                 <Button
                     type='submit'
-                    form='update-administrator-form'
+                    form='promocode-form'
                     disabled={loading}                        
-                    className='mt-btn-success pull-right btn btn-success mt-btn'
+                    className='mt-btn-success mt-btn'
                     color='primary'>
                     {t('apply')}
                 </Button>

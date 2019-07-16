@@ -150,8 +150,7 @@ class EditAutoClassroomModal extends Component {
         <div>
         {taskConfig.autoCreateTask.frequency === 'weekly' &&
 
-        <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
-          <FormControl>
+        <FormControl className='full-width form-inputs'>          
             <InputLabel htmlFor="age-simple">{t('rolloverDay')}</InputLabel>
             <Select
               name="rollOver"
@@ -165,15 +164,13 @@ class EditAutoClassroomModal extends Component {
               <MenuItem value={'Friday'}>{t('friday')}</MenuItem>
               <MenuItem value={'Saturday'}>{t('saturday')}</MenuItem>
               <MenuItem value={'Sunday'}>{t('sunday')}</MenuItem>
-            </Select>
-          </FormControl>
+            </Select>         
         </FormControl>
 
         }
 
           {taskConfig.autoCreateTask.frequency === 'monthly' &&
-          <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
-            <FormControl>
+          <FormControl className='full-width form-inputs'>            
               <InputLabel htmlFor="age-simple">{t('rolloverDayNumber')}</InputLabel>
               <Select
                 name="rollOver"
@@ -182,7 +179,6 @@ class EditAutoClassroomModal extends Component {
               >
                 { days.map( (index,value) => (<MenuItem key={index+1} value={index+1}>{index+1}</MenuItem>)) }
               </Select>
-            </FormControl>
           </FormControl>
           }
         </div>
@@ -218,8 +214,7 @@ class EditAutoClassroomModal extends Component {
           }}>            
             <div className="row">
               <div className="col-md-12">
-                <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
-                  <FormControl>
+                <FormControl className='full-width form-inputs'>                  
                     <InputLabel htmlFor="age-simple">{t('frequency')}</InputLabel>
                     <Select
                       name="frequency"
@@ -228,13 +223,12 @@ class EditAutoClassroomModal extends Component {
                     >
                       <MenuItem value="weekly">{t('weekly')}</MenuItem>
                       <MenuItem value="monthly">{t('monthly')}</MenuItem>
-                    </Select>
-                  </FormControl>
+                    </Select>                  
                   {errors && errors.get('autoCreateTask.frequency') &&
                   <FormHelperText error>{errors.get('autoCreateTask.frequency').get(0)}</FormHelperText>}
                 </FormControl>
                 {this._renderRollOverDay()}
-                <FormControl aria-describedby='maxStudent-error-text' className='full-width form-inputs'>
+                <FormControl  className='full-width form-inputs'>
                   <InputLabel htmlFor='maxStudent-error'>{t('maxStudents')}</InputLabel>
                   <Input
                     type="number"
@@ -246,7 +240,7 @@ class EditAutoClassroomModal extends Component {
                   {errors && errors.get('autoCreateTask.maxStudent') &&
                   <FormHelperText error>{errors.get('autoCreateTask.maxStudent').get(0)}</FormHelperText>}
                 </FormControl>
-                <FormControl aria-describedby='courseDuration-error-text' className='full-width form-inputs'>
+                <FormControl className='full-width form-inputs'>
                   <InputLabel htmlFor='duration-error'>{t('durationInDays')}</InputLabel>
                   <Input
                     type="number"
@@ -294,7 +288,7 @@ class EditAutoClassroomModal extends Component {
             type='submit'
             form='update-classroom-form'
             disabled={loading}            
-            className='mt-btn-success pull-right btn btn-success mt-btn'
+            className='mt-btn-success mt-btn'
             color='primary'>
             {t('startAutoClassroom')}
           </Button>
