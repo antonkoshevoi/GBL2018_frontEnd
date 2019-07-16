@@ -63,9 +63,6 @@ textarea {
     max-width: 100%;
 }
 
-.m-o-hidden {
-    overflow: hidden !important;
-}
 .content-wrapper {
     margin-bottom: 30px;
 }
@@ -135,9 +132,6 @@ textarea {
     padding-left: 0;
     padding-right: 0;
 }
-.sub-table .table thead tr.active th {
-    padding: 6px 10px;
-}
 
 .user-avatar {
     max-width: 100px;
@@ -204,17 +198,6 @@ li > .small-avatar {
 
 .main-background {
     background-image: url(../media/images/bg-3.jpg);    
-}
-
-.loginWrapper {
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
 }
 
 .m-dropdown .user-menu-header.m-dropdown__header {
@@ -325,10 +308,6 @@ table th .sort-arrow {
 
 .paggination-group button {
     min-width: 50px;
-}
-
-.paggination-group button:not('btn-metal') {
-    background-color: #2f8eed;
 }
 
 .paggination-group .btn-info {

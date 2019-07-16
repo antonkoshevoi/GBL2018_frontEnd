@@ -200,7 +200,7 @@ class Download extends Component {
                             <Billing 
                                 onDataSaved={(params) => this._setBilling(params)} 
                                 goBack={() => this._handleBack()}
-                                shippingAddress={[]} 
+                                contactsOnly={true}
                                 billingAddress={this.state.billingAddress} />
                         }
                     </div> 
@@ -215,8 +215,7 @@ class Download extends Component {
         </div>;
     }
   
-    _renderStepper()
-    {
+    _renderStepper() {
         const { t, cartRecordsRequest, auth } = this.props;    
         const activeStep = auth.get('isLoggedIn') ? 0 : (this.state.showBilling ? 1 : 0);
 

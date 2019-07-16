@@ -52,93 +52,94 @@ class Address extends Component {
   }  
 
   render() {
-    const {title, errors, disabled, form, t} = this.props;
+    const {title, errors, disabled, form, contactsOnly, t} = this.props;
        
     return (
-         <div className="row">
-            <div className='col-12'>  
+      <div className="row">
+        <div className='col-12'>  
+            <input
+              value={form.id || ''}
+              name='id'
+              onChange={(e) => {this._handleInputChange(e)}}
+              type='hidden'
+              />
+          <legend className='mb-3'>{t('contactInformation', {title: title})}</legend>
+          <div className='m-form__section'>
+            <div className="form-group row">
+              <label className="col-form-label col-lg-3 col-12">{t('firstName')}</label>
+              <div className="col-lg-9 col-12">
                 <input
-                  value={form.id || ''}
-                  name='id'
+                  required
+                  disabled={disabled}
+                  value={form.firstName || ''}
+                  name='firstName'
                   onChange={(e) => {this._handleInputChange(e)}}
-                  type='hidden'
-                  />
-              <legend className='mb-3'>{t('contactInformation', {title: title})}</legend>
-              <div className='m-form__section'>
-                <div className="form-group row">
-                  <label className="col-form-label col-lg-3 col-12">{t('firstName')}</label>
-                  <div className="col-lg-9 col-12">
-                    <input
-                      required
-                      disabled={disabled}
-                      value={form.firstName || ''}
-                      name='firstName'
-                      onChange={(e) => {this._handleInputChange(e)}}
-                      type='text'
-                      className='form-control m-input'
-                      placeholder=''/>
-                    <div className='form-control-feedback'>
-                      {errors && errors.get(`firstName`) &&
-                      <div className="form-control-feedback text-center error">{errors.get(`firstName`).get(0)}</div>}
-                    </div>
-                  </div>
-                </div>
-                <div className="form-group row">
-                  <label className="col-form-label col-lg-3 col-12">{t('lastName')}</label>
-                  <div className="col-lg-9 col-12">
-                    <input
-                      required
-                      disabled={disabled}
-                      value={form.lastName || ''}
-                      name='lastName'
-                      onChange={(e) => {this._handleInputChange(e)}}
-                      type='text'
-                      className='form-control m-input'
-                      placeholder=''/>
-                    <div className='form-control-feedback'>
-                      {errors && errors.get(`lastName`) &&
-                      <div className="form-control-feedback text-center error">{errors.get(`lastName`).get(0)}</div>}
-                    </div>
-                  </div>
-                </div>
-                <div className="form-group row">
-                  <label className="col-form-label col-lg-3 col-12">{t('email')}</label>
-                  <div className="col-lg-9 col-12">
-                    <input
-                      required
-                      disabled={disabled}
-                      value={form.email || ''}
-                      name='email'
-                      onChange={(e) => {this._handleInputChange(e)}}
-                      type='email'
-                      className='form-control m-input'
-                      placeholder=''/>
-                    <div className='form-control-feedback'>
-                      {errors && errors.get(`email`) &&
-                      <div className="form-control-feedback text-center error">{errors.get(`email`).get(0)}</div>}
-                    </div>
-                  </div>
-                </div>
-                <div className="form-group row">
-                  <label className="col-form-label col-lg-3 col-12">{t('telephone')}</label>
-                  <div className="col-lg-9 col-12">
-                    <input
-                      required
-                      disabled={disabled}
-                      value={form.telephone || ''}
-                      name='telephone'
-                      onChange={(e) => {this._handleInputChange(e)}}
-                      type='text'
-                      className='form-control m-input'
-                      placeholder=''/>
-                    <div className='form-control-feedback'>
-                      {errors && errors.get(`telephone`) &&
-                      <div className="form-control-feedback text-center error">{errors.get(`telephone`).get(0)}</div>}
-                    </div>
-                  </div>
+                  type='text'
+                  className='form-control m-input'
+                  placeholder=''/>
+                <div className='form-control-feedback'>
+                  {errors && errors.get(`firstName`) &&
+                  <div className="form-control-feedback text-center error">{errors.get(`firstName`).get(0)}</div>}
                 </div>
               </div>
             </div>
+            <div className="form-group row">
+              <label className="col-form-label col-lg-3 col-12">{t('lastName')}</label>
+              <div className="col-lg-9 col-12">
+                <input
+                  required
+                  disabled={disabled}
+                  value={form.lastName || ''}
+                  name='lastName'
+                  onChange={(e) => {this._handleInputChange(e)}}
+                  type='text'
+                  className='form-control m-input'
+                  placeholder=''/>
+                <div className='form-control-feedback'>
+                  {errors && errors.get(`lastName`) &&
+                  <div className="form-control-feedback text-center error">{errors.get(`lastName`).get(0)}</div>}
+                </div>
+              </div>
+            </div>
+            <div className="form-group row">
+              <label className="col-form-label col-lg-3 col-12">{t('email')}</label>
+              <div className="col-lg-9 col-12">
+                <input
+                  required
+                  disabled={disabled}
+                  value={form.email || ''}
+                  name='email'
+                  onChange={(e) => {this._handleInputChange(e)}}
+                  type='email'
+                  className='form-control m-input'
+                  placeholder=''/>
+                <div className='form-control-feedback'>
+                  {errors && errors.get(`email`) &&
+                  <div className="form-control-feedback text-center error">{errors.get(`email`).get(0)}</div>}
+                </div>
+              </div>
+            </div>
+            <div className="form-group row">
+              <label className="col-form-label col-lg-3 col-12">{t('telephone')}</label>
+              <div className="col-lg-9 col-12">
+                <input
+                  required
+                  disabled={disabled}
+                  value={form.telephone || ''}
+                  name='telephone'
+                  onChange={(e) => {this._handleInputChange(e)}}
+                  type='text'
+                  className='form-control m-input'
+                  placeholder=''/>
+                <div className='form-control-feedback'>
+                  {errors && errors.get(`telephone`) &&
+                  <div className="form-control-feedback text-center error">{errors.get(`telephone`).get(0)}</div>}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {!contactsOnly &&
           <div className='col-12'>
             <legend className='mb-3'>{t('contactAddress', {title: title})}</legend>
             <address className='m-form__section signUpOptional'>
@@ -257,8 +258,8 @@ class Address extends Component {
                 </div>
               </div>
             </address>              
+          </div>}
         </div>
-      </div>
     );
   }
 }

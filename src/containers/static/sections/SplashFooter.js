@@ -58,10 +58,10 @@ class SplashFooter extends PureComponent {
                                 <NavLink to={`/`}><CldImage className="img-logo" src="BZabc_logo_top.png" alt="GravityBrain" /></NavLink>
                             </div>                        
                             <div className="align-self-center text-center">
-                                <NavLink to={`/privacy-policy.html`} className="btn no-border p-0 m-0">{t('privacy')}</NavLink>
+                                <NavLink to={`/privacy-policy.html`} className="btn radius-0 p-0 m-0">{t('privacy')}</NavLink>
                             </div> 
                             <div className="align-self-center text-center">
-                                <NavLink to={`/terms`} className="btn no-border p-0 m-0">{t('terms')}</NavLink>
+                                <NavLink to={`/terms`} className="btn radius-0 p-0 m-0">{t('terms')}</NavLink>
                             </div>
                         </div>
                     </div>
