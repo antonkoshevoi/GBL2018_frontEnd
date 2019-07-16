@@ -18,6 +18,8 @@ const Video = (props) => {
     return <iframe
         src={src}
         title={title}
+        width='560'
+        height='315'
         style={{
           minWidth: '560px',
           minHeight: '315px',
@@ -89,7 +91,7 @@ class Details extends Component {
             return <div className='d-flex justify-content-end pr-4'>
                 <div>
                     <p className='mb-2 d-flex justify-content-between align-items-center'>
-                        <span>{t('printable')}</span> <i class="fa fa-download display-6" aria-hidden="true"></i>
+                        <span>{t('printable')}</span> <i className="fa fa-download display-6" aria-hidden="true"></i>
                     </p>
                     <button className="btn btn-primary" onClick={() => { this._addToCart(record.get('digitalItemId')) }}>
                         <Price price={record.get('digitalItem').get('discountPrice')} currency={record.get('currency')} />
@@ -98,7 +100,7 @@ class Details extends Component {
                 <div className='ml-5'>
                     <p className='mb-2 d-flex justify-content-between align-items-centern'>
                         <span>{t('physical')}</span> 
-                        <i class="fa fa-truck display-6" aria-hidden="true"></i>
+                        <i className="fa fa-truck display-6" aria-hidden="true"></i>
                     </p>
                     <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>                                            
                         {(record.get('discountPrice') > 0) ? <Price price={record.get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
@@ -123,7 +125,7 @@ class Details extends Component {
     let previewImages   = record.get('images').toJS().map((item) => item.previewUrl);
     
     if (record.get('videoLink')) {
-        const videoId = record.get('videoLink').split('/').pop();
+        const videoId = record.get('videoLink').split('/').pop().replace('watch?v=', '');
         
         images.unshift(<Video title='' src={record.get('videoLink')} />);
         previewImages.unshift('https://img.youtube.com/vi/' + videoId +'/0.jpg');
@@ -210,7 +212,7 @@ class Details extends Component {
                               </div>
                             </div>
                           </div>
-                          {(record.get('images').size > 0) && this._renderImages()}
+                          {(record.get('images').size > 0 || record.get('videoLink')) && this._renderImages()}
                           {this._renderPrices()}
                         </div>
                       </div>
