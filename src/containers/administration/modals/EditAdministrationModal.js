@@ -139,7 +139,7 @@ class EditAdministrationModal extends Component {
                         type='submit'
                         form='update-administrator-form'
                         disabled={loading}                        
-                        className='mt-btn-success pull-right btn btn-success mt-btn'
+                        className='mt-btn-success mt-btn'
                         color='primary'>
                         {t('updateUser')}
                     </Button>

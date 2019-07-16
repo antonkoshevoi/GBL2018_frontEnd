@@ -13,6 +13,25 @@ import {buildSortersQuery} from "../../helpers/utils";
 import Lightbox from 'lightbox-react';
 import 'lightbox-react/style.css';
 
+const Video = (props) => {
+    const {src, title} = props;
+    return <iframe
+        src={src}
+        title={title}
+        style={{
+          minWidth: '560px',
+          minHeight: '315px',
+          maxWidth: '97%',
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          margin: 'auto',
+          top: '50%',
+          transform: 'translateY(-50%)',
+        }}
+    />
+};
+
 class Details extends Component {
 
   state = {
@@ -98,16 +117,25 @@ class Details extends Component {
 
   _renderImages() {
     const {record} = this.props;        
-    const {photoIndex, showLightbox} = this.state;
-    const images = record.get('images').toJS().map((item) => item.url);
-
+    const {photoIndex, showLightbox} = this.state;    
+            
+    let images          = record.get('images').toJS().map((item) => item.url);
+    let previewImages   = record.get('images').toJS().map((item) => item.previewUrl);
+    
+    if (record.get('videoLink')) {
+        const videoId = record.get('videoLink').split('/').pop();
+        
+        images.unshift(<Video title='' src={record.get('videoLink')} />);
+        previewImages.unshift('https://img.youtube.com/vi/' + videoId +'/0.jpg');
+    };
+    
     return <div className="store-item-images">
-      {record.get('images').map((item, i) => {
-        if (i > 2) {
+      {previewImages.map((url, i) => {
+        if (i >= 3) {
             return '';
         }
-        return <img className="m-1 store-item-image" key={i} onClick={() => this._showLightbox(i)} src={item.get('previewUrl')} alt="" />;
-      })}          
+        return <img className="m-1 store-item-image" key={i} onClick={() => this._showLightbox(i)} src={url} alt="" />;
+      })}
       {showLightbox && <Lightbox
         mainSrc={images[photoIndex]}
         nextSrc={images[(photoIndex + 1) % images.length]}

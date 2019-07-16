@@ -142,10 +142,9 @@ class AssignStudentModal extends Component {
                 {students.size ?
                     <Button
                         type='button'
-                        onClick={(e) => { this._handleSubmit(e) }}
-                        form='create-student-form'
+                        onClick={(e) => { this._handleSubmit(e) }}                       
                         disabled={loading}            
-                        className='mt-btn-success pull-right btn btn-success mt-btn'
+                        className='mt-btn-success mt-btn'
                         color='primary'>
                         {t('assign')}
                     </Button>
@@ -153,7 +152,7 @@ class AssignStudentModal extends Component {
                     <Button
                         type='button'
                         onClick={(e) => { this._close(e) }}
-                        className='mt-btn-success pull-right btn btn-success mt-btn'
+                        className='mt-btn-success mt-btn'
                         color='primary'>
                         {t('ok')}
                     </Button>                  

@@ -208,9 +208,8 @@ class ClassroomForm extends Component {
                   onClick={() => {
                     this._openCourseDialog()
                   }}
-                  type='button'
-                  form='create-classroom-form'                  
-                  className='mt-btn-success mt-3 pull-right btn btn-success mt-btn'
+                  type='button'                  
+                  className='mt-btn-success mt-3 mt-btn'
                   color='primary'>
                   {t('chooseCourse')}
                 </Button>

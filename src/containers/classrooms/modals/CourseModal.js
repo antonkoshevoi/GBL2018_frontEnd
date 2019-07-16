@@ -186,10 +186,9 @@ class CourseModal extends Component {
             onClick={() => {
               this._onSubmit()
             }}
-            type='button'
-            form='choose-course-form'
+            type='button'            
             disabled={storeRecordsLoading}            
-            className='mt-btn-success pull-right btn btn-success mt-btn'
+            className='mt-btn-success mt-btn'
             color='primary'>
             {t('chooseCourse')}
           </Button>

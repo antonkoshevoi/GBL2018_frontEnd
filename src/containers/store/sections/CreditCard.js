@@ -67,8 +67,7 @@ class CreditCard extends Component {
                     <div className="form-group row">
                       <label className="col-form-label col-lg-3 col-md-3 col-sm-12">{t('cardType')}</label> 
                       <div className="col-lg-5 col-md-9 col-sm-12">
-                        <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
-                          <FormControl>
+                        <FormControl className='full-width form-inputs'>                          
                             <Select                      
                               name="cardType"
                               value={this.state.cardType || ''}
@@ -79,8 +78,7 @@ class CreditCard extends Component {
                                 <MenuItem key='2' value='Discover' >{t('discover')}</MenuItem>
                                 <MenuItem key='3' value='Amex' >{t('amex')}</MenuItem>
                                 <MenuItem key='4' value='JCB' >{t('jcb')}</MenuItem>                                
-                            </Select>
-                          </FormControl>
+                            </Select>                          
                           {errors && errors.get('cardType') && <FormHelperText error>{ errors.get('cardType').get(0) }</FormHelperText>}
                         </FormControl>
                       </div>                      
@@ -88,22 +86,19 @@ class CreditCard extends Component {
                     <div className="form-group row">
                       <label className="col-form-label col-lg-3 col-md-3 col-sm-12">{t('expDate')}</label>
                       <div className="col-6 col-sm-7 col-lg-5 col-md-5">
-                        <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
-                          <FormControl>
+                        <FormControl className='full-width form-inputs'>                          
                             <Select                      
                               name="cardExpYear"
                               value={this.state.cardExpYear || ''}
                               onChange={(e) => this._handleInputChange(e)}
                             >
                                 {years.map((item,index) => <MenuItem key={index} value={item}>{item}</MenuItem>)}
-                            </Select>
-                          </FormControl>
+                            </Select>                          
                           {errors && errors.get('cardExpYear') && <FormHelperText error>{ errors.get('cardExpYear').get(0) }</FormHelperText>}
                         </FormControl>
                       </div>
                       <div className="col-6 col-sm-5 col-lg-3 col-md-3">
-                        <FormControl aria-describedby='crmEnrollmentStartDate-error-text' className='full-width form-inputs'>
-                          <FormControl>
+                        <FormControl className='full-width form-inputs'>                         
                             <Select                      
                               name="cardExpMonth"
                               value={this.state.cardExpMonth || ''}
@@ -121,8 +116,7 @@ class CreditCard extends Component {
                                 <MenuItem key='9' value='10' >10</MenuItem>
                                 <MenuItem key='10' value='11' >11</MenuItem>
                                 <MenuItem key='11' value='12' >12</MenuItem>
-                            </Select>
-                          </FormControl>
+                            </Select>                          
                           {errors && errors.get('cardExpMonth') && <FormHelperText error>{ errors.get('cardExpMonth').get(0) }</FormHelperText>}
                         </FormControl>
                       </div>                      

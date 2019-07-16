@@ -181,7 +181,7 @@ class GiftModal extends Component {
                     }
                     <div>
                     <Typography variant="h6" color='inherit'>{t('inviteNewPersone')} </Typography>
-                    <FormControl aria-describedby='crmName-error-text' className='full-width form-inputs'>
+                    <FormControl className='full-width form-inputs'>
                       <InputLabel htmlFor='email'>{t('email')}</InputLabel>
                       <Input
                         name='email'              
@@ -223,10 +223,9 @@ class GiftModal extends Component {
         <DialogActions>
           <Button
             type='button'
-            onClick={(e) => { this._handleSubmit(e) }}
-            form='create-student-form'
+            onClick={(e) => { this._handleSubmit(e) }}            
             disabled={loading}            
-            className='mt-btn-success pull-right btn btn-success mt-btn'
+            className='mt-btn-success mt-btn'
             color='primary'>
             {t('makeGift')}
           </Button>

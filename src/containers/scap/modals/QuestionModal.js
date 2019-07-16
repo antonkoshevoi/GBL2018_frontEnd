@@ -78,10 +78,10 @@ class QuestionModal extends Component {
         </AppBar>
 
         <DialogContent className='mt-4'>
-          <form id='create-student-form' onSubmit={(e) => { this._onSubmit(e) }}>
+          <form id='create-question-form' onSubmit={(e) => { this._onSubmit(e) }}>
             <div className='row'>
               <div className='col-sm-12 m-auto'>
-                <FormControl aria-describedby='new-question-error-error-text' className='full-width form-inputs'>                      
+                <FormControl className='full-width form-inputs'>                      
                     <TextField
                       id="newQuestion"
                       label={t('question')}
@@ -103,8 +103,8 @@ class QuestionModal extends Component {
         <DialogActions>
           <Button
             type='submit'
-            form='create-student-form'            
-            className='mt-btn-success pull-right btn btn-success mt-btn'
+            form='create-question-form'
+            className='mt-btn-success mt-btn'
             color='primary'>
             {t('add')}
           </Button>

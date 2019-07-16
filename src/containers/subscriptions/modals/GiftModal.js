@@ -122,7 +122,7 @@ class GiftModal extends Component {
           <Button
             disabled={loading}     
             onClick={(e) => { this._handleSubmit(e) }}
-            className='mt-btn-success btn btn-success mt-btn'
+            className='mt-btn-success mt-btn'
             color='primary'>
             {t('makeGift')}
           </Button>

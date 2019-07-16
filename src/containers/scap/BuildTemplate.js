@@ -96,7 +96,7 @@ class BuildTemplate extends Component {
         
         return questions.map((record, key) => (          
             <div key={key} className="col-sm-12 col-md-8" data-id={record}>
-                <FormControl aria-describedby='new-question-error-error-text' className='full-width form-inputs'>                      
+                <FormControl className='full-width form-inputs'>                      
                     <TextField
                       id={`question-${key}`}
                       label={`${t('question')} #${(key + 1)}`}
@@ -132,7 +132,7 @@ class BuildTemplate extends Component {
                         <div className="row">
                             <div className="col-sm-12 col-md-6 col-lg-4">
                               <h5 className="text-left">{t('templateDetails')}</h5>
-                              <FormControl aria-describedby='title-error-text' className='full-width form-inputs'>
+                              <FormControl className='full-width form-inputs'>
                                 <InputLabel htmlFor='title-error'>{t('title')}</InputLabel>
                                 <Input
                                   name='title'
@@ -144,7 +144,7 @@ class BuildTemplate extends Component {
                                   }}/>
                                 {errors && errors.get('title') && <FormHelperText error>{errors.get('title').get(0)}</FormHelperText>}
                               </FormControl>                    
-                              <FormControl aria-describedby='description-error-text' className='full-width form-inputs'>
+                              <FormControl className='full-width form-inputs'>
                                     <TextField
                                       id='description'                
                                       name='description'

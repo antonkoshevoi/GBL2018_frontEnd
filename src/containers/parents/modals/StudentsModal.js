@@ -86,7 +86,7 @@ class StudentsModal extends Component {
                 <Divider className='full-width'/>
                 <DialogActions>
                     <Button                                                                        
-                        className='mt-btn-success pull-right btn btn-success mt-btn'
+                        className='mt-btn-success mt-btn'
                         color='primary'
                         onClick={() => this._close()} >                        
                         {t('ok')}
