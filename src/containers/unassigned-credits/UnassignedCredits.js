@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from '../../components/ui/table';
+import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from '../../components/ui/Table';
 import { connect } from 'react-redux';
 import {getRecords} from "../../redux/course-credits/actions";
 import {selectGetRecordsRequest} from "../../redux/course-credits/selectors";

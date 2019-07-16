@@ -6,7 +6,7 @@ import {Button, Checkbox, FormControlLabel} from '@material-ui/core';
 import {selectValidateAddressRequest} from "../../../redux/store/selectors";
 import {validateAddress} from "../../../redux/store/actions";
 import PaymentMethods from './PaymentMethods';
-import Loader from "../../../components/layouts/Loader";
+import {Loader} from "../../../components/ui/Loader";
 
 class Billing extends Component {
 

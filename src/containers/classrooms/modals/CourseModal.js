@@ -14,7 +14,7 @@ import Modal from "../../../components/ui/Modal";
 import Filter from "../../../components/store/Filter";
 import {selectGetStoreRecordsRequest} from "../../../redux/courses/selectors";
 import {getStoreRecords} from "../../../redux/courses/actions";
-import {Row, Table, TablePreloader, Tbody, Td, Thead, HeadRow, Th, MessageRow} from "../../../components/ui/table";
+import {Row, Table, TablePreloader, Tbody, Td, Thead, HeadRow, Th, MessageRow} from "../../../components/ui/Table";
 import toastr from 'toastr';
 
 class CourseModal extends Component {

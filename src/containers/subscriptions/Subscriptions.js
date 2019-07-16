@@ -8,7 +8,7 @@ import {getRecords, subscribe, resetSubscribeRequest, resetGetUserRecordsRequest
 import {Price} from '../../components/ui/Price';
 import CreditCardForm from "./forms/CreditCardForm";
 import SubscriptionsForm from "./forms/SubscriptionsForm";
-import Loader from "../../components/layouts/Loader";
+import {Loader} from "../../components/ui/Loader";
 import DiscountCode from '../store/sections/DiscountCode';
 
 class Subscriptions extends Component {

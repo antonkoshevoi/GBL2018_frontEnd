@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {HeadRow, Row, Table, Tbody, Td, Th, Thead, MessageRow} from "../../../components/ui/table";
+import {HeadRow, Row, Table, Tbody, Td, Th, Thead, MessageRow} from "../../../components/ui/Table";
 import {connect} from "react-redux";
 import {withTranslation} from "react-i18next";
 import {getRecords} from "../../../redux/course-credits/actions";

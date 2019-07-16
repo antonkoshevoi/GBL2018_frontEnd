@@ -6,7 +6,7 @@ import { withTranslation } from 'react-i18next';
 import { selectGetStudentsRecordsRequest, selectUnSubscribeStudentRequest } from "../../../redux/subscriptions/selectors";
 import { getStudentsRecords, unSubscribeStudent, resetUnSubscribeStudentRequest } from "../../../redux/subscriptions/actions";
 import { Date } from "../../../components/ui/DateTime";
-import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../../components/ui/table";
+import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../../components/ui/Table";
 import Modal from '../../../components/ui/Modal';
 import DeleteButton from "../../../components/ui/DeleteButton";
 

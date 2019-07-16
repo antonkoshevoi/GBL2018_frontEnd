@@ -4,7 +4,7 @@ import {withTranslation} from 'react-i18next';
 import {withRouter} from 'react-router-dom';
 import {getInvoice} from '../../redux/subscriptions/actions';
 import {selectGetInvoiceRequest} from '../../redux/subscriptions/selectors';
-import Loader from "../../components/layouts/Loader";
+import {Loader} from "../../components/ui/Loader";
 import InvoiceForm from "./forms/InvoiceForm";
 
 class Subscribed extends Component {

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Avatar, AppBar, CircularProgress, DialogContent, Icon, Toolbar, Typography, Divider, Button, DialogActions} from '@material-ui/core';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../../components/ui/Table';
 import {connect} from 'react-redux';
 import {withTranslation} from 'react-i18next';
 import {selectGetStudentsRequest} from '../../../redux/parents/selectors';

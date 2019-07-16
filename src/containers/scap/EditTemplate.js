@@ -11,7 +11,7 @@ import {
   InputLabel, 
   Button
 } from '@material-ui/core';
-import Loader from "../../components/layouts/Loader";
+import {Loader} from "../../components/ui/Loader";
 import ReactSortable  from 'react-sortablejs';
 import QuestionModal from './modals/QuestionModal'
 import NotFoundPage from '../errors/404';

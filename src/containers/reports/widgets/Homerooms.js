@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../../components/ui/Table';
 import Pagination from '../../../components/ui/Pagination';
 import { selectHomeroomsRequest } from "../../../redux/reports/dashboard/selectors";
 import { getHomerooms } from "../../../redux/reports/dashboard/actions";

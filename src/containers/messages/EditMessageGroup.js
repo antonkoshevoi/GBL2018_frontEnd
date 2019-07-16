@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { selectUpdateGroupRequest, selectGetGroupRequest } from '../../redux/messages/selectors';
 import { getGroup, updateGroup, resetUpdateGroupRequest, resetGetGroupRequest } from '../../redux/messages/actions';
-import Loader from '../../components/layouts/Loader';
+import {Loader} from '../../components/ui/Loader';
 import GroupForm from "./forms/GroupForm"
 
 class EditMessageGroup extends Component {

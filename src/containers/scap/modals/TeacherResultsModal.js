@@ -4,7 +4,7 @@ import { Date } from "../../../components/ui/DateTime";
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../../components/ui/Table';
 import { getResultsRecords, resetGetResultsRecordsRequest } from "../../../redux/scap/actions";
 import { selectGetResultRecordsRequest } from "../../../redux/scap/selectors";
 import Modal from "../../../components/ui/Modal";

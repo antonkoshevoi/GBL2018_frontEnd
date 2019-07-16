@@ -12,7 +12,7 @@ import {
   MenuItem, 
   Select  
 } from '@material-ui/core';
-import Loader from "../../components/layouts/Loader";
+import {Loader} from "../../components/ui/Loader";
 import NotFoundPage from '../errors/404';
 import { selectGetRecordRequest, selectAddAnswersRequest } from '../../redux/scap/selectors';
 import { getAssignedRecord, resetGetRecordRequest, addAnswers, resetAddAnswersRequest } from '../../redux/scap/actions';

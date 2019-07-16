@@ -14,7 +14,7 @@ import CreditCardForm from "../subscriptions/forms/CreditCardForm";
 import SubscriptionsForm from "../subscriptions/forms/SubscriptionsForm";
 import InvoiceForm from "../subscriptions/forms/InvoiceForm";
 import SplashFooter from "./sections/SplashFooter"
-import Loader from '../../components/layouts/Loader';
+import {Loader} from '../../components/ui/Loader';
 
 const Portlet = (props) => {    
     const {t} = props;       

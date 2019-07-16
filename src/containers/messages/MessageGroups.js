@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { selectGetGroupsRequest, selectDeleteGroupRequest } from '../../redux/messages/selectors';
 import { getGroups, deleteGroup, resetDeleteGroupRequest } from '../../redux/messages/actions';
 import { MenuItem, Select, Button, Icon } from '@material-ui/core';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/Table';
 import { NavLink } from "react-router-dom";
 import { DateTime } from "../../components/ui/DateTime";
 import Pagination from '../../components/ui/Pagination';

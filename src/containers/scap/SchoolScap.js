@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import { Button, Icon, MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow } from '../../components/ui/table';
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow } from '../../components/ui/Table';
 import { selectGetRecordsRequest, selectDeleteRequest } from '../../redux/scap/selectors';
 import { getRecords, deleteRecord } from '../../redux/scap/actions';
 import { Date } from "../../components/ui/DateTime";

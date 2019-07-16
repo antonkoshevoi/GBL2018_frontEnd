@@ -14,7 +14,7 @@ import Shipping from "./sections/Shipping";
 import Billing from "./sections/Billing";
 import Summary from "./sections/Summary";
 import CreditCard from "./sections/CreditCard";
-import Loader from "../../components/layouts/Loader";
+import {Loader} from "../../components/ui/Loader";
 
 class Checkout extends Component {
 

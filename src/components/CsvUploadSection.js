@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { CSVLink } from 'react-csv';
 import PortletWidgets from './ui/PortletWidgets';
 import PortletErrorsWidgets from './ui/PortletErrorsWidgets';
-import Loader from './layouts/Loader';
+import {Loader} from './ui/Loader';
 import { withTranslation } from 'react-i18next';
 import { Button } from '@material-ui/core';
 

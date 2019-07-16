@@ -6,11 +6,11 @@ import { renderToString } from 'react-dom/server'
 import { NavLink } from 'react-router-dom';
 import { selectGetUserRecordsRequest, selectUnSubscribeStudentRequest, selectUnSubscribeRequest } from '../../redux/subscriptions/selectors';
 import { getUserRecords, resetGetUserRecordsRequest, unSubscribe, resetUnSubscribeRequest } from '../../redux/subscriptions/actions';
-import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from "../../components/ui/table";
+import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from "../../components/ui/Table";
 import { Select, MenuItem, FormHelperText } from '@material-ui/core';
 import { Date } from "../../components/ui/DateTime";
 import { Price } from '../../components/ui/Price';
-import Loader from "../../components/layouts/Loader";
+import {Loader} from "../../components/ui/Loader";
 import DeleteButton from "../../components/ui/DeleteButton";
 import ConfirmButton from "../../components/ui/ConfirmButton";
 import AssignStudentModal from "./modals/AssignStudentModal";
