@@ -9,9 +9,8 @@ import SecondStepForm from './forms/SecondStepForm';
 import ThirdStepForm from './forms/ThirdStepForm';
 import {signUpParent, validate, resetSignUpRequest, resetValidateRequest} from '../../redux/signup/actions';
 import {selectSignUpRequest, selectValidateRequest} from '../../redux/signup/selectors';
-import { push } from 'react-router-redux';
-import { load } from '../../redux/app/actions';
-import './Signup.css'
+import {push} from 'react-router-redux';
+import {load} from '../../redux/app/actions';
 
 class SignUpParent extends Component {
 
@@ -151,7 +150,7 @@ class SignUpParent extends Component {
         const step2Errors = this.props.signUpRequest.getIn(['errors', 'step2']);        
 
         return (
-            <form  onSubmit={(e) => { e.preventDefault(); this._next(); }}>
+            <form className='m-form' onSubmit={(e) => { e.preventDefault(); this._next(); }}>
                 {loading && <Loader/>}
                 <div className='signup-page'>
                   <div className='m-signup col-lg-8 col-md-10 col-sm-12 m-auto'>

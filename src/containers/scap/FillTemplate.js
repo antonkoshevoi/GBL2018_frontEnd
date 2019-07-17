@@ -264,7 +264,7 @@ class FillTemplate extends Component {
                                     {t('saveAsDraft')}
                                     <Icon className="ml-2">check</Icon>
                                 </Button>                                 
-                                <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._goBack() }} variant="contained" color='default' className='mt-btn mt-btn-cancel'>
+                                <Button disabled={addAnswersRequest.get('loading')} onClick={() => { this._goBack() }} variant="contained">
                                     {t('cancel')}                                    
                                 </Button>                                
                             </div>                              

@@ -140,7 +140,7 @@ class SignUpPrincipal extends Component {
                     </div>                      
                 </div>
               </div>
-              <form className="m-portlet__body" onSubmit={(e) => { e.preventDefault(); this._submit(); }}>
+              <form className="m-portlet__body m-form" onSubmit={(e) => { e.preventDefault(); this._submit(); }}>
                 <div className="alert alert-secondary mt-2">
                   <p className="text-center m-0">                
                     <Trans i18nKey="translations:alreadyHaveAccountMessage"><NavLink className='alert-link' to="/login"></NavLink>.</Trans>
@@ -149,7 +149,7 @@ class SignUpPrincipal extends Component {
                 <div className="row mt-5">
                   <div className="col-md-6">
                     <legend>{t('personalInformation')}</legend>
-                      <div className="m-form__section">
+                      <div className="m-form__section mt-3">
                         <div className="form-group">
                           <div>
                             <input
@@ -230,7 +230,7 @@ class SignUpPrincipal extends Component {
                     </div>
                   <div className="col-md-6">
                     <legend>{t('schoolInformation')}</legend>
-                    <div className="m-form__section">
+                    <div className="m-form__section mt-3">
                       <div className="form-group">
                         <div>
                           <input

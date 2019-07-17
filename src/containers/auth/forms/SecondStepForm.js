@@ -8,7 +8,7 @@ class SecondStepForm extends Component {
 
   static propTypes = {
     form: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired,
+    errors: PropTypes.object,
     onChange: PropTypes.func.isRequired
   };
 
@@ -74,7 +74,7 @@ class SecondStepForm extends Component {
       <div className='row'>
         <div className='col-lg-7 col-md-6 col-sm-12'>
             <legend className='mb-3'>{t('required')}</legend>
-            <div className='m-form__section'>
+            <div className='m-form__section my-1'>
               <div className="form-group row">
                 <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('username')}</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
@@ -107,7 +107,7 @@ class SecondStepForm extends Component {
             
             <legend className='mb-3 mt-3'>{t('optional')}</legend>
 
-            <div className='m-form__section'>
+            <div className='m-form__section my-1'>
               <div className="form-group row">
                 <label className="col-form-label col-lg-3 col-md-12 col-sm-12">{t('firstName')}</label>
                 <div className="col-lg-8 col-md-12 col-sm-12">
@@ -139,7 +139,7 @@ class SecondStepForm extends Component {
            </div>
         </div>
         <div className='col-lg-5 col-md-6 col-sm-12 text-center'>
-          <legend className='mb-3'>{t('profilePicUpload')}</legend>
+          <legend className='mb-3 mt-4 mt-md-0'>{t('profilePicUpload')}</legend>
 
           <div className='CropperBlock text-center'>
             <div className='upload-btn-wrapper '>
@@ -160,7 +160,7 @@ class SecondStepForm extends Component {
               className='signup-cropper'
               style={{height: 250, width: 250}}
               aspectRatio={1 / 1}
-              viewMode="3"
+              viewMode={3}
               guides={false}/>
 
             {form.avatarCropped &&

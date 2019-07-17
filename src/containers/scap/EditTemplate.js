@@ -256,7 +256,7 @@ class EditTemplate extends Component {
                                     {t('saveTemplate')}
                                     <Icon className="ml-2">check</Icon>
                                 </Button>                                
-                                <Button disabled={updateRequest.get('loading')} onClick={() => { this._goBack() }} variant="contained" color='default' className='mt-btn mt-btn-cancel'>
+                                <Button disabled={updateRequest.get('loading')} onClick={() => { this._goBack() }} variant="contained">
                                     {t('cancel')}                                    
                                 </Button>                                
                             </div>                              
