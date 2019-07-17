@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import { Button, Icon, MenuItem, Select } from '@material-ui/core';
+import { Button, Icon } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, EditButton, MessageRow } from '../../components/ui/Table';
+import { SelectPerPage } from "../../components/ui/SelectPerPage";
 import { buildSortersQuery } from '../../helpers/utils';
 import { selectDeleteRequest, selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords } from '../../redux/homerooms/selectors';
 import {deleteRecord, getRecords, getSingleRecord} from '../../redux/homerooms/actions';
@@ -210,16 +211,7 @@ class Homerooms extends Component {
             <div className='mt-3 mb-4'>
               <div className='row'>
                 <div className='col-sm-12 text-right'>
-                  <Select
-                    className="pull-left table-select"
-                    value={perPage}
-                    onChange={(e) => { this._selectPerPage(e.target.value) }}>
-                    <MenuItem value={5}>5</MenuItem>
-                    <MenuItem value={10}>10</MenuItem>
-                    <MenuItem value={25}>25</MenuItem>
-                    <MenuItem value={50}>50</MenuItem>
-                    <MenuItem value={100}>100</MenuItem>
-                  </Select>
+                  <SelectPerPage value={perPage} onChange={(value) => { this._selectPerPage(value) }} className="pull-left" />
                   <HasPermission permissions={['[HomeRooms][Create][Any]']}>
                     <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success mr-3'>
                       {t('addNew')}

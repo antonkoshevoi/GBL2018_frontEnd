@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import { Button, Icon, MenuItem, Select } from '@material-ui/core';
+import { Button, Icon } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow, EditButton } from '../../components/ui/Table';
 import { buildSortersQuery } from '../../helpers/utils';
 import { selectDeleteRequest, selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords } from '../../redux/administration/selectors';
-import {deleteRecord, getRecords, getSingleRecord} from '../../redux/administration/actions';
+import { deleteRecord, getRecords, getSingleRecord } from '../../redux/administration/actions';
+import { SelectPerPage } from "../../components/ui/SelectPerPage";
 import Pagination from '../../components/ui/Pagination';
 import CreateAdministrationModal from './modals/CreateAdministrationModal';
 import EditAdministrationModal from "./modals/EditAdministrationModal";
@@ -208,27 +209,14 @@ class Administration extends Component {
             </div>
           </div>
           <div className='m-portlet__body'>
-            <div className='mt-3 mb-4'>
-              <div className='row'>
-                <div className='col-sm-12 text-right'>
-                  <Select
-                    className="pull-left table-select"
-                    value={perPage}
-                    onChange={(e) => { this._selectPerPage(e.target.value) }}>
-                    <MenuItem value={5}>5</MenuItem>
-                    <MenuItem value={10}>10</MenuItem>
-                    <MenuItem value={25}>25</MenuItem>
-                    <MenuItem value={50}>50</MenuItem>
-                    <MenuItem value={100}>100</MenuItem>
-                  </Select>
-                  <HasPermission permissions={['[Users][Administration][Create][SuperAdmin]']}>
-                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
-                      {t('addNew')}
-                      <Icon className="ml-2">add</Icon>
-                    </Button>
-                  </HasPermission>
-                </div>
-              </div>
+            <div className='mt-3 mb-4 text-right'>
+              <SelectPerPage value={perPage} onChange={(value) => { this._selectPerPage(value) }} className="pull-left" />
+              <HasPermission permissions={['[Users][Administration][Create][SuperAdmin]']}>
+                <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
+                  {t('addNew')}
+                  <Icon className="ml-2">add</Icon>
+                </Button>
+              </HasPermission>     
             </div>
 
             <Table>

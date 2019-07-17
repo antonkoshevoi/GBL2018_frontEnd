@@ -5,6 +5,7 @@ import {getRecords} from "../../redux/transactions/actions";
 import {selectGetRecordsRequest} from "../../redux/transactions/selectors";
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from "../../components/ui/Table";
 import {MenuItem, Select, FormHelperText, AppBar, DialogContent, Toolbar, Typography} from '@material-ui/core';
+import {SelectPerPage} from "../../components/ui/SelectPerPage";
 import {NavLink} from "react-router-dom";
 import {Price} from "../../components/ui/Price";
 import {DateTime} from "../../components/ui/DateTime";
@@ -193,30 +194,17 @@ class StoreItems extends Component {
         
         return (
             <div>
-                <div className='row'>
-                    <div className='col-6 col-sm-6 text-right'>
-                        <Select
-                            className="pull-left table-select"
-                            value={perPage}
-                            onChange={(e) => { this._selectPerPage(e.target.value) }}>
-                            <MenuItem value={5}>5</MenuItem>
-                            <MenuItem value={10}>10</MenuItem>
-                            <MenuItem value={25}>25</MenuItem>
-                            <MenuItem value={50}>50</MenuItem>
-                            <MenuItem value={100}>100</MenuItem>
+                <div className='d-flex justify-content-between align-items-center'>
+                    <SelectPerPage value={perPage} onChange={(value) => { this._selectPerPage(value) }} />
+                    <div className="table-filter">
+                        <Select className='full-width' value={this.state.filter} onChange={(e) => { this._handleFilter(e) }} name="filter">                        
+                            <MenuItem value={0}>{t('all')}</MenuItem>
+                            <MenuItem value="paid">{t('paid')}</MenuItem>
+                            <MenuItem value="due">{t('due')}</MenuItem>
+                            <MenuItem value="declined">{t('declined')}</MenuItem>
                         </Select>
-                    </div>
-                    <div className="col-6 col-sm-6">
-                        <div className="pull-right table-filter">
-                            <Select className='full-width' value={this.state.filter} onChange={(e) => { this._handleFilter(e) }} name="filter">                        
-                                <MenuItem value={0}>{t('all')}</MenuItem>
-                                <MenuItem value="paid">{t('paid')}</MenuItem>
-                                <MenuItem value="due">{t('due')}</MenuItem>
-                                <MenuItem value="declined">{t('declined')}</MenuItem>
-                            </Select>
-                            <FormHelperText>{t('filterTransactions')}</FormHelperText>
-                        </div>
-                    </div>                        
+                        <FormHelperText>{t('filterTransactions')}</FormHelperText>
+                    </div>                                           
                 </div>
                 <Table>
                     <Thead>

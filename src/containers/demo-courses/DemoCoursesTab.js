@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { EditButton, HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/Table';
-import { Button, Icon, MenuItem, Select } from '@material-ui/core';
+import { Button, Icon } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { selectDeleteRequest, selectGetRecordsRequest, selectGetSingleRecordRequest, selectPagination, selectRecords } from '../../redux/classrooms/selectors';
 import { buildSortersQuery } from '../../helpers/utils';
 import { Date } from "../../components/ui/DateTime";
+import { SelectPerPage } from "../../components/ui/SelectPerPage";
 import Pagination from '../../components/ui/Pagination';
 import DeleteButton from '../../components/ui/DeleteButton';
 import { getDemoClassrooms, deleteRecord, getSingleRecord } from '../../redux/classrooms/actions';
@@ -211,29 +212,16 @@ class DemoCoursesTab extends Component {
 
     return (
         <div className='m-portlet__body'>
-          <div className='mt-3 mb-4'>
-            <div className='row'>
-              <div className='col-sm-12 text-right'>
-                <Select
-                  className='pull-left table-select'
-                  value={perPage}
-                  onChange={(e) => { this._selectPerPage(e.target.value) }}>
-                  <MenuItem value={5}>5</MenuItem>
-                  <MenuItem value={10}>10</MenuItem>
-                  <MenuItem value={25}>25</MenuItem>
-                  <MenuItem value={50}>50</MenuItem>
-                  <MenuItem value={100}>100</MenuItem>
-                </Select>
-                <Button variant="contained" color='primary' onClick={() => { this._openAssignDialog() }} className='mt-btn mt-btn-success mr-3'>
-                  {t('assignStudent')}
-                  <Icon className="ml-2">persone</Icon>
-                </Button>                 
-                <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
-                  {t('addNew')}
-                  <Icon className="ml-2">add</Icon>
-                </Button>
-              </div>
-            </div>
+          <div className='mt-3 mb-4 text-right'>
+            <SelectPerPage value={perPage} onChange={(value) => { this._selectPerPage(value) }} className="pull-left" />
+            <Button variant="contained" color='primary' onClick={() => { this._openAssignDialog() }} className='mt-btn mt-btn-success mr-3'>
+              {t('assignStudent')}
+              <Icon className="ml-2">persone</Icon>
+            </Button>                 
+            <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
+              {t('addNew')}
+              <Icon className="ml-2">add</Icon>
+            </Button>
           </div>
           <Table>
             <Thead>

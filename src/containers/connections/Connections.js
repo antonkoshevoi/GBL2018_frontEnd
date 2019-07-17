@@ -179,14 +179,10 @@ class Connections extends Component {
                         </div>
                     </div>
                     <div className='m-portlet__body'>
-                        <div className='mt-3 mb-4'>
-                            <div className='row'>
-                                <div className='col-sm-12 text-right'>       
-                                    <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
-                                        {t('sentRequest')} <Icon className='ml-2'>add</Icon>
-                                    </Button>                  
-                                </div>
-                            </div>
+                        <div className='mt-3 mb-4 text-right'>
+                            <Button variant="contained" color='primary' onClick={() => { this._openCreateDialog() }} className='mt-btn mt-btn-success'>
+                                {t('sentRequest')} <Icon className='ml-2'>add</Icon>
+                            </Button>                     
                         </div>
                         <Table>
                             <Thead>
