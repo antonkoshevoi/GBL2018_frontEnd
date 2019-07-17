@@ -3,8 +3,9 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetGroupsRequest, selectDeleteGroupRequest } from '../../redux/messages/selectors';
 import { getGroups, deleteGroup, resetDeleteGroupRequest } from '../../redux/messages/actions';
-import { MenuItem, Select, Button, Icon } from '@material-ui/core';
+import { Button, Icon } from '@material-ui/core';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/Table';
+import { SelectPerPage } from "../../components/ui/SelectPerPage";
 import { NavLink } from "react-router-dom";
 import { DateTime } from "../../components/ui/DateTime";
 import Pagination from '../../components/ui/Pagination';
@@ -112,16 +113,7 @@ class MessageGroups extends Component {
                         <div className='mt-3 mb-4'>
                             <div className='row'>               
                                 <div className='col-sm-12 text-right'>
-                                    <Select
-                                        className="pull-left table-select"
-                                        value={perPage}
-                                        onChange={(e) => { this._selectPerPage(e.target.value) }}>
-                                        <MenuItem value={5}>5</MenuItem>
-                                        <MenuItem value={10}>10</MenuItem>
-                                        <MenuItem value={25}>25</MenuItem>
-                                        <MenuItem value={50}>50</MenuItem>
-                                        <MenuItem value={100}>100</MenuItem>
-                                    </Select>                                    
+                                    <SelectPerPage value={perPage} onChange={(value) => { this._selectPerPage(value) }} className="pull-left" />                                   
                                     <NavLink to="/messages/groups/new">
                                         <Button color='primary' className='mt-btn mt-btn-success'>
                                           {t('newGroup')}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import {HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow} from '../../components/ui/Table';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {getRecords} from "../../redux/course-credits/actions";
 import {selectGetRecordsRequest} from "../../redux/course-credits/selectors";
 import {buildSortersQuery} from "../../helpers/utils";
@@ -11,10 +11,7 @@ class UnassignedCredits extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sorters: {},
-      filters: {},
-      page: props.recordsRequest.get('pagination').get('page'),
-      perPage: props.recordsRequest.get('pagination').get('perPage')
+      sorters: {}
     }
   }
 
@@ -24,12 +21,10 @@ class UnassignedCredits extends Component {
   }
 
   _getRecords () {
-    const { sorters, filters, page, perPage } = this.state;
+    const { sorters } = this.state;
 
     this.props.getRecords({
-      orderBy: buildSortersQuery(sorters),
-      filter: filters,
-      page, perPage
+      orderBy: buildSortersQuery(sorters)      
     });
   }
 
@@ -67,7 +62,6 @@ class UnassignedCredits extends Component {
     } else {
       sorters[name] = 'asc';
     }
-
     this.setState({ sorters }, this._getRecords);
   }
 
@@ -76,16 +70,15 @@ class UnassignedCredits extends Component {
     const { t } = this.props;
     const loading = this.props.recordsRequest.get('loading');
     
-    return (
-        <div>
-            <Card title={t('unassignedCredits')} icon="la la-money">
+    return (        
+        <Card title={t('unassignedCredits')} icon="la la-money">
             <Table>
               <Thead>
                 <HeadRow>
                   <Th>#</Th>
                   <Th>{t('thumbnail')}</Th>
-                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['resurce']} name='resource'>{t('resource')}</Th>
-                  <Th>{t('description')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['resource']} name='resource'>{t('resource')}</Th>
+                  <Th onSort={ (name) => { this._sort(name) }} dir={sorters['description']} name='description'>{t('description')}</Th>
                   <Th onSort={ (name) => { this._sort(name) }} dir={sorters['count']} name='count'>{t('count')}</Th>
                 </HeadRow>
               </Thead>
@@ -94,8 +87,7 @@ class UnassignedCredits extends Component {
               { this._renderRecords() }
               </Tbody>
             </Table>
-          </Card>        
-      </div>
+        </Card>
     );
   }
 }

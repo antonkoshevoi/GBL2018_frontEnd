@@ -199,11 +199,11 @@ class ParentDashboard extends Component {
             <Alerts />
             <div className="row">
               <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                <div className='block-header border-b-blue'>                                                      
-                    <button title={t('add')} onClick={() => { this._openCreateDialog(); }} className="btn m-btn--icon-only pull-right bg-transparent mr-3">
+                <div className='block-header border-b-blue d-flex justify-content-between align-items-end'>                                                      
+                    <h3 className='m-portlet__head-text'>{t('myLearners')}</h3>
+                    <button title={t('add')} onClick={() => { this._openCreateDialog(); }} className="btn m-btn--icon-only bg-transparent mr-1">
                       <i className="display-5 fa fa-plus-circle"></i>
                     </button> 
-                    <h3 className='m-portlet__head-text'>{t('myLearners')}</h3>
                 </div>              
                 <div className="m-portlet m-portlet--head-solid-bg">
                   <div className="m-portlet__body pt-3">

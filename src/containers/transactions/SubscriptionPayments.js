@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import { MenuItem, Select } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { HeadRow, Row, Table, TablePreloader, Tbody, Td, Th, Thead, MessageRow } from '../../components/ui/Table';
+import { SelectPerPage } from "../../components/ui/SelectPerPage";
 import { DateTime } from "../../components/ui/DateTime";
 import { Price } from '../../components/ui/Price';
 import { selectPagination, selectGetPaymentsRequest } from '../../redux/subscriptions/selectors';
@@ -115,20 +115,7 @@ class SubscriptionPayments extends Component {
         return (
             <div>
                 <div className='mt-3 mb-4'>
-                    <div className='row'>
-                        <div className='col-sm-12 text-right'>
-                            <Select
-                                className="pull-left table-select mt-2"
-                                value={perPage}
-                                onChange={(e) => { this._selectPerPage(e.target.value) }}>                        
-                                <MenuItem value={5}>5</MenuItem>
-                                <MenuItem value={10}>10</MenuItem>
-                                <MenuItem value={25}>25</MenuItem>
-                                <MenuItem value={50}>50</MenuItem>
-                                <MenuItem value={100}>100</MenuItem>
-                            </Select> 
-                        </div>
-                    </div>
+                    <SelectPerPage value={perPage} onChange={(value) => { this._selectPerPage(value) }} />
                 </div>
                 <Table>
                     <Thead>

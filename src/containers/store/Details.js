@@ -74,7 +74,7 @@ class Details extends Component {
                         <span>{t('printable')}</span> <i className="fa fa-download display-6" aria-hidden="true"></i>
                     </p>
                     <button className="btn btn-primary" onClick={() => { this._addToCart(record.get('digitalItemId')) }}>
-                        {(record.get('discountPrice') > 0) ? <Price price={record.get('digitalItem').get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
+                        {(record.get('digitalItem').get('discountPrice') > 0) ? <Price price={record.get('digitalItem').get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
                     </button>
                 </div>
                 <div className='ml-5'>

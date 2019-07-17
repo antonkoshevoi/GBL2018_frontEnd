@@ -428,21 +428,6 @@ table th .sort-arrow {
     width: 100%;
 }
 
-table.m-middle-table td, table.m-middle-table th {
-    vertical-align: middle;
-}
-
-.btn-icon {
-    font-weight: 600;
-    margin-left: 10px;
-}
-
-.vertical-divider {
-    width: 1px;
-    height: 100%;
-    margin: 0 5px;
-}
-
 .store-filter.left-block {
     display: flex;
     justify-content: flex-start;
@@ -538,11 +523,6 @@ div.m-portlet {
 
 .small-card .col {
     line-height: 1;
-}
-
-.fa.widget-icon {
-    font-size: 65px;
-    color: #27aae1;
 }
 
 .m-portlet.m-portlet--head-solid-bg .m-widget1 .m-widget1__item {
