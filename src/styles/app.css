@@ -1185,7 +1185,17 @@ td.rotate div span {
     .chat-messages {
         max-height: calc(100vh - 165px);
         height: calc(100vh - 165px);        
-    }    
+    }
+    
+    .signup-page .col-form-label {
+        text-align: left;
+        padding-left: 7px;
+        padding-bottom: 5px;
+    }
+      
+    .signup-page .form-group {
+        margin-bottom: 5px !important;
+    }     
 }
 .quick-link .quick-link-title {
     display: block;
@@ -1211,9 +1221,6 @@ td.rotate div span {
 }
 .store-featured {    
     white-space: pre-wrap;       
-}
-.store-featured .cardActions .ratings {
-    display: none;
 }
 .store-featured .verticalCardItem.cardItem{
     max-width: 150px;
@@ -1254,6 +1261,10 @@ td.rotate div span {
 }
 .promocode-block span {
     cursor: pointer;
+}
+
+.signup-page .m-portlet--brand .m-portlet__head-tools .m-nav__link {
+    color: #fff;
 }
 
 @media (max-width: 1440px) {   

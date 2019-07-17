@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import {
   Icon,
@@ -113,7 +112,7 @@ class BuildTemplate extends Component {
     }    
 
     render() {
-        const {t, createRequest} = this.props;
+        const {t, createRequest, goTo} = this.props;
         const {form, questions, showQuestionModal} = this.state;
         const errors = createRequest.get('errors');       
         
@@ -182,15 +181,13 @@ class BuildTemplate extends Component {
                                 </Button>                              
                             </div>
                             <div className="col-sm-12 mt-5 text-center">
-                                <Button disabled={createRequest.get('loading')} onClick={() => { this._saveTemplate() }} variant="contained" color='primary' className='mt-btn mt-btn-success mr-3'>
+                                <Button disabled={createRequest.get('loading')} onClick={() => { this._saveTemplate() }} variant="contained" className='mt-btn mt-btn-success mr-3'>
                                     {t('saveTemplate')}
                                     <Icon className="ml-2">check</Icon>
                                 </Button>
-                                <NavLink to="/scap" className="link-btn">
-                                    <Button disabled={createRequest.get('loading')} variant="contained" color='default' className='mt-btn mt-btn-cancel'>
-                                        {t('cancel')}                                    
-                                    </Button>
-                                </NavLink>
+                                <Button disabled={createRequest.get('loading')} onClick={() => { goTo("/scap") }} variant="contained">
+                                    {t('cancel')}                                    
+                                </Button>                               
                             </div>                              
                         </div>                        
                     </div>

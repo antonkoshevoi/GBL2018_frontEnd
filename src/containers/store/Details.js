@@ -7,33 +7,12 @@ import Filter from "../../components/store/Filter";
 import Sidebar from "../../components/store/Sidebar";
 import {Loader} from "../../components/ui/Loader";
 import {Price} from "../../components/ui/Price";
+import {VideoFrame} from "../../components/ui/VideoFrame";
 import {addToShoppingCart, getRecords, getSingleRecord} from "../../redux/store/actions";
 import {selectAddToCartRequest, selectGetRecordsRequest, selectGetSingleRecord, selectGetSingleRecordRequest, selectRecords} from "../../redux/store/selectors";
 import {buildSortersQuery} from "../../helpers/utils";
 import Lightbox from 'lightbox-react';
 import 'lightbox-react/style.css';
-
-const Video = (props) => {
-    const {src, title} = props;
-    return <iframe 
-        src={src}
-        title={title}
-        width="560" 
-        height="315"         
-        frameBorder="0" 
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-        allowFullScreen        
-        style={{
-          maxWidth: '97%',
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          margin: 'auto',
-          top: '50%',
-          transform: 'translateY(-50%)',
-        }}>
-    </iframe>    
-};
 
 class Details extends Component {
 
@@ -95,7 +74,7 @@ class Details extends Component {
                         <span>{t('printable')}</span> <i className="fa fa-download display-6" aria-hidden="true"></i>
                     </p>
                     <button className="btn btn-primary" onClick={() => { this._addToCart(record.get('digitalItemId')) }}>
-                        <Price price={record.get('digitalItem').get('discountPrice')} currency={record.get('currency')} />
+                        {(record.get('discountPrice') > 0) ? <Price price={record.get('digitalItem').get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
                     </button>
                 </div>
                 <div className='ml-5'>
@@ -128,8 +107,8 @@ class Details extends Component {
     if (record.get('videoLink')) {
         const videoId = record.get('videoLink').split('/').pop().replace('watch?v=', '');
         
-        images.unshift(<Video title='' src={record.get('videoLink')} />);
-        previewImages.unshift('https://img.youtube.com/vi/' + videoId +'/0.jpg');
+        images.unshift(<VideoFrame title='' src={record.get('videoLink')} />);
+        previewImages.unshift('https://img.youtube.com/vi/' + videoId +'/1.jpg');
     };
     
     return <div className="store-item-images">

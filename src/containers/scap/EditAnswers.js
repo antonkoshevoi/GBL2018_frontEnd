@@ -176,7 +176,7 @@ class EditAnswers extends Component {
                                     {t('saveAsDraft')}
                                     <Icon className="ml-2">check</Icon>
                                 </Button>                                 
-                                <Button disabled={updateAnswersRequest.get('loading')} onClick={() => { this._goBack() }} variant="contained" color='default' className='mt-btn mt-btn-cancel'>
+                                <Button disabled={updateAnswersRequest.get('loading')} onClick={() => { this._goBack() }} variant="contained">
                                     {t('cancel')}                                    
                                 </Button>                                
                             </div>                              
