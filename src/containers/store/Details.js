@@ -71,9 +71,9 @@ class Details extends Component {
             return <div className='d-flex justify-content-end pr-4'>
                 <div>
                     <p className='mb-2 d-flex justify-content-between align-items-center'>
-                        <span>{t('printable')}</span> <i className="fa fa-download display-6" aria-hidden="true"></i>
+                        <span>{t('printable')}</span> <i className="fa fa-download display-6 ml-2" aria-hidden="true"></i>
                     </p>
-                    <button className="btn btn-primary" onClick={() => { this._addToCart(record.get('digitalItemId')) }}>
+                    <button className="btn btn-primary w-100" onClick={() => { this._addToCart(record.get('digitalItemId')) }}>
                         {(record.get('digitalItem').get('discountPrice') > 0) ? <Price price={record.get('digitalItem').get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
                     </button>
                 </div>
