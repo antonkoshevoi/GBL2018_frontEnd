@@ -998,6 +998,9 @@ td.rotate div span {
     font-family: Roboto  !important;
     color: #575962;
 }
+.parent-dashboard .block-header h3 {
+    margin-top: 15px
+}
 .messages > div.row {
     border-radius: 10px;
     background-color: #F1F2F7;
