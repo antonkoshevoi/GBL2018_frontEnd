@@ -8,14 +8,11 @@ import { getStudents, acceptStudentRequest, declineStudentRequest, resetStudentR
 import { selectDeleteRequest } from "../../redux/students/selectors";
 import { deleteRecord, resetDeleteRecordRequest } from "../../redux/students/actions"; 
 import { getRecords } from "../../redux/store/actions";
-import { selectRecords as storeItems }  from "../../redux/store/selectors";
 import DeleteButton from "../../components/ui/DeleteButton";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
-import FeaturedItems from "./sections/FeaturedItems";
 import UnassignedCourses from "./sections/UnassignedCourses";
 import Subscriptions from "./sections/Subscriptions";
 import QuickLink from "./sections/QuickLink";
-import ShoppingCart from "./sections/ShoppingCart";
 import Alerts from "./sections/Alerts";
 
 const styles = {
@@ -192,10 +189,10 @@ class ParentDashboard extends Component {
     }
       
     render() {    
-        const {storeItems, getStudents, studentsRequest, classes, t} = this.props;
+        const {getStudents, studentsRequest, classes, t} = this.props;
         const loading = studentsRequest.get('loading');
 
-        return <div className="fadeInLeft animated ml-3 mr-3">
+        return <div className="fadeInLeft animated ml-3 mr-3 parent-dashboard">
             <Alerts />
             <div className="row mb-5">
               <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
@@ -234,8 +231,7 @@ class ParentDashboard extends Component {
 }
 
 ParentDashboard = connect(
-    (state) => ({        
-        storeItems: storeItems(state),
+    (state) => ({                
         studentsRequest: selectStudentsRequest(state),
         studentStatusRequest: selectStudentStatusRequest(state),
         deleteStudentRequest: selectDeleteRequest(state)
