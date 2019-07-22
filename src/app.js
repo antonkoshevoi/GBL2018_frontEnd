@@ -23,7 +23,7 @@ const store     = configureStore(history, apiClient);
 
 if (navigator.geolocation && !SessionStorage.get('userCountry')) {
     navigator.geolocation.getCurrentPosition(function({coords}) {
-        fetch('//api.geonames.org/countryCodeJSON?lat=' + coords.latitude + '&lng=' + coords.longitude + '&username=' + env.GEOLOCATION_USER)
+        fetch('/geolocation.php?lat=' + coords.latitude + '&lng=' + coords.longitude + '&username=' + env.GEOLOCATION_USER)
             .then(response => response.json())
             .then(data => {
                 SessionStorage.set('userCountry', data.countryCode)
