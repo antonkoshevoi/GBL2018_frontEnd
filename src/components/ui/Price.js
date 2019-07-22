@@ -4,5 +4,10 @@ export const Price = ({price, currency}) => {
         EUR: '€',
         RUB: '₽'
     }
-    return (prefixes[currency] || '$') + parseFloat(price).toFixed(2) + ' ' + (currency || '');
+    
+    price = parseFloat(price).toFixed(2);
+            
+    price = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    
+    return (prefixes[currency] || '$') + price + ' ' + (currency || '');
 }

@@ -197,7 +197,7 @@ class ParentDashboard extends Component {
 
         return <div className="fadeInLeft animated ml-3 mr-3">
             <Alerts />
-            <div className="row">
+            <div className="row mb-5">
               <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <div className='block-header border-b-blue d-flex justify-content-between align-items-end'>                                                      
                     <h3 className='m-portlet__head-text'>{t('myLearners')}</h3>
@@ -216,19 +216,13 @@ class ParentDashboard extends Component {
                 </div>
               </div>
               <div className="col-12 col-md-6 col-lg-6 col-xl-4">
-                  <Subscriptions/>
+                <Subscriptions/>
               </div>              
               <div className="col-12 col-md-6 col-lg-6 col-xl-4">
-                  <UnassignedCourses/>
-              </div>
-              <div className="col-12 col-md-6 col-lg-6 col-xl-4">
-                  <ShoppingCart/>
-              </div>
-              <div className="col-12 col-md-6 col-lg-6 col-xl-4">
-                <QuickLink />
+                <QuickLink/>
               </div>         
-              <div className="col-12">
-                  <FeaturedItems data={storeItems}/>
+              <div className="col-12 col-md-6 col-lg-6 col-xl-4">
+                <UnassignedCourses/>
               </div>
             </div>
             <CreateStudentModal
