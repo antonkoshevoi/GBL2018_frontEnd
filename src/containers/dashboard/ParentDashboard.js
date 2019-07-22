@@ -10,7 +10,6 @@ import { deleteRecord, resetDeleteRecordRequest } from "../../redux/students/act
 import { getRecords } from "../../redux/store/actions";
 import DeleteButton from "../../components/ui/DeleteButton";
 import CreateStudentModal from "../students/modals/CreateStudentModal";
-import UnassignedCourses from "./sections/UnassignedCourses";
 import Subscriptions from "./sections/Subscriptions";
 import QuickLink from "./sections/QuickLink";
 import Alerts from "./sections/Alerts";
@@ -218,10 +217,7 @@ class ParentDashboard extends Component {
               <div className="col-12 col-md-6 col-lg-6 col-xl-4">
                 <QuickLink/>
               </div>         
-              <div className="col-12 col-md-6 col-lg-6 col-xl-4">
-                <UnassignedCourses/>
-              </div>
-            </div>
+             </div>
             <CreateStudentModal
             isOpen={this.state.createModalIsOpen}
             onClose={() => { this._closeCreateDialog() }}
