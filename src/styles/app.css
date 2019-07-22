@@ -1247,11 +1247,131 @@ td.rotate div span {
     color: #fff;
 }
 
-@media (max-width: 1440px) {   
+@media (max-width: 1600px) {
+    .small-card .m-badge {
+        min-height: 10px;
+        min-width: 10px;
+    }
+}
+
+@media (max-width: 1367px) {
     .table thead tr.active th {
         padding: 8px 8px;        
     }
     .table thead tr.active th {
         padding: 10px 8px;    
-    }    
+    } 
+    
+    div.m-portlet .m-portlet__body {
+        padding: 0.7rem;
+    }
+
+    div.m-widget1 .m-widget1__item .m-widget1__number, .m-widget1 .m-widget1__item .m-widget1__title {
+        font-size: 1.1rem;
+    }
+
+    .passRateCard h1 {
+        font-size: 4rem !important;
+    }
+}
+
+@media (max-width: 1240px) {
+
+    div.loader {
+        margin-left: 0;
+    }
+
+    .m-wrapper {
+        padding-top: 50px;
+    }
+
+    .m-header--fixed-mobile .m-topbar {
+        top: 0 !important;
+    }
+
+    .mobile-sidebar-toggle {
+        display: block !important;
+    }
+
+    .mobile-sidebar-out-toggle {
+        display: inline-block !important;
+        margin: 50px;        
+    }
+
+    div#notFoundPage {
+        margin: -20px;
+    }
+    
+    .invoice-title{
+        font-size: 24px 
+    }
+}
+
+@media (max-width: 1060px) {
+    div.pie-block > canvas {
+        margin: auto;
+    }
+}
+
+@media (max-width: 767px) {
+
+    div.m-widget1 .m-widget1__item .m-widget1__number {
+        font-size: 1.3rem;
+    }
+    
+    .general-header {
+        background: #fff;
+    }
+
+    .passRateCard h1 {
+        position: relative;
+        transform: none;
+        top: 0;
+        left: 0;
+    }
+
+    .header-menu {
+        display: none !important;
+    }
+
+    .mobile-header-menu {
+        display: block !important;
+        margin-right: 20px;
+    }
+
+    .mobile-header-menu > a.fa {
+        font-size: 2rem;
+        color: #fff;
+        padding-left: 5px;
+    }
+
+    div.m-topbar .m-topbar__nav.m-nav > .m-nav__item.m-dropdown{
+        position: relative;
+    }  
+}
+
+@media (max-width: 420px) {
+   
+    .m-btn--custom.m-btn--icon-only {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+    }
+    .message-owner img {
+        max-width: 75px;
+    }
+    .message-owner {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 0.8rem;
+    }
+    .subscriptions-banner {
+        background-size: 110%;
+        min-height: 270px !important;
+    }
+    .subscriptions-banner > .description h3 {
+        font-size: 1.25rem;
+    }
+    .subscriptions-banner > .description p {
+        font-size: 1rem;
+    }
 }

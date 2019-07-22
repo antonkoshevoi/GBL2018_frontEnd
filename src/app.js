@@ -3,29 +3,37 @@ import React, {Component} from 'react';
 import './theme/vendor/vendors.bundle.css';
 import './theme/style.bundle.css';
 import './styles/app.css';
-import './styles/responsive.css';
 
 import {Provider} from 'react-redux';
 import {Router} from "react-router";
 import Routes from './configs/routes';
 import configureStore from './redux/store';
-import { createBrowserHistory } from 'history'
-import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import {createBrowserHistory} from 'history'
+import {MuiPickersUtilsProvider} from 'material-ui-pickers';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
+import {env} from './configs/.env'
 import blue from '@material-ui/core/es/colors/blue';
 import MomentUtils from '@date-io/moment';
 import ApiClient from "./services/ApiClient";
+import SessionStorage from './services/SessionStorage';
 
 const history   = createBrowserHistory();
 const apiClient = new ApiClient();
 const store     = configureStore(history, apiClient);
 
+if (navigator.geolocation && !SessionStorage.get('userCountry')) {
+    navigator.geolocation.getCurrentPosition(function({coords}) {
+        fetch('http://api.geonames.org/countryCodeJSON?lat=' + coords.latitude + '&lng=' + coords.longitude + '&username=' + env.GEOLOCATION_USER)
+            .then(response => response.json())
+            .then(data => {
+                SessionStorage.set('userCountry', data.countryCode)
+            });
+    });
+}
+
 class App extends Component {
 
   render() {
-      
-    console.log('NODE_ENV: ' + process.env.NODE_ENV);
-      
     const theme = createMuiTheme({
         palette: {
             primary: blue

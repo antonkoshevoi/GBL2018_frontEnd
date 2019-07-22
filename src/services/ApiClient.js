@@ -32,8 +32,13 @@ export default class ApiClient {
   getRuntimeConfigs() {
     const token = SessionStorage.get('token');
     const currentLanguage = localStorage.getItem('language');
+    const currentCountry = SessionStorage.get('userCountry');
+    
     let headers = {};
 
+    if (currentCountry) {
+        headers['X-User-Country-Code'] = currentCountry;
+    }
     if (currentLanguage) {
         headers['Content-Language'] = currentLanguage;
     }
