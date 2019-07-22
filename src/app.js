@@ -11,25 +11,13 @@ import configureStore from './redux/store';
 import {createBrowserHistory} from 'history'
 import {MuiPickersUtilsProvider} from 'material-ui-pickers';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
-import {env} from './configs/.env'
 import blue from '@material-ui/core/es/colors/blue';
 import MomentUtils from '@date-io/moment';
 import ApiClient from "./services/ApiClient";
-import SessionStorage from './services/SessionStorage';
 
 const history   = createBrowserHistory();
 const apiClient = new ApiClient();
 const store     = configureStore(history, apiClient);
-
-if (navigator.geolocation && !SessionStorage.get('userCountry')) {
-    navigator.geolocation.getCurrentPosition(function({coords}) {
-        fetch('/geolocation.php?lat=' + coords.latitude + '&lng=' + coords.longitude + '&username=' + env.GEOLOCATION_USER)
-            .then(response => response.json())
-            .then(data => {
-                SessionStorage.set('userCountry', data.countryCode)
-            });
-    });
-}
 
 class App extends Component {
 
