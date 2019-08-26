@@ -25,7 +25,7 @@
     box-shadow: none;
 }
 
-.store .store-filter button, .store .filterMenu > button {
+.store .store-filter button {
     height: 50px;    
     border-radius: 0;
 }

@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {Button, IconButton, Input, InputAdornment, Menu, MenuItem, Icon} from '@material-ui/core';
+import {Button, Menu, MenuItem} from '@material-ui/core';
 import {withTranslation} from 'react-i18next';
 import {NavLink, withRouter} from "react-router-dom";
 import {buildSortersQuery} from "../../helpers/utils";
+import SearchInput from "../ui/SearchInput";
 
 class Filter extends Component {
 
@@ -89,7 +90,8 @@ class Filter extends Component {
   };
 
   _searchBarChange = (e) => {
-    this.setState({params: {...this.state.params, filter: {...this.state.params.filter, title: e.target.value}}});
+      console.log(e);
+    this.setState({params: {...this.state.params, filter: {...this.state.params.filter, title: e}}}, this._initFilter);
   };
 
   _selectFilter = (type,value,e) => {
@@ -145,8 +147,8 @@ class Filter extends Component {
      
         <div className="row">
           <div className="col-lg-6 col-md-6 col-sm-12 store-filter left-block">
-              {isShow.target &&
-              <div className="filterMenu">
+              {isShow.filters && <>
+              <div>
                 <Button
                     aria-owns={categoryMenu ? 'category-menu' : null}
                     aria-haspopup="true"
@@ -173,11 +175,9 @@ class Filter extends Component {
                   <MenuItem title={t('adult')} onClick={(e) => {this.handleMenuClose(e, 'categoryMenu'); this._selectFilter('target', 8, e) }}>{t('adult')}</MenuItem>
                   <MenuItem title={t('senior')} onClick={(e) => {this.handleMenuClose(e, 'categoryMenu'); this._selectFilter('target', 9, e) }}>{t('senior')}</MenuItem>
                 </Menu>
-              </div>
-              }
-            <div className="store-filter-divider"></div>
-              {isShow.subject &&
-              <div className="filterMenu">
+              </div>              
+              <div className="store-filter-divider"></div>              
+              <div>
                 <Button
                     aria-owns={subjectMenu ? 'subject-menu' : null}
                     aria-haspopup="true"
@@ -201,8 +201,8 @@ class Filter extends Component {
                   <MenuItem title={t('math')} onClick={(e) => { this.handleMenuClose(e, 'subjectMenu'); this._selectFilter('subject', 6, e) }}>{t('math')}</MenuItem>
                 </Menu>
               </div>
-              }
-            <div className="store-filter-divider"></div>
+              <div className="store-filter-divider"></div>
+            </>}
             <div className="filter-buttons">
                 { isShow.all &&
                     <NavLink to="/store" className={(!isActive && type !== 'details') ? ' activeFilter' : ''}><Button>{t('all')}</Button></NavLink>
@@ -214,7 +214,7 @@ class Filter extends Component {
           </div>          
           <div className="col-lg-6 col-md-6 col-sm-12 store-filter">                            
                 { isShow.sort &&              
-                <div className="filterMenu pull-right">
+                <div className="float-right">
                   <Button
                     aria-owns={sortMenu ? 'category-menu' : null}
                     aria-haspopup="true"
@@ -235,21 +235,13 @@ class Filter extends Component {
                 </div>              
                 }
                 { isShow.search &&
-                <div className="filterMenu pull-right">
-                    <Input
+                <div className="float-right">
+                    <SearchInput
                       className="store-search mt-3 mr-3"
-                      id='search'
+                      id="search"
                       type='search'
-                      onChange={(e) => this._searchBarChange(e)}
                       placeholder={t('search')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton onClick={(e) => {this._initFilter(e)}}>
-                            <Icon className="material-icons">search_icon</Icon>
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    /> 
+                      onChange={(e) => { this._searchBarChange(e) }}/>
                 </div>
               }
           </div>
@@ -264,8 +256,7 @@ Filter.defaultProps = {
   isShow:{
     sort: true,
     all: true,
-    subject: true,
-    target: true,
+    filters: true,
     search: true,
     newest: true
   }

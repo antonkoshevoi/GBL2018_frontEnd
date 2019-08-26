@@ -41,7 +41,7 @@ class Store extends Component {
     return (
       <div className="notFountMessage">
         <div className="display-1 text-center">
-          <i className="la g-red la-times-circle"></i>
+          <i className="display-1 la g-red la-times-circle"></i>
           <h1>{t('productsNotFound')}</h1>
         </div>
       </div>

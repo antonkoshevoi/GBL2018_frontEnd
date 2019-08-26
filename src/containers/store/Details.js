@@ -146,8 +146,7 @@ class Details extends Component {
     const showFilters = {
         sort: false,
         all: true,
-        subject: true,
-        target: true,
+        filters: false,
         search: false,
         newest: true
     };    

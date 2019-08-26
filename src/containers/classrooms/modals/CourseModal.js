@@ -28,12 +28,11 @@ class CourseModal extends Component {
     super(props);
     this.state = {
       course: null,
-      courseId: null,      
+      courseId: null,
       filterShow: {
         sort: false,
         all: false,
-        subject: true,
-        target: true,
+        filters: true,
         search: true,
         newest: false,
       },

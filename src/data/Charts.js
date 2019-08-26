@@ -91,21 +91,16 @@ export function formChartOptions(maxStudents, selector) {
         ticks: {
           autoSkip: false,
           callback: function (value, index, xAxesArray) {
-            return renderXAxis(selector, value, index, xAxesArray);
+            return renderXAxis(selector, value, index);
           }
         }
       }]
     }
   };
 
-  function renderXAxis(selector, value, index, xAxesArray) {
+  function renderXAxis(selector, value, index) {
     if (selector === 0) {      
       const cases = [0, 3, 6, 9, 12, 15, 18, 21];
-      for (const datum of xAxesArray) {
-        if (typeof datum === 'string') {          
-          break;
-        }
-      }
 
       switch (value) {
         case cases[0] :
