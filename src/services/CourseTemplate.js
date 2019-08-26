@@ -50,15 +50,16 @@ export default function formTableData(serverData, jsonTemplateData) {
 
   function findQuestionTemplate(jsonQuizzes, questionId) {
     let questionTemplate = '';
-    for (const quizz of jsonQuizzes) {
+    let quizz, section, question;
+    for (quizz of jsonQuizzes) {
       if (!quizz.sections) {
         continue;
       }
-      for (const section of quizz.sections) {
+      for (section of quizz.sections) {
         if (!section.questions) {
           continue;
         }
-        for (const question of section.questions) {
+        for (question of section.questions) {
           if (question.question_id === questionId) {
             questionTemplate = question;
             break;

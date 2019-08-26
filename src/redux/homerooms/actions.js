@@ -82,13 +82,13 @@ export function resetUpdateRequest () {
 /**
  * Bulk upload
  */
-export function bulkUpload(file, data, params = {}) {
+export function bulkUpload(file, params = {}) {
     const source = ApiClient.cancelToken();
 
     return {
         upload: true,
         types: [BULK_UPLOAD, BULK_UPLOAD_SUCCESS, BULK_UPLOAD_FAIL, BULK_UPLOAD_PROGRESS],
-        promise: (apiClient) => apiClient.upload(`homerooms/bulk`, file, data, params, {}, {
+        promise: (apiClient) => apiClient.upload(`homerooms/bulk`, file, params, {}, {
             cancelToken: source.token
         }),
         cancel: source.cancel

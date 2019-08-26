@@ -5,8 +5,9 @@ import toastr from 'toastr';
 export const buildSortersQuery = (sorters) => {
 
   let query = [];
-
-  for (const sorter in sorters) {
+  let sorter;
+  
+  for (sorter in sorters) {
     query.push(`${sorter}:${sorters[sorter]}`);
   }
 

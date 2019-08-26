@@ -109,15 +109,9 @@ export default class ApiClient {
     ).then(response => response.data);
   }
 
-  upload(uri, file, data, params = {}, headers = {}, configs = {}) {
+  upload(uri, file, params = {}, headers = {}, configs = {}) {
     let formData = new FormData();
     formData.append('file', file);
-
-    for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-        formData.append(key, data[key]);
-      }
-    }
 
     return this.post(uri, formData, params, headers, configs);
   }
