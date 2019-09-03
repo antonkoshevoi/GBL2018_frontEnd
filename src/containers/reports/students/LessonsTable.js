@@ -143,13 +143,13 @@ class LessonsTable extends Component {
             <div className="mr-3 ml-3">
                 <h6>{t('status')}</h6>
                 <p className="text-capitalize">
-                    <span className="badge badge-secondary mr-3"></span> {t('notStarted')}
+                    <span className="badge badge-secondary d-inline-block mr-3"></span> {t('notStarted')}
                 </p>
                 <p className="text-capitalize">
-                    <span className="badge badge-warning mr-3"></span> {t('inProgress')} 
+                    <span className="badge badge-warning d-inline-block mr-3"></span> {t('inProgress')} 
                 </p>
                 <p className="text-capitalize m-0">
-                    <span className="badge badge-success mr-3"></span> {t('completed')}
+                    <span className="badge badge-success d-inline-block mr-3"></span> {t('completed')}
                 </p>            
             </div>
         </Popover>

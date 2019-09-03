@@ -65,7 +65,7 @@ class Details extends Component {
   }
   
   _renderPrices() {
-        const {record, t} = this.props;        
+        const {record, goTo, t} = this.props;        
 
         if (record.get('digitalItemId')) {
             return <div className='d-flex justify-content-end pr-4'>
@@ -73,15 +73,21 @@ class Details extends Component {
                     <p className='mb-2 d-flex justify-content-between align-items-center'>
                         <span>{t('printable')}</span> <i className="fa fa-download display-6 ml-2" aria-hidden="true"></i>
                     </p>
-                    <button className="btn btn-primary w-100" onClick={() => { this._addToCart(record.get('digitalItemId')) }}>
-                        {(record.get('digitalItem').get('discountPrice') > 0) ? <Price price={record.get('digitalItem').get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
-                    </button>
+                    {record.get('digitalItem').get('isBought') ?
+                        <button className="btn btn-primary w-100" onClick={() => { goTo('/downloads') }}>
+                            {t('download')}
+                        </button>
+                    :                    
+                        <button className="btn btn-primary w-100" onClick={() => { this._addToCart(record.get('digitalItemId')) }}>
+                            {(record.get('digitalItem').get('discountPrice') > 0) ? <Price price={record.get('digitalItem').get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
+                        </button> 
+                    }
                 </div>
                 <div className='ml-5'>
                     <p className='mb-2 d-flex justify-content-between align-items-centern'>
                         <span>{t('physical')}</span> 
                         <i className="fa fa-truck display-6" aria-hidden="true"></i>
-                    </p>
+                    </p>               
                     <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>                                            
                         {(record.get('discountPrice') > 0) ? <Price price={record.get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
                     </button>
@@ -91,9 +97,15 @@ class Details extends Component {
         
         return <div className="actionsBtn justify-content-end full-width align-items-center d-flex pr-4 align-self-center">
             <div className="pr-3">{record.get('discount') > 0 && <span className="position-relative discount"><span><Price price={record.get('price')} currency={record.get('currency')} /></span></span>}</div>
-            <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>                                            
-                {(record.get('discountPrice') > 0) ? <Price price={record.get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
-            </button>
+            {(record.get('isDigitalOnly') && record.get('isBought')) ?
+                <button className="btn btn-primary" onClick={() => { goTo('/downloads') }}>
+                    <i className="fa fa-download display-6 mr-2" aria-hidden="true"></i> {t('download')}
+                </button>
+            :                
+                <button className="btn btn-success" onClick={() => { this._addToCart(record.get('id')) }}>                                            
+                    {(record.get('discountPrice') > 0) ? <Price price={record.get('discountPrice')} currency={record.get('currency')} /> : t('freeProduct')}
+                </button>
+            }
         </div>;     
   }
 
