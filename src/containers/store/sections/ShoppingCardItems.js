@@ -92,7 +92,7 @@ class ShoppingCardItems extends Component {
                         <Price price={item.discountPrice} currency={item.currency} />              
                     </div>              
                     <div className="my-2">
-                        {!item.isInvoice ? countInput : <span className="productLabel">{item.count}</span>}                    
+                        {(!item.isInvoice && !item.isDownloadable) ? countInput : <span className="productLabel">{item.count}</span>}                    
                     </div>
                     <Divider className="mb-2" />
                     <div>
@@ -112,7 +112,7 @@ class ShoppingCardItems extends Component {
                     </Td>
                 </HasRole>
                 <Td width='132px'>
-                    {!item.isInvoice ? countInput : <span className="productLabel text-center">{item.count}</span>}            
+                    {(!item.isInvoice && !item.isDownloadable) ? countInput : <span className="productLabel text-center">{item.count}</span>}            
                 </Td>
                 <Td width='100px'>
                     <div className="productPrice productLabel">
