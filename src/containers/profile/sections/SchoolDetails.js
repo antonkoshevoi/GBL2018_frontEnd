@@ -2,17 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import {Typography, CircularProgress} from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import {update} from "../../../redux/schools/actions";
 import {selectUpdateRequest} from "../../../redux/schools/selectors";
-
-function TabContainer(props) {
-  return (
-    <Typography component="div">
-      {props.children}
-    </Typography>
-  );
-}
 
 class SchoolDetails extends Component {
 
@@ -83,14 +75,13 @@ class SchoolDetails extends Component {
       <div>
         <div className="m-portlet m-portlet--head-solid-bg m-portlet--brand mb-3">
           <div className="m-portlet__head">
-            <div className="m-portlet__head-caption">
-              {loading && <div className="m-portlet__head-title"><span className="m-portlet__head-icon"><CircularProgress color="inherit"/></span></div>}
-              {!loading && <div className="m-portlet__head-title">
+            <div className="m-portlet__head-caption">              
+              <div className="m-portlet__head-title">
                 <span className="m-portlet__head-icon">                
-                    <i className="fa fa-id-card-o display-5"></i>
+                   {loading ? <CircularProgress color="inherit"/> : <i className="fa fa-id-card-o display-5"></i>}
                 </span>
                 <h3 className="m-portlet__head-text">{t('info')}</h3>
-              </div>}
+              </div>
             </div>
             <div className="m-portlet__head-tools">
               <ul className="m-portlet__nav">
@@ -105,10 +96,10 @@ class SchoolDetails extends Component {
             </div>
           </div>
           <div className="m-portlet__body p-2">
-            {mode === 'overview' && <TabContainer>
+            {mode === 'overview' && <div>
               <div className="m-widget1">
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding">
+                  <div className="row">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('name')}</h3>
                     </div>
@@ -118,7 +109,7 @@ class SchoolDetails extends Component {
                   </div>
                 </div>              
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding">
+                  <div className="row">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('code')}</h3>
                     </div>
@@ -128,7 +119,7 @@ class SchoolDetails extends Component {
                   </div>
                 </div>
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding">
+                  <div className="row">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('billing')}</h3>
                     </div>
@@ -138,7 +129,7 @@ class SchoolDetails extends Component {
                   </div>
                 </div>
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding">
+                  <div className="row">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('shippingAddress')}</h3>
                     </div>
@@ -148,8 +139,8 @@ class SchoolDetails extends Component {
                   </div>
                 </div>
               </div>
-            </TabContainer>}
-            {mode === 'edit' && <TabContainer>
+            </div>}
+            {mode === 'edit' && <div>
               <form id='update-school-form' className="m-4" onSubmit={(e) => { this._onSubmit(e) }}>
                 <div className="m-form mt-4">
                   <div className="form-group row">
@@ -194,11 +185,11 @@ class SchoolDetails extends Component {
                 </div>
                 <div className="m-separator"></div>
                 <div className="text-right">
-                  <button className="btn-success btn mr-3">{t('saveChanges')}</button>
+                  <button className="btn-success btn mr-3" disabled={loading}>{t('saveChanges')}</button>
                   <button className="btn-default btn" onClick={() => { this._handleSwitchMode('overview') }} >{t('cancel')}</button>
                 </div>
               </form>
-            </TabContainer>}
+            </div>}
           </div>
         </div>
       </div>

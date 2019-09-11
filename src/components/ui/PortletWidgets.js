@@ -45,7 +45,7 @@ class PortletWidgets extends Component {
                     </div>
                 </div>
                 <div className="m-portlet__body p-0">
-                    <div className="row m-row--no-padding m-row--col-separator-xl">
+                    <div className="row m-row--col-separator-xl">
                         {this._renderWidgetItems()}
                     </div>
                 </div>

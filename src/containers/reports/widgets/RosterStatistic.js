@@ -35,7 +35,7 @@ class RosterStatistic extends Component {
           <div className="m-widget1 p-0">
           <HasRole roles={['Superadministrator', 'Superintendent']}>
             <div className="m-widget1__item">
-              <div className="row m-row--no-padding align-items-center">
+              <div className="row align-items-center">
                 <div className="col">
                   <h3 className="m-widget1__title">{t('schools')}</h3>
                 </div>
@@ -49,7 +49,7 @@ class RosterStatistic extends Component {
             </div>          
           </HasRole>
             <div className="m-widget1__item">
-              <div className="row m-row--no-padding align-items-center">
+              <div className="row align-items-center">
                 <div className="col">
                   <h3 className="m-widget1__title">{t('students')}</h3>
                 </div>
@@ -62,7 +62,7 @@ class RosterStatistic extends Component {
               </div>
             </div>
             <div className="m-widget1__item">
-              <div className="row m-row--no-padding align-items-center">
+              <div className="row align-items-center">
                 <div className="col">
                   <h3 className="m-widget1__title">{t('classrooms')}</h3>
                 </div>
@@ -75,7 +75,7 @@ class RosterStatistic extends Component {
               </div>
             </div>
             <div className="m-widget1__item">
-              <div className="row m-row--no-padding align-items-center">
+              <div className="row align-items-center">
                 <div className="col">
                   <h3 className="m-widget1__title">{t('homerooms')}</h3>
                 </div>
@@ -89,7 +89,7 @@ class RosterStatistic extends Component {
             </div>
             <HasRole roles={['Principal', 'Administrator', 'Superadministrator']}>
             <div className="m-widget1__item">
-              <div className="row m-row--no-padding align-items-center">
+              <div className="row align-items-center">
                 <div className="col">
                   <h3 className="m-widget1__title">{t('teachers')}</h3>
                 </div>
@@ -104,7 +104,7 @@ class RosterStatistic extends Component {
             </HasRole>
             <HasRole roles={['Principal', 'Administrator', 'Superadministrator']}>
             <div className="m-widget1__item">
-              <div className="row m-row--no-padding align-items-center">
+              <div className="row align-items-center">
                 <div className="col">
                   <h3 className="m-widget1__title">{t('admins')}</h3>
                 </div>

@@ -215,8 +215,8 @@ class Checkout extends Component {
     const { stepIndex } = this.state;
     const { t } = this.props;
     return (
-        <div className="container p-5">
-            <div className="m-portlet  m-portlet--head-solid-bg">
+        <div className="container py-5 px-lg-5">
+            <div className="m-portlet m-portlet--head-solid-bg">
                 <div className='m-portlet__body position-relative'>               
                     <Stepper activeStep={stepIndex} alternativeLabel className="g-stepper">
                         <Step>
