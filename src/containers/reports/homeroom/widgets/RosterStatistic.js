@@ -38,7 +38,7 @@ class RosterStatistic extends Component {
         <div className="m-widget1 p-0">
           <div className="m-widget1 p-0">
             <div className="m-widget1__item">
-              <div className="row m-row--no-padding align-items-center">
+              <div className="row align-items-center">
                 <div className="col">
                   <h3 className="m-widget1__title">{t('students')}</h3>
                 </div>
@@ -51,7 +51,7 @@ class RosterStatistic extends Component {
               </div>
             </div>
             <div className="m-widget1__item">
-              <div className="row m-row--no-padding align-items-center">
+              <div className="row align-items-center">
                 <div className="col">
                   <h3 className="m-widget1__title">{t('teachers')}</h3>
                 </div>

@@ -814,8 +814,7 @@ div#notFoundPage {
 }
 
 .csv-upload-errors {   
-    width: 100%;
-    margin: 15px;
+    width: 100%;    
     color: red;
     list-style: none;
 }

@@ -5882,16 +5882,6 @@ a.text-dark:focus, a.text-dark:hover {
     .custom-file .custom-file-control:after {
       float: left; }
 
-.row.m-row--no-padding {
-  margin-left: 0;
-  margin-right: 0; }
-  .row.m-row--no-padding > div {
-    padding-left: 0;
-    padding-right: 0; }
-
-.row.m-row--full-height {
-  height: 100%; }
-
 .row[class*="m-row--col-separator-"] > div {
   border-bottom: 1px solid #ebedf2; }
   .row[class*="m-row--col-separator-"] > div:last-child {
@@ -5923,20 +5913,6 @@ a.text-dark:focus, a.text-dark:hover {
     border-bottom: 0;
     border-right: 1px solid #ebedf2; }
     .row.m-row--col-separator-xl > div:last-child {
-      border-right: 0; } }
-
-@media (min-width: 1400px) {
-  .row.m-row--col-separator-xxl > div {
-    border-bottom: 0;
-    border-right: 1px solid #ebedf2; }
-    .row.m-row--col-separator-xxl > div:last-child {
-      border-right: 0; } }
-
-@media (min-width: 1600px) {
-  .row.m-row--col-separator-xxxl > div {
-    border-bottom: 0;
-    border-right: 1px solid #ebedf2; }
-    .row.m-row--col-separator-xxxl > div:last-child {
       border-right: 0; } }
 
 .dropdown-menu {

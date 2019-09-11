@@ -36,10 +36,8 @@ export default class PortletErrorsWidgets extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="m-portlet__body p-0">
-                    <div className="row m-row--no-padding m-row--col-separator-xl">
-                        <div className="csv-upload-errors">{this._renderErrorItems(this.props.errors)}</div>
-                    </div>
+                <div className="m-portlet__body p-0">                    
+                   <div className="csv-upload-errors p-3">{this._renderErrorItems(this.props.errors)}</div>                    
                 </div>
             </div>
         );

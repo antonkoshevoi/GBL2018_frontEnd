@@ -33,7 +33,7 @@ class ViewParentModal extends Component {
                 <TabContainer>                    
                     <div className="m-widget1 p-0">
                         <div className="m-widget1__item">
-                            <div className="row m-row--no-padding">
+                            <div className="row">
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('firstName')}</h3>
                                 </div>
@@ -43,7 +43,7 @@ class ViewParentModal extends Component {
                             </div>
                         </div>
                         <div className="m-widget1__item">
-                            <div className="row m-row--no-padding">
+                            <div className="row">
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('lastName')}</h3>
                                 </div>
@@ -53,7 +53,7 @@ class ViewParentModal extends Component {
                             </div>
                         </div>
                         <div className="m-widget1__item">
-                            <div className="row m-row--no-padding">
+                            <div className="row">
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('email')}</h3>
                                 </div>
@@ -63,7 +63,7 @@ class ViewParentModal extends Component {
                             </div>
                         </div>
                         <div className="m-widget1__item">
-                            <div className="row m-row--no-padding">
+                            <div className="row">
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('username')}</h3>
                                 </div>
@@ -73,7 +73,7 @@ class ViewParentModal extends Component {
                             </div>
                         </div>                                
                         <div className="m-widget1__item">
-                            <div className="row m-row--no-padding">
+                            <div className="row">
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('phoneNumber')}</h3>
                                 </div>
@@ -83,7 +83,7 @@ class ViewParentModal extends Component {
                             </div>
                         </div>
                         <div className="m-widget1__item">
-                            <div className="row m-row--no-padding">
+                            <div className="row">
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('gender')}</h3>
                                 </div>
@@ -93,7 +93,7 @@ class ViewParentModal extends Component {
                             </div>
                         </div>                 
                         <div className="m-widget1__item">
-                            <div className="row m-row--no-padding">
+                            <div className="row">
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('birthday')}</h3>
                                 </div>
@@ -112,7 +112,7 @@ class ViewParentModal extends Component {
                     </div>
                     <div className="m-widget1 p-0">
                         <div className="m-widget1__item">
-                            <div className="row m-row--no-padding">
+                            <div className="row">
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('requestSentDate')}</h3>
                                 </div>
@@ -123,7 +123,7 @@ class ViewParentModal extends Component {
                         </div>
                         {parent.declined &&
                         <div className="m-widget1__item">
-                            <div className="row m-row--no-padding">
+                            <div className="row">
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('declinedAt')}</h3>
                                 </div>
@@ -133,7 +133,7 @@ class ViewParentModal extends Component {
                             </div>
                         </div>}
                         <div className="m-widget1__item">
-                            <div className="row m-row--no-padding">
+                            <div className="row">
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('name')}</h3>
                                 </div>
@@ -143,7 +143,7 @@ class ViewParentModal extends Component {
                             </div>
                         </div>
                         <div className="m-widget1__item">
-                            <div className="row m-row--no-padding">
+                            <div className="row">
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('username')}</h3>
                                 </div>
@@ -153,7 +153,7 @@ class ViewParentModal extends Component {
                             </div>
                         </div>                                
                         <div className="m-widget1__item">
-                            <div className="row m-row--no-padding">
+                            <div className="row">
                                 <div className="col">
                                     <h3 className="m-widget1__title">{t('email')}</h3>
                                 </div>

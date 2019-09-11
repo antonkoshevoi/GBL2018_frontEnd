@@ -13,7 +13,7 @@ class Summary extends Component {
         
         return items.map((item, key) => (
             <div key={key} className="row mb-2">
-                <div className="col-8">
+                <div className="col-6 col-lg-8">
                     <div>
                         <strong>{item.title}</strong>
                     </div>
@@ -21,7 +21,7 @@ class Summary extends Component {
                         {item.count} {t('items')}
                     </span>
                 </div>
-                <div className="col-4 text-right">
+                <div className="col-6 col-lg-4 text-right">
                     <strong className="text-nowrap d-block">
                         {(item.totalPrice > 0) ? <Price price={item.totalPrice} currency={item.currency} /> : <span className="text-success">{t('freeProduct')}</span>}
                     </strong>
@@ -46,36 +46,36 @@ class Summary extends Component {
                     <Divider className="my-3"/>
                     {!data.isFree && 
                     <div className="row my-2">
-                        <div className="col-8">
+                        <div className="col-6 col-lg-8">
                             <strong>{t('subtotal')}</strong>
                         </div>
-                        <div className="col-4 text-right">
+                        <div className="col-6 col-lg-4 text-right">
                             <strong className="text-nowrap"><Price price={data.subTotalPrice} currency={data.currency} /></strong>
                         </div>
                     </div>}
                     {data.discountCode &&
                     <div className="row my-2">
-                        <div className="col-8">
+                        <div className="col-6 col-lg-8">
                             <strong>{t('promocode')}</strong>
                         </div>
-                        <div className="col-4 text-right">
+                        <div className="col-6 col-lg-4 text-right">
                             <strong className="text-nowrap text-success">{data.discountCode}</strong>
                         </div>
                     </div>}
                     {!data.isFree && 
                     <div className="row my-2">
-                        <div className="col-8">
+                        <div className="col-6">
                             <strong>{t('discount')}</strong>
                         </div>
-                        <div className="col-4 text-right">
+                        <div className="col-6 col-lg-4 text-right">
                             <strong className="text-nowrap {(data.discountAmount > 0) && 'text-success'}"><Price price={data.discountAmount} currency={data.currency} /></strong>
                         </div>
                     </div>}                    
                     <div className="row my-2">
-                        <div className="col-8">
+                        <div className="col-6 col-lg-8">
                             <strong>{t('total')}</strong>
                         </div>
-                        <div className="col-4 text-right">
+                        <div className="col-6 text-right">
                             <strong className="text-nowrap">
                                 {(data.totalPrice > 0) ? <Price price={data.totalPrice} currency={data.currency} /> : <span className="text-success">{t('freeProduct')}</span>}
                             </strong>

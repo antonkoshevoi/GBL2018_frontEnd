@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { Select, MenuItem } from '@material-ui/core';
-import MuiDatePicker from "../../../components/ui/MuiDatePicker";
+import { Select, MenuItem, CircularProgress } from '@material-ui/core';
 import { update } from "../../../redux/user/actions";
 import { selectUpdateRequest } from "../../../redux/user/selectors";
+import { Date } from "../../../components/ui/DateTime";
+import MuiDatePicker from "../../../components/ui/MuiDatePicker";
 import HasRole from "../../middlewares/HasRole";
 
 class Details extends Component {
@@ -34,8 +35,8 @@ class Details extends Component {
   }
 
   _updateUserSuccess(nextProps) {
-    const prev = this.props.getUpdateRequest.get('success');
-    const next = nextProps.getUpdateRequest.get('success');
+    const prev = this.props.updateRequest.get('success');
+    const next = nextProps.updateRequest.get('success');
 
     if (!prev && next) {
       this.setState({
@@ -78,20 +79,18 @@ class Details extends Component {
 
   render() {
     const { mode, user } = this.state;
-    const { getUpdateRequest, t } = this.props;
-    const errors = getUpdateRequest.get('errors');    
+    const { updateRequest, t } = this.props;
+    const errors = updateRequest.get('errors');    
 
     return (      
         <div className="m-portlet m-portlet--head-solid-bg m-portlet--brand mb-3">
           <div className="m-portlet__head">
-            <div className="m-portlet__head-caption">
+            <div className="m-portlet__head-caption">              
               <div className="m-portlet__head-title">
                 <span className="m-portlet__head-icon">                  
-                    <i className="fa fa-id-card-o display-5"></i>
+                    {updateRequest.get('loading') ? <CircularProgress color="inherit"/> : <i className="fa fa-id-card-o display-5"></i>}
                 </span>
-                <h3 className="m-portlet__head-text">
-                  {t('info')}
-                </h3>
+                <h3 className="m-portlet__head-text">{t('info')}</h3>
               </div>
             </div>
             <div className="m-portlet__head-tools">
@@ -110,7 +109,7 @@ class Details extends Component {
             {mode === 'overview' && <div>
               <div className="m-widget1">
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding">
+                  <div className="row">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('firstName')}</h3>
                     </div>
@@ -120,7 +119,7 @@ class Details extends Component {
                   </div>
                 </div>
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding">
+                  <div className="row">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('lastName')}</h3>
                     </div>
@@ -130,7 +129,7 @@ class Details extends Component {
                   </div>
                 </div>
                 <div className="m-widget1__item">
-                  <div className="row m-row--no-padding">
+                  <div className="row">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('email')}</h3>
                     </div>
@@ -140,7 +139,7 @@ class Details extends Component {
                   </div>
                 </div>
                 <div className="m-widget1__item">
-                    <div className="row m-row--no-padding">
+                    <div className="row">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('phoneNumber')}</h3>
                     </div>
@@ -150,7 +149,7 @@ class Details extends Component {
                   </div>
                 </div>
                 <div className="m-widget1__item">
-                    <div className="row m-row--no-padding">
+                    <div className="row">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('gender')}</h3>
                     </div>
@@ -160,12 +159,12 @@ class Details extends Component {
                   </div>
                 </div>                 
                 <div className="m-widget1__item">
-                    <div className="row m-row--no-padding">
+                    <div className="row">
                     <div className="col">
                       <h3 className="m-widget1__title">{t('birthday')}</h3>
                     </div>
                     <div className="col text-right">
-                      <span className="m-widget1__title text-info">{user.birthday || '-'}</span>
+                      <span className="m-widget1__title text-info">{user.birthday ? <Date time={user.birthday} /> : '-'}</span>
                     </div>  
                   </div>
                 </div>
@@ -264,7 +263,7 @@ class Details extends Component {
                 </div>
                 <div className="m-separator"></div>
                 <div className="text-right">
-                  <button className="btn-success btn mr-3">{t('saveChanges')}</button>
+                  <button className="btn-success btn mr-3" disabled={updateRequest.get('loading')}>{t('saveChanges')}</button>
                   <button className="btn-default btn" onClick={() => { this._handleSwitchMode('overview') }}>{t('cancel')}</button>
                 </div>
               </form>
@@ -277,7 +276,7 @@ class Details extends Component {
 
 Details = connect(
   (state) => ({    
-    getUpdateRequest: selectUpdateRequest(state)
+    updateRequest: selectUpdateRequest(state)
   }),
   (dispatch) => ({    
     update: (form, params = {}) => { dispatch(update(form, params)) }

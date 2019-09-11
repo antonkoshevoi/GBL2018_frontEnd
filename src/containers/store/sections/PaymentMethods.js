@@ -45,8 +45,8 @@ class PaymentMethods extends Component {
     return (
         <div className="text-center">
             <legend className='mb-3'>{t('paymentMethod')}</legend>
-            <div className='row m-row--no-padding'>
-            { this._renderMethods() }
+            <div className='row'>
+                { this._renderMethods() }
             </div>
         </div>
     );
