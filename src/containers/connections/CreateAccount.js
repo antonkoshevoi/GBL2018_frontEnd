@@ -4,11 +4,12 @@ import { withRouter } from "react-router-dom";
 import { withTranslation, Trans } from 'react-i18next';
 import { push } from 'react-router-redux';
 import { NavLink } from 'react-router-dom';
-import { Divider } from '@material-ui/core';
+import { Divider, Avatar } from '@material-ui/core';
 import { selectChangeStatusRequest, selectGetRecordRequest } from "../../redux/connections/selectors";
 import { acceptAndCreate, getRecord, resetChangeStatusRequest } from "../../redux/connections/actions"; 
 import { load } from '../../redux/app/actions';
-import {Loader} from '../../components/ui/Loader';
+import { Loader } from '../../components/ui/Loader';
+import { DateTime } from "../../components/ui/DateTime";
 
 class CreateAccount extends Component {
 
@@ -82,7 +83,8 @@ class CreateAccount extends Component {
     render() {
         
         const {acceptRequest, getRecordRequest, t} = this.props;                 
-        const loading = getRecordRequest.get('loading') || acceptRequest.get('loading');        
+        const loading   = getRecordRequest.get('loading') || acceptRequest.get('loading');        
+        const data      = getRecordRequest.get('record');        
         const errors    = acceptRequest.get('errors');
         const { form }  = this.state;        
     
@@ -91,12 +93,28 @@ class CreateAccount extends Component {
             <div className='signup-page'>
               <div className='m-signup col-lg-8 col-md-10 col-sm-12 m-auto'>
                 <div className='m-signup__head'>
-                    {getRecordRequest.get('success') && <h3 className='m-login__title text-center mt-4'>{t('acceptInviteAndCreateAccount', {user: getRecordRequest.get('record').get('fromUser')})}</h3>}
+                    {getRecordRequest.get('success') && <h3 className='m-login__title text-center mt-4'>{t('acceptInviteAndCreateAccount', {user: data.get('fromUser')})}</h3>}
                 </div>
                 <div className='m-portlet m-portlet--brand m-portlet--head-solid-bg mt-5 m-portlet--full-height'>
                   <div className='m-portlet__body'>
                     <div className='row'>
-                      <div className='col-lg-7 col-md-6 col-sm-12 m-auto mt-5'>          
+                      <div className='col-lg-7 col-md-6 col-sm-12 m-auto mt-5'>
+                          {(getRecordRequest.get('success') && data.get('message')) &&
+                          <div className="card mt-2 mb-4">
+                            <div className="card-body">                            
+                                <div className="d-flex align-items-center">
+                                    <Avatar src={data.get('avatarSmall')} /> 
+                                    <div className="ml-3">
+                                        <h5 className="card-title">{data.get('fromUser')}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted"><DateTime time={data.get('sentAt')} /></h6>
+                                    </div>                                    
+                                </div> 
+                                <div className="m-separator my-2"></div>
+                                <p className="card-text">
+                                    <div className='pre-line my-2 my-sm-0 text-center'>{data.get('message')}</div>
+                                </p>
+                            </div>
+                          </div>}                                          
                           <legend className='mb-3'>{t('required')}</legend>
                           <div className='m-form__section'>
                             <div className="form-group row">

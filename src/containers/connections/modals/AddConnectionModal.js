@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import {
-  AppBar, CircularProgress, DialogContent, Icon, Toolbar, Typography, Divider
+  AppBar, CircularProgress, DialogContent, DialogActions, Icon, Toolbar, Typography, Divider, Radio, FormControlLabel, TextField
 } from '@material-ui/core';
 import { create, invite, resetCreateRequest, resetInviteRequest } from "../../../redux/connections/actions";
 import { selectCreateRequest, selectInviteRequest } from "../../../redux/connections/selectors";
@@ -12,9 +12,7 @@ class AddConnectionModal extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            form: {}
-        }
+        this.state = this._initState();
     }    
     
     componentWillUnmount() {        
@@ -30,6 +28,13 @@ class AddConnectionModal extends Component {
             this.props.onSuccess();
         }       
     }
+    
+    _handleChangeType(event) {
+        const { value } = event.target;        
+        this.setState({
+            type: value
+        });        
+    }
    
     _handleInputChange(event) {
         const { name, value } = event.target;
@@ -40,14 +45,22 @@ class AddConnectionModal extends Component {
                 [name]: value      
             }
         });
-    }    
+    }
+    
+    _handleForm() {
+        return this.state.type === 'registeredUser' ? this._invite() : this._create()
+    }
     
     _close() {        
         this.props.onClose();
         this.props.resetCreateRequest();
         this.props.resetInviteRequest();
-        this.setState({form: {}});
-    }  
+        this.setState(this._initState());
+    }
+    
+    _initState() {
+        return {form: {}, type: 'registeredUser'};
+    }
     
     _invite() {
         this.props.invite(this.state.form);
@@ -62,24 +75,31 @@ class AddConnectionModal extends Component {
         const loading       = createRequest.get('loading') || inviteRequest.get('loading');
         const createErrors  = createRequest.get('errors');        
         const inviteErrors  = inviteRequest.get('errors');
-        const {form}        = this.state;
+        const {form, type}  = this.state;
         
         return (
             <Modal middle={true} isOpen={isOpen} onClose={() => this._close()}>
                 <AppBar position="static" color="primary" className="dialogAppBar">
                     <Toolbar>                             
                         {loading ? <CircularProgress className="mr-3" color="inherit"/> : <Icon className="mr-3">person</Icon>}                
-                        <Typography variant="h6" color="inherit" >
-                            {t('connectionRequest')}
-                        </Typography>                        
+                        <Typography variant="h6" color="inherit" >{t('connectionRequest')}</Typography>                        
                     </Toolbar>
                 </AppBar>
                 <DialogContent className="mt-4">
                     <div className='m-auto' id="form-dialog-title">                
                         <div className="m-form">
-                        <h5>{t('inviteAlreadyRegisteredUser')}</h5>   
                             <div className="form-group row">
-                                <label className="col-form-label col-lg-4" htmlFor="username">{t('enterUsernameOrEmail')}</label>
+                                <div className="col">
+                                    <FormControlLabel 
+                                        label={<h5 className="m-0">{t('inviteAlreadyRegisteredUser')}</h5>}
+                                        control={<Radio color="primary" name="type" checked={type === 'registeredUser'} onChange={(e) => {this._handleChangeType(e)}} value="registeredUser" />}          
+                                    />
+                                </div>
+                            </div>
+                            {(type === 'registeredUser') && 
+                                        
+                            <div className="form-group row">
+                                <label className="col-form-label col-lg-4" htmlFor="username">{t('enterUsernameOrEmail')} <span className="text-danger">*</span></label>
                                 <div className="col-lg-6">
                                     <input
                                         type="text"
@@ -88,20 +108,19 @@ class AddConnectionModal extends Component {
                                         value={form.username || ''}
                                         className="form-control m-input" />
                                     {inviteErrors && inviteErrors.get('username') && <div className="form-control-feedback text-center error">{inviteErrors.get('username').get(0)}</div>}
-                                </div>
-                                <div className="col-lg-2">
-                                    <input
-                                        type="button"                                                
-                                        value={t('invite')}
-                                        onClick={() => { this._invite() }}
-                                        className="btn btn-success mr-3"
-                                        disabled={loading} />
-                                </div>
+                                </div>           
                             </div>
-                        </div>
-                        <Divider className="mt-4 mb-4" />
-                        <h5>{t('inviteNewUser')}</h5>
-                        <div className="m-form mt-4">
+                            }
+                            <div className="form-group row">
+                                <div className="col">
+                                    <FormControlLabel 
+                                        label={<h5 className="m-0">{t('inviteNewUser')}</h5>}
+                                        control={<Radio color="primary" name="type" checked={type === 'newUser'} onChange={(e) => {this._handleChangeType(e)}} value="newUser" />}          
+                                    />
+                                </div>           
+                            </div>
+                        {(type === 'newUser') && 
+                        <div>
                             <div className="form-group row">
                                 <label className="col-form-label col-lg-4" htmlFor="email">{t('email')} <span className="text-danger">*</span></label>
                                 <div className="col-lg-6">
@@ -141,27 +160,32 @@ class AddConnectionModal extends Component {
                                     {createErrors && createErrors.get('lastName') && <div className="form-control-feedback text-center error">{createErrors.get('lastName').get(0)}</div>}
                                 </div>
                             </div>
-                            <div className="form-group row">
-                                <div className="col-lg-12">
-                                    <div className="text-center mt-4">
-                                        <input
-                                            type="button"                                                
-                                            value={t('sentRequest')}
-                                            onClick={() => { this._create() }}
-                                            className="btn btn-success mr-3"
-                                            disabled={loading} />
-                                        <input
-                                            type="button"                                                
-                                            value={t('cancel')}
-                                            onClick={() => { this._close() }}
-                                            className="btn btn-default"
-                                           disabled={loading} />
-                                    </div>
-                               </div>
+                        </div>}
+                        <Divider className='my-3'/>
+                        <div className="form-group row">
+                            <label className="col-form-label col-lg-4" htmlFor="lastName">{t('message')}</label>
+                            <div className="col-lg-6">
+                                <textarea maxlength="300" onChange={(e) => { this._handleInputChange(e) }} name="message" className="form-control m-input">{form.message || ''}</textarea>
                             </div>
-                        </div>
+                        </div>                   
+                    </div>
                     </div>
                 </DialogContent>
+                <Divider className='full-width'/>
+                <DialogActions>
+                    <input
+                        type="button"                                                
+                        value={t('sentRequest')}
+                        onClick={() => { this._handleForm() }}
+                        className="btn btn-success mr-3"
+                        disabled={loading} />
+                    <input
+                        type="button"                                                
+                        value={t('cancel')}
+                        onClick={() => { this._close() }}
+                        className="btn btn-default"
+                       disabled={loading} />
+                </DialogActions>                
             </Modal>
         );
     }
