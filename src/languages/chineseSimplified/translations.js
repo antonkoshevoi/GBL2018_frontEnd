@@ -658,5 +658,7 @@ export default {
     math: 'Math',
     gotAccount: 'Got an account?',
     thankYou: 'Thank You',
-    pleaseWait: 'Please Wait...'
+    pleaseWait: 'Please Wait...',
+    userDisabledThisChat: 'Recipient has disabled messages in this chat...',
+    youDisabledThisChat: 'You have disabled messages in this chat...'
 }

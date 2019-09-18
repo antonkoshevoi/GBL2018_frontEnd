@@ -61,5 +61,7 @@ export default {
     messageGroupDeleted: '群组已删除',
     passwordUpdatedLoginPlease: '您的密码已更新，请尝试重新登录。',
     messageUpdated: '已成功更新讯息',
-    paymentMade: 'Thank you! Your payment has been processed!'
+    paymentMade: 'Thank you! Your payment has been processed!',
+    chatMessagesDisabed: 'Chat has been disabled! You will not get new messages here...',
+    chatMessagesEnabled: 'Chat has been enabled.'    
 }

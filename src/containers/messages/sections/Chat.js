@@ -3,19 +3,15 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { selectGetChatMessagesRequest, selectSendMessageRequest, selectUpdateMessageRequest, selectDeleteRecordRequest } from '../../../redux/messages/selectors';
 import { getChatMessages, sendChatMessage, updateChatMessage, deleteChatMessage } from '../../../redux/messages/actions';
-import { CircularProgress, Avatar, TextField, FormControl } from '@material-ui/core';
+import { CircularProgress, Avatar, TextField, FormControl, IconButton, Menu, MenuItem } from '@material-ui/core';
 import { DateTime } from "../../../components/ui/DateTime";
 import {Loader} from '../../../components/ui/Loader';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 
 class Chat extends Component {
        
     constructor(props) {
         super(props);
-                
-        console.log('Chat: ' + this.props.chatId);
+                       
         this.state = {
             message:        {},        
             messageId:      null,
@@ -178,11 +174,18 @@ class Chat extends Component {
     }
 
     render() {
-        const {getRecordsRequest, sendMessageRequest, updateMessageRequest, t} = this.props;
+        const {getRecordsRequest, sendMessageRequest, updateMessageRequest, disabledByOwner, disabledByRecipient, t} = this.props;
         const {messageText, messageId} = this.state;
         const loading = getRecordsRequest.get('loading');
         const success = getRecordsRequest.get('success');        
 
+        let placeholder = 'message';
+        if (disabledByRecipient) {
+            placeholder = 'userDisabledThisChat';
+        }
+        if (disabledByOwner) {
+            placeholder = 'youDisabledThisChat';
+        }        
         return (
             <div className='h-100 px-sm-3'>
                 {loading && <Loader /> }
@@ -199,13 +202,14 @@ class Chat extends Component {
                             <TextField
                                 multiline
                                 name="messageText"
-                                placeholder={t('message')}
+                                placeholder={t(placeholder)}
                                 className={messageId ? 'mt-1' : 'mt-3'}
                                 fullWidth
                                 margin="normal"
                                 variant="outlined"
                                 rows="2"
                                 autoFocus
+                                disabled={disabledByOwner || disabledByRecipient}
                                 readOnly={sendMessageRequest.get('loading') || updateMessageRequest.get('loading')}
                                 value={messageText || ''}
                                 onKeyPress={(e) => {

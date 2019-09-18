@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import {
-  AppBar, CircularProgress, DialogContent, DialogActions, Icon, Toolbar, Typography, Divider, Radio, FormControlLabel, TextField
-} from '@material-ui/core';
+import { AppBar, CircularProgress, DialogContent, DialogActions, Icon, Toolbar, Typography, Divider, Radio, FormControlLabel } from '@material-ui/core';
 import { create, invite, resetCreateRequest, resetInviteRequest } from "../../../redux/connections/actions";
 import { selectCreateRequest, selectInviteRequest } from "../../../redux/connections/selectors";
 import Modal from "../../../components/ui/Modal";

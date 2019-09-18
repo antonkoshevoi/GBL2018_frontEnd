@@ -18,6 +18,7 @@ import {
     CREATE_GROUP, CREATE_GROUP_SUCCESS, CREATE_GROUP_FAIL, RESET_CREATE_GROUP_REQUEST,
     UPDATE_GROUP, UPDATE_GROUP_SUCCESS, UPDATE_GROUP_FAIL, RESET_UPDATE_GROUP_REQUEST,
     DELETE_GROUP, DELETE_GROUP_SUCCESS, DELETE_GROUP_FAIL, RESET_DELETE_GROUP_REQUEST,
+    DISABLE_CHAT, DISABLE_CHAT_SUCCESS, DISABLE_CHAT_FAIL,
     NEW_MESSAGE_RECEIVED, MESSAGE_REMOVED
 } from './actions';
 import Immutable from 'immutable';
@@ -127,7 +128,13 @@ const initialState = Immutable.fromJS({
     success: false,
     fail: false,
     errors: []
-  },    
+  },
+  disableChatRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    data: Immutable.Map()
+  }  
 });
 
 function updateUnread(state, number = 1, isPrivate = false) {
@@ -144,6 +151,18 @@ function updateUnread(state, number = 1, isPrivate = false) {
         return record;
     });
     return Immutable.fromJS(unreadMessages);
+}
+
+function disableChat(state, data) {
+    let recordsKey  = data.isPrivate ? 'getPrivateChatsRequest' : 'getGroupChatsRequest';
+    let records     = state.get(recordsKey).get('records').toJS();
+    records = records.map(record => {
+        if (record.chatId === data.chatId) {                    
+            record.disabledByOwner = data.disabled;                    
+        }
+        return record;
+    });    
+    return Immutable.fromJS(records);
 }
 
 export default function reducer (state = initialState, action) {
@@ -368,7 +387,18 @@ export default function reducer (state = initialState, action) {
     case READ_MESSAGES_FAIL:        
     case GET_UNREAD_MESSAGES_FAIL:    
         return state.set('getUnreadMessagesRequest', state.get('getUnreadMessagesRequest').set('loading', false).set('success', false).set('fail', true));            
-    
+       
+    case DISABLE_CHAT:        
+        return state.set('disableChatRequest', initialState.get('disableChatRequest').set('loading', true).set('record', {}));
+    case DISABLE_CHAT_SUCCESS:
+
+        let recordsKey = action.result.data.isPrivate ? 'getPrivateChatsRequest' : 'getGroupChatsRequest'
+
+        return state.set('disableChatRequest', initialState.get('disableChatRequest').set('success', true).set('data', Immutable.fromJS(action.result.data)))
+                 .set(recordsKey, state.get(recordsKey).set('records', disableChat(state, action.result.data)));
+    case DISABLE_CHAT_FAIL:       
+        return state.set('disableChatRequest', initialState.get('disableChatRequest').set('fail', true));
+                    
     /**
      * Get single group
      */
