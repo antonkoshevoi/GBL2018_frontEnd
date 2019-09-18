@@ -62,5 +62,7 @@ export default {
     messageGroupDeleted: '그룹이 삭제 되었습니다',
     passwordUpdatedLoginPlease: '비밀번호가 업데이트 되었습니다, 로그인을 시도해 보세요',
     messageUpdated: '메시지가 업데이트 되었습니다',
-    paymentMade: 'Thank you! Your payment has been processed!'
+    paymentMade: 'Thank you! Your payment has been processed!',
+    chatMessagesDisabed: 'Chat has been disabled! You will not get new messages here...',
+    chatMessagesEnabled: 'Chat has been enabled.'    
 }

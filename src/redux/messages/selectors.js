@@ -74,3 +74,8 @@ export const selectDeleteGroupRequest = createSelector(
   selectMessagesDomain,
   (subState) => subState.get('deleteGroupRequest')
 );
+
+export const selectDisableChatRequest = createSelector(
+  selectMessagesDomain,
+  (subState) => subState.get('disableChatRequest')
+);

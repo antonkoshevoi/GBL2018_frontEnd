@@ -62,5 +62,7 @@ export default {
     messageGroupDeleted: 'Le groupe est supprimé',
     passwordUpdatedLoginPlease: 'Votre mot de passe a été mis à jour, veuillez essayez de vous connecter.',
     messageUpdated: 'Le message a été mis à jour avec succès ',
-    paymentMade: 'Thank you! Your payment has been processed!'
+    paymentMade: 'Thank you! Your payment has been processed!',
+    chatMessagesDisabed: 'Chat has been disabled! You will not get new messages here...',
+    chatMessagesEnabled: 'Chat has been enabled.'     
 }

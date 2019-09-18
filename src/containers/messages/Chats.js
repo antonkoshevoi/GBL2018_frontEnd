@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { selectGetPrivateChatsRequest, selectGetGroupChatsRequest, selectGetUnreadMessagesRequest } from '../../redux/messages/selectors';
-import { getPrivateChats, getGroupChats } from '../../redux/messages/actions';
-import { Avatar, CircularProgress } from '@material-ui/core';
+import { selectGetPrivateChatsRequest, selectGetGroupChatsRequest, selectGetUnreadMessagesRequest, selectDisableChatRequest } from '../../redux/messages/selectors';
+import { getPrivateChats, getGroupChats, disableChat } from '../../redux/messages/actions';
+import { Avatar, CircularProgress, Switch } from '@material-ui/core';
 import { debounce } from '../../helpers/utils';
 import { DateTime } from "../../components/ui/DateTime";
+import { Loader } from '../../components/ui/Loader';
 import Chat from "./sections/Chat";
 
 class Chats extends Component {
@@ -13,7 +14,8 @@ class Chats extends Component {
     constructor(props) {
         super(props);        
         this.state = {
-            chatId: null,
+            openChat: null,
+            openChatId: null,
             type: 'group',
             filter: ''
         };
@@ -24,16 +26,28 @@ class Chats extends Component {
     }
                
     componentWillReceiveProps(nextProps) {
-        const { groupChatsRequest, privateChatsRequest} = this.props;        
+        const { groupChatsRequest, privateChatsRequest, disableChatRequest} = this.props;        
         
         if (!groupChatsRequest.get('records').size && nextProps.groupChatsRequest.get('records').size) {
-            if (!this.state.chatId) {                
-                this._viewChat(nextProps.groupChatsRequest.get('records').get(0).get('chatId'));
+            if (!this.state.openChat) {                
+                this._viewChat(nextProps.groupChatsRequest.get('records').get(0));
             }
         }
         if (!privateChatsRequest.get('records').size && nextProps.privateChatsRequest.get('records').size) {
-            if (!this.state.chatId) {                
-                this._viewChat(nextProps.privateChatsRequest.get('records').get(0).get('chatId'));
+            if (!this.state.openChat) {                
+                this._viewChat(nextProps.privateChatsRequest.get('records').get(0));
+            }
+        }
+        
+        if (!disableChatRequest.get('success') && nextProps.disableChatRequest.get('success')) {
+            let data = nextProps.disableChatRequest.get('data');
+            if (data.get('chatId') === this.state.openChatId) {
+                this.setState({
+                    openChat: {
+                        ...this.state.openChat,
+                        disabledByOwner: data.get('disabled')
+                    }
+                });
             }
         }        
     }        
@@ -46,15 +60,18 @@ class Chats extends Component {
         }
     }    
     
-    _viewChat(id) {
-        console.log('viewChat: ' + id);
-        this.setState({chatId: id});
+    _viewChat(chat) {
+        this.setState({
+            openChat: chat.toJS(),
+            openChatId: chat.get('chatId')
+        });
     }
     
     _setType(type) {
         this.setState({
             type: type, 
-            chatId: null
+            openChat: null,
+            openChatId: null
         });
         
         this._getRecords(type, {
@@ -75,9 +92,16 @@ class Chats extends Component {
         }, 1000));
     }    
     
+    _handleChangeChat(e) {
+        this.props.disableChat(e.target.value, !e.target.checked);
+        
+        e.stopPropagation();
+        e.preventDefault();
+    }
+    
     _renderGroups() {        
         const { groupChatsRequest, t} = this.props;        
-        const {chatId} = this.state;
+        const { openChatId } = this.state;
         
         if (groupChatsRequest.get('loading')) {            
             return <div className="m-5 text-center"><CircularProgress /></div>;
@@ -89,12 +113,15 @@ class Chats extends Component {
         
         return groupChatsRequest.get('records').map((record, key) => {
             return (
-                <div key={key} className={`chat ${record.get('chatId') === chatId ? 'current' : ''}`} onClick={() => this._viewChat(record.get('chatId')) }>
+                <div key={key} className={`chat ${record.get('chatId') === openChatId ? 'current' : ''}`} onClick={() => this._viewChat(record) }>
                     <div className='d-flex'>
                         <div className='align-self-center d-inline-block mr-3'>
-                            <Avatar src={record.get('userAvatar')} className='border' />
+                            <Avatar src={record.get('userAvatar')} className='border' />                            
                         </div>
-                        <div className='d-inline-block'>
+                        <div className='d-inline-block flex-grow-1'>
+                            <span className="pull-right">
+                                <Switch checked={!record.get('disabledByOwner')} onClick={(e) => this._handleChangeChat(e)} value={record.get('chatId')} color="default" />
+                            </span>
                             <div>
                                 <span className='chat-name'>{record.get('name')}</span>
                                 {record.get('newMessages') > 0 && <span className='badge badge-danger p-0 ml-2'>{record.get('newMessages')}</span>}
@@ -127,7 +154,7 @@ class Chats extends Component {
     
     _renderContacts() {        
         const {privateChatsRequest, t} = this.props;       
-        const {chatId} = this.state;
+        const {openChatId} = this.state;
         
         if (privateChatsRequest.get('loading')) {            
             return <div className="m-5 text-center"><CircularProgress /></div>;
@@ -139,12 +166,15 @@ class Chats extends Component {
         
         return privateChatsRequest.get('records').map((record, key) => {
             return (
-                <div key={key} className={`chat ${record.get('chatId') === chatId ? 'current' : ''}`} onClick={() => this._viewChat(record.get('chatId')) }>
+                <div key={key} className={`chat ${record.get('chatId') === openChatId ? 'current' : ''}`} onClick={() => this._viewChat(record) }>
                     <div className='d-flex'>
                         <div className='align-self-center d-inline-block mr-3'>
                             <Avatar src={record.get('userAvatar')} className='border' />
                         </div>
-                        <div className='d-inline-block'>
+                        <div className='d-inline-block flex-grow-1'>
+                            <span className="pull-right">
+                                <Switch checked={!record.get('disabledByOwner')} onClick={(e) => this._handleChangeChat(e)} value={record.get('chatId')} color="default" />
+                            </span>                        
                             <div>
                                 <span className='chat-name'>{record.get('userName')}</span>
                                 {record.get('newMessages') > 0 && <span className='badge badge-danger p-0 ml-2'>{record.get('newMessages')}</span>}
@@ -159,7 +189,7 @@ class Chats extends Component {
     }
     
     _renderChats() {
-        const {chatId, type, filter} = this.state;
+        const {openChat, type, filter} = this.state;
         const {t} = this.props;        
         const unreadGroups = this._unreadCount('countGroup');
         const unreadPrivate = this._unreadCount('countPrivate');
@@ -195,7 +225,7 @@ class Chats extends Component {
                         </div>
                     </div>
                     <div className='col-7 col-md-8 col-lg-9 px-0'>
-                        {chatId && <Chat chatId={chatId} />}
+                        {openChat && <Chat chatId={openChat.chatId} disabledByOwner={openChat.disabledByOwner} disabledByRecipient={openChat.disabledByRecipient} />}
                     </div>                        
                 </div>                
             </div>
@@ -203,9 +233,10 @@ class Chats extends Component {
     }
     
     render() {
-        const {t} = this.props;
+        const {t, disableChatRequest} = this.props;
         return (
             <div className='fadeInLeft'>     
+                {disableChatRequest.get('loading') && <Loader />}
                 <div className='m-portlet m-portlet--head-solid-bg'>
                     <div className={`m-portlet__head border-b-violet`}>
                         <div className='m-portlet__head-caption'>
@@ -228,7 +259,8 @@ Chats = connect(
     (state) => ({
         groupChatsRequest: selectGetGroupChatsRequest(state),
         privateChatsRequest: selectGetPrivateChatsRequest(state),
-        unreadMessagesRequest: selectGetUnreadMessagesRequest(state)
+        unreadMessagesRequest: selectGetUnreadMessagesRequest(state),
+        disableChatRequest: selectDisableChatRequest(state)
     }),
     (dispatch) => ({
         getGroupChats: (params = {}) => {
@@ -236,7 +268,10 @@ Chats = connect(
         },
         getPrivateChats: (params = {}) => {
             dispatch(getPrivateChats(params));
-        }        
+        },
+        disableChat: (chatId, disabled) => {
+            dispatch(disableChat(chatId, disabled));
+        }
     })
 )(Chats);
 

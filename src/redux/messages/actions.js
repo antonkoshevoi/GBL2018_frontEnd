@@ -90,6 +90,19 @@ export const MESSAGE_REMOVED = '[Messages] MESSAGE_REMOVED';
 export const SUBSCRIBE = '[Messages] SUBSCRIBE';
 export const SUBSCRIBE_FAIL = '[Messages] SUBSCRIBE_FAIL';
 
+export const DISABLE_CHAT = '[Messages] DISABLE_CHAT';
+export const DISABLE_CHAT_SUCCESS = '[Messages] DISABLE_CHAT_SUCCESS';
+export const DISABLE_CHAT_FAIL = '[Messages] DISABLE_CHAT_FAIL';
+
+export function disableChat(chatID, disabled = true) {    
+  return {    
+    types: [DISABLE_CHAT, DISABLE_CHAT_SUCCESS, DISABLE_CHAT_FAIL],
+    promise: (apiClient) => apiClient.post(`messages/disable/${chatID}`, {
+        disabled: disabled
+    })
+  };
+}
+
 export function subscribe (userId) {
   console.log(SUBSCRIBE);
   return {

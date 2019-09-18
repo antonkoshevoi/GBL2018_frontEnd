@@ -62,5 +62,7 @@ export default {
     messageGroupDeleted: 'Group has been deleted',
     passwordUpdatedLoginPlease: 'Your password has been updated successfully. Please login.',
     messageUpdated: 'Your message was successfully updated',
-    paymentMade: 'Thank you! Your payment has been processed!'
+    paymentMade: 'Thank you! Your payment has been processed!',
+    chatMessagesDisabed: 'Chat has been disabled! You will not get new messages here...',
+    chatMessagesEnabled: 'Chat has been enabled.'    
 }
