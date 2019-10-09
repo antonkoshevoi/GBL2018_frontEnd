@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Typography, Input, FormControl, FormHelperText, InputLabel, MenuItem, Select, CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-
 import { selectGetUsersRequest} from "../../../redux/connections/selectors";
 import { getUsers } from "../../../redux/connections/actions";
 
