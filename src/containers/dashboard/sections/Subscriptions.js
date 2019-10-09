@@ -138,7 +138,7 @@ class Subscriptions extends Component {
             return (
                 <Row index={i} key={i}>                     
                     <Td>
-                        <div>{t(item.title)}</div>
+                        <div>{t('learnerPlan', {learners: item.allowedStudents})}</div>
                         <strong className="g-blue"><Price price={item.totalPrice} currency={item.currency} /></strong> / {t(item.period)}
                     </Td>      
                     <Td>

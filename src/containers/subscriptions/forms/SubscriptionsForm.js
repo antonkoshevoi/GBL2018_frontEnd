@@ -3,13 +3,15 @@ import {withTranslation} from 'react-i18next';
 import {Price} from "../../../components/ui/Price";
 
 import learner1 from '../../../media/images/1-learner.png';
+import learner2 from '../../../media/images/2-learner.png';
 import learner3 from '../../../media/images/3-learner.png';
-import learner4 from '../../../media/images/5-learner.png';
+import learner4 from '../../../media/images/4-learner.png';
+import learner5 from '../../../media/images/5-learner.png';
 
 import '../../../styles/subscriptions.css'
 
 const images = [
-    learner1, learner3, learner4
+    learner1, learner2, learner3, learner4, learner5
 ];
 
 class SubscriptionsForm extends Component {

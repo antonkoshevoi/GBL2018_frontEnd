@@ -29,16 +29,11 @@ class InvoiceForm extends Component {
                                 <h4 className="text-center">{t('subscriptionDetails')}</h4>
                                 <div className="my-3">
                                     <div>
-                                        <label>{t('name')}:</label> <strong>{t(invoice.get('title'))}</strong>
+                                        <label>{t('name')}:</label> <strong>{t('learnerPlan', {learners: invoice.get('allowedStudents')})}</strong>
                                     </div>
                                     <div>
                                         <label>{t('allowedCourses')}:</label> <strong>{invoice.get('allowedCourses')} x {invoice.get('allowedStudents')}</strong>
                                     </div>
-                                    {(invoice.get('period') === 'year') && 
-                                        <div>
-                                            <label>{t('annualBonus')}:</label> <strong>{invoice.get('allowedStudents') > 1 ? t('freeWorkbooks', {number: invoice.get('allowedStudents')}) : t('freeWorkbook')}</strong>
-                                        </div>
-                                    }
                                 </div>
                                 <Divider />
                                 {(invoice.get('discount') > 0) ?
