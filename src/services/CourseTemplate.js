@@ -33,7 +33,7 @@ export default function formTableData(serverData, jsonTemplateData) {
       return '';
     }
     attempt.metadata.forEach((metadataAttempt, attemptIndex) => {
-      if (!metadataAttempt) {
+      if (!metadataAttempt || !Array.isArray(metadataAttempt) || !metadataAttempt.length) {
         return;
       }
       const questionId = Object.keys(metadataAttempt)[0];
