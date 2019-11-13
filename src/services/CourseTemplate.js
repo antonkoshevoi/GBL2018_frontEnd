@@ -32,18 +32,19 @@ export default function formTableData(serverData, jsonTemplateData) {
     if (!attempt || !attempt.metadata) {
       return '';
     }
+    
     attempt.metadata.forEach((metadataAttempt, attemptIndex) => {
-      if (!metadataAttempt || !Array.isArray(metadataAttempt) || !metadataAttempt.length) {
+      if (!metadataAttempt || !Object.keys(metadataAttempt).length) {
         return;
-      }
-      const questionId = Object.keys(metadataAttempt)[0];
-      const mistakeDetails = metadataAttempt['' + questionId].split(',');
-      const questionTemplate = findQuestionTemplate(jsonQuizzes, questionId);
-      if (!questionTemplate) {
+      }      
+      const questionId          = Object.keys(metadataAttempt)[0];
+      const questionMeta        = metadataAttempt[questionId];
+      const questionTemplate    = findQuestionTemplate(jsonQuizzes, questionId);
+      if (!questionMeta || !questionTemplate) {
         return;
       }
       const questionType = questionTemplate.question_type_id;
-      finalComment += switchQuestionType(questionTemplate, questionType, mistakeDetails);
+      finalComment += switchQuestionType(questionTemplate, questionType, questionMeta);
     });
     return finalComment;
   }
@@ -77,8 +78,10 @@ export default function formTableData(serverData, jsonTemplateData) {
   }
 
   function switchQuestionType(questionTemplate, questionType, mistakeDetails) {
-    // This code is adaptation of BE php code located in /API/Users/Transformers/StudentReportTransformer.php,
-    // function transformMetadata
+    if (typeof mistakeDetails === 'string') {
+        mistakeDetails = mistakeDetails.split(',');
+    }
+
     if (!mistakeDetails || !questionTemplate) {
         return '';
     }
@@ -178,7 +181,7 @@ export default function formTableData(serverData, jsonTemplateData) {
         });
         return formMistakes(description, chosenAnswer);
       }
-      case '71': {        
+      case '71': {
         let chosenAnswer = '';
         mistakeDetails.forEach((mistakeDetail) => {
           const mistakeIndex = +mistakeDetail;
@@ -186,8 +189,16 @@ export default function formTableData(serverData, jsonTemplateData) {
         });
         return formMistakes(description, chosenAnswer);
       }
+      case '80': {
+        return 'Q: ' + description + '<br/>';
+      }
+      case '100':    
+      case '110':
+      case '120': {        
+        return formAnswer(description, mistakeDetails['correct'], mistakeDetails['current']);
+      }
       default: {
-          return '';
+        return '';
       }
     }
   }
