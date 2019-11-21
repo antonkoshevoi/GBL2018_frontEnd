@@ -44,10 +44,10 @@ class Classrooms extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._openEditDialogOnSingleRequestSuccess(nextProps);
-    this._openAssignStudentDialogOnSingleRequestSuccess(nextProps);
-    this._deleteRequestSuccess(nextProps);
+  componentDidUpdate(prevProps) {
+    this._openEditDialogOnSuccess(prevProps);
+    this._openAssignStudentDialogOnSuccess(prevProps);
+    this._deleteRequestSuccess(prevProps);
   }
 
   componentDidMount () {
@@ -58,6 +58,7 @@ class Classrooms extends Component {
   _openCreateDialog = () => {
     this.setState({ createModalIsOpen: true });
   };
+  
   _closeCreateDialog = () => {
     this.setState({ createModalIsOpen: false });
   };
@@ -65,6 +66,7 @@ class Classrooms extends Component {
   _openEditDialog = () => {
     this.setState({ editModalIsOpen: true });
   };
+  
   _closeEditDialog = () => {
     this.setState({ editModalIsOpen: false });
   };
@@ -72,6 +74,7 @@ class Classrooms extends Component {
   _openAssignStudentsDialog  = () => {
     this.setState({ assignStudentsModalIsOpen: true });
   };
+  
   _closeAssignStudentsDialog = () => {
     this.setState({ assignStudentsModalIsOpen: false });
   };
@@ -135,11 +138,10 @@ class Classrooms extends Component {
   _editRecord (id) {
     this.props.getSingleRecord(id);
   }
-  _openEditDialogOnSingleRequestSuccess(nextProps) {
-    const success = this.props.getSingleRecordRequest.get('success');
-    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
+  _openEditDialogOnSuccess(prevProps) {
+    const success = this.props.getSingleRecordRequest.get('success');    
 
-    if(!success && nextSuccess) {
+    if (success && !prevProps.getSingleRecordRequest.get('success')) {
       this._openEditDialog();
     }
   }
@@ -147,11 +149,11 @@ class Classrooms extends Component {
   _deleteRecord (id) {
     this.props.deleteRecord(id);
   }
-  _deleteRequestSuccess(nextProps) {
-    const deleteSuccess = this.props.getDeleteRequest.get('success');
-    const nextDeleteSuccess = nextProps.getDeleteRequest.get('success');
+  
+  _deleteRequestSuccess(prevProps) {
+    const success = this.props.getDeleteRequest.get('success');    
 
-    if(!deleteSuccess && nextDeleteSuccess) {
+    if (success && !prevProps.getDeleteRequest.get('success')) {
       this._getRecords();
     }
   }
@@ -159,19 +161,15 @@ class Classrooms extends Component {
   _assignStudent (id) {
     this.props.getRecordForAssignStudents(id);
   }
-  _openAssignStudentDialogOnSingleRequestSuccess(nextProps) {
-    const success = this.props.getRecordForAssignStudentsRequest.get('success');
-    const nextSuccess = nextProps.getRecordForAssignStudentsRequest.get('success');
+  
+  _openAssignStudentDialogOnSuccess(prevProps) {
+    const success = this.props.getRecordForAssignStudentsRequest.get('success');    
 
-    if(!success && nextSuccess) {
+    if (success && !prevProps.getRecordForAssignStudentsRequest.get('success')) {
       this._openAssignStudentsDialog();
     }
   }
 
-  /**
-   *
-   * @private
-   */
   _getRecords () {
     const { sorters, filters, page, perPage } = this.state;
 
@@ -182,11 +180,6 @@ class Classrooms extends Component {
     });
   }
 
-  /**
-   *
-   * @param name
-   * @private
-   */
   _sort (name) {
     let sorters = {};
 
@@ -199,11 +192,6 @@ class Classrooms extends Component {
     this.setState({ sorters }, this._getRecords);
   }
 
-  /**
-   *
-   * @param value
-   * @private
-   */
   _search(value) {
     let filters = {
       composed: value
@@ -215,11 +203,6 @@ class Classrooms extends Component {
     }, this._getRecords);
   }
 
-  /**
-   *
-   * @param perPage
-   * @private
-   */
   _selectPerPage (perPage) {
     const total = this.props.pagination.get('total');
     const totalPages = Math.ceil(total / perPage);

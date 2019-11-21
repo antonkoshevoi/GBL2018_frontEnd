@@ -30,15 +30,15 @@ class NewMessageModal extends Component {
         this.props.getGroups();
     }    
        
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.isOpen && nextProps.isOpen) {
+    componentDidUpdate(prevProps) {
+        if (this.props.isOpen && !prevProps.isOpen) {
             this.setState(this.getInitialState());   
         }        
-        this._handleSuccess(nextProps);
+        this._handleSuccess(prevProps);
     }
 
-    _handleSuccess(nextProps) {
-        if (!this.props.sendMessageRequest.get('success') && nextProps.sendMessageRequest.get('success')) {            
+    _handleSuccess(prevProps) {
+        if (this.props.sendMessageRequest.get('success') && !prevProps.sendMessageRequest.get('success')) {            
             this.props.onSuccess();
             this._close();
         }

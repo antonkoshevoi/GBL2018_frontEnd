@@ -34,16 +34,15 @@ class AssignStudentModal extends Component {
     };
   };
   
-  componentWillReceiveProps(nextProps) {
-    const success = this.props.subscribeRequest.get('success');
-    const nextSuccess = nextProps.subscribeRequest.get('success');
+  componentDidUpdate(prevProps) {
+    const success = this.props.subscribeRequest.get('success');    
 
-    if (!success && nextSuccess) {
+    if (success && !prevProps.subscribeRequest.get('success')) {
       this._close();     
       this.props.onSuccess();
     }
     
-    if (!this.props.isOpen && nextProps.isOpen) {
+    if (this.props.isOpen && !prevProps.isOpen) {
         this.props.getStudents();    
         this.props.getStoreItems();        
     }

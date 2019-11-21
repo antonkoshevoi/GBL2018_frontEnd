@@ -27,10 +27,6 @@ class ScapResults extends Component {
         const {getRecords} = this.props;
         getRecords(this.state.surveyId);
     }
-
-    componentWillReceiveProps(nextProps) {
-
-    }
     
     _showResultsModal(record) {
         this.setState({

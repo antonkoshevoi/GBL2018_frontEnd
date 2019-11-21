@@ -31,16 +31,15 @@ class AssignStudentModal extends Component {
     };
 
   
-    componentWillReceiveProps(nextProps) {    
-        const success = this.props.assignCourseCreditRequest.get('success');
-        const nextSuccess = nextProps.assignCourseCreditRequest.get('success');
+    componentDidUpdate(prevProps) {    
+        const success = this.props.assignCourseCreditRequest.get('success');        
 
-        if (!success && nextSuccess) {
+        if (success && !prevProps.assignCourseCreditRequest.get('success')) {
             this._close();     
             this.props.onSuccess();
         }
 
-        if (!this.props.isOpen && nextProps.isOpen) {
+        if (this.props.isOpen && !prevProps.isOpen) {
             this.props.getStudents({filter: {
                 owner: true
             }});

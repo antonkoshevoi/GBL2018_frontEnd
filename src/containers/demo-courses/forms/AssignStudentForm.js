@@ -29,18 +29,18 @@ class AssignStudentForm extends Component {
     getSchoolStudents();
   }
   
-  componentWillReceiveProps(nextProps) {
-    this._handleSchoolStudentsSuccess(nextProps);
+  componentDidUpdate(prevProps) {
+    this._handleSchoolStudentsSuccess(prevProps);
   }
 
-  _handleSchoolStudentsSuccess(nextProps) {
-    const schoolStudents = this.props.schoolStudentsRequest.get('records');
-    const nextschoolStudents = nextProps.schoolStudentsRequest.get('records');
+  _handleSchoolStudentsSuccess(prevProps) {
+    const students = this.props.schoolStudentsRequest.get('records');
+    const prevStudents = prevProps.schoolStudentsRequest.get('records');
 
-    if (!schoolStudents && nextschoolStudents) {
+    if (students && !prevStudents) {
       this.setState({
         ...this.state,
-        schoolStudents: nextschoolStudents.toJS()
+        schoolStudents: students.toJS()
       });
     }
   }  

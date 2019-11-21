@@ -47,17 +47,19 @@ class ClassroomForm extends Component {
     getSchoolHomerooms(params);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._getSchoolTeachersSuccess(nextProps);
-    this._getSchoolHomeroomsSuccess(nextProps);    
+  componentDidUpdate(prevProps) {
+    this._getSchoolTeachersSuccess(prevProps);
+    this._getSchoolHomeroomsSuccess(prevProps);    
   }
 
   _openCourseDialog = () => {
     this.setState({courseModalIsOpen: true});
   };
+  
   _closeCourseDialog = () => {
     this.setState({courseModalIsOpen: false});
   };
+  
   _submitCourseDialog = (course) => {
     this.setState({course});
     this.props.onChange({
@@ -77,26 +79,24 @@ class ClassroomForm extends Component {
     }
   }
 
-  _getSchoolTeachersSuccess(nextProps) {
-    const schoolTeachers = this.props.getSchoolTeacherRequest.get('success');
-    const nextschoolTeachers = nextProps.getSchoolTeacherRequest.get('success');
+  _getSchoolTeachersSuccess(prevProps) {
+    const success = this.props.getSchoolTeacherRequest.get('success');    
 
-    if (!schoolTeachers && nextschoolTeachers) {
+    if (success && !prevProps.getSchoolTeacherRequest.get('success')) {
       this.setState({
         ...this.state,
-        schoolTeachers: nextProps.getSchoolTeacherRequest.get('records').toJS()
+        schoolTeachers: this.props.getSchoolTeacherRequest.get('records').toJS()
       });
     }
   }
 
-  _getSchoolHomeroomsSuccess(nextProps) {
-    const schoolHomerooms = this.props.getSchoolHomeroomsRequest.get('success');
-    const nextschoolHomerooms = nextProps.getSchoolHomeroomsRequest.get('success');
+  _getSchoolHomeroomsSuccess(prevProps) {
+    const success = this.props.getSchoolHomeroomsRequest.get('success');    
 
-    if (!schoolHomerooms && nextschoolHomerooms) {
+    if (success && !prevProps.getSchoolHomeroomsRequest.get('success')) {
       this.setState({
         ...this.state,
-        schoolHomerooms: nextProps.getSchoolHomeroomsRequest.get('records').toJS()
+        schoolHomerooms: this.props.getSchoolHomeroomsRequest.get('records').toJS()
       });
     }
   }

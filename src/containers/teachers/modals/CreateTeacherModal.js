@@ -37,17 +37,16 @@ class CreateTeacherModal extends Component {
         phone: '',
         schoolId: '',
         homeroomId: '',
-        avatarCropped: '',
+        avatarCropped: ''
       },
       avatar: ''
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const success = this.props.createRequest.get('success');
-    const nextSuccess = nextProps.createRequest.get('success');
+  componentDidUpdate(prevProps) {
+    const success = this.props.createRequest.get('success');    
 
-    if(!success && nextSuccess) {
+    if (success && !prevProps.createRequest.get('success')) {
       this._close();
       this.props.onSuccess();
     }
@@ -64,16 +63,13 @@ class CreateTeacherModal extends Component {
     );
   };
 
-
   _setCroppedImage(img){
-    this.setState(
-      {
+    this.setState({
         teacher: {
           ...this.state.teacher,
           avatarCropped:img
         }
-      }
-    );
+    });
   }
 
   _setImage(img){

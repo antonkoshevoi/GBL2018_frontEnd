@@ -30,11 +30,11 @@ class CreateHomeroomModal extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     const success = this.props.createRequest.get('success');
-    const nextSuccess = nextProps.createRequest.get('success');
+    const prevSuccess = prevProps.createRequest.get('success');
 
-    if(!success && nextSuccess) {
+    if (success && !prevSuccess) {
       this._close();
       this.props.onSuccess();
     }

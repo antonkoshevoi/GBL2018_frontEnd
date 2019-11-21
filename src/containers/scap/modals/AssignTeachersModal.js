@@ -26,28 +26,27 @@ class AssignTeachersModal extends Component {
         };
     }
     
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.isOpen && nextProps.isOpen) {
+    componentDidUpdate(prevProps) {
+        if (this.props.isOpen && !prevProps.isOpen) {
             this.props.getTeachers();
             
-            const teacherIds = nextProps.template.get('teacherIds').map((id) => {                
+            const teacherIds = this.props.template.get('teacherIds').map((id) => {                
                 return id.toString();
             });          
                         
             this.setState({
-                templateId: nextProps.template.get('id'),
+                templateId: this.props.template.get('id'),
                 teacherIds: teacherIds.toJS()
             });
         }
         
-        this._handleSuccessAssigned(nextProps);
+        this._handleSuccessAssigned(prevProps);
     }
 
-    _handleSuccessAssigned(nextProps) {
-        const success = this.props.assignTeachersRequest.get('success');
-        const nextSuccess = nextProps.assignTeachersRequest.get('success');
+    _handleSuccessAssigned(prevProps) {
+        const success = this.props.assignTeachersRequest.get('success');        
 
-        if (!success && nextSuccess) {
+        if (success && !prevProps.assignTeachersRequest.get('success')) {
             this._close();
             this.props.onSuccess();
         }

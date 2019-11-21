@@ -34,11 +34,10 @@ class AssignStudentModal extends Component {
     };
   };
   
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     const success = this.props.assignDemoStudentRequest.get('success');
-    const nextSuccess = nextProps.assignDemoStudentRequest.get('success');
 
-    if (!success && nextSuccess) {
+    if (success && !prevProps.assignDemoStudentRequest.get('success')) {
       this._close();     
       this.props.onSuccess();
     }

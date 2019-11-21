@@ -26,28 +26,25 @@ class Info extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._passwordChangedSuccess(nextProps);
-    this._imageChangedSuccess(nextProps);
+  componentDidUpdate(prevProps) {
+    this._passwordChangedSuccess(prevProps);
+    this._imageChangedSuccess(prevProps);
   }
 
-  _passwordChangedSuccess(nextProps) {
-    const prev = this.props.changePasswordRequest.get('success');
-    const next = nextProps.changePasswordRequest.get('success');
+  _passwordChangedSuccess(prevProps) {
+    const success = this.props.changePasswordRequest.get('success');
 
-    if (!prev && next) {
+    if (success && !prevProps.changePasswordRequest.get('success')) {
       this.setState({
-        ...this.state,        
-        passwordFields: {},
+        ...this.state, passwordFields: {}
       });
     }
   }
   
-  _imageChangedSuccess(nextProps) {
-    const prev = this.props.changeImageRequest.get('success');
-    const next = nextProps.changeImageRequest.get('success');
+  _imageChangedSuccess(prevProps) {
+    const success = this.props.changeImageRequest.get('success');
 
-    if (!prev && next) {        
+    if (success && !prevProps.changeImageRequest.get('success')) {        
         this.props.user.avatar = this.state.croppedImage;
     }
   }  

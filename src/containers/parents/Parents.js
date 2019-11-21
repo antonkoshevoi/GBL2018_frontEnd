@@ -36,10 +36,10 @@ class Parents extends Component {
     getRecords();
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._openEditDialogOnSingleRequestSuccess(nextProps);
-    this._openStudentsDialogOnRequestSuccess(nextProps);
-    this._deleteRequestSuccess(nextProps);
+  componentDidUpdate(prevProps) {
+    this._openEditDialogOnSingleRequestSuccess(prevProps);
+    this._openStudentsDialogOnRequestSuccess(prevProps);
+    this._deleteRequestSuccess(prevProps);
   }
 
   _openCreateDialog = () => {
@@ -98,20 +98,18 @@ class Parents extends Component {
     this.props.getStudents(id);
   }
   
-  _openEditDialogOnSingleRequestSuccess(nextProps) {
-    const success = this.props.getSingleRecordRequest.get('success');
-    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
+  _openEditDialogOnSingleRequestSuccess(prevProps) {
+    const success = this.props.getSingleRecordRequest.get('success');    
 
-    if (!success && nextSuccess) {
+    if (success && !prevProps.getSingleRecordRequest.get('success')) {
       this._openEditDialog();
     }
   }
   
-  _openStudentsDialogOnRequestSuccess (nextProps) {
-    const success = this.props.getStudentsRequest.get('success');
-    const nextSuccess = nextProps.getStudentsRequest.get('success');
+  _openStudentsDialogOnRequestSuccess (prevProps) {
+    const success = this.props.getStudentsRequest.get('success');    
 
-    if(!success && nextSuccess) {
+    if (success && !prevProps.getStudentsRequest.get('success')) {
       this._openStudentsDialog();
     }
   }  
@@ -120,11 +118,10 @@ class Parents extends Component {
     this.props.deleteRecord(id);
   }
   
-  _deleteRequestSuccess(nextProps) {
-    const deleteSuccess = this.props.getDeleteRequest.get('success');
-    const nextDeleteSuccess = nextProps.getDeleteRequest.get('success');
+  _deleteRequestSuccess(prevProps) {
+    const success = this.props.getDeleteRequest.get('success');    
 
-    if(!deleteSuccess && nextDeleteSuccess) {
+    if (success && !prevProps.getDeleteRequest.get('success')) {
       this._getRecords();
     }
   }

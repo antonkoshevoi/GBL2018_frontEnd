@@ -28,17 +28,16 @@ class Subscriptions extends Component {
         getRecords();
     }
     
-    componentWillReceiveProps(nextProps) {
-        this._handleSubscribe(nextProps);
-        this._handleDiscountCode(nextProps);
+    componentDidUpdate(prevProps) {
+        this._handleSubscribe(prevProps);
+        this._handleDiscountCode(prevProps);
     }
     
-    _handleSubscribe(nextProps) {
-        const success = this.props.subscribeRequest.get('success');
-        const nextSuccess = nextProps.subscribeRequest.get('success');
+    _handleSubscribe(prevProps) {
+        const success = this.props.subscribeRequest.get('success');        
 
-        if (!success && nextSuccess) {      
-            const paymentId = nextProps.subscribeRequest.get('paymentId');
+        if (success && !prevProps.subscribeRequest.get('success')) {      
+            const paymentId = this.props.subscribeRequest.get('paymentId');
             
             this.props.resetSubscribeRequest();
             this.props.resetGetUserRecordsRequest();
@@ -53,8 +52,8 @@ class Subscriptions extends Component {
         }        
     }
     
-    _handleDiscountCode(nextProps) {
-        if (!this.props.discountCodeRequest.get('success') && nextProps.discountCodeRequest.get('success')) {
+    _handleDiscountCode(prevProps) {
+        if (this.props.discountCodeRequest.get('success') && !prevProps.discountCodeRequest.get('success')) {
             this.props.getRecords();            
         }
     }     

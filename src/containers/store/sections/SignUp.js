@@ -14,8 +14,8 @@ class SignUp extends Component {
         this.state = props.data || {};
     }
     
-    componentWillReceiveProps(nextProps){
-        if (!this.props.validateRequest.get('success') && nextProps.validateRequest.get('success')) {            
+    componentDidUpdate(prevProps){
+        if (this.props.validateRequest.get('success') && !prevProps.validateRequest.get('success')) {            
             this.props.onDataSaved({
                 email: this.state.email,
                 password: this.state.password     

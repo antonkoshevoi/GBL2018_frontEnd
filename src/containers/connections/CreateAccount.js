@@ -25,10 +25,10 @@ class CreateAccount extends Component {
         getRecord(id, hash);
     }    
   
-    componentWillReceiveProps(nextProps) {        
+    componentDidUpdate(prevProps) {        
         const {acceptRequest, resetAcceptRequest, getRecordRequest, appLoad, goTo, auth} = this.props;         
                 
-        if (!acceptRequest.get('success') && nextProps.acceptRequest.get('success')) {
+        if (acceptRequest.get('success') && !prevProps.acceptRequest.get('success')) {
             
             resetAcceptRequest();
             
@@ -40,12 +40,12 @@ class CreateAccount extends Component {
             }
         }
         
-        if (!getRecordRequest.get('fail') && nextProps.getRecordRequest.get('fail')) {
+        if (getRecordRequest.get('fail') && !prevProps.getRecordRequest.get('fail')) {
             return goTo('/login');
         }
         
-        if (!getRecordRequest.get('success') && nextProps.getRecordRequest.get('success')) {
-            const data = nextProps.getRecordRequest.get('record');
+        if (getRecordRequest.get('success') && !prevProps.getRecordRequest.get('success')) {
+            const data = getRecordRequest.get('record');
 
             this.setState({      
                   form: {

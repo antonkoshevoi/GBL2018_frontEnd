@@ -20,25 +20,23 @@ class PayPalReturnContainer extends Component {
       executePayPalPayment(parsed);
   }
 
-  componentWillReceiveProps (nextProps) {
-    this._handleExecuteResults(nextProps);
+  componentDidUpdate(prevProps) {
+    this._handleExecuteResults(prevProps);
   }
 
-  _handleExecuteResults (nextProps) {
-    const success = this.props.executePayPalPaymentRequest.get('success');
-    const nextSuccess = nextProps.executePayPalPaymentRequest.get('success');
+  _handleExecuteResults(prevProps) {
+    const success = this.props.executePayPalPaymentRequest.get('success');    
 
-    if (!success && nextSuccess) {
-      const data = nextProps.executePayPalPaymentRequest.get('data').toJS();      
+    if (success && !prevProps.executePayPalPaymentRequest.get('success')) {
+      const data = this.props.executePayPalPaymentRequest.get('data').toJS();      
       if (!data.isDigital) {
         this.props.goTo(`/shopping/checkout/${data.invoiceNo}/${data.hash}`);
       }      
     }
 
-    const fail = this.props.executePayPalPaymentRequest.get('fail');
-    const nextFail = nextProps.executePayPalPaymentRequest.get('fail');
+    const fail = this.props.executePayPalPaymentRequest.get('fail');    
 
-    if (!fail && nextFail) {
+    if (fail && !prevProps.executePayPalPaymentRequest.get('fail')) {
       this.props.goTo('/payments/fail');
     }
   }

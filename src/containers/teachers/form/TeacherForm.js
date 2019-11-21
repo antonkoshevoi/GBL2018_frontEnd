@@ -26,18 +26,17 @@ class TeacherForm extends Component {
     getSchoolHomerooms((teacher ? {schoolId: teacher.schoolId} : {}));
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._getSchoolHomeroomsSuccess(nextProps);
+  componentDidUpdate(prevProps) {
+    this._getSchoolHomeroomsSuccess(prevProps);
   }
 
-  _getSchoolHomeroomsSuccess(nextProps) {
-    const schoolHomerooms = this.props.getSchoolHomeroomsRequest.get('records');
-    const nextschoolHomerooms = nextProps.getSchoolHomeroomsRequest.get('records');
+  _getSchoolHomeroomsSuccess(prevProps) {
+    const success = this.props.getSchoolHomeroomsRequest.get('success');    
 
-    if (!schoolHomerooms && nextschoolHomerooms) {
+    if (success && !prevProps.getSchoolHomeroomsRequest.get('success')) {
       this.setState({
         ...this.state,
-        schoolHomerooms: nextschoolHomerooms.toJS()
+        schoolHomerooms: this.props.getSchoolHomeroomsRequest.get('records').toJS()
       });
     }
   }

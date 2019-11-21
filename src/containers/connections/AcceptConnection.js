@@ -21,11 +21,11 @@ class AcceptConnection extends Component {
         }
     }    
   
-    componentWillReceiveProps(nextProps) {        
+    componentDidUpdate(prevProps) {        
         const {changeStatusRequest, resetChangeStatusRequest, appLoad, goTo, auth} = this.props;                
                 
-        if ((!changeStatusRequest.get('success') && nextProps.changeStatusRequest.get('success')) 
-                || (!changeStatusRequest.get('fail') && nextProps.changeStatusRequest.get('fail'))) {
+        if ((changeStatusRequest.get('success') && !prevProps.changeStatusRequest.get('success')) 
+                || (changeStatusRequest.get('fail') && !prevProps.changeStatusRequest.get('fail'))) {
             
             resetChangeStatusRequest();
             

@@ -29,11 +29,9 @@ class Details extends Component {
     this._getPageRecords(recordId);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const recordId = this.props.match.params.id;
-    const nextRecordId = nextProps.match.params.id;
-    if (recordId !== nextRecordId) {
-      this._getPageRecords(nextRecordId);
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this._getPageRecords(this.props.match.params.id);
     }
   }
 

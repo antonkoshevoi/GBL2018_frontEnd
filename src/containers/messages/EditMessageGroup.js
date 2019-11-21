@@ -28,19 +28,19 @@ class EditMessageGroup extends Component {
         this.props.resetUpdateGroupRequest();
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
        
         const {groupRequest, resetUpdateGroupRequest, updateGroupRequest } = this.props;
 
-        if (this.props.match.params.id !== nextProps.match.params.id) {
+        if (this.props.match.params.id !== prevProps.match.params.id) {
             resetUpdateGroupRequest();            
         }
         
-        if (!groupRequest.get('success') && nextProps.groupRequest.get('success')) {            
-            this._setMessage(nextProps.groupRequest.get('record').toJS());
+        if (groupRequest.get('success') && !prevProps.groupRequest.get('success')) {            
+            this._setMessage(groupRequest.get('record').toJS());
         }
         
-        if (!updateGroupRequest.get('success') && nextProps.updateGroupRequest.get('success')) {
+        if (updateGroupRequest.get('success') && !prevProps.updateGroupRequest.get('success')) {
             this._goBack();
         }         
     }

@@ -32,21 +32,20 @@ class EditHomeroomModal extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     const record = this.props.getSingleRecordRequest.get('record');
-    const nextRecord = nextProps.getSingleRecordRequest.get('record');
+    const prevRecord = prevProps.getSingleRecordRequest.get('record');
 
-    if (!record && nextRecord) {
+    if (record && !prevRecord) {
       this.setState({
-        id: nextRecord.get('id'),
-        homeroom: nextRecord.toJS()
+        id: record.get('id'),
+        homeroom: record.toJS()
       });
     }
 
-    const success = this.props.updateRequest.get('success');
-    const nextSuccess = nextProps.updateRequest.get('success');
+    const success = this.props.updateRequest.get('success');    
 
-    if(!success && nextSuccess) {
+    if(success && !prevProps.updateRequest.get('success')) {
       this._close();
       this.props.onSuccess();
     }

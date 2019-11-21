@@ -35,33 +35,31 @@ class GiftModal extends Component {
     };
 
   
-    componentWillReceiveProps(nextProps) {    
+    componentDidUpdate(prevProps) {    
 
-        if (!this.props.isOpen && nextProps.isOpen) {
+        if (this.props.isOpen && !prevProps.isOpen) {
             this.props.getConnections();
         }
         
-        this._handleSubmitSuccess(nextProps);
+        this._handleSubmitSuccess(prevProps);
         
-        this._handleGetConnections(nextProps);
+        this._handleGetConnections(prevProps);
     };
   
-    _handleGetConnections(nextProps) {
-        const success = this.props.connectionsRequest.get('success');
-        const nextSuccess = nextProps.connectionsRequest.get('success');
+    _handleGetConnections(prevProps) {
+        const success = this.props.connectionsRequest.get('success');        
 
-        if (!success && nextSuccess) {
+        if (success && !prevProps.connectionsRequest.get('success')) {
             this.setState({
-                connections: nextProps.connectionsRequest.get('records').toJS()
+                connections: prevProps.connectionsRequest.get('records').toJS()
             });
         }        
     }
     
-    _handleSubmitSuccess(nextProps) {
-        const success = this.props.giftRequest.get('success');
-        const nextSuccess = nextProps.giftRequest.get('success');
+    _handleSubmitSuccess(prevProps) {
+        const success = this.props.giftRequest.get('success');        
 
-        if (!success && nextSuccess) {
+        if (success && !prevProps.giftRequest.get('success')) {
             this._close();     
             this.props.onSuccess();
         }        

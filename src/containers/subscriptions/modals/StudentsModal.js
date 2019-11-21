@@ -25,18 +25,18 @@ class StudentsModal extends Component {
         };        
     }; 
     
-    componentWillReceiveProps (nextProps) {
+    componentDidUpdate (prevProps) {
         const { getStudentsRecords, resetUnSubscribeStudentRequest } = this.props;
       
-        if (!this.props.subscriptionId && nextProps.subscriptionId) {
+        if (this.props.subscriptionId && !prevProps.subscriptionId) {
             this.setState({
-              subscriptionId: nextProps.subscriptionId
+              subscriptionId: this.props.subscriptionId
             });            
-            getStudentsRecords(nextProps.subscriptionId);
+            getStudentsRecords(this.props.subscriptionId);
         }        
 
-        if (!this.props.unSubscribeStudentRequest.get('success') && nextProps.unSubscribeStudentRequest.get('success')) {
-            getStudentsRecords(nextProps.subscriptionId);
+        if (this.props.unSubscribeStudentRequest.get('success') && !prevProps.unSubscribeStudentRequest.get('success')) {
+            getStudentsRecords(this.props.subscriptionId);
             resetUnSubscribeStudentRequest();
         }        
     }

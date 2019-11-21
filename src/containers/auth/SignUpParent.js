@@ -26,29 +26,27 @@ class SignUpParent extends Component {
         };
     }
 
-    componentWillReceiveProps (nextProps) {
-        this._goForwardOnStep1Success(nextProps);
-        this._goForwardOnStep2Success(nextProps);    
+    componentDidUpdate(prevProps) {
+        this._goForwardOnStep1Success(prevProps);
+        this._goForwardOnStep2Success(prevProps);    
     }
 
-    _goForwardOnStep1Success (nextProps) {
-        const success = this.props.validateRequest.get('success');
-        const nextSuccess = nextProps.validateRequest.get('success');
+    _goForwardOnStep1Success(prevProps) {
+        const success = this.props.validateRequest.get('success');        
         const { activeStep } = this.state;
 
-        if(!success && nextSuccess) {
+        if (success && !prevProps.validateRequest.get('success')) {
             this.setState({
               activeStep: (activeStep + 1)
             });
         }
     }
 
-    _goForwardOnStep2Success (nextProps) {
-        const success = this.props.signUpRequest.get('success');
-        const nextSuccess = nextProps.signUpRequest.get('success');
+    _goForwardOnStep2Success(prevProps) {
+        const success = this.props.signUpRequest.get('success');        
         const { activeStep } = this.state;
 
-        if(!success && nextSuccess) {
+        if (success && !prevProps.signUpRequest.get('success')) {
             this.setState({
               activeStep: (activeStep + 1)
             });

@@ -8,13 +8,16 @@ import {validateAddress, resetValidateAddressRequest} from "../../../redux/store
 import {Loader} from "../../../components/ui/Loader";
 
 class Shipping extends Component {
-
-    state = {
-        address: this.props.data       
-    };
     
-    componentWillReceiveProps(nextProps){
-        if (!this.props.validateAddressRequest.get('success') && nextProps.validateAddressRequest.get('success')) {
+    constructor(props) {
+        super(props);
+        this.state = {
+            address: this.props.data       
+        };
+    }     
+    
+    componentDidUpdate(prevProps){
+        if (this.props.validateAddressRequest.get('success') && !prevProps.validateAddressRequest.get('success')) {
             this.props.onDataSaved(this.state.address);
             this.props.resetValidateAddressRequest();
         }

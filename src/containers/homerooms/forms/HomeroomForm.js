@@ -68,31 +68,29 @@ class HomeroomForm extends Component {
     getSchoolStudents(params);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._getSchoolTeachersSuccess(nextProps);
-    this._getSchoolStudentsSuccess(nextProps);
+  componentDidUpdate(prevProps) {
+    this._getSchoolTeachersSuccess(prevProps);
+    this._getSchoolStudentsSuccess(prevProps);
   }
 
-  _getSchoolTeachersSuccess(nextProps) {
-    const schoolTeachers = this.props.getSchoolTeacherRequest.get('records');
-    const nextschoolTeachers = nextProps.getSchoolTeacherRequest.get('records');
+  _getSchoolTeachersSuccess(prevProps) {
+    const success = this.props.getSchoolTeacherRequest.get('success');    
 
-    if (!schoolTeachers && nextschoolTeachers) {
+    if (success && !prevProps.getSchoolTeacherRequest.get('success')) {
       this.setState({
         ...this.state,
-        schoolTeachers: nextschoolTeachers.toJS()
+        schoolTeachers: this.props.getSchoolTeacherRequest.get('records').toJS()
       });
     }
   }
 
-  _getSchoolStudentsSuccess(nextProps) {
-    const schoolStudents = this.props.getSchoolStudentsRequest.get('records');
-    const nextschoolStudents = nextProps.getSchoolStudentsRequest.get('records');
+  _getSchoolStudentsSuccess(prevProps) {
+    const success = this.props.getSchoolStudentsRequest.get('success');    
 
-    if (!schoolStudents && nextschoolStudents) {
+    if (success && !prevProps.getSchoolStudentsRequest.get('success')) {
       this.setState({
         ...this.state,
-        schoolStudents: nextschoolStudents.toJS()
+        schoolStudents: this.props.getSchoolStudentsRequest.get('records').toJS()
       });
     }
   }

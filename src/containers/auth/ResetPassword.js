@@ -37,13 +37,11 @@ class ResetPassword extends Component {
         getUser(id, hash);
     }
     
-    componentWillReceiveProps(nextProps) {        
+    componentDidUpdate(prevProps) {        
         const {updatePasswordRequest, resetUpdatePasswordRequest, goTo} = this.props;         
                        
-        if (!updatePasswordRequest.get('success') && nextProps.updatePasswordRequest.get('success')) {
-            
-            resetUpdatePasswordRequest();
-            
+        if (updatePasswordRequest.get('success') && !prevProps.updatePasswordRequest.get('success')) {
+            resetUpdatePasswordRequest();            
             goTo('/login');            
         }        
     }    

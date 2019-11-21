@@ -20,9 +20,9 @@ class Gifts extends Component {
         this._getRecords();
     }
 
-    componentWillReceiveProps(nextProps) {
-        this._deleteRequestSuccess(nextProps);
-        this._changeStatusRequestSuccess(nextProps);
+    componentDidUpdate(prevProps) {
+        this._deleteRequestSuccess(prevProps);
+        this._changeStatusRequestSuccess(prevProps);
     }
     
     _openViewDialog(record) {
@@ -124,21 +124,19 @@ class Gifts extends Component {
         });
     }
 
-    _deleteRequestSuccess(nextProps) {
-        const success     = this.props.deleteRequest.get('success');
-        const nextSuccess = nextProps.deleteRequest.get('success');
+    _deleteRequestSuccess(prevProps) {
+        const success = this.props.deleteRequest.get('success');        
 
-        if (!success && nextSuccess) {
+        if (!success && !prevProps.deleteRequest.get('success')) {
             this.props.resetDeleteRequest();
             this._getRecords();
         }
     }
     
-    _changeStatusRequestSuccess(nextProps) {
-        const success     = this.props.changeStatusRequest.get('success');
-        const nextSuccess = nextProps.changeStatusRequest.get('success');
+    _changeStatusRequestSuccess(prevProps) {
+        const success = this.props.changeStatusRequest.get('success');        
 
-        if (!success && nextSuccess) {
+        if (success && !prevProps.changeStatusRequest.get('success')) {
             this.props.resetChangeStatusRequest();
             this._getRecords();
         }

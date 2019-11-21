@@ -21,18 +21,15 @@ class ClassroomSchedule extends Component {
 
     componentDidMount() {
         const {id} = this.props.match.params;
-        const { getSchedule } = this.props;
         
-        getSchedule(id);
+        this.props.getSchedule(id);
     }
         
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
         const success       = this.props.updateScheduleRequest.get('success');
-        const nextSuccess   = nextProps.updateScheduleRequest.get('success');
-        const {id}          = this.props.match.params;
-        const {getSchedule} = this.props;
+        const {id}          = this.props.match.params;        
         
-        if (!success && nextSuccess) {
+        if (success && !prevProps.updateScheduleRequest.get('success')) {
             this.setState({            
                 scheduleType: 'unit',
                 days: 0,
@@ -40,7 +37,7 @@ class ClassroomSchedule extends Component {
                 startDate: null          
             });
             
-             getSchedule(id);
+            this.props.getSchedule(id);
         }
     }
   

@@ -33,12 +33,12 @@ class Subscriptions extends Component {
         this.props.resetUserRecordsRequest();
     }  
     
-    componentWillReceiveProps (nextProps) {            
-        if (!this.props.unSubscribeStudentRequest.get('success') && nextProps.unSubscribeStudentRequest.get('success')) {
+    componentDidUpdate(prevProps) {            
+        if (this.props.unSubscribeStudentRequest.get('success') && !prevProps.unSubscribeStudentRequest.get('success')) {
             this._getSubscriptions();
         }
         
-        if (!this.props.unSubscribeRequest.get('success') && nextProps.unSubscribeRequest.get('success')) {
+        if (this.props.unSubscribeRequest.get('success') && !prevProps.unSubscribeRequest.get('success')) {
             this.props.resetUnSubscribeRequest();
             this._getSubscriptions();
         }        

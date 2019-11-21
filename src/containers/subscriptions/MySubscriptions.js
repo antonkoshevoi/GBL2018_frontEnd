@@ -30,24 +30,24 @@ class MySubscriptions extends Component {
         }
     }    
     
-    componentDidMount () {
+    componentDidMount() {
         this._getSubscriptions();
     }
     
-    componentWillReceiveProps (nextProps) {
+    componentDidUpdate(prevProps) {
         const { getUserRecords, resetUnSubscribeRequest, goTo } = this.props;
              
-        if (!this.props.unSubscribeStudentRequest.get('success') && nextProps.unSubscribeStudentRequest.get('success')) {
+        if (this.props.unSubscribeStudentRequest.get('success') && !prevProps.unSubscribeStudentRequest.get('success')) {
             getUserRecords();
         }
         
-        if (!this.props.unSubscribeRequest.get('success') && nextProps.unSubscribeRequest.get('success')) {
+        if (this.props.unSubscribeRequest.get('success') && !prevProps.unSubscribeRequest.get('success')) {
             resetUnSubscribeRequest();
             getUserRecords();
         }
         
-        if (!this.props.subscriptionsRequest.get('success') && nextProps.subscriptionsRequest.get('success')) {
-            if (nextProps.subscriptionsRequest.get('records').size === 0) {    
+        if (this.props.subscriptionsRequest.get('success') && !prevProps.subscriptionsRequest.get('success')) {
+            if (this.props.subscriptionsRequest.get('records').size === 0) {    
                 goTo('/subscriptions');
             }
         }        

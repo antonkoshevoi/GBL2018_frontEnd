@@ -64,7 +64,7 @@ class Summary extends Component {
                     </div>}
                     {!data.isFree && 
                     <div className="row my-2">
-                        <div className="col-6">
+                        <div className="col-6 col-lg-8">
                             <strong>{t('discount')}</strong>
                         </div>
                         <div className="col-6 col-lg-4 text-right">
@@ -75,7 +75,7 @@ class Summary extends Component {
                         <div className="col-6 col-lg-8">
                             <strong>{t('total')}</strong>
                         </div>
-                        <div className="col-6 text-right">
+                        <div className="col-6 col-lg-4 text-right">
                             <strong className="text-nowrap">
                                 {(data.totalPrice > 0) ? <Price price={data.totalPrice} currency={data.currency} /> : <span className="text-success">{t('freeProduct')}</span>}
                             </strong>

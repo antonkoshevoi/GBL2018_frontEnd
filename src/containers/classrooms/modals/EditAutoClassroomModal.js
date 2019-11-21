@@ -47,34 +47,33 @@ class EditAutoClassroomModal extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     const record = this.props.getSingleRecordRequest.get('record');
-    const nextRecord = nextProps.getSingleRecordRequest.get('record');
 
-    if (!record && nextRecord) {
+    if (record && !prevProps.getSingleRecordRequest.get('record')) {
       this.setState({
-        id: nextRecord.get('crsId'),
-        taskConfig: nextRecord.toJS()
+        id: record.get('crsId'),
+        taskConfig: record.toJS()
       });
     }
-    this._getSchoolTeachersSuccess(nextProps);
+    
+    this._getSchoolTeachersSuccess(prevProps);
+    
     const success = this.props.updateRequest.get('success');
-    const nextSuccess = nextProps.updateRequest.get('success');
 
-    if (!success && nextSuccess) {
+    if (success && !prevProps.updateRequest.get('success')) {
       this._close();
       this.props.onSuccess();
     }
   }
 
-  _getSchoolTeachersSuccess(nextProps) {
-    const schoolTeachers = this.props.getSchoolTeacherRequest.get('success');
-    const nextschoolTeachers = nextProps.getSchoolTeacherRequest.get('success');
+  _getSchoolTeachersSuccess(prevProps) {
+    const success = this.props.getSchoolTeacherRequest.get('success');
 
-    if (!schoolTeachers && nextschoolTeachers) {
+    if (success && !prevProps.getSchoolTeacherRequest.get('success')) {
       this.setState({
         ...this.state,
-        schoolTeachers: nextProps.getSchoolTeacherRequest.get('records').toJS()
+        schoolTeachers: this.props.getSchoolTeacherRequest.get('records').toJS()
       });
     }
   }

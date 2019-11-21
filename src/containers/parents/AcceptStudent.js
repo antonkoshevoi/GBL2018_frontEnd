@@ -21,11 +21,11 @@ class AcceptStudent extends Component {
         }
     }    
   
-    componentWillReceiveProps(nextProps) {        
+    componentDidUpdate(prevProps) {        
         const {studentStatusRequest, resetStudentRequest, appLoad, goTo, auth} = this.props;                
                 
-        if ((!studentStatusRequest.get('success') && nextProps.studentStatusRequest.get('success')) 
-                || (!studentStatusRequest.get('fail') && nextProps.studentStatusRequest.get('fail'))) {
+        if ((studentStatusRequest.get('success') && !prevProps.studentStatusRequest.get('success')) 
+                || (studentStatusRequest.get('fail') && !prevProps.studentStatusRequest.get('fail'))) {
             
             resetStudentRequest();
             

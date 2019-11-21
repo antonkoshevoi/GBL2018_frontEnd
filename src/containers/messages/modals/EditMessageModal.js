@@ -17,19 +17,19 @@ class EditMessageModal extends Component {
         this.state = {};
     }
        
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.isOpen && nextProps.isOpen) {
+    componentDidUpdate(prevProps) {
+        if (this.props.isOpen && !prevProps.isOpen) {
             this.setState({
-                id:      nextProps.message.id,
-                message: nextProps.message.body,
-                expired: nextProps.message.expired
+                id:      this.props.message.id,
+                message: this.props.message.body,
+                expired: this.props.message.expired
             });   
         }        
-        this._handleSuccess(nextProps);
+        this._handleSuccess(prevProps);
     }
 
-    _handleSuccess(nextProps) {
-        if (!this.props.updateMessageRequest.get('success') && nextProps.updateMessageRequest.get('success')) {            
+    _handleSuccess(prevProps) {
+        if (this.props.updateMessageRequest.get('success') && !prevProps.updateMessageRequest.get('success')) {            
             this.props.onSuccess();
             this._close();
         }

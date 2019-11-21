@@ -34,21 +34,19 @@ class EditAnswers extends Component {
         this.props.resetGetRecordRequest();
     }
     
-    componentWillReceiveProps(nextProps) {        
-        const record = this.props.recordRequest.get('record');
-        const nextRecord = nextProps.recordRequest.get('record');
+    componentDidUpdate(prevProps) {        
+        const record = this.props.recordRequest.get('record');        
 
-        if (!record && nextRecord) {
+        if (record && !prevProps.recordRequest.get('record')) {
             this.setState({
-                scap: nextRecord.toJS(),
-                answers: nextRecord.get('answers').toJS()
+                scap: record.toJS(),
+                answers: record.get('answers').toJS()
             });            
         }
                     
-        const success      = this.props.updateAnswersRequest.get('success');
-        const nextSuccess  = nextProps.updateAnswersRequest.get('success');
+        const success = this.props.updateAnswersRequest.get('success');        
 
-        if (!success && nextSuccess) {
+        if (success && !prevProps.updateAnswersRequest.get('success')) {
             this._goBack();
         }         
     }

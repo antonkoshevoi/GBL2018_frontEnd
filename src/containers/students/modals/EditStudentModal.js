@@ -34,22 +34,22 @@ class EditStudentModal extends Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
         const record = this.props.getSingleRecordRequest.get('record');
-        const nextRecord = nextProps.getSingleRecordRequest.get('record');
+        const prevRecord = prevProps.getSingleRecordRequest.get('record');
 
-        if (!record && nextRecord) {
+        if (record && !prevRecord) {
             this.setState({
-                id: nextRecord.get('id'),
-                student: nextRecord.toJS(),
-                avatar: nextRecord.toJS().avatar
+                id: record.get('id'),
+                student: record.toJS(),
+                avatar: record.toJS().avatar
             });
         }
 
         const success = this.props.updateRequest.get('success');
-        const nextSuccess = nextProps.updateRequest.get('success');
+        const prevSuccess = prevProps.updateRequest.get('success');
 
-        if (!success && nextSuccess) {
+        if (success && !prevSuccess) {
             this._close();
             this.props.onSuccess();
         }
