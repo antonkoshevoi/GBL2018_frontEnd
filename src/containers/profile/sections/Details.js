@@ -30,15 +30,14 @@ class Details extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._updateUserSuccess(nextProps);    
+  componentDidUpdate(prevProps) {
+    this._updateUserSuccess(prevProps);    
   }
 
-  _updateUserSuccess(nextProps) {
-    const prev = this.props.updateRequest.get('success');
-    const next = nextProps.updateRequest.get('success');
+  _updateUserSuccess(prevProps) {
+    const success = this.props.updateRequest.get('success');
 
-    if (!prev && next) {
+    if (success && !prevProps.updateRequest.get('success')) {
       this.setState({
         ...this.state,
         mode: 'overview'

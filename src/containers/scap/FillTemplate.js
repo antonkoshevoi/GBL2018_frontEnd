@@ -44,38 +44,34 @@ class FillTemplate extends Component {
         this.props.resetGetRecordRequest();
     }
     
-    componentWillReceiveProps(nextProps) {        
-        const record = this.props.recordRequest.get('record');
-        const nextRecord = nextProps.recordRequest.get('record');
+    componentDidUpdate(prevProps) {        
+        const record = this.props.recordRequest.get('record');        
 
-        if (!record && nextRecord) {
+        if (record && !prevProps.recordRequest.get('record')) {
             this.setState({
-                scap: nextRecord.toJS()       
+                scap: record.toJS()       
             });            
         }
         
-        const students      = this.props.schoolStudentsRequest.get('records');
-        const nextStudents  = nextProps.schoolStudentsRequest.get('records');
+        const students = this.props.schoolStudentsRequest.get('records');        
 
-        if (!students && nextStudents) {
+        if (students && !prevProps.schoolStudentsRequest.get('records')) {
             this.setState({            
-                students: nextStudents.toJS()
+                students: students.toJS()
             });
         }
         
-        const homerooms      = this.props.homeroomsRequest.get('records');
-        const nextHomerooms  = nextProps.homeroomsRequest.get('records');
+        const homerooms = this.props.homeroomsRequest.get('records');        
 
-        if (!homerooms && nextHomerooms) {
+        if (homerooms && !prevProps.homeroomsRequest.get('records')) {
             this.setState({            
-                homerooms: nextHomerooms.toJS()
+                homerooms: homerooms.toJS()
             });
         }        
         
-        const success      = this.props.addAnswersRequest.get('success');
-        const nextSuccess  = nextProps.addAnswersRequest.get('success');
+        const success = this.props.addAnswersRequest.get('success');        
 
-        if (!success && nextSuccess) {
+        if (success && !prevProps.addAnswersRequest.get('success')) {
             this._goBack();
         }         
     }

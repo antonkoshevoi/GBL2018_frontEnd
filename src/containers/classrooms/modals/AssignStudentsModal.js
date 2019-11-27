@@ -35,17 +35,17 @@ class AssignStudentsModal extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._handleSuccessRecord(nextProps);
-    this._handleSuccessAssigned(nextProps);
+  componentDidUpdate(prevProps) {
+    this._handleSuccessRecord(prevProps);
+    this._handleSuccessAssigned(prevProps);
   }
 
-  _handleSuccessRecord(nextProps) {
-    const success = this.props.getRecordForAssignStudentsRequest.get('record');
-    const nextRecord= nextProps.getRecordForAssignStudentsRequest.get('record');
+  _handleSuccessRecord(prevProps) {
+    const record = this.props.getRecordForAssignStudentsRequest.get('record');
+    const prevRecord = prevProps.getRecordForAssignStudentsRequest.get('record');
 
-    if(!success && nextRecord) {
-      const classroom = nextRecord.toJS();
+    if (record && !prevRecord) {
+      const classroom = record.toJS();
 
       const studentIds = classroom.students.map((student) => {
         return student.id.toString();
@@ -60,11 +60,10 @@ class AssignStudentsModal extends Component {
     }
   }
 
-  _handleSuccessAssigned(nextProps) {
-    const success = this.props.assignStudentsRequest.get('success');
-    const nextSuccess = nextProps.assignStudentsRequest.get('success');
+  _handleSuccessAssigned(prevProps) {
+    const success = this.props.assignStudentsRequest.get('success');    
 
-    if(!success && nextSuccess) {
+    if (success && !prevProps.assignStudentsRequest.get('success')) {
       this._close();
       this.props.onSuccess();
     }

@@ -18,9 +18,10 @@ class EditParentModal extends Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.recordRequest.get('success') && nextProps.recordRequest.get('success')) {            
-            const parent = nextProps.recordRequest.get('record').toJS();            
+    componentDidUpdate(prevProps) {
+        if (this.props.recordRequest.get('success') && !prevProps.recordRequest.get('success')) {            
+            const parent = this.props.recordRequest.get('record').toJS();
+            
             this.setState({
                 id: parent.id,
                 parent: parent,
@@ -28,7 +29,7 @@ class EditParentModal extends Component {
             });
         }
 
-        if (!this.props.updateRequest.get('success') && nextProps.updateRequest.get('success')) {
+        if (this.props.updateRequest.get('success') && !prevProps.updateRequest.get('success')) {
             this._close();
             this.props.onSuccess();
         }

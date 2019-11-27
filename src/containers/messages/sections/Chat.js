@@ -28,12 +28,20 @@ class Chat extends Component {
         this._scrollToBottom();
     }
    
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.chatId !== this.props.chatId) {
-            this._getRecords(nextProps.chatId);
+    componentDidUpdate(prevProps) {
+        const {sendMessageRequest, getRecordsRequest, deleteRecordRequest} = this.props;
+        const size      = getRecordsRequest.get('records').size;
+        const prevSize  = prevProps.getRecordsRequest.get('records').size;
+        
+        if (prevProps.chatId !== this.props.chatId) {
+            this._getRecords(this.props.chatId);
         }
-        if (nextProps.deleteRecordRequest.get('success') && !this.props.deleteRecordRequest.get('success')) {
+        if (!prevProps.deleteRecordRequest.get('success') && deleteRecordRequest.get('success')) {
             this._handleActionsClose();
+        }
+                    
+        if (size > prevSize || sendMessageRequest.get('loading')) {    
+            this._scrollToBottom();
         }        
     }
     
@@ -160,17 +168,6 @@ class Chat extends Component {
 
     _scrollToBottom = () => {       
         this.messages.scrollTop = this.messages.scrollHeight;
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        const {sendMessageRequest, getRecordsRequest} = this.props;
-    
-        const size      = getRecordsRequest.get('records').size;
-        const prevSize  = prevProps.getRecordsRequest.get('records').size;
-        
-        if (size > prevSize || sendMessageRequest.get('loading')) {    
-            this._scrollToBottom();
-        }
     }
 
     render() {

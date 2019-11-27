@@ -22,15 +22,15 @@ class AddParentModal extends Component {
         this.props.resetCreateParentRequest();
     }    
   
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
         const {sentStudentRequest, createParentRequest } = this.props;
         
-        if (!sentStudentRequest.get('success') && nextProps.sentStudentRequest.get('success')) {
+        if (sentStudentRequest.get('success') && !prevProps.sentStudentRequest.get('success')) {
             this._close();
             this.props.onSuccess();
         }
                
-        if (!createParentRequest.get('success') && nextProps.createParentRequest.get('success')) {
+        if (createParentRequest.get('success') && !prevProps.createParentRequest.get('success')) {
             this._close();
             this.props.onSuccess();
         }      

@@ -26,10 +26,10 @@ class ShoppingCardItems extends Component {
         this.props.getRecords();
     }    
 
-    componentWillReceiveProps(nextProps) {
-        if ((!this.props.cartRecordsRequest.get('success') && nextProps.cartRecordsRequest.get('success')) 
-                || (nextProps.cartRecordsRequest.get('records').size !== this.props.cartRecordsRequest.get('records').size)) {
-            const data = nextProps.cartRecordsRequest.get('records').toJS();
+    componentDidUpdate(prevProps) {
+        if ((this.props.cartRecordsRequest.get('success') && !prevProps.cartRecordsRequest.get('success')) 
+                || (prevProps.cartRecordsRequest.get('records').size !== this.props.cartRecordsRequest.get('records').size)) {
+            const data = this.props.cartRecordsRequest.get('records').toJS();
             this.setState({data});
         }
     }

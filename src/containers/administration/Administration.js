@@ -32,13 +32,10 @@ class Administration extends Component {
     const { getRecords } = this.props;
     getRecords();
   }
-
-  /**
-   * Monitor props like events
-   */
-  componentWillReceiveProps(nextProps) {
-    this._openEditDialogOnSingleRequestSuccess(nextProps);
-    this._deleteRequestSuccess(nextProps);
+  
+  componentDidUpdate(prevProps) { 
+    this._openEditDialogOnSingleRequestSuccess(prevProps);
+    this._deleteRequestSuccess(prevProps);      
   }
 
   /**
@@ -109,9 +106,6 @@ class Administration extends Component {
     ));
   }
 
-  /**
-   * Change page if necessary after creating a new record
-   */
   _onCreate () {
     const { pagination } = this.props;
     const page = pagination.get('page');
@@ -121,17 +115,12 @@ class Administration extends Component {
     }
   }
 
-  /**
-   * Edit
-   */
   _editRecord (id) {
     this.props.getSingleRecord(id);
   }
-  _openEditDialogOnSingleRequestSuccess(nextProps) {
-    const success = this.props.getSingleRecordRequest.get('success');
-    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
-
-    if(!success && nextSuccess) {
+  
+  _openEditDialogOnSingleRequestSuccess(props) {
+    if(this.props.getSingleRecordRequest.get('success') && !props.getSingleRecordRequest.get('success')) {
       this._openEditDialog();
     }
   }
@@ -139,11 +128,9 @@ class Administration extends Component {
   _deleteRecord (id) {
     this.props.deleteRecord(id);
   }
-  _deleteRequestSuccess(nextProps) {
-    const deleteSuccess = this.props.getDeleteRequest.get('success');
-    const nextDeleteSuccess = nextProps.getDeleteRequest.get('success');
-
-    if(!deleteSuccess && nextDeleteSuccess) {
+  
+  _deleteRequestSuccess(props) {
+    if(!props.getDeleteRequest.get('success') && this.props.getDeleteRequest.get('success')) {
       this._getRecords();
     }
   }

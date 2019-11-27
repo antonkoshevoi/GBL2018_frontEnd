@@ -9,17 +9,21 @@ import Address from "./Address";
 import PaymentMethods from './PaymentMethods';
 
 class Billing extends Component {
-
-    state = {
-        shippingAddress:    this.props.shippingAddress || [],
-        billingAddress:     this.props.billingAddress || [],
-        contactsOnly:       this.props.contactsOnly || false,
-        sameShipping:       false,
-        paymentMethod:      null
-    };
     
-    componentWillReceiveProps(nextProps){
-        if (!this.props.validateAddressRequest.get('success') && nextProps.validateAddressRequest.get('success')) {            
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            shippingAddress:    this.props.shippingAddress || [],
+            billingAddress:     this.props.billingAddress || [],
+            contactsOnly:       this.props.contactsOnly || false,
+            sameShipping:       false,
+            paymentMethod:      null
+        };
+    }    
+    
+    componentDidUpdate(prevProps){
+        if (this.props.validateAddressRequest.get('success') && !prevProps.validateAddressRequest.get('success')) {
             this.props.onDataSaved({
                 billingAddress: this.state.billingAddress,
                 paymentMethod: this.state.paymentMethod     

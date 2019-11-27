@@ -31,34 +31,28 @@ class Teachers extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { getRecords } = this.props;
     getRecords();
   }
 
-  /**
-   * Monitor props like events
-   */
-  componentWillReceiveProps(nextProps) {
-    this._openEditDialogOnSingleRequestSuccess(nextProps);
-    this._deleteRequestSuccess(nextProps);
+  componentDidUpdate(prevProps) {
+    this._openEditDialogOnSingleRequestSuccess(prevProps);
+    this._deleteRequestSuccess(prevProps);
   }
 
-  /**
-   * Create Dialog
-   */
   _openCreateDialog = () => {
     this.setState({ createModalIsOpen: true });
   };
+  
   _closeCreateDialog = () => {
     this.setState({ createModalIsOpen: false });
   };
-  /**
-   * Edit Dialog
-   */
+
   _openEditDialog = () => {
     this.setState({ editModalIsOpen: true });
   };
+  
   _closeEditDialog = () => {
     this.setState({ editModalIsOpen: false });
   };
@@ -77,6 +71,7 @@ class Teachers extends Component {
       page, perPage
     });
   }
+  
   _renderRecords () {
     const { records, t } = this.props;
     const loading = this.props.getRecordsRequest.get('loading');
@@ -113,9 +108,6 @@ class Teachers extends Component {
     ));
   }
 
-  /**
-   * Change page if necessary after creating a new record
-   */
   _onCreate () {
     const { pagination } = this.props;
     const page = pagination.get('page');
@@ -125,17 +117,14 @@ class Teachers extends Component {
     }
   }
 
-  /**
-   * Edit
-   */
   _editRecord (id) {
     this.props.getSingleRecord(id);
   }
-  _openEditDialogOnSingleRequestSuccess(nextProps) {
+  
+  _openEditDialogOnSingleRequestSuccess(prevProps) {
     const success = this.props.getSingleRecordRequest.get('success');
-    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
 
-    if(!success && nextSuccess) {
+    if(success && !prevProps.getSingleRecordRequest.get('success')) {
       this._openEditDialog();
     }
   }
@@ -143,18 +132,15 @@ class Teachers extends Component {
   _deleteRecord (id) {
     this.props.deleteRecord(id);
   }
-  _deleteRequestSuccess(nextProps) {
-    const deleteSuccess = this.props.getDeleteRequest.get('success');
-    const nextDeleteSuccess = nextProps.getDeleteRequest.get('success');
+  
+  _deleteRequestSuccess(prevProps) {
+    const success = this.props.getDeleteRequest.get('success');
 
-    if(!deleteSuccess && nextDeleteSuccess) {
+    if (success && !prevProps.getDeleteRequest.get('success')) {
       this._getRecords();
     }
   }
 
-  /**
-   * Records
-   */
   _sort (name) {
     let sorters = {};
 
@@ -166,6 +152,7 @@ class Teachers extends Component {
 
     this.setState({ sorters }, this._getRecords);
   }
+  
   _search(value) {
     let filters = {
       composed: value
@@ -176,6 +163,7 @@ class Teachers extends Component {
       filters
     }, this._getRecords);
   }
+  
   _selectPerPage (perPage) {
     const total = this.props.pagination.get('total');
     const totalPages = Math.ceil(total / perPage);
@@ -183,6 +171,7 @@ class Teachers extends Component {
 
     this.setState({ perPage, page }, this._getRecords)
   }
+  
   _goToPage (page) {
     this.setState({ page }, this._getRecords)
   }

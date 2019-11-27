@@ -17,11 +17,11 @@ class AddConnectionModal extends Component {
         this.props.resetCreateRequest();
     }    
   
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
         const {createRequest, inviteRequest } = this.props;
                        
-        if ((!createRequest.get('success') && nextProps.createRequest.get('success')) || 
-                (!inviteRequest.get('success') && nextProps.inviteRequest.get('success'))) {
+        if ((createRequest.get('success') && !prevProps.createRequest.get('success')) || 
+                (inviteRequest.get('success') && !prevProps.inviteRequest.get('success'))) {
             this._close();
             this.props.onSuccess();
         }       

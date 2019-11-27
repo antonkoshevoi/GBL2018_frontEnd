@@ -40,3 +40,8 @@ export const selectChangeStatusRequest = createSelector(
   (subState) => subState.get('changeStatusRequest')
 );
 
+export const selectValidateRecipientRequest = createSelector(
+  selectGiftsDomain,
+  (subState) => subState.get('validateRecipientRequest')
+);
+

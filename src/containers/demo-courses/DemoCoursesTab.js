@@ -43,10 +43,10 @@ class DemoCoursesTab extends Component {
     getRecords();
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._handleDeleteRecordRequestSuccess(nextProps);
-    this._handleKeywordChange(nextProps);
-    this._openEditDialogOnSingleRequestSuccess(nextProps);
+  componentDidUpdate(prevProps) {
+    this._handleDeleteRecordRequestSuccess(prevProps);
+    this._handleKeywordChange(prevProps);
+    this._openEditDialogOnSingleRequestSuccess(prevProps);
   }
 
   _openCreateDialog () {
@@ -98,11 +98,11 @@ class DemoCoursesTab extends Component {
   _deleteRecord (id) {
     this.props.deleteRecord(id);
   }
-  _handleDeleteRecordRequestSuccess(nextProps) {
-    const deleteSuccess = this.props.deleteRecordRequest.get('success');
-    const nextDeleteSuccess = nextProps.deleteRecordRequest.get('success');
+  
+  _handleDeleteRecordRequestSuccess(prevProps) {
+    const success = this.props.deleteRecordRequest.get('success');    
 
-    if(!deleteSuccess && nextDeleteSuccess) {
+    if(success && !prevProps.deleteRecordRequest.get('success')) {
       this._getRecords();
     }
   }
@@ -117,12 +117,10 @@ class DemoCoursesTab extends Component {
       filters
     }, this._getRecords);
   }
-  _handleKeywordChange (nextProps) {
-    const keyword = this.props.keyword;
-    const nextKeyword = nextProps.keyword;
-
-    if(keyword !== nextKeyword) {
-      this._search(nextKeyword);
+  
+  _handleKeywordChange (prevProps) {
+    if(this.props.keyword !== prevProps.keyword) {
+      this._search(this.props.keyword);
     }
   }
 
@@ -195,11 +193,10 @@ class DemoCoursesTab extends Component {
   _editRecord (id) {
     this.props.getSingleRecord(id);
   }
-  _openEditDialogOnSingleRequestSuccess(nextProps) {
-    const success = this.props.getSingleRecordRequest.get('success');
-    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
+  _openEditDialogOnSingleRequestSuccess(prevProps) {
+    const success = this.props.getSingleRecordRequest.get('success');    
 
-    if(!success && nextSuccess) {
+    if (success && !prevProps.getSingleRecordRequest.get('success')) {
       this._openEditDialog();
     }
   }

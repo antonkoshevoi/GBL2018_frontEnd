@@ -21,15 +21,14 @@ class AutoCreate extends Component {
     this.props.getSchoolTeachers();
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._openEditDialogOnSingleRequestSuccess(nextProps);
+  componentDidUpdate(prevProps) {
+    this._openEditDialogOnSuccess(prevProps);
   }
 
-  _openEditDialogOnSingleRequestSuccess(nextProps) {
+  _openEditDialogOnSuccess(prevProps) {
     const success = this.props.getSingleRecordRequest.get('success');
-    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
 
-    if(!success && nextSuccess) {
+    if (success && !prevProps.getSingleRecordRequest.get('success')) {
       this._openEditDialog();
     }
   }
@@ -43,7 +42,7 @@ class AutoCreate extends Component {
     const { pagination } = this.props;
     const page = pagination.get('page');
 
-    if(this.state.page !== page) {
+    if (this.state.page !== page) {
       this._goToPage(page);
     }
   }

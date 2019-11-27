@@ -29,9 +29,9 @@ class Homerooms extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._openEditDialogOnSingleRequestSuccess(nextProps);
-    this._deleteRequestSuccess(nextProps);
+  componentDidUpdate(prevProps) {
+    this._openEditDialogOnSingleRequestSuccess(prevProps);
+    this._deleteRequestSuccess(prevProps);
   }
 
   componentDidMount () {
@@ -94,11 +94,11 @@ class Homerooms extends Component {
   _editRecord (id) {
     this.props.getSingleRecord(id);
   }
-  _openEditDialogOnSingleRequestSuccess(nextProps) {
-    const success = this.props.getSingleRecordRequest.get('success');
-    const nextSuccess = nextProps.getSingleRecordRequest.get('success');
+  
+  _openEditDialogOnSingleRequestSuccess(prevProps) {
+    const success = this.props.getSingleRecordRequest.get('success');   
 
-    if(!success && nextSuccess) {
+    if(success && !prevProps.getSingleRecordRequest.get('success')) {
       this._openEditDialog();
     }
   }
@@ -106,11 +106,11 @@ class Homerooms extends Component {
   _deleteRecord (id) {
     this.props.deleteRecord(id);
   }
-  _deleteRequestSuccess(nextProps) {
-    const deleteSuccess = this.props.getDeleteRequest.get('success');
-    const nextDeleteSuccess = nextProps.getDeleteRequest.get('success');
+  
+  _deleteRequestSuccess(prevProps) {
+    const success = this.props.getDeleteRequest.get('success');    
 
-    if(!deleteSuccess && nextDeleteSuccess) {
+    if(success && !prevProps.getDeleteRequest.get('success')) {
       this._getRecords();
     }
   }

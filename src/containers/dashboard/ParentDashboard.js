@@ -61,15 +61,15 @@ class ParentDashboard extends Component {
         getStudents();                
     }
   
-    componentWillReceiveProps(nextProps) {        
+    componentDidUpdate(prevProps) {        
         const {getStudents, studentStatusRequest, resetStudentRequest, deleteStudentRequest, resetDeleteStudentRequest} = this.props;
         
-        if (!studentStatusRequest.get('success') && nextProps.studentStatusRequest.get('success')) {            
+        if (studentStatusRequest.get('success') && !prevProps.studentStatusRequest.get('success')) {            
             getStudents();
             resetStudentRequest();
         }
 
-        if (!deleteStudentRequest.get('success') && nextProps.deleteStudentRequest.get('success')) {
+        if (deleteStudentRequest.get('success') && !prevProps.deleteStudentRequest.get('success')) {
             getStudents();
             resetDeleteStudentRequest();
         }

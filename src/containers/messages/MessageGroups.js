@@ -25,10 +25,10 @@ class MessageGroups extends Component {
         this.props.getRecords();
     }
    
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
         const {deleteRecordRequest, resetDeleteGroupRequest} = this.props;
 
-        if (!deleteRecordRequest.get('success') && nextProps.deleteRecordRequest.get('success')) {
+        if (deleteRecordRequest.get('success') && !prevProps.deleteRecordRequest.get('success')) {
             resetDeleteGroupRequest();
             this._getRecords();
         }        

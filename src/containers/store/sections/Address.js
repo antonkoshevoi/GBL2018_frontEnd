@@ -5,25 +5,28 @@ import {FormControl, MenuItem, Select} from '@material-ui/core';
 import {selectRecords, selectGetRecordsRequest} from "../../../redux/countries/selectors";
 import {getCountries} from "../../../redux/countries/actions";
 
-class Address extends Component {
-
-  state = {
-    form: {
-        ...this.props.form
-    }
-  };
-
-  componentDidMount() {
-    if (!this.props.countriesRequest.get('success')) {
-      this.props.countries();
-    }
-  }
+class Address extends Component {  
   
-    componentWillReceiveProps(nextProps){
-        if (nextProps.form) {
+    constructor(props) {
+        super(props);
+        this.state = {
+            form: {
+                ...this.props.form
+            }
+        };
+    }   
+
+    componentDidMount() {
+        if (!this.props.countriesRequest.get('success')) {
+            this.props.countries();
+        }
+    }
+  
+    componentDidUpdate(prevProps) {                
+        if (!prevProps.form && this.props.form) {
             this.setState({
                 form: {
-                  ...nextProps.form
+                  ...this.props.form
                 }
             });
         }

@@ -47,16 +47,16 @@ class Messages extends Component {
         });
     }
    
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
         const {deleteRecordRequest, getRecordsRequest, resetDeleteMessageRequest} = this.props;
 
-        if (!getRecordsRequest.get('success') && nextProps.getRecordsRequest.get('success')) {            
+        if (getRecordsRequest.get('success') && !prevProps.getRecordsRequest.get('success')) {            
             this.setState({
-                records: nextProps.getRecordsRequest.get('records').toJS()
+                records: getRecordsRequest.get('records').toJS()
             });
         }
         
-        if (!deleteRecordRequest.get('success') && nextProps.deleteRecordRequest.get('success')) {
+        if (deleteRecordRequest.get('success') && !prevProps.deleteRecordRequest.get('success')) {
             resetDeleteMessageRequest();
             this._getRecords();
         }        

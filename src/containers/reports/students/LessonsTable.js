@@ -57,28 +57,27 @@ class LessonsTable extends Component {
     this.props.resetGetReportDetails();
   }  
   
-  componentWillReceiveProps(nextProps) {
-    const success = this.props.getReportRequest.get('success');
-    const nextSuccess = nextProps.getReportRequest.get('success');
+  componentDidUpdate(prevProps) {
+    const success = this.props.getReportRequest.get('success');    
 
-    if (!success && nextSuccess) {
-        let data = nextProps.getReportRequest.get('data').toJS();
+    if (success && !prevProps.getReportRequest.get('success')) {
+        let data = this.props.getReportRequest.get('data').toJS();
         let courseTemplate = localStorage.getItem(data.courseTemplate);
         let tableData;
         
         if (!courseTemplate) {
             apiClient.getJson(data.courseTemplate).then((json) => {
-            courseTemplate = json;
-            
-            localStorage.setItem(data.courseTemplate, JSON.stringify(courseTemplate));
-            tableData = formTableData(data, courseTemplate);
-            this.setState({data: tableData});
-        });
-      } else {
+                courseTemplate = json;
+
+                localStorage.setItem(data.courseTemplate, JSON.stringify(courseTemplate));
+                tableData = formTableData(data, courseTemplate);
+                this.setState({data: tableData});
+            });
+        } else {
             courseTemplate = JSON.parse(courseTemplate);
             tableData = formTableData(data, courseTemplate);
             this.setState({data: tableData});
-      }      
+        }      
     }      
   }  
 

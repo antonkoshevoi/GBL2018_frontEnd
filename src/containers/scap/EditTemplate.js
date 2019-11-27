@@ -33,21 +33,19 @@ class EditTemplate extends Component {
         this.props.getRecord(this.props.match.params.id);
     }
     
-    componentWillReceiveProps(nextProps) {        
-        const record = this.props.recordRequest.get('record');
-        const nextRecord = nextProps.recordRequest.get('record');
+    componentDidUpdate(prevProps) {        
+        const record = this.props.recordRequest.get('record');        
 
-        if (!record && nextRecord) {
+        if (record && !prevProps.recordRequest.get('record')) {
             this.setState({
-                form: nextRecord.toJS(),
-                questions: nextRecord.get('questions').toJS()
+                form: record.toJS(),
+                questions: record.get('questions').toJS()
             });
         }
         
-        const success = this.props.updateRequest.get('success');
-        const nextSuccess = nextProps.updateRequest.get('success');
+        const success = this.props.updateRequest.get('success');        
 
-        if (!success && nextSuccess) {
+        if (success && !prevProps.updateRequest.get('success')) {
             this.props.resetGetRecordRequest();
             this.props.goTo('/scap');
         }

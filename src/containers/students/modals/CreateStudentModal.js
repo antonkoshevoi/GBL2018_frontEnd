@@ -44,20 +44,22 @@ class CreateStudentModal extends Component {
       avatar: ''
     };
   }
-
-  componentWillReceiveProps(nextProps) {
-    const success = this.props.createRequest.get('success');
-    const nextSuccess = nextProps.createRequest.get('success');
+  
+  componentDidMount() {
     const {userData} = this.props;
-    this.setState(
-      {
+    
+    this.setState({
         student: {
           ...this.state.student,
           schoolId: userData.get('schoolId')
         }
-      }
-    );
-    if (!success && nextSuccess) {
+    });
+  }  
+
+  componentDidUpdate(prevProps) {
+    const success = this.props.createRequest.get('success');    
+                 
+    if (success && !prevProps.createRequest.get('success')) {
       this._close();
       this.props.onSuccess();
     }

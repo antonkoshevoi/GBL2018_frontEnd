@@ -19,21 +19,22 @@ class Store extends Component {
     this._getRecords();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.key !== this.props.location.key) {
+      this.setState({isFiltered: false});
+      this._getRecords();
+    }
+  }
+  
   _getRecords(params) {
     this.props.getRecords(params);
   }
 
   _setFilters(params) {
-    if (params)
+    if (params) {
       this.setState({isFiltered: true});
-    this._getRecords(params)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.location.key !== this.props.location.key) {
-      this.setState({isFiltered: false});
-      this._getRecords();
     }
+    this._getRecords(params);
   }
 
   _renderNotFountMessage() {      

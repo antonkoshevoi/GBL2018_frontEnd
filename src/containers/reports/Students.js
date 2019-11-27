@@ -33,12 +33,11 @@ class Students extends Component {
         getStudent(this.state.studentId);
     }
 
-    componentWillReceiveProps(nextProps) {
-        const success = this.props.studentRequest.get('success');
-        const nextSuccess = nextProps.studentRequest.get('success');
+    componentDidUpdate(prevProps) {
+        const success = this.props.studentRequest.get('success');        
 
-        if (!success && nextSuccess) {
-            this.setState({student: nextProps.studentRequest.get('record').toJS()});
+        if (success && !prevProps.studentRequest.get('success')) {
+            this.setState({student: this.props.studentRequest.get('record').toJS()});
         }
     }
 

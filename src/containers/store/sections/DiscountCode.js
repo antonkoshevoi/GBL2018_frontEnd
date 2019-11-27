@@ -23,8 +23,8 @@ class DiscountCode extends Component {
         }        
     }
     
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.discountCodeRequest.get('success') && nextProps.discountCodeRequest.get('success')) {
+    componentDidUpdate(prevProps) {
+        if (this.props.discountCodeRequest.get('success') && !prevProps.discountCodeRequest.get('success')) {
             this.props.resetDiscountCodeRequest();
             this.setState({
                 isOpen: false

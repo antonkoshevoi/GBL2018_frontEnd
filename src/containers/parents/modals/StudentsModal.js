@@ -15,11 +15,10 @@ class StudentsModal extends Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-        
-        if (!this.props.studentsRequest.get('success') && nextProps.studentsRequest.get('success')) {
+    componentDidUpdate(prevProps) {
+        if (this.props.studentsRequest.get('success') && !prevProps.studentsRequest.get('success')) {
             this.setState({
-                students: nextProps.studentsRequest.get('records').toJS()
+                students: this.props.studentsRequest.get('records').toJS()
             });
         }
     }

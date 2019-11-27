@@ -27,15 +27,14 @@ class SchoolDetails extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._handleUpdateSchool(nextProps);
+  componentDidUpdate(prevProps) {
+    this._handleUpdateSchool(prevProps);
   }
 
-  _handleUpdateSchool(nextProps) {
-    const prev = this.props.getUpdateRequest.get('success');
-    const next = nextProps.getUpdateRequest.get('success');
+  _handleUpdateSchool(prevProps) {
+    const success = this.props.getUpdateRequest.get('success');    
 
-    if (!prev && next) {
+    if (success && !prevProps.getUpdateRequest.get('success')) {
       this.setState({
         ...this.state,
         mode: 'overview'

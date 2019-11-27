@@ -13,10 +13,8 @@ class Sidebar extends Component {
     super(props, context);
     this.menu = props.structure;
     this.state = {
+      activeKey: '',
       activeMenu: {
-        key: ''
-      },
-      activeMenuClass: {
         key: ''
       },
       hovered: false,
@@ -64,12 +62,15 @@ class Sidebar extends Component {
     } 
   }
 
-  componentWillReceiveProps(nextProps) {
-    const {location} = nextProps;
+  componentDidUpdate() {
+    const {location} = this.props;
     const key = location.pathname.substr(1).split('/')[0];
-    this._generateMenusPosition(key);
+    
+    if (this.state.activeKey !== key) {        
+        this._generateMenusPosition(key);      
+        this.setState({activeKey: key});
+    }
   }
-
 
   _getActiveMenuByKey(key) {
     const activeMenu = this.menu.multipleMenu.filter(item => item.key === key)[0];
@@ -85,9 +86,9 @@ class Sidebar extends Component {
       const activeMenuKey = $('.second_level .active').closest('.menuItem').data('key');
       if (activeMenuKey !== undefined) {
         $('.second_level .active').closest('.menuItem');
-        this.setState({activeMenu: {key: activeMenuKey, subMenu: true}, activeMenuClass: {key: activeMenuKey}})
+        this.setState({activeMenu: {key: activeMenuKey, subMenu: true}})
       } else {
-        this.setState({activeMenu: this._getActiveMenuByKey(key), activeMenuClass: this._getActiveMenuByKey(key)});
+        this.setState({activeMenu: this._getActiveMenuByKey(key)});
       }
     });
   }
@@ -149,27 +150,27 @@ class Sidebar extends Component {
 
   _googleMenuToggle(menu) {
     this._menuHoverOut();
-    this.setState({activeMenu: menu, activeMenuClass: menu})
+    this.setState({activeMenu: menu})
   }
 
   _menuBackHover() {
-    this.setState({hovered: true, activeMenuClass : {key: ''}})
+    this.setState({hovered: true})
   }
 
   _menuHoverOut() {
-    this.setState({hovered: false, activeMenuClass: this.state.activeMenu});
+    this.setState({hovered: false});
   }
 
   _resetMenu() {
-    this.setState({activeMenu: {key: 'dashboard'}, activeMenuClass: {key: 'dashboard'}});
+    this.setState({activeMenu: {key: 'dashboard'}});
   }
 
   render() {
 
-    const {headerPosition, activeMenuClass, mobileMenu} = this.state;
+    const {headerPosition, activeMenu, mobileMenu} = this.state;
 
     return (      
-        <div id="m_aside_left" style={{marginTop:-headerPosition + mobileMenu}} className={`m-menu-active-${activeMenuClass.key}`}>
+        <div id="m_aside_left" style={{marginTop:-headerPosition + mobileMenu}} className={`m-menu-active-${activeMenu.key}`}>
           <div
             id="m_ver_menu"
             data-menu-vertical="true"

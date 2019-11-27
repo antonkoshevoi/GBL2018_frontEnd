@@ -50,12 +50,12 @@ class Filter extends Component {
       }
   }
 
-  componentWillReceiveProps(nextProps){
-    if (!nextProps.isActive) {
+  componentDidUpdate(prevProps) {      
+    if (!this.props.isActive && prevProps.isActive) {
       this._resetAll();
     }
-    if (nextProps.location.hash === '' && nextProps.location.key !== this.props.location.key) {
-      this._setCategoryFilter(nextProps.match.params.category);
+    if (this.props.location.hash === '' && (prevProps.location.key !== this.props.location.key)) {
+      this._setCategoryFilter(this.props.match.params.category);
     }
   }
 

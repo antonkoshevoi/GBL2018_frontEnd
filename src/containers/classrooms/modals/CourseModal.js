@@ -39,8 +39,8 @@ class CourseModal extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._handleModalOpened(nextProps);
+  componentDidUpdate(prevProps) {
+    this._handleModalOpened(prevProps);
   }
 
   _getRecords(params) {
@@ -53,16 +53,13 @@ class CourseModal extends Component {
     this._getRecords(params)
   }
 
-  _handleModalOpened(nextProps) {
-    const prev = this.props.isOpen;
-    const next = nextProps.isOpen;
-
-    if (!prev && next) {
+  _handleModalOpened(prevProps) {
+    if (this.props.isOpen && !prevProps.isOpen) {
       const {getStoreRecords, courseId} = this.props;
 
       getStoreRecords();      
 
-      this.setState({courseId})
+      this.setState({courseId});
     }
   }
 

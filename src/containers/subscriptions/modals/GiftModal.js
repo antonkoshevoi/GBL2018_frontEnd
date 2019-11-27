@@ -30,11 +30,10 @@ class GiftModal extends Component {
     };
   };
   
-  componentWillReceiveProps(nextProps) {
-    const success = this.props.giftRequest.get('success');
-    const nextSuccess = nextProps.giftRequest.get('success');
+  componentDidUpdate(prevProps) {
+    const success = this.props.giftRequest.get('success');    
 
-    if (!success && nextSuccess) {
+    if (success && !prevProps.giftRequest.get('success')) {
       this._close();     
       this.props.onSuccess();
     }

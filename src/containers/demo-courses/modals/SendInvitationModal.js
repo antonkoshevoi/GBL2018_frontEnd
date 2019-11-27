@@ -35,11 +35,10 @@ class SendInvitationModal extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     const success = this.props.createRequest.get('success');
-    const nextSuccess = nextProps.createRequest.get('success');
 
-    if(!success && nextSuccess) {
+    if (success && !prevProps.createRequest.get('success')) {
       this._close();
       this.props.onSuccess();
     }

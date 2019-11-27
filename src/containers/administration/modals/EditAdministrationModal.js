@@ -32,22 +32,20 @@ class EditAdministrationModal extends Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
         const record = this.props.getSingleRecordRequest.get('record');
-        const nextRecord = nextProps.getSingleRecordRequest.get('record');
 
-        if (!record && nextRecord) {                    
+        if (record && !prevProps.getSingleRecordRequest.get('record')) {                    
             this.setState({
-                id: nextRecord.get('id'),
-                adminUser: nextRecord.toJS(),
-                avatar: nextRecord.toJS().avatar
+                id: record.get('id'),
+                adminUser: record.toJS(),
+                avatar: record.toJS().avatar
             });
         }
 
-        const success = this.props.updateRequest.get('success');
-        const nextSuccess = nextProps.updateRequest.get('success');
+        const success = this.props.updateRequest.get('success');        
 
-        if (!success && nextSuccess) {
+        if (success && !prevProps.updateRequest.get('success')) {
             this._onClose();
             this.props.onSuccess();
         }

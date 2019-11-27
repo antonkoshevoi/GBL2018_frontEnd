@@ -31,22 +31,21 @@ class Checkout extends Component {
     this.props.getCartRecords();     
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._handleGetAddresses(nextProps);
-    this._handleGetShoppingCart(nextProps);
-    this._handlePayPalPayment(nextProps);    
-    this._handleCheckPayment(nextProps);
-    this._handleCreditCardPayment(nextProps);    
+  componentDidUpdate(prevProps) {
+    this._handleGetAddresses(prevProps);
+    this._handleGetShoppingCart(prevProps);
+    this._handlePayPalPayment(prevProps);    
+    this._handleCheckPayment(prevProps);
+    this._handleCreditCardPayment(prevProps);    
   }  
   
-  _handleGetAddresses(nextProps) {    
-    const record = nextProps.addressesRequest.get('records');    
-    if (record && record.size){
+  _handleGetAddresses(prevProps) {    
+    if (this.props.addressesRequest.get('success') && !prevProps.addressesRequest.get('success')) {   
       this.setState({
-        ...this.state, ...record.toJS(),
-      })
+        ...this.state, ...this.props.addressesRequest.get('records').toJS()
+      });
     }  
-  } 
+  }
   
   _setShipping (params = {}) {        
     let newState = {
@@ -112,32 +111,32 @@ class Checkout extends Component {
     });
   };
 
-  _handleGetShoppingCart(nextProps) {
-    if (!this.props.cartRecordsRequest.get('success') && nextProps.cartRecordsRequest.get('success')) {      
-      if (nextProps.cartRecordsRequest.get('isDigital')) {
+  _handleGetShoppingCart(prevProps) {
+    if (this.props.cartRecordsRequest.get('success') && !prevProps.cartRecordsRequest.get('success')) {      
+      if (this.props.cartRecordsRequest.get('isDigital')) {
           this.props.goTo('/shopping/download');
       }
     }
   }
   
-  _handlePayPalPayment(nextProps) {
-    if (!this.props.paypalRequest.get('success') && nextProps.paypalRequest.get('success')) {      
-      window.location = nextProps.paypalRequest.get('approvalUrl');
+  _handlePayPalPayment(prevProps) {
+    if (this.props.paypalRequest.get('success') && !prevProps.paypalRequest.get('success')) {      
+      window.location = this.props.paypalRequest.get('approvalUrl');
     }
   }
   
-  _handleCreditCardPayment(nextProps){
-    if (!this.props.creditCardRequest.get('success') && nextProps.creditCardRequest.get('success')) {
+  _handleCreditCardPayment(prevProps){
+    if (this.props.creditCardRequest.get('success') && !prevProps.creditCardRequest.get('success')) {
       this.props.resetCreditCardPayment();
-      this._goToSuccessPage(nextProps.creditCardRequest.get('data').toJS());
+      this._goToSuccessPage(this.props.creditCardRequest.get('data').toJS());
     }
   }  
 
-  _handleCheckPayment(nextProps) {
-    if (!this.props.checkRequest.get('success') && nextProps.checkRequest.get('success')) {                
-      this._goToSuccessPage(nextProps.checkRequest.get('data').toJS());
+  _handleCheckPayment(prevProps) {
+    if (this.props.checkRequest.get('success') && !prevProps.checkRequest.get('success')) {                
+      this._goToSuccessPage(this.props.checkRequest.get('data').toJS());
     }
-    if (!this.props.checkRequest.get('fail') && nextProps.checkRequest.get('fail')) {
+    if (this.props.checkRequest.get('fail') && !prevProps.checkRequest.get('fail')) {
       this.props.goTo('/payments/fail');
     }    
   }

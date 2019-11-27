@@ -54,11 +54,10 @@ class SchoolScap extends Component {
         getRecords();
     }
 
-    componentWillReceiveProps(nextProps) {
-        const deleteSuccess = this.props.deleteRecordRequest.get('success');
-        const nextDeleteSuccess = nextProps.deleteRecordRequest.get('success');
+    componentDidUpdate(prevProps) {
+        const success = this.props.deleteRecordRequest.get('success');        
 
-        if (!deleteSuccess && nextDeleteSuccess) {
+        if (success && !prevProps.deleteRecordRequest.get('success')) {
             this._getRecords();
         }
     }

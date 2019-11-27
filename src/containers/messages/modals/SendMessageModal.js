@@ -20,18 +20,18 @@ class SendMessageModal extends Component {
         };
     }
        
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.isOpen && nextProps.isOpen) {
+    componentDidUpdate(prevProps) {
+        if (this.props.isOpen && !prevProps.isOpen) {
             this.setState({
-                recipientName:  nextProps.recipient.name,
-                userId:         nextProps.recipient.id
+                recipientName:  this.props.recipient.name,
+                userId:         this.props.recipient.id
             });   
         }        
-        this._handleSuccess(nextProps);
+        this._handleSuccess(prevProps);
     }
 
-    _handleSuccess(nextProps) {
-        if (!this.props.sendMessageRequest.get('success') && nextProps.sendMessageRequest.get('success')) {            
+    _handleSuccess(prevProps) {
+        if (this.props.sendMessageRequest.get('success') && !prevProps.sendMessageRequest.get('success')) {            
             this._close();
         }
     }

@@ -39,9 +39,9 @@ class InvitationsTab extends Component {
     getRecords();
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._handleDeleteRecordRequestSuccess(nextProps);
-    this._handleKeywordChange(nextProps);
+  componentDidUpdate(prevProps) {
+    this._handleDeleteRecordRequestSuccess(prevProps);
+    this._handleKeywordChange(prevProps);
   }
 
   _openCreateDialog () {
@@ -56,10 +56,6 @@ class InvitationsTab extends Component {
     });
   }
 
-  /**
-   *
-   * @private
-   */
   _getRecords () {
     const { filters, sorters, page, perPage } = this.state;
 
@@ -73,11 +69,12 @@ class InvitationsTab extends Component {
   _deleteRecord (id) {
     this.props.deleteRecord(id);
   }
+  
   _handleDeleteRecordRequestSuccess(nextProps) {
-    const deleteSuccess = this.props.deleteRecordRequest.get('success');
-    const nextDeleteSuccess = nextProps.deleteRecordRequest.get('success');
+    const success = this.props.deleteRecordRequest.get('success');
+    const prevSuccess = nextProps.deleteRecordRequest.get('success');
 
-    if(!deleteSuccess && nextDeleteSuccess) {
+    if (success && !prevSuccess) {
       this._getRecords();
     }
   }
@@ -92,12 +89,10 @@ class InvitationsTab extends Component {
       filters
     }, this._getRecords);
   }
-  _handleKeywordChange (nextProps) {
-    const keyword = this.props.keyword;
-    const nextKeyword = nextProps.keyword;
-
-    if(keyword !== nextKeyword) {
-      this._search(nextKeyword);
+  
+  _handleKeywordChange (prevProps) {
+    if (this.props.keyword !== prevProps.keyword) {
+      this._search(this.props.keyword);
     }
   }
 

@@ -25,22 +25,22 @@ class Chats extends Component {
         this._getRecords();
     }
                
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
         const { groupChatsRequest, privateChatsRequest, disableChatRequest} = this.props;        
         
-        if (!groupChatsRequest.get('records').size && nextProps.groupChatsRequest.get('records').size) {
+        if (groupChatsRequest.get('records').size && !prevProps.groupChatsRequest.get('records').size) {
             if (!this.state.openChat) {                
-                this._viewChat(nextProps.groupChatsRequest.get('records').get(0));
+                this._viewChat(groupChatsRequest.get('records').get(0));
             }
         }
-        if (!privateChatsRequest.get('records').size && nextProps.privateChatsRequest.get('records').size) {
+        if (privateChatsRequest.get('records').size && !prevProps.privateChatsRequest.get('records').size) {
             if (!this.state.openChat) {                
-                this._viewChat(nextProps.privateChatsRequest.get('records').get(0));
+                this._viewChat(privateChatsRequest.get('records').get(0));
             }
         }
         
-        if (!disableChatRequest.get('success') && nextProps.disableChatRequest.get('success')) {
-            let data = nextProps.disableChatRequest.get('data');
+        if (disableChatRequest.get('success') && !prevProps.disableChatRequest.get('success')) {
+            let data = disableChatRequest.get('data');
             if (data.get('chatId') === this.state.openChatId) {
                 this.setState({
                     openChat: {

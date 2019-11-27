@@ -15,11 +15,11 @@ class NewMessageGroup extends Component {
         this.state = {};
     }
     
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
        
         const {createGroupRequest} = this.props;
         
-        if (!createGroupRequest.get('success') && nextProps.createGroupRequest.get('success')) {
+        if (createGroupRequest.get('success') && !prevProps.createGroupRequest.get('success')) {
             this._goBack();
         }         
     }

@@ -19,9 +19,9 @@ class ResultsModal extends Component {
         this.state = {};
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.isOpen && nextProps.isOpen) {
-            this.props.getRecords(nextProps.item.get('id'));            
+    componentDidUpdate(prevProps) {
+        if (this.props.isOpen && !prevProps.isOpen) {
+            this.props.getRecords(this.props.item.get('id'));            
         }               
     }
 

@@ -68,7 +68,7 @@ class Downloads extends Component {
                     <Td className="d-none d-md-table-cell">{this._recordNumber(i)}</Td> 
                     <Td>
                         <div className="d-flex align-items-center">
-                            {item.get('thumbnail') ? <img src={item.get('thumbnail')} width={90} alt={item.get('title')}/> : '-'}
+                            {item.get('thumbnail') && <div><img src={item.get('thumbnail')} style={{width: '90px'}} alt={item.get('title')}/></div>}
                             <div className="ml-2 text-center flex-grow-1">
                                 <p><strong>{item.get('title')}</strong></p>
                                 <p className="text-muted">{item.get('description')}</p>                        

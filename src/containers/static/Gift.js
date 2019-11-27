@@ -41,7 +41,7 @@ class Gift extends Component {
         this.state = {
             step: 1,
             billingData: {},
-            subscriptionId: 2,            
+            subscriptionId: null,            
             period: 'month',
             showBillingForm: false
         };
@@ -49,18 +49,18 @@ class Gift extends Component {
     
     componentDidMount() {        
         const {getRecords} = this.props;
+        this.props.resetGiftRequest();
         getRecords();
     }    
     
-    componentWillReceiveProps(nextProps) {                
-        this._handleGift(nextProps);
-        this._handleDiscountCode(nextProps);
+    componentDidUpdate(prevProps) {                
+        this._handleGift(prevProps);
+        this._handleDiscountCode(prevProps);
     }
     
-    _handleGift(nextProps) {
-        if (!this.props.giftRequest.get('success') && nextProps.giftRequest.get('success')) {
-            this.props.resetGiftRequest();            
-            
+    _handleGift(prevProps) {
+        if (this.props.giftRequest.get('success') && !prevProps.giftRequest.get('success')) {
+                        
             this._setStep(3);
             
             this.setState({
@@ -71,8 +71,8 @@ class Gift extends Component {
         }        
     }
     
-    _handleDiscountCode(nextProps) {
-        if (!this.props.discountCodeRequest.get('success') && nextProps.discountCodeRequest.get('success')) {
+    _handleDiscountCode(prevProps) {
+        if (this.props.discountCodeRequest.get('success') && !prevProps.discountCodeRequest.get('success')) {
             this.props.getRecords();            
         }
     }  
@@ -188,7 +188,7 @@ class Gift extends Component {
                         </div>
                     </Portlet>
                 }
-                {step === 3 &&
+                {(step === 3 && giftRequest.get('success')) && 
                     <Portlet {...this.props}>                        
                         <InvoiceForm data={giftRequest.get('record')} />
                     </Portlet>                    

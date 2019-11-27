@@ -23,10 +23,10 @@ class TeacherResultsModal extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (!this.props.isOpen && nextProps.isOpen) {
-            this.props.getRecords(nextProps.item.get('id'));
-            this.setState({surveyId: nextProps.item.get('id')});
+    componentDidUpdate(prevProps) {
+        if (this.props.isOpen && !prevProps.isOpen) {
+            this.props.getRecords(this.props.item.get('id'));
+            this.setState({surveyId: this.props.item.get('id')});
         }               
     }
 

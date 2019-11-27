@@ -23,8 +23,8 @@ class StudentParents extends Component {
         this._getRecords();
     }
 
-    componentWillReceiveProps(nextProps) {
-        this._deleteRequestSuccess(nextProps);
+    componentDidUpdate(prevProps) {
+        this._deleteRequestSuccess(prevProps);
     }
 
     _openViewDialog(record) {
@@ -99,11 +99,10 @@ class StudentParents extends Component {
         this.props.deleteStudentRequest(id);
     }
 
-    _deleteRequestSuccess(nextProps) {
-        const deleteSuccess     = this.props.studentStatusRequest.get('success');
-        const nextDeleteSuccess = nextProps.studentStatusRequest.get('success');
+    _deleteRequestSuccess(prevProps) {
+        const success = this.props.studentStatusRequest.get('success');        
 
-        if (!deleteSuccess && nextDeleteSuccess) {
+        if (success && !prevProps.studentStatusRequest.get('success')) {
             this.props.resetStudentRequest();
             this._getRecords();
         }
