@@ -39,7 +39,7 @@ class CreditCardForm extends Component {
         return (
             <div className='m-form__section'>
               <div className="d-md-flex justify-content-end d-none">
-                <img alt="" className="pb-3" src={paypalImage} style={{width: 180, marginTop: '-3rem'}}/>  
+                <img alt="" className="pb-3 paypal-image"  src={paypalImage} />  
               </div>
               <div className="form-group row">
                 <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('creditCardNumber')} </label>

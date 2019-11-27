@@ -1261,6 +1261,11 @@ td.rotate div span {
    color: #ffffff;
    font-size: 1.5rem;   
 }
+.paypal-image {
+    width: 180px;
+    height: 64.4px;
+    margin-top: -3rem;
+}
 @media (max-width: 1600px) {
     .small-card .m-badge {
         min-height: 10px;
