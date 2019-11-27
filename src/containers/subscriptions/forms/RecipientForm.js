@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
-import { FormHelperText, Divider} from '@material-ui/core';
+import {FormHelperText} from '@material-ui/core';
 
 class RecipientForm extends Component {
 

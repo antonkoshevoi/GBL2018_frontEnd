@@ -21,7 +21,7 @@ class Gifts extends Component {
     }
 
     componentDidUpdate(prevProps) {
-       // this._deleteRequestSuccess(prevProps);
+        this._deleteRequestSuccess(prevProps);
         this._changeStatusRequestSuccess(prevProps);
     }
     

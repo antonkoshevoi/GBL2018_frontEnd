@@ -15,7 +15,7 @@ import SubscriptionsForm from "./forms/SubscriptionsForm";
 import RecipientForm from "./forms/RecipientForm";
 import DiscountCode from '../store/sections/DiscountCode';
 
-import {Checkbox, FormControlLabel, withStyles} from '@material-ui/core';
+import {Checkbox, withStyles} from '@material-ui/core';
 
 const CustomCheckbox = withStyles({
     root: {

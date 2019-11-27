@@ -43,7 +43,7 @@ class Download extends Component {
         this._handleFailPayment(prevProps);    
     }
     
-    _handleGetAddresses(prevProps) {    
+    _handleAddresses(prevProps) {    
         if (this.props.addressesRequest.get('success') && !prevProps.addressesRequest.get('success')) {   
             this.setState({
                 ...this.state, ...this.props.addressesRequest.get('records').toJS()
