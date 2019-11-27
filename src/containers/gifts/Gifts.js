@@ -21,7 +21,7 @@ class Gifts extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        this._deleteRequestSuccess(prevProps);
+       // this._deleteRequestSuccess(prevProps);
         this._changeStatusRequestSuccess(prevProps);
     }
     
@@ -127,7 +127,7 @@ class Gifts extends Component {
     _deleteRequestSuccess(prevProps) {
         const success = this.props.deleteRequest.get('success');        
 
-        if (!success && !prevProps.deleteRequest.get('success')) {
+        if (success && !prevProps.deleteRequest.get('success')) {
             this.props.resetDeleteRequest();
             this._getRecords();
         }

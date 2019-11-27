@@ -1249,6 +1249,18 @@ td.rotate div span {
     color: #fff;
 }
 
+.h-auto {
+    height: auto;
+}
+.subscription-types {
+    background-color: #1B3F5E;
+}
+.subsription-type span.label-text {
+   background-color: #f2a517;
+   padding: 0rem 0.75rem;
+   color: #ffffff;
+   font-size: 1.5rem;   
+}
 @media (max-width: 1600px) {
     .small-card .m-badge {
         min-height: 10px;

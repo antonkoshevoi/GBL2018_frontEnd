@@ -34,9 +34,8 @@ class EditAdministrationModal extends Component {
 
     componentDidUpdate(prevProps) {
         const record = this.props.getSingleRecordRequest.get('record');
-        const prevRecord = prevProps.getSingleRecordRequest.get('record');
 
-        if (record && !prevRecord) {                    
+        if (record && !prevProps.getSingleRecordRequest.get('record')) {                    
             this.setState({
                 id: record.get('id'),
                 adminUser: record.toJS(),

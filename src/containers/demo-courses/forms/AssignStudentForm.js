@@ -34,10 +34,9 @@ class AssignStudentForm extends Component {
   }
 
   _handleSchoolStudentsSuccess(prevProps) {
-    const students = this.props.schoolStudentsRequest.get('records');
-    const prevStudents = prevProps.schoolStudentsRequest.get('records');
+    const students = this.props.schoolStudentsRequest.get('records');    
 
-    if (students && !prevStudents) {
+    if (students && !prevProps.schoolStudentsRequest.get('records')) {
       this.setState({
         ...this.state,
         schoolStudents: students.toJS()

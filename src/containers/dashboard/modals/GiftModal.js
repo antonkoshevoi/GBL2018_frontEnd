@@ -51,7 +51,7 @@ class GiftModal extends Component {
 
         if (success && !prevProps.connectionsRequest.get('success')) {
             this.setState({
-                connections: prevProps.connectionsRequest.get('records').toJS()
+                connections: this.props.connectionsRequest.get('records').toJS()
             });
         }        
     }

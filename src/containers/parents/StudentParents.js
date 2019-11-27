@@ -102,7 +102,7 @@ class StudentParents extends Component {
     _deleteRequestSuccess(prevProps) {
         const success = this.props.studentStatusRequest.get('success');        
 
-        if (!success && prevProps.studentStatusRequest.get('success')) {
+        if (success && !prevProps.studentStatusRequest.get('success')) {
             this.props.resetStudentRequest();
             this._getRecords();
         }

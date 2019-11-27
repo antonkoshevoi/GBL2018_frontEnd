@@ -32,10 +32,9 @@ class SchoolDetails extends Component {
   }
 
   _handleUpdateSchool(prevProps) {
-    const success = this.props.getUpdateRequest.get('success');
-    const prevSuccess = prevProps.getUpdateRequest.get('success');
+    const success = this.props.getUpdateRequest.get('success');    
 
-    if (success && !prevSuccess) {
+    if (success && !prevProps.getUpdateRequest.get('success')) {
       this.setState({
         ...this.state,
         mode: 'overview'

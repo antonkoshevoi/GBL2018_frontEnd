@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
 import {FormControl, FormHelperText, MenuItem, Select} from '@material-ui/core';
+import paypalImage from '../../../media/images/paypal.png';
 
 class CreditCardForm extends Component {
 
@@ -37,6 +38,9 @@ class CreditCardForm extends Component {
         
         return (
             <div className='m-form__section'>
+              <div className="d-md-flex justify-content-end d-none">
+                <img alt="" className="pb-3" src={paypalImage} style={{width: 180, marginTop: '-3rem'}}/>  
+              </div>
               <div className="form-group row">
                 <label className="col-form-label col-md-4 col-lg-4 col-sm-12">{t('creditCardNumber')} </label>
                 <div className="col-lg-8 col-md-8 col-sm-12">

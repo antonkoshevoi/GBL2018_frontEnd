@@ -6,6 +6,7 @@ import {
     PUBLIC_GIFT, PUBLIC_GIFT_SUCCESS, PUBLIC_GIFT_FAIL, RESET_PUBLIC_GIFT_REQUEST, 
     DELETE, DELETE_SUCCESS, DELETE_FAIL, RESET_DELETE_REQUEST,
     ACCEPT, ACCEPT_SUCCESS, ACCEPT_FAIL, 
+    VALIDATE, VALIDATE_SUCCESS, VALIDATE_FAIL,
     DECLINE, DECLINE_SUCCESS, DECLINE_FAIL, RESET_CHANGE_STATUS_REQUEST
 } from './actions';
 import Immutable from 'immutable';
@@ -30,6 +31,12 @@ const initialState = Immutable.fromJS({
     fail: false,
     errorResponse: null
   },
+  validateRecipientRequest: {
+    loading: false,
+    success: false,
+    fail: false,
+    errorResponse: null
+  },  
   giftSubscriptionRequest: {
     loading: false,
     success: false,
@@ -165,6 +172,15 @@ export default function reducer(state = initialState, action) {
     case RESET_CHANGE_STATUS_REQUEST:
         return state.set('changeStatusRequest', initialState.get('changeStatusRequest'));
   
+    /**
+     * Validate
+     */  
+    case VALIDATE:
+        return state.set('validateRecipientRequest', initialState.get('validateRecipientRequest').set('loading', true));
+    case VALIDATE_SUCCESS:    
+        return state.set('validateRecipientRequest', initialState.get('validateRecipientRequest').set('success', true));
+    case VALIDATE_FAIL:
+        return state.set('validateRecipientRequest', initialState.get('validateRecipientRequest').set('fail', true).set('errors', Immutable.fromJS(action.error.response.data.errors)));  
     /**
      * default
      */

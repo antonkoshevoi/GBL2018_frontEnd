@@ -41,7 +41,7 @@ class Gift extends Component {
         this.state = {
             step: 1,
             billingData: {},
-            subscriptionId: 2,            
+            subscriptionId: null,            
             period: 'month',
             showBillingForm: false
         };
@@ -49,6 +49,7 @@ class Gift extends Component {
     
     componentDidMount() {        
         const {getRecords} = this.props;
+        this.props.resetGiftRequest();
         getRecords();
     }    
     
@@ -59,8 +60,7 @@ class Gift extends Component {
     
     _handleGift(prevProps) {
         if (this.props.giftRequest.get('success') && !prevProps.giftRequest.get('success')) {
-            this.props.resetGiftRequest();            
-            
+                        
             this._setStep(3);
             
             this.setState({
@@ -188,7 +188,7 @@ class Gift extends Component {
                         </div>
                     </Portlet>
                 }
-                {step === 3 &&
+                {(step === 3 && giftRequest.get('success')) && 
                     <Portlet {...this.props}>                        
                         <InvoiceForm data={giftRequest.get('record')} />
                     </Portlet>                    

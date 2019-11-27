@@ -35,10 +35,9 @@ class EditTeacherModal extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const record = this.props.getSingleRecordRequest.get('record');
-    const prevRecord = prevProps.getSingleRecordRequest.get('record');
+    const record = this.props.getSingleRecordRequest.get('record');    
 
-    if (record && !prevRecord) {
+    if (record && !prevProps.getSingleRecordRequest.get('record')) {
       this.setState({
         id: record.get('id'),
         teacher: record.toJS(),

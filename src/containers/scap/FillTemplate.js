@@ -63,7 +63,7 @@ class FillTemplate extends Component {
         
         const homerooms = this.props.homeroomsRequest.get('records');        
 
-        if (homerooms && prevProps.homeroomsRequest.get('records')) {
+        if (homerooms && !prevProps.homeroomsRequest.get('records')) {
             this.setState({            
                 homerooms: homerooms.toJS()
             });
@@ -71,7 +71,7 @@ class FillTemplate extends Component {
         
         const success = this.props.addAnswersRequest.get('success');        
 
-        if (!success && prevProps.addAnswersRequest.get('success')) {
+        if (success && !prevProps.addAnswersRequest.get('success')) {
             this._goBack();
         }         
     }

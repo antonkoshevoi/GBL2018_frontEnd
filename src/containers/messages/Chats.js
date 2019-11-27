@@ -30,12 +30,12 @@ class Chats extends Component {
         
         if (groupChatsRequest.get('records').size && !prevProps.groupChatsRequest.get('records').size) {
             if (!this.state.openChat) {                
-                this._viewChat(prevProps.groupChatsRequest.get('records').get(0));
+                this._viewChat(groupChatsRequest.get('records').get(0));
             }
         }
         if (privateChatsRequest.get('records').size && !prevProps.privateChatsRequest.get('records').size) {
             if (!this.state.openChat) {                
-                this._viewChat(prevProps.privateChatsRequest.get('records').get(0));
+                this._viewChat(privateChatsRequest.get('records').get(0));
             }
         }
         

@@ -113,7 +113,7 @@ class Checkout extends Component {
 
   _handleGetShoppingCart(prevProps) {
     if (this.props.cartRecordsRequest.get('success') && !prevProps.cartRecordsRequest.get('success')) {      
-      if (prevProps.cartRecordsRequest.get('isDigital')) {
+      if (this.props.cartRecordsRequest.get('isDigital')) {
           this.props.goTo('/shopping/download');
       }
     }

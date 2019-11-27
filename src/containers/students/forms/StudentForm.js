@@ -34,9 +34,8 @@ class StudentForm extends Component {
 
   _getSchoolHomeroomsSuccess(prevProps) {
     const homerooms = this.props.getSchoolHomeroomsRequest.get('records');
-    const prevHomerooms = prevProps.getSchoolHomeroomsRequest.get('records');
 
-    if (homerooms && !prevHomerooms) {
+    if (homerooms && !prevProps.getSchoolHomeroomsRequest.get('records')) {
       this.setState({
         ...this.state,
         schoolHomerooms: homerooms.toJS()

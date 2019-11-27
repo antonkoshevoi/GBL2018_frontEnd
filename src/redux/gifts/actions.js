@@ -18,6 +18,10 @@ export const ACCEPT = '[Gifts] ACCEPT';
 export const ACCEPT_SUCCESS = '[Gifts] ACCEPT_SUCCESS';
 export const ACCEPT_FAIL = '[Gifts] ACCEPT_FAIL';
 
+export const VALIDATE = '[Gifts] VALIDATE';
+export const VALIDATE_SUCCESS = '[Gifts] VALIDATE_SUCCESS';
+export const VALIDATE_FAIL = '[Gifts] VALIDATE_FAIL';
+
 export const DECLINE = '[Gifts] DECLINE';
 export const DECLINE_SUCCESS = '[Gifts] DECLINE_SUCCESS';
 export const DECLINE_FAIL = '[Gifts] DECLINE_FAIL';
@@ -73,6 +77,13 @@ export function giftPublic(params = {}) {
   return {
     types: [PUBLIC_GIFT, PUBLIC_GIFT_SUCCESS, PUBLIC_GIFT_FAIL],
     promise: (apiClient) => apiClient.post('gifts/public', params)
+  };
+}
+
+export function validateRecipient(params = {}) {  
+  return {
+    types: [VALIDATE, VALIDATE_SUCCESS, VALIDATE_FAIL],
+    promise: (apiClient) => apiClient.post('gifts/validate', params)
   };
 }
 

@@ -35,10 +35,9 @@ class EditStudentModal extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const record = this.props.getSingleRecordRequest.get('record');
-        const prevRecord = prevProps.getSingleRecordRequest.get('record');
+        const record = this.props.getSingleRecordRequest.get('record');        
 
-        if (record && !prevRecord) {
+        if (record && !prevProps.getSingleRecordRequest.get('record')) {
             this.setState({
                 id: record.get('id'),
                 student: record.toJS(),
@@ -46,10 +45,9 @@ class EditStudentModal extends Component {
             });
         }
 
-        const success = this.props.updateRequest.get('success');
-        const prevSuccess = prevProps.updateRequest.get('success');
+        const success = this.props.updateRequest.get('success');        
 
-        if (success && !prevSuccess) {
+        if (success && !prevProps.updateRequest.get('success')) {
             this._close();
             this.props.onSuccess();
         }

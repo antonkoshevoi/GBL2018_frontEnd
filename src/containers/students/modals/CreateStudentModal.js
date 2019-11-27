@@ -57,10 +57,9 @@ class CreateStudentModal extends Component {
   }  
 
   componentDidUpdate(prevProps) {
-    const success = this.props.createRequest.get('success');
-    const prevSuccess = prevProps.createRequest.get('success');
+    const success = this.props.createRequest.get('success');    
                  
-    if (success && !prevSuccess) {
+    if (success && !prevProps.createRequest.get('success')) {
       this._close();
       this.props.onSuccess();
     }

@@ -34,6 +34,10 @@ class InvoiceForm extends Component {
                                     <div>
                                         <label>{t('allowedCourses')}:</label> <strong>{invoice.get('allowedCourses')} x {invoice.get('allowedStudents')}</strong>
                                     </div>
+                                    {(invoice.get('userId') !== invoice.get('ownerId')) &&
+                                    <div>
+                                        <label>{t('purchasedFor')}:</label> <strong>{invoice.get('ownerName')}</strong>
+                                    </div>}
                                 </div>
                                 <Divider />
                                 {(invoice.get('discount') > 0) ?
