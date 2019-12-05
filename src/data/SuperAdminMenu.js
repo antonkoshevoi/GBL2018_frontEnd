@@ -6,12 +6,12 @@ export default  {
             title: 'dashboard',
             link: 'dashboard',
             icon: 'fa fa-dashboard',
-            colorName: 'home',
+            colorName: 'home'
         },
         {
             key: 'studentsAndStaff',
             title: 'studentsAndStaff',
-            link: 'dashboard',
+            link: 'administration/list',
             icon: 'fa fa-group',
             colorName: 'orange',
             subMenu: [
@@ -35,7 +35,7 @@ export default  {
         {
             key: 'learningAreas',
             title: 'learningAreas',
-            link: 'dashboard',
+            link: 'classrooms/list',
             icon: 'fa fa-institution',
             colorName: 'red',
             subMenu: [
@@ -71,7 +71,7 @@ export default  {
         {
             key: 'messages',
             title: 'messages',
-            link: 'messages',
+            link: 'messages/alerts',
             icon: 'fa fa-weixin',
             colorName: 'blue',
             subMenu: [
@@ -115,7 +115,7 @@ export default  {
         {
             key: 'store',
             title: 'store',
-            link: '/store',
+            link: 'store',
             icon: 'fa fa-shopping-cart',
             colorName: 'green',
             subMenu: [
@@ -161,7 +161,7 @@ export default  {
         {
             key: 'accounts',
             title: 'accounts',
-            link: 'accounts',
+            link: 'accounts/invoices',
             icon: 'fa fa-dollar',
             colorName: 'grey',
             subMenu: [

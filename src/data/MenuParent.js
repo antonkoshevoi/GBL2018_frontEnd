@@ -30,7 +30,7 @@ export default  {
         {
             key: 'store',
             title: 'store',
-            link: '/store',
+            link: 'store',
             icon: 'fa fa-shopping-cart',
             colorName: 'green',
             subMenu: [
@@ -64,7 +64,7 @@ export default  {
         {
             key: 'messages',
             title: 'messages',
-            link: 'messages',
+            link: 'messages/alerts',
             icon: 'fa fa-weixin',
             colorName: 'blue',
             subMenu: [

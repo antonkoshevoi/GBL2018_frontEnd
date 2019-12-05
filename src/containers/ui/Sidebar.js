@@ -101,7 +101,7 @@ class Sidebar extends Component {
       return (
         <div className="menuItem" key={menu.key} data-key={menu.key} onClick={(menu.subMenu === undefined) ? _self.props.mobileSidebar : () => { return; } }>
           <NavLink
-            to={(menu.subMenu !== undefined) ? `${menu.key === 'store' ? menu.link : '#' + menu.key }` : `/${menu.link}`}
+            to={`/${menu.link}`}
             className={'googleMenuItem ' + menu.colorName + (activeMenu.key === menu.key ? ' active fadeInUp  animated' : activeMenu.subMenu !== undefined ? ' swapped' : '') }
             onClick={(event) => {_self._googleMenuToggle(menu); _self._goToFirstPage(menu);}}>
             <span className="icon"><i className={menu.icon}></i></span>
@@ -114,10 +114,7 @@ class Sidebar extends Component {
   }
 
   _goToFirstPage(menu){
-    if (menu.key !== 'store' && menu.subMenu) {
-      const subLink = this.menu.multipleMenu.filter(menuItem => menuItem.key ===  menu.key)[0].subMenu[0].link;
-      this.props.history.push('/'+subLink);
-    }
+      this.props.history.push('/' + menu.link);
   }
 
   _renderGoogleSubMenus(subMenus) {
