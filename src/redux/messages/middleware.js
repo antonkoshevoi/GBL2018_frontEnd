@@ -10,7 +10,6 @@ export default function messagesMiddleware() {
 
             if (type !== SUBSCRIBE) {
                 if (type === LOGOUT_SUCCESS) {
-                    console.log('messagesMiddleware LOGOUT_SUCCESS');
                     LiveService.disconnect();
                 }
                 return next(action);
@@ -21,10 +20,8 @@ export default function messagesMiddleware() {
             }            
 
             LiveService.messages(userId, (message) => {
-                console.log('messagesMiddleware NEW_MESSAGE_RECEIVED');
                 dispatch({type: NEW_MESSAGE_RECEIVED, message})
-            }, (message) => {
-                console.log('messagesMiddleware MESSAGE_REMOVED');
+            }, (message) => {                
                 dispatch({type: MESSAGE_REMOVED, message})
             });
         };

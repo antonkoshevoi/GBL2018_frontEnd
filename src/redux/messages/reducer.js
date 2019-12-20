@@ -174,7 +174,6 @@ export default function reducer (state = initialState, action) {
         let chatsRecords    = state.get(recordsKey).get('records').toJS();
         let chatMessages    = state.get('getChatMessagesRequest').get('records').toJS();
         let newMessage      = 0;
-        console.log('Reducer - New Message: chatId = ' + chatId);
         
         if (action.message.newChat) {
             if (chatId !== state.get('getChatMessagesRequest').get('chatId')) {

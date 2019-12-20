@@ -67,8 +67,7 @@ class Messages extends Component {
             return false;
         }    
         let { readIds } = this.state;       
-        readIds.push(record.id);        
-        console.log(readIds);
+        readIds.push(record.id);               
         this.setState({readIds: readIds});
     }
     

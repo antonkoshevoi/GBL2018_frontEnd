@@ -99,7 +99,6 @@ class Chat extends Component {
             actionsAnchor: event.currentTarget,
             message: message.toJS()
         });
-        console.log(message.toJS());
     };
 
     _handleActionsClose = () => {

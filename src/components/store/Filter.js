@@ -90,7 +90,6 @@ class Filter extends Component {
   };
 
   _searchBarChange = (e) => {
-      console.log(e);
     this.setState({params: {...this.state.params, filter: {...this.state.params.filter, title: e}}}, this._initFilter);
   };
 

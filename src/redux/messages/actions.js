@@ -104,7 +104,6 @@ export function disableChat(chatID, disabled = true) {
 }
 
 export function subscribe (userId) {
-  console.log(SUBSCRIBE);
   return {
     type: SUBSCRIBE, userId
   }
