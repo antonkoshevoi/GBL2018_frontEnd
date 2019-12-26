@@ -145,7 +145,7 @@ class MySubscriptions extends Component {
         
         let hasActive = false;
         
-        subscriptionsRequest.get('records').map((item, i) => {
+        subscriptionsRequest.get('records').map((item) => {
             if (item.get('status') === 1) {
                 hasActive = true;
             }
@@ -294,7 +294,7 @@ class MySubscriptions extends Component {
     }
  }
 
-MySubscriptions = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     subscriptionsRequest: selectGetUserRecordsRequest(state),
     unSubscribeRequest: selectUnSubscribeRequest(state),
@@ -307,6 +307,4 @@ MySubscriptions = connect(
     resetUnSubscribeRequest: (params = {}) => { dispatch(resetUnSubscribeRequest(params)) },    
     goTo: (url) => {dispatch(push(url))}
   })
-)(MySubscriptions);
-
-export default withTranslation('translations')(MySubscriptions);
+)(MySubscriptions));

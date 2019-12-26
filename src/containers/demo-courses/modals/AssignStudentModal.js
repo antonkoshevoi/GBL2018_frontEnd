@@ -32,7 +32,7 @@ class AssignStudentModal extends Component {
         studentId: ''
       }
     };
-  };
+  }
   
   componentDidUpdate(prevProps) {
     const success = this.props.assignDemoStudentRequest.get('success');
@@ -41,7 +41,7 @@ class AssignStudentModal extends Component {
       this._close();     
       this.props.onSuccess();
     }
-  };
+  }
 
   _close () {     
     this.setState({
@@ -52,16 +52,16 @@ class AssignStudentModal extends Component {
     });
     this.props.onClose();
     this.props.resetAssignDemoStudentRequest();        
-  };
+  }
 
   _onChange (form) {  
       this.setState({ form });
-  };
+  }
 
   _onSubmit (e) {            
     e.preventDefault();    
     this.props.assignDemoStudent(this.state.form);    
-  };
+  }
 
   render() {
     const { isOpen, assignDemoStudentRequest, t } = this.props;
@@ -106,8 +106,8 @@ class AssignStudentModal extends Component {
     );
   }
 }
-
-AssignStudentModal = connect(
+  
+export default withTranslation('translations')(connect(
   (state) => ({
     assignDemoStudentRequest: selectAssignDemoStudentRequest(state)
   }),
@@ -115,6 +115,4 @@ AssignStudentModal = connect(
     assignDemoStudent: (form, params = {}) => { dispatch(assignDemoStudent(form, params)) },
     resetAssignDemoStudentRequest: () => { dispatch(resetAssignDemoStudentRequest()) },
   })
-)(AssignStudentModal);
-  
-export default withTranslation('translations')(AssignStudentModal);
+)(AssignStudentModal));

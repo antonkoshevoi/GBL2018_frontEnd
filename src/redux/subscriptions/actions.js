@@ -109,7 +109,7 @@ export function subscribeStudent(params = {}) {
   };
 }
 
-export function resetSubscribeStudentRequest(params = {}) {
+export function resetSubscribeStudentRequest() {
   return {
     type: RESET_SUBSCRIBE_STUDENT_REQUEST
   }
@@ -122,7 +122,7 @@ export function unSubscribeStudent(id, params = {}) {
   };
 }
 
-export function resetUnSubscribeStudentRequest(params = {}) {
+export function resetUnSubscribeStudentRequest() {
   return {
     type: RESET_UNSUBSCRIBE_STUDENT_REQUEST
   }

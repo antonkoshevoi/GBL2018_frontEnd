@@ -208,7 +208,7 @@ class AddParentModal extends Component {
     }
 }
 
-AddParentModal = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         sentStudentRequest: selectSentStudentRequest(state),
         createParentRequest: selectCreateRequest(state)
@@ -219,6 +219,4 @@ AddParentModal = connect(
         createParent: (params = {}) => { dispatch(create(params)) },
         resetCreateParentRequest: () => { dispatch(resetCreateRequest()) }
     })    
-)(AddParentModal);
-
-export default withTranslation('translations')(AddParentModal);
+)(AddParentModal));

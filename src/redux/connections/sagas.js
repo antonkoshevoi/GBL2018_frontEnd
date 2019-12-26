@@ -14,7 +14,7 @@ import { yieldErrorToasts, yieldSuccessToasts } from '../../helpers/utils';
 import i18n from '../../configs/i18n';
 import { restoreLogin } from '../auth/actions';
 
-function* onSuccess (action) {    
+function* onSuccess() {    
     yield put(restoreLogin());
 }
 

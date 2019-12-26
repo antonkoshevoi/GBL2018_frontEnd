@@ -35,7 +35,7 @@ class Details extends Component {
     }
   }
 
-  _getRecord(id, params) {
+  _getRecord(id) {
     this.props.getSingleRecord(id)
   }
 
@@ -119,7 +119,7 @@ class Details extends Component {
         
         images.unshift(<VideoFrame title='' src={record.get('videoLink')} />);
         previewImages.unshift('https://img.youtube.com/vi/' + videoId +'/1.jpg');
-    };
+    }
     
     return <div className="store-item-images">
       {previewImages.map((url, i) => {
@@ -226,7 +226,7 @@ class Details extends Component {
   }
 }
 
-Details = connect(
+export default withRouter(withTranslation("translations")(connect(
   (state) => ({
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
     addToCartRequest: selectAddToCartRequest(state),
@@ -247,8 +247,5 @@ Details = connect(
     },
     goTo: (url) => {dispatch(push(url))}
   })
-)(Details);
-
-
-export default withRouter(withTranslation("translations")(Details));
+)(Details)));
 

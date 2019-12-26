@@ -165,7 +165,7 @@ class BuildTemplate extends Component {
                                         options={{
                                             handle: "label"                
                                         }}
-                                        onChange={(order, sortable, evt) => {                    
+                                        onChange={(order) => {                    
                                             this.setState({questions: order });
                                         }}>
                                         {this._renderQuestions()}
@@ -197,7 +197,7 @@ class BuildTemplate extends Component {
     }
 }
 
-BuildTemplate = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         createRequest: selectCreateRequest(state)
     }),
@@ -208,6 +208,4 @@ BuildTemplate = connect(
         goTo: (url) => {dispatch(push(url))},
         reset: () => {dispatch(resetCreateRequest())}
     })
-)(BuildTemplate);
-
-export default withTranslation('translations')(BuildTemplate);
+)(BuildTemplate));

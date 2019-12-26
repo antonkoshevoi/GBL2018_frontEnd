@@ -27,10 +27,8 @@ class HasPermission extends Component {
 }
 
 
-HasPermission = connect(
+export default connect(
   (state) => ({
     userPermissions: selectUserPermissions(state),
   })
 )(HasPermission);
-
-export default HasPermission;

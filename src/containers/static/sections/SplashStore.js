@@ -27,18 +27,14 @@ class SplashStore extends PureComponent {
   }
 }
 
-SplashStore = connect(
+export default connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
-    records: selectRecords(state),
+    records: selectRecords(state)
   }),
   (dispatch) => ({
     getRecords: (params = {perPage: '50', filter: {category: 1}}) => {
       dispatch(getRecords(params))
     }
   })
-)(SplashStore);
-
-export default SplashStore
-
-
+)(SplashStore)

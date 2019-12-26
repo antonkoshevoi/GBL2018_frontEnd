@@ -55,7 +55,7 @@ class Checkout extends Component {
 
     this.setState(newState);
     newState.stepIndex = 1;    
-  };
+  }
   
   _setBilling(params = {}) {
     this.setState({
@@ -85,7 +85,7 @@ class Checkout extends Component {
             return;
         }
     });
-  };
+  }
   
   _makeCreditCardPayment(params = {}) {
     const { createCreditCardPayment } = this.props;
@@ -94,7 +94,7 @@ class Checkout extends Component {
     params.shippingAddress  = this.state.shippingAddress;    
       
     createCreditCardPayment(params);        
-  };
+  }
  
   _handleBack() {
     const {stepIndex, showCreditCard} = this.state;
@@ -109,7 +109,7 @@ class Checkout extends Component {
     return this.setState({
       stepIndex: stepIndex - 1
     });
-  };
+  }
 
   _handleGetShoppingCart(prevProps) {
     if (this.props.cartRecordsRequest.get('success') && !prevProps.cartRecordsRequest.get('success')) {      
@@ -176,8 +176,8 @@ class Checkout extends Component {
             <div className="row">
                 <div className="col-12 col-sm-6 col-md-7 col-xl-6 mx-auto order-1 order-sm-0">
                 {[
-                    <Shipping onDataSaved={(params) => this._setShipping(params)} data={this.state.shippingAddress} />,                    
-                    <div>
+                    <Shipping key="0" onDataSaved={(params) => this._setShipping(params)} data={this.state.shippingAddress} />,                    
+                    <div key="1">
                         {showCreditCard ? 
                             <CreditCard 
                                 onDataSaved={(params) => this._makeCreditCardPayment(params)} 
@@ -240,7 +240,7 @@ class Checkout extends Component {
   }
 }
 
-Checkout = connect(
+export default withRouter(withTranslation('translations')(connect(
   (state) => ({    
     cartRecordsRequest: selectGetCartRecordsRequest(state),
     addressesRequest: selectAddressesRequest(state),
@@ -257,6 +257,4 @@ Checkout = connect(
     resetCreditCardPayment:     () => dispatch(resetCreditCardPayment()),    
     goTo:                       (url) => {dispatch(push(url))}    
   })
-)(Checkout);
-
-export default withRouter(withTranslation('translations')(Checkout));
+)(Checkout)));

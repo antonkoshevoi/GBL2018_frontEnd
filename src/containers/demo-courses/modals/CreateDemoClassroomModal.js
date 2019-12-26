@@ -46,18 +46,18 @@ class CreateDemoClassroomModal extends Component {
     });
     this.props.resetCreateRequest();
     this.props.onClose();
-  };
+  }
 
   _onChange (classroom) {
     this.setState({ classroom });
-  };
+  }
 
   _onSubmit (e) {
     e.preventDefault();
     this.props.create(
       this.state.classroom
     );   
-  };
+  }
 
   _setCroppedImage(img) {
     this.setState(
@@ -129,14 +129,12 @@ class CreateDemoClassroomModal extends Component {
   }
 }
 
-CreateDemoClassroomModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     createRequest: selectCreateRequest(state),
   }),
   (dispatch) => ({
     create: (form, params = {}) => { dispatch(create(form, params)) },
-    resetCreateRequest: () => { dispatch(resetCreateRequest()) },
+    resetCreateRequest: () => { dispatch(resetCreateRequest()) }
   })
-)(CreateDemoClassroomModal);
-
-export default withTranslation('translations')(CreateDemoClassroomModal);
+)(CreateDemoClassroomModal));

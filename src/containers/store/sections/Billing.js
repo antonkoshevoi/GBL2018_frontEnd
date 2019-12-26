@@ -139,19 +139,17 @@ class Billing extends Component {
                     </Button>
                 </div>
             </div>;
-        };
+        }
         
         return this._renderAddressForm();
     }
 }
 
-Billing = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         validateAddressRequest: selectValidateAddressRequest(state)        
     }),
     (dispatch) => ({
         validateAddress: (data) => dispatch(validateAddress(data))        
     }),
-)(Billing);
-
-export default withTranslation('translations')(Billing);
+)(Billing));

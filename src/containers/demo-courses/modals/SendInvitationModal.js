@@ -46,14 +46,14 @@ class SendInvitationModal extends Component {
 
   _onChange (invitation) {
     this.setState({ invitation });
-  };
+  }
 
   _onSubmit (e) {
     e.preventDefault();
     this.props.create(
       this.state.invitation
     );
-  };
+  }
 
   _close () {
     this.setState({
@@ -107,7 +107,7 @@ class SendInvitationModal extends Component {
   }
 }
 
-SendInvitationModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     createRequest: selectCreateRequest(state),
   }),
@@ -115,6 +115,4 @@ SendInvitationModal = connect(
     create: (form, params = {}) => { dispatch(create(form, params)) },
     resetCreateRequest: () => { dispatch(resetCreateRequest()) },
   })
-)(SendInvitationModal);
-
-export default withTranslation('translations')(SendInvitationModal);
+)(SendInvitationModal));

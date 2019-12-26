@@ -188,13 +188,11 @@ class Invoice extends Component {
   }
 }
 
-Invoice = connect(
+export default withRouter(withTranslation('translations')(connect(
   (state) => ({
     invoiceRequest: invoiceRequest(state)
   }),
   (dispatch) => ({
     getInvoice: (id, hash) => dispatch(getInvoice(id, hash))
   })
-)(Invoice);
-
-export default withRouter(withTranslation('translations')(Invoice));
+)(Invoice)));

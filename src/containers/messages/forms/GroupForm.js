@@ -258,7 +258,7 @@ class GroupForm extends Component {
     }
 }
 
-GroupForm = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         homeroomsRequest: selectGetSchoolHomeroomsRequest(state),
         classroomsRequest: selectGetSchoolClassroomsRequest(state),
@@ -275,6 +275,4 @@ GroupForm = connect(
         getStudents: (params = {}) => { dispatch(getSchoolStudents(params)) },
         getAdmins: (params = {}) => { dispatch(getSchoolAdmins(params)) }
     })
-)(GroupForm);
-
-export default withTranslation('translations')(GroupForm);
+)(GroupForm));

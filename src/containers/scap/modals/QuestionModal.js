@@ -20,7 +20,7 @@ class QuestionModal extends Component {
         question: '',
         error: ''
     };
-  };  
+  }  
 
   _close () {     
     this.setState({         
@@ -28,7 +28,7 @@ class QuestionModal extends Component {
         error: ''      
     });
     this.props.onClose();     
-  };
+  }
 
   _handleQuestionChange (event) {  
       const { value } = event.target;
@@ -40,7 +40,7 @@ class QuestionModal extends Component {
       this.setState({ 
           question: value
       });
-  };
+  }
 
   _onSubmit (e) {  
     const { t } = this.props;
@@ -60,7 +60,7 @@ class QuestionModal extends Component {
     this.setState({ 
         question: ''
     });    
-  };
+  }
 
   render() {
     const { isOpen, t } = this.props;

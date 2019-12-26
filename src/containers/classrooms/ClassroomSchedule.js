@@ -205,7 +205,7 @@ class ClassroomSchedule extends Component {
     }    
 }
 
-ClassroomSchedule = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         getScheduleRequest: selectGetScheduleRequest(state),
         updateScheduleRequest: selectUpdateScheduleRequest(state)
@@ -218,6 +218,4 @@ ClassroomSchedule = connect(
             dispatch(updateSchedule(id, params))
         }
     })
-)(ClassroomSchedule);
-
-export default withTranslation('translations')(ClassroomSchedule);
+)(ClassroomSchedule));

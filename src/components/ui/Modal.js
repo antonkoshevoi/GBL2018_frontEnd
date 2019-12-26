@@ -55,7 +55,7 @@ Modal.defaultProps = {
   maxWidth:'md'
 };
 
-Modal = withStyles({
+export default withStyles({
   paper: {    
     maxHeight: '90vh'
   },
@@ -68,5 +68,3 @@ Modal = withStyles({
     minWidth: '40%'
   }
 })(Modal);
-
-export default Modal;

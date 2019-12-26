@@ -89,7 +89,7 @@ class Store extends Component {
   }
 }
 
-Store = connect(
+export default withRouter(withTranslation("translations")(connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     records: selectRecords(state),
@@ -99,6 +99,4 @@ Store = connect(
       dispatch(getRecords(params))
     }
   })
-)(Store);
-
-export default withRouter(withTranslation("translations")(Store));
+)(Store)));

@@ -106,7 +106,7 @@ class CreateAccount extends Component {
                                     <Avatar src={data.get('avatarSmall')} /> 
                                     <div className="ml-3">
                                         <h5 className="card-title">{data.get('fromUser')}</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted"><DateTime time={data.get('sentAt')} /></h6>
+                                        <h6 className="card-subtitle mb-2 text-muted"><DateTime time={data.get('sentAt')} /></h6>
                                     </div>                                    
                                 </div> 
                                 <div className="m-separator my-2"></div>
@@ -209,7 +209,7 @@ class CreateAccount extends Component {
     }
 }
 
-CreateAccount = connect(
+export default withTranslation('translations')(withRouter(connect(
     (state) => ({
         acceptRequest: selectChangeStatusRequest(state),
         getRecordRequest: selectGetRecordRequest(state),
@@ -222,6 +222,4 @@ CreateAccount = connect(
         resetAcceptRequest: () => {dispatch(resetChangeStatusRequest())},
         appLoad: () => { dispatch(load()) }
     })
-)(CreateAccount);
-
-export default withTranslation('translations')(withRouter(CreateAccount));   
+)(CreateAccount)));   

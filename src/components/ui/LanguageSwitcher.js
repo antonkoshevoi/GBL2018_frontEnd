@@ -24,7 +24,7 @@ class LanguageSwitcher extends Component {
     componentDidMount() {
         const currentLanguage = localStorage.getItem('language');        
         if (currentLanguage) {
-            this._switchLanguage(currentLanguage)
+            this._switchLanguage(currentLanguage);
         }
     }
     
@@ -37,11 +37,11 @@ class LanguageSwitcher extends Component {
         return null;
     }
     
-    _openLanguageMenu = event => {
+    _openLanguageMenu = (event) => {
         this.setState({ anchorEl: event.currentTarget });
     };
 
-    _closeLanguageMenu = event => {        
+    _closeLanguageMenu = () => {        
         this.setState({ anchorEl: null });
     };
 

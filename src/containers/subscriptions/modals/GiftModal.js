@@ -28,7 +28,7 @@ class GiftModal extends Component {
     this.state = {
         form: { userId: '' }
     };
-  };
+  }
   
   componentDidUpdate(prevProps) {
     const success = this.props.giftRequest.get('success');    
@@ -37,7 +37,7 @@ class GiftModal extends Component {
       this._close();     
       this.props.onSuccess();
     }
-  };
+  }
 
   _close () {     
     this.setState({
@@ -45,11 +45,11 @@ class GiftModal extends Component {
     });
     this.props.onClose();
     this.props.resetGiftRequest();        
-  };
+  }
 
   _onChange (form) {  
       this.setState({ form });
-  };
+  }
 
   _handleSubmit() {            
     const {giftSubscription, t} = this.props;
@@ -66,7 +66,7 @@ class GiftModal extends Component {
         ...form, 
         productId: this.props.subscription.id
     });    
-  };
+  }
 
   render() {
     const { isOpen, giftRequest, subscription, t } = this.props;
@@ -130,8 +130,8 @@ class GiftModal extends Component {
     );
   }
 }
-
-GiftModal = connect(
+ 
+export default withTranslation('translations')(connect(
   (state) => ({
     giftRequest: selectSubscriptionRequest(state)
   }),
@@ -139,6 +139,4 @@ GiftModal = connect(
     giftSubscription: (form) => { dispatch(giftSubscription(form)) },
     resetGiftRequest: () => { dispatch(resetGiftSubscriptionRequest()) }
   })
-)(GiftModal);
-  
-export default withTranslation('translations')(GiftModal);
+)(GiftModal));

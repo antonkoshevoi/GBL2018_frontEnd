@@ -154,7 +154,7 @@ class StudentParents extends Component {
     }
 }
 
-StudentParents = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         getRecordsRequest: selectGetRecordsRequest(state),
         studentStatusRequest: selectStudentStatusRequest(state)
@@ -164,6 +164,4 @@ StudentParents = connect(
         deleteStudentRequest: (id) => { dispatch(deleteStudentRequest(id)) },
         resetStudentRequest: () => { dispatch(resetStudentRequest()) }
     })
-)(StudentParents);
-
-export default withTranslation('translations')(StudentParents);
+)(StudentParents));

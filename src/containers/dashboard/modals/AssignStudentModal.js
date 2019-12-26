@@ -28,7 +28,7 @@ class AssignStudentModal extends Component {
             studentId: null,
             students: []
         };
-    };
+    }
 
   
     componentDidUpdate(prevProps) {    
@@ -44,13 +44,13 @@ class AssignStudentModal extends Component {
                 owner: true
             }});
         }    
-    };
+    }
   
     _close () {     
         this.setState({studentId: null});  
         this.props.onClose();
         this.props.resetAssignCourseCreditRequest();
-    };
+    }
 
     _handleSubmit (e) {            
         e.preventDefault();
@@ -61,7 +61,7 @@ class AssignStudentModal extends Component {
             creditId: unassignedItem.id,
             studentId: this.state.studentId
         });    
-    };
+    }
 
     _renderStudents() {
       const students = this.props.students.toJS();
@@ -161,8 +161,8 @@ class AssignStudentModal extends Component {
         );
     }
 }
-    
-AssignStudentModal = connect(
+  
+export default withTranslation('translations')(connect(
     (state) => ({
         students: selectRecords(state),
         getStudentsRequest: selectGetRecordsRequest(state),
@@ -173,6 +173,4 @@ AssignStudentModal = connect(
         assignCourseCredit: (form, params = {}) => { dispatch(assignCourseCredit(form, params)) },
         resetAssignCourseCreditRequest: () => { dispatch(resetAssignCourseCreditRequest()) }
     })
-)(AssignStudentModal);
-  
-export default withTranslation('translations')(AssignStudentModal);
+)(AssignStudentModal));

@@ -29,7 +29,7 @@ class RestoreLogin extends Component {
 
   _handleUsernameChange = (event) => { this.setState({username: event.target.value}); };
   _handlePasswordChange = (event) => { this.setState({password: event.target.value}); };
-  _handleRememberChange = (event) => { this.setState({remember: !this.state.remember}); };
+  _handleRememberChange = () => { this.setState({remember: !this.state.remember}); };
 
   _login() {
     const { setRedirectUrl, login, auth } = this.props;
@@ -121,9 +121,7 @@ class RestoreLogin extends Component {
   }
 }
 
-RestoreLogin.propTypes = {};
-
-RestoreLogin = connect(
+export default withRouter(withTranslation('translations')(connect(
   state => ({
     loginRequest: selectLoginRequest(state),
     auth: state.auth
@@ -132,6 +130,4 @@ RestoreLogin = connect(
     login: (username, password, remember) => { dispatch(login(username, password, remember)); },
     setRedirectUrl: (uri) => { dispatch(setRedirectUrl(uri)); },
   })
-)(RestoreLogin);
-
-export default withRouter(withTranslation('translations')(RestoreLogin));
+)(RestoreLogin)));

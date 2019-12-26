@@ -23,7 +23,7 @@ class StudentsModal extends Component {
         this.state = {
             subscriptionId: props.subscriptionId
         };        
-    }; 
+    } 
     
     componentDidUpdate (prevProps) {
         const { getStudentsRecords, resetUnSubscribeStudentRequest } = this.props;
@@ -43,11 +43,11 @@ class StudentsModal extends Component {
 
     _close () {
         this.props.onClose();    
-    };
+    }
     
     _unsubscribeStudent (id) {        
         this.props.unSubscribeStudent(id);
-    };
+    }
     
     _renderStudents () {
         const { studentsRecordsRequest, t} = this.props;
@@ -110,7 +110,7 @@ class StudentsModal extends Component {
   }
 }
 
-StudentsModal = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         studentsRecordsRequest: selectGetStudentsRecordsRequest(state),
         unSubscribeStudentRequest: selectUnSubscribeStudentRequest(state)
@@ -120,6 +120,4 @@ StudentsModal = connect(
         unSubscribeStudent: (id, params = {}) => { dispatch(unSubscribeStudent(id, params)) },
         resetUnSubscribeStudentRequest: () => { dispatch(resetUnSubscribeStudentRequest()) }
     })
-)(StudentsModal);
-  
-export default withTranslation('translations')(StudentsModal);
+)(StudentsModal));

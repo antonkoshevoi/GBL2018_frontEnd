@@ -225,7 +225,7 @@ class Subscriptions extends Component {
     }
 }
 
-Subscriptions = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     subscriptionsRequest: selectGetUserRecordsRequest(state),
     unSubscribeRequest: selectUnSubscribeRequest(state),
@@ -237,6 +237,4 @@ Subscriptions = connect(
     resetUserRecordsRequest: (params = {}) => { dispatch(resetGetUserRecordsRequest(params)) },
     resetUnSubscribeRequest: (params = {}) => { dispatch(resetUnSubscribeRequest(params)) }    
   })
-)(Subscriptions);
-
-export default withTranslation('translations')(Subscriptions);
+)(Subscriptions));

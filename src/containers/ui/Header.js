@@ -105,7 +105,7 @@ class Header extends Component {
   }
 }
 
-Header = connect(
+export default withTranslation("translation")(connect(
   (state) => ({
     auth: state.auth,          
     user: selectUserData(state),
@@ -114,6 +114,4 @@ Header = connect(
   (dispatch) => ({
     logout: () => { dispatch(logout()) }
   })
-)(Header);
-
-export default withTranslation("translation")(Header);
+)(Header));

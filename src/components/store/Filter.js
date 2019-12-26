@@ -227,9 +227,9 @@ class Filter extends Component {
                     open={Boolean(sortMenu)}
                     onClose={(e) => { this.handleMenuClose(e, 'sortMenu') }}
                   >
-                    <MenuItem onClick={(e) => { this._selectSorter('price') }}>{t('price')}</MenuItem>
-                    <MenuItem onClick={(e) => { this._selectSorter('created') }}>{t('date')}</MenuItem>
-                    <MenuItem onClick={(e) => { this._selectSorter('title') }}>{t('title')}</MenuItem>
+                    <MenuItem onClick={() => { this._selectSorter('price') }}>{t('price')}</MenuItem>
+                    <MenuItem onClick={() => { this._selectSorter('created') }}>{t('date')}</MenuItem>
+                    <MenuItem onClick={() => { this._selectSorter('title') }}>{t('title')}</MenuItem>
                   </Menu>
                 </div>              
                 }

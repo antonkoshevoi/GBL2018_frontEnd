@@ -190,7 +190,7 @@ class Gifts extends Component {
     }
 }
 
-Gifts = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         getRecordsRequest: selectGetRecordsRequest(state),
         deleteRequest: selectDeleteRequest(state),
@@ -204,6 +204,4 @@ Gifts = connect(
         resetDeleteRequest: () => { dispatch(resetDeleteRequest()) },
         resetChangeStatusRequest: () => { dispatch(resetChangeStatusRequest()) }
     })
-)(Gifts);
-
-export default withTranslation('translations')(Gifts);
+)(Gifts));

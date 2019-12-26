@@ -68,7 +68,7 @@ class Shipping extends Component {
     }
 }
 
-Shipping = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         validateAddressRequest: selectValidateAddressRequest(state)        
     }),
@@ -76,6 +76,4 @@ Shipping = connect(
         validateAddress: (data) => dispatch(validateAddress(data)),
         resetValidateAddressRequest: () => dispatch(resetValidateAddressRequest())        
     }),
-)(Shipping);
-
-export default withTranslation('translations')(Shipping);
+)(Shipping));

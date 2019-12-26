@@ -85,11 +85,11 @@ class ParentDashboard extends Component {
 
     _acceptRequest(id) {        
         this.props.acceptStudentRequest(id);
-    };
+    }
   
     _declineRequest(id) {            
         this.props.declineStudentRequest(id);
-    };
+    }
     
     _deleteStudent(id) {
         this.props.deleteStudent(id);
@@ -226,7 +226,7 @@ class ParentDashboard extends Component {
     }
 }
 
-ParentDashboard = connect(
+export default withStyles(styles)(withTranslation('translations')(connect(
     (state) => ({                
         studentsRequest: selectStudentsRequest(state),
         studentStatusRequest: selectStudentStatusRequest(state),
@@ -242,6 +242,4 @@ ParentDashboard = connect(
         deleteStudent: (id) => {dispatch(deleteRecord(id))},
         resetDeleteStudentRequest: () => {dispatch(resetDeleteRecordRequest())},
     })
-)(ParentDashboard);
-
-export default withStyles(styles)(withTranslation('translations')(ParentDashboard));   
+)(ParentDashboard)));   

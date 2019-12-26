@@ -46,18 +46,18 @@ class CreateHomeroomModal extends Component {
     });
     this.props.resetCreateRequest();
     this.props.onClose();
-  };
+  }
 
   _onChange (homeroom) {
     this.setState({ homeroom });
-  };
+  }
 
   _onSubmit (e) {
     e.preventDefault();
     this.props.create(
       this.state.homeroom
     );   
-  };
+  }
 
   render() {
     const { isOpen, createRequest, t } = this.props;
@@ -103,7 +103,7 @@ class CreateHomeroomModal extends Component {
   }
 }
 
-CreateHomeroomModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     createRequest: selectCreateRequest(state),
   }),
@@ -111,6 +111,4 @@ CreateHomeroomModal = connect(
     create: (form, params = {}) => { dispatch(create(form, params)) },
     resetCreateRequest: () => { dispatch(resetCreateRequest()) },
   })
-)(CreateHomeroomModal);
-
-export default withTranslation('translations')(CreateHomeroomModal);
+)(CreateHomeroomModal));

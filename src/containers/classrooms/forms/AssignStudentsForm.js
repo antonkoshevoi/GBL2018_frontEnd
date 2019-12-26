@@ -99,7 +99,7 @@ class AssignStudentsForm extends Component {
   }
 }
 
-AssignStudentsForm = connect(
+export default connect(
   (state) => ({
     getSchoolStudentsRequest: selectGetSchoolStudentsRequest(state)
   }),
@@ -107,5 +107,3 @@ AssignStudentsForm = connect(
     getSchoolStudents: (params = {}) => { dispatch(getSchoolStudents(params)) }
   })
 )(AssignStudentsForm);
-
-export default AssignStudentsForm;

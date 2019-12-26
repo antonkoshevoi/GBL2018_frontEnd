@@ -60,7 +60,7 @@ class Alerts extends Component {
     }
 }
 
-Alerts = connect(
+export default withTranslation('translations')(connect(
   (state) => ({    
     userData: selectUserData(state),
     userRequest: selectGetUserRequest(state)
@@ -68,6 +68,4 @@ Alerts = connect(
   (dispatch) => ({
         viewMessage: (id) => { dispatch(viewMessage(id)) }      
   })
-)(Alerts);
-
-export default withTranslation('translations')(Alerts);
+)(Alerts));

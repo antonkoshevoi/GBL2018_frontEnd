@@ -38,10 +38,8 @@ class HasRole extends Component {
   }
 }
 
-HasRole = connect(
+export default  connect(
   (state) => ({
     userRoles: selectUserRoles(state),
   })
 )(HasRole);
-
-export default HasRole;

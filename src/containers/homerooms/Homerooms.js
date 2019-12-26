@@ -274,7 +274,7 @@ class Homerooms extends Component {
   }
 }
 
-Homerooms = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
@@ -287,7 +287,4 @@ Homerooms = connect(
     getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
     deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) }
   })
-)(Homerooms);
-
-
-export default withTranslation('translations')(Homerooms);
+)(Homerooms));

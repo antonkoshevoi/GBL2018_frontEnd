@@ -2,9 +2,9 @@ import Cookies from 'universal-cookie';
 
 export default class SessionStorage {
 
-  cookies;
+  cookies
 
-  constructor () {
+  constructor() {
     this.cookies = new Cookies();
   }
 

@@ -66,7 +66,7 @@ class Download extends Component {
         } else {
             this.setState(newState);        
         }
-    };
+    }
 
     _setBilling(params = {}) {
         this.setState({
@@ -94,7 +94,7 @@ class Download extends Component {
                     return;
             }
         });
-    };
+    }
 
     _makeCreditCardPayment(params = {}) {
         const { createCreditCardPayment } = this.props;
@@ -103,7 +103,7 @@ class Download extends Component {
         params.billingAddress   = this.state.billingAddress;
 
         createCreditCardPayment(params);        
-    };
+    }
 
     _handleBack() {
         const {showCreditCard, showBilling} = this.state;
@@ -122,7 +122,7 @@ class Download extends Component {
                 showBilling: false
             });                   
         }
-    };
+    }
 
     _handleGetShoppingCart(prevProps) {
         if (this.props.cartRecordsRequest.get('success') && !prevProps.cartRecordsRequest.get('success')) {      
@@ -253,7 +253,7 @@ class Download extends Component {
     }
 }
 
-Download = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
           auth: state.auth,    
           cartRecordsRequest: selectGetCartRecordsRequest(state),
@@ -273,6 +273,4 @@ Download = connect(
           resetCreditCardPayment:     () => dispatch(resetCreditCardPayment()),
           goTo:                       (url) => {dispatch(push(url))}    
     })
-)(Download);
-
-export default withTranslation('translations')(Download);
+)(Download));

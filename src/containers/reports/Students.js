@@ -192,8 +192,8 @@ class Students extends Component {
     }
 }
 
-Students = connect(
-        (state) => ({
+export default withRouter(withTranslation('translations')(connect(
+    (state) => ({
         userData: selectUserData(state),
         studentRequest: selectGetSingleRecordRequest(state),
         getReportRequest: selectStudentReportRequest(state)
@@ -206,6 +206,4 @@ Students = connect(
             dispatch(getReport(id, params))
         }
     })
-)(Students);
-
-export default withRouter(withTranslation('translations')(Students));
+)(Students)));

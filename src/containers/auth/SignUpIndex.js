@@ -42,6 +42,4 @@ class SignUpIndex extends Component {
   }
 }
 
-SignUpIndex.propTypes = {};
-
 export default withTranslation("translations")(SignUpIndex);

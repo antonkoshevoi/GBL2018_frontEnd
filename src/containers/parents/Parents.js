@@ -287,7 +287,7 @@ class Parents extends Component {
   }
 }
 
-Parents = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
@@ -302,6 +302,4 @@ Parents = connect(
     getStudents: (id, params = {}) => { dispatch(getStudents(id, params)) },
     deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) }
   })
-)(Parents);
-
-export default withTranslation('translations')(Parents);
+)(Parents));

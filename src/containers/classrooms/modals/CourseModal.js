@@ -68,14 +68,14 @@ class CourseModal extends Component {
       courseId: this.props.courseId      
     });
     this.props.onClose();
-  };
+  }
 
   _onChange(course) {
     this.setState({course})
     const courseId = course.get('courseId');
     this.setState({courseId: courseId})
 
-  };
+  }
 
   _onSubmit() {
     const {course,courseId} = this.state;
@@ -86,7 +86,7 @@ class CourseModal extends Component {
       this.props.onSuccess(course);
       this._close();
     }
-  };
+  }
 
   _renderStoreItems() {
     const {courseId, course} = this.state;
@@ -194,7 +194,7 @@ class CourseModal extends Component {
   }
 }
 
-CourseModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     storeRecordsRequest: selectGetStoreRecordsRequest(state)    
   }),
@@ -203,6 +203,4 @@ CourseModal = connect(
       dispatch(getStoreRecords(params))
     }
   })
-)(CourseModal);
-
-export default withTranslation('translations')(CourseModal);
+)(CourseModal));

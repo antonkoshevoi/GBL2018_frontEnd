@@ -32,7 +32,7 @@ class AssignStudentModal extends Component {
         courseId: '',
         studentId: ''      
     };
-  };
+  }
   
   componentDidUpdate(prevProps) {
     const success = this.props.subscribeRequest.get('success');    
@@ -55,7 +55,7 @@ class AssignStudentModal extends Component {
     });
     this.props.onClose();
     this.props.resetSubscribeRequest();        
-  };
+  }
 
   _handleInputChange(event) {
     const { name, value } = event.target;
@@ -73,7 +73,7 @@ class AssignStudentModal extends Component {
         studentId: this.state.studentId, 
         subscriptionId: this.props.subscriptionId
     });    
-  };
+  }
   
   _renderStudents() {
     const { parentStudents } = this.props;    
@@ -186,8 +186,8 @@ class AssignStudentModal extends Component {
     );
   }
 }
-
-AssignStudentModal = connect(
+ 
+export default withTranslation('translations')(connect(
   (state) => ({
     parentStudents: selectStudents(state),
     storeItems: selectStoreItems(state),    
@@ -201,6 +201,4 @@ AssignStudentModal = connect(
     subscribeStudent: (form, params = {}) => { dispatch(subscribeStudent(form, params)) },
     resetSubscribeRequest: () => { dispatch(resetSubscribeStudentRequest()) }
   })
-)(AssignStudentModal);
-  
-export default withTranslation('translations')(AssignStudentModal);
+)(AssignStudentModal));

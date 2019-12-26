@@ -71,7 +71,7 @@ class Products extends Component {
   }
 }
 
-Products = connect(
+export default withRouter(withTranslation("translations")(connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     records: selectRecords(state),
@@ -79,11 +79,8 @@ Products = connect(
   (dispatch) => ({
     getRecords: (params = {type: 'recent'}) => {
       dispatch(getRecords(params))
-    },
+    }
   })
-)(Products);
-
-
-export default withRouter(withTranslation("translations")(Products));
+)(Products)));
 
 

@@ -234,17 +234,11 @@ class StoreItems extends Component {
     }    
 }
 
-
-StoreItems = connect(
+export default withTranslation("translations")(connect(
     (state) => ({
         recordsRequest: selectGetRecordsRequest(state)
     }),
     (dispatch) => ({
         getRecords: (params = {}) => { dispatch(getRecords(params)) }
     })
-)(StoreItems);
-
-export default withTranslation("translations")(StoreItems);
-
-
-
+)(StoreItems));

@@ -20,11 +20,11 @@ class UserMenu extends Component {
     };
   }
 
-  _openMenu = event => {
+  _openMenu = () => {
     this.setState({ menuOpened: !this.state.menuOpened });
   };
 
-  _closeMenu = event => {
+  _closeMenu = () => {
     this.setState({ menuOpened: false });
   };
 
@@ -106,11 +106,8 @@ class UserMenu extends Component {
   }
 }
 
-UserMenu = connect(
+export default withTranslation("translations")(connect(
   (state) => ({
     userData: selectUserData(state)    
-  }),
-  (dispatch) => ({})
-)(UserMenu);
-
-export default withTranslation("translations")(UserMenu);
+  })
+)(UserMenu));

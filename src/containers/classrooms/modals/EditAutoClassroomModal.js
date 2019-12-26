@@ -93,11 +93,11 @@ class EditAutoClassroomModal extends Component {
     this.props.resetUpdateRequest();
     this.props.resetGetSingleRecordRequest();
     this.props.onClose();
-  };
+  }
 
   _onChange(taskConfig) {
     this.setState({taskConfig});
-  };
+  }
 
   _handleInputChange = (e) => {
     const {name, value} = e.target;
@@ -129,7 +129,7 @@ class EditAutoClassroomModal extends Component {
     const {taskConfig} = this.state;
     
     this.props.update(taskConfig.crsId, taskConfig);    
-  };
+  }
 
   _renderTeachers() {
     const {schoolTeachers} = this.state;
@@ -176,7 +176,7 @@ class EditAutoClassroomModal extends Component {
                 value={+taskConfig.autoCreateTask.rollOver || ''}
                 onChange={this._handleInputChange}
               >
-                { days.map( (index,value) => (<MenuItem key={index+1} value={index+1}>{index+1}</MenuItem>)) }
+                { days.map( (index) => (<MenuItem key={index+1} value={index+1}>{index+1}</MenuItem>)) }
               </Select>
           </FormControl>
           }
@@ -297,7 +297,7 @@ class EditAutoClassroomModal extends Component {
   }
 }
 
-EditAutoClassroomModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
     updateRequest: selectUpdateRequest(state),
@@ -312,8 +312,6 @@ EditAutoClassroomModal = connect(
     },
     resetGetSingleRecordRequest: () => {
       dispatch(resetGetSingleRecordRequest())
-    },
+    }
   })
-)(EditAutoClassroomModal);
-
-export default withTranslation('translations')(EditAutoClassroomModal);
+)(EditAutoClassroomModal));

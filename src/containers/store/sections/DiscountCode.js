@@ -125,7 +125,7 @@ class DiscountCode extends Component {
     }
 }
 
-DiscountCode = connect(
+export default withTranslation('translations')(connect(
     (state) => ({        
         discountCodeRequest:  selectDiscountCodeRequest(state)
     }),
@@ -133,7 +133,5 @@ DiscountCode = connect(
         setDiscountCode: (params) => dispatch(setDiscountCode(params)),
         resetDiscountCodeRequest: () => dispatch(resetDiscountCodeRequest()),
     }),
-)(DiscountCode);
-
-export default withTranslation('translations')(DiscountCode);
+)(DiscountCode));
 

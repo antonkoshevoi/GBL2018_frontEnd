@@ -48,7 +48,7 @@ class PayPalReturnContainer extends Component {
   }
 }
 
-PayPalReturnContainer = connect(
+export default withRouter(withTranslation('PayPalReturnContainer')(connect(
   (state) => ({
     executePayPalPaymentRequest: selectExecutePayPalPaymentRequest(state)
   }),
@@ -56,6 +56,4 @@ PayPalReturnContainer = connect(
     executePayPalPayment: (data) => { dispatch(executePayPalPayment(data)) },
     goTo: (url) => { dispatch(push(url)) }  
   })
-)(PayPalReturnContainer);
-
-export default withRouter(withTranslation('PayPalReturnContainer')(PayPalReturnContainer));
+)(PayPalReturnContainer)));

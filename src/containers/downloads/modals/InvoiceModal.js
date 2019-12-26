@@ -16,11 +16,11 @@ class InvoiceModal extends Component {
             isOpen: this.props.isOpen,
             data: this.props.data
         };
-    };  
+    }  
   
     _close () {
         this.setState({isOpen: false});
-    };
+    }
   
     render() {
         const { t } = this.props;
@@ -45,5 +45,4 @@ class InvoiceModal extends Component {
     }
 }
    
-
 export default withTranslation('translations')(InvoiceModal);

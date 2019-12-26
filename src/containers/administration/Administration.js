@@ -250,7 +250,7 @@ class Administration extends Component {
   }
 }
 
-Administration = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
@@ -263,6 +263,4 @@ Administration = connect(
     getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
     deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) }
   })
-)(Administration);
-
-export default withTranslation('translations')(Administration);
+)(Administration));

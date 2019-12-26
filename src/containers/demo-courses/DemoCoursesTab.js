@@ -267,7 +267,7 @@ class DemoCoursesTab extends Component {
   }
 }
 
-DemoCoursesTab = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
@@ -280,6 +280,4 @@ DemoCoursesTab = connect(
     getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
     deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) },
   })
-)(DemoCoursesTab);
-
-export default withTranslation('translations')(DemoCoursesTab);
+)(DemoCoursesTab));

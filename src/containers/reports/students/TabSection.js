@@ -17,7 +17,7 @@ class TabSection extends Component {
       const { value } = event.target;
   
       this.setState({classroom: value});
-  };
+  }
 
   _renderClassRooms(courses) {
         const {t} = this.props;

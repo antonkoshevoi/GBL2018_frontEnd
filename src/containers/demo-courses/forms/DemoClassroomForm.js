@@ -199,7 +199,7 @@ class DemoClassroomForm extends Component {
   }
 }
 
-DemoClassroomForm = connect(
+export default withTranslation('translations')(connect(
   (state) => ({    
     getCoursesRequest: selectCoursesRequest(state),
     getSchoolTeacherRequest: selectGetSchoolTeachersRequest(state),
@@ -208,6 +208,4 @@ DemoClassroomForm = connect(
     getCourses: () => { dispatch(getDemoCourses()) },
     getSchoolTeachers: (params = {}) => { dispatch(getSchoolTeachers(params)) },
   })
-)(DemoClassroomForm);
-
-export default withTranslation('translations')(DemoClassroomForm);
+)(DemoClassroomForm));

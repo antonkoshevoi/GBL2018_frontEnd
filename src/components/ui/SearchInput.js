@@ -22,18 +22,14 @@ class SearchInput extends Component {
   }
 
   render() {
-    const { onChange, ...rest } = this.props;
-
     return (
       <Input
-        {...rest}
+        {...this.props}
         value={this.state.value}
         onChange={(e) => { this._onChange(e.target.value) }}
         endAdornment={
         <InputAdornment position="end">
-            <Icon className="material-icons">
-              search_icon
-            </Icon>
+            <Icon className="material-icons">search_icon</Icon>
         </InputAdornment>
       }/>
     );

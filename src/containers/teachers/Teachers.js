@@ -269,7 +269,7 @@ class Teachers extends Component {
   }
 }
 
-Teachers = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
@@ -285,6 +285,4 @@ Teachers = connect(
     deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) }
 
   })
-)(Teachers);
-
-export default withTranslation('translations')(Teachers);
+)(Teachers));

@@ -83,8 +83,8 @@ class Dashboard extends Component {
     );
   }
 }
-    
-Dashboard = connect(
+
+export default withTranslation('translations')(connect(
   (state) => ({
     dataRequest: selectChartDatatRequest(state)
   }),
@@ -93,6 +93,4 @@ Dashboard = connect(
       dispatch(getCharts(params))
     }
   })
-)(Dashboard);
-
-export default withTranslation('translations')(Dashboard);
+)(Dashboard));

@@ -46,18 +46,18 @@ class CreateClassroomModal extends Component {
     });
     this.props.resetCreateRequest();
     this.props.onClose();
-  };
+  }
 
   _onChange (classroom) {
     this.setState({ classroom });
-  };
+  }
 
   _onSubmit (e) {
     e.preventDefault();
     this.props.create(
       this.state.classroom
     );
-  };
+  }
 
   _setCroppedImage(img) {
     this.setState(
@@ -129,7 +129,7 @@ class CreateClassroomModal extends Component {
   }
 }
 
-CreateClassroomModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     createRequest: selectCreateRequest(state),
   }),
@@ -137,6 +137,4 @@ CreateClassroomModal = connect(
     create: (form, params = {}) => { dispatch(create(form, params)) },
     resetCreateRequest: () => { dispatch(resetCreateRequest()) },
   })
-)(CreateClassroomModal);
-
-export default withTranslation('translations')(CreateClassroomModal);
+)(CreateClassroomModal));

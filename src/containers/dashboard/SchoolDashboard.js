@@ -16,7 +16,7 @@ import ShoppingCart from "./sections/ShoppingCart";
 class SchoolDashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
   componentDidMount() {
@@ -64,7 +64,7 @@ class SchoolDashboard extends Component {
   }
 }
 
-SchoolDashboard = connect(
+export default withTranslation("translations")(connect(
   (state) => ({    
     records: selectRecords(state),
     dataRequest: selectChartDatatRequest(state)
@@ -77,6 +77,4 @@ SchoolDashboard = connect(
       dispatch(getCharts(params))
     }    
   })
-)(SchoolDashboard);
-
-export default withTranslation("translations")(SchoolDashboard);
+)(SchoolDashboard));

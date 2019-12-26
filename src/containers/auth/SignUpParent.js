@@ -78,7 +78,7 @@ class SignUpParent extends Component {
             firstName:      this.state.form.step1.firstName,
             lastName:       this.state.form.step1.lastName
         });
-    };
+    }
 
     _submitStep2(skipStudent = false) {
         this.props.signUp({
@@ -99,7 +99,7 @@ class SignUpParent extends Component {
                 lastName:       this.state.form.step2.lastName
             }
         });
-    };
+    }
   
     _skip() {
         this.setState({
@@ -116,7 +116,7 @@ class SignUpParent extends Component {
         this.props.resetSignUpRequest();
         this.props.resetValidateRequest();
         this.props.goToDashboard();
-    };
+    }
 
     _next() {
         const { activeStep } = this.state;
@@ -130,14 +130,14 @@ class SignUpParent extends Component {
         if (activeStep === 2) {
             this._goToDashboard();
         }    
-    };
+    }
 
     _back() {
         const { activeStep } = this.state;    
         this.setState({
           activeStep: (activeStep - 1)
         });
-    }; 
+    } 
 
     render() {
         const { activeStep, form } = this.state;
@@ -170,17 +170,17 @@ class SignUpParent extends Component {
                         </Stepper>
                         <div className="mt-2 mt-md-5 mx-2">
                           {[
-                            <FirstStepForm form={form.step1} errors={step1Errors} onChange={(form) => { this._registerStep1Changes(form) }}/>,
-                            <SecondStepForm form={form.step2} errors={step2Errors} onChange={(form) => { this._registerStep2Changes(form) }}/>,
-                            <ThirdStepForm form={form}/>
+                            <FirstStepForm key="0" form={form.step1} errors={step1Errors} onChange={(form) => { this._registerStep1Changes(form) }}/>,
+                            <SecondStepForm key="1" form={form.step2} errors={step2Errors} onChange={(form) => { this._registerStep2Changes(form) }}/>,
+                            <ThirdStepForm key="2" form={form}/>
                           ][activeStep]}                                                    
                           {activeStep < 2 && <Divider className='mt-4'/>}                       
                           <div className='my-4 text-center'>
                           {[
-                            <button type='submit' disabled={loading} className='m-btn--air m-2 btn btn-info text-uppercase'>
+                            <button key="0" type='submit' disabled={loading} className='m-btn--air m-2 btn btn-info text-uppercase'>
                                 {t('next')}
                             </button>,                          
-                            <div>
+                            <div key="1">
                                 <button type='button' onClick={() => { this._back(); }} className='m-btn--air m-2 btn btn-default text-uppercase'>
                                     {t('back')}
                                 </button>
@@ -191,7 +191,7 @@ class SignUpParent extends Component {
                                     {t('next')}
                                 </button>
                             </div>,
-                            <div >
+                            <div key="2">
                                 <p className="display-10"><strong>{t('signUpCompletedMessage')}</strong></p>            
                                 <button type='submit' className='m-btn--air m-2 btn btn-info text-uppercase'>{t('goToDashboard')}</button>
                             </div>
@@ -213,7 +213,7 @@ class SignUpParent extends Component {
     }
 }
 
-SignUpParent = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         validateRequest: selectValidateRequest(state),
         signUpRequest: selectSignUpRequest(state)
@@ -226,6 +226,4 @@ SignUpParent = connect(
         goToDashboard: () => { dispatch(push('/dashboard')) },
         appLoad: () => { dispatch(load()) }
     })
-)(SignUpParent);
-
-export default withTranslation('translations')(SignUpParent);
+)(SignUpParent));

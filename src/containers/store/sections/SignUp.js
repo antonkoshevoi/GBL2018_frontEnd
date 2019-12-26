@@ -33,7 +33,7 @@ class SignUp extends Component {
     
     _submit() {        
         this.props.validate(this.state);
-    };  
+    }  
 
     render() {
         const { validateRequest, t} = this.props;
@@ -92,13 +92,11 @@ class SignUp extends Component {
     }
 }
 
-SignUp = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     validateRequest: selectValidateRequest(state)    
   }),
   (dispatch) => ({
     validate: (data) => {dispatch(validate(data))},    
   })
-)(SignUp);
-
-export default withTranslation('translations')(SignUp);
+)(SignUp));

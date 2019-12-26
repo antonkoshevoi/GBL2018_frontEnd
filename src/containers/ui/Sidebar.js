@@ -103,7 +103,7 @@ class Sidebar extends Component {
           <NavLink
             to={`/${menu.link}`}
             className={'googleMenuItem ' + menu.colorName + (activeMenu.key === menu.key ? ' active fadeInUp  animated' : activeMenu.subMenu !== undefined ? ' swapped' : '') }
-            onClick={(event) => {_self._googleMenuToggle(menu); _self._goToFirstPage(menu);}}>
+            onClick={() => {_self._googleMenuToggle(menu); _self._goToFirstPage(menu);}}>
             <span className="icon"><i className={menu.icon}></i></span>
             <span className="content">{_self.props.t(menu.title)}</span>
           </NavLink>

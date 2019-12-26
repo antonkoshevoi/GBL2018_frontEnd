@@ -115,13 +115,11 @@ class Homerooms extends Component {
   }
 }
 
-Homerooms = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getRecordsRequest: selectHomeroomsRequest(state)
   }),
   (dispatch) => ({
     getRecords: (params = {}) => { dispatch(getHomerooms(params)) }
   })
-)(Homerooms);
-
-export default withTranslation('translations')(Homerooms);
+)(Homerooms));

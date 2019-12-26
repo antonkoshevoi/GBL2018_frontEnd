@@ -3,7 +3,7 @@ import { LOGOUT_SUCCESS } from '../auth/actions';
 import LiveService from '../../services/LiveService';
 
 export default function messagesMiddleware() {
-    return ({getState, dispatch}) => {
+    return ({dispatch}) => {
         return next => action => {
 
             const {type, userId, ...rest} = action;

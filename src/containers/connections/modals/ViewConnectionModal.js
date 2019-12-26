@@ -173,7 +173,7 @@ class ViewConnectionModal extends Component {
             {user.message && 
              <div className="col-12">
                 <div className="alert alert-secondary pre-line">
-                    <h5 class="alert-heading">{t('message')}</h5>
+                    <h5 className="alert-heading">{t('message')}</h5>
                     <hr />
                     {user.message}
                 </div>

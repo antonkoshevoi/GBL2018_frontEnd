@@ -52,7 +52,7 @@ class EditMessageModal extends Component {
         });    
         this.props.resetUpdateMessageRequest();    
         this.props.onClose();
-    };
+    }
 
     _onSubmit (e) {
         e.preventDefault();
@@ -61,7 +61,7 @@ class EditMessageModal extends Component {
             message: message,
             expired: expired
         });
-    };
+    }
   
     render() {
         const { isOpen, updateMessageRequest, title, icon, t } = this.props;
@@ -123,7 +123,7 @@ class EditMessageModal extends Component {
                     <button disabled={loading} className='btn btn-success' onClick={ (e) => {this._onSubmit(e) }} >
                       {t('save')}
                     </button>
-                    <button className='btn btn-default' onClick={ (e) => {this._close() }}>
+                    <button className='btn btn-default' onClick={ () => {this._close() }}>
                       {t('cancel')}
                     </button>                    
                 </DialogActions>
@@ -132,7 +132,7 @@ class EditMessageModal extends Component {
     }
 }
 
-EditMessageModal = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         updateMessageRequest: selectUpdateMessageRequest(state)
     }),
@@ -140,6 +140,4 @@ EditMessageModal = connect(
         updateMessage: (id, params = {}) => { dispatch(updateMessage(id, params)) },
         resetUpdateMessageRequest: () => { dispatch(resetUpdateMessageRequest()) }  
     })
-)(EditMessageModal);
-
-export default withTranslation('translations')(EditMessageModal);
+)(EditMessageModal));

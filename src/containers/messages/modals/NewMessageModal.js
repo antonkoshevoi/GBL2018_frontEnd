@@ -57,7 +57,7 @@ class NewMessageModal extends Component {
         this.setState(this.getInitialState());    
         this.props.resetSendMessageRequest();    
         this.props.onClose();
-    };
+    }
 
     _onSubmit (e) {
         e.preventDefault();
@@ -69,7 +69,7 @@ class NewMessageModal extends Component {
             expired: expired,
             type: type || 'chat'
         });
-    };
+    }
   
     render() {
         const { isOpen, sendMessageRequest, groupsRequest, title, icon, t } = this.props;
@@ -151,7 +151,7 @@ class NewMessageModal extends Component {
                     <button disabled={loading} className='btn btn-success' onClick={ (e) => {this._onSubmit(e) }} >
                       {t('sendMessage')}
                     </button>
-                    <button className='btn btn-default' onClick={ (e) => {this._close() }}>
+                    <button className='btn btn-default' onClick={ () => {this._close() }}>
                       {t('cancel')}
                     </button>                    
                 </DialogActions>
@@ -160,7 +160,7 @@ class NewMessageModal extends Component {
     }
 }
 
-NewMessageModal = connect(
+export default withTranslation('translations')(connect(
     (state) => ({        
         sendMessageRequest: selectSendMessageRequest(state),
         groupsRequest: selectGetGroupsRequest(state)
@@ -170,6 +170,4 @@ NewMessageModal = connect(
         sendMessage: (params = {}) => { dispatch(sendMessage(params)) },
         resetSendMessageRequest: () => { dispatch(resetSendMessageRequest()) }        
     })
-)(NewMessageModal);
-
-export default withTranslation('translations')(NewMessageModal);
+)(NewMessageModal));

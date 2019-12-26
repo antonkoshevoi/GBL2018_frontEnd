@@ -57,18 +57,18 @@ class CreateAdministrationModal extends Component {
     });
     this.props.resetCreateRequest();
     this.props.onClose();
-  };
+  }
 
   _onChange (adminUser) {
     this.setState({ adminUser });
-  };
+  }
 
   _onSubmit (e) {
     e.preventDefault();
     this.props.create(
       this.state.adminUser
     );
-  };
+  }
 
 
   _setCroppedImage(img){
@@ -138,14 +138,12 @@ class CreateAdministrationModal extends Component {
   }
 }
 
-CreateAdministrationModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
-    createRequest: selectCreateRequest(state),
+    createRequest: selectCreateRequest(state)
   }),
   (dispatch) => ({
     create: (form, params = {}) => { dispatch(create(form, params)) },
     resetCreateRequest: () => { dispatch(resetCreateRequest()) }
   })
-)(CreateAdministrationModal);
-
-export default withTranslation('translations')(CreateAdministrationModal);
+)(CreateAdministrationModal));

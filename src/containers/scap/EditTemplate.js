@@ -235,7 +235,7 @@ class EditTemplate extends Component {
                                         options={{
                                             handle: "label"                
                                         }}
-                                        onChange={(order, sortable, evt) => {    
+                                        onChange={(order) => {    
                                             this._sortQuestions(order);
                                         }}>
                                         {this._renderQuestions()}
@@ -267,7 +267,7 @@ class EditTemplate extends Component {
     }
 }
 
-EditTemplate = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         updateRequest: selectUpdateRequest(state),
         recordRequest: selectGetRecordRequest(state)
@@ -285,6 +285,4 @@ EditTemplate = connect(
         goTo: (url) => {dispatch(push(url))},
         reset: () => {dispatch(resetUpdateRequest())}
     })
-)(EditTemplate);
-
-export default withTranslation('translations')(EditTemplate);
+)(EditTemplate));

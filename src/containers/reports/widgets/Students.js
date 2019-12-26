@@ -140,13 +140,11 @@ class Students extends Component {
   }
 }
 
-Students = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getRecordsRequest: selectStudentsRequest(state)
   }),
   (dispatch) => ({
     getRecords: (params = {}) => { dispatch(getStudents(params)) }
   })
-)(Students);
-
-export default withTranslation('translations')(Students);
+)(Students));

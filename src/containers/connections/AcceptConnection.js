@@ -43,7 +43,7 @@ class AcceptConnection extends Component {
     }
 }
 
-AcceptConnection = connect(
+export default withRouter(connect(
     (state) => ({
         changeStatusRequest: selectChangeStatusRequest(state),
         auth: state.auth
@@ -55,6 +55,4 @@ AcceptConnection = connect(
         resetChangeStatusRequest: () => {dispatch(resetChangeStatusRequest())},
         appLoad: () => { dispatch(load()) }
     })
-)(AcceptConnection);
-
-export default withRouter(AcceptConnection);   
+)(AcceptConnection));   

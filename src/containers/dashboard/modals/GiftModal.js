@@ -32,7 +32,7 @@ class GiftModal extends Component {
             connections: [],
             error: ''
         };
-    };
+    }
 
   
     componentDidUpdate(prevProps) {    
@@ -44,7 +44,7 @@ class GiftModal extends Component {
         this._handleSubmitSuccess(prevProps);
         
         this._handleGetConnections(prevProps);
-    };
+    }
   
     _handleGetConnections(prevProps) {
         const success = this.props.connectionsRequest.get('success');        
@@ -69,7 +69,7 @@ class GiftModal extends Component {
         this.setState({userId: null, quantity: 1});  
         this.props.resetGiftRequest();
         this.props.onClose();
-    };
+    }
   
     _handleSubmit () {            
         const { unassignedItem, t } = this.props;
@@ -86,7 +86,7 @@ class GiftModal extends Component {
             productId: unassignedItem.id,
             ...form            
         });    
-    };  
+    }  
 
     _handleInputChange(event) {
         const {name, value} = event.target;
@@ -232,8 +232,8 @@ class GiftModal extends Component {
     );
   }
 }
-    
-GiftModal = connect(
+  
+export default withTranslation('translations')(connect(
     (state) => ({    
         connectionsRequest: selectGetUsersRequest(state),
         giftRequest: selectGiftRequest(state)
@@ -243,6 +243,4 @@ GiftModal = connect(
         giftCourseCredit: (form, params = {}) => { dispatch(giftCourseCredit(form, params)) },
         resetGiftRequest: () => { dispatch(resetGiftRequest()) }
     })
-)(GiftModal);
-  
-export default withTranslation('translations')(GiftModal);
+)(GiftModal));

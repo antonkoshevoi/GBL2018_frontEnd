@@ -49,11 +49,9 @@ class Profile extends Component {
     }
 }
 
-Profile = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         userData: selectUserData(state),
         getUserRequest: selectGetUserRequest(state)
     })
-)(Profile);
-
-export default withTranslation('translations')(Profile);
+)(Profile));

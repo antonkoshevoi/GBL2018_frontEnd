@@ -53,14 +53,14 @@ class CreateParentModal extends Component {
 
   _onChange(parent) {
     this.setState({parent});
-  };
+  }
 
   _onSubmit(e) {
     e.preventDefault();
     let parent = this.state.parent;
     delete parent.avatar;
     this.props.create( parent );
-  };
+  }
 
   _close() {
     this.setState({
@@ -133,7 +133,7 @@ class CreateParentModal extends Component {
   }
 }
 
-CreateParentModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     createRequest: selectCreateRequest(state),
     userData: selectUserData(state)
@@ -146,6 +146,4 @@ CreateParentModal = connect(
       dispatch(resetCreateRequest())
     }
   })
-)(CreateParentModal);
-
-export default withTranslation('translations')(CreateParentModal);
+)(CreateParentModal));

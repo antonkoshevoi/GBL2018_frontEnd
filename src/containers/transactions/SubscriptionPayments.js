@@ -146,7 +146,7 @@ class SubscriptionPayments extends Component {
     }
 }
 
-SubscriptionPayments = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
         paymentsRequest: selectGetPaymentsRequest(state),   
         pagination: selectPagination(state)
@@ -154,7 +154,4 @@ SubscriptionPayments = connect(
   (dispatch) => ({
         getPayments: (params = {}) => { dispatch(getPayments(params)) }
   })
-)(SubscriptionPayments);
-
-
-export default withTranslation('translations')(SubscriptionPayments);
+)(SubscriptionPayments));

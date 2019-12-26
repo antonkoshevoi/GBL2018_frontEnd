@@ -74,11 +74,9 @@ class InvoiceForm extends Component {
     }
 }
 
-InvoiceForm = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         auth: state.auth
     }),
     () => ({})
-)(InvoiceForm);
-
-export default withTranslation('translations')(InvoiceForm);
+)(InvoiceForm));

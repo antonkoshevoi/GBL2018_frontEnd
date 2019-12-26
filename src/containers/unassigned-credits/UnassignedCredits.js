@@ -92,13 +92,11 @@ class UnassignedCredits extends Component {
   }
 }
 
-UnassignedCredits = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     recordsRequest: selectGetRecordsRequest(state)
   }),
   (dispatch) => ({
     getRecords: (params = {}) => { dispatch(getRecords(params)) }
   })
-)(UnassignedCredits);
-
-export default withTranslation('translations')(UnassignedCredits);
+)(UnassignedCredits));

@@ -230,7 +230,7 @@ class ShoppingCardItems extends Component {
     }
 }
 
-ShoppingCardItems = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     cartRecordsRequest: selectGetCartRecordsRequest(state),    
     deleteRequest: deleteFromCartRequest(state),
@@ -240,6 +240,4 @@ ShoppingCardItems = connect(
     deleteCartRecord: (id) => { dispatch(deleteCartRecord(id)) },        
     setQuantity: (data) => { dispatch(setItemQuantity(data)) }
   })
-)(ShoppingCardItems);
-
-export default withTranslation('translations')(ShoppingCardItems);
+)(ShoppingCardItems));

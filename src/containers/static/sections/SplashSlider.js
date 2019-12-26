@@ -41,7 +41,7 @@ class SplashSlider extends PureComponent {
             adaptiveHeight: true,
             swipeToSlide: true,
             beforeChange: function () {
-                [...document.querySelectorAll('.slick-slide')].map((item, i) => {                     
+                [...document.querySelectorAll('.slick-slide')].map((item) => {                     
                      item.classList.remove('slick-slide-previous');
                      return true;
                 });
@@ -105,7 +105,7 @@ class SplashSlider extends PureComponent {
     }
 }
 
-SplashSlider = connect(
+export default connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     records: selectRecords(state),
@@ -115,8 +115,6 @@ SplashSlider = connect(
         dispatch(getRecords(params))
     }
   })
-)(SplashSlider);
-
-export default SplashSlider
+)(SplashSlider)
 
 

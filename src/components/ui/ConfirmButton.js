@@ -35,6 +35,6 @@ class ConfirmButton extends Component {
     
         return <DeleteButton onClick={() => { this._onConfirm() }} title={title} icon={icon} btnName={btnName} confirmOnly={confirmOnly} className={`${classNameDefault} ${className}`}/>;
     }
-};
+}
 
 export default ConfirmButton;

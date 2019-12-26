@@ -99,7 +99,7 @@ class Chat extends Component {
             actionsAnchor: event.currentTarget,
             message: message.toJS()
         });
-    };
+    }
 
     _handleActionsClose = () => {
         this.setState({ 
@@ -223,7 +223,7 @@ class Chat extends Component {
     }
 }
 
-Chat = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         getRecordsRequest: selectGetChatMessagesRequest(state),
         sendMessageRequest: selectSendMessageRequest(state),
@@ -244,6 +244,4 @@ Chat = connect(
             dispatch(deleteChatMessage(id));                    
         }
     })
-)(Chat);
-
-export default withTranslation('translations')(Chat);
+)(Chat));

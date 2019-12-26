@@ -169,13 +169,11 @@ class TeacherForm extends Component {
   }
 }
 
-TeacherForm = connect(
+export default withTranslation('translations')(connect(
   (state) => ({    
     getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state),
   }),
   (dispatch) => ({    
     getSchoolHomerooms: (params = {}) => { dispatch(getSchoolHomerooms(params)) }
   })
-)(TeacherForm);
-
-export default withTranslation('translations')(TeacherForm);
+)(TeacherForm));

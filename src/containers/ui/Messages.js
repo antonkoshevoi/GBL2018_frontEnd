@@ -108,13 +108,11 @@ class Messages extends Component {
   }
 }
 
-Messages = connect(
+export default withTranslation('translations')(connect(
     (state) => ({        
         unreadMessagesRequest: selectGetUnreadMessagesRequest(state)
     }),
     (dispatch) => ({    
         getMessages: () => { dispatch(getUnreadMessages())}    
     })
-)(Messages);
-
-export default withTranslation('translations')(Messages);
+)(Messages));

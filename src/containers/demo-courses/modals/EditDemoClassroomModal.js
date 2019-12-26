@@ -60,11 +60,11 @@ class EditDemoClassroomModal extends Component {
     this.props.resetUpdateRequest();
     this.props.resetGetSingleRecordRequest();
     this.props.onClose();
-  };
+  }
 
   _onChange (classroom) {
     this.setState({ classroom });
-  };
+  }
 
   _onSubmit (e) {
     e.preventDefault();
@@ -72,7 +72,7 @@ class EditDemoClassroomModal extends Component {
       this.state.id,
       this.state.classroom
     );   
-  };
+  }
 
   _setCroppedImage(img) {
     this.setState(
@@ -145,16 +145,14 @@ class EditDemoClassroomModal extends Component {
   }
 }
 
-EditDemoClassroomModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
-    updateRequest: selectUpdateRequest(state),
+    updateRequest: selectUpdateRequest(state)
   }),
   (dispatch) => ({
     update: (id, form, params = {}) => { dispatch(update(id, form, params)) },
     resetUpdateRequest: () => { dispatch(resetUpdateRequest()) },
-    resetGetSingleRecordRequest: () => { dispatch(resetGetSingleRecordRequest()) },
+    resetGetSingleRecordRequest: () => { dispatch(resetGetSingleRecordRequest()) }
   })
-)(EditDemoClassroomModal);
-
-export default withTranslation('translations')(EditDemoClassroomModal);
+)(EditDemoClassroomModal));
