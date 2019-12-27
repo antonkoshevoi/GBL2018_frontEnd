@@ -24,7 +24,7 @@ export const Tbody = (props) => {
   );
 };
 
-export const Row = ({ index, ...props}) => {
+export const Row = (props) => {
   return (
     <tr>{props.children}</tr>
   );

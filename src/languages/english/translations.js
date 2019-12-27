@@ -631,8 +631,6 @@ export default {
     Basic: 'Basic',
     Multi: 'Multi',
     Family: 'Family',
-    freeWorkbook: '1 free workbook',
-    freeWorkbooks: '{{number}} free workbooks',
     subscriptionIsActive: 'Subscription is active. Next recurring payment will be charged at {{date}}.',
     subscriptionWillBeClosed: 'Recurring payments are disabled. Subscription will be closed at {{date}}.',
     subscriptionIsClosed: 'Subscription is expired and closed.',

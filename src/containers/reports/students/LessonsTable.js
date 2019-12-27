@@ -92,7 +92,7 @@ class LessonsTable extends Component {
     
     let reportIsEmpty = true;
 
-    data.map((unit, unitIndex) => {
+    data.map((unit) => {
         if (this.countNumberOfUnitAttempts(unit) > 0) {
             reportIsEmpty = false;                  
         }
