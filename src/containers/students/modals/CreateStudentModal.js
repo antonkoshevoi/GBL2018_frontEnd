@@ -67,14 +67,14 @@ class CreateStudentModal extends Component {
 
   _onChange(student) {
     this.setState({student});
-  };
+  }
 
   _onSubmit(e) {
     e.preventDefault();
     let student = this.state.student;
     delete student.avatar;
     this.props.create( student );
-  };
+  }
 
   _close() {
     this.setState({
@@ -151,7 +151,7 @@ class CreateStudentModal extends Component {
   }
 }
 
-CreateStudentModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     createRequest: selectCreateRequest(state),
     userData: selectUserData(state)
@@ -162,8 +162,6 @@ CreateStudentModal = connect(
     },
     resetCreateRequest: () => {
       dispatch(resetCreateRequest())
-    },
+    }
   })
-)(CreateStudentModal);
-
-export default withTranslation('translations')(CreateStudentModal);
+)(CreateStudentModal));

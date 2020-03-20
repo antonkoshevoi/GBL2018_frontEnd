@@ -6,7 +6,7 @@ import SessionStorage from '../../services/SessionStorage';
 import { subscribe as subscribeToMessages } from '../messages/actions';
 //import {destroyTokenSession} from "../../helpers/session";
 
-function* onLoad (action) {
+function* onLoad() {
   const token = SessionStorage.get('token');
   const refreshToken = SessionStorage.get('refreshToken');
 

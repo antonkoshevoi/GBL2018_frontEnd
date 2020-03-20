@@ -70,13 +70,11 @@ class RosterStatistic extends Component {
   }
 }
 
-RosterStatistic = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getRosterStatisticRequest: selectRosterStatisticRequest(state)
   }),
   (dispatch) => ({
     getRosterStatistic: (id, params = {}) => {dispatch(getRosterStatistic(id, params))},
   })
-)(RosterStatistic);
-
-export default withTranslation('translations')(RosterStatistic);
+)(RosterStatistic));

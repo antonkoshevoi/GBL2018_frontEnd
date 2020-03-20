@@ -77,7 +77,7 @@ class StudentsBulkUpload extends Component {
   }
 }
 
-StudentsBulkUpload = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     bulkUploadRequest: selectBulkUploadRequest(state)
   }),
@@ -88,6 +88,4 @@ StudentsBulkUpload = connect(
       dispatch(bulkUpload(file));
     }    
   })
-)(StudentsBulkUpload);
-
-export default withTranslation('translations')(StudentsBulkUpload);
+)(StudentsBulkUpload));

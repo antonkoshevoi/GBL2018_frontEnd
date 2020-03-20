@@ -30,7 +30,7 @@ class SignUpPrincipal extends Component {
     this.props.signUp(
       this.state.form
     );
-  };
+  }
 
   _handleFileChange(e) {
     e.preventDefault();
@@ -331,7 +331,7 @@ class SignUpPrincipal extends Component {
   }
 }
 
-SignUpPrincipal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     signUpRequest: selectSignUpRequest(state),
     countries: selectRecords(state),
@@ -341,7 +341,5 @@ SignUpPrincipal = connect(
     resetSignUpRequest: () => { dispatch(resetSignUpRequest()) },
     getCountries: (params = {}) => { dispatch(getCountries(params)) }
   })
-)(SignUpPrincipal);
-
-export default withTranslation('translations')(SignUpPrincipal);
+)(SignUpPrincipal));
 

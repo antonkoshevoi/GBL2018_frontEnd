@@ -149,7 +149,7 @@ class Subscriptions extends Component {
    
     _validateRecipient() {
         this.props.validateRecipient(this.state.recipient);        
-    };
+    }
     
     _submitCreditCardPayment() {
         let data = {
@@ -161,7 +161,7 @@ class Subscriptions extends Component {
             data.recipient = this.state.recipient;
         }
         this.props.subscribe(data);        
-    };
+    }
        
     _renderBillingForm() {
         
@@ -279,8 +279,7 @@ class Subscriptions extends Component {
         );
     }
 }
-
-Subscriptions = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         subscribeRequest:  selectSubscribeRequest(state),
         getRecordsRequest: selectGetRecordsRequest(state),
@@ -296,6 +295,4 @@ Subscriptions = connect(
         getRecords: () => dispatch(getRecords()),
         goTo: (url) => {dispatch(push(url))}
     })
-)(Subscriptions);
-
-export default withTranslation('translations')(Subscriptions);
+)(Subscriptions));

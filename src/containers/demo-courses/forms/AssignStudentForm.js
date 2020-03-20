@@ -112,7 +112,7 @@ class AssignStudentForm extends Component {
   }
 }
 
-AssignStudentForm = connect(
+export default withTranslation('translations')(connect(
   (state) => ({    
     demoClassrooms: selectRecords(state),
     schoolStudentsRequest: selectGetSchoolStudentsRequest(state)
@@ -123,6 +123,4 @@ AssignStudentForm = connect(
       perPage: 0
     }))}
   })
-)(AssignStudentForm);
-
-export default withTranslation('translations')(AssignStudentForm);
+)(AssignStudentForm));

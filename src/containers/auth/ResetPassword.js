@@ -122,7 +122,7 @@ class ResetPassword extends Component {
     }
 }
 
-ResetPassword = connect(
+export default withRouter(withTranslation("translations")(connect(
     state => ({
         userRequest: selectResetPasswordUserRequest(state),
         updatePasswordRequest: selectUpdatePasswordRequest(state),
@@ -134,6 +134,4 @@ ResetPassword = connect(
         getUser: (id, hash) => {dispatch(getResetPasswordUser(id, hash))},        
         goTo: (page) => {dispatch(push(page))}
     })
-)(ResetPassword);
-
-export default withRouter(withTranslation("translations")(ResetPassword));
+)(ResetPassword)));

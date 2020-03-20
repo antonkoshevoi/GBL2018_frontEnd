@@ -11,7 +11,7 @@ export default  {
         {
             key: 'messages',
             title: 'messages',
-            link: 'messages',
+            link: 'messages/alerts',
             icon: 'fa fa-weixin',
             colorName: 'green',
             subMenu: [

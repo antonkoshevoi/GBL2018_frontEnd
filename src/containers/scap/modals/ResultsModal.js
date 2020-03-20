@@ -29,7 +29,7 @@ class ResultsModal extends Component {
         this.setState({});
         this.props.resetGetRecordRequest();
         this.props.onClose();
-    }; 
+    } 
 
     _renderRecords(answers) {
         
@@ -100,7 +100,7 @@ class ResultsModal extends Component {
     }
 }
 
-ResultsModal = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         recordRequest: selectGetRecordRequest(state)
     }),
@@ -108,6 +108,4 @@ ResultsModal = connect(
         getRecords: (id) => { dispatch(getResultsDetailsRecord(id)) },
         resetGetRecordRequest: () => { dispatch(resetGetRecordRequest()) }
     })
-)(ResultsModal);
-
-export default withTranslation('translations')(ResultsModal);
+)(ResultsModal));

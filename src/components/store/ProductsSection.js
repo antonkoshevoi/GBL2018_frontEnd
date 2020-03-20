@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard";
 
 class ProductsSection extends Component {
 
-    _renderProducts(products, categoryId) {
+    _renderProducts(products) {
         const {all} = this.props;
 
         if (products.size === 0) {

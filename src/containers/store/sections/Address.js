@@ -265,7 +265,7 @@ class Address extends Component {
   }
 }
 
-Address = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         countriesList:  selectRecords(state),
         countriesRequest:  selectGetRecordsRequest(state)
@@ -273,7 +273,5 @@ Address = connect(
     (dispatch) => ({
         countries: () => dispatch(getCountries())  
     }),
-)(Address);
-
-export default withTranslation('translations')(Address);
+)(Address));
 

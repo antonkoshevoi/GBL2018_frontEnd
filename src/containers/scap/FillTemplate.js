@@ -112,7 +112,7 @@ class FillTemplate extends Component {
         
         this.setState({studentId: value});
         
-        students.map((student, key) => {
+        students.map((student) => {
             if (student.id === value) {
                 this.setState({homeroomId: student.homeroomId});                
             }
@@ -272,7 +272,7 @@ class FillTemplate extends Component {
     }
 }
 
-FillTemplate = connect(
+export default withTranslation('translations')(connect(
     (state) => ({        
         recordRequest: selectGetRecordRequest(state),
         addAnswersRequest: selectAddAnswersRequest(state),
@@ -300,6 +300,4 @@ FillTemplate = connect(
         },        
         goTo: (url) => {dispatch(push(url))}
     })
-)(FillTemplate);
-
-export default withTranslation('translations')(FillTemplate);
+)(FillTemplate));

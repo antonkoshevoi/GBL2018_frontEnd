@@ -115,13 +115,11 @@ class Classrooms extends Component {
   }
 }
 
-Classrooms = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getRecordsRequest: selectClassroomsRequest(state)
   }),
   (dispatch) => ({
     getRecords: (params = {}) => { dispatch(getClassrooms(params)) }
   })
-)(Classrooms);
-
-export default withTranslation('translations')(Classrooms);
+)(Classrooms));

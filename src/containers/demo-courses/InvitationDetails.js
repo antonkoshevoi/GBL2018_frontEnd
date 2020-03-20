@@ -129,7 +129,7 @@ class InvitationDetails extends Component {
   }
 }
 
-InvitationDetails = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     isLoggedIn: selectIsLoggedIn(state),
     getRecordRequest: selectGetSingleRecordRequest(state)
@@ -140,6 +140,4 @@ InvitationDetails = connect(
     declineInvitation: (id, hash) => { dispatch(declineInvitation(id, hash)) },
     setLoginCallback: (callback) => { dispatch(setCallback(callback)) }
   }),
-)(InvitationDetails);
-
-export default withTranslation('translations')(InvitationDetails);
+)(InvitationDetails));

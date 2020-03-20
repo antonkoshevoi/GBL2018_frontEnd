@@ -254,8 +254,7 @@ class Chats extends Component {
         );
     }
 }
-
-Chats = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         groupChatsRequest: selectGetGroupChatsRequest(state),
         privateChatsRequest: selectGetPrivateChatsRequest(state),
@@ -273,6 +272,4 @@ Chats = connect(
             dispatch(disableChat(chatId, disabled));
         }
     })
-)(Chats);
-
-export default withTranslation('translations')(Chats);
+)(Chats));

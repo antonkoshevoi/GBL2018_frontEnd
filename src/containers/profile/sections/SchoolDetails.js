@@ -62,7 +62,7 @@ class SchoolDetails extends Component {
     this.props.update(
       this.state.school
     );
-  };
+  }
 
   render() {
     const { mode, school } = this.state;
@@ -196,13 +196,11 @@ class SchoolDetails extends Component {
   }
 }
 
-SchoolDetails = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getUpdateRequest: selectUpdateRequest(state),
   }),
   (dispatch) => ({
     update: (form, params = {}) => { dispatch(update(form, params)) },
   })
-)(SchoolDetails);
-
-export default withTranslation('translations')(SchoolDetails);
+)(SchoolDetails));

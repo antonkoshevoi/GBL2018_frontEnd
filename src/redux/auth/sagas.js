@@ -15,7 +15,7 @@ import { load } from '../app/actions';
 import { resetGetUserRequest } from '../user/actions';
 import { yieldErrorToasts, yieldSuccessToasts } from '../../helpers/utils';
 
-function* afterLoginSuccess (action) {
+function* afterLoginSuccess() {
   let redirectTo = yield select( selectRedirectAfterLogin );
   redirectTo = redirectTo ? redirectTo : '/';
 
@@ -30,7 +30,7 @@ function* afterLoginSuccess (action) {
   yield put(push(redirectTo));
 }
 
-function* afterLoginWasRestored (action) {
+function* afterLoginWasRestored() {
   const callback = yield select( selectCallback );
 
   if(typeof callback === 'function') {
@@ -39,7 +39,7 @@ function* afterLoginWasRestored (action) {
   }
 }
 
-function* afterLogoutSuccess (action) {
+function* afterLogoutSuccess() {
   yield put(resetGetUserRequest());
   yield put(push('/'));
 }

@@ -193,7 +193,7 @@ class Students extends Component {
             <div className='m-portlet__head-caption'>
               <div className='m-portlet__head-title'>
                 <span className='m-portlet__head-icon'>
-		  <i className='la la-user'></i>
+                  <i className='la la-user'></i>
                 </span>
                 <h3 className='m-portlet__head-text'>
                   {t('students')}
@@ -272,7 +272,7 @@ class Students extends Component {
   }
 }
 
-Students = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
@@ -285,6 +285,4 @@ Students = connect(
     getSingleRecord: (id, params = {}) => { dispatch(getSingleRecord(id, params)) },
     deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) }
   })
-)(Students);
-
-export default withTranslation('translations')(Students);
+)(Students));

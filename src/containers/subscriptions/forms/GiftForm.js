@@ -116,13 +116,11 @@ class GiftForm extends Component {
   }
 }
 
-GiftForm = connect(
+export default withTranslation('translations')(connect(
   (state) => ({    
     usersRequest: selectGetUsersRequest(state)
   }),
   (dispatch) => ({
     getUsers: () => { dispatch(getUsers()) }
   })
-)(GiftForm);
-
-export default withTranslation('translations')(GiftForm);
+)(GiftForm));

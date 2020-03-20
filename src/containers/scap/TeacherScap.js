@@ -162,7 +162,7 @@ class TeacherScap extends Component {
     }
 }
 
-TeacherScap = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         getRecordsRequest: selectGetRecordsRequest(state)
     }),
@@ -172,6 +172,4 @@ TeacherScap = connect(
         },
         goTo: (url) => {dispatch(push(url))}
     })
-)(TeacherScap);
-
-export default withTranslation('translations')(TeacherScap);
+)(TeacherScap));

@@ -59,11 +59,11 @@ class EditHomeroomModal extends Component {
     this.props.resetUpdateRequest();
     this.props.resetGetSingleRecordRequest();
     this.props.onClose();
-  };
+  }
 
   _onChange (homeroom) {
     this.setState({ homeroom });
-  };
+  }
 
   _onSubmit (e) {
     e.preventDefault();
@@ -71,7 +71,7 @@ class EditHomeroomModal extends Component {
       this.state.id,
       this.state.homeroom
     );  
-  };
+  }
 
   render() {
     const { isOpen, updateRequest, getSingleRecordRequest, t } = this.props;
@@ -117,7 +117,7 @@ class EditHomeroomModal extends Component {
   }
 }
 
-EditHomeroomModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
     updateRequest: selectUpdateRequest(state),
@@ -127,6 +127,4 @@ EditHomeroomModal = connect(
     resetUpdateRequest: () => { dispatch(resetUpdateRequest()) },
     resetGetSingleRecordRequest: () => { dispatch(resetGetSingleRecordRequest()) },
   })
-)(EditHomeroomModal);
-
-export default withTranslation('translations')(EditHomeroomModal);
+)(EditHomeroomModal));

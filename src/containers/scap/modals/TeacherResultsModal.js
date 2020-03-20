@@ -34,7 +34,7 @@ class TeacherResultsModal extends Component {
         this.setState({});
         this.props.resetGetResultsRecordsRequest();
         this.props.onClose();
-    }; 
+    } 
 
     _goToPage(page) {
         this.setState({page}, this._getRecords);
@@ -152,7 +152,7 @@ class TeacherResultsModal extends Component {
     }
 }
 
-TeacherResultsModal = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         getRecordsRequest: selectGetResultRecordsRequest(state)        
     }),
@@ -165,6 +165,4 @@ TeacherResultsModal = connect(
         },
         goTo: (url) => {dispatch(push(url))}
     })
-)(TeacherResultsModal);
-
-export default withTranslation('translations')(TeacherResultsModal);
+)(TeacherResultsModal));

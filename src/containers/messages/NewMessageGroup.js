@@ -61,7 +61,7 @@ class NewMessageGroup extends Component {
     }
 }
 
-NewMessageGroup = connect(
+export default withTranslation('translations')(connect(
     (state) => ({        
         createGroupRequest: selectCreateGroupRequest(state)
     }),
@@ -70,6 +70,4 @@ NewMessageGroup = connect(
         resetCreateGroupRequest: () => { dispatch(resetCreateGroupRequest()) },
         goTo: (page) => { dispatch(push(page)) }
     })
-)(NewMessageGroup);
-
-export default withTranslation('translations')(NewMessageGroup);
+)(NewMessageGroup));

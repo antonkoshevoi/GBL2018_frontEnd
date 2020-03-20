@@ -34,11 +34,9 @@ class AuthenticatedRoute extends Component {
     }
 }
 
-AuthenticatedRoute = connect(
+export default withRouter(connect(
     (state) => ({
         isLoggedIn: selectIsLoggedIn(state),
         restoreLoginFail: SelectRestoreLoginFail(state)
     })
-)(AuthenticatedRoute);
-
-export default withRouter(AuthenticatedRoute);
+)(AuthenticatedRoute));

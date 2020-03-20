@@ -315,7 +315,7 @@ class Classrooms extends Component {
   }
 }
 
-Classrooms = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
@@ -331,7 +331,4 @@ Classrooms = connect(
     deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) },
     goTo: (url) => {dispatch(push(url))}
   })
-)(Classrooms);
-
-
-export default withTranslation('translations')(Classrooms);
+)(Classrooms));

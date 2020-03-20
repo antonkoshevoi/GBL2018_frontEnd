@@ -77,11 +77,11 @@ class AssignStudentsModal extends Component {
     });
     this.props.resetAssignStudentsRequest();
     this.props.onClose();
-  };
+  }
 
   _onChange (studentIds) {
     this.setState({ studentIds });
-  };
+  }
 
   _onSubmit (e) {
     e.preventDefault();
@@ -92,7 +92,7 @@ class AssignStudentsModal extends Component {
       studentIds: studentIds,
       useCourseCredits: useCourseCredits      
     });   
-  };
+  }
   
   _handleUseCourseCreditsChange(e) 
   {
@@ -158,7 +158,7 @@ class AssignStudentsModal extends Component {
   }
 }
 
-AssignStudentsModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getRecordForAssignStudentsRequest: selectGetRecordForAssignStudentsRequest(state),
     assignStudentsRequest: selectGetAssignStudentsRequest(state)
@@ -167,6 +167,4 @@ AssignStudentsModal = connect(
     assignStudents: (id, data, params = {}) => { dispatch(assignStudents(id, data, params)) },
     resetAssignStudentsRequest: () => { dispatch(resetAssignStudentsRequest()) },
   })
-)(AssignStudentsModal);
-
-export default withTranslation('translations')(AssignStudentsModal);
+)(AssignStudentsModal));

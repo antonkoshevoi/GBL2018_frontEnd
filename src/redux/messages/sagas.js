@@ -34,7 +34,6 @@ import i18n from '../../configs/i18n';
 import toastr from 'toastr';
 
 function* afterDisableChatSuccess (action) {
-    console.log('afterDisableChatSuccess');
     if (action.result) {
         const results = action.result.data;          
         yield toastr.success(i18n.t(results.disabled ? 'messages:chatMessagesDisabed' : 'messages:chatMessagesEnabled'));        

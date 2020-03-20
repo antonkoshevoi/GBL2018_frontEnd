@@ -164,6 +164,7 @@ class LineChart extends Component {
       },
       (error) => {        
         this.setState({disabled: false});
+        console.log(error);
       });
   };
 

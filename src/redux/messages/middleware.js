@@ -3,14 +3,13 @@ import { LOGOUT_SUCCESS } from '../auth/actions';
 import LiveService from '../../services/LiveService';
 
 export default function messagesMiddleware() {
-    return ({getState, dispatch}) => {
+    return ({dispatch}) => {
         return next => action => {
 
             const {type, userId, ...rest} = action;
 
             if (type !== SUBSCRIBE) {
                 if (type === LOGOUT_SUCCESS) {
-                    console.log('messagesMiddleware LOGOUT_SUCCESS');
                     LiveService.disconnect();
                 }
                 return next(action);
@@ -21,10 +20,8 @@ export default function messagesMiddleware() {
             }            
 
             LiveService.messages(userId, (message) => {
-                console.log('messagesMiddleware NEW_MESSAGE_RECEIVED');
                 dispatch({type: NEW_MESSAGE_RECEIVED, message})
-            }, (message) => {
-                console.log('messagesMiddleware MESSAGE_REMOVED');
+            }, (message) => {                
                 dispatch({type: MESSAGE_REMOVED, message})
             });
         };

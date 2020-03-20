@@ -10,7 +10,6 @@ class SchoolProfile extends Component {
 
     componentDidMount() {
         const {getSchool} = this.props;
-
         getSchool();
     }
 
@@ -35,13 +34,11 @@ class SchoolProfile extends Component {
     }
 }
 
-SchoolProfile = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         schoolRequest: selectSchool(state)
     }),
     (dispatch) => ({
         getSchool: () => {dispatch(getSchool())}
     })
-)(SchoolProfile);
-
-export default withTranslation('translations')(SchoolProfile);
+)(SchoolProfile));

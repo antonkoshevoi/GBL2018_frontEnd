@@ -186,7 +186,7 @@ class EditAnswers extends Component {
     }
 }
 
-EditAnswers = connect(
+export default withTranslation('translations')(connect(
     (state) => ({        
         recordRequest: selectGetRecordRequest(state),
         updateAnswersRequest: selectUpdateAnswersRequest(state)        
@@ -206,6 +206,4 @@ EditAnswers = connect(
         },        
         goTo: (url) => {dispatch(push(url))}
     })
-)(EditAnswers);
-
-export default withTranslation('translations')(EditAnswers);
+)(EditAnswers));

@@ -120,8 +120,7 @@ class AutoCreate extends Component {
   }
 }
 
-
-AutoCreate = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getParentPublicClassroom: selectGetRecordsRequest(state),
     classroomRecords: selectRecords(state),
@@ -136,7 +135,4 @@ AutoCreate = connect(
     resetUpdateAutoClass: () => {dispatch(resetUpdateAutoClass())}
 
   }),
-)(AutoCreate);
-
-
-export default withTranslation('translations')(AutoCreate);
+)(AutoCreate));

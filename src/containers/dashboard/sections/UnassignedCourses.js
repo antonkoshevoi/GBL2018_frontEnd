@@ -127,13 +127,11 @@ class UnassignedCourses extends Component {
   }
 }
 
-UnassignedCourses = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     recordsRequest: selectGetRecordsRequest(state),
   }),
   (dispatch) => ({
     getRecords: (params = {}) => { dispatch(getRecords(params)) },
   })
-)(UnassignedCourses);
-
-export default withTranslation('translations')(UnassignedCourses);
+)(UnassignedCourses));

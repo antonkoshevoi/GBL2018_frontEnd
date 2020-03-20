@@ -49,7 +49,7 @@ class SendMessageModal extends Component {
         });    
         this.props.resetSendMessageRequest();    
         this.props.onClose();
-    };
+    }
 
     _onSubmit (e) {
         e.preventDefault();
@@ -60,7 +60,7 @@ class SendMessageModal extends Component {
             message:    message,            
             chatId:     `private-${userId}`
         });
-    };
+    }
   
     render() {
         const { isOpen, sendMessageRequest, t } = this.props;
@@ -122,7 +122,7 @@ class SendMessageModal extends Component {
                     <button disabled={loading} className='btn btn-success' onClick={ (e) => {this._onSubmit(e) }} >
                       {t('sendMessage')}
                     </button>
-                    <button className='btn btn-default' onClick={ (e) => {this._close() }}>
+                    <button className='btn btn-default' onClick={ () => {this._close() }}>
                       {t('cancel')}
                     </button>                    
                 </DialogActions>
@@ -131,7 +131,7 @@ class SendMessageModal extends Component {
     }
 }
 
-SendMessageModal = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         sendMessageRequest: selectSendMessageRequest(state)
     }),
@@ -139,6 +139,4 @@ SendMessageModal = connect(
         sendMessage: (params = {}) => { dispatch(sendChatMessage(params)) },
         resetSendMessageRequest: () => { dispatch(resetSendMessageRequest()) }  
     })
-)(SendMessageModal);
-
-export default withTranslation('translations')(SendMessageModal);
+)(SendMessageModal));

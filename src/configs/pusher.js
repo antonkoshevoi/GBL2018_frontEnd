@@ -22,11 +22,11 @@ export default class PusherService {
             });
         }
         return this.pusher;
-    };
+    }
     
     static getPusher() {
         return this.pusher;
-    };    
+    }    
 
     static reset() {
         if (!this.pusher) {
@@ -35,7 +35,7 @@ export default class PusherService {
         this.pusher.disconnect();
         this.pusher = null;
         return this.pusher;
-    };
+    }
 }
 
 

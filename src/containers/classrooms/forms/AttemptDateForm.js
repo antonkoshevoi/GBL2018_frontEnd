@@ -69,7 +69,7 @@ class AttemptDateForm extends Component {
     }
 }
 
-AttemptDateForm = connect(
+export default connect(
     (state) => ({
         scheduleLessonRequest: selectScheduleLessonRequest(state)
     }),
@@ -79,5 +79,3 @@ AttemptDateForm = connect(
         }
     })
 )(AttemptDateForm);
-
-export default AttemptDateForm;

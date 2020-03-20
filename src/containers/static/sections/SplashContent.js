@@ -48,6 +48,6 @@ class SplashContent extends PureComponent {
             </div>            
         </SplashWrapper>);
     }
-};
+}
 
 export default withTranslation('splashScreen')(SplashContent);

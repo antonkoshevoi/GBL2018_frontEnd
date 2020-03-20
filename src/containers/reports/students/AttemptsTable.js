@@ -26,7 +26,7 @@ class AttemptsTable extends Component {
       const { value } = event.target;
   
       this.setState({classroom: value});
-  };
+  }
   
   _getRecords () {
     const { page, perPage } = this.state;
@@ -109,13 +109,11 @@ class AttemptsTable extends Component {
   }
 }
 
-AttemptsTable = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         attemptsRequest: selectAttemptsRequest(state)
     }),
     (dispatch) => ({
         getAttempts: (id, params = {}) => {dispatch(getAttempts(id, params))},    
     })
-)(AttemptsTable);
-
-export default withTranslation('translations')(AttemptsTable);
+)(AttemptsTable));

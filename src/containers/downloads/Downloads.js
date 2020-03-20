@@ -125,8 +125,8 @@ class Downloads extends Component {
         );
     }    
 }
-  
-Downloads = connect(
+
+export default withTranslation("translations")(connect(
     (state) => ({
         recordsRequest: selectGetDownloadsRequest(state),
         invoiceRequest: invoiceRequest(state),
@@ -137,9 +137,7 @@ Downloads = connect(
         getStoreRecords: (params = {}) => dispatch(getRecords(params)),
         getDownloadsRecords: (params = {}) => { dispatch(getDownloadsRecords(params)) }
     })
-)(Downloads);
-
-export default withTranslation("translations")(Downloads);
+)(Downloads));
 
 
 

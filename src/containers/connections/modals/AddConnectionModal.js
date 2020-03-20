@@ -163,7 +163,7 @@ class AddConnectionModal extends Component {
                         <div className="form-group row">
                             <label className="col-form-label col-lg-4" htmlFor="lastName">{t('message')}</label>
                             <div className="col-lg-6">
-                                <textarea maxlength="300" onChange={(e) => { this._handleInputChange(e) }} name="message" className="form-control m-input">{form.message || ''}</textarea>
+                                <textarea maxLength="300" onChange={(e) => { this._handleInputChange(e) }} name="message" className="form-control m-input">{form.message || ''}</textarea>
                             </div>
                         </div>                   
                     </div>
@@ -189,7 +189,7 @@ class AddConnectionModal extends Component {
     }
 }
 
-AddConnectionModal = connect(
+export default withTranslation('translations')(connect(
     (state) => ({        
         createRequest: selectCreateRequest(state),
         inviteRequest: selectInviteRequest(state)
@@ -200,6 +200,4 @@ AddConnectionModal = connect(
         resetCreateRequest: () => { dispatch(resetCreateRequest()) },
         resetInviteRequest: () => { dispatch(resetInviteRequest()) }
     })    
-)(AddConnectionModal);
-
-export default withTranslation('translations')(AddConnectionModal);
+)(AddConnectionModal));

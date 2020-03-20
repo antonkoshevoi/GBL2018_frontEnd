@@ -33,7 +33,7 @@ export default function formTableData(serverData, jsonTemplateData) {
       return '';
     }
     
-    attempt.metadata.forEach((metadataAttempt, attemptIndex) => {
+    attempt.metadata.forEach((metadataAttempt) => {
       if (!metadataAttempt || !Object.keys(metadataAttempt).length) {
         return;
       }      

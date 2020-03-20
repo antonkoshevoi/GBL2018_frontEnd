@@ -61,11 +61,11 @@ class EditTeacherModal extends Component {
     this.props.onClose();
     this.props.resetUpdateRequest();
     this.props.resetGetSingleRecordRequest();
-  };
+  }
 
   _onChange (teacher) {
     this.setState({ teacher });
-  };
+  }
 
   _onSubmit (e) {
     e.preventDefault();
@@ -73,7 +73,7 @@ class EditTeacherModal extends Component {
       this.state.id,
       this.state.teacher
     );
-  };
+  }
 
     _setCroppedImage(img) {
         this.setState({
@@ -143,7 +143,7 @@ class EditTeacherModal extends Component {
   }
 }
 
-EditTeacherModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getSingleRecordRequest: selectGetSingleRecordRequest(state),
     updateRequest: selectUpdateRequest(state),
@@ -153,6 +153,4 @@ EditTeacherModal = connect(
     resetUpdateRequest: () => { dispatch(resetUpdateRequest()) },
     resetGetSingleRecordRequest: () => { dispatch(resetGetSingleRecordRequest()) },
   })
-)(EditTeacherModal);
-
-export default withTranslation('translations')(EditTeacherModal);
+)(EditTeacherModal));

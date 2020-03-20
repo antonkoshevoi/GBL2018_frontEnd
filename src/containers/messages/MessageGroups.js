@@ -151,7 +151,7 @@ class MessageGroups extends Component {
     }
 }
 
-MessageGroups = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         getRecordsRequest: selectGetGroupsRequest(state),
         deleteRecordRequest: selectDeleteGroupRequest(state)
@@ -167,6 +167,4 @@ MessageGroups = connect(
             dispatch(resetDeleteGroupRequest());
         }
     })
-)(MessageGroups);
-
-export default withTranslation('translations')(MessageGroups);
+)(MessageGroups));

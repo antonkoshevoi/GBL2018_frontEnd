@@ -67,8 +67,7 @@ class Messages extends Component {
             return false;
         }    
         let { readIds } = this.state;       
-        readIds.push(record.id);        
-        console.log(readIds);
+        readIds.push(record.id);               
         this.setState({readIds: readIds});
     }
     
@@ -225,7 +224,7 @@ class Messages extends Component {
     }
 }
 
-Messages = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         getRecordsRequest: selectGetRecordsRequest(state),
         deleteRecordRequest: selectDeleteRecordRequest(state)
@@ -244,6 +243,4 @@ Messages = connect(
             dispatch(resetDeleteMessageRequest());
         }
     })
-)(Messages);
-
-export default withTranslation('translations')(Messages);
+)(Messages));

@@ -90,7 +90,7 @@ export function formChartOptions(maxStudents, selector) {
         display: true,
         ticks: {
           autoSkip: false,
-          callback: function (value, index, xAxesArray) {
+          callback: function (value, index) {
             return renderXAxis(selector, value, index);
           }
         }

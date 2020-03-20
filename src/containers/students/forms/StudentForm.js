@@ -18,7 +18,7 @@ class StudentForm extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      schoolHomerooms: [],
+      schoolHomerooms: []
     };
   }
 
@@ -56,7 +56,7 @@ class StudentForm extends Component {
         ...this.props.student,
         [name]: value
     });
-  };  
+  }  
 
   _renderSchoolHomerooms() {
     const { schoolHomerooms } = this.state;
@@ -187,13 +187,11 @@ class StudentForm extends Component {
   }
 }
 
-StudentForm = connect(
+export default withTranslation('translations')(connect(
   (state) => ({    
     getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state),
   }),
   (dispatch) => ({    
     getSchoolHomerooms: (params = {}) => { dispatch(getSchoolHomerooms(params)) }
   })
-)(StudentForm);
-
-export default withTranslation('translations')(StudentForm);
+)(StudentForm));

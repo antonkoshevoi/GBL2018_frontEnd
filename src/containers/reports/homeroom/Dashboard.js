@@ -71,14 +71,12 @@ class Dashboard extends Component {
     );
   }
 }
-    
-Dashboard = connect(
+
+export default withTranslation('translations')(connect(
   (state) => ({
     dataRequest: selectChartDatatRequest(state)    
   }),
   (dispatch) => ({
     getCharts: (id, params = {}) => {dispatch(getCharts(id, params))}    
   })
-)(Dashboard);
-
-export default withTranslation('translations')(Dashboard);
+)(Dashboard));

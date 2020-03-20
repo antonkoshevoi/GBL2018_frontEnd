@@ -43,17 +43,17 @@ class EditParentModal extends Component {
         this.props.onClose();
         this.props.resetUpdateRequest();
         this.props.resetGetSingleRecordRequest();
-    };
+    }
 
     _onChange(parent) {
         this.setState({parent});
-    };
+    }
 
     _onSubmit(e) {
         e.preventDefault();
         let {id, parent} = this.state;        
         this.props.update( id, parent );
-    };
+    }
 
 
     _setCroppedImage(img) {      
@@ -127,7 +127,7 @@ class EditParentModal extends Component {
     }
 }
 
-EditParentModal = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         recordRequest: selectGetSingleRecordRequest(state),
         updateRequest: selectUpdateRequest(state),
@@ -143,6 +143,4 @@ EditParentModal = connect(
             dispatch(resetGetSingleRecordRequest())
         }
     })
-)(EditParentModal);
-
-export default withTranslation('translations')(EditParentModal);
+)(EditParentModal));

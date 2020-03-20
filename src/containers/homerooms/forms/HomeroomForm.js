@@ -268,7 +268,7 @@ class HomeroomForm extends Component {
   }
 }
 
-HomeroomForm = connect(
+export default withTranslation('translations')(connect(
   (state) => ({    
     getSchoolTeacherRequest: selectGetSchoolTeachersRequest(state),
     getSchoolStudentsRequest: selectGetSchoolStudentsRequest(state),
@@ -277,6 +277,4 @@ HomeroomForm = connect(
     getSchoolTeachers: (params = {}) => { dispatch(getSchoolTeachers(params)) },
     getSchoolStudents: (params = {}) => { dispatch(getSchoolStudents(params)) }
   })
-)(HomeroomForm);
-
-export default withTranslation('translations')(HomeroomForm);
+)(HomeroomForm));

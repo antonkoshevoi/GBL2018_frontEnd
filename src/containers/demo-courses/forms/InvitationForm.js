@@ -106,7 +106,7 @@ class InvitationForm extends Component {
   }
 }
 
-InvitationForm = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getCoursesRequest: selectGetRecordsRequest(state),
     demoClassrooms: selectRecords(state),
@@ -116,6 +116,4 @@ InvitationForm = connect(
       perPage: 0
     })) }
   })
-)(InvitationForm);
-
-export default withTranslation('translations')(InvitationForm);
+)(InvitationForm));

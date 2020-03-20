@@ -36,13 +36,11 @@ class Subscribed extends Component {
   }
 }
 
-Subscribed = connect(
+export default withRouter(withTranslation('translations')(connect(
     (state) => ({
         invoiceRequest: selectGetInvoiceRequest(state)
     }),
     (dispatch) => ({
         getInvoice: (id) => dispatch(getInvoice(id))    
     })
-)(Subscribed);
-
-export default withRouter(withTranslation('translations')(Subscribed));
+)(Subscribed)));

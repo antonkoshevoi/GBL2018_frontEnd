@@ -72,7 +72,7 @@ class HomeroomsBulkUpload extends Component {
   }
 }
 
-HomeroomsBulkUpload = connect(
+export default withTranslation('translations')(connect(
   (state) => ({    
     bulkUploadRequest: selectBulkUploadRequest(state)
   }),
@@ -82,6 +82,4 @@ HomeroomsBulkUpload = connect(
       dispatch(bulkUpload(file));
     }
   })
-)(HomeroomsBulkUpload);
-
-export default withTranslation('translations')(HomeroomsBulkUpload);
+)(HomeroomsBulkUpload));

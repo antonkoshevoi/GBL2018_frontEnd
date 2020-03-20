@@ -30,7 +30,7 @@ class ShoppingCart extends Component {
     }
 }
 
-ShoppingCart = connect(
+export default withRouter(connect(
     (state) => ({
         auth: state.auth,        
         cartRecordsCount: selectCartRecordsCount(state)
@@ -38,6 +38,4 @@ ShoppingCart = connect(
     (dispatch) => ({
         getRecords: () => { dispatch(getCartRecords()) }
     })
-)(ShoppingCart);
-
-export default withRouter(ShoppingCart);
+)(ShoppingCart));

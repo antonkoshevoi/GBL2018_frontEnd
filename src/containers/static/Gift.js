@@ -199,7 +199,7 @@ class Gift extends Component {
     }
 }
 
-Gift = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         giftRequest:  selectPublicGiftRequest(state),
         getRecordsRequest: selectGetRecordsRequest(state),
@@ -211,6 +211,4 @@ Gift = connect(
         getRecords: () => dispatch(getRecords()),
         goTo: (url) => {dispatch(push(url))}
     })
-)(Gift);
-
-export default withTranslation('translations')(Gift);
+)(Gift));

@@ -51,7 +51,7 @@ class SchoolInfo extends Component {
         schoolLogoCropped:croppedImg
       }
     );
-  };
+  }
 
   render() {
     const { school, t } = this.props;
@@ -89,13 +89,11 @@ class SchoolInfo extends Component {
   }
 }
 
-SchoolInfo = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getUpdateRequest: selectUpdateRequest(state),
   }),
   (dispatch) => ({
     update: (form, params = {}) => { dispatch(update(form, params)) },
   })
-)(SchoolInfo);
-
-export default withTranslation('translations')(SchoolInfo);
+)(SchoolInfo));

@@ -59,7 +59,7 @@ class AssignTeachersModal extends Component {
         });
         this.props.resetAssignTeachersRequest();
         this.props.onClose();
-    };
+    }
 
     _onSubmit (e) {
         e.preventDefault();
@@ -69,7 +69,7 @@ class AssignTeachersModal extends Component {
         this.props.assignTeachers(templateId, {
             teacherIds: teacherIds
         });
-    };
+    }
   
     _handleCheckboxChange(event) {
         let {teacherIds} = this.state;
@@ -153,7 +153,7 @@ class AssignTeachersModal extends Component {
     }
 }
 
-AssignTeachersModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getTeachersRequest: selectGetRecordsRequest(state),
     assignTeachersRequest: selectAssignTeachersRequest(state),
@@ -164,6 +164,4 @@ AssignTeachersModal = connect(
     assignTeachers: (id, data) => { dispatch(assignTeachers(id, data)) },
     resetAssignTeachersRequest: () => { dispatch(resetAssignTeachersRequest()) }
   })
-)(AssignTeachersModal);
-
-export default withTranslation('translations')(AssignTeachersModal);
+)(AssignTeachersModal));

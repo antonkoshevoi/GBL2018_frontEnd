@@ -207,7 +207,7 @@ class Connections extends Component {
     }
 }
 
-Connections = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         getRecordsRequest: selectGetRecordsRequest(state),
         deleteRequest: selectDeleteRequest(state),
@@ -221,6 +221,4 @@ Connections = connect(
         decline: (id) => { dispatch(decline(id)) },
         resetChangeStatusRequest: () => { dispatch(resetChangeStatusRequest()) }        
     })
-)(Connections);
-
-export default withTranslation('translations')(Connections);
+)(Connections));

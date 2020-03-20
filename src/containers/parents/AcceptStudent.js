@@ -43,7 +43,7 @@ class AcceptStudent extends Component {
     }
 }
 
-AcceptStudent = connect(
+export default withRouter(connect(
     (state) => ({
         studentStatusRequest: selectStudentStatusRequest(state),
         auth: state.auth
@@ -55,6 +55,4 @@ AcceptStudent = connect(
         resetStudentRequest: () => {dispatch(resetStudentRequest())},
         appLoad: () => { dispatch(load()) }
     })
-)(AcceptStudent);
-
-export default withRouter(AcceptStudent);   
+)(AcceptStudent));   

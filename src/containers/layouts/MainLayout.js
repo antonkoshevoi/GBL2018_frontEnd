@@ -16,7 +16,7 @@ class MainLayout extends Component {
         sidebarIsOpen:false
     }
 
-    openMobileSidebar = event => {
+    openMobileSidebar = () => {
         if (window.innerWidth > 1240) {
           this.setState({sidebarIsOpen: !this.state.sidebarIsOpen});
         } else {
@@ -78,10 +78,8 @@ class MainLayout extends Component {
     }
 }
 
-MainLayout = connect(
+export default withRouter(connect(
   (state) => ({
     auth: state.auth
   })
-)(MainLayout);
-
-export default withRouter(MainLayout);
+)(MainLayout));

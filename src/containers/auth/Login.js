@@ -29,7 +29,7 @@ class Login extends Component {
 
   _handleUsernameChange = (event) => { this.setState({username: event.target.value}); };
   _handlePasswordChange = (event) => { this.setState({password: event.target.value}); };
-  _handleRememberChange = (event) => { this.setState({remember: !this.state.remember}); };
+  _handleRememberChange = () => { this.setState({remember: !this.state.remember}); };
 
   _login(e) {
     e.preventDefault();
@@ -40,7 +40,9 @@ class Login extends Component {
     let pathname = '/dashboard';
     try {
       pathname = this.props.location.state.from.pathname;
-    } catch (e) {}
+    } catch (e) {
+        
+    }
 
     setRedirectUrl(pathname);
     login(username, password, remember);
@@ -111,9 +113,7 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {};
-
-Login = connect(
+export default withRouter(withTranslation("translations")(connect(
   state => ({
     loginRequest: selectLoginRequest(state),
     auth: state.auth
@@ -122,6 +122,4 @@ Login = connect(
     login: (username, password, remember) => { dispatch(login(username, password, remember)); },
     setRedirectUrl: (uri) => { dispatch(setRedirectUrl(uri)); },
   })
-)(Login);
-
-export default withRouter(withTranslation("translations")(Login));
+)(Login)));

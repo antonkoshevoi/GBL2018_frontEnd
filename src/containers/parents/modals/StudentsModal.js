@@ -28,7 +28,7 @@ class StudentsModal extends Component {
             students: []
         });
         this.props.onClose();
-    };
+    }
     
     _renderStudents() {
         const {students} = this.state;
@@ -96,11 +96,8 @@ class StudentsModal extends Component {
     }
 }
 
-StudentsModal = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         studentsRequest: selectGetStudentsRequest(state)        
-    }),
-    (dispatch) => ({})
-)(StudentsModal);
-
-export default withTranslation('translations')(StudentsModal);
+    })
+)(StudentsModal));

@@ -23,7 +23,7 @@ class ParentForm extends Component {
         ...this.props.parent,
         [name]: value
     });
-  };
+  }
 
   render() {
     const { parent, errors, t } = this.props;

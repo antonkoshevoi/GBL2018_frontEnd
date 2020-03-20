@@ -217,7 +217,7 @@ class InvitationsTab extends Component {
   }
 }
 
-InvitationsTab = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     getRecordsRequest: selectGetRecordsRequest(state),
     deleteRecordRequest: selectDeleteRecordRequest(state),
@@ -228,6 +228,4 @@ InvitationsTab = connect(
     getRecords: (params = {}) => { dispatch(getRecords(params)) },
     deleteRecord: (id, params = {}) => { dispatch(deleteRecord(id, params)) },
   })
-)(InvitationsTab);
-
-export default withTranslation('translations')(InvitationsTab);
+)(InvitationsTab));

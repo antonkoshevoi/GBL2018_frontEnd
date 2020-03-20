@@ -196,7 +196,7 @@ class AdministrationForm extends Component {
   }
 }
 
-AdministrationForm = connect(
+export default withTranslation('translations')(connect(
   (state) => ({    
     roles: selectRoles(state),
     getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state)
@@ -205,6 +205,4 @@ AdministrationForm = connect(
     getRoles: () => { dispatch(getRoles()) },
     getSchoolHomerooms: (params = {}) => { dispatch(getSchoolHomerooms(params)) }
   })
-)(AdministrationForm);
-
-export default withTranslation('translations')(AdministrationForm);
+)(AdministrationForm));

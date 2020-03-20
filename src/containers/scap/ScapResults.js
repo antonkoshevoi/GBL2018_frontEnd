@@ -157,7 +157,7 @@ class ScapResults extends Component {
     }
 }
 
-ScapResults = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         getRecordsRequest: selectGetResultRecordsRequest(state)
     }),
@@ -167,6 +167,4 @@ ScapResults = connect(
         },
         goTo: (url) => {dispatch(push(url))}
     })
-)(ScapResults);
-
-export default withTranslation('translations')(ScapResults);
+)(ScapResults));

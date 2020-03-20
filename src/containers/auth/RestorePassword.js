@@ -83,7 +83,7 @@ class RestorePassword extends Component {
     }
 }
 
-RestorePassword = connect(
+export default withTranslation("translations")(connect(
     state => ({
         resetPasswordRequest: selectResetPasswordRequest(state),
         auth: state.auth
@@ -92,6 +92,4 @@ RestorePassword = connect(
         resetPassword: (username) => {dispatch(resetPassword(username))},        
         goTo: (page) => {dispatch(push(page))}
     })
-)(RestorePassword);
-
-export default withTranslation("translations")(RestorePassword);
+)(RestorePassword));

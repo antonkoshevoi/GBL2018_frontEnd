@@ -211,8 +211,8 @@ class SchoolScap extends Component {
     }
 }
 
-SchoolScap = connect(
-        (state) => ({
+export default withTranslation('translations')(connect(
+    (state) => ({
         getRecordsRequest: selectGetRecordsRequest(state),
         deleteRecordRequest: selectDeleteRequest(state)        
     }),
@@ -225,6 +225,4 @@ SchoolScap = connect(
         },
         goTo: (url) => {dispatch(push(url))}
     })
-)(SchoolScap);
-
-export default withTranslation('translations')(SchoolScap);
+)(SchoolScap));

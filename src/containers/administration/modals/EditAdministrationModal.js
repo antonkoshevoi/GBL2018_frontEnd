@@ -59,11 +59,11 @@ class EditAdministrationModal extends Component {
         this.props.resetUpdateRequest();
         this.props.resetGetSingleRecordRequest();
         this.props.onClose();
-    };
+    }
 
     _onChange(adminUser) {
         this.setState({adminUser});
-    };
+    }
 
     _onSubmit(e) {
         e.preventDefault();
@@ -71,7 +71,7 @@ class EditAdministrationModal extends Component {
             this.state.id,
             this.state.adminUser
         );
-    };
+    }
 
     _setCroppedImage(img) {
         this.setState(
@@ -147,10 +147,10 @@ class EditAdministrationModal extends Component {
     }
 }
 
-EditAdministrationModal = connect(
+export default withTranslation('translations')(connect(
     (state) => ({
         getSingleRecordRequest: selectGetSingleRecordRequest(state),
-        updateRequest: selectUpdateRequest(state),
+        updateRequest: selectUpdateRequest(state)
     }),
     (dispatch) => ({
         update: (id, form, params = {}) => {
@@ -161,8 +161,6 @@ EditAdministrationModal = connect(
         },
         resetGetSingleRecordRequest: () => {
             dispatch(resetGetSingleRecordRequest())
-        },
+        }
     })
-)(EditAdministrationModal);
-
-export default withTranslation('translations')(EditAdministrationModal);
+)(EditAdministrationModal));

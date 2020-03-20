@@ -92,7 +92,7 @@ class LessonsTable extends Component {
     
     let reportIsEmpty = true;
 
-    data.map((unit, unitIndex) => {
+    data.map((unit) => {
         if (this.countNumberOfUnitAttempts(unit) > 0) {
             reportIsEmpty = false;                  
         }
@@ -267,7 +267,7 @@ class LessonsTable extends Component {
   }
 }
 
-LessonsTable = connect(
+export default withTranslation("translations")(withStyles(styles)(connect(
   (state) => ({
     getReportRequest: selectStudentReportDetailsRequest(state)
   }),
@@ -275,6 +275,4 @@ LessonsTable = connect(
     getReport: (studentId, classroomId) => {dispatch(getReportDetails(studentId, classroomId))},
     resetGetReportDetails: () => {dispatch(resetGetReportDetails())}
   })
-)(LessonsTable);
-
-export default withTranslation("translations")(withStyles(styles)(LessonsTable));
+)(LessonsTable)));

@@ -4,11 +4,11 @@ import { load } from '../app/actions';
 import { SIGNUP_PARENT_SUCCESS, SIGNUP_PRINCIPAL_SUCCESS } from './actions';
 import { restoreLogin } from '../auth/actions';
 
-function* onSuccess (action) {
+function* onSuccess() {
   yield put(restoreLogin());
 }
 
-function* onSuccessPrincipal (action) {
+function* onSuccessPrincipal() {
   yield put(restoreLogin());
   yield put(load());
   yield put(push('/dashboard'));

@@ -130,7 +130,7 @@ class ClassroomForm extends Component {
   _renderHomerooms(homeroomIds) {
     const {schoolHomerooms} = this.state;
 
-    return schoolHomerooms.map((homeroom, key) => (
+    return schoolHomerooms.map((homeroom) => (
       <MenuItem key={homeroom.id} value={homeroom.id}>
         <Checkbox checked={homeroomIds ? homeroomIds.includes(homeroom.id) : false}/>
         {homeroom.name}
@@ -258,7 +258,7 @@ class ClassroomForm extends Component {
             <InputLabel htmlFor='homeroomIds'>{t('homeroomsMultiple')}</InputLabel>
             <Select
               multiple={true}
-              renderValue={(e) => this._getSelectedRooms(e)}
+              renderValue={() => this._getSelectedRooms()}
               primarytext={t('selectHomeroom')}
               name='homeroomIds'
               onChange={(e) => {
@@ -280,7 +280,7 @@ class ClassroomForm extends Component {
     );
   }
 
-  _getSelectedRooms(e) {
+  _getSelectedRooms() {
     const {classroom} = this.props;
     const {schoolHomerooms} = this.state;
 
@@ -295,7 +295,7 @@ class ClassroomForm extends Component {
   }
 }
 
-ClassroomForm = connect(
+export default withTranslation('translations')(connect(
   (state) => ({    
     getSchoolTeacherRequest: selectGetSchoolTeachersRequest(state),
     getSchoolHomeroomsRequest: selectGetSchoolHomeroomsRequest(state)
@@ -308,6 +308,4 @@ ClassroomForm = connect(
       dispatch(getSchoolHomerooms(params))
     }
   })
-)(ClassroomForm);
-
-export default withTranslation('translations')(ClassroomForm);
+)(ClassroomForm));

@@ -54,14 +54,14 @@ class CreateTeacherModal extends Component {
 
   _onChange (teacher) {
     this.setState({ teacher });
-  };
+  }
 
   _onSubmit (e) {
     e.preventDefault();
     this.props.create(
       this.state.teacher
     );
-  };
+  }
 
   _setCroppedImage(img){
     this.setState({
@@ -136,7 +136,7 @@ class CreateTeacherModal extends Component {
   }
 }
 
-CreateTeacherModal = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     createRequest: selectCreateRequest(state),
   }),
@@ -144,6 +144,4 @@ CreateTeacherModal = connect(
     create: (form, params = {}) => { dispatch(create(form, params)) },
     resetCreateRequest: () => { dispatch(resetCreateRequest()) },
   })
-)(CreateTeacherModal);
-
-export default withTranslation('translations')(CreateTeacherModal);
+)(CreateTeacherModal));

@@ -12,7 +12,7 @@ import {
 import {yieldErrorToasts, yieldSuccessToasts} from '../../helpers/utils';
 import i18n from '../../configs/i18n';
 
-function* yieldSuccessCardAdd (action) {
+function* yieldSuccessCardAdd() {
   yield put(push('/store/shopping-cart'));
 }
 

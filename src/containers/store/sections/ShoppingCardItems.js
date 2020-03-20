@@ -55,11 +55,11 @@ class ShoppingCardItems extends Component {
     _itemInfo(item) {
         const {t, preview} = this.props;
         
-        return <div className="productInfo d-flex align-items-center">
+        return <div className="productInfo d-sm-flex align-items-center">
             <div className="user-avatar">
-                <img src={item.thumbnail} className="img-responsive" alt=""/>
+                <img src={item.thumbnail} style={{width: '90px'}} alt=""/>
             </div>
-            <div className="pl-3">
+            <div className="pl-0 pt-2 pl-sm-3 pt-sm-0">
                 <NavLink to={`/store/details/${item.storeItemId}`}><h5>{item.title}</h5></NavLink>
                 <p>{preview ? (item.description.substr(0, 50) + '...') : item.description}</p>                
                 <DeleteButton
@@ -102,33 +102,33 @@ class ShoppingCardItems extends Component {
             </Row> 
             : 
             <Row index={i} key={i}>
-                <Td width='10px'>{i + 1}</Td>
-                <Td width='400px'>{this._itemInfo(item)}</Td>
+                <Td className="d-none d-sm-table-cell" width='10px'>{i + 1}</Td>
+                <Td>{this._itemInfo(item)}</Td>
                 <HasRole roles={['Superadministrator', 'School', 'Teacher']}>
-                    <Td width="132px">
+                    <Td className='d-none d-sm-table-cell'>
                         <span className="productLabel font-weight-normal text-center">
                             { item.classroom || '-'}
                         </span>
                     </Td>
                 </HasRole>
-                <Td width='132px'>
+                <Td>
                     {(!item.isInvoice && !item.isDownloadable) ? countInput : <span className="productLabel text-center">{item.count}</span>}            
                 </Td>
-                <Td width='100px'>
+                <Td>
                     <div className="productPrice productLabel">
                         {item.discount > 0 &&
-                            <div>
+                            <div className='text-nowrap text-warning'>
                                 <Price price={item.price} currency={item.currency} />
                                 <span className="discount"></span>
                             </div>
                         }              
-                        <div className="price productLabel">
+                        <div className="price productLabel text-nowrap">
                             <Price price={item.discountPrice} currency={item.currency} />                
                         </div>
                     </div>
                 </Td>
-                <Td width='100px'>
-                    <span className="productPrice productLabel">
+                <Td>
+                    <span className="productPrice productLabel text-nowrap">
                         <Price price={(item.discountPrice * item.count)} currency={item.currency} />
                     </span>
                 </Td>
@@ -194,14 +194,14 @@ class ShoppingCardItems extends Component {
                                 </HeadRow> 
                             : 
                                 <HeadRow>
-                                    <Th width='10px'>#</Th>
-                                    <Th width='400px'>{t('product')}</Th>
+                                    <Th width='10px' className='d-none d-sm-table-cell'>#</Th>
+                                    <Th>{t('product')}</Th>
                                     <HasRole roles={['Superadministrator', 'School', 'Teacher']}>
-                                        <Th width='132px' className="text-center">{t('classroom')}</Th>
+                                        <Th className="text-center d-none d-sm-table-cell">{t('classroom')}</Th>
                                     </HasRole>
-                                    <Th width='132px' className="text-center">{t('quantity')}</Th>
-                                    <Th width='100px'>{t('price')}</Th>  
-                                    <Th width='100px'>{t('total')}</Th>
+                                    <Th className="text-center">{t('quantity')}</Th>
+                                    <Th>{t('price')}</Th>  
+                                    <Th>{t('total')}</Th>
                                 </HeadRow>
                             }                                            
                             </Thead>
@@ -230,7 +230,7 @@ class ShoppingCardItems extends Component {
     }
 }
 
-ShoppingCardItems = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     cartRecordsRequest: selectGetCartRecordsRequest(state),    
     deleteRequest: deleteFromCartRequest(state),
@@ -240,6 +240,4 @@ ShoppingCardItems = connect(
     deleteCartRecord: (id) => { dispatch(deleteCartRecord(id)) },        
     setQuantity: (data) => { dispatch(setItemQuantity(data)) }
   })
-)(ShoppingCardItems);
-
-export default withTranslation('translations')(ShoppingCardItems);
+)(ShoppingCardItems));

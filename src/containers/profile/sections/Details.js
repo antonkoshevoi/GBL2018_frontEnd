@@ -74,7 +74,7 @@ class Details extends Component {
     this.props.update(
       this.state.user
     );
-  };
+  }
 
   render() {
     const { mode, user } = this.state;
@@ -273,13 +273,11 @@ class Details extends Component {
   }
 }
 
-Details = connect(
+export default withTranslation('translations')(connect(
   (state) => ({    
     updateRequest: selectUpdateRequest(state)
   }),
   (dispatch) => ({    
     update: (form, params = {}) => { dispatch(update(form, params)) }
   })
-)(Details);
-
-export default withTranslation('translations')(Details);
+)(Details));

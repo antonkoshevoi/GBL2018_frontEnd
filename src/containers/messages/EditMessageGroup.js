@@ -96,7 +96,7 @@ class EditMessageGroup extends Component {
     }
 }
 
-EditMessageGroup = connect(
+export default withTranslation('translations')(connect(
     (state) => ({    
         groupRequest: selectGetGroupRequest(state),
         updateGroupRequest: selectUpdateGroupRequest(state)
@@ -108,6 +108,4 @@ EditMessageGroup = connect(
         resetUpdateGroupRequest: () => { dispatch(resetUpdateGroupRequest()) },
         goTo: (page) => { dispatch(push(page)) }
     })
-)(EditMessageGroup);
-
-export default withTranslation('translations')(EditMessageGroup);
+)(EditMessageGroup));

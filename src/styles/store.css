@@ -121,9 +121,6 @@
     -o-transform:rotate(-7deg);
     transform:rotate(-7deg);
 }
-td .productPrice {
-    width: 100px;
-}
 .cardItem .productPrice .discount > span {
     color: #525672;    
 }
@@ -246,8 +243,7 @@ button .discount > span {
 }
 
 .shoppingCartTable .productLabel {
-    font-size: 1rem;
-    color: #7b7e8a!important;
+    font-size: 1rem;    
     font-weight: 600;
     display: block;
     position: relative;

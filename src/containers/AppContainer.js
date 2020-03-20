@@ -41,13 +41,11 @@ class AppContainer extends Component {
   }
 }
 
-AppContainer = connect(
-  (state, ownProps) => ({
+export default connect(
+  (state) => ({
     appState: selectAppDomain(state)
   }),
   (dispatch) => ({
     load: () => { dispatch(load()) }
   })
 )(AppContainer);
-
-export default AppContainer;

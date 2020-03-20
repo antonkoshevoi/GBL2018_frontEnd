@@ -54,7 +54,7 @@ class Header extends Component {
     const user = this.props.user.toJS();
     const isLoggedIn = auth.get('isLoggedIn') && userRequest.get('success');
     return (
-      <header className="m-header " style={{top:-headerPosition}} ref="header" data-minimize-offset="200" data-minimize-mobile-offset="200">
+      <header className="m-header " style={{top:-headerPosition}} data-minimize-offset="200" data-minimize-mobile-offset="200">
         <div className="m-container general-header m-container--fluid m-container--full-height">
           <div className="m-stack m-stack--ver m-stack--desktop">
             <div className={`m-stack__item m-brand gravity-logo ${hideMenu ? 'logo-only' : ''}`}>
@@ -105,7 +105,7 @@ class Header extends Component {
   }
 }
 
-Header = connect(
+export default withTranslation("translation")(connect(
   (state) => ({
     auth: state.auth,          
     user: selectUserData(state),
@@ -114,6 +114,4 @@ Header = connect(
   (dispatch) => ({
     logout: () => { dispatch(logout()) }
   })
-)(Header);
-
-export default withTranslation("translation")(Header);
+)(Header));

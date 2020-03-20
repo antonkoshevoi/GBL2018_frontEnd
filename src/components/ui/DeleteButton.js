@@ -33,16 +33,16 @@ class DeleteButton extends Component {
 
   _openConfirm() {
     this.setState({opened: true});    
-  };
+  }
 
   _onCancel() {        
     this.setState({opened: false});
-  };
+  }
 
   _onConfirm() {
     this.setState({opened: false});
     this.props.onClick();
-  };
+  }
 
   render() {
     const {className, title, icon, btnName, confirmOnly, t} = this.props;
@@ -65,6 +65,6 @@ class DeleteButton extends Component {
       </span>
     );
   }
-};
+}
 
 export default withTranslation('translations')(DeleteButton);

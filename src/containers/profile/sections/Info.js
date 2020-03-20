@@ -195,7 +195,7 @@ class Info extends Component {
   }
 }
 
-Info = connect(
+export default withTranslation('translations')(connect(
   (state) => ({
     changePasswordRequest: selectChangePasswordRequest(state),
     changeImageRequest: selectChangeImageRequest(state)    
@@ -205,6 +205,4 @@ Info = connect(
     resetChangePasswordRequest: () => { dispatch(resetChangePasswordRequest()) },
     changeImage: (fields, params = {}) => { dispatch(changeImage(fields, params)) }    
   })
-)(Info);
-
-export default withTranslation('translations')(Info);
+)(Info));

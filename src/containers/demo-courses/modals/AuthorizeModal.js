@@ -56,12 +56,10 @@ class AuthorizeModal extends Component {
   }
 }
 
-AuthorizeModal = connect(
-  (state) => ({}),
+export default withTranslation('translations')(connect(
+  null,
   (dispatch) => ({
     toLogin: () => { dispatch(push('/login')) },
-    toRegistration: () => { dispatch(push('/signUp/parent')) },
+    toRegistration: () => { dispatch(push('/signUp/parent')) }
   })
-)(AuthorizeModal);
-
-export default withTranslation('translations')(AuthorizeModal);
+)(AuthorizeModal));
