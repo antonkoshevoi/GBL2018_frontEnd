@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import { NavLink } from "react-router-dom";
 
 import CldImage from "../../../components/ui/CldImage";
-import AppLink from "../../../components/ui/AppLink";
 
 class SplashJumbotron extends PureComponent {
   render() {
@@ -89,47 +88,6 @@ class SplashJumbotron extends PureComponent {
                   <NavLink to={`/store`} className="btn btn-warning btn-store">
                     {t("bookstore")}
                   </NavLink>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="splash-navigation"></div>
-        <div className="app-download">
-          <div className="container">
-            <div className="row">
-              <div className="col-12 col-sm-12 col-md-7 text-left">
-                <h3>{t("appDownloadCenter")}</h3>
-                <div className="description">
-                  {t("appDownloadCenterDescription")}
-                  &nbsp;
-                  <a href="/">{t("more")}</a>
-                </div>
-              </div>
-              <div className="col-12 col-sm-12 col-md-5 text-right">
-                <div className="applications">
-                  <div>
-                    <AppLink type="students">
-                      <CldImage
-                        src="bzabc_kids_icon_88px.png"
-                        alt="BZabc Kids"
-                      />
-                    </AppLink>
-                    <p>
-                      <AppLink type="students">{t("kidsApp")}</AppLink>
-                    </p>
-                  </div>
-                  <div>
-                    <AppLink type="parents">
-                      <CldImage
-                        src="bzabc_parents_icon_88px.png"
-                        alt="BZabc Parents"
-                      />
-                    </AppLink>
-                    <p>
-                      <AppLink type="parents">{t("parentsApp")}</AppLink>
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>

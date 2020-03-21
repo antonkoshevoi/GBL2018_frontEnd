@@ -4,9 +4,9 @@ import { withTranslation, Trans } from "react-i18next";
 
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-
 import SplashWrapper from "./sections/SplashWrapper";
 import SplashSlider from "./sections/SplashSlider";
+import AppLink from "../../components/ui/AppLink";
 import CldImage from "../../components/ui/CldImage";
 
 function TabPanel(props) {
@@ -64,6 +64,46 @@ class SplashContainer extends PureComponent {
               <Tab label={t("publishersTab")} {...a11yProps(3)} />
             </Tabs>
           </AppBar>
+        <div className="app-download">
+          <div className="container">
+            <div className="row">
+              <div className="col-12 col-sm-12 col-md-7 text-left">
+                <h3>{t("appDownloadCenter")}</h3>
+                <div className="description">
+                  {t("appDownloadCenterDescription")}
+                  &nbsp;
+                  <a href="/">{t("more")}</a>
+                </div>
+              </div>
+              <div className="col-12 col-sm-12 col-md-5 text-right">
+                <div className="applications">
+                  <div>
+                    <AppLink type="students">
+                      <CldImage
+                        src="bzabc_kids_icon_88px.png"
+                        alt="BZabc Kids"
+                      />
+                    </AppLink>
+                    <p>
+                      <AppLink type="students">{t("kidsApp")}</AppLink>
+                    </p>
+                  </div>
+                  <div>
+                    <AppLink type="parents">
+                      <CldImage
+                        src="bzabc_parents_icon_88px.png"
+                        alt="BZabc Parents"
+                      />
+                    </AppLink>
+                    <p>
+                      <AppLink type="parents">{t("parentsApp")}</AppLink>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>          
           <TabPanel value={this.state.value} index={0}>
             <section className="welcome">
               <div className="row">
