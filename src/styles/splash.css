@@ -56,7 +56,7 @@
 }
 .main-banner .main-image {
   position: relative;
-  max-width: 1317px;
+  max-width: 1400px;
   margin: 0 auto;
   width: 100%;
   min-height: 1000px;
@@ -410,8 +410,7 @@ nav .nav-narrow {
 .splash-navigation {
   background-color: var(--splash-navbar-bg);
   color: #fff;
-  position: relative;
-  text-transform: uppercase;
+  position: relative;  
   font-size: 1em;
   min-height: 35px;
 }
@@ -541,13 +540,24 @@ nav .nav-narrow {
 .splash-tabs > header {
   background: #e1e8ef;
   box-shadow: none;
+  margin-bottom: 0.5rem;
+}
+.splash-tabs > header div > span {
+    background-color: #4a8dd3;
 }
 .splash-tabs button {
-  height: 8rem;
+  height: 7rem;
   max-width: 450px;
+}
+.splash-tabs button[aria-selected="true"], .splash-tabs button[aria-selected="true"] span {        
+    color: #4a8dd3;    
 }
 .splash-tabs button span {
   font-size: 1.5rem;
+  padding: 0;
+}
+.splash-tabs button > span {
+    padding: 10px 24px 0;
 }
 
 @media (min-width: 768px) and (max-width: 1239.98px) {
@@ -681,8 +691,7 @@ nav .nav-narrow {
     margin-top: 1rem;
   }
   .splash-points ul li {
-    margin-bottom: 10px;
-    background-color: var(--splash-navbar-bg);
+    margin-bottom: 10px;    
     font-size: 24px;
     line-height: 30px;
     color: #fff;
