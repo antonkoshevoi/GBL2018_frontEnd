@@ -538,23 +538,15 @@ nav .nav-narrow {
 }
 /* Responsive Handling */
 
-.splash-tabs .MuiPaper-elevation4-20 {
+.splash-tabs > header {
+  background: #e1e8ef;
   box-shadow: none;
 }
-
-.splash-tabs .MuiAppBar-colorPrimary-12 {
-  background: #e1e8ef;
-}
-
-.splash-tabs .MuiTab-root-50 {
+.splash-tabs button {
+  height: 8rem;
   max-width: 450px;
 }
-
-.splash-tabs .MuiTab-wrapper-58 {
-  height: 8rem;
-}
-
-.splash-tabs .MuiTab-label-60 {
+.splash-tabs button span {
   font-size: 1.5rem;
 }
 
@@ -673,15 +665,12 @@ nav .nav-narrow {
 }
 
 @media (max-width: 1024px) {
-  .splash-tabs .MuiTab-root-50 {
+  .splash-tabs button {
     max-width: 250px;
-  }
-
-  .splash-tabs .MuiTab-wrapper-58 {
     height: 5rem;
   }
 
-  .splash-tabs .MuiTab-label-60 {
+  .splash-tabs button span {
     font-size: 1rem;
   }
   .main-banner .main-image {
@@ -740,15 +729,12 @@ nav .nav-narrow {
 }
 
 @media (max-width: 768px) {
-  .splash-tabs .MuiTab-root-50 {
+  .splash-tabs button {
     max-width: 250px;
-  }
-
-  .splash-tabs .MuiTab-wrapper-58 {
     height: 4rem;
   }
 
-  .splash-tabs .MuiTab-label-60 {
+  .splash-tabs button span  {
     font-size: 0.75rem;
   }
   .splash .container {
