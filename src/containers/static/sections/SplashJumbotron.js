@@ -6,8 +6,7 @@ import AppLink from "../../../components/ui/AppLink";
 
 class SplashJumbotron extends PureComponent {
   render() {
-    const { t } = this.props;
-    const page = window.location.pathname.replace("/", "") || "parents";
+    const { t } = this.props;    
     return (
       <div className="clearfix">
         <div className="d-none d-md-block main-banner">
@@ -42,7 +41,7 @@ class SplashJumbotron extends PureComponent {
                   </div>
 
                   <div className="bookstore">
-                    <div class="book-store-title-image">
+                    <div className="book-store-title-image">
                       <CldImage alt="" src="bookstoretitle.png" />
                     </div>
                     <NavLink

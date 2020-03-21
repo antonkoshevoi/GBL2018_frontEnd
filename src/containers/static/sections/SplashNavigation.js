@@ -13,9 +13,7 @@ class SplashNavigation extends PureComponent {
   }
 
   render() {
-    const { t, location } = this.props;
-
-    const page = location.pathname.replace("/", "") || "parents";
+    const { t } = this.props;
 
     return (
       <nav>
