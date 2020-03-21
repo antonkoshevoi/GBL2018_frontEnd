@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { NavLink } from "react-router-dom";
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
@@ -300,51 +300,48 @@ class SplashContainer extends PureComponent {
           <TabPanel value={this.state.value} index={1}>
             <p className="p-text">{t("schoolsAndTeachersText1")}</p>
             <p className="p-text">{t("schoolsAndTeachersText2")}</p>
-            <p className="p-text">
-              {t("schoolsAndTeachersText3")}
+            <div className="p-text">
+              <p>{t("schoolsAndTeachersText3")}</p>
               <ul>
-                <li> {t("schoolsAndTeachersText31")}</li>
+                <li>{t("schoolsAndTeachersText31")}</li>
                 <li>{t("schoolsAndTeachersText32")}</li>
-                <li> {t("schoolsAndTeachersText33")}</li>
+                <li>{t("schoolsAndTeachersText33")}</li>
                 <li>{t("schoolsAndTeachersText34")}</li>
                 <li>{t("schoolsAndTeachersText35")}</li>
                 <li>{t("schoolsAndTeachersText36")}</li>
                 <li>{t("schoolsAndTeachersText37")}</li>
               </ul>
-            </p>
+            </div>
           </TabPanel>
           <TabPanel value={this.state.value} index={2}>
             <p className="p-text">{t("studenstAndParents1")}</p>
             <p className="p-text">{t("studenstAndParents2")}</p>
             <p className="p-text">{t("studenstAndParents3")}</p>
-            <p className="p-text">
-              {t("studenstAndParents4")}
+            <div className="p-text">
+              <p>{t("studenstAndParents4")}</p>
               <ul>
                 <li> {t("studenstAndParents41")}</li>
                 <li>{t("studenstAndParents42")}</li>
                 <li> {t("studenstAndParents43")}</li>
                 <li>{t("studenstAndParents44")}</li>
               </ul>
-            </p>
-            <p className="p-text">
-              {t("studenstAndParents5")}
+            </div>
+            <div className="p-text">
+              <p>{t("studenstAndParents5")}</p>
               <ul>
                 <li> {t("studenstAndParents51")}</li>
                 <li>{t("studenstAndParents52")}</li>
                 <li> {t("studenstAndParents53")}</li>
                 <li>{t("studenstAndParents54")}</li>
               </ul>
-            </p>
+            </div>
           </TabPanel>
           <TabPanel value={this.state.value} index={3}>
             <p className="p-text">{t("publishersText1")}</p>
             <p className="p-text">{t("publishersText2")}</p>
             <p className="p-text">{t("publishersText3")}</p>
             <p className="p-text">{t("publishersText4")}</p>
-            <p
-              className="p-text"
-              dangerouslySetInnerHTML={{ __html: t("publishersText5") }}
-            ></p>
+            <p className="p-text"><Trans i18nKey="splashScreen:publishersText5"><a href='mailto:office@gravitybrain.com'>office@gravitybrain.com</a>.</Trans></p>
           </TabPanel>
         </div>
       </SplashWrapper>

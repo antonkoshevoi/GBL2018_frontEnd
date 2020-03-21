@@ -70,19 +70,19 @@ export default {
   schoolsAndTeachersText2:
     " Note: students must be registered and enrolled in courses prior to commencing work in the BZabc Kids App.",
   schoolsAndTeachersText3:
-    "School Web Tool provides all tools required to set up users and roles,",
+    "School Web Tool provides all tools required to set up users and roles:",
   schoolsAndTeachersText31:
-    "1. registration of schools, teachers and students,",
+    "1. Registration of schools, teachers and students,",
   schoolsAndTeachersText32:
     "2. Grouping system assigning students and teachers to homerooms or classrooms",
   schoolsAndTeachersText33:
-    " 3. enrollment in classes, based on the grouping above",
+    "3. Enrollment in classes, based on the grouping above",
   schoolsAndTeachersText34:
-    " 4. Detailed Teacher UI to arrange lessons be day, or week,",
+    "4. Detailed Teacher UI to arrange lessons be day, or week,",
   schoolsAndTeachersText35:
-    "5. automated reports on student progress and performance",
+    "5. Automated reports on student progress and performance",
   schoolsAndTeachersText36:
-    " 6. a robust messaging system for schools, teachers and parents, based on the same groups, with permissions control on the part of the school.",
+    "6. A robust messaging system for schools, teachers and parents, based on the same groups, with permissions control on the part of the school.",
   schoolsAndTeachersText37:
     "7. Student Centered Planned and assessment template builders, which can be assigned to teachers, who can then produce unique reports as you have now.",
   studenstAndParents1:
@@ -118,7 +118,7 @@ export default {
   publishersText4:
     "All of the software is ready to go and we can have all schools and parents grouped and connected within a day or two. At the moment we only have some courses, but we can build rapidly to accommodate whatever the curriculum requirements are for the given courses and student levels. Importantly, all students' grades and reporting for all courses is in one place. No need to have a variety of Apps",
   publishersText5:
-    "If your groupo would like to discuss authoring materials, please contact us at <a href='mailto:office@gravitybrain.com'>office@gravitybrain.com</a> or call 1-306-570-6488",
+    "If your groupo would like to discuss authoring materials, please contact us at <0>office@gravitybrain.com</0> or call 1-306-570-6488",
 
   methodologyContent: {
     title: "BZabc Methodology",
