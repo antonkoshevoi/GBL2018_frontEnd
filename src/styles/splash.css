@@ -214,7 +214,7 @@
 .p-text {
   color: #1c4062;
   font-size: 20px;
-  margin: 20px 50px 30px;
+  margin: 20px 0 30px;
 }
 
 .p-text ul {
@@ -536,13 +536,15 @@ nav .nav-narrow {
   margin-bottom: -60px;
 }
 /* Responsive Handling */
-
-.splash-tabs > header {
-  background: #e1e8ef;
+.splash-tabs {
+  background: #efefef;  
+}
+.splash-tabs header {
+  background: #efefef;
   box-shadow: none;
   margin-bottom: 0.5rem;
 }
-.splash-tabs > header div > span {
+.splash-tabs header div > span {
     background-color: #4a8dd3;
 }
 .splash-tabs button {

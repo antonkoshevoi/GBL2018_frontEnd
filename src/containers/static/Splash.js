@@ -4,10 +4,12 @@ import { withTranslation, Trans } from "react-i18next";
 
 import { AppBar, Tabs, Tab } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import SplashWrapper from "./sections/SplashWrapper";
 import SplashSlider from "./sections/SplashSlider";
 import AppLink from "../../components/ui/AppLink";
 import CldImage from "../../components/ui/CldImage";
+import SplashJumbotron from "./sections/SplashJumbotron";
+import SplashHeader from "./sections/SplashHeader";
+import SplashFooter from "./sections/SplashFooter";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,8 +52,11 @@ class SplashContainer extends PureComponent {
     const { t } = this.props;
 
     return (
-      <SplashWrapper showJumbotron>
-        <div className="splash-tabs">
+<div className="splash">
+      <SplashHeader {...this.props} />
+      <SplashJumbotron {...this.props} />
+      <div className="splash-tabs">
+      <div className="container">
           <AppBar position="static">
             <Tabs
               value={this.state.value}
@@ -63,7 +68,9 @@ class SplashContainer extends PureComponent {
               <Tab label={t("parentsStudents")} {...a11yProps(2)} />
               <Tab label={t("publishersTab")} {...a11yProps(3)} />
             </Tabs>
-          </AppBar>
+          </AppBar>    
+          </div>
+          </div>
         <div className="app-download">
           <div className="container">
             <div className="row">
@@ -103,12 +110,15 @@ class SplashContainer extends PureComponent {
               </div>
             </div>
           </div>
-        </div>          
+        </div>           
+      <section  className="splash-section">
+        <div className="container">
+            <div class="pt-4">
           <TabPanel value={this.state.value} index={0}>
             <section className="welcome">
               <div className="row">
                 <div className="col-sm-12 col-md-8 col-lg-6 m-auto">
-                  <h1 className="section-head">{t("welcomeToWebsite")}</h1>
+                  <h1 className="section-head mt-5">{t("welcomeToWebsite")}</h1>
                 </div>
               </div>
               <div className="row">
@@ -384,7 +394,10 @@ class SplashContainer extends PureComponent {
           </TabPanel>
         </div>
         <SplashSlider {...this.props} />
-      </SplashWrapper>
+        </div>
+        <SplashFooter {...this.props} />
+      </section>
+    </div>
     );
   }
 }
