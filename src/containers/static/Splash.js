@@ -294,8 +294,7 @@ class SplashContainer extends PureComponent {
                   </div>
                 </div>
               </div>
-            </section>
-            <SplashSlider {...this.props} />
+            </section>            
           </TabPanel>
           <TabPanel value={this.state.value} index={1}>
             <p className="p-text">{t("schoolsAndTeachersText1")}</p>
@@ -344,6 +343,7 @@ class SplashContainer extends PureComponent {
             <p className="p-text"><Trans i18nKey="splashScreen:publishersText5"><a href='mailto:office@gravitybrain.com'>office@gravitybrain.com</a>.</Trans></p>
           </TabPanel>
         </div>
+        <SplashSlider {...this.props} />
       </SplashWrapper>
     );
   }
