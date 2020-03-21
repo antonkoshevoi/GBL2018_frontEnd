@@ -11,8 +11,8 @@ export default {
   professionallyDesignedCourses:
     "Language and math training for early learners",
   justForKids: "Just for kids!",
-  splashBannerPoint1: "* Quick Registaration & Enrollment",
-  splashBannerPoint2: "* Engaging, interactive Lessions",
+  splashBannerPoint1: "* Quick registration & enrollment",
+  splashBannerPoint2: "* Engaging, interactive lessons",
   splashBannerPoint3: "* Personalized data-driven learning",
   splashBannerPoint4: "* Real-time Reporting",
   splashBannerPoint5: "* Real-time Messaging",
