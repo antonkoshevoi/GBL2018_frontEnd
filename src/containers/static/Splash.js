@@ -7,9 +7,10 @@ import Typography from "@material-ui/core/Typography";
 import SplashSlider from "./sections/SplashSlider";
 import AppLink from "../../components/ui/AppLink";
 import CldImage from "../../components/ui/CldImage";
-import SplashJumbotron from "./sections/SplashJumbotron";
-import SplashHeader from "./sections/SplashHeader";
-import SplashFooter from "./sections/SplashFooter";
+import SplashWrapper from "./sections/SplashWrapper";
+
+import videoIcon from '../../media/images/video-icon.png'
+import pdfIcon from '../../media/images/pdf-icon.png'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,38 +53,32 @@ class SplashContainer extends PureComponent {
     const { t } = this.props;
 
     return (
-<div className="splash">
-      <SplashHeader {...this.props} />
-      <SplashJumbotron {...this.props} />
-      <div className="splash-tabs">
-      <div className="container">
-          <AppBar position="static">
-            <Tabs
-              value={this.state.value}
-              onChange={this.handleChange}
-              aria-label="simple tabs example"
-            >
-              <Tab label={t("platformOverview")} {...a11yProps(0)} />
-              <Tab label={t("schoolsTeachers")} {...a11yProps(1)} />
-              <Tab label={t("parentsStudents")} {...a11yProps(2)} />
-              <Tab label={t("publishersTab")} {...a11yProps(3)} />
-            </Tabs>
-          </AppBar>    
+      <SplashWrapper showJumbotron>        
+        <div className="splash-tabs">
+          <div className="container">
+            <AppBar position="static">
+              <Tabs
+                value={this.state.value}
+                onChange={this.handleChange}
+              >
+                <Tab label={t("platformOverview")} {...a11yProps(0)} />
+                <Tab label={t("schoolsTeachers")} icon={<span className="schools-teachers" />} {...a11yProps(1)} />
+                <Tab label={t("parentsStudents")} icon={<span className="parents-students" />} {...a11yProps(2)} />
+                <Tab label={t("publishersTab")} {...a11yProps(3)} />
+              </Tabs>
+            </AppBar>    
           </div>
-          </div>
+        </div>
         <div className="app-download">
           <div className="container">
-            <div className="row">
-              <div className="col-12 col-sm-12 col-md-7 text-left">
+            <div className="d-flex justify-content-between align-items-center">
+              <div className="text-left pr-3">
                 <h3>{t("appDownloadCenter")}</h3>
                 <div className="description">
                   {t("appDownloadCenterDescription")}
-                  &nbsp;
-                  <a href="/">{t("more")}</a>
                 </div>
               </div>
-              <div className="col-12 col-sm-12 col-md-5 text-right">
-                <div className="applications">
+                <div className="applications d-sm-flex justify-content-around align-items-center">
                   <div>
                     <AppLink type="students">
                       <CldImage
@@ -105,15 +100,12 @@ class SplashContainer extends PureComponent {
                     <p>
                       <AppLink type="parents">{t("parentsApp")}</AppLink>
                     </p>
-                  </div>
-                </div>
+                  </div>                
               </div>
             </div>
           </div>
-        </div>           
-      <section  className="splash-section">
-        <div className="container">
-            <div class="pt-4">
+        </div>      
+        <div className="pt-4">
           <TabPanel value={this.state.value} index={0}>
             <section className="welcome">
               <div className="row">
@@ -347,19 +339,39 @@ class SplashContainer extends PureComponent {
             </section>            
           </TabPanel>
           <TabPanel value={this.state.value} index={1}>
-            <p className="p-text">{t("schoolsAndTeachersText1")}</p>
-            <p className="p-text">{t("schoolsAndTeachersText2")}</p>
-            <div className="p-text">
-              <p>{t("schoolsAndTeachersText3")}</p>
-              <ul>
-                <li>{t("schoolsAndTeachersText31")}</li>
-                <li>{t("schoolsAndTeachersText32")}</li>
-                <li>{t("schoolsAndTeachersText33")}</li>
-                <li>{t("schoolsAndTeachersText34")}</li>
-                <li>{t("schoolsAndTeachersText35")}</li>
-                <li>{t("schoolsAndTeachersText36")}</li>
-                <li>{t("schoolsAndTeachersText37")}</li>
-              </ul>
+            <div className="d-flex justify-content-between">
+              <div>
+                <p className="p-text">{t("schoolsAndTeachersText1")}</p>
+                <p className="p-text">{t("schoolsAndTeachersText2")}</p>
+                <div className="p-text">
+                  <p>{t("schoolsAndTeachersText3")}</p>
+                  <ul>
+                    <li>{t("schoolsAndTeachersText31")}</li>
+                    <li>{t("schoolsAndTeachersText32")}</li>
+                    <li>{t("schoolsAndTeachersText33")}</li>
+                    <li>{t("schoolsAndTeachersText34")}</li>
+                    <li>{t("schoolsAndTeachersText35")}</li>
+                    <li>{t("schoolsAndTeachersText36")}</li>
+                    <li>{t("schoolsAndTeachersText37")}</li>
+                  </ul>
+                </div>              
+              </div>
+              <div>
+                <div className="download-tool p-3 my-4">
+                    <div className="text-center text-nowrap mt-2">
+                      <a alt="" href="#" className="mx-4"><img style={{maxWidth: '60px'}} src={videoIcon} /></a>
+                      <a alt="" href="#" className="mx-4"><img style={{maxWidth: '60px'}} src={pdfIcon} /></a>
+                    </div>
+                    <h4 className="text-center text-nowrap mt-3 mb-0">{t('schoolWebTool')}</h4>
+                </div>
+                <div className="download-tool p-3">
+                    <div className="text-center text-nowrap mt-2">
+                      <a alt="" href="#" className="mx-4"><img style={{maxWidth: '60px'}} src={videoIcon} /></a>
+                      <a alt="" href="#" className="mx-4"><img style={{maxWidth: '60px'}} src={pdfIcon} /></a>
+                    </div>
+                    <h4 className="text-center text-nowrap mt-3 mb-0">{t('gettingStarted')}</h4>
+                </div>          
+              </div>
             </div>
           </TabPanel>
           <TabPanel value={this.state.value} index={2}>
@@ -393,11 +405,8 @@ class SplashContainer extends PureComponent {
             <p className="p-text"><Trans i18nKey="splashScreen:publishersText5"><a href='mailto:office@gravitybrain.com'>office@gravitybrain.com</a>.</Trans></p>
           </TabPanel>
         </div>
-        <SplashSlider {...this.props} />
-        </div>
-        <SplashFooter {...this.props} />
-      </section>
-    </div>
+        <SplashSlider {...this.props} />       
+      </SplashWrapper>
     );
   }
 }

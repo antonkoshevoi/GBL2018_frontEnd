@@ -4,7 +4,7 @@ export default {
   signup: "Sign Up",
   sendGift: "Send a Gift",
   subscription: "Subscription",
-  subscriptionStartingFrom: "Starting at $8.99/month",
+  subscriptionStartingFrom: "Starting at <0>$8.99</0>/month",
   workBooksAndDownloads: "Workbooks & Downloads",
   bookstore: "Bookstore",
   giveGiftOfLearning: "The BZabc Learning Platform",
@@ -60,8 +60,7 @@ export default {
   learnMore: "Learn more",
   productsNotFound: "Products Not Found...",
   appDownloadCenter: "App Download Center",
-  appDownloadCenterDescription:
-    "Learners and their parents must first register, subscribe, and enroll online or through the BZabc Parents App.",
+  appDownloadCenterDescription: "Before using the Kids App, Learners must be registered and enrolled in courses by either their school or their parent/guardian.",
   more: "more...",
   parentsApp: "BZabc Parents",
   kidsApp: "BZabc Kids",
@@ -119,7 +118,8 @@ export default {
     "All of the software is ready to go and we can have all schools and parents grouped and connected within a day or two. At the moment we only have some courses, but we can build rapidly to accommodate whatever the curriculum requirements are for the given courses and student levels. Importantly, all students' grades and reporting for all courses is in one place. No need to have a variety of Apps",
   publishersText5:
     "If your groupo would like to discuss authoring materials, please contact us at <0>office@gravitybrain.com</0> or call 1-306-570-6488",
-
+  schoolWebTool: "School Web Tool",
+  gettingStarted: "Getting Started",
   methodologyContent: {
     title: "BZabc Methodology",
     paragraphs: [
