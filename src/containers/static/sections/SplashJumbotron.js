@@ -1,22 +1,46 @@
 import React, { PureComponent } from "react";
-import { NavLink } from "react-router-dom";
-
+import {NavLink} from "react-router-dom";
+import {Trans} from "react-i18next";
+import {connect} from 'react-redux';
+import {selectGetRecordRequest} from '../../../redux/subscriptions/selectors';
+import {getRecord} from '../../../redux/subscriptions/actions';
+import {Price} from '../../../components/ui/Price';
 import CldImage from "../../../components/ui/CldImage";
 
 class SplashJumbotron extends PureComponent {
+  
+    constructor(props) {
+        super(props);
+        this.state = {
+            subscription: null
+        };
+    }
+    
+    componentDidMount() {        
+        const {getRecord} = this.props;        
+        getRecord(1);
+    }
+    
+    componentDidUpdate(prevProps) {
+        const success = this.props.getRecordRequest.get('success');        
+
+        if (success && !prevProps.getRecordRequest.get('success')) {               
+            this.setState({subscription: this.props.getRecordRequest.get('record')});
+        }       
+    }
+    
   render() {
-    const { t } = this.props;    
+    const { t } = this.props;
+    const { subscription } = this.state;
     return (
       <div className="clearfix">
         <div className="d-none d-md-block main-banner">
           <div className="container">
-            <div className="main-image">
-              <CldImage alt="" src="SplashMain.jpg" />
+            <div className="main-image">              
               <div className="main-image-text">
                 <h1>{t("giveGiftOfLearning")}</h1>
-                <h2>{t("professionallyDesignedCourses")}</h2>
-                {/*<h3>{t("justForKids")}</h3>*/}
-                <div className="splash-points">
+                <h2>{t("professionallyDesignedCourses")}</h2>                
+                <div className="splash-points d-flex flex-column align-items-end">
                   <ul>
                     <li>{t("splashBannerPoint1")}</li>
                     <li>{t("splashBannerPoint2")}</li>
@@ -24,9 +48,8 @@ class SplashJumbotron extends PureComponent {
                     <li>{t("splashBannerPoint4")}</li>
                     <li>{t("splashBannerPoint5")}</li>
                   </ul>
-                </div>
-
-                <div className="main-banner-buttons">
+                
+                <div className="main-banner-buttons mb-5">
                   <div className="subscriptions">
                     <NavLink
                       to={`/gift`}
@@ -35,9 +58,12 @@ class SplashJumbotron extends PureComponent {
                       {t("subscription")}
                     </NavLink>
                   </div>
-                  <div className=" starting-from-text">
-                    {t("subscriptionStartingFrom")}
-                  </div>
+                  {subscription && 
+                  <div className=" starting-from-text">                   
+                    <Trans i18nKey="splashScreen:subscriptionStartingFrom">
+                      <Price price={subscription.get('priceMonthly')} currency={subscription.get('currency')} />
+                    </Trans>
+                  </div>}
 
                   <div className="bookstore">
                     <div className="book-store-title-image">
@@ -54,6 +80,7 @@ class SplashJumbotron extends PureComponent {
                     {t("workBooksAndDownloads")}
                   </div>
                 </div>
+              </div>
               </div>
             </div>
           </div>
@@ -98,4 +125,11 @@ class SplashJumbotron extends PureComponent {
   }
 }
 
-export default SplashJumbotron;
+export default connect(
+    (state) => ({        
+        getRecordRequest: selectGetRecordRequest(state)
+    }),
+    (dispatch) => ({
+        getRecord: (id) => dispatch(getRecord(id))
+    })
+)(SplashJumbotron);
