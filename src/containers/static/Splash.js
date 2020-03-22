@@ -339,8 +339,8 @@ class SplashContainer extends PureComponent {
             </section>            
           </TabPanel>
           <TabPanel value={this.state.value} index={1}>
-            <div className="d-flex justify-content-between">
-              <div>
+            <div className="d-sm-flex justify-content-between">
+              <div className="mr-0 mr-sm-3">
                 <p className="p-text">{t("schoolsAndTeachersText1")}</p>
                 <p className="p-text">{t("schoolsAndTeachersText2")}</p>
                 <div className="p-text">
@@ -356,18 +356,18 @@ class SplashContainer extends PureComponent {
                   </ul>
                 </div>              
               </div>
-              <div>
-                <div className="download-tool p-3 my-4">
+              <div className="d-flex d-sm-block justify-content-center">
+                <div className="download-tool p-3 my-sm-4 mr-3 mx-sm-0">
                     <div className="text-center text-nowrap mt-2">
-                      <a alt="" href="#" className="mx-4"><img style={{maxWidth: '60px'}} src={videoIcon} /></a>
-                      <a alt="" href="#" className="mx-4"><img style={{maxWidth: '60px'}} src={pdfIcon} /></a>
+                      <a alt="" href="#" className="mx-1 mx-sm-4"><img style={{maxWidth: '60px'}} src={videoIcon} /></a>
+                      <a alt="" href="#" className="mx-1 mx-sm-4"><img style={{maxWidth: '60px'}} src={pdfIcon} /></a>
                     </div>
                     <h4 className="text-center text-nowrap mt-3 mb-0">{t('schoolWebTool')}</h4>
                 </div>
-                <div className="download-tool p-3">
+                <div className="download-tool p-3 ml-3 mx-sm-0">
                     <div className="text-center text-nowrap mt-2">
-                      <a alt="" href="#" className="mx-4"><img style={{maxWidth: '60px'}} src={videoIcon} /></a>
-                      <a alt="" href="#" className="mx-4"><img style={{maxWidth: '60px'}} src={pdfIcon} /></a>
+                      <a alt="" href="#" className="mx-1 mx-sm-4"><img style={{maxWidth: '60px'}} src={videoIcon} /></a>
+                      <a alt="" href="#" className="mx-1 mx-sm-4"><img style={{maxWidth: '60px'}} src={pdfIcon} /></a>
                     </div>
                     <h4 className="text-center text-nowrap mt-3 mb-0">{t('gettingStarted')}</h4>
                 </div>          
