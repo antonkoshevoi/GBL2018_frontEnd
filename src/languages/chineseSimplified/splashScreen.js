@@ -4,6 +4,7 @@ export default {
   signup: "Sign Up",
   sendGift: "Send a Gift",
   subscription: "Subscription",
+  publishers: "Publishers",
   subscriptionStartingFrom: "Starting at <0>$8.99</0>/month",
   bookstore: "Bookstore",
   giveGiftOfLearning: "The BZabc Learning Platform",
@@ -190,52 +191,6 @@ export default {
         content: `With BZabc, kids are guided through all lessons over day, weeks and months of any given course.  This ensures that all kids learn ALL the material, that they develop all target language skills.  BZabc also has a Navigation menu should student decided to do extra review, rewatch videos, or have a look at forthcoming material. 
                 The BZabc Kids App is server-connected.  It stores student's responses and utilizes this data to determine the appropriate order of lessons for each given learning session.  
                 Each and every lesson must be successfully passed a number of times over a period of days or weeks.  This ensure that students develop long-term memory and a deep skillset.`
-      }
-    ]
-  },
-  aboutContent: {
-    image: "//d2cnhr6egzpvdl.cloudfront.net/image/splash-image1.3239d7be.png",
-    title: "About Us",
-    paragraphs: [
-      {
-        title: "Paragraph #1",
-        content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at."
-      },
-      {
-        title: "Paragraph #2",
-        content:
-          "Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam."
-      }
-    ]
-  },
-  parentsStudentsContent: {
-    title: "Students  & Parents",
-    paragraphs: [
-      {
-        title: "Paragraph #1",
-        content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at."
-      },
-      {
-        title: "Paragraph #2",
-        content:
-          "Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam."
-      }
-    ]
-  },
-  schoolsTeachersContent: {
-    title: "Schools & Teachers",
-    paragraphs: [
-      {
-        title: "Paragraph #1",
-        content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, nibh sit amet semper suscipit, nisl orci molestie magna, vitae convallis lectus nulla ac nunc. Vestibulum rutrum turpis quis enim dapibus sodales. Sed vitae magna efficitur, pulvinar ligula nec, venenatis sem. In faucibus nisi non faucibus fringilla. Ut eu semper ligula, vitae sollicitudin velit. Nam sed urna ut tellus mattis porttitor. Aliquam volutpat diam sit amet gravida molestie. Mauris vestibulum massa feugiat blandit venenatis. Mauris sed iaculis odio, eget dictum mauris. Donec egestas felis at blandit pretium. In aliquam augue elit, vel pulvinar sem tristique at."
-      },
-      {
-        title: "Paragraph #2",
-        content:
-          "Sed auctor, tortor at venenatis facilisis, tellus velit sollicitudin ante, eu aliquet lacus dui vitae purus. Maecenas dapibus eget libero eu iaculis. Phasellus ipsum purus, commodo ac ligula non, luctus pretium lacus. Fusce tortor nibh, condimentum eget facilisis quis, molestie a felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent non lacus quam. Aliquam at dignissim odio, non tristique diam. Curabitur id enim orci. Pellentesque accumsan velit sit amet neque facilisis blandit quis et sapien. Donec volutpat facilisis ipsum id consequat. Maecenas aliquam tincidunt mauris, ac sodales massa tincidunt eget. In sem elit, luctus et augue a, sollicitudin fringilla quam. Fusce vehicula lorem at tortor dignissim, at tempor quam placerat. Mauris gravida leo nibh, vitae consectetur ante finibus at. Quisque fermentum sem nec pharetra aliquam."
       }
     ]
   },

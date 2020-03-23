@@ -47,40 +47,39 @@ class SplashJumbotron extends PureComponent {
                     <li>{t("splashBannerPoint3")}</li>
                     <li>{t("splashBannerPoint4")}</li>
                     <li>{t("splashBannerPoint5")}</li>
-                  </ul>
-                
-                <div className="main-banner-buttons mb-5">
-                  <div className="subscriptions">
-                    <NavLink
-                      to={`/gift`}
-                      className="btn btn-warning btn-subscriptions"
-                    >
-                      {t("subscription")}
-                    </NavLink>
-                  </div>
-                  {subscription && 
-                  <div className=" starting-from-text">                   
-                    <Trans i18nKey="splashScreen:subscriptionStartingFrom">
-                      <Price price={subscription.get('priceMonthly')} currency={subscription.get('currency')} />
-                    </Trans>
-                  </div>}
-
-                  <div className="bookstore">
-                    <div className="book-store-title-image">
-                      <CldImage alt="" src="bookstoretitle.png" />
+                  </ul>                
+                  <div className="main-banner-buttons mb-5">
+                    <div className="subscriptions">
+                      <NavLink
+                        to={`/gift`}
+                        className="btn btn-warning btn-subscriptions"
+                      >
+                        {t("subscription")}
+                      </NavLink>
                     </div>
-                    <NavLink
-                      to={`/store`}
-                      className="btn btn-warning btn-store"
-                    >
-                      {t("bookstore")}
-                    </NavLink>
-                  </div>
-                  <div className=" starting-from-text">
-                    {t("workBooksAndDownloads")}
+                    {subscription && 
+                    <div className="starting-from-text mt-1 text-nowrap">                   
+                      <Trans i18nKey="splashScreen:subscriptionStartingFrom">
+                        <Price price={subscription.get('priceMonthly')} />
+                      </Trans>
+                    </div>}
+
+                    <div className="bookstore">
+                      <div className="book-store-title-image">
+                        <CldImage alt="" src="bookstoretitle.png" />
+                      </div>
+                      <NavLink
+                        to={`/store`}
+                        className="btn btn-warning btn-store"
+                      >
+                        {t("bookstore")}
+                      </NavLink>
+                    </div>
+                    <div className="starting-from-text mt-1 text-nowrap">
+                      {t("workBooksAndDownloads")}
+                    </div>
                   </div>
                 </div>
-              </div>
               </div>
             </div>
           </div>

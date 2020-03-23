@@ -84,18 +84,13 @@ import Downloads from '../containers/downloads/Downloads';
 
 export default () => (
   <AppContainer>
-    <Switch>      
-      <Route exact path='/about' title='about' render={(props) => <Content {...props} page="aboutContent" /> }  />
-      
-      <Route exact path='/schools' title='schoolsTeachers' render={(props) => <Content {...props} page="schoolsTeachersContent" /> }  />
-      <Route exact path='/terms' title='termsAndConditions' render={(props) => <Content {...props} page="termsAndConditions" /> }  />
-      <Route exact path='/methodology' title="methodology" render={(props) => <Content {...props} page="methodologyContent" /> }  />
-      <Route exact path='/tech-specs' title="techSpecs" render={(props) => <Content {...props} page="techSpecsContent" /> }  />
-      
+    <Switch>     
       <Route exact path='/privacy-policy.html' title="privacyPolicy" render={(props) => <Content {...props} page="privacyPolicyContent" /> }  />
       <Route exact path='/' title="parents" component={SplashContainer} />       
-      <Route exact path='/parents' title="parents" component={SplashContainer}  />
-      <Route exact path='/splash' title="parents" component={SplashContainer} />
+      <Route exact path='/parents' title="parents" render={(props) => <SplashContainer {...props} page="parents" /> }  />
+      <Route exact path='/schools' title="schools" render={(props) => <SplashContainer {...props} page="schools" /> } />
+      <Route exact path='/publishers' title="schools" render={(props) => <SplashContainer {...props} page="publishers" /> } />
+      <Route exact path='/terms' title='termsAndConditions' render={(props) => <Content {...props} page="termsAndConditions" /> }  />
       <Route exact path='/login' title="login" component={Login} />
       <Route exact path='/restore-login' title='restoreLogin' component={RestoreLogin} />
       <Route exact path='/restore-password' title='restorePassword' component={RestorePassword} />
