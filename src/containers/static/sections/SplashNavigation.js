@@ -42,7 +42,7 @@ class SplashNavigation extends PureComponent {
             </div>
           </div>
 
-          <div className="container text-center clearfix narrow-links">
+          <div id="mobile-menu" className="container text-center clearfix narrow-links">
             <NavLink to={`/store`} className="btn radius-0 btn-sm ">
               {t("store")}
             </NavLink>
