@@ -62,8 +62,10 @@ class SplashContainer extends PureComponent {
       this.setState({
         currentTab: (this.props.page || 'overview')
       });
+      window.scroll(0, document.getElementById('splash-tab-content').offsetTop - document.getElementById('sticky-header').clientHeight);
     }
-  }    
+    document.getElementById('mobile-menu').style.removeProperty('display');      
+  }
 
   render() {
     const { t } = this.props;
@@ -117,7 +119,7 @@ class SplashContainer extends PureComponent {
             </div>
           </div>        
         </div>      
-        <div className="pt-4 splash-tab-content">
+        <div id="splash-tab-content" className="pt-4 splash-tab-content">
           <TabPanel currentTab={this.state.currentTab} index='overview'>
             <section className="welcome">
               <div className="row">
@@ -351,7 +353,7 @@ class SplashContainer extends PureComponent {
             </section>            
           </TabPanel>
           <TabPanel currentTab={this.state.currentTab} index="schools">
-            <h2 class="d-sm-none">{t("schoolsTeachers")}</h2>
+            <h2 class="d-md-none">{t("schoolsTeachers")}</h2>
             <div className="d-sm-flex justify-content-between">
               <div className="mr-0 mr-sm-3">
                 <p className="p-text">{t("schoolsAndTeachersText1")}</p>
@@ -372,15 +374,15 @@ class SplashContainer extends PureComponent {
               <div className="d-block">
                 <div className="download-tool p-3 my-4">
                     <div className="text-center text-nowrap mt-2">
-                      <a alt="" href="#" className="mx-4 mx-sm-2 mx-md-4"><img style={{maxWidth: '60px'}} src={videoIcon} /></a>
-                      <a alt="" href="#" className="mx-4 mx-sm-2 mx-md-4"><img style={{maxWidth: '60px'}} src={pdfIcon} /></a>
+                      <a href="https://gravitybrainpublic.s3.amazonaws.com" className="mx-4 mx-sm-2 mx-md-4"><img alt="Video" style={{maxWidth: '60px'}} src={videoIcon} /></a>
+                      <a href="https://gravitybrainpublic.s3.amazonaws.com/PDFs/BZabc-Learning-Platform-Overview.pdf" className="mx-4 mx-sm-2 mx-md-4"><img alt="PDF" style={{maxWidth: '60px'}} src={pdfIcon} /></a>
                     </div>
                     <h4 className="text-center text-nowrap mt-3 mb-0">{t('schoolWebTool')}</h4>
                 </div>
                 <div className="download-tool p-3">
                     <div className="text-center text-nowrap mt-2">
-                      <a alt="" href="#" className="mx-4 mx-sm-2 mx-md-4"><img style={{maxWidth: '60px'}} src={videoIcon} /></a>
-                      <a alt="" href="#" className="mx-4 mx-sm-2 mx-md-4"><img style={{maxWidth: '60px'}} src={pdfIcon} /></a>
+                      <a href="https://gravitybrainpublic.s3.amazonaws.com" className="mx-4 mx-sm-2 mx-md-4"><img alt="Video" style={{maxWidth: '60px'}} src={videoIcon} /></a>
+                      <a href="https://gravitybrainpublic.s3.amazonaws.com/PDFs/BZabc-parents-and-kids-quiskstart.pdf" className="mx-4 mx-sm-2 mx-md-4"><img alt="PDF" style={{maxWidth: '60px'}} src={pdfIcon} /></a>
                     </div>
                     <h4 className="text-center text-nowrap mt-3 mb-0">{t('gettingStarted')}</h4>
                 </div>          
@@ -388,7 +390,7 @@ class SplashContainer extends PureComponent {
             </div>
           </TabPanel>
           <TabPanel currentTab={this.state.currentTab} index="parents">
-            <h2 class="d-sm-none">{t("parentsStudents")}</h2>
+            <h2 class="d-md-none">{t("parentsStudents")}</h2>
             <p className="p-text">{t("studenstAndParents1")}</p>
             <p className="p-text">{t("studenstAndParents2")}</p>
             <p className="p-text">{t("studenstAndParents3")}</p>
@@ -404,15 +406,15 @@ class SplashContainer extends PureComponent {
             <div className="p-text">
               <p>{t("studenstAndParents5")}</p>
               <ul>
-                <li> {t("studenstAndParents51")}</li>
+                <li>{t("studenstAndParents51")}</li>
                 <li>{t("studenstAndParents52")}</li>
-                <li> {t("studenstAndParents53")}</li>
+                <li>{t("studenstAndParents53")}</li>
                 <li>{t("studenstAndParents54")}</li>
               </ul>
             </div>
           </TabPanel>
           <TabPanel currentTab={this.state.currentTab} index="publishers">
-            <h2 class="d-sm-none">{t("publishers")}</h2>
+            <h2 class="d-md-none">{t("publishers")}</h2>
             <p className="p-text">{t("publishersText1")}</p>
             <p className="p-text">{t("publishersText2")}</p>
             <p className="p-text">{t("publishersText3")}</p>

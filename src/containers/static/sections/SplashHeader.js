@@ -27,7 +27,7 @@ class SplashHeader extends PureComponent {
             <SplashNavigation t={t} />
         </section>);
 
-        return <header className="sticky-header">
+        return <header className="sticky-header" id="sticky-header">
             <div>{headerSection}</div>
         </header>;
     }
