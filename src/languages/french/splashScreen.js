@@ -4,6 +4,7 @@ export default {
   signup: "Sign Up",
   sendGift: "Send a Gift",
   subscription: "Subscription",
+  publishers: "Publishers",
   subscriptionStartingFrom: "Starting at <0>$8.99</0>/month",
   bookstore: "Bookstore",
   giveGiftOfLearning: "The BZabc Learning Platform",

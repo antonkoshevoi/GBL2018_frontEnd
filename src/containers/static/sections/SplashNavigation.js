@@ -21,8 +21,6 @@ class SplashNavigation extends PureComponent {
           <div className="container text-right clearfix wide-div">
             <a href="tel:13068706488">1-306-570-6488</a>
             <a href="mailto:office@bzabc.tv">office@bzabc.tv</a>
-            {/* <NavLink to={`/parents`} className={`btn radius-0 btn-sm students-parents ${(page === 'parents') ? 'active' : ''}`}>{t('parentsStudents')}</NavLink>
-            <NavLink to={`/schools`} className={`btn radius-0 btn-sm schools-teachers ${(page === 'schools') ? 'active' : ''}`}>{t('schoolsTeachers')}</NavLink>             */}
             <div className="splash-navigation-tools">
               <LanguageSwitcher />
             </div>
@@ -45,9 +43,6 @@ class SplashNavigation extends PureComponent {
           </div>
 
           <div className="container text-center clearfix narrow-links">
-            <NavLink to={`/about`} className="btn radius-0 btn-sm ">
-              {t("about")}
-            </NavLink>
             <NavLink to={`/store`} className="btn radius-0 btn-sm ">
               {t("store")}
             </NavLink>
@@ -57,6 +52,9 @@ class SplashNavigation extends PureComponent {
             <NavLink to={`/schools`} className="btn radius-0 btn-sm ">
               {t("schoolsTeachers")}
             </NavLink>
+            <NavLink to={`/publishers`} className="btn radius-0 btn-sm ">
+              {t("publishers")}
+            </NavLink>                    
           </div>
         </div>
       </nav>
