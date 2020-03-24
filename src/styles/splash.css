@@ -10,13 +10,13 @@ body {
   background-color: #dbdcde;
   margin-top: 90px;
 }
-.splash-header .links a.btn-login {
+.splash-header > div .links a.btn-login {
   background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/bzabc_login-shape.png);
 }
-.splash-header .links a.btn-signup {  
+.splash-header > div .links a.btn-signup {  
   background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc-signup-shape.png);
 }
-.splash-header .links a.btn-gift {
+.splash-header > div .links a.btn-gift {
   padding: 6px 20px 6px 15px;
   background-color: #f2a516;
   -webkit-box-shadow: -3px 3px 4px 0px rgba(0, 0, 0, 0.3);
@@ -24,13 +24,13 @@ body {
   box-shadow: -3px 3px 4px 0px rgba(0, 0, 0, 0.3);
   font-style: italic;
 }
-.splash-header .links a.btn-gift i {
+.splash-header > div .links a.btn-gift i {
   font-size: 24px;
   margin-right: 10px;
   margin-top: -5px;
   vertical-align: middle;
 }
-.splash-header .links a {
+.splash-header > div .links a {
   color: #fff;
   font-size: 18px;
   margin-left: 10px;
@@ -47,15 +47,12 @@ body {
 .download-tool h4 {
   color: #4788cc;    
 }
-.sticky-header {
-  height: 100px;
-}
-.sticky-header {
+.splash-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 60;
+  z-index: 999999;
 }
 .main-banner {  
   color: #6699cc;
@@ -320,36 +317,6 @@ section.methods .method .method-description {
 .splash-footer .container {  
   align-items: center;
 }
-nav .nav-narrow {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 10px;
-  background-color: var(--splash-header-bg);
-}
-.nav-narrow i {
-  float: left;
-  cursor: pointer;
-  color: #fff;
-  font-size: 2.5em;  
-}
-.nav-narrow .narrow-links {
-  display: none;
-  margin: 15px;
-  padding: 0px;
-}
-.nav-narrow .narrow-links a {
-  text-decoration: none;
-  display: block;
-  float: left;
-  clear: left;
-  padding: 0.5em 0;
-}
-.nav-narrow .nav-narrow-collapse-container {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 0;
-}
 .splash-navigation {
   background-color: var(--splash-navbar-bg);
   color: #fff;      
@@ -533,9 +500,6 @@ nav .nav-narrow {
   }
 }
 @media (min-width: 767px) {
-  nav .nav-narrow {
-    display: none;
-  }
   .splash-navigation div > a {
     padding: 0;    
     display: inline-block;
@@ -682,6 +646,13 @@ nav .nav-narrow {
 }
 
 @media (max-width: 767.9px) {
+  .splash-section {      
+      margin-top: 60px;
+  }  
+  .links-mobile a {
+    color: #ffffff;
+    font-size: 14px;
+  }
   .splash .container {
     max-width: 100%;
     width: 100%;
@@ -782,10 +753,6 @@ nav .nav-narrow {
   .logo .img-logo {
     width: 140px;
   }
-  nav .nav-narrow {
-    padding-top: 0;
-    padding-bottom: 5px;
-  }
   .footer-links {
     background-color: #589ee4;
     padding: 15px;
@@ -816,9 +783,6 @@ nav .nav-narrow {
     margin: 0;
     padding: 5px 0;
   }
-  .sticky-header {
-    height: 100px;
-  }
   .gifts .container {
     max-width: 100%;
     margin: 0;
@@ -826,11 +790,24 @@ nav .nav-narrow {
   }
 }
 @media (max-width: 540px) {
+  .splash-points ul li {
+    font-size: 16px;
+  }
   .app-download .applications {
     min-width: 90px;
   } 
 }
 @media (max-width: 430px) {
+  .splash-section {      
+      margin-top: 50px;
+  }    
+  .logo .img-logo {
+    width: 100px;
+  }
+  .links-mobile a {
+    padding: 0.35rem 0.5rem;
+  }  
+  
   .splash-navigation .btn {
     font-size: 14px;
   }
@@ -865,6 +842,9 @@ nav .nav-narrow {
   .main-banner h1 {
     font-size: 28px;
   }
+  .splash-points ul li {
+    font-size: 14px;
+  }  
   .main-banner h2 {
     font-size: 16px;
   }

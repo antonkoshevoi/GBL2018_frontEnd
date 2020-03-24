@@ -86,10 +86,7 @@ export default () => (
   <AppContainer>
     <Switch>     
       <Route exact path='/privacy-policy.html' title="privacyPolicy" render={(props) => <Content {...props} page="privacyPolicyContent" /> }  />
-      <Route exact path='/' title="parents" component={SplashContainer} />       
-      <Route exact path='/parents' title="parentsStudents" render={(props) => <SplashContainer {...props} page="parents" /> }  />
-      <Route exact path='/schools' title="schoolsTeachers" render={(props) => <SplashContainer {...props} page="schools" /> } />
-      <Route exact path='/publishers' title="publishers" render={(props) => <SplashContainer {...props} page="publishers" /> } />
+      <Route exact path='/' title="parentsStudents" component={SplashContainer} />
       <Route exact path='/terms' title='termsAndConditions' render={(props) => <Content {...props} page="termsAndConditions" /> }  />
       <Route exact path='/login' title="login" component={Login} />
       <Route exact path='/restore-login' title='restoreLogin' component={RestoreLogin} />
