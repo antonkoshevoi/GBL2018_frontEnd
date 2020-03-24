@@ -3,17 +3,21 @@
   --splash-navbar-bg: #1b3f5e;
   --splash-dark-text: #1b3f5e;
 }
+body {
+  background-color: #fff;  
+}
 .splash-section {
-  background-color: #dbdcde;  
+  background-color: #dbdcde;
+  margin-top: 90px;
 }
 .splash-header .links a.btn-login {
   background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/bzabc_login-shape.png);
 }
-.splash-header .links a.btn-signup {
+.splash-header .links a.btn-signup {  
   background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/BZabc-signup-shape.png);
 }
 .splash-header .links a.btn-gift {
-  padding: 10px 20px 10px 15px;
+  padding: 6px 20px 6px 15px;
   background-color: #f2a516;
   -webkit-box-shadow: -3px 3px 4px 0px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: -3px 3px 4px 0px rgba(0, 0, 0, 0.3);
@@ -21,69 +25,58 @@
   font-style: italic;
 }
 .splash-header .links a.btn-gift i {
-  font-size: 30px;
+  font-size: 24px;
   margin-right: 10px;
   margin-top: -5px;
   vertical-align: middle;
 }
 .splash-header .links a {
   color: #fff;
-  font-size: 20px;
+  font-size: 18px;
   margin-left: 10px;
   font-weight: bold;
   background-position: left;
   background-repeat: no-repeat;
-  padding: 10px 15px 10px 45px;
+  padding: 10px 15px 10px 35px;
+  background-size: 25%;
 }
 .download-tool {
-    background-color: #1b3f5f;
-    border-radius: 5px;
+  background-color: #1b3f5f;
+  border-radius: 5px;
 }
 .download-tool h4 {
-    color: #4788cc;    
+  color: #4788cc;    
 }
 .sticky-header {
-  height: 116px;
+  height: 100px;
 }
-.sticky-header > div {
+.sticky-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 60;
 }
-.main-banner {
-  background-color: #fff;
-  padding: 0;
-}
-.main-banner .main-image {
-  background-image: url("//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/SplashMain.jpg");
-  background-size: cover;
-  position: relative;
-  max-width: 1400px;
-  margin: 0 auto;
-  width: 100%;  
-}
-.main-image-text {  
-  width: 100%;  
-  padding-top: 1.5rem;
+.main-banner {  
   color: #6699cc;
   text-align: center;
+  background-color: #fff;
+}
+.main-banner .main-banner-background  {
+  background-image: url("//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/SplashMain.jpg");  
+  background-position-y: 30%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #fff;  
 }
 .main-banner h1 {
-  font-size: 60px;
+  font-size: 48px;
 }
 .main-banner h2 {
-  font-size: 24px;
-}
-.main-banner h3 {
-  font-size: 20px;
-  margin-bottom: -10px;
-  text-transform: uppercase;
-  font-family: "Luckiest Guy";
+  font-size: 22px;
 }
 .splash-points {  
-  margin-top: 8rem;
+  margin-top: 7rem;
 }
 .splash-points ul {
   padding: 0;
@@ -92,31 +85,25 @@
   text-align: left;
 }
 .splash-points ul li {
-  margin-bottom: 10px;
+  margin-bottom: 0.75rem;
   background-color: var(--splash-navbar-bg);
-  font-size: 42px;
-  line-height: 50px;
+  font-size: 34px;
   color: #fff;
   text-align: left;
-  padding: 0.95rem 1rem;
+  padding: 0.5rem 1rem;
 }
 .main-banner-buttons {
-    width: 330px;
-    color: #7b7b7b;
+  color: #7b7b7b;
 }
-.main-banner .bookstore,
-.main-banner .subscriptions {
-}
-.main-banner .bookstore .btn,
-.main-banner .subscriptions .btn {
+.main-banner-buttons .btn {
+  max-width: 300px;
   width: 100%;
-  font-size: 36px;
-  border-radius: 10px;
-  padding: 10px 0;
+  font-size: 30px;
+  border-radius: 5px;
+  padding: 8px 0;
 }
 .main-banner .bookstore {
-  position: relative;
-  margin-top: 8rem;
+  position: relative;  
   width: 100%;
   z-index: 5;
 }
@@ -127,25 +114,9 @@
   top: -5.5rem;
   z-index: -1;
 }
-
-.starting-from-text {
-  font-size: 2rem;
+.main-banner .note {
+  font-size: 1.55rem;
   font-weight: 500;
-}
-
-.main-banner .subscriptions {
-  margin-top: 3rem;
-  width: 100%;
-}
-.main-banner {
-  color: #fff;
-  text-align: center;
-}
-.main-banner .button-box {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  text-align: center;
 }
 .btn-store {
   background-color: #dfa343;
@@ -187,7 +158,7 @@
   font-weight: 500;
 }
 .app-download img {
-    width: 65px;
+  width: 65px;
 }
 .applications > div {
   display: inline-block;
@@ -207,17 +178,14 @@
   font-size: 11px;
   white-space: nowrap;
 }
-
 .p-text {
   color: #7b7b7b;
   font-size: 20px;
   margin: 20px 0 30px;
 }
-
 .p-text ul {
   list-style: none;
 }
-
 .about-us-note {
   text-align: center;
   color: #1c4062;
@@ -231,7 +199,7 @@ h1.section-head {
   text-align: center;
   color: #ffffff;
   border-radius: 15px;
-  font-size: 60px;
+  font-size: 50px;
   padding: 10px;
 }
 section.welcome h5 {
@@ -264,15 +232,6 @@ section.welcome .image a {
 }
 section.methods h1 {
   margin-top: 30px;
-}
-section.methods .method .image {
-  position: relative;
-}
-section.methods .method .image a {
-  position: absolute;
-  top: calc(100% - 30px);
-  left: calc(50% - 23px);
-  width: 46px;
 }
 section.methods .method,
 section.tech-specs .tech-spec {
@@ -327,20 +286,12 @@ section.methods .method .method-description {
   justify-content: flex-start;
 }
 .logo .img-logo {
-  width: 190px;
+  max-width: 115px;
+  width: 100%;
   height: auto;
 }
-.splash .section-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 116px;
-}
 .splash .splash-header {
-  background-color: var(--splash-header-bg);
-  display: flex;
-  flex: 1 1;
-  min-height: 64px;
+  background-color: var(--splash-header-bg);    
 }
 .splash .splash-header .links {
   flex: 1;
@@ -363,16 +314,8 @@ section.methods .method .method-description {
 .splash-footer .links a {
   color: #ffffff;
 }
-.splash-header .container,
-.splash-footer .container {
-  display: flex;
+.splash-footer .container {  
   align-items: center;
-}
-.section-header nav {
-  overflow: hidden;
-}
-nav .nav-wide {
-  display: none;
 }
 nav .nav-narrow {
   display: flex;
@@ -385,8 +328,7 @@ nav .nav-narrow {
   float: left;
   cursor: pointer;
   color: #fff;
-  font-size: 2.5em;
-  margin-left: 15px;
+  font-size: 2.5em;  
 }
 .nav-narrow .narrow-links {
   display: none;
@@ -407,14 +349,7 @@ nav .nav-narrow {
 }
 .splash-navigation {
   background-color: var(--splash-navbar-bg);
-  color: #fff;
-  position: relative;  
-  font-size: 1em;
-  min-height: 35px;
-}
-.splash-navigation .container {
-  position: relative;
-  padding-right: 4rem;
+  color: #fff;      
 }
 .splash-navigation .btn {
   color: #fff;
@@ -427,27 +362,14 @@ nav .nav-narrow {
   text-shadow: 0 0 1px white;
 }
 .splash-navigation-tools {
-  position: absolute;
-  right: 15px;
-  top: 6px;
+  line-height: 1;
 }
 .splash-navigation-tools button {
   color: #fff;
 }
-.nav-narrow .splash-navigation-tools {
-  right: 20px;
-  top: 12px;
-}
 .header-break {
   margin-top: 0;
   margin-bottom: 30px;
-}
-.ReactStickyHeader_root {
-  height: 116px;
-}
-.ReactStickyHeader_foreground,
-.ReactStickyHeader_background-bg {
-  display: none;
 }
 .splash-store {
   margin-top: 60px;
@@ -487,7 +409,7 @@ nav .nav-narrow {
 }
 .splash-store h2 {
   color: #1b3f5f;
-  font-size: 60px;
+  font-size: 48px;
 }
 .splash-store .productSection {
   background-color: #ffffff;
@@ -534,8 +456,6 @@ nav .nav-narrow {
   margin-bottom: -60px;
 }
 /* Responsive Handling */
-.splash-tabs {
-}
 .splash-tab-content {
   background-color: #ffffff;     
   padding: 1rem;
@@ -550,17 +470,18 @@ nav .nav-narrow {
   background: #efefef;    
 }
 .splash-tabs header div > span {
-    background-color: #4a8dd3;
+  background-color: #4a8dd3;
 }
-.splash-tabs button {
-  /*height: 6.5rem;*/
-  max-width: 450px;
+.splash-tabs button {  
+  width: 25%;
+  max-width: 25%;
+  min-width: 25%;
   line-height: 1;
   align-items:stretch;
   padding: 0 24px;
 }
 .splash-tabs button[aria-selected="true"], .splash-tabs button[aria-selected="true"] span {        
-    color: #4a8dd3;    
+  color: #4a8dd3;    
 }
 .splash-tabs button span {
   font-size: 1.5rem;
@@ -569,38 +490,38 @@ nav .nav-narrow {
 }
 
 .splash-tabs button > span:first-child {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;    
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;    
 }
 .splash-tabs .schools-teachers, .splash-tabs .parents-students {
-    padding: 0;
-    background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/bzabc_icons.png);
-    background-repeat: no-repeat;     
-    height: 35px;    
-    width: 50px;
-    display: inline-block;
-    background-repeat: no-repeat;                
+  padding: 0;
+  background-image: url(//d2cnhr6egzpvdl.cloudfront.net/image/bzabc/bzabc_icons.png);
+  background-repeat: no-repeat;     
+  height: 35px;    
+  width: 50px;
+  display: inline-block;
+  background-repeat: no-repeat;                
 }
 
 .splash-tabs button .schools-teachers {
-    background-position: 0 -36px;
-    filter: invert(65%);
+  background-position: 0 -36px;
+  filter: invert(65%);
 }    
 
 .splash-tabs button[aria-selected="true"] .schools-teachers {
-    background-position: 0 0;
-    filter: invert(0%);
+  background-position: 0 0;
+  filter: invert(0%);
 }
 
 .splash-tabs button .parents-students {
-    background-position: 0 -108px;
-    filter: invert(65%);
+  background-position: 0 -108px;
+  filter: invert(65%);
 }    
 
 .splash-tabs button[aria-selected="true"] .parents-students {
-    background-position: 0 -72px;
-    filter: invert(0%);
+  background-position: 0 -72px;
+  filter: invert(0%);
 }   
 
 @media (min-width: 768px) and (max-width: 1239.98px) {
@@ -608,46 +529,21 @@ nav .nav-narrow {
     max-width: 991px;
   }
 }
-@media (min-width: 769px) {
-  .splash-header .splash-navigation-tools {
-    display: none;
-  }
-}
 @media (min-width: 767px) {
-  nav .nav-wide {
-    display: block;
-  }
   nav .nav-narrow {
     display: none;
   }
-  .splash-navigation .container > a {
-    padding: 0;
-
-    height: 36px;
+  .splash-navigation div > a {
+    padding: 0;    
     display: inline-block;
     background-repeat: no-repeat;
     padding: 2px 5px 2px 5px;
-    font-size: 20px;
+    font-size: 16px;
     margin: 0 5px;
     color: #fff;
   }
-  .splash-navigation .container > a:hover,
-  .splash-navigation .container > a.active {
-    color: #ffffff;
-  }
-  .splash-navigation .container > a:hover.students-parents,
-  .splash-navigation .container > a.students-parents.active {
-    background-position: 0 -36px;
-  }
-  .splash-navigation .container > a:hover.schools-teachers,
-  .splash-navigation .container > a.schools-teachers.active {
-    background-position: 0 -108px;
-  }
-  .splash-navigation .container > a.students-parents {
-    background-position: 0 0;
-  }
-  .splash-navigation .container > a.schools-teachers {
-    background-position: 0 -72px;
+  .splash-navigation div .display-7 {
+    font-size: 1.4rem !important;
   }
   .footer-links {
     display: none;
@@ -661,23 +557,18 @@ nav .nav-narrow {
 }
 
 @media (max-width: 1440px) {
-  .main-banner .bookstore .btn,
-  .main-banner .subscriptions .btn {
-    font-size: 32px;
-    border-radius: 12px;
+  .main-banner-buttons .btn {
+    font-size: 28px;    
   }
   h1.section-head {
-    font-size: 48px;
+    font-size: 44px;
     padding: 10px;
-  }
-  .splash-tabs button {
-    max-width: 25%;    
-  }  
+  } 
   .splash-store h2 {
-    font-size: 48px;
+    font-size: 40px;
   }
   .splash-points ul li {
-    font-size: 32px;            
+    font-size: 30px;            
     padding: 0.25rem 1rem;
   }
   section.methods .method h2,
@@ -699,20 +590,14 @@ nav .nav-narrow {
   .app-download {
     font-size: 14px;
   }
-  .main-banner .bookstore .btn,
-  .main-banner .subscriptions .btn {
-    font-size: 28px;
-    border-radius: 9px;
-    padding: 12px 0;
-  }
-  .main-banner .subscriptions {
-    font-size: 16px;
+  .main-banner-buttons .btn {
+    font-size: 24px;        
   }
   .splash-store h2 {
     font-size: 36px;
   }
   .splash-points {
-      margin-top: 2rem;
+    margin-top: 2rem;
   }
   .splash-points ul li {
     font-size: 26px;            
@@ -741,19 +626,12 @@ nav .nav-narrow {
   }
   .splash-points ul li {
     margin-bottom: 10px;
-    font-size: 26px;            
+    font-size: 20px;            
     padding: 0rem 1rem;
   }
-  .main-banner .bookstore .btn,
-  .main-banner .subscriptions .btn {
-    font-size: 20px;
-    padding: 10px 0;
+  .main-banner-buttons .btn {
+    font-size: 20px;    
   }
-  .main-banner .subscriptions div {
-    white-space: nowrap;
-    font-size: 14px;
-  }
-
   section.methods .method h2,
   section.tech-specs .tech-spec h2 {
     font-size: 30px;
@@ -784,25 +662,50 @@ nav .nav-narrow {
 }
 
 @media (max-width: 767.9px) {
-  .splash-tabs {
-      display: none;
-  }
   .splash .container {
     max-width: 100%;
     width: 100%;
   }
-  .main-image-text {
-    position: relative;
-
-    padding-bottom: 1.5rem;
-    color: #6699cc;
-    text-align: center;
+  .main-banner h1 {
+    font-size: 22px;
+    margin: 5px 0;
+  }
+  .main-banner h2 {    
+    font-size: 20px;
+  }  
+  .main-banner .container {
+    padding: 0;
+  }
+  .main-banner .main-banner-background {
+    background-position: bottom left;
+  }
+  .splash-points {
+    margin-top: 2rem;
+  }
+  .main-banner-buttons .btn {
+    font-size: 13px;
+    max-width: 150px;
+    padding: 5px 0;
+  }
+  .main-banner-buttons .note {
+    text-align: right;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }    
+  .splash-points ul li {
+    font-size: 18px;
   }
   .splash-header .links {
     display: none;
   }
   .splash-header .logo {
     justify-content: center;
+  }
+  .splash-tabs button {
+    padding: 0 5px;
+  }
+  .splash-tabs .schools-teachers, .splash-tabs .parents-students {
+    display: none;
   }
   section.methods .method,
   section.tech-specs .tech-spec {
@@ -813,58 +716,27 @@ nav .nav-narrow {
     padding: 5px;
   }
   .splash-navigation .btn {
-    font-size: 16px;
+    font-size: 14px;
   }
-  .splash-navigation-tools {
-    top: 15px;
-  }
-  .main-banner {
-    padding: 15px 0 15px 0;
-  }
-  .main-banner h1 {
-    margin: 10px -16px 0;
-    font-size: 34px;
-  }
-  .main-banner h2 {
-    margin: 0 -16px 3px;
-    font-size: 20px;
-  }
-  .main-banner h3 {
-    font-size: 24px;
-    margin: 0 -16px 20px;
-  }
-  .main-banner .btn-store,
-  .main-banner .btn-subscriptions,
-  .footer-links .btn-store,
-  .footer-links .btn-subscriptions {
-    width: 90%;
-    font-size: 20px;
-    border-radius: 10px;
-    max-width: 190px;
-    padding: 14px 0;
-  }
+  .splash-navigation .display-7 {
+    font-size: 1.3rem !important;
+  }  
   .footer-links .btn-store,
   .footer-links .btn-subscriptions {
     padding: 10px 0;
-  }
-  .main-banner .col-6 img {
-    height: 90%;
-    max-height: 120px;
-    margin: 0 auto;
   }
   .about-us-note {
     margin: 0 0 30px;
     font-size: 14px;
   }
   .app-download h3 {
-    font-size: 28px;
-  }
-  .app-download {
-      margin-left: -15px;
-      margin-right: -15px;
+    font-size: 20px;
   }
   .app-download .applications {
-      min-width: 190px;
+    min-width: 190px;
+  }
+  .app-download > div {
+    padding: 0 20px;
   }
   .app-download .description {
     font-size: 14px;
@@ -879,6 +751,13 @@ nav .nav-narrow {
     padding: 30px 20px;
     font-size: 16px;
   }
+  .book-store-title-image {
+    top: -3.5rem;
+    left: -5.5rem;
+  }
+  .book-store-title-image img {
+    width: 110px;
+  }
   .row.methods-row,
   .row.tech-specs-row {
     margin-left: -7px;
@@ -890,19 +769,6 @@ nav .nav-narrow {
   nav .nav-narrow {
     padding-top: 0;
     padding-bottom: 5px;
-  }
-  .splash .section-header,
-  .ReactStickyHeader_root {
-    min-height: 100px;
-  }
-  .ReactStickyHeader_root {
-    height: 100px;
-  }
-  .ReactStickyHeader_fixed {
-    position: relative;
-  }
-  .section-header .nav-narrow i {
-    margin-left: 5px;
   }
   .footer-links {
     background-color: #589ee4;
@@ -927,8 +793,8 @@ nav .nav-narrow {
     padding-bottom: 125px;
   }
   .splash-section > .container {
-      padding-left: 0;
-      padding-right: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
   .splash-footer .btn {
     margin: 0;
@@ -945,7 +811,7 @@ nav .nav-narrow {
 }
 @media (max-width: 540px) {
   .app-download .applications {
-      min-width: 90px;
+    min-width: 90px;
   } 
 }
 @media (max-width: 430px) {
@@ -953,13 +819,16 @@ nav .nav-narrow {
     font-size: 14px;
   }
   .main-banner h1 {
-    font-size: 32px;
+    font-size: 22px;      
   }
   .main-banner h2 {
-    font-size: 18px;
+    font-size: 15px;
   } 
   .app-download h3 {
     font-size: 22px;
+  }
+  .splash-points ul li {
+    font-size: 15px;
   }
   .app-download .container {
     padding: 0;
@@ -983,11 +852,6 @@ nav .nav-narrow {
   .main-banner h2 {
     font-size: 16px;
   }
-  .main-banner h3 {
-    font-size: 18px;
-  }
-  .main-banner .btn-store,
-  .main-banner .btn-subscriptions,
   .footer-links .btn-store,
   .footer-links .btn-subscriptions {
     padding: 8px 0;

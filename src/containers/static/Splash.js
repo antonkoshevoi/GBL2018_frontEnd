@@ -211,13 +211,7 @@ class SplashContainer extends PureComponent {
                       <CldImage
                         src="BZabc_method_1.png"
                         alt={t("practicalSkillDevelopment")}
-                      />
-                      <a href="#practical-skill-development">
-                        <CldImage
-                          src="bzabc_document-button.svg"
-                          alt={t("practicalSkillDevelopment")}
-                        />
-                      </a>
+                      />                      
                     </div>
                     <div className="method-description pre-line">
                       {t("practicalSkillDevelopmentDescription")}
@@ -231,13 +225,7 @@ class SplashContainer extends PureComponent {
                       <CldImage
                         src="BZabc_method_2.png"
                         alt={t("consistency")}
-                      />
-                      <a href="#consistency-description">
-                        <CldImage
-                          src="bzabc_document-button.svg"
-                          alt={t("consistency")}
-                        />
-                      </a>
+                      />  
                     </div>
                     <div className="method-description pre-line">
                       {t("consistencyDescription")}
@@ -252,12 +240,6 @@ class SplashContainer extends PureComponent {
                         src="BZabc_method_3.png"
                         alt={t("totalPhysicalResponse")}
                       />
-                      <a href="#total-physical-response-description">
-                        <CldImage
-                          src="bzabc_document-button.svg"
-                          alt={t("totalPhysicalResponse")}
-                        />
-                      </a>
                     </div>
                     <div className="method-description pre-line">
                       {t("totalPhysicalResponseDescription")}
@@ -268,16 +250,7 @@ class SplashContainer extends PureComponent {
                   <div className="method">
                     <h2>{t("dailyPractice")}</h2>
                     <div className="image">
-                      <CldImage
-                        src="BZabc_method_4.png"
-                        alt={t("dailyPractice")}
-                      />
-                      <a href="#daily-practice-description">
-                        <CldImage
-                          src="bzabc_document-button.svg"
-                          alt={t("dailyPractice")}
-                        />
-                      </a>
+                      <CldImage src="BZabc_method_4.png" alt={t("dailyPractice")} />
                     </div>
                     <div className="method-description pre-line">
                       {t("dailyPracticeDescription")}

@@ -17,8 +17,8 @@ class SplashNavigation extends PureComponent {
 
     return (
       <nav>
-        <div className="splash-navigation nav-wide">
-          <div className="container text-right clearfix wide-div">
+        <div className="splash-navigation d-none d-md-block">
+          <div className="d-flex align-items-center justify-content-end mx-3 mx-md-4 mx-lg-5 px-xl-5">
             <a href="tel:13068706488">1-306-570-6488</a>
             <a href="mailto:office@bzabc.tv">office@bzabc.tv</a>
             <div className="splash-navigation-tools">
@@ -28,8 +28,8 @@ class SplashNavigation extends PureComponent {
         </div>
         <div className="splash-navigation nav-narrow">
           <div className="nav-narrow-collapse-container">
-            <i className="fa fa-bars fa-2x" onClick={this.burgerToggle}></i>
-            <div className="links text-right">
+            <i className="fa fa-bars fa-2x ml-1" onClick={this.burgerToggle}></i>
+            <div className="links text-right d-flex align-items-center">
               <NavLink to={`/login`} className="btn btn-sm ">
                 {t("login")}
               </NavLink>
@@ -39,6 +39,9 @@ class SplashNavigation extends PureComponent {
               <NavLink to={`/gift`} className="btn btn-sm signup">
                 {t("sendGift")}
               </NavLink>
+                <div className="splash-navigation-tools d-md-none float-right">
+                  <LanguageSwitcher/>
+                </div>                
             </div>
           </div>
 
