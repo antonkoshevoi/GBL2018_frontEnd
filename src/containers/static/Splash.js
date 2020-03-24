@@ -48,24 +48,6 @@ class SplashContainer extends PureComponent {
       currentTab: value
     });
   };
-  
-  componentDidMount() {
-    if (this.props.page) {
-      this.setState({
-        currentTab: this.props.page
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.page !== prevProps.page) {
-      this.setState({
-        currentTab: (this.props.page || 'overview')
-      });
-      window.scroll(0, document.getElementById('splash-tab-content').offsetTop - document.getElementById('sticky-header').clientHeight);
-    }
-    document.getElementById('mobile-menu').style.removeProperty('display');      
-  }
 
   render() {
     const { t } = this.props;
