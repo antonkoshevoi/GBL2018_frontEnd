@@ -106,17 +106,20 @@ body {
   position: relative;  
   width: 100%;
   z-index: 5;
+  margin-top: 40%;
 }
 
 .book-store-title-image {
   position: absolute;
-  left: -9rem;
-  top: -5.5rem;
+  left: -45%;
+  top: -85%;
   z-index: -1;
 }
-.main-banner .note {
-  font-size: 1.55rem;
-  font-weight: 500;
+.book-store-title-image img {
+  width: 180px;
+}
+.main-banner-buttons .note {
+  font-size: 20px;  
 }
 .btn-store {
   background-color: #dfa343;
@@ -578,6 +581,9 @@ nav .nav-narrow {
   section.methods .method h2 {
     font-size: 36px;
   }
+  .book-store-title-image img {
+    width: 170px;
+  }  
 }
 
 @media (max-width: 1279px) {
@@ -614,10 +620,18 @@ nav .nav-narrow {
   section.methods .method h2 {
     font-size: 28px;
   }
+  .book-store-title-image img {
+    width: 160px;
+  }   
 }
 
 @media (max-width: 1024px) {
-
+  .main-banner h1 {
+    font-size: 36px;
+  }
+  .main-banner h2 {
+    font-size: 16px;
+  }
   .splash-tabs button span {
     font-size: 1rem;
   }
@@ -626,11 +640,14 @@ nav .nav-narrow {
   }
   .splash-points ul li {
     margin-bottom: 10px;
-    font-size: 20px;            
+    font-size: 18px;            
     padding: 0rem 1rem;
   }
   .main-banner-buttons .btn {
-    font-size: 20px;    
+    font-size: 18px;    
+  }
+  .main-banner-buttons .note {
+    font-size: 16px;
   }
   section.methods .method h2,
   section.tech-specs .tech-spec h2 {
@@ -659,6 +676,9 @@ nav .nav-narrow {
   .gifts .subscriptions-list {
     padding: 50px 0;
   }
+  .book-store-title-image img {
+    width: 135px;
+  }   
 }
 
 @media (max-width: 767.9px) {
@@ -684,16 +704,16 @@ nav .nav-narrow {
   }
   .main-banner-buttons .btn {
     font-size: 13px;
-    max-width: 150px;
+    max-width: 160px;
     padding: 5px 0;
   }
   .main-banner-buttons .note {
     text-align: right;
-    font-size: 0.8rem;
-    font-weight: 500;
+    font-size: 12px;    
   }    
   .splash-points ul li {
     font-size: 18px;
+    padding: 0rem 0.5rem;
   }
   .splash-header .links {
     display: none;
@@ -751,12 +771,8 @@ nav .nav-narrow {
     padding: 30px 20px;
     font-size: 16px;
   }
-  .book-store-title-image {
-    top: -3.5rem;
-    left: -5.5rem;
-  }
   .book-store-title-image img {
-    width: 110px;
+    width: 100px;
   }
   .row.methods-row,
   .row.tech-specs-row {
