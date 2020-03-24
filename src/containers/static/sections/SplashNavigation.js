@@ -1,16 +1,8 @@
 import React, { PureComponent } from "react";
-import { withRouter, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import LanguageSwitcher from "../../../components/ui/LanguageSwitcher";
 
 class SplashNavigation extends PureComponent {
-  burgerToggle() {
-    let linksEl = document.querySelector(".narrow-links");
-    if (linksEl.style.display === "block") {
-      linksEl.style.display = "none";
-    } else {
-      linksEl.style.display = "block";
-    }
-  }
 
   render() {
     const { t } = this.props;
@@ -28,7 +20,6 @@ class SplashNavigation extends PureComponent {
         </div>
         <div className="splash-navigation nav-narrow">
           <div className="nav-narrow-collapse-container">
-            <i className="fa fa-bars fa-2x ml-1" onClick={this.burgerToggle}></i>
             <div className="links text-right d-flex align-items-center">
               <NavLink to={`/login`} className="btn btn-sm ">
                 {t("login")}
@@ -44,25 +35,10 @@ class SplashNavigation extends PureComponent {
                 </div>                
             </div>
           </div>
-
-          <div id="mobile-menu" className="container text-center clearfix narrow-links">
-            <NavLink to={`/store`} className="btn radius-0 btn-sm ">
-              {t("store")}
-            </NavLink>
-            <NavLink to={`/parents`} className="btn radius-0 btn-sm ">
-              {t("parentsStudents")}
-            </NavLink>
-            <NavLink to={`/schools`} className="btn radius-0 btn-sm ">
-              {t("schoolsTeachers")}
-            </NavLink>
-            <NavLink to={`/publishers`} className="btn radius-0 btn-sm ">
-              {t("publishers")}
-            </NavLink>                    
-          </div>
         </div>
       </nav>
     );
   }
 }
 
-export default withRouter(SplashNavigation);
+export default SplashNavigation;

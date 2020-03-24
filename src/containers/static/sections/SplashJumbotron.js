@@ -39,15 +39,15 @@ class SplashJumbotron extends PureComponent {
               <h1>{t("giveGiftOfLearning")}</h1>
               <h2>{t("professionallyDesignedCourses")}</h2>                
               <div className="splash-points d-flex flex-column align-items-end">
-                <ul>
+                <ul className="mb-md-3">
                   <li>{t("splashBannerPoint1")}</li>
                   <li>{t("splashBannerPoint2")}</li>
                   <li>{t("splashBannerPoint3")}</li>
                   <li>{t("splashBannerPoint4")}</li>
                   <li>{t("splashBannerPoint5")}</li>
                 </ul>                
-                <div className="main-banner-buttons my-3 my-md-5 py-xl-5">
-                  <div className="subscriptions mb-5 pb-3 pb-md-5">
+                <div className="main-banner-buttons my-3 my-md-4 my-lg-5">
+                  <div>
                     <NavLink to={`/gift`} className="btn btn-warning btn-subscriptions">
                       {t("subscription")}
                     </NavLink>                  
@@ -58,7 +58,7 @@ class SplashJumbotron extends PureComponent {
                       </Trans>
                     </div>}
                   </div>
-                  <div className="bookstore mt-1">
+                  <div className="bookstore">
                     <div className="book-store-title-image">
                       <CldImage alt="" src="bookstoretitle.png" />
                     </div>
