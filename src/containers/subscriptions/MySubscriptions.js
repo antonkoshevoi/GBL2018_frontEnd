@@ -128,12 +128,12 @@ class MySubscriptions extends Component {
         const date = renderToString(<Date time={subscription.expiredAt} />);
         
         if (subscription.status === 1) {            
-            return <ConfirmButton icon='la la-check' className='btn-success' classNameDefault={buttonClasses} confirmOnly={true} title={t('subscriptionIsActive', {date}) } />;
+            return <ConfirmButton icon='la la-check' btnName={t('status')} className='btn-success' classNameDefault={buttonClasses} confirmOnly={true} title={t('subscriptionIsActive', {date}) } />;
         }
         if (subscription.status === 2) {            
-            return <ConfirmButton icon='la la-exclamation' className='btn-warning' classNameDefault={buttonClasses} confirmOnly={true} title={t('subscriptionWillBeClosed', {date}) } />;
+            return <ConfirmButton icon='la la-exclamation' btnName={t('status')} className='btn-warning' classNameDefault={buttonClasses} confirmOnly={true} title={t('subscriptionWillBeClosed', {date}) } />;
         }
-        return <ConfirmButton icon='la la-close' className='btn-danger' classNameDefault={buttonClasses} confirmOnly={true} title={t('subscriptionIsClosed') } />;
+        return <ConfirmButton icon='la la-close' btnName={t('status')} className='btn-danger' classNameDefault={buttonClasses} confirmOnly={true} title={t('subscriptionIsClosed') } />;
     }
     
     _keepLearning() {
@@ -183,7 +183,10 @@ class MySubscriptions extends Component {
             let canAssign = ((item.allowedCourses * item.allowedStudents) - item.assignedCourses) > 0;
             return (
                 <Row index={i} key={i}>                     
-                    <Td>{t('learnerPlan', {learners: item.allowedStudents})}</Td>
+                    <Td>
+                        {t('learnerPlan', {learners: item.allowedStudents})}
+                        {item.isTrial && <div className="text-success"><i className="fa fa-check-circle mr-1"></i>{t('trialPeriod')} (<Date time={item.createdAt} /> - <Date time={item.trialExpiredAt} />)</div>}
+                    </Td>
                     <Td><strong className="g-blue"><Price price={item.totalPrice} currency={item.currency} /></strong> / {t(item.period)}</Td>
                     <Td>{item.allowedCourses} x {item.allowedStudents}</Td>
                     <Td>
