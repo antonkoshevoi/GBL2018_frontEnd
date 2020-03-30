@@ -140,6 +140,7 @@ class Subscriptions extends Component {
                     <Td>
                         <div>{t('learnerPlan', {learners: item.allowedStudents})}</div>
                         <strong className="g-blue"><Price price={item.totalPrice} currency={item.currency} /></strong> / {t(item.period)}
+                        {item.isTrial && <div className="text-success">{t('trialPeriod')}</div>}
                     </Td>      
                     <Td>
                         <span className="mr-3">{item.assignedCourses} / {(item.allowedCourses * item.allowedStudents)} </span>

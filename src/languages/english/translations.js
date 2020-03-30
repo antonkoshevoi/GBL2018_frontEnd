@@ -662,5 +662,7 @@ export default {
     thankYou: 'Thank You',
     pleaseWait: 'Please Wait...',
     userDisabledThisChat: 'Recipient has disabled messages in this chat...',
-    youDisabledThisChat: 'You have disabled messages in this chat...'   
+    youDisabledThisChat: 'You have disabled messages in this chat...',
+    trialPeriod: 'Trial Period',
+    startTrialPeriod: 'Start your 3 month free trial'
 }
