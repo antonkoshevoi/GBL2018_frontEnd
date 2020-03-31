@@ -62,8 +62,8 @@ class SubscriptionsForm extends Component {
                                             <div className="text-center mx-2">
                                                 <button className="btn btn-warning m-2" onClick={() => this._handleSelectPlan(subscription.id, 'month')}><Price price={subscription.priceMonthly} currency={subscription.currency} />/{t('month')}</button>
                                             </div>
-                                            <div className="text-center mx-2">                                                
-                                                <div className="text-center"><strong>{t('startTrialPeriod')}!</strong></div>
+                                            <div className="text-center mx-2">
+                                                {(subscription.trialDays.year > 0) && <div className="text-center"><strong>{t('startTrialPeriod', {days: subscription.trialDays.year})}!</strong></div>}
                                                 <button className="btn btn-warning m-2" onClick={() => this._handleSelectPlan(subscription.id, 'year')}><Price price={subscription.priceYearly} currency={subscription.currency} />/{t('year')}</button>
                                                 <div className="text-center">({t('saveWithAnnual')})</div>
                                             </div>
